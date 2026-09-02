@@ -19,9 +19,8 @@ La gente del evento dijo que no le importa si la demo se hace en web o
 en iOS, que web tiene más potencial de impacto, y que idealmente se
 hagan las dos.
 
-Contra eso, el revisor de la spec de HLS (del lado del anfitrión del evento; el transcript lo devuelve
-también con otras grafías, y por contexto es la misma persona) le
-mencionó al chair del WG que hay implementaciones a nivel público disponibles
+Contra eso, el revisor de la spec de HLS (del lado del anfitrión del evento) le mencionó al chair del WG que hay
+implementaciones a nivel público disponibles
 en Swift que no están en hls.js, algo alrededor de reemplazar una clase
 y de cómo eso funciona con el DATERANGE, que harían esto bastante más
 fácil en AVFoundation. También mencionó que hay trabajo ya planificado
@@ -29,13 +28,16 @@ en hls.js que va a mejorar esto, pero que todavía no está hecho.
 
 El chair del WG no tiene los detalles de esa conversación porque creía tenerla
 grabada y no la tenía. Durante la reunión mandó un email al revisor de la spec de HLS con
-El líder del proyecto en copia para recuperarlos.
+El líder del proyecto en copia para recuperarlos. El documento de requerimientos que
+El chair del WG mantiene deja escrito lo mismo sin los detalles: sobre hls.js, que
+es la opción óptima si se logra limpiamente, anota que "el revisor de la spec de HLS warned might
+not be suited for this yet but it is on their roadmap".
 
 La posición del líder del proyecto es la opuesta y viene de experiencia previa.
 Puso hls.js como camino crítico con el argumento de que si eso no sale,
 que es lo que debería ser más fácil, el proyecto está en problemas, y
-dejó explícito que si de la información del revisor de la spec de HLS surge algo nuevo,
-se cambia. El chair del WG dijo que él también preferiría hls.js porque permite
+dejó explícito que si de la información del revisor de la spec de HLS surge algo nuevo, se
+cambia. El chair del WG dijo que él también preferiría hls.js porque permite
 mostrar la pestaña de red del browser durante la demo, y agregó que una
 implementación limpia en iOS más un parche sobre hls.js sería el mejor
 de los mundos: sirve para el evento y deja base para hacerlo bien más

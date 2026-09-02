@@ -8,7 +8,7 @@
 | T-04 | Escribir y correr los tests de la lógica no visual del slice       | pending | —    | —        |
 | T-05 | Relevar y armar el set base de assets                              | pending | —    | —        |
 | T-06 | Enganchar al colaborador externo para la parte de iOS                              | pending | —    | —        |
-| T-07 | Volcar los requerimientos en el doc del chair del WG y recuperar el acceso al doc de requerimientos | pending | —    | —        |
+| T-07 | Volcar los requerimientos en el doc del chair del WG y cerrar la fecha del primer draft | pending | —    | —        |
 | T-08 | Crear o confirmar el canal `#wg-hls-presentation`                  | pending | —    | —        |
 | T-09 | Preparar y correr el sync del 21 de septiembre                     | pending | —    | —        |
 
@@ -28,9 +28,14 @@
   de cómo eso funciona con el DATERANGE, y que el trabajo planificado
   en hls.js que mejoraría esto todavía no está hecho. Esa última es la
   que decide si el camino es parchear hls.js o esperar.
-  Empezar por acá: el email que el chair del WG mandó al revisor de la spec de HLS durante la
-  reunión del 2026-09-02, con el líder del proyecto en copia; el connector de Gmail
-  llega al buzón de Qualabs. Leer también el ADR
+  Empezar por acá: el email que el chair del WG mandó al revisor de la spec de HLS durante la reunión
+  del 2026-09-02, con el líder del proyecto en copia; el connector de Gmail llega al
+  buzón de Qualabs. El documento de requerimientos ya trae la parte
+  escrita de esto y no alcanza: dice que hls.js es la opción óptima si
+  se logra limpiamente, que "el revisor de la spec de HLS warned might not be suited for this yet
+  but it is on their roadmap", y que el chair del WG presume, sin confirmarlo, que
+  se trata de definir la clase en el DATERANGE y de poder inyectar una
+  custom que interopere bien. Lo que falta es el detalle del revisor de la spec de HLS. Leer también el ADR
   `.project/decisions/0001-hls-js-camino-critico.md`, que es la
   decisión que esta task puede llegar a superseder.
   Perseguir la respuesta en lugar de esperarla: el chair del WG está de viaje por
@@ -70,9 +75,18 @@
   manera y conviene dejar registrada cuál eligió: qué URI se usa del
   array, la primera o la última, y qué pasa cuando las durations
   difieren.
-  El namespace de la clase custom es `com.qualabs.hls-concurrent-interstitial`
-  [?], provisorio mientras SVTA no publique y con la forma exacta a
-  confirmar con el chair del WG.
+  El namespace de la clase custom es
+  `com.qualabs.hls.concurrentInterstitial`, provisorio mientras SVTA no
+  publique. La clase extiende a `com.apple.hls.interstitial`, para que
+  un asset list que responda un interstitial tradicional siga
+  funcionando. El layout y el renderizado se resuelven contra el Layout
+  Controller de SVTA (`https://www.svta.org/wp-content/nlag/v4/`), que
+  trabaja con offsets porcentuales relativos al viewport, y los datos de
+  layout vienen en el bloque `X-AD-CREATIVE-SIGNALING` de cada asset.
+  La forma óptima del SDK es una librería que se incluya en la
+  aplicación y se active si la clase está definida en el DATERANGE; si
+  eso pide más scaffolding del que entra en el tiempo, queda anotado qué
+  se hizo en su lugar.
   Empezar por acá: el `PHASE.md` de la fase, la sección de alcance del
   `PROJECT.md`, y el ADR 0001. El repo
   `github.com/qualabs/hls-non-linear-ads-demo` está creado, privado y
@@ -111,8 +125,8 @@
   su lugar. El L-box de esta task puede ser el de imagen, que es el que
   tiene assets más accesibles; el de video es el difícil de conseguir y
   depende de T-05.
-  Empezar por acá: el slice de T-02, y la lista de los seis layouts en
-  el `PROJECT.md`. Los otros cuatro layouts no son de esta task: su
+  Empezar por acá: el slice de T-02, y la lista de los cinco layouts en
+  el `PROJECT.md`. Los otros tres layouts no son de esta task: su
   reparto entre el primer draft y la grabación se cierra en el sync del
   21 (T-09).
   Restricción: no reescribir el layout controller para acomodar un
@@ -202,35 +216,32 @@
 - **nivel de verificación:** mínimo. El output es lo que se le cuenta a
   El chair del WG en el sync.
 
-## T-07 — Volcar los requerimientos en el doc del chair del WG y recuperar el acceso al doc de requerimientos
+## T-07 — Volcar los requerimientos en el documento del chair del WG y cerrar la fecha del primer draft
 
 - **Objetivo:** que exista un target escrito contra el que planificar,
-  que es lo que el líder del proyecto propuso en la reunión, y cerrar el hueco de que
-  hoy el alcance de la fase está armado sobre la minuta y no sobre los
-  requerimientos.
+  que es lo que el líder del proyecto propuso en la reunión, y resolver la única
+  contradicción que queda entre las dos fuentes del proyecto.
 - **Qué tiene que cubrir:** dos cosas distintas.
-  La primera es el acceso: **hay un documento de requerimientos de alto
-  nivel en una tab de un Google Doc que el líder del proyecto mencionó y que devuelve
-  404 desde el CLI y desde el connector, con todas las cuentas
-  disponibles.** Resolverlo es pedirle al líder del proyecto el link o el id
-  exacto, o pedirle al chair del WG que comparta el documento con la cuenta que
-  corresponda. No deducir el contenido: el `PROJECT.md` tiene la
-  sección declarada y vacía a propósito, y se llena con lo que diga el
-  documento.
-  La segunda es volcar los requerimientos de la demo en el documento de
+  La primera es volcar los requerimientos de la demo en el documento de
   El chair del WG, que es el action item de la reunión: la lista de must-have y
   stretch está en el `PROJECT.md`, y el chair del WG ya agregó ahí el timeline y
   las fechas.
-  Empezar por acá: la sección "Requerimientos de alto nivel: falta el
-  documento" del `PROJECT.md`, y el alcance de la misma sección.
+  La segunda es la fecha del primer draft. El documento dice "First
+  draft of demos Sept 1" y la minuta fija el lunes 21 de septiembre.
+  Preguntárselo al chair del WG y no elegirla, porque la fase entera está
+  planificada contra el 21 y la fecha del documento ya pasó. En la misma
+  vuelta se puede confirmar una persona del equipo del evento.
+  Empezar por acá: la sección "Requerimientos de alto nivel" del
+  `PROJECT.md`, que ya tiene volcado lo que el documento fija, y la
+  sección "A confirmar".
   Restricción: el documento del chair del WG es del chair del WG y ya circuló entre la
   gente del evento. Editarlo con la Docs API por `batchUpdate` y no
   reemplazando contenido, para no romper comentarios ajenos.
   Sin dependencias.
 - **Definición de done:** los requerimientos de la demo están en el
-  documento del chair del WG, y los requerimientos de alto nivel están
-  accesibles y volcados en el `PROJECT.md`, o el motivo por el que
-  siguen inaccesibles está escrito con lo que se intentó.
+  documento del chair del WG, y la fecha del primer draft está confirmada por él
+  y reflejada en el `PROJECT.md` y en el `PHASE.md`, o está escrito qué
+  se preguntó y cuándo.
 - **nivel de verificación:** mínimo. Es un documento que el chair del WG y el líder del proyecto
   leen antes de que algo dependa de él.
 
@@ -256,8 +267,8 @@
   hora, a las 7:00 de su hora, el lunes 21 de septiembre, que es el día
   en que vuelve de Europa. Lo que hay que llevar resuelto o planteado:
   el estado del primer draft, el veredicto de plataforma de T-01, el
-  reparto de los seis layouts entre el primer draft y la grabación (que
-  la minuta no define), el estado de los assets y en particular el
+  reparto de los cinco layouts entre el primer draft y la grabación (que
+  ninguna de las dos fuentes define), el estado de los assets y en particular el
   L-box con video, si iOS entra o queda como stretch, y quién hace el
   primer pase de la especificación de SVTA, que es la decisión que
   El chair del WG dejó abierta entre el líder del proyecto y un participante del WG.

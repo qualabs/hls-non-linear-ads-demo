@@ -54,3 +54,53 @@ exacto del revisor de la spec de HLS (del lado del anfitrión del evento), la fo
 namespace `com.qualabs.hls-concurrent-interstitial` [?], el nombre del
 quinto layout ("pullback" [?]), y una persona del equipo del evento, la persona con la que
 El chair del WG trabaja el deck.
+
+## 2026-09-02 — Los requerimientos de alto nivel, ahora accesibles
+
+El documento que el chair del WG armó para la gente del evento se pudo leer. Con
+él se llenó la sección de requerimientos que estaba declarada y vacía en
+el `PROJECT.md`, y se corrigieron cosas que venían de la minuta:
+
+- **Los layouts son cinco, no seis.** El documento los enumera Overlay,
+  LBox Video, LBox Image, Side by Side pullback y Quad (editorial). La
+  minuta había partido "Side by Side pullback" en dos y contado el
+  editorial por separado.
+- **La clase del DATERANGE es `com.qualabs.hls.concurrentInterstitial`**,
+  con puntos y no con guiones. Sale textual del documento. Cuando SVTA
+  publique, la forma pasa a su namespace,
+  `com.svta.hls.concurrentInterstitial`, con el nombre todavía a definir
+  del lado de ellos.
+- **El Layout Controller es una herramienta de SVTA**, en
+  `https://www.svta.org/wp-content/nlag/v4/`, con offsets porcentuales
+  relativos al viewport.
+- **El stretch de capabilities es más preciso de lo que estaba escrito**:
+  pasarle la capacidad al APS en el request del asset list, por
+  inyección de parámetro en la URL.
+- **El SDK, óptimamente, es una librería** que se incluye en la
+  aplicación y se activa si la clase está definida en el DATERANGE.
+
+Con eso se cerraron tres de los cuatro items marcados `[?]`: el nombre
+del revisor de la spec de HLS, la forma del namespace y el nombre del quinto layout. Queda
+Una persona del equipo del evento.
+
+## 2026-09-02 — La detección de capacidades queda fuera de alcance
+
+El documento incluye una especificación técnica completa de detección de
+capacidad de decodificación concurrente (draft v0.9 del 2026-08-17,
+capítulos 0 a 13). El líder del proyecto la deja expresamente fuera de alcance, y no
+como trabajo para más adelante: su posición es que detectar qué puede
+hacer cada dispositivo es el encuadre equivocado y que la solución
+correcta es dar un listado de opciones. Está escrita en el `PROJECT.md`
+con su cita textual, porque es una posición que va a tener que sostener
+varias veces: la detección es uno de los dos problemas que el chair del WG piensa
+marcar en escenario, y pasarle la capacidad al APS sigue siendo stretch
+de la demo.
+
+## 2026-09-02 — Discrepancia de fechas: el primer draft
+
+El documento dice "First draft of demos Sept 1" y la minuta fija el
+lunes 21 de septiembre. No se eligió ninguna de las dos: queda como
+pregunta abierta para el chair del WG en el `PROJECT.md` y en la T-07, y es ahora
+el riesgo R3 de la fase 01, que está planificada contra el 21. El resto
+del timeline coincide, salvo que el documento no incluye el test run del
+5 de octubre.

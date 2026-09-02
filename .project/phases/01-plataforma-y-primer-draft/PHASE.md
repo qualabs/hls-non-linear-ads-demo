@@ -12,6 +12,9 @@ La fase existe por el riesgo de plataforma. El camino crítico se eligió
 sobre información que nadie tiene todavía, y el 21 de septiembre es el
 día en que se sabe si la elección aguanta. La fase cierra en ese hito:
 primer draft de las demos andando, más el sync de una hora con el chair del WG.
+La fecha del primer draft está pendiente de confirmar con el chair del WG, porque
+la minuta dice el 21 de septiembre y el documento de requerimientos dice
+el 1. La fase corre contra el 21 mientras tanto.
 
 ## Alcance
 
@@ -25,15 +28,14 @@ primer draft de las demos andando, más el sync de una hora con el chair del WG.
 - **Probar que el layout controller generaliza**, con al menos dos
   layouts de naturaleza distinta: un overlay, que compone encima del
   video sin tocar su geometría, y un L-box, que sí la cambia. El
-  reparto completo de los seis layouts entre el primer draft y la
+  reparto completo de los cinco layouts entre el primer draft y la
   grabación se cierra en el sync del 21.
 - **Tests del slice**, escritos y corridos, sobre la lógica no visual.
 - **El set base de assets relevado**, sin Big Buck Bunny, y con el
   L-box con video atacado temprano porque es el más difícil de
   conseguir.
 - **El colaborador externo enganchado** para la parte de iOS.
-- **Los requerimientos de la demo volcados en el documento del chair del WG**, y
-  el acceso al documento de requerimientos de alto nivel resuelto.
+- **Los requerimientos de la demo volcados en el documento del chair del WG.**
 - **El canal `#wg-hls-presentation` operativo.**
 
 ## Fuera de alcance de esta fase
@@ -42,6 +44,9 @@ primer draft de las demos andando, más el sync de una hora con el chair del WG.
 - Los stretch goals: la segunda plataforma completa en iOS, los
   controles e indicador del ad no lineal, y la detección de capability
   de múltiples decoders.
+- La especificación de detección de capacidades que trae el documento de
+  requerimientos. Queda fuera por la posición del líder del proyecto, que está en el
+  `PROJECT.md`.
 - El deck y la presentación, que son del chair del WG.
 - La actualización de la especificación de SVTA, que se retoma cuando
   la demo esté encaminada.
@@ -54,10 +59,13 @@ el 21 de septiembre.** Es el riesgo principal del proyecto. Al chair del WG le
 dijeron que en AVFoundation esto sería bastante más fácil, porque hay
 implementaciones públicas en Swift que no existen en hls.js, y que el
 trabajo en hls.js que lo mejoraría está planificado pero no hecho.
-El chair del WG perdió la grabación de esa conversación y mandó un email a
-El revisor de la spec de HLS con el líder del proyecto en copia para recuperar los detalles. El líder del proyecto
-sostiene lo contrario por experiencia previa y dejó la reserva de
-cambiar si aparece algo nuevo.
+El chair del WG perdió la grabación de esa conversación y mandó un email al revisor de la spec de HLS
+con el líder del proyecto en copia para recuperar los detalles. El documento de
+requerimientos deja escrito lo mismo sin los detalles, y agrega la
+presunción del chair del WG de que se trata de definir la clase en el DATERANGE
+y de poder inyectar una custom que interopere bien. El líder del proyecto sostiene lo
+contrario por experiencia previa y dejó la reserva de cambiar si aparece
+algo nuevo.
 
 Mitigación, en tres partes:
 
@@ -80,23 +88,17 @@ como el más difícil de conseguir en material. Mitigación: T-05 lo ataca
 primero dentro del relevamiento, y si no aparece material, la
 alternativa se discute en el sync del 21 con tiempo para buscar afuera.
 
-**R3. Los requerimientos de alto nivel no están accesibles.** El
-documento está en una tab de un Google Doc que devuelve 404 desde todas
-las cuentas disponibles, así que hoy el alcance de la fase está armado
-sobre la minuta y no sobre los requerimientos escritos. Mitigación:
-T-07 resuelve el acceso, y si al volcarlos aparece algo que no está
-contemplado acá, el alcance de la fase se amplía por la vía normal en
-lugar de descubrirse en la grabación.
+**R3. La fecha del primer draft no está acordada.** La minuta fija el
+lunes 21 de septiembre y el documento de requerimientos dice el 1 de
+septiembre, que ya pasó. Toda la fase está planificada contra el 21.
+Mitigación: es la primera pregunta que va por chat al chair del WG (T-07). Si la
+que vale es la del documento, la fase ya está tarde y lo que se decide
+con el chair del WG es qué se le muestra y cuándo, no cómo se replanifica.
 
 **R4. El colaborador externo no tiene alcance ni fechas.** La minuta registra que el líder del proyecto
 le habla directamente para iOS, y nada más. Riesgo aceptado en esta
 fase: iOS es stretch, y lo que T-06 necesita es solamente saber si el colaborador externo
 está disponible y en qué ventana.
-
-**R5. El namespace y el nombre del quinto layout están sin confirmar.**
-Riesgo residual aceptado. El namespace se usa provisorio como aparece
-en la minuta y se corrige cuando el chair del WG lo confirme; el nombre del
-layout no bloquea construirlo.
 
 ## Timeline de la fase
 
