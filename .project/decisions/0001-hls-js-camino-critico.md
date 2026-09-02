@@ -19,23 +19,25 @@ La gente del evento dijo que no le importa si la demo se hace en web o
 en iOS, que web tiene más potencial de impacto, y que idealmente se
 hagan las dos.
 
-Contra eso, Roger [?] (del lado de Apple; el transcript lo devuelve
-también como "Rob" y "Ron", y por contexto es la misma persona) le
-mencionó a David que hay implementaciones a nivel público disponibles
+Contra eso, Rob (del lado de Apple) le mencionó a David que hay
+implementaciones a nivel público disponibles
 en Swift que no están en hls.js, algo alrededor de reemplazar una clase
 y de cómo eso funciona con el DATERANGE, que harían esto bastante más
 fácil en AVFoundation. También mencionó que hay trabajo ya planificado
 en hls.js que va a mejorar esto, pero que todavía no está hecho.
 
 David no tiene los detalles de esa conversación porque creía tenerla
-grabada y no la tenía. Durante la reunión mandó un email a Roger [?] con
-Nicolás en copia para recuperarlos.
+grabada y no la tenía. Durante la reunión mandó un email a Rob con
+Nicolás en copia para recuperarlos. El documento de requerimientos que
+David mantiene deja escrito lo mismo sin los detalles: sobre hls.js, que
+es la opción óptima si se logra limpiamente, anota que "Rob warned might
+not be suited for this yet but it is on their roadmap".
 
 La posición de Nicolás es la opuesta y viene de experiencia previa.
 Puso hls.js como camino crítico con el argumento de que si eso no sale,
 que es lo que debería ser más fácil, el proyecto está en problemas, y
-dejó explícito que si de la información de Roger [?] surge algo nuevo,
-se cambia. David dijo que él también preferiría hls.js porque permite
+dejó explícito que si de la información de Rob surge algo nuevo, se
+cambia. David dijo que él también preferiría hls.js porque permite
 mostrar la pestaña de red del browser durante la demo, y agregó que una
 implementación limpia en iOS más un parche sobre hls.js sería el mejor
 de los mundos: sirve para el evento y deja base para hacerlo bien más

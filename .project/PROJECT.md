@@ -8,8 +8,9 @@ description: >
   que funcionar de verdad: David descartó explícitamente el
   compositing de video. Nicolás construye la demo y no la delega,
   trae a Emil para la parte de iOS, y apunta primero a hls.js como
-  camino crítico. Alcance, fechas y reparto salieron de la reunión
-  del 2026-09-02 con David.
+  camino crítico. Alcance, fechas y reparto salen de la reunión del
+  2026-09-02 con David y del documento de requerimientos que David
+  mantiene para la gente del evento.
 status: ongoing
 type: desarrollo
 owner: nicolas-levy
@@ -24,18 +25,23 @@ output_pointers:
   - kind: drive-doc
     label: minuta de la reunión de alcance con David Hassoun (2026-09-02)
     url: https://docs.google.com/document/d/1ZSrYPeRoNzypDRCLoenWpISu17M9PJ3erWQFkfaPL7U
+  - kind: url
+    label: Layout Controller de SVTA, la herramienta contra la que se resuelve el renderizado
+    url: https://www.svta.org/wp-content/nlag/v4/
 related_processes: []
 related_wgs: [svta-ads]
 ---
 
 # Demo de publicidad no lineal en HLS (HLS Interest Day)
 
-Toda la información de este documento sale de la minuta de la reunión
-del 2026-09-02 entre David Hassoun y Nicolás Levy, salvo donde se
-indique otra fuente. La minuta está en
-`processes/cto-minutes/data/meetings-index.json` como
-`tactiq-2026-09-02-001`, y el Doc completo es
-`1ZSrYPeRoNzypDRCLoenWpISu17M9PJ3erWQFkfaPL7U`.
+Este documento tiene dos fuentes. La primera es la minuta de la reunión
+del 2026-09-02 entre David Hassoun y Nicolás Levy, que fijó alcance,
+fechas y reparto; está en `processes/cto-minutes/data/meetings-index.json`
+como `tactiq-2026-09-02-001` y el Doc completo es
+`1ZSrYPeRoNzypDRCLoenWpISu17M9PJ3erWQFkfaPL7U`. La segunda es el
+documento de requerimientos que David armó para la gente del evento, que
+es de donde sale la sección "Requerimientos de alto nivel" y todo lo
+técnico que se cita textual. Donde las dos difieren, está dicho.
 
 El nombre "HLS Interest Day" lo aporta Nicolás. La minuta se refiere al
 evento como "el evento de Apple del 7 de octubre".
@@ -53,10 +59,14 @@ separado, porque dicen que el software tiene que estar operativo antes
 de grabar y no antes de presentar. El proyecto tiene entonces una
 semana menos de la que aparenta.
 
-El hito duro del medio es el **lunes 21 de septiembre**: primer draft de
-las demos andando, más un sync de una hora con David para revisar el
-estado completo. Es el día en que David vuelve de Europa, y es el punto
-donde se sabe si el plan aguanta.
+El hito duro del medio es el primer draft de las demos andando, más un
+sync de una hora con David para revisar el estado completo. Es el punto
+donde se sabe si el plan aguanta. Su fecha es la primera pregunta
+abierta del proyecto: la minuta la fija el **lunes 21 de septiembre**,
+el día en que David vuelve de Europa, y el documento de requerimientos
+dice **1 de septiembre**. Están a veinte días una de otra sobre un
+proyecto de cinco semanas, y la del documento ya pasó. La planificación
+de la fase 01 corre contra el 21 hasta que David confirme cuál vale.
 
 ## El riesgo número uno: hls.js contra AVFoundation
 
@@ -69,22 +79,29 @@ dejó la reserva explícita de cambiar si aparece información nueva.
 David también prefiere hls.js, porque permite mostrar la pestaña de red
 del browser durante la demo.
 
-La contra-indicación no está resuelta. A David le dijo Roger [?] que hay
+La contra-indicación no está resuelta. A David le dijo Rob que hay
 implementaciones públicas en Swift que no existen en hls.js, algo
 alrededor de reemplazar una clase y de cómo eso funciona con el
 DATERANGE, y que eso haría el trabajo bastante más fácil en
 AVFoundation. También le dijo que el trabajo en hls.js que mejoraría
 esto está planificado pero **no hecho**, así que hoy la vía posible es
 parchear o modificar hls.js en lugar de hacer una implementación limpia.
-David no tiene los detalles porque creía tener grabada esa conversación
-y no la tenía, y durante la reunión mandó un email a Roger [?] con
-Nicolás en copia para recuperarlos.
+El documento de requerimientos lo deja escrito así: sobre hls.js, que es
+la opción óptima si se logra limpiamente, "Rob warned might not be
+suited for this yet but it is on their roadmap", y David anota que no
+sabe qué parte exactamente, que puede conseguir más detalles, y que
+presume que se trata de definir la clase en el DATERANGE y de poder
+inyectar una custom que interopere bien. David no tiene esos detalles
+porque creía tener grabada esa conversación y no la tenía, y durante la
+reunión mandó un email a Rob con Nicolás en copia para recuperarlos.
+
+El documento también fija qué combinación es aceptable si la limpia no
+sale: iOS nativo limpio más web parcheado a lo bruto, o web limpio solo.
 
 Lo que esto significa en concreto: **dos semanas de trabajo pueden ir a
-la plataforma equivocada y descubrirse en el sync del 21 de
-septiembre**, cuando ya no queda margen antes de la grabación. Es el
-riesgo que decide la fase 01, y su mitigación está en el `PHASE.md` de
-esa fase.
+la plataforma equivocada y descubrirse en el sync del primer draft**,
+cuando ya no queda margen antes de la grabación. Es el riesgo que decide
+la fase 01, y su mitigación está en el `PHASE.md` de esa fase.
 
 La decisión de plataforma está registrada como ADR
 `decisions/0001-hls-js-camino-critico.md`. Si la información que David
@@ -107,33 +124,78 @@ trabajo, se va a destacar, aparejado con el de SVTA porque el trabajo se
 hace con ellos. La tercera es que la demo es lo que después empuja la
 especificación de SVTA, que es el tercer frente de este trabajo.
 
+## Requerimientos de alto nivel
+
+El documento que David armó para la gente del evento explica qué están
+haciendo, qué quieren lograr y cómo planean hacerlo. Lo que sigue es lo
+que fija para esta demo.
+
+**El marco.** El trabajo extiende la guía SVTA2053 (Ad Creative
+Signaling in DASH and HLS) a su v3, para incorporar experiencias de
+publicidad concurrente no lineal alineadas con IAB y con la
+actualización de VAST. Los formatos que se buscan cubrir son Linear Ad,
+Pause Ad, Menu Ad, Squeezeback y Overlay, extendiendo las
+implementaciones para permitir más control de la presentación del lado
+del cliente.
+
+**El mecanismo en HLS**, en los cinco puntos que el documento enumera.
+
+1. Se usan los tags DATERANGE y el flujo de interstitials existentes
+   para llegar al asset-list JSON.
+2. Se extienden las guías de SVTA sobre ese asset-list JSON para que
+   incluya los datos de layout de la experiencia concurrente, sea
+   publicitaria o editorial.
+3. La intención es proveer una librería implementable dentro de las
+   aplicaciones cliente, que permita reemplazar opcionalmente la clase
+   por defecto `com.apple.hls.interstitial` del DATERANGE por la clase
+   concurrente, y con eso habilitar la experiencia.
+4. Esa clase concurrente extiende, óptimamente, a la clase interstitial
+   existente, para mantener compatibilidad hacia atrás cuando el
+   asset-list JSON responde un interstitial tradicional.
+5. Si el asset-list trae los datos adicionales de la experiencia
+   concurrente, el cliente la renderiza.
+
+**El layout controller.** Es una herramienta de SVTA, en
+`https://www.svta.org/wp-content/nlag/v4/`, y trabaja con offsets
+porcentuales relativos al viewport. Es contra ella que se resuelve el
+layout y el renderizado.
+
+**La forma de los datos.** El DATERANGE lleva la clase custom, y el
+asset-list lleva por asset un bloque `X-AD-CREATIVE-SIGNALING` con su
+`version`, un `type` de slot y un `payload` que declara el tipo de
+presentación (por ejemplo `cornerOverlay`), su `start`, su `duration` y
+un `layout` con los assets, cada uno con su `viewport` de cuatro valores
+porcentuales y su `zDepth`.
+
+**El tercer frente.** El documento pide actualizar el spec doc de SVTA
+al estado actual de todas las decisiones y de la solución propuesta.
+
 ## Alcance
 
 ### Must-have
 
-Es la lista que David recorrió en la reunión como el mínimo.
-
-- Una plataforma funcionando, con el player usando la clase custom para
-  cargar el asset list.
-- El renderizado del layout del interstitial resuelto por un **layout
-  controller**.
-- Ejemplos de los layouts principales, no uno solo (ver la lista abajo).
-- Como opción dentro de la demo, poder mostrar junto al player el
-  DATERANGE que viene o el manifest completo resaltado, más el asset
-  list ya cargado. En web se resuelve con las herramientas de red del
-  browser; en iOS habría que exponerlo dentro de la propia app, por
-  ejemplo en un iPad. David lo nombró como opción deseable dentro del
-  must-have, no como stretch.
+- **El SDK, con al menos una plataforma funcionando.** El player usa la
+  clase del DATERANGE para cargar y manejar el asset-list.json
+  enriquecido para la experiencia concurrente, y ese manejo incluye el
+  layout y el renderizado resueltos contra el Layout Controller. El
+  documento anota que iOS puede salir más limpio, pero que hls.js es
+  más impactante.
+- **El SDK, óptimamente, en forma de librería** que se incluya en la
+  aplicación y se active si la clase está definida en el DATERANGE.
+  Puede requerir más setup y scaffolding según la plataforma.
+- **Al menos una plataforma**, entre web con hls.js e iOS con Swift.
+- **La aplicación de demo**, con un stream que recorra los distintos
+  layouts de ad y muestre el asset-list.json. Mostrar además los tags
+  DATERANGE o el manifest de cada uno es opcional. En web se resuelve
+  con las herramientas de red del browser; en iOS habría que exponerlo
+  dentro de la propia app, por ejemplo en un iPad.
 
 ### Stretch
 
-Los stretch goals que David nombró, en sus palabras.
-
 - Las dos plataformas, web y iOS.
-- Controles e indicador para el ad no lineal.
-- Detección de si el device soporta múltiples decoders, para pasar esa
-  capability al servicio de interstitials, sea en el request o
-  reflejada en el asset list.
+- Controles e indicador de si el device soporta múltiples decoders, y
+  pasar esa capacidad al APS en el request del asset list, por inyección
+  de parámetro en la URL.
 
 ### Fuera de alcance
 
@@ -143,23 +205,24 @@ Los stretch goals que David nombró, en sus palabras.
   evento y que Apple va a presentar. A David le gustaría mostrar en la
   discusión cómo se conecta con este trabajo si hay tiempo, pero quedó
   como deseable y sin owner.
+- La especificación de detección de capacidades, por la posición de
+  Nicolás que está más abajo.
 
-## Los seis layouts
+## Los cinco layouts
 
-David nombró seis. El L-box con video es, según él, el más difícil de
-conseguir en assets.
+El documento los enumera: Overlay, L-box con video, L-box con imagen,
+Side by side pullback, y Quad, que es el editorial. El L-box con video
+es, según David, el más difícil de conseguir en assets.
 
 1. Overlay.
 2. L-box con video.
 3. L-box con imagen.
-4. Side-by-side.
-5. "Pullback" [?]. El nombre exacto queda a confirmar con David: la
-   minuta lo marca como término dudoso del transcript.
-6. Uno más editorial. La minuta no lo describe más allá de eso.
+4. Side by side pullback.
+5. Quad, el layout editorial.
 
-El reparto de estos seis entre el primer draft del 21 de septiembre y la
-grabación del 28 al 30 no está definido en la minuta, y queda como
-pregunta a cerrar en el sync del 21.
+El reparto de estos cinco entre el primer draft y la grabación del 28 al
+30 no está definido en ninguna de las dos fuentes, y queda como pregunta
+a cerrar en el sync del primer draft.
 
 ## Assets
 
@@ -184,14 +247,59 @@ concepto.
 ## Namespace y branding
 
 Mientras SVTA no publique la especificación, la demo usa un namespace
-propio de Qualabs para la clase custom. La forma que aparece en la
-minuta es `com.qualabs.hls-concurrent-interstitial` [?], marcada como a
-confirmar porque el transcript devuelve una variante deformada
-("com.callabs.hls concurrent interstitial").
+propio de Qualabs para la clase custom: **`com.qualabs.hls.concurrentInterstitial`**.
+El documento lo trae textual:
+
+```
+#EXT-X-DATERANGE:ID="AD-1-0",CLASS="com.qualabs.hls.concurrentInterstitial",
+START-DATE="2019-01-01T00:12:10.939Z",END-DATE="2019-01-01T00:12:10.939Z",
+X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-ASSET-LIST="https://sgai.example.org/asset-list",
+X-RESTRICT="SKIP",PLANNED-DURATION=24,SCTE35-OUT=0xFC30...
+```
+
+Cuando SVTA publique, la clase pasa al namespace de ellos, que en el
+documento aparece como `com.svta.hls.concurrentInterstitial` y con el
+nombre todavía a definir.
 
 El branding de Qualabs se muestra junto al de SVTA. David se aseguró de
 que el namespace propio existiera y fue explícito en que el logo de
 Qualabs va a estar ahí.
+
+## Detección de capacidades: la especificación existe, y queda fuera
+
+El documento de requerimientos incluye, antes de la sección de qué hay
+que construir, una especificación técnica completa de detección de
+capacidad de decodificación concurrente: "Concurrent Media Decode
+Capability Detection for SGAI Non-Linear Ad Experiences", draft v0.9 del
+2026-08-17, de David Hassoun, con capítulos numerados del 0 al 13.
+Define un modelo de capacidad de cuatro dimensiones, un probe de cliente
+en cuatro fases, bindings normativos por plataforma, una escalera de
+fallback y cómo se señala la capacidad al ad stack.
+
+**Nicolás la deja expresamente fuera de alcance por ahora**, y su
+posición no es que sea trabajo para más adelante, sino que el encuadre
+está equivocado:
+
+> Lo de detección de capacidades por ahora olvidate. Algo pasa que
+> todavía siguen pensando en eso cuando la solución ya la tenemos, que
+> son las opciones. Pero bueno, va a llevarme más tiempo que entiendan
+> que dar un listado de opciones es la solución correcta.
+
+El argumento es que averiguar de antemano qué puede hacer cada
+dispositivo es el problema equivocado, y que la solución correcta es dar
+un listado de opciones. El propio documento ya contiene mecanismos de
+esa forma en su sección de device detection: placements que declaran qué
+tipos de presentación soportan (Replace, Insert, Concurrent,
+ConcurrentStatic), multi layout con fallback, y una única respuesta VAST
+que traiga a la vez los assets de la experiencia concurrente y los de la
+lineal.
+
+Esto no cierra la discusión, y por eso la posición queda escrita. El
+tema vuelve por dos lados: la detección es uno de los dos problemas
+abiertos que David piensa marcar en escenario, y pasarle la capacidad de
+múltiples decoders al APS sigue listado como stretch de la demo. Lo que
+queda fuera es el modelo de detección de la especificación, no el
+stretch tal como David lo escribió.
 
 ## Reparto y compromisos
 
@@ -234,6 +342,10 @@ compromiso personal y no por una asignación de equipo.
 | 2026-10-06 (martes) | Dress rehearsal. Misma nota de fuente que el test run. |
 | 2026-10-07 (miércoles) | Presentación en el evento de Apple, y especificación de SVTA actualizada con todas las decisiones tomadas. |
 
+El timeline del documento de requerimientos coincide con este salvo en
+dos puntos: pone el primer draft de las demos el 1 de septiembre en
+lugar del 21, y no incluye el test run del 5 de octubre.
+
 David está fuera por IBC y unos días más, y vuelve el 21 de septiembre.
 Dejó dicho que igual está disponible durante IBC y la semana siguiente,
 y que Nicolás lo pinguee si necesita algo. El modo de trabajo acordado
@@ -247,30 +359,11 @@ piensa insistir. No son problemas a resolver en este proyecto, pero
 condicionan qué muestra la demo.
 
 1. **Cómo se detecta que un device puede hacer esto, y cómo se entera el
-   interstitial service.** Es lo mismo que planteó Roger [?], y David lo
-   describe como un foco de interés de todos. Aparece también como
-   stretch goal de la demo.
+   interstitial service.** Es lo mismo que planteó Rob, y David lo
+   describe como un foco de interés de todos. Es también el tema sobre
+   el que Nicolás sostiene que el encuadre está equivocado, más arriba.
 2. **Qué hacer cuando el ad break no se puede llenar con un ad no
    lineal**, es decir si se cae el break entero o no.
-
-## Requerimientos de alto nivel: falta el documento
-
-**No hay requerimientos de alto nivel volcados acá, porque el documento
-que los tiene no es accesible.** Está en una tab de un Google Doc que
-Nicolás mencionó, y devuelve 404 tanto desde el CLI como desde el
-connector, con todas las cuentas disponibles.
-
-Este es el lugar declarado para esos requerimientos. Queda vacío a
-propósito: no se dedujeron ni se completaron con supuestos. Se llena
-cuando se resuelva el acceso, que es parte de la task T-07 de la fase
-01.
-
-Lo que sí está registrado de ese documento, por lo que se habló en la
-reunión, es que David lo armó para la gente del evento explicando qué
-están haciendo, qué quieren lograr y cómo planean hacerlo, que lo
-compartió en pantalla, que ya agregó el timeline y las fechas, y que
-Nicolás quedó en volcar ahí los requerimientos de la demo para poder
-planificar contra ese target.
 
 ## Riesgos que cruzan fases
 
@@ -280,9 +373,9 @@ siguen cruzan todo el proyecto.
 
 - **La fecha percibida no es la fecha real.** Cualquier planificación
   que apunte al 7 de octubre en lugar del 28 de septiembre llega una
-  semana tarde. Mitigación: el timeline de arriba y el hito del 21 de
-  septiembre son las fechas de trabajo; el 7 de octubre no se usa como
-  fecha de ingeniería.
+  semana tarde. Mitigación: el timeline de arriba y el hito del primer
+  draft son las fechas de trabajo; el 7 de octubre no se usa como fecha
+  de ingeniería.
 - **Los assets del L-box con video.** Es el layout más difícil de
   conseguir en material, según David. Mitigación: entra temprano en el
   relevamiento de assets, para que la falta se descubra con tiempo de
@@ -300,18 +393,13 @@ siguen cruzan todo el proyecto.
 
 ## A confirmar
 
-Cosas que la minuta trae marcadas como dudosas y que no se resolvieron
-a ojo.
-
-- **Roger [?]**: la persona del lado de Apple que le dio a David el
-  feedback sobre el diseño y la comparación con AVFoundation. El
-  transcript la devuelve también como "Rob" y "Ron"; por contexto es la
-  misma persona. Nombre exacto sin confirmar.
-- **`com.qualabs.hls-concurrent-interstitial` [?]**: forma exacta del
-  namespace propio.
-- **"Pullback" [?]**: nombre del quinto layout.
+- **La fecha del primer draft.** El documento de requerimientos dice
+  "First draft of demos Sept 1" y la minuta fija el lunes 21 de
+  septiembre. David dijo en la reunión que ya había agregado el timeline
+  al documento, lo que hace la contradicción más difícil de leer. Es la
+  pregunta más urgente, porque la fase 01 está planificada contra el 21.
 - **August [?]**: la persona con la que David trabaja el deck.
-- El reparto de los seis layouts entre el primer draft y la grabación.
+- El reparto de los cinco layouts entre el primer draft y la grabación.
 - Quién hace el primer pase de la especificación de SVTA.
 
 ## Coordinación

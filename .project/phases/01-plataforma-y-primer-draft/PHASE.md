@@ -12,6 +12,9 @@ La fase existe por el riesgo de plataforma. El camino crítico se eligió
 sobre información que nadie tiene todavía, y el 21 de septiembre es el
 día en que se sabe si la elección aguanta. La fase cierra en ese hito:
 primer draft de las demos andando, más el sync de una hora con David.
+La fecha del primer draft está pendiente de confirmar con David, porque
+la minuta dice el 21 de septiembre y el documento de requerimientos dice
+el 1. La fase corre contra el 21 mientras tanto.
 
 ## Alcance
 
@@ -25,15 +28,14 @@ primer draft de las demos andando, más el sync de una hora con David.
 - **Probar que el layout controller generaliza**, con al menos dos
   layouts de naturaleza distinta: un overlay, que compone encima del
   video sin tocar su geometría, y un L-box, que sí la cambia. El
-  reparto completo de los seis layouts entre el primer draft y la
+  reparto completo de los cinco layouts entre el primer draft y la
   grabación se cierra en el sync del 21.
 - **Tests del slice**, escritos y corridos, sobre la lógica no visual.
 - **El set base de assets relevado**, sin Big Buck Bunny, y con el
   L-box con video atacado temprano porque es el más difícil de
   conseguir.
 - **Emil enganchado** para la parte de iOS.
-- **Los requerimientos de la demo volcados en el documento de David**, y
-  el acceso al documento de requerimientos de alto nivel resuelto.
+- **Los requerimientos de la demo volcados en el documento de David.**
 - **El canal `#wg-hls-presentation` operativo.**
 
 ## Fuera de alcance de esta fase
@@ -42,6 +44,9 @@ primer draft de las demos andando, más el sync de una hora con David.
 - Los stretch goals: la segunda plataforma completa en iOS, los
   controles e indicador del ad no lineal, y la detección de capability
   de múltiples decoders.
+- La especificación de detección de capacidades que trae el documento de
+  requerimientos. Queda fuera por la posición de Nicolás, que está en el
+  `PROJECT.md`.
 - El deck y la presentación, que son de David.
 - La actualización de la especificación de SVTA, que se retoma cuando
   la demo esté encaminada.
@@ -54,10 +59,13 @@ el 21 de septiembre.** Es el riesgo principal del proyecto. A David le
 dijeron que en AVFoundation esto sería bastante más fácil, porque hay
 implementaciones públicas en Swift que no existen en hls.js, y que el
 trabajo en hls.js que lo mejoraría está planificado pero no hecho.
-David perdió la grabación de esa conversación y mandó un email a
-Roger [?] con Nicolás en copia para recuperar los detalles. Nicolás
-sostiene lo contrario por experiencia previa y dejó la reserva de
-cambiar si aparece algo nuevo.
+David perdió la grabación de esa conversación y mandó un email a Rob
+con Nicolás en copia para recuperar los detalles. El documento de
+requerimientos deja escrito lo mismo sin los detalles, y agrega la
+presunción de David de que se trata de definir la clase en el DATERANGE
+y de poder inyectar una custom que interopere bien. Nicolás sostiene lo
+contrario por experiencia previa y dejó la reserva de cambiar si aparece
+algo nuevo.
 
 Mitigación, en tres partes:
 
@@ -80,30 +88,24 @@ como el más difícil de conseguir en material. Mitigación: T-05 lo ataca
 primero dentro del relevamiento, y si no aparece material, la
 alternativa se discute en el sync del 21 con tiempo para buscar afuera.
 
-**R3. Los requerimientos de alto nivel no están accesibles.** El
-documento está en una tab de un Google Doc que devuelve 404 desde todas
-las cuentas disponibles, así que hoy el alcance de la fase está armado
-sobre la minuta y no sobre los requerimientos escritos. Mitigación:
-T-07 resuelve el acceso, y si al volcarlos aparece algo que no está
-contemplado acá, el alcance de la fase se amplía por la vía normal en
-lugar de descubrirse en la grabación.
+**R3. La fecha del primer draft no está acordada.** La minuta fija el
+lunes 21 de septiembre y el documento de requerimientos dice el 1 de
+septiembre, que ya pasó. Toda la fase está planificada contra el 21.
+Mitigación: es la primera pregunta que va por chat a David (T-07). Si la
+que vale es la del documento, la fase ya está tarde y lo que se decide
+con David es qué se le muestra y cuándo, no cómo se replanifica.
 
 **R4. Emil no tiene alcance ni fechas.** La minuta registra que Nicolás
 le habla directamente para iOS, y nada más. Riesgo aceptado en esta
 fase: iOS es stretch, y lo que T-06 necesita es solamente saber si Emil
 está disponible y en qué ventana.
 
-**R5. El namespace y el nombre del quinto layout están sin confirmar.**
-Riesgo residual aceptado. El namespace se usa provisorio como aparece
-en la minuta y se corrige cuando David lo confirme; el nombre del
-layout no bloquea construirlo.
-
 ## Timeline de la fase
 
 | Fecha | Qué |
 | --- | --- |
 | 2026-09-02 | Fase abierta. |
-| Lo antes posible | Llega la información de Roger [?] sobre AVFoundation contra hls.js (T-01). |
+| Lo antes posible | Llega la información de Rob sobre AVFoundation contra hls.js (T-01). |
 | 2026-09-21 | Primer draft andando y sync de una hora con David. Cierra la fase. |
 
 ## Stakeholders
@@ -113,7 +115,7 @@ layout no bloquea construirlo.
   recupera la información de plataforma. Fuera por IBC hasta el 21 de
   septiembre, disponible por chat.
 - **Emil**: parte de iOS.
-- **Roger [?]**: del lado de Apple, origen de la contra-indicación de
+- **Rob**: del lado de Apple, origen de la contra-indicación de
   plataforma.
 - Canal del proyecto: `#wg-hls-presentation`.
 
