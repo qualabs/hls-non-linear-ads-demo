@@ -106,3 +106,22 @@ pregunta abierta para David en el `PROJECT.md` y en la T-07, y es ahora
 el riesgo R3 de la fase 01, que está planificada contra el 21. El resto
 del timeline coincide, salvo que el documento no incluye el test run del
 5 de octubre.
+
+## 2026-09-03 — Se borra la planificación de la fase 01
+
+Nicolás pidió borrar todo lo planificado y empezar de cero: la fase se había
+abierto antes de tener los datos que la fase necesitaba, así que su alcance y sus
+tareas describían un trabajo que nadie había podido verificar que fuera el
+correcto.
+
+Se borran `phases/01-plataforma-y-primer-draft/` (PHASE.md y TASKS.md) y el ADR
+`0001-hls-js-camino-critico.md`.
+
+Quedan en pie `PROJECT.md` y esta bitácora. El PROJECT.md no salió de una
+planificación: salió del documento de requerimientos y de la minuta de la reunión
+con David Hassoun, que son datos reales.
+
+Esta entrada no se borra junto con lo que describe. Una bitácora sirve
+justamente para dejar registro de que algo existió y por qué se sacó; borrarla
+haría que el próximo lector no entienda por qué el proyecto tiene un PROJECT.md
+y ninguna fase.
