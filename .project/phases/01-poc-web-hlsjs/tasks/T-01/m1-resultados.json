@@ -1,0 +1,287 @@
+[
+  {
+    "n": 1,
+    "wallSeconds": 12,
+    "playResults": [
+      "ok"
+    ],
+    "errors": [],
+    "per": [
+      {
+        "i": 0,
+        "src": "primary/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.961,
+        "rateVsWall": 0.996,
+        "framesDecoded": 359,
+        "fps": 29.9,
+        "dropped": 1,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      }
+    ],
+    "visibility": {
+      "vis": "visible",
+      "focus": true
+    },
+    "chrome": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "hlsjs": "1.7.2"
+  },
+  {
+    "n": 2,
+    "wallSeconds": 12,
+    "playResults": [
+      "ok",
+      "ok"
+    ],
+    "errors": [],
+    "per": [
+      {
+        "i": 0,
+        "src": "primary/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.962,
+        "rateVsWall": 0.996,
+        "framesDecoded": 358,
+        "fps": 29.8,
+        "dropped": 0,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "i": 1,
+        "src": "adA/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.961,
+        "rateVsWall": 0.996,
+        "framesDecoded": 358,
+        "fps": 29.8,
+        "dropped": 2,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      }
+    ],
+    "visibility": {
+      "vis": "visible",
+      "focus": true
+    },
+    "chrome": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "hlsjs": "1.7.2"
+  },
+  {
+    "n": 3,
+    "wallSeconds": 12.01,
+    "playResults": [
+      "ok",
+      "ok",
+      "ok"
+    ],
+    "errors": [],
+    "per": [
+      {
+        "i": 0,
+        "src": "primary/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.964,
+        "rateVsWall": 0.996,
+        "framesDecoded": 359,
+        "fps": 29.9,
+        "dropped": 1,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "i": 1,
+        "src": "adA/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.964,
+        "rateVsWall": 0.996,
+        "framesDecoded": 359,
+        "fps": 29.9,
+        "dropped": 1,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "i": 2,
+        "src": "adB/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.965,
+        "rateVsWall": 0.996,
+        "framesDecoded": 359,
+        "fps": 29.9,
+        "dropped": 1,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      }
+    ],
+    "visibility": {
+      "vis": "visible",
+      "focus": true
+    },
+    "chrome": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "hlsjs": "1.7.2"
+  },
+  {
+    "n": 4,
+    "wallSeconds": 12,
+    "playResults": [
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+    ],
+    "errors": [],
+    "per": [
+      {
+        "i": 0,
+        "src": "primary/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.961,
+        "rateVsWall": 0.996,
+        "framesDecoded": 359,
+        "fps": 29.9,
+        "dropped": 7,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "i": 1,
+        "src": "adA/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.961,
+        "rateVsWall": 0.996,
+        "framesDecoded": 359,
+        "fps": 29.9,
+        "dropped": 7,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "i": 2,
+        "src": "adB/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.961,
+        "rateVsWall": 0.996,
+        "framesDecoded": 359,
+        "fps": 29.9,
+        "dropped": 7,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "i": 3,
+        "src": "adC/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.961,
+        "rateVsWall": 0.996,
+        "framesDecoded": 359,
+        "fps": 29.9,
+        "dropped": 7,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      }
+    ],
+    "visibility": {
+      "vis": "visible",
+      "focus": true
+    },
+    "chrome": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "hlsjs": "1.7.2"
+  },
+  {
+    "n": 5,
+    "wallSeconds": 12,
+    "playResults": [
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+    ],
+    "errors": [],
+    "per": [
+      {
+        "i": 0,
+        "src": "primary/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.961,
+        "rateVsWall": 0.996,
+        "framesDecoded": 358,
+        "fps": 29.8,
+        "dropped": 4,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "i": 1,
+        "src": "adA/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.962,
+        "rateVsWall": 0.996,
+        "framesDecoded": 358,
+        "fps": 29.8,
+        "dropped": 4,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "i": 2,
+        "src": "adB/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.961,
+        "rateVsWall": 0.996,
+        "framesDecoded": 358,
+        "fps": 29.8,
+        "dropped": 4,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "i": 3,
+        "src": "adC/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.961,
+        "rateVsWall": 0.996,
+        "framesDecoded": 358,
+        "fps": 29.8,
+        "dropped": 4,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "i": 4,
+        "src": "adD/index.m3u8",
+        "size": "1280x720",
+        "advancedSeconds": 11.961,
+        "rateVsWall": 0.996,
+        "framesDecoded": 358,
+        "fps": 29.8,
+        "dropped": 4,
+        "corrupted": 0,
+        "readyState": 4,
+        "paused": false
+      }
+    ],
+    "visibility": {
+      "vis": "visible",
+      "focus": true
+    },
+    "chrome": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "hlsjs": "1.7.2"
+  }
+]
