@@ -1,0 +1,688 @@
+{
+  "nuestro": {
+    "cornerOverlay": {
+      "tipo": "cornerOverlay",
+      "playerArea": {
+        "w": 960,
+        "h": 540,
+        "aspecto": 1.7778
+      },
+      "elementos": [
+        {
+          "elemento": "primaryContent",
+          "viewport": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "esperadoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 960,
+            "height": 540
+          },
+          "medidoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 960,
+            "height": 540
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        },
+        {
+          "elemento": "asset1",
+          "viewport": {
+            "top": 0,
+            "right": 75,
+            "bottom": 75,
+            "left": 0
+          },
+          "esperadoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 240,
+            "height": 135
+          },
+          "medidoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 240,
+            "height": 135
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        }
+      ]
+    },
+    "lowerThirdOverlay": {
+      "tipo": "lowerThirdOverlay",
+      "playerArea": {
+        "w": 960,
+        "h": 540,
+        "aspecto": 1.7778
+      },
+      "elementos": [
+        {
+          "elemento": "primaryContent",
+          "viewport": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "esperadoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 960,
+            "height": 540
+          },
+          "medidoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 960,
+            "height": 540
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        },
+        {
+          "elemento": "asset1",
+          "viewport": {
+            "top": 70,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "esperadoPx": {
+            "left": 0,
+            "top": 378,
+            "width": 960,
+            "height": 162
+          },
+          "medidoPx": {
+            "left": 0,
+            "top": 378,
+            "width": 960,
+            "height": 162
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 5.9259,
+          "aspectoFuente": 1.7778,
+          "distorsion": 233.3,
+          "reproduciendo": true,
+          "playError": null
+        }
+      ]
+    },
+    "squeezebackFrame": {
+      "tipo": "squeezebackFrame",
+      "playerArea": {
+        "w": 960,
+        "h": 540,
+        "aspecto": 1.7778
+      },
+      "elementos": [
+        {
+          "elemento": "primaryContent",
+          "viewport": {
+            "top": 20,
+            "right": 20,
+            "bottom": 20,
+            "left": 20
+          },
+          "esperadoPx": {
+            "left": 192,
+            "top": 108,
+            "width": 576,
+            "height": 324
+          },
+          "medidoPx": {
+            "left": 192,
+            "top": 108,
+            "width": 576,
+            "height": 324
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        },
+        {
+          "elemento": "asset1",
+          "viewport": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "esperadoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 960,
+            "height": 540
+          },
+          "medidoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 960,
+            "height": 540
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        }
+      ]
+    },
+    "squeezebackDoubleBox": {
+      "tipo": "squeezebackDoubleBox",
+      "playerArea": {
+        "w": 960,
+        "h": 540,
+        "aspecto": 1.7778
+      },
+      "elementos": [
+        {
+          "elemento": "primaryContent",
+          "viewport": {
+            "top": 25,
+            "right": 50,
+            "bottom": 25,
+            "left": 0
+          },
+          "esperadoPx": {
+            "left": 0,
+            "top": 135,
+            "width": 480,
+            "height": 270
+          },
+          "medidoPx": {
+            "left": 0,
+            "top": 135,
+            "width": 480,
+            "height": 270
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        },
+        {
+          "elemento": "adOverlay",
+          "viewport": {
+            "top": 25,
+            "right": 0,
+            "bottom": 25,
+            "left": 50
+          },
+          "esperadoPx": {
+            "left": 480,
+            "top": 135,
+            "width": 480,
+            "height": 270
+          },
+          "medidoPx": {
+            "left": 480,
+            "top": 135,
+            "width": 480,
+            "height": 270
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        }
+      ]
+    },
+    "squeezebackLShape": {
+      "tipo": "squeezebackLShape",
+      "playerArea": {
+        "w": 960,
+        "h": 540,
+        "aspecto": 1.7778
+      },
+      "elementos": [
+        {
+          "elemento": "primaryContent",
+          "viewport": {
+            "top": 0,
+            "right": 40,
+            "bottom": 40,
+            "left": 0
+          },
+          "esperadoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 576,
+            "height": 324
+          },
+          "medidoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 576,
+            "height": 324
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        },
+        {
+          "elemento": "adBarVertical",
+          "viewport": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 60
+          },
+          "esperadoPx": {
+            "left": 576,
+            "top": 0,
+            "width": 384,
+            "height": 540
+          },
+          "medidoPx": {
+            "left": 576,
+            "top": 0,
+            "width": 384,
+            "height": 540
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 0.7111,
+          "aspectoFuente": 1.7778,
+          "distorsion": 60,
+          "reproduciendo": true,
+          "playError": null
+        },
+        {
+          "elemento": "adBarHorizontal",
+          "viewport": {
+            "top": 60,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "esperadoPx": {
+            "left": 0,
+            "top": 324,
+            "width": 960,
+            "height": 216
+          },
+          "medidoPx": {
+            "left": 0,
+            "top": 324,
+            "width": 960,
+            "height": 216
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 4.4444,
+          "aspectoFuente": 1.7778,
+          "distorsion": 150,
+          "reproduciendo": true,
+          "playError": null
+        }
+      ]
+    },
+    "multiView": {
+      "tipo": "multiView",
+      "playerArea": {
+        "w": 960,
+        "h": 540,
+        "aspecto": 1.7778
+      },
+      "elementos": [
+        {
+          "elemento": "primaryContent",
+          "viewport": {
+            "top": 0,
+            "right": 50,
+            "bottom": 50,
+            "left": 0
+          },
+          "esperadoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 480,
+            "height": 270
+          },
+          "medidoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 480,
+            "height": 270
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        },
+        {
+          "elemento": "view2",
+          "viewport": {
+            "top": 0,
+            "right": 0,
+            "bottom": 50,
+            "left": 50
+          },
+          "esperadoPx": {
+            "left": 480,
+            "top": 0,
+            "width": 480,
+            "height": 270
+          },
+          "medidoPx": {
+            "left": 480,
+            "top": 0,
+            "width": 480,
+            "height": 270
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        },
+        {
+          "elemento": "view3",
+          "viewport": {
+            "top": 50,
+            "right": 50,
+            "bottom": 0,
+            "left": 0
+          },
+          "esperadoPx": {
+            "left": 0,
+            "top": 270,
+            "width": 480,
+            "height": 270
+          },
+          "medidoPx": {
+            "left": 0,
+            "top": 270,
+            "width": 480,
+            "height": 270
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        },
+        {
+          "elemento": "view4",
+          "viewport": {
+            "top": 50,
+            "right": 0,
+            "bottom": 0,
+            "left": 50
+          },
+          "esperadoPx": {
+            "left": 480,
+            "top": 270,
+            "width": 480,
+            "height": 270
+          },
+          "medidoPx": {
+            "left": 480,
+            "top": 270,
+            "width": 480,
+            "height": 270
+          },
+          "deltaMaxPx": 0,
+          "aspectoCaja": 1.7778,
+          "aspectoFuente": 1.7778,
+          "distorsion": 0,
+          "reproduciendo": true,
+          "playError": null
+        }
+      ]
+    }
+  },
+  "herramienta": {
+    "cornerOverlay": {
+      "ASSETS": [
+        {
+          "URI": "[PATH TO ASSET]",
+          "DURATION": 15.015,
+          "X-AD-CREATIVE-SIGNALING": {
+            "version": 2,
+            "type": "slot",
+            "payload": [
+              {
+                "type": "cornerOverlay",
+                "start": 0,
+                "duration": 15.015,
+                "layout": {
+                  "assets": [
+                    {
+                      "id": "adOverlay1",
+                      "type": "application/vnd.apple.mpegurl",
+                      "uri": "",
+                      "viewport": "0 75 75 0",
+                      "zDepth": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "lowerThirdOverlay": {
+      "ASSETS": [
+        {
+          "URI": "[PATH TO ASSET]",
+          "DURATION": 15.015,
+          "X-AD-CREATIVE-SIGNALING": {
+            "version": 2,
+            "type": "slot",
+            "payload": [
+              {
+                "type": "lowerThirdOverlay",
+                "start": 0,
+                "duration": 15.015,
+                "layout": {
+                  "assets": [
+                    {
+                      "id": "adOverlay1",
+                      "type": "application/vnd.apple.mpegurl",
+                      "uri": "",
+                      "viewport": "70 0 0 0",
+                      "zDepth": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "squeezebackFrame": {
+      "ASSETS": [
+        {
+          "URI": "[PATH TO ASSET]",
+          "DURATION": 15.015,
+          "X-AD-CREATIVE-SIGNALING": {
+            "version": 2,
+            "type": "slot",
+            "payload": [
+              {
+                "type": "squeezebackFrame",
+                "start": 0,
+                "duration": 15.015,
+                "layout": {
+                  "primaryContent": {
+                    "zDepth": 1,
+                    "viewport": "20 20 20 20"
+                  },
+                  "assets": [
+                    {
+                      "id": "adOverlay1",
+                      "type": "application/vnd.apple.mpegurl",
+                      "uri": "",
+                      "viewport": "0 0 0 0",
+                      "zDepth": 0
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "squeezebackDoubleBox": {
+      "ASSETS": [
+        {
+          "URI": "[PATH TO ASSET]",
+          "DURATION": 15.015,
+          "X-AD-CREATIVE-SIGNALING": {
+            "version": 2,
+            "type": "slot",
+            "payload": [
+              {
+                "type": "squeezebackDoubleBox",
+                "start": 0,
+                "duration": 15.015,
+                "layout": {
+                  "primaryContent": {
+                    "zDepth": 0,
+                    "viewport": "25 50 25 0"
+                  },
+                  "assets": [
+                    {
+                      "id": "adOverlay",
+                      "type": "application/vnd.apple.mpegurl",
+                      "uri": "",
+                      "viewport": "25 0 25 50",
+                      "zDepth": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "squeezebackLShape": {
+      "ASSETS": [
+        {
+          "URI": "[PATH TO ASSET]",
+          "DURATION": 15.015,
+          "X-AD-CREATIVE-SIGNALING": {
+            "version": 2,
+            "type": "slot",
+            "payload": [
+              {
+                "type": "squeezebackLShape",
+                "start": 0,
+                "duration": 15.015,
+                "layout": {
+                  "primaryContent": {
+                    "zDepth": 0,
+                    "viewport": "0 40 40 0"
+                  },
+                  "assets": [
+                    {
+                      "id": "adBarVertical",
+                      "type": "application/vnd.apple.mpegurl",
+                      "uri": "",
+                      "viewport": "0 0 0 60",
+                      "zDepth": 1
+                    },
+                    {
+                      "id": "adBarHorizontal",
+                      "type": "application/vnd.apple.mpegurl",
+                      "uri": "",
+                      "viewport": "60 0 0 0",
+                      "zDepth": 2
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "multiView": {
+      "ASSETS": [
+        {
+          "URI": "[PATH TO ASSET]",
+          "DURATION": 15.015,
+          "X-AD-CREATIVE-SIGNALING": {
+            "version": 2,
+            "type": "slot",
+            "payload": [
+              {
+                "type": "multiView",
+                "start": 0,
+                "duration": 15.015,
+                "layout": {
+                  "primaryContent": {
+                    "zDepth": 0,
+                    "viewport": "0 50 50 0"
+                  },
+                  "assets": [
+                    {
+                      "id": "view2",
+                      "type": "application/vnd.apple.mpegurl",
+                      "uri": "",
+                      "viewport": "0 0 50 50",
+                      "zDepth": 1
+                    },
+                    {
+                      "id": "view3",
+                      "type": "application/vnd.apple.mpegurl",
+                      "uri": "",
+                      "viewport": "50 50 0 0",
+                      "zDepth": 2
+                    },
+                    {
+                      "id": "view4",
+                      "type": "application/vnd.apple.mpegurl",
+                      "uri": "",
+                      "viewport": "50 0 0 50",
+                      "zDepth": 3
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

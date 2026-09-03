@@ -1,0 +1,430 @@
+{
+  "log": [
+    {
+      "ms": 25,
+      "who": "demo",
+      "what": "LEVEL_UPDATED.dateRanges",
+      "data": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial",
+          "isInterstitial": true,
+          "startDate": "Thu Sep 03 2026 20:22:26 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-LINEAR",
+            "CLASS": "com.apple.hls.interstitial",
+            "START-DATE": "2026-09-03T20:22:26.148-0300",
+            "X-ASSET-LIST": "http://127.0.0.1:8811/asset-list-linear.json",
+            "X-RESUME-OFFSET": "0",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "15"
+          }
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "class": "com.qualabs.hls.concurrentInterstitial",
+          "isInterstitial": false,
+          "startDate": "Thu Sep 03 2026 20:22:26 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-CONCURRENT",
+            "CLASS": "com.qualabs.hls.concurrentInterstitial",
+            "START-DATE": "2026-09-03T20:22:26.148-0300",
+            "X-ASSET-LIST": "http://127.0.0.1:8811/asset-list-concurrent.json",
+            "X-RESUME-OFFSET": "0",
+            "X-SNAP": "OUT,IN",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "15"
+          }
+        }
+      ]
+    },
+    {
+      "ms": 25,
+      "who": "demo",
+      "what": "filtrados por nuestra clase",
+      "data": [
+        "AD-1-CONCURRENT"
+      ]
+    },
+    {
+      "ms": 25,
+      "who": "demo",
+      "what": "fetch del asset-list (lo pide la aplicacion, no hls.js)",
+      "data": "http://127.0.0.1:8811/asset-list-concurrent.json"
+    },
+    {
+      "ms": 34,
+      "who": "fabrica",
+      "what": "INTERSTITIALS_UPDATED",
+      "data": {
+        "eventos": 3,
+        "items": [
+          {
+            "id": "AD-1-LINEAR",
+            "clase": "com.apple.hls.interstitial",
+            "assetListUrl": "http://127.0.0.1:8811/asset-list-linear.json",
+            "startTime": 10
+          }
+        ]
+      }
+    },
+    {
+      "ms": 34,
+      "who": "fabrica",
+      "what": "LEVEL_UPDATED.dateRanges",
+      "data": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial",
+          "isInterstitial": true
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "class": "com.qualabs.hls.concurrentInterstitial",
+          "isInterstitial": false
+        }
+      ]
+    },
+    {
+      "ms": 113,
+      "who": "demo",
+      "what": "asset-list recibido",
+      "data": {
+        "ASSETS": [
+          {
+            "URI": "http://127.0.0.1:8811/adB/index.m3u8",
+            "DURATION": 15,
+            "X-AD-CREATIVE-SIGNALING": {
+              "version": 2,
+              "type": "slot",
+              "payload": [
+                {
+                  "type": "cornerOverlay",
+                  "start": 0,
+                  "duration": 15,
+                  "layout": {
+                    "primaryContent": {
+                      "zDepth": 0,
+                      "volume": 100,
+                      "viewport": "0 0 0 0"
+                    },
+                    "assets": [
+                      {
+                        "id": "ad-b",
+                        "type": "video/mp4",
+                        "uri": "http://127.0.0.1:8811/adB/index.m3u8",
+                        "viewport": "0 75 75 0",
+                        "zDepth": 1,
+                        "volume": 0
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "ms": 113,
+      "who": "demo",
+      "what": "layout resuelto",
+      "data": {
+        "type": "cornerOverlay",
+        "viewportAsset": "0 75 75 0",
+        "viewportPrimario": "0 0 0 0",
+        "volumenAsset": 0
+      }
+    },
+    {
+      "ms": 232,
+      "who": "demo",
+      "what": "ERROR",
+      "data": {
+        "type": "mediaError",
+        "details": "bufferSeekOverHole",
+        "fatal": false
+      }
+    },
+    {
+      "ms": 290,
+      "who": "harness",
+      "what": "play()",
+      "data": {
+        "demo": "ok",
+        "fabrica": "ok"
+      }
+    },
+    {
+      "ms": 557,
+      "who": "fabrica",
+      "what": "INTERSTITIAL_ASSET_PLAYER_CREATED",
+      "data": {
+        "assetId": 0,
+        "url": null,
+        "mediaMismoElemento": false
+      }
+    },
+    {
+      "ms": 557,
+      "who": "fabrica",
+      "what": "INTERSTITIALS_UPDATED",
+      "data": {
+        "eventos": 3,
+        "items": [
+          {
+            "id": "AD-1-LINEAR",
+            "clase": "com.apple.hls.interstitial",
+            "assetListUrl": "http://127.0.0.1:8811/asset-list-linear.json",
+            "startTime": 10.023222222222222
+          }
+        ]
+      }
+    },
+    {
+      "ms": 600,
+      "who": "fabrica",
+      "what": "INTERSTITIALS_UPDATED",
+      "data": {
+        "eventos": 3,
+        "items": [
+          {
+            "id": "AD-1-LINEAR",
+            "clase": "com.apple.hls.interstitial",
+            "assetListUrl": "http://127.0.0.1:8811/asset-list-linear.json",
+            "startTime": 10.023222222222222
+          }
+        ]
+      }
+    },
+    {
+      "ms": 4298,
+      "who": "harness",
+      "what": "play()",
+      "data": {
+        "demo": "ok",
+        "fabrica": "ok"
+      }
+    },
+    {
+      "ms": 10372,
+      "who": "fabrica",
+      "what": "INTERSTITIAL_STARTED",
+      "data": {
+        "keys": [
+          "event",
+          "schedule",
+          "scheduleIndex"
+        ]
+      }
+    },
+    {
+      "ms": 10372,
+      "who": "fabrica",
+      "what": "INTERSTITIAL_ASSET_STARTED",
+      "data": {
+        "keys": [
+          "asset",
+          "assetListIndex",
+          "event",
+          "schedule",
+          "scheduleIndex",
+          "player"
+        ]
+      }
+    }
+  ],
+  "snapshots": {
+    "t4": {
+      "demo": {
+        "currentTime": 4.13,
+        "interstitialsManager": "null"
+      },
+      "fabrica": {
+        "currentTime": 3.98,
+        "interstitialsManager": "objeto",
+        "playingItem": {
+          "identifier": null,
+          "uri": null
+        },
+        "eventos": [
+          {
+            "id": "AD-1-LINEAR",
+            "clase": "com.apple.hls.interstitial",
+            "assetListUrl": "http://127.0.0.1:8811/asset-list-linear.json"
+          }
+        ]
+      },
+      "recursosPedidos": [
+        "http://127.0.0.1:8811/asset-list-concurrent.json",
+        "http://127.0.0.1:8811/asset-list-linear.json?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/index.m3u8?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/seg000.ts"
+      ]
+    },
+    "t8": {
+      "demo": {
+        "currentTime": 8.3,
+        "interstitialsManager": "null"
+      },
+      "fabrica": {
+        "currentTime": 8.15,
+        "interstitialsManager": "objeto",
+        "playingItem": {
+          "identifier": null,
+          "uri": null
+        },
+        "eventos": [
+          {
+            "id": "AD-1-LINEAR",
+            "clase": "com.apple.hls.interstitial",
+            "assetListUrl": "http://127.0.0.1:8811/asset-list-linear.json"
+          }
+        ]
+      },
+      "recursosPedidos": [
+        "http://127.0.0.1:8811/asset-list-concurrent.json",
+        "http://127.0.0.1:8811/asset-list-linear.json?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/index.m3u8?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/seg000.ts"
+      ]
+    },
+    "t11": {
+      "demo": {
+        "currentTime": 11.25,
+        "interstitialsManager": "null"
+      },
+      "fabrica": {
+        "currentTime": 0.98,
+        "interstitialsManager": "objeto",
+        "playingItem": {
+          "identifier": "AD-1-LINEAR",
+          "uri": null
+        },
+        "eventos": [
+          {
+            "id": "AD-1-LINEAR",
+            "clase": "com.apple.hls.interstitial",
+            "assetListUrl": "http://127.0.0.1:8811/asset-list-linear.json"
+          }
+        ]
+      },
+      "recursosPedidos": [
+        "http://127.0.0.1:8811/asset-list-concurrent.json",
+        "http://127.0.0.1:8811/asset-list-linear.json?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/index.m3u8?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/seg000.ts",
+        "http://127.0.0.1:8811/adA/seg001.ts",
+        "http://127.0.0.1:8811/adA/seg002.ts",
+        "http://127.0.0.1:8811/adA/seg003.ts",
+        "http://127.0.0.1:8811/adA/seg004.ts",
+        "http://127.0.0.1:8811/adA/seg005.ts",
+        "http://127.0.0.1:8811/adA/seg006.ts",
+        "http://127.0.0.1:8811/adA/seg007.ts"
+      ]
+    },
+    "t13": {
+      "demo": {
+        "currentTime": 13.26,
+        "interstitialsManager": "null"
+      },
+      "fabrica": {
+        "currentTime": 2.98,
+        "interstitialsManager": "objeto",
+        "playingItem": {
+          "identifier": "AD-1-LINEAR",
+          "uri": null
+        },
+        "eventos": [
+          {
+            "id": "AD-1-LINEAR",
+            "clase": "com.apple.hls.interstitial",
+            "assetListUrl": "http://127.0.0.1:8811/asset-list-linear.json"
+          }
+        ]
+      },
+      "recursosPedidos": [
+        "http://127.0.0.1:8811/asset-list-concurrent.json",
+        "http://127.0.0.1:8811/asset-list-linear.json?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/index.m3u8?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/seg000.ts",
+        "http://127.0.0.1:8811/adA/seg001.ts",
+        "http://127.0.0.1:8811/adA/seg002.ts",
+        "http://127.0.0.1:8811/adA/seg003.ts",
+        "http://127.0.0.1:8811/adA/seg004.ts",
+        "http://127.0.0.1:8811/adA/seg005.ts",
+        "http://127.0.0.1:8811/adA/seg006.ts",
+        "http://127.0.0.1:8811/adA/seg007.ts"
+      ]
+    },
+    "t16": {
+      "demo": {
+        "currentTime": 16.19,
+        "interstitialsManager": "null"
+      },
+      "fabrica": {
+        "currentTime": 5.91,
+        "interstitialsManager": "objeto",
+        "playingItem": {
+          "identifier": "AD-1-LINEAR",
+          "uri": null
+        },
+        "eventos": [
+          {
+            "id": "AD-1-LINEAR",
+            "clase": "com.apple.hls.interstitial",
+            "assetListUrl": "http://127.0.0.1:8811/asset-list-linear.json"
+          }
+        ]
+      },
+      "recursosPedidos": [
+        "http://127.0.0.1:8811/asset-list-concurrent.json",
+        "http://127.0.0.1:8811/asset-list-linear.json?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/index.m3u8?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/seg000.ts",
+        "http://127.0.0.1:8811/adA/seg001.ts",
+        "http://127.0.0.1:8811/adA/seg002.ts",
+        "http://127.0.0.1:8811/adA/seg003.ts",
+        "http://127.0.0.1:8811/adA/seg004.ts",
+        "http://127.0.0.1:8811/adA/seg005.ts",
+        "http://127.0.0.1:8811/adA/seg006.ts",
+        "http://127.0.0.1:8811/adA/seg007.ts"
+      ]
+    },
+    "t20": {
+      "demo": {
+        "currentTime": 20.07,
+        "interstitialsManager": "null"
+      },
+      "fabrica": {
+        "currentTime": 9.79,
+        "interstitialsManager": "objeto",
+        "playingItem": {
+          "identifier": "AD-1-LINEAR",
+          "uri": null
+        },
+        "eventos": [
+          {
+            "id": "AD-1-LINEAR",
+            "clase": "com.apple.hls.interstitial",
+            "assetListUrl": "http://127.0.0.1:8811/asset-list-linear.json"
+          }
+        ]
+      },
+      "recursosPedidos": [
+        "http://127.0.0.1:8811/asset-list-concurrent.json",
+        "http://127.0.0.1:8811/asset-list-linear.json?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/index.m3u8?_HLS_primary_id=1ca12cbd-4cee-415f-95a4-45668242b332",
+        "http://127.0.0.1:8811/adA/seg000.ts",
+        "http://127.0.0.1:8811/adA/seg001.ts",
+        "http://127.0.0.1:8811/adA/seg002.ts",
+        "http://127.0.0.1:8811/adA/seg003.ts",
+        "http://127.0.0.1:8811/adA/seg004.ts",
+        "http://127.0.0.1:8811/adA/seg005.ts",
+        "http://127.0.0.1:8811/adA/seg006.ts",
+        "http://127.0.0.1:8811/adA/seg007.ts"
+      ]
+    }
+  }
+}

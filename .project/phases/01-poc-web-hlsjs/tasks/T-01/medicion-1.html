@@ -1,0 +1,49 @@
+<!doctype html><meta charset="utf-8"><title>M1 - N videos concurrentes</title>
+<style>
+ body{margin:0;background:#111;color:#eee;font:13px monospace}
+ #grid{display:grid;gap:4px;padding:4px}
+ video{width:100%;background:#000}
+ .cell{position:relative} .lbl{position:absolute;top:2px;left:4px;color:#0f0;text-shadow:0 0 3px #000}
+ #out{padding:6px;white-space:pre-wrap}
+</style>
+<div id="grid"></div><div id="out"></div>
+<script src="hls.js"></script>
+<script>
+const P = new URLSearchParams(location.search);
+const N = parseInt(P.get('n')||'2',10);
+const SRC = ['primary/index.m3u8','adA/index.m3u8','adB/index.m3u8','adC/index.m3u8','adD/index.m3u8'];
+window.__M1 = {n:N, players:[], errors:[], supported: Hls.isSupported(), version: Hls.version};
+const grid = document.getElementById('grid');
+grid.style.gridTemplateColumns = 'repeat('+Math.ceil(Math.sqrt(N))+',1fr)';
+const vids=[];
+for(let i=0;i<N;i++){
+  const d=document.createElement('div'); d.className='cell';
+  const v=document.createElement('video'); v.muted=true; v.playsInline=true; v.id='v'+i;
+  const l=document.createElement('span'); l.className='lbl'; l.textContent='#'+i+' '+SRC[i%SRC.length];
+  d.appendChild(v); d.appendChild(l); grid.appendChild(d); vids.push(v);
+  const hls=new Hls({debug:false});
+  hls.on(Hls.Events.ERROR,(e,data)=>{ window.__M1.errors.push({i, type:data.type, details:data.details, fatal:data.fatal}); });
+  hls.loadSource(SRC[i%SRC.length]); hls.attachMedia(v);
+  window.__M1.players.push(hls);
+}
+window.__M1.startAll = async () => {
+  const r=[]; for(const v of vids){ try{ await v.play(); r.push('ok'); }catch(e){ r.push('REJECT: '+e.name+' '+e.message); } }
+  window.__M1.playResults=r; window.__M1.t0=performance.now();
+  window.__M1.sample0 = vids.map(snap); return r;
+};
+function snap(v){
+  const q = v.getVideoPlaybackQuality ? v.getVideoPlaybackQuality() : {};
+  return {t:+v.currentTime.toFixed(3), rs:v.readyState, paused:v.paused, w:v.videoWidth, h:v.videoHeight,
+          total:q.totalVideoFrames, dropped:q.droppedVideoFrames, corrupted:q.corruptedVideoFrames};
+}
+window.__M1.measure = () => {
+  const dt=(performance.now()-window.__M1.t0)/1000;
+  const s1=vids.map(snap), s0=window.__M1.sample0;
+  return {n:N, wallSeconds:+dt.toFixed(2), playResults:window.__M1.playResults, errors:window.__M1.errors,
+    per: s1.map((s,i)=>({i, src:SRC[i%SRC.length], size:s.w+'x'+s.h,
+      advancedSeconds:+(s.t-s0[i].t).toFixed(3), rateVsWall:+((s.t-s0[i].t)/dt).toFixed(3),
+      framesDecoded:s.total-s0[i].total, fps:+((s.total-s0[i].total)/dt).toFixed(1),
+      dropped:s.dropped-s0[i].dropped, corrupted:s.corrupted-s0[i].corrupted, readyState:s.rs, paused:s.paused}))};
+};
+document.title='M1 ready n='+N;
+</script>

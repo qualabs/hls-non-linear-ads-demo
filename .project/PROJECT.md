@@ -15,7 +15,7 @@ status: ongoing
 type: desarrollo
 owner: nicolas-levy
 started: 2026-09-02
-last_update: 2026-09-02
+last_update: 2026-09-03
 tags: [hls, hls-interstitials, non-linear-ads, svta, apple, hlsjs, avfoundation, demo]
 repo: https://github.com/qualabs/hls-non-linear-ads-demo
 output_pointers:
@@ -103,9 +103,11 @@ la plataforma equivocada y descubrirse en el sync del primer draft**,
 cuando ya no queda margen antes de la grabación. Es el riesgo que decide
 la fase 01, y su mitigación está en el `PHASE.md` de esa fase.
 
-La decisión de plataforma está registrada como ADR
-`decisions/0001-hls-js-camino-critico.md`. Si la información que David
-recupera la contradice, se escribe un ADR nuevo que la supersede.
+La decisión de plataforma no tiene ADR propio: es el objetivo que Nicolás
+le fijó a la fase 01, y lo que la sostiene está en el `PHASE.md` de esa
+fase, en el riesgo R3. La información que David recuperó de Rob Walch la
+descomprime en lugar de contradecirla: para una demo, cualquiera de las
+dos plataformas sirve.
 
 ## Objetivo y motivación
 
@@ -412,3 +414,10 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
 ## Phases
 
 <!-- La línea de cada fase se escribe cuando esa fase cierra (Mode D). -->
+
+- **01-poc-web-hlsjs**: el POC funcional en web con hls.js, que es la
+  cadena entera de la publicidad no lineal andando en un browser: la
+  clase propia en la media playlist, el asset-list con el layout de la
+  herramienta de SVTA, el renderizado de las experiencias concurrentes en
+  el DOM, y el par de compatibilidad con una instancia de hls.js de
+  fábrica al lado.

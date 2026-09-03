@@ -1,0 +1,95 @@
+<!doctype html><meta charset="utf-8"><title>M2 - cadena de senalizacion y par de compatibilidad</title>
+<style>
+ body{margin:0;background:#111;color:#eee;font:13px monospace}
+ .row{display:flex;gap:8px;padding:8px} .col{flex:1;position:relative}
+ video{width:100%;background:#000} h2{font-size:14px;margin:4px 0;color:#0ff}
+ .badge{position:absolute;top:28px;left:8px;color:#0f0;text-shadow:0 0 4px #000;font-size:12px}
+</style>
+<div class="row">
+  <div class="col"><h2>DEMO (interstitialsController apagado)</h2><video id="vdemo" muted playsinline></video><span class="badge" id="bdemo"></span></div>
+  <div class="col"><h2>FABRICA (hls.js de fabrica)</h2><video id="vfact" muted playsinline></video><span class="badge" id="bfact"></span></div>
+</div>
+<script src="hls.js"></script>
+<script>
+const SRC='primary/con-daterange.m3u8';
+const CLASE='com.qualabs.hls.concurrentInterstitial';
+const L=[]; const t0=performance.now();
+const log=(who,what,data)=>L.push({ms:Math.round(performance.now()-t0),who,what,data});
+window.__M2={log:L, version:Hls.version};
+
+// --- instancia DEMO: sin maquinaria de interstitials ---
+const vd=document.getElementById('vdemo');
+const demo=new Hls({interstitialsController: undefined});
+window.__M2.demoManagerAlCrear = demo.interstitialsManager;
+let leido=false;
+demo.on(Hls.Events.ERROR,(e,d)=>log('demo','ERROR',{type:d.type,details:d.details,fatal:d.fatal}));
+demo.on(Hls.Events.LEVEL_UPDATED,(e,d)=>{
+  const dr=d.details.dateRanges||{};
+  const ids=Object.keys(dr);
+  if(!leido && ids.length){
+    leido=true;
+    log('demo','LEVEL_UPDATED.dateRanges', ids.map(id=>({
+      id, class:dr[id].class, isInterstitial:dr[id].isInterstitial,
+      startDate:String(dr[id].startDate), attr:Object.assign({},dr[id].attr)})));
+    const mios=ids.filter(id=>dr[id].class===CLASE);
+    log('demo','filtrados por nuestra clase', mios);
+    mios.forEach(id=>{
+      const url=dr[id].attr['X-ASSET-LIST'];
+      log('demo','fetch del asset-list (lo pide la aplicacion, no hls.js)', url);
+      fetch(url).then(r=>r.json()).then(j=>{
+        log('demo','asset-list recibido', j);
+        const pl=j.ASSETS[0]['X-AD-CREATIVE-SIGNALING'].payload[0];
+        log('demo','layout resuelto', {type:pl.type, viewportAsset:pl.layout.assets[0].viewport,
+             viewportPrimario:pl.layout.primaryContent.viewport, volumenAsset:pl.layout.assets[0].volume});
+      }).catch(e=>log('demo','fetch fallo',String(e)));
+    });
+  }
+});
+demo.loadSource(SRC); demo.attachMedia(vd);
+
+// --- instancia FABRICA: configuracion por defecto ---
+const vf=document.getElementById('vfact');
+const fact=new Hls({});
+fact.on(Hls.Events.ERROR,(e,d)=>log('fabrica','ERROR',{type:d.type,details:d.details,fatal:d.fatal}));
+['INTERSTITIALS_UPDATED','INTERSTITIAL_STARTED','INTERSTITIAL_ASSET_PLAYER_CREATED','INTERSTITIAL_ASSET_STARTED','INTERSTITIAL_ASSET_ENDED','INTERSTITIAL_ENDED','INTERSTITIALS_PRIMARY_RESUMED','INTERSTITIAL_ASSET_ERROR'].forEach(ev=>{
+  const name=Hls.Events[ev]; if(!name) { log('fabrica','evento inexistente en 1.7.2',ev); return; }
+  fact.on(name,(e,d)=>{
+    let resumen=null;
+    try{
+      if(ev==='INTERSTITIALS_UPDATED') resumen={eventos:(d.schedule||[]).length, items:(d.events||[]).map(x=>({id:x.identifier,clase:x.dateRange&&x.dateRange.class,assetListUrl:x.assetListUrl,startTime:x.startTime}))};
+      else if(ev==='INTERSTITIAL_ASSET_PLAYER_CREATED') resumen={assetId:d.assetListIndex, url:d.assetItem&&d.assetItem.uri, mediaMismoElemento: d.player&&d.player.media===vf};
+      else resumen={keys:Object.keys(d||{})};
+    }catch(err){resumen=String(err);}
+    log('fabrica',ev,resumen);
+  });
+});
+let leidoF=false;
+fact.on(Hls.Events.LEVEL_UPDATED,(e,d)=>{
+  const dr=d.details.dateRanges||{};
+  const ids=Object.keys(dr);
+  if(!leidoF && ids.length){ leidoF=true;
+    log('fabrica','LEVEL_UPDATED.dateRanges', ids.map(id=>({id,class:dr[id].class,isInterstitial:dr[id].isInterstitial})));
+  }
+});
+fact.loadSource(SRC); fact.attachMedia(vf);
+
+window.__M2.start=async()=>{
+  const r={}; try{await vd.play(); r.demo='ok';}catch(e){r.demo='REJECT '+e.name;}
+  try{await vf.play(); r.fabrica='ok';}catch(e){r.fabrica='REJECT '+e.name;}
+  log('harness','play()',r); window.__M2.tStart=performance.now(); return r;
+};
+window.__M2.snapshot=()=>{
+  const im=fact.interstitialsManager;
+  const estado={
+    demo:{currentTime:+vd.currentTime.toFixed(2), interstitialsManager: demo.interstitialsManager===null?'null':typeof demo.interstitialsManager},
+    fabrica:{currentTime:+vf.currentTime.toFixed(2), interstitialsManager: im?'objeto':String(im),
+             playingItem: im&&im.playingItem?{identifier:im.playingItem.event&&im.playingItem.event.identifier, uri:im.playingItem.uri}:null,
+             eventos: im&&im.events?im.events.map(e=>({id:e.identifier, clase:e.dateRange&&e.dateRange.class, assetListUrl:e.assetListUrl})):null},
+    recursosPedidos: performance.getEntriesByType('resource').map(r=>r.name).filter(n=>n.includes('asset-list')||n.includes('adA')||n.includes('adB')).filter((v,i,a)=>a.indexOf(v)===i)
+  };
+  document.getElementById('bdemo').textContent='t='+estado.demo.currentTime;
+  document.getElementById('bfact').textContent='t='+estado.fabrica.currentTime;
+  return estado;
+};
+document.title='M2 ready';
+</script>

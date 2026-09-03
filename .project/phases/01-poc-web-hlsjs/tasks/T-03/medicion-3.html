@@ -1,0 +1,72 @@
+<!doctype html><meta charset="utf-8"><title>M3 - render del layout contra el modelo de la herramienta</title>
+<style>
+ body{margin:0;background:#111;color:#eee;font:12px monospace}
+ #wrap{padding:8px}
+ #player{position:relative;width:960px;height:540px;background:#000;overflow:hidden}
+ #player video{position:absolute;object-fit:fill}
+ .tag{position:absolute;z-index:99;background:#000a;color:#0f0;font:11px monospace;padding:1px 3px}
+ h1{font-size:14px;margin:4px 0}
+</style>
+<div id="wrap"><h1 id="titulo">-</h1><div id="player"></div></div>
+<script src="hls.js"></script>
+<script>
+// Presets copiados verbatim de app.js de la herramienta de SVTA (2026-09-03).
+const AD_TYPE_LAYOUTS = {
+  cornerOverlay:{primaryContent:{zDepth:0,volume:100,viewport:{top:0,right:0,bottom:0,left:0}},
+    newAssetDefaults:[{viewport:{top:0,right:75,bottom:75,left:0}}]},
+  lowerThirdOverlay:{primaryContent:{zDepth:0,volume:100,viewport:{top:0,right:0,bottom:0,left:0}},
+    newAssetDefaults:[{viewport:{top:70,right:0,bottom:0,left:0}}]},
+  squeezebackFrame:{primaryContent:{zDepth:1,volume:100,viewport:{top:20,right:20,bottom:20,left:20}},
+    newAssetDefaults:[{viewport:{top:0,right:0,bottom:0,left:0},zDepth:0}]},
+  squeezebackDoubleBox:{primaryContent:{zDepth:0,volume:100,viewport:{top:25,right:50,bottom:25,left:0}},
+    newAssetDefaults:[{id:'adOverlay',viewport:{top:25,right:0,bottom:25,left:50}}]},
+  squeezebackLShape:{primaryContent:{zDepth:0,volume:100,viewport:{top:0,right:40,bottom:40,left:0}},
+    newAssetDefaults:[{id:'adBarVertical',viewport:{top:0,right:0,bottom:0,left:60},zDepth:1},
+                      {id:'adBarHorizontal',viewport:{top:60,right:0,bottom:0,left:0},zDepth:2}]},
+  multiView:{primaryContent:{zDepth:0,volume:100,viewport:{top:0,right:50,bottom:50,left:0}},
+    newAssetDefaults:[{id:'view2',viewport:{top:0,right:0,bottom:50,left:50},zDepth:1},
+                      {id:'view3',viewport:{top:50,right:50,bottom:0,left:0},zDepth:2},
+                      {id:'view4',viewport:{top:50,right:0,bottom:0,left:50},zDepth:3}]}
+};
+const FUENTES=['primary/index.m3u8','adA/index.m3u8','adB/index.m3u8','adC/index.m3u8','adD/index.m3u8'];
+const player=document.getElementById('player');
+let hlses=[];
+function caja(vp,W,H){ const l=W*vp.left/100,r=W*vp.right/100,t=H*vp.top/100,b=H*vp.bottom/100;
+  return {left:l,top:t,width:Math.max(0,W-l-r),height:Math.max(0,H-t-b)}; }
+window.__M3={};
+window.__M3.render = async (tipo) => {
+  hlses.forEach(h=>h.destroy()); hlses=[]; player.innerHTML='';
+  document.getElementById('titulo').textContent=tipo;
+  const P=AD_TYPE_LAYOUTS[tipo], W=player.clientWidth, H=player.clientHeight;
+  const elems=[{nombre:'primaryContent', vp:P.primaryContent.viewport, z:P.primaryContent.zDepth, src:FUENTES[0], volume:P.primaryContent.volume}]
+    .concat(P.newAssetDefaults.map((a,i)=>({nombre:a.id||('asset'+(i+1)), vp:a.viewport, z:a.zDepth!==undefined?a.zDepth:1, src:FUENTES[(i+1)%FUENTES.length], volume:0})));
+  const medidas=[];
+  for(const e of elems){
+    const c=caja(e.vp,W,H);
+    const v=document.createElement('video'); v.playsInline=true; v.muted=true;  // ADR 0010: el aviso arranca en silencio
+    Object.assign(v.style,{left:c.left+'px',top:c.top+'px',width:c.width+'px',height:c.height+'px',zIndex:String(e.z)});
+    const t=document.createElement('span'); t.className='tag';
+    Object.assign(t.style,{left:(c.left+2)+'px',top:(c.top+2)+'px',zIndex:String(99)});
+    t.textContent=e.nombre+' z'+e.z;
+    player.appendChild(v); player.appendChild(t);
+    const h=new Hls({}); h.loadSource(e.src); h.attachMedia(v); hlses.push(h);
+    medidas.push({elemento:e.nombre, viewport:e.vp, esperado:c, video:v});
+  }
+  await new Promise(r=>setTimeout(r,1500));
+  for(const m of medidas){ try{ await m.video.play(); }catch(err){ m.playError=String(err.name); } }
+  await new Promise(r=>setTimeout(r,1200));
+  const pr=player.getBoundingClientRect();
+  return {tipo, playerArea:{w:W,h:H, aspecto:+(W/H).toFixed(4)}, elementos: medidas.map(m=>{
+    const r=m.video.getBoundingClientRect();
+    const real={left:+(r.left-pr.left).toFixed(2), top:+(r.top-pr.top).toFixed(2), width:+r.width.toFixed(2), height:+r.height.toFixed(2)};
+    const dmax=Math.max(Math.abs(real.left-m.esperado.left),Math.abs(real.top-m.esperado.top),
+                        Math.abs(real.width-m.esperado.width),Math.abs(real.height-m.esperado.height));
+    return {elemento:m.elemento, viewport:m.viewport, esperadoPx:m.esperado, medidoPx:real, deltaMaxPx:+dmax.toFixed(2),
+      aspectoCaja:+(real.width/real.height).toFixed(4),
+      aspectoFuente:m.video.videoWidth?+(m.video.videoWidth/m.video.videoHeight).toFixed(4):null,
+      distorsion:+(Math.abs((real.width/real.height)/(m.video.videoWidth/m.video.videoHeight)-1)*100).toFixed(1),
+      reproduciendo:!m.video.paused && m.video.currentTime>0, playError:m.playError||null};
+  })};
+};
+document.title='M3 ready';
+</script>

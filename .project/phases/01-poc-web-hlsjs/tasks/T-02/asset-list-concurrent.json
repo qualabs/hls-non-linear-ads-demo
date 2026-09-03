@@ -1,0 +1,26 @@
+{
+  "ASSETS": [
+    {
+      "URI": "http://127.0.0.1:8811/adB/index.m3u8",
+      "DURATION": 15.0,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "slot",
+        "payload": [
+          {
+            "type": "cornerOverlay",
+            "start": 0.0,
+            "duration": 15.0,
+            "layout": {
+              "primaryContent": { "zDepth": 0, "volume": 100, "viewport": "0 0 0 0" },
+              "assets": [
+                { "id": "ad-b", "type": "video/mp4", "uri": "http://127.0.0.1:8811/adB/index.m3u8",
+                  "viewport": "0 75 75 0", "zDepth": 1, "volume": 0 }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
