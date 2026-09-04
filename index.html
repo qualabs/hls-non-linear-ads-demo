@@ -16,19 +16,20 @@
 <body>
 
 <!--
-  The bank of the demo, and only the bank: the primary VOD playing on an
-  UNMODIFIED hls.js, served over HTTP by a static file server.
-  It demonstrates nothing on its own and does not try to.
-
-  Two things in this tree are load-bearing for what comes next:
+  The primary VOD on an UNMODIFIED hls.js, served over HTTP by a static file
+  server, and the concurrent ad experience drawn on top of it in the DOM.
 
   #player  is the positioning context. Everything the concurrent experience
-           will draw lives INSIDE it, as a sibling of the <video>, because the
+           draws lives INSIDE it, as a sibling of the <video>, because the
            element that goes fullscreen is the container and anything outside
            it disappears the moment somebody presses the fullscreen button.
 
-  #ads     is that layer, and it is deliberately empty. The renderer of T-07
-           fills it. Nothing is drawn on the picture yet.
+  #ads     is that layer. The renderer writes the boxes of the layout into it,
+           in pixels, one positioned <video> per ad asset.
+
+  #ad-audio is the visible control of ADR 0010: the ad starts silent and the
+           primary keeps its audio, so turning the ad's sound on is an explicit
+           act. The primary's own control is the player's native one.
 
   #contract is the contract, in one line of text: what the signalling layer
            says is active right now. The console has the same thing with the
@@ -44,6 +45,9 @@
     <video class="video" id="video" playsinline controls></video>
     <div class="ads" id="ads" aria-hidden="true"></div>
   </div>
+  <p class="controls">
+    <button class="ad-audio" id="ad-audio" type="button" disabled>no ad on screen</button>
+  </p>
   <p class="hud" id="hud"></p>
   <p class="hud" id="contract"></p>
   <p class="credit">
