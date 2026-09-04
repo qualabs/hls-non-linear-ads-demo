@@ -915,3 +915,23 @@ algo:
   nuestro los reproduce limpios, así que el artefacto es de esa instancia y no del
   contenido; qué lo produce esta medición no lo dice. Si aparece en la grabación,
   el cuadro que se usa es otro.
+- **post-ejecución:** 2026-09-04, el cierre de la fase encontró que el resultado
+  dice que el cliente de fábrica "reemplaza cinco veces" y en el mismo párrafo
+  cita 49,5 s de atraso, y los dos números no pueden ser ciertos a la vez. Son
+  cuatro reemplazos: `t12-sin-seek.json` deja al player de fábrica en 110,54 s de
+  programa al final de la corrida, antes del `START-DATE` del quinto break, y los
+  49,47 s de atraso son 12,37 s por break sobre cuatro. La consecuencia es de
+  grabación: el quinto aviso lineal no se ve nunca en el panel de la izquierda
+  dentro del recorrido, porque con ese atraso llegaría a ese break alrededor del
+  segundo 170 del reloj del nuestro y no lo terminaría antes de que el VOD de
+  180 s se acabe. El `README.md` arrastra el mismo cinco y hay que corregirlo
+  ahí, que es donde lo lee quien graba; queda fuera de este cierre, cuyo alcance
+  era `.project/`.
+- **post-ejecución:** 2026-09-04, el cierre encontró que el piso de luminancia
+  que `t12-los-assets-que-faltan.md` le pide a David —"sin ningún instante por
+  debajo de 40", justificado como lo que miden los otros dos— no lo cumple adA
+  (*Sintel*), que en la tabla del propio archivo tiene un mínimo de 10,8 y en el
+  navegador baja a 21,3 en la barra horizontal del LBox video y a 5,4 en su
+  cuadrante del Quad. Del material actual sólo lo cumple adB. El pedido queda en
+  pie como criterio deseado y no como el estándar que el material ya cumple. La
+  nota fechada está al pie de ese archivo, sin tocar su tabla.

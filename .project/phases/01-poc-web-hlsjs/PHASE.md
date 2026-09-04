@@ -1,9 +1,9 @@
 ---
 phase: 01-poc-web-hlsjs
 title: POC funcional en web con hls.js
-status: in-progress
+status: closed
 started: 2026-09-03
-closed: null
+closed: 2026-09-04
 ---
 
 # Fase 01: POC funcional en web con hls.js

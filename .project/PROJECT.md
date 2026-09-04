@@ -15,7 +15,7 @@ status: ongoing
 type: desarrollo
 owner: nicolas-levy
 started: 2026-09-02
-last_update: 2026-09-03
+last_update: 2026-09-04
 tags: [hls, hls-interstitials, non-linear-ads, svta, apple, hlsjs, avfoundation, demo]
 repo: https://github.com/qualabs/hls-non-linear-ads-demo
 output_pointers:
@@ -246,6 +246,16 @@ difícil.
 aparición transmite que lo que se está mirando es una prueba de
 concepto.
 
+**Lo que el POC de la fase 01 midió sobre los assets, porque cambia el
+pedido.** El recorrido corre completo con material abierto de la Blender
+Foundation, y cuatro de los cinco layouts quedan bien. Falta material para
+dos cosas distintas: un creativo de video con luz para el Quad, que
+consume los tres assets de aviso de una sola vez y por eso no admite el
+reemplazo puntual; y un creativo hecho para la forma de la barra del
+LBox, que hoy se cubre recortando el 60 % de un clip de 16:9. El pedido,
+con el método y los números, está en
+`phases/01-poc-web-hlsjs/tasks/T-12/t12-los-assets-que-faltan.md`.
+
 ## Namespace y branding
 
 Mientras SVTA no publique la especificación, la demo usa un namespace
@@ -395,14 +405,48 @@ siguen cruzan todo el proyecto.
 
 ## A confirmar
 
+La lista consolidada, con los números y la evidencia de cada una, está en
+la sección 4 del informe de cierre de la fase 01
+(`phases/01-poc-web-hlsjs/REPORT.md`). Acá quedan los enunciados.
+
+**Para David:**
+
 - **La fecha del primer draft.** El documento de requerimientos dice
   "First draft of demos Sept 1" y la minuta fija el lunes 21 de
   septiembre. David dijo en la reunión que ya había agregado el timeline
-  al documento, lo que hace la contradicción más difícil de leer. Es la
-  pregunta más urgente, porque la fase 01 está planificada contra el 21.
+  al documento, lo que hace la contradicción más difícil de leer. La fase
+  01 se planificó contra el 21 y cerró el 4 de septiembre, así que la
+  pregunta dejó de ser urgente para esa fase y sigue sin contestar para
+  el resto del proyecto.
 - **August [?]**: la persona con la que David trabaja el deck.
-- El reparto de los cinco layouts entre el primer draft y la grabación.
-- Quién hace el primer pase de la especificación de SVTA.
+- **El reparto de los cinco layouts** entre el primer draft y la
+  grabación, propuesto en el ADR 0011, que sigue en `proposed`. El POC
+  pasó de largo esa línea: hoy están los cinco. Lo que falta confirmar es
+  si esos cinco son los cinco que él quiere mostrar.
+- **El mapeo de los cinco nombres al campo `type`**, propuesto en el ADR
+  0012, que sigue en `proposed`. Dos puntos concretos: los dos LBox son
+  hoy el mismo layout hasta el MIME del asset —mismo `type`, mismos
+  `viewport`, mismos `zDepth`, y nada en el payload que los nombre—, y
+  `squeezebackFrame` es el único identificador de la herramienta sin
+  correlato en los cinco nombres del documento.
+- **Los assets que faltan, con números.** El Quad se queda sin material y
+  no se arregla desde acá, porque consume los tres assets de aviso de una
+  sola vez; y el LBox con video, el que David marcó como el más difícil de
+  conseguir, hoy está cubierto recortando el 60 % de un clip de 16:9. El
+  pedido medido está en
+  `phases/01-poc-web-hlsjs/tasks/T-12/t12-los-assets-que-faltan.md`.
+- **Quién hace el primer pase de la especificación de SVTA.**
+- **Qué significa `version: 2`** en el bloque `X-AD-CREATIVE-SIGNALING`.
+
+**Para SVTA, sobre el formato**, y ninguna bloquea código: cuál de varias
+fuentes concurrentes se escucha y cómo se expresa; el `volume` que el
+modelo tiene por elemento y la herramienta no emite nunca; cómo llena un
+asset una caja cuya relación de aspecto no es la suya (el ADR 0013 lo
+decidió para la demo y no para el formato); dónde va un asset que es una
+imagen, cuando el `URI` del `ASSET` que lo contiene espera algo
+reproducible; la divergencia de modelos de coordenadas entre HLS y DASH;
+y si el layout debería viajar en el propio DateRange Object en vez de en
+el asset-list.
 
 ## Coordinación
 
@@ -415,9 +459,10 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
 
 <!-- La línea de cada fase se escribe cuando esa fase cierra (Mode D). -->
 
-- **01-poc-web-hlsjs**: el POC funcional en web con hls.js, que es la
-  cadena entera de la publicidad no lineal andando en un browser: la
-  clase propia en la media playlist, el asset-list con el layout de la
-  herramienta de SVTA, el renderizado de las experiencias concurrentes en
-  el DOM, y el par de compatibilidad con una instancia de hls.js de
-  fábrica al lado.
+- **01-poc-web-hlsjs**: el POC funcional en web, cerrado con los cinco
+  layouts del documento de requerimientos andando en una sola corrida de
+  punta a punta sobre hls.js **sin modificar**, y con una instancia de
+  fábrica al lado sobre la misma playlist mostrando que un cliente de
+  mercado sigue funcionando. Dejó parado el escalón más alto de la
+  escalera de repliegue, que es el que se graba. Informe en
+  `phases/01-poc-web-hlsjs/REPORT.md`.

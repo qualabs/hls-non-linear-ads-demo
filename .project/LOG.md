@@ -754,3 +754,50 @@ relación de aspecto para la que el creativo está pensado.
 Con esto la fase tiene parado el escalón 1 de la escalera de repliegue,
 que es el que se graba, y las ocho tasks de construcción están cerradas.
 
+## 2026-09-04 — Fase 01 cerrada
+
+`phases/01-poc-web-hlsjs/` pasa a `closed` con su informe en `REPORT.md`.
+Doce tasks, las doce en `done`, ninguna abandonada ni bloqueada, y
+dieciséis commits en el work tree del proyecto, ninguno pusheado.
+
+**El resultado es que el POC existe y anda**: los cinco layouts del
+documento de requerimientos en una sola corrida de punta a punta, sin un
+solo seek, sobre hls.js 1.7.2 sin modificar y con su controlador de
+interstitials apagado, con una instancia de fábrica al lado sobre la misma
+playlist mostrando que un cliente de mercado sigue funcionando. Es el
+escalón 1 de la escalera de repliegue del `PHASE.md`, que es el que se
+graba, y quedó parado diecisiete días antes del hito del 21 de septiembre
+contra el que la fase estaba planificada.
+
+**Ninguno de los cuatro riesgos de la fase se materializó.** El R2, la
+concurrencia de decodificadores, es el que se cerró con un número: la
+T-01 midió cinco elementos al 0,996 del reloj de pared en un banco de
+pruebas y la T-11 volvió a medir lo mismo en la página que se va a
+grabar, con cinco elementos de video y cinco instancias de hls.js en la
+misma pestaña, al 0,999 y con cero cuadros descartados. La segunda
+medición salió mejor que la primera. Sí se materializó, en parte, un
+riesgo de los que cruzan fases: el de los assets del L-box con video.
+
+**Lo que queda abierto está consolidado en la sección 4 del informe** y
+replicado en el `PROJECT.md`, que es el documento vivo donde alguien lo
+va a buscar: los ADR 0011 y 0012 esperando la confirmación de David, el
+pedido de assets con números, los dos LBox que declaran el mismo `type`,
+`squeezebackFrame` sin correlato en los cinco nombres, las preguntas de
+audio y de llenado para SVTA, la fecha del primer draft, y un artefacto
+de decodificación en un cuadro del panel de fábrica al que no se le
+inventa una causa.
+
+**El cierre encontró dos números mal en el registro de la T-12**, y los
+dos quedaron anotados como `post-ejecución:` sin reescribir el original.
+El primero: el cliente de fábrica reemplaza cuatro veces en la corrida y
+no cinco, y la consecuencia es de grabación, porque el quinto aviso
+lineal no se ve nunca en el panel de la izquierda dentro del recorrido.
+El `README.md` arrastra el mismo cinco y hay que corregirlo ahí, que es
+donde lo lee quien graba; quedó fuera de este cierre, cuyo alcance era
+`.project/`. El segundo: el piso de luminancia que el pedido de assets le
+pide a David no lo cumple uno de los dos creativos que el pedido cita
+como referencia, así que se le pide como criterio deseado y no como el
+estándar que el material ya cumple.
+
+El `status` del proyecto queda en `ongoing`: quedan la grabación, la
+parte de iOS que entra por Emil, y la especificación de SVTA.

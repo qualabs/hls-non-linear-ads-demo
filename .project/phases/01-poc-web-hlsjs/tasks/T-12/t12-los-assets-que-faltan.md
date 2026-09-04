@@ -92,3 +92,25 @@ usó el cuadro más claro de Sintel, que cae adentro de la ventana de doce
 segundos de adA, y en pantalla los dos breaks del LBox quedaban con la misma
 duna en la misma barra. Lo que distingue LBox video de LBox image es que uno se
 mueve y el otro no, y con la misma imagen en los dos eso no se ve.
+
+---
+
+## Nota del cierre de la fase — 2026-09-04
+
+Lo de arriba no se toca: es la medición. Esto corrige una sola frase de la
+lectura que se hizo de ella.
+
+El pedido dice "sin ningún instante por debajo de 40" y lo justifica con "es lo
+que miden los otros dos". **La media arriba de 100 sí la cumplen los dos; el
+piso por instante lo cumple sólo adB.** La tabla de arriba le da a adA
+(*Sintel*) un mínimo de 10,8 en su ventana elegida, el barrido fuera del
+navegador da 11,2 para esa misma ventana, y adentro del navegador adA baja a
+21,3 en la barra horizontal del break del LBox video y a 5,4 en su cuadrante del
+Quad (`t12-medicion.json`).
+
+El pedido no cambia, porque el piso por instante es justamente la propiedad que
+distingue un creativo grabable de uno que se apaga en cámara, y las capturas de
+la fase se toman en el instante más claro de cada ventana, lo cual es legítimo
+para una captura y no lo es para una grabación, que muestra los doce segundos
+enteros. Lo que cambia es cómo se le pide a David: como el criterio que hace
+falta, y no como el estándar que el material actual ya cumple.
