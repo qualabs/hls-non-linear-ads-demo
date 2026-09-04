@@ -55,7 +55,8 @@ mantiene igual, porque está ordenado por riesgo y no por lo que se
 muestra. Lo único que cambia es qué layouts se agregan primero después
 del mínimo.
 
-Si la medición del mecanismo C muestra que dos elementos de video no
-conviven, el Quad sale del borrador y esta propuesta se rehace contra la
-escalera de repliegue de la fase, que es lo que fija qué se muestra
-cuando algo no llega.
+La medición de la T-01 ya corrió y la propuesta no depende más de ella:
+hasta cinco elementos de video conviven, así que el Quad no queda sujeto
+a que el mecanismo de multiview sea viable. Si de todos modos no llegara
+a tiempo, lo que fija qué se muestra es la escalera de repliegue de la
+fase.
