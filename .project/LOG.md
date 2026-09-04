@@ -1051,3 +1051,72 @@ primario llena el área por `object-fit: cover` del ADR 0013, y sin aviso vuelve
 aviso flota fuera de la imagen. Y la cuarta: **la barra quedó seekeable y eso no lo
 pidió ningún bloque**; se agregó porque una barra que no lleva a ningún lado se lee
 como rota, y son cinco líneas si se quiere sacar.
+
+## 2026-09-04 — T-09 de la fase 02: el área de los layouts es la del video
+
+Se ejecuta antes que la T-04 aunque el número sea más alto, porque cambia la
+medición sobre la que se apoya todo el renderizado y una medición se cambia
+antes de construirle cosas encima.
+
+**Lo que cambió, en una línea:** la caja contra la que se resuelven los insets
+porcentuales pasa a ser la de la imagen y no la del contenedor. Decisión de
+Nicolás: *"el viewport lo define el video (con su relación de aspecto), no el
+tamaño de la pantalla"*, con la restricción de que la relación de aspecto del
+video original no se toca.
+
+El renderizador sigue midiendo la capa que recibió y ahora la reduce a la
+relación de aspecto del contenido y la centra, en una función pura —`imageBox`—
+que toma la relación de `video.videoWidth / video.videoHeight`, que es la del
+elemento que ya estaba reproduciendo y la que el navegador reporta con el pixel
+aspect ratio aplicado. Antes de que llegue la metadata no hay imagen y devuelve
+el marco tal cual. Los avisos se posicionan sumando el origen de la imagen, y
+el primario recibe la caja de la imagen como caja propia y el `transform` lo
+lleva de ahí a la del layout, lo que le da a su caja la relación de aspecto del
+video y deja al `object-fit: cover` del ADR 0013 sin nada que recortarle.
+
+**En ventana no se movió nada, que es la regresión que importaba.** Las dos
+cajas coinciden ahí, así que el cambio no tiene que mover un píxel, y la fase 01
+midió ese cero cinco veces. Los cinco breaks del recorrido, catorce elementos,
+primarios incluidos: **delta máximo 0,000000 px** entre la caja que el contrato
+pide —calculada en la sonda, no preguntada a la librería— y la que el navegador
+dibuja. Y recortando las capturas de ventana a la caja del contenedor, la imagen
+la llena de borde a borde igual con aviso y sin aviso.
+
+**En fullscreen sobre un viewport de 1920 × 901 —relación 2,131 contra 1,778 del
+contenido— la prueba salió de los píxeles de las capturas**, con el mismo
+scanner corrido sobre las de la T-03 y las de esta task. La T-03, sin aviso:
+imagen en x 159..1760. La T-03, con aviso: **x 0..1919**, o sea el salto de
+encuadre, el mismo player con la imagen ocupando dos rectángulos distintos.
+Después del cambio, las tres capturas —sin aviso, con `cornerOverlay` y con
+`squeezebackLShape`— dan **x 159..1760 las tres**. Y las barras negras tienen
+canal máximo 0 en las capturas con aviso: negro puro, ningún elemento las pisa,
+incluido el overlay de esquina, que es el que arranca pegado a la izquierda y el
+que haría visible el corrimiento. La geometría acompaña con delta ≤ 0,0122 px en
+fullscreen, que no es error de la conversión sino la cuantización del navegador a
+1/64 de píxel, en la que 159,111 no cae y los números de la ventana sí.
+
+Los dos greps de la fase dan cero y `npm test` da 15/15. La página del integrador
+no se toca. Se agregó una **nota fechada al ADR 0013**, porque su párrafo de
+cierre —que el recorte nunca le toca al primario— valía en ventana y no en
+fullscreen, y ahora vale en las dos; la decisión del ADR no cambia. Y una línea a
+la regla 1 del contrato en `docs/`, que decía "el área del player" sin decir cuál
+de las dos cajas era. Commit sin push.
+
+**Tres cosas quedaron anotadas y no arregladas.** La primera: **la primera
+consecuencia del bloque no era lo que el código hacía.** El bloque dice que hoy
+un aviso pegado a la izquierda cae sobre la barra negra; con un layout activo no
+había barra negra, porque el primario estaba en `cover` sobre el contenedor y lo
+llenaba, así que el aviso arrancaba en x = 0 y la imagen también. La T-03 ya lo
+había dicho al pie de su JSON. Lo medido y cierto era el recorte del primario y
+el salto de encuadre, y el aviso sobre la barra es la forma que ese mismo defecto
+toma en cuanto el primario deja de recortarse: las dos se arreglan con este
+cambio y el done no se mueve. La segunda: **que el rectángulo del primario sea el
+mismo sin aviso depende de la hoja de estilos de la página**, que tiene `.video`
+en `object-fit: contain`; sin layout la librería le devuelve el elemento a la
+página, y una página que lo pusiera en `cover` recuperaría el salto al revés. Es
+material para la T-08, la documentación del integrador. La tercera: **los
+controles siguen sobre el contenedor y no sobre la imagen**, así que en
+fullscreen la barra y el scrim cruzan las barras negras. Esta task no los tocó y
+no es evidente que haya que tocarlos —son el marco alrededor de la composición y
+no un elemento del layout—, pero conviene tenerlo presente en la T-04, que pinta
+los rangos del programa sobre esa misma barra.

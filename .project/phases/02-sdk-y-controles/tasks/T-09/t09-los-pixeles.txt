@@ -1,0 +1,53 @@
+# Los pixeles de las capturas de la T-09 (2026-09-04)
+
+Salida de t09pixeles.py, que convierte cada PNG a PPM crudo y busca la
+primera y la ultima columna que no es negra. Los estilos computados no
+entran aca: en este repositorio ya dieron dos falsos "OK".
+
+## ANTES -- las capturas de la T-03, con el mismo scanner
+
+$ python t09pixeles.py <capturas de la T-03>
+t03-4-fullscreen-controles-escondidos.png  1920x901
+   la imagen, por pixeles:  x 159..1760  ancho 1602   |   y 4..896  alto 893   |   relacion 1.794
+   barra izquierda x 4..158: canal maximo 0   barra derecha x 1761..1915: canal maximo 0
+   en la banda del overlay de esquina (y 4..224): x 159..1760
+t03-6-fullscreen-con-aviso.png  1920x901
+   la imagen, por pixeles:  x 4..1915  ancho 1912   |   y 4..896  alto 893   |   relacion 2.141
+   barra izquierda x 4..3: canal maximo None   barra derecha x 1916..1915: canal maximo None
+   en la banda del overlay de esquina (y 4..224): x 4..1915
+
+## DESPUES -- las capturas de esta task
+
+$ python t09pixeles.py .
+t09-1-ventana-sin-aviso.png  1920x901
+   la imagen, por pixeles:  x 4..1915  ancho 1912   |   y 4..896  alto 893   |   relacion 2.141
+   barra izquierda x 4..3: canal maximo None   barra derecha x 1916..1915: canal maximo None
+   en la banda del overlay de esquina (y 4..224): x 4..1915
+t09-2-ventana-con-aviso.png  1920x901
+   la imagen, por pixeles:  x 4..1915  ancho 1912   |   y 4..896  alto 893   |   relacion 2.141
+   barra izquierda x 4..3: canal maximo None   barra derecha x 1916..1915: canal maximo None
+   en la banda del overlay de esquina (y 4..224): x 4..1915
+t09-3-fullscreen-sin-aviso.png  1920x901
+   la imagen, por pixeles:  x 159..1760  ancho 1602   |   y 4..896  alto 893   |   relacion 1.794
+   barra izquierda x 4..158: canal maximo 0   barra derecha x 1761..1915: canal maximo 0
+   en la banda del overlay de esquina (y 4..224): x 159..1760
+t09-4-fullscreen-con-aviso.png  1920x901
+   la imagen, por pixeles:  x 159..1760  ancho 1602   |   y 4..896  alto 893   |   relacion 1.794
+   barra izquierda x 4..158: canal maximo 0   barra derecha x 1761..1915: canal maximo 0
+   en la banda del overlay de esquina (y 4..224): x 159..1760
+t09-5-fullscreen-squeezeback.png  1920x901
+   la imagen, por pixeles:  x 159..1760  ancho 1602   |   y 4..896  alto 893   |   relacion 1.794
+   barra izquierda x 4..158: canal maximo 0   barra derecha x 1761..1915: canal maximo 0
+   en la banda del overlay de esquina (y 4..224): x 159..1760
+
+## En ventana, recortado a la caja del contenedor (715x402 en 988,257)
+
+$ convert t09-{1,2}-ventana-*.png -crop 715x402+988+257 && python t09pixeles.py
+crop-1-ventana-sin-aviso.png  715x402
+   la imagen, por pixeles:  x 4..710  ancho 707   |   y 4..397  alto 394   |   relacion 1.794
+   barra izquierda x 4..3: canal maximo None   barra derecha x 711..710: canal maximo None
+   en la banda del overlay de esquina (y 4..99): x 4..710
+crop-2-ventana-con-aviso.png  715x402
+   la imagen, por pixeles:  x 4..710  ancho 707   |   y 4..397  alto 394   |   relacion 1.794
+   barra izquierda x 4..3: canal maximo None   barra derecha x 711..710: canal maximo None
+   en la banda del overlay de esquina (y 4..99): x 4..710

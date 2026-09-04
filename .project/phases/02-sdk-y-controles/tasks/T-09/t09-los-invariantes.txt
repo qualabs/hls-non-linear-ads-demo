@@ -1,0 +1,56 @@
+# Los invariantes de la T-09, verificados y no afirmados (2026-09-04)
+
+## A. El corte del ADR 0003: el lado del renderizado no sabe una palabra del transporte
+
+El mismo comando de la T-01, la T-02 y la T-03. Esta task toca `lib/renderer.js`,
+que es el archivo central de ese lado.
+
+$ /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js js/contract-trace.js css/player.css
+(sin salida: ningun hit; exit code 1)
+
+Y los contadores del lado que si sabe de transporte, sin cambios respecto de la
+T-03: esta task no movio nada de ese lado.
+
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/signalling.js
+34
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/media.js
+6
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/concurrent-hls.js
+23
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/stock-player.js
+22
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/app.js
+14
+
+## B. El corte del ADR 0015: el lado de la libreria no nombra la aplicacion
+
+El renderizador sigue midiendo la capa que recibio y no busca nada en el
+documento de nadie. La relacion de aspecto sale del elemento que ya tenia.
+
+$ /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+(sin salida: ningun hit; exit code 1)
+
+## C. Los tests siguen pasando, y siguen siendo quince
+
+La task no agrega tests. Agrega una funcion pura --`imageBox`-- y esta
+exportada para que la T-06 pueda apuntarle, pero su aritmetica no falla en
+silencio: si la caja de la imagen esta mal, lo que se ve es una barra negra
+del lado equivocado. Es el mismo criterio con que la T-03 no agrego ninguno.
+
+$ npm test
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 131.04863
+
+## D. La pagina del integrador
+
+Sin cambios: esta task no toca `js/app.js` ni `index.html`.
+
+$ awk '/^\/\/ =====/{n++; next} n==1{print}' js/app.js | sed '/^$/d' | wc -l
+11
+   (siete de codigo y cuatro de comentario, igual que en la T-03)
