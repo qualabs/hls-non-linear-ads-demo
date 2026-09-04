@@ -1,0 +1,194 @@
+{
+  "parcial": {
+    "currentTime": 1.853,
+    "settled": false,
+    "cuantos": 5,
+    "porClase": {
+      "interstitial": 5
+    },
+    "ranges": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "kind": "interstitial",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "kind": "interstitial",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "kind": "interstitial",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "kind": "interstitial",
+        "startTime": 120,
+        "duration": 12
+      }
+    ],
+    "activeAhora": []
+  },
+  "completa": {
+    "currentTime": 9.971,
+    "settled": true,
+    "cuantos": 10,
+    "porClase": {
+      "interstitial": 5,
+      "concurrent": 5
+    },
+    "ranges": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-1-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "kind": "interstitial",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "kind": "interstitial",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "kind": "interstitial",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "kind": "interstitial",
+        "startTime": 120,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 120,
+        "duration": 12
+      }
+    ],
+    "activeAhora": []
+  },
+  "soloCrecio": true,
+  "adentroDelPrimerBreak": {
+    "currentTime": 25.015,
+    "settled": true,
+    "cuantos": 10,
+    "porClase": {
+      "interstitial": 5,
+      "concurrent": 5
+    },
+    "ranges": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-1-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "kind": "interstitial",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "kind": "interstitial",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "kind": "interstitial",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "kind": "interstitial",
+        "startTime": 120,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 120,
+        "duration": 12
+      }
+    ],
+    "activeAhora": [
+      {
+        "id": "AD-1-CONCURRENT",
+        "type": "cornerOverlay"
+      }
+    ]
+  },
+  "errores": []
+}

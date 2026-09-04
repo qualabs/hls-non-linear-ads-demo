@@ -1,0 +1,420 @@
+{
+  "lecturas": [
+    {
+      "currentTime": 0,
+      "largoDelPrimarioReleido": 180,
+      "settled": true,
+      "cuantos": 10,
+      "porClase": {
+        "interstitial": 5,
+        "concurrent": 5
+      },
+      "ranges": [
+        {
+          "id": "AD-1-LINEAR",
+          "kind": "interstitial",
+          "startTime": 20,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.11111,
+            "hasta": 0.17778
+          }
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "kind": "concurrent",
+          "startTime": 20,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.11111,
+            "hasta": 0.17778
+          }
+        },
+        {
+          "id": "AD-2-LINEAR",
+          "kind": "interstitial",
+          "startTime": 45,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.25,
+            "hasta": 0.31667
+          }
+        },
+        {
+          "id": "AD-2-CONCURRENT",
+          "kind": "concurrent",
+          "startTime": 45,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.25,
+            "hasta": 0.31667
+          }
+        },
+        {
+          "id": "AD-3-LINEAR",
+          "kind": "interstitial",
+          "startTime": 70,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.38889,
+            "hasta": 0.45556
+          }
+        },
+        {
+          "id": "AD-3-CONCURRENT",
+          "kind": "concurrent",
+          "startTime": 70,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.38889,
+            "hasta": 0.45556
+          }
+        },
+        {
+          "id": "AD-4-LINEAR",
+          "kind": "interstitial",
+          "startTime": 95,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.52778,
+            "hasta": 0.59444
+          }
+        },
+        {
+          "id": "AD-4-CONCURRENT",
+          "kind": "concurrent",
+          "startTime": 95,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.52778,
+            "hasta": 0.59444
+          }
+        },
+        {
+          "id": "AD-5-LINEAR",
+          "kind": "interstitial",
+          "startTime": 120,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.66667,
+            "hasta": 0.73333
+          }
+        },
+        {
+          "id": "AD-5-CONCURRENT",
+          "kind": "concurrent",
+          "startTime": 120,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.66667,
+            "hasta": 0.73333
+          }
+        }
+      ],
+      "activeAhora": [],
+      "experienciasResueltas": 5,
+      "esUnArrayNuevo": true,
+      "mismosObjetos": true,
+      "paredSegundos": 0.83
+    },
+    {
+      "currentTime": 0,
+      "largoDelPrimarioReleido": 180,
+      "settled": true,
+      "cuantos": 10,
+      "porClase": {
+        "interstitial": 5,
+        "concurrent": 5
+      },
+      "ranges": [
+        {
+          "id": "AD-1-LINEAR",
+          "kind": "interstitial",
+          "startTime": 20,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.11111,
+            "hasta": 0.17778
+          }
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "kind": "concurrent",
+          "startTime": 20,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.11111,
+            "hasta": 0.17778
+          }
+        },
+        {
+          "id": "AD-2-LINEAR",
+          "kind": "interstitial",
+          "startTime": 45,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.25,
+            "hasta": 0.31667
+          }
+        },
+        {
+          "id": "AD-2-CONCURRENT",
+          "kind": "concurrent",
+          "startTime": 45,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.25,
+            "hasta": 0.31667
+          }
+        },
+        {
+          "id": "AD-3-LINEAR",
+          "kind": "interstitial",
+          "startTime": 70,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.38889,
+            "hasta": 0.45556
+          }
+        },
+        {
+          "id": "AD-3-CONCURRENT",
+          "kind": "concurrent",
+          "startTime": 70,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.38889,
+            "hasta": 0.45556
+          }
+        },
+        {
+          "id": "AD-4-LINEAR",
+          "kind": "interstitial",
+          "startTime": 95,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.52778,
+            "hasta": 0.59444
+          }
+        },
+        {
+          "id": "AD-4-CONCURRENT",
+          "kind": "concurrent",
+          "startTime": 95,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.52778,
+            "hasta": 0.59444
+          }
+        },
+        {
+          "id": "AD-5-LINEAR",
+          "kind": "interstitial",
+          "startTime": 120,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.66667,
+            "hasta": 0.73333
+          }
+        },
+        {
+          "id": "AD-5-CONCURRENT",
+          "kind": "concurrent",
+          "startTime": 120,
+          "duration": 12,
+          "fraccion": {
+            "desde": 0.66667,
+            "hasta": 0.73333
+          }
+        }
+      ],
+      "activeAhora": [],
+      "experienciasResueltas": 5,
+      "esUnArrayNuevo": true,
+      "mismosObjetos": true,
+      "paredSegundos": 0.84
+    }
+  ],
+  "laLectura": {
+    "currentTime": 0,
+    "largoDelPrimarioReleido": 180,
+    "settled": true,
+    "cuantos": 10,
+    "porClase": {
+      "interstitial": 5,
+      "concurrent": 5
+    },
+    "ranges": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12,
+        "fraccion": {
+          "desde": 0.11111,
+          "hasta": 0.17778
+        }
+      },
+      {
+        "id": "AD-1-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 20,
+        "duration": 12,
+        "fraccion": {
+          "desde": 0.11111,
+          "hasta": 0.17778
+        }
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "kind": "interstitial",
+        "startTime": 45,
+        "duration": 12,
+        "fraccion": {
+          "desde": 0.25,
+          "hasta": 0.31667
+        }
+      },
+      {
+        "id": "AD-2-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 45,
+        "duration": 12,
+        "fraccion": {
+          "desde": 0.25,
+          "hasta": 0.31667
+        }
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "kind": "interstitial",
+        "startTime": 70,
+        "duration": 12,
+        "fraccion": {
+          "desde": 0.38889,
+          "hasta": 0.45556
+        }
+      },
+      {
+        "id": "AD-3-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 70,
+        "duration": 12,
+        "fraccion": {
+          "desde": 0.38889,
+          "hasta": 0.45556
+        }
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "kind": "interstitial",
+        "startTime": 95,
+        "duration": 12,
+        "fraccion": {
+          "desde": 0.52778,
+          "hasta": 0.59444
+        }
+      },
+      {
+        "id": "AD-4-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 95,
+        "duration": 12,
+        "fraccion": {
+          "desde": 0.52778,
+          "hasta": 0.59444
+        }
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "kind": "interstitial",
+        "startTime": 120,
+        "duration": 12,
+        "fraccion": {
+          "desde": 0.66667,
+          "hasta": 0.73333
+        }
+      },
+      {
+        "id": "AD-5-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 120,
+        "duration": 12,
+        "fraccion": {
+          "desde": 0.66667,
+          "hasta": 0.73333
+        }
+      }
+    ],
+    "activeAhora": [],
+    "experienciasResueltas": 5,
+    "esUnArrayNuevo": true,
+    "mismosObjetos": true,
+    "paredSegundos": 0.84
+  },
+  "monotona": true,
+  "antesDelPrimerBreak": {
+    "currentTimeDeLaLectura": 0,
+    "primerRangoEmpiezaEn": 20,
+    "loLeyoAntes": true
+  },
+  "seeksDelPrimario": [],
+  "errores": [],
+  "trazaDeLaSenalizacion": [
+    "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-cornerOverlay.json",
+    "[signalling] AD-2-CONCURRENT at t=45.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape.json",
+    "[signalling] AD-3-CONCURRENT at t=70.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json",
+    "[signalling] AD-4-CONCURRENT at t=95.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json",
+    "[signalling] AD-5-CONCURRENT at t=120.00s, asset-list http://localhost:8080/signalling/asset-list-multiView.json"
+  ],
+  "consola": [
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-cornerOverlay.json"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved cornerOverlay#AD-1-CONCURRENT: 2 elements, window 20.00s -> 32.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-2-CONCURRENT at t=45.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackLShape#AD-2-CONCURRENT: 3 elements, window 45.00s -> 57.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-3-CONCURRENT at t=70.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json"
+    },
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackLShape#AD-3-CONCURRENT: 3 elements, window 70.00s -> 82.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-4-CONCURRENT at t=95.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackDoubleBox#AD-4-CONCURRENT: 2 elements, window 95.00s -> 107.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-5-CONCURRENT at t=120.00s, asset-list http://localhost:8080/signalling/asset-list-multiView.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved multiView#AD-5-CONCURRENT: 4 elements, window 120.00s -> 132.00s"
+    }
+  ]
+}

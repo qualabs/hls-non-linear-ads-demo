@@ -107,6 +107,7 @@ and the page that uses it.
 | `server.mjs` | a static file server, and nothing else: no ad server, no APS |
 | `scripts/` | the content: download and package as HLS VOD. And the build of the library |
 | `content/` | the packaged output. Generated, gitignored |
+| `docs/` | the architecture of the product: the contract between the two layers |
 | `brand/` | Qualabs fonts, logo and favicon, on disk |
 | `CREDITS.md` | the CC BY attribution the footage requires |
 
@@ -136,9 +137,9 @@ each client keeping the one it understands.
 
 The demo is split in two, with a contract between them (ADR 0003): the
 signalling layer answers *what is active at this playback time, and with what
-boxes*, and the consumer draws it. Only the first side knows what HLS is. The
-contract is written down in
-`.project/phases/01-poc-web-hlsjs/tasks/T-06/t06-contrato.md`.
+boxes* and *where all the ranges of the programme are, and of which kind*, and
+the consumer draws it. Only the first side knows what HLS is. The contract is
+written down in `docs/contrato-senalizacion-renderizado.md`.
 
 The ad starts **silent** and the primary content keeps its audio, so the page
 has a visible control to turn the ad's sound on (ADR 0010). Turning it on in
