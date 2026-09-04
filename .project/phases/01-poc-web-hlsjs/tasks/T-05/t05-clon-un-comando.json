@@ -1,0 +1,52 @@
+{
+  "origen": "clon limpio del repo, servido por ./run.sh en el puerto 8099",
+  "estado": {
+    "hud": "hls.js 1.7.2 · interstitials manager: none · playing ./content/primary/index.m3u8",
+    "ver": "1.7.2",
+    "mgr": "null",
+    "t": 10.43,
+    "paused": false,
+    "rs": 4,
+    "w": 1280,
+    "h": 720,
+    "err": null
+  },
+  "red": {
+    "totalRequests": 31,
+    "playlists": [
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8099/content/primary/index.m3u8"
+      }
+    ],
+    "segmentos": 21,
+    "primerosSegmentos": [
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8099/content/primary/seg000.ts"
+      },
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8099/content/primary/seg001.ts"
+      },
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8099/content/primary/seg002.ts"
+      },
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8099/content/primary/seg003.ts"
+      },
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8099/content/primary/seg004.ts"
+      }
+    ]
+  }
+}

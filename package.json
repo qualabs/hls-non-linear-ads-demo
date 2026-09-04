@@ -1,0 +1,13 @@
+{
+  "name": "hls-non-linear-ads-demo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Non-linear (concurrent) HLS ad experiences on hls.js, unmodified. No bundler and no dependencies: native ES modules in the browser, node --test for the pure logic.",
+  "type": "module",
+  "scripts": {
+    "start": "./run.sh",
+    "serve": "node server.mjs",
+    "content": "./scripts/preparar-contenido.sh",
+    "test": "node --test"
+  }
+}

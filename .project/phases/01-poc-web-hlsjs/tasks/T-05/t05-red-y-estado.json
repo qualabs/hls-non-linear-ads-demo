@@ -1,0 +1,94 @@
+{
+  "estado": {
+    "hud": "hls.js 1.7.2 · interstitials manager: none · playing ./content/primary/index.m3u8",
+    "hlsVersion": "1.7.2",
+    "interstitialsManager": "null",
+    "currentTime": 20.15,
+    "duration": 180,
+    "paused": false,
+    "readyState": 4,
+    "videoWidth": 1280,
+    "videoHeight": 720,
+    "capaDeAvisosVacia": true
+  },
+  "red": {
+    "totalRequests": 35,
+    "playlists": [
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8080/content/primary/index.m3u8"
+      }
+    ],
+    "segmentos": 26,
+    "primerosSegmentos": [
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8080/content/primary/seg000.ts"
+      },
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8080/content/primary/seg001.ts"
+      },
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8080/content/primary/seg002.ts"
+      },
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8080/content/primary/seg003.ts"
+      },
+      {
+        "method": "GET",
+        "type": "xhr",
+        "url": "http://localhost:8080/content/primary/seg004.ts"
+      }
+    ],
+    "otros": [
+      {
+        "method": "GET",
+        "type": "document",
+        "url": "http://localhost:8080/"
+      },
+      {
+        "method": "GET",
+        "type": "stylesheet",
+        "url": "http://localhost:8080/brand/fonts-embedded.css"
+      },
+      {
+        "method": "GET",
+        "type": "stylesheet",
+        "url": "http://localhost:8080/css/player.css"
+      },
+      {
+        "method": "GET",
+        "type": "script",
+        "url": "http://localhost:8080/vendor/hls.min.js"
+      },
+      {
+        "method": "GET",
+        "type": "script",
+        "url": "http://localhost:8080/js/app.js"
+      },
+      {
+        "method": "GET",
+        "type": "script",
+        "url": "chrome-extension://cimiefiiaegbelhefglklhhakcgmhkai/page-script.js"
+      },
+      {
+        "method": "GET",
+        "type": "font",
+        "url": "chrome-extension://ailoabdmgclmfmhdagmlohpjlbpffblp/Roboto-Regular.woff2"
+      },
+      {
+        "method": "GET",
+        "type": "script",
+        "url": "blob:http://localhost:8080/6e8e8a17-af9a-4548-87e9-af12dd2e7e42"
+      }
+    ]
+  }
+}

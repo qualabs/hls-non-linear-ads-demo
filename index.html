@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HLS non-linear ads — Qualabs demo</title>
+<!--
+  The fonts and the favicon are copies of the Qualabs brand kit on disk, not
+  links to it: a demo that reads a file out of another project on this laptop
+  fails the day it is recorded from anywhere else. Provenance in brand/README.md.
+-->
+<link rel="stylesheet" href="./brand/fonts-embedded.css">
+<link rel="stylesheet" href="./css/player.css">
+<link rel="icon" href="./brand/favicon.svg">
+</head>
+<body>
+
+<!--
+  The bank of the demo, and only the bank: the primary VOD playing on an
+  UNMODIFIED hls.js, served over HTTP by a static file server.
+  It demonstrates nothing on its own and does not try to.
+
+  Two things in this tree are load-bearing for what comes next:
+
+  #player  is the positioning context. Everything the concurrent experience
+           will draw lives INSIDE it, as a sibling of the <video>, because the
+           element that goes fullscreen is the container and anything outside
+           it disappears the moment somebody presses the fullscreen button.
+
+  #ads     is that layer, and it is deliberately empty. The signalling layer
+           and the renderer fill it; the seam between them is the contract of
+           ADR 0003.
+
+  No bundler and no framework: native ES modules, and hls.js vendored in
+  ./vendor/ at 1.7.2 rather than pulled from a CDN, because it is the version
+  the code was read against and the version the measurements ran on (ADR 0002).
+-->
+
+<div class="stage">
+  <div class="player" id="player">
+    <video class="video" id="video" playsinline controls></video>
+    <div class="ads" id="ads" aria-hidden="true"></div>
+  </div>
+  <p class="hud" id="hud"></p>
+  <p class="credit">
+    Primary content: <em>Tears of Steel</em> (CC BY 3.0) &middot;
+    Ad assets: <em>Sintel</em> (CC BY 3.0), <em>Caminandes: Gran Dillama</em> (CC BY 3.0),
+    <em>Elephants Dream</em> (CC BY 2.5) &middot;
+    &copy; Blender Foundation, <a href="https://www.blender.org">blender.org</a>.
+    Re-encoded and shortened for this demo.
+  </p>
+</div>
+
+<script src="./vendor/hls.min.js"></script>
+<script type="module" src="./js/app.js"></script>
+
+</body>
+</html>

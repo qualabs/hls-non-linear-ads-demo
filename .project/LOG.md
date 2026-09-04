@@ -270,3 +270,46 @@ Quad va temprano porque es el que más muestra de qué se trata la
 publicidad no lineal y cuesta lo mismo que cualquier otro layout. El ADR
 sigue en `proposed`, que es lo que corresponde a una propuesta que espera
 la confirmación de David.
+
+## 2026-09-04 — T-05: el banco de la demo
+
+El repo dejó de tener solamente `.project/`: en la raíz están ahora la
+página, el servidor y los scripts de contenido. Sin bundler, sin
+framework y sin dependencias de npm, con hls.js vendorizado en 1.7.2 y
+sin tocar (ADR 0002). Un comando, `./run.sh`, empaqueta el contenido si
+no está y levanta el servidor de archivos estáticos.
+
+Se verificó como está escrito el criterio: clon limpio del repo, un
+comando, y el primario reproduciendo. En el Chrome del sistema: hls.js
+reporta 1.7.2, el `interstitialsManager` de la instancia queda en
+`null`, el VOD primario
+reproduce a 1280x720, y la pestaña de red muestra la media playlist más
+los segmentos, servidos por el servidor estático y nada más. La página
+tiene ya la capa vacía sobre el elemento de video donde el renderizador
+va a dibujar, y nada más que eso: no hay layout, no hay Date Range y no
+hay experiencia concurrente.
+
+**El contenido.** Big Buck Bunny quedó descartado por pedido de Nicolás,
+así que el material es de las otras películas abiertas de la Blender
+Foundation, todas bajo Creative Commons Attribution: el primario son
+tres minutos de *Tears of Steel*, y los tres avisos cortos salen del
+trailer de *Sintel*, de *Caminandes: Gran Dillama* y del teaser de
+*Elephants Dream*. La atribución que la licencia exige está en
+`CREDITS.md` y al pie de la página. La ventana del primario no arranca
+en el principio de la película: se eligió un tramo sin placas de
+créditos, sin armas y con la imagen cambiando bastante, porque esto se
+graba y un aviso dibujado encima se tiene que ver.
+
+**Dos supuestos del plan que no se sostuvieron.** El esqueleto reusable
+de `aws-multiview/demo-ibc/` trae hls.js 1.7.0 y no la 1.7.2 que fija el
+ADR 0002, así que la copia vendorizada salió del tarball de npm de la
+1.7.2. Y el script de empaquetado de la T-01 no se pudo reusar tal cual:
+su entrada son fuentes sintéticas de `testsrc2`, que era lo correcto
+para medir decodificadores y es lo contrario de lo que una demo grabada
+necesita. Se reusó su invocación de ffmpeg verbatim y se le cambió la
+entrada por un archivo real.
+
+Del esqueleto sí se reusó lo demás: la forma de la página, con todo
+adentro del contenedor que va a fullscreen; el kit de marca en `brand/`
+copiado a disco en vez de linkeado; y la decisión de vendorizar hls.js
+en lugar de traerlo de un CDN.
