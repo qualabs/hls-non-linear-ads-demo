@@ -3,3 +3,8 @@
 # any clone can rebuild with one command.
 content/
 node_modules/
+
+# The built library. It is assembled from lib/ by scripts/construir-libreria.sh
+# on every start, exactly like the signalled playlist, so a copy in git could
+# only be a stale one.
+dist/
