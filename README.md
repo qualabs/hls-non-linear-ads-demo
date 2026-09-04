@@ -48,10 +48,12 @@ than going grey as if no ad were on screen.
 
 **The left player falls behind, and that is the second argument of the demo.**
 Every break carries its linear Date Range as well, so the off-the-shelf client
-replaces the content five times and comes back where it left off, twelve
-seconds later each time. After the first four breaks it is 49.5 s of programme
-behind the player on the right, which lost none: put the two panes side by side
-at any moment after the first break and they are showing different scenes of
+replaces the content four times over the run and comes back where it left off,
+twelve seconds later each time. It only reaches four of the five breaks: by the
+fifth START-DATE it is already 49.5 s behind, so that break arrives near the end
+of the 180 s VOD and the fifth linear ad never completes on the left. After those
+four breaks it is 49.5 s of programme behind the player on the right, which
+lost none: put the two panes side by side at any moment after the first break and they are showing different scenes of
 the same film. Only in the first break do both clients react to the same tags
 at the same instant; from the second on, the left one is somewhere else in the
 programme, which is the argument rather than a defect.
