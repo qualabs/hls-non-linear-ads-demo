@@ -207,8 +207,10 @@ al estado actual de todas las decisiones y de la solución propuesta.
   evento y que Apple va a presentar. A David le gustaría mostrar en la
   discusión cómo se conecta con este trabajo si hay tiempo, pero quedó
   como deseable y sin owner.
-- La especificación de detección de capacidades, por la posición de
-  Nicolás que está más abajo.
+- **El modelo** de detección de capacidades de la especificación, por la
+  posición de Nicolás que está más abajo. Lo que sí entra, en la fase 03, es
+  el passthrough: el SDK recibe un `decoderCount` configurado, lo lleva al
+  pedido del asset-list, y hace repliegue con él.
 
 ## Los cinco layouts
 
@@ -312,6 +314,14 @@ abiertos que David piensa marcar en escenario, y pasarle la capacidad de
 múltiples decoders al APS sigue listado como stretch de la demo. Lo que
 queda fuera es el modelo de detección de la especificación, no el
 stretch tal como David lo escribió.
+
+Y ese stretch dejó de ser stretch. **La fase 03 se lleva el `decoderCount`**
+como configuración del SDK que viaja al pedido del asset-list, más el
+repliegue del lado del cliente cuando lo que vuelve no se puede reproducir.
+David coincide en el reparto: "it's not the SDK's responsibility to determine
+the decoders, that's the application developer's". El SDK recibe el número;
+averiguarlo sigue siendo del que integra, y el modelo de detección sigue
+afuera.
 
 ## Reparto y compromisos
 
@@ -439,8 +449,10 @@ la sección 4 del informe de cierre de la fase 01
 - **Qué significa `version: 2`** en el bloque `X-AD-CREATIVE-SIGNALING`.
 
 **Para SVTA, sobre el formato**, y ninguna bloquea código: cuál de varias
-fuentes concurrentes se escucha y cómo se expresa; el `volume` que el
-modelo tiene por elemento y la herramienta no emite nunca; cómo llena un
+fuentes concurrentes se escucha y cómo se expresa; el `volume`, que la
+herramienta no emite cuando vale 100 y cuyo default en ausencia el formato no
+fija (el ADR 0014 lo decide para la demo en silencio, que es una divergencia
+deliberada con la semántica de la herramienta); cómo llena un
 asset una caja cuya relación de aspecto no es la suya (el ADR 0013 lo
 decidió para la demo y no para el formato); dónde va un asset que es una
 imagen, cuando el `URI` del `ASSET` que lo contiene espera algo
@@ -457,7 +469,8 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
 
 ## Phases
 
-<!-- La línea de cada fase se escribe cuando esa fase cierra (Mode D). -->
+<!-- La línea de una fase abierta dice para qué está; al cerrar se reescribe
+     con lo que la fase terminó siendo (Mode D). -->
 
 - **01-poc-web-hlsjs**: el POC funcional en web, cerrado con los cinco
   layouts del documento de requerimientos andando en una sola corrida de
@@ -466,3 +479,15 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   mercado sigue funcionando. Dejó parado el escalón más alto de la
   escalera de repliegue, que es el que se graba. Informe en
   `phases/01-poc-web-hlsjs/REPORT.md`.
+- **02-sdk-y-controles**: cortar la librería de la aplicación de demo y darle
+  a la librería los controles de la composición: una sola barra de progreso de
+  todo el contenido con los rangos marcados por color, la pausa, un solo
+  control de audio y el fullscreen de la composición. Van juntos porque el
+  límite del SDK y la propiedad de los controles son la misma decisión (ADR
+  0015), y el corte va primero adentro de la fase. Abierta.
+- **03-breaks-multiples-y-repliegue**: un break con varios avisos mezclando
+  concurrente y lineal, el repliegue del lado del cliente al lineal
+  tradicional del asset, y el `decoderCount` como passthrough hasta el pedido
+  del asset-list. Abierta, y no arranca antes de que cierre la 02. Su primera
+  task es una medición, porque el aviso lineal en el medio del break es el
+  único item que queda capaz de reabrir un ADR de la fase 01.

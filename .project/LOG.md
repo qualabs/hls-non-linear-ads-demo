@@ -801,3 +801,55 @@ estándar que el material ya cumple.
 
 El `status` del proyecto queda en `ongoing`: quedan la grabación, la
 parte de iOS que entra por Emil, y la especificación de SVTA.
+
+## 2026-09-04 — Fases 02 y 03 abiertas y generadas en el mismo pase
+
+Las dos en `planning`, con su `PHASE.md` y su `TASKS.md` escritos en el mismo
+pase, más tres ADR. Sale de la reunión del 2026-09-04 con David Hassoun y de
+las decisiones que Nicolás tomó sobre el análisis de
+`propuesta-de-fases-post-01.md`. No hizo falta un `DESIGN.md`: las decisiones
+llegaron tomadas, así que la generación es lo único que quedaba.
+
+**`02-sdk-y-controles`, ocho tasks.** El SDK y sus controles son una sola fase
+porque el límite del SDK y la propiedad de los controles son la misma
+decisión, y separarlas significa tomarla dos veces: el renderizado ya es hoy
+dueño del elemento que va a fullscreen y mueve el primario con un `transform`,
+así que un tercero no puede quedarse con sus controles nativos sobre ese
+elemento. **El corte va primero adentro de la fase**, porque lo construido
+antes nace del lado equivocado de la línea. Después el contrato promovido a
+`docs/` y ampliado, después los controles, los rangos marcados y el volumen,
+después los tests, y al final el skin y la documentación del integrador.
+
+**`03-breaks-multiples-y-repliegue`, ocho tasks**, y **no arranca antes de que
+cierre la 02**. Su primera task es una medición, como la T-01 de la fase 01,
+porque el aviso lineal en el medio de un break es el único item que queda en
+el proyecto capaz de reabrir un ADR de la fase 01: es un reemplazo, el
+contrato no tiene noción de primario pausado, y el ADR 0002 apagó justamente
+esa maquinaria. Las tasks de construcción están escritas contra lo que hoy se
+sabe y la T-02 las puede reescribir con la medición en la mano.
+
+**Tres ADR.** El **0014** respeta el `volume` que declara el asset list y fija
+el default del campo ausente en 0, o sea silencio; supersede al **0010**, que
+queda en `superseded` con `superseded_by: 0014` y el cuerpo sin tocar. Es una
+divergencia deliberada con la semántica de SVTA —para la herramienta de David
+el campo ausente vale 100— y la razón es que audio inesperado en cámara es
+peor que audio faltante; va a la lista de cosas para SVTA. El **0015** fija el
+límite del SDK y la propiedad de los controles, y es el que gobierna la fase
+02: se decide al principio y se verifica con un grep, como la 01 hizo con el
+0003. El **0016** registra que la clase concurrente no tiene ninguno de los
+dos modos del interstitial tradicional —ni reemplaza un tramo ni se inserta
+estirando la línea de tiempo—, lo que refuerza el 0009 desde otro lado y es lo
+que sostiene que la barra no crezca y que el largo se relea.
+
+**`PROJECT.md`**: las líneas de las dos fases nuevas, la de "fuera de alcance"
+sobre detección de capacidades reescrita —lo que queda afuera es el modelo, y
+el passthrough del `decoderCount` entra en la fase 03—, y la pregunta del
+`volume` para SVTA corregida, porque la herramienta sí lo emite cuando no vale
+100.
+
+**Lo que quedó afuera a propósito**: iOS, los ADR 0011 y 0012, el modelo de
+detección de capacidades, el link desplegado para David, la pantalla inicial
+de la demo que pregunta cuántos decoders hay, y que el asset-list cambie según
+el parámetro, que es trabajo del APS.
+
+Nada de código: el pase tocó `.project/` y nada más. Commit sin push.

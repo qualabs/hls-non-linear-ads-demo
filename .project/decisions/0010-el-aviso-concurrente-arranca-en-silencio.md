@@ -1,11 +1,11 @@
 ---
 id: 0010
 title: Arrancar el aviso concurrente en silencio y dejarle el audio al contenido primario
-status: accepted
+status: superseded
 scope: phase-01
 date: 2026-09-03
 supersedes: null
-superseded_by: null
+superseded_by: 0014
 ---
 
 ## Contexto
