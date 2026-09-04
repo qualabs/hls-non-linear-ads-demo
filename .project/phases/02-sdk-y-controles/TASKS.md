@@ -17,6 +17,7 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
 | T-01 | El corte: la librería y la aplicación de demo como dos cosas     | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-01/` |
 | T-02 | El contrato en `docs/`, ampliado con los rangos del programa     | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-02/` |
 | T-03 | Los controles de la composición: barra, pausa, audio y fullscreen | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-03/` |
+| T-09 | El área de los layouts es la del video, no la del contenedor      | planned | —    | —        |
 | T-04 | Los rangos del programa marcados en la barra                     | planned | —    | —        |
 | T-05 | El volumen del asset list, con la mezcla que David propuso       | planned | —    | —        |
 | T-06 | Tests: los rangos del programa y el default de volumen           | planned | —    | —        |
@@ -332,3 +333,40 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
   documento no diga.
 - **nivel de verificación:** mínimo. La salida entera la lee una persona antes
   de que nada dependa de ella.
+
+## T-09 — El área de los layouts es la del video, no la del contenedor
+
+> **Se ejecuta ANTES que la T-04**, aunque su número sea más alto: cambia la
+> medición sobre la que se apoya todo el renderizado, y una medición se cambia
+> antes de construirle cosas encima. El número es alto porque las tasks de la
+> T-04 en adelante ya estaban escritas y renumerarlas rompería sus referencias.
+
+- **Objetivo:** que la caja contra la que se resuelven los insets porcentuales
+  sea la de la **imagen** y no la del contenedor. Lo decidió Nicolás el
+  2026-09-04: *"el viewport lo define el video (con su relación de aspecto), no
+  el tamaño de la pantalla"*, con la restricción de que cambiar la relación de
+  aspecto del video original no es una opción.
+- **Qué tiene que cubrir:** hoy el renderizador toma el área con
+  `layer.getBoundingClientRect()`, que es la caja del contenedor. En ventana el
+  contenedor es 16:9 y las dos cajas coinciden, así que no se nota; en
+  fullscreen sobre una pantalla de otra forma no coinciden, y la T-03 lo midió:
+  contenedor 1920x901, imagen 1601,778 de ancho desde el píxel 159,111.
+
+  Las dos consecuencias que este cambio elimina, escritas porque son las que
+  prueban que sirvió: un aviso declarado pegado a la izquierda hoy caería sobre
+  la barra negra, fuera de la imagen; y el encuadre del primario cambia al
+  entrar y salir de cada break, porque con un layout activo llena el área y sin
+  aviso vuelve a entrar entero.
+
+  Hace además verdadera en fullscreen la nota del ADR 0013 que dice que el
+  recorte nunca le toca al contenido primario, que hoy sólo vale en ventana.
+  Restricción: **la relación de aspecto del video no se toca.** Depende de T-03.
+- **Definición de done:** en ventana, las mediciones de 0,00 px siguen dando
+  0,00 px — es la regresión que importa, porque ahí las dos cajas coinciden y el
+  cambio no tiene que mover nada. En fullscreen sobre un viewport que a
+  propósito no es 16:9: la caja de cada aviso queda **adentro** del rectángulo
+  de la imagen, y el rectángulo del primario es **el mismo** con aviso y sin
+  aviso. Con capturas.
+- **nivel de verificación:** bajo. El error está en la pantalla, y se verifica
+  mirando los píxeles de las capturas y no los estilos computados: en este repo
+  ya hubo dos falsos "OK" por medir lo segundo.
