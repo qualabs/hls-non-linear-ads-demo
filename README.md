@@ -87,18 +87,25 @@ measured there.
 
 ## What is where
 
+The repository is two things with a line between them (ADR 0015): the library,
+and the page that uses it.
+
 | | |
 | --- | --- |
-| `index.html`, `css/`, `js/` | the page. No bundler and no framework: native ES modules |
-| `js/signalling.js` | the signalling layer: Date Ranges in, the contract out |
-| `js/renderer.js` | the rendering layer: the contract in, the boxes drawn over the video. Knows nothing about HLS |
+| `lib/` | **the library.** No bundler and no dependencies |
+| `lib/signalling.js` | the signalling layer: Date Ranges in, the contract out |
+| `lib/renderer.js` | the rendering layer: the contract in, the boxes drawn over the video. Knows nothing about HLS |
+| `lib/media.js` | how a `uri` becomes pixels: one instance of hls.js per ad asset |
+| `lib/concurrent-hls.js` | the entry point and the public surface: `attach`, and the configuration the instance has to be built with |
+| `dist/` | the built library: one classic script that defines a global. Generated, gitignored |
+| `index.html`, `css/`, `js/` | **the page.** The compatibility pair, the trace of the contract, and the wiring of the library. Native ES modules |
 | `js/contract-trace.js` | the same contract, printed: the line under the player and the table in the console |
 | `js/stock-player.js` | the off-the-shelf client of the compatibility pair: hls.js at its factory configuration, and none of the above |
 | `signalling/` | the asset-lists, as the SVTA Layout Controller emits them, with the URIs filled in |
 | `test/` | the tests of the layout resolution, over the six payloads of the tool |
 | `vendor/hls.min.js` | hls.js **1.7.2, unmodified** |
 | `server.mjs` | a static file server, and nothing else: no ad server, no APS |
-| `scripts/` | the content: download and package as HLS VOD |
+| `scripts/` | the content: download and package as HLS VOD. And the build of the library |
 | `content/` | the packaged output. Generated, gitignored |
 | `brand/` | Qualabs fonts, logo and favicon, on disk |
 | `CREDITS.md` | the CC BY attribution the footage requires |
@@ -143,6 +150,56 @@ where three concurrent sources are on screen at once, it turns the three of
 them on together. There is nothing in the data to do anything finer -- the
 tool's model has a `volume` per element and emits it in none of the six
 layouts, so a per-quadrant mix would be invented rather than signalled.
+
+## The library, and the page that uses it
+
+The library is `lib/`: the two layers, the piece that turns a `uri` into pixels,
+and the entry point that joins them. Everything else is the page.
+
+It is distributed as **one classic `<script src>` that defines a global**, with
+no bundler and no npm dependency. The sources stay as ES modules and
+`scripts/construir-libreria.sh` assembles them into
+`dist/qualabs-concurrent-hls.js` on every start, the same way the signalled
+playlist is written on every start. They stay separate for two reasons that are
+not taste: the seam of ADR 0003 is verified with a grep per file, and the tests
+import the pure functions of both layers.
+
+What a page writes to use it is a script tag,
+
+```html
+<script src="./dist/qualabs-concurrent-hls.js"></script>
+```
+
+and five lines:
+
+```js
+const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+const concurrent = QualabsConcurrentHls.attach(hls, {
+  container: document.getElementById('player')
+});
+hls.loadSource(src);
+hls.attachMedia(video);
+```
+
+The container is the box the composition lives in, and the media element has to
+be inside it: the library creates its own layer there, draws the boxes of the
+layout into it, and moves the primary content within it. From `attach` it gets
+back the contract of ADR 0003, which is what the trace on this page reads.
+
+`hlsConfig` is the one thing the library cannot fix afterwards. The interstitials
+machinery of hls.js is instantiated in the constructor (ADR 0002), so an instance
+built without that configuration arrives with the machinery already on. The
+library **verifies and warns**: it neither requires it nor leaves it at
+documentation, because with the machinery on the player schedules the traditional
+interstitial the same playlist carries and replaces the content with it, which
+looks exactly like an ordinary player working correctly. Nothing throws and
+nothing is on screen to notice. Throwing would be the wrong answer too: taking
+somebody's page down over a configuration he can fix in one line is a bigger
+promise than a plugin gets to make.
+
+The public surface is deliberately not frozen yet. ADR 0015 fixes it with the
+controls of the composition built and not before, because the controls are most
+of it.
 
 ## Four things that look like details and are not
 

@@ -1,13 +1,16 @@
 /* The look, adapted from the Qualabs kit vendored in ./brand/.
  *
- * There are two rules here that are not decoration. The first: .ads is
- * absolutely positioned over the <video> inside .player and takes no pointer
- * events, so the layer the concurrent experience draws into covers the picture
- * without swallowing the clicks that belong to the player underneath. The
- * second: the two panes get their identity from a colour and their live state
- * from a data attribute, so that somebody watching a recording with the sound
- * off can tell which player is which and what each one is doing at that
- * instant, without anybody explaining it. */
+ * There is one rule here that is not decoration: the two panes get their
+ * identity from a colour and their live state from a data attribute, so that
+ * somebody watching a recording with the sound off can tell which player is
+ * which and what each one is doing at that instant, without anybody explaining
+ * it.
+ *
+ * Nothing here styles the concurrent experience. The layer it is drawn into is
+ * created and styled by the library, inside the container this page gives it,
+ * because the way that layer stacks is an invariant of the renderer and not a
+ * choice of whoever writes the page (ADR 0015). What .player keeps is the frame
+ * around it: the aspect ratio, the black bed and the rounded corners. */
 
 :root {
   --q-teal-500: #37b4a7;
@@ -90,20 +93,6 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
 }
 
 .video { width: 100%; height: 100%; display: block; object-fit: contain; }
-
-/* Positioned, and deliberately with NO z-index: at `z-index: auto` this layer
- * is not a stacking context, so the ad boxes inside it and the primary <video>
- * -- which is its sibling and not its child -- compete in the same stacking
- * context and the zDepth of the layout is what decides who is on top. Closing
- * it (a z-index, a transform, a filter, an opacity below 1) would put every ad
- * above the picture, and there are layouts where the ad is the background. */
-.ads { position: absolute; inset: 0; pointer-events: none; }
-
-/* The renderer writes every box in pixels -- position, size, stacking order and
- * fill mode are all inline styles it computes from the layout. What is left
- * here is only what does not come from the layout: a black bed, so that the
- * first frame of the asset does not show the picture underneath through it. */
-.ads .ad { background: #000; }
 
 /* The live state of each pane, which is what makes a single frame of the
  * recording legible: while an ad is on, the pane's picture gets a ring and its

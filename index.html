@@ -37,14 +37,13 @@
 
   Both read the SAME URL. That is printed under each player on purpose.
 
-  #player  is the positioning context of the demo pane. Everything the
-           concurrent experience draws lives INSIDE it, as a sibling of the
-           <video>, because the element that goes fullscreen is the container
-           and anything outside it disappears the moment somebody presses the
-           fullscreen button.
-
-  #ads     is that layer. The renderer writes the boxes of the layout into it,
-           in pixels, one positioned <video> per ad asset.
+  #player  is the container the page hands to the library, and the only thing
+           it hands over besides the hls.js instance. Everything the concurrent
+           experience draws lives INSIDE it: the library creates its own layer
+           there, as a sibling of the <video>, writes the boxes of the layout
+           into it in pixels, and moves the primary content within it. Anything
+           outside the container disappears the moment somebody presses the
+           fullscreen button (ADR 0015).
 
   #ad-audio is the visible control of ADR 0010: the ad starts silent and the
            primary keeps its audio, so turning the ad's sound on is an explicit
@@ -54,9 +53,11 @@
            says is active right now. The console has the same thing with the
            boxes and the order of every element.
 
-  No bundler and no framework: native ES modules, and hls.js vendored in
-  ./vendor/ at 1.7.2 rather than pulled from a CDN, because it is the version
-  the code was read against and the version the measurements ran on (ADR 0002).
+  No bundler and no framework. The library is one classic <script src> that
+  defines a global, assembled from lib/ on every start (ADR 0015); this page's
+  own two files are native ES modules. hls.js is vendored in ./vendor/ at 1.7.2
+  rather than pulled from a CDN, because it is the version the code was read
+  against and the version the measurements ran on (ADR 0002).
 -->
 
 <div class="stage">
@@ -91,7 +92,6 @@
       </p>
       <div class="player" id="player">
         <video class="video" id="video" playsinline controls></video>
-        <div class="ads" id="ads" aria-hidden="true"></div>
       </div>
       <p class="state" id="demo-state"></p>
       <p class="hud" id="hud"></p>
@@ -113,6 +113,7 @@
 </div>
 
 <script src="./vendor/hls.min.js"></script>
+<script src="./dist/qualabs-concurrent-hls.js"></script>
 <script type="module" src="./js/app.js"></script>
 
 </body>

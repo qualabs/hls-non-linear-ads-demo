@@ -1,0 +1,31 @@
+# El corte de la libreria y la aplicacion de demo, verificado con grep (2026-09-04)
+
+## A. El corte del ADR 0003: el lado del renderizado no sabe una palabra del transporte
+
+Es el mismo grep de las T-06, T-07, T-09, T-10, T-11 y T-12 de la fase 01, con la
+ruta nueva del renderizado. Sigue dando cero: la mudanza no le enseño nada.
+
+$ /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js js/contract-trace.js css/player.css
+(sin salida: ningun hit; exit code 1)
+
+Y los contadores del lado que si sabe de transporte, para que el cero de arriba
+sea el resultado de una separacion y no de un archivo vacio:
+
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/signalling.js
+19
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/media.js
+6
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/concurrent-hls.js
+23
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/stock-player.js
+22
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/app.js
+14
+
+## B. El corte del ADR 0015: el lado de la libreria no nombra la demo
+
+Los terminos son los archivos de la pagina, sus identificadores del DOM, la
+palabra demo, y las dos formas de buscar un elemento en un documento ajeno.
+
+$ /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+(sin salida: ningun hit; exit code 1)

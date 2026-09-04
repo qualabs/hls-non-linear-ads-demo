@@ -853,3 +853,60 @@ de la demo que pregunta cuántos decoders hay, y que el asset-list cambie según
 el parámetro, que es trabajo del APS.
 
 Nada de código: el pase tocó `.project/` y nada más. Commit sin push.
+
+## 2026-09-04 — T-01 de la fase 02: la línea del ADR 0015, dibujada antes de construir
+
+El repositorio pasó a ser dos cosas. La librería es `lib/` —señalización,
+renderizado, el `attachAsset` que salió de `js/app.js` y un punto de entrada que
+los junta— y la demo es `index.html`, `css/` y `js/`. Es una mudanza y no un
+rediseño: los cinco breaks llegan a los mismos instantes que midió la T-12 de la
+fase 01, en una sola carga, sin un solo seek y sin un error de consola.
+
+**El empaquetado se resolvió con un paso que arma la librería** y no con un
+archivo escrito a mano. `scripts/construir-libreria.sh` concatena los cuatro
+archivos de `lib/`, saca los `import` y los `export`, envuelve en un IIFE y
+define `window.QualabsConcurrentHls`; `run.sh` lo corre en cada arranque, como
+ya corre el que escribe la playlist señalizada. El argumento no es de gusto: el
+grep del ADR 0003 es **por archivo**, así que una librería escrita como un solo
+archivo dejaría de ser verificable el mismo día en que se separa; y los quince
+tests importan las funciones puras de las dos capas como módulos ES, de manera
+que un archivo clásico obligaría a reescribirlos. Lo que protege la
+concatenación no es la expresión regular sino un `node --check` sobre una copia
+`.cjs`, donde un `import` sobreviviente o un nombre declarado dos veces son
+errores de sintaxis.
+
+**El `interstitialsController` del ADR 0002: la librería verifica y avisa.** No
+puede exigirlo —el controlador se instancia en el constructor de hls.js, así que
+cuando la instancia llega ya está decidido— y documentarlo no alcanza porque el
+error es silencioso: con la maquinaria encendida el player agenda el Date Range
+de clase Apple y reemplaza el contenido, o sea que el integrador ve un player
+normal funcionando bien. Tirar una excepción sería una promesa más grande de la
+que un plugin puede hacer sobre algo que se arregla en una línea. La librería
+entrega además la configuración (`QualabsConcurrentHls.hlsConfig`) para que el
+camino correcto sea un spread. Verificado en vivo con dos instancias, una de
+fábrica y una con la configuración.
+
+**La capa donde se dibuja pasó a ser de la librería.** Era un `<div id="ads">`
+que escribía la página y estilaba `css/player.css`, y esa regla lleva un
+invariante —sin `z-index`, para que el `zDepth` del layout decida el apilado—
+que es del renderizador y no del que escribe la página. Ahora la crea la
+librería adentro del contenedor, con las tres propiedades en línea.
+
+**La página del integrador son trece líneas**, ocho de JavaScript entre dos
+vallas de `js/app.js` y cinco de marcado. El mínimo son diez: `audioControl` y
+su botón son provisorios hasta la T-03, y `onResolved` es la traza de consola de
+esta página.
+
+Los dos greps dan cero: el del ADR 0003, que es el mismo comando de seis tasks
+de la fase 01 con la ruta nueva, y el del ADR 0015, que es nuevo. `npm test`,
+15/15. Commit sin push.
+
+**Tres cosas quedaron anotadas y no arregladas.** La primera: el `PHASE.md` de
+la fase y el ADR 0015 nombran `js/renderer.js:191` y la regla `.ads` de
+`css/player.css`, que después de esta task no existen; el ADR es un registro con
+fecha y se deja en pie, pero la mitigación del R2 del `PHASE.md` le da a la T-03
+una instrucción sobre un selector que ya no está. En el `TASKS.md`, que es el
+plan vivo, las rutas sí se siguieron hasta su lugar nuevo. La segunda: el
+`<video controls>` del primario sigue ahí, porque sacarlo es de la T-03. La
+tercera: el botón `#ad-audio` sigue siendo de la página y se le pasa a la
+librería como elemento, que es el único cruce de la línea que queda vivo.

@@ -14,7 +14,7 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
 
 | id   | brief                                                          | status  | plan | evidence |
 | ---- | -------------------------------------------------------------- | ------- | ---- | -------- |
-| T-01 | El corte: la librería y la aplicación de demo como dos cosas     | planned | —    | —        |
+| T-01 | El corte: la librería y la aplicación de demo como dos cosas     | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-01/` |
 | T-02 | El contrato en `docs/`, ampliado con los rangos del programa     | planned | —    | —        |
 | T-03 | Los controles de la composición: barra, pausa, audio y fullscreen | planned | —    | —        |
 | T-04 | Los rangos del programa marcados en la barra                     | planned | —    | —        |
@@ -77,7 +77,7 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
   están todos los rangos del programa y no qué está activo ahora. **Dice de
   qué clase es cada rango**, porque los colores tienen dueño y la misma
   playlist lleva un Date Range de clase Apple por break que la capa hoy
-  descarta por clase (`js/signalling.js:125`). Y **no trae el largo total como
+  descarta por clase (`lib/signalling.js:125`). Y **no trae el largo total como
   dato propio**, porque el largo se relee y no se guarda (ADR 0016).
 
   Hay un detalle del modelo que hay que resolver y no inventar: hoy las
@@ -86,7 +86,7 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
   con los Date Ranges escritos en la media playlist llegan todos en el primer
   `LEVEL_UPDATED` y cada asset-list se pide ahí mismo, pero eso es una
   propiedad del ADR 0005 y no del contrato, y el contrato tiene que decir qué
-  promete. Punto de partida: el contrato de la T-06, `js/signalling.js`, y los
+  promete. Punto de partida: el contrato de la T-06, `lib/signalling.js`, y los
   ADR 0003, 0005, 0014 y 0016. Restricción: el renderizado sigue sin saber una
   palabra del transporte y el grep del corte sigue dando cero. Depende de
   T-01.
@@ -108,7 +108,7 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
 
   **Los controles nativos sobre el primario dejan de estar** (`controls` en
   `index.html:93`). La razón está medida en el código y no es de gusto:
-  `js/renderer.js:191` escala el primario con un `transform` y los controles
+  `lib/renderer.js:197` escala el primario con un `transform` y los controles
   nativos son parte del elemento, así que escalan con él; y con más de un
   `<video>` en pantalla controlan un pedazo y no la composición.
 
@@ -150,7 +150,7 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
   `css/player.css` la deja deliberadamente sin `z-index` para que el `zDepth`
   del layout decida, y cerrarla pondría todos los avisos arriba de la imagen.
 
-  Punto de partida: los ADR 0015 y 0016, `js/renderer.js`, `css/player.css`,
+  Punto de partida: los ADR 0015 y 0016, `lib/renderer.js`, `css/player.css`,
   `index.html`, y las dos imágenes de referencia que mandó Nicolás.
   Restricción: **no se toca el pane de fábrica**, que conserva sus controles
   nativos porque es un cliente de mercado y así se ve un cliente de mercado
@@ -180,7 +180,7 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
   **violeta**. El naranja fuerte queda descartado por dos razones: al lado del
   amarillo se confunde a distancia y esto se ve en pantalla grande, y en este
   repositorio el ámbar `--q-amber-400` ya significa otra cosa, que es el pane
-  donde el contenido fue reemplazado (`css/player.css:62`). Es reversible: es
+  donde el contenido fue reemplazado (`css/player.css:65`). Es reversible: es
   un valor.
 
   El violeta no está en el brand kit de Qualabs, que es teal, naranja, tinta y
@@ -210,7 +210,7 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
   elemento sale del asset list, y el default cuando el campo no viene es
   silencio.
 - **Qué tiene que cubrir:** el renderizador deja de ignorar el campo a
-  propósito (`js/renderer.js:76-82`), y con él se va el comentario que lo
+  propósito (`lib/renderer.js:77-82`), y con él se va el comentario que lo
   explica.
 
   **El default de 0 es de los elementos del aviso y no del primario.**
@@ -236,7 +236,7 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
   instrumento no anda en esta máquina y, aunque anduviera, graba la mezcla y
   no dice cuál de los elementos suena.
 
-  Punto de partida: el ADR 0014, `js/renderer.js`, `js/signalling.js` y
+  Punto de partida: el ADR 0014, `lib/renderer.js`, `lib/signalling.js` y
   `signalling/asset-list-multiView.json`. Depende de T-03.
 - **Definición de done:** con el break de `multiView` en pantalla, la lectura
   por elemento muestra el de abajo a la izquierda en 100 y los otros tres en

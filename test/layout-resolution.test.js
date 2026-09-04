@@ -32,8 +32,8 @@ import {
   activeAt,
   DEFAULT_VOLUME,
   FULL_FRAME
-} from '../js/signalling.js';
-import { boxToPixels } from '../js/renderer.js';
+} from '../lib/signalling.js';
+import { boxToPixels } from '../lib/renderer.js';
 
 const M3 = JSON.parse(
   readFileSync(new URL('../.project/phases/01-poc-web-hlsjs/tasks/T-03/m3-resultados.json', import.meta.url))
