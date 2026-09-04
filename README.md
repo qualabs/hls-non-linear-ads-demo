@@ -19,6 +19,15 @@ re-package without re-downloading, `npm run content`.
 
 Requirements: node and ffmpeg. There are no npm dependencies.
 
+The concurrent Date Range points at the `cornerOverlay` asset-list. To signal
+another layout, name it when the playlist is written -- there is one asset-list
+per layout in `signalling/`:
+
+```bash
+./scripts/senalizar-contenido.sh 20 squeezebackLShape   # break at 20 s
+npm run serve
+```
+
 ## Test it
 
 ```bash

@@ -1,0 +1,964 @@
+{
+  "al_cruzar": {
+    "time": 21.47,
+    "barras": [
+      {
+        "id": "adBarVertical",
+        "currentTime": 1.24,
+        "paused": false,
+        "readyState": 4,
+        "w": 1280,
+        "h": 720
+      },
+      {
+        "id": "adBarHorizontal",
+        "currentTime": 1.22,
+        "paused": false,
+        "readyState": 4,
+        "w": 1280,
+        "h": 720
+      }
+    ],
+    "contract": "t=21.4s \u00b7 squeezebackLShape \u00b7 z0 primaryContent [0 40 40 0] \u00b7 z1 adBarVertical [0 0 0 60] \u00b7 z2 adBarHorizontal [60 0 0 0]",
+    "paneState": "ad"
+  },
+  "geometria": {
+    "time": 29.08,
+    "playerArea": {
+      "w": 715,
+      "h": 402.19,
+      "aspecto": 1.7778
+    },
+    "fillMode": "cover",
+    "elements": [
+      {
+        "element": "primaryContent",
+        "primary": true,
+        "zDepth": 0,
+        "box": {
+          "top": 0,
+          "right": 40,
+          "bottom": 40,
+          "left": 0
+        },
+        "uri": null,
+        "mediaType": null,
+        "esperadoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 429,
+          "height": 241.3125
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 429,
+          "height": 241.3125
+        },
+        "deltaMaxPx": 0,
+        "objectFit": "cover",
+        "zIndex": "0",
+        "position": "relative",
+        "transform": "matrix(0.6, 0, 0, 0.6, 0, 0)",
+        "llenado": {
+          "aspectoFuente": 1.7778,
+          "aspectoCaja": 1.7778,
+          "fuentePx": {
+            "w": 1280,
+            "h": 720
+          },
+          "visibleDeLaFuentePx": {
+            "w": 1280,
+            "h": 720
+          },
+          "recortePorCiento": 0,
+          "ejeRecortado": "ninguno",
+          "estiramientoSiFillPorCiento": 0
+        },
+        "video": {
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 29.08,
+          "muted": true,
+          "w": 1280,
+          "h": 720
+        }
+      },
+      {
+        "element": "adBarVertical",
+        "primary": false,
+        "zDepth": 1,
+        "box": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 60
+        },
+        "uri": "/content/adB/index.m3u8",
+        "mediaType": "application/vnd.apple.mpegurl",
+        "esperadoPx": {
+          "left": 429,
+          "top": 0,
+          "width": 286,
+          "height": 402.1875
+        },
+        "medidoPx": {
+          "left": 429,
+          "top": 0,
+          "width": 286,
+          "height": 402.1875
+        },
+        "deltaMaxPx": 0,
+        "objectFit": "cover",
+        "zIndex": "1",
+        "position": "absolute",
+        "transform": "none",
+        "llenado": {
+          "aspectoFuente": 1.7778,
+          "aspectoCaja": 0.7111,
+          "fuentePx": {
+            "w": 1280,
+            "h": 720
+          },
+          "visibleDeLaFuentePx": {
+            "w": 512,
+            "h": 720
+          },
+          "recortePorCiento": 60,
+          "ejeRecortado": "horizontal",
+          "estiramientoSiFillPorCiento": 60
+        },
+        "video": {
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 8.98,
+          "muted": true,
+          "w": 1280,
+          "h": 720
+        }
+      },
+      {
+        "element": "adBarHorizontal",
+        "primary": false,
+        "zDepth": 2,
+        "box": {
+          "top": 60,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "uri": "/content/adA/index.m3u8",
+        "mediaType": "application/vnd.apple.mpegurl",
+        "esperadoPx": {
+          "left": 0,
+          "top": 241.3125,
+          "width": 715,
+          "height": 160.875
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 241.3125,
+          "width": 715,
+          "height": 160.875
+        },
+        "deltaMaxPx": 0,
+        "objectFit": "cover",
+        "zIndex": "2",
+        "position": "absolute",
+        "transform": "none",
+        "llenado": {
+          "aspectoFuente": 1.7778,
+          "aspectoCaja": 4.4444,
+          "fuentePx": {
+            "w": 1280,
+            "h": 720
+          },
+          "visibleDeLaFuentePx": {
+            "w": 1280,
+            "h": 288
+          },
+          "recortePorCiento": 60,
+          "ejeRecortado": "vertical",
+          "estiramientoSiFillPorCiento": 150
+        },
+        "video": {
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 8.98,
+          "muted": true,
+          "w": 1280,
+          "h": 720
+        }
+      }
+    ],
+    "type": "squeezebackLShape",
+    "id": "AD-1-CONCURRENT",
+    "window": [
+      20,
+      32
+    ]
+  },
+  "llenado_modos": {
+    "objectFitAhora": "fill",
+    "rect": {
+      "w": 286,
+      "h": 402.19
+    },
+    "fuente": {
+      "w": 1280,
+      "h": 720
+    },
+    "cuadro": 10.31
+  },
+  "geometria_resize": {
+    "time": 31.831,
+    "playerArea": {
+      "w": 435,
+      "h": 244.69,
+      "aspecto": 1.7778
+    },
+    "fillMode": "cover",
+    "elements": [
+      {
+        "element": "primaryContent",
+        "primary": true,
+        "zDepth": 0,
+        "box": {
+          "top": 0,
+          "right": 40,
+          "bottom": 40,
+          "left": 0
+        },
+        "uri": null,
+        "mediaType": null,
+        "esperadoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 261,
+          "height": 146.8125
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 261,
+          "height": 146.8125
+        },
+        "deltaMaxPx": 0,
+        "objectFit": "cover",
+        "zIndex": "0",
+        "position": "relative",
+        "transform": "matrix(0.6, 0, 0, 0.6, 0, 0)",
+        "llenado": {
+          "aspectoFuente": 1.7778,
+          "aspectoCaja": 1.7778,
+          "fuentePx": {
+            "w": 1280,
+            "h": 720
+          },
+          "visibleDeLaFuentePx": {
+            "w": 1280,
+            "h": 720
+          },
+          "recortePorCiento": 0,
+          "ejeRecortado": "ninguno",
+          "estiramientoSiFillPorCiento": 0
+        },
+        "video": {
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 31.83,
+          "muted": true,
+          "w": 1280,
+          "h": 720
+        }
+      },
+      {
+        "element": "adBarVertical",
+        "primary": false,
+        "zDepth": 1,
+        "box": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 60
+        },
+        "uri": "/content/adB/index.m3u8",
+        "mediaType": "application/vnd.apple.mpegurl",
+        "esperadoPx": {
+          "left": 261,
+          "top": 0,
+          "width": 174,
+          "height": 244.6875
+        },
+        "medidoPx": {
+          "left": 261,
+          "top": 0,
+          "width": 174,
+          "height": 244.6875
+        },
+        "deltaMaxPx": 0,
+        "objectFit": "cover",
+        "zIndex": "1",
+        "position": "absolute",
+        "transform": "none",
+        "llenado": {
+          "aspectoFuente": 1.7778,
+          "aspectoCaja": 0.7111,
+          "fuentePx": {
+            "w": 1280,
+            "h": 720
+          },
+          "visibleDeLaFuentePx": {
+            "w": 512,
+            "h": 720
+          },
+          "recortePorCiento": 60,
+          "ejeRecortado": "horizontal",
+          "estiramientoSiFillPorCiento": 60
+        },
+        "video": {
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 11.75,
+          "muted": true,
+          "w": 1280,
+          "h": 720
+        }
+      },
+      {
+        "element": "adBarHorizontal",
+        "primary": false,
+        "zDepth": 2,
+        "box": {
+          "top": 60,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "uri": "/content/adA/index.m3u8",
+        "mediaType": "application/vnd.apple.mpegurl",
+        "esperadoPx": {
+          "left": 0,
+          "top": 146.8125,
+          "width": 435,
+          "height": 97.875
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 146.8125,
+          "width": 435,
+          "height": 97.875
+        },
+        "deltaMaxPx": 0,
+        "objectFit": "cover",
+        "zIndex": "2",
+        "position": "absolute",
+        "transform": "none",
+        "llenado": {
+          "aspectoFuente": 1.7778,
+          "aspectoCaja": 4.4444,
+          "fuentePx": {
+            "w": 1280,
+            "h": 720
+          },
+          "visibleDeLaFuentePx": {
+            "w": 1280,
+            "h": 288
+          },
+          "recortePorCiento": 60,
+          "ejeRecortado": "vertical",
+          "estiramientoSiFillPorCiento": 150
+        },
+        "video": {
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 11.75,
+          "muted": true,
+          "w": 1280,
+          "h": 720
+        }
+      }
+    ],
+    "type": "squeezebackLShape",
+    "id": "AD-1-CONCURRENT",
+    "window": [
+      20,
+      32
+    ]
+  },
+  "zdepth": {
+    "sonda": {
+      "construido": true,
+      "primario": {
+        "position": "relative",
+        "zIndex": "1",
+        "transform": "matrix(0.6, 0, 0, 0.6, 143, 80.4375)"
+      },
+      "detras": {
+        "zIndex": "0"
+      }
+    },
+    "geometria": {
+      "time": 33.485,
+      "playerArea": {
+        "w": 715,
+        "h": 402.19,
+        "aspecto": 1.7778
+      },
+      "fillMode": "cover",
+      "elements": [
+        {
+          "element": "adDetras",
+          "primary": false,
+          "zDepth": 0,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "uri": "/content/no-es-un-asset.mp4",
+          "mediaType": "video/mp4",
+          "esperadoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 715,
+            "height": 402.1875
+          },
+          "medidoPx": {
+            "left": 0,
+            "top": 0,
+            "width": 715,
+            "height": 402.1875
+          },
+          "deltaMaxPx": 0,
+          "objectFit": "cover",
+          "zIndex": "0",
+          "position": "absolute",
+          "transform": "none",
+          "llenado": null,
+          "video": {
+            "readyState": 0,
+            "paused": true,
+            "currentTime": 0.5,
+            "muted": true,
+            "w": 0,
+            "h": 0
+          }
+        },
+        {
+          "element": "primaryContent",
+          "primary": true,
+          "zDepth": 1,
+          "box": {
+            "top": 20,
+            "right": 20,
+            "bottom": 20,
+            "left": 20
+          },
+          "uri": null,
+          "mediaType": null,
+          "esperadoPx": {
+            "left": 143,
+            "top": 80.4375,
+            "width": 429,
+            "height": 241.3125
+          },
+          "medidoPx": {
+            "left": 143,
+            "top": 80.4375,
+            "width": 429,
+            "height": 241.3125
+          },
+          "deltaMaxPx": 0,
+          "objectFit": "cover",
+          "zIndex": "1",
+          "position": "relative",
+          "transform": "matrix(0.6, 0, 0, 0.6, 143, 80.4375)",
+          "llenado": {
+            "aspectoFuente": 1.7778,
+            "aspectoCaja": 1.7778,
+            "fuentePx": {
+              "w": 1280,
+              "h": 720
+            },
+            "visibleDeLaFuentePx": {
+              "w": 1280,
+              "h": 720
+            },
+            "recortePorCiento": 0,
+            "ejeRecortado": "ninguno",
+            "estiramientoSiFillPorCiento": 0
+          },
+          "video": {
+            "readyState": 4,
+            "paused": false,
+            "currentTime": 33.49,
+            "muted": true,
+            "w": 1280,
+            "h": 720
+          }
+        }
+      ],
+      "type": "squeezebackFrame",
+      "id": "zDepthProbe",
+      "window": [
+        32.17,
+        122.17
+      ]
+    },
+    "sin_posicionar": {
+      "position": "static",
+      "zIndex": "1",
+      "transform": "matrix(0.6, 0, 0, 0.6, 143, 80.4375)"
+    }
+  },
+  "despues_de_la_ventana": {
+    "avisos": 0,
+    "primaryStyle": null,
+    "primaryTransform": "none",
+    "primarioPx": {
+      "w": 715,
+      "h": 402.19
+    },
+    "areaPx": {
+      "w": 715,
+      "h": 402.19
+    },
+    "contract": "t=40.2s \u00b7 no concurrent experience"
+  },
+  "red": [
+    {
+      "resp": "http://localhost:8080/",
+      "status": 200,
+      "ct": "text/html; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/brand/fonts-embedded.css",
+      "status": 200,
+      "ct": "text/css; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/css/player.css",
+      "status": 200,
+      "ct": "text/css; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/js/app.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/vendor/hls.min.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "chrome-extension://cimiefiiaegbelhefglklhhakcgmhkai/page-script.js",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "resp": "chrome-extension://ailoabdmgclmfmhdagmlohpjlbpffblp/Roboto-Regular.woff2",
+      "status": 200,
+      "ct": "application/octet-stream"
+    },
+    {
+      "resp": "http://localhost:8080/js/signalling.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/js/contract-trace.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/js/stock-player.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/js/renderer.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/con-daterange.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/con-daterange.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/signalling/asset-list-squeezebackLShape.json",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "blob:http://localhost:8080/a8f639b8-4471-4738-a098-a6b938622f0d",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg009.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg010.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg011.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg012.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg013.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg006.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg014.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg007.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg015.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg016.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg008.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg017.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg009.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg018.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg010.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=fde386f1-b0c8-4570-919d-e00dc2fa0339",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg019.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg020.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg021.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg022.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg023.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg024.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg025.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg026.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg027.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg028.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg029.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg030.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg031.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/no-es-un-asset.mp4",
+      "status": 404,
+      "ct": "text/plain"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg032.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg033.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg034.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg035.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    }
+  ],
+  "consola": [
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape.json"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackLShape#AD-1-CONCURRENT: 3 elements, window 20.00s -> 32.00s"
+    },
+    {
+      "type": "error",
+      "text": "[hls] error networkError aborted fatal: false"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=19.01s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=20.07s  ACTIVE squeezebackLShape#AD-1-CONCURRENT  window 20.00s -> 32.00s  3 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=32.00s  nothing active"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=32.80s  ACTIVE squeezebackFrame#zDepthProbe  window 32.17s -> 122.17s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=34.66s  nothing active"
+    }
+  ]
+}

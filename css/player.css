@@ -91,6 +91,12 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
 
 .video { width: 100%; height: 100%; display: block; object-fit: contain; }
 
+/* Positioned, and deliberately with NO z-index: at `z-index: auto` this layer
+ * is not a stacking context, so the ad boxes inside it and the primary <video>
+ * -- which is its sibling and not its child -- compete in the same stacking
+ * context and the zDepth of the layout is what decides who is on top. Closing
+ * it (a z-index, a transform, a filter, an opacity below 1) would put every ad
+ * above the picture, and there are layouts where the ad is the background. */
 .ads { position: absolute; inset: 0; pointer-events: none; }
 
 /* The renderer writes every box in pixels -- position, size, stacking order and

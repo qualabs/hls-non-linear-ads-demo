@@ -1,0 +1,26 @@
+# El corte entre las dos capas, con el mecanismo de squeezeback (2026-09-04)
+
+$ /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." js/renderer.js js/contract-trace.js css/player.css
+(sin salida: ningun hit; exit code 1)
+
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/signalling.js
+19
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/stock-player.js
+22
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/app.js
+30
+
+Es el mismo grep de la T-06, la T-07 y la T-09, y los tres contadores de la
+capa de senalizacion son los mismos numeros: esta task no toco esos archivos.
+
+Lo que cambio del lado del renderizado es js/renderer.js, que ahora mueve el
+contenido primario con una transformacion, y css/player.css, con el comentario
+de por que la capa de avisos no lleva z-index. Ninguno de los dos nombra el
+transporte: lo que el renderizado sabe es que hay un elemento que ya esta en
+pantalla y que hay que llevarlo a una caja, y no de que protocolo salio esa
+caja.
+
+Los datos del layout que agrega la task viven del otro lado, que es donde
+corresponde: signalling/asset-list-squeezebackLShape.json es el payload de la
+herramienta de SVTA con las URIs de los assets puestas, y el interruptor de
+cual layout senalizar esta en scripts/senalizar-contenido.sh.

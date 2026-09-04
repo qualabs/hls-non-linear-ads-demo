@@ -527,3 +527,66 @@ mercado mientras reemplaza es el del aviso y no el del programa. Lo que
 distingue un estado del otro no es el número sino de dónde sale, así que
 la etiqueta de la izquierda se arma con `interstitialsManager.playingItem`,
 que es la misma propiedad que ya había leído la T-02.
+
+## 2026-09-04 — T-10: el mecanismo de squeezeback
+
+El segundo de los tres mecanismos anda, y con él queda parado el escalón
+3 de la escalera. Es el primero que **mueve el contenido primario**: el
+video se achica con una transformación de CSS a la caja que declara su
+`primaryContent` y las dos barras del `squeezebackLShape` se dibujan en
+el espacio liberado. En el renderizador el método que coloca se partió
+en dos, porque los dos tipos de elemento llegan a su caja desde lugares
+distintos: un nodo del aviso lo crea el renderizador y la caja **es** su
+geometría, mientras el primario ya está en pantalla y lo único que hay
+que hacer con él es moverlo. El layout entra por datos, un asset-list
+más en `signalling/`, y el interruptor de cuál señalizar es un argumento
+del script que escribe la playlist.
+
+La geometría vuelve a dar cero: 0,00 px de diferencia entre la caja que
+pidió el contrato y la que dibuja el navegador en los tres elementos,
+con el área del player en 715x402,19, y otros 0,00 px después de un
+resize a 435x244,69. El mismo cero de la T-03 y de la T-07, ahora con el
+primario movido por una transformación en vez de redimensionado.
+
+El layout se eligió porque pone a prueba la política de llenado, y la
+prueba salió limpia: las dos barras son las cajas más lejanas del
+aspecto del asset entre las quince que midió la T-03 —0,7111 y 4,4444
+contra un asset de 1,7778— y con recorte centrado cada una deja afuera
+el 60 % del asset sin estirar nada. Los 60 % y 150 % de deformación que
+la T-03 calculó para esas mismas cajas son lo que costaría llenarlas
+estirando, y no se paga. Entre el mismo cuadro dibujado con recorte y
+dibujado estirado cambia el 55,27 % de los píxeles, así que la constante
+del ADR 0013 no es decorativa.
+
+El detalle de apilado del que había que cuidarse muerde de verdad, y lo
+que lo evita es una palabra: `position`. Una transformación crea un
+contexto de apilado propio pero no posiciona el elemento, y `z-index` en
+un elemento estático se ignora, así que un primario achicado solamente
+con la transformación pierde su `zDepth`. Se midió con la nota que la
+T-07 dejó para esta task, y con el caso que ningún layout ejercitaba:
+una experiencia sintética con el aviso detrás del primario, el de atrás
+pintado de un color. Con el primario posicionado ese color ocupa el
+63,85 % del cuadro, que es exactamente el 64 % que queda afuera de su
+caja; sacándole el `position` pasa al 99,73 % y el contenido primario
+desaparece detrás del aviso. La nota de la T-07 queda cerrada.
+
+Y aparece un límite del mecanismo que el ADR 0001 no dice: la
+transformación solo achica el primario sin deformarlo mientras su caja
+conserve la relación de aspecto del área del player, porque si no la
+conserva la escala es distinta en cada eje y el modo de llenado no puede
+salvarla —la transformación escala lo que `object-fit` ya dibujó—. La
+nota final del ADR 0013, que el recorte nunca le toca al primario, es
+cierta en los seis payloads de la herramienta, pero la razón es más
+fuerte que lo que el ADR dice: con este mecanismo la política de
+recorte no llega al primario. El renderizador avisa en vez de deformar
+en silencio.
+
+Dos cosas quedan anotadas para más adelante. El invariante que sostiene
+el orden no lo cubre ningún test: los 15 de la T-08 son lógica pura
+sobre la resolución del layout, y esto solo falla en pantalla. Y la
+elección de creativos de la T-12 gana un criterio: la primera corrida
+del layout dio un squeezeback con las dos barras casi negras, porque uno
+de los assets tiene una luminancia media de 7 a 30 sobre 255 en sus doce
+segundos, y una barra negra no permite ver si el aviso está deformado.
+No alcanza con que el recorte no se coma nada importante; el cuadro
+también tiene que tener luz para que se lea en cámara.
