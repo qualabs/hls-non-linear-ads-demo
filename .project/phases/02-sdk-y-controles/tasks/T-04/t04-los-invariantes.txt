@@ -1,0 +1,88 @@
+# Los invariantes de la T-04, verificados y no afirmados (2026-09-04)
+
+## A. El corte del ADR 0003: el lado del renderizado no sabe una palabra del transporte
+
+La lista de terminos tal cual la corrio la T-03 YA NO DA CERO, y el hallazgo es
+de la lista y no del codigo: los cinco hits son el valor 'interstitial' del campo
+`kind` del contrato, su color, su carril y su tooltip. El contrato de la T-02 dice
+que eso es exactamente lo que cruza la costura --"lo que cruza es la clase de
+rango y no la clase del transporte"--, asi que el termino quedo viejo el dia que
+la consulta de los rangos entro al contrato.
+
+$ /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js js/contract-trace.js css/player.css
+lib/controls.js:21:// or 'interstitial' -- which the contract carries on purpose, because the two
+lib/controls.js:60:  interstitial: '#ffcc00'
+lib/controls.js:93:  interstitial: {
+lib/controls.js:96:    title: 'traditional interstitial: where a client already in the market replaces the content'
+lib/controls.js:238:  background: ${RANGE_COLOURS.interstitial};
+(cinco hits; exit code 0)
+
+La misma lista SIN ese termino, que es la que mide lo que el invariante quiere
+medir --que el transporte no cruzo--, sigue dando cero:
+
+$ /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|Hls\." lib/renderer.js lib/controls.js js/contract-trace.js css/player.css
+(sin salida: ningun hit; exit code 1)
+
+Y los contadores del lado que si sabe de transporte, sin cambios respecto de la
+T-03: esta task no movio nada de ese lado.
+
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/signalling.js
+34
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/media.js
+6
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/concurrent-hls.js
+23
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/stock-player.js
+22
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/app.js
+14
+
+## B. El corte del ADR 0015: el lado de la libreria no nombra la aplicacion
+
+Da cero, y en el camino corrigio algo: la primera version del comentario de los
+colores explicaba el descarte del naranja con "en este demo el ambar ya significa
+otra cosa", que es cierto y es de esta pagina y no de la libreria. El grep lo
+encontro, la razon se mudo al documento de la task, y en el codigo quedo la razon
+que si es de los colores: al lado del amarillo el naranja deja de ser otro color
+a distancia.
+
+$ /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+(sin salida: ningun hit; exit code 1)
+
+## C. Los tests siguen pasando
+
+La task no agrega tests: la aritmetica que agrega --`rangeSpan`-- la cubre la
+T-06, que la tiene enumerada, y por eso queda pura y exportada. Lo que esto
+verifica es que pasarle el proveedor a los controles no rompio nada de lo que ya
+estaba cubierto.
+
+$ npm test
+i tests 15
+i suites 0
+i pass 15
+i fail 0
+i cancelled 0
+i skipped 0
+i todo 0
+i duration_ms 131.322595
+
+## D. La pagina del integrador
+
+Sin cambios: los marcadores son de la libreria y no agregan una linea a lo que un
+tercero escribe. Sigue en once lineas, siete de codigo y cuatro de comentario.
+
+$ awk '/^\/\/ =====/{n++; next} n==1{print}' js/app.js | sed '/^$/d' | wc -l
+11
+
+## E. La libreria construida
+
+$ ./scripts/construir-libreria.sh
+construir-libreria: dist/qualabs-concurrent-hls.js (1323 lines, global QualabsConcurrentHls)
+
+## F. La consola de la corrida
+
+Sin warnings ni errores. El aviso que `paintRanges` emite para un `kind` sin
+carril no aparece, que es lo correcto: las dos clases del recorrido tienen carril.
+
+$ (campo "consola" de t04-la-medicion.json)
+[]

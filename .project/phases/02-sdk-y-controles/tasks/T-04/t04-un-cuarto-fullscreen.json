@@ -1,0 +1,135 @@
+{
+  "captura": "t04-5-fullscreen.png",
+  "reducida": "t04-6-fullscreen-un-cuarto.png",
+  "tamano": "480x225",
+  "tamanoOriginal": "1920x901",
+  "alturaDeLasMarcasEnLaReducida": {
+    "marca": 2.0,
+    "cue": 2.0,
+    "anchoDeCadaBreak": 29.4
+  },
+  "filasLeidas": {
+    "riel (marca concurrente)": 217,
+    "carril de abajo (cue de interstitial)": 220
+  },
+  "breaks": [
+    {
+      "break": 1,
+      "x": 77,
+      "declarado": {
+        "marca": "rgb(162, 115, 255)",
+        "cue": "rgb(255, 204, 0)"
+      },
+      "leidoEnLaReducida": {
+        "marca": [
+          173,
+          122,
+          255
+        ],
+        "cue": [
+          245,
+          196,
+          3
+        ]
+      },
+      "distanciaRgbEntreLosDos": 272.3
+    },
+    {
+      "break": 2,
+      "x": 139,
+      "declarado": {
+        "marca": "rgb(162, 115, 255)",
+        "cue": "rgb(255, 204, 0)"
+      },
+      "leidoEnLaReducida": {
+        "marca": [
+          173,
+          122,
+          255
+        ],
+        "cue": [
+          245,
+          196,
+          3
+        ]
+      },
+      "distanciaRgbEntreLosDos": 272.3
+    },
+    {
+      "break": 3,
+      "x": 200,
+      "declarado": {
+        "marca": "rgb(162, 115, 255)",
+        "cue": "rgb(255, 204, 0)"
+      },
+      "leidoEnLaReducida": {
+        "marca": [
+          169,
+          119,
+          255
+        ],
+        "cue": [
+          247,
+          197,
+          4
+        ]
+      },
+      "distanciaRgbEntreLosDos": 274.2
+    },
+    {
+      "break": 4,
+      "x": 261,
+      "declarado": {
+        "marca": "rgb(162, 115, 255)",
+        "cue": "rgb(255, 204, 0)"
+      },
+      "leidoEnLaReducida": {
+        "marca": [
+          173,
+          122,
+          255
+        ],
+        "cue": [
+          246,
+          196,
+          3
+        ]
+      },
+      "distanciaRgbEntreLosDos": 272.6
+    },
+    {
+      "break": 5,
+      "x": 322,
+      "declarado": {
+        "marca": "rgb(162, 115, 255)",
+        "cue": "rgb(255, 204, 0)"
+      },
+      "leidoEnLaReducida": {
+        "marca": [
+          170,
+          120,
+          255
+        ],
+        "cue": [
+          247,
+          197,
+          4
+        ]
+      },
+      "distanciaRgbEntreLosDos": 273.6
+    }
+  ],
+  "fueraDeUnBreak": {
+    "x": 389,
+    "riel": [
+      90,
+      89,
+      88
+    ],
+    "carrilDeAbajo": [
+      8,
+      7,
+      5
+    ]
+  }
+}
