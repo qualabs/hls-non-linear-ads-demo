@@ -27,7 +27,7 @@ algo:
 | T-06 | La capa de señalización y el contrato con el renderizado            | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-06/`  |
 | T-07 | El mínimo: un cornerOverlay con la cadena completa a la vista       | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-07/`  |
 | T-08 | Tests de la resolución del layout                                   | done    | —    | `test/layout-resolution.test.js` y `.project/phases/01-poc-web-hlsjs/tasks/T-08/` |
-| T-09 | El par de compatibilidad en la página de la demo                    | pending | —    | —                                              |
+| T-09 | El par de compatibilidad en la página de la demo                    | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-09/`  |
 | T-10 | El mecanismo de squeezeback                                         | pending | —    | —                                              |
 | T-11 | El mecanismo de multiview                                           | pending | —    | —                                              |
 | T-12 | Los cinco layouts en un recorrido grabable                          | pending | —    | —                                              |
@@ -452,6 +452,67 @@ algo:
   concurrente encima.
 - **nivel de verificación:** bajo. Es interfaz, y lo que podía fallar por
   debajo ya lo confirmó la T-02.
+- **Resultado:** el cliente de mercado es `js/stock-player.js` —una instancia de
+  hls.js a la que no se le pasa una sola opción, sin el proveedor de la T-06 y
+  sin el renderizador de la T-07— y `js/app.js` la crea con **la misma constante
+  `SRC`** que carga la instancia de la demo, que es el argumento entero. La
+  página quedó en dos paneles del mismo tamaño, cada uno con su nombre de rol,
+  su línea de configuración, la clase que se queda y la clase que ignora, una
+  línea de estado en vivo y su propio HUD con la versión, el manager de
+  interstitials y la URL que está reproduciendo.
+  **El instante está atrapado en una sola captura,
+  `t09-el-par-en-el-mismo-instante.png`**: a los 20,81 s del primario la
+  instancia de la demo sigue en el contenido con el `cornerOverlay` encima
+  —ventana 20 a 32, el aviso a 0,68 s— y la de fábrica está a 0,6 s del aviso
+  lineal `AD-1-LINEAR` con el contenido fuera de la pantalla. Sin ningún seek:
+  las dos arrancan de cero y cruzan el `START-DATE` reproduciendo, que es lo que
+  va a pasar en la grabación.
+  Lo que la T-02 midió se sostiene ahora que comparten página, y sostenido es
+  literal: **las dos instancias reciben los dos Date Ranges completos**, con
+  todos sus atributos y con `isInterstitial` en `true` para la clase de Apple y
+  en `false` para la nuestra en las dos; la de fábrica agenda **un solo** evento,
+  `AD-1-LINEAR`; y la de la demo tiene el manager de interstitials en `null`.
+  **La playlist se sirvió exactamente dos veces, una por cliente** —el mismo
+  `/content/primary/con-daterange.m3u8`—, y en la red están los segmentos de los
+  dos avisos, `adA` para el lineal y `adB` para el concurrente. Sesenta y un
+  respuestas, las sesenta y una 200, y la consola sin un solo error ni warning.
+  **Las dos instancias no interfirieron en nada.** Con los tres elementos
+  decodificando a la vez —el primario de la demo, el aviso encima, y el aviso
+  lineal de la de fábrica— los tres avanzan al 100,0 % del reloj de pared, a 30,0
+  cuadros por segundo, con **cero cuadros descartados** y sin errores de ninguna
+  de las dos instancias. Es el mismo resultado de la T-01, ahora con un
+  controlador de interstitials encendido en una de ellas. El corte entre capas se
+  mantiene: el mismo grep de la T-06 y la T-07, cero hits del lado del
+  renderizado.
+- **Cuatro cosas que el bloque no tenía previstas.** La primera es que **esta
+  task no agregó nada de señalización**. El bloque dice que la playlist y los dos
+  asset-list de la T-02 sirven tal cual, y en realidad ya estaban servidos: el
+  `EXT-X-DATERANGE` de clase Apple lo escribe `scripts/senalizar-contenido.sh`
+  desde la T-06 y `signalling/asset-list-linear.json` está en el repo desde
+  entonces. El argumento de compatibilidad estaba latente en la playlist hacía
+  dos tasks y no había nadie en la página que lo mostrara; el diff de la T-09 es
+  la página.
+  La segunda corrige un renglón de la T-06 y de la T-07, que decían que **el
+  asset-list del Date Range de clase Apple no lo pide nadie**. Ahora lo pide la
+  instancia de fábrica, y se distingue de quién es cada pedido a simple vista: el
+  de la de fábrica lleva el `?_HLS_primary_id=<uuid>` que hls.js le agrega, y el
+  del concurrente, que lo pide la aplicación con `fetch`, no lleva nada. No es
+  una contradicción sino la consecuencia de que el par esté en la página.
+  La tercera es un segundo argumento que apareció gratis y no estaba buscado:
+  cuando el aviso termina, la instancia de fábrica **vuelve al primario en el
+  segundo 20,44** —donde lo había dejado, que es lo que pide su
+  `X-RESUME-OFFSET=0`— mientras la de la demo va por el 32,78. El cliente de
+  mercado se perdió los doce segundos de programa que reemplazó y el de la demo
+  no se perdió ninguno, y eso se ve en un cuadro: en
+  `t09-despues-del-aviso.png` los dos están en el contenido primario y en
+  escenas distintas. Es material para la grabación y le toca a la T-12.
+  La cuarta es de etiquetado y sale de la anterior: **los dos paneles no pueden
+  compartir un reloj**. El `currentTime` que reporta un cliente de mercado
+  mientras reemplaza es el del aviso y no el del programa, así que la línea de
+  estado de la izquierda dice los segundos del aviso y la de la derecha los del
+  programa. Lo que distingue un estado del otro no es el número sino de dónde
+  sale: la etiqueta se arma con `interstitialsManager.playingItem`, que es la
+  misma propiedad que leyó la T-02.
 
 ## T-10 — El mecanismo de squeezeback
 

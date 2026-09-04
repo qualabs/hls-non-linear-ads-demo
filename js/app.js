@@ -25,6 +25,7 @@
 import { createSignalling } from './signalling.js';
 import { traceContract } from './contract-trace.js';
 import { createRenderer } from './renderer.js';
+import { createStockPlayer } from './stock-player.js';
 
 // The signalled playlist: the same segments as ./content/primary/index.m3u8
 // plus the two Date Ranges, written by scripts/senalizar-contenido.sh on every
@@ -105,5 +106,36 @@ hls.attachMedia(video);
 video.muted = true;
 video.play().catch(() => {});
 
+// The other half of the compatibility pair (ADR 0007): a client that is already
+// in the market, on the SAME playlist -- `SRC`, the same constant, which is the
+// whole argument -- and with none of the above wired into it. It schedules the
+// linear ad of the Apple-class Date Range and replaces the content with it,
+// while the player above keeps the content and draws the concurrent experience
+// over it. Neither instance knows the other exists.
+const stock = createStockPlayer({
+  video: document.getElementById('stock-video'),
+  src: SRC,
+  pane: document.getElementById('pane-stock'),
+  state: document.getElementById('stock-state'),
+  hud: document.getElementById('stock-hud')
+});
+
+// The demo pane's own label, the mirror of the one the stock player paints for
+// itself. It is here and not in the renderer because it is the page talking
+// about the page, and reading it takes the contract -- which is `activeAt` and
+// nothing else, the same thing every consumer of the seam gets.
+const demoPane = document.getElementById('pane-demo');
+const demoState = document.getElementById('demo-state');
+function paintDemoPane() {
+  const active = provider.activeAt(video.currentTime);
+  demoPane.dataset.state = active.length ? 'ad' : 'primary';
+  demoState.textContent = active.length
+    ? `primary content + CONCURRENT AD (${active.map((e) => e.type).join(', ')})` +
+      ` · ${video.currentTime.toFixed(1)}s · nothing was replaced`
+    : `primary content · ${video.currentTime.toFixed(1)}s`;
+}
+video.addEventListener('timeupdate', paintDemoPane);
+paintDemoPane();
+
 // For the console and for whoever comes next.
-window.demo = { hls, video, provider, consumer, renderer };
+window.demo = { hls, video, provider, consumer, renderer, stock };
