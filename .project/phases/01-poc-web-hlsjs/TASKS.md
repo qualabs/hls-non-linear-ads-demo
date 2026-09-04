@@ -24,7 +24,7 @@ algo:
 | T-03 | Medir el render de un layout de SVTA contra su vista previa         | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-03/`  |
 | T-04 | Cerrar el plan de construcción con los resultados de las mediciones | done    | —    | este archivo y el ADR 0013                      |
 | T-05 | El banco de la demo: repo, página y contenido servido               | done    | —    | el repo mismo y `.project/phases/01-poc-web-hlsjs/tasks/T-05/` |
-| T-06 | La capa de señalización y el contrato con el renderizado            | pending | —    | —                                              |
+| T-06 | La capa de señalización y el contrato con el renderizado            | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-06/`  |
 | T-07 | El mínimo: un cornerOverlay con la cadena completa a la vista       | pending | —    | —                                              |
 | T-08 | Tests de la resolución del layout                                   | pending | —    | —                                              |
 | T-09 | El par de compatibilidad en la página de la demo                    | pending | —    | —                                              |
@@ -245,6 +245,42 @@ algo:
 - **nivel de verificación:** bajo. La parte que no se ve, que son los
   defaults omitidos y la ventana de activación, es la que puede fallar en
   silencio, y los tests que le corresponden son los de la T-08.
+- **Resultado:** la capa de señalización es `js/signalling.js` y el
+  contrato quedó escrito en `tasks/T-06/t06-contrato.md`. El consumidor
+  del contrato es `js/contract-trace.js`, que hasta que llegue el
+  renderizador de la T-07 imprime en consola en lugar de dibujar;
+  `js/app.js` es el único archivo que conoce los dos lados, porque es el
+  que los une. Verificado en el Chrome del sistema con el servidor de la
+  demo: hls.js 1.7.2, `interstitialsManager` en `null`, los dos Date
+  Ranges en la playlist con el mismo `START-DATE`, el concurrente
+  resuelto a `t=20.00s` y su ventana de 20 a 32. La consola lo anuncia a
+  los `20.07s` con las dos cajas ordenadas por `zDepth` —el primario en
+  z0 y `adOverlay1` en z1 con la caja `0 75 75 0`— y a los `32.02s` dice
+  que no hay nada activo. De la cadena, la playlist la pide hls.js por
+  XHR y el asset-list lo pide la aplicación por `fetch`, que es la misma
+  conclusión de la T-02 vista desde otro ángulo; el asset-list del Date
+  Range de clase Apple no lo pide nadie. El corte entre las dos capas se
+  verificó con grep: cero menciones al transporte del lado del
+  renderizado, las 19 del lado de la señalización.
+- **Dos cosas que el bloque no tenía previstas.** La playlist señalizada
+  **no puede ser un archivo en git**: el `START-DATE` se resuelve contra
+  el `EXT-X-PROGRAM-DATE-TIME` que escribe el empaquetado, y ese reloj es
+  la hora de pared de cuando se empaquetó, así que un `START-DATE` fijo
+  apunta al pasado en el próximo clon. Se resolvió con
+  `scripts/senalizar-contenido.sh`, que la genera desde la playlist del
+  primario, y con un paso en `run.sh` que la reescribe en cada arranque.
+  La segunda: esta task se lleva puestas dos piezas que el bloque de la
+  T-07 enumera —el `EXT-X-DATERANGE` de clase propia en la playlist y el
+  asset-list servido al lado, en `signalling/`— porque sin ellas el done
+  de la T-06 no se puede cumplir. Lo que queda para la T-07 es dibujar.
+- **Un cruce entre el default omitido y el ADR 0010.** La herramienta no
+  emite `volume` en ninguno de los seis layouts, así que el default que
+  la capa asume es 100 en todos los elementos, aviso incluido. El ADR
+  0010 dice que el `volume` del layout "se lee y se respeta como estado
+  inicial del control", y con este default eso significaría un aviso a
+  todo volumen. Manda la otra mitad del mismo ADR, que es la decisión: el
+  aviso arranca en silencio. Está anotado en el contrato y le toca a la
+  T-07 implementarlo.
 
 ## T-07 — El mínimo: un cornerOverlay con la cadena completa a la vista
 

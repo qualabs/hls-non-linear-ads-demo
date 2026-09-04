@@ -1,0 +1,30 @@
+{
+  "ASSETS": [
+    {
+      "URI": "/content/adB/index.m3u8",
+      "DURATION": 12.0,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "slot",
+        "payload": [
+          {
+            "type": "cornerOverlay",
+            "start": 0,
+            "duration": 12.0,
+            "layout": {
+              "assets": [
+                {
+                  "id": "adOverlay1",
+                  "type": "application/vnd.apple.mpegurl",
+                  "uri": "/content/adB/index.m3u8",
+                  "viewport": "0 75 75 0",
+                  "zDepth": 1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

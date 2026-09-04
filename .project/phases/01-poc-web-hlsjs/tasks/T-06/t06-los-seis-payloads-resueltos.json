@@ -1,0 +1,295 @@
+{
+ "fuente": "tasks/T-03/m3-resultados.json, clave `herramienta`: los seis payloads verbatim de la herramienta de SVTA",
+ "slotStart": 100,
+ "nota": "de los seis, cornerOverlay y lowerThirdOverlay NO traen el bloque primaryContent, y ninguno de los seis trae volume. Lo que sigue es lo que la capa entrega asumiendo los dos defaults.",
+ "resueltos": {
+  "cornerOverlay": {
+   "primaryContentEnElPayload": false,
+   "experiencias": [
+    {
+     "id": "cornerOverlay",
+     "type": "cornerOverlay",
+     "startTime": 100,
+     "duration": 15.015,
+     "elements": [
+      {
+       "id": "primaryContent",
+       "primary": true,
+       "box": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "zDepth": 0,
+       "volume": 100,
+       "uri": null,
+       "mediaType": null
+      },
+      {
+       "id": "adOverlay1",
+       "primary": false,
+       "box": {
+        "top": 0,
+        "right": 75,
+        "bottom": 75,
+        "left": 0
+       },
+       "zDepth": 1,
+       "volume": 100,
+       "uri": null,
+       "mediaType": "application/vnd.apple.mpegurl"
+      }
+     ]
+    }
+   ]
+  },
+  "lowerThirdOverlay": {
+   "primaryContentEnElPayload": false,
+   "experiencias": [
+    {
+     "id": "lowerThirdOverlay",
+     "type": "lowerThirdOverlay",
+     "startTime": 100,
+     "duration": 15.015,
+     "elements": [
+      {
+       "id": "primaryContent",
+       "primary": true,
+       "box": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "zDepth": 0,
+       "volume": 100,
+       "uri": null,
+       "mediaType": null
+      },
+      {
+       "id": "adOverlay1",
+       "primary": false,
+       "box": {
+        "top": 70,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "zDepth": 1,
+       "volume": 100,
+       "uri": null,
+       "mediaType": "application/vnd.apple.mpegurl"
+      }
+     ]
+    }
+   ]
+  },
+  "squeezebackFrame": {
+   "primaryContentEnElPayload": true,
+   "experiencias": [
+    {
+     "id": "squeezebackFrame",
+     "type": "squeezebackFrame",
+     "startTime": 100,
+     "duration": 15.015,
+     "elements": [
+      {
+       "id": "adOverlay1",
+       "primary": false,
+       "box": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "zDepth": 0,
+       "volume": 100,
+       "uri": null,
+       "mediaType": "application/vnd.apple.mpegurl"
+      },
+      {
+       "id": "primaryContent",
+       "primary": true,
+       "box": {
+        "top": 20,
+        "right": 20,
+        "bottom": 20,
+        "left": 20
+       },
+       "zDepth": 1,
+       "volume": 100,
+       "uri": null,
+       "mediaType": null
+      }
+     ]
+    }
+   ]
+  },
+  "squeezebackDoubleBox": {
+   "primaryContentEnElPayload": true,
+   "experiencias": [
+    {
+     "id": "squeezebackDoubleBox",
+     "type": "squeezebackDoubleBox",
+     "startTime": 100,
+     "duration": 15.015,
+     "elements": [
+      {
+       "id": "primaryContent",
+       "primary": true,
+       "box": {
+        "top": 25,
+        "right": 50,
+        "bottom": 25,
+        "left": 0
+       },
+       "zDepth": 0,
+       "volume": 100,
+       "uri": null,
+       "mediaType": null
+      },
+      {
+       "id": "adOverlay",
+       "primary": false,
+       "box": {
+        "top": 25,
+        "right": 0,
+        "bottom": 25,
+        "left": 50
+       },
+       "zDepth": 1,
+       "volume": 100,
+       "uri": null,
+       "mediaType": "application/vnd.apple.mpegurl"
+      }
+     ]
+    }
+   ]
+  },
+  "squeezebackLShape": {
+   "primaryContentEnElPayload": true,
+   "experiencias": [
+    {
+     "id": "squeezebackLShape",
+     "type": "squeezebackLShape",
+     "startTime": 100,
+     "duration": 15.015,
+     "elements": [
+      {
+       "id": "primaryContent",
+       "primary": true,
+       "box": {
+        "top": 0,
+        "right": 40,
+        "bottom": 40,
+        "left": 0
+       },
+       "zDepth": 0,
+       "volume": 100,
+       "uri": null,
+       "mediaType": null
+      },
+      {
+       "id": "adBarVertical",
+       "primary": false,
+       "box": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 60
+       },
+       "zDepth": 1,
+       "volume": 100,
+       "uri": null,
+       "mediaType": "application/vnd.apple.mpegurl"
+      },
+      {
+       "id": "adBarHorizontal",
+       "primary": false,
+       "box": {
+        "top": 60,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "zDepth": 2,
+       "volume": 100,
+       "uri": null,
+       "mediaType": "application/vnd.apple.mpegurl"
+      }
+     ]
+    }
+   ]
+  },
+  "multiView": {
+   "primaryContentEnElPayload": true,
+   "experiencias": [
+    {
+     "id": "multiView",
+     "type": "multiView",
+     "startTime": 100,
+     "duration": 15.015,
+     "elements": [
+      {
+       "id": "primaryContent",
+       "primary": true,
+       "box": {
+        "top": 0,
+        "right": 50,
+        "bottom": 50,
+        "left": 0
+       },
+       "zDepth": 0,
+       "volume": 100,
+       "uri": null,
+       "mediaType": null
+      },
+      {
+       "id": "view2",
+       "primary": false,
+       "box": {
+        "top": 0,
+        "right": 0,
+        "bottom": 50,
+        "left": 50
+       },
+       "zDepth": 1,
+       "volume": 100,
+       "uri": null,
+       "mediaType": "application/vnd.apple.mpegurl"
+      },
+      {
+       "id": "view3",
+       "primary": false,
+       "box": {
+        "top": 50,
+        "right": 50,
+        "bottom": 0,
+        "left": 0
+       },
+       "zDepth": 2,
+       "volume": 100,
+       "uri": null,
+       "mediaType": "application/vnd.apple.mpegurl"
+      },
+      {
+       "id": "view4",
+       "primary": false,
+       "box": {
+        "top": 50,
+        "right": 0,
+        "bottom": 0,
+        "left": 50
+       },
+       "zDepth": 3,
+       "volume": 100,
+       "uri": null,
+       "mediaType": "application/vnd.apple.mpegurl"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}
