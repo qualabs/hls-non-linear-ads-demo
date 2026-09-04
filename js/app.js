@@ -24,6 +24,7 @@
 
 import { createSignalling } from './signalling.js';
 import { traceContract } from './contract-trace.js';
+import { createRenderer } from './renderer.js';
 
 // The signalled playlist: the same segments as ./content/primary/index.m3u8
 // plus the two Date Ranges, written by scripts/senalizar-contenido.sh on every
@@ -49,7 +50,38 @@ const provider = createSignalling(hls, {
     }
   }
 });
+// Two consumers of the same contract, and neither knows about the other. The
+// renderer draws; the trace of T-06 keeps the line of text under the player and
+// the table in the console, which is what makes a recording auditable.
+const renderer = createRenderer({
+  provider,
+  video,
+  layer: document.getElementById('ads'),
+  audioControl: document.getElementById('ad-audio'),
+  attachAsset
+});
 const consumer = traceContract({ provider, video, hud: contractHud });
+
+/**
+ * How a `uri` of the contract becomes pixels. It lives HERE, on the side that
+ * is allowed to know the player library, and the renderer receives it as a
+ * function: it asks for the asset to be attached to a node and gets back a way
+ * to detach it, without importing anything or knowing what a media playlist
+ * is. A second hls.js instance is what T-01 measured -- several elements, each
+ * with its own instance, play at the same time.
+ */
+function attachAsset(node, { uri, mediaType, startAt = 0 }) {
+  const isHls = /mpegurl/i.test(mediaType || '') || /\.m3u8($|\?)/i.test(uri);
+  if (!isHls) {
+    node.src = uri;
+    if (startAt > 0) node.currentTime = startAt;
+    return () => { node.removeAttribute('src'); node.load(); };
+  }
+  const adHls = new Hls({ interstitialsController: undefined, startPosition: startAt });
+  adHls.loadSource(uri);
+  adHls.attachMedia(node);
+  return () => adHls.destroy();
+}
 
 hls.on(Hls.Events.ERROR, (_e, d) => {
   console.error('[hls] error', d.type, d.details, 'fatal:', d.fatal);
@@ -74,4 +106,4 @@ video.muted = true;
 video.play().catch(() => {});
 
 // For the console and for whoever comes next.
-window.demo = { hls, video, provider, consumer };
+window.demo = { hls, video, provider, consumer, renderer };

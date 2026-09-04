@@ -1,0 +1,805 @@
+{
+  "geometria": {
+    "time": 21.464,
+    "playerArea": {
+      "w": 1280,
+      "h": 720
+    },
+    "fillMode": "cover",
+    "elements": [
+      {
+        "element": "primaryContent",
+        "primary": true,
+        "zDepth": 0,
+        "volume": 100,
+        "uri": null,
+        "mediaType": null,
+        "box": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "esperadoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 1280,
+          "height": 720
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 1280,
+          "height": 720
+        },
+        "deltaMaxPx": 0,
+        "objectFit": "cover",
+        "zIndex": "0",
+        "drawn": true,
+        "video": {
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 21.46,
+          "muted": true,
+          "volume": 1,
+          "w": 1280,
+          "h": 720
+        }
+      },
+      {
+        "element": "adOverlay1",
+        "primary": false,
+        "zDepth": 1,
+        "volume": 100,
+        "uri": "/content/adB/index.m3u8",
+        "mediaType": "application/vnd.apple.mpegurl",
+        "box": {
+          "top": 0,
+          "right": 75,
+          "bottom": 75,
+          "left": 0
+        },
+        "esperadoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 320,
+          "height": 180
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 320,
+          "height": 180
+        },
+        "deltaMaxPx": 0,
+        "objectFit": "cover",
+        "zIndex": "1",
+        "drawn": true,
+        "video": {
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 1.22,
+          "muted": true,
+          "volume": 1,
+          "w": 1280,
+          "h": 720
+        }
+      }
+    ],
+    "type": "cornerOverlay",
+    "id": "AD-1-CONCURRENT",
+    "window": [
+      20,
+      32
+    ]
+  },
+  "audio": {
+    "antes": {
+      "primary": {
+        "muted": true,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 22.32,
+        "audioBytes": 48742
+      },
+      "ad": {
+        "muted": true,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 2.07,
+        "audioBytes": 29325
+      },
+      "button": {
+        "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+        "disabled": false
+      }
+    },
+    "rms_antes": {
+      "primary": {
+        "audioTracks": 1,
+        "peak": 0.33703,
+        "trackMuted": false,
+        "trackEnabled": true,
+        "ctxState": "running"
+      },
+      "ad": {
+        "audioTracks": 1,
+        "peak": 0.62095,
+        "trackMuted": false,
+        "trackEnabled": true,
+        "ctxState": "running"
+      }
+    },
+    "despues_del_click": {
+      "primary": {
+        "muted": true,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 25.44,
+        "audioBytes": 88306
+      },
+      "ad": {
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 5.18,
+        "audioBytes": 68567
+      },
+      "button": {
+        "text": "\ud83d\udd0a ad audio ON \u2014 click to mute the ad",
+        "disabled": false
+      }
+    },
+    "con_los_dos_encendidos": {
+      "primary": {
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 25.94,
+        "audioBytes": 94757
+      },
+      "ad": {
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 5.68,
+        "audioBytes": 74827
+      },
+      "button": {
+        "text": "\ud83d\udd0a ad audio ON \u2014 click to mute the ad",
+        "disabled": false
+      }
+    },
+    "rms_los_dos": {
+      "primary": {
+        "audioTracks": 1,
+        "peak": 0.46628,
+        "trackMuted": false,
+        "trackEnabled": true,
+        "ctxState": "running"
+      },
+      "ad": {
+        "audioTracks": 1,
+        "peak": 0.81943,
+        "trackMuted": false,
+        "trackEnabled": true,
+        "ctxState": "running"
+      }
+    },
+    "bytes_1s": {
+      "primary": 13139,
+      "ad": 12606
+    },
+    "despues_de_apagar": {
+      "primary": {
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 30.39,
+        "audioBytes": 150228
+      },
+      "ad": {
+        "muted": true,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 10.13,
+        "audioBytes": 129668
+      },
+      "button": {
+        "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+        "disabled": false
+      }
+    }
+  },
+  "geometria_resize": {
+    "time": 31.021,
+    "playerArea": {
+      "w": 960,
+      "h": 540
+    },
+    "fillMode": "cover",
+    "elements": [
+      {
+        "element": "primaryContent",
+        "primary": true,
+        "zDepth": 0,
+        "volume": 100,
+        "uri": null,
+        "mediaType": null,
+        "box": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "esperadoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 960,
+          "height": 540
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 960,
+          "height": 540
+        },
+        "deltaMaxPx": 0,
+        "objectFit": "cover",
+        "zIndex": "0",
+        "drawn": true,
+        "video": {
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 31.02,
+          "muted": false,
+          "volume": 1,
+          "w": 1280,
+          "h": 720
+        }
+      },
+      {
+        "element": "adOverlay1",
+        "primary": false,
+        "zDepth": 1,
+        "volume": 100,
+        "uri": "/content/adB/index.m3u8",
+        "mediaType": "application/vnd.apple.mpegurl",
+        "box": {
+          "top": 0,
+          "right": 75,
+          "bottom": 75,
+          "left": 0
+        },
+        "esperadoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 240,
+          "height": 135
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 240,
+          "height": 135
+        },
+        "deltaMaxPx": 0,
+        "objectFit": "cover",
+        "zIndex": "1",
+        "drawn": true,
+        "video": {
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 10.76,
+          "muted": true,
+          "volume": 1,
+          "w": 1280,
+          "h": 720
+        }
+      }
+    ],
+    "type": "cornerOverlay",
+    "id": "AD-1-CONCURRENT",
+    "window": [
+      20,
+      32
+    ]
+  },
+  "despues_de_la_ventana": {
+    "ads": 0,
+    "primaryStyle": "",
+    "button": "no ad on screen",
+    "buttonDisabled": true,
+    "contract": "t=40.2s \u00b7 no concurrent experience"
+  },
+  "red": [
+    {
+      "url": "http://localhost:8080/",
+      "type": "document"
+    },
+    {
+      "url": "https://p16-ttark-sg.tiktokcdn.com/tos-alisg-i-0twjg7x6w4-sg/e51998c8a03608f2cd89bdd6497e2c26.png~tplv-0twjg7x6w4-default:0:0:q75.image",
+      "type": "image"
+    },
+    {
+      "url": "https://p16-ttark-sg.tiktokcdn.com/tos-alisg-i-0twjg7x6w4-sg/bc9c008cf1d7a5e62f99f98838408807.png~tplv-0twjg7x6w4-default:0:0:q75.image",
+      "type": "image"
+    },
+    {
+      "resp": "http://localhost:8080/",
+      "status": 200,
+      "ct": "text/html; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/brand/fonts-embedded.css",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://localhost:8080/css/player.css",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://localhost:8080/vendor/hls.min.js",
+      "type": "script"
+    },
+    {
+      "url": "http://localhost:8080/js/app.js",
+      "type": "script"
+    },
+    {
+      "url": "chrome-extension://cimiefiiaegbelhefglklhhakcgmhkai/page-script.js",
+      "type": "script"
+    },
+    {
+      "resp": "http://localhost:8080/brand/fonts-embedded.css",
+      "status": 200,
+      "ct": "text/css; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/css/player.css",
+      "status": 200,
+      "ct": "text/css; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/js/app.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/vendor/hls.min.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "chrome-extension://cimiefiiaegbelhefglklhhakcgmhkai/page-script.js",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "url": "chrome-extension://ailoabdmgclmfmhdagmlohpjlbpffblp/Roboto-Regular.woff2",
+      "type": "font"
+    },
+    {
+      "resp": "chrome-extension://ailoabdmgclmfmhdagmlohpjlbpffblp/Roboto-Regular.woff2",
+      "status": 200,
+      "ct": "application/octet-stream"
+    },
+    {
+      "url": "http://localhost:8080/js/signalling.js",
+      "type": "script"
+    },
+    {
+      "url": "http://localhost:8080/js/contract-trace.js",
+      "type": "script"
+    },
+    {
+      "url": "http://localhost:8080/js/renderer.js",
+      "type": "script"
+    },
+    {
+      "resp": "http://localhost:8080/js/contract-trace.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/js/signalling.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/js/renderer.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/con-daterange.m3u8",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/con-daterange.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-cornerOverlay.json",
+      "type": "fetch"
+    },
+    {
+      "resp": "http://localhost:8080/signalling/asset-list-cornerOverlay.json",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg000.ts",
+      "type": "xhr"
+    },
+    {
+      "url": "blob:http://localhost:8080/ba2102e0-03eb-4e6e-b102-b220aa2ecc62",
+      "type": "script"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "blob:http://localhost:8080/ba2102e0-03eb-4e6e-b102-b220aa2ecc62",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg001.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg009.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg009.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg010.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg010.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg011.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg011.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg012.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg012.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg013.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg013.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg014.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg014.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg015.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg015.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg016.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg016.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg017.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg017.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg018.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg018.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg019.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg019.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg020.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg020.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg021.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg021.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg022.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg022.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg023.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg023.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg024.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg024.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/index.m3u8",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg025.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg025.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg000.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg001.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg002.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg003.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg004.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg005.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg026.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg026.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg027.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg027.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/brand/favicon.svg",
+      "type": "other"
+    },
+    {
+      "resp": "http://localhost:8080/brand/favicon.svg",
+      "status": 200,
+      "ct": "image/svg+xml"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg028.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg028.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg029.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg029.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg030.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg030.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg031.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg031.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg032.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg032.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg033.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg033.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg034.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg034.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg035.ts",
+      "type": "xhr"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg035.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    }
+  ],
+  "consola": [
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-cornerOverlay.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved cornerOverlay#AD-1-CONCURRENT: 2 elements, window 20.00s -> 32.00s"
+    },
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=19.00s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=20.01s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 20.00s -> 32.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=40.00s  nothing active"
+    }
+  ]
+}

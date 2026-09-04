@@ -366,3 +366,67 @@ sin ellas el done de la T-06 no se podía cumplir.
 campo como estado inicial del control de audio, y con este default eso
 sería un aviso a todo volumen. Manda la decisión del mismo ADR: el
 aviso arranca en silencio. Le toca a la T-07.
+
+## 2026-09-04 — T-07: el mínimo en pantalla, y el escalón 4 parado
+
+El primer aviso concurrente está dibujado. La capa de renderizado es
+`js/renderer.js`: toma el proveedor del contrato, convierte los cuatro
+porcentajes de inset a la caja en píxeles sobre el área del player,
+dibuja cada asset como un elemento posicionado encima del video primario
+y llena cada caja con recorte centrado, con el modo en una sola
+constante como pide el ADR 0013. Con eso queda parado el escalón 4 de la
+escalera de repliegue, que es el piso de la fase: desde acá siempre hay
+algo grabable.
+
+En el Chrome del sistema, con la página cargada y **sin ningún seek**, el
+primario reproduce y a los 20 segundos el aviso aparece solo en la
+esquina superior izquierda. El área del player es 1280x720 y la caja del
+aviso 320x180 desde 0,0. A los 32 desaparece y el primario vuelve al
+cuadro entero.
+
+La caja dibujada coincide con la que el contrato pidió: **0,00 píxeles de
+diferencia** en los dos elementos, midiendo el rectángulo que el DOM
+reporta contra la cuenta de los porcentajes hecha aparte del
+renderizador, y otros 0,00 con el player en 960x540 después de un
+resize, que es lo que prueba que la conversión se recalcula. Es el mismo
+cero que midió la T-03 entre el modelo de SVTA y lo que el browser
+dibuja.
+
+En la red están las tres piezas de la cadena, las tres con 200: la media
+playlist con el tag, que pide hls.js; el asset-list JSON, que pide la
+aplicación; y el contenido del aviso con sus seis segmentos, que pide la
+segunda instancia de hls.js. El asset-list del Date Range de clase Apple
+sigue sin pedirlo nadie.
+
+**El control de audio del ADR 0010 se probó, no se declaró.** El aviso
+arranca muteado; un click real lo desmutea, el segundo lo vuelve a
+mutear, y el estado del primario no lo toca nadie en todo el recorrido.
+Con los dos en silencio, la salida de la máquina son 32000 muestras de
+silencio exacto y Chrome no tiene un solo stream de playback abierto; al
+clickear el control, Chrome abre un stream sin mutear con el primario
+todavía en silencio, así que el sonido que aparece es el del aviso. Los
+dos elementos decodifican audio al mismo tiempo. Lo que no se pudo medir
+es el nivel de la salida mientras suena: en esta máquina `parec` devuelve
+cero bytes sobre el monitor del sink cada vez que algo suena, y se
+reproduce con un tono de 440 Hz sin browser de por medio, así que es el
+stack de audio de la sesión y no la demo.
+
+**Lo que el bloque no tenía previsto, y es lo que vale de esta task.** El
+contrato estaba incompleto, y no en los datos sino en una capacidad: da
+el `uri` y el `mediaType`, que alcanzan para saber qué va en la caja,
+pero en un browser un `uri` de media playlist no lo reproduce el
+elemento de video solo, y ésa es la única cosa que el renderizado
+necesita y no puede hacer sin cruzar la costura. Se resolvió sin romper
+el corte: el renderizado **recibe** una función `attachAsset` que
+devuelve cómo desconectar, y quien la implementa es `js/app.js`, que es
+el archivo que conoce los dos lados porque es el que los une. El corte
+se verificó otra vez con grep y del lado del renderizado no hay un solo
+hit. El día que la capa de abajo se reemplace, esa función se reemplaza
+con ella.
+
+Y una que es de escenario y no de código: la página arranca el primario
+muteado para que la política de autoplay deje empezar sin un click, así
+que si el operador enciende el audio del aviso sin haber desmuteado
+antes el primario, lo que se ve es exactamente lo contrario de lo que el
+ADR 0010 quiere mostrar. Es una instrucción de la grabación, y le toca a
+la T-12.

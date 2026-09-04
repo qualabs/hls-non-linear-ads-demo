@@ -1,0 +1,15 @@
+# El corte entre las dos capas, con el renderizador ya escrito (2026-09-04)
+
+$ /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." js/renderer.js js/contract-trace.js css/player.css
+(sin salida: ningun hit; exit code 1)
+
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/signalling.js
+19
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/app.js
+30
+
+El renderizador, que es lo que esta task agrega, no menciona el transporte ni
+una vez. Lo unico que el renderizado no puede hacer solo es convertir un `uri`
+en pixeles, y no lo resuelve importando nada: recibe `attachAsset` como funcion
+y devuelve la forma de desconectar. Esa funcion vive en js/app.js, que es el
+unico archivo que conoce los dos lados, y ahi estan los 30 hits.

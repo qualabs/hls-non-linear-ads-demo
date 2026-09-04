@@ -25,7 +25,8 @@ Requirements: node and ffmpeg. There are no npm dependencies.
 | --- | --- |
 | `index.html`, `css/`, `js/` | the page. No bundler and no framework: native ES modules |
 | `js/signalling.js` | the signalling layer: Date Ranges in, the contract out |
-| `js/contract-trace.js` | the consumer side of the contract. Knows nothing about HLS |
+| `js/renderer.js` | the rendering layer: the contract in, the boxes drawn over the video. Knows nothing about HLS |
+| `js/contract-trace.js` | the same contract, printed: the line under the player and the table in the console |
 | `signalling/` | the asset-lists, as the SVTA Layout Controller emits them, with the URIs filled in |
 | `vendor/hls.min.js` | hls.js **1.7.2, unmodified** |
 | `server.mjs` | a static file server, and nothing else: no ad server, no APS |
@@ -41,6 +42,11 @@ signalling layer answers *what is active at this playback time, and with what
 boxes*, and the consumer draws it. Only the first side knows what HLS is. The
 contract is written down in
 `.project/phases/01-poc-web-hlsjs/tasks/T-06/t06-contrato.md`.
+
+The ad starts **silent** and the primary content keeps its audio, so the page
+has a visible control to turn the ad's sound on (ADR 0010). Turning it on in
+front of an audience is how the demo shows that both sources of audio are
+there and that choosing between them is the player's.
 
 ## Three things that look like details and are not
 

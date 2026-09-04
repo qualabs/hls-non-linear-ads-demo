@@ -25,7 +25,7 @@ algo:
 | T-04 | Cerrar el plan de construcción con los resultados de las mediciones | done    | —    | este archivo y el ADR 0013                      |
 | T-05 | El banco de la demo: repo, página y contenido servido               | done    | —    | el repo mismo y `.project/phases/01-poc-web-hlsjs/tasks/T-05/` |
 | T-06 | La capa de señalización y el contrato con el renderizado            | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-06/`  |
-| T-07 | El mínimo: un cornerOverlay con la cadena completa a la vista       | pending | —    | —                                              |
+| T-07 | El mínimo: un cornerOverlay con la cadena completa a la vista       | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-07/`  |
 | T-08 | Tests de la resolución del layout                                   | pending | —    | —                                              |
 | T-09 | El par de compatibilidad en la página de la demo                    | pending | —    | —                                              |
 | T-10 | El mecanismo de squeezeback                                         | pending | —    | —                                              |
@@ -306,6 +306,56 @@ algo:
   aviso funciona.
 - **nivel de verificación:** bajo. Es interfaz: el error está en la
   pantalla y la verificación principal es mirar la captura.
+- **Resultado:** la capa de renderizado es `js/renderer.js`; `js/app.js` la
+  une al proveedor de la T-06 y `index.html` con `css/player.css` agregan la
+  capa donde se dibuja y el control de audio visible. En el Chrome del sistema,
+  con la página cargada y sin ningún seek, el primario reproduce y a los 20 s
+  aparece el aviso solo en la esquina superior izquierda, con el área del
+  player en 1280x720 y la caja del aviso en 320x180 desde 0,0. A los 32 s
+  desaparece y el primario vuelve al cuadro entero. La captura a tamaño real es
+  `t07-cornerOverlay-player.png`.
+  **La caja dibujada coincide con la que el contrato pidió: 0,00 px de
+  diferencia** en los dos elementos, midiendo el rectángulo del DOM contra la
+  cuenta de los porcentajes hecha aparte del renderizador, y otros 0,00 px con
+  el player en 960x540 después de un resize, que es la prueba de que la
+  conversión se recalcula y no está cableada. Es el mismo cero que midió la
+  T-03. En la red están las tres piezas de la cadena, las tres 200: la media
+  playlist `con-daterange.m3u8` como `application/vnd.apple.mpegurl` que pide
+  hls.js, el `asset-list-cornerOverlay.json` como `application/json` que pide
+  la aplicación, y el contenido del aviso `/content/adB/index.m3u8` con sus
+  seis segmentos, que pide la segunda instancia de hls.js. El asset-list del
+  Date Range de clase Apple sigue sin pedirlo nadie. El corte entre las dos
+  capas se mantiene: grep del lado del renderizado, cero hits.
+  El control de audio se probó y funciona: el aviso arranca muteado, el click
+  —un click real despachado por el browser— lo desmutea, el segundo lo vuelve a
+  mutear, y el estado del primario no lo toca nadie en todo el recorrido. Con
+  los dos en silencio la salida del sistema son 32000 muestras de silencio
+  exacto y Chrome no tiene ningún stream de playback abierto; al clickear el
+  control Chrome abre un stream sin mutear con el primario todavía en silencio,
+  así que el sonido que aparece es el del aviso. Los dos elementos decodifican
+  audio al mismo tiempo, 13,1 y 12,6 KB por segundo.
+  **Lo que no se pudo medir** es el nivel de la salida mientras suena: en esta
+  máquina `parec` devuelve cero bytes sobre el monitor del sink cada vez que
+  algo está sonando, y se reproduce con un tono de 440 Hz sin browser de por
+  medio. Es el stack de audio de la sesión, no la demo.
+- **Tres cosas que el bloque no tenía previstas.** La primera es que **el
+  contrato estaba incompleto**, y no en los datos sino en una capacidad: da el
+  `uri` y el `mediaType`, que alcanzan para saber qué va en la caja, pero en un
+  browser un `uri` de media playlist no lo reproduce el elemento de video solo.
+  Se resolvió sin romper el corte, con una función que el renderizado recibe
+  —`attachAsset(node, {uri, mediaType, startAt})`, que devuelve cómo
+  desconectar— y que implementa `js/app.js`, el único archivo que conoce los dos
+  lados. Quedó escrito en el contrato.
+  La segunda es del escenario y no del código: la página arranca el primario
+  muteado para que la política de autoplay deje empezar sin un click, así que si
+  el operador enciende el audio del aviso sin haber desmuteado antes el primario
+  con el control nativo, lo que se ve es justo lo contrario de lo que el ADR
+  0010 quiere mostrar. Es una instrucción de la grabación, y le toca a la T-12.
+  La tercera es una nota para la T-10: para que el orden por `zDepth` valga
+  también cuando el aviso va **detrás** del primario, como en
+  `squeezebackFrame`, el elemento de video y los del aviso tienen que compartir
+  el contexto de apilado. El renderizador ya escribe el `z-index` de los dos en
+  el mismo contexto, pero ese caso no lo ejercita ningún layout de esta task.
 
 ## T-08 — Tests de la resolución del layout
 

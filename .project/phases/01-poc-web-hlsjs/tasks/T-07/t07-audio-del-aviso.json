@@ -1,0 +1,179 @@
+{
+  "que_se_probo": "El control visible del ADR 0010: el aviso arranca en silencio, el primario conserva su audio, y el control lo enciende. El click es un click real despachado por el browser como entrada, no un dispatchEvent.",
+  "estado_de_los_dos_elementos": {
+    "1_antes_del_click": {
+      "primary": {
+        "muted": true,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 22.32,
+        "audioBytes": 48742
+      },
+      "ad": {
+        "muted": true,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 2.07,
+        "audioBytes": 29325
+      },
+      "button": {
+        "text": "🔇 ad audio OFF — click to unmute the ad",
+        "disabled": false
+      }
+    },
+    "2_despues_del_click": {
+      "primary": {
+        "muted": true,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 25.44,
+        "audioBytes": 88306
+      },
+      "ad": {
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 5.18,
+        "audioBytes": 68567
+      },
+      "button": {
+        "text": "🔊 ad audio ON — click to mute the ad",
+        "disabled": false
+      }
+    },
+    "3_con_el_primario_tambien_encendido": {
+      "primary": {
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 25.94,
+        "audioBytes": 94757
+      },
+      "ad": {
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 5.68,
+        "audioBytes": 74827
+      },
+      "button": {
+        "text": "🔊 ad audio ON — click to mute the ad",
+        "disabled": false
+      }
+    },
+    "4_segundo_click_el_aviso_vuelve_al_silencio": {
+      "primary": {
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 30.39,
+        "audioBytes": 150228
+      },
+      "ad": {
+        "muted": true,
+        "volume": 1,
+        "paused": false,
+        "currentTime": 10.13,
+        "audioBytes": 129668
+      },
+      "button": {
+        "text": "🔇 ad audio OFF — click to unmute the ad",
+        "disabled": false
+      }
+    }
+  },
+  "bytes_de_audio_decodificados_en_un_segundo": {
+    "primary": 13139,
+    "ad": 12606,
+    "que_dice": "los dos elementos decodifican su propio audio al mismo tiempo; no dice que se escuchen"
+  },
+  "salida_del_sistema": {
+    "monitor": "xrdp-sink.monitor",
+    "pasos": [
+      {
+        "paso": "1-los-dos-en-silencio",
+        "primarioMuted": true,
+        "avisoMuted": true,
+        "muestras": 32000,
+        "rms": 0.0,
+        "streamsDeChrome": []
+      },
+      {
+        "paso": "2-audio-del-aviso-encendido",
+        "primarioMuted": true,
+        "avisoMuted": false,
+        "muestras": 0,
+        "rms": null,
+        "streamsDeChrome": [
+          "Sink Input #3456",
+          "Mute: no",
+          "application.name = \"Google Chrome\"",
+          "media.name = \"Playback\""
+        ]
+      },
+      {
+        "paso": "3-los-dos-suenan",
+        "primarioMuted": false,
+        "avisoMuted": false,
+        "muestras": 0,
+        "rms": null,
+        "streamsDeChrome": [
+          "Sink Input #3456",
+          "Mute: no",
+          "application.name = \"Google Chrome\"",
+          "media.name = \"Playback\""
+        ]
+      },
+      {
+        "paso": "4-el-aviso-en-silencio-otra-vez",
+        "primarioMuted": false,
+        "avisoMuted": true,
+        "muestras": 0,
+        "rms": null,
+        "streamsDeChrome": [
+          "Sink Input #3456",
+          "Mute: no",
+          "application.name = \"Google Chrome\"",
+          "media.name = \"Playback\""
+        ]
+      }
+    ],
+    "que_dice": "Con los dos en silencio: dos segundos grabados del monitor del sink, 32000 muestras de silencio exacto (rms 0.0), y Chrome sin un solo stream de playback abierto. Al clickear el control, Chrome abre un stream de playback sin mutear en el sink del sistema, con el primario todavia en silencio: el sonido que aparece es el del aviso.",
+    "lo_que_no_se_pudo_medir": "El nivel de la salida MIENTRAS suena. En esta sesion parec devuelve cero bytes sobre el monitor del sink cada vez que algun stream esta sonando, y se reproduce con un tono de 440 Hz por paplay sin browser de por medio: es el stack de audio de la sesion (xrdp-sink sobre pipewire), no la demo. El stream que Chrome abre tampoco desaparece en el mismo instante en que se vuelve a mutear, porque Chrome lo mantiene un rato: la aparicion es la mitad que discrimina, no la desaparicion."
+  },
+  "captureStream_no_discrimina": {
+    "con_el_aviso_muteado": {
+      "primary": {
+        "audioTracks": 1,
+        "peak": 0.33703,
+        "trackMuted": false,
+        "trackEnabled": true,
+        "ctxState": "running"
+      },
+      "ad": {
+        "audioTracks": 1,
+        "peak": 0.62095,
+        "trackMuted": false,
+        "trackEnabled": true,
+        "ctxState": "running"
+      }
+    },
+    "con_los_dos_encendidos": {
+      "primary": {
+        "audioTracks": 1,
+        "peak": 0.46628,
+        "trackMuted": false,
+        "trackEnabled": true,
+        "ctxState": "running"
+      },
+      "ad": {
+        "audioTracks": 1,
+        "peak": 0.81943,
+        "trackMuted": false,
+        "trackEnabled": true,
+        "ctxState": "running"
+      }
+    },
+    "que_dice": "Los dos elementos tienen una pista de audio viva y con senal (peak 0.34 y 0.62) al mismo tiempo. NO sirve para decidir si se escucha: el peak del aviso es 0.62 estando muteado, o sea que captureStream de Chrome ignora el muted del elemento."
+  }
+}

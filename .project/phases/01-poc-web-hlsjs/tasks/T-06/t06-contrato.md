@@ -2,7 +2,8 @@
 
 Es la única superficie entre las dos capas del ADR 0003. De este lado, el
 renderizado, no se importa el player, no se leen tags y no se pide nada por
-red: se recibe un **proveedor** y se dibujan cajas.
+red: se recibe un **proveedor**, se recibe una **manera de poner un asset en un
+elemento**, y se dibujan cajas.
 
 ## El proveedor
 
@@ -70,6 +71,36 @@ Element {
 5. **`activeAt` es la única fuente de la ventana de activación.** No hay que
    comparar tiempos: si la experiencia está en la lista, está activa. `startTime`
    y `duration` vienen para mostrar un contador, no para decidir.
+
+## El reproductor de assets
+
+El contrato le da al renderizado el `uri` del asset y su `mediaType`, y con eso
+alcanza para saber **qué** hay que poner en la caja. No alcanza para poner
+nada: en un browser, un `uri` de media playlist no lo reproduce el elemento de
+video solo. Y esa es la única cosa que el renderizado necesita y no puede
+hacer sin cruzar la costura.
+
+Se resuelve con una función que el renderizado **recibe**, y no con un import:
+
+```js
+attachAsset(node, { uri, mediaType, startAt }) -> detach()
+```
+
+`node` es el elemento de video que el renderizado creó para ese asset,
+`startAt` es el segundo del asset por donde tiene que arrancar —cero cuando la
+experiencia recién empieza, y el desplazamiento correspondiente cuando se cae
+en el medio de la ventana—, y lo que devuelve es la manera de desconectarlo
+cuando la experiencia termina.
+
+Del lado del renderizado esa función es opaca: la llama y guarda el `detach`.
+Quien la implementa es `js/app.js`, que es el archivo que conoce los dos lados
+porque es el que los une, y ahí adentro sí se sabe que un `mediaType` de media
+playlist necesita una segunda instancia del player. Que dos elementos de video,
+cada uno con su propia instancia, reproduzcan al mismo tiempo es lo que midió
+la T-01.
+
+El día que la capa de abajo se reemplace, esta función se reemplaza con ella y
+el renderizado no cambia, que es exactamente lo que el ADR 0003 compra.
 
 ## Lo que el contrato NO dice
 

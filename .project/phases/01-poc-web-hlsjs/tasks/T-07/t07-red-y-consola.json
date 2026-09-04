@@ -1,0 +1,129 @@
+{
+  "las_tres_piezas_de_la_cadena": {
+    "1_media_playlist_con_el_tag": {
+      "status": 200,
+      "contentType": "application/vnd.apple.mpegurl",
+      "veces": 1,
+      "url": "/content/primary/con-daterange.m3u8",
+      "quien_la_pide": "hls.js, por XHR",
+      "que_trae": "los dos EXT-X-DATERANGE con el mismo START-DATE, el de clase Apple y el concurrente"
+    },
+    "2_asset_list_json": {
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "veces": 1,
+      "url": "/signalling/asset-list-cornerOverlay.json",
+      "quien_lo_pide": "la aplicacion, por fetch (hls.js corre con su controlador de interstitials apagado)",
+      "que_trae": "el bloque X-AD-CREATIVE-SIGNALING del cornerOverlay"
+    },
+    "3_contenido_del_aviso": {
+      "status": 200,
+      "contentType": "application/vnd.apple.mpegurl",
+      "veces": 1,
+      "url": "/content/adB/index.m3u8",
+      "quien_lo_pide": "la segunda instancia de hls.js, la del elemento del aviso",
+      "segmentos_servidos": 6
+    }
+  },
+  "segmentos": {
+    "primary": 29,
+    "adB": 6
+  },
+  "el_asset_list_de_la_clase_apple": {
+    "url": "/signalling/asset-list-linear.json",
+    "pedido": false,
+    "que_dice": "no lo pide nadie, igual que en la T-06: la maquinaria de interstitials esta apagada"
+  },
+  "todo_lo_servido": {
+    "/": {
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "veces": 1
+    },
+    "/brand/fonts-embedded.css": {
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "veces": 1
+    },
+    "/css/player.css": {
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "veces": 1
+    },
+    "/js/app.js": {
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "veces": 1
+    },
+    "/vendor/hls.min.js": {
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "veces": 1
+    },
+    "/js/contract-trace.js": {
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "veces": 1
+    },
+    "/js/signalling.js": {
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "veces": 1
+    },
+    "/js/renderer.js": {
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "veces": 1
+    },
+    "/content/primary/con-daterange.m3u8": {
+      "status": 200,
+      "contentType": "application/vnd.apple.mpegurl",
+      "veces": 1
+    },
+    "/signalling/asset-list-cornerOverlay.json": {
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "veces": 1
+    },
+    "/content/adB/index.m3u8": {
+      "status": 200,
+      "contentType": "application/vnd.apple.mpegurl",
+      "veces": 1
+    },
+    "/brand/favicon.svg": {
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "veces": 1
+    }
+  },
+  "consola": [
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-cornerOverlay.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved cornerOverlay#AD-1-CONCURRENT: 2 elements, window 20.00s -> 32.00s"
+    },
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=19.00s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=20.01s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 20.00s -> 32.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=40.00s  nothing active"
+    }
+  ]
+}
