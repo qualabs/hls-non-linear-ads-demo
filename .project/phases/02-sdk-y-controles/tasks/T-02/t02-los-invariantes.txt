@@ -1,0 +1,47 @@
+# Los invariantes de la T-02, verificados y no afirmados (2026-09-04)
+
+## A. El corte del ADR 0003: el lado del renderizado no sabe una palabra del transporte
+
+El mismo comando de la T-01, que es el mismo de seis tasks de la fase 01. La
+consulta nueva agrega una clase mas al lado de la senalizacion y nada del otro
+lado: lo que cruza la costura es el `kind` del rango, no la clase de HLS.
+
+$ /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js js/contract-trace.js css/player.css
+(sin salida: ningun hit; exit code 1)
+
+Y los contadores del lado que si sabe de transporte, para que el cero de arriba
+sea el resultado de una separacion y no de un archivo vacio. `lib/signalling.js`
+sube de 19 a 34: es donde entro la clase de Apple.
+
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/signalling.js
+34
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/media.js
+6
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" lib/concurrent-hls.js
+23
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/stock-player.js
+22
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/app.js
+14
+
+## B. El corte del ADR 0015: el lado de la libreria no nombra la demo
+
+$ /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+(sin salida: ningun hit; exit code 1)
+
+## C. Los tests que ya existian siguen pasando
+
+La task no agrega tests: los de los rangos son de la T-06, que los tiene
+enumerados. Lo que esto verifica es que la consulta nueva no rompio la
+resolucion de layouts que ya estaba cubierta.
+
+$ npm test
+✔ the conversion follows the player area, which is what a resize depends on (0.192421ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 139.865477

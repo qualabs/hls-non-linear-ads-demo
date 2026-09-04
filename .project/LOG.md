@@ -910,3 +910,70 @@ plan vivo, las rutas sí se siguieron hasta su lugar nuevo. La segunda: el
 `<video controls>` del primario sigue ahí, porque sacarlo es de la T-03. La
 tercera: el botón `#ad-audio` sigue siendo de la página y se le pasa a la
 librería como elemento, que es el único cruce de la línea que queda vivo.
+
+## 2026-09-04 — T-02 de la fase 02: el contrato en `docs/`, con los rangos del programa
+
+El proyecto tiene por fin un documento de arquitectura.
+`docs/contrato-senalizacion-renderizado.md` es el contrato del ADR 0003, que
+vivía adentro de la evidencia de una fase cerrada y es el único documento vivo
+que la fase 01 dejó. Es también la pieza que la fase de iOS necesita, porque es
+exactamente lo que cambia al pasar de hls.js a AVFoundation. Al moverlo se
+actualizaron las referencias vivas —el `README.md` y los comentarios de
+`lib/signalling.js` y `lib/renderer.js`—; la entrada de esta bitácora que lo
+nombra en su lugar viejo se deja en pie, porque es un registro con fecha.
+
+**La consulta nueva es `provider.programRanges()`, y contesta dónde están todos
+los rangos del programa.** Devuelve `{ ranges, settled }`, con cada rango en
+`{ id, kind, startTime, duration }` ordenado por `startTime`. Cumple las tres
+condiciones que la fase le puso: contesta dónde están todos y no cuál corre
+ahora, dice de qué clase es cada uno, y **no trae el largo total**, que quien
+pinta relee del contenido primario en cada pintada (ADR 0016). La posición sobre
+la barra es una división que hace la barra.
+
+**Lo que cruza la costura es el `kind` del rango y no la clase de HLS.** La capa
+de señalización traduce en un solo lugar: `com.apple.hls.interstitial` es
+`'interstitial'` y la clase concurrente es `'concurrent'`. La distinción es de
+semántica y no de transporte —el rango concurrente nunca cambia el largo de la
+línea de tiempo y el de reemplazo sí, que es el ADR 0016—, así que sobrevive a un
+cambio de transporte, que es lo que el ADR 0003 compra. La capa dejó de descartar
+el Date Range de clase Apple, que estaba ahí y no se leía: es el que marca dónde
+un cliente de mercado se habría detenido. No se cuela en `activeAt`, que sigue
+siendo solo de la experiencia concurrente, y eso está medido adentro de un break.
+
+**La completitud se prometió, en lugar de heredarla de una coincidencia.**
+`settled` es verdadero cuando la fuente de los rangos está cerrada —una playlist
+que ya no puede crecer— y ningún asset-list quedó en vuelo; la lista, además, es
+monótona: un rango que ya salió no cambia ni desaparece. El límite es explícito y
+está escrito: `settled` habla de la señalización y no del programa, y sobre una
+fuente que sigue creciendo no se vuelve verdadero nunca. Que en este POC la lista
+esté completa antes del primer break es una propiedad del ADR 0005 —VOD con los
+Date Ranges en la media playlist— y no del contrato.
+
+**Las dos corridas.** La primera lee los diez rangos del recorrido —cinco de cada
+clase, en 20, 45, 70, 95 y 120 s— a los 0,8 s de reloj de pared y con
+`currentTime` en 0, o sea veinte segundos antes de que empiece el primero. La
+segunda demora los asset-list dos segundos a propósito para ver la promesa en sus
+dos estados, porque una promesa que solo se observa cumplida no está medida: con
+los asset-list en vuelo `settled` es falso y la lista tiene cinco rangos, todos
+de clase Apple, que son los que se leen del tag; cuando vuelven son diez y
+`settled` es verdadero, y los cinco primeros están idénticos. Sin seeks y sin un
+error de consola.
+
+Los dos greps dan cero y `npm test` da 15/15. Commit sin push.
+
+**Cuatro cosas quedaron anotadas y no arregladas.** La primera y la que más
+importa: el contrato ya dice lo que el ADR 0014 decidió —el default de `volume`
+ausente es 0 en los elementos del aviso y 100 en el contenido primario— y el
+código todavía no, porque implementarlo es la T-05. Hasta que la T-05 corra, el
+documento va una task adelante de `lib/signalling.js`, que tiene una sola
+constante en 100 para todos los elementos, y del renderizador, que ignora el
+campo a propósito. La segunda: cuando la T-05 corra, el test
+`no payload of the tool carries volume, and every element comes out at 100` se
+pone rojo, y ningún bloque de la fase lo dice: la T-06 enumera los casos nuevos y
+ninguna enumera el que hay que cambiar. La tercera: la lista de textos vigentes
+que citan el ADR 0010 y quedan viejos tiene un ítem más que el que la T-05
+enumera, que es la sección `The two layers` del `README.md`. Y la cuarta: el
+rango de clase Apple se marca con lo que el tag declara, `PLANNED-DURATION=12`,
+que no es lo que el aviso lineal dura de verdad —la T-12 de la fase 01 midió
+12,37 s por break—; para la barra manda la señalización, y conviene saberlo
+antes de pintarla.

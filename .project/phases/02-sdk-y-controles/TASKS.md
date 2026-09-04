@@ -15,7 +15,7 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
 | id   | brief                                                          | status  | plan | evidence |
 | ---- | -------------------------------------------------------------- | ------- | ---- | -------- |
 | T-01 | El corte: la librería y la aplicación de demo como dos cosas     | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-01/` |
-| T-02 | El contrato en `docs/`, ampliado con los rangos del programa     | planned | —    | —        |
+| T-02 | El contrato en `docs/`, ampliado con los rangos del programa     | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-02/` |
 | T-03 | Los controles de la composición: barra, pausa, audio y fullscreen | planned | —    | —        |
 | T-04 | Los rangos del programa marcados en la barra                     | planned | —    | —        |
 | T-05 | El volumen del asset list, con la mezcla que David propuso       | planned | —    | —        |
