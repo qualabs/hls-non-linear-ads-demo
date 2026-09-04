@@ -98,6 +98,16 @@ inconsistencia.** Es un cliente de mercado y así se ve un cliente de mercado
 (ADR 0007). La asimetría visual entre los dos panes refuerza el argumento de
 compatibilidad en lugar de debilitarlo.
 
+> **Nota del 2026-09-04.** Este párrafo afirma un hecho que no era cierto
+> cuando se escribió: el pane del player sin modificar entró en la T-09 de la
+> fase 01 con `playsinline muted` y **nunca tuvo controles nativos**. El único
+> que los tenía era el nuestro, o sea la asimetría al revés de como está
+> descrita. Al preguntárselo, Nicolás decidió que **no se muestran controles
+> nativos en ninguno de los dos panes, sólo los nuestros**, así que la
+> asimetría deja de existir y el argumento de compatibilidad se apoya en lo
+> que ya lo sostenía: que uno reemplaza el contenido y el otro no, y que al
+> final del recorrido el player sin modificar va 49,5 s de programa atrás.
+
 La fase de iOS hereda el límite y no el código. Lo que se comparte entre las
 dos plataformas es dónde está la línea y qué queda de cada lado, igual que el
 ADR 0003 comparte el contrato y no la implementación.
