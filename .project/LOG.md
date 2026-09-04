@@ -668,3 +668,89 @@ cambiar el asset oscuro por otro, acá no existe: el layout consume los
 tres assets de aviso del repo de una sola vez, porque la cuarta fuente
 es el contenido primario. El listado de SVTA que la T-12 va a pedir
 necesita al menos un asset más, y con luz.
+
+## 2026-09-04 — T-12: los cinco layouts en una corrida, y el escalón 1 parado
+
+El recorrido es una sola playlist con diez `EXT-X-DATERANGE`, cinco pares
+de la misma `START-DATE`: uno de la clase concurrente por layout y uno de
+la clase de Apple al lado, que es el par de compatibilidad de la T-09
+repetido cinco veces. Los cinco nombres del documento de requerimientos
+quedan cubiertos con el mapeo del ADR 0012 —Overlay a los 20 s, LBox
+video a los 45, LBox image a los 70, Side by side pullback a los 95 y
+Quad a los 120— y los cinco breaks duran doce segundos.
+
+El done está en una sola corrida y sin tocar el reloj de nadie: la
+página se carga una vez, llega sola a cada break y de cada uno sale una
+captura a tamaño real. No es una promesa del script, es una lectura de la
+página: el elemento primario lleva un contador de eventos `seeking` y la
+corrida termina con la lista vacía, con una sola carga y sin un error de
+consola. Y avanza al reloj de pared: 160,0 s de programa en 160,15 s de
+pared, o sea 0,999, el mismo número de la T-01 y de la T-11.
+
+Lo único que agregó código es el asset de imagen del LBox image, y son 24
+líneas en dos archivos: la función que decide si el nodo es un `<img>` o
+un `<video>` según el `mediaType`, la que separa los nodos del aviso que
+tienen línea de tiempo y audio de los que no, y la rama de imagen de
+`attachAsset`, que es un `src` y nada más. Más dos líneas de
+`Content-Type` en el servidor estático. Los cinco breaks, los cinco Date
+Ranges, los dos asset-list nuevos y el recorrido entero son datos y no
+aparecen en el diff de código: es lo que el ADR 0008 anticipaba, ahora
+contado en líneas.
+
+La geometría vuelve a dar cero por quinta vez: 0,00 px entre la caja que
+pidió el contrato y la que dibuja el navegador en los catorce elementos
+de los cinco layouts, y otros 0,00 px en los catorce después de un
+resize. Dos de esas catorce cajas no son un elemento de video sino una
+imagen, y el llenado del ADR 0013 las trata igual: las dos barras del L
+dejan afuera el 60 % del asset en el break de video y en el de imagen,
+porque la caja no cambió y el tipo de asset no le importa a la política.
+
+Del audio quedó un caso que el ADR 0010 no cubría. El control anda en
+cuatro de los cinco breaks, y en el quinto no hay nada que encender
+porque los dos assets son cuadros fijos. El botón lo dice en lugar de
+quedar gris como si no hubiera aviso en pantalla, que son dos estados
+distintos y en cámara se distinguen. La otra mitad de la pregunta de
+audio, la que dejó abierta la T-11 —cuál de las fuentes concurrentes
+querría escuchar quien mira—, no se contestó: quedó anotada como pregunta
+para SVTA en el `PHASE.md`, junto con una segunda que apareció acá, que
+es dónde va un asset que es una imagen cuando el `URI` del `ASSET` que lo
+contiene es un campo de HLS y espera algo reproducible.
+
+El segundo argumento de la T-09 quedó atrapado en un cuadro. Como los
+cinco breaks llevan también su Date Range lineal, el cliente de fábrica
+reemplaza cinco veces y vuelve al primario donde lo había dejado: a los
+160 s va 49,5 s de programa atrás del nuestro, los dos en el contenido
+primario y en escenas distintas. Los doce segundos por break que declara
+el tag le cuestan 12,4 s de programa, y esta medición no separa el costo
+de la transición de una detención del player de la izquierda.
+
+La instrucción de grabación que la T-07 dejó pendiente quedó donde la lee
+quien graba y no en una evidencia: abre la sección `Before you record`
+del `README.md` y `./run.sh` la imprime en cada arranque junto con la
+tabla de los cinco breaks. Hay que desmutear el contenido primario con el
+control nativo antes de tocar el botón del aviso, porque la página
+arranca muteada por la política de autoplay y encender el audio del
+aviso con el primario en silencio muestra lo contrario de lo que el ADR
+0010 quiere mostrar.
+
+Y los assets. Cuatro de los cinco layouts quedan bien y uno no, y está
+medido: el barrido de luminancia de la T-11 se corrió sobre las tres
+fuentes enteras para elegir la ventana de doce segundos de cada creativo
+—la ventana cuyo instante más oscuro es el más claro posible— y adentro
+del navegador sobre los cinco breaks. El asset más oscuro de cada layout
+mide 162,7, 151,6, 135,1 y 162,7 en los cuatro primeros breaks, y 24,5 en
+el Quad. El Quad es el que se queda sin material y no hay con qué
+arreglarlo desde acá, porque consume los tres assets de aviso de una sola
+vez; y no es la ventana elegida sino la fuente: en los 75 segundos del
+teaser de *Elephants Dream* no hay un instante que llegue a 46 de
+luminancia sobre 255. El pedido para David es un creativo de video de
+doce segundos, 1280x720 o más, con media arriba de 100 y sin ningún
+instante por debajo de 40. Y el del LBox con video, que es el que David
+marcó como el más difícil de conseguir, hoy está cubierto recortando el
+60 % de un clip de 16:9: lo que falta ahí no es luz sino un creativo
+hecho para la forma de la barra, o que el modelo diga por asset la
+relación de aspecto para la que el creativo está pensado.
+
+Con esto la fase tiene parado el escalón 1 de la escalera de repliegue,
+que es el que se graba, y las ocho tasks de construcción están cerradas.
+

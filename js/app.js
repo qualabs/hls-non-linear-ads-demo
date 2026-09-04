@@ -72,6 +72,13 @@ const consumer = traceContract({ provider, video, hud: contractHud });
  * with its own instance, play at the same time.
  */
 function attachAsset(node, { uri, mediaType, startAt = 0 }) {
+  // An image is the one asset that needs nothing from this side of the seam: no
+  // player, no timeline, no second instance. The renderer already created an
+  // <img> for it, so attaching is a src and detaching is dropping it.
+  if (/^image\//i.test(mediaType || '')) {
+    node.src = uri;
+    return () => node.removeAttribute('src');
+  }
   const isHls = /mpegurl/i.test(mediaType || '') || /\.m3u8($|\?)/i.test(uri);
   if (!isHls) {
     node.src = uri;

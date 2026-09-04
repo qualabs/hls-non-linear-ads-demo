@@ -1,0 +1,50 @@
+# El corte entre las dos capas, con los cinco layouts (2026-09-04)
+
+$ /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." js/renderer.js js/contract-trace.js css/player.css
+(sin salida: ningun hit; exit code 1)
+
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/signalling.js
+19
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/stock-player.js
+22
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/app.js
+30
+
+Es el mismo grep de la T-06, la T-07, la T-09, la T-10 y la T-11, y los tres
+contadores son los mismos numeros que dieron la T-10 y la T-11: el asset de
+imagen no le enseño al renderizado una palabra del transporte.
+
+Y esta task SI toco codigo, a diferencia de la T-11, asi que conviene decir
+cuanto y donde:
+
+$ git diff --stat 152c8be -- js/ css/ index.html test/
+ js/app.js      |  7 +++++++
+ js/renderer.js | 57 +++++++++++++++++++++++++++++++++++++++++++++------------
+ 2 files changed, 52 insertions(+), 12 deletions(-)
+
+De esas 52 lineas agregadas, 24 son codigo y el resto comentario. Las 24 son
+todas el asset de imagen, y se reparten en tres cosas:
+
+  js/renderer.js   `isImage(mediaType)`, y el nodo que se crea es un <img> o un
+                   <video> segun esa funcion. Es una pregunta sobre el DOM: el
+                   archivo no aprende nada nuevo sobre de donde vienen las cajas.
+  js/renderer.js   `playable()`, que son los nodos del aviso que tienen linea de
+                   tiempo y audio. El control del ADR 0010, y el play/pause/seek
+                   que sigue al primario, actuan sobre esos y no sobre todos.
+  js/app.js        la rama de imagen de `attachAsset`: un `src` y nada mas, sin
+                   segunda instancia del player y sin `startAt`.
+
+Los cinco breaks, los cinco Date Ranges de clase concurrente, los dos
+asset-list nuevos y el recorrido entero son datos: no aparecen en este diff.
+
+$ git diff --stat 152c8be -- signalling/ scripts/ server.mjs
+ scripts/preparar-contenido.sh  | 37 +++++++++--
+ scripts/senalizar-contenido.sh | 112 ++++++++++++++++++++++++------
+ server.mjs                     |  2 +
+ (mas signalling/asset-list-squeezebackDoubleBox.json y
+  signalling/asset-list-squeezebackLShape-image.json, nuevos)
+
+Las dos lineas de `server.mjs` son el Content-Type de un .jpg. El servidor
+estatico existe justamente por eso (esta escrito en su cabecera): la demo se
+graba con la pestaña de red abierta, y un asset servido como
+application/octet-stream se lee ahi como una descarga y no como una imagen.

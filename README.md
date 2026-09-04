@@ -19,14 +19,55 @@ re-package without re-downloading, `npm run content`.
 
 Requirements: node and ffmpeg. There are no npm dependencies.
 
-The concurrent Date Range points at the `cornerOverlay` asset-list. To signal
-another layout, name it when the playlist is written -- there is one asset-list
-per layout in `signalling/`:
+The playlist carries **five breaks, one per layout**: the five names of the
+requirements document one after the other, which is the run that gets recorded.
+To work on a single layout instead, name it when the playlist is written --
+there is one asset-list per layout in `signalling/`:
 
 ```bash
-./scripts/senalizar-contenido.sh 20 squeezebackLShape   # break at 20 s
+./scripts/senalizar-contenido.sh 20 squeezebackLShape   # one break, at 20 s
 npm run serve
 ```
+
+## Before you record
+
+The run is under three minutes and it needs nothing but a browser window. One
+thing to do before the camera rolls, and two to expect.
+
+**Unmute the primary content first**, with the native control of the player on
+the right. The page starts muted so the browser's autoplay policy lets it begin
+without a click, and the ad-audio button turns the *ad's* sound on and nothing
+else. Pressing it while the primary is still muted puts on screen the exact
+opposite of what ADR 0010 is there to show: an ad that took the audio of the
+programme. Unmute the primary once, at the start, and from then on the button
+does what it says.
+
+**One of the five breaks has no audio to turn on.** The two assets of LBox
+image are stills, so there is nothing to unmute and the button says so rather
+than going grey as if no ad were on screen.
+
+**The left player falls behind, and that is the second argument of the demo.**
+Every break carries its linear Date Range as well, so the off-the-shelf client
+replaces the content five times and comes back where it left off, twelve
+seconds later each time. After the first four breaks it is 49.5 s of programme
+behind the player on the right, which lost none: put the two panes side by side
+at any moment after the first break and they are showing different scenes of
+the same film. Only in the first break do both clients react to the same tags
+at the same instant; from the second on, the left one is somewhere else in the
+programme, which is the argument rather than a defect.
+
+| break | at | layout on screen | name in the requirements document |
+| --- | --- | --- | --- |
+| 1 | 20 s | `cornerOverlay` | Overlay |
+| 2 | 45 s | `squeezebackLShape`, video assets | LBox video |
+| 3 | 70 s | `squeezebackLShape`, image assets | LBox image |
+| 4 | 95 s | `squeezebackDoubleBox` | Side by side pullback |
+| 5 | 120 s | `multiView` | Quad |
+
+Every break lasts twelve seconds, and `./run.sh` prints the same table on
+startup. The mapping of the five names to the four identifiers is ADR 0012, and
+it is a proposal waiting on David: LBox video and LBox image are the same
+layout, and what tells them apart is the type of the asset inserted into it.
 
 ## Test it
 
@@ -101,7 +142,7 @@ them on together. There is nothing in the data to do anything finer -- the
 tool's model has a `volume` per element and emits it in none of the six
 layouts, so a per-quadrant mix would be invented rather than signalled.
 
-## Three things that look like details and are not
+## Four things that look like details and are not
 
 **hls.js runs with its interstitials machinery turned off.** The page creates
 the instance with `interstitialsController: undefined`. That machinery is
@@ -115,6 +156,16 @@ which is where this demo picks them up.
 **The primary playlist carries `EXT-X-PROGRAM-DATE-TIME`.** A `START-DATE`
 resolves against that clock, so without it the Date Ranges have nothing to
 anchor to.
+
+**One of the five layouts inserts a still and not a video.** LBox image is the
+same L-shape as LBox video, and what changes is the `type` of each asset in the
+payload: `image/jpeg` instead of `application/vnd.apple.mpegurl`. The renderer
+reads that field to decide whether the box is an `<img>` or a `<video>`, which
+is the only thing the five layouts needed that the three mechanisms did not
+already do. It costs the ad its audio and its timeline, and both show: the
+audio button of ADR 0010 says there is nothing to unmute, and the still does
+not follow the primary when it is paused or seeked, because there is nothing to
+follow.
 
 **The Layout Controller omits two defaults, and the JSON in `signalling/` is
 not missing them.** Of the six payloads the tool emits, the two overlays carry

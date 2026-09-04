@@ -1,0 +1,5300 @@
+{
+  "breaks": {
+    "1-Overlay": {
+      "nombre": "Overlay",
+      "type": "cornerOverlay",
+      "ventana": [
+        20,
+        32
+      ],
+      "luz": [
+        {
+          "time": 20.52,
+          "primaryContent": 61.9,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 0.42,
+              "luz": 110.9
+            }
+          },
+          "luzDelMasOscuro": 110.9
+        },
+        {
+          "time": 20.94,
+          "primaryContent": 65.6,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 0.82,
+              "luz": 108.3
+            }
+          },
+          "luzDelMasOscuro": 108.3
+        },
+        {
+          "time": 21.38,
+          "primaryContent": 69.7,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 1.25,
+              "luz": 108
+            }
+          },
+          "luzDelMasOscuro": 108
+        },
+        {
+          "time": 21.8,
+          "primaryContent": 68.4,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 1.67,
+              "luz": 105.4
+            }
+          },
+          "luzDelMasOscuro": 105.4
+        },
+        {
+          "time": 22.23,
+          "primaryContent": 72.4,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 2.09,
+              "luz": 129.6
+            }
+          },
+          "luzDelMasOscuro": 129.6
+        },
+        {
+          "time": 22.64,
+          "primaryContent": 77.9,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 2.51,
+              "luz": 133.1
+            }
+          },
+          "luzDelMasOscuro": 133.1
+        },
+        {
+          "time": 23.06,
+          "primaryContent": 79.9,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 2.93,
+              "luz": 132.8
+            }
+          },
+          "luzDelMasOscuro": 132.8
+        },
+        {
+          "time": 23.49,
+          "primaryContent": 80.2,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 3.36,
+              "luz": 132.3
+            }
+          },
+          "luzDelMasOscuro": 132.3
+        },
+        {
+          "time": 23.91,
+          "primaryContent": 82.5,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 3.78,
+              "luz": 132.8
+            }
+          },
+          "luzDelMasOscuro": 132.8
+        },
+        {
+          "time": 24.33,
+          "primaryContent": 83.4,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 4.2,
+              "luz": 133.4
+            }
+          },
+          "luzDelMasOscuro": 133.4
+        },
+        {
+          "time": 24.75,
+          "primaryContent": 85.4,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 4.62,
+              "luz": 133.7
+            }
+          },
+          "luzDelMasOscuro": 133.7
+        },
+        {
+          "time": 25.17,
+          "primaryContent": 120.5,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 5.04,
+              "luz": 119.2
+            }
+          },
+          "luzDelMasOscuro": 119.2
+        },
+        {
+          "time": 25.59,
+          "primaryContent": 113.7,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 5.46,
+              "luz": 120.8
+            }
+          },
+          "luzDelMasOscuro": 120.8
+        },
+        {
+          "time": 26.02,
+          "primaryContent": 115.6,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 5.88,
+              "luz": 126.7
+            }
+          },
+          "luzDelMasOscuro": 126.7
+        },
+        {
+          "time": 26.43,
+          "primaryContent": 117.9,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 6.3,
+              "luz": 157.5
+            }
+          },
+          "luzDelMasOscuro": 157.5
+        },
+        {
+          "time": 26.86,
+          "primaryContent": 123.9,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 6.73,
+              "luz": 152.5
+            }
+          },
+          "luzDelMasOscuro": 152.5
+        },
+        {
+          "time": 27.29,
+          "primaryContent": 124.5,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 7.16,
+              "luz": 145.3
+            }
+          },
+          "luzDelMasOscuro": 145.3
+        },
+        {
+          "time": 27.71,
+          "primaryContent": 103.8,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 7.58,
+              "luz": 162.8
+            }
+          },
+          "luzDelMasOscuro": 162.8
+        },
+        {
+          "time": 28.13,
+          "primaryContent": 104.2,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 8,
+              "luz": 162.6
+            }
+          },
+          "luzDelMasOscuro": 162.6
+        },
+        {
+          "time": 28.56,
+          "primaryContent": 105.6,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 8.43,
+              "luz": 162.6
+            }
+          },
+          "luzDelMasOscuro": 162.6
+        },
+        {
+          "time": 28.99,
+          "primaryContent": 92.1,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 8.86,
+              "luz": 162.6
+            }
+          },
+          "luzDelMasOscuro": 162.6
+        },
+        {
+          "time": 29.41,
+          "primaryContent": 91.9,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 9.28,
+              "luz": 162.4
+            }
+          },
+          "luzDelMasOscuro": 162.4
+        },
+        {
+          "time": 29.83,
+          "primaryContent": 92.7,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 9.7,
+              "luz": 162.4
+            }
+          },
+          "luzDelMasOscuro": 162.4
+        },
+        {
+          "time": 30.26,
+          "primaryContent": 89.7,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 10.12,
+              "luz": 161.9
+            }
+          },
+          "luzDelMasOscuro": 161.9
+        },
+        {
+          "time": 30.68,
+          "primaryContent": 92.2,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 10.55,
+              "luz": 161.9
+            }
+          },
+          "luzDelMasOscuro": 161.9
+        },
+        {
+          "time": 31.1,
+          "primaryContent": 103.3,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 10.98,
+              "luz": 162.4
+            }
+          },
+          "luzDelMasOscuro": 162.4
+        },
+        {
+          "time": 31.54,
+          "primaryContent": 103.3,
+          "assets": {
+            "adOverlay1": {
+              "tag": "video",
+              "adTime": 11.41,
+              "luz": 162.7
+            }
+          },
+          "luzDelMasOscuro": 162.7
+        }
+      ],
+      "instanteMasClaro": {
+        "time": 27.71,
+        "primaryContent": 103.8,
+        "assets": {
+          "adOverlay1": {
+            "tag": "video",
+            "adTime": 7.58,
+            "luz": 162.8
+          }
+        },
+        "luzDelMasOscuro": 162.8
+      },
+      "offsetDeLaCaptura": 7.7,
+      "geometria": {
+        "time": 28.523,
+        "playerArea": {
+          "w": 715,
+          "h": 402.19,
+          "aspecto": 1.7778
+        },
+        "fillMode": "cover",
+        "elements": [
+          {
+            "element": "primaryContent",
+            "primary": true,
+            "tag": "video",
+            "zDepth": 0,
+            "box": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "uri": null,
+            "mediaType": null,
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 715,
+              "height": 402.1875
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 715,
+              "height": 402.1875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "0",
+            "position": "relative",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "adOverlay1",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 1,
+            "box": {
+              "top": 0,
+              "right": 75,
+              "bottom": 75,
+              "left": 0
+            },
+            "uri": "/content/adB/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 178.75,
+              "height": 100.546875
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 178.75,
+              "height": 100.546875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "1",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          }
+        ],
+        "type": "cornerOverlay",
+        "id": "AD-1-CONCURRENT",
+        "window": [
+          20,
+          32
+        ]
+      },
+      "estado": {
+        "time": 28.53,
+        "contract": "t=28.5s \u00b7 cornerOverlay \u00b7 z0 primaryContent [0 0 0 0] \u00b7 z1 adOverlay1 [0 75 75 0]",
+        "demoState": "primary content + CONCURRENT AD (cornerOverlay) \u00b7 28.5s \u00b7 nothing was replaced",
+        "stockState": "primary content \u00b7 12.4s",
+        "paneDemo": "ad",
+        "paneStock": "primary",
+        "boton": {
+          "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+          "disabled": false
+        },
+        "adAudioOn": false,
+        "videosEnLaPestana": 3,
+        "imagenesDelAviso": 0,
+        "nodos": [
+          {
+            "id": "adOverlay1",
+            "tag": "video",
+            "muted": true,
+            "listo": true,
+            "w": 1280,
+            "h": 720
+          }
+        ]
+      },
+      "geometria_resize": {
+        "time": 22.603,
+        "playerArea": {
+          "w": 435,
+          "h": 244.69,
+          "aspecto": 1.7778
+        },
+        "fillMode": "cover",
+        "elements": [
+          {
+            "element": "primaryContent",
+            "primary": true,
+            "tag": "video",
+            "zDepth": 0,
+            "box": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "uri": null,
+            "mediaType": null,
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 435,
+              "height": 244.6875
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 435,
+              "height": 244.6875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "0",
+            "position": "relative",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "adOverlay1",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 1,
+            "box": {
+              "top": 0,
+              "right": 75,
+              "bottom": 75,
+              "left": 0
+            },
+            "uri": "/content/adB/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 108.75,
+              "height": 61.171875
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 108.75,
+              "height": 61.171875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "1",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          }
+        ],
+        "type": "cornerOverlay",
+        "id": "AD-1-CONCURRENT",
+        "window": [
+          20,
+          32
+        ]
+      }
+    },
+    "2-LBox video": {
+      "nombre": "LBox video",
+      "type": "squeezebackLShape",
+      "ventana": [
+        45,
+        57
+      ],
+      "luz": [
+        {
+          "time": 45.51,
+          "primaryContent": 105.3,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 0.41,
+              "luz": 111
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 0.5,
+              "luz": 117.6
+            }
+          },
+          "luzDelMasOscuro": 111
+        },
+        {
+          "time": 45.94,
+          "primaryContent": 104.8,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 0.8,
+              "luz": 108.4
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 0.92,
+              "luz": 145.9
+            }
+          },
+          "luzDelMasOscuro": 108.4
+        },
+        {
+          "time": 46.36,
+          "primaryContent": 105.1,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 1.23,
+              "luz": 108
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 1.35,
+              "luz": 137.4
+            }
+          },
+          "luzDelMasOscuro": 108
+        },
+        {
+          "time": 46.79,
+          "primaryContent": 105.2,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 1.66,
+              "luz": 106
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 1.78,
+              "luz": 111.8
+            }
+          },
+          "luzDelMasOscuro": 106
+        },
+        {
+          "time": 47.23,
+          "primaryContent": 106.1,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 2.1,
+              "luz": 129.8
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 2.22,
+              "luz": 129.1
+            }
+          },
+          "luzDelMasOscuro": 129.1
+        },
+        {
+          "time": 47.67,
+          "primaryContent": 105.9,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 2.54,
+              "luz": 133.1
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 2.66,
+              "luz": 145.1
+            }
+          },
+          "luzDelMasOscuro": 133.1
+        },
+        {
+          "time": 48.1,
+          "primaryContent": 105.9,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 2.97,
+              "luz": 132.6
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 3.08,
+              "luz": 102.1
+            }
+          },
+          "luzDelMasOscuro": 102.1
+        },
+        {
+          "time": 48.52,
+          "primaryContent": 104.8,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 3.39,
+              "luz": 132.4
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 3.51,
+              "luz": 21.3
+            }
+          },
+          "luzDelMasOscuro": 21.3
+        },
+        {
+          "time": 48.95,
+          "primaryContent": 105.3,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 3.82,
+              "luz": 132.8
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 3.94,
+              "luz": 44.3
+            }
+          },
+          "luzDelMasOscuro": 44.3
+        },
+        {
+          "time": 49.38,
+          "primaryContent": 105.6,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 4.25,
+              "luz": 133.5
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 4.37,
+              "luz": 109.3
+            }
+          },
+          "luzDelMasOscuro": 109.3
+        },
+        {
+          "time": 49.81,
+          "primaryContent": 106.2,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 4.68,
+              "luz": 119.1
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 4.8,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 119.1
+        },
+        {
+          "time": 50.24,
+          "primaryContent": 99.5,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 5.11,
+              "luz": 119.3
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 5.23,
+              "luz": 134.1
+            }
+          },
+          "luzDelMasOscuro": 119.3
+        },
+        {
+          "time": 50.67,
+          "primaryContent": 99.1,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 5.54,
+              "luz": 121.3
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 5.66,
+              "luz": 134
+            }
+          },
+          "luzDelMasOscuro": 121.3
+        },
+        {
+          "time": 51.11,
+          "primaryContent": 98.6,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 5.97,
+              "luz": 142.5
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 6.09,
+              "luz": 139
+            }
+          },
+          "luzDelMasOscuro": 139
+        },
+        {
+          "time": 51.53,
+          "primaryContent": 98.8,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 6.4,
+              "luz": 157.4
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 6.52,
+              "luz": 141.5
+            }
+          },
+          "luzDelMasOscuro": 141.5
+        },
+        {
+          "time": 51.96,
+          "primaryContent": 98.3,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 6.83,
+              "luz": 150.9
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 6.95,
+              "luz": 149.3
+            }
+          },
+          "luzDelMasOscuro": 149.3
+        },
+        {
+          "time": 52.39,
+          "primaryContent": 112.6,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 7.25,
+              "luz": 143.3
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 7.39,
+              "luz": 146.6
+            }
+          },
+          "luzDelMasOscuro": 143.3
+        },
+        {
+          "time": 52.83,
+          "primaryContent": 112,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 7.7,
+              "luz": 162.7
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 7.82,
+              "luz": 142.5
+            }
+          },
+          "luzDelMasOscuro": 142.5
+        },
+        {
+          "time": 53.26,
+          "primaryContent": 112,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 8.12,
+              "luz": 162.6
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 8.24,
+              "luz": 137.9
+            }
+          },
+          "luzDelMasOscuro": 137.9
+        },
+        {
+          "time": 53.68,
+          "primaryContent": 111.6,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 8.55,
+              "luz": 162.6
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 8.67,
+              "luz": 139.3
+            }
+          },
+          "luzDelMasOscuro": 139.3
+        },
+        {
+          "time": 54.11,
+          "primaryContent": 107.2,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 8.98,
+              "luz": 162.5
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 9.1,
+              "luz": 144.9
+            }
+          },
+          "luzDelMasOscuro": 144.9
+        },
+        {
+          "time": 54.53,
+          "primaryContent": 106.5,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 9.41,
+              "luz": 162.4
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 9.53,
+              "luz": 149.1
+            }
+          },
+          "luzDelMasOscuro": 149.1
+        },
+        {
+          "time": 54.97,
+          "primaryContent": 106.9,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 9.84,
+              "luz": 162.4
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 9.96,
+              "luz": 151.2
+            }
+          },
+          "luzDelMasOscuro": 151.2
+        },
+        {
+          "time": 55.4,
+          "primaryContent": 106.7,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 10.27,
+              "luz": 161.6
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 10.39,
+              "luz": 151
+            }
+          },
+          "luzDelMasOscuro": 151
+        },
+        {
+          "time": 55.84,
+          "primaryContent": 107,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 10.7,
+              "luz": 162.4
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 10.82,
+              "luz": 142.8
+            }
+          },
+          "luzDelMasOscuro": 142.8
+        },
+        {
+          "time": 56.26,
+          "primaryContent": 106.6,
+          "assets": {
+            "adBarVertical": {
+              "tag": "video",
+              "adTime": 11.14,
+              "luz": 162.1
+            },
+            "adBarHorizontal": {
+              "tag": "video",
+              "adTime": 11.26,
+              "luz": 122
+            }
+          },
+          "luzDelMasOscuro": 122
+        }
+      ],
+      "instanteMasClaro": {
+        "time": 54.97,
+        "primaryContent": 106.9,
+        "assets": {
+          "adBarVertical": {
+            "tag": "video",
+            "adTime": 9.84,
+            "luz": 162.4
+          },
+          "adBarHorizontal": {
+            "tag": "video",
+            "adTime": 9.96,
+            "luz": 151.2
+          }
+        },
+        "luzDelMasOscuro": 151.2
+      },
+      "offsetDeLaCaptura": 10.0,
+      "geometria": {
+        "time": 55.809,
+        "playerArea": {
+          "w": 715,
+          "h": 402.19,
+          "aspecto": 1.7778
+        },
+        "fillMode": "cover",
+        "elements": [
+          {
+            "element": "primaryContent",
+            "primary": true,
+            "tag": "video",
+            "zDepth": 0,
+            "box": {
+              "top": 0,
+              "right": 40,
+              "bottom": 40,
+              "left": 0
+            },
+            "uri": null,
+            "mediaType": null,
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 429,
+              "height": 241.3125
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 429,
+              "height": 241.3125
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "0",
+            "position": "relative",
+            "transform": "matrix(0.6, 0, 0, 0.6, 0, 0)",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "adBarVertical",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 1,
+            "box": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 60
+            },
+            "uri": "/content/adB/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 429,
+              "top": 0,
+              "width": 286,
+              "height": 402.1875
+            },
+            "medidoPx": {
+              "left": 429,
+              "top": 0,
+              "width": 286,
+              "height": 402.1875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "1",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 0.7111,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 512,
+                "h": 720
+              },
+              "recortePorCiento": 60,
+              "ejeRecortado": "horizontal",
+              "estiramientoSiFillPorCiento": 60
+            }
+          },
+          {
+            "element": "adBarHorizontal",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 2,
+            "box": {
+              "top": 60,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "uri": "/content/adA/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 241.3125,
+              "width": 715,
+              "height": 160.875
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 241.3125,
+              "width": 715,
+              "height": 160.875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "2",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 4.4444,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 288
+              },
+              "recortePorCiento": 60,
+              "ejeRecortado": "vertical",
+              "estiramientoSiFillPorCiento": 150
+            }
+          }
+        ],
+        "type": "squeezebackLShape",
+        "id": "AD-2-CONCURRENT",
+        "window": [
+          45,
+          57
+        ]
+      },
+      "estado": {
+        "time": 55.82,
+        "contract": "t=55.7s \u00b7 squeezebackLShape \u00b7 z0 primaryContent [0 40 40 0] \u00b7 z1 adBarVertical [0 0 0 60] \u00b7 z2 adBarHorizontal [60 0 0 0]",
+        "demoState": "primary content + CONCURRENT AD (squeezebackLShape) \u00b7 55.7s \u00b7 nothing was replaced",
+        "stockState": "LINEAR AD \"AD-1-LINEAR\" \u00b7 6.3s of the ad \u00b7 the content is off the screen",
+        "paneDemo": "ad",
+        "paneStock": "ad",
+        "boton": {
+          "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+          "disabled": false
+        },
+        "adAudioOn": false,
+        "videosEnLaPestana": 4,
+        "imagenesDelAviso": 0,
+        "nodos": [
+          {
+            "id": "adBarVertical",
+            "tag": "video",
+            "muted": true,
+            "listo": true,
+            "w": 1280,
+            "h": 720
+          },
+          {
+            "id": "adBarHorizontal",
+            "tag": "video",
+            "muted": true,
+            "listo": true,
+            "w": 1280,
+            "h": 720
+          }
+        ]
+      },
+      "geometria_resize": {
+        "time": 47.644,
+        "playerArea": {
+          "w": 435,
+          "h": 244.69,
+          "aspecto": 1.7778
+        },
+        "fillMode": "cover",
+        "elements": [
+          {
+            "element": "primaryContent",
+            "primary": true,
+            "tag": "video",
+            "zDepth": 0,
+            "box": {
+              "top": 0,
+              "right": 40,
+              "bottom": 40,
+              "left": 0
+            },
+            "uri": null,
+            "mediaType": null,
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 261,
+              "height": 146.8125
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 261,
+              "height": 146.8125
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "0",
+            "position": "relative",
+            "transform": "matrix(0.6, 0, 0, 0.6, 0, 0)",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "adBarVertical",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 1,
+            "box": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 60
+            },
+            "uri": "/content/adB/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 261,
+              "top": 0,
+              "width": 174,
+              "height": 244.6875
+            },
+            "medidoPx": {
+              "left": 261,
+              "top": 0,
+              "width": 174,
+              "height": 244.6875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "1",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 0.7111,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 512,
+                "h": 720
+              },
+              "recortePorCiento": 60,
+              "ejeRecortado": "horizontal",
+              "estiramientoSiFillPorCiento": 60
+            }
+          },
+          {
+            "element": "adBarHorizontal",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 2,
+            "box": {
+              "top": 60,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "uri": "/content/adA/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 146.8125,
+              "width": 435,
+              "height": 97.875
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 146.8125,
+              "width": 435,
+              "height": 97.875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "2",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 4.4444,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 288
+              },
+              "recortePorCiento": 60,
+              "ejeRecortado": "vertical",
+              "estiramientoSiFillPorCiento": 150
+            }
+          }
+        ],
+        "type": "squeezebackLShape",
+        "id": "AD-2-CONCURRENT",
+        "window": [
+          45,
+          57
+        ]
+      }
+    },
+    "3-LBox image": {
+      "nombre": "LBox image",
+      "type": "squeezebackLShape",
+      "ventana": [
+        70,
+        82
+      ],
+      "luz": [
+        {
+          "time": 70.4,
+          "primaryContent": 104.7,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": null
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": null
+            }
+          },
+          "luzDelMasOscuro": null
+        },
+        {
+          "time": 70.75,
+          "primaryContent": 114.1,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 71.24,
+          "primaryContent": 91.3,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 71.65,
+          "primaryContent": 93.6,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 72.09,
+          "primaryContent": 88.8,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 72.52,
+          "primaryContent": 101.1,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 72.93,
+          "primaryContent": 97,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 73.35,
+          "primaryContent": 91.3,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 73.77,
+          "primaryContent": 89.5,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 74.18,
+          "primaryContent": 87.5,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 74.59,
+          "primaryContent": 85.5,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 75.02,
+          "primaryContent": 78,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 75.45,
+          "primaryContent": 78.1,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 75.86,
+          "primaryContent": 83.4,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 76.28,
+          "primaryContent": 89.1,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 76.7,
+          "primaryContent": 108.7,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 77.11,
+          "primaryContent": 111.3,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 77.52,
+          "primaryContent": 113.3,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 77.95,
+          "primaryContent": 112.1,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 78.37,
+          "primaryContent": 110.6,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 78.8,
+          "primaryContent": 110.7,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 79.21,
+          "primaryContent": 110.4,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 79.64,
+          "primaryContent": 110.6,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 80.06,
+          "primaryContent": 110.9,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 80.49,
+          "primaryContent": 98.5,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 80.92,
+          "primaryContent": 100.5,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        },
+        {
+          "time": 81.33,
+          "primaryContent": 101.3,
+          "assets": {
+            "adBarVertical": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 159.3
+            },
+            "adBarHorizontal": {
+              "tag": "img",
+              "adTime": null,
+              "luz": 135.1
+            }
+          },
+          "luzDelMasOscuro": 135.1
+        }
+      ],
+      "instanteMasClaro": {
+        "time": 70.75,
+        "primaryContent": 114.1,
+        "assets": {
+          "adBarVertical": {
+            "tag": "img",
+            "adTime": null,
+            "luz": 159.3
+          },
+          "adBarHorizontal": {
+            "tag": "img",
+            "adTime": null,
+            "luz": 135.1
+          }
+        },
+        "luzDelMasOscuro": 135.1
+      },
+      "offsetDeLaCaptura": 0.8,
+      "geometria": {
+        "time": 71.586,
+        "playerArea": {
+          "w": 715,
+          "h": 402.19,
+          "aspecto": 1.7778
+        },
+        "fillMode": "cover",
+        "elements": [
+          {
+            "element": "primaryContent",
+            "primary": true,
+            "tag": "video",
+            "zDepth": 0,
+            "box": {
+              "top": 0,
+              "right": 40,
+              "bottom": 40,
+              "left": 0
+            },
+            "uri": null,
+            "mediaType": null,
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 429,
+              "height": 241.3125
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 429,
+              "height": 241.3125
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "0",
+            "position": "relative",
+            "transform": "matrix(0.6, 0, 0, 0.6, 0, 0)",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "adBarVertical",
+            "primary": false,
+            "tag": "img",
+            "zDepth": 1,
+            "box": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 60
+            },
+            "uri": "/content/adImageA/creative.jpg",
+            "mediaType": "image/jpeg",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 429,
+              "top": 0,
+              "width": 286,
+              "height": 402.1875
+            },
+            "medidoPx": {
+              "left": 429,
+              "top": 0,
+              "width": 286,
+              "height": 402.1875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "1",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 0.7111,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 512,
+                "h": 720
+              },
+              "recortePorCiento": 60,
+              "ejeRecortado": "horizontal",
+              "estiramientoSiFillPorCiento": 60
+            }
+          },
+          {
+            "element": "adBarHorizontal",
+            "primary": false,
+            "tag": "img",
+            "zDepth": 2,
+            "box": {
+              "top": 60,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "uri": "/content/adImageB/creative.jpg",
+            "mediaType": "image/jpeg",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 241.3125,
+              "width": 715,
+              "height": 160.875
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 241.3125,
+              "width": 715,
+              "height": 160.875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "2",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 4.4444,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 288
+              },
+              "recortePorCiento": 60,
+              "ejeRecortado": "vertical",
+              "estiramientoSiFillPorCiento": 150
+            }
+          }
+        ],
+        "type": "squeezebackLShape",
+        "id": "AD-3-CONCURRENT",
+        "window": [
+          70,
+          82
+        ]
+      },
+      "estado": {
+        "time": 71.59,
+        "contract": "t=71.5s \u00b7 squeezebackLShape \u00b7 z0 primaryContent [0 40 40 0] \u00b7 z1 adBarVertical [0 0 0 60] \u00b7 z2 adBarHorizontal [60 0 0 0]",
+        "demoState": "primary content + CONCURRENT AD (squeezebackLShape) \u00b7 71.5s \u00b7 nothing was replaced",
+        "stockState": "primary content \u00b7 28.5s",
+        "paneDemo": "ad",
+        "paneStock": "primary",
+        "boton": {
+          "text": "the ad on screen has no audio",
+          "disabled": true
+        },
+        "adAudioOn": false,
+        "videosEnLaPestana": 2,
+        "imagenesDelAviso": 2,
+        "nodos": [
+          {
+            "id": "adBarVertical",
+            "tag": "img",
+            "muted": null,
+            "listo": true,
+            "w": 1280,
+            "h": 720
+          },
+          {
+            "id": "adBarHorizontal",
+            "tag": "img",
+            "muted": null,
+            "listo": true,
+            "w": 1280,
+            "h": 720
+          }
+        ]
+      },
+      "geometria_resize": {
+        "time": 72.617,
+        "playerArea": {
+          "w": 435,
+          "h": 244.69,
+          "aspecto": 1.7778
+        },
+        "fillMode": "cover",
+        "elements": [
+          {
+            "element": "primaryContent",
+            "primary": true,
+            "tag": "video",
+            "zDepth": 0,
+            "box": {
+              "top": 0,
+              "right": 40,
+              "bottom": 40,
+              "left": 0
+            },
+            "uri": null,
+            "mediaType": null,
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 261,
+              "height": 146.8125
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 261,
+              "height": 146.8125
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "0",
+            "position": "relative",
+            "transform": "matrix(0.6, 0, 0, 0.6, 0, 0)",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "adBarVertical",
+            "primary": false,
+            "tag": "img",
+            "zDepth": 1,
+            "box": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 60
+            },
+            "uri": "/content/adImageA/creative.jpg",
+            "mediaType": "image/jpeg",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 261,
+              "top": 0,
+              "width": 174,
+              "height": 244.6875
+            },
+            "medidoPx": {
+              "left": 261,
+              "top": 0,
+              "width": 174,
+              "height": 244.6875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "1",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 0.7111,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 512,
+                "h": 720
+              },
+              "recortePorCiento": 60,
+              "ejeRecortado": "horizontal",
+              "estiramientoSiFillPorCiento": 60
+            }
+          },
+          {
+            "element": "adBarHorizontal",
+            "primary": false,
+            "tag": "img",
+            "zDepth": 2,
+            "box": {
+              "top": 60,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "uri": "/content/adImageB/creative.jpg",
+            "mediaType": "image/jpeg",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 146.8125,
+              "width": 435,
+              "height": 97.875
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 146.8125,
+              "width": 435,
+              "height": 97.875
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "2",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 4.4444,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 288
+              },
+              "recortePorCiento": 60,
+              "ejeRecortado": "vertical",
+              "estiramientoSiFillPorCiento": 150
+            }
+          }
+        ],
+        "type": "squeezebackLShape",
+        "id": "AD-3-CONCURRENT",
+        "window": [
+          70,
+          82
+        ]
+      },
+      "audioConAssetsDeImagen": {
+        "time": 71.29,
+        "contract": "t=71.2s \u00b7 squeezebackLShape \u00b7 z0 primaryContent [0 40 40 0] \u00b7 z1 adBarVertical [0 0 0 60] \u00b7 z2 adBarHorizontal [60 0 0 0]",
+        "demoState": "primary content + CONCURRENT AD (squeezebackLShape) \u00b7 71.2s \u00b7 nothing was replaced",
+        "stockState": "primary content \u00b7 30.9s",
+        "paneDemo": "ad",
+        "paneStock": "primary",
+        "boton": {
+          "text": "the ad on screen has no audio",
+          "disabled": true
+        },
+        "adAudioOn": false,
+        "videosEnLaPestana": 2,
+        "imagenesDelAviso": 2,
+        "nodos": [
+          {
+            "id": "adBarVertical",
+            "tag": "img",
+            "muted": null,
+            "listo": true,
+            "w": 1280,
+            "h": 720
+          },
+          {
+            "id": "adBarHorizontal",
+            "tag": "img",
+            "muted": null,
+            "listo": true,
+            "w": 1280,
+            "h": 720
+          }
+        ]
+      }
+    },
+    "4-Side by side pullback": {
+      "nombre": "Side by side pullback",
+      "type": "squeezebackDoubleBox",
+      "ventana": [
+        95,
+        107
+      ],
+      "luz": [
+        {
+          "time": 95.42,
+          "primaryContent": 90,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 0.42,
+              "luz": 110.9
+            }
+          },
+          "luzDelMasOscuro": 110.9
+        },
+        {
+          "time": 95.83,
+          "primaryContent": 89.7,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 0.83,
+              "luz": 108.3
+            }
+          },
+          "luzDelMasOscuro": 108.3
+        },
+        {
+          "time": 96.28,
+          "primaryContent": 90.1,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 1.28,
+              "luz": 108
+            }
+          },
+          "luzDelMasOscuro": 108
+        },
+        {
+          "time": 96.73,
+          "primaryContent": 90.4,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 1.73,
+              "luz": 131.2
+            }
+          },
+          "luzDelMasOscuro": 131.2
+        },
+        {
+          "time": 97.18,
+          "primaryContent": 93.6,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 2.16,
+              "luz": 129.9
+            }
+          },
+          "luzDelMasOscuro": 129.9
+        },
+        {
+          "time": 97.6,
+          "primaryContent": 94.1,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 2.58,
+              "luz": 133.2
+            }
+          },
+          "luzDelMasOscuro": 133.2
+        },
+        {
+          "time": 98.03,
+          "primaryContent": 60.7,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 3.01,
+              "luz": 132.6
+            }
+          },
+          "luzDelMasOscuro": 132.6
+        },
+        {
+          "time": 98.45,
+          "primaryContent": 59.6,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 3.43,
+              "luz": 132.5
+            }
+          },
+          "luzDelMasOscuro": 132.5
+        },
+        {
+          "time": 98.86,
+          "primaryContent": 58.5,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 3.84,
+              "luz": 132.9
+            }
+          },
+          "luzDelMasOscuro": 132.9
+        },
+        {
+          "time": 99.28,
+          "primaryContent": 101.6,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 4.27,
+              "luz": 133.5
+            }
+          },
+          "luzDelMasOscuro": 133.5
+        },
+        {
+          "time": 99.71,
+          "primaryContent": 127.5,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 4.7,
+              "luz": 119.1
+            }
+          },
+          "luzDelMasOscuro": 119.1
+        },
+        {
+          "time": 100.14,
+          "primaryContent": 127.7,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 5.13,
+              "luz": 119.3
+            }
+          },
+          "luzDelMasOscuro": 119.3
+        },
+        {
+          "time": 100.56,
+          "primaryContent": 129.6,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 5.55,
+              "luz": 121.3
+            }
+          },
+          "luzDelMasOscuro": 121.3
+        },
+        {
+          "time": 100.99,
+          "primaryContent": 130.1,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 5.97,
+              "luz": 142.5
+            }
+          },
+          "luzDelMasOscuro": 142.5
+        },
+        {
+          "time": 101.41,
+          "primaryContent": 130.3,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 6.4,
+              "luz": 157.2
+            }
+          },
+          "luzDelMasOscuro": 157.2
+        },
+        {
+          "time": 101.84,
+          "primaryContent": 73.3,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 6.82,
+              "luz": 151.8
+            }
+          },
+          "luzDelMasOscuro": 151.8
+        },
+        {
+          "time": 102.25,
+          "primaryContent": 74.2,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 7.24,
+              "luz": 143.3
+            }
+          },
+          "luzDelMasOscuro": 143.3
+        },
+        {
+          "time": 102.68,
+          "primaryContent": 73.3,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 7.67,
+              "luz": 162.7
+            }
+          },
+          "luzDelMasOscuro": 162.7
+        },
+        {
+          "time": 103.11,
+          "primaryContent": 71.8,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 8.09,
+              "luz": 162.6
+            }
+          },
+          "luzDelMasOscuro": 162.6
+        },
+        {
+          "time": 103.53,
+          "primaryContent": 71.4,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 8.52,
+              "luz": 162.6
+            }
+          },
+          "luzDelMasOscuro": 162.6
+        },
+        {
+          "time": 103.97,
+          "primaryContent": 125.5,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 8.95,
+              "luz": 162.6
+            }
+          },
+          "luzDelMasOscuro": 162.6
+        },
+        {
+          "time": 104.39,
+          "primaryContent": 123.8,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 9.37,
+              "luz": 162.4
+            }
+          },
+          "luzDelMasOscuro": 162.4
+        },
+        {
+          "time": 104.81,
+          "primaryContent": 122.9,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 9.79,
+              "luz": 162.4
+            }
+          },
+          "luzDelMasOscuro": 162.4
+        },
+        {
+          "time": 105.23,
+          "primaryContent": 123.3,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 10.21,
+              "luz": 161.6
+            }
+          },
+          "luzDelMasOscuro": 161.6
+        },
+        {
+          "time": 105.65,
+          "primaryContent": 122.8,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 10.64,
+              "luz": 163.6
+            }
+          },
+          "luzDelMasOscuro": 163.6
+        },
+        {
+          "time": 106.09,
+          "primaryContent": 103.5,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 11.07,
+              "luz": 163.3
+            }
+          },
+          "luzDelMasOscuro": 163.3
+        },
+        {
+          "time": 106.51,
+          "primaryContent": 103.8,
+          "assets": {
+            "adOverlay": {
+              "tag": "video",
+              "adTime": 11.5,
+              "luz": 162.5
+            }
+          },
+          "luzDelMasOscuro": 162.5
+        }
+      ],
+      "instanteMasClaro": {
+        "time": 105.65,
+        "primaryContent": 122.8,
+        "assets": {
+          "adOverlay": {
+            "tag": "video",
+            "adTime": 10.64,
+            "luz": 163.6
+          }
+        },
+        "luzDelMasOscuro": 163.6
+      },
+      "offsetDeLaCaptura": 10.7,
+      "geometria": {
+        "time": 106.473,
+        "playerArea": {
+          "w": 715,
+          "h": 402.19,
+          "aspecto": 1.7778
+        },
+        "fillMode": "cover",
+        "elements": [
+          {
+            "element": "primaryContent",
+            "primary": true,
+            "tag": "video",
+            "zDepth": 0,
+            "box": {
+              "top": 25,
+              "right": 50,
+              "bottom": 25,
+              "left": 0
+            },
+            "uri": null,
+            "mediaType": null,
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 100.546875,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 100.546875,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "0",
+            "position": "relative",
+            "transform": "matrix(0.5, 0, 0, 0.5, 0, 100.547)",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "adOverlay",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 1,
+            "box": {
+              "top": 25,
+              "right": 0,
+              "bottom": 25,
+              "left": 50
+            },
+            "uri": "/content/adB/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 357.5,
+              "top": 100.546875,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "medidoPx": {
+              "left": 357.5,
+              "top": 100.546875,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "1",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          }
+        ],
+        "type": "squeezebackDoubleBox",
+        "id": "AD-4-CONCURRENT",
+        "window": [
+          95,
+          107
+        ]
+      },
+      "estado": {
+        "time": 106.48,
+        "contract": "t=106.4s \u00b7 squeezebackDoubleBox \u00b7 z0 primaryContent [25 50 25 0] \u00b7 z1 adOverlay [25 0 25 50]",
+        "demoState": "primary content + CONCURRENT AD (squeezebackDoubleBox) \u00b7 106.4s \u00b7 nothing was replaced",
+        "stockState": "primary content \u00b7 43.4s",
+        "paneDemo": "ad",
+        "paneStock": "primary",
+        "boton": {
+          "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+          "disabled": false
+        },
+        "adAudioOn": false,
+        "videosEnLaPestana": 3,
+        "imagenesDelAviso": 0,
+        "nodos": [
+          {
+            "id": "adOverlay",
+            "tag": "video",
+            "muted": true,
+            "listo": true,
+            "w": 1280,
+            "h": 720
+          }
+        ]
+      },
+      "geometria_resize": {
+        "time": 97.64,
+        "playerArea": {
+          "w": 435,
+          "h": 244.69,
+          "aspecto": 1.7778
+        },
+        "fillMode": "cover",
+        "elements": [
+          {
+            "element": "primaryContent",
+            "primary": true,
+            "tag": "video",
+            "zDepth": 0,
+            "box": {
+              "top": 25,
+              "right": 50,
+              "bottom": 25,
+              "left": 0
+            },
+            "uri": null,
+            "mediaType": null,
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 61.171875,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 61.171875,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "0",
+            "position": "relative",
+            "transform": "matrix(0.5, 0, 0, 0.5, 0, 61.1719)",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "adOverlay",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 1,
+            "box": {
+              "top": 25,
+              "right": 0,
+              "bottom": 25,
+              "left": 50
+            },
+            "uri": "/content/adB/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 217.5,
+              "top": 61.171875,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "medidoPx": {
+              "left": 217.5,
+              "top": 61.171875,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "1",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          }
+        ],
+        "type": "squeezebackDoubleBox",
+        "id": "AD-4-CONCURRENT",
+        "window": [
+          95,
+          107
+        ]
+      }
+    },
+    "5-Quad": {
+      "nombre": "Quad",
+      "type": "multiView",
+      "ventana": [
+        120,
+        132
+      ],
+      "luz": [
+        {
+          "time": 120.57,
+          "primaryContent": 85.5,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 0.43,
+              "luz": 103.6
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 0.43,
+              "luz": 110.9
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 0.42,
+              "luz": 18.2
+            }
+          },
+          "luzDelMasOscuro": 18.2
+        },
+        {
+          "time": 121.01,
+          "primaryContent": 85.6,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 0.88,
+              "luz": 145.9
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 0.87,
+              "luz": 107.9
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 0.89,
+              "luz": 23.9
+            }
+          },
+          "luzDelMasOscuro": 23.9
+        },
+        {
+          "time": 121.5,
+          "primaryContent": 88.4,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 1.38,
+              "luz": 131.3
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 1.36,
+              "luz": 108
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 1.38,
+              "luz": 24.2
+            }
+          },
+          "luzDelMasOscuro": 24.2
+        },
+        {
+          "time": 121.99,
+          "primaryContent": 89,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 1.86,
+              "luz": 105.7
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 1.84,
+              "luz": 131.3
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 1.85,
+              "luz": 24.4
+            }
+          },
+          "luzDelMasOscuro": 24.4
+        },
+        {
+          "time": 122.46,
+          "primaryContent": 84.6,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 2.33,
+              "luz": 169.1
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 2.32,
+              "luz": 130.5
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 2.33,
+              "luz": 24.5
+            }
+          },
+          "luzDelMasOscuro": 24.5
+        },
+        {
+          "time": 122.92,
+          "primaryContent": 104.8,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 2.78,
+              "luz": 131.2
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 2.75,
+              "luz": 133
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 2.76,
+              "luz": 24.4
+            }
+          },
+          "luzDelMasOscuro": 24.4
+        },
+        {
+          "time": 123.36,
+          "primaryContent": 105.6,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 3.22,
+              "luz": 73.6
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 3.2,
+              "luz": 132.4
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 3.21,
+              "luz": 16.3
+            }
+          },
+          "luzDelMasOscuro": 16.3
+        },
+        {
+          "time": 123.81,
+          "primaryContent": 107.8,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 3.67,
+              "luz": 5.4
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 3.64,
+              "luz": 132.7
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 3.65,
+              "luz": 9.4
+            }
+          },
+          "luzDelMasOscuro": 5.4
+        },
+        {
+          "time": 124.24,
+          "primaryContent": 105.3,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 4.1,
+              "luz": 70.4
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 4.08,
+              "luz": 133.4
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 4.09,
+              "luz": 8.9
+            }
+          },
+          "luzDelMasOscuro": 8.9
+        },
+        {
+          "time": 124.68,
+          "primaryContent": 104.2,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 4.54,
+              "luz": 135.6
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 4.51,
+              "luz": 133.7
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 4.52,
+              "luz": 9
+            }
+          },
+          "luzDelMasOscuro": 9
+        },
+        {
+          "time": 125.11,
+          "primaryContent": 103.4,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 4.97,
+              "luz": 134.6
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 4.94,
+              "luz": 119.1
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 4.94,
+              "luz": 9.4
+            }
+          },
+          "luzDelMasOscuro": 9.4
+        },
+        {
+          "time": 125.53,
+          "primaryContent": 103.7,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 5.4,
+              "luz": 133.8
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 5.37,
+              "luz": 120.4
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 5.38,
+              "luz": 9.7
+            }
+          },
+          "luzDelMasOscuro": 9.7
+        },
+        {
+          "time": 125.97,
+          "primaryContent": 102.6,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 5.83,
+              "luz": 136.1
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 5.81,
+              "luz": 126.3
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 5.83,
+              "luz": 10.2
+            }
+          },
+          "luzDelMasOscuro": 10.2
+        },
+        {
+          "time": 126.42,
+          "primaryContent": 101.7,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 6.28,
+              "luz": 137.7
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 6.25,
+              "luz": 157.6
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 6.26,
+              "luz": 10.9
+            }
+          },
+          "luzDelMasOscuro": 10.9
+        },
+        {
+          "time": 126.85,
+          "primaryContent": 100.7,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 6.71,
+              "luz": 145.5
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 6.69,
+              "luz": 154.4
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 6.69,
+              "luz": 13.6
+            }
+          },
+          "luzDelMasOscuro": 13.6
+        },
+        {
+          "time": 127.28,
+          "primaryContent": 101.3,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 7.15,
+              "luz": 149
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 7.12,
+              "luz": 145.6
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 7.13,
+              "luz": 13.4
+            }
+          },
+          "luzDelMasOscuro": 13.4
+        },
+        {
+          "time": 127.72,
+          "primaryContent": 99.6,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 7.59,
+              "luz": 145.7
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 7.56,
+              "luz": 162.8
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 7.57,
+              "luz": 11.9
+            }
+          },
+          "luzDelMasOscuro": 11.9
+        },
+        {
+          "time": 128.16,
+          "primaryContent": 101.2,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 8.02,
+              "luz": 139
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 7.99,
+              "luz": 162.7
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 8,
+              "luz": 12
+            }
+          },
+          "luzDelMasOscuro": 12
+        },
+        {
+          "time": 128.59,
+          "primaryContent": 103.2,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 8.45,
+              "luz": 138.1
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 8.42,
+              "luz": 162.6
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 8.43,
+              "luz": 22.4
+            }
+          },
+          "luzDelMasOscuro": 22.4
+        },
+        {
+          "time": 129.02,
+          "primaryContent": 110.4,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 8.88,
+              "luz": 142.8
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 8.85,
+              "luz": 162.6
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 8.85,
+              "luz": 21.5
+            }
+          },
+          "luzDelMasOscuro": 21.5
+        },
+        {
+          "time": 129.44,
+          "primaryContent": 110.7,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 9.31,
+              "luz": 147.2
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 9.28,
+              "luz": 162.4
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 9.29,
+              "luz": 19.9
+            }
+          },
+          "luzDelMasOscuro": 19.9
+        },
+        {
+          "time": 129.88,
+          "primaryContent": 111.1,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 9.76,
+              "luz": 150.1
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 9.75,
+              "luz": 162.4
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 9.76,
+              "luz": 18.2
+            }
+          },
+          "luzDelMasOscuro": 18.2
+        },
+        {
+          "time": 130.35,
+          "primaryContent": 111.6,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 10.22,
+              "luz": 151.2
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 10.19,
+              "luz": 161.6
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 10.2,
+              "luz": 15.9
+            }
+          },
+          "luzDelMasOscuro": 15.9
+        },
+        {
+          "time": 130.79,
+          "primaryContent": 79.6,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 10.66,
+              "luz": 150.8
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 10.63,
+              "luz": 163.6
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 10.64,
+              "luz": 13.3
+            }
+          },
+          "luzDelMasOscuro": 13.3
+        },
+        {
+          "time": 131.23,
+          "primaryContent": 77.4,
+          "assets": {
+            "view2": {
+              "tag": "video",
+              "adTime": 11.1,
+              "luz": 130
+            },
+            "view3": {
+              "tag": "video",
+              "adTime": 11.07,
+              "luz": 163.3
+            },
+            "view4": {
+              "tag": "video",
+              "adTime": 11.08,
+              "luz": 10.8
+            }
+          },
+          "luzDelMasOscuro": 10.8
+        }
+      ],
+      "instanteMasClaro": {
+        "time": 122.46,
+        "primaryContent": 84.6,
+        "assets": {
+          "view2": {
+            "tag": "video",
+            "adTime": 2.33,
+            "luz": 169.1
+          },
+          "view3": {
+            "tag": "video",
+            "adTime": 2.32,
+            "luz": 130.5
+          },
+          "view4": {
+            "tag": "video",
+            "adTime": 2.33,
+            "luz": 24.5
+          }
+        },
+        "luzDelMasOscuro": 24.5
+      },
+      "offsetDeLaCaptura": 2.5,
+      "geometria": {
+        "time": 123.307,
+        "playerArea": {
+          "w": 715,
+          "h": 402.19,
+          "aspecto": 1.7778
+        },
+        "fillMode": "cover",
+        "elements": [
+          {
+            "element": "primaryContent",
+            "primary": true,
+            "tag": "video",
+            "zDepth": 0,
+            "box": {
+              "top": 0,
+              "right": 50,
+              "bottom": 50,
+              "left": 0
+            },
+            "uri": null,
+            "mediaType": null,
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "0",
+            "position": "relative",
+            "transform": "matrix(0.5, 0, 0, 0.5, 0, 0)",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "view2",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 1,
+            "box": {
+              "top": 0,
+              "right": 0,
+              "bottom": 50,
+              "left": 50
+            },
+            "uri": "/content/adA/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 357.5,
+              "top": 0,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "medidoPx": {
+              "left": 357.5,
+              "top": 0,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "1",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "view3",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 2,
+            "box": {
+              "top": 50,
+              "right": 50,
+              "bottom": 0,
+              "left": 0
+            },
+            "uri": "/content/adB/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 201.09375,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 201.09375,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "2",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "view4",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 3,
+            "box": {
+              "top": 50,
+              "right": 0,
+              "bottom": 0,
+              "left": 50
+            },
+            "uri": "/content/adC/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 357.5,
+              "top": 201.09375,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "medidoPx": {
+              "left": 357.5,
+              "top": 201.09375,
+              "width": 357.5,
+              "height": 201.09375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "3",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          }
+        ],
+        "type": "multiView",
+        "id": "AD-5-CONCURRENT",
+        "window": [
+          120,
+          132
+        ]
+      },
+      "estado": {
+        "time": 123.32,
+        "contract": "t=123.2s \u00b7 multiView \u00b7 z0 primaryContent [0 50 50 0] \u00b7 z1 view2 [0 0 50 50] \u00b7 z2 view3 [50 50 0 0] \u00b7 z3 view4 [50 0 0 50]",
+        "demoState": "primary content + CONCURRENT AD (multiView) \u00b7 123.2s \u00b7 nothing was replaced",
+        "stockState": "primary content \u00b7 45.0s",
+        "paneDemo": "ad",
+        "paneStock": "primary",
+        "boton": {
+          "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+          "disabled": false
+        },
+        "adAudioOn": false,
+        "videosEnLaPestana": 5,
+        "imagenesDelAviso": 0,
+        "nodos": [
+          {
+            "id": "view2",
+            "tag": "video",
+            "muted": true,
+            "listo": true,
+            "w": 1280,
+            "h": 720
+          },
+          {
+            "id": "view3",
+            "tag": "video",
+            "muted": true,
+            "listo": true,
+            "w": 1280,
+            "h": 720
+          },
+          {
+            "id": "view4",
+            "tag": "video",
+            "muted": true,
+            "listo": true,
+            "w": 1280,
+            "h": 720
+          }
+        ]
+      },
+      "geometria_resize": {
+        "time": 122.614,
+        "playerArea": {
+          "w": 435,
+          "h": 244.69,
+          "aspecto": 1.7778
+        },
+        "fillMode": "cover",
+        "elements": [
+          {
+            "element": "primaryContent",
+            "primary": true,
+            "tag": "video",
+            "zDepth": 0,
+            "box": {
+              "top": 0,
+              "right": 50,
+              "bottom": 50,
+              "left": 0
+            },
+            "uri": null,
+            "mediaType": null,
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 0,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "0",
+            "position": "relative",
+            "transform": "matrix(0.5, 0, 0, 0.5, 0, 0)",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "view2",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 1,
+            "box": {
+              "top": 0,
+              "right": 0,
+              "bottom": 50,
+              "left": 50
+            },
+            "uri": "/content/adA/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 217.5,
+              "top": 0,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "medidoPx": {
+              "left": 217.5,
+              "top": 0,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "1",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "view3",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 2,
+            "box": {
+              "top": 50,
+              "right": 50,
+              "bottom": 0,
+              "left": 0
+            },
+            "uri": "/content/adB/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 0,
+              "top": 122.34375,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "medidoPx": {
+              "left": 0,
+              "top": 122.34375,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "2",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          },
+          {
+            "element": "view4",
+            "primary": false,
+            "tag": "video",
+            "zDepth": 3,
+            "box": {
+              "top": 50,
+              "right": 0,
+              "bottom": 0,
+              "left": 50
+            },
+            "uri": "/content/adC/index.m3u8",
+            "mediaType": "application/vnd.apple.mpegurl",
+            "volume": 100,
+            "esperadoPx": {
+              "left": 217.5,
+              "top": 122.34375,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "medidoPx": {
+              "left": 217.5,
+              "top": 122.34375,
+              "width": 217.5,
+              "height": 122.34375
+            },
+            "deltaMaxPx": 0,
+            "objectFit": "cover",
+            "zIndex": "3",
+            "position": "absolute",
+            "transform": "none",
+            "llenado": {
+              "aspectoFuente": 1.7778,
+              "aspectoCaja": 1.7778,
+              "fuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "visibleDeLaFuentePx": {
+                "w": 1280,
+                "h": 720
+              },
+              "recortePorCiento": 0,
+              "ejeRecortado": "ninguno",
+              "estiramientoSiFillPorCiento": 0
+            }
+          }
+        ],
+        "type": "multiView",
+        "id": "AD-5-CONCURRENT",
+        "window": [
+          120,
+          132
+        ]
+      }
+    }
+  },
+  "laSenalizacion": {
+    "experiencias": [
+      {
+        "id": "AD-1-CONCURRENT",
+        "type": "cornerOverlay",
+        "ventana": [
+          20,
+          32
+        ],
+        "elementos": [
+          {
+            "id": "primaryContent",
+            "zDepth": 0,
+            "mediaType": null
+          },
+          {
+            "id": "adOverlay1",
+            "zDepth": 1,
+            "mediaType": "application/vnd.apple.mpegurl"
+          }
+        ]
+      },
+      {
+        "id": "AD-2-CONCURRENT",
+        "type": "squeezebackLShape",
+        "ventana": [
+          45,
+          57
+        ],
+        "elementos": [
+          {
+            "id": "primaryContent",
+            "zDepth": 0,
+            "mediaType": null
+          },
+          {
+            "id": "adBarVertical",
+            "zDepth": 1,
+            "mediaType": "application/vnd.apple.mpegurl"
+          },
+          {
+            "id": "adBarHorizontal",
+            "zDepth": 2,
+            "mediaType": "application/vnd.apple.mpegurl"
+          }
+        ]
+      },
+      {
+        "id": "AD-3-CONCURRENT",
+        "type": "squeezebackLShape",
+        "ventana": [
+          70,
+          82
+        ],
+        "elementos": [
+          {
+            "id": "primaryContent",
+            "zDepth": 0,
+            "mediaType": null
+          },
+          {
+            "id": "adBarVertical",
+            "zDepth": 1,
+            "mediaType": "image/jpeg"
+          },
+          {
+            "id": "adBarHorizontal",
+            "zDepth": 2,
+            "mediaType": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "id": "AD-4-CONCURRENT",
+        "type": "squeezebackDoubleBox",
+        "ventana": [
+          95,
+          107
+        ],
+        "elementos": [
+          {
+            "id": "primaryContent",
+            "zDepth": 0,
+            "mediaType": null
+          },
+          {
+            "id": "adOverlay",
+            "zDepth": 1,
+            "mediaType": "application/vnd.apple.mpegurl"
+          }
+        ]
+      },
+      {
+        "id": "AD-5-CONCURRENT",
+        "type": "multiView",
+        "ventana": [
+          120,
+          132
+        ],
+        "elementos": [
+          {
+            "id": "primaryContent",
+            "zDepth": 0,
+            "mediaType": null
+          },
+          {
+            "id": "view2",
+            "zDepth": 1,
+            "mediaType": "application/vnd.apple.mpegurl"
+          },
+          {
+            "id": "view3",
+            "zDepth": 2,
+            "mediaType": "application/vnd.apple.mpegurl"
+          },
+          {
+            "id": "view4",
+            "zDepth": 3,
+            "mediaType": "application/vnd.apple.mpegurl"
+          }
+        ]
+      }
+    ],
+    "dateRangesDeLaDemo": [
+      "AD-1-LINEAR",
+      "AD-1-CONCURRENT",
+      "AD-2-LINEAR",
+      "AD-2-CONCURRENT",
+      "AD-3-LINEAR",
+      "AD-3-CONCURRENT",
+      "AD-4-LINEAR",
+      "AD-4-CONCURRENT",
+      "AD-5-LINEAR",
+      "AD-5-CONCURRENT"
+    ],
+    "managerDeInterstitials": "null",
+    "agendadosPorElDeFabrica": [
+      {
+        "id": "AD-1-LINEAR",
+        "class": "com.apple.hls.interstitial"
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "class": "com.apple.hls.interstitial"
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "class": "com.apple.hls.interstitial"
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "class": "com.apple.hls.interstitial"
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "class": "com.apple.hls.interstitial"
+      }
+    ]
+  },
+  "despues_del_ultimo_break": {
+    "avisos": 0,
+    "videosEnLaPestana": 2,
+    "primaryStyle": "",
+    "primaryTransform": "none",
+    "primarioPx": {
+      "w": 715,
+      "h": 402.19
+    },
+    "areaPx": {
+      "w": 715,
+      "h": 402.19
+    },
+    "contract": "t=140.5s \u00b7 no concurrent experience"
+  },
+  "red": [
+    {
+      "resp": "http://localhost:8080/",
+      "status": 200,
+      "ct": "text/html; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/brand/fonts-embedded.css",
+      "status": 200,
+      "ct": "text/css; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/css/player.css",
+      "status": 200,
+      "ct": "text/css; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/js/app.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/vendor/hls.min.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "chrome-extension://cimiefiiaegbelhefglklhhakcgmhkai/page-script.js",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "resp": "chrome-extension://ailoabdmgclmfmhdagmlohpjlbpffblp/Roboto-Regular.woff2",
+      "status": 200,
+      "ct": "application/octet-stream"
+    },
+    {
+      "resp": "http://localhost:8080/js/contract-trace.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/js/signalling.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/js/renderer.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/js/stock-player.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/con-daterange.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/con-daterange.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/signalling/asset-list-cornerOverlay.json",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/signalling/asset-list-squeezebackLShape.json",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/signalling/asset-list-multiView.json",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "blob:http://localhost:8080/117bda3d-74f0-4132-9e52-cf32f788bb6b",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg010.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg011.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg012.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg013.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg006.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg007.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg014.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg008.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg015.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg009.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg016.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=0368eea6-427f-4037-a038-0181312a5b3c",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg010.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg017.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg018.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg019.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg020.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg021.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg022.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg023.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg024.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg025.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg026.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg027.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg028.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg029.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg030.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg031.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg032.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg033.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg034.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg035.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg036.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg037.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg038.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg039.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg040.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg010.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg041.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg042.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg043.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adImageA/creative.jpg",
+      "status": 200,
+      "ct": "image/jpeg"
+    },
+    {
+      "resp": "http://localhost:8080/content/adImageB/creative.jpg",
+      "status": 200,
+      "ct": "image/jpeg"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg044.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg045.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg046.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg047.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg048.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg049.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg050.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg051.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg052.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg011.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg012.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg013.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg014.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg015.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg016.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg017.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg018.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg019.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg020.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg021.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg022.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=0368eea6-427f-4037-a038-0181312a5b3c",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg023.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg053.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg054.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg055.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg056.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg057.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg058.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg059.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg060.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg061.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg062.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg063.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg064.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg065.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg066.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg067.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg068.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/adC/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg069.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg070.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg071.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg072.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adC/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg073.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adC/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adC/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg022.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg074.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adC/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adC/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg075.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adB/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/adC/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg076.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg077.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg078.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg079.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg080.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg023.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg024.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg025.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg026.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg027.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg028.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg029.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg030.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg031.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg032.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg033.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg034.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg035.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=0368eea6-427f-4037-a038-0181312a5b3c",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "resp": "http://localhost:8080/content/adA/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg081.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg082.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg083.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg084.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "resp": "http://localhost:8080/content/primary/seg085.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    }
+  ],
+  "consola": [
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-cornerOverlay.json"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved cornerOverlay#AD-1-CONCURRENT: 2 elements, window 20.00s -> 32.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-2-CONCURRENT at t=45.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackLShape#AD-2-CONCURRENT: 3 elements, window 45.00s -> 57.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-3-CONCURRENT at t=70.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json"
+    },
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackLShape#AD-3-CONCURRENT: 3 elements, window 70.00s -> 82.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-4-CONCURRENT at t=95.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackDoubleBox#AD-4-CONCURRENT: 2 elements, window 95.00s -> 107.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-5-CONCURRENT at t=120.00s, asset-list http://localhost:8080/signalling/asset-list-multiView.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved multiView#AD-5-CONCURRENT: 4 elements, window 120.00s -> 132.00s"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=20.41s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 20.00s -> 32.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=45.40s  ACTIVE squeezebackLShape#AD-2-CONCURRENT  window 45.00s -> 57.00s  3 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=70.40s  ACTIVE squeezebackLShape#AD-3-CONCURRENT  window 70.00s -> 82.00s  3 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=95.40s  ACTIVE squeezebackDoubleBox#AD-4-CONCURRENT  window 95.00s -> 107.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=120.41s  ACTIVE multiView#AD-5-CONCURRENT  window 120.00s -> 132.00s  4 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object, Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=140.00s  nothing active"
+    }
+  ],
+  "errores": []
+}

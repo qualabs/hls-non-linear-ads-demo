@@ -30,7 +30,7 @@ algo:
 | T-09 | El par de compatibilidad en la página de la demo                    | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-09/`  |
 | T-10 | El mecanismo de squeezeback                                         | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-10/`  |
 | T-11 | El mecanismo de multiview                                           | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-11/`  |
-| T-12 | Los cinco layouts en un recorrido grabable                          | pending | —    | —                                              |
+| T-12 | Los cinco layouts en un recorrido grabable                          | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-12/`  |
 
 ---
 
@@ -768,3 +768,150 @@ algo:
   donde aparecen los cinco layouts, con una captura de cada uno.
 - **nivel de verificación:** bajo. Es interfaz y datos, y el error está
   en la pantalla.
+- **Resultado:** el recorrido es una sola playlist con **diez `EXT-X-DATERANGE`**,
+  cinco pares de la misma `START-DATE`: uno de la clase concurrente por layout y
+  uno de la clase de Apple al lado, que es la forma del par de compatibilidad de
+  la T-09 repetida cinco veces. Los cinco nombres del documento de
+  requerimientos quedan cubiertos con el mapeo del ADR 0012:
+
+  | break | t | asset-list | `type` del payload | nombre en el documento |
+  | --- | --- | --- | --- | --- |
+  | 1 | 20 s | `asset-list-cornerOverlay.json` | `cornerOverlay` | Overlay |
+  | 2 | 45 s | `asset-list-squeezebackLShape.json` | `squeezebackLShape` | LBox video |
+  | 3 | 70 s | `asset-list-squeezebackLShape-image.json` | `squeezebackLShape` | LBox image |
+  | 4 | 95 s | `asset-list-squeezebackDoubleBox.json` | `squeezebackDoubleBox` | Side by side pullback |
+  | 5 | 120 s | `asset-list-multiView.json` | `multiView` | Quad |
+
+  **El done está en una sola corrida y sin tocar el reloj de nadie.** La página se
+  carga una vez, llega sola a cada break y de cada uno sale una captura a tamaño
+  real: `t12-1-cornerOverlay-player.png` y las otras cuatro, más el par en el
+  mismo instante en `t12-N-...-el-par.png`. No es una promesa del script: el
+  elemento de video primario lleva un contador de eventos `seeking` y la corrida
+  termina con la lista **vacía**, con una sola carga de la página y sin un solo
+  error de consola (`t12-sin-seek.json`). Y avanza al reloj de pared: 160,0 s de
+  programa en 160,15 s de pared desde que la página quedó lista, o sea 0,999,
+  que es el mismo número que midieron la T-01 y la T-11.
+  **Lo único que agregó código es el asset de imagen del LBox image**, y son
+  **24 líneas en dos archivos**: `isImage(mediaType)` y el nodo que se crea, un
+  `<img>` o un `<video>` según esa función; `playable()`, que son los nodos del
+  aviso que tienen línea de tiempo y audio, sobre los que actúan el control del
+  ADR 0010 y el play/pause/seek que sigue al primario; y la rama de imagen de
+  `attachAsset`, que es un `src` y nada más, sin segunda instancia del player.
+  Más dos líneas en `server.mjs`, que son el `Content-Type` de un `.jpg`. Los
+  cinco breaks, los cinco Date Ranges, los dos asset-list nuevos y el recorrido
+  son **datos**, y no aparecen en el diff de código: es exactamente lo que
+  anticipa el ADR 0008 y ahora está contado.
+  **La caja dibujada coincide con la que el contrato pidió: 0,00 px de
+  diferencia** en los **catorce** elementos de los cinco layouts, con el área del
+  player en 715x402,19, y otros 0,00 px en los catorce con el área en 435x244,69
+  después de un resize. Es el mismo cero de la T-03, la T-07, la T-10 y la T-11,
+  y ahora incluye dos cajas que no son un elemento de video sino un `<img>`.
+  **El llenado del ADR 0013 se aplica a una imagen igual que a un video, y el
+  número es el mismo.** Las dos barras del L dejan afuera el 60 % del asset en
+  los dos breaks del LBox, el de video y el de imagen: la caja no cambió y el
+  tipo de asset no le importa a la política. En `cornerOverlay`, en
+  `squeezebackDoubleBox` y en los cuatro cuadrantes del `multiView` el recorte es
+  0 %, porque esas cajas conservan la relación de aspecto del asset.
+  **El control de audio del ADR 0010 anda en cuatro de los cinco breaks**, y en
+  el quinto no hay nada que encender: los dos assets del LBox image son cuadros
+  fijos. El botón lo dice —`the ad on screen has no audio`, deshabilitado— en
+  lugar de quedar gris como si no hubiera aviso en pantalla, que son dos estados
+  distintos y en cámara se distinguen.
+  **El segundo argumento de la T-09 quedó atrapado en un cuadro.** Los cinco
+  breaks llevan también su Date Range lineal, así que el cliente de fábrica
+  reemplaza cinco veces y vuelve al primario donde lo había dejado: a los 160 s
+  de la corrida va **49,5 s de programa atrás** del nuestro, los dos en el
+  contenido primario y en escenas distintas
+  (`t12-el-programa-que-el-de-fabrica-se-perdio.png`, el de la izquierda en
+  110,5 s y el de la derecha en 160,0). Los doce segundos por break que declara
+  el tag le cuestan 12,4 s de programa, y esta medición no separa el costo de la
+  transición de una detención del player de la izquierda.
+  **La instrucción de grabación de la T-07 quedó donde la lee quien graba**, y no
+  en una evidencia: la sección `Before you record` del `README.md` la abre, y
+  `./run.sh` la imprime en cada arranque junto con la tabla de los cinco breaks.
+  Lo que dice es que hay que desmutear el contenido primario con el control
+  nativo **antes** de tocar el botón del aviso, porque la página arranca muteada
+  por la política de autoplay y encender el audio del aviso con el primario en
+  silencio muestra lo contrario de lo que el ADR 0010 quiere mostrar.
+  El corte entre las dos capas se mantiene: el mismo grep de la T-06, la T-07, la
+  T-09, la T-10 y la T-11, cero hits del lado del renderizado y los mismos tres
+  contadores —19, 22 y 30—, en `t12-corte-entre-capas.txt`. Los 15 tests de la
+  T-08 siguen pasando sin tocarlos. En la red está la cadena entera y todo
+  responde 200 —207 respuestas, las 207 con 200—: la media playlist, los **cinco**
+  asset-list de clase concurrente que pide la aplicación sin ningún parámetro,
+  uno por break; el de clase Apple que pide el player de fábrica con su
+  `?_HLS_primary_id`, que es lo que distingue de quién es cada pedido desde la
+  T-09; los tres contenidos de aviso con sus segmentos, cada uno por su propia
+  instancia de hls.js; y los dos `.jpg` como `image/jpeg`, que es el
+  `Content-Type` que el servidor estático aprendió en esta task.
+- **Los assets: cuatro layouts de cinco quedan bien y uno no, y está medido.**
+  El barrido de luminancia de la T-11 se corrió sobre las tres fuentes enteras
+  para elegir la ventana de doce segundos de cada creativo —la ventana cuyo
+  instante más oscuro es el más claro posible, porque lo que arruina una captura
+  es un instante negro adentro y no un promedio bajo—, y adentro del navegador
+  sobre los cinco breaks. Sintel pasó de la ventana de la T-05, con dos cortes a
+  negro y una media de 82,4, a una media de 123,1. En la corrida del recorrido el
+  asset más oscuro de cada layout mide 162,7, 151,6, 135,1 y 162,7 en los cuatro
+  primeros breaks, y **24,5 en el Quad**.
+  **El Quad es el que se queda sin material y no hay con qué arreglarlo desde
+  acá.** Consume los tres assets de aviso de una sola vez, así que la salida de
+  la T-10 —cambiar el asset oscuro por otro— no existe. Y no es la ventana: en
+  los 75 segundos del teaser de *Elephants Dream* no hay un solo instante que
+  llegue a 46 de luminancia sobre 255, la película entera promedia 15,0 y su
+  mejor ventana de doce segundos promedia 24,9. El pedido concreto, y los números
+  con los que se pide, están en `t12-los-assets-que-faltan.md`: un creativo de
+  video de doce segundos, 1280x720 o más, con media arriba de 100 y sin ningún
+  instante por debajo de 40.
+  **Y el del LBox con video, que es el que David marcó como el más difícil de
+  conseguir, está cubierto recortando el 60 % de un clip de 16:9.** Lo que se ve
+  es un fragmento de una película y no un creativo pensado para una caja de 0,71
+  a 1, y que se vea bien es una elección de encuadre hecha a mano. Lo que falta
+  ahí no es luz: es un creativo hecho para la forma de la barra, o que el modelo
+  diga por asset la relación de aspecto para la que el creativo está pensado, que
+  es la pregunta que el ADR 0013 ya le manda a SVTA.
+- **Cinco cosas que aparecieron al hacerlo.** La primera es que **los dos LBox
+  son el mismo layout hasta el MIME del asset**, y eso vuelve más filosa la
+  pregunta del ADR 0012. Los dos breaks declaran el mismo `type`, los mismos tres
+  elementos, los mismos `viewport` y los mismos `zDepth`: el único campo que
+  difiere en todo el payload es el `type` de cada asset,
+  `application/vnd.apple.mpegurl` contra `image/jpeg`. La línea del contrato que
+  la página imprime debajo del player es **idéntica** en los dos, así que quien
+  audite la consola no puede distinguir LBox video de LBox image más que por la
+  URI. Si el documento de requerimientos quiere que sean dos layouts con nombre
+  propio, hoy no hay en el payload nada que los nombre. Y el sexto identificador
+  de la herramienta, `squeezebackFrame`, es el único que el recorrido no ejercita,
+  porque ninguno de los cinco nombres le corresponde: sigue exactamente donde el
+  ADR 0012 lo dejó.
+  La segunda es que **el control de audio del ADR 0010 supone que el aviso tiene
+  audio**, y uno de los cinco layouts no lo tiene. No es una contradicción del
+  ADR sino un caso que no cubre: el ADR dice que la página expone un control para
+  activar el audio del aviso, y con dos cuadros fijos no hay nada que activar. El
+  renderizador ahora distingue "no hay aviso" de "el aviso no tiene audio", que
+  es la única forma de que el botón no mienta.
+  La tercera es que **elegir un creativo no es medir su luminancia.** El instante
+  más claro de *Caminandes* en toda la película es su placa de agradecimientos:
+  mide 180 sobre 255, es perfectamente estable, y en pantalla se lee como que el
+  reproductor está mostrando los créditos de algo. Y el primer cuadro fijo de
+  Sintel salió del instante más claro de la película, que cae adentro de la
+  ventana de doce segundos del **video** de Sintel, así que los dos breaks del
+  LBox quedaban con la misma duna en la misma barra: lo que distingue LBox video
+  de LBox image es que uno se mueve y el otro no, y con la misma imagen en los dos
+  eso no se ve. Los dos cuadros se terminaron eligiendo mirándolos, con el
+  criterio medido como filtro y no como decisión.
+  La cuarta es que **los cinco breaks lineales hacen que el par deje de ser
+  comparable break a break, y ahí está justamente el argumento.** Sólo en el
+  primer break los dos clientes reaccionan al mismo par de tags en el mismo
+  instante; del segundo en adelante el de fábrica va atrasado y está mostrando
+  otra parte del programa, o su propio aviso lineal de un break anterior —en el
+  cuarto break los dos paneles tienen un aviso en pantalla, uno reemplazando y el
+  otro no—. El cuadro donde los dos están en el contenido primario y en escenas
+  distintas vale más que cinco cuadros donde los dos hacen lo mismo, así que la
+  captura del par que importa es la de los 160 s.
+  La quinta es una observación sin causa establecida, y se anota porque le toca a
+  quien grabe: en uno de los seis cuadros del par, el de los 160 s, **el panel de
+  fábrica muestra un artefacto de decodificación** —bloques verdes y magenta sobre
+  el cuadro entero— mientras el panel de la demo dibuja el mismo contenido sin un
+  defecto. Los segmentos son los mismos archivos para los dos clientes y el
+  nuestro los reproduce limpios, así que el artefacto es de esa instancia y no del
+  contenido; qué lo produce esta medición no lo dice. Si aparece en la grabación,
+  el cuadro que se usa es otro.

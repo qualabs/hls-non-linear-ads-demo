@@ -1,0 +1,41 @@
+{
+  "ASSETS": [
+    {
+      "URI": "/content/adA/index.m3u8",
+      "DURATION": 12.0,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "slot",
+        "payload": [
+          {
+            "type": "squeezebackLShape",
+            "start": 0,
+            "duration": 12.0,
+            "layout": {
+              "primaryContent": {
+                "zDepth": 0,
+                "viewport": "0 40 40 0"
+              },
+              "assets": [
+                {
+                  "id": "adBarVertical",
+                  "type": "image/jpeg",
+                  "uri": "/content/adImageA/creative.jpg",
+                  "viewport": "0 0 0 60",
+                  "zDepth": 1
+                },
+                {
+                  "id": "adBarHorizontal",
+                  "type": "image/jpeg",
+                  "uri": "/content/adImageB/creative.jpg",
+                  "viewport": "60 0 0 0",
+                  "zDepth": 2
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

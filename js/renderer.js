@@ -23,6 +23,20 @@
 export const FILL_MODE = 'cover';
 
 /**
+ * Which DOM element draws a given asset. Of the five layouts of the
+ * requirements document, one -- LBox image -- inserts a still instead of a
+ * video, and what tells them apart is the `mediaType` of the element and
+ * nothing else: the layout is the same L-shape either way (ADR 0012).
+ *
+ * The decision lives here because it is a question about the DOM and not about
+ * where the boxes came from, so the seam of ADR 0003 stays where it was: this
+ * file learns nothing new about the layer underneath. What the renderer still
+ * cannot do by itself is turn the `uri` into pixels -- that is `attachAsset`,
+ * injected, for an image exactly as for a video.
+ */
+export const isImage = (mediaType) => /^image\//i.test(mediaType || '');
+
+/**
  * The conversion of rule 1 of the contract: `box` are percentages of INSET
  * over the player area, so going to pixels is a subtraction. T-03 measured
  * this same arithmetic against the model of the SVTA tool with zero pixels of
@@ -96,16 +110,24 @@ export function createRenderer({ provider, video, layer, audioControl, attachAss
         drawn.push({ element, node: video, detach: null });
         continue;
       }
-      const node = document.createElement('video');
+      const image = isImage(element.mediaType);
+      const node = document.createElement(image ? 'img' : 'video');
       node.className = 'ad';
       node.dataset.elementId = element.id;
-      node.playsInline = true;
-      node.muted = true;
+      if (image) {
+        // The layer is aria-hidden and the picture is the ad itself, so there
+        // is nothing to describe that is not already on screen.
+        node.alt = '';
+      } else {
+        node.playsInline = true;
+        node.muted = true;
+      }
       layer.appendChild(node);
       const startAt = Math.max(0, video.currentTime - experience.startTime);
       const detach = attachAsset(node, { uri: element.uri, mediaType: element.mediaType, startAt });
-      node.play().catch(() => {});
-      drawn.push({ element, node, detach, experience });
+      // A still has no timeline: nothing to start and nothing to follow.
+      if (!image) node.play().catch(() => {});
+      drawn.push({ element, node, detach, experience, image });
     }
   }
 
@@ -187,22 +209,33 @@ export function createRenderer({ provider, video, layer, audioControl, attachAss
     adAudioOn = false;
   }
 
-  /** The ad nodes, which are the ones the audio control acts on. */
+  /** The ad nodes: every element of the layout that is not the primary. */
   function ads() {
     return drawn.filter((d) => !d.element.primary);
   }
 
+  /**
+   * The ad nodes that have a timeline and a soundtrack, which are the ones the
+   * audio control and the play/pause/seek of the primary act on. An image ad
+   * has neither, and one of the five layouts is made only of images.
+   */
+  function playable() {
+    return ads().filter((d) => !d.image);
+  }
+
   function applyAudio() {
-    for (const { node } of ads()) node.muted = !adAudioOn;
+    for (const { node } of playable()) node.muted = !adAudioOn;
   }
 
   function syncControl() {
     applyAudio();
     if (!audioControl) return;
-    const there = ads().length > 0;
+    const there = playable().length > 0;
     audioControl.disabled = !there;
     audioControl.textContent = !there
-      ? 'no ad on screen'
+      // Two states share the disabled button and saying which one it is matters
+      // on camera: an ad made of stills is not the absence of an ad.
+      ? (ads().length ? 'the ad on screen has no audio' : 'no ad on screen')
       : adAudioOn
         ? '🔊 ad audio ON — click to mute the ad'
         : '🔇 ad audio OFF — click to unmute the ad';
@@ -215,10 +248,10 @@ export function createRenderer({ provider, video, layer, audioControl, attachAss
 
   // The ad follows the primary: the experience is concurrent with the content,
   // so pausing the content pauses it and seeking inside the window moves it.
-  video.addEventListener('play', () => { for (const { node } of ads()) node.play().catch(() => {}); });
-  video.addEventListener('pause', () => { for (const { node } of ads()) node.pause(); });
+  video.addEventListener('play', () => { for (const { node } of playable()) node.play().catch(() => {}); });
+  video.addEventListener('pause', () => { for (const { node } of playable()) node.pause(); });
   video.addEventListener('seeked', () => {
-    for (const { node, experience } of ads()) {
+    for (const { node, experience } of playable()) {
       node.currentTime = Math.max(0, video.currentTime - experience.startTime);
     }
   });
