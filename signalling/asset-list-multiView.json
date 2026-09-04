@@ -1,0 +1,48 @@
+{
+  "ASSETS": [
+    {
+      "URI": "/content/adA/index.m3u8",
+      "DURATION": 12.0,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "slot",
+        "payload": [
+          {
+            "type": "multiView",
+            "start": 0,
+            "duration": 12.0,
+            "layout": {
+              "primaryContent": {
+                "zDepth": 0,
+                "viewport": "0 50 50 0"
+              },
+              "assets": [
+                {
+                  "id": "view2",
+                  "type": "application/vnd.apple.mpegurl",
+                  "uri": "/content/adA/index.m3u8",
+                  "viewport": "0 0 50 50",
+                  "zDepth": 1
+                },
+                {
+                  "id": "view3",
+                  "type": "application/vnd.apple.mpegurl",
+                  "uri": "/content/adB/index.m3u8",
+                  "viewport": "50 50 0 0",
+                  "zDepth": 2
+                },
+                {
+                  "id": "view4",
+                  "type": "application/vnd.apple.mpegurl",
+                  "uri": "/content/adC/index.m3u8",
+                  "viewport": "50 0 0 50",
+                  "zDepth": 3
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

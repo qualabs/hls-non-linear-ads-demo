@@ -21,8 +21,9 @@ OUT=content/primary/con-daterange.m3u8
 OFFSET=${1:-20}
 # Cuál de los layouts apunta el Date Range de la clase concurrente. Hay un
 # asset-list por layout en ./signalling/, y esto es el interruptor entre ellos:
-# `cornerOverlay` es el mínimo de la T-07 y `squeezebackLShape` el squeezeback
-# de la T-10. El recorrido de los cinco en una sola playlist es la T-12.
+# `cornerOverlay` es el mínimo de la T-07, `squeezebackLShape` el squeezeback de
+# la T-10 y `multiView` el multiview de la T-11, uno por cada mecanismo del
+# ADR 0008. El recorrido de los cinco en una sola playlist es la T-12.
 LAYOUT=${2:-cornerOverlay}
 LIST=signalling/asset-list-$LAYOUT.json
 [ -f "$LIST" ] || { echo "no hay asset-list para '$LAYOUT': falta $LIST" >&2; exit 1; }

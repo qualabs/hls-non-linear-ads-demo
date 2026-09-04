@@ -1,0 +1,74 @@
+{
+  "archivo": "t11-multiView-player.png",
+  "size": [
+    715,
+    403
+  ],
+  "nota": "la captura a tamano real del #player, tomada sin un solo seek a los 25,81 s de reproduccion; cada cuadrante es un cuarto exacto de la imagen",
+  "cuadrantes": {
+    "primaryContent (Tears of Steel)": {
+      "recorteDeLaImagenPx": [
+        0,
+        0,
+        357,
+        201
+      ],
+      "mediaRGB": [
+        135.8,
+        112.7,
+        102.5
+      ],
+      "luminanciaMedia": 116.9,
+      "luminanciaMax": 244.6,
+      "pixelesCasiNegrosPorCiento": 0.02
+    },
+    "view2 = adA (Sintel)": {
+      "recorteDeLaImagenPx": [
+        357,
+        0,
+        715,
+        201
+      ],
+      "mediaRGB": [
+        104.1,
+        74.7,
+        47.0
+      ],
+      "luminanciaMedia": 78.9,
+      "luminanciaMax": 236.9,
+      "pixelesCasiNegrosPorCiento": 3.71
+    },
+    "view3 = adB (Caminandes)": {
+      "recorteDeLaImagenPx": [
+        0,
+        201,
+        357,
+        403
+      ],
+      "mediaRGB": [
+        122.5,
+        126.6,
+        144.9
+      ],
+      "luminanciaMedia": 127.1,
+      "luminanciaMax": 245.9,
+      "pixelesCasiNegrosPorCiento": 0.54
+    },
+    "view4 = adC (Elephants Dream teaser)": {
+      "recorteDeLaImagenPx": [
+        357,
+        201,
+        715,
+        403
+      ],
+      "mediaRGB": [
+        56.6,
+        40.7,
+        33.2
+      ],
+      "luminanciaMedia": 43.5,
+      "luminanciaMax": 224.7,
+      "pixelesCasiNegrosPorCiento": 66.19
+    }
+  }
+}

@@ -590,3 +590,81 @@ de los assets tiene una luminancia media de 7 a 30 sobre 255 en sus doce
 segundos, y una barra negra no permite ver si el aviso está deformado.
 No alcanza con que el recorte no se coma nada importante; el cuadro
 también tiene que tener luz para que se lea en cámara.
+
+## 2026-09-04 — T-11: el mecanismo de multiview, y el escalón 2 parado
+
+El tercero de los tres mecanismos anda, y con él queda parado el escalón
+2 de la escalera: los tres mecanismos con un layout de cada uno, más el
+par de compatibilidad. Es el que el ADR 0008 dejó para el final porque
+era el único que dependía de una capacidad que había que medir antes de
+comprometerla, y **entró sin una línea de código**. El diff contra la
+T-10 son dos cosas y las dos del lado de los datos: el asset-list de
+`multiView` con las URIs de los tres assets puestas, y un comentario en
+el script que escribe la playlist. Ningún archivo de `js/`, `css/`,
+`index.html` ni `test/` cambió.
+
+Los cuatro cuadrantes reproducen a la vez, y la medición entra a la
+ventana sin seek: la página se carga y se deja llegar a los 20 s sola.
+En la pestaña hay cinco elementos de video y cinco instancias de hls.js,
+porque a los cuatro del layout se suma el player de fábrica del par, y
+en 9,01 s de reloj de pared los cinco dan el mismo número: `rateVsWall`
+0,999, 30,0 fps, cero cuadros descartados, cero corruptos y ningún error
+de hls.js. La T-01 había medido 0,996 y cuatro descartados con cinco
+elementos en su banco de pruebas; en la página los números son los
+mismos dentro del ruido, con los descartados en cero. La capacidad que
+autorizaba esta task quedó confirmada donde importa, que es la página
+que se va a grabar.
+
+La geometría vuelve a dar cero por cuarta vez: 0,00 px entre la caja que
+pidió el contrato y la que dibuja el navegador en los cuatro elementos,
+con el área del player en 715x402,19 y cada cuadrante en 357,5x201,09, y
+otros 0,00 px después de un resize. Y este layout es el otro extremo de
+la política de llenado del ADR 0013: las cuatro cajas son cuadrantes del
+área del player, así que conservan su relación de aspecto y el recorte
+es cero, contra el 60 % que dejaban afuera las dos barras del
+squeezeback.
+
+Del audio se pudo medir una parte y conviene tenerla separada de la que
+no. Lo que sostiene que el sonido sale del contenido primario son el
+`muted` de cada uno de los cinco elementos —los tres cuadrantes del
+aviso muteados y el primario no, y un elemento muteado no rinde su audio
+a la salida—, los streams de playback que Chrome abre en el sink del
+sistema —cero con los cinco muteados, uno en el instante en que algo se
+desmutea— y el audio que cada elemento decodifica, que es el mismo esté
+muteado o no y por eso dice quién decodifica y no quién se escucha. Lo
+que **no** se pudo medir es el nivel de la salida mientras suena:
+`parec` devolvió cero bytes en los cuatro estados, incluido el estado en
+que nada sonaba, mientras el mismo comando desde una shell con la página
+cerrada devuelve 32000 muestras de silencio exacto. La T-07 había leído
+ese cero como "cero bytes cuando algo suena"; con esta corrida el cero
+también aparece con nada sonando, así que lo que hay es un instrumento
+poco confiable en esta sesión y no una regla, y no se apoya nada en él.
+De fondo hay además una razón para no volver por ese camino: el monitor
+del sink graba la mezcla, así que funcionando diría que algo suena y no
+cuál de los cuatro elementos.
+
+Tres cosas quedan anotadas. La primera es que los tres mecanismos del
+ADR 0008 son dos caminos de código y no tres: el ADR los separa por lo
+que hacen en pantalla, que para ordenar el trabajo por riesgo fue lo
+correcto, pero en el renderizador un multiview es un squeezeback con
+cuatro cajas. Lo que el ADR anticipa para los layouts de un mismo
+mecanismo vale también cruzando la frontera entre el B y el C.
+
+La segunda es que el control de audio del ADR 0010 es uno para todo el
+aviso, y con tres fuentes concurrentes esa pregunta se ve: el botón
+enciende los tres cuadrantes a la vez y aparece la de cuál querría
+escuchar quien mira. Hoy no hay dato para contestarla, porque la
+herramienta no emite el `volume` que su propio modelo tiene por
+elemento, así que una mezcla por cuadrante sería inventada. Es el hueco
+que el ADR 0010 ya había anotado, y el multiview lo vuelve una pregunta
+concreta para SVTA.
+
+La tercera es de assets y le toca a la T-12. La nota que la T-10 dejó
+sobre la luz de los creativos ahora está medida a lo largo de toda la
+ventana: el teaser de *Elephants Dream* no pasa de 42,4 de luminancia
+media en ninguno de los doce segundos, y en el mejor instante el 66 % de
+su cuadrante sigue siendo casi negro. La salida que usó la T-10, que fue
+cambiar el asset oscuro por otro, acá no existe: el layout consume los
+tres assets de aviso del repo de una sola vez, porque la cuarta fuente
+es el contenido primario. El listado de SVTA que la T-12 va a pedir
+necesita al menos un asset más, y con luz.
