@@ -102,17 +102,20 @@ seis tasks.
 Mitigación: el mismo método, en la T-01 y repetido en cada task que agregue
 código a la librería, más la página del integrador medida en líneas.
 
-**R2. Los controles pelean con el apilado de los layouts.** `css/player.css`
-deja a `.ads` deliberadamente sin `z-index` para que no sea un contexto de
-apilado y el `zDepth` del layout decida quién queda arriba; el renderizador
-le pone `position: relative` al primario por la misma razón. Una barra de
+**R2. Los controles pelean con el apilado de los layouts.** La capa donde se
+dibujan los avisos queda deliberadamente sin `z-index`, para que no sea un
+contexto de apilado y el `zDepth` del layout decida quién queda arriba; el
+renderizador le pone `position: relative` al primario por la misma razón.
+Desde la T-01 esa capa la crea la librería con sus propiedades en línea, así
+que el invariante dejó de estar en una hoja de estilos que el integrador
+podía pisar. Una barra de
 controles adentro del contenedor tiene que quedar arriba de todos los
 elementos de todos los layouts, y hay layouts donde el aviso es el fondo y el
 primario va encima.
 
 Mitigación: los controles van en su propia capa, con un `z-index` por encima
-del máximo `zDepth` que los layouts usan, y sin tocar la propiedad de `.ads`
-que el invariante necesita. La task que los dibuja lo verifica contra el
+del máximo `zDepth` que los layouts usan, y sin darle un `z-index` a la capa
+de avisos, que es lo que el invariante necesita. La task que los dibuja lo verifica contra el
 layout que pone el aviso atrás.
 
 **R3. El fullscreen no existe, y el que hay es del elemento equivocado.** Es
