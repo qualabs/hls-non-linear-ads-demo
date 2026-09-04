@@ -104,6 +104,27 @@ mezcla por elemento la declara el asset list y es la T-05, **y ahí el mute de l
 composición tiene que pasar a ser una compuerta sobre esa mezcla**: hoy no hace
 falta porque no hay nada más que suene.
 
+## 5. Las cuatro capturas, y una lectura que hay que hacer explícita
+
+`t03-1-sin-aviso.png`, `t03-2-con-aviso.png`, `t03-3-fullscreen-con-controles.png`
+y `t03-4-fullscreen-controles-escondidos.png`, a tamaño real. Las dos de
+fullscreen se tomaron en fullscreen de verdad, con un click sobre el botón —el
+único gesto que el navegador acepta para `requestFullscreen`— y con
+`document.fullscreenElement === el contenedor` leído en ese instante.
+
+El done pide que en las cuatro se vea una sola barra con el largo del programa
+entero y que en las de fullscreen se vea el control de audio. **En la cuarta no se
+ve ninguna de las dos cosas, y eso es exactamente lo que esa captura tiene que
+probar**: los controles se esconden solos y ahí no queda nada en pantalla. La
+afirmación se verifica en las otras tres, y la cuarta prueba su propia. En las
+tres se lee `3:00`, que son los 180 s del programa, y en la tercera el control de
+audio está arriba a la derecha, que es el que hoy desaparece al ir a fullscreen
+por el botón nativo.
+
+Hay una quinta y una sexta que el done no pide y que sostienen dos afirmaciones de
+arriba: `t03-5-apilado-aviso-de-fondo.png` es la sonda del apilado y
+`t03-6-fullscreen-con-aviso.png` es el fullscreen con un break en pantalla.
+
 ---
 
 ## Cuatro cosas que quedaron anotadas y no arregladas
