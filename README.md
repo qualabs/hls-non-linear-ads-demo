@@ -34,17 +34,17 @@ npm run serve
 The run is under three minutes and it needs nothing but a browser window. One
 thing to do before the camera rolls, and two to expect.
 
-**Unmute the primary content first**, with the native control of the player on
-the right. The page starts muted so the browser's autoplay policy lets it begin
-without a click, and the ad-audio button turns the *ad's* sound on and nothing
-else. Pressing it while the primary is still muted puts on screen the exact
-opposite of what ADR 0010 is there to show: an ad that took the audio of the
-programme. Unmute the primary once, at the start, and from then on the button
-does what it says.
+**Turn the sound on once, at the start**, with the audio control at the top
+right of the right-hand picture. The page starts muted so the browser's autoplay
+policy lets it begin without a click, and that control is the one that lifts it:
+it is the audio of the composition, drawn by the library along with the progress
+bar, the play/pause and the fullscreen (ADR 0015). The elements of the ad stay
+silent; the mix each one declares is ADR 0014 and it is not implemented yet.
 
-**One of the five breaks has no audio to turn on.** The two assets of LBox
-image are stills, so there is nothing to unmute and the button says so rather
-than going grey as if no ad were on screen.
+**One of the five breaks has no audio at all.** The two assets of LBox image are
+stills, so that ad has no soundtrack to mix in, and the state line under the
+right-hand picture says so -- which is not the same thing as no ad being on
+screen, and on camera the two look alike.
 
 **The left player falls behind, and that is the second argument of the demo.**
 Every break carries its linear Date Range as well, so the off-the-shelf client
@@ -222,8 +222,8 @@ same L-shape as LBox video, and what changes is the `type` of each asset in the
 payload: `image/jpeg` instead of `application/vnd.apple.mpegurl`. The renderer
 reads that field to decide whether the box is an `<img>` or a `<video>`, which
 is the only thing the five layouts needed that the three mechanisms did not
-already do. It costs the ad its audio and its timeline, and both show: the
-audio button of ADR 0010 says there is nothing to unmute, and the still does
+already do. It costs the ad its audio and its timeline, and both show: the state
+line says the ad on screen is made of stills and has no audio, and the still does
 not follow the primary when it is paused or seeked, because there is nothing to
 follow.
 

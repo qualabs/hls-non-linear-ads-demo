@@ -1,0 +1,54 @@
+{
+  "enElMarco": {
+    "fullscreen": false,
+    "laQueMideElRenderizador": {
+      "x": 988,
+      "w": 715,
+      "h": 402.188
+    },
+    "laImagen": {
+      "x": 988,
+      "w": 715,
+      "h": 402.188
+    },
+    "corrimientoPorLado": 0,
+    "relacionDeAspectoDeLaCaja": 1.778,
+    "avisos": [
+      {
+        "id": "adOverlay1",
+        "x": 988,
+        "w": 178.75,
+        "empiezaAntesDeLaImagen": false
+      }
+    ],
+    "tipo": [
+      "cornerOverlay"
+    ]
+  },
+  "enFullscreen": {
+    "fullscreen": true,
+    "laQueMideElRenderizador": {
+      "x": 0,
+      "w": 1920,
+      "h": 901
+    },
+    "laImagen": {
+      "x": 159.111,
+      "w": 1601.778,
+      "h": 901
+    },
+    "corrimientoPorLado": 159.111,
+    "relacionDeAspectoDeLaCaja": 2.131,
+    "avisos": [
+      {
+        "id": "adOverlay1",
+        "x": 0,
+        "w": 480,
+        "empiezaAntesDeLaImagen": true
+      }
+    ],
+    "tipo": [
+      "cornerOverlay"
+    ]
+  }
+}
