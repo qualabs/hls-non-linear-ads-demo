@@ -430,3 +430,45 @@ que si el operador enciende el audio del aviso sin haber desmuteado
 antes el primario, lo que se ve es exactamente lo contrario de lo que el
 ADR 0010 quiere mostrar. Es una instrucción de la grabación, y le toca a
 la T-12.
+
+## 2026-09-04 — T-08: los tests de la resolución del layout
+
+Quince tests en `test/layout-resolution.test.js`, que corren con `npm
+test` —`node --test`, sin una sola dependencia— y pasan los quince. La
+task existe por una razón sola: la resolución del layout es lo único de
+la fase que puede fallar en silencio, porque todo lo demás se ve en la
+pantalla y los layouts se miran de a uno. El parseo, los defaults, el
+orden y la ventana de activación pueden estar mal para un layout
+mientras el que se está mirando anda bien.
+
+Los casos salen de datos reales y no inventados: el test lee los seis
+payloads verbatim de la herramienta de SVTA de la evidencia de la T-03,
+entra por `resolveAssetList` —la misma puerta que usa `js/app.js`— y
+compara las quince cajas contra los píxeles que la misma T-03 midió
+sobre un área de 960x540, con igualdad exacta. Un test escrito con un
+payload inventado sólo probaría que el código hace lo que creía quien lo
+escribió.
+
+**Cada test se vio en rojo antes de darlo por bueno.** Se rompió a mano
+una cosa por vez en la lógica de producción, se corrió la suite, se
+anotó qué test se puso rojo y se devolvió el código: dieciocho
+mutaciones, ninguna sobrevivió, y los quince tests aparecieron en rojo
+por lo menos una vez. Ningún test destapó un defecto, así que el diff de
+la task son los tests y su evidencia; `js/` no se tocó.
+
+Tres casos hubo que inventarlos porque no hay payload real que los
+ejercite, y el que importa es un `volume: 0` explícito. La herramienta no
+emite el campo nunca, así que la capa asume 100 en los seis layouts; pero
+el día que alguien mande un aviso deliberadamente en silencio, un `||`
+en lugar de un `??` lo convertiría en uno a todo volumen y nada en la
+pantalla lo diría. Los otros dos son un `viewport` que no trae cuatro
+números y un empate de `zDepth`.
+
+De paso quedaron a la vista tres cosas del código que el bloque no
+decía. Los datos de la T-03 no se cruzan por `id`, porque el único aviso
+de tres layouts le sale a la herramienta como `adOverlay1` y la T-03 lo
+llamó `asset1`. La caja medida a 960x540 no alcanza para cubrir la
+conversión: una mutación que cablea el 960 pasa los quince elementos, así
+que hay un test más al doble del área. Y `DEFAULT_PRIMARY` no cambia el
+comportamiento —los defaults por campo dan lo mismo—: documenta el
+supuesto y evita un warning, no lo sostiene.

@@ -26,7 +26,7 @@ algo:
 | T-05 | El banco de la demo: repo, página y contenido servido               | done    | —    | el repo mismo y `.project/phases/01-poc-web-hlsjs/tasks/T-05/` |
 | T-06 | La capa de señalización y el contrato con el renderizado            | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-06/`  |
 | T-07 | El mínimo: un cornerOverlay con la cadena completa a la vista       | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-07/`  |
-| T-08 | Tests de la resolución del layout                                   | pending | —    | —                                              |
+| T-08 | Tests de la resolución del layout                                   | done    | —    | `test/layout-resolution.test.js` y `.project/phases/01-poc-web-hlsjs/tasks/T-08/` |
 | T-09 | El par de compatibilidad en la página de la demo                    | pending | —    | —                                              |
 | T-10 | El mecanismo de squeezeback                                         | pending | —    | —                                              |
 | T-11 | El mecanismo de multiview                                           | pending | —    | —                                              |
@@ -377,6 +377,59 @@ algo:
   seis tipos de la herramienta cubiertos.
 - **nivel de verificación:** mínimo. La salida entera es una corrida que
   una persona mira.
+- **Resultado:** los tests son `test/layout-resolution.test.js` y corren con
+  `npm test`, que es `node --test` sin una sola dependencia. **Quince tests, los
+  quince verdes**, y la corrida está en `t08-corrida.txt`. Los casos salen de
+  los seis payloads verbatim de la herramienta, que el test lee de
+  `tasks/T-03/m3-resultados.json`, y los valores esperados son las quince cajas
+  en píxeles que la misma T-03 midió sobre un área de 960x540: el test entra por
+  `resolveAssetList`, que es la misma puerta que usa `js/app.js`, y compara
+  contra `medidoPx` con igualdad exacta. Los cinco puntos quedaron cubiertos:
+  el orden top-right-bottom-left del `viewport` con las dos cadenas reales que
+  lo distinguen, el `primaryContent` ausente en los dos overlays y el `volume`
+  ausente en los seis, el orden ascendente por `zDepth` con el caso de
+  `squeezebackFrame` donde el aviso es el fondo, la ventana semiabierta sobre la
+  duración real de 15,015 s, y la conversión de insets a píxeles.
+  **Cada test se vio en rojo antes de darlo por bueno**: se rompió a mano una
+  cosa por vez en `js/signalling.js` o `js/renderer.js`, se corrió la suite, se
+  anotó qué test se puso rojo y se devolvió el código. Dieciocho mutaciones,
+  ninguna sobrevivió, y los quince tests aparecieron en rojo por lo menos una
+  vez. La tabla en las dos direcciones está en `t08-vistos-en-rojo.md` y el
+  script en `t08-mutar.py`. **Ningún test destapó un defecto**: la lógica de
+  producción no se tocó, y el diff de la task son los tests y esta evidencia.
+- **Tres casos hubo que inventarlos, porque no hay payload real que los
+  ejercite.** El que importa es **un `volume: 0` explícito**, que tiene que
+  sobrevivir: la herramienta no emite el campo nunca, así que no hay dato real,
+  pero es el caso donde un `||` en lugar de un `??` convertiría un aviso
+  deliberadamente en silencio en uno a todo volumen, y nada en la pantalla lo
+  diría. Los otros dos son un `viewport` que no trae cuatro números —el
+  repliegue al cuadro entero es invisible en pantalla, así que el test también
+  exige el warning, que es la única señal que le queda al operador— y un empate
+  de `zDepth`, donde el orden del payload tiene que mantenerse.
+- **Cuatro cosas que el bloque no decía.** La primera es que los datos de la
+  T-03 no se cruzan por `id`: a la herramienta el único aviso de tres layouts le
+  sale como `adOverlay1` y la T-03 lo llamó `asset1`, así que el test lleva un
+  alias de dos entradas para emparejarlos, y falla a propósito si no encuentra
+  el elemento medido en lugar de saltearlo.
+  La segunda es que la caja en píxeles medida a 960x540 no alcanza para cubrir
+  la conversión: una mutación que cablea el 960 pasa los quince elementos y
+  falla sólo contra un área distinta, así que hay un test más que corre las
+  mismas cajas reales de `squeezebackFrame` al doble del área. Es la conversión
+  que se recalcula en cada resize, y la T-07 ya la había medido en vivo.
+  La tercera es que `DEFAULT_PRIMARY` no cambia el comportamiento: con el bloque
+  ausente, los defaults por campo que ya tiene `resolveElement` —`zDepth` 0,
+  `volume` 100, y un `viewport` que falta y repliega al cuadro entero— dan
+  exactamente lo mismo. La constante documenta el supuesto y evita el warning
+  del repliegue; no lo sostiene. Para verla en rojo hay que cambiarle los
+  valores, no borrarla.
+  La cuarta es que los seis payloads traen `uri: ""`, que no es un `uri` sino un
+  hueco para que lo llene el operador, y la capa lo convierte en `null`. El
+  contrato no lo dice y el test lo fija.
+- **Lo que quedó afuera a propósito:** `mediaTimeOf`, que convierte un instante
+  del reloj del programa a tiempo de reproducción. No es uno de los cinco puntos
+  del bloque, y no es de las que fallan en silencio: si el `START-DATE` cae en el
+  segundo equivocado se ve en la pantalla, y la T-06 lo verificó en vuelo con
+  una captura.
 
 ## T-09 — El par de compatibilidad en la página de la demo
 
