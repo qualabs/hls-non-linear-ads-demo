@@ -18,7 +18,7 @@ lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
 | T-02 | El contrato en `docs/`, ampliado con los rangos del programa     | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-02/` |
 | T-03 | Los controles de la composición: barra, pausa, audio y fullscreen | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-03/` |
 | T-09 | El área de los layouts es la del video, no la del contenedor      | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-09/` |
-| T-04 | Los rangos del programa marcados en la barra                     | planned | —    | —        |
+| T-04 | Los rangos del programa marcados en la barra                     | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-04/` |
 | T-05 | El volumen del asset list, con la mezcla que David propuso       | planned | —    | —        |
 | T-06 | Tests: los rangos del programa y el default de volumen           | planned | —    | —        |
 | T-07 | El skin y el branding de Qualabs                                 | planned | —    | —        |

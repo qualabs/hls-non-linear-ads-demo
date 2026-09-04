@@ -1120,3 +1120,68 @@ fullscreen la barra y el scrim cruzan las barras negras. Esta task no los tocó 
 no es evidente que haya que tocarlos —son el marco alrededor de la composición y
 no un elemento del layout—, pero conviene tenerlo presente en la T-04, que pinta
 los rangos del programa sobre esa misma barra.
+
+## 2026-09-04 — T-04 de la fase 02: los rangos del programa marcados en la barra
+
+**La decisión que el bloque dejó abierta: la barra marca las dos clases.** No
+sólo el rango concurrente que este player dibuja, sino también el interstitial
+tradicional que la misma playlist lleva en cada break y que el player ignora por
+clase. La razón no es estética: una barra que marca sólo lo que este player
+dibuja se queda callada sobre un break que un cliente de mercado sí toma, y eso
+es lo que la página existe para mostrar. Y el silencio no escala: una playlist
+con un break de reemplazo sin rango concurrente al lado no tendría nada que lo
+avisara.
+
+**Y una cosa que apareció al medir y que decide cómo se dibuja: los dos rangos de
+cada break están en el mismo lugar**, mismo `START-DATE` y misma duración, que es
+lo que hace al par de compatibilidad ser un par. O sea que marcar las dos clases
+una encima de la otra agrega un color y no información. Lo que las separa no es
+dónde están sino de quién es cada una, así que se dibujan en dos carriles:
+**sobre el riel, en violeta `#a273ff`, lo que este player reproduce** —el relleno
+le pasa por adentro y la perilla lo cruza—, y **debajo del riel, en un carril
+propio, en amarillo `#ffcc00`, lo que hace el otro cliente**, que ningún playhead
+toca porque no es esta línea de tiempo. Esa separación es lo que hace que el
+amarillo se lea como "acá un cliente de mercado reemplaza" y no como "acá pasa
+algo en este player". Se descartó un segundo riel tenue de ancho completo:
+diría lo mismo con más claridad y se lee como una segunda barra de progreso, que
+es exactamente lo que David pidió que no hubiera.
+
+Los dos son colores funcionales y no de marca —el kit de Qualabs es teal,
+naranja, tinta y papel—: el amarillo porque es el que los players de Apple usan
+para el interstitial y llega leído, y el violeta porque no tiene convención que
+respetar. El naranja fuerte queda afuera porque al lado del amarillo deja de ser
+otro color a distancia.
+
+**La barra en fullscreen sigue cruzando las barras negras, y se queda así.** Era
+la observación que la T-09 dejó abierta. Las imágenes de referencia muestran la
+barra ocupando todo el ancho del marco, es lo que hace cualquier player, y la
+distinción ya tiene lugar: el renderizador mide la imagen porque las cajas del
+layout son porcentajes de lo que alguien mira, y los controles miden el
+contenedor porque son el marco alrededor de esa imagen.
+
+**Medido.** Los cinco breaks marcados con `settled` en `true` antes de que
+empiece el primero; el riel mide lo mismo con aviso y sin aviso —1042,84 +
+559,31— que es el ADR 0016 visto en la barra; y la geometría de cada marca contra
+la aritmética calculada en la sonda da delta ≤ 0,0122 px, que es la cuantización
+del navegador a 1/64 de píxel. La captura reducida al 25 % de su lado, leída en
+sus píxeles y no en un estilo computado, da violeta `114, 80, 206` contra
+amarillo `255, 232, 0` en la página entera y `173, 122, 255` contra `245, 196, 3`
+en fullscreen, con 2 px de alto por carril. Los dos greps de la fase, `npm test`
+15/15, y la página del integrador sin cambios en once líneas. Commit sin push.
+
+**Tres cosas quedaron anotadas y no arregladas.** La primera: **el grep del ADR
+0003 lleva un término que la T-02 dejó viejo.** La lista de la T-03 incluye
+`interstitial` y ahora da cinco hits del lado del renderizado, que son el valor
+`kind` del contrato, su color, su carril y su tooltip; el contrato dice de frente
+que eso es lo que cruza la costura, así que lo viejo es la lista y no el código.
+Corrido sin ese término, el grep sigue dando cero. La segunda: **la T-06 pide una
+función que en el código son tres.** Su bloque habla de "la que produce los
+rangos del programa… con su clase y su posición sobre el largo total", y esa
+partición es la del ADR 0016: la señalización produce los rangos con su clase
+(`rangeOfExperiences`, `rangeOfDateRange`) y el renderizado los pone sobre el
+largo que relee (`rangeSpan`), porque el largo no cruza la costura. La tercera:
+**el grep del ADR 0015 encontró algo real y se corrigió en el momento.** El
+comentario de los colores explicaba el descarte del naranja con "en este demo el
+ámbar ya significa otra cosa", que es cierto y es de esta página y no de una
+librería que se distribuye; la razón se mudó al documento de la task y en el
+código quedó la que sí es de los colores.
