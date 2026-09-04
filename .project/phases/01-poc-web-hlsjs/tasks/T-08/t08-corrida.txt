@@ -1,0 +1,27 @@
+
+> hls-non-linear-ads-demo@0.0.0 test
+> node --test
+
+✔ viewport is four inset percentages in the order top right bottom left (3.688538ms)
+✔ a viewport that is not four numbers falls back to the full frame, and warns (0.308705ms)
+✔ each of the six asset-lists resolves to one experience with its type and window (0.350915ms)
+✔ the fifteen elements come out with the ids, the uri and the mediaType of the payload (0.547704ms)
+✔ elements come out ordered by ascending zDepth in the six layouts (0.365321ms)
+✔ in squeezebackFrame the ad is the background and the primary content is on top (0.230694ms)
+✔ on an equal zDepth the order of the payload holds (0.254473ms)
+✔ the two overlays carry no primaryContent, and the layer assumes the full frame at zDepth 0 (0.302564ms)
+✔ the four layouts that do carry primaryContent keep its zDepth and its viewport (0.361352ms)
+✔ no payload of the tool carries volume, and every element comes out at 100 (0.424935ms)
+✔ an explicit volume of 0 survives, because a silent ad is silent on purpose (1.114918ms)
+✔ the activation window is half open: in at startTime, out at the end (0.288452ms)
+✔ activeAt returns every experience active at that instant (0.199312ms)
+✔ the insets become the fifteen boxes in pixels T-03 measured (0.424341ms)
+✔ the conversion follows the player area, which is what a resize depends on (0.169315ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 124.352572

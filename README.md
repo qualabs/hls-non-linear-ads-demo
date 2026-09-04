@@ -19,6 +19,20 @@ re-package without re-downloading, `npm run content`.
 
 Requirements: node and ffmpeg. There are no npm dependencies.
 
+## Test it
+
+```bash
+npm test          # node --test, no dependencies and no browser
+```
+
+The tests cover the layout resolution and nothing else: the parsing of
+`viewport`, the two defaults the tool omits, the order by `zDepth`, the
+activation window, and the conversion of insets into a box in pixels. That is
+the only part of the demo that can fail in silence -- everything else is on the
+screen. The cases are the six payloads the SVTA Layout Controller emits, read
+verbatim from the evidence of T-03, and the expected boxes are the pixels
+measured there.
+
 ## What is where
 
 | | |
@@ -28,6 +42,7 @@ Requirements: node and ffmpeg. There are no npm dependencies.
 | `js/renderer.js` | the rendering layer: the contract in, the boxes drawn over the video. Knows nothing about HLS |
 | `js/contract-trace.js` | the same contract, printed: the line under the player and the table in the console |
 | `signalling/` | the asset-lists, as the SVTA Layout Controller emits them, with the URIs filled in |
+| `test/` | the tests of the layout resolution, over the six payloads of the tool |
 | `vendor/hls.min.js` | hls.js **1.7.2, unmodified** |
 | `server.mjs` | a static file server, and nothing else: no ad server, no APS |
 | `scripts/` | the content: download and package as HLS VOD |
