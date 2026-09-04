@@ -27,9 +27,12 @@
            element that goes fullscreen is the container and anything outside
            it disappears the moment somebody presses the fullscreen button.
 
-  #ads     is that layer, and it is deliberately empty. The signalling layer
-           and the renderer fill it; the seam between them is the contract of
-           ADR 0003.
+  #ads     is that layer, and it is deliberately empty. The renderer of T-07
+           fills it. Nothing is drawn on the picture yet.
+
+  #contract is the contract, in one line of text: what the signalling layer
+           says is active right now. The console has the same thing with the
+           boxes and the order of every element.
 
   No bundler and no framework: native ES modules, and hls.js vendored in
   ./vendor/ at 1.7.2 rather than pulled from a CDN, because it is the version
@@ -42,6 +45,7 @@
     <div class="ads" id="ads" aria-hidden="true"></div>
   </div>
   <p class="hud" id="hud"></p>
+  <p class="hud" id="contract"></p>
   <p class="credit">
     Primary content: <em>Tears of Steel</em> (CC BY 3.0) &middot;
     Ad assets: <em>Sintel</em> (CC BY 3.0), <em>Caminandes: Gran Dillama</em> (CC BY 3.0),

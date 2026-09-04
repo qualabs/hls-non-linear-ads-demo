@@ -1,5 +1,7 @@
-// app.js -- the bank of the demo: hls.js plays the primary VOD, and that is all
-// that happens here. No layout, no Date Range, no concurrent experience.
+// app.js -- the wiring, and only the wiring: it creates the hls.js instance,
+// hands it to the signalling layer, and hands the signalling layer's contract
+// to whoever consumes it. It is the one file allowed to know both sides,
+// because somebody has to join them (ADR 0003).
 //
 // The one thing that IS a decision and not plumbing is the config. The
 // interstitials machinery of hls.js is closed over Apple's class: the only
@@ -20,12 +22,34 @@
 //
 // hls.js is UNMODIFIED, at 1.7.2, vendored on disk.
 
-const SRC = './content/primary/index.m3u8';
+import { createSignalling } from './signalling.js';
+import { traceContract } from './contract-trace.js';
+
+// The signalled playlist: the same segments as ./content/primary/index.m3u8
+// plus the two Date Ranges, written by scripts/senalizar-contenido.sh on every
+// start. Its START-DATE is computed from the playlist's own
+// EXT-X-PROGRAM-DATE-TIME, so it cannot be a file in git: the clock moves every
+// time the content is packaged.
+const SRC = './content/primary/con-daterange.m3u8';
 
 const video = document.getElementById('video');
 const hud = document.getElementById('hud');
+const contractHud = document.getElementById('contract');
 
 const hls = new Hls({ interstitialsController: undefined });
+
+// The two layers, and the seam between them. The signalling layer gets the
+// hls.js instance; the consumer gets `provider`, which is `activeAt(time)` and
+// nothing else.
+const provider = createSignalling(hls, {
+  onResolved: (experiences) => {
+    for (const e of experiences) {
+      console.log(`[app] resolved ${e.type}#${e.id}: ${e.elements.length} elements,` +
+        ` window ${e.startTime.toFixed(2)}s -> ${(e.startTime + e.duration).toFixed(2)}s`);
+    }
+  }
+});
+const consumer = traceContract({ provider, video, hud: contractHud });
 
 hls.on(Hls.Events.ERROR, (_e, d) => {
   console.error('[hls] error', d.type, d.details, 'fatal:', d.fatal);
@@ -50,4 +74,4 @@ video.muted = true;
 video.play().catch(() => {});
 
 // For the console and for whoever comes next.
-window.demo = { hls, video };
+window.demo = { hls, video, provider, consumer };

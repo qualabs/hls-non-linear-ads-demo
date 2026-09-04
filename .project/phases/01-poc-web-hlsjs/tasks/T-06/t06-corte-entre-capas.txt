@@ -1,0 +1,12 @@
+# El corte entre las dos capas, verificado con grep (2026-09-04)
+
+$ /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." js/contract-trace.js css/player.css
+(sin salida: ningun hit; exit code 1)
+
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/signalling.js
+19
+
+Del lado del renderizado (js/contract-trace.js y css/player.css) no hay una
+sola mencion al transporte. Los 19 hits estan todos en la capa de
+senalizacion, que es donde el ADR 0003 los quiere. js/app.js es el unico
+archivo que conoce los dos lados, porque es el que los une.

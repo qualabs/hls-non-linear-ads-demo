@@ -1,0 +1,95 @@
+{
+ "corrida": "2026-09-04, Chrome del sistema por la skill playwright, servidor de la demo en http://localhost:8080/",
+ "sistema": {
+  "hlsVersion": "1.7.2",
+  "interstitialsManager": "null",
+  "playlist": "./content/primary/con-daterange.m3u8",
+  "dateRangesEnLaPlaylist": [
+   {
+    "id": "AD-1-LINEAR",
+    "clase": "com.apple.hls.interstitial",
+    "isInterstitial": true,
+    "startDate": "2026-09-04T11:11:00.350Z"
+   },
+   {
+    "id": "AD-1-CONCURRENT",
+    "clase": "com.qualabs.hls.concurrentInterstitial",
+    "isInterstitial": false,
+    "startDate": "2026-09-04T11:11:00.350Z"
+   }
+  ]
+ },
+ "cadena": {
+  "recursosPedidos": [
+   {
+    "url": "/content/primary/con-daterange.m3u8",
+    "initiator": "xmlhttprequest"
+   },
+   {
+    "url": "/signalling/asset-list-cornerOverlay.json",
+    "initiator": "fetch"
+   }
+  ],
+  "assetListDelDateRangeDeAppleFuePedido": false,
+  "nota": "el asset-list de la clase concurrente lo pide la aplicacion con fetch; la playlist la pide hls.js con XHR. El de la clase de Apple no lo pide nadie: el controlador de interstitials esta apagado."
+ },
+ "ventanaDeActivacion": {
+  "antes": {
+   "label": "before the START-DATE",
+   "t": 18.27,
+   "hud": "t=18.2s · no concurrent experience",
+   "active": []
+  },
+  "dentro": {
+   "label": "inside the window",
+   "t": 20.37,
+   "hud": "t=20.3s · cornerOverlay · z0 primaryContent [0 0 0 0] · z1 adOverlay1 [0 75 75 0]",
+   "active": [
+    {
+     "type": "cornerOverlay",
+     "id": "AD-1-CONCURRENT",
+     "startTime": 20,
+     "duration": 12,
+     "order": [
+      "z0 primaryContent [0 0 0 0] vol100",
+      "z1 adOverlay1 [0 75 75 0] vol100"
+     ]
+    }
+   ]
+  },
+  "ultimoSegundo": {
+   "label": "last second of the window",
+   "t": 31.26,
+   "hud": "t=31.2s · cornerOverlay · z0 primaryContent [0 0 0 0] · z1 adOverlay1 [0 75 75 0]",
+   "active": [
+    "cornerOverlay#AD-1-CONCURRENT"
+   ]
+  },
+  "despues": {
+   "label": "after the window",
+   "t": 32.36,
+   "hud": "t=32.3s · no concurrent experience",
+   "active": []
+  },
+  "transiciones": [
+   {
+    "t": 0.17,
+    "n": 0
+   },
+   {
+    "t": 20.07,
+    "n": 1
+   },
+   {
+    "t": 32.02,
+    "n": 0
+   }
+  ]
+ },
+ "consola": [
+  "LOG [contract] t=20.07s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 20.00s -> 32.00s  2 elements, ordered by zDepth:",
+  "TABLE [{\"zDepth\":0,\"element\":\"primaryContent\",\"primary\":true,\"box t/r/b/l %\":\"0/0/0/0\",\"volume\":100,\"uri\":\"(the primary content)\"},{\"zDepth\":1,\"element\":\"adOverlay1\",\"primary\":false,\"box t/r/b/l %\":\"0/75/75/0\",\"volume\":100,\"uri\":\"/content/adB/index.m3u8\"}]",
+  "TABLE [{\"zDepth\":0,\"element\":\"primaryContent\",\"primary\":true,\"box t/r/b/l %\":\"0/0/0/0\",\"volume\":100,\"uri\":\"(the primary content)\"},{\"zDepth\":1,\"element\":\"adOverlay1\",\"primary\":false,\"box t/r/b/l %\":\"0/75/75/0\",\"volume\":100,\"uri\":\"/content/adB/index.m3u8\"}]",
+  "LOG [contract] t=32.02s  nothing active"
+ ]
+}

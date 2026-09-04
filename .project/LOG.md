@@ -313,3 +313,56 @@ Del esqueleto sí se reusó lo demás: la forma de la página, con todo
 adentro del contenedor que va a fullscreen; el kit de marca en `brand/`
 copiado a disco en vez de linkeado; y la decisión de vendorizar hls.js
 en lugar de traerlo de un CDN.
+
+## 2026-09-04 — T-06: la capa de señalización y el contrato
+
+Ya existe el corte en dos capas del ADR 0003, y existe de las dos
+mitades. La de abajo, `js/signalling.js`, es la única que sabe lo que es
+HLS: se suscribe a `LEVEL_UPDATED`, se queda con los Date Ranges de
+clase `com.qualabs.hls.concurrentInterstitial`, pide su `X-ASSET-LIST`
+—la aplicación, no hls.js, que sigue con su controlador de interstitials
+apagado— y resuelve el bloque `X-AD-CREATIVE-SIGNALING`. La de arriba
+recibe un objeto con un método, `activeAt(time)`, y una lista de cajas
+en porcentajes. El contrato entre las dos está escrito en
+`phases/01-poc-web-hlsjs/tasks/T-06/t06-contrato.md`.
+
+El corte se verificó como se dijo que se iba a verificar, con grep: del
+lado del renderizado no aparece ni una vez hls.js, ni un Date Range, ni
+un asset-list, ni un manifiesto. Las diecinueve menciones están todas en
+la capa de señalización. `js/app.js` conoce los dos lados porque es el
+que los une, y es el único.
+
+En el Chrome del sistema, con la playlist que lleva los dos Date Ranges
+en el mismo `START-DATE` —la forma que midió la T-02—, el Date Range
+concurrente se resuelve a `t=20.00s` contra el
+`EXT-X-PROGRAM-DATE-TIME` del primario, y la consola anuncia la
+experiencia a los `20.07s` con sus dos cajas ordenadas por `zDepth`: el
+contenido primario en z0 con el cuadro entero, y `adOverlay1` en z1 con
+la caja `0 75 75 0`. A los `32.02s` dice que no hay nada activo. Todavía
+no se dibuja nada encima del video: eso es la T-07.
+
+**Las tres cosas que podían fallar en silencio.** Los dos defaults que
+la herramienta de SVTA omite se asumen y no se exigen, así que los seis
+payloads que la T-03 guardó verbatim resuelven todos, incluidos los dos
+overlays que no traen el bloque `primaryContent`; quedaron resueltos en
+`t06-los-seis-payloads-resueltos.json`. La ventana de activación es
+semiabierta y se verificó en sus cuatro bordes. Y el orden por `zDepth`
+es ascendente y estable, que es lo que hace que en `squeezebackFrame` el
+aviso quede de fondo y el contenido primario encima.
+
+**Lo que el plan no tenía previsto.** La playlist señalizada no puede
+ser un archivo en git, porque su `START-DATE` se resuelve contra el
+reloj que el empaquetado escribe y ese reloj es la hora de pared de
+cuando se empaquetó. Es un artefacto generado:
+`scripts/senalizar-contenido.sh` la escribe desde la playlist del
+primario y `run.sh` la reescribe en cada arranque. Por el mismo motivo
+esta task se llevó puestas dos piezas que el bloque de la T-07
+enumeraba, el tag en la playlist y el asset-list servido al lado, porque
+sin ellas el done de la T-06 no se podía cumplir.
+
+**Y un cruce que conviene tener anotado.** La herramienta no emite
+`volume` en ninguno de los seis layouts, así que el default asumido es
+100 en todos los elementos, aviso incluido. El ADR 0010 pide leer ese
+campo como estado inicial del control de audio, y con este default eso
+sería un aviso a todo volumen. Manda la decisión del mismo ADR: el
+aviso arranca en silencio. Le toca a la T-07.
