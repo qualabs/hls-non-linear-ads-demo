@@ -1,0 +1,820 @@
+{
+  "enVentana": [
+    {
+      "fullscreen": false,
+      "viewport": {
+        "w": 1920,
+        "h": 901
+      },
+      "t": 23.107838,
+      "marco": {
+        "left": 988,
+        "top": 257.078125,
+        "width": 715,
+        "height": 402.1875
+      },
+      "imagen": {
+        "left": 988,
+        "top": 257.078125,
+        "width": 715,
+        "height": 402.1875
+      },
+      "corrimientoPorLado": 0,
+      "relacionDeAspectoDelMarco": 1.777778,
+      "relacionDeAspectoDelVideo": 1.777778,
+      "videoIntrinseco": {
+        "w": 1280,
+        "h": 720
+      },
+      "cajaDelVideoEnElDom": {
+        "left": 988,
+        "top": 257.078125,
+        "width": 715,
+        "height": 402.1875
+      },
+      "tipo": [
+        "cornerOverlay"
+      ],
+      "elementos": [
+        {
+          "tipo": "cornerOverlay",
+          "id": "primaryContent",
+          "primario": true,
+          "esperado": {
+            "left": 988,
+            "top": 257.078125,
+            "width": 715,
+            "height": 402.1875
+          },
+          "dibujado": {
+            "left": 988,
+            "top": 257.078125,
+            "width": 715,
+            "height": 402.1875
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 1.777778
+        },
+        {
+          "tipo": "cornerOverlay",
+          "id": "adOverlay1",
+          "primario": false,
+          "esperado": {
+            "left": 988,
+            "top": 257.078125,
+            "width": 178.75,
+            "height": 100.546875
+          },
+          "dibujado": {
+            "left": 988,
+            "top": 257.078125,
+            "width": 178.75,
+            "height": 100.546875
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 1.777778
+        }
+      ],
+      "break": "Overlay"
+    },
+    {
+      "fullscreen": false,
+      "viewport": {
+        "w": 1920,
+        "h": 901
+      },
+      "t": 48.081547,
+      "marco": {
+        "left": 988,
+        "top": 248.828125,
+        "width": 715,
+        "height": 402.1875
+      },
+      "imagen": {
+        "left": 988,
+        "top": 248.828125,
+        "width": 715,
+        "height": 402.1875
+      },
+      "corrimientoPorLado": 0,
+      "relacionDeAspectoDelMarco": 1.777778,
+      "relacionDeAspectoDelVideo": 1.777778,
+      "videoIntrinseco": {
+        "w": 1280,
+        "h": 720
+      },
+      "cajaDelVideoEnElDom": {
+        "left": 988,
+        "top": 248.828125,
+        "width": 429,
+        "height": 241.3125
+      },
+      "tipo": [
+        "squeezebackLShape"
+      ],
+      "elementos": [
+        {
+          "tipo": "squeezebackLShape",
+          "id": "primaryContent",
+          "primario": true,
+          "esperado": {
+            "left": 988,
+            "top": 248.828125,
+            "width": 429,
+            "height": 241.3125
+          },
+          "dibujado": {
+            "left": 988,
+            "top": 248.828125,
+            "width": 429,
+            "height": 241.3125
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 1.777778
+        },
+        {
+          "tipo": "squeezebackLShape",
+          "id": "adBarVertical",
+          "primario": false,
+          "esperado": {
+            "left": 1417,
+            "top": 248.828125,
+            "width": 286,
+            "height": 402.1875
+          },
+          "dibujado": {
+            "left": 1417,
+            "top": 248.828125,
+            "width": 286,
+            "height": 402.1875
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 0.711111
+        },
+        {
+          "tipo": "squeezebackLShape",
+          "id": "adBarHorizontal",
+          "primario": false,
+          "esperado": {
+            "left": 988,
+            "top": 490.140625,
+            "width": 715,
+            "height": 160.875
+          },
+          "dibujado": {
+            "left": 988,
+            "top": 490.140625,
+            "width": 715,
+            "height": 160.875
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 4.444444
+        }
+      ],
+      "break": "LBox video"
+    },
+    {
+      "fullscreen": false,
+      "viewport": {
+        "w": 1920,
+        "h": 901
+      },
+      "t": 73.088839,
+      "marco": {
+        "left": 988,
+        "top": 240.828125,
+        "width": 715,
+        "height": 402.1875
+      },
+      "imagen": {
+        "left": 988,
+        "top": 240.828125,
+        "width": 715,
+        "height": 402.1875
+      },
+      "corrimientoPorLado": 0,
+      "relacionDeAspectoDelMarco": 1.777778,
+      "relacionDeAspectoDelVideo": 1.777778,
+      "videoIntrinseco": {
+        "w": 1280,
+        "h": 720
+      },
+      "cajaDelVideoEnElDom": {
+        "left": 988,
+        "top": 240.828125,
+        "width": 429,
+        "height": 241.3125
+      },
+      "tipo": [
+        "squeezebackLShape"
+      ],
+      "elementos": [
+        {
+          "tipo": "squeezebackLShape",
+          "id": "primaryContent",
+          "primario": true,
+          "esperado": {
+            "left": 988,
+            "top": 240.828125,
+            "width": 429,
+            "height": 241.3125
+          },
+          "dibujado": {
+            "left": 988,
+            "top": 240.828125,
+            "width": 429,
+            "height": 241.3125
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 1.777778
+        },
+        {
+          "tipo": "squeezebackLShape",
+          "id": "adBarVertical",
+          "primario": false,
+          "esperado": {
+            "left": 1417,
+            "top": 240.828125,
+            "width": 286,
+            "height": 402.1875
+          },
+          "dibujado": {
+            "left": 1417,
+            "top": 240.828125,
+            "width": 286,
+            "height": 402.1875
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 0.711111
+        },
+        {
+          "tipo": "squeezebackLShape",
+          "id": "adBarHorizontal",
+          "primario": false,
+          "esperado": {
+            "left": 988,
+            "top": 482.140625,
+            "width": 715,
+            "height": 160.875
+          },
+          "dibujado": {
+            "left": 988,
+            "top": 482.140625,
+            "width": 715,
+            "height": 160.875
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 4.444444
+        }
+      ],
+      "break": "LBox image"
+    },
+    {
+      "fullscreen": false,
+      "viewport": {
+        "w": 1920,
+        "h": 901
+      },
+      "t": 98.092917,
+      "marco": {
+        "left": 988,
+        "top": 257.078125,
+        "width": 715,
+        "height": 402.1875
+      },
+      "imagen": {
+        "left": 988,
+        "top": 257.078125,
+        "width": 715,
+        "height": 402.1875
+      },
+      "corrimientoPorLado": 0,
+      "relacionDeAspectoDelMarco": 1.777778,
+      "relacionDeAspectoDelVideo": 1.777778,
+      "videoIntrinseco": {
+        "w": 1280,
+        "h": 720
+      },
+      "cajaDelVideoEnElDom": {
+        "left": 988,
+        "top": 357.625,
+        "width": 357.5,
+        "height": 201.09375
+      },
+      "tipo": [
+        "squeezebackDoubleBox"
+      ],
+      "elementos": [
+        {
+          "tipo": "squeezebackDoubleBox",
+          "id": "primaryContent",
+          "primario": true,
+          "esperado": {
+            "left": 988,
+            "top": 357.625,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "dibujado": {
+            "left": 988,
+            "top": 357.625,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 1.777778
+        },
+        {
+          "tipo": "squeezebackDoubleBox",
+          "id": "adOverlay",
+          "primario": false,
+          "esperado": {
+            "left": 1345.5,
+            "top": 357.625,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "dibujado": {
+            "left": 1345.5,
+            "top": 357.625,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 1.777778
+        }
+      ],
+      "break": "Side by side pullback"
+    },
+    {
+      "fullscreen": false,
+      "viewport": {
+        "w": 1920,
+        "h": 901
+      },
+      "t": 123.101954,
+      "marco": {
+        "left": 988,
+        "top": 248.828125,
+        "width": 715,
+        "height": 402.1875
+      },
+      "imagen": {
+        "left": 988,
+        "top": 248.828125,
+        "width": 715,
+        "height": 402.1875
+      },
+      "corrimientoPorLado": 0,
+      "relacionDeAspectoDelMarco": 1.777778,
+      "relacionDeAspectoDelVideo": 1.777778,
+      "videoIntrinseco": {
+        "w": 1280,
+        "h": 720
+      },
+      "cajaDelVideoEnElDom": {
+        "left": 988,
+        "top": 248.828125,
+        "width": 357.5,
+        "height": 201.09375
+      },
+      "tipo": [
+        "multiView"
+      ],
+      "elementos": [
+        {
+          "tipo": "multiView",
+          "id": "primaryContent",
+          "primario": true,
+          "esperado": {
+            "left": 988,
+            "top": 248.828125,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "dibujado": {
+            "left": 988,
+            "top": 248.828125,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 1.777778
+        },
+        {
+          "tipo": "multiView",
+          "id": "view2",
+          "primario": false,
+          "esperado": {
+            "left": 1345.5,
+            "top": 248.828125,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "dibujado": {
+            "left": 1345.5,
+            "top": 248.828125,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 1.777778
+        },
+        {
+          "tipo": "multiView",
+          "id": "view3",
+          "primario": false,
+          "esperado": {
+            "left": 988,
+            "top": 449.921875,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "dibujado": {
+            "left": 988,
+            "top": 449.921875,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 1.777778
+        },
+        {
+          "tipo": "multiView",
+          "id": "view4",
+          "primario": false,
+          "esperado": {
+            "left": 1345.5,
+            "top": 449.921875,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "dibujado": {
+            "left": 1345.5,
+            "top": 449.921875,
+            "width": 357.5,
+            "height": 201.09375
+          },
+          "delta": {
+            "left": 0,
+            "top": 0,
+            "width": 0,
+            "height": 0
+          },
+          "dentroDeLaImagen": true,
+          "relacionDeAspectoDeSuCaja": 1.777778
+        }
+      ],
+      "break": "Quad"
+    }
+  ],
+  "enVentanaSinAviso": {
+    "fullscreen": false,
+    "viewport": {
+      "w": 1920,
+      "h": 901
+    },
+    "t": 37.161893,
+    "marco": {
+      "left": 988,
+      "top": 257.078125,
+      "width": 715,
+      "height": 402.1875
+    },
+    "imagen": {
+      "left": 988,
+      "top": 257.078125,
+      "width": 715,
+      "height": 402.1875
+    },
+    "corrimientoPorLado": 0,
+    "relacionDeAspectoDelMarco": 1.777778,
+    "relacionDeAspectoDelVideo": 1.777778,
+    "videoIntrinseco": {
+      "w": 1280,
+      "h": 720
+    },
+    "cajaDelVideoEnElDom": {
+      "left": 988,
+      "top": 257.078125,
+      "width": 715,
+      "height": 402.1875
+    },
+    "tipo": [],
+    "elementos": []
+  },
+  "fullscreenSinAviso": {
+    "fullscreen": true,
+    "viewport": {
+      "w": 1920,
+      "h": 901
+    },
+    "t": 36.684788,
+    "marco": {
+      "left": 0,
+      "top": 0,
+      "width": 1920,
+      "height": 901
+    },
+    "imagen": {
+      "left": 159.111111,
+      "top": 0,
+      "width": 1601.777778,
+      "height": 901
+    },
+    "corrimientoPorLado": 159.111111,
+    "relacionDeAspectoDelMarco": 2.130966,
+    "relacionDeAspectoDelVideo": 1.777778,
+    "videoIntrinseco": {
+      "w": 1280,
+      "h": 720
+    },
+    "cajaDelVideoEnElDom": {
+      "left": 0,
+      "top": 0,
+      "width": 1920,
+      "height": 901
+    },
+    "tipo": [],
+    "elementos": []
+  },
+  "fullscreenConAviso": {
+    "fullscreen": true,
+    "viewport": {
+      "w": 1920,
+      "h": 901
+    },
+    "t": 23.082047,
+    "marco": {
+      "left": 0,
+      "top": 0,
+      "width": 1920,
+      "height": 901
+    },
+    "imagen": {
+      "left": 159.111111,
+      "top": 0,
+      "width": 1601.777778,
+      "height": 901
+    },
+    "corrimientoPorLado": 159.111111,
+    "relacionDeAspectoDelMarco": 2.130966,
+    "relacionDeAspectoDelVideo": 1.777778,
+    "videoIntrinseco": {
+      "w": 1280,
+      "h": 720
+    },
+    "cajaDelVideoEnElDom": {
+      "left": 159.109375,
+      "top": 0,
+      "width": 1601.765625,
+      "height": 901
+    },
+    "tipo": [
+      "cornerOverlay"
+    ],
+    "elementos": [
+      {
+        "tipo": "cornerOverlay",
+        "id": "primaryContent",
+        "primario": true,
+        "esperado": {
+          "left": 159.111111,
+          "top": 0,
+          "width": 1601.777778,
+          "height": 901
+        },
+        "dibujado": {
+          "left": 159.109375,
+          "top": 0,
+          "width": 1601.765625,
+          "height": 901
+        },
+        "delta": {
+          "left": 0.001736,
+          "top": 0,
+          "width": 0.012153,
+          "height": 0
+        },
+        "dentroDeLaImagen": true,
+        "relacionDeAspectoDeSuCaja": 1.777764
+      },
+      {
+        "tipo": "cornerOverlay",
+        "id": "adOverlay1",
+        "primario": false,
+        "esperado": {
+          "left": 159.111111,
+          "top": 0,
+          "width": 400.444444,
+          "height": 225.25
+        },
+        "dibujado": {
+          "left": 159.109375,
+          "top": 0,
+          "width": 400.4375,
+          "height": 225.25
+        },
+        "delta": {
+          "left": 0.001736,
+          "top": 0,
+          "width": 0.006944,
+          "height": 0
+        },
+        "dentroDeLaImagen": true,
+        "relacionDeAspectoDeSuCaja": 1.777747
+      }
+    ]
+  },
+  "fullscreenConSqueezeback": {
+    "fullscreen": true,
+    "viewport": {
+      "w": 1920,
+      "h": 901
+    },
+    "t": 48.083174,
+    "marco": {
+      "left": 0,
+      "top": 0,
+      "width": 1920,
+      "height": 901
+    },
+    "imagen": {
+      "left": 159.111111,
+      "top": 0,
+      "width": 1601.777778,
+      "height": 901
+    },
+    "corrimientoPorLado": 159.111111,
+    "relacionDeAspectoDelMarco": 2.130966,
+    "relacionDeAspectoDelVideo": 1.777778,
+    "videoIntrinseco": {
+      "w": 1280,
+      "h": 720
+    },
+    "cajaDelVideoEnElDom": {
+      "left": 159.109375,
+      "top": 0,
+      "width": 961.059326,
+      "height": 540.600037
+    },
+    "tipo": [
+      "squeezebackLShape"
+    ],
+    "elementos": [
+      {
+        "tipo": "squeezebackLShape",
+        "id": "primaryContent",
+        "primario": true,
+        "esperado": {
+          "left": 159.111111,
+          "top": 0,
+          "width": 961.066667,
+          "height": 540.6
+        },
+        "dibujado": {
+          "left": 159.109375,
+          "top": 0,
+          "width": 961.059326,
+          "height": 540.600037
+        },
+        "delta": {
+          "left": 0.001736,
+          "top": 0,
+          "width": 0.00734,
+          "height": 3.7e-05
+        },
+        "dentroDeLaImagen": true,
+        "relacionDeAspectoDeSuCaja": 1.777764
+      },
+      {
+        "tipo": "squeezebackLShape",
+        "id": "adBarVertical",
+        "primario": false,
+        "esperado": {
+          "left": 1120.177778,
+          "top": 0,
+          "width": 640.711111,
+          "height": 901
+        },
+        "dibujado": {
+          "left": 1120.171875,
+          "top": 0,
+          "width": 640.703125,
+          "height": 901
+        },
+        "delta": {
+          "left": 0.005903,
+          "top": 0,
+          "width": 0.007986,
+          "height": 0
+        },
+        "dentroDeLaImagen": true,
+        "relacionDeAspectoDeSuCaja": 0.711102
+      },
+      {
+        "tipo": "squeezebackLShape",
+        "id": "adBarHorizontal",
+        "primario": false,
+        "esperado": {
+          "left": 159.111111,
+          "top": 540.6,
+          "width": 1601.777778,
+          "height": 360.4
+        },
+        "dibujado": {
+          "left": 159.109375,
+          "top": 540.59375,
+          "width": 1601.765625,
+          "height": 360.390625
+        },
+        "delta": {
+          "left": 0.001736,
+          "top": 0.00625,
+          "width": 0.012153,
+          "height": 0.009375
+        },
+        "dentroDeLaImagen": true,
+        "relacionDeAspectoDeSuCaja": 4.444526
+      }
+    ]
+  }
+}

@@ -49,7 +49,11 @@ Element {
 ## Las cinco reglas de lectura
 
 1. **`box` son insets en porcentaje, no coordenadas.** Cuánto se recorta cada
-   borde respecto del área del player. `{0,0,0,0}` es el cuadro entero;
+   borde respecto del área del player, **que es la caja de la imagen y no la
+   del contenedor**: la relación de aspecto la pone el video, no el tamaño de
+   la pantalla, así que en una pantalla que no tiene la forma del contenido las
+   cajas se reparten sobre la imagen y no sobre las barras negras de al lado
+   (T-09). `{0,0,0,0}` es el cuadro entero;
    `{0,75,75,0}` es la esquina superior izquierda a un cuarto de cada lado. La
    conversión a píxeles es una resta, y la midió la T-03 con cero píxeles de
    diferencia en los quince elementos de los seis layouts:

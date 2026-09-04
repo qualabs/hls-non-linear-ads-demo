@@ -67,3 +67,14 @@ La medición deja además una nota que conviene tener presente: en los
 seis tipos que emite la herramienta, la caja del `primaryContent`
 conserva la relación de aspecto del área del player, así que el recorte
 nunca le toca al contenido primario.
+
+> **Nota del 2026-09-04.** Ese último párrafo valía en ventana y no en
+> fullscreen, porque el área contra la que se resolvían las cajas era la
+> del contenedor: en una pantalla que no tiene la forma del contenido, el
+> contenedor no conserva la relación de aspecto del video y el recorte sí
+> llegaba al primario. La T-09 de la fase 02 cambió la medición —el área
+> pasó a ser la caja de la imagen, con la relación de aspecto que pone el
+> video— y con eso la caja del `primaryContent` conserva esa relación en
+> cualquier pantalla. La decisión de este ADR no cambia: el modo de
+> llenado sigue siendo el recorte centrado, y sobre el primario sigue sin
+> tener nada que recortar.
