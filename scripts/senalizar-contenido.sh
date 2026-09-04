@@ -19,6 +19,13 @@ OUT=content/primary/con-daterange.m3u8
 # Segundo de reproducción donde arranca la experiencia. 20 s deja ver contenido
 # antes del aviso, que es lo que la grabación necesita.
 OFFSET=${1:-20}
+# Cuál de los layouts apunta el Date Range de la clase concurrente. Hay un
+# asset-list por layout en ./signalling/, y esto es el interruptor entre ellos:
+# `cornerOverlay` es el mínimo de la T-07 y `squeezebackLShape` el squeezeback
+# de la T-10. El recorrido de los cinco en una sola playlist es la T-12.
+LAYOUT=${2:-cornerOverlay}
+LIST=signalling/asset-list-$LAYOUT.json
+[ -f "$LIST" ] || { echo "no hay asset-list para '$LAYOUT': falta $LIST" >&2; exit 1; }
 
 [ -f "$SRC" ] || { echo "falta $SRC: correr ./scripts/preparar-contenido.sh" >&2; exit 1; }
 
@@ -28,13 +35,13 @@ START=$(date -d "$PDT + $OFFSET seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
 
 # Los tags van después de las cabeceras y antes del primer segmento, que es
 # donde la especificación los admite y donde la T-02 los puso.
-awk -v start="$START" '
+awk -v start="$START" -v list="/$LIST" '
   /^#EXTINF:/ && !hecho {
     print "#EXT-X-DATERANGE:ID=\"AD-1-LINEAR\",CLASS=\"com.apple.hls.interstitial\",START-DATE=\"" start "\",X-ASSET-LIST=\"/signalling/asset-list-linear.json\",X-RESUME-OFFSET=0,X-RESTRICT=\"SKIP\",PLANNED-DURATION=12"
-    print "#EXT-X-DATERANGE:ID=\"AD-1-CONCURRENT\",CLASS=\"com.qualabs.hls.concurrentInterstitial\",START-DATE=\"" start "\",X-ASSET-LIST=\"/signalling/asset-list-cornerOverlay.json\",X-RESUME-OFFSET=0,X-SNAP=\"OUT,IN\",X-RESTRICT=\"SKIP\",PLANNED-DURATION=12"
+    print "#EXT-X-DATERANGE:ID=\"AD-1-CONCURRENT\",CLASS=\"com.qualabs.hls.concurrentInterstitial\",START-DATE=\"" start "\",X-ASSET-LIST=\"" list "\",X-RESUME-OFFSET=0,X-SNAP=\"OUT,IN\",X-RESTRICT=\"SKIP\",PLANNED-DURATION=12"
     hecho = 1
   }
   { print }
 ' "$SRC" > "$OUT"
 
-echo "$OUT  (START-DATE $START, t=${OFFSET}s)"
+echo "$OUT  (START-DATE $START, t=${OFFSET}s, layout $LAYOUT)"

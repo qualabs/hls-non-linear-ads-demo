@@ -28,7 +28,7 @@ algo:
 | T-07 | El mínimo: un cornerOverlay con la cadena completa a la vista       | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-07/`  |
 | T-08 | Tests de la resolución del layout                                   | done    | —    | `test/layout-resolution.test.js` y `.project/phases/01-poc-web-hlsjs/tasks/T-08/` |
 | T-09 | El par de compatibilidad en la página de la demo                    | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-09/`  |
-| T-10 | El mecanismo de squeezeback                                         | pending | —    | —                                              |
+| T-10 | El mecanismo de squeezeback                                         | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-10/`  |
 | T-11 | El mecanismo de multiview                                           | pending | —    | —                                              |
 | T-12 | Los cinco layouts en un recorrido grabable                          | pending | —    | —                                              |
 
@@ -534,6 +534,94 @@ algo:
   tamaño real, y el aviso se ve sin deformarse.
 - **nivel de verificación:** bajo. Es interfaz y el error está en la
   pantalla.
+- **Resultado:** el contenido primario se achica con una transformación de CSS
+  —`transform: translate() scale()` con el origen en la esquina superior
+  izquierda, sobre el mismo `boxToPixels` que ya usaban los assets— y las dos
+  barras del L se dibujan en el espacio liberado. En `js/renderer.js` el método
+  que coloca se partió en dos, porque los dos tipos de elemento llegan a su
+  caja desde lugares distintos: un nodo del aviso lo crea el renderizador y la
+  caja **es** su geometría, y el primario ya está en pantalla ocupando el cuadro
+  entero, así que lo que hay que hacer con él es moverlo (regla 3 del contrato,
+  ADR 0001). El layout entra por datos: `signalling/asset-list-squeezebackLShape.json`
+  es el payload de la herramienta de SVTA con las URIs puestas, y
+  `scripts/senalizar-contenido.sh` toma ahora el layout como segundo argumento,
+  con `cornerOverlay` de default para no mover lo que la T-07 y la T-09 dejaron.
+  La captura a tamaño real es `t10-squeezebackLShape-player.png`: el primario en
+  429x241 arriba a la izquierda, la barra vertical de 286x402 a la derecha y la
+  horizontal de 715x161 abajo, que entre las dos cubren exactamente el resto del
+  cuadro. `t10-el-par-con-el-squeezeback.png` es la página; ahí el player de la
+  izquierda va por su propio reloj porque el único que se adelantó fue el de la
+  demo, y el instante simultáneo de los dos es la evidencia de la T-09.
+  **La caja dibujada coincide con la que el contrato pidió: 0,00 px de
+  diferencia** en los tres elementos, con el área del player en 715x402,19 y la
+  cuenta de los porcentajes hecha aparte del renderizador; y otros 0,00 px con
+  el área en 435x244,69 después de un resize. Es el mismo cero de la T-03 y de
+  la T-07, ahora con el primario movido por una transformación en lugar de
+  redimensionado.
+  **El aviso se ve sin deformarse, y el número es el del ADR 0013.** Los dos
+  assets son de 1280x720, o sea 1,7778. La caja de la barra vertical es de
+  0,7111 y la de la horizontal de 4,4444, que son las dos cajas más lejanas del
+  aspecto del asset entre las quince que midió la T-03. Con recorte centrado
+  cada barra deja afuera **el 60 % del asset**: de la vertical se ven 512 de las
+  1280 columnas y de la horizontal 288 de las 720 filas, y en las dos el
+  estiramiento es cero. Los 60 % y 150 % que la T-03 calculó para esas mismas
+  cajas son lo que costaría llenarlas con `fill`, y no se paga.
+  `t10-recorte-vs-estirado.png` muestra el mismo cuadro congelado de la barra
+  vertical en los dos modos, y entre las dos imágenes cambia el 55,27 % de los
+  píxeles: la constante del ADR 0013 no es decorativa.
+  Todos los números de arriba salen de `t10-medicion.json`, que es la corrida de
+  `t10run.py` sobre el navegador, y de `t10-pixeles.json`, que es la lectura de
+  las capturas.
+  El corte entre las dos capas se mantiene: el mismo grep de la T-06, la T-07 y
+  la T-09, cero hits del lado del renderizado, en `t10-corte-entre-capas.txt`.
+  Los 15 tests de la T-08 siguen pasando sin tocarlos. En la red está la cadena
+  entera y todo responde 200: la media playlist, el asset-list del layout, y los
+  dos contenidos de aviso con sus segmentos, cada uno pedido por su propia
+  instancia de hls.js. Con esto la página corre cuatro elementos de
+  video a la vez por primera vez —el primario, las dos barras y el player de
+  fábrica— y ninguno falló, que es un dato para la T-11.
+- **Cuatro cosas que aparecieron al hacerlo.** La primera es que **el detalle de
+  apilado muerde de verdad, y lo que lo evita es una palabra**: `position`. Una
+  transformación crea un contexto de apilado propio pero **no** posiciona el
+  elemento, y `z-index` en un elemento estático se ignora, así que un primario
+  achicado solamente con la transformación pierde su `zDepth`. Se midió, con la
+  nota que la T-07 dejó para esta task: una experiencia sintética de
+  `squeezebackFrame` —el contrato es data plana, así que se construye a mano—
+  con el elemento de atrás en `zDepth` 0 pintado de magenta y el primario en
+  `zDepth` 1. Con el primario posicionado el magenta ocupa el 63,85 % del
+  cuadro, que es exactamente el 64 % que queda afuera de su caja, y 0 % en el
+  centro: el orden se respeta (`t10-zdepth-primario-posicionado.png`). Sacándole
+  el `position` y dejando la transformación, el magenta pasa al 99,73 % y el
+  contenido primario **desaparece** detrás del aviso
+  (`t10-zdepth-primario-estatico.png`). El renderizador escribe el `position`
+  junto con el `z-index` y `css/player.css` documenta la otra mitad, que es que
+  la capa de avisos no puede llevar z-index ni transformación propia: si la
+  cierra, todo aviso queda encima del primario. La nota de la T-07 queda
+  cerrada, y el caso que ningún layout ejercitaba ahora está medido.
+  La segunda es un límite del mecanismo que el ADR 0001 no dice: **la
+  transformación solo achica el primario sin deformarlo mientras su caja
+  conserve la relación de aspecto del área del player.** Si no la conserva, la
+  escala es distinta en cada eje y la imagen se estira ahí mismo, y el modo de
+  llenado no puede salvarla, porque la transformación escala lo que
+  `object-fit` ya dibujó. La nota final del ADR 0013 —que el recorte nunca le
+  toca al contenido primario— es cierta en los seis payloads de la herramienta,
+  pero la razón es más fuerte que lo que el ADR dice: con este mecanismo la
+  política de recorte **no llega** al primario. El renderizador avisa por
+  consola en vez de deformar en silencio; en los seis layouts no se dispara.
+  La tercera sale de la primera: **el invariante que sostiene el orden no lo
+  cubre ningún test**. Los 15 de la T-08 son lógica pura sobre la resolución del
+  layout, y esto solo falla en pantalla. Hoy lo sostienen un comentario en cada
+  una de las dos puntas y la medición de arriba.
+  La cuarta es de assets y le toca a la T-12. La primera corrida del layout usó
+  los dos avisos que quedaban libres y dio un squeezeback con las dos barras
+  casi negras: el teaser de *Elephants Dream* tiene una luminancia media de 7 a
+  30 sobre 255 en sus doce segundos, así que la barra no permitía ver si el
+  aviso estaba deformado, que es justo lo que la task tiene que mostrar. Se
+  cambió a *Caminandes* en la vertical y *Sintel* en la horizontal, y la captura
+  se toma a los 9 s del aviso. Es un problema de datos y no de código, que es lo
+  que el ADR 0013 anticipa, y agrega un criterio a la elección de creativos de
+  la T-12: no alcanza con que el recorte no se coma nada importante, el cuadro
+  también tiene que tener luz para que se lea en cámara.
 
 ## T-11 — El mecanismo de multiview
 

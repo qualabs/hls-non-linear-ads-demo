@@ -1,0 +1,76 @@
+{
+  "cover_vs_fill": {
+    "regionComparada": {
+      "w": 286,
+      "h": 240,
+      "nota": "parte visible de adBarVertical: la horizontal, en zDepth 2, la tapa desde y=241"
+    },
+    "cuadroCongelado": true,
+    "diferenciaMediaPorCanal": 27.84,
+    "pixelesDistintosPorCiento": 55.27
+  },
+  "primario_posicionado": {
+    "archivo": "t10-zdepth-primario-posicionado.png",
+    "cuadroEntero": {
+      "size": [
+        715,
+        403
+      ],
+      "mediaRGB": [
+        211.8,
+        41.2,
+        208.3
+      ],
+      "magentaPorCiento": 63.85
+    },
+    "centro40x40": {
+      "size": [
+        40,
+        40
+      ],
+      "mediaRGB": [
+        131.5,
+        140.5,
+        150.4
+      ],
+      "magentaPorCiento": 0.0
+    },
+    "pixelDelCentro": [
+      193,
+      203,
+      206
+    ]
+  },
+  "primario_estatico": {
+    "archivo": "t10-zdepth-primario-estatico.png",
+    "cuadroEntero": {
+      "size": [
+        715,
+        403
+      ],
+      "mediaRGB": [
+        254.4,
+        0.1,
+        254.5
+      ],
+      "magentaPorCiento": 99.73
+    },
+    "centro40x40": {
+      "size": [
+        40,
+        40
+      ],
+      "mediaRGB": [
+        255.0,
+        0.0,
+        255.0
+      ],
+      "magentaPorCiento": 100.0
+    },
+    "pixelDelCentro": [
+      255,
+      0,
+      255
+    ]
+  }
+}
