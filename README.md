@@ -95,6 +95,12 @@ has a visible control to turn the ad's sound on (ADR 0010). Turning it on in
 front of an audience is how the demo shows that both sources of audio are
 there and that choosing between them is the player's.
 
+That control is one for the whole ad, not one per element: in `multiView`,
+where three concurrent sources are on screen at once, it turns the three of
+them on together. There is nothing in the data to do anything finer -- the
+tool's model has a `volume` per element and emits it in none of the six
+layouts, so a per-quadrant mix would be invented rather than signalled.
+
 ## Three things that look like details and are not
 
 **hls.js runs with its interstitials machinery turned off.** The page creates

@@ -1,0 +1,51 @@
+{
+  "al_entrar": {
+    "time": 20.11,
+    "paneDemo": "primary",
+    "paneStock": "primary",
+    "demoState": "primary content \u00b7 19.9s",
+    "stockState": "primary content \u00b7 19.9s",
+    "cuadrantes": 3
+  },
+  "en_la_captura": {
+    "time": 25.81,
+    "primario": {
+      "paused": false,
+      "muted": true
+    },
+    "cuadrantes": [
+      {
+        "id": "view2",
+        "adTime": 5.53,
+        "paused": false,
+        "readyState": 4,
+        "muted": true,
+        "w": 1280,
+        "h": 720
+      },
+      {
+        "id": "view3",
+        "adTime": 5.53,
+        "paused": false,
+        "readyState": 4,
+        "muted": true,
+        "w": 1280,
+        "h": 720
+      },
+      {
+        "id": "view4",
+        "adTime": 5.52,
+        "paused": false,
+        "readyState": 4,
+        "muted": true,
+        "w": 1280,
+        "h": 720
+      }
+    ],
+    "paneDemo": "ad",
+    "paneStock": "ad",
+    "demoState": "primary content + CONCURRENT AD (multiView) \u00b7 25.7s \u00b7 nothing was replaced",
+    "stockState": "LINEAR AD \"AD-1-LINEAR\" \u00b7 5.5s of the ad \u00b7 the content is off the screen",
+    "contract": "t=25.7s \u00b7 multiView \u00b7 z0 primaryContent [0 50 50 0] \u00b7 z1 view2 [0 0 50 50] \u00b7 z2 view3 [50 50 0 0] \u00b7 z3 view4 [50 0 0 50]"
+  }
+}

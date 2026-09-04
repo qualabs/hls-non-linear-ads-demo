@@ -29,7 +29,7 @@ algo:
 | T-08 | Tests de la resolución del layout                                   | done    | —    | `test/layout-resolution.test.js` y `.project/phases/01-poc-web-hlsjs/tasks/T-08/` |
 | T-09 | El par de compatibilidad en la página de la demo                    | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-09/`  |
 | T-10 | El mecanismo de squeezeback                                         | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-10/`  |
-| T-11 | El mecanismo de multiview                                           | pending | —    | —                                              |
+| T-11 | El mecanismo de multiview                                           | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-11/`  |
 | T-12 | Los cinco layouts en un recorrido grabable                          | pending | —    | —                                              |
 
 ---
@@ -643,6 +643,110 @@ algo:
   contenido primario.
 - **nivel de verificación:** bajo. Es interfaz, y la concurrencia que
   podía bloquearlo ya la midió la T-01.
+- **Resultado:** el mecanismo entró **sin una línea de código**. El diff contra
+  la T-10 son dos cosas y las dos del lado de los datos:
+  `signalling/asset-list-multiView.json`, que es el payload de `multiView` de la
+  herramienta de SVTA con las URIs de los tres assets puestas, y un comentario
+  en `scripts/senalizar-contenido.sh`, que es donde vive el interruptor de cuál
+  layout señalizar. `git diff --stat 98013a3 -- js/ css/ index.html test/` no
+  devuelve nada.
+  **Los cuatro cuadrantes reproducen a la vez.** La medición entra a la ventana
+  **sin seek**: la página se carga y se deja llegar a los 20 s sola, así que el
+  número no se apoya en un seek que calentó el buffer. Son cinco elementos de
+  video y cinco instancias de hls.js en la misma pestaña, porque a los cuatro
+  del layout se suma el player de fábrica del par de compatibilidad, y en 9,01 s
+  de reloj de pared los cinco dan lo mismo: `rateVsWall` 0,999, 30,0 fps, 0
+  cuadros descartados, 0 corruptos, `readyState` 4, ninguno pausado y ningún
+  error de hls.js en consola. La tabla, en el formato de la T-01, está en
+  `t11-medicion.json`; contra la corrida de cinco elementos de la T-01 —0,996 y
+  4 descartados en 12 s— los números son los mismos dentro del ruido, con los
+  descartados en cero.
+  **La caja dibujada coincide con la que el contrato pidió: 0,00 px de
+  diferencia** en los cuatro elementos, con el área del player en 715x402,19 y
+  cada cuadrante en 357,5x201,09, midiendo el rectángulo del DOM contra la
+  cuenta de los porcentajes hecha aparte del renderizador; y otros 0,00 px con
+  el área en 435x244,69 después de un resize. Es el mismo cero de la T-03, la
+  T-07 y la T-10.
+  La captura a tamaño real es `t11-multiView-player.png`, tomada también sin
+  ningún seek, a los 25,81 s: los cuatro cuadrantes con imagen, el primario
+  arriba a la izquierda y los tres avisos en los otros tres.
+  `t11-el-par-con-el-multiview.png` es el par en el **mismo instante**, sin que
+  ninguno de los dos relojes se haya tocado: a la izquierda el player de fábrica
+  con el aviso lineal y el rótulo "the content is off the screen", a la derecha
+  los cuatro cuadrantes y "nothing was replaced".
+  **En este layout la política de llenado no cuesta nada, y eso es el contraste
+  con la T-10.** Las cuatro cajas son cuadrantes del área del player, así que
+  conservan su relación de aspecto: 1,7778 de caja contra 1,7778 de asset, 0 %
+  de recorte y 0 % de estiramiento en los cuatro. Es el otro extremo de las dos
+  barras del `squeezebackLShape`, que dejaban afuera el 60 % del asset. El aviso
+  del renderizador sobre la relación de aspecto del primario no se dispara, que
+  es lo que el ADR 0013 anticipa para los seis payloads de la herramienta.
+  En la red está la cadena entera y todo responde 200: la media playlist, el
+  `asset-list-multiView.json` como `application/json` que pide la aplicación, y
+  los **tres** contenidos de aviso con sus seis segmentos cada uno, cada uno
+  pedido por su propia instancia de hls.js. El asset-list de clase Apple lo pide
+  el player de fábrica y nadie más.
+  El corte entre las dos capas se mantiene: el mismo grep de la T-06, la T-07,
+  la T-09 y la T-10, cero hits del lado del renderizado y los mismos tres
+  contadores, en `t11-corte-entre-capas.txt`. Los 15 tests de la T-08 siguen
+  pasando sin tocarlos.
+- **Del audio se pudo medir una parte, y conviene decir cuál.** Lo que sostiene
+  que el audio sale del contenido primario son tres mediciones, en
+  `t11-audio.json`, sobre cuatro estados:
+  1. **El `muted` de cada uno de los cinco elementos.** En el estado del ADR
+     0010 —el primario con audio y el aviso en silencio— los tres cuadrantes del
+     aviso están en `muted: true` y el único que no lo está es el primario. Para
+     un elemento de media eso no es un indicio: un elemento muteado no rinde su
+     audio a la salida.
+  2. **Los streams de playback que Chrome abre en el sink del sistema.** Con los
+     cinco elementos muteados, cero streams y el sink en `IDLE`. En el instante
+     en que algo se desmutea, Chrome abre exactamente un stream sin mutear y el
+     sink pasa a `RUNNING`. Lo que ese contador **no** discrimina es cuántos
+     elementos están sonando: es uno solo con tres avisos encendidos y uno solo
+     con los cuatro, así que lo que separa silencio de sonido es la aparición del
+     stream y no su cantidad. Es la misma lectura que dejó la T-07.
+  3. **El audio decodificado por elemento.** Los cinco decodifican su propio
+     audio a la vez, entre 25,7 y 26,4 kB en los dos segundos de cada captura, y
+     el número no cambia según el `muted`. O sea que decodificar y escucharse son
+     cosas distintas, y este número dice la primera.
+  **Lo que no se pudo medir es el nivel de la salida mientras suena**, así que no
+  hay una grabación del audio que respalde la frase. `parec` sobre el monitor del
+  sink por defecto devolvió cero bytes en los cuatro estados, incluido el estado
+  en que nada sonaba; el mismo comando desde una shell, con la página cerrada,
+  devuelve 32000 muestras de silencio exacto. El instrumento anda a veces y no
+  otras en esta sesión, así que no se apoya nada en él: la T-07 había leído su
+  cero como "cero bytes cuando algo suena", y con esta corrida el cero también
+  aparece con nada sonando. Y hay una razón más de fondo para no ir por ahí: el
+  monitor del sink graba la **mezcla**, así que incluso funcionando diría que algo
+  suena y no cuál de los cuatro elementos.
+- **Tres cosas que aparecieron al hacerlo.** La primera es que **los tres
+  mecanismos del ADR 0008 son dos caminos de código, no tres.** El ADR los
+  separa por lo que hacen en pantalla, y para elegir el orden de trabajo eso fue
+  lo correcto. Pero en el renderizador un multiview es un squeezeback con cuatro
+  cajas: mover el contenido primario a su caja lo aprendió la T-10 y dibujar N
+  assets posicionados lo sabía desde la T-07, y el tercer mecanismo no agregó
+  nada. Lo que el ADR 0008 anticipa para los layouts de un mismo mecanismo —que
+  agregar los que falten es trabajo de datos y no de ingeniería— vale también
+  cruzando la frontera entre el mecanismo B y el C.
+  La segunda es que **el control de audio del ADR 0010 es uno para todo el
+  aviso, y con tres fuentes concurrentes esa pregunta se ve.** El botón enciende
+  y apaga los tres cuadrantes a la vez, y con este layout aparece la pregunta de
+  cuál de las tres querría escuchar quien mira. Hoy no hay dato para contestarla:
+  el modelo de la herramienta tiene un `volume` por elemento y la T-03 midió que
+  no lo emite en ninguno de los seis layouts, así que una mezcla por cuadrante
+  sería inventada. Es exactamente el hueco que el ADR 0010 dejó anotado, y el
+  multiview es el layout que lo vuelve una pregunta concreta para SVTA.
+  La tercera es de assets y le toca a la T-12, y es la nota de la T-10 medida en
+  serio. El barrido de `t11-luz.json` recorre la ventana de 12 s muestreando la
+  luminancia de cada cuadrante: `view3` (*Caminandes*) va de 108 a 163, `view2`
+  (*Sintel*) oscila entre 0 y 177, y `view4` (el teaser de *Elephants Dream*)
+  **no pasa de 42,4 en ningún instante de los doce segundos**. En el mejor
+  instante de la ventana, que es el que la captura usa, el 66 % de ese cuadrante
+  sigue siendo casi negro (`t11-pixeles.json`). Y esta vez no hay con qué
+  cambiarlo: el layout consume los tres assets de aviso del repo de una sola vez
+  —la cuarta fuente es el contenido primario—, así que la salida que usó la T-10,
+  que fue cambiar el asset oscuro por otro, acá no existe. El listado de SVTA que
+  la T-12 va a pedir necesita al menos un asset más, y con luz.
 
 ## T-12 — Los cinco layouts en un recorrido grabable
 

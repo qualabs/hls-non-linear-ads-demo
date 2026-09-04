@@ -1,0 +1,463 @@
+{
+  "barrido": [
+    {
+      "time": 21.11,
+      "primaryContent": 66.7,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 0.95,
+          "luz": 34.2
+        },
+        "view3": {
+          "adTime": 0.97,
+          "luz": 107.9
+        },
+        "view4": {
+          "adTime": 0.99,
+          "luz": 2
+        }
+      },
+      "luzDelMasOscuro": 2
+    },
+    {
+      "time": 21.38,
+      "primaryContent": 69.7,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 1.32,
+          "luz": 14.7
+        },
+        "view3": {
+          "adTime": 1.34,
+          "luz": 108.1
+        },
+        "view4": {
+          "adTime": 1.35,
+          "luz": 1.9
+        }
+      },
+      "luzDelMasOscuro": 1.9
+    },
+    {
+      "time": 21.83,
+      "primaryContent": 67.9,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 1.77,
+          "luz": 0
+        },
+        "view3": {
+          "adTime": 1.78,
+          "luz": 131.2
+        },
+        "view4": {
+          "adTime": 1.79,
+          "luz": 2.9
+        }
+      },
+      "luzDelMasOscuro": 0
+    },
+    {
+      "time": 22.36,
+      "primaryContent": 74.6,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 2.25,
+          "luz": 14.5
+        },
+        "view3": {
+          "adTime": 2.27,
+          "luz": 130.6
+        },
+        "view4": {
+          "adTime": 2.28,
+          "luz": 7.2
+        }
+      },
+      "luzDelMasOscuro": 7.2
+    },
+    {
+      "time": 22.89,
+      "primaryContent": 79.8,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 2.86,
+          "luz": 51.8
+        },
+        "view3": {
+          "adTime": 2.88,
+          "luz": 132.7
+        },
+        "view4": {
+          "adTime": 2.9,
+          "luz": 13.1
+        }
+      },
+      "luzDelMasOscuro": 13.1
+    },
+    {
+      "time": 23.37,
+      "primaryContent": 79.8,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 3.32,
+          "luz": 63.2
+        },
+        "view3": {
+          "adTime": 3.34,
+          "luz": 132.3
+        },
+        "view4": {
+          "adTime": 3.35,
+          "luz": 12.8
+        }
+      },
+      "luzDelMasOscuro": 12.8
+    },
+    {
+      "time": 23.86,
+      "primaryContent": 82.4,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 3.8,
+          "luz": 57.4
+        },
+        "view3": {
+          "adTime": 3.82,
+          "luz": 132.8
+        },
+        "view4": {
+          "adTime": 3.83,
+          "luz": 12.6
+        }
+      },
+      "luzDelMasOscuro": 12.6
+    },
+    {
+      "time": 24.36,
+      "primaryContent": 83.9,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 4.27,
+          "luz": 88.2
+        },
+        "view3": {
+          "adTime": 4.28,
+          "luz": 133.5
+        },
+        "view4": {
+          "adTime": 4.3,
+          "luz": 12.2
+        }
+      },
+      "luzDelMasOscuro": 12.2
+    },
+    {
+      "time": 24.85,
+      "primaryContent": 85.6,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 4.8,
+          "luz": 77.7
+        },
+        "view3": {
+          "adTime": 4.8,
+          "luz": 119.1
+        },
+        "view4": {
+          "adTime": 4.81,
+          "luz": 11.3
+        }
+      },
+      "luzDelMasOscuro": 11.3
+    },
+    {
+      "time": 25.38,
+      "primaryContent": 118.3,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 5.32,
+          "luz": 76.6
+        },
+        "view3": {
+          "adTime": 5.33,
+          "luz": 120
+        },
+        "view4": {
+          "adTime": 5.33,
+          "luz": 10.9
+        }
+      },
+      "luzDelMasOscuro": 10.9
+    },
+    {
+      "time": 25.86,
+      "primaryContent": 115,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 5.77,
+          "luz": 77.5
+        },
+        "view3": {
+          "adTime": 5.77,
+          "luz": 127.1
+        },
+        "view4": {
+          "adTime": 5.78,
+          "luz": 42.4
+        }
+      },
+      "luzDelMasOscuro": 42.4
+    },
+    {
+      "time": 26.34,
+      "primaryContent": 117.4,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 6.24,
+          "luz": 177.3
+        },
+        "view3": {
+          "adTime": 6.25,
+          "luz": 157.6
+        },
+        "view4": {
+          "adTime": 6.25,
+          "luz": 37.1
+        }
+      },
+      "luzDelMasOscuro": 37.1
+    },
+    {
+      "time": 26.87,
+      "primaryContent": 124.1,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 6.83,
+          "luz": 127
+        },
+        "view3": {
+          "adTime": 6.84,
+          "luz": 150.9
+        },
+        "view4": {
+          "adTime": 6.85,
+          "luz": 32.7
+        }
+      },
+      "luzDelMasOscuro": 32.7
+    },
+    {
+      "time": 27.38,
+      "primaryContent": 124,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 7.32,
+          "luz": 148.3
+        },
+        "view3": {
+          "adTime": 7.33,
+          "luz": 142.8
+        },
+        "view4": {
+          "adTime": 7.35,
+          "luz": 21.9
+        }
+      },
+      "luzDelMasOscuro": 21.9
+    },
+    {
+      "time": 27.79,
+      "primaryContent": 103.8,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 7.65,
+          "luz": 105.6
+        },
+        "view3": {
+          "adTime": 7.65,
+          "luz": 162.7
+        },
+        "view4": {
+          "adTime": 7.66,
+          "luz": 14.1
+        }
+      },
+      "luzDelMasOscuro": 14.1
+    },
+    {
+      "time": 28.34,
+      "primaryContent": 104.6,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 8.22,
+          "luz": 0
+        },
+        "view3": {
+          "adTime": 8.24,
+          "luz": 162.6
+        },
+        "view4": {
+          "adTime": 8.26,
+          "luz": 4.9
+        }
+      },
+      "luzDelMasOscuro": 0
+    },
+    {
+      "time": 28.89,
+      "primaryContent": 105,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 8.84,
+          "luz": 89.6
+        },
+        "view3": {
+          "adTime": 8.85,
+          "luz": 162.6
+        },
+        "view4": {
+          "adTime": 8.85,
+          "luz": 5
+        }
+      },
+      "luzDelMasOscuro": 5
+    },
+    {
+      "time": 29.38,
+      "primaryContent": 91.9,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 9.34,
+          "luz": 145.7
+        },
+        "view3": {
+          "adTime": 9.35,
+          "luz": 162.4
+        },
+        "view4": {
+          "adTime": 9.37,
+          "luz": 4.6
+        }
+      },
+      "luzDelMasOscuro": 4.6
+    },
+    {
+      "time": 29.86,
+      "primaryContent": 92.7,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 9.8,
+          "luz": 141.7
+        },
+        "view3": {
+          "adTime": 9.81,
+          "luz": 162.4
+        },
+        "view4": {
+          "adTime": 9.81,
+          "luz": 8.9
+        }
+      },
+      "luzDelMasOscuro": 8.9
+    },
+    {
+      "time": 30.32,
+      "primaryContent": 89.1,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 10.2,
+          "luz": 118.1
+        },
+        "view3": {
+          "adTime": 10.21,
+          "luz": 161.6
+        },
+        "view4": {
+          "adTime": 10.23,
+          "luz": 9.8
+        }
+      },
+      "luzDelMasOscuro": 9.8
+    },
+    {
+      "time": 30.9,
+      "primaryContent": 102.9,
+      "cuadrantes": {
+        "view2": {
+          "adTime": 10.86,
+          "luz": 169
+        },
+        "view3": {
+          "adTime": 10.86,
+          "luz": 162.4
+        },
+        "view4": {
+          "adTime": 10.87,
+          "luz": 10
+        }
+      },
+      "luzDelMasOscuro": 10
+    }
+  ],
+  "instanteElegido": {
+    "time": 25.86,
+    "primaryContent": 115,
+    "cuadrantes": {
+      "view2": {
+        "adTime": 5.77,
+        "luz": 77.5
+      },
+      "view3": {
+        "adTime": 5.77,
+        "luz": 127.1
+      },
+      "view4": {
+        "adTime": 5.78,
+        "luz": 42.4
+      }
+    },
+    "luzDelMasOscuro": 42.4
+  },
+  "enLaCaptura": {
+    "time": 26.65,
+    "primario": {
+      "paused": false,
+      "readyState": 4
+    },
+    "cuadrantes": [
+      {
+        "id": "view2",
+        "adTime": 6.53,
+        "paused": false,
+        "readyState": 4,
+        "muted": true,
+        "w": 1280,
+        "h": 720
+      },
+      {
+        "id": "view3",
+        "adTime": 6.53,
+        "paused": false,
+        "readyState": 4,
+        "muted": true,
+        "w": 1280,
+        "h": 720
+      },
+      {
+        "id": "view4",
+        "adTime": 6.53,
+        "paused": false,
+        "readyState": 4,
+        "muted": true,
+        "w": 1280,
+        "h": 720
+      }
+    ],
+    "contract": "t=26.6s \u00b7 multiView \u00b7 z0 primaryContent [0 50 50 0] \u00b7 z1 view2 [0 0 50 50] \u00b7 z2 view3 [50 50 0 0] \u00b7 z3 view4 [50 0 0 50]",
+    "paneDemo": "ad",
+    "paneStock": "primary",
+    "stockState": "primary content \u00b7 12.0s",
+    "demoState": "primary content + CONCURRENT AD (multiView) \u00b7 26.6s \u00b7 nothing was replaced"
+  }
+}

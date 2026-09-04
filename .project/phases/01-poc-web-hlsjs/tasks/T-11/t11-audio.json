@@ -1,0 +1,319 @@
+{
+  "monitor": "xrdp-sink.monitor",
+  "pasos": [
+    {
+      "paso": "1-como-arranca-la-pagina-todo-en-silencio",
+      "estado": {
+        "adAudioOn": false,
+        "boton": {
+          "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+          "disabled": false
+        },
+        "elementos": {
+          "primaryContent": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 24.53,
+            "audioBytes": 50465
+          },
+          "stockPlayer": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 3.63,
+            "audioBytes": 48250
+          },
+          "view2": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.3,
+            "audioBytes": 45760
+          },
+          "view3": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.29,
+            "audioBytes": 44005
+          },
+          "view4": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.29,
+            "audioBytes": 44060
+          }
+        }
+      },
+      "sinks": {
+        "alsa_output.pci-0000_00_1f.3.analog-stereo": "SUSPENDED",
+        "xrdp-sink": "IDLE"
+      },
+      "streamsDeChrome": [],
+      "nivelDeLaSalida": {
+        "returncode": 124,
+        "stderr": "",
+        "bytes": 0,
+        "muestras": 0
+      },
+      "bytesDeAudioEnLosDosSegundosDeLaCaptura": {
+        "primaryContent": 25719,
+        "stockPlayer": 26142,
+        "view2": 25803,
+        "view3": 25803,
+        "view4": 25825
+      }
+    },
+    {
+      "paso": "2-los-tres-avisos-con-audio-el-primario-todavia-muteado",
+      "estado": {
+        "adAudioOn": true,
+        "boton": {
+          "text": "\ud83d\udd0a ad audio ON \u2014 click to mute the ad",
+          "disabled": false
+        },
+        "elementos": {
+          "primaryContent": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 24.23,
+            "audioBytes": 96785
+          },
+          "stockPlayer": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 7.14,
+            "audioBytes": 91569
+          },
+          "view2": {
+            "muted": false,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.04,
+            "audioBytes": 91706
+          },
+          "view3": {
+            "muted": false,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.04,
+            "audioBytes": 89865
+          },
+          "view4": {
+            "muted": false,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.04,
+            "audioBytes": 89932
+          }
+        }
+      },
+      "sinks": {
+        "alsa_output.pci-0000_00_1f.3.analog-stereo": "SUSPENDED",
+        "xrdp-sink": "RUNNING"
+      },
+      "streamsDeChrome": [
+        "Sink Input #3685",
+        "Sink: 75",
+        "Corked: no",
+        "Mute: no",
+        "application.name = \"Google Chrome\"",
+        "media.name = \"Playback\""
+      ],
+      "nivelDeLaSalida": {
+        "returncode": 124,
+        "stderr": "",
+        "bytes": 0,
+        "muestras": 0
+      },
+      "bytesDeAudioEnLosDosSegundosDeLaCaptura": {
+        "primaryContent": 25912,
+        "stockPlayer": 25744,
+        "view2": 25871,
+        "view3": 25848,
+        "view4": 25852
+      }
+    },
+    {
+      "paso": "3-el-estado-del-ADR-0010-primario-con-audio-y-los-tres-avisos-en-silencio",
+      "estado": {
+        "adAudioOn": false,
+        "boton": {
+          "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+          "disabled": false
+        },
+        "elementos": {
+          "primaryContent": {
+            "muted": false,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 24.13,
+            "audioBytes": 141728
+          },
+          "stockPlayer": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 10.54,
+            "audioBytes": 133840
+          },
+          "view2": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.18,
+            "audioBytes": 136328
+          },
+          "view3": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.17,
+            "audioBytes": 134388
+          },
+          "view4": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.17,
+            "audioBytes": 134514
+          }
+        }
+      },
+      "sinks": {
+        "alsa_output.pci-0000_00_1f.3.analog-stereo": "SUSPENDED",
+        "xrdp-sink": "RUNNING"
+      },
+      "streamsDeChrome": [
+        "Sink Input #3685",
+        "Sink: 75",
+        "Corked: no",
+        "Mute: no",
+        "application.name = \"Google Chrome\"",
+        "media.name = \"Playback\""
+      ],
+      "nivelDeLaSalida": {
+        "returncode": 124,
+        "stderr": "",
+        "bytes": 0,
+        "muestras": 0
+      },
+      "bytesDeAudioEnLosDosSegundosDeLaCaptura": {
+        "primaryContent": 26408,
+        "stockPlayer": 26191,
+        "view2": 26147,
+        "view3": 26116,
+        "view4": 26119
+      }
+    },
+    {
+      "paso": "4-los-cuatro-con-audio",
+      "estado": {
+        "adAudioOn": true,
+        "boton": {
+          "text": "\ud83d\udd0a ad audio ON \u2014 click to mute the ad",
+          "disabled": false
+        },
+        "elementos": {
+          "primaryContent": {
+            "muted": false,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 24.18,
+            "audioBytes": 186190
+          },
+          "stockPlayer": {
+            "muted": true,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 13.93,
+            "audioBytes": 175643
+          },
+          "view2": {
+            "muted": false,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.09,
+            "audioBytes": 180398
+          },
+          "view3": {
+            "muted": false,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.09,
+            "audioBytes": 178375
+          },
+          "view4": {
+            "muted": false,
+            "volume": 1,
+            "paused": false,
+            "currentTime": 4.09,
+            "audioBytes": 178562
+          }
+        }
+      },
+      "sinks": {
+        "alsa_output.pci-0000_00_1f.3.analog-stereo": "SUSPENDED",
+        "xrdp-sink": "RUNNING"
+      },
+      "streamsDeChrome": [
+        "Sink Input #3685",
+        "Sink: 75",
+        "Corked: no",
+        "Mute: no",
+        "application.name = \"Google Chrome\"",
+        "media.name = \"Playback\""
+      ],
+      "nivelDeLaSalida": {
+        "returncode": 124,
+        "stderr": "",
+        "bytes": 0,
+        "muestras": 0
+      },
+      "bytesDeAudioEnLosDosSegundosDeLaCaptura": {
+        "primaryContent": 25912,
+        "stockPlayer": 25944,
+        "view2": 25871,
+        "view3": 25848,
+        "view4": 25852
+      }
+    }
+  ],
+  "antes_de_abrir_la_pagina": {
+    "sinks": {
+      "alsa_output.pci-0000_00_1f.3.analog-stereo": "SUSPENDED",
+      "xrdp-sink": "SUSPENDED"
+    },
+    "streams": [],
+    "nivel": {
+      "returncode": 124,
+      "stderr": "",
+      "bytes": 0,
+      "muestras": 0
+    }
+  },
+  "despues_de_cerrar_la_pagina": {
+    "sinks": {
+      "alsa_output.pci-0000_00_1f.3.analog-stereo": "SUSPENDED",
+      "xrdp-sink": "IDLE"
+    },
+    "streams": [
+      "Sink Input #3685",
+      "Sink: 75",
+      "Corked: yes",
+      "Mute: no",
+      "application.name = \"Google Chrome\"",
+      "media.name = \"Playback\""
+    ],
+    "nivel": {
+      "returncode": 124,
+      "stderr": "",
+      "bytes": 0,
+      "muestras": 0
+    }
+  }
+}

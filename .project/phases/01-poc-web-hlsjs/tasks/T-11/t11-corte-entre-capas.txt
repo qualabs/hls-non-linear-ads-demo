@@ -1,0 +1,32 @@
+# El corte entre las dos capas, con el mecanismo de multiview (2026-09-04)
+
+$ /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." js/renderer.js js/contract-trace.js css/player.css
+(sin salida: ningun hit; exit code 1)
+
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/signalling.js
+19
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/stock-player.js
+22
+$ /usr/bin/grep -c -i -E "hls|daterange|asset-list|EXT-X|interstitial" js/app.js
+30
+
+Es el mismo grep de la T-06, la T-07, la T-09 y la T-10, y los tres contadores
+son los mismos numeros que dio la T-10.
+
+Y esta vez el motivo es mas fuerte que "no toco esos archivos": esta task no
+toco NINGUN archivo de js/. El diff completo del mecanismo son dos cosas, las
+dos del lado de los datos:
+
+    signalling/asset-list-multiView.json   nuevo: el payload de multiView de la
+                                           herramienta de SVTA, con las URIs de
+                                           los tres assets puestas
+    scripts/senalizar-contenido.sh         un comentario: el interruptor de
+                                           layout ahora nombra los tres
+
+$ git diff --stat 98013a3 -- js/ css/ index.html test/
+(sin salida: ningun archivo de codigo cambiado)
+
+El tercer mecanismo del ADR 0008 entro sin una linea de renderizado. El
+renderizador ya sabia mover el contenido primario a una caja (lo aprendio en la
+T-10) y ya sabia dibujar N assets posicionados (lo sabia desde la T-07), y un
+multiview es esas dos cosas con cuatro cajas que son cuadrantes.
