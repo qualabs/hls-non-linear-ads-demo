@@ -23,7 +23,7 @@ algo:
 | T-02 | Medir la cadena mínima de señalización y el par de compatibilidad   | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-02/`  |
 | T-03 | Medir el render de un layout de SVTA contra su vista previa         | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-03/`  |
 | T-04 | Cerrar el plan de construcción con los resultados de las mediciones | done    | —    | este archivo y el ADR 0013                      |
-| T-05 | El banco de la demo: repo, página y contenido servido               | pending | —    | —                                              |
+| T-05 | El banco de la demo: repo, página y contenido servido               | done    | —    | el repo mismo y `.project/phases/01-poc-web-hlsjs/tasks/T-05/` |
 | T-06 | La capa de señalización y el contrato con el renderizado            | pending | —    | —                                              |
 | T-07 | El mínimo: un cornerOverlay con la cadena completa a la vista       | pending | —    | —                                              |
 | T-08 | Tests de la resolución del layout                                   | pending | —    | —                                              |
@@ -194,6 +194,25 @@ algo:
   ningún layout.
 - **nivel de verificación:** mínimo. No tiene lógica propia y su único
   resultado es que el video se ve, cosa que se sabe en el primer segundo.
+- **Resultado:** el banco está en la raíz de este repo, al lado de
+  `.project/`. `./run.sh` (o `npm start`) empaqueta el contenido si no
+  está y sirve `http://localhost:8080/`. Verificado en el Chrome del
+  sistema: hls.js 1.7.2, `interstitialsManager` en `null`, el primario
+  reproduciendo a 1280x720 desde el segundo 20 de 180, y en la red la
+  media playlist más 26 segmentos servidos, todos desde el servidor de
+  archivos estáticos. El criterio se verificó también como lo dice: clon
+  limpio del repo, un comando, y el primario reproduciendo. Evidencia en
+  `tasks/T-05/`.
+- **Dos cosas que el bloque daba por resueltas y no lo estaban.** El
+  esqueleto de `demo-ibc` trae hls.js **1.7.0**, no la 1.7.2 que pide el
+  ADR 0002, así que la vendorizada salió del tarball de npm de 1.7.2. Y
+  `tasks/T-01/empaquetar-contenido.sh` no se pudo reusar tal cual: su
+  entrada son cinco fuentes sintéticas de `testsrc2`, porque lo que la
+  T-01 medía era cuántos decodificadores aguanta el browser y la imagen
+  no importaba. Lo que se reusó verbatim es la invocación de ffmpeg
+  —1280x720 a 30 fps, H.264 más AAC, segmentos de 2 s,
+  `program_date_time+independent_segments`—; lo que cambió es que la
+  entrada ahora es un archivo real.
 
 ## T-06 — La capa de señalización y el contrato con el renderizado
 

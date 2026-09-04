@@ -1,0 +1,55 @@
+/* The look, adapted from the Qualabs kit vendored in ./brand/.
+ *
+ * There is one rule here that is not decoration: .ads is absolutely positioned
+ * over the <video> inside .player and takes no pointer events, so the layer the
+ * concurrent experience draws into covers the picture without swallowing the
+ * clicks that belong to the player underneath. */
+
+:root {
+  --q-teal-500: #37b4a7;
+  --q-ink-900: #1a1f2e;
+  --q-paper-50: #f8f9fa;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--q-ink-900);
+  color: var(--q-paper-50);
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+.stage { width: min(1280px, 96vw); padding: 24px 0; }
+
+.player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video { width: 100%; height: 100%; display: block; object-fit: contain; }
+
+/* Empty until the renderer of T-07 puts something in it. */
+.ads { position: absolute; inset: 0; pointer-events: none; }
+
+.hud {
+  margin: 12px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--q-teal-500);
+}
+
+.credit {
+  margin: 8px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  opacity: 0.55;
+}
+.credit a { color: inherit; }
