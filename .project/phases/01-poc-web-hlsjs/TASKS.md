@@ -1,20 +1,36 @@
 # Tasks — fase 01-poc-web-hlsjs
 
-**Este plan está deliberadamente incompleto, y esa es su forma correcta
-hasta que las tres primeras tasks se lean con Nicolás.** El diseño de la
-fase pide tres mediciones cortas antes de comprometer un plan de
-construcción, porque hasta que corran, un plan completo sería otra vez
-planificación sobre datos que no están, que es exactamente el error que
-este proyecto ya cometió una vez. Las tres mediciones son la T-01, la
-T-02 y la T-03. La T-04 es la que cierra el plan con sus resultados, y
-recién ahí aparecen las tasks de construcción.
+Las tres primeras tasks son mediciones, y están primero porque el diseño
+de la fase pidió medir antes de comprometer un plan de construcción. La
+T-04 cierra ese plan con sus resultados. De la T-05 en adelante es
+construcción, ordenada como manda el ADR 0008: el mínimo es un overlay y
+el orden va del riesgo conocido al desconocido.
 
-| id   | brief                                                              | status  | plan | evidence                                              |
-| ---- | ------------------------------------------------------------------ | ------- | ---- | ----------------------------------------------------- |
-| T-01 | Medir cuántos elementos de video con hls.js reproducen a la vez     | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-01/`         |
-| T-02 | Medir la cadena mínima de señalización y el par de compatibilidad   | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-02/`         |
-| T-03 | Medir el render de un layout de SVTA contra su vista previa         | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-03/`         |
-| T-04 | Cerrar el plan de construcción con los resultados de las mediciones | pending | —    | —                                                      |
+Ese orden está alineado con la escalera de repliegue del `PHASE.md`, de
+manera que cada escalón sea un punto real donde se puede parar y grabar
+algo:
+
+| Al terminar | Escalón alcanzado                                                                            |
+| ----------- | -------------------------------------------------------------------------------------------- |
+| T-07        | 4, el piso: el mecanismo de overlay con la cadena de señalización completa y visible en la red |
+| T-10        | 3: los mecanismos de overlay y squeezeback, más el par de compatibilidad                       |
+| T-11        | 2: los tres mecanismos con un layout de cada uno, más el par                                   |
+| T-12        | 1: los tres mecanismos con los cinco layouts, más el par                                       |
+
+| id   | brief                                                              | status  | plan | evidence                                       |
+| ---- | ------------------------------------------------------------------ | ------- | ---- | ---------------------------------------------- |
+| T-01 | Medir cuántos elementos de video con hls.js reproducen a la vez     | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-01/`  |
+| T-02 | Medir la cadena mínima de señalización y el par de compatibilidad   | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-02/`  |
+| T-03 | Medir el render de un layout de SVTA contra su vista previa         | done    | —    | `.project/phases/01-poc-web-hlsjs/tasks/T-03/`  |
+| T-04 | Cerrar el plan de construcción con los resultados de las mediciones | done    | —    | este archivo y el ADR 0013                      |
+| T-05 | El banco de la demo: repo, página y contenido servido               | pending | —    | —                                              |
+| T-06 | La capa de señalización y el contrato con el renderizado            | pending | —    | —                                              |
+| T-07 | El mínimo: un cornerOverlay con la cadena completa a la vista       | pending | —    | —                                              |
+| T-08 | Tests de la resolución del layout                                   | pending | —    | —                                              |
+| T-09 | El par de compatibilidad en la página de la demo                    | pending | —    | —                                              |
+| T-10 | El mecanismo de squeezeback                                         | pending | —    | —                                              |
+| T-11 | El mecanismo de multiview                                           | pending | —    | —                                              |
+| T-12 | Los cinco layouts en un recorrido grabable                          | pending | —    | —                                              |
 
 ---
 
@@ -152,3 +168,192 @@ recién ahí aparecen las tasks de construcción.
   SVTA.
 - **nivel de verificación:** mínimo. Es trabajo de planificación que
   Nicolás lee entero antes de que se ejecute nada.
+
+## T-05 — El banco de la demo: repo, página y contenido servido
+
+- **Objetivo:** tener el repositorio con una página que reproduce el VOD
+  primario con hls.js sin modificar, y el contenido servido por HTTP. Es
+  la base sobre la que corre todo lo demás y no demuestra nada por sí
+  sola.
+- **Qué tiene que cubrir:** el repositorio `qualabs/hls-non-linear-ads-demo`,
+  que existe vacío. Sin bundler y sin framework; el esqueleto reusable es
+  `projects/aws-multiview/demo-ibc/`, que ya es un player web sobre
+  hls.js sin modificar y con una capa de UI encima del elemento de video.
+  hls.js entra en la versión 1.7.2 y sin tocar, y la instancia de la demo
+  arranca con `interstitialsController` vacío (ADR 0002). El contenido
+  primario es un VOD empaquetado en HLS con al menos un
+  `EXT-X-PROGRAM-DATE-TIME`, que es lo que `START-DATE` necesita para
+  resolverse (ADR 0005); el empaquetado con ffmpeg ya está resuelto en
+  `tasks/T-01/empaquetar-contenido.sh` y se reusa. Van también dos o tres
+  assets de aviso cortos, empaquetados igual, y un servidor de archivos
+  estáticos: no hay ad server ni APS (ADR 0005). Big Buck Bunny está
+  descartado por pedido de Nicolás. Sin dependencias.
+- **Definición de done:** con el repo clonado, un comando levanta el
+  servidor y la página reproduce el VOD primario en Chrome, con la
+  playlist y los segmentos visibles en la pestaña de red. Todavía no hay
+  ningún layout.
+- **nivel de verificación:** mínimo. No tiene lógica propia y su único
+  resultado es que el video se ve, cosa que se sabe en el primer segundo.
+
+## T-06 — La capa de señalización y el contrato con el renderizado
+
+- **Objetivo:** implementar la capa que, para un tiempo de reproducción
+  dado, entrega la lista de experiencias concurrentes activas con su
+  layout resuelto, y dejar escrito el contrato que la capa de renderizado
+  consume. Es el corte en dos capas del ADR 0003, y es lo que hace que
+  cambiar de transporte más adelante sea reemplazar una capa y no
+  reescribir la demo.
+- **Qué tiene que cubrir:** suscribirse a `LEVEL_UPDATED`, leer
+  `details.dateRanges`, quedarse con los de clase
+  `com.qualabs.hls.concurrentInterstitial`, pedir su `X-ASSET-LIST` desde
+  la aplicación, y resolver el bloque `X-AD-CREATIVE-SIGNALING` a la
+  forma que el renderizado consume. La resolución tiene que parsear
+  `viewport` como cuatro porcentajes de inset en el orden top, right,
+  bottom, left; **asumir los dos defaults que la herramienta omite**, que
+  son el bloque `primaryContent` entero cuando no viene y `volume` 100
+  cuando falta, en lugar de exigir esos campos; ordenar los elementos por
+  `zDepth`; y decidir qué está activo en cada momento con el `start` y la
+  `duration` del payload contra el `START-DATE` del Date Range. El
+  contrato es la única superficie entre las dos capas: del lado del
+  renderizado no se importa hls.js ni se lee nada de HLS, que es la
+  disciplina que el ADR 0003 marca como su costo. El camino entero ya
+  corrió en la T-02 y su registro de eventos sirve de guía. Restricción:
+  hls.js entra sin modificar. Depende de T-05.
+- **Definición de done:** con la playlist de la T-02 servida, la consola
+  muestra la experiencia concurrente activa con sus cajas y su orden en
+  el momento correcto, y el contrato queda escrito en una página, que
+  entra como evidencia de esta task tal como lo pide el `PHASE.md`.
+- **nivel de verificación:** bajo. La parte que no se ve, que son los
+  defaults omitidos y la ventana de activación, es la que puede fallar en
+  silencio, y los tests que le corresponden son los de la T-08.
+
+## T-07 — El mínimo: un cornerOverlay con la cadena completa a la vista
+
+- **Objetivo:** poner en pantalla la primera experiencia concurrente y
+  con eso dejar parado el escalón 4 de la escalera de repliegue, que es
+  el piso de la fase. Es el mínimo que fija el ADR 0008: si esto anda, la
+  cadena entera anda y lo que falta es más de lo mismo.
+- **Qué tiene que cubrir:** la capa de renderizado, que toma el contrato
+  de la T-06 y dibuja: convierte los insets porcentuales a la caja en
+  píxeles sobre el área del player, ordena por `zDepth`, y dibuja cada
+  asset como un elemento posicionado encima del video primario (ADR
+  0001). Cada caja se llena con la política del ADR 0013. El aviso
+  arranca en silencio, el contenido primario conserva su audio, y la
+  página expone un control visible para activar el audio del aviso: es el
+  ADR 0010, y entra acá porque esta es la primera task que pone un aviso
+  en pantalla. El layout es `cornerOverlay`, con su `EXT-X-DATERANGE` de
+  clase propia en la playlist y su asset-list servido al lado. Depende de
+  T-06.
+- **Definición de done:** el navegador muestra el VOD primario con el
+  aviso en la esquina, y la pestaña de red muestra las tres piezas de la
+  cadena: la media playlist con el tag, el asset-list JSON y el contenido
+  del aviso. Hay una captura a tamaño real y el control de audio del
+  aviso funciona.
+- **nivel de verificación:** bajo. Es interfaz: el error está en la
+  pantalla y la verificación principal es mirar la captura.
+
+## T-08 — Tests de la resolución del layout
+
+- **Objetivo:** que un cambio hecho para un layout no rompa otro sin que
+  nadie se entere. Es lo único de la fase que puede fallar en silencio,
+  porque todo lo demás se ve en la pantalla y los layouts se miran de a
+  uno.
+- **Qué tiene que cubrir:** las funciones puras de las dos capas y nada
+  más: el parseo de `viewport`, los dos defaults que la herramienta
+  omite, el orden por `zDepth`, la ventana de activación, y la conversión
+  de insets a caja en píxeles. Los casos salen de los seis payloads que
+  la herramienta emite, que están verbatim en
+  `tasks/T-03/m3-resultados.json` bajo `herramienta`, y los valores
+  esperados son las cajas que la misma T-03 midió. Restricción, y es la
+  que define el tamaño de esta task: no hay tests de DOM, ni de browser,
+  ni comparación de imágenes, ni cobertura como objetivo. Depende de
+  T-07.
+- **Definición de done:** un comando corre los tests y pasan, con los
+  seis tipos de la herramienta cubiertos.
+- **nivel de verificación:** mínimo. La salida entera es una corrida que
+  una persona mira.
+
+## T-09 — El par de compatibilidad en la página de la demo
+
+- **Objetivo:** mostrar en la misma página que esto se despliega sin
+  romperle nada a los clientes que ya están en el mercado, que es el
+  argumento más fuerte que la demo puede hacer (ADR 0007).
+- **Qué tiene que cubrir:** la misma media playlist con los dos
+  `EXT-X-DATERANGE` en el mismo `START-DATE`, cada uno con su propio `ID`
+  y su propio asset-list: uno de clase `com.apple.hls.interstitial` con
+  el aviso lineal y otro de clase concurrente con la experiencia. En la
+  página, al lado del cliente de la demo, una instancia de hls.js de
+  fábrica que reproduce el aviso lineal. La playlist y los dos asset-list
+  de la T-02 sirven tal cual, y el comportamiento de las dos instancias
+  ya quedó confirmado ahí; lo que falta es que convivan en la página de
+  la demo y se vean juntas y etiquetadas, para que en cámara se entienda
+  cuál es cuál. Depende de T-07.
+- **Definición de done:** una captura de la página donde, en el mismo
+  instante, la instancia de fábrica está reproduciendo el aviso lineal y
+  la de la demo sigue en el contenido primario con la experiencia
+  concurrente encima.
+- **nivel de verificación:** bajo. Es interfaz, y lo que podía fallar por
+  debajo ya lo confirmó la T-02.
+
+## T-10 — El mecanismo de squeezeback
+
+- **Objetivo:** cubrir el segundo de los tres mecanismos de render y con
+  eso dejar parado el escalón 3 de la escalera. Es el mecanismo que
+  además mueve el contenido primario.
+- **Qué tiene que cubrir:** achicar el elemento de video primario a la
+  caja que declara su `primaryContent`, con una transformación de CSS, y
+  dibujar los assets en el espacio liberado (ADR 0001). El layout es
+  `squeezebackLShape`, por dos razones: es el que el documento de
+  requerimientos nombra dos veces, como LBox video y LBox image (ADR
+  0012), y es el que pone a prueba la política de llenado del ADR 0013,
+  porque sus dos barras son las cajas más alejadas de la relación de
+  aspecto del asset entre las que midió la T-03. La geometría esperada de
+  sus tres elementos está en `tasks/T-03/m3-resultados.json`. Depende de
+  T-07.
+- **Definición de done:** el navegador muestra el contenido primario
+  achicado con las dos barras del L ocupando el resto, con captura a
+  tamaño real, y el aviso se ve sin deformarse.
+- **nivel de verificación:** bajo. Es interfaz y el error está en la
+  pantalla.
+
+## T-11 — El mecanismo de multiview
+
+- **Objetivo:** cubrir el tercer mecanismo y con eso dejar parado el
+  escalón 2 de la escalera, que son los tres mecanismos andando con un
+  layout de cada uno más el par de compatibilidad. Va último porque es el
+  único que depende de una capacidad que hubo que medir (ADR 0008).
+- **Qué tiene que cubrir:** el layout `multiView`, con el contenido
+  primario en un cuadrante y tres fuentes más en los otros tres, cada una
+  en su propio elemento de video con su propia instancia de hls.js, que
+  es exactamente la configuración que la T-01 midió. El primario conserva
+  su audio y las otras tres arrancan en silencio (ADR 0010). Restricción:
+  nada de detección de capacidad de decodificación concurrente, que el
+  `PROJECT.md` deja expresamente fuera de alcance; si en la máquina de la
+  grabación no anduviera, la salida es la escalera de repliegue y no un
+  mecanismo de detección. Depende de T-07.
+- **Definición de done:** los cuatro cuadrantes reproducen a la vez en
+  Chrome, con captura a tamaño real, y el audio sale solamente del
+  contenido primario.
+- **nivel de verificación:** bajo. Es interfaz, y la concurrencia que
+  podía bloquearlo ya la midió la T-01.
+
+## T-12 — Los cinco layouts en un recorrido grabable
+
+- **Objetivo:** dejar parado el escalón 1 de la escalera, que es el que
+  se graba: los cinco layouts del documento de requerimientos, en un VOD
+  que los recorra uno tras otro. Es trabajo de datos y de assets más que
+  de ingeniería, que es lo que el ADR 0008 anticipa que va a pasar una
+  vez que los tres mecanismos anden.
+- **Qué tiene que cubrir:** un VOD con un break por layout, cada uno con
+  su `EXT-X-DATERANGE` y su asset-list, cubriendo los cinco nombres del
+  documento de requerimientos con el mapeo propuesto en el ADR 0012:
+  Overlay, LBox video, LBox image, Side by side pullback y Quad. Lo único
+  que agrega código es el asset de imagen del LBox image, que se dibuja
+  como un `<img>` en lugar de un `<video>` según el `type` del asset. Los
+  assets salen del listado de assets abiertos de SVTA que David quedó en
+  compartir; el del LBox con video es el que David marcó como el más
+  difícil de conseguir, así que se busca primero. Depende de T-10 y T-11.
+- **Definición de done:** una sola corrida del VOD, de punta a punta,
+  donde aparecen los cinco layouts, con una captura de cada uno.
+- **nivel de verificación:** bajo. Es interfaz y datos, y el error está
+  en la pantalla.

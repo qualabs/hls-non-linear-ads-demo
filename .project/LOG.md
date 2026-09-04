@@ -224,3 +224,49 @@ asumir esos defaults en lugar de exigir los campos.
 Ninguna de las tres mediciones cambió una decisión del diseño. Las tres
 la confirman, y la T-03 le agrega al renderizador un requisito que el
 diseño no tenía escrito.
+
+## 2026-09-03 — El plan de construcción de la fase 01, cerrado con las mediciones
+
+Las tres mediciones se leyeron con Nicolás y las tres dieron bien, así
+que la T-04 cerró el plan: ocho tasks de construcción, de la T-05 a la
+T-12, ordenadas como manda el ADR 0008 y mapeadas contra la escalera de
+repliegue del `PHASE.md`. El orden es el banco de la demo, la capa de
+señalización con su contrato, el mínimo del `cornerOverlay`, los tests de
+la resolución del layout, el par de compatibilidad, el squeezeback, el
+multiview, y los cinco layouts en un recorrido grabable. Cada escalón de
+la escalera queda parado por una task concreta: el piso al terminar la
+T-07, y de ahí para arriba T-10, T-11 y T-12.
+
+La vara es la de un POC, y Nicolás la fijó al autorizar el plan: "esto es
+una POC que luego podemos cambiar y mejorar". Quedó afuera a propósito
+todo lo que no hace que la demo funcione ni destraba una decisión de hoy:
+medición de performance, manejo de errores más allá de que no se rompa en
+cámara, abstracciones para casos que la demo no muestra, un panel de
+debug para mostrar el asset-list (lo muestra la pestaña de red), y
+cualquier task de la especificación de SVTA, que Nicolás dejó fuera de
+esta fase. De tests va uno solo, sobre las funciones puras de la
+resolución del layout, que es lo único que puede romperse sin que nadie
+lo vea.
+
+**ADR 0013: la política de llenado.** Es lo que la T-03 dejó abierto y el
+plan tenía que decidir. El renderizador llena cada caja con recorte
+centrado y sin deformar el asset. De las tres formas posibles es la única
+que respeta a la vez la caja que el layout declara y la forma del
+creativo: estirar deforma hasta 233 por ciento en un caso ya medido, y
+encajar el asset entero deja la caja del aviso parcialmente vacía, que en
+cámara se lee como que el player no terminó de dibujar. Lo que se paga es
+que un pedazo del creativo no entra, y para esta demo eso se arregla
+cambiando el asset. La decisión fija el comportamiento de la demo y no
+toma posición sobre el formato: el hueco es real y va a SVTA como
+pregunta, porque mientras el modelo no diga por asset el modo de llenado
+o la relación de aspecto para la que el creativo está pensado, dos
+clientes que cumplen la especificación dibujan el mismo layout distinto.
+
+**Corrección al ADR 0011.** Justificaba meter el Quad en el borrador
+diciendo que era el único layout con riesgo sin medir. La T-01 corrió el
+mismo día y lo midió, así que el pasaje ahora dice lo que se sabe: hasta
+cinco elementos de video conviven, la capacidad está disponible, y el
+Quad va temprano porque es el que más muestra de qué se trata la
+publicidad no lineal y cuesta lo mismo que cualquier otro layout. El ADR
+sigue en `proposed`, que es lo que corresponde a una propuesta que espera
+la confirmación de David.

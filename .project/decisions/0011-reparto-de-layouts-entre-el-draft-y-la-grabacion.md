@@ -32,10 +32,17 @@ En la grabación van los cinco layouts.
 
 El Quad va en el borrador, y no recién en la grabación.
 
-El motivo de meter el Quad temprano es que es el único layout con riesgo
-sin medir, porque pone dos o más elementos de video a reproducir a la
-vez, y conviene que aparezca cuando todavía hay tiempo de reemplazarlo y
-no la semana de grabar.
+El motivo de meter el Quad temprano es que la capacidad de la que
+depende ya está medida y su costo pasó a ser el mismo que el de
+cualquier otro layout. El Quad es el que pone dos o más elementos de
+video a reproducir a la vez, y la T-01 midió que hasta cinco elementos
+de 1280x720 a 30 fps, cada uno con su propia instancia de hls.js,
+reproducen simultáneamente al 99,6 por ciento del reloj de pared, con
+menos del 2 por ciento de cuadros descartados y sin errores. Con eso
+resuelto, el Quad es el layout que más muestra de qué se trata la
+publicidad no lineal, y conviene tenerlo en el borrador para que David
+lo vea el 21 de septiembre con una semana por delante para cambiarlo si
+quiere otra cosa.
 
 ## Consecuencias
 
