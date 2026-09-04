@@ -147,6 +147,22 @@ Para la especificación de SVTA, y no para esta fase: si el layout debería
 viajar en el propio DateRange Object en vez de en el asset-list, y la
 divergencia de modelos de coordenadas entre HLS y DASH del R4.
 
+Aparecidas al construir, y que esta fase no puede contestar sin inventar:
+
+- **Cuál de las fuentes concurrentes se escucha.** El control de audio del ADR
+  0010 es uno para todo el aviso, y en el `multiView` enciende tres fuentes a la
+  vez. El modelo de la herramienta tiene un `volume` por elemento y la T-03
+  midió que no lo emite en ninguno de los seis layouts, así que una mezcla por
+  cuadrante la decidiría el reproductor y no la señalización. La pregunta es de
+  quién es esa decisión y cómo se expresa.
+- **Dónde va un asset que es una imagen.** El layout LBox image inserta un
+  `image/jpeg` y el bloque `X-AD-CREATIVE-SIGNALING` lo expresa sin problema,
+  pero el `URI` del `ASSET` que lo contiene es un campo de HLS y espera algo
+  reproducible: un cliente que ignore el bloque de layout reproduciría ese URI.
+  Hoy el asset-list del LBox image declara ahí un video, que es lo que un
+  despliegue real pondría de repliegue, y el formato no dice si eso es lo
+  correcto o si un aviso de imagen tiene otra forma de declararse.
+
 Aparecida al medir, y ya resuelta para la demo: el modelo de porcentajes
 no dice cómo llena un asset una caja cuya relación de aspecto no es la
 suya. El ADR 0013 fija el recorte centrado sin deformar como política de

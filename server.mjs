@@ -23,6 +23,8 @@ const TYPES = {
   '.json': 'application/json; charset=utf-8',
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
   '.woff2': 'font/woff2',
   '.m3u8': 'application/vnd.apple.mpegurl',
   '.ts': 'video/mp2t',

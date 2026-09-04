@@ -1,0 +1,567 @@
+{
+  "breaks": {
+    "1-Overlay": {
+      "time": 28.02,
+      "primario": {
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "luz": 104.1
+      },
+      "deFabrica": {
+        "time": 7.83,
+        "paused": false,
+        "luz": 142.5,
+        "reemplazando": "AD-1-LINEAR"
+      },
+      "assets": [
+        {
+          "id": "adOverlay1",
+          "tag": "video",
+          "adTime": 7.83,
+          "paused": false,
+          "muted": true,
+          "listo": true,
+          "luz": 162.7,
+          "w": 1280,
+          "h": 720
+        }
+      ],
+      "videosEnLaPestana": 3,
+      "contract": "t=27.8s \u00b7 cornerOverlay \u00b7 z0 primaryContent [0 0 0 0] \u00b7 z1 adOverlay1 [0 75 75 0]",
+      "demoState": "primary content + CONCURRENT AD (cornerOverlay) \u00b7 27.8s \u00b7 nothing was replaced",
+      "stockState": "LINEAR AD \"AD-1-LINEAR\" \u00b7 7.6s of the ad \u00b7 the content is off the screen",
+      "paneDemo": "ad",
+      "paneStock": "ad",
+      "boton": {
+        "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+        "disabled": false
+      },
+      "paredSegundos": 28.79
+    },
+    "2-LBox video": {
+      "time": 55.12,
+      "primario": {
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "luz": 106.8
+      },
+      "deFabrica": {
+        "time": 42.84,
+        "paused": false,
+        "luz": 120.9,
+        "reemplazando": null
+      },
+      "assets": [
+        {
+          "id": "adBarVertical",
+          "tag": "video",
+          "adTime": 9.94,
+          "paused": false,
+          "muted": true,
+          "listo": true,
+          "luz": 162.5,
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "id": "adBarHorizontal",
+          "tag": "video",
+          "adTime": 10.04,
+          "paused": false,
+          "muted": true,
+          "listo": true,
+          "luz": 151.6,
+          "w": 1280,
+          "h": 720
+        }
+      ],
+      "videosEnLaPestana": 4,
+      "contract": "t=54.9s \u00b7 squeezebackLShape \u00b7 z0 primaryContent [0 40 40 0] \u00b7 z1 adBarVertical [0 0 0 60] \u00b7 z2 adBarHorizontal [60 0 0 0]",
+      "demoState": "primary content + CONCURRENT AD (squeezebackLShape) \u00b7 54.9s \u00b7 nothing was replaced",
+      "stockState": "primary content \u00b7 42.8s",
+      "paneDemo": "ad",
+      "paneStock": "primary",
+      "boton": {
+        "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+        "disabled": false
+      },
+      "paredSegundos": 55.97
+    },
+    "3-LBox image": {
+      "time": 76.01,
+      "primario": {
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "luz": 86
+      },
+      "deFabrica": {
+        "time": 51.3,
+        "paused": false,
+        "luz": 98.6,
+        "reemplazando": null
+      },
+      "assets": [
+        {
+          "id": "adBarVertical",
+          "tag": "img",
+          "adTime": null,
+          "paused": null,
+          "muted": null,
+          "listo": true,
+          "luz": 159.3,
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "id": "adBarHorizontal",
+          "tag": "img",
+          "adTime": null,
+          "paused": null,
+          "muted": null,
+          "listo": true,
+          "luz": 135.1,
+          "w": 1280,
+          "h": 720
+        }
+      ],
+      "videosEnLaPestana": 2,
+      "contract": "t=75.9s \u00b7 squeezebackLShape \u00b7 z0 primaryContent [0 40 40 0] \u00b7 z1 adBarVertical [0 0 0 60] \u00b7 z2 adBarHorizontal [60 0 0 0]",
+      "demoState": "primary content + CONCURRENT AD (squeezebackLShape) \u00b7 75.9s \u00b7 nothing was replaced",
+      "stockState": "primary content \u00b7 51.1s",
+      "paneDemo": "ad",
+      "paneStock": "primary",
+      "boton": {
+        "text": "the ad on screen has no audio",
+        "disabled": true
+      },
+      "paredSegundos": 76.79
+    },
+    "4-Side by side pullback": {
+      "time": 103.01,
+      "primario": {
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "luz": 72.2
+      },
+      "deFabrica": {
+        "time": 8.02,
+        "paused": false,
+        "luz": 139.8,
+        "reemplazando": "AD-3-LINEAR"
+      },
+      "assets": [
+        {
+          "id": "adOverlay",
+          "tag": "video",
+          "adTime": 7.96,
+          "paused": false,
+          "muted": true,
+          "listo": true,
+          "luz": 162.7,
+          "w": 1280,
+          "h": 720
+        }
+      ],
+      "videosEnLaPestana": 3,
+      "contract": "t=103.0s \u00b7 squeezebackDoubleBox \u00b7 z0 primaryContent [25 50 25 0] \u00b7 z1 adOverlay [25 0 25 50]",
+      "demoState": "primary content + CONCURRENT AD (squeezebackDoubleBox) \u00b7 103.0s \u00b7 nothing was replaced",
+      "stockState": "LINEAR AD \"AD-3-LINEAR\" \u00b7 7.9s of the ad \u00b7 the content is off the screen",
+      "paneDemo": "ad",
+      "paneStock": "ad",
+      "boton": {
+        "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+        "disabled": false
+      },
+      "paredSegundos": 103.6
+    },
+    "5-Quad": {
+      "time": 122.52,
+      "primario": {
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "luz": 104.6
+      },
+      "deFabrica": {
+        "time": 85.47,
+        "paused": false,
+        "luz": 125,
+        "reemplazando": null
+      },
+      "assets": [
+        {
+          "id": "view2",
+          "tag": "video",
+          "adTime": 2.31,
+          "paused": false,
+          "muted": true,
+          "listo": true,
+          "luz": 163.1,
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "id": "view3",
+          "tag": "video",
+          "adTime": 2.32,
+          "paused": false,
+          "muted": true,
+          "listo": true,
+          "luz": 130.5,
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "id": "view4",
+          "tag": "video",
+          "adTime": 2.3,
+          "paused": false,
+          "muted": true,
+          "listo": true,
+          "luz": 24.5,
+          "w": 1280,
+          "h": 720
+        }
+      ],
+      "videosEnLaPestana": 5,
+      "contract": "t=122.4s \u00b7 multiView \u00b7 z0 primaryContent [0 50 50 0] \u00b7 z1 view2 [0 0 50 50] \u00b7 z2 view3 [50 50 0 0] \u00b7 z3 view4 [50 0 0 50]",
+      "demoState": "primary content + CONCURRENT AD (multiView) \u00b7 122.4s \u00b7 nothing was replaced",
+      "stockState": "primary content \u00b7 85.4s",
+      "paneDemo": "ad",
+      "paneStock": "primary",
+      "boton": {
+        "text": "\ud83d\udd07 ad audio OFF \u2014 click to unmute the ad",
+        "disabled": false
+      },
+      "paredSegundos": 123.67
+    }
+  },
+  "linea_de_tiempo": [
+    {
+      "hito": "break 1 Overlay",
+      "programa": 28.02,
+      "pared": 28.79
+    },
+    {
+      "hito": "break 2 LBox video",
+      "programa": 55.12,
+      "pared": 55.97
+    },
+    {
+      "hito": "break 3 LBox image",
+      "programa": 76.01,
+      "pared": 76.79
+    },
+    {
+      "hito": "break 4 Side by side pullback",
+      "programa": 103.01,
+      "pared": 103.6
+    },
+    {
+      "hito": "break 5 Quad",
+      "programa": 122.52,
+      "pared": 123.67
+    }
+  ],
+  "el_programa_que_se_perdio": {
+    "time": 160.01,
+    "primario": {
+      "paused": false,
+      "muted": true,
+      "readyState": 4,
+      "luz": 85
+    },
+    "deFabrica": {
+      "time": 110.54,
+      "paused": false,
+      "luz": 135.8,
+      "reemplazando": null
+    },
+    "assets": [],
+    "videosEnLaPestana": 2,
+    "contract": "t=159.9s \u00b7 no concurrent experience",
+    "demoState": "primary content \u00b7 159.9s",
+    "stockState": "primary content \u00b7 110.4s",
+    "paneDemo": "primary",
+    "paneStock": "primary",
+    "boton": {
+      "text": "no ad on screen",
+      "disabled": true
+    },
+    "paredSegundos": 160.15,
+    "atrasoDelDeFabricaSegundos": 49.47
+  },
+  "seeksDelPrimario": [],
+  "recargas": 1,
+  "errores": [],
+  "consola": [
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-cornerOverlay.json"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved cornerOverlay#AD-1-CONCURRENT: 2 elements, window 20.00s -> 32.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-2-CONCURRENT at t=45.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackLShape#AD-2-CONCURRENT: 3 elements, window 45.00s -> 57.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-3-CONCURRENT at t=70.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackLShape#AD-3-CONCURRENT: 3 elements, window 70.00s -> 82.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-4-CONCURRENT at t=95.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackDoubleBox#AD-4-CONCURRENT: 2 elements, window 95.00s -> 107.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-5-CONCURRENT at t=120.00s, asset-list http://localhost:8080/signalling/asset-list-multiView.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved multiView#AD-5-CONCURRENT: 4 elements, window 120.00s -> 132.00s"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=0.21s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=20.13s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 20.00s -> 32.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=32.08s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=45.10s  ACTIVE squeezebackLShape#AD-2-CONCURRENT  window 45.00s -> 57.00s  3 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=57.05s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=70.07s  ACTIVE squeezebackLShape#AD-3-CONCURRENT  window 70.00s -> 82.00s  3 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=82.02s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=95.03s  ACTIVE squeezebackDoubleBox#AD-4-CONCURRENT  window 95.00s -> 107.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=107.25s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=120.03s  ACTIVE multiView#AD-5-CONCURRENT  window 120.00s -> 132.00s  4 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object, Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=132.24s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    }
+  ]
+}
