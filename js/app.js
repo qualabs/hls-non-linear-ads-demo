@@ -44,14 +44,13 @@ function logResolved(experiences) {
 }
 
 // ===========================================================================
-// WHAT AN INTEGRATOR WRITES  (with the <script src> of index.html:116 and the
-// container of index.html:93). Everything between the two fences exists because
+// WHAT AN INTEGRATOR WRITES  (with the <script src> of index.html:120 and the
+// container of index.html:100). Everything between the two fences exists because
 // the library exists; the rest of this file exists because this page is a
 // compatibility demo.
 const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
 const concurrent = QualabsConcurrentHls.attach(hls, {
   container: document.getElementById('player'),
-  audioControl: document.getElementById('ad-audio'),
   onResolved: logResolved
 });
 hls.loadSource(SRC);
@@ -80,7 +79,8 @@ hls.on(Hls.Events.MANIFEST_PARSED, () => {
 function say(text) { hud.textContent = text; }
 
 // Muted, so the autoplay policy lets the recording start without a click. The
-// native controls are right there to turn the sound on.
+// audio control the library draws at the top right of the picture is the one
+// that lifts it.
 video.muted = true;
 video.play().catch(() => {});
 
@@ -104,12 +104,27 @@ const stock = createStockPlayer({
 // nothing else, the same thing every consumer of the seam gets.
 const demoPane = document.getElementById('pane-demo');
 const demoState = document.getElementById('demo-state');
+
+/**
+ * One of the five breaks is made of stills, so that ad has no soundtrack --
+ * which is not the same thing as no ad being on screen, and on camera the two
+ * look alike. The distinction belongs to this line and not to the audio control
+ * of the composition, which is never disabled because the composition always
+ * has sound. It is read off the contract, which carries the `mediaType` of
+ * every element, so the page needs nothing from the library to say it.
+ */
+function stills(active) {
+  const assets = active.flatMap((e) => e.elements.filter((el) => !el.primary));
+  return assets.length > 0 && assets.every((el) => /^image\//i.test(el.mediaType || ''));
+}
+
 function paintDemoPane() {
   const active = concurrent.provider.activeAt(video.currentTime);
   demoPane.dataset.state = active.length ? 'ad' : 'primary';
   demoState.textContent = active.length
     ? `primary content + CONCURRENT AD (${active.map((e) => e.type).join(', ')})` +
-      ` · ${video.currentTime.toFixed(1)}s · nothing was replaced`
+      ` · ${video.currentTime.toFixed(1)}s · nothing was replaced` +
+      (stills(active) ? ' · stills: this ad has no audio' : '')
     : `primary content · ${video.currentTime.toFixed(1)}s`;
 }
 video.addEventListener('timeupdate', paintDemoPane);

@@ -6,11 +6,13 @@
  * which and what each one is doing at that instant, without anybody explaining
  * it.
  *
- * Nothing here styles the concurrent experience. The layer it is drawn into is
- * created and styled by the library, inside the container this page gives it,
- * because the way that layer stacks is an invariant of the renderer and not a
- * choice of whoever writes the page (ADR 0015). What .player keeps is the frame
- * around it: the aspect ratio, the black bed and the rounded corners. */
+ * Nothing here styles the concurrent experience, and nothing here styles the
+ * controls of the right-hand player either. Both are drawn and styled by the
+ * library, inside the container this page gives it, because the way that layer
+ * stacks and the way the controls sit above it are invariants of the renderer
+ * and not choices of whoever writes the page (ADR 0015). What .player keeps is
+ * the frame around them: the aspect ratio, the black bed and the rounded
+ * corners. */
 
 :root {
   --q-teal-500: #37b4a7;
@@ -106,20 +108,6 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
 }
 .pane[data-state='ad'] .player { outline-color: var(--hot); }
 .pane[data-state='ad'] .state { color: var(--hot); font-weight: 600; }
-
-.controls { margin: 10px 0 0; }
-
-.ad-audio {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 12px;
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: 1px solid var(--q-teal-500);
-  background: transparent;
-  color: var(--q-teal-500);
-  cursor: pointer;
-}
-.ad-audio:disabled { opacity: 0.35; cursor: default; }
 
 .hud {
   margin: 8px 0 0;

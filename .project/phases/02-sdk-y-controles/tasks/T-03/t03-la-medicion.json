@@ -1,0 +1,398 @@
+{
+  "superficie": {
+    "controles": true,
+    "claves": [
+      "container",
+      "controls",
+      "diagnostics",
+      "layer",
+      "provider",
+      "renderer",
+      "video"
+    ],
+    "elVideoNoTraeControlesNativos": true,
+    "elDeFabricaSiLosTrae": false,
+    "elBotonViejoYaNoEsta": true,
+    "cuantasBarrasEnLaPagina": 1
+  },
+  "cajasSinAviso": {
+    "contenedor": {
+      "x": 988,
+      "y": 257.078125,
+      "w": 715,
+      "h": 402.1875
+    },
+    "laQueMideElRenderizador": {
+      "x": 988,
+      "y": 257.078125,
+      "w": 715,
+      "h": 402.1875
+    },
+    "losControles": {
+      "x": 988,
+      "y": 257.078125,
+      "w": 715,
+      "h": 402.1875
+    },
+    "elVideo": {
+      "x": 988,
+      "y": 257.078125,
+      "w": 715,
+      "h": 402.1875
+    },
+    "laImagen": {
+      "x": 988,
+      "y": 257.078125,
+      "w": 715,
+      "h": 402.1875
+    },
+    "fullscreen": false,
+    "zIndexDeLaCapaDeAvisos": "auto",
+    "zIndexDeLosControles": "2147483000"
+  },
+  "barraAntes": {
+    "anchoDelRielPx": 559.313,
+    "izquierdaPx": 1042.844,
+    "largoReleidoDelPrimario": 180,
+    "textoDelLargo": "3:00",
+    "textoDelReloj": "0:06",
+    "currentTime": 6.55,
+    "cuantasBarrasEnElPane": 1,
+    "hayAviso": false
+  },
+  "cajasConAviso": {
+    "contenedor": {
+      "x": 988,
+      "y": 257.078125,
+      "w": 715,
+      "h": 402.1875
+    },
+    "laQueMideElRenderizador": {
+      "x": 988,
+      "y": 257.078125,
+      "w": 715,
+      "h": 402.1875
+    },
+    "losControles": {
+      "x": 988,
+      "y": 257.078125,
+      "w": 715,
+      "h": 402.1875
+    },
+    "elVideo": {
+      "x": 988,
+      "y": 257.078125,
+      "w": 715,
+      "h": 402.1875
+    },
+    "laImagen": {
+      "x": 988,
+      "y": 257.078125,
+      "w": 715,
+      "h": 402.1875
+    },
+    "fullscreen": false,
+    "zIndexDeLaCapaDeAvisos": "auto",
+    "zIndexDeLosControles": "2147483000"
+  },
+  "barraDurante": {
+    "anchoDelRielPx": 559.313,
+    "izquierdaPx": 1042.844,
+    "largoReleidoDelPrimario": 180,
+    "textoDelLargo": "3:00",
+    "textoDelReloj": "0:22",
+    "currentTime": 22.07,
+    "cuantasBarrasEnElPane": 1,
+    "hayAviso": true
+  },
+  "pixelesConAviso": [
+    {
+      "tipo": "cornerOverlay",
+      "elemento": "primaryContent",
+      "primario": true,
+      "esperadoPx": {
+        "left": 0,
+        "top": 0,
+        "width": 715,
+        "height": 402.1875
+      },
+      "medidoPx": {
+        "left": 0,
+        "top": 0,
+        "width": 715,
+        "height": 402.1875
+      },
+      "deltaMaxPx": 0
+    },
+    {
+      "tipo": "cornerOverlay",
+      "elemento": "adOverlay1",
+      "primario": false,
+      "esperadoPx": {
+        "left": 0,
+        "top": 0,
+        "width": 178.75,
+        "height": 100.546875
+      },
+      "medidoPx": {
+        "left": 0,
+        "top": 0,
+        "width": 178.75,
+        "height": 100.546875
+      },
+      "deltaMaxPx": 0
+    }
+  ],
+  "barraDespues": {
+    "anchoDelRielPx": 559.313,
+    "izquierdaPx": 1042.844,
+    "largoReleidoDelPrimario": 180,
+    "textoDelLargo": "3:00",
+    "textoDelReloj": "0:33",
+    "currentTime": 33.39,
+    "cuantasBarrasEnElPane": 1,
+    "hayAviso": false
+  },
+  "cajasFullscreen": {
+    "contenedor": {
+      "x": 0,
+      "y": 0,
+      "w": 1920,
+      "h": 901
+    },
+    "laQueMideElRenderizador": {
+      "x": 0,
+      "y": 0,
+      "w": 1920,
+      "h": 901
+    },
+    "losControles": {
+      "x": 0,
+      "y": 0,
+      "w": 1920,
+      "h": 901
+    },
+    "elVideo": {
+      "x": 0,
+      "y": 0,
+      "w": 1920,
+      "h": 901
+    },
+    "laImagen": {
+      "x": 159.111111,
+      "y": 0,
+      "w": 1601.777778,
+      "h": 901
+    },
+    "fullscreen": true,
+    "zIndexDeLaCapaDeAvisos": "auto",
+    "zIndexDeLosControles": "2147483000"
+  },
+  "barraFullscreen": {
+    "anchoDelRielPx": 1764.313,
+    "izquierdaPx": 54.844,
+    "largoReleidoDelPrimario": 180,
+    "textoDelLargo": "3:00",
+    "textoDelReloj": "0:34",
+    "currentTime": 34.69,
+    "cuantasBarrasEnElPane": 1,
+    "hayAviso": false
+  },
+  "fullscreenDeVerdad": {
+    "fullscreenElement": "player",
+    "esElContenedor": true,
+    "innerWidth": 1920,
+    "innerHeight": 901,
+    "screen": {
+      "w": 1920,
+      "h": 1052
+    },
+    "laCapaDeAvisosEntro": true,
+    "losControlesEntraron": true,
+    "controlesALaVista": true
+  },
+  "controlesEscondidos": {
+    "claseEncendida": false,
+    "opacidad": "0",
+    "sigueEnFullscreen": true
+  },
+  "sonda": {
+    "construido": true
+  },
+  "quienTapaAQuien": {
+    "elBotonCentral": {
+      "tag": "svg",
+      "clase": {},
+      "id": null,
+      "esElVideo": false,
+      "esElAviso": false,
+      "dentroDeLosControles": true
+    },
+    "laBarra": {
+      "tag": "div",
+      "clase": "qa-track__rail",
+      "id": null,
+      "esElVideo": false,
+      "esElAviso": false,
+      "dentroDeLosControles": true
+    },
+    "elControlDeAudio": {
+      "tag": "svg",
+      "clase": {},
+      "id": null,
+      "esElVideo": false,
+      "esElAviso": false,
+      "dentroDeLosControles": true
+    },
+    "dondeElPrimarioTapaAlAviso": {
+      "tag": "video",
+      "clase": "video",
+      "id": null,
+      "esElVideo": true,
+      "esElAviso": false,
+      "dentroDeLosControles": false
+    },
+    "dondeSeVeElAvisoDeFondo": {
+      "tag": "div",
+      "clase": "player",
+      "id": null,
+      "esElVideo": false,
+      "esElAviso": false,
+      "dentroDeLosControles": false
+    },
+    "zIndexDeLaCapaDeAvisos": "auto",
+    "zIndexDelPrimario": "1",
+    "positionDelPrimario": "relative",
+    "zIndexDelAvisoDeFondo": "0",
+    "zIndexDeLosControles": "2147483000"
+  },
+  "seeksDelPrimario": [],
+  "errores": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "consola": [
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-cornerOverlay.json"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved cornerOverlay#AD-1-CONCURRENT: 2 elements, window 20.00s -> 32.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-2-CONCURRENT at t=45.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape.json"
+    },
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackLShape#AD-2-CONCURRENT: 3 elements, window 45.00s -> 57.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-3-CONCURRENT at t=70.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackLShape#AD-3-CONCURRENT: 3 elements, window 70.00s -> 82.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-4-CONCURRENT at t=95.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackDoubleBox#AD-4-CONCURRENT: 2 elements, window 95.00s -> 107.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-5-CONCURRENT at t=120.00s, asset-list http://localhost:8080/signalling/asset-list-multiView.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved multiView#AD-5-CONCURRENT: 4 elements, window 120.00s -> 132.00s"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=0.20s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=20.12s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 20.00s -> 32.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=32.07s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=38.71s  ACTIVE squeezebackFrame#zDepthProbe  window 38.01s -> 128.01s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    }
+  ]
+}

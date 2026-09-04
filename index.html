@@ -45,9 +45,16 @@
            outside the container disappears the moment somebody presses the
            fullscreen button (ADR 0015).
 
-  #ad-audio is the visible control of ADR 0010: the ad starts silent and the
-           primary keeps its audio, so turning the ad's sound on is an explicit
-           act. The primary's own control is the player's native one.
+  THE CONTROLS of the right-hand player are not in this file, and that is the
+           point of ADR 0015: the library draws them inside #player, over the
+           picture -- one progress bar at the bottom for the whole programme, the
+           play/pause centred, one audio control at the top right, and
+           fullscreen of the composition. The <video> therefore carries no
+           `controls` attribute: the native ones are part of the element, so
+           they scale with the transform the renderer applies to it, and with
+           several <video> on screen they command a piece and not the picture.
+           The left-hand player keeps its own, because that is what an
+           off-the-shelf client looks like (ADR 0007).
 
   #contract is the contract, in one line of text: what the signalling layer
            says is active right now. The console has the same thing with the
@@ -91,13 +98,10 @@
         ignores <code>com.apple.hls.interstitial</code>
       </p>
       <div class="player" id="player">
-        <video class="video" id="video" playsinline controls></video>
+        <video class="video" id="video" playsinline></video>
       </div>
       <p class="state" id="demo-state"></p>
       <p class="hud" id="hud"></p>
-      <p class="controls">
-        <button class="ad-audio" id="ad-audio" type="button" disabled>no ad on screen</button>
-      </p>
       <p class="hud" id="contract"></p>
     </section>
 

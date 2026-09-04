@@ -977,3 +977,77 @@ rango de clase Apple se marca con lo que el tag declara, `PLANNED-DURATION=12`,
 que no es lo que el aviso lineal dura de verdad —la T-12 de la fase 01 midió
 12,37 s por break—; para la barra manda la señalización, y conviene saberlo
 antes de pintarla.
+
+## 2026-09-04 — T-03 de la fase 02: los controles de la composición
+
+Los controles propios, adentro de la librería: una sola barra abajo de todo con
+el largo del programa entero, la pausa centrada, un control de audio arriba a la
+derecha y el fullscreen de la composición, que hasta hoy no existía —no había una
+sola llamada a `requestFullscreen` en el repositorio—. Los controles nativos
+sobre el primario dejaron de estar y el botón `#ad-audio` dejó de existir. Todo
+en `lib/controls.js`, que es un archivo nuevo de la librería y entra al script
+que `run.sh` arma en cada arranque.
+
+**La consecuencia estructural que el bloque planteó como condicional la
+contestaron las imágenes de referencia.** Si la barra iba debajo del área de la
+composición, el elemento que va a fullscreen dejaba de ser la caja 16:9 de la
+imagen y el renderizador —que mide con `layer.getBoundingClientRect()`— se
+llevaba la barra adentro del área, corriendo todas las cajas de todos los
+layouts. Las imágenes ponen la barra abajo de todo pero **adentro del marco**,
+sobre la imagen, con el reloj a la izquierda y el largo a la derecha. Entonces no
+hay contenedor nuevo: el que va a fullscreen es el contenedor que el integrador
+entrega, que es el mismo que la capa de avisos cubre y el mismo que el
+renderizador mide, y la trampa no se compensa porque no existe. Medido: la caja
+que mide el renderizador, la del contenedor, la del `<video>` y la de la imagen
+son la misma —715 × 402,1875 px— con y sin aviso, y los píxeles de los elementos
+del break dan delta máximo **0,000000 px** contra `boxToPixels`.
+
+**El apilado se verificó contra el caso que el recorrido no tiene.** Los controles
+son una capa hermana de la de avisos, con `z-index: 2147483000` —arriba del rango
+que el `zDepth` de un payload ajeno puede tomar, no arriba del máximo visto— y sin
+tocarle el `z-index` a la capa de avisos, que sigue en `auto` y por lo tanto sigue
+sin ser un contexto de apilado. Con la sonda sintética de la T-10 de la fase 01,
+que pone el aviso de fondo en `zDepth` 0 y el primario encima en 1, el aviso se ve
+atrás, el primario adelante y los cuatro controles arriba de los dos.
+
+**El estado que se quedaba sin lugar se mudó, no se cayó.** El botón `#ad-audio`
+distinguía "no hay aviso" de "el aviso en pantalla no tiene audio", y el control
+de la composición no puede heredarlos porque **nunca está deshabilitado**: la
+composición siempre tiene audio. Los dos estados eran de un control que dejó de
+existir. La información se mudó a la línea de estado del pane, que es donde la
+página ya dice qué hay en pantalla, y se calcula del contrato —el `mediaType` de
+cada elemento— así que no agrega una línea a la superficie pública.
+
+**Las cuatro capturas, y las de fullscreen tomadas en fullscreen de verdad**, con
+un click real sobre el botón, que es lo único que el navegador acepta como gesto
+de usuario. En las cuatro se ve una sola barra con `3:00`, que es el programa
+entero. Y la barra mide lo mismo antes, durante y después de un break: 559,313 px
+de riel y 180,000 s releídos del primario en los tres momentos, que es el
+invariante del ADR 0016 y lo que la fase 03 va a poner a prueba.
+
+Los dos greps dan cero —el archivo nuevo entra al del renderizado contra el
+transporte— y `npm test` da 15/15. La página del integrador baja de ocho líneas de
+código a siete. Commit sin push.
+
+**Cuatro cosas quedaron anotadas y no arregladas.** La primera y la que más
+importa para el argumento de la demo: **el pane de fábrica no tiene controles
+nativos y nunca los tuvo.** El ADR 0015 cierra diciendo que los conserva y que la
+asimetría entre los dos panes refuerza la compatibilidad, y el bloque de la task
+lo repite como restricción; en el código `#stock-video` entró en la T-09 de la
+fase 01 con `playsinline muted` y nada más. Antes de esta task el único pane con
+controles nativos era el nuestro —la asimetría al revés— y después no los tiene
+ninguno de los dos. La task tiene prohibido tocar ese pane, así que queda dicho: si
+la asimetría es parte del argumento, es una línea. La segunda: **`squeezebackFrame`
+no está en el recorrido.** El bloque y el contrato lo citan como el layout que pone
+el aviso de fondo, y ninguno de los seis asset-list de `signalling/` es ese layout:
+en los cinco del recorrido el primario está siempre en `zDepth` 0. Es el sexto
+payload de la herramienta de SVTA y vive en los fixtures de los tests, que es por
+lo que el apilado se verificó con la sonda. La tercera: **en fullscreen sobre un
+viewport que no tiene la relación de aspecto del contenido, el encuadre del
+primario salta al entrar y al salir de cada break** —con un layout activo el
+primario llena el área por `object-fit: cover` del ADR 0013, y sin aviso vuelve a
+`contain` y aparece el pilarbox, medido en 159,111 px por lado sobre un viewport de
+1920 × 901—; las cajas del layout quedan exactas en los dos casos, así que ningún
+aviso flota fuera de la imagen. Y la cuarta: **la barra quedó seekeable y eso no lo
+pidió ningún bloque**; se agregó porque una barra que no lleva a ningún lado se lee
+como rota, y son cinco líneas si se quiere sacar.
