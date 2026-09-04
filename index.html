@@ -16,13 +16,32 @@
 <body>
 
 <!--
-  The primary VOD on an UNMODIFIED hls.js, served over HTTP by a static file
-  server, and the concurrent ad experience drawn on top of it in the DOM.
+  THE COMPATIBILITY PAIR (ADR 0007), which is the strongest argument this demo
+  can make and the reason the page is two players and not one: the new
+  experience deploys without breaking the clients that are already in the
+  market. One media playlist carries two EXT-X-DATERANGE with the same
+  START-DATE, one of Apple's interstitial class and one of the sibling class of
+  ADR 0009, and each client keeps the one it understands. Backwards
+  compatibility does not come from one class extending the other -- in HLS the
+  class is compared by exact string equality and there is no inheritance -- it
+  comes from the playlist serving both things at once.
 
-  #player  is the positioning context. Everything the concurrent experience
-           draws lives INSIDE it, as a sibling of the <video>, because the
-           element that goes fullscreen is the container and anything outside
-           it disappears the moment somebody presses the fullscreen button.
+  Left pane, an OFF-THE-SHELF client: hls.js at its factory configuration, with
+  nothing of this demo wired into it. It schedules the linear ad and replaces
+  the content with it, exactly as it does today in production.
+
+  Right pane, THIS DEMO'S client: the same library, same version, unmodified,
+  with its interstitials machinery off (ADR 0002) and the two layers of
+  ADR 0003 on top. It keeps the primary content on screen and draws the
+  concurrent experience over it.
+
+  Both read the SAME URL. That is printed under each player on purpose.
+
+  #player  is the positioning context of the demo pane. Everything the
+           concurrent experience draws lives INSIDE it, as a sibling of the
+           <video>, because the element that goes fullscreen is the container
+           and anything outside it disappears the moment somebody presses the
+           fullscreen button.
 
   #ads     is that layer. The renderer writes the boxes of the layout into it,
            in pixels, one positioned <video> per ad asset.
@@ -41,15 +60,49 @@
 -->
 
 <div class="stage">
-  <div class="player" id="player">
-    <video class="video" id="video" playsinline controls></video>
-    <div class="ads" id="ads" aria-hidden="true"></div>
-  </div>
-  <p class="controls">
-    <button class="ad-audio" id="ad-audio" type="button" disabled>no ad on screen</button>
+
+  <p class="headline">
+    One media playlist. Two <code>EXT-X-DATERANGE</code> on the same
+    <code>START-DATE</code>. Two clients, neither of which knows about the other.
   </p>
-  <p class="hud" id="hud"></p>
-  <p class="hud" id="contract"></p>
+
+  <div class="pair">
+
+    <section class="pane pane-stock" id="pane-stock" data-state="primary">
+      <h2 class="role">Off-the-shelf player</h2>
+      <p class="role-sub">A client that is already in the market. Nothing of this demo in it.</p>
+      <p class="role-reads">
+        keeps <code>com.apple.hls.interstitial</code> ·
+        ignores <code>com.qualabs.hls.concurrentInterstitial</code>
+      </p>
+      <div class="player">
+        <video class="video" id="stock-video" playsinline muted></video>
+      </div>
+      <p class="state" id="stock-state"></p>
+      <p class="hud" id="stock-hud"></p>
+    </section>
+
+    <section class="pane pane-demo" id="pane-demo" data-state="primary">
+      <h2 class="role">This demo&rsquo;s player</h2>
+      <p class="role-sub">The same library, same version, unmodified. Its interstitials machinery off.</p>
+      <p class="role-reads">
+        keeps <code>com.qualabs.hls.concurrentInterstitial</code> ·
+        ignores <code>com.apple.hls.interstitial</code>
+      </p>
+      <div class="player" id="player">
+        <video class="video" id="video" playsinline controls></video>
+        <div class="ads" id="ads" aria-hidden="true"></div>
+      </div>
+      <p class="state" id="demo-state"></p>
+      <p class="hud" id="hud"></p>
+      <p class="controls">
+        <button class="ad-audio" id="ad-audio" type="button" disabled>no ad on screen</button>
+      </p>
+      <p class="hud" id="contract"></p>
+    </section>
+
+  </div>
+
   <p class="credit">
     Primary content: <em>Tears of Steel</em> (CC BY 3.0) &middot;
     Ad assets: <em>Sintel</em> (CC BY 3.0), <em>Caminandes: Gran Dillama</em> (CC BY 3.0),

@@ -41,6 +41,7 @@ measured there.
 | `js/signalling.js` | the signalling layer: Date Ranges in, the contract out |
 | `js/renderer.js` | the rendering layer: the contract in, the boxes drawn over the video. Knows nothing about HLS |
 | `js/contract-trace.js` | the same contract, printed: the line under the player and the table in the console |
+| `js/stock-player.js` | the off-the-shelf client of the compatibility pair: hls.js at its factory configuration, and none of the above |
 | `signalling/` | the asset-lists, as the SVTA Layout Controller emits them, with the URIs filled in |
 | `test/` | the tests of the layout resolution, over the six payloads of the tool |
 | `vendor/hls.min.js` | hls.js **1.7.2, unmodified** |
@@ -49,6 +50,28 @@ measured there.
 | `content/` | the packaged output. Generated, gitignored |
 | `brand/` | Qualabs fonts, logo and favicon, on disk |
 | `CREDITS.md` | the CC BY attribution the footage requires |
+
+## The compatibility pair
+
+The page is two players, not one, and that is the demo's strongest argument
+(ADR 0007): this deploys without breaking the clients that are already in the
+market. Both load the **same URL**. The media playlist carries two
+`EXT-X-DATERANGE` on the same `START-DATE`, one of Apple's interstitial class
+with a linear ad and one of the sibling class of ADR 0009 with the concurrent
+experience, each with its own `ID` and its own asset-list.
+
+The left player is hls.js at its **factory configuration**, with nothing of this
+demo wired into it: it schedules the Apple-class tag and replaces the content
+with the linear ad, exactly as a deployed player does today. The right one is
+the same library, same version, unmodified, and keeps the content on screen with
+the concurrent experience drawn over it.
+
+Backwards compatibility does **not** come from one class extending the other. In
+HLS the class of a Date Range is compared by exact string equality and there is
+no inheritance, so an existing client cannot do anything sensible with a class
+it has never heard of -- it ignores it, which is what the left player does with
+ours. The compatibility comes from the playlist serving both things at once and
+each client keeping the one it understands.
 
 ## The two layers
 

@@ -1,14 +1,23 @@
 /* The look, adapted from the Qualabs kit vendored in ./brand/.
  *
- * There is one rule here that is not decoration: .ads is absolutely positioned
- * over the <video> inside .player and takes no pointer events, so the layer the
- * concurrent experience draws into covers the picture without swallowing the
- * clicks that belong to the player underneath. */
+ * There are two rules here that are not decoration. The first: .ads is
+ * absolutely positioned over the <video> inside .player and takes no pointer
+ * events, so the layer the concurrent experience draws into covers the picture
+ * without swallowing the clicks that belong to the player underneath. The
+ * second: the two panes get their identity from a colour and their live state
+ * from a data attribute, so that somebody watching a recording with the sound
+ * off can tell which player is which and what each one is doing at that
+ * instant, without anybody explaining it. */
 
 :root {
   --q-teal-500: #37b4a7;
   --q-ink-900: #1a1f2e;
+  --q-ink-800: #232a3d;
   --q-paper-50: #f8f9fa;
+  /* The off-the-shelf pane reads as neutral, the demo pane as ours. */
+  --q-slate-400: #7f8aa3;
+  /* What "the content got replaced" looks like at a glance. */
+  --q-amber-400: #f0a24b;
 }
 
 * { box-sizing: border-box; }
@@ -23,7 +32,52 @@ body {
   font-family: 'Poppins', system-ui, sans-serif;
 }
 
-.stage { width: min(1280px, 96vw); padding: 24px 0; }
+.stage { width: min(1520px, 96vw); padding: 20px 0; }
+
+.headline {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+/* The pair, side by side, same size: the claim is that one playlist serves
+ * both, so neither pane is the small one. */
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .pair { grid-template-columns: 1fr; }
+}
+
+.pane {
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 10px;
+  background: var(--q-ink-800);
+  padding: 14px 16px 16px;
+}
+.pane-stock { --accent: var(--q-slate-400); --hot: var(--q-amber-400); }
+.pane-demo  { --accent: var(--q-teal-500); --hot: var(--q-teal-500); }
+
+.role {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+}
+.role-sub { margin: 4px 0 0; font-size: 13px; line-height: 1.45; opacity: 0.7; }
+.role-reads {
+  margin: 6px 0 12px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  opacity: 0.6;
+}
+code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em; }
 
 .player {
   position: relative;
@@ -31,6 +85,8 @@ body {
   background: #000;
   border-radius: 8px;
   overflow: hidden;
+  outline: 3px solid transparent;
+  outline-offset: 2px;
 }
 
 .video { width: 100%; height: 100%; display: block; object-fit: contain; }
@@ -43,7 +99,20 @@ body {
  * first frame of the asset does not show the picture underneath through it. */
 .ads .ad { background: #000; }
 
-.controls { margin: 12px 0 0; }
+/* The live state of each pane, which is what makes a single frame of the
+ * recording legible: while an ad is on, the pane's picture gets a ring and its
+ * line of text turns hot -- amber on the left, where the content was replaced,
+ * and ours on the right, where it was not. */
+.state {
+  margin: 10px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--q-paper-50) 65%, transparent);
+}
+.pane[data-state='ad'] .player { outline-color: var(--hot); }
+.pane[data-state='ad'] .state { color: var(--hot); font-weight: 600; }
+
+.controls { margin: 10px 0 0; }
 
 .ad-audio {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -58,14 +127,16 @@ body {
 .ad-audio:disabled { opacity: 0.35; cursor: default; }
 
 .hud {
-  margin: 12px 0 0;
+  margin: 8px 0 0;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 12px;
-  color: var(--q-teal-500);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--accent);
+  word-break: break-all;
 }
 
 .credit {
-  margin: 8px 0 0;
+  margin: 16px 0 0;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 11px;
   line-height: 1.6;

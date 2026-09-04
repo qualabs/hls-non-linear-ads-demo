@@ -472,3 +472,58 @@ conversión: una mutación que cablea el 960 pasa los quince elementos, así
 que hay un test más al doble del área. Y `DEFAULT_PRIMARY` no cambia el
 comportamiento —los defaults por campo dan lo mismo—: documenta el
 supuesto y evita un warning, no lo sostiene.
+
+## 2026-09-04 — T-09: el par de compatibilidad en la página de la demo
+
+La página es dos players, y con eso queda hecho el argumento más fuerte
+que la demo puede hacer, que no es visual: esto se despliega sin
+romperle nada a los clientes que ya están en el mercado. A la izquierda,
+hls.js a su configuración de fábrica sin nada de esta demo adentro; a la
+derecha, la misma librería, la misma versión y sin tocar, con las dos
+capas encima. **Los dos cargan la misma URL**, que en el código es la
+misma constante y en la página está impresa debajo de cada player.
+
+El instante está en una sola captura, porque la evidencia es que ocurre
+simultáneamente: a los 20,81 s del primario la instancia de la demo
+sigue en el contenido con el `cornerOverlay` encima y la de fábrica está
+a 0,6 s del aviso lineal, con el contenido fuera de la pantalla. Sin
+ningún seek, las dos arrancando de cero y cruzando el `START-DATE`
+reproduciendo, que es lo que va a pasar en la grabación. La playlist se
+sirvió exactamente dos veces, una por cliente.
+
+Lo que la T-02 midió se sostiene ahora que comparten página: las dos
+instancias reciben los dos Date Ranges completos, la de fábrica agenda un
+solo evento y la de la demo tiene el manager de interstitials en `null`.
+Y no se pisaron en nada: con tres elementos decodificando a la vez, los
+tres al 100 % del reloj de pared, a 30 cuadros por segundo y con cero
+descartados. Es el resultado de la T-01 otra vez, ahora con un
+controlador de interstitials encendido en una de las instancias, que era
+justamente lo que la T-01 no tenía.
+
+Cuatro cosas aparecieron al hacerlo. La primera es que esta task no
+agregó nada de señalización: el `EXT-X-DATERANGE` de clase Apple y su
+asset-list estaban servidos desde la T-06, así que el argumento de
+compatibilidad estaba latente en la playlist hacía dos tasks y lo único
+que faltaba era alguien en la página que lo mostrara.
+
+La segunda corrige un renglón de la T-06 y de la T-07: el asset-list del
+Date Range de clase Apple ya no es cierto que no lo pida nadie, lo pide
+la instancia de fábrica. Y se ve de quién es cada pedido sin
+instrumentar nada, porque el de la de fábrica lleva el
+`?_HLS_primary_id` que hls.js le agrega y el del concurrente, que lo
+pide la aplicación, no lleva nada.
+
+La tercera es un segundo argumento que salió gratis y que nadie fue a
+buscar: cuando el aviso termina, la instancia de fábrica vuelve al
+primario en el segundo donde lo había dejado, mientras la de la demo va
+doce segundos más adelante. El cliente de mercado se perdió los doce
+segundos de programa que reemplazó y el de la demo no se perdió
+ninguno, y eso se ve en un solo cuadro con los dos en escenas
+distintas. Es material de guión para la T-12.
+
+La cuarta es de etiquetado y sale de la anterior: los dos paneles no
+pueden compartir un reloj, porque el tiempo que reporta un cliente de
+mercado mientras reemplaza es el del aviso y no el del programa. Lo que
+distingue un estado del otro no es el número sino de dónde sale, así que
+la etiqueta de la izquierda se arma con `interstitialsManager.playingItem`,
+que es la misma propiedad que ya había leído la T-02.

@@ -1,0 +1,1080 @@
+{
+  "antes_del_aviso": {
+    "wall": 779.5,
+    "demo": {
+      "interstitialsManager": "null",
+      "dateRanges": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial",
+          "isInterstitial": true,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-LINEAR",
+            "CLASS": "com.apple.hls.interstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-linear.json",
+            "X-RESUME-OFFSET": "0",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "class": "com.qualabs.hls.concurrentInterstitial",
+          "isInterstitial": false,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-CONCURRENT",
+            "CLASS": "com.qualabs.hls.concurrentInterstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-cornerOverlay.json",
+            "X-RESUME-OFFSET": "0",
+            "X-SNAP": "OUT,IN",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        }
+      ],
+      "video": {
+        "currentTime": 0,
+        "paused": false,
+        "muted": true,
+        "readyState": 0,
+        "w": 0,
+        "h": 0,
+        "decoded": 0,
+        "dropped": 0
+      },
+      "overlay": null,
+      "active": [],
+      "paneState": "primary",
+      "stateLine": "primary content \u00b7 0.0s",
+      "hud": "hls.js 1.7.2 \u00b7 interstitials manager: none \u00b7 playing ./content/primary/con-daterange.m3u8",
+      "contract": ""
+    },
+    "stock": {
+      "interstitialsManager": "objeto",
+      "scheduled": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial"
+        }
+      ],
+      "playingAd": null,
+      "dateRanges": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial",
+          "isInterstitial": true,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-LINEAR",
+            "CLASS": "com.apple.hls.interstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-linear.json",
+            "X-RESUME-OFFSET": "0",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "class": "com.qualabs.hls.concurrentInterstitial",
+          "isInterstitial": false,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-CONCURRENT",
+            "CLASS": "com.qualabs.hls.concurrentInterstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-cornerOverlay.json",
+            "X-RESUME-OFFSET": "0",
+            "X-SNAP": "OUT,IN",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        }
+      ],
+      "video": {
+        "currentTime": 0,
+        "paused": false,
+        "muted": true,
+        "readyState": 0,
+        "w": 0,
+        "h": 0,
+        "decoded": 0,
+        "dropped": 0
+      },
+      "paneState": "primary",
+      "stateLine": "primary content \u00b7 0.0s",
+      "hud": "hls.js 1.7.2 \u00b7 interstitials manager: PRESENT \u00b7 playing ./content/primary/con-daterange.m3u8"
+    }
+  },
+  "el_instante": {
+    "wall": 21695.5,
+    "demo": {
+      "interstitialsManager": "null",
+      "dateRanges": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial",
+          "isInterstitial": true,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-LINEAR",
+            "CLASS": "com.apple.hls.interstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-linear.json",
+            "X-RESUME-OFFSET": "0",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "class": "com.qualabs.hls.concurrentInterstitial",
+          "isInterstitial": false,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-CONCURRENT",
+            "CLASS": "com.qualabs.hls.concurrentInterstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-cornerOverlay.json",
+            "X-RESUME-OFFSET": "0",
+            "X-SNAP": "OUT,IN",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        }
+      ],
+      "video": {
+        "currentTime": 20.81,
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "w": 1280,
+        "h": 720,
+        "decoded": 628,
+        "dropped": 0
+      },
+      "overlay": {
+        "currentTime": 0.68,
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "w": 1280,
+        "h": 720,
+        "decoded": 25,
+        "dropped": 0
+      },
+      "active": [
+        {
+          "type": "cornerOverlay",
+          "id": "AD-1-CONCURRENT",
+          "window": [
+            20,
+            32
+          ],
+          "elements": [
+            {
+              "zDepth": 0,
+              "id": "primaryContent",
+              "primary": true,
+              "box": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "uri": null
+            },
+            {
+              "zDepth": 1,
+              "id": "adOverlay1",
+              "primary": false,
+              "box": {
+                "top": 0,
+                "right": 75,
+                "bottom": 75,
+                "left": 0
+              },
+              "uri": "/content/adB/index.m3u8"
+            }
+          ]
+        }
+      ],
+      "paneState": "ad",
+      "stateLine": "primary content + CONCURRENT AD (cornerOverlay) \u00b7 20.7s \u00b7 nothing was replaced",
+      "hud": "hls.js 1.7.2 \u00b7 interstitials manager: none \u00b7 playing ./content/primary/con-daterange.m3u8",
+      "contract": "t=20.7s \u00b7 cornerOverlay \u00b7 z0 primaryContent [0 0 0 0] \u00b7 z1 adOverlay1 [0 75 75 0]"
+    },
+    "stock": {
+      "interstitialsManager": "objeto",
+      "scheduled": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial"
+        }
+      ],
+      "playingAd": "AD-1-LINEAR",
+      "dateRanges": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial",
+          "isInterstitial": true,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-LINEAR",
+            "CLASS": "com.apple.hls.interstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-linear.json",
+            "X-RESUME-OFFSET": "0",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "class": "com.qualabs.hls.concurrentInterstitial",
+          "isInterstitial": false,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-CONCURRENT",
+            "CLASS": "com.qualabs.hls.concurrentInterstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-cornerOverlay.json",
+            "X-RESUME-OFFSET": "0",
+            "X-SNAP": "OUT,IN",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        }
+      ],
+      "video": {
+        "currentTime": 0.6,
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "w": 1280,
+        "h": 720,
+        "decoded": 22,
+        "dropped": 0
+      },
+      "paneState": "ad",
+      "stateLine": "LINEAR AD \"AD-1-LINEAR\" \u00b7 0.5s of the ad \u00b7 the content is off the screen",
+      "hud": "hls.js 1.7.2 \u00b7 interstitials manager: PRESENT \u00b7 playing ./content/primary/con-daterange.m3u8"
+    }
+  },
+  "concurrencia": {
+    "wallSeconds": 3.001,
+    "elements": {
+      "demo/primary": {
+        "avanceSegundos": 3,
+        "avanceContraRelojDePared": 100,
+        "cuadrosDecodificados": 90,
+        "cuadrosDescartados": 0,
+        "fps": 30,
+        "porcentajeDescartado": 0
+      },
+      "demo/overlay": {
+        "avanceSegundos": 3,
+        "avanceContraRelojDePared": 100,
+        "cuadrosDecodificados": 90,
+        "cuadrosDescartados": 0,
+        "fps": 30,
+        "porcentajeDescartado": 0
+      },
+      "stock/linear-ad": {
+        "avanceSegundos": 3.002,
+        "avanceContraRelojDePared": 100,
+        "cuadrosDecodificados": 90,
+        "cuadrosDescartados": 0,
+        "fps": 30,
+        "porcentajeDescartado": 0
+      }
+    }
+  },
+  "durante_la_medicion_de_concurrencia": {
+    "wall": 25514.1,
+    "demo": {
+      "interstitialsManager": "null",
+      "dateRanges": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial",
+          "isInterstitial": true,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-LINEAR",
+            "CLASS": "com.apple.hls.interstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-linear.json",
+            "X-RESUME-OFFSET": "0",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "class": "com.qualabs.hls.concurrentInterstitial",
+          "isInterstitial": false,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-CONCURRENT",
+            "CLASS": "com.qualabs.hls.concurrentInterstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-cornerOverlay.json",
+            "X-RESUME-OFFSET": "0",
+            "X-SNAP": "OUT,IN",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        }
+      ],
+      "video": {
+        "currentTime": 24.62,
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "w": 1280,
+        "h": 720,
+        "decoded": 743,
+        "dropped": 0
+      },
+      "overlay": {
+        "currentTime": 4.5,
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "w": 1280,
+        "h": 720,
+        "decoded": 140,
+        "dropped": 0
+      },
+      "active": [
+        {
+          "type": "cornerOverlay",
+          "id": "AD-1-CONCURRENT",
+          "window": [
+            20,
+            32
+          ],
+          "elements": [
+            {
+              "zDepth": 0,
+              "id": "primaryContent",
+              "primary": true,
+              "box": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "uri": null
+            },
+            {
+              "zDepth": 1,
+              "id": "adOverlay1",
+              "primary": false,
+              "box": {
+                "top": 0,
+                "right": 75,
+                "bottom": 75,
+                "left": 0
+              },
+              "uri": "/content/adB/index.m3u8"
+            }
+          ]
+        }
+      ],
+      "paneState": "ad",
+      "stateLine": "primary content + CONCURRENT AD (cornerOverlay) \u00b7 24.4s \u00b7 nothing was replaced",
+      "hud": "hls.js 1.7.2 \u00b7 interstitials manager: none \u00b7 playing ./content/primary/con-daterange.m3u8",
+      "contract": "t=24.4s \u00b7 cornerOverlay \u00b7 z0 primaryContent [0 0 0 0] \u00b7 z1 adOverlay1 [0 75 75 0]"
+    },
+    "stock": {
+      "interstitialsManager": "objeto",
+      "scheduled": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial"
+        }
+      ],
+      "playingAd": "AD-1-LINEAR",
+      "dateRanges": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial",
+          "isInterstitial": true,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-LINEAR",
+            "CLASS": "com.apple.hls.interstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-linear.json",
+            "X-RESUME-OFFSET": "0",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "class": "com.qualabs.hls.concurrentInterstitial",
+          "isInterstitial": false,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-CONCURRENT",
+            "CLASS": "com.qualabs.hls.concurrentInterstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-cornerOverlay.json",
+            "X-RESUME-OFFSET": "0",
+            "X-SNAP": "OUT,IN",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        }
+      ],
+      "video": {
+        "currentTime": 4.42,
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "w": 1280,
+        "h": 720,
+        "decoded": 137,
+        "dropped": 0
+      },
+      "paneState": "ad",
+      "stateLine": "LINEAR AD \"AD-1-LINEAR\" \u00b7 4.2s of the ad \u00b7 the content is off the screen",
+      "hud": "hls.js 1.7.2 \u00b7 interstitials manager: PRESENT \u00b7 playing ./content/primary/con-daterange.m3u8"
+    }
+  },
+  "despues_del_aviso": {
+    "wall": 33674.3,
+    "demo": {
+      "interstitialsManager": "null",
+      "dateRanges": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial",
+          "isInterstitial": true,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-LINEAR",
+            "CLASS": "com.apple.hls.interstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-linear.json",
+            "X-RESUME-OFFSET": "0",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "class": "com.qualabs.hls.concurrentInterstitial",
+          "isInterstitial": false,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-CONCURRENT",
+            "CLASS": "com.qualabs.hls.concurrentInterstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-cornerOverlay.json",
+            "X-RESUME-OFFSET": "0",
+            "X-SNAP": "OUT,IN",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        }
+      ],
+      "video": {
+        "currentTime": 32.78,
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "w": 1280,
+        "h": 720,
+        "decoded": 987,
+        "dropped": 0
+      },
+      "overlay": null,
+      "active": [],
+      "paneState": "primary",
+      "stateLine": "primary content \u00b7 32.6s",
+      "hud": "hls.js 1.7.2 \u00b7 interstitials manager: none \u00b7 playing ./content/primary/con-daterange.m3u8",
+      "contract": "t=32.6s \u00b7 no concurrent experience"
+    },
+    "stock": {
+      "interstitialsManager": "objeto",
+      "scheduled": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial"
+        }
+      ],
+      "playingAd": null,
+      "dateRanges": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial",
+          "isInterstitial": true,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-LINEAR",
+            "CLASS": "com.apple.hls.interstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-linear.json",
+            "X-RESUME-OFFSET": "0",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "class": "com.qualabs.hls.concurrentInterstitial",
+          "isInterstitial": false,
+          "startDate": "Fri Sep 04 2026 08:11:00 GMT-0300 (Uruguay Standard Time)",
+          "attr": {
+            "ID": "AD-1-CONCURRENT",
+            "CLASS": "com.qualabs.hls.concurrentInterstitial",
+            "START-DATE": "2026-09-04T08:11:00.350-0300",
+            "X-ASSET-LIST": "/signalling/asset-list-cornerOverlay.json",
+            "X-RESUME-OFFSET": "0",
+            "X-SNAP": "OUT,IN",
+            "X-RESTRICT": "SKIP",
+            "PLANNED-DURATION": "12"
+          }
+        }
+      ],
+      "video": {
+        "currentTime": 20.44,
+        "paused": false,
+        "muted": true,
+        "readyState": 4,
+        "w": 1280,
+        "h": 720,
+        "decoded": 17,
+        "dropped": 0
+      },
+      "paneState": "primary",
+      "stateLine": "primary content \u00b7 20.2s",
+      "hud": "hls.js 1.7.2 \u00b7 interstitials manager: PRESENT \u00b7 playing ./content/primary/con-daterange.m3u8"
+    }
+  },
+  "red": [
+    {
+      "url": "http://localhost:8080/",
+      "status": 200,
+      "ct": "text/html; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/brand/fonts-embedded.css",
+      "status": 200,
+      "ct": "text/css; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/css/player.css",
+      "status": 200,
+      "ct": "text/css; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/js/app.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/vendor/hls.min.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "url": "chrome-extension://cimiefiiaegbelhefglklhhakcgmhkai/page-script.js",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "url": "chrome-extension://ailoabdmgclmfmhdagmlohpjlbpffblp/Roboto-Regular.woff2",
+      "status": 200,
+      "ct": "application/octet-stream"
+    },
+    {
+      "url": "http://localhost:8080/js/signalling.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/js/contract-trace.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/js/renderer.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/js/stock-player.js",
+      "status": 200,
+      "ct": "text/javascript; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/con-daterange.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/con-daterange.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-cornerOverlay.json",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "blob:http://localhost:8080/d44c8958-cc05-4b21-817b-51582fcb8f0b",
+      "status": 200,
+      "ct": "text/javascript"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg006.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg006.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg007.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg007.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg008.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg008.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg009.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg009.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg010.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg010.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg011.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=93d8dd11-0ab1-4ec0-b8fa-e01c5efa5a3c",
+      "status": 200,
+      "ct": "application/json; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg012.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adA/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "url": "http://localhost:8080/content/adA/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg013.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg014.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg015.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg016.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg017.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg018.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg019.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg020.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg021.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg022.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg023.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg024.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/index.m3u8",
+      "status": 200,
+      "ct": "application/vnd.apple.mpegurl"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg000.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg025.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adA/seg001.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adA/seg002.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adB/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adA/seg003.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adA/seg004.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/adA/seg005.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg010.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg026.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg027.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg028.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg029.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg030.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg031.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg011.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg012.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg013.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg014.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg015.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg016.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg017.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg018.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg019.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg020.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg021.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg022.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg023.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg024.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    },
+    {
+      "url": "http://localhost:8080/content/primary/seg025.ts",
+      "status": 200,
+      "ct": "video/mp2t"
+    }
+  ],
+  "consola": [
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-cornerOverlay.json"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved cornerOverlay#AD-1-CONCURRENT: 2 elements, window 20.00s -> 32.00s"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=0.21s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=20.13s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 20.00s -> 32.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=32.08s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    }
+  ]
+}
