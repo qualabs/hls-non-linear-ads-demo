@@ -147,7 +147,7 @@ Para la especificación de SVTA, y no para esta fase: si el layout debería
 viajar en el propio DateRange Object en vez de en el asset-list, y la
 divergencia de modelos de coordenadas entre HLS y DASH del R4.
 
-Abierta dentro de la fase, y aparecida al medir: el modelo de porcentajes
+Aparecida al medir, y ya resuelta para la demo: el modelo de porcentajes
 no dice cómo llena un asset una caja cuya relación de aspecto no es la
-suya. La decisión de política de llenado la toma la task que construya el
-renderizador, y el hueco se le reporta a SVTA.
+suya. El ADR 0013 fija el recorte centrado sin deformar como política de
+la demo, y el hueco del modelo se le reporta a SVTA como pregunta.
