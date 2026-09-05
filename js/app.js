@@ -44,13 +44,15 @@ function logResolved(experiences) {
 }
 
 // ===========================================================================
-// WHAT AN INTEGRATOR WRITES  (with the <script src> of index.html:120 and the
-// container of index.html:100). Everything between the two fences exists because
+// WHAT AN INTEGRATOR WRITES  (with the <script src> of index.html:139 and the
+// container of index.html:119). Everything between the two fences exists because
 // the library exists; the rest of this file exists because this page is a
-// compatibility demo.
+// compatibility demo. The `logo` is optional and it is the one line of these
+// that a player with no brand does not write.
 const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
 const concurrent = QualabsConcurrentHls.attach(hls, {
   container: document.getElementById('player'),
+  logo: { src: './brand/logo-qualabs.svg', alt: 'Qualabs' },
   onResolved: logResolved
 });
 hls.loadSource(SRC);

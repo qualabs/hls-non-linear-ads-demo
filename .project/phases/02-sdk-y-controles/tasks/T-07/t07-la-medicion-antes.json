@@ -1,0 +1,209 @@
+{
+  "modo": "antes",
+  "paneSinModificar": {
+    "pane": {
+      "width": 749,
+      "height": 572.125
+    },
+    "player": {
+      "width": 715,
+      "height": 402.1875
+    },
+    "playerDentroDelPane": {
+      "x": 17,
+      "y": 102.4375,
+      "w": 715,
+      "h": 402.1875
+    },
+    "controlesNativos": false,
+    "t": 8,
+    "pausado": true,
+    "estado": "primary",
+    "texto": "primary content \u00b7 8.0s"
+  },
+  "enVentana": {
+    "t": 60.6841,
+    "pausado": true,
+    "largo": 180,
+    "contenedor": {
+      "left": 988,
+      "top": 346.5781,
+      "width": 715,
+      "height": 402.1875
+    },
+    "riel": {
+      "left": 1042.8438,
+      "top": 713.7656,
+      "width": 559.3125,
+      "height": 8
+    },
+    "relleno": {
+      "left": 1042.8438,
+      "top": 713.7656,
+      "width": 188.5625,
+      "height": 8
+    },
+    "perilla": {
+      "left": 1224.4063,
+      "top": 710.7656,
+      "width": 14,
+      "height": 14
+    },
+    "colorPerilla": "rgb(255, 255, 255)",
+    "carrilDeCues": {
+      "left": 1042.8438,
+      "top": 724.7656,
+      "width": 559.3125,
+      "height": 8
+    },
+    "marcas": 5,
+    "nodos": [
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1104.9844,
+          "top": 713.7656,
+          "width": 37.2813,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1182.6719,
+          "top": 713.7656,
+          "width": 37.2813,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1260.3438,
+          "top": 713.7656,
+          "width": 37.2813,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1338.0313,
+          "top": 713.7656,
+          "width": 37.2813,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1415.7188,
+          "top": 713.7656,
+          "width": 37.2813,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1104.9844,
+          "top": 724.7656,
+          "width": 37.2813,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1182.6719,
+          "top": 724.7656,
+          "width": 37.2813,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1260.3438,
+          "top": 724.7656,
+          "width": 37.2813,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1338.0313,
+          "top": 724.7656,
+          "width": 37.2813,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1415.7188,
+          "top": 724.7656,
+          "width": 37.2813,
+          "height": 8
+        }
+      }
+    ],
+    "marca": null,
+    "logoDelEncabezado": null,
+    "cues": 5,
+    "colorMarca": "rgb(162, 115, 255)",
+    "colorCue": "rgb(255, 204, 0)",
+    "placa": null,
+    "colorPlaca": null,
+    "logo": null,
+    "srcDelLogo": null,
+    "botonAudio": {
+      "left": 1655,
+      "top": 358.5781,
+      "width": 34,
+      "height": 34
+    },
+    "botonPlay": {
+      "left": 1308.5,
+      "top": 510.6719,
+      "width": 74,
+      "height": 74
+    },
+    "botonFull": {
+      "left": 1653,
+      "top": 700.7656,
+      "width": 34,
+      "height": 34
+    },
+    "tiempos": [
+      {
+        "texto": "1:00",
+        "tamano": "13px",
+        "familia": "system-ui"
+      },
+      {
+        "texto": "3:00",
+        "tamano": "13px",
+        "familia": "system-ui"
+      }
+    ],
+    "fullscreen": false,
+    "claseDeLaCapa": "qa-controls qa-controls--on",
+    "viewport": {
+      "w": 1920,
+      "h": 1080
+    }
+  },
+  "consola": []
+}

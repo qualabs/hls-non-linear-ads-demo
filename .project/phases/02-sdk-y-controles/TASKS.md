@@ -29,7 +29,7 @@ línea y no por su número, así que una edición más arriba no la mueve.
 | T-04 | Los rangos del programa marcados en la barra                     | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-04/` |
 | T-05 | El volumen del asset list, con la mezcla que David propuso       | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-05/` |
 | T-06 | Tests: los rangos del programa y el default de volumen           | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-06/` |
-| T-07 | El skin y el branding de Qualabs                                 | planned | —    | —        |
+| T-07 | El skin y el branding de Qualabs                                 | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-07/` |
 | T-08 | La documentación del integrador                                  | planned | —    | —        |
 
 ---
@@ -314,7 +314,6 @@ línea y no por su número, así que una edición más arriba no la mueve.
   con aviso y en fullscreen, con el skin puesto y el logo donde va; y el pane
   de fábrica sin tocar, que es la mitad del argumento de la página.
 - **nivel de verificación:** bajo. Es estética y el error está en la pantalla.
-
 ## T-08 — La documentación del integrador
 
 - **Objetivo:** que alguien que no somos nosotros pueda agregar esto a su

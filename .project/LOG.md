@@ -1365,3 +1365,78 @@ que el mapa decide es por cuál de los dos caminos entra el Date Range. No es un
 defecto —el ruteo y la etiqueta coinciden por construcción— pero un test sobre
 el mapa solo no protege la etiqueta, y lo que la protege es la comparación de
 los diez rangos enteros contra la lectura de la T-02.
+
+## 2026-09-05 — T-07 de la fase 02: el skin y la marca
+
+El skin de los controles y el logo de Qualabs, que hasta hoy estaba vendorizado
+en `brand/` y no aparecía en ninguna pantalla. Alcance propio: lo más cercano
+que dijo David es "make it look a little more Pro". Todo en `lib/controls.js`,
+más una placa en el encabezado de la página y el token que la página le pasa al
+chrome.
+
+**El logo va en dos lugares y son el mismo archivo**: una placa sobre el titular
+y una placa que la librería dibuja adentro del contenedor, en una fila propia de
+la barra. La segunda existe porque es la única que sigue en el cuadro en
+fullscreen, que es el único marco que tiene una grabación en fullscreen.
+
+**No va en una esquina de la imagen, y eso está medido y no supuesto.** Un bug
+de canal va en una esquina, y en este player la imagen es del layout: `multiView`
+pone un elemento en las cuatro esquinas y el aviso de `cornerOverlay` **es** la
+esquina superior izquierda. Se probó arriba a la izquierda y la captura quedó
+como evidencia de la opción descartada: la placa le tapaba la mitad al aviso que
+la demo existe para mostrar. La barra es la franja que la composición ya le cedió
+al mobiliario, y la fila propia arriba del riel es lo que hace que la marca
+tampoco le saque ancho a la barra de progreso.
+
+**La librería no lleva marca, y por eso la marca es del que la integra.** El logo
+entra por `attach` como `logo: { src, alt }` —un archivo del integrador, la
+librería no trae ninguno— y el color por la propiedad CSS `--qa-accent` que él
+pone sobre su contenedor; la tipografía es `inherit`, así que el chrome sale en
+Poppins sin que la librería nombre una fuente ni la distribuya. Sin ninguna de
+las tres, el player sale blanco y sin marca, que es lo que parece un player sin
+marca. Costo dicho de frente: la valla de `js/app.js` pasa de ocho líneas a
+nueve, y la novena es opcional.
+
+**Acento y no superficie**, que es la segunda regla del kit: teal sólo en la
+perilla y en el anillo de foco. **El relleno del progreso se dejó blanco a
+propósito** aunque pintarlo hubiera sido el gesto más visible, porque es el
+sustrato sobre el que la T-04 midió que las marcas violetas se leen a un cuarto.
+Y la placa clara es la primera regla del kit, verificada mirándola: sobre el
+fondo oscuro de la página el "qua" del wordmark desaparece y sobrevive el "labs".
+
+**Los tamaños del chrome son tokens y en fullscreen cambian de juego** —botones
+de 34 a 46, pausa de 74 a 104, tiempos de 13 a 18, riel de 8 a 10—, con la clase
+puesta por la misma función que pinta el icono de fullscreen.
+
+**La prueba del cuarto encontró un defecto real, como en la T-04.** El logo del
+player a 22 px queda en 5,5 px reducido y el wordmark se disuelve, y no se
+arregla agrandándolo: a un cuarto, esa imagen mide 179 px de ancho y un "qualabs"
+legible necesita 48 de esos 179. O sea que **en la página de dos panes la marca
+que se lee de lejos es la del encabezado**, que a un cuarto queda en 11 px y se
+lee entera. En fullscreen no hay encabezado, así que ahí sí tiene que leerse la
+del player: se subió de 32 a 40 px y con eso queda en 10 px reducido y se lee.
+La T-04 sigue en pie: violeta contra amarillo a 276–284 de distancia RGB, contra
+los 282–292 de aquella medición, y el riel fuera de un break en `127, 127, 125`.
+
+**El pane sin modificar quedó igual y no se afirma: 0 píxeles distintos de
+429.177.** Para que ese número signifique algo hicieron falta dos cosas, y la
+segunda es la que casi produce un falso positivo: el video del pane se para en el
+mismo segundo en las dos corridas, y el pane se empuja a una fila entera de
+píxeles, porque el encabezado nuevo lo baja 13,x px y la rasterización de un
+texto depende de la fracción de píxel en la que cae. Sin esa alineación el diff
+daba 2,7 % de píxeles distintos que eran antialiasing y no skin.
+
+Los dos greps de la fase en verde, `npm test` 27/27, y la página del integrador
+sin cambios fuera de la línea del logo. Commit sin push.
+
+**Cuatro cosas quedaron anotadas.** **La dirección del skin no está escrita en
+ningún lado**: el bloque la da por elegida y en la fase sólo hay las dos imágenes
+de referencia de la T-03 —que fijaron dónde va cada control, no cómo se ve— y el
+"more Pro" de David; el skin se decidió con eso y con las dos reglas del kit. Un
+**`networkError aborted` no fatal** aparece a veces en la consola de la sonda y
+también aparece en el árbol sin los cambios corriendo la misma secuencia: es un
+fragmento que hls.js cancela cuando la sonda hace seek. Un **comentario de
+`index.html`** seguía afirmando que el pane de fábrica conserva sus controles
+nativos, que es lo que la nota fechada del ADR 0015 ya había corregido, y se
+corrigió el comentario. Y **el bloque pide que en las tres capturas se vea el
+pane sin modificar**, que en la de fullscreen es imposible por construcción.

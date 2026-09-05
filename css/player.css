@@ -12,7 +12,14 @@
  * stacks and the way the controls sit above it are invariants of the renderer
  * and not choices of whoever writes the page (ADR 0015). What .player keeps is
  * the frame around them: the aspect ratio, the black bed and the rounded
- * corners. */
+ * corners.
+ *
+ * What this page DOES hand the chrome is one value, `--qa-accent`, and a value
+ * is not a rule: the library asks for the colour of whoever integrates it
+ * rather than shipping one, so the knob of the bar comes out in the teal of
+ * this brand without a line of the library naming it. The logo travels the
+ * other way, as a file passed to `attach`, because a mark is an asset and not
+ * a token. */
 
 :root {
   --q-teal-500: #37b4a7;
@@ -39,8 +46,31 @@ body {
 
 .stage { width: min(1520px, 96vw); padding: 20px 0; }
 
+/* THE MARK GOES ON A LIGHT PLATE AND NOT ON THE DARK PAGE, and that is the
+ * brand's rule and not a preference: its wordmark is ink, so on this background
+ * the "qua" of it disappears and the "labs" survives in teal, which is a broken
+ * logo and not a dark version of one. Recolouring it is the other way to break
+ * it. The plate is the size of the logo and no bigger: a full-width light band
+ * would be a surface, and on a page whose subject is two pictures the brand is
+ * an accent. */
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin: 0 0 18px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: var(--q-paper-50);
+}
+.brand img { display: block; height: 44px; width: auto; }
+
 .headline {
-  margin: 0 0 16px;
+  margin: 0;
   font-size: 15px;
   line-height: 1.5;
   opacity: 0.85;
@@ -95,6 +125,11 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
 }
 
 .video { width: 100%; height: 100%; display: block; object-fit: contain; }
+
+/* The one value this page hands to the chrome the library draws (see the head
+ * of this file). It goes on the container and not on anything inside it,
+ * because what is inside is the library's. */
+.pane-demo .player { --qa-accent: var(--accent); }
 
 /* The live state of each pane, which is what makes a single frame of the
  * recording legible: while an ad is on, the pane's picture gets a ring and its

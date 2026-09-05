@@ -53,8 +53,15 @@
            `controls` attribute: the native ones are part of the element, so
            they scale with the transform the renderer applies to it, and with
            several <video> on screen they command a piece and not the picture.
-           The left-hand player keeps its own, because that is what an
-           off-the-shelf client looks like (ADR 0007).
+           Neither does the left-hand one: no pane of this page shows native
+           controls, which is what Nicolás decided when it turned out that the
+           off-the-shelf pane never had them (the dated note of ADR 0015). What
+           tells the two apart is what each one does with the same break, and
+           not a strip of buttons.
+
+  THE MARK of this page is in two places and they are one file: the plate over
+           the headline, and the plate the library draws inside the container,
+           which is the only one still in the frame in fullscreen.
 
   #contract is the contract, in one line of text: what the signalling layer
            says is active right now. The console has the same thing with the
@@ -69,10 +76,22 @@
 
 <div class="stage">
 
-  <p class="headline">
-    One media playlist. Two <code>EXT-X-DATERANGE</code> on the same
-    <code>START-DATE</code>. Two clients, neither of which knows about the other.
-  </p>
+  <!--
+    The mark, on the light plate the brand's own documents put it on. The logo
+    is the file in ./brand/, unedited: on this background its wordmark is ink
+    and would lose half of itself, and a dark version of somebody's logo is a
+    broken logo. The same file goes into the picture of the composition, on the
+    same kind of plate, handed to the library as an option -- see the fenced
+    block of js/app.js -- because that one is inside the container and is
+    therefore the only one still in the frame in fullscreen.
+  -->
+  <header class="masthead">
+    <span class="brand"><img src="./brand/logo-qualabs.svg" alt="Qualabs"></span>
+    <p class="headline">
+      One media playlist. Two <code>EXT-X-DATERANGE</code> on the same
+      <code>START-DATE</code>. Two clients, neither of which knows about the other.
+    </p>
+  </header>
 
   <div class="pair">
 
