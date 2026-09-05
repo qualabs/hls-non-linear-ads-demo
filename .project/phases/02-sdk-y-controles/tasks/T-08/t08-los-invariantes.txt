@@ -1,0 +1,43 @@
+# Los invariantes de la T-08, verificados y no afirmados (2026-09-05)
+
+La task no toca código: escribe un documento en docs/. Los dos chequeos
+corren igual, porque lo que el documento afirma sale del código y un
+documento que describe una librería rota no sirve de nada.
+
+## A. Las dos costuras
+
+$ node scripts/verificar-cortes.mjs
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js js/contract-trace.js css/player.css
+
+   GREEN: 5 occurrence(s), all of them on the accepted list.
+     lib/controls.js:21  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:65  interstitial: '#ffcc00'
+     lib/controls.js:98  interstitial: {
+     lib/controls.js:101  title: 'traditional interstitial: where a client already in the market replaces the content'
+     lib/controls.js:344  background: ${RANGE_COLOURS.interstitial};
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
+
+## B. Los tests
+
+$ npm test
+✔ with no volume in the asset-list the ad comes out silent and the programme does not (0.579213ms)
+✔ the mix of the Quad is the one the asset-list declares, element by element (0.49042ms)
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||` (0.207061ms)
+✔ a volume that is not a number falls back to the element own default, and there are two (0.153657ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 147.925163

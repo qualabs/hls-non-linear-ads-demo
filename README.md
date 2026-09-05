@@ -134,7 +134,7 @@ and the page that uses it.
 | `server.mjs` | a static file server, and nothing else: no ad server, no APS |
 | `scripts/` | the content: download and package as HLS VOD. The build of the library. And `verificar-cortes.mjs`, the check of the two seams |
 | `content/` | the packaged output. Generated, gitignored |
-| `docs/` | the architecture of the product: the contract between the two layers |
+| `docs/` | the product's own documents: the contract between the two layers, and how to integrate the library into a page that is not this one |
 | `brand/` | Qualabs fonts, logo and favicon, on disk |
 | `CREDITS.md` | the CC BY attribution the footage requires |
 
