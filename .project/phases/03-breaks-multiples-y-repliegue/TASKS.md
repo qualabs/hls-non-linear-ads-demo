@@ -102,8 +102,9 @@ que la T-04 de la fase 01 hizo con las tres mediciones que la precedieron.
   asset-list de datos, no de código: el ADR 0008 predijo que agregar casos es
   trabajo de datos y la fase 01 lo midió en líneas. Punto de partida: la T-01,
   `js/signalling.js`, `signalling/` y el contrato. Restricción: el corte del
-  ADR 0003 sigue verificado por grep, y el recorrido de los cinco breaks que
-  hoy se graba tiene que seguir corriendo igual. Depende de T-02.
+  ADR 0003 sigue verificado por `scripts/verificar-cortes.mjs`, y el recorrido
+  de los cinco breaks que hoy se graba tiene que seguir corriendo igual.
+  Depende de T-02.
 - **Definición de done:** un break con tres avisos concurrentes corre entero,
   con una captura por aviso a tamaño real donde se ve que sale uno por vez y
   en el orden del asset-list, y la barra de la fase 02 marcando el break una

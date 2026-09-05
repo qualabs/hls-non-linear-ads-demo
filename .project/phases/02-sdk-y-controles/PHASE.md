@@ -71,7 +71,8 @@ verificarla con un grep en cada task.
 ## Decisiones que gobiernan la fase
 
 - **ADR 0015**, el límite del SDK y la propiedad de los controles. Es el ADR
-  0003 de esta fase: se decide al principio y se verifica con un grep.
+  0003 de esta fase: se decide al principio y se verifica en cada task, con
+  `scripts/verificar-cortes.mjs`.
 - **ADR 0014**, el volumen que declara el asset list, con el default en
   silencio. Supersede al 0010.
 - **ADR 0016**, que la clase concurrente nunca cambia el largo de la línea de
@@ -99,8 +100,13 @@ cualquier separación en dos: la línea se dibuja el primer día y se cruza a la
 semana sin que nadie lo note. La fase 01 lo resolvió con un grep corrido en
 seis tasks.
 
-Mitigación: el mismo método, en la T-01 y repetido en cada task que agregue
-código a la librería, más la página del integrador medida en líneas.
+Mitigación: `scripts/verificar-cortes.mjs`, corrido en cada task que agregue
+código a la librería, más la página del integrador medida en líneas. El script
+corre los dos greps —el del 0003 y el del 0015— y los compara contra la lista
+de ocurrencias aceptadas que lleva adentro, cada una con la razón por la que lo
+es; una ocurrencia que no esté en esa lista lo hace fallar diciendo cuál y
+dónde. La lista se indexa por el contenido de la línea y no por su número, para
+que editar arriba de una aceptada no sea un hallazgo.
 
 **R2. Los controles pelean con el apilado de los layouts.** La capa donde se
 dibujan los avisos queda deliberadamente sin `z-index`, para que no sea un

@@ -12,6 +12,14 @@ superficie pública que el ADR 0015 fija. Los tests van antes que el skin a
 propósito: si el calendario aprieta, lo que se recorta es lo de abajo de la
 lista, y lo que no puede quedar sin cubrir es lo que falla en silencio.
 
+**Las dos costuras se verifican con `scripts/verificar-cortes.mjs`**, en cada
+task que agregue código a la librería. Corre los dos greps —el del ADR 0003, que
+el renderizado no nombre el transporte, y el del ADR 0015, que la librería no
+nombre la demo— y los compara contra la lista de ocurrencias aceptadas que lleva
+adentro, cada una con su razón escrita. Una ocurrencia que no esté en esa lista
+lo hace fallar diciendo cuál y dónde. La lista se indexa por el contenido de la
+línea y no por su número, así que una edición más arriba no la mueve.
+
 | id   | brief                                                          | status  | plan | evidence |
 | ---- | -------------------------------------------------------------- | ------- | ---- | -------- |
 | T-01 | El corte: la librería y la aplicación de demo como dos cosas     | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-01/` |

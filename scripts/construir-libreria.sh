@@ -7,11 +7,11 @@
 # build wins on three counts and each one is about something that already exists
 # in this repository:
 #
-#   1. The seam of ADR 0003 is verified with a grep PER FILE -- the rendering
-#      side must not contain one word of the transport. Written as a single
-#      file, signalling and rendering share a scope and the grep has nothing to
-#      point at: the invariant of phase 01 would stop being verifiable on the
-#      day the library is cut out.
+#   1. The seam of ADR 0003 is verified PER FILE, by verificar-cortes.mjs -- the
+#      rendering side must not contain one word of the transport. Written as a
+#      single file, signalling and rendering share a scope and that check has
+#      nothing to point at: the invariant of phase 01 would stop being
+#      verifiable on the day the library is cut out.
 #   2. The tests import the pure functions of both layers as ES modules. One
 #      hand-written classic file would force either rewriting the tests or
 #      keeping a second export path alongside it.
