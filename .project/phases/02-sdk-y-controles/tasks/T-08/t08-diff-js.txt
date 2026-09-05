@@ -1,0 +1,13 @@
+--- /dev/shm/t08-20260905T133751-a7f2/doc-min.js	2026-09-05 10:39:50.495120301 -0300
++++ /dev/shm/t08-20260905T133751-a7f2/demo-fence.js	2026-09-05 10:39:37.442610386 -0300
+@@ -1,6 +1,8 @@
+ const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+ const concurrent = QualabsConcurrentHls.attach(hls, {
+-  container: document.getElementById('player')
++  container: document.getElementById('player'),
++  logo: { src: './brand/logo-qualabs.svg', alt: 'Qualabs' },
++  onResolved: logResolved
+ });
+-hls.loadSource('./content/primary/con-daterange.m3u8');
++hls.loadSource(SRC);
+ hls.attachMedia(video);

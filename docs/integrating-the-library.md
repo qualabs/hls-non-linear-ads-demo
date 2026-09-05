@@ -1,0 +1,315 @@
+# Integrating the library
+
+This library plays a **concurrent** ad experience over an unmodified hls.js: the
+ad runs beside the content instead of replacing it. You keep your own player
+instance and your own content; the library takes over one box of your page and
+draws the composition inside it.
+
+What you add is a `<script src>`, a container, and one call. What you have to
+get right is on this page, and two of those things are requirements the library
+cannot fix for you afterwards — they are §2.
+
+The seam between the two layers inside the library is a different document,
+`contrato-senalizacion-renderizado.md`. You do not need it to integrate; you
+need it if you want to read what is active at a given instant, which is what
+`attach` hands back.
+
+---
+
+## 1. The page, in full
+
+This is the whole of it. Nothing is elided.
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  /* Neither of these two rules is decoration. §3 says why. */
+  .player { position: relative; aspect-ratio: 16 / 9; background: #000; }
+  .video  { width: 100%; height: 100%; display: block; object-fit: contain; }
+</style>
+</head>
+<body>
+
+<!-- The container, and the media element INSIDE it. -->
+<div class="player" id="player">
+  <video class="video" id="video" playsinline></video>
+</div>
+
+<!-- hls.js first: the library reaches for the `Hls` global (§4). -->
+<script src="./vendor/hls.min.js"></script>
+<script src="./dist/qualabs-concurrent-hls.js"></script>
+<script>
+  const video = document.getElementById('video');
+
+  const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+  const concurrent = QualabsConcurrentHls.attach(hls, {
+    container: document.getElementById('player')
+  });
+  hls.loadSource('./content/primary/con-daterange.m3u8');
+  hls.attachMedia(video);
+
+  // Yours and not ours: muted so the autoplay policy lets it start without a
+  // click. The audio control the library draws over the picture is what lifts
+  // it.
+  video.muted = true;
+  video.play().catch(() => {});
+</script>
+
+</body>
+</html>
+```
+
+Six lines of JavaScript and four of markup exist because this library exists.
+Everything else on that page — the media element, the URL of your content, the
+autoplay decision — you would be writing anyway.
+
+Two things about the shape of it:
+
+- **Order of the two script tags matters**, and §4 is the reason.
+- **Your code has to run after both of them.** An inline `<script>` at the end
+  of `<body>`, as above, or a `<script src>` of your own after those two.
+
+---
+
+## 2. The two things this library requires and cannot fix for you
+
+### 2.1 The interstitials machinery of hls.js goes off
+
+```js
+const hls = new Hls({ ...myOwnConfig, ...QualabsConcurrentHls.hlsConfig });
+```
+
+`hlsConfig` is one key — `interstitialsController: undefined` — handed over
+rather than described, so that the correct path is one line and you never have
+to know the name of the key.
+
+**It cannot be required, in the sense of being fixed.** hls.js instantiates the
+controller in its constructor, gated on nothing but the truthiness of
+`config.interstitialsController`. By the time your instance reaches `attach`
+the machinery either exists or does not, and no call from this side changes it.
+The other way of requiring it — building the instance for you — is not on
+offer: the player is yours.
+
+**And documenting it is not enough, which is the part worth reading twice.**
+With the machinery on, *your player still works*. The same media playlist
+carries a Date Range of Apple's interstitial class next to ours (that is how
+this deploys without breaking clients already in the market), so hls.js
+schedules the traditional ad and replaces the content with it. No exception, no
+error, nothing on screen to notice: what you are looking at is an ordinary
+player doing an ordinary thing. The only symptom is the absence of the thing you
+integrated this for.
+
+So the library **verifies and warns**. On `attach` it reads the instance and, if
+the machinery is on, writes to `console.error` and leaves the same message on
+the handle:
+
+```js
+concurrent.diagnostics  // { interstitialsControllerOn: boolean, message: string|null }
+```
+
+It does not throw. Taking somebody's page down over a configuration he can fix
+in one line is a bigger promise than a plugin gets to make.
+
+Why the machinery has to go off at all: it is closed over Apple's class, so a
+Date Range of the concurrent class never reaches it; and it is a machinery of
+*replacement* — it hands one MediaSource back and forth between the primary and
+the asset, which is the opposite of drawing two sources at once. Nothing is
+lost by turning it off: hls.js parses every `EXT-X-DATERANGE` regardless of
+class and hands them over on `LEVEL_UPDATED`, which is where the library picks
+them up.
+
+### 2.2 No native controls on the primary content
+
+Do not put the `controls` attribute on your `<video>`.
+
+The library scales and moves the primary content inside the container with a
+`transform`, because that is how the picture shrinks into the box a layout asks
+for. **Native controls are part of the video element, so they scale with it**: a
+squeezeback leaves you with a control bar at 40 % of its size, in a corner of
+the composition. And with more than one `<video>` on screen — which is what a
+concurrent experience is — they command one piece of the picture rather than the
+picture.
+
+What you get instead, drawn by the library inside your container: one progress
+bar along the bottom for the **whole programme**, with the breaks marked on two
+lanes; play/pause centred over the composition; one audio control at the top
+right; and fullscreen **of the composition**, which is the container and
+everything in it.
+
+That last one is worth stating as a consequence and not as a feature: **anything
+you draw outside the container is gone the moment somebody presses fullscreen.**
+If your player has a mark, it goes in through the `logo` option (§7), which is
+drawn inside.
+
+---
+
+## 3. What your stylesheet has to say
+
+Two rules and one prohibition.
+
+**`object-fit: contain` on the media element.** This is the one that bites
+silently. While a layout is on screen the library owns the primary's box; the
+moment the break ends it hands the element back to your page by removing its
+inline styles, and from then on your stylesheet is what decides the rectangle
+the picture occupies. `contain` fits the picture into the container without
+deforming it, which is the same rectangle the library was using — so the framing
+does not move on the way out of a break. `cover` names a *different* rectangle,
+and you get a picture that jumps at the end of every break. Nothing errors and
+nothing logs.
+
+**The container needs a box of its own.** It has no intrinsic size: give it a
+width from your layout and a height, an `aspect-ratio: 16 / 9` being the
+straightforward way. A container of zero height draws nothing.
+
+You do not have to make it a positioning context — the library sets
+`position: relative` on it if it computes to `static`, and leaves it alone if
+your stylesheet already made it one.
+
+**Do not style the media element inline.** At the end of every break the library
+calls `removeAttribute('style')` on it, so any inline style you wrote is gone
+after the first break. Put it in a stylesheet.
+
+---
+
+## 4. hls.js has to be a global
+
+The library never receives the hls.js constructor. It reads `Hls.Events` to
+subscribe, and it does `new Hls(...)` for every ad asset that is an HLS
+playlist — one instance per asset, which is what makes several sources play at
+once.
+
+So hls.js has to be loaded as **a classic script that defines `window.Hls`**,
+before your code calls `attach`. `import Hls from 'hls.js'` into a module scope
+does not satisfy this: the primary content plays, and the first break throws a
+`ReferenceError` from inside the library. If that is your setup, assign it —
+`window.Hls = Hls` — before `attach`.
+
+The library itself is distributed the same way and for the same reason: one
+classic `<script src>` that defines `window.QualabsConcurrentHls`, no bundler
+and no npm dependency (§8).
+
+---
+
+## 5. What is the library's, and what stays yours
+
+| | |
+| --- | --- |
+| **Yours** | the hls.js instance, its configuration, its source, its error handling |
+| | the media element that plays the primary content, and its `muted` / autoplay |
+| | the container: where it sits on the page, how big it is, its background and its corners |
+| | your brand: the logo file, the accent colour, the typeface (§7) |
+| **The library's** | everything drawn inside the container: the layer the ads live in, the boxes of each layout, the second instances that play the assets |
+| | the geometry of the primary content **while a break is on screen** — its position, its size and its scale |
+| | the controls of the composition, and the element that goes fullscreen |
+| | the volume of every element during a break, including the primary's, which the asset-list declares |
+
+The library takes the media element from the instance you pass — either it is
+attached already, or it arrives on `MEDIA_ATTACHED` — so there is nothing to
+pass twice. **It has to be a descendant of the container**: the primary is moved
+and scaled within that box, so an element living elsewhere would be dragged
+around outside it. The library says so on `console.error` and carries on.
+
+---
+
+## 6. The public surface
+
+The global is `QualabsConcurrentHls`, and this is all of it:
+
+| | |
+| --- | --- |
+| `VERSION` | the library's version, a string |
+| `CONCURRENT_CLASS` | `'com.qualabs.hls.concurrentInterstitial'`, the Date Range class this reads |
+| `hlsConfig` | the configuration your instance has to be built with (§2.1) |
+| `attach(hls, options)` | turns the concurrent experience on, and returns a handle |
+
+### `attach(hls, options)`
+
+`hls` is required and it is your instance, already built.
+
+| option | | |
+| --- | --- | --- |
+| `container` | **required** | the box the composition lives in, and the element that goes fullscreen. The media element has to be inside it |
+| `video` | optional | only if the media element is not the one the instance is attached to |
+| `onResolved` | optional | called with the experiences of each asset-list as they resolve. A hook for your own logging; nothing depends on it |
+| `logo` | optional | `{ src, alt }` — your own mark, drawn inside the container (§7) |
+
+Anything else you pass is ignored. `attach` throws a `TypeError` on a missing
+instance or a missing container, and those are the only two things it throws
+for.
+
+### The handle it returns
+
+| | |
+| --- | --- |
+| `container` | the one you passed |
+| `provider` | the contract: `activeAt(time)` and `programRanges()`. This is the seam of the other document, and the supported way to know what is on screen |
+| `diagnostics` | the reading of your instance's configuration (§2.1) |
+| `layer` | the element the ads are drawn into |
+| `video` | the media element the library ended up using |
+| `renderer`, `controls` | the two pieces, once there is a media element |
+
+`provider` is the one to build on. The last three are there to be inspected, not
+to be driven.
+
+---
+
+## 7. The brand is yours, because this library ships none
+
+A player embedded in somebody else's page carries his brand or none. Three
+things, none of them required, and each travels by the mechanism that fits what
+it is:
+
+```js
+QualabsConcurrentHls.attach(hls, {
+  container: document.getElementById('player'),
+  logo: { src: './my-logo.svg', alt: 'My brand' }   // a file, so it goes through the API
+});
+```
+
+```css
+#player {
+  --qa-accent: #37b4a7;   /* the knob of the bar and the focus ring */
+  --qa-plate:  #f8f9fa;   /* the surface the logo sits on */
+}
+```
+
+A logo is an asset, so it goes through `attach`; a colour is a value, so it goes
+through CSS, set on your container. **The typeface is inherited** — the chrome
+takes the font of the page it is embedded in, and this library distributes none.
+
+Pass nothing and you get a player with no mark, a white knob and a light plate,
+which is what a player with no brand looks like.
+
+Two colours are **not** yours and are deliberately not exposed: the violet of a
+concurrent range and the yellow of a traditional one, on the bar. Those are
+functional — what they have to do is be told apart — and yellow is the colour
+Apple's own players mark a break with, so it arrives already read.
+
+---
+
+## 8. Getting the file
+
+`dist/qualabs-concurrent-hls.js` is assembled from `lib/` by
+`scripts/construir-libreria.sh`: the sources stay as ES modules, one file per
+piece, and the build concatenates them into one classic script that defines the
+global. No bundler, no dependencies, and the browser does not resolve modules.
+
+In this repository it is built on every start by `run.sh` and it is gitignored,
+so there can be no stale copy. To take the library elsewhere, run that script
+and copy the one file it writes.
+
+---
+
+## 9. What it costs, in lines
+
+Ten lines: six of JavaScript and four of markup, plus the two CSS rules of §3.
+That is the page of §1 with the optional things left out.
+
+The demo in this repository is that page with two options added — `logo` and
+`onResolved`, both optional — and everything else it contains is there to make
+its own argument: a second player at its factory configuration for the
+compatibility pair, and the trace of the contract under the picture and in the
+console. Neither is plumbing this library needs.

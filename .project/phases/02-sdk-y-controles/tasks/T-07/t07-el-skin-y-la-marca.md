@@ -91,6 +91,13 @@ son dos clases de cosa.
 pasa de ocho líneas de JavaScript a nueve. La novena es el `logo` y es
 opcional: el mínimo que la T-01 midió no se movió.
 
+> **Nota del 2026-09-05 (T-08).** Los dos números están corridos en uno: la
+> valla pasó de **siete a ocho**. Las ocho de la T-01 incluían `audioControl`,
+> que la T-03 borró al llevarse los controles a la librería —`git show
+> 2bcb136:js/app.js` da siete—, y esta task comparó contra la medida vieja sin
+> restarle eso. Lo que la línea afirma sigue siendo cierto: la marca costó una
+> línea, es opcional, y el mínimo de diez de la T-01 no se movió.
+
 ## 5. El resto del skin
 
 Los tamaños del chrome son **tokens**, y hay un juego por tamaño de pantalla: en

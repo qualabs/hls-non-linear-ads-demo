@@ -1440,3 +1440,65 @@ fragmento que hls.js cancela cuando la sonda hace seek. Un **comentario de
 nativos, que es lo que la nota fechada del ADR 0015 ya había corregido, y se
 corrigió el comentario. Y **el bloque pide que en las tres capturas se vea el
 pane sin modificar**, que en la de fullscreen es imposible por construcción.
+
+## 2026-09-05 — T-08 de la fase 02: la documentación del integrador
+
+Última task de la fase. El documento es `docs/integrating-the-library.md`, al
+lado del contrato, y está en inglés como el `README.md` y el código: es lo único
+de `docs/` que lee alguien que no somos nosotros, y David lo pidió con esa forma
+—*"then it's actually like clean on how this could be distributed and shared"*—.
+El `README.md` sigue siendo el único punto de entrada; el documento no se
+referencia desde ahí.
+
+**Las dos exigencias que la librería no puede adivinar, con la razón y no como
+regla.** La maquinaria de interstitials de hls.js va apagada (ADR 0002), y lo
+que importa es por qué la librería avisa en vez de exigir: hls.js instancia el
+controlador en el constructor, así que para cuando la instancia llega a `attach`
+ya está decidido, y con la maquinaria encendida el player del integrador **anda
+igual** —agenda el Date Range de clase Apple que la misma playlist lleva y
+reemplaza el contenido—, o sea que no hay excepción, no hay error y no hay nada
+en pantalla: el único síntoma es la ausencia de lo que integró. Y los controles
+nativos sobre el primario no van, porque el renderizador lo escala con un
+`transform` y los controles son parte del elemento, así que escalan con él; con
+más de un `<video>` en pantalla mandan sobre un pedazo y no sobre la composición.
+
+**La prueba de que el documento no miente es la comparación línea por línea, y
+dio limpia.** Seis líneas de JavaScript en la página mínima contra las ocho de la
+demo, con tres diferencias: `logo` y `onResolved`, las dos opcionales y las dos
+declaradas opcionales en el documento, y la URL del contenido escrita entera en
+vez de la constante `SRC`. Las cuatro líneas de marcado son idénticas y las dos
+reglas de CSS coinciden —la del `<video>`, carácter por carácter—. Nada de lo que
+la demo hace porque la librería existe quedó afuera del documento, y nada de lo
+que el documento pide falta en la demo.
+
+**La medida de hoy son 12 líneas** —8 de JS entre las vallas de `js/app.js` más 4
+de marcado—, con el mínimo en 10. **El número de la T-07 estaba corrido en uno**:
+la valla pasó de siete a ocho y no de ocho a nueve, porque las ocho de la T-01
+incluían el `audioControl` que la T-03 borró al llevarse los controles a la
+librería. Quedó como nota fechada en la evidencia de la T-07, sin reescribir lo
+que aquella task afirmó.
+
+**El hallazgo son dos requisitos que la librería tiene y nadie había escrito, y
+los dos salieron de comparar y no del bloque.** El primero: **la librería
+necesita el global `Hls` y nunca lo recibe**. La superficie del ADR 0015 entrega
+la instancia, no el constructor, y la librería lo busca en el global tres veces
+—`lib/concurrent-hls.js:167`, `lib/signalling.js:204` y `lib/media.js:34`, que
+hace `new Hls(...)` por cada asset—. O sea que el orden de los dos `<script src>`
+importa, y un integrador que haga `import Hls from 'hls.js'` reproduce el
+contenido primario y se come un `ReferenceError` en el primer break: la misma
+forma de falla que el ADR 0002, anda hasta que importa. El segundo: **la librería
+le borra el atributo `style` al elemento de video** al terminar cada break
+(`lib/renderer.js:346`), que es justo el mecanismo del que depende la garantía de
+la T-09, y de paso se lleva puesto cualquier estilo en línea que el integrador le
+haya puesto. Los dos están escritos en el documento; no se tocó código, porque es
+una task de documentación y el global es la forma de distribución que el ADR 0015
+eligió.
+
+Lo que la T-09 dejó para acá también entró: **que el encuadre no salte depende de
+una regla de la hoja de estilos del integrador**, `object-fit: contain` sobre el
+elemento de video. Sin layout activo la librería le devuelve el elemento a la
+página y de ahí el rectángulo lo decide su CSS; con `cover` el salto vuelve al
+revés, sin error y sin log.
+
+Los dos greps de la fase en verde y `npm test` 27/27, aunque la task no toca
+código. Commit sin push.
