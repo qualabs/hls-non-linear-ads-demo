@@ -86,13 +86,20 @@ npm test                        # node --test, no dependencies and no browser
 ./scripts/verificar-cortes.mjs  # the two seams of the project
 ```
 
-The tests cover the layout resolution and nothing else: the parsing of
-`viewport`, the two defaults the tool omits, the order by `zDepth`, the
-activation window, and the conversion of insets into a box in pixels. That is
-the only part of the demo that can fail in silence -- everything else is on the
-screen. The cases are the six payloads the SVTA Layout Controller emits, read
-verbatim from the evidence of T-03, and the expected boxes are the pixels
-measured there.
+The tests cover what can fail in silence and nothing else -- everything else is
+on the screen. That is the pure functions of the two layers, in two files. The
+layout resolution: the parsing of `viewport`, the two defaults the tool omits,
+the order by `zDepth`, the activation window, and the conversion of insets into
+a box in pixels. And what the controls stand on: where the breaks of the
+programme are, which kind each one is, where that lands as a fraction of the
+whole programme, and the volume every element starts at, which is the one place
+where a single character turns the show mute or an ad declared silent into the
+loudest thing on the screen.
+
+No case is invented unless it says so. The layouts are the six payloads the SVTA
+Layout Controller emits, read verbatim from the evidence of T-03; the breaks are
+the run `scripts/senalizar-contenido.sh` writes; and the expected values are the
+pixels, the marks and the volumes measured on the running player.
 
 The second command checks a shape instead of a value, and it is the other half
 of what can go wrong here without showing on the screen: the two seams. It runs
@@ -122,7 +129,7 @@ and the page that uses it.
 | `js/contract-trace.js` | the same contract, printed: the line under the player and the table in the console |
 | `js/stock-player.js` | the off-the-shelf client of the compatibility pair: hls.js at its factory configuration, and none of the above |
 | `signalling/` | the asset-lists, as the SVTA Layout Controller emits them, with the URIs filled in |
-| `test/` | the tests of the layout resolution, over the six payloads of the tool |
+| `test/` | the tests of what fails in silence: the layout resolution, the ranges of the programme, and the volume of an element |
 | `vendor/hls.min.js` | hls.js **1.7.2, unmodified** |
 | `server.mjs` | a static file server, and nothing else: no ad server, no APS |
 | `scripts/` | the content: download and package as HLS VOD. The build of the library. And `verificar-cortes.mjs`, the check of the two seams |
