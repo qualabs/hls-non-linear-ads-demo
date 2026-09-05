@@ -15,7 +15,7 @@ status: ongoing
 type: desarrollo
 owner: nicolas-levy
 started: 2026-09-02
-last_update: 2026-09-04
+last_update: 2026-09-05
 tags: [hls, hls-interstitials, non-linear-ads, svta, apple, hlsjs, avfoundation, demo]
 repo: https://github.com/qualabs/hls-non-linear-ads-demo
 output_pointers:
@@ -445,6 +445,16 @@ la sección 4 del informe de cierre de la fase 01
   conseguir, hoy está cubierto recortando el 60 % de un clip de 16:9. El
   pedido medido está en
   `phases/01-poc-web-hlsjs/tasks/T-12/t12-los-assets-que-faltan.md`.
+- **La mezcla del Quad, donde el contenido primario queda a 10.** David
+  propuso "the bottom left be 100, and then the other ones are all 10" sobre
+  el layout de cuatro elementos, y en un multiview el primario es uno de los
+  cuatro, así que la mezcla lo baja a 10 mientras un cuadrante del aviso va a
+  100. Está implementado así y anotado en el ADR 0014; falta que David
+  confirme que contó al programa entre "the other ones". Es una línea de asset
+  list, y se escucha en cámara.
+- **La dirección del skin y la marca**, que David no vio. Lo más cercano que
+  dijo es "make it look a little more Pro", sobre el marcador de los breaks.
+  Ver la sección 4 del informe de cierre de la fase 02.
 - **Quién hace el primer pase de la especificación de SVTA.**
 - **Qué significa `version: 2`** en el bloque `X-AD-CREATIVE-SIGNALING`.
 
@@ -479,12 +489,16 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   mercado sigue funcionando. Dejó parado el escalón más alto de la
   escalera de repliegue, que es el que se graba. Informe en
   `phases/01-poc-web-hlsjs/REPORT.md`.
-- **02-sdk-y-controles**: cortar la librería de la aplicación de demo y darle
-  a la librería los controles de la composición: una sola barra de progreso de
-  todo el contenido con los rangos marcados por color, la pausa, un solo
-  control de audio y el fullscreen de la composición. Van juntos porque el
-  límite del SDK y la propiedad de los controles son la misma decisión (ADR
-  0015), y el corte va primero adentro de la fase. Abierta.
+- **02-sdk-y-controles**: cerrada con una librería y no con una demo de código
+  ordenado: el corte del ADR 0015 lo chequea `scripts/verificar-cortes.mjs`, la
+  página del integrador son 12 líneas comparadas línea por línea contra el
+  documento que las describe, y ese documento existe en `docs/` junto con el
+  contrato entre las dos capas, que es el documento de arquitectura del
+  producto. La librería se quedó con los controles de la composición —una sola
+  barra con los breaks en dos carriles, la pausa, un control de audio y el
+  fullscreen, que antes no existía en el repositorio— y el área de los layouts
+  pasó a ser la de la imagen y no la del contenedor. Informe en
+  `phases/02-sdk-y-controles/REPORT.md`.
 - **03-breaks-multiples-y-repliegue**: un break con varios avisos mezclando
   concurrente y lineal, el repliegue del lado del cliente al lineal
   tradicional del asset, y el `decoderCount` como passthrough hasta el pedido

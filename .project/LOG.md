@@ -1502,3 +1502,62 @@ revés, sin error y sin log.
 
 Los dos greps de la fase en verde y `npm test` 27/27, aunque la task no toca
 código. Commit sin push.
+
+## 2026-09-05 — Fase 02 cerrada
+
+Nueve tasks en `done`, ninguna abandonada ni bloqueada, y ninguna línea
+`post-ejecución:` en el `TASKS.md`. `phases/02-sdk-y-controles/PHASE.md` pasa a
+`status: closed` con `closed: 2026-09-05`. El informe está en
+`phases/02-sdk-y-controles/REPORT.md`.
+
+**Lo que la fase deja no es una demo con el código ordenado: es una librería**,
+y las tres cosas que lo sostienen se verifican. El corte del ADR 0015 lo chequea
+`scripts/verificar-cortes.mjs`, al que se hizo fallar de tres maneras antes de
+creerle; la página del integrador son 12 líneas comparadas línea por línea
+contra la página mínima del documento; y el documento existe, en `docs/`, al
+lado del contrato entre las dos capas, que es el documento de arquitectura del
+producto que la fase 01 dejó pendiente. La librería se quedó con los controles
+de la composición, incluido un fullscreen que antes de esta fase no existía en
+el repositorio.
+
+**Ningún ADR nuevo durante la ejecución, y tres notas fechadas.** Las decisiones
+llegaron tomadas en el pase que generó las fases 02 y 03 —el 0014, el 0015 y el
+0016—, y lo que la construcción produjo fueron correcciones al texto de las que
+ya estaban: el 0015 afirmaba que el pane de fábrica conserva controles nativos
+que nunca tuvo, el 0014 se leía como que el primario queda siempre en 100
+cuando lo que se implementó es que el volumen declarado se obedece en todos los
+elementos y la asimetría es sólo del default, y el 0013 valía en ventana y ahora
+vale también en fullscreen.
+
+**Los riesgos, uno por uno.** El R1 no se materializó y su alarma sonó tres
+veces; lo más cerca que estuvo fue una fuga que el `PHASE.md` no nombró, el
+chequeo corriendo sobre una lista de archivos escrita a mano. El R2 no se
+materializó, con la salvedad de que el layout que pone el aviso de fondo no está
+en el recorrido y la verificación es contra una sonda. **El R3 sí se
+materializó**, en una forma adyacente a la escrita: como nunca había habido un
+camino a fullscreen, nadie había medido ahí, y la primera medición encontró que
+el renderizador tomaba el área del contenedor y no la de la imagen; costó la
+T-09, que no estaba en el plan. El R4 no se materializó y se lo fue a buscar con
+una mutación. El R5 se materializó en la mitad que no era la del calendario: la
+dirección del skin no tiene fuente escrita en ningún lado.
+
+**Lo que queda abierto y es de código son dos cosas, las dos de la T-08 y las
+dos escritas en el documento del integrador**: la librería necesita el global
+`Hls` y su superficie pública no lo pide —un integrador que importe hls.js como
+módulo ve el primario reproducir bien y falla recién en el primer break, que es
+la misma forma de falla del ADR 0002—, y la librería le borra el atributo
+`style` al elemento de video al terminar cada break, que es el mecanismo del que
+depende la garantía de la T-09 y de paso se lleva estilos en línea del
+integrador.
+
+**Y una contradicción entre documentos vivos, encontrada en el cierre**: el
+`README.md` dice "and five lines:" arriba de un bloque de seis, mientras
+`docs/integrating-the-library.md` dice seis en dos lugares. El error viene de la
+T-01 y ninguna task posterior lo miró. No se corrigió acá porque el alcance del
+cierre era `.project/`; queda como recomendación 3.
+
+`PROJECT.md`: la línea de la fase 02 reescrita con lo que la fase terminó
+siendo, `last_update` en 2026-09-05, y dos preguntas nuevas para David en "A
+confirmar" —la mezcla del Quad, donde el primario queda a 10, y la dirección del
+skin, que él no vio—. El `status` del proyecto sigue en `ongoing`. Nada de
+código: el pase tocó `.project/` y nada más. Commit sin push.
