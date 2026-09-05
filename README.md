@@ -222,6 +222,16 @@ be inside it: the library creates its own layer there, draws the boxes of the
 layout into it, and moves the primary content within it. From `attach` it gets
 back the contract of ADR 0003, which is what the trace on this page reads.
 
+**The library ships no brand of its own, so a page that wants one hands it
+over.** Its own mark, as a file, in `logo: { src, alt }` — drawn on a light
+plate in the bar, inside the container, so that it is still in the frame in
+fullscreen — and its own colour as a CSS custom property on the container,
+`--qa-accent`, which the knob of the bar and the focus ring take (`--qa-plate`
+is the plate's surface, light by default). None of the three is required, and
+a player that passes none of them comes out in white, with no mark, which is
+what a player with no brand looks like. The colours the bar marks the breaks
+with are not part of this: those are functional and stay where they are.
+
 `hlsConfig` is the one thing the library cannot fix afterwards. The interstitials
 machinery of hls.js is instantiated in the constructor (ADR 0002), so an instance
 built without that configuration arrives with the machinery already on. The

@@ -1,0 +1,642 @@
+{
+  "modo": "despues",
+  "paneSinModificar": {
+    "pane": {
+      "width": 749,
+      "height": 572.125
+    },
+    "player": {
+      "width": 715,
+      "height": 402.1875
+    },
+    "playerDentroDelPane": {
+      "x": 17,
+      "y": 102.4375,
+      "w": 715,
+      "h": 402.1875
+    },
+    "controlesNativos": false,
+    "t": 8,
+    "pausado": true,
+    "estado": "primary",
+    "texto": "primary content \u00b7 8.0s"
+  },
+  "enVentana": {
+    "t": 60.6814,
+    "pausado": true,
+    "largo": 180,
+    "contenedor": {
+      "left": 988,
+      "top": 370.3281,
+      "width": 715,
+      "height": 402.1875
+    },
+    "riel": {
+      "left": 1050.9219,
+      "top": 735.5156,
+      "width": 541.5625,
+      "height": 8
+    },
+    "relleno": {
+      "left": 1050.9219,
+      "top": 735.5156,
+      "width": 182.5625,
+      "height": 8
+    },
+    "perilla": {
+      "left": 1226.4844,
+      "top": 732.5156,
+      "width": 14,
+      "height": 14
+    },
+    "colorPerilla": "rgb(55, 180, 167)",
+    "carrilDeCues": {
+      "left": 1050.9219,
+      "top": 746.5156,
+      "width": 541.5625,
+      "height": 8
+    },
+    "marcas": 5,
+    "nodos": [
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1111.0938,
+          "top": 735.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1186.3125,
+          "top": 735.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1261.5156,
+          "top": 735.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1336.7344,
+          "top": 735.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1411.9531,
+          "top": 735.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1111.0938,
+          "top": 746.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1186.3125,
+          "top": 746.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1261.5156,
+          "top": 746.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1336.7344,
+          "top": 746.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1411.9531,
+          "top": 746.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      }
+    ],
+    "marca": {
+      "left": 200,
+      "top": 181.8906,
+      "width": 229.75,
+      "height": 68
+    },
+    "logoDelEncabezado": {
+      "left": 218,
+      "top": 193.8906,
+      "width": 193.75,
+      "height": 44
+    },
+    "cues": 5,
+    "colorMarca": "rgb(162, 115, 255)",
+    "colorCue": "rgb(255, 204, 0)",
+    "placa": {
+      "left": 1004,
+      "top": 678.5313,
+      "width": 115.3438,
+      "height": 35.1875
+    },
+    "colorPlaca": "rgb(248, 249, 250)",
+    "logo": {
+      "left": 1013.2344,
+      "top": 685.125,
+      "width": 96.875,
+      "height": 22
+    },
+    "srcDelLogo": "./brand/logo-qualabs.svg",
+    "botonAudio": {
+      "left": 1653,
+      "top": 386.3281,
+      "width": 34,
+      "height": 34
+    },
+    "botonPlay": {
+      "left": 1308.5,
+      "top": 534.4219,
+      "width": 74,
+      "height": 74
+    },
+    "botonFull": {
+      "left": 1653,
+      "top": 722.5156,
+      "width": 34,
+      "height": 34
+    },
+    "tiempos": [
+      {
+        "texto": "1:00",
+        "tamano": "13px",
+        "familia": "Poppins"
+      },
+      {
+        "texto": "3:00",
+        "tamano": "13px",
+        "familia": "Poppins"
+      }
+    ],
+    "fullscreen": false,
+    "claseDeLaCapa": "qa-controls qa-controls--on",
+    "viewport": {
+      "w": 1920,
+      "h": 1080
+    }
+  },
+  "conAviso": {
+    "t": 22.6727,
+    "pausado": true,
+    "largo": 180,
+    "contenedor": {
+      "left": 988,
+      "top": 370.3281,
+      "width": 715,
+      "height": 402.1875
+    },
+    "riel": {
+      "left": 1050.9219,
+      "top": 735.5156,
+      "width": 541.5625,
+      "height": 8
+    },
+    "relleno": {
+      "left": 1050.9219,
+      "top": 735.5156,
+      "width": 68.2031,
+      "height": 8
+    },
+    "perilla": {
+      "left": 1112.125,
+      "top": 732.5156,
+      "width": 14,
+      "height": 14
+    },
+    "colorPerilla": "rgb(55, 180, 167)",
+    "carrilDeCues": {
+      "left": 1050.9219,
+      "top": 746.5156,
+      "width": 541.5625,
+      "height": 8
+    },
+    "marcas": 5,
+    "nodos": [
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1111.0938,
+          "top": 735.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1186.3125,
+          "top": 735.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1261.5156,
+          "top": 735.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1336.7344,
+          "top": 735.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1411.9531,
+          "top": 735.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1111.0938,
+          "top": 746.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1186.3125,
+          "top": 746.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1261.5156,
+          "top": 746.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1336.7344,
+          "top": 746.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1411.9531,
+          "top": 746.5156,
+          "width": 36.0938,
+          "height": 8
+        }
+      }
+    ],
+    "marca": {
+      "left": 200,
+      "top": 181.8906,
+      "width": 229.75,
+      "height": 68
+    },
+    "logoDelEncabezado": {
+      "left": 218,
+      "top": 193.8906,
+      "width": 193.75,
+      "height": 44
+    },
+    "cues": 5,
+    "colorMarca": "rgb(162, 115, 255)",
+    "colorCue": "rgb(255, 204, 0)",
+    "placa": {
+      "left": 1004,
+      "top": 678.5313,
+      "width": 115.3438,
+      "height": 35.1875
+    },
+    "colorPlaca": "rgb(248, 249, 250)",
+    "logo": {
+      "left": 1013.2344,
+      "top": 685.125,
+      "width": 96.875,
+      "height": 22
+    },
+    "srcDelLogo": "./brand/logo-qualabs.svg",
+    "botonAudio": {
+      "left": 1653,
+      "top": 386.3281,
+      "width": 34,
+      "height": 34
+    },
+    "botonPlay": {
+      "left": 1308.5,
+      "top": 534.4219,
+      "width": 74,
+      "height": 74
+    },
+    "botonFull": {
+      "left": 1653,
+      "top": 722.5156,
+      "width": 34,
+      "height": 34
+    },
+    "tiempos": [
+      {
+        "texto": "0:22",
+        "tamano": "13px",
+        "familia": "Poppins"
+      },
+      {
+        "texto": "3:00",
+        "tamano": "13px",
+        "familia": "Poppins"
+      }
+    ],
+    "fullscreen": false,
+    "claseDeLaCapa": "qa-controls qa-controls--on",
+    "viewport": {
+      "w": 1920,
+      "h": 1080
+    }
+  },
+  "fullscreen": {
+    "t": 60.6633,
+    "pausado": true,
+    "largo": 180,
+    "contenedor": {
+      "left": 0,
+      "top": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    "riel": {
+      "left": 101.6406,
+      "top": 1022,
+      "width": 1645.2188,
+      "height": 10
+    },
+    "relleno": {
+      "left": 101.6406,
+      "top": 1022,
+      "width": 554.4688,
+      "height": 10
+    },
+    "perilla": {
+      "left": 647.3594,
+      "top": 1018.25,
+      "width": 17.5,
+      "height": 17.5
+    },
+    "colorPerilla": "rgb(55, 180, 167)",
+    "carrilDeCues": {
+      "left": 101.6406,
+      "top": 1035,
+      "width": 1645.2188,
+      "height": 10
+    },
+    "marcas": 5,
+    "nodos": [
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 284.4375,
+          "top": 1022,
+          "width": 109.6719,
+          "height": 10
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 512.9375,
+          "top": 1022,
+          "width": 109.6719,
+          "height": 10
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 741.4375,
+          "top": 1022,
+          "width": 109.6719,
+          "height": 10
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 969.9375,
+          "top": 1022,
+          "width": 109.6719,
+          "height": 10
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "color": "rgb(162, 115, 255)",
+        "dibujado": {
+          "left": 1198.4375,
+          "top": 1022,
+          "width": 109.6719,
+          "height": 10
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 284.4375,
+          "top": 1035,
+          "width": 109.6719,
+          "height": 10
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 512.9375,
+          "top": 1035,
+          "width": 109.6719,
+          "height": 10
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 741.4375,
+          "top": 1035,
+          "width": 109.6719,
+          "height": 10
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 969.9375,
+          "top": 1035,
+          "width": 109.6719,
+          "height": 10
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "color": "rgb(255, 204, 0)",
+        "dibujado": {
+          "left": 1198.4375,
+          "top": 1035,
+          "width": 109.6719,
+          "height": 10
+        }
+      }
+    ],
+    "marca": {
+      "left": 200,
+      "top": 194.1406,
+      "width": 229.75,
+      "height": 68
+    },
+    "logoDelEncabezado": {
+      "left": 218,
+      "top": 206.1406,
+      "width": 193.75,
+      "height": 44
+    },
+    "cues": 5,
+    "colorMarca": "rgb(162, 115, 255)",
+    "colorCue": "rgb(255, 204, 0)",
+    "placa": {
+      "left": 30,
+      "top": 923.5,
+      "width": 209.7344,
+      "height": 64
+    },
+    "colorPlaca": "rgb(248, 249, 250)",
+    "logo": {
+      "left": 46.7969,
+      "top": 935.5,
+      "width": 176.1406,
+      "height": 40
+    },
+    "srcDelLogo": "./brand/logo-qualabs.svg",
+    "botonAudio": {
+      "left": 1844,
+      "top": 30,
+      "width": 46,
+      "height": 46
+    },
+    "botonPlay": {
+      "left": 908,
+      "top": 488,
+      "width": 104,
+      "height": 104
+    },
+    "botonFull": {
+      "left": 1844,
+      "top": 1004,
+      "width": 46,
+      "height": 46
+    },
+    "tiempos": [
+      {
+        "texto": "1:00",
+        "tamano": "18px",
+        "familia": "Poppins"
+      },
+      {
+        "texto": "3:00",
+        "tamano": "18px",
+        "familia": "Poppins"
+      }
+    ],
+    "fullscreen": true,
+    "claseDeLaCapa": "qa-controls qa-controls--on qa-controls--full",
+    "viewport": {
+      "w": 1920,
+      "h": 1080
+    }
+  },
+  "consola": [
+    {
+      "type": "error",
+      "text": "[hls] error networkError aborted fatal: false"
+    }
+  ]
+}

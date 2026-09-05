@@ -1,0 +1,422 @@
+{
+  "enVentana": {
+    "captura": "t07-1-sin-aviso.png",
+    "clave": "enVentana",
+    "tamano": [
+      1920,
+      1080
+    ],
+    "reducida": [
+      480,
+      270
+    ],
+    "placaDeLosControles": {
+      "altoDelLogoEnLaReducida": 5.5,
+      "anchoDelLogoEnLaReducida": 24.22,
+      "papel": 254.0,
+      "tintaMasOscura": 161.8,
+      "percentil5": 178.9,
+      "rangoDeLuz": 93.2,
+      "tamanoEnLaReducida": [
+        28,
+        9
+      ],
+      "archivo": "t07-1-sin-aviso-un-cuarto-placa.png"
+    },
+    "placaDelEncabezado": {
+      "altoDelLogoEnLaReducida": 11.0,
+      "anchoDelLogoEnLaReducida": 48.44,
+      "papel": 238.1,
+      "tintaMasOscura": 104.0,
+      "percentil5": 144.1,
+      "rangoDeLuz": 151.0,
+      "tamanoEnLaReducida": [
+        52,
+        15
+      ],
+      "archivo": "t07-1-sin-aviso-un-cuarto-encabezado.png"
+    },
+    "perilla": {
+      "declarada": "rgb(55, 180, 167)",
+      "ladoEnLaReducida": 3.5,
+      "leidaEnLaReducida": [
+        37,
+        171,
+        158
+      ],
+      "tamanoEnLaReducida": [
+        7,
+        7
+      ],
+      "archivo": "t07-1-sin-aviso-un-cuarto-perilla.png",
+      "distanciaAlRellenoBlanco": 253.0
+    },
+    "marcas": {
+      "altoEnLaReducida": 2.0,
+      "anchoDeCadaBreak": 9.02,
+      "filaDelRiel": 184,
+      "filaDelCarril": 187,
+      "breaks": [
+        {
+          "break": 1,
+          "x": 282,
+          "marca": [
+            158,
+            112,
+            243
+          ],
+          "cue": [
+            255,
+            221,
+            0
+          ],
+          "distanciaRgb": 283.4
+        },
+        {
+          "break": 2,
+          "x": 301,
+          "marca": [
+            158,
+            113,
+            244
+          ],
+          "cue": [
+            255,
+            221,
+            0
+          ],
+          "distanciaRgb": 283.9
+        },
+        {
+          "break": 3,
+          "x": 320,
+          "marca": [
+            157,
+            112,
+            244
+          ],
+          "cue": [
+            255,
+            219,
+            0
+          ],
+          "distanciaRgb": 283.9
+        },
+        {
+          "break": 4,
+          "x": 339,
+          "marca": [
+            159,
+            114,
+            244
+          ],
+          "cue": [
+            255,
+            221,
+            0
+          ],
+          "distanciaRgb": 283.2
+        },
+        {
+          "break": 5,
+          "x": 358,
+          "marca": [
+            163,
+            117,
+            247
+          ],
+          "cue": [
+            255,
+            221,
+            0
+          ],
+          "distanciaRgb": 283.4
+        }
+      ],
+      "fueraDeUnBreak": {
+        "x": 378,
+        "riel": [
+          127,
+          127,
+          125
+        ]
+      }
+    }
+  },
+  "conAviso": {
+    "captura": "t07-2-con-aviso.png",
+    "clave": "conAviso",
+    "tamano": [
+      1920,
+      1080
+    ],
+    "reducida": [
+      480,
+      270
+    ],
+    "placaDeLosControles": {
+      "altoDelLogoEnLaReducida": 5.5,
+      "anchoDelLogoEnLaReducida": 24.22,
+      "papel": 252.9,
+      "tintaMasOscura": 161.8,
+      "percentil5": 178.8,
+      "rangoDeLuz": 93.2,
+      "tamanoEnLaReducida": [
+        28,
+        9
+      ],
+      "archivo": "t07-2-con-aviso-un-cuarto-placa.png"
+    },
+    "placaDelEncabezado": {
+      "altoDelLogoEnLaReducida": 11.0,
+      "anchoDelLogoEnLaReducida": 48.44,
+      "papel": 238.1,
+      "tintaMasOscura": 104.0,
+      "percentil5": 144.1,
+      "rangoDeLuz": 151.0,
+      "tamanoEnLaReducida": [
+        52,
+        15
+      ],
+      "archivo": "t07-2-con-aviso-un-cuarto-encabezado.png"
+    },
+    "perilla": {
+      "declarada": "rgb(55, 180, 167)",
+      "ladoEnLaReducida": 3.5,
+      "leidaEnLaReducida": [
+        40,
+        174,
+        160
+      ],
+      "tamanoEnLaReducida": [
+        7,
+        7
+      ],
+      "archivo": "t07-2-con-aviso-un-cuarto-perilla.png",
+      "distanciaAlRellenoBlanco": 248.6
+    },
+    "marcas": {
+      "altoEnLaReducida": 2.0,
+      "anchoDeCadaBreak": 9.02,
+      "filaDelRiel": 184,
+      "filaDelCarril": 187,
+      "breaks": [
+        {
+          "break": 1,
+          "x": 282,
+          "marca": [
+            170,
+            118,
+            242
+          ],
+          "cue": [
+            255,
+            222,
+            0
+          ],
+          "distanciaRgb": 276.8
+        },
+        {
+          "break": 2,
+          "x": 301,
+          "marca": [
+            157,
+            112,
+            242
+          ],
+          "cue": [
+            255,
+            218,
+            0
+          ],
+          "distanciaRgb": 281.8
+        },
+        {
+          "break": 3,
+          "x": 320,
+          "marca": [
+            158,
+            112,
+            242
+          ],
+          "cue": [
+            255,
+            218,
+            0
+          ],
+          "distanciaRgb": 281.4
+        },
+        {
+          "break": 4,
+          "x": 339,
+          "marca": [
+            158,
+            112,
+            243
+          ],
+          "cue": [
+            255,
+            218,
+            0
+          ],
+          "distanciaRgb": 282.3
+        },
+        {
+          "break": 5,
+          "x": 358,
+          "marca": [
+            165,
+            116,
+            244
+          ],
+          "cue": [
+            255,
+            217,
+            0
+          ],
+          "distanciaRgb": 279.0
+        }
+      ],
+      "fueraDeUnBreak": {
+        "x": 378,
+        "riel": [
+          90,
+          87,
+          83
+        ]
+      }
+    }
+  },
+  "fullscreen": {
+    "captura": "t07-3-fullscreen.png",
+    "clave": "fullscreen",
+    "tamano": [
+      1920,
+      1080
+    ],
+    "reducida": [
+      480,
+      270
+    ],
+    "placaDeLosControles": {
+      "altoDelLogoEnLaReducida": 10.0,
+      "anchoDelLogoEnLaReducida": 44.04,
+      "papel": 109.1,
+      "tintaMasOscura": 113.1,
+      "percentil5": 157.3,
+      "rangoDeLuz": 141.9,
+      "tamanoEnLaReducida": [
+        48,
+        14
+      ],
+      "archivo": "t07-3-fullscreen-un-cuarto-placa.png"
+    },
+    "placaDelEncabezado": "el encabezado de la pagina no esta en el cuadro en fullscreen",
+    "perilla": {
+      "declarada": "rgb(55, 180, 167)",
+      "ladoEnLaReducida": 4.38,
+      "leidaEnLaReducida": [
+        58,
+        179,
+        166
+      ],
+      "tamanoEnLaReducida": [
+        8,
+        8
+      ],
+      "archivo": "t07-3-fullscreen-un-cuarto-perilla.png",
+      "distanciaAlRellenoBlanco": 229.1
+    },
+    "marcas": {
+      "altoEnLaReducida": 2.5,
+      "anchoDeCadaBreak": 27.42,
+      "filaDelRiel": 256,
+      "filaDelCarril": 260,
+      "breaks": [
+        {
+          "break": 1,
+          "x": 85,
+          "marca": [
+            179,
+            127,
+            255
+          ],
+          "cue": [
+            255,
+            212,
+            1
+          ],
+          "distanciaRgb": 278.4
+        },
+        {
+          "break": 2,
+          "x": 142,
+          "marca": [
+            179,
+            127,
+            255
+          ],
+          "cue": [
+            255,
+            211,
+            1
+          ],
+          "distanciaRgb": 278.1
+        },
+        {
+          "break": 3,
+          "x": 199,
+          "marca": [
+            172,
+            121,
+            255
+          ],
+          "cue": [
+            255,
+            210,
+            0
+          ],
+          "distanciaRgb": 282.6
+        },
+        {
+          "break": 4,
+          "x": 256,
+          "marca": [
+            179,
+            126,
+            255
+          ],
+          "cue": [
+            255,
+            211,
+            1
+          ],
+          "distanciaRgb": 278.4
+        },
+        {
+          "break": 5,
+          "x": 313,
+          "marca": [
+            174,
+            123,
+            255
+          ],
+          "cue": [
+            255,
+            210,
+            0
+          ],
+          "distanciaRgb": 281.3
+        }
+      ],
+      "fueraDeUnBreak": {
+        "x": 375,
+        "riel": [
+          108,
+          106,
+          102
+        ]
+      }
+    }
+  }
+}
