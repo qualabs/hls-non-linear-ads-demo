@@ -1,9 +1,9 @@
 ---
 phase: 02-sdk-y-controles
 title: El SDK y sus controles
-status: in-progress
+status: closed
 started: 2026-09-04
-closed: null
+closed: 2026-09-05
 ---
 
 # Fase 02: el SDK y sus controles
