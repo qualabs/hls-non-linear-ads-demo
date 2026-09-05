@@ -1295,3 +1295,73 @@ imprime `scripts/senalizar-contenido.sh`, el README tenía el párrafo de la
 arquitectura —"una mezcla por cuadrante sería inventada y no señalizada"— y el de
 los dos defaults que la herramienta omite. Corregidos los cuatro textos.
 
+
+## 2026-09-05 — T-06 de la fase 02: los tests de lo que falla en silencio
+
+Doce tests nuevos en `test/program-ranges-and-volume.test.js`, sobre las
+funciones puras que la fase agregó y nada más: **dónde están los breaks y de qué
+clase es cada uno**, **dónde cae eso sobre el largo total del programa**, y **en
+qué volumen arranca cada elemento**. Todo lo demás que la fase agregó está en la
+pantalla, y un control mal dibujado es un control mal dibujado. Sin DOM, sin
+browser, sin comparación de imágenes y sin cobertura como objetivo. `npm test`
+cierra en 27/27 y `scripts/verificar-cortes.mjs` da verde.
+
+Los datos son los reales. Los cinco breaks salen de la tabla `RECORRIDO` de
+`scripts/senalizar-contenido.sh`, parseada y no copiada; los layouts, de
+`signalling/`; y los valores esperados son las lecturas de la T-02 sobre el
+contrato en vuelo, de la T-04 sobre las marcas de la barra y de la T-05 sobre
+cada nodo. Es lo mismo que hizo la T-08 de la fase 01 con la medición de la
+T-03: un test escrito con un payload inventado sólo prueba que el código hace lo
+que creía quien lo escribió. Los tres casos que sí son inventados lo dicen donde
+están.
+
+**El test que existe por el error de la T-08 de la fase 01**: los mismos diez
+rangos sobre un programa de otro largo. Aquella corría todos sus casos sobre una
+sola resolución y una mutación que cableaba el 960 pasaba desapercibida; acá el
+número es el largo del programa, que el ADR 0016 manda releer y no guardar. Las
+dos lecturas —180 s y 360 s— se toman adentro del mismo test, una después de la
+otra, para que un largo cacheado en la primera llamada falle sin importar desde
+dónde se corra el archivo.
+
+**El detector del `??` se mudó de lado**, y es lo que la T-05 dejó anotado: con
+el default del aviso ya en 0, un `volume: 0` explícito en un elemento del aviso
+da 0 con los dos operadores. Lo que los separa es el `0` explícito en el
+primario, cuyo default es 100.
+
+**La campaña de mutación: once roturas, una por regla, corriendo sólo los tests
+que cubren esa regla. Ninguna quedó verde.** Las tres que el bloque nombra
+murieron con la aserción a la vista: el `??` cambiado por `||` (actual 100,
+esperado 0), el default de 0 aplicado también al primario (actual 0, esperado
+100 en `squeezebackDoubleBox/primaryContent`) y el largo total cacheado (actual
+11,111111, esperado 5,555556). Cada uno de los doce tests se vio en rojo al menos
+una vez. Las dos tablas —qué mató cada mutación y qué mutación mató cada test—
+están en `tasks/T-06/t06-la-campana-de-mutacion.md`, y las corridas verbatim en
+`t06-los-invariantes.txt`.
+
+La regla del default asimétrico necesitó **dos** roturas y no una: está escrita
+en dos capas, `resolveElement` en la señalización y `volumeOf` en el
+renderizado, y hay que romper las dos. La del renderizado destapó el único hueco
+de la task: ese default sólo se alcanza cuando el `volume` no es un número, y
+después de `resolveElement` siempre lo es, así que ningún test manejado por
+datos reales llega ahí. Lo tapa un test que llama a `volumeOf` directo con el
+campo ausente y con un string, que es el borde que la T-05 había dejado anotado
+—el contrato declara `volume: number // 0..100` y nadie valida el extremo—.
+
+Nada de la lógica de producción cambió: ningún test destapó un defecto, y cada
+mutación se restauró antes de la siguiente. Commit sin push.
+
+Tres cosas del bloque que no coincidían con el código, anotadas enteras en el
+documento de la campaña. **Las funciones puras que la fase agrega no son dos,
+son seis**, y están de los dos lados de la costura del ADR 0003: la clase cruza
+el contrato como dato y la posición sobre el largo total es una división que
+hace quien pinta, con un largo que el contrato deliberadamente no lleva. **El
+recorrido de los cinco breaks no se puede leer desde git**, porque la playlist
+señalizada es contenido generado y su `START-DATE` es la hora de pared del
+empaquetado (ADR 0005); lo que está en git es la tabla del script que la
+escribe. Y **`KIND_OF_CLASS` no es "el único lugar" donde una clase se vuelve un
+`kind`, aunque su comentario lo diga**: el `kind` que llega al `Range` sale de
+dos literales, uno en `rangeOfExperiences` y otro en `rangeOfDateRange`, y lo
+que el mapa decide es por cuál de los dos caminos entra el Date Range. No es un
+defecto —el ruteo y la etiqueta coinciden por construcción— pero un test sobre
+el mapa solo no protege la etiqueta, y lo que la protege es la comparación de
+los diez rangos enteros contra la lectura de la T-02.

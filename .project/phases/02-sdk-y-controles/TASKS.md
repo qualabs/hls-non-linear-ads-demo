@@ -28,7 +28,7 @@ línea y no por su número, así que una edición más arriba no la mueve.
 | T-09 | El área de los layouts es la del video, no la del contenedor      | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-09/` |
 | T-04 | Los rangos del programa marcados en la barra                     | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-04/` |
 | T-05 | El volumen del asset list, con la mezcla que David propuso       | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-05/` |
-| T-06 | Tests: los rangos del programa y el default de volumen           | planned | —    | —        |
+| T-06 | Tests: los rangos del programa y el default de volumen           | done    | —    | `.project/phases/02-sdk-y-controles/tasks/T-06/` |
 | T-07 | El skin y el branding de Qualabs                                 | planned | —    | —        |
 | T-08 | La documentación del integrador                                  | planned | —    | —        |
 
