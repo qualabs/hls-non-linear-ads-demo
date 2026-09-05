@@ -32,7 +32,7 @@ npm run serve
 ## Before you record
 
 The run is under three minutes and it needs nothing but a browser window. One
-thing to do before the camera rolls, and two to expect.
+thing to do before the camera rolls, and three to expect.
 
 **Turn the sound on once, at the start**, with the audio control at the top
 right of the right-hand picture. The page starts muted so the browser's autoplay
