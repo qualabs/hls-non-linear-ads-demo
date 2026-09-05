@@ -30,7 +30,8 @@ import {
   resolveExperience,
   resolveAssetList,
   activeAt,
-  DEFAULT_VOLUME,
+  DEFAULT_AD_VOLUME,
+  DEFAULT_PRIMARY_VOLUME,
   FULL_FRAME
 } from '../lib/signalling.js';
 import { boxToPixels } from '../lib/renderer.js';
@@ -247,15 +248,24 @@ test('the four layouts that do carry primaryContent keep its zDepth and its view
   }
 });
 
-test('no payload of the tool carries volume, and every element comes out at 100', () => {
+test('no payload of the tool carries volume: the ad comes out silent and the show does not', () => {
   // The fact T-06 measured, asserted over the evidence itself: the field is not
-  // omitted only when it is worth 100, it is never there.
+  // omitted only when it is worth 100, it is never there. What the layer does
+  // with that absence is ADR 0014, and it is not one answer but two -- silence
+  // on the ad, full volume on the primary content.
+  //
+  // THE PRIMARY HALF IS THE ONE THIS TEST IS FOR. The tool omits the field on
+  // the `primaryContent` block as well, so a single default of 0 would leave
+  // the show mute in the six layouts and pass every other test in this file:
+  // the boxes, the order and the windows would all still be right, and a frame
+  // of the recording would look correct.
   assert.ok(!JSON.stringify(TOOL).includes('volume'), 'the six payloads mention volume nowhere');
-  assert.equal(DEFAULT_VOLUME, 100);
+  assert.equal(DEFAULT_AD_VOLUME, 0);
+  assert.equal(DEFAULT_PRIMARY_VOLUME, 100);
   for (const type of LAYOUTS) {
     const [experience] = resolve(type);
     for (const element of experience.elements) {
-      assert.equal(element.volume, 100, `${type}/${element.id}`);
+      assert.equal(element.volume, element.primary ? 100 : 0, `${type}/${element.id}`);
     }
   }
 });
@@ -280,8 +290,12 @@ test('an explicit volume of 0 survives, because a silent ad is silent on purpose
   for (const element of experience.elements) {
     assert.equal(element.volume, 0, element.id);
   }
-  // And the contrast: the same element with the field missing is 100.
-  assert.equal(resolveElement({ id: 'adOverlay1', viewport: '0 75 75 0' }, false).volume, 100);
+  // And the contrast: the same element with the field missing is 0 anyway, so
+  // what this proves is that the 0 above SURVIVED and was not produced by the
+  // default. The pair that tells `??` from `||` apart is the other one: an
+  // explicit 0 on the primary content, whose default is 100.
+  assert.equal(resolveElement({ id: 'adOverlay1', viewport: '0 75 75 0' }, false).volume, 0);
+  assert.equal(resolveElement({ id: 'primaryContent', viewport: '0 0 0 0' }, true).volume, 100);
 });
 
 // ---------------------------------------------------------------------------

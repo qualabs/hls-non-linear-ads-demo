@@ -1,0 +1,275 @@
+{
+  "composicionEncendida": {
+    "muted": false
+  },
+  "quadConMezcla": {
+    "t": 124.819,
+    "composicion": {
+      "muted": false,
+      "volume": 0.1
+    },
+    "cuantosElementos": 4,
+    "elementos": [
+      {
+        "id": "primaryContent",
+        "primary": true,
+        "zDepth": 0,
+        "caja": "0 50 50 0",
+        "cuadrante": "arriba a la izquierda",
+        "volumenDeclarado": 10,
+        "nodo": "VIDEO",
+        "muted": false,
+        "volume": 0.1,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 124.819
+      },
+      {
+        "id": "view2",
+        "primary": false,
+        "zDepth": 1,
+        "caja": "0 0 50 50",
+        "cuadrante": "arriba a la derecha",
+        "volumenDeclarado": 10,
+        "nodo": "VIDEO",
+        "muted": false,
+        "volume": 0.1,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 4.7766
+      },
+      {
+        "id": "view3",
+        "primary": false,
+        "zDepth": 2,
+        "caja": "50 50 0 0",
+        "cuadrante": "abajo a la izquierda",
+        "volumenDeclarado": 100,
+        "nodo": "VIDEO",
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 4.7339
+      },
+      {
+        "id": "view4",
+        "primary": false,
+        "zDepth": 3,
+        "caja": "50 0 0 50",
+        "cuadrante": "abajo a la derecha",
+        "volumenDeclarado": 10,
+        "nodo": "VIDEO",
+        "muted": false,
+        "volume": 0.1,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 4.734
+      }
+    ]
+  },
+  "despuesDelQuad": {
+    "t": 137.6673,
+    "composicion": {
+      "muted": false,
+      "volume": 1
+    },
+    "cuantosElementos": 0,
+    "elementos": []
+  },
+  "quadCompuestaMuteada": {
+    "t": 125.3203,
+    "composicion": {
+      "muted": true,
+      "volume": 0.1
+    },
+    "cuantosElementos": 4,
+    "elementos": [
+      {
+        "id": "primaryContent",
+        "primary": true,
+        "zDepth": 0,
+        "caja": "0 50 50 0",
+        "cuadrante": "arriba a la izquierda",
+        "volumenDeclarado": 10,
+        "nodo": "VIDEO",
+        "muted": true,
+        "volume": 0.1,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 125.3203
+      },
+      {
+        "id": "view2",
+        "primary": false,
+        "zDepth": 1,
+        "caja": "0 0 50 50",
+        "cuadrante": "arriba a la derecha",
+        "volumenDeclarado": 10,
+        "nodo": "VIDEO",
+        "muted": true,
+        "volume": 0.1,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 5.3115
+      },
+      {
+        "id": "view3",
+        "primary": false,
+        "zDepth": 2,
+        "caja": "50 50 0 0",
+        "cuadrante": "abajo a la izquierda",
+        "volumenDeclarado": 100,
+        "nodo": "VIDEO",
+        "muted": true,
+        "volume": 1,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 5.3114
+      },
+      {
+        "id": "view4",
+        "primary": false,
+        "zDepth": 3,
+        "caja": "50 0 0 50",
+        "cuadrante": "abajo a la derecha",
+        "volumenDeclarado": 10,
+        "nodo": "VIDEO",
+        "muted": true,
+        "volume": 0.1,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 5.3539
+      }
+    ]
+  },
+  "overlaySinVolumen": {
+    "t": 22.7448,
+    "composicion": {
+      "muted": false,
+      "volume": 1
+    },
+    "cuantosElementos": 2,
+    "elementos": [
+      {
+        "id": "primaryContent",
+        "primary": true,
+        "zDepth": 0,
+        "caja": "0 0 0 0",
+        "cuadrante": "arriba a la izquierda",
+        "volumenDeclarado": 100,
+        "nodo": "VIDEO",
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 22.7448
+      },
+      {
+        "id": "adOverlay1",
+        "primary": false,
+        "zDepth": 1,
+        "caja": "0 75 75 0",
+        "cuadrante": "arriba a la izquierda",
+        "volumenDeclarado": 0,
+        "nodo": "VIDEO",
+        "muted": true,
+        "volume": 0,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 2.7764
+      }
+    ]
+  },
+  "dobleBoxSinVolumen": {
+    "t": 99.695,
+    "composicion": {
+      "muted": false,
+      "volume": 1
+    },
+    "cuantosElementos": 2,
+    "elementos": [
+      {
+        "id": "primaryContent",
+        "primary": true,
+        "zDepth": 0,
+        "caja": "25 50 25 0",
+        "cuadrante": "arriba a la izquierda",
+        "volumenDeclarado": 100,
+        "nodo": "VIDEO",
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 99.695
+      },
+      {
+        "id": "adOverlay",
+        "primary": false,
+        "zDepth": 1,
+        "caja": "25 0 25 50",
+        "cuadrante": "arriba a la derecha",
+        "volumenDeclarado": 0,
+        "nodo": "VIDEO",
+        "muted": true,
+        "volume": 0,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 4.7692
+      }
+    ]
+  },
+  "stills": {
+    "t": 74.7203,
+    "composicion": {
+      "muted": false,
+      "volume": 1
+    },
+    "cuantosElementos": 3,
+    "elementos": [
+      {
+        "id": "primaryContent",
+        "primary": true,
+        "zDepth": 0,
+        "caja": "0 40 40 0",
+        "cuadrante": "arriba a la izquierda",
+        "volumenDeclarado": 100,
+        "nodo": "VIDEO",
+        "muted": false,
+        "volume": 1,
+        "paused": false,
+        "readyState": 4,
+        "tiempoDelAsset": 74.7203
+      },
+      {
+        "id": "adBarVertical",
+        "primary": false,
+        "zDepth": 1,
+        "caja": "0 0 0 60",
+        "cuadrante": "arriba a la derecha",
+        "volumenDeclarado": 0,
+        "nodo": "IMG",
+        "muted": null,
+        "volume": null,
+        "paused": null,
+        "readyState": null,
+        "tiempoDelAsset": null
+      },
+      {
+        "id": "adBarHorizontal",
+        "primary": false,
+        "zDepth": 2,
+        "caja": "60 0 0 0",
+        "cuadrante": "abajo a la izquierda",
+        "volumenDeclarado": 0,
+        "nodo": "IMG",
+        "muted": null,
+        "volume": null,
+        "paused": null,
+        "readyState": null,
+        "tiempoDelAsset": null
+      }
+    ]
+  },
+  "consola": []
+}

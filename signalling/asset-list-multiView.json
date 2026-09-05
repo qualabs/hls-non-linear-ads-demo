@@ -14,7 +14,8 @@
             "layout": {
               "primaryContent": {
                 "zDepth": 0,
-                "viewport": "0 50 50 0"
+                "viewport": "0 50 50 0",
+                "volume": 10
               },
               "assets": [
                 {
@@ -22,21 +23,24 @@
                   "type": "application/vnd.apple.mpegurl",
                   "uri": "/content/adA/index.m3u8",
                   "viewport": "0 0 50 50",
-                  "zDepth": 1
+                  "zDepth": 1,
+                  "volume": 10
                 },
                 {
                   "id": "view3",
                   "type": "application/vnd.apple.mpegurl",
                   "uri": "/content/adB/index.m3u8",
                   "viewport": "50 50 0 0",
-                  "zDepth": 2
+                  "zDepth": 2,
+                  "volume": 100
                 },
                 {
                   "id": "view4",
                   "type": "application/vnd.apple.mpegurl",
                   "uri": "/content/adC/index.m3u8",
                   "viewport": "50 0 0 50",
-                  "zDepth": 3
+                  "zDepth": 3,
+                  "volume": 10
                 }
               ]
             }
