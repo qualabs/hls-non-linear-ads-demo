@@ -74,7 +74,8 @@ layout, and what tells them apart is the type of the asset inserted into it.
 ## Test it
 
 ```bash
-npm test          # node --test, no dependencies and no browser
+npm test                        # node --test, no dependencies and no browser
+./scripts/verificar-cortes.mjs  # the two seams of the project
 ```
 
 The tests cover the layout resolution and nothing else: the parsing of
@@ -84,6 +85,16 @@ the only part of the demo that can fail in silence -- everything else is on the
 screen. The cases are the six payloads the SVTA Layout Controller emits, read
 verbatim from the evidence of T-03, and the expected boxes are the pixels
 measured there.
+
+The second command checks a shape instead of a value, and it is the other half
+of what can go wrong here without showing on the screen: the two seams. It runs
+the grep of ADR 0003 -- the rendering side does not name the transport -- and
+the grep of ADR 0015 -- the library does not name the demo -- and compares what
+they find against a list of ACCEPTED occurrences it carries inside, each one
+with the reason it is acceptable written beside it. Anything that is not on that
+list makes it exit non-zero, saying which and where. The list is keyed by the
+CONTENT of the line and not by its number, so an edit above an accepted line is
+not a finding and the check is not asked to cry wolf.
 
 ## What is where
 
@@ -105,7 +116,7 @@ and the page that uses it.
 | `test/` | the tests of the layout resolution, over the six payloads of the tool |
 | `vendor/hls.min.js` | hls.js **1.7.2, unmodified** |
 | `server.mjs` | a static file server, and nothing else: no ad server, no APS |
-| `scripts/` | the content: download and package as HLS VOD. And the build of the library |
+| `scripts/` | the content: download and package as HLS VOD. The build of the library. And `verificar-cortes.mjs`, the check of the two seams |
 | `content/` | the packaged output. Generated, gitignored |
 | `docs/` | the architecture of the product: the contract between the two layers |
 | `brand/` | Qualabs fonts, logo and favicon, on disk |
@@ -162,8 +173,9 @@ no bundler and no npm dependency. The sources stay as ES modules and
 `scripts/construir-libreria.sh` assembles them into
 `dist/qualabs-concurrent-hls.js` on every start, the same way the signalled
 playlist is written on every start. They stay separate for two reasons that are
-not taste: the seam of ADR 0003 is verified with a grep per file, and the tests
-import the pure functions of both layers.
+not taste: the seam of ADR 0003 is verified per file by
+`scripts/verificar-cortes.mjs`, and the tests import the pure functions of both
+layers.
 
 What a page writes to use it is a script tag,
 

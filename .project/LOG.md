@@ -1185,3 +1185,59 @@ comentario de los colores explicaba el descarte del naranja con "en este demo el
 ámbar ya significa otra cosa", que es cierto y es de esta página y no de una
 librería que se distribuye; la razón se mudó al documento de la task y en el
 código quedó la que sí es de los colores.
+
+## 2026-09-04 — El chequeo de los dos cortes deja de ser un grep y pasa a ser un script
+
+La T-04 dejó anotado que el grep del ADR 0003 había dejado de dar cero y que la
+decisión de qué hacer con la lista de términos no era de esa task. **Nicolás
+eligió: la palabra `interstitial` se queda en la búsqueda y los cinco lugares
+aceptados quedan registrados.** Sacarla de la lista era la otra salida y queda
+descartada porque debilita la única alarma que impide que las dos capas se
+vuelvan a mezclar: el término quedaría libre de aparecer en cualquier lado y por
+cualquier motivo.
+
+El chequeo pasa a ser `scripts/verificar-cortes.mjs`, que corre los dos greps de
+la fase —el del 0003 y el del 0015— y compara lo que encuentran contra una lista
+de ocurrencias aceptadas, en vez de dejar que cada task decida sola si cinco hits
+son buenos o malos. Sale con código distinto de cero cuando aparece una que no
+está, diciendo cuál y dónde.
+
+**Dos cosas de la forma de la lista, y la segunda es la que la hace servir.** Las
+excepciones se registran por el **contenido** de la línea y no por su número
+—recortada y con los espacios internos colapsados—, porque los números se corren
+con cualquier edición de más arriba y un chequeo que falla por motivos falsos se
+termina apagando. Y cada excepción lleva escrito **por qué** es aceptable, al
+punto de que el script se niega a correr con una que no lo tenga: una lista de
+excepciones sin razones es una lista que la próxima persona amplía sin pensar,
+que es como esta alarma se moriría, no de golpe sino de a una línea por vez.
+
+**Un chequeador que nunca se vio fallar no se sabe si chequea**, así que se lo
+hizo fallar. Con una referencia falsa a `details.dateRanges` metida en
+`lib/renderer.js` salta el corte del 0003 y nombra archivo, línea y texto; con un
+`document.getElementById('player')` en el mismo archivo salta el del 0015; y con
+una copia de una línea ya aceptada salta igual, que es el caso que la lista
+podría haber absorbido en silencio. El corte por contenido también se vio
+funcionar sin fabricar nada: el comentario que se le agregó a `lib/controls.js`
+—el que dice que esas cinco menciones están registradas y que una sexta salta—
+corrió cuatro de las aceptadas de las líneas 60, 93, 96 y 238 a las 65, 98, 101 y
+243, y el script siguió en verde.
+
+**Lo que se miró de cerca y no cambió de estado: las cinco ocurrencias son
+legítimas, y cuatro lo son por la misma razón.** Tres son el valor `'interstitial'`
+del `kind` usado como clave —el color, el carril— o una referencia a esa clave
+—el CSS que lee el color—, y una es el comentario que explica por qué el kind
+cruza la costura. La quinta es la única que es prosa y no una clave: el tooltip
+del carril. Se acepta porque describe un **comportamiento de reproducción** —que
+otro cliente reemplaza el contenido— y no un mecanismo de transporte: no nombra
+una etiqueta, ni una playlist, ni una clase de HLS. Queda escrito en el script
+que el día que ese texto explique de dónde sale el rango deja de ser aceptable, y
+que el arreglo es reescribir la frase y no ampliar la lista.
+
+**Y una fuga que el script cierra de paso.** El grep del 0003 corre sobre una
+lista de archivos escrita a mano, así que un archivo nuevo en `lib/` que nadie
+agregue a ninguna lista pasaría por no ser mirado. El script exige que cada
+`lib/*.js` esté declarado de un lado o del otro de la costura y falla nombrando
+al que no lo esté. El grep del 0015 no tenía ese problema y sigue corriendo sobre
+`lib/*.js` entero.
+
+`npm test` da 15/15 y los dos cortes dan verde. Commit sin push.
