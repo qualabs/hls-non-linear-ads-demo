@@ -206,7 +206,7 @@ What a page writes to use it is a script tag,
 <script src="./dist/qualabs-concurrent-hls.js"></script>
 ```
 
-and five lines:
+and six lines:
 
 ```js
 const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
