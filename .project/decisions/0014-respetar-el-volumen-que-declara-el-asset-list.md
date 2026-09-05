@@ -43,6 +43,19 @@ El contenido primario conserva su audio y el reproductor sigue exponiendo un
 control visible: esa parte del 0010 no cambia, y se repite acá para que este
 ADR se lea solo.
 
+> **Nota del 2026-09-05.** La frase "conserva su audio" se leía como que el
+> primario siempre queda en 100, y la T-05 implementó otra cosa: **el volumen
+> declarado se respeta en TODOS los elementos, el primario incluido, y la
+> asimetría es sólo del default** (0 para el aviso, 100 para el primario). La
+> consecuencia concreta es que en el Quad, con la mezcla que David propuso,
+> el contenido primario suena a 10 mientras un cuadrante del aviso suena a
+> 100, porque en un multiview el primario es uno de los cuatro cuadrantes y
+> la mezcla habla de los cuatro. Nicolás lo confirmó el 2026-09-05.
+>
+> Lo que este ADR no decía en ningún lado, y que la T-05 tuvo que decidir, es
+> qué hacer con un `volume` declarado dentro del bloque `primaryContent`. La
+> respuesta es la de arriba: se obedece.
+
 ## Es una divergencia deliberada con la semántica de SVTA
 
 Para la herramienta de SVTA un `volume` ausente vale 100, y David lo dijo con
