@@ -82,7 +82,7 @@ export function createStockPlayer({ video, src, pane, state, hud }) {
   hls.loadSource(src);
   hls.attachMedia(video);
   // Muted: this pane is the compatibility argument and not the audio one. The
-  // audio of ADR 0010 belongs to the demo pane.
+  // audio of the composition belongs to the demo pane (ADR 0014).
   video.muted = true;
   video.play().catch(() => {});
   paint();

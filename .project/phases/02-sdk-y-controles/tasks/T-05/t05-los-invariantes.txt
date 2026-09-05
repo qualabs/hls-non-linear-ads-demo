@@ -1,0 +1,105 @@
+# Los invariantes de la T-05, verificados y no afirmados (2026-09-04)
+
+## A. Las dos costuras, con el chequeo scripteado
+
+$ node scripts/verificar-cortes.mjs
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js js/contract-trace.js css/player.css
+
+   GREEN: 5 occurrence(s), all of them on the accepted list.
+     lib/controls.js:21  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:65  interstitial: '#ffcc00'
+     lib/controls.js:98  interstitial: {
+     lib/controls.js:101  title: 'traditional interstitial: where a client already in the market replaces the content'
+     lib/controls.js:243  background: ${RANGE_COLOURS.interstitial};
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
+(exit code 0)
+
+## B. Los tests, con el que esta task tenia que corregir
+
+$ npm test
+✔ the conversion follows the player area, which is what a resize depends on (0.171874ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 134.924615
+
+## C. La librería construida
+
+$ ./scripts/construir-libreria.sh
+construir-libreria: dist/qualabs-concurrent-hls.js (1422 lines, global QualabsConcurrentHls)
+
+## D. El campo ya no se ignora: el renderizado lo lee
+
+$ /usr/bin/grep -n "volume\|muted" lib/renderer.js
+45: * The declared volume of an element as the fraction a media element takes, 0 to
+50: * two defaults are NOT the same: full volume for the primary content and
+58:export function volumeOf(element) {
+59:  const declared = Number(element.volume);
+179:      // volume the layout declared for it -- see `applyAudio`.
+201:        // black box on camera. `applyAudio` below gives it the volume the
+203:        node.muted = true;
+310:   *   An element of the ad gets the volume the layout declared, and it is muted
+311:   *   outright when that volume is 0. Muted and not merely at zero, because a
+316:   *   The primary content gets its declared volume too -- a mix that leaves the
+322:   * THE COMPOSITION'S MUTE GATES THE ELEMENTS OF THE AD. The page starts muted
+324:   * took its declared volume regardless would be the one thing making noise
+325:   * before anybody asked for it. So this runs again on every `volumechange` of
+329:    const off = video.muted;
+333:      const level = volumeOf(element);
+334:      node.volume = level;
+335:      if (!element.primary) node.muted = off || level === 0;
+346:        // And back to its own audio, which the style does not carry: `volume`
+352:        node.volume = 1;
+366:   * Their audio is not decided here: each one is created muted so that it can
+367:   * start at all, and `applyAudio` gives it the volume its element declares.
+387:  video.addEventListener('volumechange', applyAudio);
+
+## E. La página del integrador, sin cambios
+
+$ awk '/^\/\/ =====/{n++; next} n==1{print}' js/app.js | sed '/^$/d' | wc -l
+11
+
+## F. La consola de la corrida
+
+Sin warnings ni errores en los seis estados medidos.
+
+$ (campo "consola" de t05-la-medicion.json)
+[]
+
+## G. El test corregido, visto en rojo
+
+No es la campaña de mutación, que es de la T-06. Son las dos roturas de un
+caracter que este nivel de verificación nombra, corridas una por una sobre la
+línea del default para ver que el test corregido las agarra. La línea se
+restauró después de cada una y `npm test` volvió a dar 15/15 (sección B).
+
+M-a  el default de 0 aplicado TAMBIÉN al primario
+     volume: Number(source.volume ?? DEFAULT_AD_VOLUME)
+     ROJO: pass 13, fail 2
+       ✖ no payload of the tool carries volume: the ad comes out silent and
+         the show does not     -> AssertionError: squeezebackFrame/primaryContent
+       ✖ an explicit volume of 0 survives, because a silent ad is silent on purpose
+
+M-b  el `??` cambiado por `||`
+     volume: Number(source.volume || (isPrimary ? DEFAULT_PRIMARY_VOLUME : DEFAULT_AD_VOLUME))
+     ROJO: pass 14, fail 1
+       ✖ an explicit volume of 0 survives, because a silent ad is silent on purpose
+
+Y una cosa que la M-b deja a la vista para la T-06: con el default del aviso en
+0, un `volume: 0` explícito EN UN ELEMENTO DEL AVISO ya no distingue `??` de
+`||` --las dos ramas dan 0--. Lo que separa los dos operadores ahora es un
+`volume: 0` explícito EN EL PRIMARIO, cuyo default es 100. El detector se mudó
+de lado con el default.

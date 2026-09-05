@@ -106,9 +106,15 @@ if [ $# -eq 0 ]; then
     printf '  break %s  t=%3ss a %3ss  %-22s %s\n' "$n" "$offset" "$((offset + 12))" "$nombre" "$lista"
   done
   echo
-  echo "Antes de grabar, y esto se hace UNA vez al empezar: desmutear el"
-  echo "contenido primario con el control nativo del player de la derecha."
-  echo "La página arranca muteada por la política de autoplay del browser, y"
-  echo "encender el audio del aviso sin haber desmuteado antes el primario"
-  echo "muestra lo contrario de lo que el ADR 0010 quiere mostrar."
+  echo "Antes de grabar, y esto se hace UNA vez al empezar: encender el audio"
+  echo "con el control de arriba a la derecha de la imagen, que lo dibuja la"
+  echo "librería (ADR 0015). La página arranca muteada por la política de"
+  echo "autoplay del browser y ese control es el que la levanta: es el audio de"
+  echo "la composición entera, primario y aviso a la vez."
+  echo
+  echo "La mezcla de cada elemento la declara el asset list y el reproductor la"
+  echo "respeta (ADR 0014). En este recorrido: el break del Quad trae la mezcla"
+  echo "—100 en el cuadrante de abajo a la izquierda y 10 en los otros tres—, y"
+  echo "los otros cuatro no declaran volumen, así que el aviso entra callado y"
+  echo "el programa se sigue escuchando."
 fi

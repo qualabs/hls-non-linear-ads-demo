@@ -1241,3 +1241,57 @@ al que no lo esté. El grep del 0015 no tenía ese problema y sigue corriendo so
 `lib/*.js` entero.
 
 `npm test` da 15/15 y los dos cortes dan verde. Commit sin push.
+
+## 2026-09-04 — T-05 de la fase 02: el volumen que declara el asset list
+
+El ADR 0014 implementado. El renderizado dejó de ignorar el campo a propósito, y
+lo que había que decidir bien no era leerlo sino **con qué default**: la
+herramienta de SVTA no emite `volume` en ningún elemento, el bloque
+`primaryContent` incluido, así que un `DEFAULT_VOLUME = 0` a secas deja el
+programa mudo en los cinco layouts y una captura del recorrido se ve idéntica.
+El default quedó partido en dos —0 en los elementos del aviso, 100 en el
+primario— y el operador es `??` y no `||`, que es la otra rotura de un caracter:
+con `||`, un `volume: 0` declarado a propósito sale a todo volumen.
+
+**El volumen declarado se respeta en todos los elementos, y la asimetría es
+únicamente del default.** El ADR 0014 dice "el contenido primario conserva su
+audio" y el done de la task dice que en el Quad el de abajo a la izquierda va en
+100 y "los otros tres" en 10 sobre un layout de cuatro elementos, o sea que el
+primario es uno de esos tres. Se resolvió por el done, y por dos cosas más: el
+objetivo de la task dice "cada elemento" sin recortar, y el contrato de la T-02
+—escrito después del ADR— dice lo mismo. La razón de fondo es que una mezcla que
+deja el programa al mismo nivel que el aviso contra el que se mezcla no es una
+mezcla. Lo que el ADR no dice en ningún lado es qué hacer con un `volume`
+declarado en el bloque del primario, y eso es lo que esta task decidió.
+
+Dos cosas más que el renderizado tuvo que hacerse cargo, y las dos fallan en
+silencio: **el mute de la composición tapa los elementos del aviso** —si no, el
+aviso sería lo único que suena antes de que alguien lo pida, porque la página
+arranca muteada por la política de autoplay—, y **al cerrar el break el primario
+recupera su audio entero**, porque `volume` es una propiedad y no un estilo y un
+primario que se queda en el 10 % de la mezcla sigue así el resto del programa.
+
+La mezcla que propuso David —100 abajo a la izquierda y 10 en el resto— es un
+asset list y no código: va sobre `signalling/asset-list-multiView.json`, que es
+el break del Quad del recorrido, y los otros cuatro siguen sin declarar `volume`
+para que el otro caso se pueda mostrar en la misma corrida.
+
+**Verificado leyendo `muted` y `volume` de cada nodo**, que es la restricción, y
+no con el monitor del sink de PulseAudio, que la fase 01 dejó descartado con dos
+corridas. Con el Quad en pantalla: `view3` (abajo a la izquierda) en 1, y el
+primario, `view2` y `view4` en 0,1, los cuatro sonando. Sin `volume` declarado,
+en los dos sabores —con y sin bloque `primaryContent` en el payload—: el aviso en
+0 y muteado, el primario en 1. Después del break, el primario en 1.
+
+El test que afirmaba "no payload of the tool carries volume, and every element
+comes out at 100" dejó de ser cierto y se corrigió, no se borró: ahora afirma que
+el aviso sale en silencio y el programa no. Se lo vio en rojo con las dos
+roturas de un caracter, una por una. `npm test` da 15/15 y
+`scripts/verificar-cortes.mjs` da verde. Commit sin push.
+
+Tres documentos vigentes decían lo contrario de lo que la demo hace ahora y no
+uno: además de la sección `Before you record` del README y de las líneas que
+imprime `scripts/senalizar-contenido.sh`, el README tenía el párrafo de la
+arquitectura —"una mezcla por cuadrante sería inventada y no señalizada"— y el de
+los dos defaults que la herramienta omite. Corregidos los cuatro textos.
+

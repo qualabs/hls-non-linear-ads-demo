@@ -38,8 +38,16 @@ thing to do before the camera rolls, and two to expect.
 right of the right-hand picture. The page starts muted so the browser's autoplay
 policy lets it begin without a click, and that control is the one that lifts it:
 it is the audio of the composition, drawn by the library along with the progress
-bar, the play/pause and the fullscreen (ADR 0015). The elements of the ad stay
-silent; the mix each one declares is ADR 0014 and it is not implemented yet.
+bar, the play/pause and the fullscreen (ADR 0015). It is one switch for the
+whole thing, primary content and ad together; what each element is worth inside
+it is the mix the asset-list declares, and the player obeys it (ADR 0014).
+
+**Only the fifth break has a mix.** Its asset-list asks for 100 in the
+bottom-left quadrant and 10 in the other three, which is what a quad of
+concurrent sources sounds like when the signalling picks one to listen to. The
+other four declare no `volume` at all, and an absent field is silence on the ad
+and full volume on the show, so those four breaks come in quietly over a
+programme that keeps its audio.
 
 **One of the five breaks has no audio at all.** The two assets of LBox image are
 stills, so that ad has no soundtrack to mix in, and the state line under the
@@ -153,16 +161,23 @@ boxes* and *where all the ranges of the programme are, and of which kind*, and
 the consumer draws it. Only the first side knows what HLS is. The contract is
 written down in `docs/contrato-senalizacion-renderizado.md`.
 
-The ad starts **silent** and the primary content keeps its audio, so the page
-has a visible control to turn the ad's sound on (ADR 0010). Turning it on in
-front of an audience is how the demo shows that both sources of audio are
-there and that choosing between them is the player's.
+**The mix is signalled, and the default is silence.** Each element of a layout
+starts at the `volume` its asset-list declares, and the page has a visible
+control for the audio of the composition as a whole (ADR 0014). Turning it on in
+front of an audience is how the demo shows that several sources of audio are
+there and that choosing between them is the signalling's rather than the
+player's.
 
-That control is one for the whole ad, not one per element: in `multiView`,
-where three concurrent sources are on screen at once, it turns the three of
-them on together. There is nothing in the data to do anything finer -- the
-tool's model has a `volume` per element and emits it in none of the six
-layouts, so a per-quadrant mix would be invented rather than signalled.
+An absent `volume` is **not** the same default on both sides of the layout: it
+is silence on an element of the ad and full volume on the primary content. The
+tool omits the field on every element, the primary content included, so a single
+default of 0 would leave the show mute in the five layouts with nothing on
+screen saying so, and a single default of 100 would put every ad at full volume
+over the programme. Unexpected audio on camera is worse than missing audio,
+which is what decides the ad side; the primary content was already playing
+before the break, which decides the other. It is a deliberate divergence with
+the tool, for which an absent field is 100 everywhere, and ADR 0014 leaves it
+written down as a question for SVTA.
 
 ## The library, and the page that uses it
 
@@ -244,7 +259,8 @@ follow.
 not missing them.** Of the six payloads the tool emits, the two overlays carry
 no `primaryContent` block at all, and none of the six carries `volume` on any
 element. The signalling layer assumes both -- the primary at zDepth 0, volume
-100, viewport `0 0 0 0`, and volume 100 wherever it is absent -- instead of
-requiring them, so a payload pasted straight out of the tool works as it is
-(ADR 0004). Adding those fields to the JSON to "fix" it would hide the case
-that a real payload hits.
+100, viewport `0 0 0 0`, and, where `volume` is absent, silence on an element of
+the ad and full volume on the primary content (ADR 0014) -- instead of requiring
+them, so a payload pasted straight out of the tool works as it is (ADR 0004).
+Adding those fields to the JSON to "fix" it would hide the case that a real
+payload hits.
