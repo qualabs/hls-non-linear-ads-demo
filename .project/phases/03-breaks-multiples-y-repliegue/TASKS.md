@@ -399,10 +399,13 @@ de números y no una mirada.
   entero y el de fábrica muestra el programa**, o sea al revés del cuadro que la demo
   quiere. Los dos panes siguen en el mismo segundo del programa —el ADR 0017 se
   cumple—, pero durante ese tramo la comparación dice lo contrario de lo que quiere
-  decir. Las tres salidas están en la sección 8 del `DESIGN.md`: poner el aviso a
-  cuadro entero primero en la mezcla, aceptar la inversión y explicarla, o desalinear
-  los `START-DATE`. **Es decisión de producto y de David**, porque es lo que él
-  cuenta en escenario, y la task la aplica.
+  decir. Va como David lo pidió: concurrent, concurrent, linear, concurrent, con el
+  aviso a cuadro entero **tercero**. La inversión del par se acepta y se explica: el
+  break de ellos dura 12 s y el nuestro 48, así que del 144 al 156 ellos muestran el
+  programa y nosotros la pantalla tapada. Son 12 segundos de 48, y no importa porque
+  **los dos players hacen lo mismo en momentos distintos**, porque les tocaron breaks
+  de largos distintos. El argumento de la demo vive en los otros 36 segundos. Las
+  alternativas —el lineal primero, o desalinear los `START-DATE`— quedan descartadas.
 
   **Lo que la mezcla ya no tiene que esquivar.** Las transiciones de adentro del
   break costaban un arranque en frío cada una, con el nodo en negro mientras duraba,
@@ -434,7 +437,7 @@ de números y no una mirada.
 
   **El tramo invertido no se afirma acá.** Es lo que la demo cuenta en escenario y se
   juzga mirando los dos panes en el mismo cuadro: lo mira Nicolás corriendo la demo,
-  que es además quien lleva la decisión a David.
+  que es además quien se lo cuenta a David antes del sync del 21.
 - **nivel de verificación:** bajo. Es datos y guion de recorrido: la aritmética la
   dicen las lecturas de arriba, y lo que queda es de escenario y tiene su revisor.
 
