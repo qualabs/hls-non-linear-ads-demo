@@ -60,10 +60,26 @@ PDT=$(grep -m1 '^#EXT-X-PROGRAM-DATE-TIME:' "$SRC" | cut -d: -f2-)
 # Un break son dos tags: el lineal que se queda el cliente de mercado y el
 # concurrente que se queda el de la demo (ADR 0007). Los dos con el mismo
 # START-DATE, cada uno con su ID y su asset-list.
+#
+# El tag lineal va en la forma de REEMPLAZO, y la forma es la AUSENCIA de
+# X-RESUME-OFFSET: sin el atributo el primario retoma donde el aviso termino, asi
+# que un pedazo del programa no se ve y los dos panes se quedan en el mismo
+# segundo del programa (ADR 0017). Escrito en 0 el atributo pide la otra cosa: el
+# primario retoma donde lo interrumpieron, no se pierde programa, y el pane de
+# fabrica se atrasa la duracion del aviso en cada break.
+#
+# Entre las dos formas del reemplazo decidio una medicion y no la
+# especificacion: con el atributo ausente hls.js 1.7.2 resuelve el punto de
+# retorno contra el largo que MIDIO del aviso, y con el offset escrito a mano
+# vale el numero escrito aunque el aviso dure otra cosa. Las dos reemplazan; la
+# ausencia es la que sigue siendo cierta si el aviso cambia de largo.
+#
+# El X-RESUME-OFFSET del tag concurrente no significa nada, porque no hay nada
+# interrumpido que reanudar (ADR 0016), y queda como estaba.
 par_de_tags() { # $1 numero de break, $2 offset en segundos, $3 asset-list
   local n=$1 offset=$2 lista=$3 start
   start=$(date -d "$PDT + $offset seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
-  printf '#EXT-X-DATERANGE:ID="AD-%s-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="%s",X-ASSET-LIST="/signalling/asset-list-linear.json",X-RESUME-OFFSET=0,X-RESTRICT="SKIP",PLANNED-DURATION=12\n' "$n" "$start"
+  printf '#EXT-X-DATERANGE:ID="AD-%s-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="%s",X-ASSET-LIST="/signalling/asset-list-linear.json",X-RESTRICT="SKIP",PLANNED-DURATION=12\n' "$n" "$start"
   printf '#EXT-X-DATERANGE:ID="AD-%s-CONCURRENT",CLASS="com.qualabs.hls.concurrentInterstitial",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=12\n' "$n" "$start" "$lista"
 }
 

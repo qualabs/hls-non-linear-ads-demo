@@ -32,7 +32,7 @@ npm run serve
 ## Before you record
 
 The run is under three minutes and it needs nothing but a browser window. One
-thing to do before the camera rolls, and three to expect.
+thing to do before the camera rolls, and four to expect.
 
 **Turn the sound on once, at the start**, with the audio control at the top
 right of the right-hand picture. The page starts muted so the browser's autoplay
@@ -54,17 +54,24 @@ stills, so that ad has no soundtrack to mix in, and the state line under the
 right-hand picture says so -- which is not the same thing as no ad being on
 screen, and on camera the two look alike.
 
-**The left player falls behind, and that is the second argument of the demo.**
-Every break carries its linear Date Range as well, so the off-the-shelf client
-replaces the content four times over the run and comes back where it left off,
-twelve seconds later each time. It only reaches four of the five breaks: by the
-fifth START-DATE it is already 49.5 s behind, so that break arrives near the end
-of the 180 s VOD and the fifth linear ad never completes on the left. After those
-four breaks it is 49.5 s of programme behind the player on the right, which
-lost none: put the two panes side by side at any moment after the first break and they are showing different scenes of
-the same film. Only in the first break do both clients react to the same tags
-at the same instant; from the second on, the left one is somewhere else in the
-programme, which is the argument rather than a defect.
+**Both panes stay on the same second of the programme, and that is the second
+argument of the demo.** Every break carries its linear Date Range as well, and
+that tag is in replacement form: the off-the-shelf client takes the twelve
+seconds of the break out of the programme and comes back where the ad ended and
+not where it began. So the five breaks land on both clients at the same instant,
+and outside a break the two panes are showing the same frame of the same film.
+Inside one they are on the same second of the programme and each does something
+different with it: on the right the ad is drawn over the picture and nothing is
+replaced, on the left the ad **is** the picture and that stretch of the
+programme is gone. When the break ends they are on the same second again, which
+is what makes the two panes comparable frame by frame.
+
+**The left pane can end the run a fraction of a second behind**, and that is the
+whole of the offset. hls.js resumes three of the five breaks by appending the ad
+into the primary timeline, which costs nothing, and the other two by passing the
+MediaSource to the asset and back, which costs a fraction of a second each --
+0.7 s over the whole run, against the twelve seconds per break that inserting
+the ad instead of replacing it would cost.
 
 | break | at | layout on screen | name in the requirements document |
 | --- | --- | --- | --- |
