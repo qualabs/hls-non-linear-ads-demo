@@ -1,0 +1,121 @@
+{
+  "etiqueta": "configurado-invalido",
+  "decoderCount": "0",
+  "pedidos": [
+    {
+      "url": "http://localhost:8080/signalling/asset-list-cornerOverlay.json",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-squeezebackLShape.json",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-multiView.json",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=7ad1f74f-26c8-442b-9710-2781e8412592",
+      "metodo": "GET"
+    }
+  ],
+  "consola_asset_list": [
+    "[signalling] decoderCount is 0, which is not a whole number of decoders above zero, so it is not sent: the asset-list is asked for exactly as it would be asked for without the option.",
+    "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-cornerOverlay.json",
+    "[signalling] AD-2-CONCURRENT at t=45.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape.json",
+    "[signalling] AD-3-CONCURRENT at t=70.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json",
+    "[signalling] AD-4-CONCURRENT at t=95.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json",
+    "[signalling] AD-5-CONCURRENT at t=120.00s, asset-list http://localhost:8080/signalling/asset-list-multiView.json"
+  ],
+  "dentro": [],
+  "rangos": {
+    "ranges": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-1-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "kind": "interstitial",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "kind": "interstitial",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "kind": "interstitial",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "kind": "interstitial",
+        "startTime": 120,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 120,
+        "duration": 12
+      }
+    ],
+    "settled": true
+  },
+  "seeks": null,
+  "errores": [],
+  "inyeccion": {
+    "ocurrencias": 1,
+    "linea": "  decoderCount: 0"
+  },
+  "superficie": {
+    "claves": [
+      "VERSION",
+      "CONCURRENT_CLASS",
+      "DECODER_COUNT_PARAM",
+      "hlsConfig",
+      "attach",
+      "attachControls"
+    ],
+    "param": "qa-decoder-count"
+  }
+}
