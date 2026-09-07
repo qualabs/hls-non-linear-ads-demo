@@ -9,6 +9,10 @@ What you add is a `<script src>`, a container, and one call. What you have to
 get right is on this page, and two of those things are requirements the library
 cannot fix for you afterwards — they are §2.
 
+The chrome it draws — the progress bar, the play/pause, the audio control and
+fullscreen of the composition — can also be used on its own, over a player this
+library does nothing else to. That is a second call and it is §6.
+
 The seam between the two layers inside the library is a different document,
 `contrato-senalizacion-renderizado.md`. You do not need it to integrate; you
 need it if you want to read what is active at a given instant, which is what
@@ -75,6 +79,13 @@ Two things about the shape of it:
 ---
 
 ## 2. The two things this library requires and cannot fix for you
+
+Both are about `attach`, and one of them is only about `attach`. §2.1 is a
+requirement of the concurrent experience, so it is not `attachControls`'
+business: that call receives no instance. §2.2 holds for both, for one of its
+two reasons — with the chrome drawn there are two sets of controls over the same
+element, whichever call drew it. The other reason, the `transform` that scales
+the native ones, is only about `attach`.
 
 ### 2.1 The interstitials machinery of hls.js goes off
 
@@ -224,6 +235,7 @@ The global is `QualabsConcurrentHls`, and this is all of it:
 | `CONCURRENT_CLASS` | `'com.qualabs.hls.concurrentInterstitial'`, the Date Range class this reads |
 | `hlsConfig` | the configuration your instance has to be built with (§2.1) |
 | `attach(hls, options)` | turns the concurrent experience on, and returns a handle |
+| `attachControls(video, options)` | draws the chrome on a player, with nothing else turned on |
 
 ### `attach(hls, options)`
 
@@ -253,6 +265,44 @@ for.
 
 `provider` is the one to build on. The last three are there to be inspected, not
 to be driven.
+
+### `attachControls(video, options)`
+
+The chrome on its own: the same controls `attach` draws, on a media element,
+with none of the concurrent experience behind them. It receives no instance of
+hls.js and it subscribes to nothing.
+
+It is here because the two are separable and you can want one without the other
+— the chrome over a player whose ads you already handle some other way, or over
+a player this library does not drive at all. Nothing about that player changes:
+this call reads `currentTime`, `duration`, `paused` and `muted` off the element
+and writes them back, and that is the whole of its contact with it.
+
+`video` is required and it is the element the controls command.
+
+| option | | |
+| --- | --- | --- |
+| `container` | **required** | the box the controls are drawn in, and the element that goes fullscreen. `video` has to be inside it, and it needs a box of its own (§3) |
+| `provider` | optional | anything with a `programRanges()`, which is what the bar marks the breaks from. Without one the bar is the bar and nothing else |
+| `logo` | optional | `{ src, alt }` — your own mark, drawn inside the container (§7) |
+
+**`provider` is the contract and not this library's implementation of it.** The
+one `attach` hands back is one implementation; a player of your own that knows
+where its breaks are is another. That is the rule and not a convenience: what a
+bar marks has to come out of the player that bar is drawn on, or it is marking
+somebody else's timeline. The shape is in `contrato-senalizacion-renderizado.md`.
+
+The handle it returns is `attach`'s minus what does not exist:
+
+| | |
+| --- | --- |
+| `container` | the one you passed |
+| `video` | the one you passed |
+| `controls` | the piece it built |
+
+What it does **not** do is most of the point. It reads no configuration and
+writes no diagnosis, so §2.1 is not its business; it creates no layer for ads and
+applies no transform to your element; and it asks the network for nothing.
 
 ---
 

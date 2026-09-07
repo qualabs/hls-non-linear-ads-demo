@@ -1901,3 +1901,82 @@ inmovilizada sin que ninguna task lo hubiera decidido, y por eso el subagente
 frenó y la devolvió en lugar de elegir por su cuenta. El bloque no cambia.
 
 `verificar-cortes` verde con las dos costuras. Commit sin push.
+
+## 2026-09-07 — La separabilidad se decide, y las tres lecturas no entran en el script
+
+La T-04 de la fase 04, que es trabajo de decisión y no toca código. Tres
+decisiones, cada una con su razón escrita al lado.
+
+**La entrada pública es una segunda función y no una opción de `attach`:**
+`attachControls(video, { container, provider, logo })`. La razón del cambio de
+superficie no es la comodidad de esta demo, es que un integrador puede querer el
+cromo y no la parte de concurrentes. Y la forma se decide por tres hechos del
+código: `attach` pide una instancia de hls.js que el cromo no necesita, hace
+cinco cosas de las que una opción tendría que apagar cuatro, y una de esas cinco
+es `checkConfig`, que escribe en `console.error` cuando la instancia trae la
+máquina de interstitials prendida. La instancia del pane de fábrica la trae
+prendida a propósito, así que la opción obligaría a apagar la alarma de la
+librería con un flag. `attach` no cambia: el agregado es aditivo.
+
+**Las marcas de la barra de ese pane salen de su propio player**, del
+`hls.interstitialsManager` que `js/stock-player.js` ya lee, con el pane
+implementando el `programRanges()` del contrato desde su propio manager. Lo que
+ese player agendó sólo lo sabe ese player; nuestra señalización sabe lo que la
+playlist señaliza, que es otro hecho. Si ese pane dejara de agendar un break, una
+barra alimentada por nuestro proveedor seguiría pintando cinco marcas y estaría
+mintiendo sobre el pane, y la barra es el instrumento sobre el que se apoya la
+comparación cuadro a cuadro. Es también la primera vez que se ejerce la
+consecuencia que el ADR 0003 escribió en la fase 01: el contrato con una segunda
+implementación, del lado de la demo, sin tocar el renderizado.
+
+**Las tres lecturas del ADR 0007 no entran en `scripts/verificar-cortes.mjs`.**
+Las dos costuras de ese script son greps que tienen que volver vacíos sobre el
+texto de un archivo, y de las tres lecturas dos no existen en ningún archivo. La
+versión que un grep sí podría hacer —buscar `new Hls()` en `js/stock-player.js`—
+cubre un tercio de una de las tres y pintaría verde bajo un script cuya última
+línea dice que las dos costuras se sostienen, que es justo la confusión que el R1
+de la fase existe para evitar. Quedan escritas en el documento de la task, con
+instrumento, valor esperado y forma de la falla para cada una, y las corre la
+T-07, cuyo bloque ya nombra la decisión de la T-04 como punto de partida.
+
+**Cuatro cosas del bloque que no coinciden con el código, con la evidencia al
+lado.** La nota fechada del ADR 0015 que la task pedía poner ya estaba puesta:
+entró con `1716f6f plan(fase-04)`, y no se reescribió. `lib/controls.js` sí
+nombra a la señalización y al renderizado, en prosa y siete veces; lo que es
+cierto y es más fuerte es que no tiene una sola línea `import`. "Su pestaña de
+red" no es una lectura que una sola página permita hacer tal cual, porque los dos
+players comparten la línea de tiempo de recursos del navegador, así que el pedido
+hay que atribuirlo: se resuelve con lo que esa instancia declara en sus propios
+eventos y con la huella `_HLS_primary_id` que hls.js le pone a lo que pide su
+controlador de interstitials, las dos medidas en la fase 01. Y de los campos de
+un evento del manager sólo están medidos `identifier`, `dateRange.class` y
+`assetListUrl`: la posición y el largo de las marcas quedan como lectura de la
+T-07 en lugar de supuestos hoy.
+
+**No sale un ADR**, y la razón es que las tres decisiones son instancias de
+decisiones ya aceptadas: la nota del 2026-09-07 del ADR 0015 para la
+separabilidad y la entrada pública más, el ADR 0018 para de dónde salen las
+marcas —su última consecuencia ya delega esto y deja el argumento contrario
+escrito—, y la nota del 2026-09-07 del ADR 0007 para las tres lecturas. Lo que la
+task produce es la forma de una función, que va al documento del integrador
+porque es donde el ADR 0015 dice que vive la superficie, y un procedimiento de
+lectura, que va al documento de la task. Sí habría un ADR el día que exista el
+principio de atrás —una capacidad nueva se publica como función, una perilla como
+opción de `attach`—, pero hoy hay un caso solo y una regla escrita sobre un caso
+solo es ese caso con otra forma. Se propone cuando la fase 03 traiga el segundo.
+
+`docs/integrating-the-library.md` cambia en tres lugares y la sección 7 no se
+toca: una oración en la introducción, un párrafo que acota las dos exigencias de
+la sección 2 —la 2.1 es del experimento concurrente y no le aplica a la entrada
+nueva—, y la sección 6 con la fila del global y la subsección de `attachControls`.
+Queda dicho que entre esta task y la T-07 el documento describe una función que
+la librería construida todavía no exporta: es lo que el bloque pide, una decide y
+la otra construye, y está acotado porque `dist/` se arma en cada arranque desde
+`lib/` y la fase cierra antes de la grabación.
+
+Nada que correr, que es la verificación mínima que el bloque pide: la task no
+toca código y lo que escribe son la decisión y el documento del integrador, que
+ni `verificar-cortes` ni `npm test` miran. Ninguna línea del pane del otro
+tocada.
+
+Evidencia en `.project/phases/04-refinamiento/tasks/T-04/`. Commit sin push.
