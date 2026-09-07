@@ -17,9 +17,9 @@
  * What this page DOES hand the chrome is one value, `--qa-accent`, and a value
  * is not a rule: the library asks for the colour of whoever integrates it
  * rather than shipping one, so the knob of the bar comes out in the teal of
- * this brand without a line of the library naming it. The logo travels the
- * other way, as a file passed to `attach`, because a mark is an asset and not
- * a token. */
+ * this brand without a line of the library naming it. A mark travels the other
+ * way, as a file passed to `attach`, because a mark is an asset and not a
+ * token. This page hands none: its only mark is the plate in the masthead. */
 
 :root {
   --q-teal-500: #37b4a7;

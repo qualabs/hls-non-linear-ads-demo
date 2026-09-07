@@ -308,8 +308,8 @@ and copy the one file it writes.
 Ten lines: six of JavaScript and four of markup, plus the two CSS rules of §3.
 That is the page of §1 with the optional things left out.
 
-The demo in this repository is that page with two options added — `logo` and
-`onResolved`, both optional — and everything else it contains is there to make
-its own argument: a second player at its factory configuration for the
-compatibility pair, and the trace of the contract under the picture and in the
-console. Neither is plumbing this library needs.
+The demo in this repository is that page with one option added, `onResolved`,
+and everything else it contains is there to make its own argument: a second
+player at its factory configuration for the compatibility pair, and the trace
+of the contract under the picture and in the console. Neither is plumbing this
+library needs.
