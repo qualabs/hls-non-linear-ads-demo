@@ -335,10 +335,14 @@ quiere decir**. Para que los dos avisos a cuadro entero coincidan, el tag de cla
 Apple tendría que arrancar en el 44 y no en el 20, y ahí se rompe el `START-DATE`
 compartido del ADR 0018.
 
-No tiene solución obvia y es decisión de producto. Las opciones: poner el lineal
-primero en la mezcla —contradice el "mixing that up" de David pero salva el par—,
-aceptar la inversión y explicarla, o desalinear los `START-DATE`. **Es lo que hay
-que llevarle a David**, porque es lo que él va a contar en escenario.
+**La fase acepta la inversión y la explica**, que es la única de las tres salidas
+que no rompe algo que ya está decidido. Poner el lineal primero en la mezcla salva
+el par, pero contradice el "mixing that up" que David pidió, que es justamente lo
+que esta fase existe para mostrar. Desalinear los `START-DATE` rompe el ADR 0018,
+que es lo que hace que el par sea un par. Aceptarla cuesta un tramo de doce
+segundos donde la comparación dice lo contrario de lo que quiere decir, y ese
+tramo se cuenta en vez de esconderse: el cuadro que la demo quiere —del 20 al 32—
+sigue estando y llega primero.
 
 ## 9. El ejemplo de asset-list
 

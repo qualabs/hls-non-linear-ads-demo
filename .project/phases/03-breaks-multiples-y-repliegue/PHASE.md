@@ -143,8 +143,10 @@ mezcla, hay un tramo del break donde nuestro pane muestra un aviso a cuadro ente
 y el de fábrica muestra el programa, o sea al revés de lo que la demo quiere
 mostrar. El `DESIGN.md` lo tiene con sus tres salidas.
 
-Mitigación: es decisión de producto y de David, porque es lo que él cuenta en
-escenario. Va al sync del 21 de septiembre; la T-05 la aplica.
+Mitigación: la fase acepta la inversión y la explica. La sección 8 del `DESIGN.md`
+tiene por qué es la única salida que no contradice el "mixing that up" ni rompe el
+ADR 0018, y la T-05 la deja escrita en la tabla del recorrido y en el `README.md`.
+El cuadro que la demo quiere sigue llegando primero.
 
 **R3. El degradado no es transparente y alguien lo va a contar como si lo fuera.**
 La norma no tiene modelo de superposición, así que un cliente conforme que lea el
@@ -178,9 +180,10 @@ que ya existe.
 ## Stakeholders
 
 - **Nicolás Levy**: owner.
-- **David Hassoun**: pidió las tres cosas de esta fase, y es quien decide qué se
-  hace con la inversión del par de compatibilidad (R2) y quien cuenta el degradado
-  en escenario (R3).
+- **David Hassoun**: pidió las tres cosas de esta fase, y es quien cuenta en
+  escenario la inversión del par de compatibilidad (R2) y el degradado (R3). Las
+  dos llegan al sync del 21 de septiembre resueltas y explicadas, no como
+  preguntas abiertas.
 - **SVTA**: dueña del formato. Las dos preguntas que esta fase le devuelve son de
   especificación antes que de código, y las dos están en el `DESIGN.md`: qué regla
   de claves desconocidas tiene el JSON del asset list, que la norma no define; y
