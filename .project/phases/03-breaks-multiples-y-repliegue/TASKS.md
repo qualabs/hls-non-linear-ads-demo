@@ -62,7 +62,7 @@ de números y no una mirada.
 
 | id   | brief                                                              | status  | plan | evidence |
 | ---- | ------------------------------------------------------------------ | ------- | ---- | -------- |
-| T-01 | Un break con varios avisos, uno detrás del otro                    | planned | —    | —        |
+| T-01 | Un break con varios avisos, uno detrás del otro                    | done    | —    | [tasks/T-01/](tasks/T-01/) |
 | T-02 | El asset sin bloque: el aviso lineal y el repliegue                | planned | —    | —        |
 | T-03 | El `decoderCount`, de la configuración al pedido del asset-list    | planned | —    | —        |
 | T-04 | Tests: la secuencia del break y el asset sin bloque                | planned | —    | —        |

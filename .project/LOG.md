@@ -2526,3 +2526,86 @@ una se murió, otra volvió a ser pregunta abierta y la tercera se mudó adentro
 T-02.
 
 La fase sigue en `planning`. No se ejecutó ninguna task.
+
+## 2026-09-07 — T-01 de la fase 03: tres avisos en un break, la identidad de cada uno y la precarga
+
+La primera task de la fase 03 está hecha. Un break de tres avisos corre entero,
+en secuencia y no encimados, el segundo se ve aunque comparta layout con el
+primero, y ninguna de las transiciones pasa por un cuadro en negro. Evidencia en
+`tasks/T-01/`; el escenario es `signalling/asset-list-multiAd.json`, que es un
+JSON y no una rama.
+
+**El desplazamiento de cada aviso sale de la `DURATION` de nivel superior de su
+asset, acumulada, y el `start` del item pasa a leerse adentro de su propio
+asset.** Las tres alternativas estaban abiertas y hoy coinciden en todos los
+asset-list de la demo, así que la que decidió no fue el dato sino el caso que
+todavía no existe: el asset sin bloque de la T-02 no tiene dónde llevar un
+`start`, y `DURATION` es obligatorio en cada Asset-Description por el Apéndice
+D.2. Una regla escrita sobre el `start` sirve para los avisos que dibujamos y no
+dice nada del que no. Los seis payloads de la herramienta traen un solo asset con
+`start: 0`, así que el acumulador vale 0 y nada de lo que ya corría se movió.
+
+**Lo que la decisión cuesta quedó escrito y no resuelto.** La `DURATION` es
+metadato declarado: un servidor de decisioning puede declarar un número y servir
+un creativo de otro largo, y entonces los avisos que vienen después quedan
+colocados contra un número que nunca fue cierto. La capa declara la secuencia y
+no la corrige. Es la misma tensión que la norma abre con "hasta el fin del
+asset", y de qué lado queda es la decisión de la T-02: acá se documentó el
+comportamiento, no se eligió el lado.
+
+**La identidad es un campo nuevo del contrato, `itemId`, y `id` no cambió de
+significado.** `id` sigue nombrando el Date Range —lo comparten los tres avisos, y
+es lo que hace que la barra marque un rango por break y no tres—, y `itemId`
+nombra un aviso. La clave del renderizador pasó a ser el `itemId`. Es la regla 6
+del contrato, y el mismo arreglo se aplicó a `js/contract-trace.js`, que llevaba
+la misma clave y por lo tanto también se saltaba el segundo aviso en la consola:
+una traza que se saltea un aviso es peor que no tener traza.
+
+**La precarga trae el aviso siguiente 3 segundos antes preguntándole al contrato
+`activeAt(t + 3)`**, o sea sin agregarle un método al proveedor. Hasta que le
+toca, el nodo está en la capa y en su caja con `opacity: 0` —que lo esconde sin
+sacarlo de la pintura, y un nodo que no se pinta tampoco se decodifica—, en pausa
+y muteado, porque `applyPlayback` y `applyAudio` leen `drawn` y el nodo
+precargado no está en `drawn`. Los 3 segundos son un trade y está argumentado
+donde vive: alcanzan para las dos vueltas de red de un arranque en frío y son una
+fracción chica de un aviso, así que hay como mucho un decodificador de más y sólo
+durante la cola del aviso anterior.
+
+**Las cuatro lecturas, con el recorrido corriendo.** `activeAt` devuelve
+exactamente una experiencia en un instante de cada aviso, con `startTime` en 20,
+32 y 44, que es lo que el desplazamiento predice. En el instante del segundo
+aviso el nodo de la capa es `ad2-overlay`. `programRanges()` devuelve un rango
+para el Date Range, del 20 al 56. Y en el instante anterior a cada transición el
+nodo que entra ya está en la capa con `readyState` 4.
+
+**El contraste se corrió y no se dio por sabido.** La misma corrida con la clave
+vieja y la precarga apagada: en el instante del segundo aviso el nodo de la capa
+es `ad1-overlay` con `currentTime` 12,032 s —el primer creativo pasado su propio
+fin, corriendo de largo— y el segundo no se dibuja nunca; y antes de cada
+transición el nodo que entra no existe. El tercer aviso sí se dibujaba, porque
+cambia de `type`: por eso el defecto aparece cuando dos avisos comparten layout y
+no antes.
+
+**El bloque supone algo que el código no hace, y no se acomodó el resultado.** El
+done pide distinguir los dos creativos por el `src` del nodo. Un asset de media
+playlist se adjunta con una segunda instancia del player, así que el `src` es un
+`blob:` del MediaSource y no nombra al creativo. Lo que lo nombra es el
+`data-element-id` del nodo y el `uri` del elemento del contrato, y las dos
+lecturas están en la evidencia.
+
+**La costura del ADR 0015 atrapó dos cruces reales mientras se escribía la
+task**: dos comentarios de `lib/` que nombraban la demo para argumentar un
+número. Los dos se reescribieron sin nombrarla. Es exactamente para lo que la
+verificación existe, y no habría aparecido leyendo el diff.
+
+`verificar-cortes` verde en las dos costuras, `npm test` 27 de 27, la caja pedida
+contra la dibujada con 0,0 píxeles de diferencia en los seis elementos de los
+tres layouts encadenados, y el recorrido de los cinco breaks entregando los
+mismos diez rangos, sin seeks y sin errores de consola.
+
+**Lo que la task no tocó y quedó anotado.** El modo de un solo break de
+`scripts/senalizar-contenido.sh` escribe `PLANNED-DURATION=12` fijo, así que el
+tag concurrente del break de tres avisos declara 12 y el break dura 36. Es inerte
+para nuestro player —el rango del concurrente sale de las experiencias, no del
+tag— y el recorrido que se graba no lo usa, pero es un dato que miente. El
+recorrido y su script son de la T-05.

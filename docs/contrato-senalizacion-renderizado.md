@@ -28,7 +28,8 @@ más abajo.
 
 ```js
 Experience {
-  id: string          // identificador de la señalización; sirve para nombrar la experiencia en un log
+  id: string          // identificador de la señalización; sirve para nombrar el BREAK en un log
+  itemId: string      // identidad de este aviso adentro del break; única entre todas las experiencias
   type: string        // etiqueta opaca del layout: 'cornerOverlay', 'squeezebackLShape', ...
   startTime: number   // segundos de reproducción en que arranca
   duration: number    // segundos que dura
@@ -46,7 +47,7 @@ Element {
 }
 ```
 
-## Las cinco reglas de lectura
+## Las seis reglas de lectura
 
 1. **`box` son insets en porcentaje, no coordenadas.** Cuánto se recorta cada
    borde respecto del área del player, **que es la caja de la imagen y no la
@@ -83,6 +84,15 @@ Element {
    y `duration` vienen para mostrar un contador, no para decidir. Los rangos del
    programa no sirven para esto: dicen dónde están los breaks, no cuál corre
    ahora.
+
+6. **Dos experiencias se distinguen por `itemId`, nunca por `id` ni por
+   `type`.** Un break trae varios avisos y los tres campos no dicen lo mismo:
+   `id` nombra el break y lo comparten todos sus avisos, `type` es la etiqueta
+   del layout y dos avisos seguidos pueden compartirla —es lo natural, no lo
+   raro—, y `itemId` es el único que nombra a un aviso. Quien dibuja se entera
+   de que un aviso terminó y empezó otro comparando `itemId`: comparando
+   cualquiera de los otros dos, el segundo creativo de un break no se dibuja
+   nunca y en pantalla se ve el primero corriendo de largo.
 
 ## Los rangos del programa
 
@@ -228,11 +238,33 @@ faltante, y el ADR 0014 lo argumenta y lo deja anotado como pregunta para SVTA.
 El renderizado no ve nada de esto: le llega el elemento primario completo y un
 `volume` en todos los elementos, siempre.
 
-## Un supuesto que conviene tener a la vista
+## Cómo se ordenan los avisos de un break
 
-El `start` de cada item del `payload` se lee como un desplazamiento desde el
-`START-DATE` de la señalización, y no desde el comienzo de cada `ASSET`. El
-bloque se declara `"type": "slot"` y los seis payloads de la herramienta traen
-un único asset con `start: 0`, así que hoy las dos lecturas coinciden. Un
-asset-list con varios `ASSETS` las separaría, y es una pregunta para SVTA antes
-que una decisión de código.
+Un asset-list trae varios `ASSETS` y se reproducen **en el orden del array**.
+Eso no es una decisión de esta capa: lo hereda de la norma, Apéndice D.2.
+
+**El desplazamiento de cada aviso sale de la `DURATION` de nivel superior de su
+asset, acumulada.** El primer asset arranca en el `START-DATE` de la
+señalización, el segundo donde el primero termina, y así. El `start` del item
+del bloque `X-AD-CREATIVE-SIGNALING` se lee entonces como un desplazamiento
+**adentro de su propio asset**, y no desde el `START-DATE`.
+
+**Por qué la `DURATION` y no el `start`.** El desplazamiento tiene que salir de
+un campo que **todos** los assets tengan. `DURATION` es obligatorio en cada
+Asset-Description por el Apéndice D.2; el bloque es una extensión nuestra y un
+asset puede no traerlo —ese asset es un aviso lineal (ADR 0019), y no tiene
+dónde escribir un `start`—. Una regla escrita sobre el `start` funciona para los
+avisos que dibujamos y no dice nada del que no.
+
+Los seis payloads que emite la herramienta de SVTA traen un único asset con
+`start: 0`, así que el acumulador vale 0 y las dos lecturas coinciden en todos
+los asset-list de la demo.
+
+**Lo que esto cuesta, dicho de frente.** La `DURATION` es metadato
+**declarado**: un servidor de decisioning puede declarar un número y servir un
+creativo de otro largo. Cuando eso pasa, los avisos que vienen después quedan
+colocados contra un número que nunca fue cierto, y nadie avisa. La capa
+**declara la secuencia y no la corrige**: no mide el creativo ni mueve las
+ventanas de los avisos siguientes. Es la misma tensión que la norma abre al
+decir que el interstitial termina al terminar el asset y no al cumplirse su
+`DURATION`, y de qué lado queda es una pregunta abierta del proyecto.
