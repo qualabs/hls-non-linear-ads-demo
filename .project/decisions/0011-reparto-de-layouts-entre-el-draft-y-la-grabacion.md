@@ -1,5 +1,5 @@
 ---
-id: 0011
+id: "0011"
 title: Repartir los layouts entre el primer draft y la grabación por mecanismo
 status: proposed
 scope: phase-01

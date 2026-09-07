@@ -1,5 +1,5 @@
 ---
-id: 0012
+id: "0012"
 title: Mapear los cinco layouts del documento de requerimientos al campo type del payload
 status: proposed
 scope: phase-01

@@ -1,5 +1,5 @@
 ---
-id: 0003
+id: "0003"
 title: Separar señalización y renderizado en dos capas con un contrato entre ellas
 status: accepted
 scope: phase-01

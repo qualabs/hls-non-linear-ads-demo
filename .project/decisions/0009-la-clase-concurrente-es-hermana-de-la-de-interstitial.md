@@ -1,5 +1,5 @@
 ---
-id: 0009
+id: "0009"
 title: Tratar la clase concurrente como hermana de la de interstitial, no como una extensión
 status: accepted
 scope: project

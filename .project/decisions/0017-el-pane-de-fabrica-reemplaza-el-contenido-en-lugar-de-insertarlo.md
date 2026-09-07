@@ -1,5 +1,5 @@
 ---
-id: 0017
+id: "0017"
 title: El pane del cliente de mercado reemplaza el contenido en lugar de insertarlo
 status: accepted
 scope: project
