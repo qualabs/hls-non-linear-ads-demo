@@ -1,0 +1,19 @@
+{
+  "etiqueta": "despues",
+  "laLectura": {
+    "marcaAdentroDelCuadro": {
+      "existe": false
+    },
+    "marcaDelEncabezado": {
+      "existe": true,
+      "src": "./brand/logo-qualabs.svg",
+      "alt": "Qualabs",
+      "width": 193.75,
+      "height": 44
+    },
+    "controlesALaVista": true,
+    "t": 27.91,
+    "cuantosAvisos": 1
+  },
+  "consola": []
+}

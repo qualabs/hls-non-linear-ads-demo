@@ -1738,3 +1738,60 @@ cancela. No es fatal.
 
 Evidencia en `.project/phases/04-refinamiento/tasks/T-01/`, con la lectura de
 antes del cambio al lado de la de después. Commit sin push.
+
+## 2026-09-07 — T-02 de la fase 04: el logo de Qualabs sale de los controles del player
+
+El segundo de los puntos de Nicolás, y el que menos código toca: la marca sale
+de adentro de la imagen y queda la del encabezado, que es la que se lee de
+lejos. Supersede la parte de la T-07 de la fase 02 que puso el logo en la barra.
+
+**El cambio es de la demo y no de la librería, y esa distinción era la task.**
+Lo que se fue es la línea de `js/app.js` que pasaba `logo` a `attach`. La opción
+`logo`, su documentación —la sección 7 del documento del integrador, *The brand
+is yours, because this library ships none*—, el nodo `qa-brand` de
+`lib/controls.js` y su CSS se quedaron los cuatro en pie. Sacar la opción le
+habría quitado a un integrador la única manera de poner su marca adentro del
+cuadro, que es un problema distinto del que Nicolás encontró. La prueba de que
+la superficie no se movió es el diff vacío sobre
+`docs/integrating-the-library.md`.
+
+**Cambió un segundo archivo, y es la página afirmando algo que su código dejó de
+hacer.** `index.html` tenía dos comentarios que decían que la marca de esta
+página está en dos lugares y son un archivo: el de la cabecera y el de arriba
+del `masthead`. Los dos se reescribieron a la misma cantidad de líneas a
+propósito, porque el comentario de `js/app.js` referencia `index.html:139` y
+`index.html:119` y las dos referencias siguen apuntando a lo que nombran.
+
+**La captura, a tamaño real y con los controles a la vista**, que es la salida
+entera de la task: el break 1 —el `cornerOverlay`, el mismo aviso con el que la
+T-07 de la fase 02 mostró la marca— sin nada nuestro encima, y el logo del
+encabezado en su lugar, 193,75 × 44 px y el mismo archivo de `brand/`. Antes, la
+placa de la barra medía 115,34 × 35,19 px; después no hay nodo `qa-brand`
+adentro de `#player`. El largo del riel no se movió —el logo vivía en una fila
+propia arriba del reloj y del riel—: `0:28` y `3:00` en los dos extremos, en las
+dos capturas.
+
+**No se corrió nada más, y no es un recorte.** Los dos archivos editados no son
+ninguno de los que `scripts/verificar-cortes.mjs` mira, y `npm test` importa las
+funciones puras de las dos capas, que esta task no toca. La captura reducida a
+un cuarto tampoco: estaba para probar que la marca que sobrevive a la reducción
+es la del encabezado, y eso ya lo midió la T-07 de la fase 02 —a un cuarto el
+logo de 22 px de la barra queda en 5,5 px y el wordmark se disuelve—.
+
+**Dos afirmaciones vivas quedaron viejas y las dos quedan para que Nicolás
+decida, porque arreglarlas rompe algo que la task pide.** La sección 9 del
+documento del integrador dice que la demo de este repositorio es la página
+mínima *con dos opciones agregadas, `logo` y `onResolved`*, y desde hoy es una;
+no se corrigió porque la definición de done de la task es el diff vacío sobre
+ese archivo. Y el comentario de `css/player.css` que explica por qué el color va
+por CSS cierra diciendo que *el logo viaja por el otro camino, como archivo
+pasado a `attach`*, en un párrafo sobre lo que esta página le entrega al cromo;
+la oración sigue siendo cierta del mecanismo, pero se lee como si la página
+todavía lo pasara, y ese archivo está en la lista que `verificar-cortes` mira.
+
+El conteo de 12 líneas de la página de esta demo no se tocó: vive en la
+evidencia de la T-08 de la fase 02 y en el informe de esa fase, los dos registro
+histórico.
+
+Evidencia en `.project/phases/04-refinamiento/tasks/T-02/`, con la captura de
+antes del cambio al lado de la de después. Commit sin push.
