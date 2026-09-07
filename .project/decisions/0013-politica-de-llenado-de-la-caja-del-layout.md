@@ -1,5 +1,5 @@
 ---
-id: 0013
+id: "0013"
 title: Llenar la caja del layout con recorte centrado y sin deformar el asset
 status: accepted
 scope: phase-01

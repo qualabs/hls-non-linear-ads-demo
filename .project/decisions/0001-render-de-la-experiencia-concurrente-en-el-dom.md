@@ -1,5 +1,5 @@
 ---
-id: 0001
+id: "0001"
 title: Renderizar la experiencia concurrente en el DOM sobre el video
 status: accepted
 scope: phase-01

@@ -1,5 +1,5 @@
 ---
-id: 0002
+id: "0002"
 title: Apagar la maquinaria de interstitials de hls.js y manejar los Date Ranges por cuenta propia
 status: accepted
 scope: phase-01

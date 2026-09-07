@@ -1,5 +1,5 @@
 ---
-id: 0004
+id: "0004"
 title: Consumir el asset-list tal como lo emite el Layout Controller de SVTA
 status: accepted
 scope: phase-01

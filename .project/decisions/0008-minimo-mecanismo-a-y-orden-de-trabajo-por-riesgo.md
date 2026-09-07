@@ -1,5 +1,5 @@
 ---
-id: 0008
+id: "0008"
 title: Fijar el mínimo en un layout de overlay y ordenar el trabajo del riesgo conocido al desconocido
 status: accepted
 scope: phase-01

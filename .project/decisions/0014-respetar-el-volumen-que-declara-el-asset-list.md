@@ -1,10 +1,10 @@
 ---
-id: 0014
+id: "0014"
 title: Respetar el volumen que declara el asset list, con el default en silencio
 status: accepted
 scope: project
 date: 2026-09-04
-supersedes: 0010
+supersedes: "0010"
 superseded_by: null
 ---
 

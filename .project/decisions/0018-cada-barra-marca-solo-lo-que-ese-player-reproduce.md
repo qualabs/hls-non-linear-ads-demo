@@ -1,5 +1,5 @@
 ---
-id: 0018
+id: "0018"
 title: Cada barra marca sólo lo que ese player reproduce, y lo marca sobre su propio riel
 status: accepted
 scope: project

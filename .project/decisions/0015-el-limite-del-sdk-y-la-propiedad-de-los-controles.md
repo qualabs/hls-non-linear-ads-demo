@@ -1,5 +1,5 @@
 ---
-id: 0015
+id: "0015"
 title: Cortar la librería de la aplicación de demo, con los controles del lado de la librería
 status: accepted
 scope: phase-02

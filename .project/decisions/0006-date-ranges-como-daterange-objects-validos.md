@@ -1,5 +1,5 @@
 ---
-id: 0006
+id: "0006"
 title: Escribir los Date Ranges como DateRange Objects válidos
 status: accepted
 scope: phase-01

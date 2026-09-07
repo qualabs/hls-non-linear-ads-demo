@@ -1,5 +1,5 @@
 ---
-id: 0007
+id: "0007"
 title: Mostrar la compatibilidad hacia atrás con dos players sobre el mismo manifiesto
 status: accepted
 scope: phase-01
