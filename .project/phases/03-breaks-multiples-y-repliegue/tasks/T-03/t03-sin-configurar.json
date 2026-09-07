@@ -1,0 +1,252 @@
+{
+  "etiqueta": "sin-configurar",
+  "decoderCount": null,
+  "pedidos": [
+    {
+      "url": "http://localhost:8080/signalling/asset-list-cornerOverlay.json",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-squeezebackLShape.json",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-multiView.json",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=386e4ba3-a381-4556-84a6-a3d627897558",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=386e4ba3-a381-4556-84a6-a3d627897558",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=386e4ba3-a381-4556-84a6-a3d627897558",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=386e4ba3-a381-4556-84a6-a3d627897558",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=386e4ba3-a381-4556-84a6-a3d627897558",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=386e4ba3-a381-4556-84a6-a3d627897558",
+      "metodo": "GET"
+    },
+    {
+      "url": "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=386e4ba3-a381-4556-84a6-a3d627897558",
+      "metodo": "GET"
+    }
+  ],
+  "consola_asset_list": [
+    "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-cornerOverlay.json",
+    "[signalling] AD-2-CONCURRENT at t=45.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape.json",
+    "[signalling] AD-3-CONCURRENT at t=70.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json",
+    "[signalling] AD-4-CONCURRENT at t=95.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json",
+    "[signalling] AD-5-CONCURRENT at t=120.00s, asset-list http://localhost:8080/signalling/asset-list-multiView.json"
+  ],
+  "dentro": [
+    {
+      "t": 26.056,
+      "activas": [
+        {
+          "id": "AD-1-CONCURRENT",
+          "itemId": "AD-1-CONCURRENT.0",
+          "type": "cornerOverlay",
+          "startTime": 20,
+          "duration": 12,
+          "elementos": 2
+        }
+      ],
+      "nodos": [
+        {
+          "elementId": "adOverlay1",
+          "opacity": ""
+        }
+      ],
+      "breakN": 1,
+      "esperado": "cornerOverlay"
+    },
+    {
+      "t": 51.044,
+      "activas": [
+        {
+          "id": "AD-2-CONCURRENT",
+          "itemId": "AD-2-CONCURRENT.0",
+          "type": "squeezebackLShape",
+          "startTime": 45,
+          "duration": 12,
+          "elementos": 3
+        }
+      ],
+      "nodos": [
+        {
+          "elementId": "adBarVertical",
+          "opacity": ""
+        },
+        {
+          "elementId": "adBarHorizontal",
+          "opacity": ""
+        }
+      ],
+      "breakN": 2,
+      "esperado": "squeezebackLShape"
+    },
+    {
+      "t": 76.051,
+      "activas": [
+        {
+          "id": "AD-3-CONCURRENT",
+          "itemId": "AD-3-CONCURRENT.0",
+          "type": "squeezebackLShape",
+          "startTime": 70,
+          "duration": 12,
+          "elementos": 3
+        }
+      ],
+      "nodos": [
+        {
+          "elementId": "adBarVertical",
+          "opacity": ""
+        },
+        {
+          "elementId": "adBarHorizontal",
+          "opacity": ""
+        }
+      ],
+      "breakN": 3,
+      "esperado": "squeezebackLShape"
+    },
+    {
+      "t": 101.047,
+      "activas": [
+        {
+          "id": "AD-4-CONCURRENT",
+          "itemId": "AD-4-CONCURRENT.0",
+          "type": "squeezebackDoubleBox",
+          "startTime": 95,
+          "duration": 12,
+          "elementos": 2
+        }
+      ],
+      "nodos": [
+        {
+          "elementId": "adOverlay",
+          "opacity": ""
+        }
+      ],
+      "breakN": 4,
+      "esperado": "squeezebackDoubleBox"
+    },
+    {
+      "t": 126.016,
+      "activas": [
+        {
+          "id": "AD-5-CONCURRENT",
+          "itemId": "AD-5-CONCURRENT.0",
+          "type": "multiView",
+          "startTime": 120,
+          "duration": 12,
+          "elementos": 4
+        }
+      ],
+      "nodos": [
+        {
+          "elementId": "view2",
+          "opacity": ""
+        },
+        {
+          "elementId": "view3",
+          "opacity": ""
+        },
+        {
+          "elementId": "view4",
+          "opacity": ""
+        }
+      ],
+      "breakN": 5,
+      "esperado": "multiView"
+    }
+  ],
+  "rangos": {
+    "ranges": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-1-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "kind": "interstitial",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "kind": "interstitial",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "kind": "interstitial",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "kind": "interstitial",
+        "startTime": 120,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 120,
+        "duration": 12
+      }
+    ],
+    "settled": true
+  },
+  "seeks": [],
+  "errores": [],
+  "inyeccion": null
+}

@@ -237,6 +237,7 @@ The global is `QualabsConcurrentHls`, and this is all of it:
 | --- | --- |
 | `VERSION` | the library's version, a string |
 | `CONCURRENT_CLASS` | `'com.qualabs.hls.concurrentInterstitial'`, the Date Range class this reads |
+| `DECODER_COUNT_PARAM` | `'qa-decoder-count'`, the query parameter `decoderCount` travels in |
 | `hlsConfig` | the configuration your instance has to be built with (§2.1) |
 | `attach(hls, options)` | turns the concurrent experience on, and returns a handle |
 | `attachControls(video, options)` | draws the chrome on a player, with nothing else turned on |
@@ -251,10 +252,56 @@ The global is `QualabsConcurrentHls`, and this is all of it:
 | `video` | optional | only if the media element is not the one the instance is attached to |
 | `onResolved` | optional | called with the experiences of each asset-list as they resolve. A hook for your own logging; nothing depends on it |
 | `logo` | optional | `{ src, alt }` — your own mark, drawn inside the container (§7) |
+| `decoderCount` | optional | how many video decoders the device has. It travels to your ad server on the asset-list request, and nothing else happens to it here |
 
 Anything else you pass is ignored. `attach` throws a `TypeError` on a missing
 instance or a missing container, and those are the only two things it throws
 for.
+
+### `decoderCount`, and the parameter it becomes
+
+A concurrent break is more than one video on screen at once, so how many the
+device can decode at the same time is something the ad server would like to know
+before it picks what to send. This option is how it finds out, and that is the
+whole of it: **the number is passed on, not interpreted.** The library does not
+read it back, does not refuse a layout over it, and measures nothing with it.
+
+```js
+QualabsConcurrentHls.attach(hls, { container, decoderCount: 3 });
+```
+
+Every asset-list request then carries it:
+
+```
+GET /signalling/asset-list-cornerOverlay.json?qa-decoder-count=3
+```
+
+**Leave it out and nothing is added to the request.** That is the supported
+state, not an oversight: the URI is asked for character for character the way it
+is asked for by an integrator who never heard of this option, and your ad server
+answers what it answers today. A value that is not a whole number of decoders
+above zero is not sent either, and the library says so on `console.warn` rather
+than putting it on the wire, where it would be ignored without anybody noticing.
+
+**You give the number; the library does not find it out.** What else on your page
+is decoding at the same moment is something only your application knows, so
+detection is yours and this is the seam where it arrives.
+
+Two things about the name, because it ends up in your server's logs and in
+somebody's parser:
+
+- **It does not begin with `_HLS_`.** The HLS draft reserves that prefix for the
+  query parameters it defines itself and asks that nobody else define parameters
+  with it. It is also in live use next to this one: the interstitials machinery
+  of hls.js puts `_HLS_primary_id` on the asset-list requests it makes.
+- **It carries this library's namespace**, like the Date Range class it reads and
+  the global it defines. The asset-list URI is yours and may already carry query
+  of its own, so a bare `decoderCount` would be claiming a name in shared space.
+  The day the specification names this capability, that name is the one that
+  travels and it replaces this one.
+
+The name is `QualabsConcurrentHls.DECODER_COUNT_PARAM`, so a server-side check
+and a client-side one can be written against the same string.
 
 ### The handle it returns
 

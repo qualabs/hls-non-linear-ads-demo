@@ -2694,3 +2694,46 @@ cuadro entero, la línea de la demo dice "primary content + CONCURRENT AD (linea
 · nothing was replaced". Es literalmente cierto —el primario nunca se detuvo— y
 en escenario puede leerse al revés. Es la página de la demo y no la librería, y
 la decisión de qué cuenta el pane durante el break mezclado es de producto.
+
+## 2026-09-07 — T-03 de la fase 03: el `decoderCount` viaja, y el nombre del parámetro se decide contra la norma
+
+La task es passthrough y quedó passthrough: el integrador declara
+`decoderCount` en el `attach` del SDK, el número viaja en el GET al asset-list, y
+nada de este lado lo lee de vuelta. No se agregó detección de nada.
+
+**El nombre es `qa-decoder-count`, y la norma decidió la mitad.** El draft reserva
+el prefijo `_HLS_` para sus propios query params, así que por ahí no se puede ir.
+La reserva no es teórica acá: en la misma corrida el pane de fábrica pide
+`asset-list-linear.json?_HLS_primary_id=<uuid>`, que es la maquinaria de
+interstitials de hls.js poniéndole su huella al pedido, y esa huella es lo que la
+evidencia del par de compatibilidad usa para saber qué pidió cada pane. La otra
+mitad la decidió el repo: el namespace del vendor, como el global, la clase de la
+capa, el `--qa-accent` y la clase de Date Range del ADR 0009. El asset-list es de
+quien lo sirve y puede traer query propia, así que un `decoderCount` pelado sería
+reclamar un nombre en espacio compartido. El día que la especificación nombre la
+capacidad, ese nombre reemplaza a éste.
+
+**La condición que se rompe sin verse quedó medida contra el antes.** Se corrió el
+recorrido completo antes de tocar una línea, se guardaron las cinco URLs, y
+después del cambio salieron **idénticas carácter por carácter**, sin query string,
+con los mismos diez rangos, cero seeks y cero errores. Configurado en 3, las
+mismas cinco URLs más `?qa-decoder-count=3`, verificado por concatenación.
+
+**Lo único que el bloque no enumeraba y hubo que decidir: qué hace la librería con
+un valor que no es una cuenta.** Avisa por consola y no lo manda, en lugar de
+reenviarlo. Un valor así llega igual al servidor de decisioning, donde se ignora
+en silencio o se contesta mal, y las dos son fallas que se parecen a que todo
+anda. Es la forma que `checkConfig` y `ensurePositioned` ya tienen en ese archivo:
+verificar y avisar, no exigir y no romper. El aviso sale una sola vez para los
+cinco breaks, porque lo que puede estar mal es lo que escribió el integrador.
+
+**El gancho que la T-02 dejó no necesitó plomería.** Aquella task no detectó el
+caso del layout que pide más elementos que los decodificadores declarados porque
+el número no existía, y dejó escrito que sería una línea donde el bloque
+inutilizable ya cae al repliegue. Ese lugar lo llama `read()`, que tiene el número
+en su propio alcance: no se agregó un parámetro sin consumidor para dejarlo
+"preparado".
+
+`verificar-cortes` verde en las dos costuras —el ADR 0015 con cero cruces, que es
+el que dice que esto nace del lado del SDK—, `npm test` 27 de 27, y la comparación
+de cajas no corresponde porque la task no toca el renderizado.
