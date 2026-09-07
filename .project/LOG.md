@@ -1871,3 +1871,33 @@ número antes y después del cambio, que es el redondeo sub-pixel de una caja de
 
 Evidencia en `.project/phases/04-refinamiento/tasks/T-03/`, con la lectura y las
 capturas de antes del cambio al lado de las de después. Commit sin push.
+
+## 2026-09-07 — Ninguna afirmación viva dice que la marca de Qualabs va adentro del player
+
+Nicolás pidió, sobre la T-02 ya cerrada, sacar toda referencia a ese logo adentro
+del player si quedaba en algún lugar más. La búsqueda sobre los archivos vigentes
+del proyecto devolvió dos, las dos ya anotadas por la T-02 y ninguna nueva:
+
+- La sección 9 de `docs/integrating-the-library.md` decía que esta demo es la
+  página mínima con **dos** opciones agregadas, `logo` y `onResolved`. Desde la
+  T-02 agrega una.
+- El comentario de cabecera de `css/player.css` describe lo que esta página le
+  entrega al cromo y cerraba con el logo viajando como archivo a `attach`, lo que
+  en ese párrafo se leía como si esta página todavía lo pasara.
+
+**El resto de las menciones quedan, porque no son "ese logo":** la opción `logo`,
+el nodo `qa-brand` y su CSS son el mecanismo genérico con el que un integrador
+pone su propia marca —la sección 7 dice "The brand is yours, because this library
+ships none"—, el inventario de `brand/` del `README.md` es un inventario, y la
+atribución de `CREDITS.md` es cierta.
+
+**Una precisión sobre la definición de done de la T-02, porque el registro tiene
+que decir de quién fue el error.** El bloque de la task pedía "la sección 7 del
+documento del integrador sin cambios", que es exactamente el alcance correcto: la
+sección 7 es la superficie pública y la sección 9 es una descripción de esta demo.
+Lo que se ensanchó fue el encargo al subagente, que pidió probarlo con un `git
+diff` vacío sobre el archivo entero. Con esa prueba la sección 9 quedaba
+inmovilizada sin que ninguna task lo hubiera decidido, y por eso el subagente
+frenó y la devolvió en lugar de elegir por su cuenta. El bloque no cambia.
+
+`verificar-cortes` verde con las dos costuras. Commit sin push.
