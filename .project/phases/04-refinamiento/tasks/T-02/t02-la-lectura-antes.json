@@ -1,0 +1,26 @@
+{
+  "etiqueta": "antes",
+  "laLectura": {
+    "marcaAdentroDelCuadro": {
+      "existe": true,
+      "width": 115.34,
+      "height": 35.19
+    },
+    "marcaDelEncabezado": {
+      "existe": true,
+      "src": "./brand/logo-qualabs.svg",
+      "alt": "Qualabs",
+      "width": 193.75,
+      "height": 44
+    },
+    "controlesALaVista": true,
+    "t": 27.95,
+    "cuantosAvisos": 1
+  },
+  "consola": [
+    {
+      "type": "error",
+      "text": "[hls] error networkError aborted fatal: false"
+    }
+  ]
+}
