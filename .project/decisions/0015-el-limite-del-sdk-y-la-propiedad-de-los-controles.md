@@ -116,3 +116,28 @@ Y queda un riesgo que se acepta explícito: **ser dueño del contenedor es una
 promesa más grande que la que la demo necesita**, y es la que un tercero nos
 va a hacer valer. Se acepta porque la alternativa —dejarle los controles al
 integrador— no funciona sobre un elemento que el renderizador escala.
+
+> **Nota del 2026-09-07.** La fase 04 le agrega dos cosas a este ADR y no le
+> contradice ninguna.
+>
+> 1. **Los controles funcionan con o sin experiencias concurrentes.** Este ADR
+>    dice que la librería es dueña de los controles y que la superficie pública
+>    es lo que el integrador escribe en su página; lo que no decía, porque nada
+>    lo necesitaba, es si el cromo se puede usar solo. Se puede y tiene que
+>    poder: un integrador puede querer uno y no el otro, y la demo lo necesita
+>    para ponerle nuestro skin al pane del cliente de mercado sin convertirlo en
+>    un cliente modificado, que es lo que rompería el ADR 0007. En el código la
+>    separación ya estaba casi hecha —`createControls` acepta `provider = null` y
+>    su archivo no nombra ni a la señalización ni al renderizado—, así que lo que
+>    la fase agrega es una entrada pública más, escrita en
+>    `docs/integrating-the-library.md`. Ser dueño del contenedor sigue siendo la
+>    promesa de este ADR; lo que se amplía es que esa propiedad no viene atada a
+>    encender lo concurrente.
+> 2. **La pata del argumento de compatibilidad que la nota del 2026-09-04 apoya
+>    en el atraso se retira.** Esa nota dejó el argumento apoyado en dos cosas:
+>    que uno reemplaza el contenido y el otro no, y que al final del recorrido el
+>    player sin modificar va 49,5 s de programa atrás. El ADR 0017 hace que el
+>    pane sin modificar reemplace en lugar de insertar, así que el atraso deja de
+>    existir y esa segunda pata se cae. La primera es la que queda, y es la que
+>    ahora se ve en un cuadro solo: al mismo segundo del programa, uno muestra el
+>    aviso encima del programa y el otro en lugar del programa.

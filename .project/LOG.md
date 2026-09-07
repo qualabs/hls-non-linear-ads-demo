@@ -1561,3 +1561,66 @@ siendo, `last_update` en 2026-09-05, y dos preguntas nuevas para David en "A
 confirmar" —la mezcla del Quad, donde el primario queda a 10, y la dirección del
 skin, que él no vio—. El `status` del proyecto sigue en `ongoing`. Nada de
 código: el pase tocó `.project/` y nada más. Commit sin push.
+
+## 2026-09-07 — Fase 04 escrita: el refinamiento, y va antes que la 03
+
+Nicolás probó la demo desde el celular y salieron seis puntos. Ninguno agrega
+una capacidad: tres son defectos y tres sacan diferencias entre los dos panes.
+Él la llamó **fase de refinamiento** y así quedó nombrada. La fase está
+aprobada, no propuesta.
+
+**Es la 04 y se ejecuta antes que la 03.** El número es más alto porque la 03 ya
+estaba escrita y renumerarla rompía sus referencias; el orden sale de otra
+cosa: **esto es lo que se graba** y la 03 son capacidades nuevas, con la ventana
+de grabación del 28 al 30 de septiembre en el medio. Queda dicho en el
+`PHASE.md` de la 04, en el primer bloque del `PHASE.md` de la 03 y en las dos
+líneas del índice de fases del `PROJECT.md`.
+
+**El criterio de la fase** es sacar toda diferencia entre los dos players que no
+sea el mecanismo que la demo muestra. Hoy difieren en tres cosas a la vez —uno
+inserta, uno tiene skin, uno se atrasa— y alguien que mira no sabe cuál de las
+tres es el punto. Está escrito en el `PHASE.md` porque es lo que decide los
+casos que los seis puntos no enumeran, y en la fase aparecieron cuatro: qué
+controles del cromo actúan sobre el pane del otro, si su barra muestra el reloj
+del aviso o el del programa, si la marca tiene que volver a la imagen, y qué
+rótulos de la página son diferencias legítimas.
+
+**Ocho tasks.** Los tres defectos primero (T-01 la pausa de la composición que
+tiene que gobernar a todos sus elementos, T-02 el logo que sale de los
+controles, T-03 los controles usables con el dedo), después la separabilidad
+(T-04, que decide y no toca el pane del otro), después el reemplazo (T-05), la
+barra de un solo carril (T-06), el cromo del otro pane (T-07) y el par completo
+con su única diferencia (T-08).
+
+**Dos ADR nuevos y tres notas fechadas.** El **0017** es que el pane del cliente
+de mercado reemplaza el contenido en lugar de insertarlo, con el argumento del
+atraso retirado a propósito. El **0018** es que cada barra marca sólo lo que ese
+player reproduce y lo marca sobre su propio riel, que supersede el diseño de dos
+carriles de la T-04 de la fase 02 y de paso paga la recomendación 5 de su
+informe, que pedía promover esa decisión a ADR. Las notas: el **0015** gana que
+los controles funcionan con o sin experiencias concurrentes y pierde la pata del
+argumento de compatibilidad que su nota del 2026-09-04 apoyaba en los 49,5 s; el
+**0016** conserva su decisión y su contexto deja de describir a la demo, porque
+la que corre ahora es el reemplazo; y el **0007** dice qué cubre "sin modificar"
+ahora que ese pane lleva nuestro cromo, que es la instancia y su configuración y
+no el mobiliario, verificado con tres lecturas de la página corriendo.
+
+**Lo que la escritura de la fase encontró y no estaba en los seis puntos.** La
+causa del defecto de móvil que dice el encargo —el temporizador que se renueva
+con el mouse— no es la que explica el síntoma: el `pointerleave` del contenedor
+dispara apenas se levanta el dedo, así que esconde los controles en cada toque,
+y un temporizador de 2600 ms se vería como un ocultamiento lento y no como "casi
+de inmediato". Está escrito como riesgo R2 y la T-03 mide antes de arreglar. Y
+hay un tercer defecto del mismo toque: la capa de controles se esconde con
+`opacity: 0`, que no desactiva los eventos de puntero, así que un toque en la
+franja de abajo con los controles invisibles seekea en lugar de mostrarlos.
+
+**Lo que queda anotado y no se tocó.** El informe de la fase 01 sigue diciendo
+que el atraso es el segundo argumento de la demo, y no se reescribe porque es el
+registro de lo que se midió: el retiro está en el ADR 0017, en el `PROJECT.md` y
+—cuando la T-05 corra— en el párrafo del `README.md` que lo afirma. El `README.md`
+no se tocó acá, porque el alcance de este pase era `.project/`. Nada de código.
+
+`PROJECT.md`: índice de fases con la 04 y la línea de la 03 corregida por el
+orden, `last_update` en 2026-09-07, y una entrada nueva en "A confirmar" para
+David, porque el punto 1 cambia lo que él cuenta en escenario. Commit sin push.

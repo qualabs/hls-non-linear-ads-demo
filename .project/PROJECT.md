@@ -15,7 +15,7 @@ status: ongoing
 type: desarrollo
 owner: nicolas-levy
 started: 2026-09-02
-last_update: 2026-09-05
+last_update: 2026-09-07
 tags: [hls, hls-interstitials, non-linear-ads, svta, apple, hlsjs, avfoundation, demo]
 repo: https://github.com/qualabs/hls-non-linear-ads-demo
 output_pointers:
@@ -455,6 +455,15 @@ la sección 4 del informe de cierre de la fase 01
 - **La dirección del skin y la marca**, que David no vio. Lo más cercano que
   dijo es "make it look a little more Pro", sobre el marcador de los breaks.
   Ver la sección 4 del informe de cierre de la fase 02.
+- **El argumento del atraso, retirado.** La fase 04 hace que el pane del cliente
+  de mercado reemplace el contenido en lugar de insertarlo (ADR 0017), para que
+  los dos panes se queden en el mismo segundo del programa y se puedan comparar
+  cuadro a cuadro. Con eso se muere el argumento de que el cliente de mercado va
+  49,5 s de programa atrás, que la T-09 y la T-12 de la fase 01 midieron y que el
+  informe de esa fase presenta como el segundo argumento de la demo. El que queda
+  se ve en un cuadro solo: al mismo segundo, uno muestra el aviso encima del
+  programa y el otro en lugar del programa. **Es un cambio de lo que David
+  cuenta en escenario**, así que va contado antes del sync del 21 y no después.
 - **Quién hace el primer pase de la especificación de SVTA.**
 - **Qué significa `version: 2`** en el bloque `X-AD-CREATIVE-SIGNALING`.
 
@@ -502,6 +511,18 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
 - **03-breaks-multiples-y-repliegue**: un break con varios avisos mezclando
   concurrente y lineal, el repliegue del lado del cliente al lineal
   tradicional del asset, y el `decoderCount` como passthrough hasta el pedido
-  del asset-list. Abierta, y no arranca antes de que cierre la 02. Su primera
-  task es una medición, porque el aviso lineal en el medio del break es el
-  único item que queda capaz de reabrir un ADR de la fase 01.
+  del asset-list. Abierta, y **arranca después de la 04**, que tiene el número
+  más alto y va primero: la 04 es lo que se graba y esta fase son capacidades
+  nuevas. Su primera task es una medición, porque el aviso lineal en el medio
+  del break es el único item que queda capaz de reabrir un ADR de la fase 01.
+- **04-refinamiento**: los seis puntos que salieron de Nicolás probando la demo
+  desde el celular, y **se ejecuta antes que la 03**. Tres son defectos —la
+  pausa de la composición que no gobierna a los avisos, el logo de Qualabs
+  adentro de la imagen, y los controles que en touch aparecen y desaparecen en
+  el mismo toque— y tres sacan diferencias entre los dos panes que no son el
+  mecanismo: el pane sin modificar pasa a reemplazar el contenido en lugar de
+  insertarlo, cada barra marca sólo lo que ese player reproduce y sobre su
+  propio riel, y el pane sin modificar lleva nuestro cromo sin dejar de ser un
+  cliente sin modificar. El criterio que la gobierna es sacar toda diferencia
+  entre los dos players que no sea el mecanismo que la demo muestra, y su costo
+  es el argumento del atraso de 49,5 s, retirado a propósito (ADR 0017).
