@@ -511,12 +511,15 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   pasó a ser la de la imagen y no la del contenedor. Informe en
   `phases/02-sdk-y-controles/REPORT.md`.
 - **03-breaks-multiples-y-repliegue**: un break con varios avisos mezclando
-  concurrente y lineal, el repliegue del lado del cliente al lineal
-  tradicional del asset, y el `decoderCount` como passthrough hasta el pedido
-  del asset-list. Abierta, y **arranca después de la 04**, que tiene el número
-  más alto y va primero: la 04 es lo que se graba y esta fase son capacidades
-  nuevas. Su primera task es una medición, porque el aviso lineal en el medio
-  del break es el único item que queda capaz de reabrir un ADR de la fase 01.
+  concurrente y lineal, el asset sin bloque —que es a la vez el aviso lineal y
+  el repliegue del lado del cliente, por el ADR 0019— y el `decoderCount` como
+  passthrough hasta el pedido del asset-list. Abierta y en diseño revisado, con
+  la 02 y la 04 cerradas: es la que corre. Su primera task sigue siendo una
+  medición, y mide otra cosa que antes: cuánto dura el arranque en frío de cada
+  instancia de hls.js en las transiciones de adentro del break, que es lo que
+  puede arruinar la grabación. Que el aviso lineal reabra un ADR de la fase 01
+  dejó de ser un riesgo: el ADR 0019 lo reproduce con el mismo mecanismo que
+  todo lo demás y el 0002 no se toca.
 - **04-refinamiento**: cerrada con los seis puntos que Nicolás dio probando la
   demo desde el celular cerrados, y **se ejecutó antes que la 03**. El criterio
   se cumplió: los dos players quedaron idénticos en todo —el mismo cromo, la

@@ -2408,3 +2408,57 @@ cuando el creativo dura otra cosa que su `DURATION` declarada. Cómo se resuelve
 la decisión de la task que construye el mecanismo, y la versión del documento sale
 de ahí; escribirla antes sería fijar por escrito una salida que todavía no se
 eligió.
+
+## 2026-09-07 — La fase 03 se regenera desde el diseño: siete tasks y la T-04 fusionada
+
+Etapa 2 del modo de apertura de fase: con el `DESIGN.md` escrito, el `PHASE.md` y
+el `TASKS.md` se generan desde ahí en lugar de parchearse. No es la misma
+operación que corregir punteros, y los dos archivos son escritura nueva.
+
+**Lo que quedó resuelto, item por item.**
+
+- **La T-04 y la T-05 se fusionan en una.** El ADR 0019 dice que el aviso lineal
+  y el repliegue son el mismo camino de código —un asset sin bloque se reproduce
+  por su `URI` hasta el fin del asset, y un bloque que falla cae al mismo lugar—,
+  así que dos tasks eran dos implementaciones del mismo mecanismo. La fase pasa de
+  ocho tasks a siete y se renumera entera: ninguna tenía evidencia ni plan, así
+  que la renumeración no rompe nada.
+- **Los cinco punteros a `js/signalling.js` y `js/renderer.js`** apuntan a `lib/`,
+  que es donde la fase 02 dejó la librería (ADR 0015).
+- **El párrafo del atraso del pane de fábrica se fue de la task del recorrido.**
+  El ADR 0017 lo invalidó: el atraso ya no existe —0,72 s medidos por la T-05 de
+  la fase 04—, el quinto aviso ya se ve y el argumento se retiró a propósito. Lo
+  reemplaza la inversión del par de compatibilidad, que el `DESIGN.md` describe con
+  sus tres salidas y que es decisión de David porque es lo que él cuenta en
+  escenario.
+- **Los ADR 0017, 0018 y 0019 entran en la lista de decisiones que gobiernan la
+  fase**, que antes tenía cinco y ahora tiene ocho.
+- **Los dos bugs que la fase no nombraba tienen dueño.** Que dos experiencias
+  consecutivas del mismo `type` son indistinguibles para el renderizador —y por
+  eso el segundo creativo no se ve nunca— es de la T-03, que es exactamente el
+  escenario que lo destapa. Que el `kind` está hardcodeado y es por break y no por
+  aviso es de la T-04, junto con la decisión de si hace falta arreglarlo.
+- **La regla del repliegue se escribe "hasta el fin del asset"** en todos lados, y
+  nunca "por su `DURATION`".
+- **La T-01 se reescribe entera.** Lo que medía está contestado en el `DESIGN.md`
+  por lectura, y lo que queda por medir son tres cosas: el arranque en frío de cada
+  instancia de hls.js en las tres transiciones de adentro del break —la que puede
+  arruinar la grabación, porque cada nodo nace con fondo negro y hoy no se nota con
+  un aviso por break—, qué hace el renderizador con dos experiencias solapadas que
+  declaran cajas distintas para el primario, y si el primario decodificando detrás
+  de un aviso opaco cuesta lo mismo que decodificando visible.
+- **La T-02 deja de escribir el plan de construcción**, porque el plan existe y
+  sale del diseño, y pasa a ser el punto donde la medición vuelve a los artefactos.
+
+**El riesgo R1 de la fase cambió de identidad.** Era "el aviso lineal puede
+reabrir el ADR 0002", y el ADR 0019 lo cerró: el asset sin bloque lo reproduce
+nuestro plugin con el mismo `attachAsset` que usa para todo lo demás. El R1 nuevo
+son los tres arranques en frío adentro del break, que es lo que se ve en cámara.
+
+**Y una línea del índice de fases del `PROJECT.md` se corrigió en el mismo pase**,
+porque decía dos cosas que dejaron de ser ciertas: que la fase arranca después de
+la 04, que está cerrada, y que el aviso lineal es el único item capaz de reabrir un
+ADR de la fase 01.
+
+La fase queda en `planning`. No se ejecutó ninguna task: esto es diseño, y Nicolás
+lo revisa antes de dar el OK para implementar.
