@@ -40,8 +40,13 @@ la caja pedida contra la dibujada donde la task toque el renderizado.
 ## T-01 — Medir las tres cosas que el diseño no pudo leer
 
 - **Objetivo:** saber lo que no se puede leer del código antes de que nada dependa
-  de ello. Es la mitigación del riesgo R1 de la fase, y la primera de las tres
-  mediciones es la que decide si el break mezclado se puede grabar.
+  de ello. Es la mitigación del riesgo R1 de la fase. La primera de las tres
+  mediciones contesta si **entre un aviso y el siguiente aparece un parpadeo negro
+  y cuánto dura, con un número por transición**: en cada transición del break el
+  renderizador destruye la instancia del aviso que sale y crea una nueva, y cada
+  nodo nace con fondo negro hasta que muestra su primer cuadro. Hoy no se nota
+  porque hay un aviso por break y su único arranque en frío cae antes de que haya
+  algo que mostrar; con cuatro avisos pasa tres veces en el medio.
 - **Qué tiene que cubrir:** tres cosas, y son exactamente tres.
 
   1. **Cuánto dura el arranque en frío de cada instancia de hls.js en las
@@ -174,11 +179,12 @@ la caja pedida contra la dibujada donde la task toque el renderizado.
 
 ## T-04 — El asset sin bloque: el aviso lineal y el repliegue
 
-- **Objetivo:** construir el mecanismo del ADR 0019. Un asset sin bloque
-  `X-AD-CREATIVE-SIGNALING` se reproduce por su `URI` hasta el fin del asset, y un
-  bloque que falla cae al mismo lugar. **El aviso lineal en el medio del break y el
-  repliegue del lado del cliente son el mismo camino de código**, y por eso son una
-  sola task. Es lo que David marcó como lo más importante del día, y la parte de
+- **Objetivo:** que un asset sin bloque se reproduzca solo y que el cliente sepa qué
+  hacer con cada forma de falla, que es el mecanismo del ADR 0019. Un asset sin
+  bloque `X-AD-CREATIVE-SIGNALING` se reproduce por su `URI` hasta el fin del asset,
+  y un bloque que falla cae al mismo lugar. **El aviso lineal en el medio del break
+  y el repliegue del lado del cliente son el mismo camino de código**, y por eso son
+  una sola task. Es lo que David marcó como lo más importante del día, y la parte de
   repliegue es la que él llamó "a production level failover situation".
 - **Qué tiene que cubrir:** el mecanismo, la regla de fin, la lista de casos que
   caen en él, y una decisión sobre la barra que hay que tomar y escribir.
