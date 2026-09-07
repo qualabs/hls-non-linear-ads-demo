@@ -2370,3 +2370,41 @@ the duration of the interstitial"*) y que `=0` significa que el primario retoma
 donde quedó. **La T-05 de la fase 04 llegó a la ausencia midiendo en el navegador,
 sin haber leído la norma, y coincide** (ADR 0017 y su nota fechada). La decisión
 que se había tomado con una fuente pasa a tener dos.
+
+## 2026-09-07 — ADR 0019: el bloque de layout es una extensión por encima del interstitial estándar
+
+La decisión de arquitectura de la fase 03, sacada del `DESIGN.md` de la fase.
+`X-AD-CREATIVE-SIGNALING` es una extensión por encima del interstitial estándar:
+un asset con el bloque lo dibuja nuestro plugin, un asset sin el bloque se
+reproduce por su `URI` hasta el fin del asset —que es exactamente un aviso
+lineal, declarado como se declaró siempre—, y un bloque que falla cae al mismo
+lugar. **El aviso lineal y el repliegue son el mismo mecanismo.** Scope
+`project`, porque decide cómo se lee el formato y no sólo cómo lo lee esta demo.
+
+La consecuencia que el ADR escribe sin suavizar es que **el degradado no es
+transparente**: la norma no tiene modelo de superposición, así que un cliente
+conforme que lea el asset-list y no entienda el bloque pausa el primario, y el
+aviso concurrente se convierte en uno lineal que interrumpe. Es un buen repliegue
+y no una equivalencia.
+
+**Ninguna relación con un ADR anterior, y conviene decir por qué no.** El ADR
+0009 rechazó la palabra "extensión" para la **clase del Date Range**, y este la
+usa para el **JSON del asset list**: son dos niveles distintos, y en el segundo la
+relación sí tiene algo detrás, porque las claves obligatorias siguen ahí y un
+cliente que ignora el bloque igual reproduce. Nada del 0009 dejó de ser cierto.
+Tampoco del 0002, del 0007 ni del 0016. El 0018 anticipa en una consecuencia que
+nuestro player va a producir un rango de clase `interstitial` sobre su propio
+riel, y bajo el render que esta fase adopta esa anticipación no se sigue sola;
+pero una anticipación en una consecuencia no es una decisión que dejó de ser
+cierta, así que el 0018 no se toca y la pregunta queda planteada en el `DESIGN.md`
+y en la task que la construye.
+
+**El documento de arquitectura del producto —el contrato entre las dos capas, en
+`docs/contrato-senalizacion-renderizado.md`— sí tiene un delta pendiente por esta
+decisión**, y no se aplica acá: la regla 5 dice que `activeAt` es la única fuente
+de la ventana de activación, calculada desde `startTime` y `duration`, y la regla
+de la norma es "hasta el fin del asset". Las dos no pueden ser ciertas a la vez
+cuando el creativo dura otra cosa que su `DURATION` declarada. Cómo se resuelve es
+la decisión de la task que construye el mecanismo, y la versión del documento sale
+de ahí; escribirla antes sería fijar por escrito una salida que todavía no se
+eligió.
