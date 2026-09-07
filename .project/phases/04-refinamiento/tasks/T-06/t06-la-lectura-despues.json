@@ -1,0 +1,425 @@
+{
+  "etiqueta": "despues",
+  "url": "http://localhost:8080/",
+  "viewport": {
+    "width": 1600,
+    "height": 1000,
+    "deviceScaleFactor": 1,
+    "mobile": false
+  },
+  "lasMarcasYElRiel": {
+    "track": {
+      "x": 890.92,
+      "y": 672.52,
+      "w": 541.56,
+      "h": 44,
+      "bottom": 716.52,
+      "right": 1432.48
+    },
+    "rail": {
+      "x": 890.92,
+      "y": 690.52,
+      "w": 541.56,
+      "h": 8,
+      "bottom": 698.52,
+      "right": 1432.48
+    },
+    "fila": {
+      "x": 844,
+      "y": 672.52,
+      "w": 683,
+      "h": 44,
+      "bottom": 716.52,
+      "right": 1527
+    },
+    "barra": {
+      "x": 828,
+      "y": 672.52,
+      "w": 715,
+      "h": 60,
+      "bottom": 732.52,
+      "right": 1543
+    },
+    "player": {
+      "x": 828,
+      "y": 330.33,
+      "w": 715,
+      "h": 402.19,
+      "bottom": 732.52,
+      "right": 1543
+    },
+    "video": {
+      "x": 828,
+      "y": 330.33,
+      "w": 715,
+      "h": 402.19,
+      "bottom": 732.52,
+      "right": 1543
+    },
+    "contenedorDeCues": null,
+    "marcas": [
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 951.09,
+          "y": 690.52,
+          "w": 36.09,
+          "h": 8,
+          "bottom": 698.52,
+          "right": 987.19
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 1026.31,
+          "y": 690.52,
+          "w": 36.09,
+          "h": 8,
+          "bottom": 698.52,
+          "right": 1062.41
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 1101.52,
+          "y": 690.52,
+          "w": 36.09,
+          "h": 8,
+          "bottom": 698.52,
+          "right": 1137.61
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 1176.73,
+          "y": 690.52,
+          "w": 36.09,
+          "h": 8,
+          "bottom": 698.52,
+          "right": 1212.83
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 1251.95,
+          "y": 690.52,
+          "w": 36.09,
+          "h": 8,
+          "bottom": 698.52,
+          "right": 1288.05
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      }
+    ],
+    "cuantasMarcas": 5,
+    "cuantasCuelgan": 0,
+    "rangosDelProveedorDeLaPagina": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-1-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "kind": "interstitial",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "kind": "interstitial",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "kind": "interstitial",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "kind": "interstitial",
+        "startTime": 120,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 120,
+        "duration": 12
+      }
+    ],
+    "tokens": {
+      "--qa-rail": "8px",
+      "--qa-icon": "34px",
+      "--qa-pad": "16px"
+    },
+    "altoDeTrackComputado": "44px"
+  },
+  "laTira": {
+    "x": 828,
+    "y": 664.52,
+    "width": 715,
+    "height": 68.0
+  },
+  "laCajaPedidaContraLaDibujada": [
+    {
+      "elemento": "primaryContent",
+      "primario": true,
+      "deltaMaxPx": 0
+    },
+    {
+      "elemento": "view2",
+      "primario": false,
+      "deltaMaxPx": 0
+    },
+    {
+      "elemento": "view3",
+      "primario": false,
+      "deltaMaxPx": 0
+    },
+    {
+      "elemento": "view4",
+      "primario": false,
+      "deltaMaxPx": 0
+    }
+  ],
+  "lasMarcasYElRielAdentroDelBreak": {
+    "track": {
+      "x": 890.92,
+      "y": 664.27,
+      "w": 541.56,
+      "h": 44,
+      "bottom": 708.27,
+      "right": 1432.48
+    },
+    "rail": {
+      "x": 890.92,
+      "y": 682.27,
+      "w": 541.56,
+      "h": 8,
+      "bottom": 690.27,
+      "right": 1432.48
+    },
+    "fila": {
+      "x": 844,
+      "y": 664.27,
+      "w": 683,
+      "h": 44,
+      "bottom": 708.27,
+      "right": 1527
+    },
+    "barra": {
+      "x": 828,
+      "y": 664.27,
+      "w": 715,
+      "h": 60,
+      "bottom": 724.27,
+      "right": 1543
+    },
+    "player": {
+      "x": 828,
+      "y": 322.08,
+      "w": 715,
+      "h": 402.19,
+      "bottom": 724.27,
+      "right": 1543
+    },
+    "video": {
+      "x": 828,
+      "y": 322.08,
+      "w": 357.5,
+      "h": 201.09,
+      "bottom": 523.17,
+      "right": 1185.5
+    },
+    "contenedorDeCues": null,
+    "marcas": [
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 951.09,
+          "y": 682.27,
+          "w": 36.09,
+          "h": 8,
+          "bottom": 690.27,
+          "right": 987.19
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 1026.31,
+          "y": 682.27,
+          "w": 36.09,
+          "h": 8,
+          "bottom": 690.27,
+          "right": 1062.41
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 1101.52,
+          "y": 682.27,
+          "w": 36.09,
+          "h": 8,
+          "bottom": 690.27,
+          "right": 1137.61
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 1176.73,
+          "y": 682.27,
+          "w": 36.09,
+          "h": 8,
+          "bottom": 690.27,
+          "right": 1212.83
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 1251.95,
+          "y": 682.27,
+          "w": 36.09,
+          "h": 8,
+          "bottom": 690.27,
+          "right": 1288.05
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      }
+    ],
+    "cuantasMarcas": 5,
+    "cuantasCuelgan": 0,
+    "rangosDelProveedorDeLaPagina": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-1-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "kind": "interstitial",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "kind": "interstitial",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "kind": "interstitial",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "kind": "interstitial",
+        "startTime": 120,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 120,
+        "duration": 12
+      }
+    ],
+    "tokens": {
+      "--qa-rail": "8px",
+      "--qa-icon": "34px",
+      "--qa-pad": "16px"
+    },
+    "altoDeTrackComputado": "44px"
+  },
+  "consola": []
+}

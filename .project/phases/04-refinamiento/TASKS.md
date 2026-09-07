@@ -33,7 +33,7 @@ fue.
 | T-03 | Los controles usables con el dedo                                  | done    | —    | `.project/phases/04-refinamiento/tasks/T-03/` |
 | T-04 | La separabilidad: el cromo sin la parte de concurrentes            | done    | —    | `.project/phases/04-refinamiento/tasks/T-04/` |
 | T-05 | El pane de fábrica reemplaza el contenido en lugar de insertarlo   | done    | —    | `.project/phases/04-refinamiento/tasks/T-05/` |
-| T-06 | La barra marca sólo lo que ese player reproduce, y sobre el riel   | planned | —    | —        |
+| T-06 | La barra marca sólo lo que ese player reproduce, y sobre el riel   | done    | —    | `.project/phases/04-refinamiento/tasks/T-06/` |
 | T-07 | El pane del otro con nuestro cromo, y su propio riel               | planned | —    | —        |
 
 ---
