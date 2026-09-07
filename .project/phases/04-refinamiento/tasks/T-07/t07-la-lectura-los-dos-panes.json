@@ -1,0 +1,1148 @@
+{
+  "url": "http://localhost:8080/",
+  "modo": "los-dos-panes",
+  "viewport": {
+    "width": 1600,
+    "height": 1000,
+    "deviceScaleFactor": 1,
+    "mobile": false
+  },
+  "afueraDelBreak": {
+    "fabrica": {
+      "hayCromo": true,
+      "cromoArriba": true,
+      "transcurrido": "0:09",
+      "total": "3:00",
+      "perillaIzquierda": "5.02136%",
+      "rellenoAncho": "5.02136%",
+      "botones": [
+        "sound of the composition",
+        "play or pause the composition",
+        "fullscreen"
+      ],
+      "marca": "#7f8aa3",
+      "perillaColor": "rgb(127, 138, 163)",
+      "contenedor": {
+        "x": 57,
+        "y": 330.33,
+        "w": 715,
+        "h": 402.19,
+        "bottom": 732.52
+      },
+      "track": {
+        "x": 119.92,
+        "y": 672.52,
+        "w": 541.56,
+        "h": 44,
+        "bottom": 716.52
+      },
+      "rail": {
+        "x": 119.92,
+        "y": 690.52,
+        "w": 541.56,
+        "h": 8,
+        "bottom": 698.52
+      },
+      "player": {
+        "x": 40,
+        "y": 227.89,
+        "w": 749,
+        "h": 572.13,
+        "bottom": 800.02
+      },
+      "video": {
+        "x": 57,
+        "y": 330.33,
+        "w": 715,
+        "h": 402.19,
+        "bottom": 732.52
+      },
+      "cuantasMarcas": 5,
+      "cuantasCuelgan": 0,
+      "marcas": [
+        {
+          "caja": {
+            "x": 180.14,
+            "y": 690.52,
+            "w": 36.2,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "11.1216%",
+          "ancho": "6.68661%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 255.36,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "25.0089%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 330.56,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "38.8961%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 405.77,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "52.7834%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 480.98,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "66.6706%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        }
+      ]
+    },
+    "demo": {
+      "hayCromo": true,
+      "cromoArriba": true,
+      "transcurrido": "0:09",
+      "total": "3:00",
+      "perillaIzquierda": "5.02845%",
+      "rellenoAncho": "5.02845%",
+      "botones": [
+        "sound of the composition",
+        "play or pause the composition",
+        "fullscreen"
+      ],
+      "marca": "#37b4a7",
+      "perillaColor": "rgb(55, 180, 167)",
+      "contenedor": {
+        "x": 828,
+        "y": 330.33,
+        "w": 715,
+        "h": 402.19,
+        "bottom": 732.52
+      },
+      "track": {
+        "x": 890.92,
+        "y": 672.52,
+        "w": 541.56,
+        "h": 44,
+        "bottom": 716.52
+      },
+      "rail": {
+        "x": 890.92,
+        "y": 690.52,
+        "w": 541.56,
+        "h": 8,
+        "bottom": 698.52
+      },
+      "player": {
+        "x": 811,
+        "y": 227.89,
+        "w": 749,
+        "h": 596.63,
+        "bottom": 824.52
+      },
+      "video": {
+        "x": 828,
+        "y": 330.33,
+        "w": 715,
+        "h": 402.19,
+        "bottom": 732.52
+      },
+      "cuantasMarcas": 5,
+      "cuantasCuelgan": 0,
+      "marcas": [
+        {
+          "caja": {
+            "x": 951.09,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "11.1111%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1026.31,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "25%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1101.52,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "38.8889%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1176.73,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "52.7778%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1251.95,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "66.6667%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        }
+      ]
+    },
+    "relojes": {
+      "demo": {
+        "elemT": 9.051,
+        "elemDur": 180,
+        "paused": true,
+        "muted": true,
+        "concurrentesActivos": []
+      },
+      "fabrica": {
+        "elemT": 9.04,
+        "elemDur": 180.021,
+        "paused": true,
+        "muted": true,
+        "programaT": 9.04,
+        "programaDur": 180.021,
+        "loQueLaFachadaDevuelve": {
+          "currentTime": 9.04,
+          "duration": 180.021
+        },
+        "ad": null,
+        "appendInPlace": null,
+        "breakSpan": {
+          "start": 0,
+          "end": 20.021
+        },
+        "enElAviso": {
+          "currentTime": 0,
+          "duration": 12.037
+        },
+        "lineaDeEstado": "primary content \u00b7 9.0s",
+        "rangosQueDeclara": {
+          "ranges": [
+            {
+              "id": "AD-1-LINEAR",
+              "kind": "interstitial",
+              "startTime": 20.021333333333335,
+              "duration": 12.037333333333333
+            },
+            {
+              "id": "AD-2-LINEAR",
+              "kind": "interstitial",
+              "startTime": 45.02133333333333,
+              "duration": 12
+            },
+            {
+              "id": "AD-3-LINEAR",
+              "kind": "interstitial",
+              "startTime": 70.02133333333333,
+              "duration": 12
+            },
+            {
+              "id": "AD-4-LINEAR",
+              "kind": "interstitial",
+              "startTime": 95.02133333333333,
+              "duration": 12
+            },
+            {
+              "id": "AD-5-LINEAR",
+              "kind": "interstitial",
+              "startTime": 120.02133333333333,
+              "duration": 12
+            }
+          ],
+          "settled": true
+        },
+        "siLaBarraLeyeraElElemento": {
+          "transcurrido": "0:09",
+          "total": "3:00",
+          "perillaPorCiento": 5.0214,
+          "marcasQueSePodrianDibujar": 5
+        }
+      },
+      "lineaDeEstadoDeLaDemo": "primary content \u00b7 9.1s"
+    },
+    "elMismoSegundoDelPrograma": {
+      "demo": 9.051,
+      "fabrica": 9.04,
+      "diferenciaSegundos": 0.011,
+      "elMismoRelojEnLasDosBarras": true
+    },
+    "comoSeLlego": {
+      "pedido": 8.0,
+      "aterrizaron": {
+        "demo": 9.043587,
+        "fabrica": 9.006399
+      },
+      "intentos": 1
+    }
+  },
+  "adentroDel-break-1-appendInPlace": {
+    "fabrica": {
+      "hayCromo": true,
+      "cromoArriba": true,
+      "transcurrido": "0:22",
+      "total": "3:00",
+      "perillaIzquierda": "12.3831%",
+      "rellenoAncho": "12.3831%",
+      "botones": [
+        "sound of the composition",
+        "play or pause the composition",
+        "fullscreen"
+      ],
+      "marca": "#7f8aa3",
+      "perillaColor": "rgb(127, 138, 163)",
+      "contenedor": {
+        "x": 57,
+        "y": 330.33,
+        "w": 715,
+        "h": 402.19,
+        "bottom": 732.52
+      },
+      "track": {
+        "x": 119.92,
+        "y": 672.52,
+        "w": 541.56,
+        "h": 44,
+        "bottom": 716.52
+      },
+      "rail": {
+        "x": 119.92,
+        "y": 690.52,
+        "w": 541.56,
+        "h": 8,
+        "bottom": 698.52
+      },
+      "player": {
+        "x": 40,
+        "y": 227.89,
+        "w": 749,
+        "h": 572.13,
+        "bottom": 800.02
+      },
+      "video": {
+        "x": 57,
+        "y": 330.33,
+        "w": 715,
+        "h": 402.19,
+        "bottom": 732.52
+      },
+      "cuantasMarcas": 5,
+      "cuantasCuelgan": 0,
+      "marcas": [
+        {
+          "caja": {
+            "x": 180.14,
+            "y": 690.52,
+            "w": 36.2,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "11.1216%",
+          "ancho": "6.68661%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 255.36,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "25.0089%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 330.56,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "38.8961%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 405.77,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "52.7834%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 480.98,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "66.6706%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        }
+      ]
+    },
+    "demo": {
+      "hayCromo": true,
+      "cromoArriba": true,
+      "transcurrido": "0:22",
+      "total": "3:00",
+      "perillaIzquierda": "12.3847%",
+      "rellenoAncho": "12.3847%",
+      "botones": [
+        "sound of the composition",
+        "play or pause the composition",
+        "fullscreen"
+      ],
+      "marca": "#37b4a7",
+      "perillaColor": "rgb(55, 180, 167)",
+      "contenedor": {
+        "x": 828,
+        "y": 330.33,
+        "w": 715,
+        "h": 402.19,
+        "bottom": 732.52
+      },
+      "track": {
+        "x": 890.92,
+        "y": 672.52,
+        "w": 541.56,
+        "h": 44,
+        "bottom": 716.52
+      },
+      "rail": {
+        "x": 890.92,
+        "y": 690.52,
+        "w": 541.56,
+        "h": 8,
+        "bottom": 698.52
+      },
+      "player": {
+        "x": 811,
+        "y": 227.89,
+        "w": 749,
+        "h": 596.63,
+        "bottom": 824.52
+      },
+      "video": {
+        "x": 828,
+        "y": 330.33,
+        "w": 715,
+        "h": 402.19,
+        "bottom": 732.52
+      },
+      "cuantasMarcas": 5,
+      "cuantasCuelgan": 0,
+      "marcas": [
+        {
+          "caja": {
+            "x": 951.09,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "11.1111%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1026.31,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "25%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1101.52,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "38.8889%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1176.73,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "52.7778%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1251.95,
+            "y": 690.52,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 698.52
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "66.6667%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        }
+      ]
+    },
+    "relojes": {
+      "demo": {
+        "elemT": 22.292,
+        "elemDur": 180,
+        "paused": true,
+        "muted": true,
+        "concurrentesActivos": [
+          "cornerOverlay"
+        ]
+      },
+      "fabrica": {
+        "elemT": 22.292,
+        "elemDur": 180.021,
+        "paused": true,
+        "muted": true,
+        "programaT": 22.292,
+        "programaDur": 180.021,
+        "loQueLaFachadaDevuelve": {
+          "currentTime": 22.292,
+          "duration": 180.021
+        },
+        "ad": "AD-1-LINEAR",
+        "appendInPlace": true,
+        "breakSpan": {
+          "start": 20.021,
+          "end": 32.059
+        },
+        "enElAviso": {
+          "currentTime": 2.292,
+          "duration": 12.037
+        },
+        "lineaDeEstado": "LINEAR AD \"AD-1-LINEAR\" \u00b7 2.3s of 12.0s \u00b7 the content is off the screen",
+        "rangosQueDeclara": {
+          "ranges": [
+            {
+              "id": "AD-1-LINEAR",
+              "kind": "interstitial",
+              "startTime": 20.021333333333335,
+              "duration": 12.037333333333333
+            },
+            {
+              "id": "AD-2-LINEAR",
+              "kind": "interstitial",
+              "startTime": 45.02133333333333,
+              "duration": 12
+            },
+            {
+              "id": "AD-3-LINEAR",
+              "kind": "interstitial",
+              "startTime": 70.02133333333333,
+              "duration": 12
+            },
+            {
+              "id": "AD-4-LINEAR",
+              "kind": "interstitial",
+              "startTime": 95.02133333333333,
+              "duration": 12
+            },
+            {
+              "id": "AD-5-LINEAR",
+              "kind": "interstitial",
+              "startTime": 120.02133333333333,
+              "duration": 12
+            }
+          ],
+          "settled": true
+        },
+        "siLaBarraLeyeraElElemento": {
+          "transcurrido": "0:22",
+          "total": "3:00",
+          "perillaPorCiento": 12.3831,
+          "marcasQueSePodrianDibujar": 5
+        }
+      },
+      "lineaDeEstadoDeLaDemo": "primary content + CONCURRENT AD (cornerOverlay) \u00b7 22.3s \u00b7 nothing was replaced"
+    },
+    "elMismoSegundoDelPrograma": {
+      "demo": 22.292,
+      "fabrica": 22.292,
+      "diferenciaSegundos": 0.0,
+      "elMismoRelojEnLasDosBarras": true
+    },
+    "comoSeLlego": {
+      "pedido": 18.0,
+      "aterrizaron": {
+        "demo": 18,
+        "fabrica": 18
+      },
+      "intentos": 1
+    },
+    "laCajaPedidaContraLaDibujada": [
+      {
+        "elemento": "primaryContent",
+        "primario": true,
+        "deltaMaxPx": 0
+      },
+      {
+        "elemento": "adOverlay1",
+        "primario": false,
+        "deltaMaxPx": 0
+      }
+    ]
+  },
+  "adentroDel-break-2-mediasource-al-asset": {
+    "fabrica": {
+      "hayCromo": true,
+      "cromoArriba": true,
+      "transcurrido": "0:45",
+      "total": "3:00",
+      "perillaIzquierda": "25.0089%",
+      "rellenoAncho": "25.0089%",
+      "botones": [
+        "sound of the composition",
+        "play or pause the composition",
+        "fullscreen"
+      ],
+      "marca": "#7f8aa3",
+      "perillaColor": "rgb(127, 138, 163)",
+      "contenedor": {
+        "x": 57,
+        "y": 322.08,
+        "w": 715,
+        "h": 402.19,
+        "bottom": 724.27
+      },
+      "track": {
+        "x": 119.92,
+        "y": 664.27,
+        "w": 541.56,
+        "h": 44,
+        "bottom": 708.27
+      },
+      "rail": {
+        "x": 119.92,
+        "y": 682.27,
+        "w": 541.56,
+        "h": 8,
+        "bottom": 690.27
+      },
+      "player": {
+        "x": 40,
+        "y": 219.64,
+        "w": 749,
+        "h": 572.13,
+        "bottom": 791.77
+      },
+      "video": {
+        "x": 57,
+        "y": 322.08,
+        "w": 715,
+        "h": 402.19,
+        "bottom": 724.27
+      },
+      "cuantasMarcas": 5,
+      "cuantasCuelgan": 0,
+      "marcas": [
+        {
+          "caja": {
+            "x": 180.14,
+            "y": 682.27,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 690.27
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "11.1216%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 255.36,
+            "y": 682.27,
+            "w": 36.2,
+            "h": 8,
+            "bottom": 690.27
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "25.0089%",
+          "ancho": "6.68661%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 330.56,
+            "y": 682.27,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 690.27
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "38.8961%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 405.77,
+            "y": 682.27,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 690.27
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "52.7834%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 480.98,
+            "y": 682.27,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 690.27
+          },
+          "color": "rgb(255, 204, 0)",
+          "titulo": "traditional interstitial: the content is replaced by the ad",
+          "izquierda": "66.6706%",
+          "ancho": "6.66588%",
+          "pxDebajoDelRiel": 0
+        }
+      ]
+    },
+    "demo": {
+      "hayCromo": true,
+      "cromoArriba": true,
+      "transcurrido": "0:47",
+      "total": "3:00",
+      "perillaIzquierda": "26.2743%",
+      "rellenoAncho": "26.2743%",
+      "botones": [
+        "sound of the composition",
+        "play or pause the composition",
+        "fullscreen"
+      ],
+      "marca": "#37b4a7",
+      "perillaColor": "rgb(55, 180, 167)",
+      "contenedor": {
+        "x": 828,
+        "y": 322.08,
+        "w": 715,
+        "h": 402.19,
+        "bottom": 724.27
+      },
+      "track": {
+        "x": 890.92,
+        "y": 664.27,
+        "w": 541.56,
+        "h": 44,
+        "bottom": 708.27
+      },
+      "rail": {
+        "x": 890.92,
+        "y": 682.27,
+        "w": 541.56,
+        "h": 8,
+        "bottom": 690.27
+      },
+      "player": {
+        "x": 811,
+        "y": 219.64,
+        "w": 749,
+        "h": 613.13,
+        "bottom": 832.77
+      },
+      "video": {
+        "x": 828,
+        "y": 322.08,
+        "w": 429,
+        "h": 241.31,
+        "bottom": 563.39
+      },
+      "cuantasMarcas": 5,
+      "cuantasCuelgan": 0,
+      "marcas": [
+        {
+          "caja": {
+            "x": 951.09,
+            "y": 682.27,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 690.27
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "11.1111%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1026.31,
+            "y": 682.27,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 690.27
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "25%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1101.52,
+            "y": 682.27,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 690.27
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "38.8889%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1176.73,
+            "y": 682.27,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 690.27
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "52.7778%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        },
+        {
+          "caja": {
+            "x": 1251.95,
+            "y": 682.27,
+            "w": 36.09,
+            "h": 8,
+            "bottom": 690.27
+          },
+          "color": "rgb(162, 115, 255)",
+          "titulo": "concurrent ad: drawn over the content, which never stops",
+          "izquierda": "66.6667%",
+          "ancho": "6.66667%",
+          "pxDebajoDelRiel": 0
+        }
+      ]
+    },
+    "relojes": {
+      "demo": {
+        "elemT": 47.294,
+        "elemDur": 180,
+        "paused": true,
+        "muted": true,
+        "concurrentesActivos": [
+          "squeezebackLShape"
+        ]
+      },
+      "fabrica": {
+        "elemT": 2.144,
+        "elemDur": 12.032,
+        "paused": true,
+        "muted": true,
+        "programaT": 45.021,
+        "programaDur": 180.021,
+        "loQueLaFachadaDevuelve": {
+          "currentTime": 45.021,
+          "duration": 180.021
+        },
+        "ad": "AD-2-LINEAR",
+        "appendInPlace": false,
+        "breakSpan": {
+          "start": 45.021,
+          "end": 57.059
+        },
+        "enElAviso": {
+          "currentTime": 2.144,
+          "duration": 12.037
+        },
+        "lineaDeEstado": "LINEAR AD \"AD-2-LINEAR\" \u00b7 2.1s of 12.0s \u00b7 the content is off the screen",
+        "rangosQueDeclara": {
+          "ranges": [
+            {
+              "id": "AD-1-LINEAR",
+              "kind": "interstitial",
+              "startTime": 20.021333333333335,
+              "duration": 11.999999999999996
+            },
+            {
+              "id": "AD-2-LINEAR",
+              "kind": "interstitial",
+              "startTime": 45.02133333333333,
+              "duration": 12.037333333333336
+            },
+            {
+              "id": "AD-3-LINEAR",
+              "kind": "interstitial",
+              "startTime": 70.02133333333333,
+              "duration": 12
+            },
+            {
+              "id": "AD-4-LINEAR",
+              "kind": "interstitial",
+              "startTime": 95.02133333333333,
+              "duration": 12
+            },
+            {
+              "id": "AD-5-LINEAR",
+              "kind": "interstitial",
+              "startTime": 120.02133333333333,
+              "duration": 12
+            }
+          ],
+          "settled": true
+        },
+        "siLaBarraLeyeraElElemento": {
+          "transcurrido": "0:02",
+          "total": "0:12",
+          "perillaPorCiento": 17.8228,
+          "marcasQueSePodrianDibujar": 0
+        }
+      },
+      "lineaDeEstadoDeLaDemo": "primary content + CONCURRENT AD (squeezebackLShape) \u00b7 47.3s \u00b7 nothing was replaced"
+    },
+    "elMismoSegundoDelPrograma": {
+      "demo": 47.294,
+      "fabrica": 45.021,
+      "diferenciaSegundos": 2.273,
+      "elMismoRelojEnLasDosBarras": false
+    },
+    "comoSeLlego": {
+      "pedido": 43.0,
+      "aterrizaron": {
+        "demo": 43,
+        "fabrica": 43
+      },
+      "intentos": 1
+    },
+    "laCajaPedidaContraLaDibujada": [
+      {
+        "elemento": "primaryContent",
+        "primario": true,
+        "deltaMaxPx": 0
+      },
+      {
+        "elemento": "adBarVertical",
+        "primario": false,
+        "deltaMaxPx": 0
+      },
+      {
+        "elemento": "adBarHorizontal",
+        "primario": false,
+        "deltaMaxPx": 0
+      }
+    ]
+  },
+  "lasTresLecturas": {
+    "unaLaInstancia": {
+      "cuantasOpciones": 0,
+      "userConfig": {},
+      "managerPresente": true,
+      "hud": "hls.js 1.7.2 \u00b7 interstitials manager: PRESENT \u00b7 playing ./content/primary/con-daterange.m3u8",
+      "interstitialsControllerEnLaConfig": true,
+      "elOtroPaneCuantasOpciones": 1,
+      "elOtroPaneManagerPresente": false
+    },
+    "dosLaRed": {
+      "loQueEsaInstanciaDeclara": [
+        "/signalling/asset-list-linear.json",
+        "/signalling/asset-list-linear.json",
+        "/signalling/asset-list-linear.json",
+        "/signalling/asset-list-linear.json",
+        "/signalling/asset-list-linear.json"
+      ],
+      "assetListsDeLaPagina": {
+        "http://localhost:8080/signalling/asset-list-cornerOverlay.json": 1,
+        "http://localhost:8080/signalling/asset-list-squeezebackLShape.json": 1,
+        "http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json": 1,
+        "http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json": 1,
+        "http://localhost:8080/signalling/asset-list-multiView.json": 1,
+        "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=60aa5433-cfc5-48d7-a8d8-67ccb9620ac3": 3
+      },
+      "conHuellaDeControladorDeInterstitials": [
+        "http://localhost:8080/signalling/asset-list-linear.json?_HLS_primary_id=60aa5433-cfc5-48d7-a8d8-67ccb9620ac3"
+      ],
+      "concurrentesConHuella": [],
+      "concurrentesPelados": [
+        "http://localhost:8080/signalling/asset-list-cornerOverlay.json",
+        "http://localhost:8080/signalling/asset-list-squeezebackLShape.json",
+        "http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json",
+        "http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json",
+        "http://localhost:8080/signalling/asset-list-multiView.json"
+      ]
+    },
+    "tresLosAgendados": {
+      "cuantos": 5,
+      "eventos": [
+        {
+          "id": "AD-1-LINEAR",
+          "clase": "com.apple.hls.interstitial"
+        },
+        {
+          "id": "AD-2-LINEAR",
+          "clase": "com.apple.hls.interstitial"
+        },
+        {
+          "id": "AD-3-LINEAR",
+          "clase": "com.apple.hls.interstitial"
+        },
+        {
+          "id": "AD-4-LINEAR",
+          "clase": "com.apple.hls.interstitial"
+        },
+        {
+          "id": "AD-5-LINEAR",
+          "clase": "com.apple.hls.interstitial"
+        }
+      ],
+      "getterDeLaPagina": [
+        {
+          "id": "AD-1-LINEAR",
+          "class": "com.apple.hls.interstitial"
+        },
+        {
+          "id": "AD-2-LINEAR",
+          "class": "com.apple.hls.interstitial"
+        },
+        {
+          "id": "AD-3-LINEAR",
+          "class": "com.apple.hls.interstitial"
+        },
+        {
+          "id": "AD-4-LINEAR",
+          "class": "com.apple.hls.interstitial"
+        },
+        {
+          "id": "AD-5-LINEAR",
+          "class": "com.apple.hls.interstitial"
+        }
+      ],
+      "deLaClaseConcurrente": 0
+    }
+  },
+  "consola": [],
+  "consolaStock": [
+    "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+  ]
+}

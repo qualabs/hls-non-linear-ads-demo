@@ -35,7 +35,10 @@ The run is under three minutes and it needs nothing but a browser window. One
 thing to do before the camera rolls, and four to expect.
 
 **Turn the sound on once, at the start**, with the audio control at the top
-right of the right-hand picture. The page starts muted so the browser's autoplay
+right of the right-hand picture. Both pictures have one and either works, but
+only one of them can be live: turning one on turns the other off, because two
+soundtracks of the same film a fraction of a second apart is the worst thing
+that can happen to a recording. The page starts muted so the browser's autoplay
 policy lets it begin without a click, and that control is the one that lifts it:
 it is the audio of the composition, drawn by the library along with the progress
 bar, the play/pause and the fullscreen (ADR 0015). It is one switch for the
@@ -130,7 +133,7 @@ and the page that uses it.
 | `lib/renderer.js` | the rendering layer: the contract in, the boxes drawn over the video. Knows nothing about HLS |
 | `lib/controls.js` | the composition's own controls: one progress bar over the whole programme, pause, audio, fullscreen, and the marks on its rail that say where the breaks this player plays are |
 | `lib/media.js` | how a `uri` becomes pixels: one instance of hls.js per ad asset |
-| `lib/concurrent-hls.js` | the entry point and the public surface: `attach`, and the configuration the instance has to be built with |
+| `lib/concurrent-hls.js` | the entry point and the public surface: `attach` for the concurrent experience, `attachControls` for the chrome on its own, and the configuration the instance has to be built with |
 | `dist/` | the built library: one classic script that defines a global. Generated, gitignored |
 | `index.html`, `css/`, `js/` | **the page.** The compatibility pair, the trace of the contract, and the wiring of the library. Native ES modules |
 | `js/contract-trace.js` | the same contract, printed: the line under the player and the table in the console |
@@ -155,10 +158,31 @@ with a linear ad and one of the sibling class of ADR 0009 with the concurrent
 experience, each with its own `ID` and its own asset-list.
 
 The left player is hls.js at its **factory configuration**, with nothing of this
-demo wired into it: it schedules the Apple-class tag and replaces the content
-with the linear ad, exactly as a deployed player does today. The right one is
-the same library, same version, unmodified, and keeps the content on screen with
-the concurrent experience drawn over it.
+demo wired into the instance: it schedules the Apple-class tag and replaces the
+content with the linear ad, exactly as a deployed player does today. The right
+one is the same library, same version, unmodified, and keeps the content on
+screen with the concurrent experience drawn over it.
+
+**Both panes carry the same chrome, and the left one is still an unmodified
+client.** What it takes from the library is `attachControls`, which draws the bar
+and the buttons over a player and does nothing else to it: no instance goes in,
+nothing is turned on, and nothing of ours reaches the network for it. The
+instance is `new Hls()` and not one option, which is the thing that has to stay
+untouched for the argument to hold, and it is verified rather than asserted --
+three readings of the running page, in the evidence of T-07 of phase 04. Without
+the same chrome the two pictures would differ in the mechanism and in the
+furniture at once, and nobody watching would know which of the two is the point.
+
+**Each bar marks what its own player plays** (ADR 0018): the concurrent ranges in
+violet on the right, and on the left the twelve seconds of the programme each
+break replaces, in yellow, read out of that client's own schedule. Same
+positions, because the two tags share their `START-DATE`; different colour,
+because they are different behaviours. **And the left bar shows the clock of the
+programme**, which during a break is the second the programme is stopped at
+inside that break, and not the clock of the ad -- that one is on the line of text
+under the picture. Why it cannot be the element's own clock is in the evidence of
+T-07: in two of the five breaks hls.js hands the MediaSource to the asset, and
+the element then reports 0:02 of 0:12 with the whole rail rescaled to the ad.
 
 Backwards compatibility does **not** come from one class extending the other. In
 HLS the class of a Date Range is compared by exact string equality and there is

@@ -7,17 +7,18 @@
  * it.
  *
  * Nothing here styles the concurrent experience, and nothing here styles the
- * controls of the right-hand player either. Both are drawn and styled by the
- * library, inside the container this page gives it, because the way that layer
- * stacks and the way the controls sit above it are invariants of the renderer
- * and not choices of whoever writes the page (ADR 0015). What .player keeps is
- * the frame around them: the aspect ratio, the black bed and the rounded
- * corners.
+ * controls of either player. Both are drawn and styled by the library, inside
+ * the container this page gives it, because the way that layer stacks and the
+ * way the controls sit above it are invariants of the renderer and not choices
+ * of whoever writes the page (ADR 0015). What .player keeps is the frame around
+ * them: the aspect ratio, the black bed and the rounded corners. Both panes
+ * have that frame and both have the chrome inside it, which is what makes them
+ * two pictures of the same player differing in one thing.
  *
  * What this page DOES hand the chrome is one value, `--qa-accent`, and a value
  * is not a rule: the library asks for the colour of whoever integrates it
- * rather than shipping one, so the knob of the bar comes out in the teal of
- * this brand without a line of the library naming it. A mark travels the other
+ * rather than shipping one, so the knob of each bar comes out in the colour of
+ * its own pane without a line of the library naming it. A mark travels the other
  * way, as a file passed to `attach`, because a mark is an asset and not a
  * token. This page hands none: its only mark is the plate in the masthead. */
 
@@ -128,8 +129,15 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
 
 /* The one value this page hands to the chrome the library draws (see the head
  * of this file). It goes on the container and not on anything inside it,
- * because what is inside is the library's. */
-.pane-demo .player { --qa-accent: var(--accent); }
+ * because what is inside is the library's.
+ *
+ * ONE RULE FOR BOTH PANES, and each one takes its own identity colour, because
+ * both panes now carry the same chrome. The knob of the left bar comes out
+ * slate and the right one teal, which is the rule this page already had -- the
+ * colour says which player you are looking at -- and it is the one difference
+ * between the two strips that is deliberate. A teal knob over the left picture
+ * would say "ours" of a player that is not. */
+.pane .player { --qa-accent: var(--accent); }
 
 /* The live state of each pane, which is what makes a single frame of the
  * recording legible: while an ad is on, the pane's picture gets a ring and its

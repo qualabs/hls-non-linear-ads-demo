@@ -282,7 +282,17 @@ a player this library does not drive at all. Nothing about that player changes:
 this call reads `currentTime`, `duration`, `paused` and `muted` off the element
 and writes them back, and that is the whole of its contact with it.
 
-`video` is required and it is the element the controls command.
+`video` is required and it is what the controls command. A media element, or
+anything that reports and accepts those four properties and forwards
+`addEventListener`, `play` and `pause` to one. That is not a loophole and it is
+worth one paragraph, because it is what makes this call usable over a player
+whose ads it does not handle: **a client that replaces the content with an ad
+usually stops reporting the programme while the ad is on screen** -- its element
+reports the ad's own time and the ad's own length. A bar fed that would rescale
+the whole rail to twelve seconds and drop every mark on it. Hand over a small
+object that reads the programme's position off wherever your player keeps it, and
+the bar draws one timeline. The clock of the ad is a different statement and it
+belongs somewhere else on your page.
 
 | option | | |
 | --- | --- | --- |
@@ -363,7 +373,10 @@ Ten lines: six of JavaScript and four of markup, plus the two CSS rules of §3.
 That is the page of §1 with the optional things left out.
 
 The demo in this repository is that page with one option added, `onResolved`,
-and everything else it contains is there to make its own argument: a second
-player at its factory configuration for the compatibility pair, and the trace
-of the contract under the picture and in the console. Neither is plumbing this
-library needs.
+plus one more call of §6 -- `attachControls` over the second player, so that both
+pictures carry the same chrome. Everything else it contains is there to make its
+own argument: that second player at its factory configuration for the
+compatibility pair, the object it hands over so its bar reads the programme and
+not the ad it replaces it with, and the trace of the contract under the picture
+and in the console. None of that is plumbing this library needs, and the second
+call is the same one line the section above documents.

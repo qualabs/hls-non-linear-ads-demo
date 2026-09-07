@@ -1,0 +1,577 @@
+{
+  "url": "http://localhost:8080/",
+  "modo": "controles",
+  "viewport": {
+    "width": 1600,
+    "height": 1000,
+    "deviceScaleFactor": 1,
+    "mobile": false
+  },
+  "losCuatroControles": {
+    "laPausa": {
+      "antes": {
+        "demo": {
+          "elemT": 10.502,
+          "elemDur": 180,
+          "paused": false,
+          "muted": true,
+          "concurrentesActivos": []
+        },
+        "fabrica": {
+          "elemT": 10.499,
+          "elemDur": 180.021,
+          "paused": false,
+          "muted": true,
+          "programaT": 10.342,
+          "programaDur": 180.021,
+          "loQueLaFachadaDevuelve": {
+            "currentTime": 10.342,
+            "duration": 180.021
+          },
+          "ad": null,
+          "appendInPlace": null,
+          "breakSpan": {
+            "start": 0,
+            "end": 20.021
+          },
+          "enElAviso": {
+            "currentTime": 0,
+            "duration": 12.037
+          },
+          "lineaDeEstado": "primary content \u00b7 10.1s",
+          "rangosQueDeclara": {
+            "ranges": [
+              {
+                "id": "AD-1-LINEAR",
+                "kind": "interstitial",
+                "startTime": 20.021333333333335,
+                "duration": 12.037333333333333
+              },
+              {
+                "id": "AD-2-LINEAR",
+                "kind": "interstitial",
+                "startTime": 45.02133333333333,
+                "duration": 12
+              },
+              {
+                "id": "AD-3-LINEAR",
+                "kind": "interstitial",
+                "startTime": 70.02133333333333,
+                "duration": 12
+              },
+              {
+                "id": "AD-4-LINEAR",
+                "kind": "interstitial",
+                "startTime": 95.02133333333333,
+                "duration": 12
+              },
+              {
+                "id": "AD-5-LINEAR",
+                "kind": "interstitial",
+                "startTime": 120.02133333333333,
+                "duration": 12
+              }
+            ],
+            "settled": true
+          },
+          "siLaBarraLeyeraElElemento": {
+            "transcurrido": "0:10",
+            "total": "3:00",
+            "perillaPorCiento": 5.832,
+            "marcasQueSePodrianDibujar": 5
+          }
+        },
+        "lineaDeEstadoDeLaDemo": "primary content \u00b7 10.3s"
+      },
+      "despues": {
+        "demo": {
+          "elemT": 11.465,
+          "elemDur": 180,
+          "paused": false,
+          "muted": true,
+          "concurrentesActivos": []
+        },
+        "fabrica": {
+          "elemT": 10.647,
+          "elemDur": 180.021,
+          "paused": true,
+          "muted": true,
+          "programaT": 10.647,
+          "programaDur": 180.021,
+          "loQueLaFachadaDevuelve": {
+            "currentTime": 10.647,
+            "duration": 180.021
+          },
+          "ad": null,
+          "appendInPlace": null,
+          "breakSpan": {
+            "start": 0,
+            "end": 20.021
+          },
+          "enElAviso": {
+            "currentTime": 0,
+            "duration": 12.037
+          },
+          "lineaDeEstado": "primary content \u00b7 10.6s",
+          "rangosQueDeclara": {
+            "ranges": [
+              {
+                "id": "AD-1-LINEAR",
+                "kind": "interstitial",
+                "startTime": 20.021333333333335,
+                "duration": 12.037333333333333
+              },
+              {
+                "id": "AD-2-LINEAR",
+                "kind": "interstitial",
+                "startTime": 45.02133333333333,
+                "duration": 12
+              },
+              {
+                "id": "AD-3-LINEAR",
+                "kind": "interstitial",
+                "startTime": 70.02133333333333,
+                "duration": 12
+              },
+              {
+                "id": "AD-4-LINEAR",
+                "kind": "interstitial",
+                "startTime": 95.02133333333333,
+                "duration": 12
+              },
+              {
+                "id": "AD-5-LINEAR",
+                "kind": "interstitial",
+                "startTime": 120.02133333333333,
+                "duration": 12
+              }
+            ],
+            "settled": true
+          },
+          "siLaBarraLeyeraElElemento": {
+            "transcurrido": "0:10",
+            "total": "3:00",
+            "perillaPorCiento": 5.9143,
+            "marcasQueSePodrianDibujar": 5
+          }
+        },
+        "lineaDeEstadoDeLaDemo": "primary content \u00b7 11.4s"
+      },
+      "yDeVuelta": {
+        "demo": {
+          "elemT": 12.744,
+          "elemDur": 180,
+          "paused": false,
+          "muted": true,
+          "concurrentesActivos": []
+        },
+        "fabrica": {
+          "elemT": 11.474,
+          "elemDur": 180.021,
+          "paused": false,
+          "muted": true,
+          "programaT": 11.451,
+          "programaDur": 180.021,
+          "loQueLaFachadaDevuelve": {
+            "currentTime": 11.451,
+            "duration": 180.021
+          },
+          "ad": null,
+          "appendInPlace": null,
+          "breakSpan": {
+            "start": 0,
+            "end": 20.021
+          },
+          "enElAviso": {
+            "currentTime": 0,
+            "duration": 12.037
+          },
+          "lineaDeEstado": "primary content \u00b7 11.2s",
+          "rangosQueDeclara": {
+            "ranges": [
+              {
+                "id": "AD-1-LINEAR",
+                "kind": "interstitial",
+                "startTime": 20.021333333333335,
+                "duration": 12.037333333333333
+              },
+              {
+                "id": "AD-2-LINEAR",
+                "kind": "interstitial",
+                "startTime": 45.02133333333333,
+                "duration": 12
+              },
+              {
+                "id": "AD-3-LINEAR",
+                "kind": "interstitial",
+                "startTime": 70.02133333333333,
+                "duration": 12
+              },
+              {
+                "id": "AD-4-LINEAR",
+                "kind": "interstitial",
+                "startTime": 95.02133333333333,
+                "duration": 12
+              },
+              {
+                "id": "AD-5-LINEAR",
+                "kind": "interstitial",
+                "startTime": 120.02133333333333,
+                "duration": 12
+              }
+            ],
+            "settled": true
+          },
+          "siLaBarraLeyeraElElemento": {
+            "transcurrido": "0:11",
+            "total": "3:00",
+            "perillaPorCiento": 6.3738,
+            "marcasQueSePodrianDibujar": 5
+          }
+        },
+        "lineaDeEstadoDeLaDemo": "primary content \u00b7 12.7s"
+      }
+    },
+    "elAudio": {
+      "antes": {
+        "fabrica": true,
+        "demo": true
+      },
+      "fabricaDesmuteada": {
+        "fabrica": false,
+        "demo": true
+      },
+      "yLaDemoDesmuteada": {
+        "fabrica": true,
+        "demo": false
+      }
+    },
+    "elSeek": {
+      "afueraDeUnBreak": {
+        "antes": {
+          "demo": {
+            "elemT": 15.112,
+            "elemDur": 180,
+            "paused": false,
+            "muted": true,
+            "concurrentesActivos": []
+          },
+          "fabrica": {
+            "elemT": 13.872,
+            "elemDur": 180.021,
+            "paused": false,
+            "muted": true,
+            "programaT": 13.865,
+            "programaDur": 180.021,
+            "loQueLaFachadaDevuelve": {
+              "currentTime": 13.865,
+              "duration": 180.021
+            },
+            "ad": null,
+            "appendInPlace": null,
+            "breakSpan": {
+              "start": 0,
+              "end": 20.021
+            },
+            "enElAviso": {
+              "currentTime": 0,
+              "duration": 12.037
+            },
+            "lineaDeEstado": "primary content \u00b7 13.6s",
+            "rangosQueDeclara": {
+              "ranges": [
+                {
+                  "id": "AD-1-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 20.021333333333335,
+                  "duration": 12.037333333333333
+                },
+                {
+                  "id": "AD-2-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 45.02133333333333,
+                  "duration": 12
+                },
+                {
+                  "id": "AD-3-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 70.02133333333333,
+                  "duration": 12
+                },
+                {
+                  "id": "AD-4-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 95.02133333333333,
+                  "duration": 12
+                },
+                {
+                  "id": "AD-5-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 120.02133333333333,
+                  "duration": 12
+                }
+              ],
+              "settled": true
+            },
+            "siLaBarraLeyeraElElemento": {
+              "transcurrido": "0:13",
+              "total": "3:00",
+              "perillaPorCiento": 7.7056,
+              "marcasQueSePodrianDibujar": 5
+            }
+          },
+          "lineaDeEstadoDeLaDemo": "primary content \u00b7 14.9s"
+        },
+        "despues": {
+          "demo": {
+            "elemT": 16.777,
+            "elemDur": 180,
+            "paused": false,
+            "muted": true,
+            "concurrentesActivos": []
+          },
+          "fabrica": {
+            "elemT": 91.19,
+            "elemDur": 180.021,
+            "paused": false,
+            "muted": true,
+            "programaT": 91.021,
+            "programaDur": 180.021,
+            "loQueLaFachadaDevuelve": {
+              "currentTime": 91.021,
+              "duration": 180.021
+            },
+            "ad": null,
+            "appendInPlace": null,
+            "breakSpan": {
+              "start": 82.021,
+              "end": 95.021
+            },
+            "enElAviso": {
+              "currentTime": 0,
+              "duration": 12.027
+            },
+            "lineaDeEstado": "primary content \u00b7 90.8s",
+            "rangosQueDeclara": {
+              "ranges": [
+                {
+                  "id": "AD-1-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 20.021333333333335,
+                  "duration": 11.999999999999996
+                },
+                {
+                  "id": "AD-2-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 45.02133333333333,
+                  "duration": 12
+                },
+                {
+                  "id": "AD-3-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 70.02133333333333,
+                  "duration": 12
+                },
+                {
+                  "id": "AD-4-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 95.02133333333333,
+                  "duration": 12.02666666666667
+                },
+                {
+                  "id": "AD-5-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 120.02133333333333,
+                  "duration": 12
+                }
+              ],
+              "settled": true
+            },
+            "siLaBarraLeyeraElElemento": {
+              "transcurrido": "1:31",
+              "total": "3:00",
+              "perillaPorCiento": 50.6549,
+              "marcasQueSePodrianDibujar": 5
+            }
+          },
+          "lineaDeEstadoDeLaDemo": "primary content \u00b7 16.7s"
+        },
+        "fraccionPedida": 0.5
+      },
+      "adentroDeUnBreak": {
+        "antes": {
+          "demo": {
+            "elemT": 47.206,
+            "elemDur": 180,
+            "paused": false,
+            "muted": true,
+            "concurrentesActivos": [
+              "squeezebackLShape"
+            ]
+          },
+          "fabrica": {
+            "elemT": 2.02,
+            "elemDur": 12.032,
+            "paused": false,
+            "muted": true,
+            "programaT": 45.021,
+            "programaDur": 180.021,
+            "loQueLaFachadaDevuelve": {
+              "currentTime": 45.021,
+              "duration": 180.021
+            },
+            "ad": "AD-2-LINEAR",
+            "appendInPlace": false,
+            "breakSpan": {
+              "start": 45.021,
+              "end": 57.059
+            },
+            "enElAviso": {
+              "currentTime": 2.02,
+              "duration": 12.037
+            },
+            "lineaDeEstado": "LINEAR AD \"AD-2-LINEAR\" \u00b7 1.8s of 12.0s \u00b7 the content is off the screen",
+            "rangosQueDeclara": {
+              "ranges": [
+                {
+                  "id": "AD-1-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 20.021333333333335,
+                  "duration": 11.999999999999996
+                },
+                {
+                  "id": "AD-2-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 45.02133333333333,
+                  "duration": 12.037333333333336
+                },
+                {
+                  "id": "AD-3-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 70.02133333333333,
+                  "duration": 12
+                },
+                {
+                  "id": "AD-4-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 95.02133333333333,
+                  "duration": 12
+                },
+                {
+                  "id": "AD-5-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 120.02133333333333,
+                  "duration": 12
+                }
+              ],
+              "settled": true
+            },
+            "siLaBarraLeyeraElElemento": {
+              "transcurrido": "0:02",
+              "total": "0:12",
+              "perillaPorCiento": 16.7874,
+              "marcasQueSePodrianDibujar": 0
+            }
+          },
+          "lineaDeEstadoDeLaDemo": "primary content + CONCURRENT AD (squeezebackLShape) \u00b7 47.0s \u00b7 nothing was replaced"
+        },
+        "despues": {
+          "demo": {
+            "elemT": 48.864,
+            "elemDur": 180,
+            "paused": false,
+            "muted": true,
+            "concurrentesActivos": [
+              "squeezebackLShape"
+            ]
+          },
+          "fabrica": {
+            "elemT": 3.678,
+            "elemDur": 12.032,
+            "paused": false,
+            "muted": true,
+            "programaT": 45.021,
+            "programaDur": 180.021,
+            "loQueLaFachadaDevuelve": {
+              "currentTime": 45.021,
+              "duration": 180.021
+            },
+            "ad": "AD-2-LINEAR",
+            "appendInPlace": false,
+            "breakSpan": {
+              "start": 45.021,
+              "end": 57.059
+            },
+            "enElAviso": {
+              "currentTime": 3.678,
+              "duration": 12.037
+            },
+            "lineaDeEstado": "LINEAR AD \"AD-2-LINEAR\" \u00b7 3.6s of 12.0s \u00b7 the content is off the screen",
+            "rangosQueDeclara": {
+              "ranges": [
+                {
+                  "id": "AD-1-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 20.021333333333335,
+                  "duration": 11.999999999999996
+                },
+                {
+                  "id": "AD-2-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 45.02133333333333,
+                  "duration": 12.037333333333336
+                },
+                {
+                  "id": "AD-3-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 70.02133333333333,
+                  "duration": 12
+                },
+                {
+                  "id": "AD-4-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 95.02133333333333,
+                  "duration": 12
+                },
+                {
+                  "id": "AD-5-LINEAR",
+                  "kind": "interstitial",
+                  "startTime": 120.02133333333333,
+                  "duration": 12
+                }
+              ],
+              "settled": true
+            },
+            "siLaBarraLeyeraElElemento": {
+              "transcurrido": "0:03",
+              "total": "0:12",
+              "perillaPorCiento": 30.5682,
+              "marcasQueSePodrianDibujar": 0
+            }
+          },
+          "lineaDeEstadoDeLaDemo": "primary content + CONCURRENT AD (squeezebackLShape) \u00b7 48.8s \u00b7 nothing was replaced"
+        },
+        "fraccionPedida": 0.05
+      }
+    },
+    "elFullscreen": {
+      "despuesDeApretar": {
+        "elemento": "stock-player",
+        "claseFull": true
+      },
+      "yDeVuelta": {
+        "elemento": "stock-player",
+        "claseFull": true
+      }
+    }
+  },
+  "consola": [
+    {
+      "type": "error",
+      "text": "[stock] error networkError aborted fatal: false"
+    }
+  ],
+  "consolaStock": [
+    "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+  ]
+}
