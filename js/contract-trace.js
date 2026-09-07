@@ -26,7 +26,11 @@ export function traceContract({ provider, video, hud }) {
     const active = provider.activeAt(time);
     // The line of text follows the clock; the console only speaks on a change.
     if (hud) hud.textContent = describeActive(active, time);
-    const key = active.map((e) => `${e.type}#${e.id}`).join(',');
+    // `itemId` and not the type with the identifier of the signalling: inside
+    // one break every ad carries the same identifier, so two ads in a row of
+    // the same layout used to come out with one key and the console printed
+    // the first one only. A trace that skips an ad is worse than no trace.
+    const key = active.map((e) => e.itemId).join(',');
     if (key === last) return;
     last = key;
 

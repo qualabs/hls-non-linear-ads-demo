@@ -38,7 +38,7 @@ const contractHud = document.getElementById('contract');
  */
 function logResolved(experiences) {
   for (const e of experiences) {
-    console.log(`[app] resolved ${e.type}#${e.id}: ${e.elements.length} elements,` +
+    console.log(`[app] resolved ${e.type}#${e.itemId}: ${e.elements.length} elements,` +
       ` window ${e.startTime.toFixed(2)}s -> ${(e.startTime + e.duration).toFixed(2)}s`);
   }
 }
