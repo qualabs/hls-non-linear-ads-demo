@@ -1,0 +1,217 @@
+{
+  "etiqueta": "telefono",
+  "url": "http://localhost:8080/",
+  "viewport": {
+    "width": 412,
+    "height": 915,
+    "deviceScaleFactor": 1,
+    "mobile": false
+  },
+  "conElDedo": true,
+  "lasMarcasYElRiel": {
+    "track": {
+      "x": 80.66,
+      "y": 656.94,
+      "w": 178.08,
+      "h": 44,
+      "bottom": 700.94,
+      "right": 258.73
+    },
+    "rail": {
+      "x": 80.66,
+      "y": 674.94,
+      "w": 178.08,
+      "h": 8,
+      "bottom": 682.94,
+      "right": 258.73
+    },
+    "fila": {
+      "x": 33.73,
+      "y": 656.94,
+      "w": 329.52,
+      "h": 44,
+      "bottom": 700.94,
+      "right": 363.25
+    },
+    "barra": {
+      "x": 17.73,
+      "y": 656.94,
+      "w": 361.52,
+      "h": 60,
+      "bottom": 716.94,
+      "right": 379.25
+    },
+    "player": {
+      "x": 17.73,
+      "y": 513.59,
+      "w": 361.52,
+      "h": 203.34,
+      "bottom": 716.94,
+      "right": 379.25
+    },
+    "video": {
+      "x": 17.73,
+      "y": 513.59,
+      "w": 361.52,
+      "h": 203.34,
+      "bottom": 716.94,
+      "right": 379.25
+    },
+    "contenedorDeCues": null,
+    "marcas": [
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 100.44,
+          "y": 674.94,
+          "w": 11.86,
+          "h": 8,
+          "bottom": 682.94,
+          "right": 112.3
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 125.17,
+          "y": 674.94,
+          "w": 11.86,
+          "h": 8,
+          "bottom": 682.94,
+          "right": 137.03
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 149.91,
+          "y": 674.94,
+          "w": 11.86,
+          "h": 8,
+          "bottom": 682.94,
+          "right": 161.77
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 174.64,
+          "y": 674.94,
+          "w": 11.86,
+          "h": 8,
+          "bottom": 682.94,
+          "right": 186.5
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      },
+      {
+        "clase": "qa-mark",
+        "titulo": "concurrent ad: drawn over the content, which never stops",
+        "caja": {
+          "x": 199.38,
+          "y": 674.94,
+          "w": 11.86,
+          "h": 8,
+          "bottom": 682.94,
+          "right": 211.23
+        },
+        "pxDebajoDelRiel": 0,
+        "pxSobreElRiel": 0
+      }
+    ],
+    "cuantasMarcas": 5,
+    "cuantasCuelgan": 0,
+    "rangosDelProveedorDeLaPagina": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-1-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "kind": "interstitial",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-2-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 45,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "kind": "interstitial",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-3-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 70,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "kind": "interstitial",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-4-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 95,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "kind": "interstitial",
+        "startTime": 120,
+        "duration": 12
+      },
+      {
+        "id": "AD-5-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 120,
+        "duration": 12
+      }
+    ],
+    "tokens": {
+      "--qa-rail": "8px",
+      "--qa-icon": "44px",
+      "--qa-pad": "16px"
+    },
+    "altoDeTrackComputado": "44px"
+  },
+  "laTira": {
+    "x": 17.73,
+    "y": 648.94,
+    "width": 361.52,
+    "height": 68.0
+  },
+  "elInstrumento": {
+    "coarse": true,
+    "anyCoarse": true,
+    "maxTouchPoints": 5,
+    "ontouchstart": true
+  },
+  "consola": []
+}

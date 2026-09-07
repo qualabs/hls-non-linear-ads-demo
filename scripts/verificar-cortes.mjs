@@ -11,14 +11,14 @@
 // The grep of ADR 0003 stopped coming back empty in the T-04 of phase 02, and
 // the finding was about the LIST OF TERMS and not about the code: `interstitial`
 // is the value of the `kind` field of the contract that the T-02 designed, and
-// the contract says out loud that the kind is what crosses the seam. Five places
-// on the rendering side name it: the comment that explains it, its colour, its
-// lane and its tooltip.
+// the contract says out loud that the kind is what crosses the seam. Three
+// places on the rendering side name it: the comment that explains it, its
+// colour and its name.
 //
 // There were two ways out and Nicolas took the second. Dropping the term from
 // the list weakens the only alarm that keeps the two layers from mixing again --
 // the word would then be free to appear anywhere, for any reason. So THE WORD
-// STAYS IN THE SEARCH AND THE ACCEPTED PLACES ARE WRITTEN DOWN HERE. A sixth
+// STAYS IN THE SEARCH AND THE ACCEPTED PLACES ARE WRITTEN DOWN HERE. A fourth
 // one fires.
 //
 // TWO THINGS ABOUT THE SHAPE OF THAT LIST, AND THE SECOND ONE IS THE POINT.
@@ -85,40 +85,24 @@ const SEAMS = [
         line: "interstitial: '#ffcc00'",
         times: 1,
         porque:
-          'A key of RANGE_COLOURS, a table indexed by the `kind` of the contract. The bar ' +
-          'paints two colours because there are two kinds of range, and without the value as ' +
-          'a key there is no table: the colour would be chosen off something other than what ' +
-          'the contract hands over.'
+          'A key of RANGE_COLOURS, a table indexed by the `kind` of the contract. Every mark ' +
+          'reads its colour off it, and a kind that is NOT a key in it is a break that is not ' +
+          'drawn and says so out loud, so this is also the table the miss is checked against. ' +
+          'Without the value as a key there is no table: the colour would be chosen off ' +
+          'something other than what the contract hands over.'
       },
       {
         file: 'lib/controls.js',
-        line: 'interstitial: {',
+        line: "interstitial: 'traditional interstitial: the content is replaced by the ad'",
         times: 1,
         porque:
-          'A key of RANGE_LANES, the table that says which lane each kind of range is drawn ' +
-          'in. Same argument as the colour: it is the `kind` used as an index, which is how ' +
-          'the contract gets consumed.'
-      },
-      {
-        file: 'lib/controls.js',
-        line:
-          "title: 'traditional interstitial: where a client already in the market replaces the content'",
-        times: 1,
-        porque:
-          'The tooltip of the lane: the readable name of the kind of range, for whoever hovers ' +
-          'over it. It is the only one of the five that is prose and not a key, and it is ' +
-          'accepted because it describes a PLAYBACK BEHAVIOUR -- that another client replaces ' +
-          'the content -- and not a transport mechanism: it names no tag, no playlist and no ' +
-          'HLS class. The day this text explains where the range comes from it stops being ' +
-          'acceptable, and the fix is to rewrite the sentence, not to widen this list.'
-      },
-      {
-        file: 'lib/controls.js',
-        line: 'background: ${RANGE_COLOURS.interstitial};',
-        times: 1,
-        porque:
-          'The CSS of the lane reading the colour off the table. It is a reference to the key ' +
-          'of RANGE_COLOURS and not a new mention: if that key was accepted, this goes with it.'
+          'An entry of RANGE_TITLES: the readable name of the kind of range, which is the ' +
+          'tooltip of a mark of that kind, for whoever hovers over it. It is the only one of ' +
+          'the three that is prose and not only a key, and it is accepted because it describes ' +
+          'a PLAYBACK BEHAVIOUR -- that the content is replaced by the ad -- and not a ' +
+          'transport mechanism: it names no tag, no playlist and no HLS class. The day this ' +
+          'text explains where the range comes from it stops being acceptable, and the fix is ' +
+          'to rewrite the sentence, not to widen this list.'
       }
     ]
   },

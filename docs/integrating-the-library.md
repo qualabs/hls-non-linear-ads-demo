@@ -145,10 +145,14 @@ concurrent experience is — they command one piece of the picture rather than t
 picture.
 
 What you get instead, drawn by the library inside your container: one progress
-bar along the bottom for the **whole programme**, with the breaks marked on two
-lanes; play/pause centred over the composition; one audio control at the top
-right; and fullscreen **of the composition**, which is the container and
-everything in it.
+bar along the bottom for the **whole programme**, with the breaks marked **on the
+bar itself** and nothing hanging below it; play/pause centred over the
+composition; one audio control at the top right; and fullscreen **of the
+composition**, which is the container and everything in it.
+
+What a bar marks is what the player it is attached to plays, and only that. The
+breaks come from the `provider` you hand over (§6), so a bar over your own
+player marks your own breaks and a bar over a second player marks that one's.
 
 That last one is worth stating as a consequence and not as a feature: **anything
 you draw outside the container is gone the moment somebody presses fullscreen.**

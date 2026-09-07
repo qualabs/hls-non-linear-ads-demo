@@ -2057,3 +2057,89 @@ dos formas se movió. `verificar-cortes` no corre: ninguna de sus dos costuras
 mira ese script.
 
 Evidencia en `.project/phases/04-refinamiento/tasks/T-05/`. Commit sin push.
+
+## 2026-09-07 — T-06 de la fase 04: la barra sobre el riel, y quién elige lo que marca
+
+Se fue el carril de abajo. Nuestra barra queda con cinco marcas violetas adentro
+del riel y nada colgando debajo: **10 nodos de marca pasaron a 5, y los 5 que
+estaban a +11 px del borde de abajo del riel pasaron a 0.** El contenedor
+`.qa-track__cues` no existe más en el DOM, y los bloques `.qa-cue` y
+`.qa-track__cues` no existen más en el CSS. La captura de la tira de abajo, antes
+y después, es la definición de done a simple vista.
+
+**Lo que costó decidir no fue el carril: fue quién elige los rangos que una barra
+marca**, y el bloque no lo nombra. Con el carril afuera y sin nada más, nuestra
+barra dibujaba los diez rangos del contrato en los mismos cinco lugares —el
+concurrente y el de reemplazo de cada break tienen el mismo `x` y el mismo `w`,
+951,09 y 36,09 px el primero, que es la medición de la T-04 de la fase 02
+saliendo sola otra vez—, o sea un color encima de otro y ninguna información
+nueva. La respuesta quedó forzada por tres cosas ya cerradas: el contrato entrega
+las dos clases a propósito y el proveedor de la página sigue devolviendo 10
+rangos, 5 y 5, antes y después; la barra no puede filtrar por clase porque es la
+misma barra que la T-07 le pone al pane de fábrica alimentada con
+`kind: 'interstitial'` y porque la fase 03 va a tener un rango de reemplazo que
+es nuestro; y no hay dónde ponerlo como opción, porque la T-04 cerró la firma de
+`attachControls`. Así que lo elige **quien conecta un proveedor con una barra**:
+`playedRanges(provider)` en `lib/concurrent-hls.js`, un `Set` de las clases que
+este player reproduce, y `lib/controls.js` dibuja todo lo que recibe. Es un `Set`
+y no una constante porque es la lista de lo que este player reproduce y no una
+definición de la clase concurrente, y las dos dejan de ser la misma lista en la
+fase 03. No se tocó `lib/signalling.js` ni la forma del contrato.
+
+**La altura: 44 px, un solo valor, para los dos punteros.**
+`calc(var(--qa-rail) * 3 + 6px)` era la aritmética de dos carriles —la mitad de
+lo que sobraba debajo del riel tenía que ser el hueco más el carril— y daba 30 px
+sobre un riel de 8. Con un carril esa cuenta no resuelve nada, así que el número
+se eligió por lo único que le queda que decidir: cuánto mide el blanco que se
+toca. La T-03 había dejado anotado que 30 está abajo de los 44 con los que se
+dibuja un blanco táctil, y que el número salía de la expresión que esta task
+reescribe. Es la única longitud del cromo que **no** escala con `--qa-rail`: lo
+que se ve es el riel y sigue escalando, lo que se toca es una caja invisible y un
+blanco es físico. Y es un valor y no uno por puntero, que es donde se aparta del
+patrón de la T-03: un icono de 44 px en escritorio cambia cómo se ve el player,
+una caja invisible de 44 px no se ve y le compra al mouse un click que aterriza
+donde apuntó.
+
+**Lo que la altura cuesta, medido, y lo que no.** La fila pasa de 34 a 44 px y el
+bloque de la barra de 50 a 60, así que el riel sube 5 px dentro del cuadro
+(y = 695,52 → 690,52). El borde de abajo de la barra no se movió. Y la caja del
+contenedor y la del elemento de video son **idénticas antes y después** —715 ×
+402,19 px, mismo origen—, así que la capa sigue siendo un overlay sobre la imagen
+y el renderizado resuelve los layouts contra la misma caja: la caja pedida contra
+la dibujada adentro del break del Quad da **delta máximo 0 px en los cuatro
+elementos, antes y después**. Con el dedo (412 × 915, emulación táctil, imagen de
+361,52 × 203,34) `.qa-track` mide 44 px, `--qa-icon` 44, y las cinco marcas están
+sobre el riel.
+
+**La lista de aceptadas de `verificar-cortes` bajó de cinco a tres**, que era la
+mitad del valor de la task. Se fueron tres líneas —la clave `interstitial: {` de
+`RANGE_LANES`, el `title:` del carril y el `background: ${RANGE_COLOURS.interstitial};`
+del CSS del carril— y entró una: la entrada de `RANGE_TITLES`, con el texto
+reescrito porque la marca de esa clase ahora va en el riel del player que sí
+reemplaza, así que el nombre describe el comportamiento de ese player y no el de
+un tercero. Las razones de las dos que quedaron se reescribieron donde dejaron de
+ser exactas: `RANGE_COLOURS` es ahora también la tabla contra la que se chequea
+una clase antes de dibujarla, así que la tabla de la que sale el color y la que
+agarra el error son la misma y no se pueden desincronizar. Las cabeceras del
+script y de `lib/controls.js` decían "cinco lugares" y "a sixth one fires": dicen
+tres y "a fourth".
+
+**Dos afirmaciones vivas se reescribieron.** La sección 2.2 del documento del
+integrador decía "with the breaks marked on two lanes" —la T-04 la dejó anotada—
+y ahora dice que los breaks van marcados sobre la barra misma y nada colgando
+debajo, con un párrafo nuevo que dice que una barra marca lo que reproduce el
+player al que está pegada y que los breaks salen del `provider` que el integrador
+entrega. Y una que el bloque no nombra: la fila de `lib/controls.js` en el
+`README.md` decía "the two lanes that mark where the breaks are". Es la misma
+clase de afirmación y estaba en el mismo estado. La sección 7 del documento del
+integrador no se tocó: los dos colores siguen fuera de la superficie pública y lo
+que dice ahí sigue siendo cierto. `.project/PROJECT.md` tampoco: lo que dice de
+los dos carriles está en la lista de fases cerradas, que es registro histórico.
+
+`verificar-cortes` verde con las dos costuras y tres aceptadas. `npm test` 27 de
+27, igual que antes: `rangeSpan` no se movió y el archivo sí. Y el test sirvió —un
+backtick que se fue adentro del template de CSS rompió `lib/controls.js`, y lo
+agarraron el test que importa `rangeSpan` y el chequeo de sintaxis del build en la
+misma corrida—.
+
+Evidencia en `.project/phases/04-refinamiento/tasks/T-06/`. Commit sin push.
