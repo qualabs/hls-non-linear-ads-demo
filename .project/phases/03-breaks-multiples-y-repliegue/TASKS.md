@@ -65,7 +65,7 @@ de números y no una mirada.
 | T-01 | Un break con varios avisos, uno detrás del otro                    | done    | —    | [tasks/T-01/](tasks/T-01/) |
 | T-02 | El asset sin bloque: el aviso lineal y el repliegue                | done    | —    | [tasks/T-02/](tasks/T-02/) |
 | T-03 | El `decoderCount`, de la configuración al pedido del asset-list    | done    | —    | [tasks/T-03/](tasks/T-03/) |
-| T-04 | Tests: la secuencia del break y el asset sin bloque                | planned | —    | —        |
+| T-04 | Tests: la secuencia del break y el asset sin bloque                | done    | —    | [tasks/T-04/](tasks/T-04/) |
 | T-05 | El break mezclado adentro del recorrido grabable                   | planned | —    | —        |
 
 ---

@@ -1,0 +1,537 @@
+[
+  {
+    "id": "M01-fixture-del-break-de-tres",
+    "rule": "the fixture of the break of three is the one the readings were taken on",
+    "file": "signalling/asset-list-multiAd.json",
+    "totals": {
+      "tests": 43,
+      "pass": 41,
+      "fail": 2
+    },
+    "reds": [
+      {
+        "test": "the fixtures of the phase are the breaks the readings were taken on",
+        "message": "AssertionError [ERR_ASSERTION]: the first two ads of the break of three share the layout, which is the case of the identity",
+        "where": "test/break-sequence-and-fallback.test.js:101"
+      },
+      {
+        "test": "two ads of one break are two identities even when they share the layout",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "where": "test/break-sequence-and-fallback.test.js:210"
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M02-el-acumulador-no-arranca-en-cero",
+    "rule": "the offset accumulator starts at zero, so a break of one asset opens at the START-DATE",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 30,
+      "fail": 13
+    },
+    "reds": [
+      {
+        "test": "a break of one asset opens at the START-DATE, which is every break of the recording",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay",
+        "where": "test/break-sequence-and-fallback.test.js:133"
+      },
+      {
+        "test": "each asset begins where the one before it ended, over the breaks of three, four and two",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:141"
+      },
+      {
+        "test": "the start of an item is an offset inside its own asset and not from the START-DATE",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:185"
+      },
+      {
+        "test": "the ordinal of an ad is of the whole break, so two items of one asset are two ads",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:233"
+      },
+      {
+        "test": "an ASSET with a URI and a DURATION and nothing else is one full-frame ad",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "where": "test/break-sequence-and-fallback.test.js:252"
+      },
+      {
+        "test": "a block this client cannot draw plays the asset own URI, and the ads around it do not move",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:353"
+      },
+      {
+        "test": "an asset with nothing to play is skipped alone, and the ads after it keep their windows",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:467"
+      },
+      {
+        "test": "a break of several ads is one range, from the first to start to the last to end",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:533"
+      },
+      {
+        "test": "each of the six asset-lists resolves to one experience with its type and window",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay",
+        "where": ""
+      },
+      {
+        "test": "activeAt returns every experience active at that instant",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": ""
+      },
+      {
+        "test": "the five breaks are the ten ranges T-02 read off the contract",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": ""
+      },
+      {
+        "test": "the ten ranges land where T-04 measured them on the bar",
+        "message": "AssertionError [ERR_ASSERTION]: AD-1-CONCURRENT left",
+        "where": ""
+      },
+      {
+        "test": "a range that cannot be placed is not a mark",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "where": ""
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M03-el-offset-sale-de-la-ventana-y-no-de-la-DURATION",
+    "rule": "the offset of each asset is the accumulated top-level DURATION and not the window of the ad before it",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 39,
+      "fail": 4
+    },
+    "reds": [
+      {
+        "test": "each asset begins where the one before it ended, over the breaks of three, four and two",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:156"
+      },
+      {
+        "test": "the start of an item is an offset inside its own asset and not from the START-DATE",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:185"
+      },
+      {
+        "test": "an asset with nothing to play is skipped alone, and the ads after it keep their windows",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:467"
+      },
+      {
+        "test": "a break of several ads is one range, from the first to start to the last to end",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:541"
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M04-el-start-se-lee-desde-el-START-DATE",
+    "rule": "the item's start is an offset inside its own asset",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 36,
+      "fail": 7
+    },
+    "reds": [
+      {
+        "test": "each asset begins where the one before it ended, over the breaks of three, four and two",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:141"
+      },
+      {
+        "test": "the start of an item is an offset inside its own asset and not from the START-DATE",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:185"
+      },
+      {
+        "test": "the ordinal of an ad is of the whole break, so two items of one asset are two ads",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:233"
+      },
+      {
+        "test": "in the mixed break the full-frame ad silences the programme and the concurrent ones do not",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:353"
+      },
+      {
+        "test": "a block this client cannot draw plays the asset own URI, and the ads around it do not move",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:353"
+      },
+      {
+        "test": "an asset with nothing to play is skipped alone, and the ads after it keep their windows",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:467"
+      },
+      {
+        "test": "a break of several ads is one range, from the first to start to the last to end",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:533"
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M05-la-identidad-vuelve-a-ser-la-del-Date-Range",
+    "rule": "each ad of a break has an identity of its own",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 40,
+      "fail": 3
+    },
+    "reds": [
+      {
+        "test": "two ads of one break are two identities even when they share the layout",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:197"
+      },
+      {
+        "test": "the ordinal of an ad is of the whole break, so two items of one asset are two ads",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:232"
+      },
+      {
+        "test": "an asset with nothing to play is skipped alone, and the ads after it keep their windows",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:463"
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M06-el-ordinal-es-el-del-array-ASSETS",
+    "rule": "the ordinal of an ad is of the whole break and not of the ASSETS array",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 41,
+      "fail": 2
+    },
+    "reds": [
+      {
+        "test": "the ordinal of an ad is of the whole break, so two items of one asset are two ads",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:232"
+      },
+      {
+        "test": "an asset with nothing to play is skipped alone, and the ads after it keep their windows",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:463"
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M07-la-mezcla-del-aviso-a-cuadro-entero-no-se-invierte",
+    "rule": "a full-frame ad sounds and the programme under it does not",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 40,
+      "fail": 3
+    },
+    "reds": [
+      {
+        "test": "an ASSET with a URI and a DURATION and nothing else is one full-frame ad",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "where": "test/break-sequence-and-fallback.test.js:271"
+      },
+      {
+        "test": "in the mixed break the full-frame ad silences the programme and the concurrent ones do not",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:289"
+      },
+      {
+        "test": "a block this client cannot draw plays the asset own URI, and the ads around it do not move",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "where": "test/break-sequence-and-fallback.test.js:358"
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M08-un-item-sin-ventana-pasa-por-usable",
+    "rule": "an item with no window is a block this client cannot draw (the fallback that does not fire)",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 42,
+      "fail": 1
+    },
+    "reds": [
+      {
+        "test": "the three shapes this client cannot draw are the three that cannot become a box",
+        "message": "AssertionError [ERR_ASSERTION]: a duration of null",
+        "where": "test/break-sequence-and-fallback.test.js:323"
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M09-un-layout-sin-assets-pasa-por-usable",
+    "rule": "a layout with no assets in it is a block this client cannot draw",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 42,
+      "fail": 1
+    },
+    "reds": [
+      {
+        "test": "the three shapes this client cannot draw are the three that cannot become a box",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "where": "test/break-sequence-and-fallback.test.js:328"
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M10-el-uri-vacio-cuenta-como-bloque-ilegible",
+    "rule": "an empty uri is not a failure of the block (the fallback that fires when it should not)",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 33,
+      "fail": 10
+    },
+    "reds": [
+      {
+        "test": "an empty uri and a media type nobody knows are not failures of the block",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay keeps the layout the tool declared",
+        "where": "test/break-sequence-and-fallback.test.js:382"
+      },
+      {
+        "test": "viewport is four inset percentages in the order top right bottom left",
+        "message": "AssertionError [ERR_ASSERTION]: T-03 measured no element called linear in cornerOverlay",
+        "where": ""
+      },
+      {
+        "test": "each of the six asset-lists resolves to one experience with its type and window",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "where": ""
+      },
+      {
+        "test": "the fifteen elements come out with the ids, the uri and the mediaType of the payload",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay: the ads of the payload",
+        "where": ""
+      },
+      {
+        "test": "in squeezebackFrame the ad is the background and the primary content is on top",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": ""
+      },
+      {
+        "test": "the two overlays carry no primaryContent, and the layer assumes the full frame at zDepth 0",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay",
+        "where": ""
+      },
+      {
+        "test": "the four layouts that do carry primaryContent keep its zDepth and its viewport",
+        "message": "AssertionError [ERR_ASSERTION]: squeezebackFrame",
+        "where": ""
+      },
+      {
+        "test": "no payload of the tool carries volume: the ad comes out silent and the show does not",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay/primaryContent",
+        "where": ""
+      },
+      {
+        "test": "the insets become the fifteen boxes in pixels T-03 measured",
+        "message": "AssertionError [ERR_ASSERTION]: T-03 measured no element called linear in cornerOverlay",
+        "where": ""
+      },
+      {
+        "test": "the conversion follows the player area, which is what a resize depends on",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": ""
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M11-el-salteo-de-un-asset-cancela-el-break",
+    "rule": "what is skipped is that asset and not the break",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 42,
+      "fail": 1
+    },
+    "reds": [
+      {
+        "test": "an asset with nothing to play is skipped alone, and the ads after it keep their windows",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "where": "test/break-sequence-and-fallback.test.js:462"
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M12-el-fixture-del-asset-list-ilegible-pasa-a-ser-JSON-valido",
+    "rule": "the asset-list that cannot be read is a list that cannot be read",
+    "file": "signalling/asset-list-repliegue-json-roto.json",
+    "totals": {
+      "tests": 43,
+      "pass": 42,
+      "fail": 1
+    },
+    "reds": [
+      {
+        "test": "the asset-list that cannot be read cancels the whole break, which is not skipping an asset",
+        "message": "AssertionError [ERR_ASSERTION]: Missing expected exception (SyntaxError).",
+        "where": "test/break-sequence-and-fallback.test.js:491"
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M13-ASSETS-vacio-no-se-reporta",
+    "rule": "a list that declares no ASSETS says so",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 42,
+      "fail": 1
+    },
+    "reds": [
+      {
+        "test": "a list that declares no ASSETS plays nothing and reports no range",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "where": "test/break-sequence-and-fallback.test.js:505"
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M15-un-layout-sin-primaryContent-cuenta-como-ilegible",
+    "rule": "a layout that carries no primaryContent block is drawable: the tool omits it on the two overlays",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 27,
+      "fail": 16
+    },
+    "reds": [
+      {
+        "test": "each asset begins where the one before it ended, over the breaks of three, four and two",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:157"
+      },
+      {
+        "test": "the start of an item is an offset inside its own asset and not from the START-DATE",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:185"
+      },
+      {
+        "test": "the ordinal of an ad is of the whole break, so two items of one asset are two ads",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:232"
+      },
+      {
+        "test": "in the mixed break the full-frame ad silences the programme and the concurrent ones do not",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:287"
+      },
+      {
+        "test": "the three shapes this client cannot draw are the three that cannot become a box",
+        "message": "AssertionError [ERR_ASSERTION]: a block that can be drawn",
+        "where": "test/break-sequence-and-fallback.test.js:313"
+      },
+      {
+        "test": "a block this client cannot draw plays the asset own URI, and the ads around it do not move",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:352"
+      },
+      {
+        "test": "an empty uri and a media type nobody knows are not failures of the block",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay keeps the layout the tool declared",
+        "where": "test/break-sequence-and-fallback.test.js:382"
+      },
+      {
+        "test": "none of the asset-lists the demo serves falls back, and the two linear ads are declared ones",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay: linear ads",
+        "where": "test/break-sequence-and-fallback.test.js:443"
+      },
+      {
+        "test": "an asset with nothing to play is skipped alone, and the ads after it keep their windows",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "where": "test/break-sequence-and-fallback.test.js:478"
+      },
+      {
+        "test": "viewport is four inset percentages in the order top right bottom left",
+        "message": "AssertionError [ERR_ASSERTION]: T-03 measured no element called linear in cornerOverlay",
+        "where": ""
+      },
+      {
+        "test": "each of the six asset-lists resolves to one experience with its type and window",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "where": ""
+      },
+      {
+        "test": "the fifteen elements come out with the ids, the uri and the mediaType of the payload",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay: the ads of the payload",
+        "where": ""
+      },
+      {
+        "test": "the two overlays carry no primaryContent, and the layer assumes the full frame at zDepth 0",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay",
+        "where": ""
+      },
+      {
+        "test": "no payload of the tool carries volume: the ad comes out silent and the show does not",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay/primaryContent",
+        "where": ""
+      },
+      {
+        "test": "the insets become the fifteen boxes in pixels T-03 measured",
+        "message": "AssertionError [ERR_ASSERTION]: T-03 measured no element called linear in cornerOverlay",
+        "where": ""
+      },
+      {
+        "test": "with no volume in the asset-list the ad comes out silent and the programme does not",
+        "message": "AssertionError [ERR_ASSERTION]: cornerOverlay/primaryContent",
+        "where": ""
+      }
+    ],
+    "restored": true
+  },
+  {
+    "id": "M14-el-rango-del-break-es-la-suma-y-no-la-union",
+    "rule": "the range of a break spans from the first ad to start to the last one to end",
+    "file": "lib/signalling.js",
+    "totals": {
+      "tests": 43,
+      "pass": 40,
+      "fail": 3
+    },
+    "reds": [
+      {
+        "test": "an asset with nothing to play is skipped alone, and the ads after it keep their windows",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:475"
+      },
+      {
+        "test": "a break of several ads is one range, from the first to start to the last to end",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": "test/break-sequence-and-fallback.test.js:541"
+      },
+      {
+        "test": "the window of a concurrent break spans every experience its asset-list declares",
+        "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "where": ""
+      }
+    ],
+    "restored": true
+  }
+]
