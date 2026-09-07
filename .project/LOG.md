@@ -2840,3 +2840,68 @@ largo de cada tag se calcula del asset-list en vez de leerse de un literal, los 
 rangos se comparan contra la lectura de esta task y los nueve que no se movieron se
 siguen comparando contra la de la fase 02. `verificar-cortes` verde en las dos
 costuras.
+
+## 2026-09-07 — Fase 03 cerrada: el modelo del ADR 0019 construido, y una decisión que la fase no debió llevar adentro
+
+**Las cinco tasks en `done` y la fase cerrada el mismo día que se diseñó.** Lo
+que entrega son capacidades nuevas y no arreglos, que es lo que la separa de la
+04: un break de cuatro avisos mezclando concurrente y lineal, el asset sin bloque,
+y el `decoderCount` viajando al pedido del asset-list. Las tres están adentro de
+la corrida que se graba. Informe en `phases/03-breaks-multiples-y-repliegue/REPORT.md`.
+
+**El modelo del ADR 0019 dejó de ser una predicción.** Un asset sin bloque
+`X-AD-CREATIVE-SIGNALING` se reproduce solo, a cuadro entero, con el programa
+corriendo detrás, y un bloque que falla cae al mismo lugar: el aviso lineal y el
+repliegue resultaron **el mismo camino de código**, una task sola con una sola
+implementación. Y el ADR 0016 quedó verificado y no afirmado — 180, 20 y 48 antes,
+durante y después del aviso a cuadro entero, con el `<video>` del primario en
+`volume` 0 y `paused` en falso.
+
+**La regla de fin la decidió una medición.** La tensión entre la regla 5 del
+contrato y "hasta el fin del asset" no se podía resolver razonando, así que se
+corrió un asset-list solapado a propósito y la alternativa mostró lo que cuesta:
+el primario terminó a **357,5 píxeles** de la caja que la primera experiencia
+había pedido, y al cerrarse el solape se tiraron **6,09 s** de asset ya bajado.
+Decide la ventana declarada, y la divergencia con la norma quedó escrita en
+`docs/` y dicha en consola con el número.
+
+**Cuatro hallazgos que nadie pidió.** Que el `src` de un nodo no distingue dos
+creativos porque es un `blob:` del MediaSource, así que el bloque de la T-01
+suponía algo que el código no hace. Que la reserva del prefijo `_HLS_` no era
+teórica: el pane de fábrica pide `?_HLS_primary_id=<uuid>` en la misma corrida, y
+esa huella es la que prueba que ese player sigue sin modificar. Que dos mutaciones
+de los tests —contar un `uri` vacío como bloque ilegible, y exigir un bloque
+`primaryContent`— ponen en rojo a nueve y a dieciséis tests de los que ya estaban,
+que es el lado caro de la frontera del repliegue: uno que se dispara cuando no
+debería reemplaza un layout señalizado. Y que el `PLANNED-DURATION` escrito a mano
+declaraba doce segundos de un break de cuarenta y ocho.
+
+**La verificación cambió de instrumento respecto de la fase 04, y está
+argumentado.** Allá los defectos eran visuales y mirar era la medición; acá el
+contenido es mecánico y una captura no afirma nada sobre él, así que cada
+definición de done se escribió como una lectura del estado que puede fallar sola.
+Lo que sólo se juzga mirando sigue teniendo a Nicolás corriendo la demo como
+revisor.
+
+**El defecto de diseño, que es el hallazgo de gobierno.** El bloque de la T-05
+llevaba adentro que la salida de la inversión del par de compatibilidad "es
+decisión de producto y de David": una fase aprobada con una decisión que depende
+de una persona, que hizo frenar a la ejecución para preguntar, que es exactamente
+lo que diseñar la fase existe para evitar. Se corrigió antes del cierre y en su
+propio commit —el bloque dice la decisión: concurrent, concurrent, linear,
+concurrent con el aviso a cuadro entero tercero, la inversión aceptada y explicada
+en sus 12 segundos de 48, las dos alternativas descartadas— y el barrido de los
+cinco bloques encontró un segundo pasaje más chico del mismo tipo. **De ahí salió
+el gate nuevo de la regla A4 del repo padre** —un plan no se aprueba con una
+decisión pendiente adentro, y la aprobación no lo levanta—, más el chequeo
+equivalente que se está construyendo en `scripts/validar-proyecto.py`.
+
+**Lo que queda abierto**: el tramo invertido pendiente de que Nicolás lo mire
+corriendo la demo y de que se lo cuente a David antes del sync del 21, que va en
+la misma conversación que el argumento del atraso retirado por el ADR 0017; trece
+commits sin pushear, que son toda la fase; el caso del `decoderCount` contra el
+layout, que la T-02 dejó afuera por falta de un dato que la T-03 después trajo y
+hoy es una línea; y las dos preguntas de especificación para SVTA.
+
+**El validador reporta dos rojos y ninguno es de esta fase**: las fases 02 y 04 no
+tienen `DESIGN.md`. No se silencian y no se rellenan.

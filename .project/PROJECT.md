@@ -466,6 +466,17 @@ la sección 4 del informe de cierre de la fase 01
   aviso encima del programa y el otro en lugar del programa. **Es un cambio de lo
   que David cuenta en escenario**, y eso es lo que sigue abierto acá: va contado
   antes del sync del 21 y no después.
+- **El tramo invertido del par de compatibilidad**, que va en la misma
+  conversación que el item anterior. El break mezclado de la fase 03 dura 48 s del
+  lado nuestro y 12 del lado del tag de clase Apple, así que del 144 al 156 el
+  pane de fábrica muestra el programa y el nuestro la pantalla tapada: la
+  comparación queda al revés durante 12 de los 48 segundos. La decisión está
+  tomada y aplicada —se acepta y se explica, porque los dos players hacen lo mismo
+  en momentos distintos y el argumento vive en los otros 36—, y está escrita en la
+  tabla que el script imprime y en `Before you record`. Lo que falta es que
+  Nicolás lo mire corriendo la demo, porque si se cuenta bien en escenario sólo se
+  juzga mirando los dos panes en el mismo cuadro, y que se lo cuente a David antes
+  del 21.
 - **Quién hace el primer pase de la especificación de SVTA.**
 - **Qué significa `version: 2`** en el bloque `X-AD-CREATIVE-SIGNALING`.
 
@@ -510,20 +521,21 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   fullscreen, que antes no existía en el repositorio— y el área de los layouts
   pasó a ser la de la imagen y no la del contenedor. Informe en
   `phases/02-sdk-y-controles/REPORT.md`.
-- **03-breaks-multiples-y-repliegue**: un break con varios avisos mezclando
-  concurrente y lineal, el asset sin bloque —que es a la vez el aviso lineal y
-  el repliegue del lado del cliente, por el ADR 0019— y el `decoderCount` como
-  passthrough hasta el pedido del asset-list. Abierta y en diseño revisado, con
-  la 02 y la 04 cerradas: es la que corre. Ya no arranca con una medición: las
-  tres cosas que su primera task iba a medir se cayeron —el parpadeo negro entre
-  avisos es la consecuencia conocida de no traer el asset siguiente antes, así que
-  la precarga pasó a ser construcción; el costo del primario decodificando detrás
-  de un aviso opaco no lo consume ninguna decisión de la fase; y el solape de dos
-  experiencias es una lectura adentro de la task que elige la regla de fin—, así
-  que la fase quedó en cinco tasks de construcción, y cada una afirma lo suyo
-  leyendo el estado del navegador en lugar de guardar capturas. Que el aviso
-  lineal reabra un ADR de la fase 01 dejó de ser un riesgo: el ADR 0019 lo
-  reproduce con el mismo mecanismo que todo lo demás y el 0002 no se toca.
+- **03-breaks-multiples-y-repliegue**: cerrada con las tres capacidades que pidió
+  David adentro de la corrida que se graba, y con el modelo del ADR 0019
+  construido y verificado: un asset sin bloque se reproduce solo, y **el aviso
+  lineal y el repliegue resultaron el mismo camino de código**. La regla de fin de
+  un aviso la decidió una medición y no un argumento —un asset-list solapado a
+  propósito dejó el primario a 357,5 px de donde el primer aviso lo había pedido y
+  tiró 6,09 s de asset ya bajado—, así que la ventana declarada decide y la
+  divergencia con la norma queda escrita como tal. El break mezclado es el quinto
+  de la corrida, con el aviso a cuadro entero tercero y la inversión del par de
+  compatibilidad aceptada y explicada: 12 segundos de 48. Verificó **leyendo el
+  estado del navegador en lugar de mirando capturas**, que es un cambio de
+  instrumento respecto de la 04 y está argumentado. Su hallazgo más caro es de
+  gobierno y no de código: la fase llegó a ejecución con una decisión adentro que
+  dependía de una persona, y de ahí salió el gate nuevo de la regla A4 del repo
+  padre. Informe en `phases/03-breaks-multiples-y-repliegue/REPORT.md`.
 - **04-refinamiento**: cerrada con los seis puntos que Nicolás dio probando la
   demo desde el celular cerrados, y **se ejecutó antes que la 03**. El criterio
   se cumplió: los dos players quedaron idénticos en todo —el mismo cromo, la
