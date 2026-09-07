@@ -54,3 +54,25 @@ sabe hacer.
 
 Cada Date Range del par lleva su propio `ID`, por la nota del ADR 0005
 sobre la fusión de tags con identificador repetido.
+
+> **Nota del 2026-09-07.** La fase 04 le pone a ese pane **nuestro cromo**: el
+> mismo skin y los mismos controles que dibuja la librería en el pane de la demo,
+> para que las dos imágenes se diferencien en el mecanismo y no en el mobiliario.
+> Eso obliga a decir qué cubre "sin modificar" en este ADR, porque hay una lectura
+> que lo rompería: si ese pane corriera nuestra librería para tener el skin, el
+> argumento se cae, ya que el punto es que un cliente de mercado funciona sobre la
+> misma playlist **sin tocarlo**.
+>
+> **Lo que queda sin modificar es la instancia y su configuración**, y el cromo lo
+> dibuja la página alrededor. Los controles se pueden usar sin la parte de
+> concurrentes (nota del 2026-09-07 del ADR 0015), así que ese pane sigue
+> corriendo hls.js pelado. Y no se afirma: se verifica con tres lecturas de la
+> página corriendo, que son la definición de done de la task que lo viste. La
+> instancia se construye con cero opciones (`new Hls()`), su pestaña de red nunca
+> pide un asset-list concurrente, y sigue agendando el Date Range de clase Apple.
+>
+> La otra mitad del cambio es que **ese pane pasa a marcar sus propios rangos en su
+> propia barra** (ADR 0018), y que ninguno de los dos muestra controles nativos
+> (nota del 2026-09-04 del ADR 0015). Y el argumento de este ADR deja de apoyarse
+> en el atraso del cliente de mercado, porque desde el ADR 0017 ese pane reemplaza
+> en lugar de insertar y el atraso no existe.

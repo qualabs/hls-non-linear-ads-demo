@@ -14,6 +14,14 @@ hecho para que el `decoderCount` y el repliegue —que son configuración y
 comportamiento del SDK— no nazcan en la aplicación de demo y haya que
 mudarlos.
 
+**Y tampoco arranca antes de que cierre la 04, que tiene el número más alto y
+se ejecuta primero.** La 04 apareció después de que esta ya estuviera escrita, y
+renumerarla habría roto las referencias que este archivo y su `TASKS.md` ya
+tienen. El orden no sale del número: **la 04 es lo que se graba** —los defectos
+que hacen la demo incómoda de mostrar y las diferencias entre los dos panes que
+no son el mecanismo— **y esta fase son capacidades nuevas**, con la ventana de
+grabación del 28 al 30 de septiembre en el medio.
+
 ## Objetivo
 
 Que un break pueda traer varios avisos mezclando concurrente y lineal, que el

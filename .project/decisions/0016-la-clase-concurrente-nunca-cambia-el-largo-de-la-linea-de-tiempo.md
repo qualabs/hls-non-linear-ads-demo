@@ -68,3 +68,22 @@ requerimientos. No es un defecto a corregir ahora —ningún cliente de la demo
 lo lee: el nuestro ignora el atributo y el de fábrica ignora la clase— y sí
 es una pregunta para SVTA: qué atributos del Date Range de interstitial
 conservan su significado en la clase hermana y cuáles no.
+
+> **Nota del 2026-09-07.** El contexto de arriba dice que de los dos modos del
+> interstitial tradicional "la que corre es la segunda", la inserción, y lo
+> sostiene sobre el `X-RESUME-OFFSET=0` de la playlist y sobre los 49,47 s que
+> midió la T-12. **Desde la fase 04 la demo corre el primero**: el Date Range de
+> clase Apple lleva la forma de reemplazo, para que los dos panes se queden en el
+> mismo segundo del programa y se puedan comparar cuadro a cuadro (ADR 0017). La
+> medición de los 49,47 s no se toca: sigue siendo el registro de lo que la
+> inserción produjo, y deja de describir a la demo.
+>
+> **La decisión de este ADR no cambia**, y conviene decir por qué no. La clase
+> concurrente sigue sin tener ninguno de los dos modos y sigue sin cambiar el
+> largo de la línea de tiempo; el largo que relee nuestra barra sale del contenido
+> primario, que es un VOD que el cambio de atributo no toca. Lo que hay ahora es
+> un rango de reemplazo corriendo de verdad, y corre en el pane del otro player.
+> Con eso la razón para releer el largo en lugar de guardarlo gana una segunda
+> fuente antes de la fase 03: el pane de fábrica pasa a tener su propia barra, y
+> lo que su elemento reporta durante un aviso de reemplazo es el tiempo del aviso
+> y no el del programa.
