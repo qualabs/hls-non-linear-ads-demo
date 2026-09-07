@@ -8,6 +8,12 @@ supersedes: null
 superseded_by: null
 ---
 
+> **Nota del 2026-09-07.** La forma que fijó la medición es la **ausencia** de
+> `X-RESUME-OFFSET` en el tag de clase Apple, y no un offset igual a la duración.
+> Con el atributo ausente hls.js resuelve el punto de retorno contra el largo que
+> **midió** del aviso, en lugar de contra una constante que hay que mantener
+> sincronizada con él a mano.
+
 ## Contexto
 
 Un interstitial tradicional tiene dos modos y son el mismo tag con distinto
