@@ -1,9 +1,9 @@
 ---
 phase: 03-breaks-multiples-y-repliegue
 title: "Breaks con varios avisos, el asset sin bloque y el decoderCount"
-status: planning
+status: closed
 started: 2026-09-04
-closed: null
+closed: 2026-09-07
 ---
 
 # Fase 03: breaks con varios avisos, el asset sin bloque y el `decoderCount`
