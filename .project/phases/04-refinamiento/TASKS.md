@@ -30,7 +30,7 @@ fue.
 | ---- | ------------------------------------------------------------------ | ------- | ---- | -------- |
 | T-01 | El estado de la composición gobierna a todos sus elementos         | done    | —    | `.project/phases/04-refinamiento/tasks/T-01/` |
 | T-02 | El logo de Qualabs sale de los controles del player                | done    | —    | `.project/phases/04-refinamiento/tasks/T-02/` |
-| T-03 | Los controles usables con el dedo                                  | planned | —    | —        |
+| T-03 | Los controles usables con el dedo                                  | done    | —    | `.project/phases/04-refinamiento/tasks/T-03/` |
 | T-04 | La separabilidad: el cromo sin la parte de concurrentes            | planned | —    | —        |
 | T-05 | El pane de fábrica reemplaza el contenido en lugar de insertarlo   | planned | —    | —        |
 | T-06 | La barra marca sólo lo que ese player reproduce, y sobre el riel   | planned | —    | —        |
