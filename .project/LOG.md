@@ -1795,3 +1795,79 @@ histórico.
 
 Evidencia en `.project/phases/04-refinamiento/tasks/T-02/`, con la captura de
 antes del cambio al lado de la de después. Commit sin push.
+
+## 2026-09-07 — T-03 de la fase 04: los controles usables con el dedo
+
+El tercero de los defectos, y el único de los tres que empezaba con una
+medición. Nicolás reportó que en el celular los controles aparecen y desaparecen
+casi de inmediato al tocar.
+
+**Las dos causas candidatas existen las dos, y la del código es la que explica
+el síntoma.** El `pointerleave` de `lib/controls.js` dispara 0,2 ms después del
+`pointerup` porque en touch el puntero deja de existir cuando el dedo se
+levanta: medido con eventos táctiles reales, la capa estuvo arriba **118,9 ms**
+—exactamente lo que el dedo estuvo apretando— y el `click` de ese mismo toque
+aterrizó cuando ya no había nada en pantalla. La causa enunciada, la del
+temporizador que no se renueva con el movimiento, se aisló apretando el dedo y
+sin levantarlo: sin `pointerleave`, la capa bajó a los **2601,3 ms** y en esos
+4 segundos llegaron **cero** `pointermove`. Es cierta y es la segunda: son 2,6 s
+y no 100 ms. Arreglar una sola habría dejado el síntoma a medias.
+
+**El tercer defecto existía, y no estaba en un lugar sino en tres.** El bloque
+nombraba `.qa-track`, y es cierto —un toque en la franja de abajo con los
+controles invisibles seekeó 134,01 s—, pero los cuatro controles tienen
+`pointer-events: auto`: el toque en el centro pausó la composición y el de
+arriba a la derecha levantó el mute, que de los tres es el peor en cámara.
+
+**Y apagar `pointer-events` mientras la capa está escondida cubre sólo la
+mitad.** El `pointerdown` se resuelve antes de que corra cualquier listener, así
+que el seek de la barra queda muerto; el `click` se resuelve **después**, ya con
+la capa de vuelta en pantalla, así que un botón lo recibe igual. Se midió: un
+toque sobre el medio invisible dio `pointerdown` en el elemento de video y
+`click` en el botón de play, y la composición se pausó. Por eso hay dos
+mecanismos y no uno, y el click se traga en un solo lugar, en fase de captura
+sobre el contenedor.
+
+**Lo que se decidió.** `pointerleave` deja de esconder para todo lo que no sea
+un mouse y sigue siendo el gesto del mouse. El gesto que esconde en touch es un
+segundo toque sobre la imagen, que alterna; sobre el mobiliario nunca alterna. De
+las tres opciones que el bloque enumeraba, *el temporizador sólo mientras
+reproduce* **ya estaba implementado** —`arm()` ya tenía `if (!video.paused)`—,
+así que la decisión real era el toque. `CONTROLS_HIDE_MS` se queda en 2600 y
+aparece `CONTROLS_HIDE_TOUCH_MS = 5000`, porque no son la misma cantidad: con
+mouse el número es "cuánto después de que dejás de mover" y el movimiento lo
+renueva —3,6 s de movimiento continuo y siguen arriba—, con el dedo es la
+interacción entera y no hay nada que lo renueve. Y `--qa-icon` pasa de 34 a
+44 px, que es un token y no un layout nuevo, con el juego nuevo indexado por el
+instrumento y no por el tamaño de la pantalla.
+
+**El apagado de `pointer-events` va detrás de `(any-pointer: coarse)`, y esa es
+la mitad que es una decisión.** En el mouse el agujero existe pero no es un
+defecto, y cerrarlo ahí sí sería un cambio: medido, en escritorio un click sin
+mover con los controles escondidos seekea 113,49 s, y después del cambio sigue
+seekeando 113,56 s. Es `any-pointer` y no `pointer` porque un laptop con
+pantalla táctil tiene puntero fino primario y un pulgar además.
+
+**Lo que la corrida con el dedo devuelve después:** la capa queda arriba
+5000,2 ms en lugar de 118,9, y la baja el temporizador y no el dedo levantándose;
+el toque en la franja ya no seekea y muestra; el del centro ya no pausa y
+muestra; el de arriba a la derecha ya no toca el audio y muestra; la pausa y el
+audio se accionan con el dedo con los controles a la vista; y el segundo toque
+sobre la imagen los esconde sin seekear, con el siguiente trayéndolos de vuelta.
+La corrida con mouse da los mismos números que antes en las ocho lecturas, con
+los tokens del escritorio intactos en 34 px.
+
+**Lo que se dejó a propósito sin cambiar: la altura de la barra.** `.qa-track`
+da 30 px de blanco sobre un riel de 8 px, y ese número sale de
+`calc(var(--qa-rail) * 3 + 6px)`, que es la aritmética de dos carriles. La T-06
+saca el carril de abajo y reescribe esa expresión, así que un valor puesto hoy
+contra ella es un valor escrito dos veces. Queda anotado para esa task.
+
+`verificar-cortes` verde con las mismas 5 ocurrencias aceptadas y cero hits del
+lado de ADR 0015, `npm test` 27 de 27, y la comparación de la caja pedida contra
+la dibujada en 0 px en el escritorio y 0,007813 px en el teléfono —el mismo
+número antes y después del cambio, que es el redondeo sub-pixel de una caja de
+361,52 px y no un corrimiento—.
+
+Evidencia en `.project/phases/04-refinamiento/tasks/T-03/`, con la lectura y las
+capturas de antes del cambio al lado de las de después. Commit sin push.

@@ -1,0 +1,854 @@
+{
+  "etiqueta": "despues",
+  "elInstrumento": {
+    "coarse": true,
+    "hoverNone": true,
+    "maxTouchPoints": 5,
+    "ontouchstart": true,
+    "viewport": {
+      "w": 412,
+      "h": 915,
+      "dpr": 2
+    },
+    "controlesNativos": [
+      {
+        "id": "stock-video",
+        "controls": false
+      },
+      {
+        "id": "video",
+        "controls": false
+      }
+    ]
+  },
+  "lasAreasDeToque": {
+    "player": {
+      "x": 17.73,
+      "y": 513.59,
+      "w": 361.52,
+      "h": 203.34,
+      "cx": 198.49,
+      "cy": 615.27
+    },
+    "play": {
+      "x": 161.48,
+      "y": 578.27,
+      "w": 74,
+      "h": 74,
+      "cx": 198.48,
+      "cy": 615.27
+    },
+    "audio": {
+      "x": 319.25,
+      "y": 529.59,
+      "w": 44,
+      "h": 44,
+      "cx": 341.25,
+      "cy": 551.59
+    },
+    "full": {
+      "x": 319.25,
+      "y": 656.94,
+      "w": 44,
+      "h": 44,
+      "cx": 341.25,
+      "cy": 678.94
+    },
+    "track": {
+      "x": 80.66,
+      "y": 663.94,
+      "w": 178.08,
+      "h": 30,
+      "cx": 169.7,
+      "cy": 678.94
+    },
+    "rail": {
+      "x": 80.66,
+      "y": 674.94,
+      "w": 178.08,
+      "h": 8,
+      "cx": 169.7,
+      "cy": 678.94
+    },
+    "tokens": {
+      "--qa-icon": "44px",
+      "--qa-play": "74px",
+      "--qa-rail": "8px"
+    }
+  },
+  "losToquesSobreLaImagen": {
+    "candidatos": [
+      {
+        "x": 61.12,
+        "y": 550.2,
+        "fx": 0.12,
+        "fy": 0.18
+      },
+      {
+        "x": 104.5,
+        "y": 550.2,
+        "fx": 0.24,
+        "fy": 0.18
+      },
+      {
+        "x": 198.49,
+        "y": 550.2,
+        "fx": 0.5,
+        "fy": 0.18
+      },
+      {
+        "x": 285.26,
+        "y": 550.2,
+        "fx": 0.74,
+        "fy": 0.18
+      },
+      {
+        "x": 61.12,
+        "y": 578.66,
+        "fx": 0.12,
+        "fy": 0.32
+      },
+      {
+        "x": 104.5,
+        "y": 578.66,
+        "fx": 0.24,
+        "fy": 0.32
+      },
+      {
+        "x": 285.26,
+        "y": 578.66,
+        "fx": 0.74,
+        "fy": 0.32
+      },
+      {
+        "x": 61.12,
+        "y": 611.2,
+        "fx": 0.12,
+        "fy": 0.48
+      },
+      {
+        "x": 104.5,
+        "y": 611.2,
+        "fx": 0.24,
+        "fy": 0.48
+      },
+      {
+        "x": 285.26,
+        "y": 611.2,
+        "fx": 0.74,
+        "fy": 0.48
+      },
+      {
+        "x": 335.87,
+        "y": 611.2,
+        "fx": 0.88,
+        "fy": 0.48
+      },
+      {
+        "x": 61.12,
+        "y": 639.67,
+        "fx": 0.12,
+        "fy": 0.62
+      },
+      {
+        "x": 104.5,
+        "y": 639.67,
+        "fx": 0.24,
+        "fy": 0.62
+      },
+      {
+        "x": 285.26,
+        "y": 639.67,
+        "fx": 0.74,
+        "fy": 0.62
+      },
+      {
+        "x": 335.87,
+        "y": 639.67,
+        "fx": 0.88,
+        "fy": 0.62
+      }
+    ],
+    "usados": [
+      {
+        "x": 61.12,
+        "y": 550.2,
+        "fx": 0.12,
+        "fy": 0.18
+      },
+      {
+        "x": 335.87,
+        "y": 639.67,
+        "fx": 0.88,
+        "fy": 0.62
+      }
+    ]
+  },
+  "laCausaPointerleave": {
+    "loQueMide": "un toque completo sobre la imagen, con el dedo levantandose",
+    "secuencia": [
+      {
+        "ms": 2030.7,
+        "ev": "pointerdown",
+        "pointerType": "touch",
+        "trusted": true,
+        "target": "video",
+        "arriba": false
+      },
+      {
+        "ms": 2031.4,
+        "ev": "clase",
+        "arriba": true
+      },
+      {
+        "ms": 2149.8,
+        "ev": "pointerup",
+        "pointerType": "touch",
+        "trusted": true,
+        "target": "video",
+        "arriba": true
+      },
+      {
+        "ms": 2150,
+        "ev": "pointerleave",
+        "pointerType": "touch",
+        "trusted": true,
+        "target": "player",
+        "arriba": true
+      },
+      {
+        "ms": 2152.6,
+        "ev": "click",
+        "pointerType": "touch",
+        "trusted": true,
+        "target": "video",
+        "arriba": true
+      },
+      {
+        "ms": 7031.6,
+        "ev": "clase",
+        "arriba": false
+      }
+    ],
+    "lectura": {
+      "subio": true,
+      "bajo": true,
+      "msArriba": 5000.2,
+      "eventoPegadoALaBajada": "click",
+      "msEntreEseEventoYLaBajada": 4879.0
+    },
+    "lasCuatroLecturas": [
+      {
+        "msDesdeQueSubieron": 663.4,
+        "arriba": true
+      },
+      {
+        "msDesdeQueSubieron": 2533.4,
+        "arriba": true
+      },
+      {
+        "msDesdeQueSubieron": 5180.8,
+        "arriba": false
+      },
+      {
+        "msDesdeQueSubieron": 6184.1,
+        "arriba": false
+      }
+    ]
+  },
+  "laCausaTemporizador": {
+    "loQueMide": "el dedo apretado 4 s sin levantarlo: sin pointerleave, lo unico que puede bajar la capa es el temporizador",
+    "secuencia": [
+      {
+        "ms": 8248.2,
+        "ev": "pointerdown",
+        "pointerType": "touch",
+        "trusted": true,
+        "target": "video",
+        "arriba": false
+      },
+      {
+        "ms": 8248.4,
+        "ev": "clase",
+        "arriba": true
+      }
+    ],
+    "lectura": {
+      "subio": true,
+      "bajo": false,
+      "msArribaAlMenos": 0.0
+    },
+    "arribaConElDedoAbajoALos4000ms": true,
+    "cuantosPointermoveLlegaron": 0
+  },
+  "elTercerDefecto": {
+    "laFranjaDeAbajo": {
+      "antes": {
+        "paused": false,
+        "muted": true,
+        "t": 10.435,
+        "ms": 13271.7,
+        "arriba": false
+      },
+      "despues": {
+        "paused": false,
+        "muted": true,
+        "t": 10.927,
+        "ms": 13763.6,
+        "arriba": true
+      },
+      "seekeo": false,
+      "saltoSegundos": 0.492,
+      "mostroLosControles": true,
+      "secuencia": [
+        {
+          "ms": 13308.5,
+          "ev": "pointerdown",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "video",
+          "arriba": false
+        },
+        {
+          "ms": 13308.5,
+          "ev": "clase",
+          "arriba": true
+        },
+        {
+          "ms": 13407.3,
+          "ev": "pointerup",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "video",
+          "arriba": true
+        },
+        {
+          "ms": 13407.4,
+          "ev": "pointerleave",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "player",
+          "arriba": true
+        },
+        {
+          "ms": 13409,
+          "ev": "click",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "qa-track__rail",
+          "arriba": true
+        }
+      ]
+    },
+    "elCentro": {
+      "antes": {
+        "paused": false,
+        "muted": true,
+        "t": 14.225,
+        "ms": 18332.5,
+        "arriba": false
+      },
+      "despues": {
+        "paused": false,
+        "muted": true,
+        "t": 14.698,
+        "ms": 18805.2,
+        "arriba": true
+      },
+      "cambioLaPausa": false,
+      "mostroLosControles": true,
+      "secuencia": [
+        {
+          "ms": 18351.7,
+          "ev": "pointerdown",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "video",
+          "arriba": false
+        },
+        {
+          "ms": 18351.8,
+          "ev": "clase",
+          "arriba": true
+        },
+        {
+          "ms": 18448.4,
+          "ev": "pointerup",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "video",
+          "arriba": true
+        },
+        {
+          "ms": 18448.4,
+          "ev": "pointerleave",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "player",
+          "arriba": true
+        },
+        {
+          "ms": 18451.2,
+          "ev": "click",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "[object SVGAnimatedString]",
+          "arriba": true
+        }
+      ]
+    },
+    "arribaALaDerecha": {
+      "antes": {
+        "paused": false,
+        "muted": true,
+        "t": 19.265,
+        "ms": 23372.6,
+        "arriba": false
+      },
+      "despues": {
+        "paused": false,
+        "muted": true,
+        "t": 19.762,
+        "ms": 23868.8,
+        "arriba": true
+      },
+      "cambioElAudio": false,
+      "mostroLosControles": true,
+      "secuencia": [
+        {
+          "ms": 23407.5,
+          "ev": "pointerdown",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "video",
+          "arriba": false
+        },
+        {
+          "ms": 23407.7,
+          "ev": "clase",
+          "arriba": true
+        },
+        {
+          "ms": 23507.7,
+          "ev": "pointerup",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "video",
+          "arriba": true
+        },
+        {
+          "ms": 23507.7,
+          "ev": "pointerleave",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "player",
+          "arriba": true
+        },
+        {
+          "ms": 23512.1,
+          "ev": "click",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "qa-btn qa-btn--audio",
+          "arriba": true
+        }
+      ]
+    }
+  },
+  "elGesto": {
+    "alSegundoYPocoDelToque": {
+      "paused": false,
+      "muted": true,
+      "t": 15.759,
+      "ms": 29798.3,
+      "arriba": true
+    },
+    "laPausaConElDedo": {
+      "antes": {
+        "paused": false,
+        "muted": true,
+        "t": 15.766,
+        "ms": 29805.4,
+        "arriba": true
+      },
+      "despues": {
+        "paused": true,
+        "muted": true,
+        "t": 15.933,
+        "ms": 30376.3,
+        "arriba": true
+      },
+      "pauso": true,
+      "yLosControlesQuedaronArriba": true
+    },
+    "elAudioConElDedo": {
+      "antes": {
+        "paused": true,
+        "muted": true,
+        "t": 15.933,
+        "ms": 30561.8,
+        "arriba": true
+      },
+      "despues": {
+        "paused": true,
+        "muted": false,
+        "t": 15.933,
+        "ms": 31059.2,
+        "arriba": true
+      },
+      "cambioElAudio": true,
+      "yLosControlesQuedaronArriba": true
+    },
+    "yDeVueltaAReproducir": {
+      "paused": false,
+      "muted": true,
+      "t": 16.459,
+      "ms": 31818.1,
+      "arriba": true
+    },
+    "elGestoQueLosEsconde": {
+      "antes": {
+        "paused": false,
+        "muted": true,
+        "t": 16.478,
+        "ms": 31837.3,
+        "arriba": true
+      },
+      "despues": {
+        "paused": false,
+        "muted": true,
+        "t": 16.98,
+        "ms": 32360.6,
+        "arriba": false
+      },
+      "losEscondio": true,
+      "sinSeekear": true,
+      "secuencia": [
+        {
+          "ms": 31865.5,
+          "ev": "pointerdown",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "video",
+          "arriba": true
+        },
+        {
+          "ms": 31865.8,
+          "ev": "clase",
+          "arriba": false
+        },
+        {
+          "ms": 31954.8,
+          "ev": "pointerup",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "video",
+          "arriba": false
+        },
+        {
+          "ms": 31954.8,
+          "ev": "pointerleave",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "player",
+          "arriba": false
+        },
+        {
+          "ms": 31956.4,
+          "ev": "click",
+          "pointerType": "touch",
+          "trusted": true,
+          "target": "video",
+          "arriba": false
+        }
+      ]
+    },
+    "yElTercerToqueLosTraeDeVuelta": {
+      "paused": false,
+      "muted": true,
+      "t": 17.583,
+      "ms": 32964,
+      "arriba": true
+    }
+  },
+  "laCajaPedidaContraLaDibujada": {
+    "enElTelefono": {
+      "t": 126.0,
+      "elementos": [
+        {
+          "elemento": "primaryContent",
+          "primario": true,
+          "deltaMaxPx": 0.007813
+        },
+        {
+          "elemento": "view2",
+          "primario": false,
+          "deltaMaxPx": 0.007813
+        },
+        {
+          "elemento": "view3",
+          "primario": false,
+          "deltaMaxPx": 0.007813
+        },
+        {
+          "elemento": "view4",
+          "primario": false,
+          "deltaMaxPx": 0.007813
+        }
+      ],
+      "deltaMaxPx": 0.007813
+    },
+    "enElEscritorio": {
+      "t": 126.0,
+      "elementos": [
+        {
+          "elemento": "primaryContent",
+          "primario": true,
+          "deltaMaxPx": 0
+        },
+        {
+          "elemento": "view2",
+          "primario": false,
+          "deltaMaxPx": 0
+        },
+        {
+          "elemento": "view3",
+          "primario": false,
+          "deltaMaxPx": 0
+        },
+        {
+          "elemento": "view4",
+          "primario": false,
+          "deltaMaxPx": 0
+        }
+      ],
+      "deltaMaxPx": 0
+    }
+  },
+  "elInstrumentoDelMouse": {
+    "coarse": false,
+    "hoverNone": false,
+    "maxTouchPoints": 0,
+    "viewport": {
+      "w": 1600,
+      "h": 1000
+    }
+  },
+  "lasAreasDeToqueEnElEscritorio": {
+    "player": {
+      "x": 828,
+      "y": 322.08,
+      "w": 715,
+      "h": 402.19,
+      "cx": 1185.5,
+      "cy": 523.17
+    },
+    "play": {
+      "x": 1148.5,
+      "y": 486.17,
+      "w": 74,
+      "h": 74,
+      "cx": 1185.5,
+      "cy": 523.17
+    },
+    "audio": {
+      "x": 1493,
+      "y": 338.08,
+      "w": 34,
+      "h": 34,
+      "cx": 1510,
+      "cy": 355.08
+    },
+    "full": {
+      "x": 1493,
+      "y": 674.27,
+      "w": 34,
+      "h": 34,
+      "cx": 1510,
+      "cy": 691.27
+    },
+    "track": {
+      "x": 890.92,
+      "y": 676.27,
+      "w": 541.56,
+      "h": 30,
+      "cx": 1161.7,
+      "cy": 691.27
+    },
+    "rail": {
+      "x": 890.92,
+      "y": 687.27,
+      "w": 541.56,
+      "h": 8,
+      "cx": 1161.7,
+      "cy": 691.27
+    },
+    "tokens": {
+      "--qa-icon": "34px",
+      "--qa-play": "74px",
+      "--qa-rail": "8px"
+    }
+  },
+  "laCorridaConMouse": {
+    "elMouseEntraYSeQuedaQuieto": {
+      "secuencia": [
+        {
+          "ms": 36726.5,
+          "ev": "pointermove",
+          "pointerType": "mouse",
+          "trusted": true,
+          "target": "video",
+          "arriba": false
+        },
+        {
+          "ms": 36726.8,
+          "ev": "clase",
+          "arriba": true
+        },
+        {
+          "ms": 39327.2,
+          "ev": "clase",
+          "arriba": false
+        }
+      ],
+      "lectura": {
+        "subio": true,
+        "bajo": true,
+        "msArriba": 2600.4,
+        "eventoPegadoALaBajada": "pointermove",
+        "msEntreEseEventoYLaBajada": 2600.7
+      }
+    },
+    "elMouseSeMueveYLosRenueva": {
+      "arribaDespuesDe3600msDeMovimiento": true
+    },
+    "elMouseSaleDelContenedor": {
+      "secuencia": [
+        {
+          "ms": 43926.1,
+          "ev": "pointerleave",
+          "pointerType": "mouse",
+          "trusted": true,
+          "target": "player",
+          "arriba": true
+        },
+        {
+          "ms": 43926.3,
+          "ev": "clase",
+          "arriba": false
+        }
+      ],
+      "lectura": {
+        "subio": false
+      },
+      "escondidos": true
+    },
+    "clickEnLaPausa": {
+      "antes": {
+        "paused": false,
+        "muted": true,
+        "t": 18.751,
+        "ms": 44916.2,
+        "arriba": true
+      },
+      "despues": {
+        "paused": true,
+        "muted": true,
+        "t": 18.755,
+        "ms": 45324.9,
+        "arriba": true
+      },
+      "cambioLaPausa": true
+    },
+    "clickEnElAudio": {
+      "antes": {
+        "paused": true,
+        "muted": true,
+        "t": 18.755,
+        "ms": 45330.6,
+        "arriba": true
+      },
+      "despues": {
+        "paused": true,
+        "muted": false,
+        "t": 18.755,
+        "ms": 45743.5,
+        "arriba": true
+      },
+      "cambioElAudio": true
+    },
+    "elSeekConLosControlesArriba": {
+      "antes": {
+        "paused": false,
+        "muted": true,
+        "t": 19.174,
+        "ms": 46155.4,
+        "arriba": true
+      },
+      "despues": {
+        "paused": false,
+        "muted": true,
+        "t": 54.273,
+        "ms": 46783.3,
+        "arriba": true
+      },
+      "seekeo": true,
+      "saltoSegundos": 35.099
+    },
+    "elClickSinMoverConLosControlesEscondidos": {
+      "antes": {
+        "paused": false,
+        "muted": true,
+        "t": 12.852,
+        "ms": 49814.4,
+        "arriba": false
+      },
+      "despues": {
+        "paused": false,
+        "muted": true,
+        "t": 126.413,
+        "ms": 50353.6,
+        "arriba": true
+      },
+      "seekeo": true,
+      "saltoSegundos": 113.561,
+      "secuencia": [
+        {
+          "ms": 49824.6,
+          "ev": "pointerdown",
+          "pointerType": "mouse",
+          "trusted": true,
+          "target": "qa-track",
+          "arriba": false
+        },
+        {
+          "ms": 49825,
+          "ev": "clase",
+          "arriba": true
+        },
+        {
+          "ms": 49825.1,
+          "ev": "clase",
+          "arriba": true
+        },
+        {
+          "ms": 49842.9,
+          "ev": "pointerup",
+          "pointerType": "mouse",
+          "trusted": true,
+          "target": "qa-track",
+          "arriba": true
+        },
+        {
+          "ms": 49843.1,
+          "ev": "click",
+          "pointerType": "mouse",
+          "trusted": true,
+          "target": "qa-track",
+          "arriba": true
+        }
+      ]
+    }
+  },
+  "consola": []
+}
