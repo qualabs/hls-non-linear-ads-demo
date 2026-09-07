@@ -2462,3 +2462,67 @@ ADR de la fase 01.
 
 La fase queda en `planning`. No se ejecutó ninguna task: esto es diseño, y Nicolás
 lo revisa antes de dar el OK para implementar.
+
+## 2026-09-07 — La verificación de la fase 03 se reescribe: se lee el estado, no se miran capturas
+
+Nicolás corrigió el enfoque de la fase por dos lados y los dos son de fondo.
+
+**El parpadeo negro entre avisos no es un hallazgo que merezca una medición.** Es
+la consecuencia conocida de crear la instancia del aviso que entra recién cuando el
+anterior salió, con arreglo conocido —traer el asset siguiente mientras corre el
+actual—, así que medir cuánto dura para después precargar igual es trabajo que
+ninguna decisión de la fase necesita. La precarga pasó a ser **construcción**: es
+la tercera cosa que cubre la T-01, junto con la secuencia y el bug de la identidad.
+
+**Verificar mirando capturas está mal para esta fase.** Lo que la fase construye es
+mecánico —que el aviso 2 arranque cuando el 1 termina, que un asset sin bloque
+dispare su `URI`, que un parámetro viaje en el pedido— y todo eso es un número o un
+booleano que se lee del navegador. Cada definición de done se reescribió como una
+aserción sobre el estado que **puede fallar sola**, sin que nadie mire: qué devuelve
+`activeAt` en un instante dado, qué nodos hay en la capa y con qué `src`, qué
+`volume` y qué `paused` tiene el `<video>` del primario, qué URL salió al
+asset-list, qué devuelve `programRanges()`. `window.demo` ya expone el proveedor, el
+renderizador y la capa, así que el instrumento existe.
+
+**De dónde salió el error, que es lo que importa que quede escrito.** La fase 04
+verificaba con capturas a tamaño real y **estaba bien**: sus seis defectos eran
+visuales —un logo sobre la imagen, el amarillo colgando debajo del riel, los
+controles que desaparecían al tocar— y mirar era la medición. Acá el contenido es
+mecánico y la captura no afirma nada: un asset que corta medio segundo antes se ve
+idéntico en la foto. **Se importó el instrumento de una fase a otra que no se le
+parece.**
+
+**Y el límite, que es la mitad que evita el péndulo.** Hay cosas que sólo se juzgan
+mirando —si la mezcla se cuenta bien en escenario, si el par de compatibilidad dice
+lo que tiene que decir— y para esas el revisor es Nicolás corriendo la demo. Eso ya
+estaba resuelto así en la fase 04 y no se reemplaza por un artefacto guardado en una
+carpeta. El tramo invertido de la T-05 es el caso: no se afirma con una lectura, se
+mira.
+
+**Las dos primeras tasks se cayeron, y la fase quedó en cinco.** La T-01 medía tres
+cosas. El parpadeo se murió por lo de arriba. Si el primario decodificando detrás de
+un aviso opaco cuesta lo mismo que visible no lo consume ninguna decisión de esta
+fase: el `decoderCount` es passthrough por diseño y no hace nada con ese costo, así
+que la pregunta vuelve a quedar abierta en el `PHASE.md` para la fase que le dé
+semántica al número. Y qué hace el renderizador con dos experiencias solapadas sí le
+importa a una decisión concreta —la regla de fin—, así que bajó a ser una lectura
+adentro de esa task en lugar de una medición aparte. Sin las tres, la T-02 se quedó
+sin nada que devolver al diseño: lo único que le quedaba era el pase de la medición,
+porque el plan de construcción ya salía del `DESIGN.md`. La fase se renumeró entera
+y ninguna task tenía plan ni evidencia, así que no rompió nada.
+
+**El riesgo R1 cambió de forma.** Era "los tres arranques en frío se ven en cámara,
+y la mitigación es medirlos primero". Ahora la mitigación es que se precargan, y lo
+que queda de riesgo es que traer el asset antes no alcance para que el primer cuadro
+esté listo a tiempo: el done de la T-01 lo afirma leyendo `readyState` del nodo que
+entra en el instante anterior a la transición, así que si no alcanzó se sabe ahí y
+no en la grabación.
+
+**Dos cosas del `DESIGN.md` quedaron viejas y no se tocaron**, porque el diseño es
+el registro de lo que se leyó y no se reescribe para que coincida con las tasks: el
+cierre de la sección 10 —"es lo primero que hay que medir"— y la sección 12 entera,
+que enumera las tres cosas sin medir como la primera task de la fase. De esas tres,
+una se murió, otra volvió a ser pregunta abierta y la tercera se mudó adentro de la
+T-02.
+
+La fase sigue en `planning`. No se ejecutó ninguna task.

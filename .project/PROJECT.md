@@ -514,12 +514,16 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   concurrente y lineal, el asset sin bloque —que es a la vez el aviso lineal y
   el repliegue del lado del cliente, por el ADR 0019— y el `decoderCount` como
   passthrough hasta el pedido del asset-list. Abierta y en diseño revisado, con
-  la 02 y la 04 cerradas: es la que corre. Su primera task sigue siendo una
-  medición, y mide otra cosa que antes: cuánto dura el arranque en frío de cada
-  instancia de hls.js en las transiciones de adentro del break, que es lo que
-  puede arruinar la grabación. Que el aviso lineal reabra un ADR de la fase 01
-  dejó de ser un riesgo: el ADR 0019 lo reproduce con el mismo mecanismo que
-  todo lo demás y el 0002 no se toca.
+  la 02 y la 04 cerradas: es la que corre. Ya no arranca con una medición: las
+  tres cosas que su primera task iba a medir se cayeron —el parpadeo negro entre
+  avisos es la consecuencia conocida de no traer el asset siguiente antes, así que
+  la precarga pasó a ser construcción; el costo del primario decodificando detrás
+  de un aviso opaco no lo consume ninguna decisión de la fase; y el solape de dos
+  experiencias es una lectura adentro de la task que elige la regla de fin—, así
+  que la fase quedó en cinco tasks de construcción, y cada una afirma lo suyo
+  leyendo el estado del navegador en lugar de guardar capturas. Que el aviso
+  lineal reabra un ADR de la fase 01 dejó de ser un riesgo: el ADR 0019 lo
+  reproduce con el mismo mecanismo que todo lo demás y el 0002 no se toca.
 - **04-refinamiento**: cerrada con los seis puntos que Nicolás dio probando la
   demo desde el celular cerrados, y **se ejecutó antes que la 03**. El criterio
   se cumplió: los dos players quedaron idénticos en todo —el mismo cromo, la

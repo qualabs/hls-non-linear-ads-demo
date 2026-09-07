@@ -37,7 +37,10 @@ linear, concurrent, mixing that up".
   `slotStart`, así que tres avisos con `start: 0` saldrían los tres a la vez; con
   `start` acumulados el código de hoy ya los secuencia. Y adentro del break el
   renderizador tiene un bug que este alcance destapa: dos experiencias
-  consecutivas del mismo `type` comparten clave y la segunda no se dibuja.
+  consecutivas del mismo `type` comparten clave y la segunda no se dibuja. Y la
+  transición entre un aviso y el siguiente se precarga —el asset que entra se trae
+  mientras corre el actual—, que es lo que evita que el break pase por un cuadro en
+  negro en cada una de sus transiciones.
 - **El asset sin bloque: el aviso lineal y el repliegue, un solo mecanismo.** El
   ADR 0019 fija el modelo: un asset sin bloque `X-AD-CREATIVE-SIGNALING` no se
   saltea, se reproduce su `URI` **hasta el fin del asset**, y un bloque que falla
@@ -92,7 +95,7 @@ linear, concurrent, mixing that up".
 - **0018** — cada barra marca sólo lo que ese player reproduce, sobre su propio
   riel. Anticipa un rango de clase `interstitial` del lado nuestro, y bajo el
   modelo del ADR 0019 esa anticipación no se sigue sola: es una decisión de la
-  T-04.
+  T-02.
 
 Si algo obliga a cambiar una de estas, se escribe el ADR que la supersede y no se
 edita la vieja.
@@ -116,17 +119,24 @@ son tres cosas, y ninguna cambia la forma de `Experience` ni de `Element`:
    activación, calculada desde `startTime` y `duration`; la norma dice que el
    asset se reproduce hasta su fin. Las dos no pueden ser ciertas a la vez cuando
    el creativo dura otra cosa que su `DURATION` declarada. La salida la elige la
-   T-04 y sale como versión del documento.
+   T-02 y sale como versión del documento.
 
 ## Riesgos y mitigaciones
 
-**R1. Los tres arranques en frío adentro del break se ven en cámara.** Cada
-transición entre avisos destruye la instancia de hls.js anterior y crea una nueva,
-y cada nodo nace con fondo negro. Con un aviso por break no se nota; con cuatro
-hay tres transiciones. Es el riesgo que puede arruinar la grabación.
+**R1. La transición entre dos avisos del break sale en negro.** El renderizador
+destruye la experiencia que sale y recién ahí construye la que entra, así que cada
+transición de adentro del break paga una instancia nueva de hls.js con su fetch de
+playlist y de segmento, y el nodo nace con fondo negro. Con un aviso por break no
+se nota; con cuatro pasa tres veces en el medio, y es lo único de esta fase que se
+ve en cámara sin que nadie lo busque.
 
-Mitigación: **es lo primero que mide la T-01**, antes de que se construya nada, y
-la T-07 decide la mezcla del recorrido con ese número en la mano.
+Mitigación: **no se mide, se construye.** La causa se conoce y el arreglo también:
+el asset siguiente se trae mientras corre el actual, y eso es parte de lo que la
+T-01 construye. Medir cuánto dura el negro para después precargar igual no lo
+necesita ninguna decisión de la fase. Lo que queda de riesgo después de la
+precarga es que traerlo antes no alcance para que el primer cuadro esté listo a
+tiempo, y el done de la T-01 lo afirma leyendo el estado del nodo que entra en el
+instante anterior a la transición: si no alcanzó se sabe ahí y no en la grabación.
 
 **R2. La inversión del par de compatibilidad.** Con el lineal tercero en la
 mezcla, hay un tramo del break donde nuestro pane muestra un aviso a cuadro entero
@@ -134,7 +144,7 @@ y el de fábrica muestra el programa, o sea al revés de lo que la demo quiere
 mostrar. El `DESIGN.md` lo tiene con sus tres salidas.
 
 Mitigación: es decisión de producto y de David, porque es lo que él cuenta en
-escenario. Va al sync del 21 de septiembre; la T-07 la aplica.
+escenario. Va al sync del 21 de septiembre; la T-05 la aplica.
 
 **R3. El degradado no es transparente y alguien lo va a contar como si lo fuera.**
 La norma no tiene modelo de superposición, así que un cliente conforme que lea el
@@ -148,7 +158,7 @@ es material para SVTA. Nadie tiene que deducirlo del código.
 el fin del asset" es la clase de cosa que, resuelta de apuro adentro de una task,
 después no se puede sacar.
 
-Mitigación: la T-04 tiene la decisión enumerada en su bloque, con las dos salidas
+Mitigación: la T-02 tiene la decisión enumerada en su bloque, con las dos salidas
 escritas, y el resultado es una versión del documento en `docs/` y no un párrafo
 adentro de la evidencia de una task.
 
@@ -185,6 +195,7 @@ que ya existe.
   acá.
 - **Si el `decoderCount` significa algo real bajo el render que esta fase
   construye.** El primario sigue decodificando detrás del aviso a cuadro entero, o
-  sea que no se libera un decodificador. La T-01 mide si eso cuesta lo mismo que
-  decodificar visible; qué hacer con la respuesta es de la fase que le dé
-  semántica al número, y esta es passthrough por diseño.
+  sea que no se libera un decodificador. **Esta fase no lo mide**: es passthrough
+  por diseño y ninguna decisión de acá consume ese número. Lo mide la fase que le
+  dé semántica al `decoderCount`, que es la misma que decide qué hacer con la
+  respuesta.
