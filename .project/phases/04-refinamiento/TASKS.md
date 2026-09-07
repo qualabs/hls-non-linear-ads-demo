@@ -10,9 +10,21 @@ mecanismo que la fase 02 usó para el corte: la decisión se toma al principio y
 se verifica, en lugar de afirmarse. La T-04 no toca ese pane; decide cómo se lo
 va a tocar y cómo se va a comprobar que sigue siendo un cliente sin modificar.
 
-**Y al final el par completo, con la única diferencia que tiene que quedar.** El
-criterio de la fase es una afirmación sobre el conjunto, así que se verifica una
-vez, sobre el recorrido corriendo entero, y no task por task.
+**El criterio de la fase no tiene task.** Es una afirmación sobre el conjunto,
+así que se verifica una vez y sobre el recorrido corriendo entero, y lo verifica
+Nicolás mirando los dos panes: el cuadro de los dos en el mismo segundo lo arma
+él y lo arma más rápido a mano. Las diferencias que se espera que sobrevivan
+están enumeradas en el `PHASE.md`, para que cuando mire sepa cuáles son
+legítimas y cuáles son un hallazgo.
+
+**La verificación de las tasks es liviana, y liviano tiene un límite.** No se
+agrega aparato nuevo, porque los seis defectos de la fase se ven todos en la
+pantalla y el revisor es él. Pero lo que ya existe se sigue corriendo:
+`node scripts/verificar-cortes.mjs` y `npm test` al final de cada task que toque
+los archivos que cada uno mira, y la comparación de la caja pedida contra la
+dibujada donde la task toque el renderizado o los controles. El razonamiento
+completo está en el `PHASE.md`; cada bloque de acá dice qué le queda y qué se le
+fue.
 
 | id   | brief                                                              | status  | plan | evidence |
 | ---- | ------------------------------------------------------------------ | ------- | ---- | -------- |
@@ -23,7 +35,6 @@ vez, sobre el recorrido corriendo entero, y no task por task.
 | T-05 | El pane de fábrica reemplaza el contenido en lugar de insertarlo   | planned | —    | —        |
 | T-06 | La barra marca sólo lo que ese player reproduce, y sobre el riel   | planned | —    | —        |
 | T-07 | El pane del otro con nuestro cromo, y su propio riel               | planned | —    | —        |
-| T-08 | El par, lado a lado, con una sola diferencia                       | planned | —    | —        |
 
 ---
 
@@ -56,16 +67,28 @@ vez, sobre el recorrido corriendo entero, y no task por task.
   dependencias.
 - **Definición de done:** la secuencia exacta corrida y capturada: pausar la
   composición, hacer seek hasta caer adentro de un aviso concurrente de video, y
-  ver todos los elementos detenidos, con la lectura de `paused` nodo por nodo
-  —que es lo que hace verificable el "todos" en lugar del que se probó—. Y la
-  vuelta: apretar play y ver que todos arrancan juntos. El recorrido completo
-  sigue corriendo sin cambios.
+  ver todos los elementos detenidos, con la lectura nodo por nodo —que es lo que
+  hace verificable el "todos" en lugar del que se probó—. Y la vuelta: apretar
+  play y ver que todos arrancan juntos. El recorrido completo sigue corriendo sin
+  cambios.
 - **nivel de verificación:** bajo. El error está en la pantalla —un aviso
   reproduciendo solo mientras todo lo demás está quieto— y la lectura nodo por
   nodo es lo que cubre el resto de los elementos. No es `alto` porque lo que hay
   que cubrir vive en el camino que toca el DOM y este proyecto decidió no tener
   tests de DOM ni de browser: lo que un test cubriría acá es un booleano que la
   captura y la lectura muestran directo.
+
+  **Queda:** `verificar-cortes` y `npm test`, porque la task edita
+  `lib/renderer.js` y los dos lo miran. La comparación de la caja pedida contra
+  la dibujada, porque `build()` es la función que aplica la caja y es la que se
+  edita. Y la lectura nodo por nodo lee tres campos y no uno: además de `paused`,
+  `volume`/`muted` y `currentTime`. Son las dos únicas cosas de esta task que no
+  se ven en la pantalla —un elemento que arranca con el volumen equivocado o en
+  el segundo equivocado se ve bien— y las dos pasan por la misma función, porque
+  `applyAudio()` corre después de `build()` y el `startAt` se calcula adentro.
+  No es una medición nueva: es la misma lectura con dos columnas más.
+
+  **Se fue:** nada. Esta task nunca tuvo campaña ni capturas a un cuarto.
 
 ## T-02 — El logo de Qualabs sale de los controles del player
 
@@ -99,16 +122,23 @@ vez, sobre el recorrido corriendo entero, y no task por task.
   corregirlo: la página mínima del documento del integrador y el bloque de seis
   líneas del `README.md` nunca pasaron `logo`, así que ninguno de los dos cambia.
   El que cambia en uno es el de la página de **esta demo**, que son 12 líneas y
-  vive en la evidencia de la T-08 y en el informe de la fase 02, los dos
-  registro y ninguno de los dos se reescribe.
+  vive en la evidencia de la T-08 de la fase 02 y en el informe de esa fase, los
+  dos registro y ninguno de los dos se reescribe.
 - **Definición de done:** una captura a tamaño real de los dos panes sin marca
-  sobre la imagen y con la del encabezado en su lugar, más la misma captura
-  reducida a un cuarto, que es la prueba barata de que la marca que sobrevive a
-  la reducción es la del encabezado y no la del player —a un cuarto, el logo de
-  22 px de la barra queda en 5,5 px y el wordmark se disuelve, y eso ya está
-  medido en la T-07—. La sección 7 del documento del integrador sin cambios, que
-  es la prueba de que la superficie no se movió.
-- **nivel de verificación:** bajo. Es estética y el error está en la pantalla.
+  sobre la imagen y con la del encabezado en su lugar. La sección 7 del documento
+  del integrador sin cambios, que es la prueba de que la superficie no se movió.
+- **nivel de verificación:** mínimo. Es una línea de `js/app.js` que se va, y la
+  salida entera es una captura que una persona mira.
+
+  **Queda:** la captura a tamaño real, y nada más que correr: la task no toca
+  `lib/` ni ninguno de los archivos que `verificar-cortes` mira, y `npm test` no
+  tiene qué mirar acá.
+
+  **Se fue:** la captura reducida a un cuarto. Estaba para probar que la marca
+  que sobrevive a la reducción es la del encabezado y no la del player, y eso ya
+  lo midió la T-07 de la fase 02: a un cuarto el logo de 22 px de la barra queda
+  en 5,5 px y el wordmark se disuelve. Volver a medirlo no atrapa ningún defecto
+  nuevo.
 
 ## T-03 — Los controles usables con el dedo
 
@@ -155,6 +185,17 @@ vez, sobre el recorrido corriendo entero, y no task por task.
 - **nivel de verificación:** bajo. El error está en la pantalla, y el instrumento
   es un dispositivo: en este repositorio ya hubo dos falsos "OK" por medir estilos
   computados en lugar de mirar la imagen.
+
+  **Queda:** la corrida en el dispositivo y la corrida con mouse que muestra que
+  el escritorio no cambió, que son las dos que juzgan el síntoma. `verificar-cortes`
+  y `npm test`, porque la task edita `lib/controls.js` y los dos lo miran. Y la
+  comparación de la caja pedida contra la dibujada, porque las áreas de toque son
+  tokens de tamaño y la capa de controles está sobre la misma imagen contra la que
+  se resuelven los layouts.
+
+  **Se fue:** nada. Confirmar la causa antes de arreglar es mirar el síntoma en un
+  celular, no una medición nueva, y sin eso la task arregla una de las dos causas
+  y da el síntoma por ido sin mirar.
 
 ## T-04 — La separabilidad: el cromo sin la parte de concurrentes
 
@@ -218,6 +259,12 @@ vez, sobre el recorrido corriendo entero, y no task por task.
 - **nivel de verificación:** mínimo. Es trabajo de decisión que Nicolás lee entero
   antes de que algo dependa de él.
 
+  **Queda:** nada que correr. La task no toca código —su done dice que ninguna
+  línea del pane del otro se toca— y lo que escribe son la decisión y el documento
+  del integrador, que ninguno de los dos chequeos mira.
+
+  **Se fue:** nada.
+
 ## T-05 — El pane de fábrica reemplaza el contenido en lugar de insertarlo
 
 - **Objetivo:** que los dos panes muestren el mismo segundo del programa al mismo
@@ -264,9 +311,24 @@ vez, sobre el recorrido corriendo entero, y no task por task.
   recorrido, que es el número que dice que el atraso se fue, contra los 49,47 s que
   la T-12 midió. El quinto break llegando completo al pane de la izquierda. Y el
   párrafo del `README.md` reescrito.
-- **nivel de verificación:** bajo. El error está en la pantalla, y el número del
-  final es lo que hace auditable la afirmación de que los dos panes quedaron
-  sincronizados.
+- **nivel de verificación:** bajo. El error grueso está en la pantalla —los dos
+  panes en escenas distintas de la misma película—, pero el fino no: dos panes
+  desincronizados por un par de segundos se ven sincronizados, y la fase entera se
+  apoya en que estén en el mismo segundo. Lo que lo dice es el número.
+
+  **Queda:** la captura adentro del break, y la lectura del `currentTime` de los
+  dos elementos al final del recorrido contra los 49,47 s de la T-12 de la fase
+  01, que de las dos es la única que agarra el error fino. Y `npm test`, que acá
+  es el que menos se espera: `test/program-ranges-and-volume.test.js` parsea la
+  tabla del recorrido y el `PLANNED-DURATION` de `scripts/senalizar-contenido.sh`,
+  que es el archivo que esta task edita, así que un cambio que le rompa la forma a
+  esas líneas se ve como tests en rojo en lugar de no verse. `verificar-cortes` no
+  corre: ninguna de sus dos costuras mira ese script.
+
+  **Se fue:** nada. Medir qué forma tiene el reemplazo —si el offset vale la
+  duración del aviso o si el atributo tiene que faltar, y qué hace hls.js 1.7.2
+  con cada una— es una corrida y no una campaña, y sin ella la task no sabe qué
+  escribir.
 
 ## T-06 — La barra marca sólo lo que ese player reproduce, y sobre el riel
 
@@ -313,14 +375,25 @@ vez, sobre el recorrido corriendo entero, y no task por task.
   superficie pública (sección 7 del documento del integrador). Depende de T-04, que
   es donde se decide de dónde salen las marcas del otro pane.
 - **Definición de done:** una captura a tamaño real de nuestra barra con los cinco
-  breaks marcados sobre el riel y nada colgando debajo, más la misma captura
-  reducida a un cuarto, que es la prueba que en la T-04 de la fase 02 encontró que
-  un riel de 6 px no sobrevive a la reducción. `scripts/verificar-cortes.mjs`
+  breaks marcados sobre el riel y nada colgando debajo. `scripts/verificar-cortes.mjs`
   pasando, con su lista de aceptadas consistente con el archivo después del cambio.
   Y `npm test` cerrando como cerraba: `rangeSpan` no cambia, pero el archivo sí.
 - **nivel de verificación:** bajo. Es interfaz y el error está en la pantalla. La
   aritmética que pone cada marca en su lugar ya la cubren los tests de la T-06 de
   la fase 02.
+
+  **Queda:** la captura a tamaño real. `verificar-cortes` **con su lista de
+  ocurrencias aceptadas consistente con el archivo**, que acá no es una
+  formalidad: la task borra líneas que están en esa lista, y un chequeo cuyas
+  excepciones ya no existen dejó de probar lo que dice probar. `npm test`, porque
+  la task edita `lib/controls.js` y de ahí sale `rangeSpan`. Y la comparación de la
+  caja pedida contra la dibujada, porque la altura de `.qa-track` cambia y esa capa
+  está sobre la imagen contra la que se resuelven los layouts.
+
+  **Se fue:** la captura reducida a un cuarto como requisito. Lo que probaba —que
+  un riel fino no sobrevive a la reducción— ya lo midió la T-04 de la fase 02, y
+  mirar la barra chica es un vistazo que el revisor da o no da, no un artefacto que
+  la task tenga que producir.
 
 ## T-07 — El pane del otro con nuestro cromo, y su propio riel
 
@@ -342,7 +415,7 @@ vez, sobre el recorrido corriendo entero, y no task por task.
   aviso. Que eso sea un defecto o que sea exactamente la verdad de lo que
   significa reemplazar es la decisión de esta task, y lo que muestre tiene que ser
   cierto: la barra es el instrumento sobre el que se apoya la comparación cuadro a
-  cuadro de la T-08.
+  cuadro que la fase existe para hacer posible.
 
   **Qué controles actúan sobre ese pane, decidido y escrito.** El cromo trae cuatro
   y los cuatro accionan el elemento: la pausa, el audio, el fullscreen y el seek de
@@ -378,34 +451,13 @@ vez, sobre el recorrido corriendo entero, y no task por task.
   de done pide por nombre. No es `alto` porque los tests que ese nivel debe serían
   de browser, y este proyecto decidió no tenerlos.
 
-## T-08 — El par, lado a lado, con una sola diferencia
+  **Queda:** las capturas de los dos panes adentro y afuera del break; **las tres
+  lecturas**, que son lo único que separa un pane sin modificar de uno que lo
+  parece y por eso no se recortan; la lectura de qué reporta el elemento de ese
+  pane durante un interstitial, que es lo que decide qué muestra su barra y la
+  barra tiene que ser cierta; y `verificar-cortes` con `npm test` si la task
+  termina tocando `lib/controls.js` para construir la entrada pública que decidió
+  la T-04.
 
-- **Objetivo:** producir el artefacto que la fase existe para producir y que nunca
-  existió, porque hasta ahora los dos panes no podían estar en el mismo segundo: el
-  cuadro donde muestran el mismo segundo del programa y difieren en una sola cosa.
-  Y comprobar que no quedó una segunda diferencia.
-- **Qué tiene que cubrir:** el recorrido corrido entero, en una sola carga y sin un
-  solo seek, con una captura de los dos panes en el mismo instante adentro de cada
-  uno de los cinco breaks y una afuera. Más la **enumeración de todas las
-  diferencias entre los dos panes que sobreviven**, que es lo que hace que el
-  criterio de la fase quede verificado y no afirmado.
-
-  Las diferencias que se espera que sobrevivan y no son hallazgos: el color de
-  identidad de cada pane y sus rótulos —el `--q-slate-400` del de fábrica contra el
-  nuestro, las líneas `role`, `role-sub` y `role-reads`, la línea de estado y el
-  `data-state` que la hoja de estilos pinta—, que existen para que alguien mirando
-  una grabación sin sonido sepa cuál es cuál y qué está haciendo cada uno. Eso es la
-  página hablando de la página. Cualquier otra cosa es un hallazgo.
-
-  Las capturas reducidas a un cuarto van también, porque en este repositorio esa
-  prueba encontró dos defectos en dos tasks distintas.
-
-  Punto de partida: el criterio del `PHASE.md`, `css/player.css`, y la evidencia de
-  las tasks anteriores de la fase. Restricción: no se cambia nada acá. Es la task
-  que mira; lo que encuentre y no sea trivial vuelve como corrección a la task que
-  lo dejó. Depende de todas las anteriores.
-- **Definición de done:** las capturas de los cinco breaks y la de afuera del break,
-  la lista enumerada de las diferencias que sobreviven con la razón por la que cada
-  una no es el mecanismo, y el recorrido corriendo entero en una sola carga.
-- **nivel de verificación:** bajo. La salida es una tanda de capturas y una lista que
-  una persona mira, y el criterio de la fase es exactamente lo que se lee en ellas.
+  **Se fue:** nada. Esta task ya estaba escrita sobre lecturas de una página
+  corriendo y no sobre aparato.

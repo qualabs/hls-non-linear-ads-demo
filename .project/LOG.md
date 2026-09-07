@@ -1624,3 +1624,63 @@ no se tocó acá, porque el alcance de este pase era `.project/`. Nada de códig
 `PROJECT.md`: índice de fases con la 04 y la línea de la 03 corregida por el
 orden, `last_update` en 2026-09-07, y una entrada nueva en "A confirmar" para
 David, porque el punto 1 cambia lo que él cuenta en escenario. Commit sin push.
+
+## 2026-09-07 — Fase 04 replanificada: se va la T-08 y la verificación pasa a liviana
+
+Dos cambios que pidió Nicolás sobre la fase que se había escrito unas horas
+antes, los dos de gobernanza y ninguno de código.
+
+**La T-08 se fue y no la reemplaza nada.** Era la que producía el cuadro de los
+dos panes en el mismo segundo y enumeraba las diferencias que sobreviven. Él
+dijo que la hace a mano y más rápido, así que la fase queda en **siete tasks**,
+T-01 a T-07, y el criterio de la fase pasa a verificarlo él con el recorrido
+corriendo. Lo único que se preservó de esa task es la lista de las diferencias
+legítimas —el color de identidad de cada pane y sus rótulos—, que ahora vive en
+el `PHASE.md` al lado del criterio: no es un artefacto que alguien tenga que
+producir, es lo que le dice al que mira cuáles son hallazgos y cuáles no.
+
+**La verificación de la fase baja a liviana, y el fundamento quedó escrito.**
+Los seis defectos de esta fase se ven todos: la pausa que no manda, los
+controles que no se pueden tocar, el logo, la barra, el reemplazo. Ninguno falla
+en silencio y el revisor es Nicolás mirando la pantalla, así que construir
+aparato es gastar en algo que su ojo hace mejor. Es lo contrario de la T-05 de
+la fase 02, que llevó `alto` porque un volumen mal resuelto no se ve en una
+captura y se descubre en la toma. El razonamiento está en el `PHASE.md` porque
+es lo que decide los casos que él no enumeró.
+
+**El límite de liviano, que también quedó escrito: no se agrega aparato nuevo,
+no se deja de correr lo que ya existe.** Siguen corriendo `verificar-cortes`
+(las dos costuras), `npm test` (los 27) y la comparación de la caja pedida
+contra la dibujada (0,00 px siete veces), cada uno en las tasks que tocan lo que
+ese chequeo mira. Se fueron las campañas de mutación, las capturas a un cuarto
+como requisito, y las mediciones que existían para probar algo en lugar de para
+atrapar un defecto. **Cada task dice qué le queda y qué se le fue**, para que la
+ausencia se lea como decisión y no como descuido.
+
+**Niveles:** la T-02 baja de `bajo` a `mínimo` (una línea de `js/app.js` que se
+va, y nada que correr). Las otras seis se quedan donde estaban, porque `bajo` ya
+significa lo que él pidió —sin campaña, sin tests nuevos de lo visual, una
+captura a tamaño real y la suite existente una vez al final—: lo que estaba de
+más no era el nivel sino lo que cada definición de done pedía.
+
+**Dos hallazgos de este pase, y los dos son tasks donde el defecto NO se ve en
+la pantalla.** La **T-05**: dos panes desincronizados por un par de segundos se
+ven sincronizados, y la comparación cuadro a cuadro es toda la fase, así que lo
+que cierra esa task es la lectura del `currentTime` de los dos elementos y no la
+captura. Y **el `npm test` de la T-05, que nadie esperaba**:
+`test/program-ranges-and-volume.test.js` parsea la tabla del recorrido y el
+`PLANNED-DURATION` de `scripts/senalizar-contenido.sh`, que es exactamente el
+archivo donde esa task cambia el `X-RESUME-OFFSET`. La **T-07** ya lo tenía
+escrito: un pane que parezca sin modificar y no lo esté se ve igual de bien, y
+lo agarran las tres lecturas de la página corriendo. Ninguna de las dos lecturas
+es aparato nuevo y ninguna se recorta.
+
+Y una lectura menor en la T-01: `volume`/`muted` y `currentTime` se suman a la
+lectura nodo por nodo que la task ya iba a hacer, porque un elemento que arranca
+con el volumen o el segundo equivocado se ve bien y las dos cosas pasan por
+`build()`, que es la función que la task edita. Dos columnas más en una lectura
+que ya existía, no una medición nueva.
+
+Alcance del pase: sólo `.project/`. Los ADR 0017 y 0018 y las notas fechadas no
+se tocaron, siguen valiendo. El `PROJECT.md` tampoco: su entrada de la fase 04
+no dice cuántas tasks tiene y sigue siendo cierta. Commit sin push.

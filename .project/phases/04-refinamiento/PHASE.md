@@ -45,6 +45,17 @@ cuenta el aviso es una diferencia que además puede ser cierta y hay que decidir
 qué se hace con ella. Cada vez que aparezca un caso no enumerado, se resuelve
 contra esta frase.
 
+**Quién lo verifica: Nicolás, con el recorrido corriendo y los dos panes a la
+vista.** No hay una task que lo enumere ni que produzca el cuadro de los dos
+panes en el mismo segundo, porque ese artefacto lo arma él y lo arma más rápido
+a mano. Lo único que conviene tener escrito para cuando mire es cuáles son las
+diferencias legítimas: el color de identidad de cada pane y sus rótulos —el
+`--q-slate-400` del de fábrica contra el nuestro, las líneas `role`, `role-sub`
+y `role-reads`, la línea de estado y el `data-state` que la hoja de estilos
+pinta—, que existen para que alguien mirando una
+grabación sin sonido sepa cuál es cuál y qué está haciendo cada uno. Eso es la
+página hablando de la página. Cualquier otra cosa es un hallazgo.
+
 ## Alcance
 
 Los seis puntos, en el orden en que Nicolás los dijo y no en el que se
@@ -138,6 +149,54 @@ la vista: `createControls` ya acepta `provider = null` y su archivo no nombra ni
 a la señalización ni al renderizado, así que lo que falta no es desacoplar sino
 publicar.
 
+## La verificación de la fase, y por qué es liviana
+
+**Los seis defectos de esta fase se ven todos.** La pausa que no manda se ve,
+los controles que no se pueden tocar se sienten, el logo se ve, la barra se ve,
+el reemplazo se ve. Ninguno falla en silencio. Y el revisor es Nicolás mirando
+la pantalla, así que construir aparato de verificación acá es gastar en algo que
+su ojo ya hace mejor y más rápido.
+
+Es lo contrario de la T-05 de la fase 02, que llevó nivel `alto` con tests y una
+campaña de mutación porque un volumen mal resuelto no se ve en una captura y se
+descubre en la toma. Esa fase tenía una cosa así. Acá quedan dos que tampoco se
+ven, y las dos están más abajo en esta sección, pero ninguna de las dos es
+aritmética que un test pueda cubrir: una es un atributo de la playlist y la otra
+es una afirmación sobre un pane, y lo que las agarra es una lectura de la página
+corriendo. Por eso ninguna task de esta fase pasa de `bajo`.
+
+**Liviano significa no agregar aparato nuevo. No significa dejar de correr lo
+que ya existe.** Tres cosas siguen corriendo al final de cada task que las
+toque, porque cada una es un comando y las tres protegen mediciones que ya se
+pagaron:
+
+- `node scripts/verificar-cortes.mjs`, las dos costuras, donde la task toque
+  alguno de los archivos que ese script mira: `lib/renderer.js`,
+  `lib/controls.js`, `js/contract-trace.js`, `css/player.css`, cualquier
+  `lib/*.js` y `scripts/construir-libreria.sh`.
+- `npm test`, los 27 tests que ya están, donde la task toque `lib/`. Y también
+  en la T-05, que es la que menos se lo espera: `test/program-ranges-and-volume.test.js`
+  parsea la tabla del recorrido y el `PLANNED-DURATION` de
+  `scripts/senalizar-contenido.sh`, que es justamente el archivo que esa task
+  edita.
+- La comparación de la caja que el contrato pide contra la que el navegador
+  dibuja, donde la task toque el renderizado o los controles. Dio 0,00 px siete
+  veces y es lo único que atrapa un corrimiento que nadie ve.
+
+Lo que se fue: las campañas de mutación, las capturas reducidas a un cuarto como
+requisito, y las mediciones nuevas que existían para probar algo en lugar de
+para atrapar un defecto. Cada task dice qué le queda y qué se le fue, para que
+la ausencia se lea como una decisión y no como un descuido.
+
+**Las dos tasks donde el ojo no es el instrumento**, y las dos lo llevan escrito
+en su definición de done. La **T-05**: dos panes desincronizados por un par de
+segundos se ven sincronizados, y la fase entera se apoya en que estén en el
+mismo segundo, así que lo que lo dice es la lectura del `currentTime` de los dos
+elementos y no la pantalla. Y la **T-07**: un pane que parezca sin modificar y
+no lo esté se ve exactamente igual de bien, y lo que lo agarra son las tres
+lecturas de la página corriendo. Ninguna de las dos lecturas es aparato nuevo y
+ninguna se recorta.
+
 ## Lo que esta fase le hace al argumento de la fase 01, dicho de frente
 
 El punto 1 mata el segundo argumento de la demo tal como está escrito hoy.
@@ -221,8 +280,11 @@ mismo segundo uno muestra el aviso encima y el otro en lugar del programa— no
 existe como artefacto: nunca se produjo un cuadro de los dos panes en el mismo
 segundo del programa, porque hasta hoy no podían estar en el mismo segundo.
 
-Mitigación: la T-08 produce exactamente ese cuadro, y hasta que exista el retiro
-es una apuesta.
+Mitigación: el cuadro lo arma Nicolás, y lo que la fase le deja lista es la
+condición que lo hace posible. Después de la T-05 los dos panes están en el
+mismo segundo del programa, y la lectura del `currentTime` de los dos elementos
+que esa task pide es lo que dice que el cuadro se puede tomar. Hasta que el
+cuadro exista, el retiro es una apuesta.
 
 ## Timeline
 
