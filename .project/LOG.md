@@ -2143,3 +2143,81 @@ agarraron el test que importa `rangeSpan` y el chequeo de sintaxis del build en 
 misma corrida—.
 
 Evidencia en `.project/phases/04-refinamiento/tasks/T-06/`. Commit sin push.
+
+## 2026-09-07 — T-07 de la fase 04: los dos panes con el mismo cromo, y qué reloj muestra la barra del de fábrica
+
+Cerró la fase 04. El pane del cliente de mercado tiene la misma barra, los mismos
+cuatro botones y el mismo reloj que el de la demo, y sigue siendo `new Hls()` sin
+una sola opción: la entrada pública que decidió la T-04 —`attachControls(video,
+{ container, provider, logo })`— existe, está agregada al objeto que el build
+cuelga del global, y no hace nada más que dibujar el cromo y dejar el contenedor
+como contexto de posicionamiento. Ninguna instancia entra, ninguna señalización
+se crea y nada de lo nuestro le pide algo a la red por ese pane.
+
+**La decisión de la task fue qué reloj muestra esa barra, y una medición dejó al
+otro camino sin defensa.** La barra de ese pane es la barra del **programa**: su
+reloj, su largo y sus marcas salen de `hls.interstitialsManager.primary` y de
+`manager.events`, que es el mismo objeto que `js/stock-player.js` ya leía, y
+ninguno de los tres sale del elemento. Alimentada con el elemento, en los dos
+breaks donde hls.js le pasa el MediaSource al asset esa barra mostraría **0:02 de
+0:12** y **perdería las cinco marcas**, porque con `duration` en 12,032 los cinco
+rangos caen más allá del final y `rangeSpan` devuelve `null` para los cinco. Con
+el programa muestra 0:45 / 3:00 y la perilla en el borde de la segunda marca.
+
+**Y lo que muestra es cierto en los cinco breaks y no en tres.** La afirmación de
+la barra es dónde quedó el playhead del programa de ese cliente, y durante un
+break la respuesta es adentro de los doce segundos que el break le saca al
+programa: camina esos doce segundos donde el aviso está appendeado en el lugar
+(0:22 adentro de 20,02–32,06) y se queda quieto en el segundo en que el break
+empezó donde el MediaSource se fue al asset (0:45). Las dos son ciertas y ninguna
+dice que el programa se esté viendo; lo que ocupa ese tramo lo dice la marca. El
+reloj del aviso no se perdió: es la línea de texto de abajo, que pasó a leer
+`interstitialPlayer` y dice `2.1s of 12.0s` en los cinco. Ahí murió el
+`125.3s of the ad` que la T-05 encontró mintiendo en cámara.
+
+**Los cuatro controles quedan y los cuatro hacen algo**, porque un botón que está
+y no hace nada es una diferencia entre los dos panes que además miente. La pausa
+acciona el elemento, y es el control que la comparación cuadro a cuadro necesita.
+El fullscreen acciona el contenedor, que es la decisión del ADR 0015, así que no
+toca la maquinaria del break. El audio funciona en los dos panes y **los dos no
+pueden sonar a la vez**: quien levanta el mute apaga al otro, en cinco líneas de
+`js/app.js`, porque quién se queda con el audio de una grabación de dos players
+es asunto de la página y no de la librería. El default no se movió. Y el seek
+seekea el **programa**, escrito sobre `primary.currentTime`: afuera de un break
+hls.js lo lleva al borde de segmento —90,01 pedido, 91,021 quedó— y **adentro de
+un break no lo toma**, medido cuatro veces en las dos estrategias y en los dos
+sentidos, que es el `X-RESTRICT="SKIP"` del tag haciéndose valer. Eso convirtió
+al seek en la razón para no sacarlo: no es mobiliario, es la política del aviso
+en funcionamiento.
+
+**Las tres lecturas del ADR 0007, verdes.** La instancia: `userConfig` con **cero
+claves** —más fuerte que la línea del archivo, porque cubre el argumento que
+alguien le pase mañana— con la maquinaria presente, contra la del pane de al lado
+que tiene una opción y la maquinaria ausente. La red, atribuida por dos lados: la
+instancia declara los cinco `assetListUrl` en `/signalling/asset-list-linear.json`
+y nada más, y de la página los cinco concurrentes salieron una vez cada uno y
+**pelados**, con la huella `_HLS_primary_id` sólo en el lineal y **cero**
+concurrentes con ella. Los agendados: cinco, los cinco de clase
+`com.apple.hls.interstitial`, cero de la concurrente.
+
+`verificar-cortes` verde con las dos costuras —la de ADR 0015 con cero hits, que
+es la que hay que mirar acá—, `npm test` 27 de 27, el build sin quejas, y la caja
+pedida contra la dibujada con **delta máximo 0 px** adentro de los dos breaks.
+Cero errores y cero warnings de consola en la corrida de los dos panes.
+
+**Cuatro afirmaciones vivas se reescribieron**: la fila de `lib/concurrent-hls.js`
+del `README.md`, que decía que la superficie es "`attach`, y la configuración"; la
+sección 9 del documento del integrador, que decía que esta demo es la página
+mínima con una opción agregada y ahora dice que hay una llamada más; el párrafo
+del par de compatibilidad del `README.md`, que decía "with nothing of this demo
+wired into it" y ahora distingue la instancia del cromo; y el comentario de
+`index.html`, que decía que los controles son los del player de la derecha. Más
+una que nadie había anotado y que la decisión obliga: la sección 6 del documento
+del integrador decía que el primer argumento de `attachControls` es "el elemento",
+y ahora dice qué es y por qué, con el caso concreto de un cliente que deja de
+reportar el programa mientras el aviso está en pantalla. La sección 7 no se tocó.
+
+Y una precisión sobre el bloque: **de los cuatro controles, tres accionan el
+elemento y el cuarto no**. El fullscreen acciona el contenedor, por el ADR 0015.
+
+Evidencia en `.project/phases/04-refinamiento/tasks/T-07/`. Commit sin push.

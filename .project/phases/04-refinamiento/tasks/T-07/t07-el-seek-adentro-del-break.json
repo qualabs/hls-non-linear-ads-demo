@@ -1,0 +1,82 @@
+{
+ "break-1-appendInPlace": {
+  "antes": {
+   "elemT": 21.596,
+   "programaT": 21.401,
+   "ad": "AD-1-LINEAR",
+   "aip": true,
+   "span": [
+    20.021,
+    32.059
+   ]
+  },
+  "intentos": [
+   {
+    "pedido": 9.0,
+    "quedo": {
+     "elemT": 23.103,
+     "programaT": 22.994,
+     "ad": "AD-1-LINEAR",
+     "aip": true,
+     "span": [
+      20.021,
+      32.059
+     ]
+    }
+   },
+   {
+    "pedido": 150.0,
+    "quedo": {
+     "elemT": 24.61,
+     "programaT": 24.588,
+     "ad": "AD-1-LINEAR",
+     "aip": true,
+     "span": [
+      20.021,
+      32.059
+     ]
+    }
+   }
+  ]
+ },
+ "break-2-mediasource": {
+  "antes": {
+   "elemT": 1.624,
+   "programaT": 45.021,
+   "ad": "AD-2-LINEAR",
+   "aip": false,
+   "span": [
+    45.021,
+    57.059
+   ]
+  },
+  "intentos": [
+   {
+    "pedido": 9.0,
+    "quedo": {
+     "elemT": 3.149,
+     "programaT": 45.021,
+     "ad": "AD-2-LINEAR",
+     "aip": false,
+     "span": [
+      45.021,
+      57.059
+     ]
+    }
+   },
+   {
+    "pedido": 150.0,
+    "quedo": {
+     "elemT": 4.664,
+     "programaT": 45.021,
+     "ad": "AD-2-LINEAR",
+     "aip": false,
+     "span": [
+      45.021,
+      57.059
+     ]
+    }
+   }
+  ]
+ }
+}

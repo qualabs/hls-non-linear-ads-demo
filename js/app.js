@@ -90,13 +90,43 @@ video.play().catch(() => {});
 // linear ad of the Apple-class Date Range and replaces the content with it,
 // while the player above keeps the content and draws the concurrent experience
 // over it. Neither instance knows the other exists.
+const stockVideo = document.getElementById('stock-video');
 const stock = createStockPlayer({
-  video: document.getElementById('stock-video'),
+  video: stockVideo,
+  container: document.getElementById('stock-player'),
   src: SRC,
   pane: document.getElementById('pane-stock'),
   state: document.getElementById('stock-state'),
   hud: document.getElementById('stock-hud')
 });
+
+/**
+ * ONE AUDIO AT A TIME, and it is the page that arbitrates it because it is the
+ * page that has two players.
+ *
+ * Both panes now carry the same chrome, and the audio control of that chrome is
+ * one of its four buttons. Taking it off the left one would put back a
+ * difference between the two panes that is not the mechanism -- a button that is
+ * there and does nothing is worse, because it is a difference that also lies --
+ * and leaving both live means two audible panes at once, which on camera is the
+ * worst of the three: two soundtracks of the same film a fraction of a second
+ * apart.
+ *
+ * So both buttons work and whichever one is lifted last owns the sound. The
+ * default does not move: the page starts both muted so the autoplay policy lets
+ * the recording begin, and the audio of the composition is the demo pane's
+ * (ADR 0014). Muting the other one raises its own `volumechange`, which finds
+ * it already muted and stops there.
+ */
+function oneAudioAtATime(elements) {
+  for (const element of elements) {
+    element.addEventListener('volumechange', () => {
+      if (element.muted) return;
+      for (const other of elements) if (other !== element) other.muted = true;
+    });
+  }
+}
+oneAudioAtATime([video, stockVideo]);
 
 // The demo pane's own label, the mirror of the one the stock player paints for
 // itself. It is here and not in the library because it is the page talking

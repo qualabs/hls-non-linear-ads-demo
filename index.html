@@ -27,8 +27,13 @@
   comes from the playlist serving both things at once.
 
   Left pane, an OFF-THE-SHELF client: hls.js at its factory configuration, with
-  nothing of this demo wired into it. It schedules the linear ad and replaces
-  the content with it, exactly as it does today in production.
+  nothing of this demo wired INTO it. It schedules the linear ad and replaces
+  the content with it, exactly as it does today in production. What it does take
+  from the library is the chrome AROUND it -- the same bar and the same buttons
+  the other pane has -- through a call that receives no instance and turns
+  nothing on (ADR 0015). The instance is what has to stay unmodified for the
+  argument to hold, and it does: `new Hls()` and not one option (the dated note
+  of ADR 0007).
 
   Right pane, THIS DEMO'S client: the same library, same version, unmodified,
   with its interstitials machinery off (ADR 0002) and the two layers of
@@ -45,19 +50,27 @@
            outside the container disappears the moment somebody presses the
            fullscreen button (ADR 0015).
 
-  THE CONTROLS of the right-hand player are not in this file, and that is the
-           point of ADR 0015: the library draws them inside #player, over the
+  THE CONTROLS of BOTH players are not in this file, and that is the point of
+           ADR 0015: the library draws them inside each container, over the
            picture -- one progress bar at the bottom for the whole programme, the
            play/pause centred, one audio control at the top right, and
-           fullscreen of the composition. The <video> therefore carries no
-           `controls` attribute: the native ones are part of the element, so
-           they scale with the transform the renderer applies to it, and with
-           several <video> on screen they command a piece and not the picture.
-           Neither does the left-hand one: no pane of this page shows native
-           controls, which is what Nicolás decided when it turned out that the
-           off-the-shelf pane never had them (the dated note of ADR 0015). What
-           tells the two apart is what each one does with the same break, and
-           not a strip of buttons.
+           fullscreen of the composition. Neither <video> carries a `controls`
+           attribute: the native ones are part of the element, so they scale
+           with the transform the renderer applies to it, and with several
+           <video> on screen they command a piece and not the picture. No pane
+           of this page shows native controls, which is what Nicolás decided
+           when it turned out that the off-the-shelf pane never had them (the
+           dated note of ADR 0015). What tells the two apart is what each one
+           does with the same break, and not a strip of buttons -- which is why
+           the two strips are now the same one.
+
+           EACH BAR MARKS WHAT ITS OWN PLAYER PLAYS (ADR 0018), so the marks are
+           not the same on the two: on the right, the concurrent ranges our
+           player draws over the content, in violet; on the left, the twelve
+           seconds of the programme each break replaces, in yellow, read out of
+           that client's own schedule. Same positions, because the pair of tags
+           shares its START-DATE; different colour, because they are different
+           behaviours.
 
   THE MARK of this page is one plate over the headline, and one file. The
            library draws one inside the container when it is handed the `logo`
@@ -102,7 +115,7 @@
         keeps <code>com.apple.hls.interstitial</code> ·
         ignores <code>com.qualabs.hls.concurrentInterstitial</code>
       </p>
-      <div class="player">
+      <div class="player" id="stock-player">
         <video class="video" id="stock-video" playsinline muted></video>
       </div>
       <p class="state" id="stock-state"></p>
