@@ -1,0 +1,44 @@
+content/primary/con-daterange.m3u8  (el recorrido de los cinco breaks, 10 Date Ranges)
+
+El recorrido, que es el orden en que hay que grabarlo:
+  break 1  t= 20s a  32s  (12s)  Overlay          asset-list-cornerOverlay.json
+  break 2  t= 45s a  57s  (12s)  LBox video       asset-list-squeezebackLShape.json
+  break 3  t= 70s a  82s  (12s)  LBox image       asset-list-squeezebackLShape-image.json
+  break 4  t= 95s a 107s  (12s)  Quad             asset-list-multiView.json
+  break 5  t=120s a 168s  (48s)  Break mezclado   asset-list-mezclado.json
+      aviso 1  t=120s a 132s  cornerOverlay         concurrente, el programa se sigue viendo
+      aviso 2  t=132s a 144s  squeezebackDoubleBox  concurrente, el programa se sigue viendo
+      aviso 3  t=144s a 156s  linear                a cuadro entero, el programa corre detrás
+      aviso 4  t=156s a 168s  cornerOverlay         concurrente, el programa se sigue viendo
+
+El break 5 es el que pidió David —concurrent, concurrent, linear,
+concurrent— y adentro trae el Side by side pullback del documento de
+requerimientos, que por eso no tiene break propio: los cinco nombres
+siguen estando en la corrida.
+
+Antes de grabar, y esto se hace UNA vez al empezar: encender el audio
+con el control de arriba a la derecha de la imagen, que lo dibuja la
+librería (ADR 0015). La página arranca muteada por la política de
+autoplay del browser y ese control es el que la levanta: es el audio de
+la composición entera, primario y aviso a la vez.
+
+La mezcla de cada elemento la declara el asset list y el reproductor la
+respeta (ADR 0014). En este recorrido: el break del Quad trae la mezcla
+—100 en el cuadrante de abajo a la izquierda y 10 en los otros tres—,
+los avisos que declaran layout entran callados sobre un programa que se
+sigue escuchando, y el aviso a cuadro entero del break 5 es el único
+que se queda con el audio: la capa lo sintetiza con 100 en el aviso y 0
+en el programa (ADR 0019), porque un aviso que tapa la pantalla entera
+sin sonido es una falla que nada en pantalla reporta.
+
+El par de compatibilidad durante el break 5, y conviene contarlo antes
+de grabarlo. Los dos tags del break arrancan en el mismo segundo
+(ADR 0018), el de clase Apple declara 12 s y el nuestro 48. Del 120 al
+132 el pane de fábrica muestra su aviso a cuadro entero y el nuestro el
+programa con el aviso encima, que es el cuadro que la demo quiere. Del
+132 en adelante el de fábrica ya volvió al programa y nosotros seguimos
+adentro del break, y del 144 al 156 —el aviso a cuadro entero— la
+comparación queda al revés: el nuestro tapado y el de fábrica con el
+programa. Son 12 segundos de 48 y no cambian el argumento: los dos
+players están haciendo lo mismo en momentos distintos, porque les
+tocaron breaks de largos distintos.

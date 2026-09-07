@@ -1,0 +1,10 @@
+#EXT-X-DATERANGE:ID="AD-1-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="<PDT+offset>",X-ASSET-LIST="/signalling/asset-list-linear.json",X-RESTRICT="SKIP",PLANNED-DURATION=12
+#EXT-X-DATERANGE:ID="AD-1-CONCURRENT",CLASS="com.qualabs.hls.concurrentInterstitial",START-DATE="<PDT+offset>",X-ASSET-LIST="/signalling/asset-list-cornerOverlay.json",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=12
+#EXT-X-DATERANGE:ID="AD-2-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="<PDT+offset>",X-ASSET-LIST="/signalling/asset-list-linear.json",X-RESTRICT="SKIP",PLANNED-DURATION=12
+#EXT-X-DATERANGE:ID="AD-2-CONCURRENT",CLASS="com.qualabs.hls.concurrentInterstitial",START-DATE="<PDT+offset>",X-ASSET-LIST="/signalling/asset-list-squeezebackLShape.json",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=12
+#EXT-X-DATERANGE:ID="AD-3-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="<PDT+offset>",X-ASSET-LIST="/signalling/asset-list-linear.json",X-RESTRICT="SKIP",PLANNED-DURATION=12
+#EXT-X-DATERANGE:ID="AD-3-CONCURRENT",CLASS="com.qualabs.hls.concurrentInterstitial",START-DATE="<PDT+offset>",X-ASSET-LIST="/signalling/asset-list-squeezebackLShape-image.json",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=12
+#EXT-X-DATERANGE:ID="AD-4-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="<PDT+offset>",X-ASSET-LIST="/signalling/asset-list-linear.json",X-RESTRICT="SKIP",PLANNED-DURATION=12
+#EXT-X-DATERANGE:ID="AD-4-CONCURRENT",CLASS="com.qualabs.hls.concurrentInterstitial",START-DATE="<PDT+offset>",X-ASSET-LIST="/signalling/asset-list-multiView.json",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=12
+#EXT-X-DATERANGE:ID="AD-5-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="<PDT+offset>",X-ASSET-LIST="/signalling/asset-list-linear.json",X-RESTRICT="SKIP",PLANNED-DURATION=12
+#EXT-X-DATERANGE:ID="AD-5-CONCURRENT",CLASS="com.qualabs.hls.concurrentInterstitial",START-DATE="<PDT+offset>",X-ASSET-LIST="/signalling/asset-list-mezclado.json",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=48

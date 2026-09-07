@@ -19,10 +19,10 @@ re-package without re-downloading, `npm run content`.
 
 Requirements: node and ffmpeg. There are no npm dependencies.
 
-The playlist carries **five breaks, one per layout**: the five names of the
-requirements document one after the other, which is the run that gets recorded.
-To work on a single layout instead, name it when the playlist is written --
-there is one asset-list per layout in `signalling/`:
+The playlist carries **five breaks**: four of a single ad each and a last one of
+four ads back to back, one of them at full frame. That is the run that gets
+recorded. To work on a single layout instead, name it when the playlist is
+written -- there is one asset-list per layout in `signalling/`:
 
 ```bash
 ./scripts/senalizar-contenido.sh 20 squeezebackLShape   # one break, at 20 s
@@ -32,7 +32,7 @@ npm run serve
 ## Before you record
 
 The run is under three minutes and it needs nothing but a browser window. One
-thing to do before the camera rolls, and four to expect.
+thing to do before the camera rolls, and five to expect.
 
 **Turn the sound on once, at the start**, with the audio control at the top
 right of the right-hand picture. Both pictures have one and either works, but
@@ -45,14 +45,28 @@ bar, the play/pause and the fullscreen (ADR 0015). It is one switch for the
 whole thing, primary content and ad together; what each element is worth inside
 it is the mix the asset-list declares, and the player obeys it (ADR 0014).
 
-**Only the fifth break has a mix.** Its asset-list asks for 100 in the
-bottom-left quadrant and 10 in the other three, which is what a quad of
-concurrent sources sounds like when the signalling picks one to listen to. The
-other four declare no `volume` at all, and an absent field is silence on the ad
-and full volume on the show, so those four breaks come in quietly over a
-programme that keeps its audio.
+**The last break carries four ads in a row, and the third of them is at full
+frame.** The first four breaks are one ad each and walk four of the five names
+of the requirements document; break 5 is the mix -- concurrent, concurrent,
+linear, concurrent -- and the fifth name, Side by side pullback, is the second
+ad inside it, which is why that layout has no break of its own. The break runs
+48 s where the others run 12. Its third ad covers the picture and takes the
+sound, and the programme **keeps playing underneath it**, uninterrupted and
+silent: the line under the picture says so while it is on screen, and the bar
+does not move, because drawing a linear ad this way changes nothing about the
+programme's timeline (ADR 0016).
 
-**One of the five breaks has no audio at all.** The two assets of LBox image are
+**Two breaks bring audio of their own.** The Quad, break 4, is the one with a
+mix: its asset-list asks for 100 in the bottom-left quadrant and 10 in the other
+three, which is what a quad of concurrent sources sounds like when the
+signalling picks one to listen to. The full-frame ad inside break 5 is the
+other, and it is the only ad of the run that takes the sound off the programme,
+because an ad covering the whole screen with no audio is a fault nothing on
+screen reports. Every other ad declares no `volume` at all, and an absent field
+is silence on the ad and full volume on the show, so those come in quietly over
+a programme that keeps its audio.
+
+**One of the breaks has no audio at all.** The two assets of LBox image are
 stills, so that ad has no soundtrack to mix in, and the state line under the
 right-hand picture says so -- which is not the same thing as no ad being on
 screen, and on camera the two look alike.
@@ -60,7 +74,7 @@ screen, and on camera the two look alike.
 **Both panes stay on the same second of the programme, and that is the second
 argument of the demo.** Every break carries its linear Date Range as well, and
 that tag is in replacement form: the off-the-shelf client takes the twelve
-seconds of the break out of the programme and comes back where the ad ended and
+seconds of that tag out of the programme and comes back where the ad ended and
 not where it began. So the five breaks land on both clients at the same instant,
 and outside a break the two panes are showing the same frame of the same film.
 Inside one they are on the same second of the programme and each does something
@@ -69,6 +83,19 @@ replaced, on the left the ad **is** the picture and that stretch of the
 programme is gone. When the break ends they are on the same second again, which
 is what makes the two panes comparable frame by frame.
 
+**In break 5 that comparison inverts for twelve of its forty-eight seconds, and
+it is better said before it happens than explained afterwards.** Both tags of a
+break share their `START-DATE`, which is what makes the pair a pair (ADR 0018),
+and what they do not share is their length: theirs is twelve seconds and ours is
+forty-eight. From 132 s the off-the-shelf client is already back on the
+programme while the right-hand pane is still inside the break, and from 144 s to
+156 s -- the full-frame ad -- the left pane shows the programme and the right
+one shows a covered screen, which is the reverse of the frame the demo is built
+on. It costs the argument nothing: both players are doing the same thing at
+different moments, because they were handed breaks of different lengths, and the
+argument lives in the other thirty-six seconds, where the right-hand pane keeps
+the programme on screen and the left one does not.
+
 **The left pane can end the run a fraction of a second behind**, and that is the
 whole of the offset. hls.js resumes three of the five breaks by appending the ad
 into the primary timeline, which costs nothing, and the other two by passing the
@@ -76,18 +103,24 @@ MediaSource to the asset and back, which costs a fraction of a second each --
 0.7 s over the whole run, against the twelve seconds per break that inserting
 the ad instead of replacing it would cost.
 
-| break | at | layout on screen | name in the requirements document |
-| --- | --- | --- | --- |
-| 1 | 20 s | `cornerOverlay` | Overlay |
-| 2 | 45 s | `squeezebackLShape`, video assets | LBox video |
-| 3 | 70 s | `squeezebackLShape`, image assets | LBox image |
-| 4 | 95 s | `squeezebackDoubleBox` | Side by side pullback |
-| 5 | 120 s | `multiView` | Quad |
+| break | from | to | layout on screen | name in the requirements document |
+| --- | --- | --- | --- | --- |
+| 1 | 20 s | 32 s | `cornerOverlay` | Overlay |
+| 2 | 45 s | 57 s | `squeezebackLShape`, video assets | LBox video |
+| 3 | 70 s | 82 s | `squeezebackLShape`, image assets | LBox image |
+| 4 | 95 s | 107 s | `multiView` | Quad |
+| 5 | 120 s | 168 s | four ads back to back | the mix |
+| 5, ad 1 | 120 s | 132 s | `cornerOverlay` | Overlay |
+| 5, ad 2 | 132 s | 144 s | `squeezebackDoubleBox` | Side by side pullback |
+| 5, ad 3 | 144 s | 156 s | full frame, no layout block | the linear ad |
+| 5, ad 4 | 156 s | 168 s | `cornerOverlay` | Overlay |
 
-Every break lasts twelve seconds, and `./run.sh` prints the same table on
-startup. The mapping of the five names to the four identifiers is ADR 0012, and
-it is a proposal waiting on David: LBox video and LBox image are the same
-layout, and what tells them apart is the type of the asset inserted into it.
+The first four breaks last twelve seconds and the fifth forty-eight, which is
+its four ads one after the other, and `./run.sh` prints the same table on
+startup along with what the compatibility pair does inside break 5. The mapping
+of the five names to the four identifiers is ADR 0012, and it is a proposal
+waiting on David: LBox video and LBox image are the same layout, and what tells
+them apart is the type of the asset inserted into it.
 
 ## Test it
 

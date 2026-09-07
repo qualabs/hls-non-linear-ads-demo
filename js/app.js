@@ -148,12 +148,45 @@ function stills(active) {
   return assets.length > 0 && assets.every((el) => /^image\//i.test(el.mediaType || ''));
 }
 
+/**
+ * THE ONE SECOND OF THE RUN WHERE "nothing was replaced" READS BACKWARDS, and
+ * it is the ad the mixed break carries third: an ad at full frame, with the
+ * programme still running underneath it. The sentence is literally true there
+ * -- the primary was never stopped, which is the whole of ADR 0016 and what the
+ * evidence of T-02 reads off `paused` -- but somebody watching a covered screen
+ * reads it as the opposite, and it is on camera while it does.
+ *
+ * So the line says the same thing the other way round when an element of the ad
+ * COVERS the primary content: what is true is not that nothing was replaced but
+ * that the programme is underneath, which is the sentence a covered screen does
+ * not contradict. It is read off the contract and not off the type of the
+ * experience -- an ad that covers the frame is a box and a zDepth, and a layout
+ * that ever declares one gets the same line without this page learning about
+ * it -- and the audio half comes from the primary's own volume, so the sentence
+ * cannot say silent about a programme that is not.
+ */
+function covering(active) {
+  for (const experience of active) {
+    const primary = experience.elements.find((e) => e.primary);
+    if (!primary) continue;
+    const over = experience.elements.some(
+      (e) => !e.primary && e.zDepth > primary.zDepth && Object.values(e.box).every((v) => v === 0)
+    );
+    if (over) return primary;
+  }
+  return null;
+}
+
 function paintDemoPane() {
   const active = concurrent.provider.activeAt(video.currentTime);
+  const covered = active.length ? covering(active) : null;
   demoPane.dataset.state = active.length ? 'ad' : 'primary';
   demoState.textContent = active.length
     ? `primary content + CONCURRENT AD (${active.map((e) => e.type).join(', ')})` +
-      ` · ${video.currentTime.toFixed(1)}s · nothing was replaced` +
+      ` · ${video.currentTime.toFixed(1)}s · ` +
+      (covered
+        ? `the programme is still playing underneath, covered${covered.volume === 0 ? ' and silent' : ''}`
+        : 'nothing was replaced') +
       (stills(active) ? ' · stills: this ad has no audio' : '')
     : `primary content · ${video.currentTime.toFixed(1)}s`;
 }

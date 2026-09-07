@@ -2783,3 +2783,60 @@ pantalla se parece, queda afirmada entera.
 `js/` ni `css/`— y se corrió igual, verde en las dos costuras, porque la campaña
 escribe sobre `lib/signalling.js` y sobre dos fixtures y eso verifica que los
 quince cortes se restauraron.
+
+## 2026-09-07 — T-05 de la fase 03: el break mezclado es el quinto de la corrida, y el par se invierte 12 s de 48
+
+El break que David pidió —"concurrent, concurrent, linear, concurrent"— está adentro
+de la corrida que se graba. **Es el quinto y último, y no es un break nuevo**: el
+programa dura 180 s y un sexto break querría 48 s más los 13 que separan a los
+otros, o sea terminar en el 193. Los cinco arranques quedan donde estaban —20, 45,
+70, 95 y 120— y lo que cambia es el último, que pasa de un aviso de 12 s a cuatro de
+48. El Quad se corre del 120 al 95 y el Side by side pullback, que estaba en el 95,
+**no se cae de la corrida: es el segundo aviso de adentro del break mezclado**, doce
+segundos enteros como cualquier otro. Los cinco nombres del documento de
+requerimientos siguen estando.
+
+Va último y no cuarto por lo que cuenta mejor en escenario: es lo nuevo de la fase y
+lo que hay que explicar, así que cae después de los cuatro layouts sueltos, donde el
+presentador puede hablar encima del tramo invertido en vez de tener que volver sobre
+él. Cierra en el 168 y quedan 12 s de programa, que es lo mismo que separa a los
+otros breaks.
+
+**La inversión del par de compatibilidad se acepta y se explica, que era la decisión
+de producto que el bloque dejaba abierta.** Los dos tags del break arrancan en el
+mismo segundo (ADR 0018) y lo que no comparten es el largo: 12 s el de clase Apple y
+48 el nuestro. Del 132 en adelante el pane de fábrica ya volvió al programa y el
+nuestro sigue adentro del break, y del 144 al 156 —el aviso a cuadro entero— la
+comparación queda al revés. Son 12 segundos de 48 y no cambian el argumento: los dos
+players están haciendo lo mismo en momentos distintos, porque les tocaron breaks de
+largos distintos, y el argumento vive en los otros 36. Está escrito en la tabla que
+el script imprime y en `Before you record`, que es donde el presentador lo lee antes
+de grabar. Si se cuenta bien en escenario lo juzga Nicolás mirando los dos panes.
+
+**Dos datos que mentían y eran de esta task.** El `PLANNED-DURATION` estaba escrito
+a mano en 12 en los dos tags, así que el concurrente de un break de varios avisos
+declaraba doce segundos de un break de cuarenta y ocho: inerte para este player
+—el rango sale de las experiencias y no del tag— y falso para cualquier otro cliente
+que lea la playlist. Ahora cada tag declara la suma de las `DURATION` de su propio
+asset-list, leída del archivo, y en el modo de un solo break también: `20 multiAd`
+declara 36. Y la línea de estado del pane de la demo decía `nothing was replaced`
+también durante el aviso a cuadro entero, que es cierto y se lee al revés con la
+pantalla tapada; ahora dice `the programme is still playing underneath, covered and
+silent`, decidido por la caja y el `zDepth` del elemento y no por el `type`, así que
+un layout que algún día declare un aviso a cuadro entero con bloque recibe la misma
+línea.
+
+**El done, leído de una sola corrida de 174 s sin un seek.** 3484 muestras del
+`currentTime` contra el reloj de pared: peor salto hacia atrás 0,000 s y peor
+adelanto 0,009 s, con la lista de eventos `seeking` vacía. `programRanges()` devuelve
+los mismos segundos que la tabla, con `AD-5-CONCURRENT` en el 120 y 48 s de largo. Y
+en un instante de adentro de cada uno de los nueve avisos `activeAt` devuelve
+exactamente una experiencia, en el orden que la mezcla declara, con el `itemId`
+distinguiendo el primero del cuarto aunque compartan `type`. Cero advertencias y cero
+errores de consola.
+
+`npm test` 43 de 43, con `program-ranges-and-volume` movido detrás del recorrido: el
+largo de cada tag se calcula del asset-list en vez de leerse de un literal, los diez
+rangos se comparan contra la lectura de esta task y los nueve que no se movieron se
+siguen comparando contra la de la fase 02. `verificar-cortes` verde en las dos
+costuras.

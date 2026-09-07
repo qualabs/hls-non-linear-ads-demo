@@ -56,9 +56,24 @@ const T02 = readJson('../.project/phases/02-sdk-y-controles/tasks/T-02/t02-los-r
 const T04 = readJson('../.project/phases/02-sdk-y-controles/tasks/T-04/t04-la-medicion.json');
 /** What T-05 measured on every media node, volume by volume. */
 const T05 = readJson('../.project/phases/02-sdk-y-controles/tasks/T-05/t05-la-medicion.json');
+/** What T-05 of phase 03 read off the contract with the mixed break in the run. */
+const T05_MIXED = readJson(
+  '../.project/phases/03-breaks-multiples-y-repliegue/tasks/T-05/t05-el-recorrido-con-el-break-mezclado.json'
+);
 
 /** The length of the primary content, re-read in flight by T-02 and by T-04. */
 const PROGRAMME = T02.laLectura.largoDelPrimarioReleido; // 180
+
+/**
+ * The length a Date Range declares, which the script no longer writes by hand:
+ * the sum of the `DURATION`s of the asset-list that tag points at, which is
+ * what the break lasts. The two tags of a break declare their own and they are
+ * not always the same number -- twelve on the Apple-class tag and forty-eight
+ * on ours in the mixed break -- and that difference is the whole of why the
+ * compatibility pair inverts inside it.
+ */
+const declaredLength = (list) =>
+  readJson(`../signalling/${list}`).ASSETS.reduce((total, asset) => total + Number(asset.DURATION), 0);
 
 /**
  * The recording's run, parsed out of the shell script that writes the tags:
@@ -70,12 +85,13 @@ const RUN = [...SIGNALLER.matchAll(/^\s*"(\d+)\|(asset-list-[^|]+)\|/gm)].map(
   ([, offset, list], i) => ({
     n: i + 1,
     slotStart: Number(offset),
+    plannedDuration: declaredLength(list),
     assetList: readJson(`../signalling/${list}`)
   })
 );
 
-/** The length both tags of a break declare, out of the same script. */
-const PLANNED_DURATION = Number(SIGNALLER.match(/PLANNED-DURATION=(\d+)/)[1]);
+/** What the Apple-class tag of every break declares: one linear ad of 12 s. */
+const LINEAR_PLANNED = declaredLength('asset-list-linear.json');
 
 /**
  * The ten ranges of the run, built the way `createSignalling` builds them: the
@@ -86,7 +102,7 @@ const PLANNED_DURATION = Number(SIGNALLER.match(/PLANNED-DURATION=(\d+)/)[1]);
 function programRanges() {
   const ranges = [];
   for (const { n, slotStart } of RUN) {
-    ranges.push(rangeOfDateRange(`AD-${n}-LINEAR`, { plannedDuration: PLANNED_DURATION }, slotStart));
+    ranges.push(rangeOfDateRange(`AD-${n}-LINEAR`, { plannedDuration: LINEAR_PLANNED }, slotStart));
   }
   for (const { n, slotStart, assetList } of RUN) {
     const id = `AD-${n}-CONCURRENT`;
@@ -101,7 +117,16 @@ test('the run of the script is the five breaks of the recording', () => {
   // make every test in the first half pass over an empty list.
   assert.equal(RUN.length, 5, 'five rows in the RECORRIDO table of senalizar-contenido.sh');
   assert.deepEqual(RUN.map((b) => b.slotStart), [20, 45, 70, 95, 120]);
-  assert.equal(PLANNED_DURATION, 12);
+  // Four breaks of one ad and a last one of four, which is the mixed break.
+  assert.deepEqual(RUN.map((b) => b.plannedDuration), [12, 12, 12, 12, 48]);
+  assert.equal(LINEAR_PLANNED, 12);
+  // AND THE LENGTH IS COMPUTED AND NOT TYPED, which is a rule about the script
+  // and not about this run. A hard-wired `PLANNED-DURATION` declares twelve
+  // seconds of a break that lasts forty-eight: inert for this player, because
+  // the concurrent range is built out of the experiences and not out of the
+  // tag, and a lie to every other client that reads the playlist.
+  assert.match(SIGNALLER, /PLANNED-DURATION=%s/);
+  assert.doesNotMatch(SIGNALLER, /PLANNED-DURATION=\d/);
 });
 
 // ---------------------------------------------------------------------------
@@ -126,9 +151,11 @@ test('the two classes the playlist signals become the two kinds the contract car
 // 2. The ranges of the programme
 // ---------------------------------------------------------------------------
 
-test('the five breaks are the ten ranges T-02 read off the contract', () => {
+test('the five breaks are the ten ranges T-05 read off the contract', () => {
+  // The reading is of THIS run, taken in flight with the mixed break in it, and
+  // it is the whole list: two ranges per break, one of each kind.
   const ranges = programRanges();
-  const measured = T02.laLectura.ranges.map(({ id, kind, startTime, duration }) => ({
+  const measured = T05_MIXED.rangos.ranges.map(({ id, kind, startTime, duration }) => ({
     id,
     kind,
     startTime,
@@ -136,6 +163,28 @@ test('the five breaks are the ten ranges T-02 read off the contract', () => {
   }));
   assert.equal(measured.length, 10, 'two ranges per break: one of each kind');
   assert.deepEqual(ranges, measured);
+
+  // AND NINE OF THE TEN ARE STILL THE ONES T-02 READ IN PHASE 02, which is the
+  // half of this test that a new reading of a new run cannot give: a reading
+  // agrees with itself. The mixed break is the one that moved, and it moved in
+  // one number -- same second, four ads instead of one -- so anything else that
+  // moves is not the change this task made.
+  const before = new Map(T02.laLectura.ranges.map((r) => [r.id, r]));
+  let mixed = 0;
+  for (const { id, kind, startTime, duration } of ranges) {
+    const old = before.get(id);
+    assert.ok(old, `T-02 read no range called ${id}`);
+    if (id === 'AD-5-CONCURRENT') {
+      assert.equal(startTime, old.startTime, 'the mixed break starts where the fifth break always did');
+      assert.equal(old.duration, 12);
+      assert.equal(duration, 48);
+      mixed += 1;
+      continue;
+    }
+    assert.deepEqual({ id, kind, startTime, duration },
+      { id: old.id, kind: old.kind, startTime: old.startTime, duration: old.duration }, id);
+  }
+  assert.equal(mixed, 1);
 });
 
 test('a break of no experiences is no range, and a tag that declares no length is no range either', () => {
@@ -171,9 +220,11 @@ test('a break of no experiences is no range, and a tag that declares no length i
 });
 
 test('the window of a concurrent break spans every experience its asset-list declares', () => {
-  // INVENTED: every asset-list of the run declares a single experience. The
-  // rule is that one Date Range is ONE range of the programme however many
-  // experiences it carries, so what a bar marks is the break and not each ad.
+  // INVENTED in its overlaps: the mixed break of the run declares four
+  // experiences and they go back to back, and no asset-list of the run declares
+  // two at once. The rule is that one Date Range is ONE range of the programme
+  // however many experiences it carries, so what a bar marks is the break and
+  // not each ad.
   const experiences = [
     { id: 'AD-9', startTime: 40, duration: 5 },
     { id: 'AD-9', startTime: 30, duration: 4 },
@@ -201,6 +252,16 @@ test('the ten ranges land where T-04 measured them on the bar', () => {
     assert.equal(measured.kind, range.kind, range.id);
     const span = rangeSpan(range, PROGRAMME);
     assert.equal(round(span.left), measured.left, `${range.id} left`);
+    if (range.id === 'AD-5-CONCURRENT') {
+      // THE ONE MARK T-04 MEASURED IN ANOTHER SHAPE. It measured the fifth
+      // break at twelve seconds and the mixed break is forty-eight, so its
+      // width is written out as the arithmetic it is -- where it starts is
+      // still the measurement, and that is the half of the mark this run did
+      // not move.
+      assert.equal(round(span.width), round((48 / PROGRAMME) * 100), `${range.id} width`);
+      count += 1;
+      continue;
+    }
     assert.equal(round(span.width), measured.width, `${range.id} width`);
     count += 1;
   }
@@ -275,10 +336,15 @@ function resolvedElements(list, type) {
 }
 
 test('with no volume in the asset-list the ad comes out silent and the programme does not', () => {
-  // The asymmetry, over the two breaks of the run that declare nothing and the
-  // per-element reading T-05 took of them. A single default of 0 leaves the
-  // show mute for the whole recording and every other test of both files still
-  // passes: the boxes, the order and the windows would all still be right.
+  // The asymmetry, over two of the asset-lists the demo serves and the
+  // per-element reading T-05 took of them. The double box has no break of its
+  // own any more -- it is the second ad of the mixed break, and the file is
+  // what the single-break mode serves -- and it stays here because WHICH
+  // element the field is absent on is the whole of the case: it is the one of
+  // the two that carries a `primaryContent` block saying nothing about audio.
+  // A single default of 0 leaves the show mute for the whole recording and
+  // every other test of both files still passes: the boxes, the order and the
+  // windows would all still be right.
   for (const { measurement, list, type } of MEASURED_VOLUME.slice(0, 2)) {
     const measured = T05[measurement].elementos;
     const elements = resolvedElements(list, type);
