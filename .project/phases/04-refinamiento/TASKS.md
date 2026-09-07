@@ -28,7 +28,7 @@ fue.
 
 | id   | brief                                                              | status  | plan | evidence |
 | ---- | ------------------------------------------------------------------ | ------- | ---- | -------- |
-| T-01 | El estado de la composición gobierna a todos sus elementos         | planned | —    | —        |
+| T-01 | El estado de la composición gobierna a todos sus elementos         | done    | —    | `.project/phases/04-refinamiento/tasks/T-01/` |
 | T-02 | El logo de Qualabs sale de los controles del player                | planned | —    | —        |
 | T-03 | Los controles usables con el dedo                                  | planned | —    | —        |
 | T-04 | La separabilidad: el cromo sin la parte de concurrentes            | planned | —    | —        |

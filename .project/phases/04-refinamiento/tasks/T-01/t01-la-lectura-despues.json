@@ -1,0 +1,515 @@
+{
+  "etiqueta": "despues",
+  "elRecorrido": [
+    {
+      "break": 1,
+      "nombre": "Overlay",
+      "t": 27.2358,
+      "primarioPausado": false,
+      "cuantosElementos": 2,
+      "deltaMaxPx": 0,
+      "elementos": [
+        {
+          "id": "primaryContent",
+          "primary": true,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 100,
+          "arranqueQuePideElContrato": null,
+          "paused": false,
+          "muted": true,
+          "volume": 1,
+          "currentTime": 27.2358,
+          "readyState": 4
+        },
+        {
+          "id": "adOverlay1",
+          "primary": false,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 0,
+          "arranqueQuePideElContrato": 7.2358,
+          "paused": false,
+          "muted": true,
+          "volume": 0,
+          "currentTime": 7.2088,
+          "readyState": 4
+        }
+      ]
+    },
+    {
+      "break": 2,
+      "nombre": "LBox video",
+      "t": 52.29,
+      "primarioPausado": false,
+      "cuantosElementos": 3,
+      "deltaMaxPx": 0,
+      "elementos": [
+        {
+          "id": "primaryContent",
+          "primary": true,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 100,
+          "arranqueQuePideElContrato": null,
+          "paused": false,
+          "muted": true,
+          "volume": 1,
+          "currentTime": 52.29,
+          "readyState": 4
+        },
+        {
+          "id": "adBarVertical",
+          "primary": false,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 0,
+          "arranqueQuePideElContrato": 7.29,
+          "paused": false,
+          "muted": true,
+          "volume": 0,
+          "currentTime": 7.1763,
+          "readyState": 4
+        },
+        {
+          "id": "adBarHorizontal",
+          "primary": false,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 0,
+          "arranqueQuePideElContrato": 7.29,
+          "paused": false,
+          "muted": true,
+          "volume": 0,
+          "currentTime": 7.2721,
+          "readyState": 4
+        }
+      ]
+    },
+    {
+      "break": 3,
+      "nombre": "LBox image",
+      "t": 77.1823,
+      "primarioPausado": false,
+      "cuantosElementos": 3,
+      "deltaMaxPx": 0,
+      "elementos": [
+        {
+          "id": "primaryContent",
+          "primary": true,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 100,
+          "arranqueQuePideElContrato": null,
+          "paused": false,
+          "muted": true,
+          "volume": 1,
+          "currentTime": 77.1823,
+          "readyState": 4
+        },
+        {
+          "id": "adBarVertical",
+          "primary": false,
+          "nodo": "IMG",
+          "volumenDeclarado": 0,
+          "arranqueQuePideElContrato": 7.1823,
+          "paused": null,
+          "muted": null,
+          "volume": null,
+          "currentTime": null,
+          "readyState": null
+        },
+        {
+          "id": "adBarHorizontal",
+          "primary": false,
+          "nodo": "IMG",
+          "volumenDeclarado": 0,
+          "arranqueQuePideElContrato": 7.1823,
+          "paused": null,
+          "muted": null,
+          "volume": null,
+          "currentTime": null,
+          "readyState": null
+        }
+      ]
+    },
+    {
+      "break": 4,
+      "nombre": "Side by side pullback",
+      "t": 102.1955,
+      "primarioPausado": false,
+      "cuantosElementos": 2,
+      "deltaMaxPx": 0,
+      "elementos": [
+        {
+          "id": "primaryContent",
+          "primary": true,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 100,
+          "arranqueQuePideElContrato": null,
+          "paused": false,
+          "muted": true,
+          "volume": 1,
+          "currentTime": 102.1955,
+          "readyState": 4
+        },
+        {
+          "id": "adOverlay",
+          "primary": false,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 0,
+          "arranqueQuePideElContrato": 7.1955,
+          "paused": false,
+          "muted": true,
+          "volume": 0,
+          "currentTime": 7.1718,
+          "readyState": 4
+        }
+      ]
+    },
+    {
+      "break": 5,
+      "nombre": "Quad",
+      "t": 127.2648,
+      "primarioPausado": false,
+      "cuantosElementos": 4,
+      "deltaMaxPx": 0,
+      "elementos": [
+        {
+          "id": "primaryContent",
+          "primary": true,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 10,
+          "arranqueQuePideElContrato": null,
+          "paused": false,
+          "muted": true,
+          "volume": 0.1,
+          "currentTime": 127.2648,
+          "readyState": 4
+        },
+        {
+          "id": "view2",
+          "primary": false,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 10,
+          "arranqueQuePideElContrato": 7.2648,
+          "paused": false,
+          "muted": true,
+          "volume": 0.1,
+          "currentTime": 7.1837,
+          "readyState": 4
+        },
+        {
+          "id": "view3",
+          "primary": false,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 100,
+          "arranqueQuePideElContrato": 7.2648,
+          "paused": false,
+          "muted": true,
+          "volume": 1,
+          "currentTime": 7.1827,
+          "readyState": 4
+        },
+        {
+          "id": "view4",
+          "primary": false,
+          "nodo": "VIDEO",
+          "volumenDeclarado": 10,
+          "arranqueQuePideElContrato": 7.2648,
+          "paused": false,
+          "muted": true,
+          "volume": 0.1,
+          "currentTime": 7.1827,
+          "readyState": 4
+        }
+      ]
+    }
+  ],
+  "audioDeLaComposicion": {
+    "muted": false
+  },
+  "pausadaAntesDelSeek": {
+    "paused": true,
+    "t": 10.559,
+    "cuantosNodosDeAviso": 0
+  },
+  "pausadaAdentroDelAviso": {
+    "composicion": {
+      "paused": true,
+      "muted": false,
+      "volume": 0.1,
+      "currentTime": 125.9981
+    },
+    "cuantosElementos": 4,
+    "elementos": [
+      {
+        "id": "primaryContent",
+        "primary": true,
+        "nodo": "VIDEO",
+        "volumenDeclarado": 10,
+        "arranqueQuePideElContrato": null,
+        "paused": true,
+        "muted": false,
+        "volume": 0.1,
+        "currentTime": 125.9981,
+        "readyState": 4
+      },
+      {
+        "id": "view2",
+        "primary": false,
+        "nodo": "VIDEO",
+        "volumenDeclarado": 10,
+        "arranqueQuePideElContrato": 5.9981,
+        "paused": true,
+        "muted": false,
+        "volume": 0.1,
+        "currentTime": 5.9981,
+        "readyState": 4
+      },
+      {
+        "id": "view3",
+        "primary": false,
+        "nodo": "VIDEO",
+        "volumenDeclarado": 100,
+        "arranqueQuePideElContrato": 5.9981,
+        "paused": true,
+        "muted": false,
+        "volume": 1,
+        "currentTime": 5.9981,
+        "readyState": 4
+      },
+      {
+        "id": "view4",
+        "primary": false,
+        "nodo": "VIDEO",
+        "volumenDeclarado": 10,
+        "arranqueQuePideElContrato": 5.9981,
+        "paused": true,
+        "muted": false,
+        "volume": 0.1,
+        "currentTime": 5.9981,
+        "readyState": 4
+      }
+    ],
+    "pixeles": [
+      {
+        "elemento": "primaryContent",
+        "primario": true,
+        "esperadoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "deltaMaxPx": 0
+      },
+      {
+        "elemento": "view2",
+        "primario": false,
+        "esperadoPx": {
+          "left": 357.5,
+          "top": 0,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "medidoPx": {
+          "left": 357.5,
+          "top": 0,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "deltaMaxPx": 0
+      },
+      {
+        "elemento": "view3",
+        "primario": false,
+        "esperadoPx": {
+          "left": 0,
+          "top": 201.09375,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 201.09375,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "deltaMaxPx": 0
+      },
+      {
+        "elemento": "view4",
+        "primario": false,
+        "esperadoPx": {
+          "left": 357.5,
+          "top": 201.09375,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "medidoPx": {
+          "left": 357.5,
+          "top": 201.09375,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "deltaMaxPx": 0
+      }
+    ]
+  },
+  "unSegundoDeParedConLaPausa": {
+    "antes": {
+      "primaryContent": 125.9981,
+      "view2": 5.9981,
+      "view3": 5.9981,
+      "view4": 5.9981
+    },
+    "despues": {
+      "primaryContent": 125.9981,
+      "view2": 5.9981,
+      "view3": 5.9981,
+      "view4": 5.9981
+    },
+    "avanzo": {
+      "primaryContent": 0.0,
+      "view2": 0.0,
+      "view3": 0.0,
+      "view4": 0.0
+    }
+  },
+  "reproduciendoAdentroDelAviso": {
+    "composicion": {
+      "paused": false,
+      "muted": false,
+      "volume": 0.1,
+      "currentTime": 127.4032
+    },
+    "cuantosElementos": 4,
+    "elementos": [
+      {
+        "id": "primaryContent",
+        "primary": true,
+        "nodo": "VIDEO",
+        "volumenDeclarado": 10,
+        "arranqueQuePideElContrato": null,
+        "paused": false,
+        "muted": false,
+        "volume": 0.1,
+        "currentTime": 127.4032,
+        "readyState": 4
+      },
+      {
+        "id": "view2",
+        "primary": false,
+        "nodo": "VIDEO",
+        "volumenDeclarado": 10,
+        "arranqueQuePideElContrato": 7.4032,
+        "paused": false,
+        "muted": false,
+        "volume": 0.1,
+        "currentTime": 7.4032,
+        "readyState": 4
+      },
+      {
+        "id": "view3",
+        "primary": false,
+        "nodo": "VIDEO",
+        "volumenDeclarado": 100,
+        "arranqueQuePideElContrato": 7.4032,
+        "paused": false,
+        "muted": false,
+        "volume": 1,
+        "currentTime": 7.4032,
+        "readyState": 4
+      },
+      {
+        "id": "view4",
+        "primary": false,
+        "nodo": "VIDEO",
+        "volumenDeclarado": 10,
+        "arranqueQuePideElContrato": 7.4032,
+        "paused": false,
+        "muted": false,
+        "volume": 0.1,
+        "currentTime": 7.4032,
+        "readyState": 4
+      }
+    ],
+    "pixeles": [
+      {
+        "elemento": "primaryContent",
+        "primario": true,
+        "esperadoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 0,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "deltaMaxPx": 0
+      },
+      {
+        "elemento": "view2",
+        "primario": false,
+        "esperadoPx": {
+          "left": 357.5,
+          "top": 0,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "medidoPx": {
+          "left": 357.5,
+          "top": 0,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "deltaMaxPx": 0
+      },
+      {
+        "elemento": "view3",
+        "primario": false,
+        "esperadoPx": {
+          "left": 0,
+          "top": 201.09375,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "medidoPx": {
+          "left": 0,
+          "top": 201.09375,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "deltaMaxPx": 0
+      },
+      {
+        "elemento": "view4",
+        "primario": false,
+        "esperadoPx": {
+          "left": 357.5,
+          "top": 201.09375,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "medidoPx": {
+          "left": 357.5,
+          "top": 201.09375,
+          "width": 357.5,
+          "height": 201.09375
+        },
+        "deltaMaxPx": 0
+      }
+    ]
+  },
+  "consola": [
+    {
+      "type": "error",
+      "text": "[hls] error networkError aborted fatal: false"
+    }
+  ]
+}

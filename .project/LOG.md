@@ -1684,3 +1684,57 @@ que ya existía, no una medición nueva.
 Alcance del pase: sólo `.project/`. Los ADR 0017 y 0018 y las notas fechadas no
 se tocaron, siguen valiendo. El `PROJECT.md` tampoco: su entrada de la fase 04
 no dice cuántas tasks tiene y sigue siendo cierta. Commit sin push.
+
+## 2026-09-07 — T-01 de la fase 04: el estado de la composición gobierna a todos sus elementos
+
+El primero de los tres defectos que Nicolás encontró probando la demo desde el
+celular: con la composición pausada, un seek que caía adentro de un aviso
+concurrente de video arrancaba a reproducir ese aviso solo, con todo lo demás
+detenido.
+
+**La causa era la que el bloque de la task decía, y era la mitad general del
+problema y no el caso.** `lib/renderer.js` tenía la respuesta a una sola
+pregunta —si un elemento del aviso reproduce— saliendo de dos lugares: los
+listeners de `play` y `pause` del primario propagaban las transiciones, y
+`build()` decidía el estado de un nodo al crearlo, con un `node.play()` que no
+miraba `video.paused`. Los dos coinciden mientras la composición reproduzca y
+difieren exactamente cuando un nodo nace con la pausa puesta.
+
+**El arreglo copia la forma que el mute ya tenía**, que era el modelo que la
+task señalaba. `applyPlayback()` no toma argumento y lee `video.paused`, corre
+después de cada `build` y en el `play` y el `pause` del primario —los dos
+listeners son la misma función—, y el `node.play()` de `build()` se fue. Queda un
+solo lugar que contesta. El orden dentro de `tick` es `applyPlayback()` y
+después `applyAudio()`, que es el que ya estaba: el nodo arranca muteado, que es
+la única manera de que la política de autoplay lo deje arrancar, y recién
+entonces toma el volumen que su elemento declara. Cada nodo se sigue creando
+`muted` y el `startAt` sigue siendo el que posiciona el asset.
+
+**La lectura nodo por nodo, con las tres columnas y en los dos estados** (break
+5, `multiView`, caído en 126,0 s de una ventana de 120 s a 132 s, con la pausa y
+el seek hechos con clicks de verdad). Pausada: los cuatro elementos en `paused:
+true`, los tres del aviso en el 5,998 que el contrato pide, y 0,000 s de avance
+del `currentTime` en 1,5 s de reloj de pared. Play: los cuatro en `paused:
+false` y los tres en 7,403, que es lo que el contrato pide en ese segundo. El
+volumen es la mezcla declarada en los dos estados: 0,1 en el primario, `view2` y
+`view4`, y 1 en `view3`.
+
+**La tercera columna atrapó la mitad del defecto que no se ve, y era la razón
+por la que estaba pedida.** Antes del cambio, al volver de la pausa el asset
+estaba en 11,483 contra los 7,387 que el contrato pedía: los nodos habían
+seguido corriendo los cuatro segundos que la composición estuvo detenida, así
+que el aviso volvía desfasado del programa. Un elemento en el segundo equivocado
+se ve perfecto en una captura.
+
+**Los tres chequeos, los tres en verde**: `verificar-cortes` (las dos costuras),
+`npm test` (27 de 27) y la caja pedida contra la dibujada, 0,00 px sobre los
+cuatro elementos en los dos estados y sobre los cinco breaks del recorrido. El
+recorrido sigue corriendo igual: 2, 3, 3, 2 y 4 elementos, con los stills del
+break 3 sin línea de tiempo que gobernar.
+
+Una línea de consola que aparece igual antes y después y no es de esta task:
+`[hls] error networkError aborted fatal: false`, la petición que el seek
+cancela. No es fatal.
+
+Evidencia en `.project/phases/04-refinamiento/tasks/T-01/`, con la lectura de
+antes del cambio al lado de la de después. Commit sin push.
