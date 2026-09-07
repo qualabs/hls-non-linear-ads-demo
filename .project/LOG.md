@@ -2221,3 +2221,72 @@ Y una precisión sobre el bloque: **de los cuatro controles, tres accionan el
 elemento y el cuarto no**. El fullscreen acciona el contenedor, por el ADR 0015.
 
 Evidencia en `.project/phases/04-refinamiento/tasks/T-07/`. Commit sin push.
+
+## 2026-09-07 — Fase 04 cerrada: los seis puntos cerrados y una sola diferencia entre los dos panes
+
+Las siete tasks en `done`, ninguna abandonada, ninguna con corrección
+post-ejecución. La fase se abrió y se cerró el mismo día, así que no se comió
+los días de la 03 y no hubo que ejercer el orden de recorte del R4: la T-07, que
+era lo primero que se recortaba, se hizo entera.
+
+**El criterio se cumplió.** Los dos players quedan idénticos en todo —el mismo
+cromo, la misma barra, el mismo reloj, ninguna marca sobre la imagen, el mismo
+segundo del programa— y distintos en una sola cosa: qué muestran durante el
+break. El de la izquierda sigue siendo `new Hls()` con cero opciones, verificado
+con las tres lecturas del ADR 0007 y no afirmado.
+
+**Lo que la fase produjo y no estaba en los seis puntos** es lo más valioso que
+deja, y son cinco de las siete tasks: el aviso volvía 4 s desfasado del programa
+después de una pausa —11,483 s contra los 7,387 que el contrato pedía, y un
+elemento en el segundo equivocado se ve perfecto en una captura— (T-01); un toque
+invisible levantaba el mute, y apagar los eventos de puntero cubría sólo la mitad
+porque el `pointerdown` se resuelve antes de cualquier listener y el `click`
+después, ya con la capa de vuelta en pantalla (T-03); el atraso de 49,47 s se fue
+a 0,72 s y el quinto break pasó a verse, con los 0,72 s repartidos en los dos
+breaks donde hls.js pasa el MediaSource al asset y cero en los otros tres (T-05);
+qué reporta el elemento del pane de fábrica durante un aviso no tiene una
+respuesta sino dos, según si el punto de retorno cae en un borde de segmento
+(T-05); alimentar la barra de ese pane con su elemento le hacía perder las cinco
+marcas (T-07); y el rótulo de ese pane decía `125.3s of the ad` de un aviso de
+12 s, que ahora dice `2.1s of 12.0s` (T-07).
+
+**Dos tasks tuvieron que decidir algo que su bloque no decidía**, y las dos
+quedaron escritas: la T-06, quién elige los rangos que una barra marca —quedó en
+`playedRanges(provider)`, un `Set` de las clases que ese player reproduce—, y la
+T-07, qué muestra la barra del pane de fábrica, que quedó siendo la barra del
+programa. Es un aprendizaje sobre cómo se escriben los bloques y no un defecto de
+las tasks: el de la T-07 nombraba la pregunta y por eso su decisión fue trabajo
+previsto, el de la T-06 no la nombraba y por eso fue trabajo encontrado.
+
+**El validador de frontmatter de ADR salió rojo con 20 hallazgos, todos de la
+misma clase**: los 18 `id:` más el `superseded_by: 0014` del 0010 y el
+`supersedes: 0010` del 0014, sin comillar. En YAML un cero a la izquierda es
+octal, así que `0011` vuelve como `9`, que es el id de otro ADR de esta carpeta, y
+no hay error en ningún parser. Ninguno de los 20 es una relación mal puesta, así
+que no había nada que decidir sobre qué extremo se mueve: se comillan en un commit
+propio inmediatamente después de este cierre. Es el mismo barrido que ya se hizo
+en los otros nueve proyectos del repo; este había quedado afuera porque había
+agentes trabajando adentro.
+
+**Lo que le queda a la fase 03**, que estaba escrita y sin arrancar, es un
+precedente y no una decisión pendiente: la sección 10 del documento de la T-07.
+Desde la 03 nuestro player reproduce un aviso lineal adentro del break, así que
+nuestro elemento va a poder dejar de reportar el programa por el mismo mecanismo;
+la respuesta está en la sección 3 de ese documento y la segunda mitad la escribió
+la T-06 con `KINDS_PLAYED`. Hay que aplicarlo, no decidirlo.
+
+**El hilo abierto real: 13 commits sin pushear**, de `1716f6f plan(fase-04)` a
+este cierre. La demo que se graba existe hoy en un solo disco.
+
+Revisión de documentación, superficie por superficie, en la sección 8 del
+informe. Este pase toca el índice de fases del `PROJECT.md` —la línea de la 04
+reescrita con lo que la fase terminó siendo— y el item del argumento del atraso
+de "A confirmar", que estaba en futuro y ahora dice lo que la T-05 midió. Dos
+afirmaciones vivas quedaron anotadas y sin aplicar porque el alcance de este pase
+era `.project/`: el comentario de cabecera de `css/player.css` y la justificación
+del campo `kind` en el contrato de `docs/`. `docs/arc42/` no existe en este
+proyecto y este cierre no lo crea: el documento de arquitectura es el contrato
+entre las dos capas, que se re-leyó entero y sigue describiendo este sistema.
+
+Informe en `.project/phases/04-refinamiento/REPORT.md`. `PHASE.md` en `closed`
+con fecha 2026-09-07. Commit sin push.

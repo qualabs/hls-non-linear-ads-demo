@@ -455,15 +455,17 @@ la sección 4 del informe de cierre de la fase 01
 - **La dirección del skin y la marca**, que David no vio. Lo más cercano que
   dijo es "make it look a little more Pro", sobre el marcador de los breaks.
   Ver la sección 4 del informe de cierre de la fase 02.
-- **El argumento del atraso, retirado.** La fase 04 hace que el pane del cliente
-  de mercado reemplace el contenido en lugar de insertarlo (ADR 0017), para que
-  los dos panes se queden en el mismo segundo del programa y se puedan comparar
-  cuadro a cuadro. Con eso se muere el argumento de que el cliente de mercado va
-  49,5 s de programa atrás, que la T-09 y la T-12 de la fase 01 midieron y que el
-  informe de esa fase presenta como el segundo argumento de la demo. El que queda
-  se ve en un cuadro solo: al mismo segundo, uno muestra el aviso encima del
-  programa y el otro en lugar del programa. **Es un cambio de lo que David
-  cuenta en escenario**, así que va contado antes del sync del 21 y no después.
+- **El argumento del atraso, retirado.** La fase 04 hizo que el pane del cliente
+  de mercado reemplace el contenido en lugar de insertarlo (ADR 0017), y los dos
+  panes se quedan en el mismo segundo del programa: la T-05 midió 0,72 s donde la
+  T-12 de la fase 01 había medido 49,47 s, y el quinto aviso lineal pasó a entrar
+  entero en el recorrido. Con eso se murió el argumento de que el cliente de
+  mercado va 49,5 s de programa atrás, que la T-09 y la T-12 de la fase 01
+  midieron y que el informe de esa fase presenta como el segundo argumento de la
+  demo. El que queda se ve en un cuadro solo: al mismo segundo, uno muestra el
+  aviso encima del programa y el otro en lugar del programa. **Es un cambio de lo
+  que David cuenta en escenario**, y eso es lo que sigue abierto acá: va contado
+  antes del sync del 21 y no después.
 - **Quién hace el primer pase de la especificación de SVTA.**
 - **Qué significa `version: 2`** en el bloque `X-AD-CREATIVE-SIGNALING`.
 
@@ -515,14 +517,17 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   más alto y va primero: la 04 es lo que se graba y esta fase son capacidades
   nuevas. Su primera task es una medición, porque el aviso lineal en el medio
   del break es el único item que queda capaz de reabrir un ADR de la fase 01.
-- **04-refinamiento**: los seis puntos que salieron de Nicolás probando la demo
-  desde el celular, y **se ejecuta antes que la 03**. Tres son defectos —la
-  pausa de la composición que no gobierna a los avisos, el logo de Qualabs
-  adentro de la imagen, y los controles que en touch aparecen y desaparecen en
-  el mismo toque— y tres sacan diferencias entre los dos panes que no son el
-  mecanismo: el pane sin modificar pasa a reemplazar el contenido en lugar de
-  insertarlo, cada barra marca sólo lo que ese player reproduce y sobre su
-  propio riel, y el pane sin modificar lleva nuestro cromo sin dejar de ser un
-  cliente sin modificar. El criterio que la gobierna es sacar toda diferencia
-  entre los dos players que no sea el mecanismo que la demo muestra, y su costo
-  es el argumento del atraso de 49,5 s, retirado a propósito (ADR 0017).
+- **04-refinamiento**: cerrada con los seis puntos que Nicolás dio probando la
+  demo desde el celular cerrados, y **se ejecutó antes que la 03**. El criterio
+  se cumplió: los dos players quedaron idénticos en todo —el mismo cromo, la
+  misma barra, el mismo reloj, ninguna marca sobre la imagen— y distintos en una
+  sola cosa, qué muestran durante el break. El pane sin modificar reemplaza el
+  contenido en lugar de insertarlo y sigue siendo `new Hls()` con cero opciones,
+  con lo que el atraso de 49,47 s pasó a 0,72 s y el quinto aviso lineal entró
+  en el recorrido; cada barra marca sólo lo que ese player reproduce y lo marca
+  sobre su propio riel; el cromo se publica aparte de la parte de concurrentes
+  como `attachControls`; la composición gobierna el estado de todos sus
+  elementos; los controles se usan con el dedo; y no queda marca de Qualabs
+  adentro del cuadro. Su costo es el argumento del atraso, retirado a propósito
+  (ADR 0017), que se cambia por uno que se ve en un cuadro solo. Informe en
+  `phases/04-refinamiento/REPORT.md`.

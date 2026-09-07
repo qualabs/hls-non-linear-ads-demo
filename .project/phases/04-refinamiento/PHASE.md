@@ -1,9 +1,9 @@
 ---
 phase: 04-refinamiento
 title: "El refinamiento: una sola diferencia entre los dos players"
-status: planning
+status: closed
 started: 2026-09-07
-closed: null
+closed: 2026-09-07
 ---
 
 # Fase 04: el refinamiento
