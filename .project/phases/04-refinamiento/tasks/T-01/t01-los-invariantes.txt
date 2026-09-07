@@ -1,0 +1,28 @@
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js js/contract-trace.js css/player.css
+
+   GREEN: 5 occurrence(s), all of them on the accepted list.
+     lib/controls.js:21  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:65  interstitial: '#ffcc00'
+     lib/controls.js:98  interstitial: {
+     lib/controls.js:101  title: 'traditional interstitial: where a client already in the market replaces the content'
+     lib/controls.js:344  background: ${RANGE_COLOURS.interstitial};
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
+
+=== npm test ===
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 151.044289
