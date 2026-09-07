@@ -1,0 +1,2455 @@
+{
+  "etiqueta": "atributo-ausente",
+  "tagDeClaseApple": "#EXT-X-DATERANGE:ID=\"AD-1-LINEAR\",CLASS=\"com.apple.hls.interstitial\",START-DATE=\"2026-09-04T10:34:32.369-0300\",X-ASSET-LIST=\"/signalling/asset-list-linear.json\",X-RESTRICT=\"SKIP\",PLANNED-DURATION=12",
+  "assetListLineal": "{ \"ASSETS\": [ { \"URI\": \"/content/adA/index.m3u8\", \"DURATION\": 12.0 } ] }",
+  "agenda": {
+    "eventos": [
+      {
+        "id": "AD-1-LINEAR",
+        "clase": "com.apple.hls.interstitial",
+        "startTime": 20,
+        "duration": 12,
+        "plannedDuration": 12,
+        "resumeOffset": "NaN",
+        "resumptionOffset": 12,
+        "resumeTime": 32,
+        "cumulativeDuration": 0,
+        "startIsAligned": true,
+        "appendInPlace": true,
+        "assetListLoaded": false
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "clase": "com.apple.hls.interstitial",
+        "startTime": 45,
+        "duration": 12,
+        "plannedDuration": 12,
+        "resumeOffset": "NaN",
+        "resumptionOffset": 12,
+        "resumeTime": 57,
+        "cumulativeDuration": 0,
+        "startIsAligned": true,
+        "appendInPlace": false,
+        "assetListLoaded": false
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "clase": "com.apple.hls.interstitial",
+        "startTime": 70,
+        "duration": 12,
+        "plannedDuration": 12,
+        "resumeOffset": "NaN",
+        "resumptionOffset": 12,
+        "resumeTime": 82,
+        "cumulativeDuration": 0,
+        "startIsAligned": true,
+        "appendInPlace": true,
+        "assetListLoaded": false
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "clase": "com.apple.hls.interstitial",
+        "startTime": 95,
+        "duration": 12,
+        "plannedDuration": 12,
+        "resumeOffset": "NaN",
+        "resumptionOffset": 12,
+        "resumeTime": 107,
+        "cumulativeDuration": 0,
+        "startIsAligned": true,
+        "appendInPlace": false,
+        "assetListLoaded": false
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "clase": "com.apple.hls.interstitial",
+        "startTime": 120,
+        "duration": 12,
+        "plannedDuration": 12,
+        "resumeOffset": "NaN",
+        "resumptionOffset": 12,
+        "resumeTime": 132,
+        "cumulativeDuration": 0,
+        "startIsAligned": true,
+        "appendInPlace": true,
+        "assetListLoaded": false
+      }
+    ],
+    "largos": {
+      "primary": 180,
+      "integrated": 120
+    }
+  },
+  "agendaDespues": {
+    "eventos": [
+      {
+        "id": "AD-1-LINEAR",
+        "clase": "com.apple.hls.interstitial",
+        "startTime": 20.021,
+        "duration": 12,
+        "plannedDuration": 12,
+        "resumeOffset": "NaN",
+        "resumptionOffset": 12,
+        "resumeTime": 32.021,
+        "cumulativeDuration": 0,
+        "startIsAligned": true,
+        "appendInPlace": true,
+        "assetListLoaded": false
+      },
+      {
+        "id": "AD-2-LINEAR",
+        "clase": "com.apple.hls.interstitial",
+        "startTime": 45.021,
+        "duration": 12,
+        "plannedDuration": 12,
+        "resumeOffset": "NaN",
+        "resumptionOffset": 12,
+        "resumeTime": 57.021,
+        "cumulativeDuration": 0,
+        "startIsAligned": true,
+        "appendInPlace": false,
+        "assetListLoaded": false
+      },
+      {
+        "id": "AD-3-LINEAR",
+        "clase": "com.apple.hls.interstitial",
+        "startTime": 70.021,
+        "duration": 12.037,
+        "plannedDuration": 12,
+        "resumeOffset": "NaN",
+        "resumptionOffset": 12.037,
+        "resumeTime": 82.059,
+        "cumulativeDuration": 0,
+        "startIsAligned": true,
+        "appendInPlace": true,
+        "assetListLoaded": true
+      },
+      {
+        "id": "AD-4-LINEAR",
+        "clase": "com.apple.hls.interstitial",
+        "startTime": 95.021,
+        "duration": 12,
+        "plannedDuration": 12,
+        "resumeOffset": "NaN",
+        "resumptionOffset": 12,
+        "resumeTime": 107.021,
+        "cumulativeDuration": 0,
+        "startIsAligned": true,
+        "appendInPlace": false,
+        "assetListLoaded": false
+      },
+      {
+        "id": "AD-5-LINEAR",
+        "clase": "com.apple.hls.interstitial",
+        "startTime": 120.021,
+        "duration": 12,
+        "plannedDuration": 12,
+        "resumeOffset": "NaN",
+        "resumptionOffset": 12,
+        "resumeTime": 132.021,
+        "cumulativeDuration": 0,
+        "startIsAligned": true,
+        "appendInPlace": true,
+        "assetListLoaded": false
+      }
+    ],
+    "largos": {
+      "primary": 180.021,
+      "integrated": 119.984
+    }
+  },
+  "barrido": [
+    {
+      "demoT": 0,
+      "stockElemT": 0,
+      "stockPrimaryT": 0,
+      "stockIntegratedT": 0,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 0.164,
+      "stockElemT": 0.172,
+      "stockPrimaryT": 0,
+      "stockIntegratedT": 0,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 0.419,
+      "stockElemT": 0.426,
+      "stockPrimaryT": 0.185,
+      "stockIntegratedT": 0.185,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 0.675,
+      "stockElemT": 0.682,
+      "stockPrimaryT": 0.448,
+      "stockIntegratedT": 0.448,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 0.938,
+      "stockElemT": 0.946,
+      "stockPrimaryT": 0.713,
+      "stockIntegratedT": 0.713,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 1.194,
+      "stockElemT": 1.201,
+      "stockPrimaryT": 0.979,
+      "stockIntegratedT": 0.979,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 1.448,
+      "stockElemT": 1.455,
+      "stockPrimaryT": 1.245,
+      "stockIntegratedT": 1.245,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 1.703,
+      "stockElemT": 1.71,
+      "stockPrimaryT": 1.511,
+      "stockIntegratedT": 1.511,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 1.96,
+      "stockElemT": 1.967,
+      "stockPrimaryT": 1.776,
+      "stockIntegratedT": 1.776,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 2.218,
+      "stockElemT": 2.225,
+      "stockPrimaryT": 2.043,
+      "stockIntegratedT": 2.043,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 2.473,
+      "stockElemT": 2.48,
+      "stockPrimaryT": 2.307,
+      "stockIntegratedT": 2.307,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 2.728,
+      "stockElemT": 2.736,
+      "stockPrimaryT": 2.573,
+      "stockIntegratedT": 2.573,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 2.984,
+      "stockElemT": 2.992,
+      "stockPrimaryT": 2.839,
+      "stockIntegratedT": 2.839,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 3.24,
+      "stockElemT": 3.248,
+      "stockPrimaryT": 3.105,
+      "stockIntegratedT": 3.105,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 3.496,
+      "stockElemT": 3.503,
+      "stockPrimaryT": 3.37,
+      "stockIntegratedT": 3.37,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 3.751,
+      "stockElemT": 3.759,
+      "stockPrimaryT": 3.635,
+      "stockIntegratedT": 3.635,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 4.008,
+      "stockElemT": 4.015,
+      "stockPrimaryT": 3.901,
+      "stockIntegratedT": 3.901,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 4.262,
+      "stockElemT": 4.27,
+      "stockPrimaryT": 4.167,
+      "stockIntegratedT": 4.167,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 4.517,
+      "stockElemT": 4.524,
+      "stockPrimaryT": 4.432,
+      "stockIntegratedT": 4.432,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 4.771,
+      "stockElemT": 4.778,
+      "stockPrimaryT": 4.698,
+      "stockIntegratedT": 4.698,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 5.026,
+      "stockElemT": 5.033,
+      "stockPrimaryT": 4.964,
+      "stockIntegratedT": 4.964,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 5.281,
+      "stockElemT": 5.288,
+      "stockPrimaryT": 5.229,
+      "stockIntegratedT": 5.229,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 5.536,
+      "stockElemT": 5.544,
+      "stockPrimaryT": 5.495,
+      "stockIntegratedT": 5.495,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 5.792,
+      "stockElemT": 5.799,
+      "stockPrimaryT": 5.761,
+      "stockIntegratedT": 5.761,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 6.046,
+      "stockElemT": 6.054,
+      "stockPrimaryT": 6.026,
+      "stockIntegratedT": 6.026,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 6.302,
+      "stockElemT": 6.309,
+      "stockPrimaryT": 6.292,
+      "stockIntegratedT": 6.292,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 6.557,
+      "stockElemT": 6.564,
+      "stockPrimaryT": 6.557,
+      "stockIntegratedT": 6.557,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 6.811,
+      "stockElemT": 6.819,
+      "stockPrimaryT": 6.557,
+      "stockIntegratedT": 6.557,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 7.065,
+      "stockElemT": 7.072,
+      "stockPrimaryT": 6.823,
+      "stockIntegratedT": 6.823,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 7.319,
+      "stockElemT": 7.326,
+      "stockPrimaryT": 7.089,
+      "stockIntegratedT": 7.089,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 7.575,
+      "stockElemT": 7.583,
+      "stockPrimaryT": 7.354,
+      "stockIntegratedT": 7.354,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 7.834,
+      "stockElemT": 7.841,
+      "stockPrimaryT": 7.62,
+      "stockIntegratedT": 7.62,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 8.092,
+      "stockElemT": 8.099,
+      "stockPrimaryT": 7.885,
+      "stockIntegratedT": 7.885,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 8.346,
+      "stockElemT": 8.354,
+      "stockPrimaryT": 8.151,
+      "stockIntegratedT": 8.151,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 8.601,
+      "stockElemT": 8.609,
+      "stockPrimaryT": 8.417,
+      "stockIntegratedT": 8.417,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 8.857,
+      "stockElemT": 8.864,
+      "stockPrimaryT": 8.684,
+      "stockIntegratedT": 8.684,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 9.12,
+      "stockElemT": 9.127,
+      "stockPrimaryT": 8.948,
+      "stockIntegratedT": 8.948,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 9.379,
+      "stockElemT": 9.387,
+      "stockPrimaryT": 9.214,
+      "stockIntegratedT": 9.214,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 9.637,
+      "stockElemT": 9.644,
+      "stockPrimaryT": 9.48,
+      "stockIntegratedT": 9.48,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 9.893,
+      "stockElemT": 9.9,
+      "stockPrimaryT": 9.745,
+      "stockIntegratedT": 9.745,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 10.148,
+      "stockElemT": 10.155,
+      "stockPrimaryT": 10.01,
+      "stockIntegratedT": 10.01,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 10.402,
+      "stockElemT": 10.409,
+      "stockPrimaryT": 10.276,
+      "stockIntegratedT": 10.276,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 10.656,
+      "stockElemT": 10.664,
+      "stockPrimaryT": 10.542,
+      "stockIntegratedT": 10.542,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 10.911,
+      "stockElemT": 10.918,
+      "stockPrimaryT": 10.807,
+      "stockIntegratedT": 10.807,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 11.166,
+      "stockElemT": 11.174,
+      "stockPrimaryT": 11.073,
+      "stockIntegratedT": 11.073,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 11.42,
+      "stockElemT": 11.428,
+      "stockPrimaryT": 11.339,
+      "stockIntegratedT": 11.339,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 11.674,
+      "stockElemT": 11.681,
+      "stockPrimaryT": 11.606,
+      "stockIntegratedT": 11.606,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 11.928,
+      "stockElemT": 11.935,
+      "stockPrimaryT": 11.87,
+      "stockIntegratedT": 11.87,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 12.184,
+      "stockElemT": 12.191,
+      "stockPrimaryT": 12.135,
+      "stockIntegratedT": 12.135,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 12.438,
+      "stockElemT": 12.446,
+      "stockPrimaryT": 12.401,
+      "stockIntegratedT": 12.401,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 12.692,
+      "stockElemT": 12.699,
+      "stockPrimaryT": 12.667,
+      "stockIntegratedT": 12.667,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 12.948,
+      "stockElemT": 12.956,
+      "stockPrimaryT": 12.933,
+      "stockIntegratedT": 12.933,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 13.206,
+      "stockElemT": 13.213,
+      "stockPrimaryT": 13.198,
+      "stockIntegratedT": 13.198,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 13.461,
+      "stockElemT": 13.468,
+      "stockPrimaryT": 13.464,
+      "stockIntegratedT": 13.464,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 13.716,
+      "stockElemT": 13.724,
+      "stockPrimaryT": 13.464,
+      "stockIntegratedT": 13.464,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 13.972,
+      "stockElemT": 13.979,
+      "stockPrimaryT": 13.729,
+      "stockIntegratedT": 13.729,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 14.233,
+      "stockElemT": 14.24,
+      "stockPrimaryT": 13.995,
+      "stockIntegratedT": 13.995,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 14.492,
+      "stockElemT": 14.5,
+      "stockPrimaryT": 14.261,
+      "stockIntegratedT": 14.261,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 14.747,
+      "stockElemT": 14.754,
+      "stockPrimaryT": 14.526,
+      "stockIntegratedT": 14.526,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 15.001,
+      "stockElemT": 15.009,
+      "stockPrimaryT": 14.792,
+      "stockIntegratedT": 14.792,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 15.262,
+      "stockElemT": 15.269,
+      "stockPrimaryT": 15.057,
+      "stockIntegratedT": 15.057,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 15.517,
+      "stockElemT": 15.524,
+      "stockPrimaryT": 15.323,
+      "stockIntegratedT": 15.323,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 15.771,
+      "stockElemT": 15.778,
+      "stockPrimaryT": 15.588,
+      "stockIntegratedT": 15.588,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 16.025,
+      "stockElemT": 16.032,
+      "stockPrimaryT": 15.854,
+      "stockIntegratedT": 15.854,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 16.279,
+      "stockElemT": 16.287,
+      "stockPrimaryT": 16.12,
+      "stockIntegratedT": 16.12,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 16.534,
+      "stockElemT": 16.541,
+      "stockPrimaryT": 16.385,
+      "stockIntegratedT": 16.385,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 16.789,
+      "stockElemT": 16.797,
+      "stockPrimaryT": 16.651,
+      "stockIntegratedT": 16.651,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 17.045,
+      "stockElemT": 17.052,
+      "stockPrimaryT": 16.917,
+      "stockIntegratedT": 16.917,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 17.3,
+      "stockElemT": 17.307,
+      "stockPrimaryT": 17.183,
+      "stockIntegratedT": 17.183,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 17.554,
+      "stockElemT": 17.562,
+      "stockPrimaryT": 17.448,
+      "stockIntegratedT": 17.448,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 17.809,
+      "stockElemT": 17.817,
+      "stockPrimaryT": 17.714,
+      "stockIntegratedT": 17.714,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 18.064,
+      "stockElemT": 18.071,
+      "stockPrimaryT": 17.979,
+      "stockIntegratedT": 17.979,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 18.318,
+      "stockElemT": 18.326,
+      "stockPrimaryT": 18.245,
+      "stockIntegratedT": 18.245,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 18.573,
+      "stockElemT": 18.58,
+      "stockPrimaryT": 18.51,
+      "stockIntegratedT": 18.51,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 18.828,
+      "stockElemT": 18.835,
+      "stockPrimaryT": 18.776,
+      "stockIntegratedT": 18.776,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 19.082,
+      "stockElemT": 19.09,
+      "stockPrimaryT": 19.042,
+      "stockIntegratedT": 19.042,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 19.337,
+      "stockElemT": 19.344,
+      "stockPrimaryT": 19.307,
+      "stockIntegratedT": 19.307,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 19.592,
+      "stockElemT": 19.599,
+      "stockPrimaryT": 19.573,
+      "stockIntegratedT": 19.573,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 19.848,
+      "stockElemT": 19.855,
+      "stockPrimaryT": 19.839,
+      "stockIntegratedT": 19.839,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 20.105,
+      "stockElemT": 20.112,
+      "stockPrimaryT": 20.021,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 20.358,
+      "stockElemT": 20.366,
+      "stockPrimaryT": 20.021,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 20.614,
+      "stockElemT": 20.621,
+      "stockPrimaryT": 20.37,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 20.87,
+      "stockElemT": 20.877,
+      "stockPrimaryT": 20.635,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 21.123,
+      "stockElemT": 21.13,
+      "stockPrimaryT": 20.901,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 21.377,
+      "stockElemT": 21.385,
+      "stockPrimaryT": 21.167,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 21.631,
+      "stockElemT": 21.639,
+      "stockPrimaryT": 21.432,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 21.886,
+      "stockElemT": 21.893,
+      "stockPrimaryT": 21.698,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 22.14,
+      "stockElemT": 22.147,
+      "stockPrimaryT": 21.964,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 22.394,
+      "stockElemT": 22.401,
+      "stockPrimaryT": 22.229,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 22.647,
+      "stockElemT": 22.655,
+      "stockPrimaryT": 22.495,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 22.902,
+      "stockElemT": 22.909,
+      "stockPrimaryT": 22.761,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 23.157,
+      "stockElemT": 23.164,
+      "stockPrimaryT": 23.027,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 23.411,
+      "stockElemT": 23.419,
+      "stockPrimaryT": 23.292,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 23.666,
+      "stockElemT": 23.673,
+      "stockPrimaryT": 23.557,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 23.921,
+      "stockElemT": 23.929,
+      "stockPrimaryT": 23.823,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 24.177,
+      "stockElemT": 24.185,
+      "stockPrimaryT": 24.089,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 24.431,
+      "stockElemT": 24.439,
+      "stockPrimaryT": 24.354,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 24.685,
+      "stockElemT": 24.693,
+      "stockPrimaryT": 24.62,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 24.939,
+      "stockElemT": 24.947,
+      "stockPrimaryT": 24.886,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 25.193,
+      "stockElemT": 25.2,
+      "stockPrimaryT": 25.151,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 25.907,
+      "stockElemT": 25.915,
+      "stockPrimaryT": 25.683,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 26.162,
+      "stockElemT": 26.17,
+      "stockPrimaryT": 25.948,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 26.417,
+      "stockElemT": 26.424,
+      "stockPrimaryT": 26.214,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 26.67,
+      "stockElemT": 26.678,
+      "stockPrimaryT": 26.479,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 26.924,
+      "stockElemT": 26.932,
+      "stockPrimaryT": 26.745,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 27.18,
+      "stockElemT": 27.188,
+      "stockPrimaryT": 27.01,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 27.436,
+      "stockElemT": 27.443,
+      "stockPrimaryT": 27.276,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 27.69,
+      "stockElemT": 27.697,
+      "stockPrimaryT": 27.542,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 27.946,
+      "stockElemT": 27.953,
+      "stockPrimaryT": 27.807,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 28.202,
+      "stockElemT": 28.209,
+      "stockPrimaryT": 28.073,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 28.456,
+      "stockElemT": 28.463,
+      "stockPrimaryT": 28.339,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 28.712,
+      "stockElemT": 28.72,
+      "stockPrimaryT": 28.604,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 28.967,
+      "stockElemT": 28.974,
+      "stockPrimaryT": 28.87,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 29.22,
+      "stockElemT": 29.228,
+      "stockPrimaryT": 29.135,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 29.474,
+      "stockElemT": 29.481,
+      "stockPrimaryT": 29.401,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 29.729,
+      "stockElemT": 29.736,
+      "stockPrimaryT": 29.667,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 29.983,
+      "stockElemT": 29.991,
+      "stockPrimaryT": 29.932,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 30.239,
+      "stockElemT": 30.247,
+      "stockPrimaryT": 30.198,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 30.494,
+      "stockElemT": 30.501,
+      "stockPrimaryT": 30.464,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 30.749,
+      "stockElemT": 30.756,
+      "stockPrimaryT": 30.729,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 31.003,
+      "stockElemT": 31.011,
+      "stockPrimaryT": 30.995,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 31.258,
+      "stockElemT": 31.266,
+      "stockPrimaryT": 31.261,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 31.512,
+      "stockElemT": 31.519,
+      "stockPrimaryT": 31.261,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 31.766,
+      "stockElemT": 31.773,
+      "stockPrimaryT": 31.526,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 32.021,
+      "stockElemT": 32.031,
+      "stockPrimaryT": 31.792,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 32.279,
+      "stockElemT": 32.286,
+      "stockPrimaryT": 32.057,
+      "stockIntegratedT": 20.021,
+      "playingAd": "AD-1-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 32.533,
+      "stockElemT": 32.541,
+      "stockPrimaryT": 32.059,
+      "stockIntegratedT": 20.059,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 32.789,
+      "stockElemT": 32.796,
+      "stockPrimaryT": 32.588,
+      "stockIntegratedT": 20.588,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 33.044,
+      "stockElemT": 33.052,
+      "stockPrimaryT": 32.854,
+      "stockIntegratedT": 20.854,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 33.299,
+      "stockElemT": 33.307,
+      "stockPrimaryT": 33.12,
+      "stockIntegratedT": 21.12,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 33.556,
+      "stockElemT": 33.564,
+      "stockPrimaryT": 33.385,
+      "stockIntegratedT": 21.385,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 33.814,
+      "stockElemT": 33.821,
+      "stockPrimaryT": 33.651,
+      "stockIntegratedT": 21.651,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 34.069,
+      "stockElemT": 34.076,
+      "stockPrimaryT": 33.917,
+      "stockIntegratedT": 21.917,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 34.322,
+      "stockElemT": 34.33,
+      "stockPrimaryT": 34.182,
+      "stockIntegratedT": 22.182,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 34.577,
+      "stockElemT": 34.584,
+      "stockPrimaryT": 34.448,
+      "stockIntegratedT": 22.448,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 34.833,
+      "stockElemT": 34.841,
+      "stockPrimaryT": 34.714,
+      "stockIntegratedT": 22.714,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 35.09,
+      "stockElemT": 35.098,
+      "stockPrimaryT": 34.979,
+      "stockIntegratedT": 22.979,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 35.346,
+      "stockElemT": 35.354,
+      "stockPrimaryT": 35.245,
+      "stockIntegratedT": 23.245,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 35.601,
+      "stockElemT": 35.608,
+      "stockPrimaryT": 35.51,
+      "stockIntegratedT": 23.51,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 35.855,
+      "stockElemT": 35.862,
+      "stockPrimaryT": 35.776,
+      "stockIntegratedT": 23.776,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 36.112,
+      "stockElemT": 36.12,
+      "stockPrimaryT": 36.042,
+      "stockIntegratedT": 24.042,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 36.367,
+      "stockElemT": 36.374,
+      "stockPrimaryT": 36.307,
+      "stockIntegratedT": 24.307,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 36.623,
+      "stockElemT": 36.63,
+      "stockPrimaryT": 36.573,
+      "stockIntegratedT": 24.573,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 36.878,
+      "stockElemT": 36.886,
+      "stockPrimaryT": 36.839,
+      "stockIntegratedT": 24.839,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 37.132,
+      "stockElemT": 37.14,
+      "stockPrimaryT": 37.104,
+      "stockIntegratedT": 25.104,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 37.385,
+      "stockElemT": 37.393,
+      "stockPrimaryT": 37.37,
+      "stockIntegratedT": 25.37,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 37.64,
+      "stockElemT": 37.648,
+      "stockPrimaryT": 37.636,
+      "stockIntegratedT": 25.636,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 37.898,
+      "stockElemT": 37.905,
+      "stockPrimaryT": 37.901,
+      "stockIntegratedT": 25.901,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 38.153,
+      "stockElemT": 38.159,
+      "stockPrimaryT": 37.901,
+      "stockIntegratedT": 25.901,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 38.407,
+      "stockElemT": 38.414,
+      "stockPrimaryT": 38.167,
+      "stockIntegratedT": 26.167,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 38.66,
+      "stockElemT": 38.667,
+      "stockPrimaryT": 38.432,
+      "stockIntegratedT": 26.432,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 38.917,
+      "stockElemT": 38.924,
+      "stockPrimaryT": 38.698,
+      "stockIntegratedT": 26.698,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 39.177,
+      "stockElemT": 39.185,
+      "stockPrimaryT": 38.964,
+      "stockIntegratedT": 26.964,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 39.433,
+      "stockElemT": 39.441,
+      "stockPrimaryT": 39.229,
+      "stockIntegratedT": 27.229,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 39.687,
+      "stockElemT": 39.695,
+      "stockPrimaryT": 39.495,
+      "stockIntegratedT": 27.495,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 39.942,
+      "stockElemT": 39.95,
+      "stockPrimaryT": 39.761,
+      "stockIntegratedT": 27.761,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 40.197,
+      "stockElemT": 40.205,
+      "stockPrimaryT": 40.026,
+      "stockIntegratedT": 28.026,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 40.451,
+      "stockElemT": 40.458,
+      "stockPrimaryT": 40.292,
+      "stockIntegratedT": 28.292,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 40.705,
+      "stockElemT": 40.713,
+      "stockPrimaryT": 40.558,
+      "stockIntegratedT": 28.558,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 40.961,
+      "stockElemT": 40.968,
+      "stockPrimaryT": 40.823,
+      "stockIntegratedT": 28.823,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 41.216,
+      "stockElemT": 41.224,
+      "stockPrimaryT": 41.089,
+      "stockIntegratedT": 29.089,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 41.471,
+      "stockElemT": 41.478,
+      "stockPrimaryT": 41.354,
+      "stockIntegratedT": 29.354,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 41.727,
+      "stockElemT": 41.734,
+      "stockPrimaryT": 41.62,
+      "stockIntegratedT": 29.62,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 41.983,
+      "stockElemT": 41.991,
+      "stockPrimaryT": 41.885,
+      "stockIntegratedT": 29.885,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 42.239,
+      "stockElemT": 42.246,
+      "stockPrimaryT": 42.151,
+      "stockIntegratedT": 30.151,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 42.493,
+      "stockElemT": 42.5,
+      "stockPrimaryT": 42.417,
+      "stockIntegratedT": 30.417,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 42.747,
+      "stockElemT": 42.755,
+      "stockPrimaryT": 42.682,
+      "stockIntegratedT": 30.682,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 43.002,
+      "stockElemT": 43.01,
+      "stockPrimaryT": 42.948,
+      "stockIntegratedT": 30.948,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 43.257,
+      "stockElemT": 43.264,
+      "stockPrimaryT": 43.214,
+      "stockIntegratedT": 31.214,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 43.511,
+      "stockElemT": 43.518,
+      "stockPrimaryT": 43.479,
+      "stockIntegratedT": 31.479,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 43.764,
+      "stockElemT": 43.772,
+      "stockPrimaryT": 43.745,
+      "stockIntegratedT": 31.745,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 44.022,
+      "stockElemT": 44.029,
+      "stockPrimaryT": 44.011,
+      "stockIntegratedT": 32.011,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 44.278,
+      "stockElemT": 44.285,
+      "stockPrimaryT": 44.276,
+      "stockIntegratedT": 32.276,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 44.532,
+      "stockElemT": 44.54,
+      "stockPrimaryT": 44.276,
+      "stockIntegratedT": 32.276,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 44.788,
+      "stockElemT": 44.796,
+      "stockPrimaryT": 44.542,
+      "stockIntegratedT": 32.542,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 45.047,
+      "stockElemT": 45.055,
+      "stockPrimaryT": 44.807,
+      "stockIntegratedT": 32.807,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 45.301,
+      "stockElemT": 0.162,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 45.558,
+      "stockElemT": 0.418,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 45.817,
+      "stockElemT": 0.677,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 46.074,
+      "stockElemT": 0.934,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 46.328,
+      "stockElemT": 1.188,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 46.582,
+      "stockElemT": 1.442,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 46.837,
+      "stockElemT": 1.697,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 47.092,
+      "stockElemT": 1.952,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 47.348,
+      "stockElemT": 2.208,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 47.603,
+      "stockElemT": 2.463,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 47.859,
+      "stockElemT": 2.719,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 48.12,
+      "stockElemT": 2.98,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 48.379,
+      "stockElemT": 3.239,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 48.634,
+      "stockElemT": 3.494,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 48.89,
+      "stockElemT": 3.75,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 49.144,
+      "stockElemT": 4.004,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 49.398,
+      "stockElemT": 4.258,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 49.653,
+      "stockElemT": 4.513,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 49.907,
+      "stockElemT": 4.767,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 50.16,
+      "stockElemT": 5.02,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 50.792,
+      "stockElemT": 5.652,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 51.046,
+      "stockElemT": 5.906,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 51.3,
+      "stockElemT": 6.16,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 51.553,
+      "stockElemT": 6.413,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 51.806,
+      "stockElemT": 6.666,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 52.065,
+      "stockElemT": 6.925,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 52.32,
+      "stockElemT": 7.181,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 52.574,
+      "stockElemT": 7.434,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 52.829,
+      "stockElemT": 7.689,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 53.083,
+      "stockElemT": 7.943,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 53.338,
+      "stockElemT": 8.198,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 53.592,
+      "stockElemT": 8.452,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 53.846,
+      "stockElemT": 8.706,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 54.103,
+      "stockElemT": 8.963,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 54.358,
+      "stockElemT": 9.218,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 54.614,
+      "stockElemT": 9.474,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 54.871,
+      "stockElemT": 9.731,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 55.125,
+      "stockElemT": 9.985,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 55.379,
+      "stockElemT": 10.239,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 55.634,
+      "stockElemT": 10.494,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 55.889,
+      "stockElemT": 10.749,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 56.144,
+      "stockElemT": 11.004,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 56.398,
+      "stockElemT": 11.258,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 56.653,
+      "stockElemT": 11.513,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 56.908,
+      "stockElemT": 11.768,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 57.164,
+      "stockElemT": 12.024,
+      "stockPrimaryT": 45.021,
+      "stockIntegratedT": 33.021,
+      "playingAd": "AD-2-LINEAR",
+      "paneStock": "ad",
+      "stockPaused": false
+    },
+    {
+      "demoT": 57.418,
+      "stockElemT": 57.185,
+      "stockPrimaryT": 57.06,
+      "stockIntegratedT": 33.06,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 57.675,
+      "stockElemT": 57.442,
+      "stockPrimaryT": 57.27,
+      "stockIntegratedT": 33.27,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 57.933,
+      "stockElemT": 57.7,
+      "stockPrimaryT": 57.536,
+      "stockIntegratedT": 33.536,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 58.188,
+      "stockElemT": 57.955,
+      "stockPrimaryT": 57.801,
+      "stockIntegratedT": 33.801,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 58.441,
+      "stockElemT": 58.208,
+      "stockPrimaryT": 58.067,
+      "stockIntegratedT": 34.067,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 58.698,
+      "stockElemT": 58.466,
+      "stockPrimaryT": 58.333,
+      "stockIntegratedT": 34.333,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 58.956,
+      "stockElemT": 58.723,
+      "stockPrimaryT": 58.599,
+      "stockIntegratedT": 34.599,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 59.211,
+      "stockElemT": 58.978,
+      "stockPrimaryT": 58.864,
+      "stockIntegratedT": 34.864,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 59.465,
+      "stockElemT": 59.232,
+      "stockPrimaryT": 59.13,
+      "stockIntegratedT": 35.13,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 59.719,
+      "stockElemT": 59.486,
+      "stockPrimaryT": 59.396,
+      "stockIntegratedT": 35.396,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 59.972,
+      "stockElemT": 59.739,
+      "stockPrimaryT": 59.662,
+      "stockIntegratedT": 35.662,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    },
+    {
+      "demoT": 60.226,
+      "stockElemT": 59.993,
+      "stockPrimaryT": 59.926,
+      "stockIntegratedT": 35.926,
+      "playingAd": null,
+      "paneStock": "primary",
+      "stockPaused": false
+    }
+  ],
+  "eventosDelDeFabrica": [
+    "[stock] INTERSTITIAL_STARTED",
+    "[stock] INTERSTITIAL_ASSET_STARTED",
+    "[stock] INTERSTITIAL_ASSET_ENDED",
+    "[stock] INTERSTITIAL_ENDED",
+    "[stock] INTERSTITIALS_PRIMARY_RESUMED",
+    "[stock] INTERSTITIAL_STARTED",
+    "[stock] INTERSTITIAL_ASSET_STARTED",
+    "[stock] INTERSTITIAL_ASSET_ENDED",
+    "[stock] INTERSTITIAL_ENDED",
+    "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+  ],
+  "seeksDelPrimario": [
+    57.06
+  ],
+  "errores": [],
+  "consola": [
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-cornerOverlay.json"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved cornerOverlay#AD-1-CONCURRENT: 2 elements, window 20.00s -> 32.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-2-CONCURRENT at t=45.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape.json"
+    },
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackLShape#AD-2-CONCURRENT: 3 elements, window 45.00s -> 57.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-3-CONCURRENT at t=70.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackLShape-image.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackLShape#AD-3-CONCURRENT: 3 elements, window 70.00s -> 82.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-4-CONCURRENT at t=95.00s, asset-list http://localhost:8080/signalling/asset-list-squeezebackDoubleBox.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackDoubleBox#AD-4-CONCURRENT: 2 elements, window 95.00s -> 107.00s"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-5-CONCURRENT at t=120.00s, asset-list http://localhost:8080/signalling/asset-list-multiView.json"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved multiView#AD-5-CONCURRENT: 4 elements, window 120.00s -> 132.00s"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=0.21s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=20.11s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 20.00s -> 32.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=32.07s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=45.08s  ACTIVE squeezebackLShape#AD-2-CONCURRENT  window 45.00s -> 57.00s  3 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=57.04s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 5: AD-1-LINEAR (com.apple.hls.interstitial), AD-2-LINEAR (com.apple.hls.interstitial), AD-3-LINEAR (com.apple.hls.interstitial), AD-4-LINEAR (com.apple.hls.interstitial), AD-5-LINEAR (com.apple.hls.interstitial)"
+    }
+  ]
+}

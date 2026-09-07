@@ -1980,3 +1980,80 @@ ni `verificar-cortes` ni `npm test` miran. Ninguna línea del pane del otro
 tocada.
 
 Evidencia en `.project/phases/04-refinamiento/tasks/T-04/`. Commit sin push.
+
+## 2026-09-07 — El pane de fábrica reemplaza: 49,47 s de atraso pasaron a 0,72 s
+
+La T-05 de la fase 04. El Date Range de clase Apple de cada break pasa a la
+forma de reemplazo, que es una línea de `scripts/senalizar-contenido.sh`, y con
+eso los dos panes se quedan en el mismo segundo del programa.
+
+**La forma del reemplazo es la ausencia del atributo, y la decidió una medición
+que no dio lo que el bloque esperaba.** Se corrieron las dos candidatas más la
+inserción como control: `X-RESUME-OFFSET=0` deja el punto de retorno en el
+segundo en que el aviso empezó y produce el atraso de la fase 01 —12,5 s después
+del primer break y 12,36 s después del segundo, contra los 12,37 s por break que
+midió la T-12—, y las dos candidatas lo ponen doce segundos más adelante, con el
+mismo `resumeTime` en cuatro de los cinco breaks y el mismo patrón de estrategia
+de append. O sea que **las dos reemplazan y no se separan por el modo**, que es
+por donde el bloque esperaba que la medición eligiera.
+
+Lo que las separa aparece en la agenda leída después de que llegan los asset
+list: con el atributo ausente `resumeOffset` queda en `NaN` y hls.js resuelve el
+retorno contra el largo que **midió** del aviso —`AD-3-LINEAR` salió con
+`duration` 12,037 s, `resumptionOffset` 12,037 y `resumeTime` 82,059—, y con el
+offset escrito a mano vale el número escrito: el mismo evento, el mismo aviso,
+`resumptionOffset` 12 y `resumeTime` 82,021. Son 38 ms acá y son la diferencia
+entre un punto de retorno que es una propiedad del aviso y uno que es una
+constante que hay que mantener igual al aviso. Una cuarta corrida con el asset
+list declarando 8,0 s dejó el `duration` del evento en 12,027, o sea que el largo
+que la forma ausente usa es el medido y no el declarado. Por eso quedó la
+ausencia, y las dos son un `printf`, así que es reversible.
+
+**El recorrido corre entero y el número es 0,72 s.** Una sola corrida, la página
+cargada una vez, cero seeks del elemento del pane de la demo: a los 160 s —el
+mismo instante en que la T-12 leyó 49,47 s— el pane de la demo va en 160,106 s y
+el de fábrica en 159,381 s, y la captura de los dos muestra el mismo cuadro de la
+misma película. Los cinco avisos lineales entran enteros, el quinto incluido:
+`AD-5-LINEAR` arrancó en 120,021 y cerró en 132,059, con el VOD de 180 s todavía
+lejos, así que el recorrido pasa a mostrar cinco avisos lineales en lugar de
+cuatro.
+
+**Los 0,72 s son de dos breaks y de ninguno de los otros tres**, y eso el
+barrido lo muestra como escalera y no como deriva: 0,016 s hasta pasado el break
+1, 0,258 s después del 2, 0,259 s después del 3 y 0,725 s después del 4 y del 5.
+Los tres breaks que hls.js appendea en el lugar no cuestan nada; los dos que
+pasan el MediaSource al asset y de vuelta cuestan 0,24 s y 0,47 s, que es el
+precio del reattach, y son también los dos únicos seeks de la corrida —los hizo
+hls.js solo, en 57,06 y 107,06—.
+
+**Un hallazgo que le cambia la pregunta a la T-07.** El ADR 0017 y el comentario
+de `js/stock-player.js` dicen que el tiempo que un cliente de mercado reporta
+durante un aviso de reemplazo es el del aviso y no el del programa. Medido, es
+una cosa o la otra según el break: el del aviso en los breaks 2 y 4, donde hls.js
+pasa el MediaSource, y el del **programa** en los breaks 1, 3 y 5, donde appendea
+el aviso adentro de la línea de tiempo del primario. La estrategia la elige hls.js
+por break, según si el punto de retorno cae en un borde de segmento —sobre una
+grilla de 2 s, 32, 82 y 132 caen; 57 y 107 no—. Ya está en pantalla: adentro del
+quinto break la línea de estado de ese pane dice `125.3s of the ad` de un aviso
+de 12 s. Esta task no lo toca, porque es el pane del otro y qué muestra ese pane
+durante un interstitial lo decide la T-07; lo que le deja es que la respuesta que
+su riesgo R3 pedía medir no es una sino dos, y que una de las dos ya miente en un
+rótulo que entra en cámara.
+
+**El `README.md` cambia en dos lugares y el informe de la fase 01 en ninguno.**
+El párrafo del atraso se reescribió con el argumento nuevo —afuera del break los
+dos panes muestran el mismo cuadro, adentro uno tiene el aviso encima de la
+imagen y el otro el aviso en lugar de la imagen, y cuando vuelve están otra vez
+en el mismo segundo— y se sumó el ítem que dice de dónde sale la fracción de
+segundo que queda, para que quien grabe no lo reporte como defecto. Con eso la
+sección pasa de tres cosas que esperar a cuatro, y el conteo de su párrafo de
+entrada se corrigió. El informe de la fase 01 y la evidencia de la T-12 no se
+tocaron: son el registro de lo que la inserción produjo.
+
+`npm test`: 27 de 27. Es el chequeo que menos se espera y el que la task tenía
+que correr, porque `test/program-ranges-and-volume.test.js` parsea la tabla del
+recorrido y el `PLANNED-DURATION` del archivo que la task edita; ninguna de las
+dos formas se movió. `verificar-cortes` no corre: ninguna de sus dos costuras
+mira ese script.
+
+Evidencia en `.project/phases/04-refinamiento/tasks/T-05/`. Commit sin push.
