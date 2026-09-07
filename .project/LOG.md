@@ -2609,3 +2609,88 @@ tag concurrente del break de tres avisos declara 12 y el break dura 36. Es inert
 para nuestro player —el rango del concurrente sale de las experiencias, no del
 tag— y el recorrido que se graba no lo usa, pero es un dato que miente. El
 recorrido y su script son de la T-05.
+
+## 2026-09-07 — T-02 de la fase 03: el asset sin bloque, el repliegue y de dónde sale el fin de un aviso
+
+La task de nivel alto de la fase está hecha, y es la que David marcó como lo más
+importante del día. Un asset sin bloque `X-AD-CREATIVE-SIGNALING` se reproduce
+solo, a cuadro entero, con el programa corriendo detrás; un bloque que falla cae
+al mismo lugar; y los tres escalones del Apéndice D.5 hacen cada uno lo suyo.
+Evidencia en `tasks/T-02/`: siete corridas, una por escenario, con la consola
+entera. `signalling/asset-list-linear.json`, el aviso lineal declarado sin bloque
+desde la fase 01, resuelve hoy a una experiencia y se reproduce.
+
+**La regla de fin la decide la ventana declarada, y es una divergencia con la
+norma escrita como tal.** El Apéndice D dice que el interstitial termina al
+terminar el asset; este cliente termina cuando se cumple la `duration` declarada,
+y `activeAt` sigue siendo la única fuente de la ventana de activación. Tres
+razones: un asset que nunca carga nunca termina, así que la regla del fin real
+necesita igual un corte por tiempo debajo y ese corte es la duración declarada;
+el contrato tiene más de un lector y con dos fuentes pueden contestar distinto
+sobre el mismo instante; y la lista de rangos es monótona por promesa, así que un
+fin que llega del asset movería una `duration` ya publicada.
+
+**Lo que decidió no fue el argumento sino la lectura del solape, que se corrió.**
+Con un asset-list solapado a propósito, en el instante del solape `activeAt`
+devuelve dos experiencias, `drawn` queda con dos entradas apuntando al mismo
+`<video>` y gana la última: el contenido primario terminó a **357,5 píxeles** de
+la caja que la primera experiencia había pedido, con el aviso de esa experiencia
+dibujado sobre un área que el primario ya no ocupaba. Y al cerrarse el solape el
+aviso que seguía corriendo se destruyó y se reconstruyó, tirando **6,09 s** de
+asset ya traído — un arranque en frío en el medio del break, que es justo lo que
+la T-01 había sacado. Si el fin real mandara, eso pasaría en operación normal
+cada vez que un creativo dure más que su `DURATION` declarada.
+
+**La divergencia deja de ser silenciosa.** Las dos direcciones fallan sin verse
+—un creativo más corto se queda en su última imagen hasta que la ventana cierre,
+uno más largo se corta a mitad de camino, y las dos se ven idénticas a un aviso
+normal—, así que el renderizador las dice en la consola con el número. La capa
+sigue sin corregir nada: declara la secuencia y no la mueve.
+
+**Se detectan tres de los cuatro casos de "no lo puedo reproducir", y los dos que
+no están escritos con su razón.** No se detecta el `mediaType` que el cliente no
+soporta, porque en el momento de resolver el `type` de un asset de media playlist
+es el mismo string para cualquier códec que tenga adentro: el chequeo miraría el
+contenedor y rechazaría nada de lo que realmente falla. Y no se detecta el layout
+que pide más elementos que los decodificadores declarados, porque el número es de
+la T-03; cuando exista, la comparación es una línea en el lugar donde el bloque
+inutilizable ya cae al repliegue.
+
+**La suite de tests atrapó un chequeo que habría replegado sobre todo.** La
+primera versión tomaba un `uri` vacío en un elemento por bloque ilegible y puso
+nueve tests en rojo: la herramienta de SVTA emite `"uri": ""` en los seis
+payloads, con `"URI": "[PATH TO ASSET]"` arriba. Un cliente así replegaría sobre
+todos los asset-list que la herramienta produce, que es exactamente lo que el
+ADR 0004 decide no hacer. El chequeo se sacó.
+
+**La barra marca el break entero con una sola marca, como hoy, y el ADR 0018 no
+se reescribe.** El contrato define `kind` por si el rango cambia el largo de la
+línea de tiempo (ADR 0016), y bajo este render el aviso a cuadro entero no lo
+cambia: marcarlo de reemplazo diría que hubo un reemplazo donde no lo hubo. La
+anticipación del ADR 0018 se cumple el día que un aviso de esta capa detenga el
+programa de verdad.
+
+**El ADR 0016 quedó verificado y no afirmado.** El `duration` del primario y el
+`startTime` y el `duration` del rango son los mismos tres números antes, durante
+y después del aviso a cuadro entero: 180, 20 y 48. Y durante el aviso el `<video>`
+del primario tiene `volume` 0 y **`paused` en falso**, que es la lectura que una
+captura del cuadro entero no puede dar.
+
+**El segundo escalón lo contestó la norma y la fase lo tenía más grueso.** Un
+asset que no se puede reproducir se saltea solo, con las ventanas de los que
+siguen intactas —medido: el tercer asset sigue arrancando en el segundo 44—; un
+asset-list que no se puede leer cancela el break entero y no reporta rango; un
+`ASSETS` vacío no produce nada. El "si no están, salteá el break entero" que la
+fase tenía escrito era una sola cosa donde hay tres.
+
+`verificar-cortes` verde en las dos costuras, `npm test` 27 de 27, la caja pedida
+contra la dibujada con 0,0 píxeles de diferencia —incluida la caja `0 0 0 0` del
+aviso a cuadro entero, que es la primera vez que se dibuja una así—, y el
+recorrido de los cinco breaks entregando los mismos diez rangos, sin seeks y sin
+errores de consola.
+
+**Lo que la task no tocó y queda anotado para la T-05.** Durante el aviso a
+cuadro entero, la línea de la demo dice "primary content + CONCURRENT AD (linear)
+· nothing was replaced". Es literalmente cierto —el primario nunca se detuvo— y
+en escenario puede leerse al revés. Es la página de la demo y no la librería, y
+la decisión de qué cuenta el pane durante el break mezclado es de producto.

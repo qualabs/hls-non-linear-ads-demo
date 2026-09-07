@@ -31,6 +31,7 @@ Experience {
   id: string          // identificador de la señalización; sirve para nombrar el BREAK en un log
   itemId: string      // identidad de este aviso adentro del break; única entre todas las experiencias
   type: string        // etiqueta opaca del layout: 'cornerOverlay', 'squeezebackLShape', ...
+                      // 'linear' es el de un aviso al que esta capa no le dibuja layout
   startTime: number   // segundos de reproducción en que arranca
   duration: number    // segundos que dura
   elements: Element[] // ordenados por zDepth ascendente
@@ -83,7 +84,9 @@ Element {
    comparar tiempos: si la experiencia está en la lista, está activa. `startTime`
    y `duration` vienen para mostrar un contador, no para decidir. Los rangos del
    programa no sirven para esto: dicen dónde están los breaks, no cuál corre
-   ahora.
+   ahora. La ventana es **declarada** y puede no coincidir con el largo real del
+   asset: de dónde sale el fin y qué cuesta, en "De dónde sale el fin de un
+   aviso".
 
 6. **Dos experiencias se distinguen por `itemId`, nunca por `id` ni por
    `type`.** Un break trae varios avisos y los tres campos no dicen lo mismo:
@@ -263,8 +266,151 @@ los asset-list de la demo.
 **Lo que esto cuesta, dicho de frente.** La `DURATION` es metadato
 **declarado**: un servidor de decisioning puede declarar un número y servir un
 creativo de otro largo. Cuando eso pasa, los avisos que vienen después quedan
-colocados contra un número que nunca fue cierto, y nadie avisa. La capa
-**declara la secuencia y no la corrige**: no mide el creativo ni mueve las
-ventanas de los avisos siguientes. Es la misma tensión que la norma abre al
-decir que el interstitial termina al terminar el asset y no al cumplirse su
-`DURATION`, y de qué lado queda es una pregunta abierta del proyecto.
+colocados contra un número que nunca fue cierto. La capa **declara la secuencia
+y no la corrige**: no mide el creativo ni mueve las ventanas de los avisos
+siguientes. De dónde sale el fin de cada aviso, y qué pasa cuando el declarado y
+el real no coinciden, es la sección siguiente.
+
+## De dónde sale el fin de un aviso
+
+**La ventana declarada decide, y `activeAt` sigue siendo la única fuente de la
+ventana de activación** (regla 5). Un aviso entra en su `startTime` y sale
+cuando se cumple su `duration`, y ni el renderizado ni nadie más consulta el
+asset para saber si terminó.
+
+**Es una divergencia con la norma y no un descuido.** El Apéndice D dice que en
+ausencia de `X-PLAYOUT-LIMIT` *"the interstitial MUST end upon reaching the end
+of the interstitial asset(s)"*, o sea que el fin lo pone el asset y no el
+`DURATION` que lo describe. Este cliente hace la otra cosa. Las tres razones, en
+orden de peso:
+
+1. **El fin real no es una fuente que se pueda prometer.** Un asset que nunca
+   carga nunca termina, así que una regla escrita sobre el fin del elemento
+   necesita igual un corte por tiempo debajo — y ese corte es la duración
+   declarada. No reemplaza a la ventana: le agrega una segunda fuente encima.
+2. **El contrato tiene más de un lector.** La ventana la leen el renderizado y
+   quien traza el contrato, cada uno por su lado y en el mismo cuadro. Con dos
+   fuentes de verdad los dos pueden contestar distinto sobre el mismo instante,
+   y ahí el contrato deja de ser uno.
+3. **La lista de rangos es monótona** (más arriba): un rango que ya salió
+   conserva su `duration`. Un fin que llega del asset la movería después de
+   publicada.
+
+**Qué pasa cuando el fin real no coincide con el declarado, medido y no
+supuesto.** Las dos direcciones fallan distinto y ninguna de las dos se ve:
+
+- **El creativo dura menos que su ventana.** El elemento llega a su última
+  imagen y se queda ahí hasta que la ventana cierre. En pantalla es idéntico a
+  un aviso que sigue corriendo.
+- **El creativo dura más que su ventana.** Se lo saca a mitad de camino. En
+  pantalla es idéntico a un aviso que terminó.
+
+Por eso **el renderizado lo dice en la consola las dos veces**, con el número: es
+el único lugar donde esa diferencia aparece. La capa sigue sin corregir nada — no
+mueve las ventanas de los avisos siguientes, que ya estaban calculadas contra la
+`DURATION` declarada — pero deja de ser silenciosa.
+
+**Y por qué no se eligió que el fin real mandara**, con el número que lo decide.
+Bajo esa regla un creativo más largo que su `DURATION` declarada se solapa con el
+aviso siguiente **en operación normal**, y el renderizado no tiene modelo para
+dos experiencias a la vez: las dos declaran caja para el contenido primario, las
+dos entradas apuntan al mismo elemento y gana la última. Medido sobre un
+asset-list solapado a propósito, en el instante del solape el contenido primario
+quedó en la caja de la segunda experiencia, a **357,5 píxeles** de la que la
+primera había pedido, con el aviso de la primera dibujado contra un área que el
+primario ya no ocupaba. Y al cerrarse el solape el aviso que seguía corriendo se
+destruyó y se reconstruyó, tirando **6,09 s** de asset ya traído. La divergencia
+que la regla declarada deja es un aviso cortado o congelado; la que la otra abre
+es la composición entera mal dibujada.
+
+## Qué pasa con un asset que este cliente no puede dibujar
+
+Un `ASSET` de la lista se resuelve de una de tres maneras, y son la decisión del
+ADR 0019 junto con los tres escalones del Apéndice D.5:
+
+| El asset | Qué produce |
+| --- | --- |
+| trae un bloque `X-AD-CREATIVE-SIGNALING` utilizable | las experiencias que el bloque declara, con su layout |
+| no trae bloque, o trae uno que este cliente no puede dibujar | **una** experiencia a cuadro entero con el `URI` del propio asset |
+| no trae ninguna de las dos cosas | nada: se saltea **ese asset** y no el break |
+
+**El aviso lineal y el repliegue son el mismo camino.** Un asset sin bloque es un
+aviso lineal declarado como se declaró siempre — `URI` y `DURATION`, nada
+nuestro— y un bloque que falla cae exactamente al mismo lugar. No hay dos
+mecanismos y no hace falta un campo nuevo: la experiencia sintetizada usa el
+mismo `viewport`, el mismo `zDepth` y el mismo `volume` que cualquier otro
+layout. Su `type` es `'linear'`, que es una etiqueta **de este contrato** y no un
+valor que alguien tenga que escribir en un asset-list.
+
+**El contenido primario no se detiene.** El aviso ocupa el cuadro entero por
+`zDepth` y el primario queda debajo, tapado y en silencio, pero reproduciéndose.
+Es lo que mantiene invariante el largo de la línea de tiempo (ADR 0016) y lo que
+hace que un aviso lineal nuestro no se parezca al de un cliente de mercado, que
+sí interrumpe.
+
+**La mezcla del aviso lineal es la inversa de la del concurrente**, y la
+asimetría es deliberada: 100 en el aviso y 0 en el programa. Un aviso concurrente
+que no declara volumen entra callado porque se mezcla **sobre** un programa que
+alguien está escuchando; este no se mezcla sobre nada — tapa el cuadro—, y un
+aviso a cuadro entero sin sonido es una falla que nada en pantalla reporta.
+
+### Qué cuenta como "no lo puedo dibujar", y qué no
+
+Se detectan tres formas, y las tres son sobre la forma del dato:
+
+- **No hay bloque.** No es una falla: es un aviso lineal.
+- **El bloque no tiene payload usable**: no hay `payload`, está vacío, o alguno
+  de sus items no tiene ventana —un `duration` que no es un número positivo— o
+  declara un layout sin assets adentro. Nada de eso puede volverse una caja en
+  una pantalla.
+- **El asset no tiene nada reproducible**: ni bloque usable ni un `URI` con una
+  `DURATION` positiva. Ahí se saltea ese asset, y **el desplazamiento de los que
+  siguen no se mueve**: la `DURATION` declarada se acumula igual, así que las
+  ventanas de los demás quedan donde estaban. Saltear un asset moviendo a los
+  otros sería el break fallando de a un aviso por vez, que es justo lo que el
+  Apéndice D.5 separa.
+
+Y dos que **no** se detectan, cada una por una razón distinta:
+
+- **El `mediaType` que este cliente no soporta.** En el momento de resolver no
+  hay con qué contestarlo: el `type` de un asset de media playlist es el mismo
+  string para cualquier códec que haya adentro, así que el chequeo miraría el
+  contenedor y no lo que importa, rechazando nada de lo que realmente falla. Una
+  respuesta honesta llega recién cuando el elemento intenta reproducir, que es
+  otro mecanismo y otro momento.
+- **Un layout que pide más elementos que los decodificadores declarados.** El
+  número todavía no existe. Cuando exista, la comparación es una línea en el
+  mismo lugar donde el bloque inutilizable ya cae al repliegue, y no necesita
+  mecanismo nuevo.
+
+**Un `uri` vacío en un elemento no cuenta como bloque ilegible.** La herramienta
+de SVTA emite `"uri": ""` en los seis payloads, con `"URI": "[PATH TO ASSET]"`
+arriba: un cliente que lo tomara por ilegible replegaría sobre todos los
+asset-list que la herramienta produce, y el ADR 0004 es exactamente la decisión
+de no hacer eso.
+
+### Los dos escalones que son del asset-list entero
+
+- **El asset-list no se puede leer** —no llega, o no es JSON—: se cancela el
+  break entero con offset 0. Bajo este render el offset 0 ya está aplicado,
+  porque el primario nunca se detuvo, así que cancelar es esto: ninguna
+  experiencia, **ningún rango en la lista de rangos**, y el programa siguiendo.
+  El error en la consola es el único rastro que deja, y por eso es un error y no
+  una advertencia.
+- **`ASSETS` viene vacío**: se aplica el offset y no se reproduce nada. Ninguna
+  experiencia y ningún rango, con una advertencia en la consola.
+
+### Qué marca la barra durante un aviso a cuadro entero
+
+**Nada aparte.** El break entero sigue siendo **un** rango de clase
+`concurrent`, desde el arranque del primer aviso hasta el fin del último, con el
+aviso a cuadro entero adentro.
+
+La razón es la definición de `kind` de más arriba: un rango es concurrente o es
+de reemplazo, y lo que los separa es si cambia el largo de la línea de tiempo
+(ADR 0016). Bajo este render el aviso a cuadro entero **no lo cambia** —el
+primario nunca se detuvo—, así que marcarlo como rango de reemplazo diría que
+hubo un reemplazo sobre un riel donde no lo hubo, y marcarlo como concurrente no
+agregaría nada al rango que ya está. El día que un aviso de esta capa detenga el
+programa de verdad, ese aviso sí es un rango propio y sí es de reemplazo, y ahí
+la distinción tiene qué decir.

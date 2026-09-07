@@ -1,0 +1,843 @@
+{
+  "escenario": "solapado",
+  "audio": null,
+  "experiencias": [
+    {
+      "id": "AD-1-CONCURRENT",
+      "itemId": "AD-1-CONCURRENT.0",
+      "type": "cornerOverlay",
+      "startTime": 20,
+      "duration": 18,
+      "elements": [
+        {
+          "id": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "zDepth": 0,
+          "volume": 100,
+          "uri": null,
+          "mediaType": null
+        },
+        {
+          "id": "ad1-overlay",
+          "primary": false,
+          "box": {
+            "top": 0,
+            "right": 75,
+            "bottom": 75,
+            "left": 0
+          },
+          "zDepth": 1,
+          "volume": 0,
+          "uri": "/content/adB/index.m3u8",
+          "mediaType": "application/vnd.apple.mpegurl"
+        }
+      ]
+    },
+    {
+      "id": "AD-1-CONCURRENT",
+      "itemId": "AD-1-CONCURRENT.1",
+      "type": "squeezebackDoubleBox",
+      "startTime": 32,
+      "duration": 12,
+      "elements": [
+        {
+          "id": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 25,
+            "right": 50,
+            "bottom": 25,
+            "left": 0
+          },
+          "zDepth": 0,
+          "volume": 100,
+          "uri": null,
+          "mediaType": null
+        },
+        {
+          "id": "ad2-box",
+          "primary": false,
+          "box": {
+            "top": 25,
+            "right": 0,
+            "bottom": 25,
+            "left": 50
+          },
+          "zDepth": 1,
+          "volume": 0,
+          "uri": "/content/adC/index.m3u8",
+          "mediaType": "application/vnd.apple.mpegurl"
+        }
+      ]
+    }
+  ],
+  "marcas": [
+    {
+      "t": 26.037,
+      "primario": {
+        "paused": false,
+        "volume": 1,
+        "muted": true,
+        "duration": 180,
+        "style": "object-fit: cover; z-index: 0; position: absolute; left: 0px; top: 0px; width: 715px; height: 402.188px; transform-origin: 0px 0px; transform: translate(0px, 0px) scale(1, 1);",
+        "rect": {
+          "left": 828,
+          "top": 330.328,
+          "width": 715,
+          "height": 402.188
+        }
+      },
+      "videoW": 1280,
+      "videoH": 720,
+      "frame": {
+        "left": 828,
+        "top": 330.328,
+        "width": 715,
+        "height": 402.188
+      },
+      "activas": [
+        {
+          "id": "AD-1-CONCURRENT",
+          "itemId": "AD-1-CONCURRENT.0",
+          "type": "cornerOverlay",
+          "startTime": 20,
+          "duration": 18,
+          "elements": [
+            {
+              "id": "primaryContent",
+              "primary": true,
+              "box": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "zDepth": 0,
+              "volume": 100,
+              "uri": null,
+              "mediaType": null
+            },
+            {
+              "id": "ad1-overlay",
+              "primary": false,
+              "box": {
+                "top": 0,
+                "right": 75,
+                "bottom": 75,
+                "left": 0
+              },
+              "zDepth": 1,
+              "volume": 0,
+              "uri": "/content/adB/index.m3u8",
+              "mediaType": "application/vnd.apple.mpegurl"
+            }
+          ]
+        }
+      ],
+      "nodosEnLaCapa": [
+        {
+          "tag": "video",
+          "elementId": "ad1-overlay",
+          "readyState": 4,
+          "paused": false,
+          "muted": true,
+          "volume": 0,
+          "currentTime": 5.975,
+          "duration": 12.032,
+          "ended": false,
+          "opacity": "",
+          "zIndex": "1",
+          "rect": {
+            "left": 828,
+            "top": 330.328,
+            "width": 178.75,
+            "height": 100.547
+          }
+        }
+      ],
+      "dibujado": [
+        {
+          "elementId": "primaryContent",
+          "primary": true,
+          "uri": null,
+          "itemId": null
+        },
+        {
+          "elementId": "ad1-overlay",
+          "primary": false,
+          "uri": "/content/adB/index.m3u8",
+          "itemId": "AD-1-CONCURRENT.0"
+        }
+      ],
+      "cajas": [
+        {
+          "itemId": null,
+          "elementId": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "pedida": {
+            "left": 828,
+            "top": 330.328,
+            "width": 715,
+            "height": 402.188
+          },
+          "dibujada": {
+            "left": 828,
+            "top": 330.328,
+            "width": 715,
+            "height": 402.188
+          },
+          "delta": 0
+        },
+        {
+          "itemId": "AD-1-CONCURRENT.0",
+          "elementId": "ad1-overlay",
+          "primary": false,
+          "box": {
+            "top": 0,
+            "right": 75,
+            "bottom": 75,
+            "left": 0
+          },
+          "pedida": {
+            "left": 828,
+            "top": 330.328,
+            "width": 178.75,
+            "height": 100.547
+          },
+          "dibujada": {
+            "left": 828,
+            "top": 330.328,
+            "width": 178.75,
+            "height": 100.547
+          },
+          "delta": 0
+        }
+      ],
+      "rangos": {
+        "ranges": [
+          {
+            "id": "AD-1-LINEAR",
+            "kind": "interstitial",
+            "startTime": 20,
+            "duration": 12
+          },
+          {
+            "id": "AD-1-CONCURRENT",
+            "kind": "concurrent",
+            "startTime": 20,
+            "duration": 24
+          }
+        ],
+        "settled": true
+      },
+      "marca": 26.0,
+      "para": "solo el aviso 1"
+    },
+    {
+      "t": 34.501,
+      "primario": {
+        "paused": false,
+        "volume": 1,
+        "muted": true,
+        "duration": 180,
+        "style": "object-fit: cover; z-index: 0; position: absolute; left: 0px; top: 0px; width: 715px; height: 402.188px; transform-origin: 0px 0px; transform: translate(0px, 100.547px) scale(0.5, 0.5);",
+        "rect": {
+          "left": 828,
+          "top": 414.625,
+          "width": 357.5,
+          "height": 201.094
+        }
+      },
+      "videoW": 1280,
+      "videoH": 720,
+      "frame": {
+        "left": 828,
+        "top": 314.078,
+        "width": 715,
+        "height": 402.188
+      },
+      "activas": [
+        {
+          "id": "AD-1-CONCURRENT",
+          "itemId": "AD-1-CONCURRENT.0",
+          "type": "cornerOverlay",
+          "startTime": 20,
+          "duration": 18,
+          "elements": [
+            {
+              "id": "primaryContent",
+              "primary": true,
+              "box": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "zDepth": 0,
+              "volume": 100,
+              "uri": null,
+              "mediaType": null
+            },
+            {
+              "id": "ad1-overlay",
+              "primary": false,
+              "box": {
+                "top": 0,
+                "right": 75,
+                "bottom": 75,
+                "left": 0
+              },
+              "zDepth": 1,
+              "volume": 0,
+              "uri": "/content/adB/index.m3u8",
+              "mediaType": "application/vnd.apple.mpegurl"
+            }
+          ]
+        },
+        {
+          "id": "AD-1-CONCURRENT",
+          "itemId": "AD-1-CONCURRENT.1",
+          "type": "squeezebackDoubleBox",
+          "startTime": 32,
+          "duration": 12,
+          "elements": [
+            {
+              "id": "primaryContent",
+              "primary": true,
+              "box": {
+                "top": 25,
+                "right": 50,
+                "bottom": 25,
+                "left": 0
+              },
+              "zDepth": 0,
+              "volume": 100,
+              "uri": null,
+              "mediaType": null
+            },
+            {
+              "id": "ad2-box",
+              "primary": false,
+              "box": {
+                "top": 25,
+                "right": 0,
+                "bottom": 25,
+                "left": 50
+              },
+              "zDepth": 1,
+              "volume": 0,
+              "uri": "/content/adC/index.m3u8",
+              "mediaType": "application/vnd.apple.mpegurl"
+            }
+          ]
+        }
+      ],
+      "nodosEnLaCapa": [
+        {
+          "tag": "video",
+          "elementId": "ad2-box",
+          "readyState": 4,
+          "paused": false,
+          "muted": true,
+          "volume": 0,
+          "currentTime": 2.428,
+          "duration": 12.032,
+          "ended": false,
+          "opacity": "",
+          "zIndex": "1",
+          "rect": {
+            "left": 1185.5,
+            "top": 414.625,
+            "width": 357.5,
+            "height": 201.094
+          }
+        },
+        {
+          "tag": "video",
+          "elementId": "ad1-overlay",
+          "readyState": 4,
+          "paused": true,
+          "muted": true,
+          "volume": 0,
+          "currentTime": 12.011,
+          "duration": 12.011,
+          "ended": true,
+          "opacity": "",
+          "zIndex": "1",
+          "rect": {
+            "left": 828,
+            "top": 314.078,
+            "width": 178.75,
+            "height": 100.547
+          }
+        }
+      ],
+      "dibujado": [
+        {
+          "elementId": "primaryContent",
+          "primary": true,
+          "uri": null,
+          "itemId": null
+        },
+        {
+          "elementId": "ad1-overlay",
+          "primary": false,
+          "uri": "/content/adB/index.m3u8",
+          "itemId": "AD-1-CONCURRENT.0"
+        },
+        {
+          "elementId": "primaryContent",
+          "primary": true,
+          "uri": null,
+          "itemId": null
+        },
+        {
+          "elementId": "ad2-box",
+          "primary": false,
+          "uri": "/content/adC/index.m3u8",
+          "itemId": "AD-1-CONCURRENT.1"
+        }
+      ],
+      "cajas": [
+        {
+          "itemId": null,
+          "elementId": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "pedida": {
+            "left": 828,
+            "top": 314.078,
+            "width": 715,
+            "height": 402.188
+          },
+          "dibujada": {
+            "left": 828,
+            "top": 414.625,
+            "width": 357.5,
+            "height": 201.094
+          },
+          "delta": 357.5
+        },
+        {
+          "itemId": "AD-1-CONCURRENT.0",
+          "elementId": "ad1-overlay",
+          "primary": false,
+          "box": {
+            "top": 0,
+            "right": 75,
+            "bottom": 75,
+            "left": 0
+          },
+          "pedida": {
+            "left": 828,
+            "top": 314.078,
+            "width": 178.75,
+            "height": 100.547
+          },
+          "dibujada": {
+            "left": 828,
+            "top": 314.078,
+            "width": 178.75,
+            "height": 100.547
+          },
+          "delta": 0
+        },
+        {
+          "itemId": null,
+          "elementId": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 25,
+            "right": 50,
+            "bottom": 25,
+            "left": 0
+          },
+          "pedida": {
+            "left": 828,
+            "top": 414.625,
+            "width": 357.5,
+            "height": 201.094
+          },
+          "dibujada": {
+            "left": 828,
+            "top": 414.625,
+            "width": 357.5,
+            "height": 201.094
+          },
+          "delta": 0
+        },
+        {
+          "itemId": "AD-1-CONCURRENT.1",
+          "elementId": "ad2-box",
+          "primary": false,
+          "box": {
+            "top": 25,
+            "right": 0,
+            "bottom": 25,
+            "left": 50
+          },
+          "pedida": {
+            "left": 1185.5,
+            "top": 414.625,
+            "width": 357.5,
+            "height": 201.094
+          },
+          "dibujada": {
+            "left": 1185.5,
+            "top": 414.625,
+            "width": 357.5,
+            "height": 201.094
+          },
+          "delta": 0
+        }
+      ],
+      "rangos": {
+        "ranges": [
+          {
+            "id": "AD-1-LINEAR",
+            "kind": "interstitial",
+            "startTime": 20,
+            "duration": 12
+          },
+          {
+            "id": "AD-1-CONCURRENT",
+            "kind": "concurrent",
+            "startTime": 20,
+            "duration": 24
+          }
+        ],
+        "settled": true
+      },
+      "marca": 34.5,
+      "para": "EL SOLAPE: las dos experiencias activas"
+    },
+    {
+      "t": 41.024,
+      "primario": {
+        "paused": false,
+        "volume": 1,
+        "muted": true,
+        "duration": 180,
+        "style": "object-fit: cover; z-index: 0; position: absolute; left: 0px; top: 0px; width: 715px; height: 402.188px; transform-origin: 0px 0px; transform: translate(0px, 100.547px) scale(0.5, 0.5);",
+        "rect": {
+          "left": 828,
+          "top": 430.875,
+          "width": 357.5,
+          "height": 201.094
+        }
+      },
+      "videoW": 1280,
+      "videoH": 720,
+      "frame": {
+        "left": 828,
+        "top": 330.328,
+        "width": 715,
+        "height": 402.188
+      },
+      "activas": [
+        {
+          "id": "AD-1-CONCURRENT",
+          "itemId": "AD-1-CONCURRENT.1",
+          "type": "squeezebackDoubleBox",
+          "startTime": 32,
+          "duration": 12,
+          "elements": [
+            {
+              "id": "primaryContent",
+              "primary": true,
+              "box": {
+                "top": 25,
+                "right": 50,
+                "bottom": 25,
+                "left": 0
+              },
+              "zDepth": 0,
+              "volume": 100,
+              "uri": null,
+              "mediaType": null
+            },
+            {
+              "id": "ad2-box",
+              "primary": false,
+              "box": {
+                "top": 25,
+                "right": 0,
+                "bottom": 25,
+                "left": 50
+              },
+              "zDepth": 1,
+              "volume": 0,
+              "uri": "/content/adC/index.m3u8",
+              "mediaType": "application/vnd.apple.mpegurl"
+            }
+          ]
+        }
+      ],
+      "nodosEnLaCapa": [
+        {
+          "tag": "video",
+          "elementId": "ad2-box",
+          "readyState": 4,
+          "paused": false,
+          "muted": true,
+          "volume": 0,
+          "currentTime": 8.892,
+          "duration": 12.011,
+          "ended": false,
+          "opacity": "",
+          "zIndex": "1",
+          "rect": {
+            "left": 1185.5,
+            "top": 430.875,
+            "width": 357.5,
+            "height": 201.094
+          }
+        }
+      ],
+      "dibujado": [
+        {
+          "elementId": "primaryContent",
+          "primary": true,
+          "uri": null,
+          "itemId": null
+        },
+        {
+          "elementId": "ad2-box",
+          "primary": false,
+          "uri": "/content/adC/index.m3u8",
+          "itemId": "AD-1-CONCURRENT.1"
+        }
+      ],
+      "cajas": [
+        {
+          "itemId": null,
+          "elementId": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 25,
+            "right": 50,
+            "bottom": 25,
+            "left": 0
+          },
+          "pedida": {
+            "left": 828,
+            "top": 430.875,
+            "width": 357.5,
+            "height": 201.094
+          },
+          "dibujada": {
+            "left": 828,
+            "top": 430.875,
+            "width": 357.5,
+            "height": 201.094
+          },
+          "delta": 0
+        },
+        {
+          "itemId": "AD-1-CONCURRENT.1",
+          "elementId": "ad2-box",
+          "primary": false,
+          "box": {
+            "top": 25,
+            "right": 0,
+            "bottom": 25,
+            "left": 50
+          },
+          "pedida": {
+            "left": 1185.5,
+            "top": 430.875,
+            "width": 357.5,
+            "height": 201.094
+          },
+          "dibujada": {
+            "left": 1185.5,
+            "top": 430.875,
+            "width": 357.5,
+            "height": 201.094
+          },
+          "delta": 0
+        }
+      ],
+      "rangos": {
+        "ranges": [
+          {
+            "id": "AD-1-LINEAR",
+            "kind": "interstitial",
+            "startTime": 20,
+            "duration": 12
+          },
+          {
+            "id": "AD-1-CONCURRENT",
+            "kind": "concurrent",
+            "startTime": 20,
+            "duration": 24
+          }
+        ],
+        "settled": true
+      },
+      "marca": 41.0,
+      "para": "solo el aviso 2"
+    }
+  ],
+  "rangosAlFinal": {
+    "ranges": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-1-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 20,
+        "duration": 24
+      }
+    ],
+    "settled": true
+  },
+  "seeks": [],
+  "consola": [
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-solapado.json"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved cornerOverlay#AD-1-CONCURRENT.0: 2 elements, window 20.00s -> 38.00s"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved squeezebackDoubleBox#AD-1-CONCURRENT.1: 2 elements, window 32.00s -> 44.00s"
+    },
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=0.20s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=20.12s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 20.00s -> 38.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=32.10s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 20.00s -> 38.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=32.10s  ACTIVE squeezebackDoubleBox#AD-1-CONCURRENT  window 32.00s -> 44.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    },
+    {
+      "type": "error",
+      "text": "[stock] error networkError aborted fatal: false"
+    },
+    {
+      "type": "warning",
+      "text": "[renderer] ad1-overlay: the asset ran out with 5.87s still left in the window it was given. The composition follows the window, so the last frame stays in the box until the window closes."
+    },
+    {
+      "type": "warning",
+      "text": "[renderer] ad2-box: taken off with 6.09s of its asset still unplayed -- the asset is 12.03s long and the window it was given is 12s. The composition follows the window."
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=38.20s  ACTIVE squeezebackDoubleBox#AD-1-CONCURRENT  window 32.00s -> 44.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=44.06s  nothing active"
+    }
+  ],
+  "errores": [
+    {
+      "type": "error",
+      "text": "[stock] error networkError aborted fatal: false"
+    }
+  ],
+  "warns": [
+    {
+      "type": "warning",
+      "text": "[renderer] ad1-overlay: the asset ran out with 5.87s still left in the window it was given. The composition follows the window, so the last frame stays in the box until the window closes."
+    },
+    {
+      "type": "warning",
+      "text": "[renderer] ad2-box: taken off with 6.09s of its asset still unplayed -- the asset is 12.03s long and the window it was given is 12s. The composition follows the window."
+    }
+  ]
+}

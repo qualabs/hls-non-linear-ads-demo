@@ -1,0 +1,743 @@
+{
+  "escenario": "repliegue-bloque-roto",
+  "audio": null,
+  "experiencias": [
+    {
+      "id": "AD-1-CONCURRENT",
+      "itemId": "AD-1-CONCURRENT.0",
+      "type": "cornerOverlay",
+      "startTime": 20,
+      "duration": 12,
+      "elements": [
+        {
+          "id": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "zDepth": 0,
+          "volume": 100,
+          "uri": null,
+          "mediaType": null
+        },
+        {
+          "id": "ad1-overlay",
+          "primary": false,
+          "box": {
+            "top": 0,
+            "right": 75,
+            "bottom": 75,
+            "left": 0
+          },
+          "zDepth": 1,
+          "volume": 0,
+          "uri": "/content/adB/index.m3u8",
+          "mediaType": "application/vnd.apple.mpegurl"
+        }
+      ]
+    },
+    {
+      "id": "AD-1-CONCURRENT",
+      "itemId": "AD-1-CONCURRENT.1",
+      "type": "linear",
+      "startTime": 32,
+      "duration": 12,
+      "elements": [
+        {
+          "id": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "zDepth": 0,
+          "volume": 0,
+          "uri": null,
+          "mediaType": null
+        },
+        {
+          "id": "linear",
+          "primary": false,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "zDepth": 1,
+          "volume": 100,
+          "uri": "/content/adA/index.m3u8",
+          "mediaType": null
+        }
+      ]
+    },
+    {
+      "id": "AD-1-CONCURRENT",
+      "itemId": "AD-1-CONCURRENT.2",
+      "type": "cornerOverlay",
+      "startTime": 44,
+      "duration": 12,
+      "elements": [
+        {
+          "id": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "zDepth": 0,
+          "volume": 100,
+          "uri": null,
+          "mediaType": null
+        },
+        {
+          "id": "ad3-overlay",
+          "primary": false,
+          "box": {
+            "top": 75,
+            "right": 0,
+            "bottom": 0,
+            "left": 75
+          },
+          "zDepth": 1,
+          "volume": 0,
+          "uri": "/content/adC/index.m3u8",
+          "mediaType": "application/vnd.apple.mpegurl"
+        }
+      ]
+    }
+  ],
+  "marcas": [
+    {
+      "t": 26.066,
+      "primario": {
+        "paused": false,
+        "volume": 1,
+        "muted": true,
+        "duration": 180,
+        "style": "object-fit: cover; z-index: 0; position: absolute; left: 0px; top: 0px; width: 715px; height: 402.188px; transform-origin: 0px 0px; transform: translate(0px, 0px) scale(1, 1);",
+        "rect": {
+          "left": 828,
+          "top": 330.328,
+          "width": 715,
+          "height": 402.188
+        }
+      },
+      "videoW": 1280,
+      "videoH": 720,
+      "frame": {
+        "left": 828,
+        "top": 330.328,
+        "width": 715,
+        "height": 402.188
+      },
+      "activas": [
+        {
+          "id": "AD-1-CONCURRENT",
+          "itemId": "AD-1-CONCURRENT.0",
+          "type": "cornerOverlay",
+          "startTime": 20,
+          "duration": 12,
+          "elements": [
+            {
+              "id": "primaryContent",
+              "primary": true,
+              "box": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "zDepth": 0,
+              "volume": 100,
+              "uri": null,
+              "mediaType": null
+            },
+            {
+              "id": "ad1-overlay",
+              "primary": false,
+              "box": {
+                "top": 0,
+                "right": 75,
+                "bottom": 75,
+                "left": 0
+              },
+              "zDepth": 1,
+              "volume": 0,
+              "uri": "/content/adB/index.m3u8",
+              "mediaType": "application/vnd.apple.mpegurl"
+            }
+          ]
+        }
+      ],
+      "nodosEnLaCapa": [
+        {
+          "tag": "video",
+          "elementId": "ad1-overlay",
+          "readyState": 4,
+          "paused": false,
+          "muted": true,
+          "volume": 0,
+          "currentTime": 6.013,
+          "duration": 12.032,
+          "ended": false,
+          "opacity": "",
+          "zIndex": "1",
+          "rect": {
+            "left": 828,
+            "top": 330.328,
+            "width": 178.75,
+            "height": 100.547
+          }
+        }
+      ],
+      "dibujado": [
+        {
+          "elementId": "primaryContent",
+          "primary": true,
+          "uri": null,
+          "itemId": null
+        },
+        {
+          "elementId": "ad1-overlay",
+          "primary": false,
+          "uri": "/content/adB/index.m3u8",
+          "itemId": "AD-1-CONCURRENT.0"
+        }
+      ],
+      "cajas": [
+        {
+          "itemId": null,
+          "elementId": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "pedida": {
+            "left": 828,
+            "top": 330.328,
+            "width": 715,
+            "height": 402.188
+          },
+          "dibujada": {
+            "left": 828,
+            "top": 330.328,
+            "width": 715,
+            "height": 402.188
+          },
+          "delta": 0
+        },
+        {
+          "itemId": "AD-1-CONCURRENT.0",
+          "elementId": "ad1-overlay",
+          "primary": false,
+          "box": {
+            "top": 0,
+            "right": 75,
+            "bottom": 75,
+            "left": 0
+          },
+          "pedida": {
+            "left": 828,
+            "top": 330.328,
+            "width": 178.75,
+            "height": 100.547
+          },
+          "dibujada": {
+            "left": 828,
+            "top": 330.328,
+            "width": 178.75,
+            "height": 100.547
+          },
+          "delta": 0
+        }
+      ],
+      "rangos": {
+        "ranges": [
+          {
+            "id": "AD-1-LINEAR",
+            "kind": "interstitial",
+            "startTime": 20,
+            "duration": 12
+          },
+          {
+            "id": "AD-1-CONCURRENT",
+            "kind": "concurrent",
+            "startTime": 20,
+            "duration": 36
+          }
+        ],
+        "settled": true
+      },
+      "marca": 26.0,
+      "para": "dentro del aviso 1, concurrente"
+    },
+    {
+      "t": 38.065,
+      "primario": {
+        "paused": false,
+        "volume": 0,
+        "muted": true,
+        "duration": 180,
+        "style": "object-fit: cover; z-index: 0; position: absolute; left: 0px; top: 0px; width: 715px; height: 402.188px; transform-origin: 0px 0px; transform: translate(0px, 0px) scale(1, 1);",
+        "rect": {
+          "left": 828,
+          "top": 330.328,
+          "width": 715,
+          "height": 402.188
+        }
+      },
+      "videoW": 1280,
+      "videoH": 720,
+      "frame": {
+        "left": 828,
+        "top": 330.328,
+        "width": 715,
+        "height": 402.188
+      },
+      "activas": [
+        {
+          "id": "AD-1-CONCURRENT",
+          "itemId": "AD-1-CONCURRENT.1",
+          "type": "linear",
+          "startTime": 32,
+          "duration": 12,
+          "elements": [
+            {
+              "id": "primaryContent",
+              "primary": true,
+              "box": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "zDepth": 0,
+              "volume": 0,
+              "uri": null,
+              "mediaType": null
+            },
+            {
+              "id": "linear",
+              "primary": false,
+              "box": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "zDepth": 1,
+              "volume": 100,
+              "uri": "/content/adA/index.m3u8",
+              "mediaType": null
+            }
+          ]
+        }
+      ],
+      "nodosEnLaCapa": [
+        {
+          "tag": "video",
+          "elementId": "linear",
+          "readyState": 4,
+          "paused": false,
+          "muted": true,
+          "volume": 1,
+          "currentTime": 6.005,
+          "duration": 12.032,
+          "ended": false,
+          "opacity": "",
+          "zIndex": "1",
+          "rect": {
+            "left": 828,
+            "top": 330.328,
+            "width": 715,
+            "height": 402.188
+          }
+        }
+      ],
+      "dibujado": [
+        {
+          "elementId": "primaryContent",
+          "primary": true,
+          "uri": null,
+          "itemId": null
+        },
+        {
+          "elementId": "linear",
+          "primary": false,
+          "uri": "/content/adA/index.m3u8",
+          "itemId": "AD-1-CONCURRENT.1"
+        }
+      ],
+      "cajas": [
+        {
+          "itemId": null,
+          "elementId": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "pedida": {
+            "left": 828,
+            "top": 330.328,
+            "width": 715,
+            "height": 402.188
+          },
+          "dibujada": {
+            "left": 828,
+            "top": 330.328,
+            "width": 715,
+            "height": 402.188
+          },
+          "delta": 0
+        },
+        {
+          "itemId": "AD-1-CONCURRENT.1",
+          "elementId": "linear",
+          "primary": false,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "pedida": {
+            "left": 828,
+            "top": 330.328,
+            "width": 715,
+            "height": 402.188
+          },
+          "dibujada": {
+            "left": 828,
+            "top": 330.328,
+            "width": 715,
+            "height": 402.188
+          },
+          "delta": 0
+        }
+      ],
+      "rangos": {
+        "ranges": [
+          {
+            "id": "AD-1-LINEAR",
+            "kind": "interstitial",
+            "startTime": 20,
+            "duration": 12
+          },
+          {
+            "id": "AD-1-CONCURRENT",
+            "kind": "concurrent",
+            "startTime": 20,
+            "duration": 36
+          }
+        ],
+        "settled": true
+      },
+      "marca": 38.0,
+      "para": "dentro del aviso 2, el del bloque roto"
+    },
+    {
+      "t": 50.061,
+      "primario": {
+        "paused": false,
+        "volume": 1,
+        "muted": true,
+        "duration": 180,
+        "style": "object-fit: cover; z-index: 0; position: absolute; left: 0px; top: 0px; width: 715px; height: 402.188px; transform-origin: 0px 0px; transform: translate(0px, 0px) scale(1, 1);",
+        "rect": {
+          "left": 828,
+          "top": 330.328,
+          "width": 715,
+          "height": 402.188
+        }
+      },
+      "videoW": 1280,
+      "videoH": 720,
+      "frame": {
+        "left": 828,
+        "top": 330.328,
+        "width": 715,
+        "height": 402.188
+      },
+      "activas": [
+        {
+          "id": "AD-1-CONCURRENT",
+          "itemId": "AD-1-CONCURRENT.2",
+          "type": "cornerOverlay",
+          "startTime": 44,
+          "duration": 12,
+          "elements": [
+            {
+              "id": "primaryContent",
+              "primary": true,
+              "box": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "zDepth": 0,
+              "volume": 100,
+              "uri": null,
+              "mediaType": null
+            },
+            {
+              "id": "ad3-overlay",
+              "primary": false,
+              "box": {
+                "top": 75,
+                "right": 0,
+                "bottom": 0,
+                "left": 75
+              },
+              "zDepth": 1,
+              "volume": 0,
+              "uri": "/content/adC/index.m3u8",
+              "mediaType": "application/vnd.apple.mpegurl"
+            }
+          ]
+        }
+      ],
+      "nodosEnLaCapa": [
+        {
+          "tag": "video",
+          "elementId": "ad3-overlay",
+          "readyState": 4,
+          "paused": false,
+          "muted": true,
+          "volume": 0,
+          "currentTime": 6.007,
+          "duration": 12.032,
+          "ended": false,
+          "opacity": "",
+          "zIndex": "1",
+          "rect": {
+            "left": 1364.25,
+            "top": 631.969,
+            "width": 178.75,
+            "height": 100.547
+          }
+        }
+      ],
+      "dibujado": [
+        {
+          "elementId": "primaryContent",
+          "primary": true,
+          "uri": null,
+          "itemId": null
+        },
+        {
+          "elementId": "ad3-overlay",
+          "primary": false,
+          "uri": "/content/adC/index.m3u8",
+          "itemId": "AD-1-CONCURRENT.2"
+        }
+      ],
+      "cajas": [
+        {
+          "itemId": null,
+          "elementId": "primaryContent",
+          "primary": true,
+          "box": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "pedida": {
+            "left": 828,
+            "top": 330.328,
+            "width": 715,
+            "height": 402.188
+          },
+          "dibujada": {
+            "left": 828,
+            "top": 330.328,
+            "width": 715,
+            "height": 402.188
+          },
+          "delta": 0
+        },
+        {
+          "itemId": "AD-1-CONCURRENT.2",
+          "elementId": "ad3-overlay",
+          "primary": false,
+          "box": {
+            "top": 75,
+            "right": 0,
+            "bottom": 0,
+            "left": 75
+          },
+          "pedida": {
+            "left": 1364.25,
+            "top": 631.969,
+            "width": 178.75,
+            "height": 100.547
+          },
+          "dibujada": {
+            "left": 1364.25,
+            "top": 631.969,
+            "width": 178.75,
+            "height": 100.547
+          },
+          "delta": 0
+        }
+      ],
+      "rangos": {
+        "ranges": [
+          {
+            "id": "AD-1-LINEAR",
+            "kind": "interstitial",
+            "startTime": 20,
+            "duration": 12
+          },
+          {
+            "id": "AD-1-CONCURRENT",
+            "kind": "concurrent",
+            "startTime": 20,
+            "duration": 36
+          }
+        ],
+        "settled": true
+      },
+      "marca": 50.0,
+      "para": "dentro del aviso 3, concurrente"
+    }
+  ],
+  "rangosAlFinal": {
+    "ranges": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12
+      },
+      {
+        "id": "AD-1-CONCURRENT",
+        "kind": "concurrent",
+        "startTime": 20,
+        "duration": 36
+      }
+    ],
+    "settled": true
+  },
+  "seeks": [],
+  "consola": [
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-repliegue-bloque-roto.json"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "warning",
+      "text": "[signalling] AD-1-CONCURRENT: an ASSET carries a layout block this client cannot draw, so it falls back to the asset's own URI and plays as a linear ad (ADR 0019)."
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved cornerOverlay#AD-1-CONCURRENT.0: 2 elements, window 20.00s -> 32.00s"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved linear#AD-1-CONCURRENT.1: 2 elements, window 32.00s -> 44.00s"
+    },
+    {
+      "type": "log",
+      "text": "[app] resolved cornerOverlay#AD-1-CONCURRENT.2: 2 elements, window 44.00s -> 56.00s"
+    },
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=0.19s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=20.12s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 20.00s -> 32.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=32.09s  ACTIVE linear#AD-1-CONCURRENT  window 32.00s -> 44.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=44.04s  ACTIVE cornerOverlay#AD-1-CONCURRENT  window 44.00s -> 56.00s  2 elements, ordered by zDepth:"
+    },
+    {
+      "type": "table",
+      "text": "[Object, Object]"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=56.25s  nothing active"
+    }
+  ],
+  "errores": [],
+  "warns": [
+    {
+      "type": "warning",
+      "text": "[signalling] AD-1-CONCURRENT: an ASSET carries a layout block this client cannot draw, so it falls back to the asset's own URI and plays as a linear ad (ADR 0019)."
+    }
+  ]
+}

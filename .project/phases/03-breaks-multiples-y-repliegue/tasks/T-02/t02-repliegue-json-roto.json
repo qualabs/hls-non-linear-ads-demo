@@ -1,0 +1,207 @@
+{
+  "escenario": "repliegue-json-roto",
+  "audio": null,
+  "experiencias": [],
+  "marcas": [
+    {
+      "t": 10.054,
+      "primario": {
+        "paused": false,
+        "volume": 1,
+        "muted": true,
+        "duration": 180,
+        "style": null,
+        "rect": {
+          "left": 828,
+          "top": 330.328,
+          "width": 715,
+          "height": 402.188
+        }
+      },
+      "videoW": 1280,
+      "videoH": 720,
+      "frame": {
+        "left": 828,
+        "top": 330.328,
+        "width": 715,
+        "height": 402.188
+      },
+      "activas": [],
+      "nodosEnLaCapa": [],
+      "dibujado": [],
+      "cajas": [],
+      "rangos": {
+        "ranges": [
+          {
+            "id": "AD-1-LINEAR",
+            "kind": "interstitial",
+            "startTime": 20,
+            "duration": 12
+          }
+        ],
+        "settled": true
+      },
+      "marca": 10.0,
+      "para": "antes del break"
+    },
+    {
+      "t": 26.035,
+      "primario": {
+        "paused": false,
+        "volume": 1,
+        "muted": true,
+        "duration": 180,
+        "style": null,
+        "rect": {
+          "left": 828,
+          "top": 330.328,
+          "width": 715,
+          "height": 402.188
+        }
+      },
+      "videoW": 1280,
+      "videoH": 720,
+      "frame": {
+        "left": 828,
+        "top": 330.328,
+        "width": 715,
+        "height": 402.188
+      },
+      "activas": [],
+      "nodosEnLaCapa": [],
+      "dibujado": [],
+      "cajas": [],
+      "rangos": {
+        "ranges": [
+          {
+            "id": "AD-1-LINEAR",
+            "kind": "interstitial",
+            "startTime": 20,
+            "duration": 12
+          }
+        ],
+        "settled": true
+      },
+      "marca": 26.0,
+      "para": "en la ventana del break cancelado"
+    },
+    {
+      "t": 38.063,
+      "primario": {
+        "paused": false,
+        "volume": 1,
+        "muted": true,
+        "duration": 180,
+        "style": null,
+        "rect": {
+          "left": 828,
+          "top": 330.328,
+          "width": 715,
+          "height": 402.188
+        }
+      },
+      "videoW": 1280,
+      "videoH": 720,
+      "frame": {
+        "left": 828,
+        "top": 330.328,
+        "width": 715,
+        "height": 402.188
+      },
+      "activas": [],
+      "nodosEnLaCapa": [],
+      "dibujado": [],
+      "cajas": [],
+      "rangos": {
+        "ranges": [
+          {
+            "id": "AD-1-LINEAR",
+            "kind": "interstitial",
+            "startTime": 20,
+            "duration": 12
+          }
+        ],
+        "settled": true
+      },
+      "marca": 38.0,
+      "para": "despues de la ventana del break cancelado"
+    }
+  ],
+  "rangosAlFinal": {
+    "ranges": [
+      {
+        "id": "AD-1-LINEAR",
+        "kind": "interstitial",
+        "startTime": 20,
+        "duration": 12
+      }
+    ],
+    "settled": true
+  },
+  "seeks": [],
+  "consola": [
+    {
+      "type": "log",
+      "text": "Failed to get subsystem status for purpose {rejected: true, message: Object}"
+    },
+    {
+      "type": "log",
+      "text": "[signalling] AD-1-CONCURRENT at t=20.00s, asset-list http://localhost:8080/signalling/asset-list-repliegue-json-roto.json"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "error",
+      "text": "[signalling] AD-1-CONCURRENT: the asset-list could not be read, so the whole break is cancelled with offset 0 (Appendix D.5): nothing is played, no range is reported, and the programme is not interrupted. http://localhost:8080/signalling/asset-list-repliegue-json-roto.json SyntaxError: Expected double-quoted property name in JSON at position 68 (line 1 column 69)"
+    },
+    {
+      "type": "log",
+      "text": "[contract] t=0.20s  nothing active"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] scheduled 1: AD-1-LINEAR (com.apple.hls.interstitial)"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_STARTED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ASSET_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIAL_ENDED"
+    },
+    {
+      "type": "log",
+      "text": "[stock] INTERSTITIALS_PRIMARY_RESUMED"
+    }
+  ],
+  "errores": [
+    {
+      "type": "error",
+      "text": "[signalling] AD-1-CONCURRENT: the asset-list could not be read, so the whole break is cancelled with offset 0 (Appendix D.5): nothing is played, no range is reported, and the programme is not interrupted. http://localhost:8080/signalling/asset-list-repliegue-json-roto.json SyntaxError: Expected double-quoted property name in JSON at position 68 (line 1 column 69)"
+    }
+  ],
+  "warns": []
+}
