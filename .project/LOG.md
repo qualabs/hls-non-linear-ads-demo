@@ -2737,3 +2737,49 @@ en su propio alcance: no se agregó un parámetro sin consumidor para dejarlo
 `verificar-cortes` verde en las dos costuras —el ADR 0015 con cero cruces, que es
 el que dice que esto nace del lado del SDK—, `npm test` 27 de 27, y la comparación
 de cajas no corresponde porque la task no toca el renderizado.
+
+## 2026-09-07 — T-04 de la fase 03: dieciséis tests, quince mutaciones y ninguna verde
+
+La suite pasa de 27 a **43 tests**, y los dieciséis nuevos apuntan a lo único que
+esta fase agregó que no se ve en la pantalla: la aritmética de la secuencia —dónde
+cae cada aviso, que sale de la `DURATION` de nivel superior acumulada, y cuál aviso
+es cuál, que es el `itemId`— y la decisión del asset sin bloque, o sea cuándo un
+asset cae al repliegue y cuándo no. La otra mitad ya estaba afirmada: las lecturas
+del estado con el recorrido corriendo son el done de la T-01, la T-02 y la T-03, y
+un navegador levantado acá no habría agregado nada.
+
+**Cada test se vio en rojo, y las dos mutaciones que más dicen no son las que se
+diseñaron para eso.** Quince cortes, quince corridas en rojo, sesenta y ocho rojos
+en total y el árbol restaurado y verificado después de cada uno. Ninguna quedó
+verde, así que no hubo hallazgos. Pero dos se salen de escala: **M10** —contar un
+`uri` vacío como bloque ilegible, que es el error de diseño que la T-02 cometió en
+su primera versión— pone en rojo diez tests, **nueve de ellos de los archivos que
+ya estaban**, porque los seis payloads de la herramienta dejan de resolver a su
+layout. Y **M15** —exigir un bloque `primaryContent`, que la herramienta omite en
+los dos overlays— pone dieciséis. Las dos son la misma familia: un repliegue que se
+dispara cuando no debería reemplaza un layout señalizado por un aviso a cuadro
+entero, y la grabación de eso es la grabación de un aviso reproduciéndose.
+
+**Una mutación que el bloque pedía no se pudo aplicar, porque describe la regla que
+la T-02 eligió.** El bloque enumera "la regla de fin resuelta por `DURATION` en
+lugar de por el fin del asset", y esa frase se escribió con la decisión abierta. La
+T-02 la cerró en el otro sentido —la ventana declarada decide, `activeAt` sigue
+siendo la única fuente— así que resolver el fin por la `DURATION` declarada no es
+una mutación de esa regla: es la regla. En su lugar se rompieron las dos formas en
+que esa decisión se deshace sin que se note, las dos sobre
+`asset-list-solapado.json`, que es el único fixture donde el número declarado y la
+ventana real no coinciden: acumular el desplazamiento desde las ventanas en lugar
+de desde la `DURATION`, y hacer del rango del break la suma de las ventanas en
+lugar de su unión.
+
+**El segundo escalón del Apéndice D.5 se cubre por las puntas.** La cancelación del
+break vive en el `catch` de `createSignalling`, donde está el `fetch`, y ese no es
+un camino puro. Se afirma la entrada —el fixture del asset-list ilegible no es
+JSON— y la salida —un break que no resolvió nada no es ningún rango—, y la
+distinción con el salteo de un asset, que es de lo que se trata el escalón y en
+pantalla se parece, queda afirmada entera.
+
+`npm test` 43 de 43. `verificar-cortes` no corresponde —la task no toca `lib/`,
+`js/` ni `css/`— y se corrió igual, verde en las dos costuras, porque la campaña
+escribe sobre `lib/signalling.js` y sobre dos fixtures y eso verifica que los
+quince cortes se restauraron.
