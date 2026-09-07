@@ -2290,3 +2290,83 @@ entre las dos capas, que se re-leyó entero y sigue describiendo este sistema.
 
 Informe en `.project/phases/04-refinamiento/REPORT.md`. `PHASE.md` en `closed`
 con fecha 2026-09-07. Commit sin push.
+
+## 2026-09-07 — La fase 03 tiene diseño, y el diseño se corrigió dos veces antes de existir
+
+**La fase 03 se había generado sin etapa de diseño.** Tenía `PHASE.md` y
+`TASKS.md` y no tenía `DESIGN.md`, a diferencia de la fase 01. Es plausiblemente
+la causa de lo que después se le encontró: cinco punteros de arranque de task a
+archivos que la fase 02 había mudado, un párrafo que un ADR del mismo día
+invalidó, dos ADR de scope `project` sin listar entre las decisiones que la
+gobiernan, y dos huecos del código sin dueño. Nada de eso tuvo dónde aparecer,
+porque no hubo documento de exploración.
+
+El `review-previo.md` que Nicolás pidió antes de arrancar la fase **es ese
+documento**, y pasa a ser el `DESIGN.md` de la fase con `git mv`, para que la
+historia quede. Nicolás: *"el documento review-previo.md en realidad no debería
+ser el DESIGN.md? al final del día estamos diseñando"*.
+
+**Lo corrigieron dos cosas, en el mismo día y en este orden.**
+
+**Uno, la corrección de Nicolás por audio, que es la decisión de arquitectura de
+la fase entera.** `X-AD-CREATIVE-SIGNALING` es una extensión **por encima** del
+interstitial estándar: un asset con el bloque lo dibuja nuestro plugin; un asset
+sin el bloque no se saltea, se reproduce su `URI`, que es exactamente un aviso
+lineal declarado como se declaró siempre; y un bloque que falla cae al mismo
+lugar. Sus palabras: *"lo que yo esperaría de nuestro plugin es que utilice la
+mecánica que ya existe de interstitial para ese segmento... que nuestro plugin sea
+retrocompatible... de esa forma nuestro módulo extiende el comportamiento por
+defecto que HLS ya define y no tenemos que tener otro mecanismo de cómo poner
+lineal"*. La consecuencia grande es que **el aviso lineal y el repliegue son el
+mismo mecanismo**, y las dos tasks que los tenían separados se fusionan.
+
+**Lo que esa corrección descartó, y queda anotado acá porque no va al
+documento:** la primera versión del `review-previo.md` recomendaba declarar el
+aviso lineal **con** bloque `X-AD-CREATIVE-SIGNALING`, con tres razones —dejar el
+`URI` de nivel superior libre para el repliegue, que era la única forma que el
+resolvedor de hoy podía ver, y que así el lineal tenía `duration` propia— y con un
+`"type": "linear"` inventado. El ejemplo que lo destapó estaba en su propio
+asset-list: el bloque del asset lineal apuntaba **al mismo `URI` que el nivel
+superior ya declaraba**. Redundante por construcción. El `DESIGN.md` no lleva esa
+recomendación: lleva el modelo corregido, y el registro de que hubo una anterior
+vive acá.
+
+**Dos, la verificación contra la norma**, que hasta ese momento nadie había hecho
+contra este diseño. Se leyó `draft-pantos-hls-rfc8216bis-22` —1 de mayo de 2026,
+obsoleta la RFC 8216— y corrigió cuatro cosas más:
+
+- **La secuencia ya está en la norma** (Apéndice D.2: *"The client SHOULD play the
+  interstitial assets back-to-back in the order that they appear in the ASSETS
+  array"*), es `SHOULD` y no `MUST`, y no hay offset de inicio por asset: que las
+  duraciones acumulen aparece sólo implícito en el ejemplo del D.7. O sea que el
+  orden es herencia y la ubicación precisa en el tiempo sigue siendo nuestra. La
+  acumulación de duraciones dejó de presentarse como idea propia.
+- **"Reproducí el `URI` por su `DURATION`" está mal.** La norma dice *"the
+  interstitial MUST end upon reaching the end of the interstitial asset(s)"*. El
+  `DURATION` es metadato declarativo. La regla se escribe **"hasta el fin del
+  asset"**, y eso agranda el hueco de que el contrato no tenga noción de
+  secuencia.
+- **La norma no tiene modelo de superposición.** Todo el Apéndice D asume que el
+  primario se detiene. Así que **el degradado no es transparente**: un player
+  conforme sin nuestro plugin pausa el primario para reproducir el asset del
+  repliegue, y un aviso concurrente se convierte en uno lineal que interrumpe. Es
+  un buen repliegue y no una equivalencia.
+- **La garantía del prefijo `X-` es más floja de lo que suponíamos.** El *"clients
+  MUST ignore any other attribute/value pair with an unrecognized AttributeName"*
+  de la 6.3.1 cubre los atributos de los tags. El bloque de SVTA vive en el JSON
+  del asset list, y para ese JSON la norma no define ninguna regla de claves
+  desconocidas: la extensión es legítima y esa mitad se apoya en convención y no
+  en obligación. Es pregunta para SVTA.
+
+**Tres obligaciones** que el diseño ahora respeta y escribe: el `URI` del
+Asset-Description debe ser absoluto —los de la demo son absolutos de path y no de
+URI, queda anotado como no conformidad del dato—; cada asset es un Playlist y debe
+ser VOD, así que el repliegue no puede ser un creativo suelto; y los interstitials
+anidados deben ignorarse.
+
+**Y una confirmación que vale la pena dejar escrita:** la norma dice que la
+ausencia de `X-RESUME-OFFSET` significa reemplazo (*"its value is considered to be
+the duration of the interstitial"*) y que `=0` significa que el primario retoma
+donde quedó. **La T-05 de la fase 04 llegó a la ausencia midiendo en el navegador,
+sin haber leído la norma, y coincide** (ADR 0017 y su nota fechada). La decisión
+que se había tomado con una fuente pasa a tener dos.
