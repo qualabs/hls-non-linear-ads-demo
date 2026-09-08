@@ -1,0 +1,8 @@
+# T-01 — run.json contra la tabla RECORRIDO del script, el dia que se copia
+
+El mismo parseo que la suite hacia hasta hoy, corrido una vez a mano contra el
+fixture que lo reemplaza. Despues de esto las dos no se vuelven a comparar.
+
+parseo del script : [{"slotStart":20,"assetList":"asset-list-cornerOverlay.json"},{"slotStart":45,"assetList":"asset-list-squeezebackLShape.json"},{"slotStart":70,"assetList":"asset-list-squeezebackLShape-image.json"},{"slotStart":95,"assetList":"asset-list-multiView.json"},{"slotStart":120,"assetList":"asset-list-mezclado.json"}]
+run.json          : [{"slotStart":20,"assetList":"asset-list-cornerOverlay.json"},{"slotStart":45,"assetList":"asset-list-squeezebackLShape.json"},{"slotStart":70,"assetList":"asset-list-squeezebackLShape-image.json"},{"slotStart":95,"assetList":"asset-list-multiView.json"},{"slotStart":120,"assetList":"asset-list-mezclado.json"}]
+identicos         : si

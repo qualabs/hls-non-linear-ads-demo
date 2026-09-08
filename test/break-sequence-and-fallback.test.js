@@ -26,12 +26,14 @@
 // functions, and nothing else. No DOM, no browser, no image comparison, and
 // coverage is not the goal.
 //
-// The data is the real one. The asset-lists are the ones in `signalling/` that
-// the demo serves -- the five of the run, the two the phase added and the four
-// fixtures broken on purpose -- and the expected numbers are what T-01 and
-// T-02 read off the contract with the player running. The six payloads of the
-// SVTA tool are verbatim in the evidence of T-03 of phase 01. The cases that
-// ARE invented say so where they are.
+// The data is the real one, and it is in `test/fixtures/`: the asset-lists are
+// the thirteen the demo serves -- the five of the run, the three phase 03
+// added, the linear ad of phase 01 and the four fixtures broken on purpose --
+// and the expected numbers are what T-01 and T-02 read off the contract with
+// the player running. The six payloads of the SVTA tool are verbatim in the
+// reading of T-03 of phase 01. Every fixture says where it was copied from in
+// `fixtures/README.md`, and from that copy on it belongs to this suite
+// (ADR 0023). The cases that ARE invented say so where they are.
 //
 // Run: npm test   (node --test, no dependencies)
 
@@ -56,7 +58,7 @@ const read = (path) => readFileSync(new URL(path, import.meta.url), 'utf8');
 const readJson = (path) => JSON.parse(read(path));
 
 /** The six asset-lists, verbatim as the SVTA tool emits them (T-03, phase 01). */
-const TOOL = readJson('../.project/phases/01-poc-web-hlsjs/tasks/T-03/m3-resultados.json').herramienta;
+const TOOL = readJson('./fixtures/mediciones/m3-resultados.json').herramienta;
 
 /** The identifier of the Date Range, which every ad of one break shares. */
 const ID = 'AD-1-CONCURRENT';
@@ -64,7 +66,7 @@ const ID = 'AD-1-CONCURRENT';
 /** The second the run signals its first break at, and the one T-01 and T-02 read against. */
 const SLOT_START = 20;
 
-const list = (name) => readJson(`../signalling/asset-list-${name}.json`);
+const list = (name) => readJson(`./fixtures/asset-lists/asset-list-${name}.json`);
 const durationsOf = (name) => list(name).ASSETS.map((a) => a.DURATION);
 const typesOf = (name) => list(name).ASSETS.map((a) => a[BLOCK]?.payload[0].type ?? null);
 
@@ -243,8 +245,8 @@ test('the ordinal of an ad is of the whole break, so two items of one asset are 
 // ---------------------------------------------------------------------------
 
 test('an ASSET with a URI and a DURATION and nothing else is one full-frame ad', () => {
-  // `signalling/asset-list-linear.json`, declared without a block since phase
-  // 01 and resolving to nothing at all until this phase.
+  // `asset-list-linear.json`, declared without a block since phase 01 and
+  // resolving to nothing at all until this phase.
   const { experiences, said } = resolveWithConsole('linear');
   assert.equal(experiences.length, 1);
   const [ad] = experiences;
@@ -414,9 +416,9 @@ test('an empty uri and a media type nobody knows are not failures of the block',
 });
 
 /**
- * Every asset-list `signalling/` serves that is NOT a fixture broken on
- * purpose, with what each one has to resolve to. The five of the recording, the
- * three the phase added, and the linear ad of phase 01.
+ * Every asset-list the demo serves that is NOT a fixture broken on purpose,
+ * with what each one has to resolve to. The five of the recording, the three
+ * the phase added, and the linear ad of phase 01.
  */
 const NO_FALLBACK = [
   { name: 'cornerOverlay', ads: 1, linear: 0 },
@@ -488,7 +490,7 @@ test('the asset-list that cannot be read cancels the whole break, which is not s
   // response never becomes a list and there is nothing to resolve. It is
   // asserted here because a fixture "fixed" by somebody tidying up would take
   // the scenario away without taking a test away with it.
-  assert.throws(() => JSON.parse(read('../signalling/asset-list-repliegue-json-roto.json')), SyntaxError);
+  assert.throws(() => JSON.parse(read('./fixtures/asset-lists/asset-list-repliegue-json-roto.json')), SyntaxError);
 
   // The outcome: a break that resolved nothing is NO RANGE AT ALL, so it is
   // missing from the bar -- which is what cancelling with offset 0 looks like

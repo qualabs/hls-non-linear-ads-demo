@@ -1,0 +1,49 @@
+### test/break-sequence-and-fallback.test.js
+✔ the fixtures of the phase are the breaks the readings were taken on
+✔ a break of one asset opens at the START-DATE, which is every break of the recording
+✔ each asset begins where the one before it ended, over the breaks of three, four and two
+✔ the start of an item is an offset inside its own asset and not from the START-DATE
+✔ two ads of one break are two identities even when they share the layout
+✔ the ordinal of an ad is of the whole break, so two items of one asset are two ads
+✔ an ASSET with a URI and a DURATION and nothing else is one full-frame ad
+✔ in the mixed break the full-frame ad silences the programme and the concurrent ones do not
+✔ the three shapes this client cannot draw are the three that cannot become a box
+✔ a block this client cannot draw plays the asset own URI, and the ads around it do not move
+✔ an empty uri and a media type nobody knows are not failures of the block
+✔ none of the asset-lists the demo serves falls back, and the two linear ads are declared ones
+✔ an asset with nothing to play is skipped alone, and the ads after it keep their windows
+✔ the asset-list that cannot be read cancels the whole break, which is not skipping an asset
+✔ a list that declares no ASSETS plays nothing and reports no range
+✔ a break of several ads is one range, from the first to start to the last to end
+
+### test/layout-resolution.test.js
+✔ viewport is four inset percentages in the order top right bottom left
+✔ a viewport that is not four numbers falls back to the full frame, and warns
+✔ each of the six asset-lists resolves to one experience with its type and window
+✔ the fifteen elements come out with the ids, the uri and the mediaType of the payload
+✔ elements come out ordered by ascending zDepth in the six layouts
+✔ in squeezebackFrame the ad is the background and the primary content is on top
+✔ on an equal zDepth the order of the payload holds
+✔ the two overlays carry no primaryContent, and the layer assumes the full frame at zDepth 0
+✔ the four layouts that do carry primaryContent keep its zDepth and its viewport
+✔ no payload of the tool carries volume: the ad comes out silent and the show does not
+✔ an explicit volume of 0 survives, because a silent ad is silent on purpose
+✔ the activation window is half open: in at startTime, out at the end
+✔ activeAt returns every experience active at that instant
+✔ the insets become the fifteen boxes in pixels T-03 measured
+✔ the conversion follows the player area, which is what a resize depends on
+
+### test/program-ranges-and-volume.test.js
+✔ the run of the script is the five breaks of the recording
+✔ the two classes the playlist signals become the two kinds the contract carries
+✔ the five breaks are the ten ranges T-05 read off the contract
+✔ a break of no experiences is no range, and a tag that declares no length is no range either
+✔ the window of a concurrent break spans every experience its asset-list declares
+✔ the ten ranges land where T-04 measured them on the bar
+✔ the same ten ranges on a programme of another length land somewhere else
+✔ a range that cannot be placed is not a mark
+✔ with no volume in the asset-list the ad comes out silent and the programme does not
+✔ the mix of the Quad is the one the asset-list declares, element by element
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||`
+✔ a volume that is not a number falls back to the element own default, and there are two
+

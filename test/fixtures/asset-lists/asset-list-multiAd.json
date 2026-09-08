@@ -1,0 +1,86 @@
+{
+  "ASSETS": [
+    {
+      "URI": "/content/adB/index.m3u8",
+      "DURATION": 12.0,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "slot",
+        "payload": [
+          {
+            "type": "cornerOverlay",
+            "start": 0,
+            "duration": 12.0,
+            "layout": {
+              "assets": [
+                {
+                  "id": "ad1-overlay",
+                  "type": "application/vnd.apple.mpegurl",
+                  "uri": "/content/adB/index.m3u8",
+                  "viewport": "0 75 75 0",
+                  "zDepth": 1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "URI": "/content/adC/index.m3u8",
+      "DURATION": 12.0,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "slot",
+        "payload": [
+          {
+            "type": "cornerOverlay",
+            "start": 0,
+            "duration": 12.0,
+            "layout": {
+              "assets": [
+                {
+                  "id": "ad2-overlay",
+                  "type": "application/vnd.apple.mpegurl",
+                  "uri": "/content/adC/index.m3u8",
+                  "viewport": "75 0 0 75",
+                  "zDepth": 1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "URI": "/content/adA/index.m3u8",
+      "DURATION": 12.0,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "slot",
+        "payload": [
+          {
+            "type": "squeezebackDoubleBox",
+            "start": 0,
+            "duration": 12.0,
+            "layout": {
+              "primaryContent": {
+                "zDepth": 0,
+                "viewport": "25 50 25 0"
+              },
+              "assets": [
+                {
+                  "id": "ad3-box",
+                  "type": "application/vnd.apple.mpegurl",
+                  "uri": "/content/adA/index.m3u8",
+                  "viewport": "25 0 25 50",
+                  "zDepth": 1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
