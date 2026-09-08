@@ -1,0 +1,196 @@
+
+==================================================================
+$ npm run build
+==================================================================
+
+> qualabs-concurrent-hls@0.0.0 build
+> ./scripts/construir-libreria.sh
+
+construir-libreria: dist/qualabs-concurrent-hls.js (2328 lines, global QualabsConcurrentHls)
+[exit 0]
+
+==================================================================
+$ npm run check
+==================================================================
+
+> qualabs-concurrent-hls@0.0.0 check
+> ./scripts/verificar-cortes.mjs
+
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js demo/compatibility-pair/js/contract-trace.js demo/compatibility-pair/css/player.css
+
+   GREEN: 3 occurrence(s), all of them on the accepted list.
+     lib/controls.js:21  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:93  interstitial: '#ffcc00'
+     lib/controls.js:122  interstitial: 'traditional interstitial: the content is replaced by the ad'
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
+[exit 0]
+
+==================================================================
+$ npm test
+==================================================================
+
+> qualabs-concurrent-hls@0.0.0 test
+> node --test
+
+✔ the script signals the five breaks of the recording, and every one names an asset-list of this demo (2.657788ms)
+✔ the length a break declares is computed from its asset-list and not typed into the script (0.244318ms)
+✔ the two classes the script writes are the two the library translates (1.400702ms)
+✔ the fixtures of the phase are the breaks the readings were taken on (3.70718ms)
+✔ a break of one asset opens at the START-DATE, which is every break of the recording (2.23495ms)
+✔ each asset begins where the one before it ended, over the breaks of three, four and two (1.433347ms)
+✔ the start of an item is an offset inside its own asset and not from the START-DATE (0.541029ms)
+✔ two ads of one break are two identities even when they share the layout (0.714205ms)
+✔ the ordinal of an ad is of the whole break, so two items of one asset are two ads (0.618016ms)
+✔ an ASSET with a URI and a DURATION and nothing else is one full-frame ad (0.718441ms)
+✔ in the mixed break the full-frame ad silences the programme and the concurrent ones do not (1.788269ms)
+✔ the three shapes this client cannot draw are the three that cannot become a box (0.558856ms)
+✔ a block this client cannot draw plays the asset own URI, and the ads around it do not move (0.724738ms)
+✔ an empty uri and a media type nobody knows are not failures of the block (0.736697ms)
+✔ none of the asset-lists the demo serves falls back, and the two linear ads are declared ones (1.231674ms)
+✔ an asset with nothing to play is skipped alone, and the ads after it keep their windows (0.723347ms)
+✔ the asset-list that cannot be read cancels the whole break, which is not skipping an asset (0.733354ms)
+✔ a list that declares no ASSETS plays nothing and reports no range (0.324283ms)
+✔ a break of several ads is one range, from the first to start to the last to end (0.465679ms)
+✔ viewport is four inset percentages in the order top right bottom left (4.037393ms)
+✔ a viewport that is not four numbers falls back to the full frame, and warns (0.480939ms)
+✔ each of the six asset-lists resolves to one experience with its type and window (1.1053ms)
+✔ the fifteen elements come out with the ids, the uri and the mediaType of the payload (0.925128ms)
+✔ elements come out ordered by ascending zDepth in the six layouts (0.598539ms)
+✔ in squeezebackFrame the ad is the background and the primary content is on top (0.521498ms)
+✔ on an equal zDepth the order of the payload holds (0.341383ms)
+✔ the two overlays carry no primaryContent, and the layer assumes the full frame at zDepth 0 (0.362564ms)
+✔ the four layouts that do carry primaryContent keep its zDepth and its viewport (1.742205ms)
+✔ no payload of the tool carries volume: the ad comes out silent and the show does not (0.511773ms)
+✔ an explicit volume of 0 survives, because a silent ad is silent on purpose (0.332703ms)
+✔ the activation window is half open: in at startTime, out at the end (0.366554ms)
+✔ activeAt returns every experience active at that instant (0.211336ms)
+✔ the insets become the fifteen boxes in pixels T-03 measured (0.569879ms)
+✔ the conversion follows the player area, which is what a resize depends on (0.233268ms)
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ the run of the recording is five breaks, each naming an asset-list of this suite (4.048698ms)
+✔ the two classes the playlist signals become the two kinds the contract carries (0.31767ms)
+✔ the five breaks are the ten ranges T-05 read off the contract (3.798708ms)
+✔ a break of no experiences is no range, and a tag that declares no length is no range either (0.450871ms)
+✔ the window of a concurrent break spans every experience its asset-list declares (0.337747ms)
+✔ the ten ranges land where T-04 measured them on the bar (1.270818ms)
+✔ the same ten ranges on a programme of another length land somewhere else (0.929642ms)
+✔ a range that cannot be placed is not a mark (1.052031ms)
+✔ with no volume in the asset-list the ad comes out silent and the programme does not (0.690866ms)
+✔ the mix of the Quad is the one the asset-list declares, element by element (0.766576ms)
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||` (0.305981ms)
+✔ a volume that is not a number falls back to the element own default, and there are two (0.29987ms)
+ℹ tests 46
+ℹ suites 0
+ℹ pass 46
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 165.437754
+[exit 0]
+
+==================================================================
+$ npm pack --dry-run
+==================================================================
+npm notice
+npm notice 📦  qualabs-concurrent-hls@0.0.0
+npm notice Tarball Contents
+npm notice 20.4kB README.md
+npm notice 111.6kB dist/qualabs-concurrent-hls.js
+npm notice 22.6kB docs/contrato-senalizacion-renderizado.md
+npm notice 20.0kB docs/integrating-the-library.md
+npm notice 16.9kB lib/concurrent-hls.js
+npm notice 36.5kB lib/controls.js
+npm notice 1.8kB lib/media.js
+npm notice 29.7kB lib/renderer.js
+npm notice 26.3kB lib/signalling.js
+npm notice 582B package.json
+npm notice Tarball Details
+npm notice name: qualabs-concurrent-hls
+npm notice version: 0.0.0
+npm notice filename: qualabs-concurrent-hls-0.0.0.tgz
+npm notice package size: 95.6 kB
+npm notice unpacked size: 286.4 kB
+npm notice shasum: 1631e2dd1a50ef553f7d2d314d31afdc12955159
+npm notice integrity: sha512-nrCv25I2UWlUw[...]BrrP5j1vMGhkg==
+npm notice total files: 10
+npm notice
+qualabs-concurrent-hls-0.0.0.tgz
+[exit 0]
+
+==================================================================
+$ npm start   (el servidor se baja a mano despues de los cuatro pedidos)
+==================================================================
+
+> qualabs-concurrent-hls@0.0.0 start
+> ./run.sh
+
+content/primary/con-daterange.m3u8  (el recorrido de los cinco breaks, 10 Date Ranges)
+
+El recorrido, que es el orden en que hay que grabarlo:
+  break 1  t= 20s a  32s  (12s)  Overlay          asset-list-cornerOverlay.json
+  break 2  t= 45s a  57s  (12s)  LBox video       asset-list-squeezebackLShape.json
+  break 3  t= 70s a  82s  (12s)  LBox image       asset-list-squeezebackLShape-image.json
+  break 4  t= 95s a 107s  (12s)  Quad             asset-list-multiView.json
+  break 5  t=120s a 168s  (48s)  Break mezclado   asset-list-mezclado.json
+      aviso 1  t=120s a 132s  cornerOverlay         concurrente, el programa se sigue viendo
+      aviso 2  t=132s a 144s  squeezebackDoubleBox  concurrente, el programa se sigue viendo
+      aviso 3  t=144s a 156s  linear                a cuadro entero, el programa corre detrás
+      aviso 4  t=156s a 168s  cornerOverlay         concurrente, el programa se sigue viendo
+
+El break 5 es el que pidió David —concurrent, concurrent, linear,
+concurrent— y adentro trae el Side by side pullback del documento de
+requerimientos, que por eso no tiene break propio: los cinco nombres
+siguen estando en la corrida.
+
+Antes de grabar, y esto se hace UNA vez al empezar: encender el audio
+con el control de arriba a la derecha de la imagen, que lo dibuja la
+librería (ADR 0015). La página arranca muteada por la política de
+autoplay del browser y ese control es el que la levanta: es el audio de
+la composición entera, primario y aviso a la vez.
+
+La mezcla de cada elemento la declara el asset list y el reproductor la
+respeta (ADR 0014). En este recorrido: el break del Quad trae la mezcla
+—100 en el cuadrante de abajo a la izquierda y 10 en los otros tres—,
+los avisos que declaran layout entran callados sobre un programa que se
+sigue escuchando, y el aviso a cuadro entero del break 5 es el único
+que se queda con el audio: la capa lo sintetiza con 100 en el aviso y 0
+en el programa (ADR 0019), porque un aviso que tapa la pantalla entera
+sin sonido es una falla que nada en pantalla reporta.
+
+El par de compatibilidad durante el break 5, y conviene contarlo antes
+de grabarlo. Los dos tags del break arrancan en el mismo segundo
+(ADR 0018), el de clase Apple declara 12 s y el nuestro 48. Del 120 al
+132 el pane de fábrica muestra su aviso a cuadro entero y el nuestro el
+programa con el aviso encima, que es el cuadro que la demo quiere. Del
+132 en adelante el de fábrica ya volvió al programa y nosotros seguimos
+adentro del break, y del 144 al 156 —el aviso a cuadro entero— la
+comparación queda al revés: el nuestro tapado y el de fábrica con el
+programa. Son 12 segundos de 48 y no cambian el argumento: los dos
+players están haciendo lo mismo en momentos distintos, porque les
+tocaron breaks de largos distintos.
+construir-libreria: dist/qualabs-concurrent-hls.js (2328 lines, global QualabsConcurrentHls)
+hls-non-linear-ads-demo: http://localhost:8080/ -- serving demo/compatibility-pair
+
+--- los cuatro pedidos que la pagina hace, contra el servidor que npm start dejo arriba ---
+/                                                HTTP 200  7708 B  text/html; charset=utf-8
+/vendor/hls.min.js                               HTTP 200  618946 B  text/javascript; charset=utf-8
+/dist/qualabs-concurrent-hls.js                  HTTP 200  111568 B  text/javascript; charset=utf-8
+/signalling/asset-list-cornerOverlay.json        HTTP 200  671 B  application/json; charset=utf-8
+
+[servidor bajado: pid 3934299]
+/ despues del kill -> HTTP 000 (000 = el puerto quedo libre)
+/ despues del kill -> sin respuesta, el puerto quedo libre

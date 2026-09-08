@@ -3165,3 +3165,59 @@ mayor o igual a 400. Las dos costuras en `both seams hold.`
 La evidencia —el árbol, la suite, las costuras, el recorrido entero y un cuadro
 por break, más el sexto del aviso a cuadro entero donde el par se invierte— en
 `phases/05-la-sdk-y-sus-demos/tasks/T-03/`.
+
+## 2026-09-08 — T-04 de la fase 05: el manifiesto declara la sdk, y `files` se lee corriendo `npm pack`
+
+El `package.json` pasó de doce líneas a veinte y quedó siendo la única afirmación
+del repositorio sobre qué es el producto (ADR 0024). `name` es
+`qualabs-concurrent-hls`, que es el nombre del archivo construido y del global que
+define; `main` y `exports` apuntan a `./lib/concurrent-hls.js`, que es el punto de
+entrada de las fuentes y no `dist/`, que está gitignoreado y sería una afirmación
+falsa en todo clone nuevo; y `files` es `["lib/", "dist/", "docs/"]`. `description`
+y `type: "module"` no se tocaron, y `private: true` con `version: 0.0.0` se quedan:
+el manifiesto declara qué **es** la sdk sin afirmar que está publicada.
+
+**`npm pack --dry-run` es el campo `files` leído por la herramienta**, y lista diez
+archivos: los cinco de `lib/`, el de `dist/`, los dos de `docs/`, y `package.json`
+con `README.md`. Nada de `demo/`, `test/`, `scripts/`, `vendor/`, `server.mjs` ni
+`run.sh`, que es lo que este campo dice sobre todo por omisión. Los dos últimos no
+son una fuga: npm los incluye siempre, con `files` o sin él, junto con `LICENSE` y
+el archivo de `main`. Y dos cosas que sólo se ven corriendo el comando, las dos a
+favor del ADR y no en contra: **`dist/` entra al paquete aunque esté
+gitignoreado**, porque `files` es una lista blanca y le gana al `.gitignore` que
+npm usa cuando no hay `.npmignore`; y **`private: true` no frena a `npm pack`**, lo
+que frena es `npm publish`. O sea que el campo es verificable hoy, sin publicar
+nada, que es la consecuencia que el ADR le pedía.
+
+**Los cuatro verbos existen y corren**: `build` (`./scripts/construir-libreria.sh`)
+dio los 2328 lines del global `QualabsConcurrentHls`, `check`
+(`./scripts/verificar-cortes.mjs`) dio `both seams hold.`, `test` quedó en 46 de 46
+y `start` levantó la demo sirviendo `demo/compatibility-pair`, con el HTML, hls.js,
+la librería construida y un asset-list en 200, que son las tres raíces que el
+servidor monta. `check` corre el `.mjs` sin `node` adelante porque el archivo tiene
+su shebang y el bit de ejecución; los cuatro verbos son la ruta al archivo y nada
+más.
+
+**`serve` y `content` se fueron del manifiesto** porque nombraban rutas de una demo
+—y `content` además apuntaba a una ruta que la T-03 ya había movido—. La T-05 los
+escribe en el README de la demo con su ruta completa. El efecto de segundo orden
+que el ADR anticipa se cumple: el nombre de la demo por default quedó en un solo
+lugar del repositorio, la línea `DEMO="${1:-compatibility-pair}"` de `run.sh`, que
+además quedó siendo el único arrancador del servidor.
+
+**El hallazgo: el nombre viejo sobrevive en dos lugares, y esta task no los tocó.**
+El grep del árbol tracked fuera de `.project/` devuelve `README.md:1`, que es de la
+T-05 y está siendo reescrito, y `server.mjs:107`, que es la etiqueta de la línea de
+arranque. El segundo se deja por dos razones: el bloque de esta task es el
+manifiesto, y sobre todo **cuál tiene que ser la etiqueta nueva no lo decide ningún
+ADR**. `server.mjs` sirve una demo y no la sdk, así que copiarle el `name` del
+manifiesto es la respuesta cómoda y no necesariamente la correcta. Es una etiqueta
+de consola, sin efecto funcional y sin costura que la mire. Queda reportado.
+
+Ninguna costura se movió, y estaba previsto que pudiera pasar: el grep del ADR 0015
+busca el literal `demo` con lista de aceptados vacía, y el `./run.sh` de `start` lo
+contiene, pero su lista de archivos es `lib/*.js` y `scripts/construir-libreria.sh`
+y el manifiesto no está adentro. Se corrió igual.
+
+La evidencia, con la salida verbatim de los cinco comandos, en
+`phases/05-la-sdk-y-sus-demos/tasks/T-04/`.
