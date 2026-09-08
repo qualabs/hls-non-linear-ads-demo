@@ -1,0 +1,14 @@
+$ ./run.sh    # sin argumento, exactamente como antes de la task
+# el server quedo levantado en 8080; abajo, todo lo que la pagina carga
+
+  /                                        200  text/html; charset=utf-8
+  /css/player.css                          200  text/css; charset=utf-8
+  /js/app.js                               200  text/javascript; charset=utf-8
+  /js/contract-trace.js                    200  text/javascript; charset=utf-8
+  /dist/qualabs-concurrent-hls.js          200  text/javascript; charset=utf-8
+  /vendor/hls.min.js                       200  text/javascript; charset=utf-8
+  /brand/logo-qualabs.svg                  200  image/svg+xml
+  /brand/favicon.svg                       200  image/svg+xml
+  /brand/fonts-embedded.css                200  text/css; charset=utf-8
+  /signalling/asset-list-linear.json       200  application/json; charset=utf-8
+  /content/primary/index.m3u8              200  application/vnd.apple.mpegurl

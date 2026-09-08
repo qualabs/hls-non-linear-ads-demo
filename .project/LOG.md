@@ -3052,3 +3052,51 @@ propósito, para que nadie borre la procedencia arreglando un grep.
 `npm test` en verde y las dos costuras de `verificar-cortes.mjs` en verde. La
 evidencia, con el inventario antes y después, los diffs y la salida verbatim de
 las tres mutaciones, en `phases/05-la-sdk-y-sus-demos/tasks/T-01/`.
+
+## 2026-09-08 — T-02 de la fase 05: el servidor sirve la carpeta que se le nombra, y el `..` que dispara el 403 no es el que uno escribiría
+
+`server.mjs` recibe la raíz de documentos como primer argumento y monta `/dist/` y
+`/vendor/` contra la raíz del repositorio (ADR 0022). **Sin argumento sirve la raíz
+del repositorio**, que es lo que servía antes, así que el commit es una suma:
+`run.sh` sigue diciendo `node server.mjs` y la demo levanta igual, con los once
+archivos que la página carga en 200 y con su `Content-Type`.
+
+Son tres piezas y 59 líneas, la mitad comentario: `DOCS` con el argumento resuelto
+contra la raíz, `MOUNTS` con las dos rutas de la sdk, y `resolveFile()` que
+reemplaza el `join` y la guarda y devuelve el archivo o `null`, que es el 403. El
+costo de los dos montajes —un pedido a la demo devuelve archivos que no están abajo
+del directorio que se le pasó— quedó escrito arriba de la constante, que es donde
+lo lee quien edite el archivo.
+
+**El hallazgo es de la guarda de traversal, y cambió cuál es el pedido que la
+prueba.** El handler parsea con `new URL(...)`, y ese parser colapsa los `../` del
+path antes de que el servidor vea nada: `/dist/../../etc/passwd` llega como
+`/etc/passwd` y da 404 abajo de la raíz de documentos, no 403. Pasaba lo mismo antes
+de esta task, y es por eso que la guarda vieja no se disparaba nunca. El `..` que
+sobrevive es el percent-encodeado con la barra adentro, `%2e%2e%2f`, porque el
+parser no decodifica `%2f` como separador y el `decodeURIComponent` corre después.
+Y ahí la guarda importa de verdad: abajo de un montaje lo que se junta es el resto
+del path, que es relativo, así que su `../` sobrevive a `normalize()` y lo único que
+lo para es la comparación de prefijo. `/dist/%2e%2e%2f%2e%2e%2fetc/passwd` da 403, y
+`/vendor/%2e%2e%2fdist/qualabs-concurrent-hls.js` también, que es el que muestra que
+cada montaje sirve su propio subárbol y nada más. La comparación pasó a ser contra
+`root + sep` en lugar de a secas, para que una carpeta hermana con el mismo prefijo
+de nombre tampoco pase.
+
+**Tests nuevos no hay, y es una decisión de la fase y no una omisión**: un test que
+importara `server.mjs` dejaría a `test/` leyendo fuera de `test/` y `lib/`, que es
+justo lo que el ADR 0023 acaba de instalar. El instrumento son los pedidos con su
+salida verbatim. `npm test` quedó en 43 de 43, la misma cuenta que dejó la T-01, y
+`verificar-cortes.mjs` en `both seams hold.` — `server.mjs` no está en la lista de
+archivos de ninguna de las dos costuras, así que la palabra `demo` de su comentario
+no las mueve.
+
+Dos cosas que el bloque no cubría y se resolvieron sin preguntar. La línea de
+arranque ahora dice qué carpeta está sirviendo (`-- serving compatibility-pair`):
+cuesta un `relative()`, es lo primero que uno quiere saber cuando la página no
+carga, y nadie parsea esa salida. Y el encabezado dejó de decir "40 lines", porque
+el archivo dejó de tener cuarenta; dice "a few dozen", que es la afirmación que la
+próxima edición no vuelve a falsear.
+
+La evidencia, con los pedidos verbatim, la suite, las costuras y la corrida de
+`run.sh`, en `phases/05-la-sdk-y-sus-demos/tasks/T-02/`.

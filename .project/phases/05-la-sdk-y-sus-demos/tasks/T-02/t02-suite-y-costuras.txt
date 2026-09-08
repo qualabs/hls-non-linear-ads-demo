@@ -1,0 +1,79 @@
+$ npm test
+
+> hls-non-linear-ads-demo@0.0.0 test
+> node --test
+
+✔ the fixtures of the phase are the breaks the readings were taken on (2.863113ms)
+✔ a break of one asset opens at the START-DATE, which is every break of the recording (1.617442ms)
+✔ each asset begins where the one before it ended, over the breaks of three, four and two (0.933693ms)
+✔ the start of an item is an offset inside its own asset and not from the START-DATE (0.359407ms)
+✔ two ads of one break are two identities even when they share the layout (0.413726ms)
+✔ the ordinal of an ad is of the whole break, so two items of one asset are two ads (0.390923ms)
+✔ an ASSET with a URI and a DURATION and nothing else is one full-frame ad (0.738437ms)
+✔ in the mixed break the full-frame ad silences the programme and the concurrent ones do not (1.804975ms)
+✔ the three shapes this client cannot draw are the three that cannot become a box (0.502284ms)
+✔ a block this client cannot draw plays the asset own URI, and the ads around it do not move (0.70222ms)
+✔ an empty uri and a media type nobody knows are not failures of the block (0.611433ms)
+✔ none of the asset-lists the demo serves falls back, and the two linear ads are declared ones (1.040544ms)
+✔ an asset with nothing to play is skipped alone, and the ads after it keep their windows (0.557326ms)
+✔ the asset-list that cannot be read cancels the whole break, which is not skipping an asset (0.554774ms)
+✔ a list that declares no ASSETS plays nothing and reports no range (0.279879ms)
+✔ a break of several ads is one range, from the first to start to the last to end (0.47207ms)
+✔ viewport is four inset percentages in the order top right bottom left (3.224837ms)
+✔ a viewport that is not four numbers falls back to the full frame, and warns (0.304467ms)
+✔ each of the six asset-lists resolves to one experience with its type and window (0.405949ms)
+✔ the fifteen elements come out with the ids, the uri and the mediaType of the payload (0.513852ms)
+✔ elements come out ordered by ascending zDepth in the six layouts (0.358095ms)
+✔ in squeezebackFrame the ad is the background and the primary content is on top (0.221733ms)
+✔ on an equal zDepth the order of the payload holds (0.233804ms)
+✔ the two overlays carry no primaryContent, and the layer assumes the full frame at zDepth 0 (0.328968ms)
+✔ the four layouts that do carry primaryContent keep its zDepth and its viewport (1.888898ms)
+✔ no payload of the tool carries volume: the ad comes out silent and the show does not (0.752707ms)
+✔ an explicit volume of 0 survives, because a silent ad is silent on purpose (0.279648ms)
+✔ the activation window is half open: in at startTime, out at the end (0.264834ms)
+✔ activeAt returns every experience active at that instant (0.225847ms)
+✔ the insets become the fifteen boxes in pixels T-03 measured (0.428652ms)
+✔ the conversion follows the player area, which is what a resize depends on (0.18997ms)
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ the run of the script is the five breaks of the recording (3.267325ms)
+✔ the two classes the playlist signals become the two kinds the contract carries (0.342278ms)
+✔ the five breaks are the ten ranges T-05 read off the contract (4.232378ms)
+✔ a break of no experiences is no range, and a tag that declares no length is no range either (0.436312ms)
+✔ the window of a concurrent break spans every experience its asset-list declares (0.227473ms)
+✔ the ten ranges land where T-04 measured them on the bar (1.047416ms)
+✔ the same ten ranges on a programme of another length land somewhere else (0.964869ms)
+✔ a range that cannot be placed is not a mark (1.053711ms)
+✔ with no volume in the asset-list the ad comes out silent and the programme does not (0.626024ms)
+✔ the mix of the Quad is the one the asset-list declares, element by element (0.862325ms)
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||` (0.30069ms)
+✔ a volume that is not a number falls back to the element own default, and there are two (0.211018ms)
+ℹ tests 43
+ℹ suites 0
+ℹ pass 43
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 184.245301
+
+$ node scripts/verificar-cortes.mjs
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js js/contract-trace.js css/player.css
+
+   GREEN: 3 occurrence(s), all of them on the accepted list.
+     lib/controls.js:21  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:93  interstitial: '#ffcc00'
+     lib/controls.js:122  interstitial: 'traditional interstitial: the content is replaced by the ad'
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
