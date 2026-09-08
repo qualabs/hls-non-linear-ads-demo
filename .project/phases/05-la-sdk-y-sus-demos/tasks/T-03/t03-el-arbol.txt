@@ -1,0 +1,68 @@
+# El árbol después de la mudanza
+
+$ ls -1 --group-directories-first  (la raíz, sin .git ni .project)
+demo
+dist
+docs
+lib
+scripts
+test
+vendor
+package.json
+README.md
+run.sh
+server.mjs
+
+$ find demo/compatibility-pair -maxdepth 2 -not -path "*/content/*" -not -path "*/.fuentes*" | sort
+demo/compatibility-pair
+demo/compatibility-pair/brand
+demo/compatibility-pair/brand/favicon.svg
+demo/compatibility-pair/brand/fonts-embedded.css
+demo/compatibility-pair/brand/logo-qualabs.svg
+demo/compatibility-pair/brand/README.md
+demo/compatibility-pair/content
+demo/compatibility-pair/CREDITS.md
+demo/compatibility-pair/css
+demo/compatibility-pair/css/player.css
+demo/compatibility-pair/index.html
+demo/compatibility-pair/js
+demo/compatibility-pair/js/app.js
+demo/compatibility-pair/js/contract-trace.js
+demo/compatibility-pair/js/stock-player.js
+demo/compatibility-pair/scripts
+demo/compatibility-pair/scripts/empaquetar-contenido.sh
+demo/compatibility-pair/scripts/preparar-contenido.sh
+demo/compatibility-pair/scripts/senalizar-contenido.sh
+demo/compatibility-pair/signalling
+demo/compatibility-pair/signalling/asset-list-cornerOverlay.json
+demo/compatibility-pair/signalling/asset-list-linear.json
+demo/compatibility-pair/signalling/asset-list-mezclado.json
+demo/compatibility-pair/signalling/asset-list-multiAd.json
+demo/compatibility-pair/signalling/asset-list-multiView.json
+demo/compatibility-pair/signalling/asset-list-repliegue-bloque-roto.json
+demo/compatibility-pair/signalling/asset-list-repliegue-json-roto.json
+demo/compatibility-pair/signalling/asset-list-repliegue-sin-uri.json
+demo/compatibility-pair/signalling/asset-list-repliegue-vacio.json
+demo/compatibility-pair/signalling/asset-list-solapado.json
+demo/compatibility-pair/signalling/asset-list-squeezebackDoubleBox.json
+demo/compatibility-pair/signalling/asset-list-squeezebackLShape-image.json
+demo/compatibility-pair/signalling/asset-list-squeezebackLShape.json
+demo/compatibility-pair/test
+demo/compatibility-pair/test/signalled-run.test.js
+
+$ ls -1 demo/compatibility-pair/signalling | wc -l   (los trece asset-lists)
+13
+
+$ ls -a demo/compatibility-pair/content   (con su cache .fuentes, sin volver a bajar nada)
+.
+..
+adA
+adB
+adC
+adImageA
+adImageB
+.fuentes
+primary
+
+$ du -sh demo/compatibility-pair/content/.fuentes
+660M	demo/compatibility-pair/content/.fuentes

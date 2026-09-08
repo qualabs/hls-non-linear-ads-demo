@@ -62,11 +62,12 @@ parse of `scripts/senalizar-contenido.sh` that used to build this table inside
 reading of a browser, and a reading is about a run, so the run is declared here
 instead of being scraped out of a shell script the library does not own.
 
-What stays over the script, because it is about the script and not about this
-table: that its run table has five rows, that the `PLANNED-DURATION` of a tag is
-computed and not typed, and that it writes the two `CLASS` strings the library
-translates. Those assertions are the reason a hard-wired `PLANNED-DURATION`
-declaring twelve seconds of a forty-eight second break was ever found.
+What is asserted over the script, because it is about the script and not about
+this table: that its run table has five rows, that the `PLANNED-DURATION` of a
+tag is computed and not typed, and that it writes the two `CLASS` strings the
+library translates. Those three live in the suite of the demo, beside the script
+they read, and they are the reason a hard-wired `PLANNED-DURATION` declaring
+twelve seconds of a forty-eight second break was ever found.
 
 Its integrity is asserted and not assumed, in the first test of
 `program-ranges-and-volume.test.js`: five breaks, each with its second and its

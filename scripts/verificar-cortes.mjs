@@ -68,7 +68,17 @@ const SEAMS = [
     // rendering would share a scope and the grep would have nothing to point at.
     // That is also why the library is assembled by a build step instead of being
     // written by hand (scripts/construir-libreria.sh).
-    files: ['lib/renderer.js', 'lib/controls.js', 'js/contract-trace.js', 'css/player.css'],
+    //
+    // Two of the four are inside a demo, and they are named one by one for the
+    // same reason: they are the proof that the contract is enough to draw with,
+    // which is the argument of ADR 0003. What must not depend on any demo is the
+    // completeness check below, and that one is only over `lib/`.
+    files: [
+      'lib/renderer.js',
+      'lib/controls.js',
+      'demo/compatibility-pair/js/contract-trace.js',
+      'demo/compatibility-pair/css/player.css'
+    ],
     accepted: [
       {
         file: 'lib/controls.js',

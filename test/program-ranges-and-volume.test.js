@@ -49,16 +49,6 @@ import { rangeSpan } from '../lib/controls.js';
 const read = (path) => readFileSync(new URL(path, import.meta.url), 'utf8');
 const readJson = (path) => JSON.parse(read(path));
 
-/**
- * The script that writes the signalled playlist. It is the one path of this
- * suite that leaves `test/` and `lib/`, and it is here because the assertions
- * that read it are about the script itself: that it signals five breaks, that
- * it computes the `PLANNED-DURATION` instead of typing it, and that it writes
- * the two classes the library translates. A copy of it frozen in `fixtures/`
- * would leave those three asserting over nothing. The DATA of the run no longer
- * comes from here.
- */
-const SIGNALLER = read('../scripts/senalizar-contenido.sh');
 /** What T-02 read off `programRanges()` with the player running. */
 const T02 = readJson('./fixtures/mediciones/t02-los-rangos-del-programa.json');
 /** What T-04 measured of the marks on the bar, over a 180 s programme. */
@@ -88,7 +78,7 @@ const declaredLength = (list) =>
 /**
  * The recording's run, DECLARED: second of playback and asset-list, five rows,
  * in `fixtures/run.json`. It used to be parsed out of the RECORRIDO table of
- * the shell script above, and it is declared here because the expected values
+ * the script that signals it, and it is declared here because the expected values
  * below are a reading of the browser and a reading is about a run -- so the run
  * belongs to this suite, frozen alongside the readings that describe it
  * (ADR 0023). What that costs, and what watches the live run instead, is
@@ -122,7 +112,7 @@ function programRanges() {
   return ranges.sort((a, b) => a.startTime - b.startTime);
 }
 
-test('the run of the script is the five breaks of the recording', () => {
+test('the run of the recording is five breaks, each naming an asset-list of this suite', () => {
   // The table above is the load-bearing part of everything below it, so it is
   // asserted instead of assumed: a fixture that lost a row would otherwise make
   // every test in the first half pass over a shorter run, and a shorter run is
@@ -138,21 +128,9 @@ test('the run of the script is the five breaks of the recording', () => {
     assert.ok(existsSync(new URL(assetListPath(list), import.meta.url)),
       `break ${n} names ${list}, which is not in test/fixtures/asset-lists/`);
   }
-  // AND THE SCRIPT STILL SIGNALS FIVE BREAKS, which is an assertion about the
-  // script and not about the table: now that the run is declared here, nothing
-  // else in this file would notice a break added to the script or taken out.
-  assert.equal([...SIGNALLER.matchAll(/^\s*"(\d+)\|(asset-list-[^|]+)\|/gm)].length, 5,
-    'five rows in the RECORRIDO table of senalizar-contenido.sh');
   // Four breaks of one ad and a last one of four, which is the mixed break.
   assert.deepEqual(RUN.map((b) => declaredLength(b.list)), [12, 12, 12, 12, 48]);
   assert.equal(LINEAR_PLANNED, 12);
-  // AND THE LENGTH IS COMPUTED AND NOT TYPED, which is a rule about the script
-  // and not about this run. A hard-wired `PLANNED-DURATION` declares twelve
-  // seconds of a break that lasts forty-eight: inert for this player, because
-  // the concurrent range is built out of the experiences and not out of the
-  // tag, and a lie to every other client that reads the playlist.
-  assert.match(SIGNALLER, /PLANNED-DURATION=%s/);
-  assert.doesNotMatch(SIGNALLER, /PLANNED-DURATION=\d/);
 });
 
 // ---------------------------------------------------------------------------
@@ -160,11 +138,10 @@ test('the run of the script is the five breaks of the recording', () => {
 // ---------------------------------------------------------------------------
 
 test('the two classes the playlist signals become the two kinds the contract carries', () => {
-  // A range of each class, and they are the two strings the script writes: the
-  // side that writes the tag and the side that reads it agree, or every break
-  // of the run is missing from the bar.
-  assert.ok(SIGNALLER.includes(`CLASS="${INTERSTITIAL_CLASS}"`), 'the script writes the traditional class');
-  assert.ok(SIGNALLER.includes(`CLASS="${CONCURRENT_CLASS}"`), 'the script writes the concurrent class');
+  // The two class strings of the transport, translated into the two kinds the
+  // contract carries. That the SCRIPT of the demo writes exactly these two is
+  // the other half of the same agreement, and it is asserted in the suite of
+  // that demo, beside the script it reads (ADR 0023).
   assert.equal(kindOfClass(INTERSTITIAL_CLASS), 'interstitial');
   assert.equal(kindOfClass(CONCURRENT_CLASS), 'concurrent');
   // What crosses is the kind and never the class of the transport, so a Date
