@@ -104,6 +104,6 @@ createServer(async (req, res) => {
   // Which folder is being served is the first thing to check when the page does
   // not load, so it is printed next to the URL.
   console.log(
-    `hls-non-linear-ads-demo: http://localhost:${PORT}/ -- serving ${relative(SDK, DOCS) || '.'}`
+    `server: http://localhost:${PORT}/ -- serving ${relative(SDK, DOCS) || '.'}`
   );
 });

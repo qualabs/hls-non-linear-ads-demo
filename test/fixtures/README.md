@@ -17,10 +17,12 @@ demo has inside it.
 
 **The paths below are written without the prefix of the development-management
 folder and without the name of the folder the demo serves its asset-lists from,
-and that is deliberate**: the self-sufficiency of `test/` is verified with a grep
-for those two strings over this whole folder, this README included. A path
-written in full here would put the check in red for a documentation reason, and
-the next person would "fix" it by deleting the provenance.
+and that is deliberate.** The rule this folder exists for is the one above, and
+it is verified with a grep for those names over the code of `test/`, so a path
+written in full in this README does not put the check in red. It is still not
+written in full: a full path is a thing to follow, and the provenance of a copy
+is a thing to know. Whoever wants to follow it has the name of the task, which
+is the name of the file.
 
 ## `mediciones/` — five readings, under their original names
 
@@ -57,7 +59,7 @@ decision that governs the rest of this folder.
 
 The five breaks of the recording, each one with the second of playback it is
 signalled at and the asset-list its concurrent tag points to. It replaces the
-parse of `scripts/senalizar-contenido.sh` that used to build this table inside
+parse of the signalling script of the demo that used to build this table inside
 `program-ranges-and-volume.test.js`: half of the tests of that file are a
 reading of a browser, and a reading is about a run, so the run is declared here
 instead of being scraped out of a shell script the library does not own.
