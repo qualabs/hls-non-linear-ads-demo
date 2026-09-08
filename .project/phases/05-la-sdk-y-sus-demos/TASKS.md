@@ -45,7 +45,7 @@ pedía, y aplica a las tres tasks que lo repiten.
 | ---- | ------------------------------------------------------------------ | ------- | ---- | -------- |
 | T-01 | Los fixtures pasan a ser del test                                  | done    | —    | [tasks/T-01/](tasks/T-01/) |
 | T-02 | El servidor sirve la carpeta que se le nombra                       | done    | —    | [tasks/T-02/](tasks/T-02/) |
-| T-03 | La mudanza: la página baja a `demo/compatibility-pair/`             | pending | —    | —        |
+| T-03 | La mudanza: la página baja a `demo/compatibility-pair/`             | done    | —    | [tasks/T-03/](tasks/T-03/) |
 | T-04 | El manifiesto declara la sdk                                        | pending | —    | —        |
 | T-05 | El README de la raíz enruta y la demo cuenta su corrida             | pending | —    | —        |
 | T-06 | La corrida entera desde la estructura nueva                         | pending | —    | —        |

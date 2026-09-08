@@ -3100,3 +3100,68 @@ próxima edición no vuelve a falsear.
 
 La evidencia, con los pedidos verbatim, la suite, las costuras y la corrida de
 `run.sh`, en `phases/05-la-sdk-y-sus-demos/tasks/T-02/`.
+
+## 2026-09-08 — T-03 de la fase 05: la página bajó a `demo/compatibility-pair/`, y la raíz quedó siendo la sdk
+
+La mudanza, que es la fase. Veintiséis archivos tracked se movieron con `git mv`
+—`index.html`, `css/`, `js/`, `brand/`, `signalling/` con sus trece asset-lists,
+`CREDITS.md` y los tres scripts de contenido— y `content/` con su cache
+`.fuentes/` de 660 MB con un `mv`, porque está gitignoreado y nunca estuvo en el
+índice: nada se volvió a bajar. La raíz quedó con `lib/`, `dist/`, `test/`,
+`docs/`, `vendor/`, `server.mjs`, `run.sh`, `package.json`, `README.md` y los dos
+scripts de la sdk. `git log --follow` sigue la historia de cada archivo mudado:
+veinticinco renombres al 100% y el de `index.html` al 98%, que son sus dos `src`.
+
+**Un commit solo, con el test de la demo adentro**, y está así por el invariante
+de la fase: separarlo es tener un commit con la suite roja o uno con las tres
+afirmaciones sobre `senalizar-contenido.sh` borradas, que es el chequeo que
+encontró el `PLANNED-DURATION` de doce segundos en un break de cuarenta y ocho.
+`demo/compatibility-pair/test/signalled-run.test.js` son esas tres afirmaciones,
+ahora sobre los archivos de la demo y no contra el fixture: leen el script y el
+`signalling/` de la demo, e importan las dos constantes de clase de
+`lib/signalling.js`, que es la demo nombrando a la sdk, la dirección que el
+ADR 0015 permite. `npm test` quedó en 46: los 43 de `test/` que dejó la T-01 más
+los 3 de la demo, sin un test borrado ni un valor esperado cambiado. `node --test`
+sin argumentos descubre las dos carpetas en una sola corrida.
+
+**Las cuatro ediciones de ruta fueron cuatro, y las trece URIs de asset-list no se
+tocaron**, que es lo que el ADR 0022 existe para evitar: los dos `src` de la sdk en
+`index.html` pasaron a absolutos, `run.sh` toma la demo como argumento con
+`compatibility-pair` de default, las dos rutas del lado del renderizado de la
+costura del ADR 0003 se reescribieron bajo `demo/compatibility-pair/`, y la cita
+de `brand/README.md` en `lib/controls.js` perdió la ruta y se quedó con la frase.
+Los tres scripts de contenido no se editaron —hacen `cd "$(dirname "$0")/.."`— y
+el `.gitignore` tampoco.
+
+**Un renombre de test que vale anotar.** El que se llamaba `the run of the script
+is the five breaks of the recording` ahora se llama `the run of the recording is
+five breaks, each naming an asset-list of this suite`. El nombre viejo nombraba al
+script y el test ya no lo lee: la T-01 le había sacado el parseo de la tabla y esta
+task le sacó las dos afirmaciones que le quedaban sobre él.
+
+**El grep de la autosuficiencia encontró un comentario mío.** El texto que
+explicaba dónde quedó la otra mitad del test decía la ruta completa
+`demo/compatibility-pair/test/`, y el literal `demo/` es justo uno de los tres que
+ese grep busca en el código de `test/`. Es el mismo caso que el punto 4 del bloque
+—la cita de la librería a `brand/README.md`— y se arregló igual: se saca la ruta y
+se queda la frase.
+
+Tres cosas que el bloque no cubría, decididas sin preguntar: `run.sh` chequea que
+la carpeta de la demo exista y dice qué nombre no encontró, que es la línea que un
+argumento nuevo trae consigo; el comentario de `verificar-cortes.mjs` arriba de
+`files` dice por qué dos de los cuatro archivos están adentro de una demo; y un
+párrafo de `test/fixtures/README.md` pasó a decir que las tres afirmaciones viven
+en la suite de la demo, porque decía "what stays over the script" y esta task las
+bajó. Era el único lugar del repositorio donde la mudanza dejaba una frase falsa y
+no lo cubre la T-05, que es de los otros dos README.
+
+`./run.sh` levanta la demo desde la estructura nueva y sirve
+`demo/compatibility-pair`. El recorrido corrió de punta a punta sin un salto,
+muestreado cada 250 ms: los cinco breaks arrancaron en su segundo declarado, el
+mezclado corrió sus cuatro avisos en orden y cerró en el 168, el pane de fábrica
+hizo sus cinco avisos lineales de 12 s, y en 250 pedidos no hubo un solo status
+mayor o igual a 400. Las dos costuras en `both seams hold.`
+
+La evidencia —el árbol, la suite, las costuras, el recorrido entero y un cuadro
+por break, más el sexto del aviso a cuadro entero donde el par se invierte— en
+`phases/05-la-sdk-y-sus-demos/tasks/T-03/`.
