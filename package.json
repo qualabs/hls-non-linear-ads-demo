@@ -1,13 +1,20 @@
 {
-  "name": "hls-non-linear-ads-demo",
+  "name": "qualabs-concurrent-hls",
   "private": true,
   "version": "0.0.0",
   "description": "Non-linear (concurrent) HLS ad experiences on hls.js, unmodified. No bundler and no dependencies: native ES modules in the browser, node --test for the pure logic.",
   "type": "module",
+  "main": "./lib/concurrent-hls.js",
+  "exports": "./lib/concurrent-hls.js",
+  "files": [
+    "lib/",
+    "dist/",
+    "docs/"
+  ],
   "scripts": {
     "start": "./run.sh",
-    "serve": "node server.mjs",
-    "content": "./scripts/preparar-contenido.sh",
+    "build": "./scripts/construir-libreria.sh",
+    "check": "./scripts/verificar-cortes.mjs",
     "test": "node --test"
   }
 }
