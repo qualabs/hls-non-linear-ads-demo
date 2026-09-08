@@ -1,0 +1,68 @@
+# T-01 — los diffs de cada copia contra su original
+
+Corrido el 2026-09-08T16:52:00-03:00 desde la raiz del repositorio. Es el unico
+momento en que las dos copias se comparan a proposito: el ADR 0023 prohibe
+un chequeo permanente, no verificar la copia el dia que se hace.
+
+## mediciones (5)
+m3-resultados.json                             identico  (phases/01-poc-web-hlsjs/tasks/T-03/m3-resultados.json)
+t02-los-rangos-del-programa.json               identico  (phases/02-sdk-y-controles/tasks/T-02/t02-los-rangos-del-programa.json)
+t04-la-medicion.json                           identico  (phases/02-sdk-y-controles/tasks/T-04/t04-la-medicion.json)
+t05-la-medicion.json                           identico  (phases/02-sdk-y-controles/tasks/T-05/t05-la-medicion.json)
+t05-el-recorrido-con-el-break-mezclado.json    identico  (phases/03-breaks-multiples-y-repliegue/tasks/T-05/t05-el-recorrido-con-el-break-mezclado.json)
+
+## asset-lists (13)
+asset-list-cornerOverlay.json                  identico
+asset-list-linear.json                         identico
+asset-list-mezclado.json                       identico
+asset-list-multiAd.json                        identico
+asset-list-multiView.json                      identico
+asset-list-repliegue-bloque-roto.json          identico
+asset-list-repliegue-json-roto.json            identico
+asset-list-repliegue-sin-uri.json              identico
+asset-list-repliegue-vacio.json                identico
+asset-list-solapado.json                       identico
+asset-list-squeezebackDoubleBox.json           identico
+asset-list-squeezebackLShape-image.json        identico
+asset-list-squeezebackLShape.json              identico
+
+## sha256, las dos copias
+059131f2be72ca5b37ac2f1cd3fd7e8ba31155a0c8d3b8da43bad43cfbb42ae0  signalling/asset-list-repliegue-json-roto.json
+059131f2be72ca5b37ac2f1cd3fd7e8ba31155a0c8d3b8da43bad43cfbb42ae0  test/fixtures/asset-lists/asset-list-repliegue-json-roto.json
+1bb3a8468c9a266c5644212c473763fa4baa9652f6637eba4a4999864e73fdff  signalling/asset-list-repliegue-sin-uri.json
+1bb3a8468c9a266c5644212c473763fa4baa9652f6637eba4a4999864e73fdff  test/fixtures/asset-lists/asset-list-repliegue-sin-uri.json
+1ceec42599975d3d4f170d9a293182f9c8715156806a268d82b3f02da6326c84  .project/phases/03-breaks-multiples-y-repliegue/tasks/T-05/t05-el-recorrido-con-el-break-mezclado.json
+1ceec42599975d3d4f170d9a293182f9c8715156806a268d82b3f02da6326c84  test/fixtures/mediciones/t05-el-recorrido-con-el-break-mezclado.json
+45e1a5bc667e83fb78d24d98c473921967c002b30032ec081009207c677ea99e  signalling/asset-list-mezclado.json
+45e1a5bc667e83fb78d24d98c473921967c002b30032ec081009207c677ea99e  test/fixtures/asset-lists/asset-list-mezclado.json
+5021b58a001307824de967177a6ffbe61d1b871dbc65cc25d32c83201dc10cb8  signalling/asset-list-solapado.json
+5021b58a001307824de967177a6ffbe61d1b871dbc65cc25d32c83201dc10cb8  test/fixtures/asset-lists/asset-list-solapado.json
+732059a7818e869bd0770a9cdc80b62a55262f929737cf5ca3ee864e1e54af74  .project/phases/02-sdk-y-controles/tasks/T-05/t05-la-medicion.json
+732059a7818e869bd0770a9cdc80b62a55262f929737cf5ca3ee864e1e54af74  test/fixtures/mediciones/t05-la-medicion.json
+7c7ec2c119107c21de76b23e4afa24f3aa31f6c13316ec6be0216947601941ac  .project/phases/02-sdk-y-controles/tasks/T-02/t02-la-promesa-de-la-lista.json
+86c521dd19962c4c7857a1d9c7ab7c993b6a2e6d48ac869d31e832985d0d5eb5  signalling/asset-list-squeezebackDoubleBox.json
+86c521dd19962c4c7857a1d9c7ab7c993b6a2e6d48ac869d31e832985d0d5eb5  test/fixtures/asset-lists/asset-list-squeezebackDoubleBox.json
+944ac4aa94e1cdf0af939f8cb0c4a282018d08302759f256ca87368cd987c913  signalling/asset-list-squeezebackLShape-image.json
+944ac4aa94e1cdf0af939f8cb0c4a282018d08302759f256ca87368cd987c913  test/fixtures/asset-lists/asset-list-squeezebackLShape-image.json
+9e12f56f6f64463bec3d83d363b956b8902d97cec7e33a484710302a18fa35bf  .project/phases/02-sdk-y-controles/tasks/T-04/t04-un-cuarto.json
+9fb8f634385dc70368b907255c41c328cba5bdb8773444c497f9827d854d5013  signalling/asset-list-multiView.json
+9fb8f634385dc70368b907255c41c328cba5bdb8773444c497f9827d854d5013  test/fixtures/asset-lists/asset-list-multiView.json
+a5ee58bb2530ff4d1e72546bbc6cc538294521ca2bf8f0481517784d46119457  .project/phases/02-sdk-y-controles/tasks/T-02/t02-los-rangos-del-programa.json
+a5ee58bb2530ff4d1e72546bbc6cc538294521ca2bf8f0481517784d46119457  test/fixtures/mediciones/t02-los-rangos-del-programa.json
+a693f4b72d4c5f7809167b42376d5b2d2a272a45bf37a6af8df25fe1969de126  signalling/asset-list-repliegue-bloque-roto.json
+a693f4b72d4c5f7809167b42376d5b2d2a272a45bf37a6af8df25fe1969de126  test/fixtures/asset-lists/asset-list-repliegue-bloque-roto.json
+a97e775f45f715e995cb6adb53190640a6acaef60cf7f879e9f9822025311d01  .project/phases/02-sdk-y-controles/tasks/T-04/t04-un-cuarto-fullscreen.json
+b036f6f7500865db70f02b46c8a8902db8ce6b8b64808173ef4dd16709dd26dd  signalling/asset-list-multiAd.json
+b036f6f7500865db70f02b46c8a8902db8ce6b8b64808173ef4dd16709dd26dd  test/fixtures/asset-lists/asset-list-multiAd.json
+bf792a1e6d39d7ada72698403a5333ac6079fbdec7c5b875a576bdf30a755b2a  signalling/asset-list-repliegue-vacio.json
+bf792a1e6d39d7ada72698403a5333ac6079fbdec7c5b875a576bdf30a755b2a  test/fixtures/asset-lists/asset-list-repliegue-vacio.json
+bf8cc5f5dae09bc2d89e08113ebebe79ff1b8ddd244d439c9bacabe357084f7e  .project/phases/02-sdk-y-controles/tasks/T-04/t04-la-medicion.json
+bf8cc5f5dae09bc2d89e08113ebebe79ff1b8ddd244d439c9bacabe357084f7e  test/fixtures/mediciones/t04-la-medicion.json
+cc509979686f9a6815ef57f63d93deb307e0c6bd13e3f0891f81d3342468366a  signalling/asset-list-cornerOverlay.json
+cc509979686f9a6815ef57f63d93deb307e0c6bd13e3f0891f81d3342468366a  test/fixtures/asset-lists/asset-list-cornerOverlay.json
+d390b0474e6370a4f26a91ea1626fe759a4ef600d201e4735bb36d3d82f57b6a  .project/phases/01-poc-web-hlsjs/tasks/T-03/m3-resultados.json
+d390b0474e6370a4f26a91ea1626fe759a4ef600d201e4735bb36d3d82f57b6a  test/fixtures/mediciones/m3-resultados.json
+d5bd265e3dd8bbaa67f06aff3feeac253abb52a43b60fadb99865d2842f42411  signalling/asset-list-squeezebackLShape.json
+d5bd265e3dd8bbaa67f06aff3feeac253abb52a43b60fadb99865d2842f42411  test/fixtures/asset-lists/asset-list-squeezebackLShape.json
+dd88fa65cf2db661920b7b3df631055cb67ecd2a01191ea60efd68a835220ab3  signalling/asset-list-linear.json
+dd88fa65cf2db661920b7b3df631055cb67ecd2a01191ea60efd68a835220ab3  test/fixtures/asset-lists/asset-list-linear.json

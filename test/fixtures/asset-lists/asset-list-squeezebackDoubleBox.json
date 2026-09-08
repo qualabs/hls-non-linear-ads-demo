@@ -1,0 +1,34 @@
+{
+  "ASSETS": [
+    {
+      "URI": "/content/adB/index.m3u8",
+      "DURATION": 12.0,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "slot",
+        "payload": [
+          {
+            "type": "squeezebackDoubleBox",
+            "start": 0,
+            "duration": 12.0,
+            "layout": {
+              "primaryContent": {
+                "zDepth": 0,
+                "viewport": "25 50 25 0"
+              },
+              "assets": [
+                {
+                  "id": "adOverlay",
+                  "type": "application/vnd.apple.mpegurl",
+                  "uri": "/content/adB/index.m3u8",
+                  "viewport": "25 0 25 50",
+                  "zDepth": 1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

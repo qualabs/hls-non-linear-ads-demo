@@ -13,7 +13,7 @@
 // DOM, no browser, no image comparison, and coverage is not the goal.
 //
 // The cases come from real data: the six payloads the SVTA tool emits are
-// verbatim in the evidence of T-03 under `herramienta`, and the expected values
+// verbatim in the reading of T-03 under `herramienta`, and the expected values
 // are the boxes T-03 measured in pixels under `nuestro`. A test written with an
 // invented payload would only prove that the code does what whoever wrote it
 // believed. The three cases that ARE invented say so where they are.
@@ -36,8 +36,12 @@ import {
 } from '../lib/signalling.js';
 import { boxToPixels } from '../lib/renderer.js';
 
+/**
+ * The reading of T-03 of phase 01, copied into `test/fixtures/` under its own
+ * name, which is where it came from: `fixtures/README.md` says so file by file.
+ */
 const M3 = JSON.parse(
-  readFileSync(new URL('../.project/phases/01-poc-web-hlsjs/tasks/T-03/m3-resultados.json', import.meta.url))
+  readFileSync(new URL('./fixtures/mediciones/m3-resultados.json', import.meta.url))
 );
 
 /** The six asset-lists, verbatim as the SVTA tool emits them. */

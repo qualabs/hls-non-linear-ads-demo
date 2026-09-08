@@ -1,0 +1,546 @@
+============================================================================
+M01 — Saca una tanda: la tercera, LBox image.
+============================================================================
+
+--- node --test --test-name-pattern "the run of the script is the five breaks of the recording" test/program-ranges-and-volume.test.js   (exit 1) ---
+✖ the run of the script is the five breaks of the recording (2.190334ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 90.405501
+
+✖ failing tests:
+
+test at test/program-ranges-and-volume.test.js:125:1
+✖ the run of the script is the five breaks of the recording (2.190334ms)
+  AssertionError [ERR_ASSERTION]: five breaks declared in fixtures/run.json
+  
+  4 !== 5
+  
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:130:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 4,
+    expected: 5,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+--- node --test test/program-ranges-and-volume.test.js   (el radio: el archivo entero, exit 1) ---
+[signalling] AD-4-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-4-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-4-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-4-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-4-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✖ the run of the script is the five breaks of the recording (2.600029ms)
+✔ the two classes the playlist signals become the two kinds the contract carries (0.343698ms)
+✖ the five breaks are the ten ranges T-05 read off the contract (4.101694ms)
+✔ a break of no experiences is no range, and a tag that declares no length is no range either (0.484576ms)
+✔ the window of a concurrent break spans every experience its asset-list declares (0.202408ms)
+✖ the ten ranges land where T-04 measured them on the bar (1.054795ms)
+✔ the same ten ranges on a programme of another length land somewhere else (0.653389ms)
+✔ a range that cannot be placed is not a mark (0.826371ms)
+✔ with no volume in the asset-list the ad comes out silent and the programme does not (0.499689ms)
+✔ the mix of the Quad is the one the asset-list declares, element by element (0.630256ms)
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||` (0.232298ms)
+✔ a volume that is not a number falls back to the element own default, and there are two (0.166754ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 9
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 119.369776
+
+✖ failing tests:
+
+test at test/program-ranges-and-volume.test.js:125:1
+✖ the run of the script is the five breaks of the recording (2.600029ms)
+  AssertionError [ERR_ASSERTION]: five breaks declared in fixtures/run.json
+  
+  4 !== 5
+  
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:130:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 4,
+    expected: 5,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/program-ranges-and-volume.test.js:180:1
+✖ the five breaks are the ten ranges T-05 read off the contract (4.101694ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    [
+      {
+        duration: 12,
+        id: 'AD-1-LINEAR',
+        kind: 'interstitial',
+  ...
+        kind: 'interstitial',
+  +     startTime: 95
+  -     startTime: 70
+      },
+      {
+        duration: 12,
+        id: 'AD-3-CONCURRENT',
+        kind: 'concurrent',
+  +     startTime: 95
+  -     startTime: 70
+      },
+      {
+        duration: 12,
+        id: 'AD-4-LINEAR',
+        kind: 'interstitial',
+  -     startTime: 95
+  -   },
+  -   {
+  -     duration: 12,
+  -     id: 'AD-4-CONCURRENT',
+  -     kind: 'concurrent',
+  -     startTime: 95
+  -   },
+  -   {
+  -     duration: 12,
+  -     id: 'AD-5-LINEAR',
+  -     kind: 'interstitial',
+        startTime: 120
+      },
+      {
+        duration: 48,
+  +     id: 'AD-4-CONCURRENT',
+  -     id: 'AD-5-CONCURRENT',
+        kind: 'concurrent',
+        startTime: 120
+      }
+    ]
+  
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:191:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { id: 'AD-1-LINEAR', kind: 'interstitial', startTime: 20, duration: 12 }, { id: 'AD-1-CONCURRENT', kind: 'concurrent', startTime: 20, duration: 12 }, { id: 'AD-2-LINEAR', kind: 'interstitial', startTime: 45, duration: 12 }, { id: 'AD-2-CONCURRENT', kind: 'concurrent', startTime: 45, duration: 12 }, { id: 'AD-3-LINEAR', kind: 'interstitial', startTime: 95, duration: 12 }, { id: 'AD-3-CONCURRENT', kind: 'concurrent', startTime: 95, duration: 12 }, { id: 'AD-4-LINEAR', kind: 'interstitial', startTime: 120, duration: 12 }, { id: 'AD-4-CONCURRENT', kind: 'concurrent', startTime: 120, duration: 48 } ],
+    expected: [ { id: 'AD-1-LINEAR', kind: 'interstitial', startTime: 20, duration: 12 }, { id: 'AD-1-CONCURRENT', kind: 'concurrent', startTime: 20, duration: 12 }, { id: 'AD-2-LINEAR', kind: 'interstitial', startTime: 45, duration: 12 }, { id: 'AD-2-CONCURRENT', kind: 'concurrent', startTime: 45, duration: 12 }, { id: 'AD-3-LINEAR', kind: 'interstitial', startTime: 70, duration: 12 }, { id: 'AD-3-CONCURRENT', kind: 'concurrent', startTime: 70, duration: 12 }, { id: 'AD-4-LINEAR', kind: 'interstitial', startTime: 95, duration: 12 }, { id: 'AD-4-CONCURRENT', kind: 'concurrent', startTime: 95, duration: 12 }, { id: 'AD-5-LINEAR', kind: 'interstitial', startTime: 120, duration: 12 }, { id: 'AD-5-CONCURRENT', kind: 'concurrent', startTime: 120, duration: 48 } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/program-ranges-and-volume.test.js:271:1
+✖ the ten ranges land where T-04 measured them on the bar (1.054795ms)
+  AssertionError [ERR_ASSERTION]: AD-3-LINEAR left
+  + actual - expected
+  
+  + 52.777778
+  - 38.888889
+  
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:280:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 52.777778,
+    expected: 38.888889,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+============================================================================
+M02 — Cambia un segundo: el segundo break pasa de 45 a 46.
+============================================================================
+
+--- node --test --test-name-pattern "the run of the script is the five breaks of the recording" test/program-ranges-and-volume.test.js   (exit 1) ---
+✖ the run of the script is the five breaks of the recording (3.176261ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 95.140846
+
+✖ failing tests:
+
+test at test/program-ranges-and-volume.test.js:125:1
+✖ the run of the script is the five breaks of the recording (3.176261ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      20,
+  +   46,
+  -   45,
+      70,
+      95,
+      120
+    ]
+  
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:131:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 20, 46, 70, 95, 120 ],
+    expected: [ 20, 45, 70, 95, 120 ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+--- node --test test/program-ranges-and-volume.test.js   (el radio: el archivo entero, exit 1) ---
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✖ the run of the script is the five breaks of the recording (4.265227ms)
+✔ the two classes the playlist signals become the two kinds the contract carries (0.420377ms)
+✖ the five breaks are the ten ranges T-05 read off the contract (3.83879ms)
+✔ a break of no experiences is no range, and a tag that declares no length is no range either (0.27612ms)
+✔ the window of a concurrent break spans every experience its asset-list declares (0.189551ms)
+✖ the ten ranges land where T-04 measured them on the bar (1.027771ms)
+✔ the same ten ranges on a programme of another length land somewhere else (0.679739ms)
+✔ a range that cannot be placed is not a mark (0.887084ms)
+✔ with no volume in the asset-list the ad comes out silent and the programme does not (0.489722ms)
+✔ the mix of the Quad is the one the asset-list declares, element by element (0.563203ms)
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||` (0.3978ms)
+✔ a volume that is not a number falls back to the element own default, and there are two (0.233673ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 9
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 111.743004
+
+✖ failing tests:
+
+test at test/program-ranges-and-volume.test.js:125:1
+✖ the run of the script is the five breaks of the recording (4.265227ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      20,
+  +   46,
+  -   45,
+      70,
+      95,
+      120
+    ]
+  
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:131:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 20, 46, 70, 95, 120 ],
+    expected: [ 20, 45, 70, 95, 120 ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/program-ranges-and-volume.test.js:180:1
+✖ the five breaks are the ten ranges T-05 read off the contract (3.83879ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    [
+      {
+        duration: 12,
+        id: 'AD-1-LINEAR',
+        kind: 'interstitial',
+  ...
+        kind: 'interstitial',
+  +     startTime: 46
+  -     startTime: 45
+      },
+      {
+        duration: 12,
+        id: 'AD-2-CONCURRENT',
+        kind: 'concurrent',
+  +     startTime: 46
+  -     startTime: 45
+      },
+      {
+        duration: 12,
+        id: 'AD-3-LINEAR',
+        kind: 'interstitial',
+  
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:191:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { id: 'AD-1-LINEAR', kind: 'interstitial', startTime: 20, duration: 12 }, { id: 'AD-1-CONCURRENT', kind: 'concurrent', startTime: 20, duration: 12 }, { id: 'AD-2-LINEAR', kind: 'interstitial', startTime: 46, duration: 12 }, { id: 'AD-2-CONCURRENT', kind: 'concurrent', startTime: 46, duration: 12 }, { id: 'AD-3-LINEAR', kind: 'interstitial', startTime: 70, duration: 12 }, { id: 'AD-3-CONCURRENT', kind: 'concurrent', startTime: 70, duration: 12 }, { id: 'AD-4-LINEAR', kind: 'interstitial', startTime: 95, duration: 12 }, { id: 'AD-4-CONCURRENT', kind: 'concurrent', startTime: 95, duration: 12 }, { id: 'AD-5-LINEAR', kind: 'interstitial', startTime: 120, duration: 12 }, { id: 'AD-5-CONCURRENT', kind: 'concurrent', startTime: 120, duration: 48 } ],
+    expected: [ { id: 'AD-1-LINEAR', kind: 'interstitial', startTime: 20, duration: 12 }, { id: 'AD-1-CONCURRENT', kind: 'concurrent', startTime: 20, duration: 12 }, { id: 'AD-2-LINEAR', kind: 'interstitial', startTime: 45, duration: 12 }, { id: 'AD-2-CONCURRENT', kind: 'concurrent', startTime: 45, duration: 12 }, { id: 'AD-3-LINEAR', kind: 'interstitial', startTime: 70, duration: 12 }, { id: 'AD-3-CONCURRENT', kind: 'concurrent', startTime: 70, duration: 12 }, { id: 'AD-4-LINEAR', kind: 'interstitial', startTime: 95, duration: 12 }, { id: 'AD-4-CONCURRENT', kind: 'concurrent', startTime: 95, duration: 12 }, { id: 'AD-5-LINEAR', kind: 'interstitial', startTime: 120, duration: 12 }, { id: 'AD-5-CONCURRENT', kind: 'concurrent', startTime: 120, duration: 48 } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/program-ranges-and-volume.test.js:271:1
+✖ the ten ranges land where T-04 measured them on the bar (1.027771ms)
+  AssertionError [ERR_ASSERTION]: AD-2-LINEAR left
+  
+  25.555556 !== 25
+  
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:280:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 25.555556,
+    expected: 25,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+============================================================================
+M03 — Apunta una tanda a un asset-list que no esta.
+============================================================================
+
+--- node --test --test-name-pattern "the run of the script is the five breaks of the recording" test/program-ranges-and-volume.test.js   (exit 1) ---
+✖ the run of the script is the five breaks of the recording (2.785264ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 94.832253
+
+✖ failing tests:
+
+test at test/program-ranges-and-volume.test.js:125:1
+✖ the run of the script is the five breaks of the recording (2.785264ms)
+  AssertionError [ERR_ASSERTION]: break 1 names asset-list-cornerOverlayy.json, which is not in test/fixtures/asset-lists/
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:138:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+--- node --test test/program-ranges-and-volume.test.js   (el radio: el archivo entero, exit 1) ---
+✖ the run of the script is the five breaks of the recording (2.71778ms)
+✔ the two classes the playlist signals become the two kinds the contract carries (0.255795ms)
+✖ the five breaks are the ten ranges T-05 read off the contract (0.389115ms)
+✔ a break of no experiences is no range, and a tag that declares no length is no range either (0.314755ms)
+✔ the window of a concurrent break spans every experience its asset-list declares (0.208402ms)
+✖ the ten ranges land where T-04 measured them on the bar (0.261178ms)
+✖ the same ten ranges on a programme of another length land somewhere else (0.26591ms)
+✖ a range that cannot be placed is not a mark (0.219545ms)
+✔ with no volume in the asset-list the ad comes out silent and the programme does not (1.253918ms)
+✔ the mix of the Quad is the one the asset-list declares, element by element (0.629191ms)
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||` (0.308824ms)
+✔ a volume that is not a number falls back to the element own default, and there are two (0.203864ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 7
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 107.875399
+
+✖ failing tests:
+
+test at test/program-ranges-and-volume.test.js:125:1
+✖ the run of the script is the five breaks of the recording (2.71778ms)
+  AssertionError [ERR_ASSERTION]: break 1 names asset-list-cornerOverlayy.json, which is not in test/fixtures/asset-lists/
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:138:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at test/program-ranges-and-volume.test.js:180:1
+✖ the five breaks are the ten ranges T-05 read off the contract (0.389115ms)
+  Error: ENOENT: no such file or directory, open '/home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/fixtures/asset-lists/asset-list-cornerOverlayy.json'
+      at readFileSync (node:fs:436:20)
+      at read (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:49:24)
+      at readJson (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:50:39)
+      at programRanges (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:119:23)
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:183:18)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/fixtures/asset-lists/asset-list-cornerOverlayy.json'
+  }
+
+test at test/program-ranges-and-volume.test.js:271:1
+✖ the ten ranges land where T-04 measured them on the bar (0.261178ms)
+  Error: ENOENT: no such file or directory, open '/home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/fixtures/asset-lists/asset-list-cornerOverlayy.json'
+      at readFileSync (node:fs:436:20)
+      at read (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:49:24)
+      at readJson (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:50:39)
+      at programRanges (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:119:23)
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:275:23)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/fixtures/asset-lists/asset-list-cornerOverlayy.json'
+  }
+
+test at test/program-ranges-and-volume.test.js:297:1
+✖ the same ten ranges on a programme of another length land somewhere else (0.26591ms)
+  Error: ENOENT: no such file or directory, open '/home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/fixtures/asset-lists/asset-list-cornerOverlayy.json'
+      at readFileSync (node:fs:436:20)
+      at read (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:49:24)
+      at readJson (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:50:39)
+      at programRanges (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:119:23)
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:306:18)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/fixtures/asset-lists/asset-list-cornerOverlayy.json'
+  }
+
+test at test/program-ranges-and-volume.test.js:320:1
+✖ a range that cannot be placed is not a mark (0.219545ms)
+  Error: ENOENT: no such file or directory, open '/home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/fixtures/asset-lists/asset-list-cornerOverlayy.json'
+      at readFileSync (node:fs:436:20)
+      at read (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:49:24)
+      at readJson (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:50:39)
+      at programRanges (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:119:23)
+      at TestContext.<anonymous> (file:///home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/program-ranges-and-volume.test.js:321:19)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/test/fixtures/asset-lists/asset-list-cornerOverlayy.json'
+  }
+
+============================================================================
+El fixture restaurado: npm test (node --test) entero
+============================================================================
+
+--- node --test   (exit 0) ---
+✔ the fixtures of the phase are the breaks the readings were taken on (3.138174ms)
+✔ a break of one asset opens at the START-DATE, which is every break of the recording (1.829756ms)
+✔ each asset begins where the one before it ended, over the breaks of three, four and two (1.094292ms)
+✔ the start of an item is an offset inside its own asset and not from the START-DATE (0.321838ms)
+✔ two ads of one break are two identities even when they share the layout (0.435706ms)
+✔ the ordinal of an ad is of the whole break, so two items of one asset are two ads (0.390934ms)
+✔ an ASSET with a URI and a DURATION and nothing else is one full-frame ad (0.696226ms)
+✔ in the mixed break the full-frame ad silences the programme and the concurrent ones do not (1.92564ms)
+✔ the three shapes this client cannot draw are the three that cannot become a box (0.575762ms)
+✔ a block this client cannot draw plays the asset own URI, and the ads around it do not move (0.848994ms)
+✔ an empty uri and a media type nobody knows are not failures of the block (0.855116ms)
+✔ none of the asset-lists the demo serves falls back, and the two linear ads are declared ones (1.485808ms)
+✔ an asset with nothing to play is skipped alone, and the ads after it keep their windows (0.635668ms)
+✔ the asset-list that cannot be read cancels the whole break, which is not skipping an asset (0.742312ms)
+✔ a list that declares no ASSETS plays nothing and reports no range (0.371749ms)
+✔ a break of several ads is one range, from the first to start to the last to end (0.561803ms)
+✔ viewport is four inset percentages in the order top right bottom left (3.698619ms)
+✔ a viewport that is not four numbers falls back to the full frame, and warns (0.31321ms)
+✔ each of the six asset-lists resolves to one experience with its type and window (0.512065ms)
+✔ the fifteen elements come out with the ids, the uri and the mediaType of the payload (0.577102ms)
+✔ elements come out ordered by ascending zDepth in the six layouts (0.411892ms)
+✔ in squeezebackFrame the ad is the background and the primary content is on top (0.236721ms)
+✔ on an equal zDepth the order of the payload holds (0.298202ms)
+✔ the two overlays carry no primaryContent, and the layer assumes the full frame at zDepth 0 (0.329629ms)
+✔ the four layouts that do carry primaryContent keep its zDepth and its viewport (1.557295ms)
+✔ no payload of the tool carries volume: the ad comes out silent and the show does not (0.511652ms)
+✔ an explicit volume of 0 survives, because a silent ad is silent on purpose (0.265659ms)
+✔ the activation window is half open: in at startTime, out at the end (0.28718ms)
+✔ activeAt returns every experience active at that instant (0.207137ms)
+✔ the insets become the fifteen boxes in pixels T-03 measured (0.461746ms)
+✔ the conversion follows the player area, which is what a resize depends on (0.178425ms)
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ the run of the script is the five breaks of the recording (3.247222ms)
+✔ the two classes the playlist signals become the two kinds the contract carries (0.247304ms)
+✔ the five breaks are the ten ranges T-05 read off the contract (3.006072ms)
+✔ a break of no experiences is no range, and a tag that declares no length is no range either (0.342715ms)
+✔ the window of a concurrent break spans every experience its asset-list declares (0.200774ms)
+✔ the ten ranges land where T-04 measured them on the bar (1.201772ms)
+✔ the same ten ranges on a programme of another length land somewhere else (1.243462ms)
+✔ a range that cannot be placed is not a mark (1.420119ms)
+✔ with no volume in the asset-list the ad comes out silent and the programme does not (0.589686ms)
+✔ the mix of the Quad is the one the asset-list declares, element by element (0.558286ms)
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||` (0.286326ms)
+✔ a volume that is not a number falls back to the element own default, and there are two (0.189668ms)
+ℹ tests 43
+ℹ suites 0
+ℹ pass 43
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 158.564292

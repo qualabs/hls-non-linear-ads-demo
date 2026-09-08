@@ -3003,3 +3003,52 @@ por audiencia.
 siguen sin `DESIGN.md`. No se silencian y no se rellenan. La fase 05 sale limpia,
 incluido el chequeo de que ningún bloque de task difiera una decisión a una
 persona.
+
+## 2026-09-08 — T-01 de la fase 05: la suite dejó de leer la gestión del desarrollo, y los 43 tests son los mismos 43
+
+`test/` ya no lee un solo archivo fuera de `test/` y `lib/`, salvo el script de
+señalización, que quedó en un lugar solo y con el porqué escrito al lado. Los
+cinco JSON de mediciones y los trece asset-lists se copiaron a `test/fixtures/`,
+y de ahí en adelante son del test: **dieciocho de dieciocho copias idénticas a su
+original**, verificadas con `diff` y `sha256` el día que se hicieron, que es el
+único momento en que las dos copias se comparan a propósito. La evidencia de las
+fases quedó intacta como registro.
+
+**La tabla de la corrida dejó de salir de un parseo.** Las cinco tandas —segundo
+y asset-list— se declaran en `test/fixtures/run.json`, que reemplaza el
+`matchAll` sobre `senalizar-contenido.sh` del que salía la mitad de los tests de
+`program-ranges-and-volume.test.js`. Las tres afirmaciones que hablan del script
+—que señaliza cinco breaks, que el `PLANNED-DURATION` se computa y no se tipea, y
+que escribe las dos `CLASS`— siguen leyendo el script en la raíz, que es donde
+todavía está: las muda la T-03, cuando exista la demo sobre la que pueden hablar.
+
+**La red no perdió tensión, y eso se midió.** Los 43 tests son los mismos 43, con
+los mismos nombres y en el mismo orden (`diff` del inventario antes y después,
+vacío). La campaña de mutación acotada a la regla que la task es dueña —sacar una
+tanda, cambiar un segundo, apuntar a un asset-list que no está— dio **tres rojos
+de tres**, cada uno en el test dueño de la regla y con el mensaje que nombra la
+causa. Ninguna quedó verde.
+
+**Los tests nuevos son afirmaciones nuevas adentro del test que ya existía**, no
+tests con nombre propio: es la única forma de cumplir a la vez lo que el bloque
+pide —tests nuevos— y lo que restringe —la misma lista de nombres y la misma
+cuenta—, y el propio bloque señala ese test como el lugar. La cuenta quedó en 43.
+El nombre del test quedó a medio camino de lo que hace hoy, y se resuelve en la
+T-03, que lo parte en dos.
+
+**Un hallazgo, y es del instrumento y no del código**: el grep de la definición de
+done, `/usr/bin/grep -rn "\.project\|signalling/" test/`, no puede dar vacío como
+está escrito. Devuelve quince líneas, las quince adentro de dos JSON de
+mediciones recién copiados, y son líneas de consola que el navegador imprimió
+durante la corrida medida, con la URL del asset-list adentro del texto. Es dato
+medido y editarlo sería falsificar un registro. El instrumento correcto es el
+mismo grep sobre el código de la suite (`--include=*.js`), que sí da vacío.
+Aplica igual a la T-03 y a la T-06, que repiten ese grep con `demo/` agregado, y
+queda reportado sin tocar sus bloques. Por la misma razón,
+`test/fixtures/README.md` escribe la procedencia sin el prefijo de la carpeta de
+gestión y sin nombrar la carpeta de señalización, y dice ahí mismo que lo hace a
+propósito, para que nadie borre la procedencia arreglando un grep.
+
+`npm test` en verde y las dos costuras de `verificar-cortes.mjs` en verde. La
+evidencia, con el inventario antes y después, los diffs y la salida verbatim de
+las tres mutaciones, en `phases/05-la-sdk-y-sus-demos/tasks/T-01/`.

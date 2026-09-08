@@ -1,0 +1,9 @@
+{
+  "breaks": [
+    { "slotStart": 20, "assetList": "asset-list-cornerOverlay.json" },
+    { "slotStart": 45, "assetList": "asset-list-squeezebackLShape.json" },
+    { "slotStart": 70, "assetList": "asset-list-squeezebackLShape-image.json" },
+    { "slotStart": 95, "assetList": "asset-list-multiView.json" },
+    { "slotStart": 120, "assetList": "asset-list-mezclado.json" }
+  ]
+}

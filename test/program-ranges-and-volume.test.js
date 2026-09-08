@@ -20,18 +20,19 @@
 // functions and nothing else. No DOM, no browser, no image comparison, and
 // coverage is not the goal.
 //
-// The data is the real one. The five breaks come from the table in
-// `scripts/senalizar-contenido.sh`, which is what writes the signalled
-// playlist; the layouts come from `signalling/`, which is what the server
-// hands over; and the expected values are what T-02 read off the contract in
-// flight, what T-04 measured on the bar and what T-05 measured on each media
-// node. The three cases that ARE invented say so where they are.
+// The data is the real one and it is in `test/fixtures/`: the five breaks of
+// the run are declared in `fixtures/run.json`, the layouts are the copies of
+// the asset-lists the server hands over, and the expected values are what T-02
+// read off the contract in flight, what T-04 measured on the bar and what T-05
+// measured on each media node. Every fixture says where it was copied from in
+// `fixtures/README.md`, and from that copy on it belongs to this suite
+// (ADR 0023). The three cases that ARE invented say so where they are.
 //
 // Run: npm test   (node --test, no dependencies)
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 
 import {
   CONCURRENT_CLASS,
@@ -48,21 +49,30 @@ import { rangeSpan } from '../lib/controls.js';
 const read = (path) => readFileSync(new URL(path, import.meta.url), 'utf8');
 const readJson = (path) => JSON.parse(read(path));
 
-/** The script that writes the signalled playlist: the five breaks live here. */
+/**
+ * The script that writes the signalled playlist. It is the one path of this
+ * suite that leaves `test/` and `lib/`, and it is here because the assertions
+ * that read it are about the script itself: that it signals five breaks, that
+ * it computes the `PLANNED-DURATION` instead of typing it, and that it writes
+ * the two classes the library translates. A copy of it frozen in `fixtures/`
+ * would leave those three asserting over nothing. The DATA of the run no longer
+ * comes from here.
+ */
 const SIGNALLER = read('../scripts/senalizar-contenido.sh');
 /** What T-02 read off `programRanges()` with the player running. */
-const T02 = readJson('../.project/phases/02-sdk-y-controles/tasks/T-02/t02-los-rangos-del-programa.json');
+const T02 = readJson('./fixtures/mediciones/t02-los-rangos-del-programa.json');
 /** What T-04 measured of the marks on the bar, over a 180 s programme. */
-const T04 = readJson('../.project/phases/02-sdk-y-controles/tasks/T-04/t04-la-medicion.json');
+const T04 = readJson('./fixtures/mediciones/t04-la-medicion.json');
 /** What T-05 measured on every media node, volume by volume. */
-const T05 = readJson('../.project/phases/02-sdk-y-controles/tasks/T-05/t05-la-medicion.json');
+const T05 = readJson('./fixtures/mediciones/t05-la-medicion.json');
 /** What T-05 of phase 03 read off the contract with the mixed break in the run. */
-const T05_MIXED = readJson(
-  '../.project/phases/03-breaks-multiples-y-repliegue/tasks/T-05/t05-el-recorrido-con-el-break-mezclado.json'
-);
+const T05_MIXED = readJson('./fixtures/mediciones/t05-el-recorrido-con-el-break-mezclado.json');
 
 /** The length of the primary content, re-read in flight by T-02 and by T-04. */
 const PROGRAMME = T02.laLectura.largoDelPrimarioReleido; // 180
+
+/** Where the copy of an asset-list lives, which is inside this suite. */
+const assetListPath = (list) => `./fixtures/asset-lists/${list}`;
 
 /**
  * The length a Date Range declares, which the script no longer writes by hand:
@@ -73,22 +83,22 @@ const PROGRAMME = T02.laLectura.largoDelPrimarioReleido; // 180
  * compatibility pair inverts inside it.
  */
 const declaredLength = (list) =>
-  readJson(`../signalling/${list}`).ASSETS.reduce((total, asset) => total + Number(asset.DURATION), 0);
+  readJson(assetListPath(list)).ASSETS.reduce((total, asset) => total + Number(asset.DURATION), 0);
 
 /**
- * The recording's run, parsed out of the shell script that writes the tags:
- * second of playback and asset-list, five rows. Parsed and not copied so that a
- * break moved in the script moves here too -- the expected values below are a
- * reading of the browser, and a reading is about a run.
+ * The recording's run, DECLARED: second of playback and asset-list, five rows,
+ * in `fixtures/run.json`. It used to be parsed out of the RECORRIDO table of
+ * the shell script above, and it is declared here because the expected values
+ * below are a reading of the browser and a reading is about a run -- so the run
+ * belongs to this suite, frozen alongside the readings that describe it
+ * (ADR 0023). What that costs, and what watches the live run instead, is
+ * written in `fixtures/README.md`.
  */
-const RUN = [...SIGNALLER.matchAll(/^\s*"(\d+)\|(asset-list-[^|]+)\|/gm)].map(
-  ([, offset, list], i) => ({
-    n: i + 1,
-    slotStart: Number(offset),
-    plannedDuration: declaredLength(list),
-    assetList: readJson(`../signalling/${list}`)
-  })
-);
+const RUN = readJson('./fixtures/run.json').breaks.map(({ slotStart, assetList }, i) => ({
+  n: i + 1,
+  slotStart,
+  list: assetList
+}));
 
 /** What the Apple-class tag of every break declares: one linear ad of 12 s. */
 const LINEAR_PLANNED = declaredLength('asset-list-linear.json');
@@ -104,21 +114,37 @@ function programRanges() {
   for (const { n, slotStart } of RUN) {
     ranges.push(rangeOfDateRange(`AD-${n}-LINEAR`, { plannedDuration: LINEAR_PLANNED }, slotStart));
   }
-  for (const { n, slotStart, assetList } of RUN) {
+  for (const { n, slotStart, list } of RUN) {
     const id = `AD-${n}-CONCURRENT`;
+    const assetList = readJson(assetListPath(list));
     ranges.push(rangeOfExperiences(id, resolveAssetList(assetList, { id, slotStart })));
   }
   return ranges.sort((a, b) => a.startTime - b.startTime);
 }
 
 test('the run of the script is the five breaks of the recording', () => {
-  // The parse above is the load-bearing part of everything below it, so it is
-  // asserted instead of assumed: a script that stops matching would otherwise
-  // make every test in the first half pass over an empty list.
-  assert.equal(RUN.length, 5, 'five rows in the RECORRIDO table of senalizar-contenido.sh');
+  // The table above is the load-bearing part of everything below it, so it is
+  // asserted instead of assumed: a fixture that lost a row would otherwise make
+  // every test in the first half pass over a shorter run, and a shorter run is
+  // not a failure anybody sees -- it is the same tests passing over less.
+  assert.equal(RUN.length, 5, 'five breaks declared in fixtures/run.json');
   assert.deepEqual(RUN.map((b) => b.slotStart), [20, 45, 70, 95, 120]);
+  // And every row carries its two fields, with the asset-list it names present
+  // in this suite: a name mistyped in the fixture is a table read against a
+  // file that is not there, which is the other way this run can quietly shrink.
+  for (const { n, slotStart, list } of RUN) {
+    assert.equal(typeof slotStart, 'number', `break ${n} declares the second it is signalled at`);
+    assert.match(list, /^asset-list-.+\.json$/, `break ${n} declares its asset-list`);
+    assert.ok(existsSync(new URL(assetListPath(list), import.meta.url)),
+      `break ${n} names ${list}, which is not in test/fixtures/asset-lists/`);
+  }
+  // AND THE SCRIPT STILL SIGNALS FIVE BREAKS, which is an assertion about the
+  // script and not about the table: now that the run is declared here, nothing
+  // else in this file would notice a break added to the script or taken out.
+  assert.equal([...SIGNALLER.matchAll(/^\s*"(\d+)\|(asset-list-[^|]+)\|/gm)].length, 5,
+    'five rows in the RECORRIDO table of senalizar-contenido.sh');
   // Four breaks of one ad and a last one of four, which is the mixed break.
-  assert.deepEqual(RUN.map((b) => b.plannedDuration), [12, 12, 12, 12, 48]);
+  assert.deepEqual(RUN.map((b) => declaredLength(b.list)), [12, 12, 12, 12, 48]);
   assert.equal(LINEAR_PLANNED, 12);
   // AND THE LENGTH IS COMPUTED AND NOT TYPED, which is a rule about the script
   // and not about this run. A hard-wired `PLANNED-DURATION` declares twelve
@@ -331,7 +357,7 @@ const MEASURED_VOLUME = [
 ];
 
 function resolvedElements(list, type) {
-  const [experience] = resolveAssetList(readJson(`../signalling/${list}`), { id: type, slotStart: 0 });
+  const [experience] = resolveAssetList(readJson(assetListPath(list)), { id: type, slotStart: 0 });
   return experience.elements;
 }
 
@@ -360,9 +386,9 @@ test('with no volume in the asset-list the ad comes out silent and the programme
 
 test('the mix of the Quad is the one the asset-list declares, element by element', () => {
   // The mix David asked for -- the bottom left at 100 and the other three at 10
-  // -- lives in `signalling/asset-list-multiView.json` and not in code. What is
-  // asserted is that it survives the layer intact and reaches the media nodes
-  // as the fractions T-05 read off them.
+  // -- lives in `asset-list-multiView.json` and not in code. What is asserted
+  // is that it survives the layer intact and reaches the media nodes as the
+  // fractions T-05 read off them.
   const measured = T05.quadConMezcla.elementos;
   const elements = resolvedElements('asset-list-multiView.json', 'multiView');
   assert.deepEqual(

@@ -1,0 +1,909 @@
+{
+  "enVentana": {
+    "t": 60.675671,
+    "pausado": true,
+    "largoDelPrimarioReleido": 180,
+    "settled": true,
+    "cuantosRangos": 10,
+    "porClase": {
+      "interstitial": 5,
+      "concurrent": 5
+    },
+    "marcasEnElRiel": 5,
+    "marcasDebajo": 5,
+    "riel": {
+      "left": 1042.84375,
+      "top": 624.265625,
+      "width": 559.3125,
+      "height": 8
+    },
+    "relleno": {
+      "left": 1042.84375,
+      "width": 188.53125
+    },
+    "esperado": {
+      "AD-1-LINEAR": {
+        "kind": "interstitial",
+        "left": 11.111111,
+        "width": 6.666667,
+        "izquierdaEnPx": 1104.989583,
+        "anchoEnPx": 37.2875
+      },
+      "AD-1-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 11.111111,
+        "width": 6.666667,
+        "izquierdaEnPx": 1104.989583,
+        "anchoEnPx": 37.2875
+      },
+      "AD-2-LINEAR": {
+        "kind": "interstitial",
+        "left": 25,
+        "width": 6.666667,
+        "izquierdaEnPx": 1182.671875,
+        "anchoEnPx": 37.2875
+      },
+      "AD-2-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 25,
+        "width": 6.666667,
+        "izquierdaEnPx": 1182.671875,
+        "anchoEnPx": 37.2875
+      },
+      "AD-3-LINEAR": {
+        "kind": "interstitial",
+        "left": 38.888889,
+        "width": 6.666667,
+        "izquierdaEnPx": 1260.354167,
+        "anchoEnPx": 37.2875
+      },
+      "AD-3-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 38.888889,
+        "width": 6.666667,
+        "izquierdaEnPx": 1260.354167,
+        "anchoEnPx": 37.2875
+      },
+      "AD-4-LINEAR": {
+        "kind": "interstitial",
+        "left": 52.777778,
+        "width": 6.666667,
+        "izquierdaEnPx": 1338.036458,
+        "anchoEnPx": 37.2875
+      },
+      "AD-4-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 52.777778,
+        "width": 6.666667,
+        "izquierdaEnPx": 1338.036458,
+        "anchoEnPx": 37.2875
+      },
+      "AD-5-LINEAR": {
+        "kind": "interstitial",
+        "left": 66.666667,
+        "width": 6.666667,
+        "izquierdaEnPx": 1415.71875,
+        "anchoEnPx": 37.2875
+      },
+      "AD-5-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 66.666667,
+        "width": 6.666667,
+        "izquierdaEnPx": 1415.71875,
+        "anchoEnPx": 37.2875
+      }
+    },
+    "nodos": [
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "11.1111%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1104.984375,
+          "top": 624.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.111102,
+          "hasta": 0.177757
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "25%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1182.671875,
+          "top": 624.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.25,
+          "hasta": 0.316655
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "38.8889%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1260.34375,
+          "top": 624.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.38887,
+          "hasta": 0.455526
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "52.7778%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1338.03125,
+          "top": 624.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.527768,
+          "hasta": 0.594424
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "66.6667%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1415.71875,
+          "top": 624.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.666667,
+          "hasta": 0.733322
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "11.1111%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1104.984375,
+          "top": 635.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.111102,
+          "hasta": 0.177757
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "25%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1182.671875,
+          "top": 635.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.25,
+          "hasta": 0.316655
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "38.8889%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1260.34375,
+          "top": 635.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.38887,
+          "hasta": 0.455526
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "52.7778%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1338.03125,
+          "top": 635.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.527768,
+          "hasta": 0.594424
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "66.6667%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1415.71875,
+          "top": 635.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.666667,
+          "hasta": 0.733322
+        }
+      }
+    ],
+    "fullscreen": false,
+    "viewport": {
+      "w": 1920,
+      "h": 901
+    }
+  },
+  "conAviso": {
+    "t": 22.680209,
+    "pausado": true,
+    "largoDelPrimarioReleido": 180,
+    "settled": true,
+    "cuantosRangos": 10,
+    "porClase": {
+      "interstitial": 5,
+      "concurrent": 5
+    },
+    "marcasEnElRiel": 5,
+    "marcasDebajo": 5,
+    "riel": {
+      "left": 1042.84375,
+      "top": 624.265625,
+      "width": 559.3125,
+      "height": 8
+    },
+    "relleno": {
+      "left": 1042.84375,
+      "width": 70.46875
+    },
+    "esperado": {
+      "AD-1-LINEAR": {
+        "kind": "interstitial",
+        "left": 11.111111,
+        "width": 6.666667,
+        "izquierdaEnPx": 1104.989583,
+        "anchoEnPx": 37.2875
+      },
+      "AD-1-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 11.111111,
+        "width": 6.666667,
+        "izquierdaEnPx": 1104.989583,
+        "anchoEnPx": 37.2875
+      },
+      "AD-2-LINEAR": {
+        "kind": "interstitial",
+        "left": 25,
+        "width": 6.666667,
+        "izquierdaEnPx": 1182.671875,
+        "anchoEnPx": 37.2875
+      },
+      "AD-2-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 25,
+        "width": 6.666667,
+        "izquierdaEnPx": 1182.671875,
+        "anchoEnPx": 37.2875
+      },
+      "AD-3-LINEAR": {
+        "kind": "interstitial",
+        "left": 38.888889,
+        "width": 6.666667,
+        "izquierdaEnPx": 1260.354167,
+        "anchoEnPx": 37.2875
+      },
+      "AD-3-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 38.888889,
+        "width": 6.666667,
+        "izquierdaEnPx": 1260.354167,
+        "anchoEnPx": 37.2875
+      },
+      "AD-4-LINEAR": {
+        "kind": "interstitial",
+        "left": 52.777778,
+        "width": 6.666667,
+        "izquierdaEnPx": 1338.036458,
+        "anchoEnPx": 37.2875
+      },
+      "AD-4-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 52.777778,
+        "width": 6.666667,
+        "izquierdaEnPx": 1338.036458,
+        "anchoEnPx": 37.2875
+      },
+      "AD-5-LINEAR": {
+        "kind": "interstitial",
+        "left": 66.666667,
+        "width": 6.666667,
+        "izquierdaEnPx": 1415.71875,
+        "anchoEnPx": 37.2875
+      },
+      "AD-5-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 66.666667,
+        "width": 6.666667,
+        "izquierdaEnPx": 1415.71875,
+        "anchoEnPx": 37.2875
+      }
+    },
+    "nodos": [
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "11.1111%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1104.984375,
+          "top": 624.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.111102,
+          "hasta": 0.177757
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "25%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1182.671875,
+          "top": 624.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.25,
+          "hasta": 0.316655
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "38.8889%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1260.34375,
+          "top": 624.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.38887,
+          "hasta": 0.455526
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "52.7778%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1338.03125,
+          "top": 624.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.527768,
+          "hasta": 0.594424
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "66.6667%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1415.71875,
+          "top": 624.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.666667,
+          "hasta": 0.733322
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "11.1111%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1104.984375,
+          "top": 635.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.111102,
+          "hasta": 0.177757
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "25%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1182.671875,
+          "top": 635.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.25,
+          "hasta": 0.316655
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "38.8889%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1260.34375,
+          "top": 635.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.38887,
+          "hasta": 0.455526
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "52.7778%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1338.03125,
+          "top": 635.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.527768,
+          "hasta": 0.594424
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "66.6667%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1415.71875,
+          "top": 635.265625,
+          "width": 37.28125,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.666667,
+          "hasta": 0.733322
+        }
+      }
+    ],
+    "fullscreen": false,
+    "viewport": {
+      "w": 1920,
+      "h": 901
+    }
+  },
+  "fullscreen": {
+    "t": 60.680508,
+    "pausado": true,
+    "largoDelPrimarioReleido": 180,
+    "settled": true,
+    "cuantosRangos": 10,
+    "porClase": {
+      "interstitial": 5,
+      "concurrent": 5
+    },
+    "marcasEnElRiel": 5,
+    "marcasDebajo": 5,
+    "riel": {
+      "left": 54.84375,
+      "top": 866,
+      "width": 1764.3125,
+      "height": 8
+    },
+    "relleno": {
+      "left": 54.84375,
+      "width": 594.765625
+    },
+    "esperado": {
+      "AD-1-LINEAR": {
+        "kind": "interstitial",
+        "left": 11.111111,
+        "width": 6.666667,
+        "izquierdaEnPx": 250.878472,
+        "anchoEnPx": 117.620833
+      },
+      "AD-1-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 11.111111,
+        "width": 6.666667,
+        "izquierdaEnPx": 250.878472,
+        "anchoEnPx": 117.620833
+      },
+      "AD-2-LINEAR": {
+        "kind": "interstitial",
+        "left": 25,
+        "width": 6.666667,
+        "izquierdaEnPx": 495.921875,
+        "anchoEnPx": 117.620833
+      },
+      "AD-2-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 25,
+        "width": 6.666667,
+        "izquierdaEnPx": 495.921875,
+        "anchoEnPx": 117.620833
+      },
+      "AD-3-LINEAR": {
+        "kind": "interstitial",
+        "left": 38.888889,
+        "width": 6.666667,
+        "izquierdaEnPx": 740.965278,
+        "anchoEnPx": 117.620833
+      },
+      "AD-3-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 38.888889,
+        "width": 6.666667,
+        "izquierdaEnPx": 740.965278,
+        "anchoEnPx": 117.620833
+      },
+      "AD-4-LINEAR": {
+        "kind": "interstitial",
+        "left": 52.777778,
+        "width": 6.666667,
+        "izquierdaEnPx": 986.008681,
+        "anchoEnPx": 117.620833
+      },
+      "AD-4-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 52.777778,
+        "width": 6.666667,
+        "izquierdaEnPx": 986.008681,
+        "anchoEnPx": 117.620833
+      },
+      "AD-5-LINEAR": {
+        "kind": "interstitial",
+        "left": 66.666667,
+        "width": 6.666667,
+        "izquierdaEnPx": 1231.052083,
+        "anchoEnPx": 117.620833
+      },
+      "AD-5-CONCURRENT": {
+        "kind": "concurrent",
+        "left": 66.666667,
+        "width": 6.666667,
+        "izquierdaEnPx": 1231.052083,
+        "anchoEnPx": 117.620833
+      }
+    },
+    "nodos": [
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "11.1111%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 250.875,
+          "top": 866,
+          "width": 117.609375,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.111109,
+          "hasta": 0.177769
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "25%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 495.921875,
+          "top": 866,
+          "width": 117.609375,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.25,
+          "hasta": 0.31666
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "38.8889%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 740.953125,
+          "top": 866,
+          "width": 117.609375,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.388882,
+          "hasta": 0.455542
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "52.7778%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 986,
+          "top": 866,
+          "width": 117.609375,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.527773,
+          "hasta": 0.594433
+        }
+      },
+      {
+        "clase": "qa-mark",
+        "carril": "sobre el riel",
+        "title": "concurrent ad: drawn over the content, which never stops",
+        "color": "rgb(162, 115, 255)",
+        "estilo": {
+          "left": "66.6667%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1231.046875,
+          "top": 866,
+          "width": 117.609375,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.666664,
+          "hasta": 0.733324
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "11.1111%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 250.875,
+          "top": 877,
+          "width": 117.609375,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.111109,
+          "hasta": 0.177769
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "25%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 495.921875,
+          "top": 877,
+          "width": 117.609375,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.25,
+          "hasta": 0.31666
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "38.8889%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 740.953125,
+          "top": 877,
+          "width": 117.609375,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.388882,
+          "hasta": 0.455542
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "52.7778%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 986,
+          "top": 877,
+          "width": 117.609375,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.527773,
+          "hasta": 0.594433
+        }
+      },
+      {
+        "clase": "qa-cue",
+        "carril": "debajo del riel",
+        "title": "traditional interstitial: where a client already in the market replaces the content",
+        "color": "rgb(255, 204, 0)",
+        "estilo": {
+          "left": "66.6667%",
+          "width": "6.66667%"
+        },
+        "dibujado": {
+          "left": 1231.046875,
+          "top": 877,
+          "width": 117.609375,
+          "height": 8
+        },
+        "fraccionMedida": {
+          "desde": 0.666664,
+          "hasta": 0.733324
+        }
+      }
+    ],
+    "fullscreen": true,
+    "viewport": {
+      "w": 1920,
+      "h": 901
+    }
+  },
+  "consola": []
+}

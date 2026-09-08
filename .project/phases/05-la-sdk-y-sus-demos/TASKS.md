@@ -34,7 +34,7 @@ ausencia se lea como una decisión y no como un descuido.
 
 | id   | brief                                                              | status  | plan | evidence |
 | ---- | ------------------------------------------------------------------ | ------- | ---- | -------- |
-| T-01 | Los fixtures pasan a ser del test                                  | pending | —    | —        |
+| T-01 | Los fixtures pasan a ser del test                                  | done    | —    | [tasks/T-01/](tasks/T-01/) |
 | T-02 | El servidor sirve la carpeta que se le nombra                       | pending | —    | —        |
 | T-03 | La mudanza: la página baja a `demo/compatibility-pair/`             | pending | —    | —        |
 | T-04 | El manifiesto declara la sdk                                        | pending | —    | —        |
