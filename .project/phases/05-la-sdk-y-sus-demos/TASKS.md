@@ -47,7 +47,7 @@ pedía, y aplica a las tres tasks que lo repiten.
 | T-02 | El servidor sirve la carpeta que se le nombra                       | done    | —    | [tasks/T-02/](tasks/T-02/) |
 | T-03 | La mudanza: la página baja a `demo/compatibility-pair/`             | done    | —    | [tasks/T-03/](tasks/T-03/) |
 | T-04 | El manifiesto declara la sdk                                        | done    | —    | [tasks/T-04/](tasks/T-04/) |
-| T-05 | El README de la raíz enruta y la demo cuenta su corrida             | pending | —    | —        |
+| T-05 | El README de la raíz enruta y la demo cuenta su corrida             | done    | —    | [tasks/T-05/](tasks/T-05/) |
 | T-06 | La corrida entera desde la estructura nueva                         | pending | —    | —        |
 
 ---

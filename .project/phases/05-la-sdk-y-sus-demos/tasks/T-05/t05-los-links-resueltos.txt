@@ -1,0 +1,130 @@
+$ python3 chequeo-de-links.py   # el script, entero, al final de este archivo
+
+== links markdown ==
+--- README.md: 6 links
+    OK       demo/compatibility-pair/README.md  ->  demo/compatibility-pair/README.md
+    OK       test/fixtures/README.md  ->  test/fixtures/README.md
+    OK       docs/contrato-senalizacion-renderizado.md  ->  docs/contrato-senalizacion-renderizado.md
+    OK       docs/integrating-the-library.md  ->  docs/integrating-the-library.md
+    OK       docs/contrato-senalizacion-renderizado.md  ->  docs/contrato-senalizacion-renderizado.md
+    OK       docs/integrating-the-library.md  ->  docs/integrating-the-library.md
+--- demo/compatibility-pair/README.md: 6 links
+    OK       ../../README.md  ->  README.md
+    OK       ../../docs/contrato-senalizacion-renderizado.md  ->  docs/contrato-senalizacion-renderizado.md
+    OK       brand/README.md  ->  demo/compatibility-pair/brand/README.md
+    OK       CREDITS.md  ->  demo/compatibility-pair/CREDITS.md
+    OK       ../../README.md  ->  README.md
+    OK       ../../docs/integrating-the-library.md  ->  docs/integrating-the-library.md
+
+== rutas escritas en prosa y en los bloques de codigo ==
+--- README.md
+    OK     ./dist/qualabs-concurrent-hls.js                         relativa al propio archivo
+    OK     ./run.sh                                                 relativa al propio archivo
+    OK     demo/                                                    relativa al propio archivo
+    OK     dist/                                                    relativa al propio archivo
+    OK     dist/qualabs-concurrent-hls.js                           relativa al propio archivo
+    OK     docs/                                                    relativa al propio archivo
+    OK     docs/contrato-senalizacion-renderizado.md                relativa al propio archivo
+    OK     docs/integrating-the-library.md                          relativa al propio archivo
+    OK     lib/                                                     relativa al propio archivo
+    OK     lib/concurrent-hls.js                                    relativa al propio archivo
+    OK     lib/controls.js                                          relativa al propio archivo
+    OK     lib/media.js                                             relativa al propio archivo
+    OK     lib/renderer.js                                          relativa al propio archivo
+    OK     lib/signalling.js                                        relativa al propio archivo
+    OK     package.json                                             relativa al propio archivo
+    OK     run.sh                                                   relativa al propio archivo
+    OK     scripts/                                                 relativa al propio archivo
+    OK     scripts/construir-libreria.sh                            relativa al propio archivo
+    OK     scripts/verificar-cortes.mjs                             relativa al propio archivo
+    OK     server.mjs                                               relativa al propio archivo
+    OK     test/                                                    relativa al propio archivo
+    OK     test/fixtures/                                           relativa al propio archivo
+    OK     vendor/hls.min.js                                        relativa al propio archivo
+--- demo/compatibility-pair/README.md
+    OK     ./demo/compatibility-pair/scripts/preparar-contenido.sh  relativa a la raiz del repo
+    OK     ./demo/compatibility-pair/scripts/senalizar-contenido.sh relativa a la raiz del repo
+    OK     ./run.sh                                                 relativa a la raiz del repo
+    OK     CREDITS.md                                               relativa al propio archivo
+    OK     brand/                                                   relativa al propio archivo
+    OK     brand/README.md                                          relativa al propio archivo
+    OK     content/                                                 relativa al propio archivo
+    OK     css/player.css                                           relativa al propio archivo
+    OK     dist/                                                    relativa a la raiz del repo
+    OK     docs/contrato-senalizacion-renderizado.md                relativa a la raiz del repo
+    OK     docs/integrating-the-library.md                          relativa a la raiz del repo
+    OK     index.html                                               relativa al propio archivo
+    OK     js/app.js                                                relativa al propio archivo
+    OK     js/contract-trace.js                                     relativa al propio archivo
+    OK     js/stock-player.js                                       relativa al propio archivo
+    OK     lib/                                                     relativa a la raiz del repo
+    OK     run.sh                                                   relativa a la raiz del repo
+    OK     scripts/                                                 relativa al propio archivo
+    OK     scripts/empaquetar-contenido.sh                          relativa al propio archivo
+    OK     scripts/senalizar-contenido.sh                           relativa al propio archivo
+    OK     server.mjs                                               relativa a la raiz del repo
+    OK     signalling/                                              relativa al propio archivo
+    OK     test/                                                    relativa al propio archivo
+    OK     test/signalled-run.test.js                               relativa al propio archivo
+    OK     vendor/                                                  relativa a la raiz del repo
+
+0 ruta(s) sin resolver
+
+exit=0
+
+--- chequeo-de-links.py, verbatim ---
+# Los links de los dos README, resueltos contra el disco: primero los links
+# markdown, y despues cada ruta escrita entre backticks o dentro de un bloque de
+# codigo, que es la forma en que una ruta se quedo vieja dos veces en esta fase.
+import re, sys
+from pathlib import Path
+
+ROOT = Path('.').resolve()
+FILES = ['README.md', 'demo/compatibility-pair/README.md']
+LINK = re.compile(r'\[[^\]]*\]\(([^)]+)\)')
+SPAN = re.compile(r'`([^`\n]+)`')
+TOKEN = re.compile(r'[A-Za-z0-9_./<>-]+')
+EXTS = ('.js', '.mjs', '.sh', '.json', '.md', '.html', '.css', '.svg')
+missing = 0
+
+def looks_like_path(tok):
+    if ' ' in tok or tok.startswith('/') or '://' in tok or '<' in tok:
+        return False
+    return tok.endswith('/') or tok.endswith(EXTS)
+
+print('== links markdown ==')
+for f in FILES:
+    p = ROOT / f
+    targets = LINK.findall(p.read_text())
+    print(f'--- {f}: {len(targets)} links')
+    for t in targets:
+        if t.startswith(('http://', 'https://', 'mailto:', '#')):
+            print(f'    absoluto  {t}')
+            continue
+        resolved = (p.parent / t.split('#')[0]).resolve()
+        ok = resolved.exists()
+        missing += 0 if ok else 1
+        print(f'    {"OK      " if ok else "FALTA   "} {t}  ->  {resolved.relative_to(ROOT)}')
+
+print()
+print('== rutas escritas en prosa y en los bloques de codigo ==')
+for f in FILES:
+    p = ROOT / f
+    prose, fences, in_fence = [], [], False
+    for line in p.read_text().split('\n'):
+        if line.startswith('```'):
+            in_fence = not in_fence
+            continue
+        (fences if in_fence else prose).append(line)
+    cands = set(SPAN.findall('\n'.join(prose))) | set(TOKEN.findall('\n'.join(fences)))
+    print(f'--- {f}')
+    for tok in sorted(c for c in cands if looks_like_path(c)):
+        cand = tok[2:] if tok.startswith('./') else tok
+        base = ('relativa al propio archivo' if (p.parent / cand).exists()
+                else ('relativa a la raiz del repo' if (ROOT / cand).exists() else None))
+        missing += 0 if base else 1
+        print(f'    {"OK    " if base else "FALTA "} {tok:56s} {base or "NO EXISTE en ninguna de las dos bases"}')
+
+print()
+print(f'{missing} ruta(s) sin resolver')
+sys.exit(1 if missing else 0)
