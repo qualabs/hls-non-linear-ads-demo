@@ -2905,3 +2905,101 @@ hoy es una línea; y las dos preguntas de especificación para SVTA.
 
 **El validador reporta dos rojos y ninguno es de esta fase**: las fases 02 y 04 no
 tienen `DESIGN.md`. No se silencian y no se rellenan.
+
+## 2026-09-08 — Fase 05 abierta y generada el mismo día: la raíz es la sdk, y seis ADR
+
+La fase 05 se abrió en diseño y se generó el mismo día. El `DESIGN.md` —453
+líneas, ocho decisiones, cada una con su alternativa descartada— quedó aprobado
+sin cambios, y de ahí salieron el `PHASE.md`, el `TASKS.md` con seis tasks y seis
+ADR nuevos, el 0020 al 0025.
+
+**Lo que la fase hace**: mover al árbol del repositorio la línea que el ADR 0015
+ya trazó adentro del código. La raíz queda con la sdk (`lib/`, `dist/`, `test/`,
+`docs/`, `vendor/`, `server.mjs`, `run.sh`, `package.json`, y los dos scripts de
+la librería) y la página baja entera a `demo/compatibility-pair/`, que es la
+primera de varias demos. Y de paso corta el único acoplamiento que va en la
+dirección equivocada: tres tests que leen JSON de `.project/`, dos que leen
+`signalling/` y uno que parsea `scripts/senalizar-contenido.sh`.
+
+**Los seis ADR y qué decidió cada uno.**
+
+- **0020** — la raíz del repositorio es la librería y `demo/` es donde se la
+  muestra, con una subcarpeta por demo. Reparto archivo por archivo, resuelto con
+  una sola pregunta ("¿existiría si no hubiera ninguna demo?"), `vendor/` en la
+  raíz porque la versión de hls.js es una propiedad de la sdk (ADR 0002), y una
+  demo se nombra por el argumento que hace: `compatibility-pair`, no la ocasión,
+  no el contenido, no la plataforma. **Generaliza el ADR 0015**, que queda
+  `accepted` con `generalized_by: "0020"` y una nota fechada: la línea se
+  ensancha del código al árbol y nada de lo que ese ADR afirma deja de valer.
+- **0021** — un `signalling/` por demo, y el criterio para la lista repetida: dos
+  demos que necesitaran el archivo idéntico son una demo con dos corridas, no una
+  carpeta compartida. Descartado un `demo/signalling/` común, que cuesta una
+  pregunta nueva por cada asset-list que se agregue.
+- **0022** — el servidor recibe su raíz de documentos como argumento y monta
+  `/dist/` y `/vendor/` contra la raíz del repositorio. Ocho líneas en un archivo
+  de cuarenta, y a cambio los trece asset-lists, el script de señalización y los
+  tres scripts de contenido quedan byte por byte iguales. Descartado reescribir
+  las URIs con el prefijo de la demo (trece archivos y va contra el ADR 0004) y
+  descartados los symlinks (los rechaza la guarda de traversal del propio
+  servidor).
+- **0023** — el código no lee `.project/` y la documentación sí lo cita. `test/`
+  sólo lee `test/` y `lib/`; los fixtures se copian a `test/fixtures/` y de ahí en
+  adelante son del test, sin chequeo contra el original; lo que habla del script
+  de señalización baja a `demo/compatibility-pair/test/` y afirma sobre los
+  archivos de la demo. La cita de `docs/contrato-senalizacion-renderizado.md` se
+  queda, con una cláusula que diga que apunta a la evidencia de una fase cerrada:
+  un test que **lee** el registro se rompe si el registro se reorganiza, un
+  documento que lo **cita** no se rompe con nada.
+- **0024** — el manifiesto declara la sdk sin afirmar que está publicada.
+  `name: qualabs-concurrent-hls`, `main`/`exports` a `./lib/concurrent-hls.js` y
+  no a `dist/` (que está gitignoreado), `files: ["lib/", "dist/", "docs/"]`, que
+  es el campo que hace el trabajo por lo que no está adentro, `private: true` y
+  `0.0.0` intactos, y `scripts` con los cuatro verbos de la sdk. `serve` y
+  `content` salen porque nombran rutas de una demo.
+- **0025** — el README de la raíz enruta y cada demo cuenta su corrida, con el
+  reparto sección por sección de las nueve que tiene hoy. Dos reglas: cada párrafo
+  va donde vive su tema y el otro README recibe un puntero y nunca un resumen, y
+  el README de la raíz no describe la corrida.
+
+**Lo que no se volvió ADR y por qué.** Las tres consecuencias que la mudanza
+obliga —`lib/controls.js` deja de citar la ruta de `brand/README.md`, el grep del
+ADR 0003 reescribe dos rutas, el `.gitignore` no se toca— no son decisiones
+nuevas: son trabajo, y están en los bloques de las tasks. El nombre de la demo
+quedó adentro del 0020, porque el criterio para nombrar una demo y la existencia
+de `demo/` son la misma convención.
+
+**El invariante que fija el orden de las tasks**, y es el hallazgo de gobierno de
+esta generación: **ningún commit deja `npm test` en rojo y ninguno deja a `test/`
+leyendo una demo.** Los dos acoplamientos que la fase corta se cruzan justo en el
+medio de la mudanza, así que la autosuficiencia de la suite va primera (T-01), el
+servidor segundo (T-02) y la mudanza tercera (T-03) llevando adentro el test nuevo
+de la demo, porque separarlo en un commit propio es tener un commit con la suite
+roja o con las tres afirmaciones sobre el script borradas. Ese chequeo es el que
+encontró el `PLANNED-DURATION` de doce segundos en un break de cuarenta y ocho,
+así que no se apaga ni por un commit.
+
+**Los niveles de verificación.** La T-01 es la única `alto`, y no por dificultad:
+lo que entrega es la red de regresión del proyecto, y una red que quedó más floja
+pasa en verde igual. Lleva campaña de mutación acotada a la única regla que es
+dueña —la tabla de la corrida sale de un fixture y no de un parseo— y el `diff` de
+cada copia contra su original, que es el único momento en que las dos copias se
+comparan a propósito: el ADR 0023 prohíbe un chequeo permanente, no verificar la
+copia el día que se hace. La T-05 es `mínimo` porque todo su entregable es prosa.
+Las otras cuatro son `bajo`.
+
+**Una consecuencia del ADR 0023 que apareció escribiendo la T-02 y quedó anotada
+en el propio ADR**: con `test/` leyendo sólo `test/` y `lib/`, nada de la raíz que
+no sea `lib/` se puede testear unitariamente, y hoy eso es `server.mjs` y los dos
+scripts de la sdk. Los tres se chequean corriéndolos. Es el costo de que la regla
+no tenga excepciones, y se acepta escrito, porque una excepción es por dónde esta
+regla se despegaría.
+
+**El proyecto no tiene `docs/arc42/` y esta fase no lo crea.** Sus dos documentos
+de `docs/` cumplen ese papel para el único lector que tienen, quien construye con
+la sdk, y el diseño ya resolvió explícitamente no partir `docs/` en subcarpetas
+por audiencia.
+
+**El validador reporta dos rojos y ninguno es de esta fase**: las fases 02 y 04
+siguen sin `DESIGN.md`. No se silencian y no se rellenan. La fase 05 sale limpia,
+incluido el chequeo de que ningún bloque de task difiera una decisión a una
+persona.
