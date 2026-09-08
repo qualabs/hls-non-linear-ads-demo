@@ -15,14 +15,12 @@ these files keep describing the old one and nothing here will say so. What
 watches the live run is the suite of the demo, which asserts over the files the
 demo has inside it.
 
-**The paths below are written without the prefix of the development-management
-folder and without the name of the folder the demo serves its asset-lists from,
-and that is deliberate.** The rule this folder exists for is the one above, and
-it is verified with a grep for those names over the code of `test/`, so a path
-written in full in this README does not put the check in red. It is still not
-written in full: a full path is a thing to follow, and the provenance of a copy
-is a thing to know. Whoever wants to follow it has the name of the task, which
-is the name of the file.
+**The paths below are written in full, and that is what ADR 0023 asks for.** The
+rule this folder exists for is the one above -- the code does not read the
+development-management folder -- and a citation is not a read: a read breaks when
+the record is reorganised, and a citation breaks with nothing. The check that
+holds the rule greps the *code* of `test/`, so a path written out in a README
+never puts it in red.
 
 ## `mediciones/` — five readings, under their original names
 
@@ -34,11 +32,11 @@ mean anything.
 
 | file | copied from | what it is |
 | --- | --- | --- |
-| `m3-resultados.json` | `phases/01-poc-web-hlsjs/tasks/T-03/` | the six payloads the SVTA tool emits, verbatim, under `herramienta`, and the same six layouts as T-03 measured them in pixels, under `nuestro` |
-| `t02-los-rangos-del-programa.json` | `phases/02-sdk-y-controles/tasks/T-02/` | what `programRanges()` returned with the player running, plus the length of the primary content re-read in flight |
-| `t04-la-medicion.json` | `phases/02-sdk-y-controles/tasks/T-04/` | where the ten marks landed on the bar, over a 180 s programme |
-| `t05-la-medicion.json` | `phases/02-sdk-y-controles/tasks/T-05/` | the volume every media node started at, element by element, over three breaks |
-| `t05-el-recorrido-con-el-break-mezclado.json` | `phases/03-breaks-multiples-y-repliegue/tasks/T-05/` | the ten ranges read off the contract with the mixed break in the run |
+| `m3-resultados.json` | `.project/phases/01-poc-web-hlsjs/tasks/T-03/` | the six payloads the SVTA tool emits, verbatim, under `herramienta`, and the same six layouts as T-03 measured them in pixels, under `nuestro` |
+| `t02-los-rangos-del-programa.json` | `.project/phases/02-sdk-y-controles/tasks/T-02/` | what `programRanges()` returned with the player running, plus the length of the primary content re-read in flight |
+| `t04-la-medicion.json` | `.project/phases/02-sdk-y-controles/tasks/T-04/` | where the ten marks landed on the bar, over a 180 s programme |
+| `t05-la-medicion.json` | `.project/phases/02-sdk-y-controles/tasks/T-05/` | the volume every media node started at, element by element, over three breaks |
+| `t05-el-recorrido-con-el-break-mezclado.json` | `.project/phases/03-breaks-multiples-y-repliegue/tasks/T-05/` | the ten ranges read off the contract with the mixed break in the run |
 
 ## `asset-lists/` — the thirteen, whole
 
