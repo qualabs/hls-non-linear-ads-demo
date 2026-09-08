@@ -32,6 +32,15 @@ solo y no hay margen para reacomodarlo.
 corriendo y un grep. Cada bloque dice qué le queda y qué se le fue, para que la
 ausencia se lea como una decisión y no como un descuido.
 
+**El grep de autosuficiencia va acotado al código (`--include='*.js'`), y el motivo
+es del instrumento y no del alcance.** Sin acotar devuelve quince líneas que están
+adentro de dos JSON de mediciones: son líneas de consola que el navegador imprimió
+durante la corrida medida, con una URL `.../signalling/asset-list-....json` en el
+texto. Es dato medido y no una ruta que alguien resuelva, así que editarlo
+falsificaría un registro. Lo encontró la T-01 corriendo el grep que su propio done
+pedía, y aplica a las tres tasks que lo repiten.
+
+
 | id   | brief                                                              | status  | plan | evidence |
 | ---- | ------------------------------------------------------------------ | ------- | ---- | -------- |
 | T-01 | Los fixtures pasan a ser del test                                  | done    | —    | [tasks/T-01/](tasks/T-01/) |
@@ -88,12 +97,12 @@ ausencia se lea como una decisión y no como un descuido.
 
   Punto de partida, en este orden: el ADR 0023, que es la regla y su costo; los
   tres archivos de `test/`; y las cinco rutas de `.project/` que hoy aparecen en
-  ellos (`/usr/bin/grep -rn "\.project" test/`). Restricción: ni un valor
+  ellos (`/usr/bin/grep -rn --include='*.js' -e '\.project' test/`). Restricción: ni un valor
   esperado cambia y ni un test se borra. La cuenta de tests y sus nombres son los
   mismos antes y después; si alguno tiene que cambiar de nombre, es un hallazgo y
   se reporta. Sin dependencias.
 - **Definición de done:**
-  - `/usr/bin/grep -rn "\.project\|signalling/" test/` no devuelve nada, y la
+  - `/usr/bin/grep -rn --include='*.js' -e '\.project' -e 'signalling/' test/` no devuelve nada, y la
     única ruta de `test/` que sale de `test/` y `lib/` es la del script de
     señalización, en un lugar solo.
   - `npm test` en verde, con la **misma lista de nombres de test y la misma
@@ -255,7 +264,7 @@ ausencia se lea como una decisión y no como un descuido.
     dejó la T-01 menos las tres afirmaciones que bajaron.
   - `npm run check` (o `node scripts/verificar-cortes.mjs` mientras la T-04 no
     exista) en verde, las dos costuras.
-  - `/usr/bin/grep -rn "\.project\|signalling/\|demo/" test/` no devuelve nada:
+  - `/usr/bin/grep -rn --include='*.js' -e '\.project' -e 'signalling/' -e 'demo/' test/` no devuelve nada:
     `test/` quedó leyendo sólo `test/` y `lib/`, que es el estado final del
     ADR 0023.
   - `git status` limpio y `git log --follow` mostrando la historia de al menos un
