@@ -6,6 +6,8 @@ scope: phase-02
 date: 2026-09-04
 supersedes: null
 superseded_by: null
+generalizes: null
+generalized_by: "0020"
 ---
 
 ## Contexto
@@ -141,3 +143,12 @@ integrador— no funciona sobre un elemento que el renderizador escala.
 >    existir y esa segunda pata se cae. La primera es la que queda, y es la que
 >    ahora se ve en un cuadro solo: al mismo segundo del programa, uno muestra el
 >    aviso encima del programa y el otro en lugar del programa.
+
+> **Nota del 2026-09-08.** El **ADR 0020 generaliza esta decisión** y no le
+> contradice nada. Este ADR puso la línea entre la librería y la página adentro
+> del código y dijo qué queda de cada lado; el 0020 la ensancha al árbol del
+> repositorio —la raíz es la sdk, `demo/<nombre>/` es una demo, y hay una
+> pregunta que reparte cualquier archivo nuevo— y agrega que del lado de la demo
+> puede haber más de una. Todo lo que está escrito arriba sigue valiendo, incluida
+> la costura verificada por grep, que es justamente la que encontró a
+> `lib/controls.js` citando `brand/README.md` cuando `brand/` bajó a la demo.
