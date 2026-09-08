@@ -226,6 +226,9 @@ el renderizado no cambia, que es exactamente lo que el ADR 0003 compra.
 Los midió la T-03 sobre los seis payloads que emite la herramienta de SVTA, y
 están resueltos en
 `.project/phases/01-poc-web-hlsjs/tasks/T-06/t06-los-seis-payloads-resueltos.json`.
+Ese archivo es la evidencia de una fase cerrada, y la cita es su procedencia:
+dice dónde se hizo la medición, no dónde hay un archivo que alguien lea en
+tiempo de ejecución (ADR 0023).
 La capa los **asume** en lugar de exigirlos, porque el ADR 0004 manda consumir
 el asset-list tal como la herramienta lo emite:
 

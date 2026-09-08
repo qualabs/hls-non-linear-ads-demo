@@ -1,163 +1,73 @@
-# hls-non-linear-ads-demo
+# qualabs-concurrent-hls
 
-Non-linear ad experiences in HLS, played by an **unmodified hls.js**: an ad
-that runs *concurrently* with the content instead of replacing it, signalled
-with `EXT-X-DATERANGE` of the class `com.qualabs.hls.concurrentInterstitial`
-and laid out from the asset-list that the SVTA Layout Controller emits.
+**Non-linear ad experiences in HLS, played by an unmodified hls.js**: an ad that
+runs *concurrently* with the content instead of replacing it, signalled with
+`EXT-X-DATERANGE` of the class `com.qualabs.hls.concurrentInterstitial` and laid
+out from the asset-list that the SVTA Layout Controller emits.
 
-## Run it
+The root of this repository is that library. `demo/` is where it is shown: one
+folder per demo, and each demo tells its own run.
 
-```bash
-./run.sh          # or: npm start
-```
+## demo/
 
-Then open <http://localhost:8080/>.
-
-The first run downloads ~535 MB of footage and packages it (about half a
-minute of ffmpeg). Every run after that starts the server straight away. To
-re-package without re-downloading, `npm run content`.
-
-Requirements: node and ffmpeg. There are no npm dependencies.
-
-The playlist carries **five breaks**: four of a single ad each and a last one of
-four ads back to back, one of them at full frame. That is the run that gets
-recorded. To work on a single layout instead, name it when the playlist is
-written -- there is one asset-list per layout in `signalling/`:
+| demo | what it argues |
+| --- | --- |
+| [`compatibility-pair`](demo/compatibility-pair/README.md) | the same URL on two clients at once: an off-the-shelf hls.js, which schedules the linear Date Range and replaces the content with the ad, next to the same version of hls.js driven by this library, which keeps the content on screen and draws the ad over it. That is the pair (ADR 0007), and what it argues is that this deploys without breaking the clients already in the market |
 
 ```bash
-./scripts/senalizar-contenido.sh 20 squeezebackLShape   # one break, at 20 s
-npm run serve
+./run.sh <demo>   # with no argument, and through npm start, it is compatibility-pair
 ```
 
-## Before you record
-
-The run is under three minutes and it needs nothing but a browser window. One
-thing to do before the camera rolls, and five to expect.
-
-**Turn the sound on once, at the start**, with the audio control at the top
-right of the right-hand picture. Both pictures have one and either works, but
-only one of them can be live: turning one on turns the other off, because two
-soundtracks of the same film a fraction of a second apart is the worst thing
-that can happen to a recording. The page starts muted so the browser's autoplay
-policy lets it begin without a click, and that control is the one that lifts it:
-it is the audio of the composition, drawn by the library along with the progress
-bar, the play/pause and the fullscreen (ADR 0015). It is one switch for the
-whole thing, primary content and ad together; what each element is worth inside
-it is the mix the asset-list declares, and the player obeys it (ADR 0014).
-
-**The last break carries four ads in a row, and the third of them is at full
-frame.** The first four breaks are one ad each and walk four of the five names
-of the requirements document; break 5 is the mix -- concurrent, concurrent,
-linear, concurrent -- and the fifth name, Side by side pullback, is the second
-ad inside it, which is why that layout has no break of its own. The break runs
-48 s where the others run 12. Its third ad covers the picture and takes the
-sound, and the programme **keeps playing underneath it**, uninterrupted and
-silent: the line under the picture says so while it is on screen, and the bar
-does not move, because drawing a linear ad this way changes nothing about the
-programme's timeline (ADR 0016).
-
-**Two breaks bring audio of their own.** The Quad, break 4, is the one with a
-mix: its asset-list asks for 100 in the bottom-left quadrant and 10 in the other
-three, which is what a quad of concurrent sources sounds like when the
-signalling picks one to listen to. The full-frame ad inside break 5 is the
-other, and it is the only ad of the run that takes the sound off the programme,
-because an ad covering the whole screen with no audio is a fault nothing on
-screen reports. Every other ad declares no `volume` at all, and an absent field
-is silence on the ad and full volume on the show, so those come in quietly over
-a programme that keeps its audio.
-
-**One of the breaks has no audio at all.** The two assets of LBox image are
-stills, so that ad has no soundtrack to mix in, and the state line under the
-right-hand picture says so -- which is not the same thing as no ad being on
-screen, and on camera the two look alike.
-
-**Both panes stay on the same second of the programme, and that is the second
-argument of the demo.** Every break carries its linear Date Range as well, and
-that tag is in replacement form: the off-the-shelf client takes the twelve
-seconds of that tag out of the programme and comes back where the ad ended and
-not where it began. So the five breaks land on both clients at the same instant,
-and outside a break the two panes are showing the same frame of the same film.
-Inside one they are on the same second of the programme and each does something
-different with it: on the right the ad is drawn over the picture and nothing is
-replaced, on the left the ad **is** the picture and that stretch of the
-programme is gone. When the break ends they are on the same second again, which
-is what makes the two panes comparable frame by frame.
-
-**In break 5 that comparison inverts for twelve of its forty-eight seconds, and
-it is better said before it happens than explained afterwards.** Both tags of a
-break share their `START-DATE`, which is what makes the pair a pair (ADR 0018),
-and what they do not share is their length: theirs is twelve seconds and ours is
-forty-eight. From 132 s the off-the-shelf client is already back on the
-programme while the right-hand pane is still inside the break, and from 144 s to
-156 s -- the full-frame ad -- the left pane shows the programme and the right
-one shows a covered screen, which is the reverse of the frame the demo is built
-on. It costs the argument nothing: both players are doing the same thing at
-different moments, because they were handed breaks of different lengths, and the
-argument lives in the other thirty-six seconds, where the right-hand pane keeps
-the programme on screen and the left one does not.
-
-**The left pane can end the run a fraction of a second behind**, and that is the
-whole of the offset. hls.js resumes three of the five breaks by appending the ad
-into the primary timeline, which costs nothing, and the other two by passing the
-MediaSource to the asset and back, which costs a fraction of a second each --
-0.7 s over the whole run, against the twelve seconds per break that inserting
-the ad instead of replacing it would cost.
-
-| break | from | to | layout on screen | name in the requirements document |
-| --- | --- | --- | --- | --- |
-| 1 | 20 s | 32 s | `cornerOverlay` | Overlay |
-| 2 | 45 s | 57 s | `squeezebackLShape`, video assets | LBox video |
-| 3 | 70 s | 82 s | `squeezebackLShape`, image assets | LBox image |
-| 4 | 95 s | 107 s | `multiView` | Quad |
-| 5 | 120 s | 168 s | four ads back to back | the mix |
-| 5, ad 1 | 120 s | 132 s | `cornerOverlay` | Overlay |
-| 5, ad 2 | 132 s | 144 s | `squeezebackDoubleBox` | Side by side pullback |
-| 5, ad 3 | 144 s | 156 s | full frame, no layout block | the linear ad |
-| 5, ad 4 | 156 s | 168 s | `cornerOverlay` | Overlay |
-
-The first four breaks last twelve seconds and the fifth forty-eight, which is
-its four ads one after the other, and `./run.sh` prints the same table on
-startup along with what the compatibility pair does inside break 5. The mapping
-of the five names to the four identifiers is ADR 0012, and it is a proposal
-waiting on David: LBox video and LBox image are the same layout, and what tells
-them apart is the type of the asset inserted into it.
+One command for any of them: it packages the demo's content if it is not there
+yet, writes its signalled playlist, builds the library, and serves the demo's
+folder as the document root (ADR 0022). What a demo needs before that, what it
+puts on screen and what to expect while it runs is in its own README.
 
 ## Test it
 
 ```bash
-npm test                        # node --test, no dependencies and no browser
-./scripts/verificar-cortes.mjs  # the two seams of the project
+npm test        # node --test, no dependencies and no browser
+npm run check   # the two seams of the project
 ```
 
-The tests cover what can fail in silence and nothing else -- everything else is
-on the screen. That is the pure functions of the two layers, in two files. The
-layout resolution: the parsing of `viewport`, the two defaults the tool omits,
-the order by `zDepth`, the activation window, and the conversion of insets into
-a box in pixels. And what the controls stand on: where the breaks of the
-programme are, which kind each one is, where that lands as a fraction of the
-whole programme, and the volume every element starts at, which is the one place
-where a single character turns the show mute or an ad declared silent into the
-loudest thing on the screen.
+`node --test` takes no arguments and discovers every suite in the repository:
+the library's, in `test/`, and each demo's, inside its own folder.
 
-No case is invented unless it says so. The layouts are the six payloads the SVTA
-Layout Controller emits, read verbatim from the evidence of T-03; the breaks are
-the run `scripts/senalizar-contenido.sh` writes; and the expected values are the
-pixels, the marks and the volumes measured on the running player.
+`test/` covers what can fail in silence in the library and nothing else --
+everything else is on the screen. That is the pure functions of the two layers,
+in three files. The layout resolution: the parsing of `viewport`, the two
+defaults the tool omits, the order by `zDepth`, the activation window, and the
+conversion of insets into a box in pixels. The sequence of a break: where each
+of its ads lands on the timeline of the programme, which ad is which, and the
+rungs the layer falls back to when an asset cannot be drawn. And what the
+controls stand on: where the breaks of the programme are, which kind each one
+is, where that lands as a fraction of the whole programme, and the volume every
+element starts at, which is the one place where a single character turns the
+show mute or an ad declared silent into the loudest thing on the screen.
 
-The second command checks a shape instead of a value, and it is the other half
-of what can go wrong here without showing on the screen: the two seams. It runs
-the grep of ADR 0003 -- the rendering side does not name the transport -- and
-the grep of ADR 0015 -- the library does not name the demo -- and compares what
-they find against a list of ACCEPTED occurrences it carries inside, each one
-with the reason it is acceptable written beside it. Anything that is not on that
-list makes it exit non-zero, saying which and where. The list is keyed by the
-CONTENT of the line and not by its number, so an edit above an accepted line is
-not a finding and the check is not asked to cry wolf.
+No case is invented unless it says so, and no case is read out of a demo:
+`test/` reads `test/` and `lib/`, and nothing else (ADR 0023). The six payloads
+the tool emits, the readings taken on the running player and the run they were
+taken over are copies this suite owns, in
+[`test/fixtures/`](test/fixtures/README.md), which is also where the reason
+there is no check against the originals is written down, so that nobody adds one
+believing it is missing. What a frozen copy cannot notice is the run a demo
+serves changing shape, and what watches that is the demo's own suite.
+
+`npm run check` checks a shape instead of a value, and it is the other half of
+what can go wrong here without showing on the screen: the two seams. It runs the
+grep of ADR 0003 -- the rendering side does not name the transport -- and the
+grep of ADR 0015 -- the library does not name a demo -- and compares what they
+find against a list of ACCEPTED occurrences it carries inside, each one with the
+reason it is acceptable written beside it. Anything that is not on that list
+makes it exit non-zero, saying which and where. The list is keyed by the CONTENT
+of the line and not by its number, so an edit above an accepted line is not a
+finding and the check is not asked to cry wolf.
 
 ## What is where
 
-The repository is two things with a line between them (ADR 0015): the library,
-and the page that uses it.
+The line of ADR 0015 runs through the tree: the root is the library and what
+serves it, and everything below `demo/` is a page that uses it.
 
 | | |
 | --- | --- |
@@ -168,97 +78,45 @@ and the page that uses it.
 | `lib/media.js` | how a `uri` becomes pixels: one instance of hls.js per ad asset |
 | `lib/concurrent-hls.js` | the entry point and the public surface: `attach` for the concurrent experience, `attachControls` for the chrome on its own, and the configuration the instance has to be built with |
 | `dist/` | the built library: one classic script that defines a global. Generated, gitignored |
-| `index.html`, `css/`, `js/` | **the page.** The compatibility pair, the trace of the contract, and the wiring of the library. Native ES modules |
-| `js/contract-trace.js` | the same contract, printed: the line under the player and the table in the console |
-| `js/stock-player.js` | the off-the-shelf client of the compatibility pair: hls.js at its factory configuration, and none of the above |
-| `signalling/` | the asset-lists, as the SVTA Layout Controller emits them, with the URIs filled in |
-| `test/` | the tests of what fails in silence: the layout resolution, the ranges of the programme, and the volume of an element |
-| `vendor/hls.min.js` | hls.js **1.7.2, unmodified** |
-| `server.mjs` | a static file server, and nothing else: no ad server, no APS |
-| `scripts/` | the content: download and package as HLS VOD. The build of the library. And `verificar-cortes.mjs`, the check of the two seams |
-| `content/` | the packaged output. Generated, gitignored |
-| `docs/` | the product's own documents: the contract between the two layers, and how to integrate the library into a page that is not this one |
-| `brand/` | Qualabs fonts, logo and favicon, on disk |
-| `CREDITS.md` | the CC BY attribution the footage requires |
-
-## The compatibility pair
-
-The page is two players, not one, and that is the demo's strongest argument
-(ADR 0007): this deploys without breaking the clients that are already in the
-market. Both load the **same URL**. The media playlist carries two
-`EXT-X-DATERANGE` on the same `START-DATE`, one of Apple's interstitial class
-with a linear ad and one of the sibling class of ADR 0009 with the concurrent
-experience, each with its own `ID` and its own asset-list.
-
-The left player is hls.js at its **factory configuration**, with nothing of this
-demo wired into the instance: it schedules the Apple-class tag and replaces the
-content with the linear ad, exactly as a deployed player does today. The right
-one is the same library, same version, unmodified, and keeps the content on
-screen with the concurrent experience drawn over it.
-
-**Both panes carry the same chrome, and the left one is still an unmodified
-client.** What it takes from the library is `attachControls`, which draws the bar
-and the buttons over a player and does nothing else to it: no instance goes in,
-nothing is turned on, and nothing of ours reaches the network for it. The
-instance is `new Hls()` and not one option, which is the thing that has to stay
-untouched for the argument to hold, and it is verified rather than asserted --
-three readings of the running page, in the evidence of T-07 of phase 04. Without
-the same chrome the two pictures would differ in the mechanism and in the
-furniture at once, and nobody watching would know which of the two is the point.
-
-**Each bar marks what its own player plays** (ADR 0018): the concurrent ranges in
-violet on the right, and on the left the twelve seconds of the programme each
-break replaces, in yellow, read out of that client's own schedule. Same
-positions, because the two tags share their `START-DATE`; different colour,
-because they are different behaviours. **And the left bar shows the clock of the
-programme**, which during a break is the second the programme is stopped at
-inside that break, and not the clock of the ad -- that one is on the line of text
-under the picture. Why it cannot be the element's own clock is in the evidence of
-T-07: in two of the five breaks hls.js hands the MediaSource to the asset, and
-the element then reports 0:02 of 0:12 with the whole rail rescaled to the ad.
-
-Backwards compatibility does **not** come from one class extending the other. In
-HLS the class of a Date Range is compared by exact string equality and there is
-no inheritance, so an existing client cannot do anything sensible with a class
-it has never heard of -- it ignores it, which is what the left player does with
-ours. The compatibility comes from the playlist serving both things at once and
-each client keeping the one it understands.
+| `demo/` | **the demos**, one folder each, indexed above |
+| `test/` | the tests of what fails in silence: the layout resolution, the sequence of a break and its fallback, the ranges of the programme, and the volume of an element |
+| `docs/` | the product's own documents: [the contract between the two layers](docs/contrato-senalizacion-renderizado.md), and [how to integrate the library](docs/integrating-the-library.md) into a page that is not a demo |
+| `vendor/hls.min.js` | hls.js **1.7.2, unmodified** (ADR 0002) |
+| `server.mjs` | a static file server, and nothing else: no ad server, no APS. It takes the folder to serve as its argument, and mounts `/dist/` and `/vendor/` from here (ADR 0022) |
+| `run.sh` | the one command of a demo, with the demo as its argument |
+| `scripts/` | the two scripts of the library: `scripts/construir-libreria.sh`, the build, and `scripts/verificar-cortes.mjs`, the check of the two seams |
+| `package.json` | what the product is: the entry point, and the three folders `files` lists (ADR 0024) |
 
 ## The two layers
 
-The demo is split in two, with a contract between them (ADR 0003): the
+The library is split in two, with a contract between them (ADR 0003): the
 signalling layer answers *what is active at this playback time, and with what
 boxes* and *where all the ranges of the programme are, and of which kind*, and
 the consumer draws it. Only the first side knows what HLS is. The contract is
-written down in `docs/contrato-senalizacion-renderizado.md`.
+written down, field by field and rule by rule, in
+[`docs/contrato-senalizacion-renderizado.md`](docs/contrato-senalizacion-renderizado.md),
+which owns it.
 
 **The mix is signalled, and the default is silence.** Each element of a layout
-starts at the `volume` its asset-list declares, and the page has a visible
-control for the audio of the composition as a whole (ADR 0014). Turning it on in
-front of an audience is how the demo shows that several sources of audio are
-there and that choosing between them is the signalling's rather than the
-player's.
-
-An absent `volume` is **not** the same default on both sides of the layout: it
-is silence on an element of the ad and full volume on the primary content. The
-tool omits the field on every element, the primary content included, so a single
-default of 0 would leave the show mute in the five layouts with nothing on
-screen saying so, and a single default of 100 would put every ad at full volume
-over the programme. Unexpected audio on camera is worse than missing audio,
-which is what decides the ad side; the primary content was already playing
-before the break, which decides the other. It is a deliberate divergence with
-the tool, for which an absent field is 100 everywhere, and ADR 0014 leaves it
-written down as a question for SVTA.
+starts at the `volume` its asset-list declares, and the audio of the composition
+as a whole gets one visible control (ADR 0014). The tool declares no `volume` on
+any element, and no `primaryContent` block at all on the two overlays, and the
+signalling layer **assumes** both instead of requiring them, so a payload pasted
+straight out of the tool works as it is (ADR 0004). What it assumes for each of
+the two, and why an absent `volume` is silence on an element of the ad and full
+volume on the primary content -- a deliberate divergence with the tool, left
+written down as a question for SVTA (ADR 0014) -- is in the contract, under *Los
+dos defaults que la herramienta omite*.
 
 ## The library, and the page that uses it
 
 The library is `lib/`: the two layers, the piece that turns a `uri` into pixels,
-and the entry point that joins them. Everything else is the page.
+and the entry point that joins them.
 
 It is distributed as **one classic `<script src>` that defines a global**, with
 no bundler and no npm dependency. The sources stay as ES modules and
 `scripts/construir-libreria.sh` assembles them into
-`dist/qualabs-concurrent-hls.js` on every start, the same way the signalled
+`dist/qualabs-concurrent-hls.js` on every start, the same way a demo's signalled
 playlist is written on every start. They stay separate for two reasons that are
 not taste: the seam of ADR 0003 is verified per file by
 `scripts/verificar-cortes.mjs`, and the tests import the pure functions of both
@@ -284,64 +142,29 @@ hls.attachMedia(video);
 The container is the box the composition lives in, and the media element has to
 be inside it: the library creates its own layer there, draws the boxes of the
 layout into it, and moves the primary content within it. From `attach` it gets
-back the contract of ADR 0003, which is what the trace on this page reads.
+back the contract of ADR 0003, which is what the trace of a demo reads.
 
 **The library ships no brand of its own, so a page that wants one hands it
-over.** Its own mark, as a file, in `logo: { src, alt }` — drawn on a light
+over.** Its own mark, as a file, in `logo: { src, alt }` -- drawn on a light
 plate in the bar, inside the container, so that it is still in the frame in
-fullscreen — and its own colour as a CSS custom property on the container,
+fullscreen -- and its own colour as a CSS custom property on the container,
 `--qa-accent`, which the knob of the bar and the focus ring take (`--qa-plate`
-is the plate's surface, light by default). None of the three is required, and
-a player that passes none of them comes out in white, with no mark, which is
-what a player with no brand looks like. The colours the bar marks the breaks
-with are not part of this: those are functional and stay where they are.
+is the plate's surface, light by default). None of the three is required, and a
+player that passes none of them comes out in white, with no mark, which is what
+a player with no brand looks like. The colours the bar marks the breaks with are
+not part of this: those are functional and stay where they are.
 
-`hlsConfig` is the one thing the library cannot fix afterwards. The interstitials
-machinery of hls.js is instantiated in the constructor (ADR 0002), so an instance
-built without that configuration arrives with the machinery already on. The
-library **verifies and warns**: it neither requires it nor leaves it at
-documentation, because with the machinery on the player schedules the traditional
-interstitial the same playlist carries and replaces the content with it, which
-looks exactly like an ordinary player working correctly. Nothing throws and
-nothing is on screen to notice. Throwing would be the wrong answer too: taking
-somebody's page down over a configuration he can fix in one line is a bigger
-promise than a plugin gets to make.
+**`hlsConfig` is the one thing the library cannot fix afterwards.** hls.js
+instantiates its interstitials machinery in the constructor (ADR 0002), so the
+instance has to be built with that configuration or it arrives with the
+machinery already on; the library verifies and warns, because with it on the
+player schedules a traditional interstitial the playlist may also carry and
+replaces the content with it, which looks exactly like an ordinary player
+working correctly. Why that is the right answer, what the warning leaves on the
+handle, and why it is neither thrown nor left at documentation, is
+[`docs/integrating-the-library.md`](docs/integrating-the-library.md) §2.1, which
+owns it.
 
 The public surface is deliberately not frozen yet. ADR 0015 fixes it with the
 controls of the composition built and not before, because the controls are most
 of it.
-
-## Four things that look like details and are not
-
-**hls.js runs with its interstitials machinery turned off.** The page creates
-the instance with `interstitialsController: undefined`. That machinery is
-closed over Apple's interstitial class, so a Date Range of our own class would
-never reach it, and it is a machinery of *replacement*: it passes one
-MediaSource between the primary and the asset, which is the opposite of
-drawing two sources at once. The tags are not lost -- hls.js parses every
-`EXT-X-DATERANGE` regardless of class and hands them over on `LEVEL_UPDATED`,
-which is where this demo picks them up.
-
-**The primary playlist carries `EXT-X-PROGRAM-DATE-TIME`.** A `START-DATE`
-resolves against that clock, so without it the Date Ranges have nothing to
-anchor to.
-
-**One of the five layouts inserts a still and not a video.** LBox image is the
-same L-shape as LBox video, and what changes is the `type` of each asset in the
-payload: `image/jpeg` instead of `application/vnd.apple.mpegurl`. The renderer
-reads that field to decide whether the box is an `<img>` or a `<video>`, which
-is the only thing the five layouts needed that the three mechanisms did not
-already do. It costs the ad its audio and its timeline, and both show: the state
-line says the ad on screen is made of stills and has no audio, and the still does
-not follow the primary when it is paused or seeked, because there is nothing to
-follow.
-
-**The Layout Controller omits two defaults, and the JSON in `signalling/` is
-not missing them.** Of the six payloads the tool emits, the two overlays carry
-no `primaryContent` block at all, and none of the six carries `volume` on any
-element. The signalling layer assumes both -- the primary at zDepth 0, volume
-100, viewport `0 0 0 0`, and, where `volume` is absent, silence on an element of
-the ad and full volume on the primary content (ADR 0014) -- instead of requiring
-them, so a payload pasted straight out of the tool works as it is (ADR 0004).
-Adding those fields to the JSON to "fix" it would hide the case that a real
-payload hits.

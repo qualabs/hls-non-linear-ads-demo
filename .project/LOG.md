@@ -3221,3 +3221,61 @@ y el manifiesto no está adentro. Se corrió igual.
 
 La evidencia, con la salida verbatim de los cinco comandos, en
 `phases/05-la-sdk-y-sus-demos/tasks/T-04/`.
+
+## 2026-09-08 — T-05 de la fase 05: el README de la raíz enruta y la demo cuenta su corrida
+
+Las 347 líneas y nueve secciones del README único quedaron en dos documentos: la
+raíz en 170 líneas, que dice qué es la sdk y dónde está escrita cada cosa, y
+`demo/compatibility-pair/README.md` en 243, que dice qué muestra esa demo y cómo
+se levanta. El reparto lo decidió el ADR 0025 y esta task lo ejecutó sin
+redecidir nada: *Run it*, *Before you record* con su tabla de los cinco breaks y
+*The compatibility pair* bajaron enteros a la demo; *The two layers* y *The
+library, and the page that uses it* se quedaron en la raíz; *Test it* y *What is
+where* se partieron, cada uno con lo suyo.
+
+**La raíz ya no describe la corrida, y esa es la propiedad que la fase compra.**
+No queda una sola línea de los cinco breaks, del audio, de ffmpeg ni del
+localhost arriba; lo que hay es una sección `demo/` de una fila —qué argumenta
+`compatibility-pair`, el link a su README, el ADR 0007— más `./run.sh <demo>`.
+Una demo nueva agrega una fila y escribe su propio README, sin tocar ninguna otra
+sección.
+
+**Los dos punteros eran la duplicación menos visible de las tres**, porque
+estaban escritos completos en el README y en `docs/`. La maquinaria de
+interstitials apagada quedó en tres líneas —el requisito, que es de la sdk— y
+manda a `docs/integrating-the-library.md` §2.1 por el por qué, el warning y el
+síntoma. Los dos defaults que la herramienta omite quedaron en que no emite
+`volume` ni el bloque `primaryContent` de los dos overlays y que la capa los
+asume, con el detalle de cada uno en el contrato. Los dos dicen lo justo para
+saber si hay que seguirlos, que es lo que un puntero tiene que hacer y un resumen
+no.
+
+**La cita de `docs/` a `.project/` se quedó, con su cláusula.** El JSON de la
+T-06 de la fase 01 es la evidencia de una fase cerrada, y ahora el contrato lo
+dice: la cita es la procedencia de una medición, no una ruta que alguien resuelva
+en tiempo de ejecución (ADR 0023). Nada más de `docs/` se tocó.
+
+**Tres cosas que el bloque no cubría, decididas y hechas.** El título de la raíz
+era `# hls-non-linear-ads-demo`, el `name` que el ADR 0024 sacó del manifiesto, y
+pasó a `# qualabs-concurrent-hls`: con eso se cierra uno de los dos
+sobrevivientes del nombre viejo que reportó la T-04, y el otro —la etiqueta de
+consola de `server.mjs:107`— sigue abierto y no es de esta task. La frase "one
+thing to do before the camera rolls, and five to expect" tenía seis párrafos
+abajo y quedó en seis. Y dos filas de tabla que decían "the same contract" y
+"none of the above" se apoyaban en secciones que ahora viven en el otro
+documento: se reescribieron, porque la regla es que cada README se lea solo.
+
+**El chequeo de links fue más allá del link markdown a propósito**: lo que se
+quedó viejo dos veces en esta fase fue una ruta escrita en un comentario, no un
+link. Se resolvieron contra el disco los 12 links markdown y las 48 rutas
+escritas en prosa o en un bloque de código de los dos documentos, y el único
+hallazgo fue `verificar-cortes.mjs` suelto en la fila de `scripts/`, que no
+resuelve desde la raíz: quedó `scripts/verificar-cortes.mjs`, que es la
+convención que la tabla ya usaba para los cinco archivos de `lib/`.
+
+`npm test` en 46 de 46 y las dos costuras en verde. Ninguna de las dos mira un
+README —la del ADR 0015 grepea `lib/*.js` y `scripts/construir-libreria.sh`, y el
+grep de autosuficiencia de `test/` va acotado a `*.js`—, y se corrieron igual.
+
+La evidencia, con la salida verbatim del chequeo de links y de la suite, en
+`phases/05-la-sdk-y-sus-demos/tasks/T-05/`.
