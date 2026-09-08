@@ -1,0 +1,241 @@
+# Los cuatro chequeos de la fase, en el orden en que el PHASE.md los pide
+
+Corridos sobre el arbol entero despues de las cinco tasks.
+
+== 1. La demo levanta y el recorrido corre entero ==
+
+$ ./run.sh
+
+content/primary/con-daterange.m3u8  (el recorrido de los cinco breaks, 10 Date Ranges)
+
+El recorrido, que es el orden en que hay que grabarlo:
+  break 1  t= 20s a  32s  (12s)  Overlay          asset-list-cornerOverlay.json
+  break 2  t= 45s a  57s  (12s)  LBox video       asset-list-squeezebackLShape.json
+  break 3  t= 70s a  82s  (12s)  LBox image       asset-list-squeezebackLShape-image.json
+  break 4  t= 95s a 107s  (12s)  Quad             asset-list-multiView.json
+  break 5  t=120s a 168s  (48s)  Break mezclado   asset-list-mezclado.json
+      aviso 1  t=120s a 132s  cornerOverlay         concurrente, el programa se sigue viendo
+      aviso 2  t=132s a 144s  squeezebackDoubleBox  concurrente, el programa se sigue viendo
+      aviso 3  t=144s a 156s  linear                a cuadro entero, el programa corre detrás
+      aviso 4  t=156s a 168s  cornerOverlay         concurrente, el programa se sigue viendo
+
+El break 5 es el que pidió David —concurrent, concurrent, linear,
+concurrent— y adentro trae el Side by side pullback del documento de
+requerimientos, que por eso no tiene break propio: los cinco nombres
+siguen estando en la corrida.
+
+[aqui el script imprime su briefing de grabacion: el audio, la mezcla de cada
+elemento y como se invierte el par durante el break mezclado. Son cuarenta
+lineas de prosa que no cambiaron con la mudanza y van sin repetir.]
+
+construir-libreria: dist/qualabs-concurrent-hls.js (2328 lines, global QualabsConcurrentHls)
+server: http://localhost:8080/ -- serving demo/compatibility-pair
+
+(Sin argumento, con compatibility-pair de default. El contenido ya estaba
+empaquetado, asi que no se volvio a bajar ni a empaquetar nada. La etiqueta de
+arranque dice 'server:' y no el nombre viejo del repositorio: es el hallazgo que
+la T-04 dejo abierto y que esta task cerro.)
+
+## Las trece rutas que la pagina carga, por HTTP, mas la guarda de traversal
+
+$ for u in ... ; do curl -s -o /dev/null -w "%{http_code} %{content_type} %{size_download}" "http://localhost:8080$u"; done
+
+/                                                  200 text/html; charset=utf-8 7708
+/dist/qualabs-concurrent-hls.js                    200 text/javascript; charset=utf-8 111568
+/vendor/hls.min.js                                 200 text/javascript; charset=utf-8 618946
+/content/primary/con-daterange.m3u8                200 application/vnd.apple.mpegurl 9801
+/signalling/asset-list-cornerOverlay.json          200 application/json; charset=utf-8 671
+/css/player.css                                    200 text/css; charset=utf-8 5840
+/js/app.js                                         200 text/javascript; charset=utf-8 9590
+/js/contract-trace.js                              200 text/javascript; charset=utf-8 3384
+/js/stock-player.js                                200 text/javascript; charset=utf-8 12277
+/brand/favicon.svg                                 200 image/svg+xml 802
+/brand/logo-qualabs.svg                            200 image/svg+xml 4676
+/brand/fonts-embedded.css                          200 text/css; charset=utf-8 180420
+/content/adB/index.m3u8                            200 application/vnd.apple.mpegurl 633
+/dist/%2e%2e%2f%2e%2e%2fetc/passwd                 403 (guarda de traversal)
+
+/dist/ y /vendor/ salen de los dos montajes de la sdk; las otras cinco familias
+—content, signalling, css, js, brand—, de la carpeta de la demo. El ../../
+percent-encoded sigue dando 403 con las tres raices montadas.
+
+## El recorrido, break por break, con el cuadro que se guardo de cada uno
+
+Chrome del sistema, 1920 x 977, reproducido de 0 a 180. En cada ventana se
+pauso la composicion con el control de la libreria, se saco el cuadro y se
+reanudo, asi que cada PNG es la composicion quieta y no un frame a medio
+decodificar. Lo que la pagina reporto en cada pausa:
+
+  t06-break-1-cornerOverlay.png
+    pedido t=23.9  ->  el nuestro en t=23.93, el de fabrica en t=23.95
+    3 elementos <video> en la pagina, los 3 en pausa
+    LINEAR AD "AD-1-LINEAR" · 4.0s of 12.0s · the content is off the screen
+    primary content + CONCURRENT AD (cornerOverlay) · 23.9s · nothing was replaced
+
+  t06-break-2-squeezebackLShape.png
+    pedido t=48.8  ->  el nuestro en t=48.85, el de fabrica en t=3.55
+    4 elementos <video> en la pagina, los 4 en pausa
+    LINEAR AD "AD-2-LINEAR" · 3.6s of 12.0s · the content is off the screen
+    primary content + CONCURRENT AD (squeezebackLShape) · 48.8s · nothing was replaced
+
+  t06-break-3-squeezebackLShape-image.png
+    pedido t=76.3  ->  el nuestro en t=76.32, el de fabrica en t=75.89
+    2 elementos <video> en la pagina, los 2 en pausa
+    LINEAR AD "AD-3-LINEAR" · 5.9s of 12.0s · the content is off the screen
+    primary content + CONCURRENT AD (squeezebackLShape) · 76.3s · nothing was replaced · stills: this ad has no audio
+
+  t06-break-4-multiView.png
+    pedido t=98.8  ->  el nuestro en t=98.87, el de fabrica en t=3.04
+    5 elementos <video> en la pagina, los 5 en pausa
+    LINEAR AD "AD-4-LINEAR" · 3.0s of 12.0s · the content is off the screen
+    primary content + CONCURRENT AD (multiView) · 98.9s · nothing was replaced
+
+  t06-break-5-mezclado-aviso-1-cornerOverlay.png
+    pedido t=127.9  ->  el nuestro en t=127.91, el de fabrica en t=126.91
+    3 elementos <video> en la pagina, los 3 en pausa
+    LINEAR AD "AD-5-LINEAR" · 6.9s of 12.0s · the content is off the screen
+    primary content + CONCURRENT AD (cornerOverlay) · 127.9s · nothing was replaced
+
+  t06-break-5-mezclado-aviso-3-linear.png
+    pedido t=151.8  ->  el nuestro en t=151.83, el de fabrica en t=150.84
+    3 elementos <video> en la pagina, los 3 en pausa
+    primary content · 150.8s
+    primary content + CONCURRENT AD (linear) · 151.8s · the programme is still playing underneath, covered and silent
+
+En dos de las pausas el reloj del pane de fabrica marca 3.55 y 3.04: son los dos
+breaks en los que hls.js le pasa el MediaSource al asset, asi que el elemento
+reporta el reloj del aviso y no el del programa. Esta escrito en el README de la
+demo y no es un desfasaje entre los dos panes.
+
+Los seis cuadros:
+
+  t06-break-1-cornerOverlay.png                    t=23.9  overlay arriba a la izquierda sobre el programa
+  t06-break-2-squeezebackLShape.png                t=48.8  L: programa achicado, barra vertical y barra horizontal
+  t06-break-3-squeezebackLShape-image.png          t=76.3  la misma L con stills (jpeg), "this ad has no audio"
+  t06-break-4-multiView.png                        t=98.9  el Quad: programa y tres vistas
+  t06-break-5-mezclado-aviso-1-cornerOverlay.png   t=127.9 el mezclado arrancando, overlay sobre el programa
+  t06-break-5-mezclado-aviso-3-linear.png          t=151.8 el aviso a cuadro entero, y el par invertido:
+                                                           el de fabrica ya volvio al programa
+
+## La corrida termino sola y sin un pedido en error
+
+== fin del recorrido: el video corre hasta el final ==
+{"ended":true,"t":180.03,"dur":180.03}
+== errores de red de toda la corrida ==
+{"pedidos":250,"por_familia":{"brand":2,"css":1,"dist":1,"vendor":1,"js":3,"content":230,"signalling":12}}
+
+$ performance.getEntriesByType("resource").filter(e => e.responseStatus >= 400)
+  {"total":250,"con_status":250,"errores":[]}
+
+250 pedidos, los 250 con status leido, ninguno >= 400. Es el chequeo que atrapa
+una ruta que solo falla en runtime.
+
+== 2. npm test, con la cuenta de cada suite anotada por separado ==
+
+$ npm test
+✔ a volume that is not a number falls back to the element own default, and there are two (0.304198ms)
+ℹ tests 46
+ℹ suites 0
+ℹ pass 46
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 184.921512
+
+Las dos suites, contadas por archivo:
+
+$ for f in test/*.test.js demo/compatibility-pair/test/*.test.js; do /usr/bin/grep -c '^test(' $f; done
+test/break-sequence-and-fallback.test.js           16
+test/layout-resolution.test.js                     15
+test/program-ranges-and-volume.test.js             12
+demo/compatibility-pair/test/signalled-run.test.js 3
+
+  test/                          43
+  demo/compatibility-pair/test/   3
+  ---------------------------------
+  npm test                       46
+
+Y la cuenta de antes de la fase, que es la que el PHASE.md pide comparar:
+
+$ for f in $(git ls-tree -r --name-only 94677ca~1 | /usr/bin/grep '\.test\.js$'); do git show 94677ca~1:$f | /usr/bin/grep -c '^test('; done
+test/break-sequence-and-fallback.test.js           16
+test/layout-resolution.test.js                     15
+test/program-ranges-and-volume.test.js             12
+
+43 antes de la fase y 43 despues en test/, mas los 3 de la demo. La suite no
+adelgazo: las tres afirmaciones que bajaron a la demo se compensan con el test
+de integridad del fixture que la T-01 agrego, y eso deja 12 en
+program-ranges-and-volume.test.js antes y despues.
+
+== 3. npm run check, las dos costuras ==
+
+$ npm run check
+
+> qualabs-concurrent-hls@0.0.0 check
+> ./scripts/verificar-cortes.mjs
+
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js demo/compatibility-pair/js/contract-trace.js demo/compatibility-pair/css/player.css
+
+   GREEN: 3 occurrence(s), all of them on the accepted list.
+     lib/controls.js:21  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:93  interstitial: '#ffcc00'
+     lib/controls.js:122  interstitial: 'traditional interstitial: the content is replaced by the ad'
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
+
+== 4. La autosuficiencia de test/, grepeada ==
+
+$ /usr/bin/grep -rn --include='*.js' -e '\.project' -e 'signalling/' -e 'demo/' test/
+(cero lineas, exit=1)
+
+Acotado al codigo, que es lo que el preambulo del TASKS.md explica: sin el
+--include devuelve quince lineas que viven adentro de dos JSON de mediciones,
+son lineas de consola que el navegador imprimio durante la corrida medida, y no
+se editan porque es dato medido.
+
+== Y lo que solo se puede mirar aca: el arbol de la raiz se lee como una sdk ==
+
+$ ls
+demo
+dist
+docs
+lib
+package.json
+README.md
+run.sh
+scripts
+server.mjs
+test
+vendor
+
+$ ls -a
+.
+..
+demo
+dist
+docs
+.git
+.gitignore
+lib
+package.json
+.project
+README.md
+run.sh
+scripts
+server.mjs
+test
+vendor
+
+Los once que el bloque de la task enumera —lib/, dist/, test/, docs/, vendor/,
+demo/, scripts/, server.mjs, run.sh, package.json, README.md— y nada de la
+pagina. Los dos puntos del ls -a son .gitignore y .project/, que son del
+repositorio y de la gestion del desarrollo.

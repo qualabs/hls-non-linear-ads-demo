@@ -1,0 +1,116 @@
+# Las rutas de todo el arbol tracked, resueltas contra el disco
+
+El chequeo de la T-05 miraba los dos README. Aca se corre sobre los 36 archivos
+de texto tracked fuera de .project/ —los README, docs/, los cinco de lib/, los
+tres de test/, server.mjs, run.sh, los dos scripts de la sdk, y todo lo de
+demo/compatibility-pair/— y con la misma vara: los links markdown, y ademas cada
+ruta escrita en prosa, en un bloque de codigo o en un comentario, que es la forma
+en que una ruta se quedo vieja dos veces en esta fase.
+
+$ python3 chequeo-de-rutas.py   # el script, entero, al final de este archivo
+
+    12  links markdown, todos resueltos (mas uno absoluto, blender.org)
+   179  rutas escritas en prosa, en codigo o en un comentario, todas resueltas
+     1  ruta vieja, y es un hallazgo de esta task
+   120  tokens que el filtro deja pasar y no son rutas, clasificados abajo
+
+## El hallazgo: una ruta que la mudanza dejo vieja
+
+    test/fixtures/README.md   scripts/senalizar-contenido.sh   NO EXISTE
+
+El script de senalizacion bajo a demo/compatibility-pair/scripts/ en la T-03, y
+el scripts/ de la raiz —el de la sdk— tiene los dos de la libreria y no ese. Un
+lector del README lo iba a buscar ahi y no lo iba a encontrar. Corregido en esta
+task: el parrafo lo nombra por lo que es, el script de senalizacion de la demo,
+que es la forma en que ese mismo documento ya nombra a signalling/.
+
+## Los 120 que no son rutas
+
+    39  fragmentos del base64 de las fuentes embebidas y de los dos svg de brand/
+    29  trozos de una lista de extensiones o de un regex del propio codigo
+    28  nombres de archivo mencionados en prosa o usados como valor, que viven en
+        una carpeta hermana (los asset-lists que run.json nombra y el script
+        compone, el index.html que el servidor le agrega a una ruta que termina
+        en barra, el program-ranges-and-volume.test.js del README de fixtures)
+    14  el nombre de la libreria hls.js, que no es una ruta
+     5  las cinco citas a .project/ del README de fixtures, escritas sin el
+        prefijo, que es la convencion de procedencia de ese documento
+     2  rutas de afuera de este repositorio: la procedencia de la marca en
+        brand/README.md y el ./my-logo.svg del ejemplo de docs/
+     2  la variable $DEMO de run.sh, partida por el tokenizador
+     1  una URL http://localhost:8080/... partida por el tokenizador
+
+Los 28 nombres sueltos no quedan sin chequear por eso: los que run.json nombra
+los verifica el primer test de program-ranges-and-volume.test.js, que afirma que
+cada asset-list de la tabla existe en test/fixtures/asset-lists/, y los que el
+script de senalizacion compone los verifica el test de la demo contra su propio
+signalling/.
+
+--- chequeo-de-rutas.py, verbatim ---
+# Las rutas escritas en TODO el arbol tracked (fuera de .project/), resueltas
+# contra el disco: los links markdown, y ademas cada ruta escrita en prosa, en un
+# bloque de codigo o en un comentario de codigo -- que es la forma en que una ruta
+# se quedo vieja dos veces en esta fase. Extiende el chequeo de la T-05, que
+# miraba solo los dos README.
+import re, subprocess, sys
+from pathlib import Path
+
+ROOT = Path('.').resolve()
+TEXT = ('.md', '.js', '.mjs', '.sh', '.html', '.css', '.json', '.svg')
+tracked = subprocess.run(['git', 'ls-files'], capture_output=True, text=True).stdout.split()
+FILES = [f for f in tracked if not f.startswith('.project/') and f.endswith(TEXT)]
+
+LINK = re.compile(r'\[[^\]]*\]\(([^)]+)\)')
+TOKEN = re.compile(r'[A-Za-z0-9_./<>-]+')
+EXTS = ('.js', '.mjs', '.sh', '.json', '.md', '.html', '.css', '.svg')
+missing = 0
+
+def looks_like_path(tok):
+    if ' ' in tok or tok.startswith('/') or '://' in tok or '<' in tok:
+        return False
+    return tok.endswith('/') or tok.endswith(EXTS)
+
+def bases(p):
+    # el propio directorio, la raiz del repo, y -- para lo que vive adentro de una
+    # demo -- la raiz de esa demo, que es contra la que hacen `cd` sus scripts.
+    out = [('relativa al propio archivo', p.parent), ('relativa a la raiz del repo', ROOT)]
+    parts = p.relative_to(ROOT).parts
+    if len(parts) > 2 and parts[0] == 'demo':
+        out.insert(1, (f'relativa a demo/{parts[1]}/', ROOT / 'demo' / parts[1]))
+    return out
+
+print('== links markdown ==')
+for f in FILES:
+    if not f.endswith('.md'):
+        continue
+    p = ROOT / f
+    targets = LINK.findall(p.read_text())
+    if not targets:
+        continue
+    print(f'--- {f}: {len(targets)} links')
+    for t in targets:
+        if t.startswith(('http://', 'https://', 'mailto:', '#')):
+            print(f'    absoluto  {t}')
+            continue
+        resolved = (p.parent / t.split('#')[0]).resolve()
+        ok = resolved.exists()
+        missing += 0 if ok else 1
+        print(f'    {"OK      " if ok else "FALTA   "} {t}  ->  {resolved.relative_to(ROOT)}')
+
+print()
+print('== rutas escritas en prosa, en bloques de codigo y en comentarios ==')
+for f in FILES:
+    p = ROOT / f
+    cands = {c for c in TOKEN.findall(p.read_text()) if looks_like_path(c)}
+    if not cands:
+        continue
+    print(f'--- {f}')
+    for tok in sorted(cands):
+        cand = tok[2:] if tok.startswith('./') else tok
+        base = next((name for name, b in bases(p) if (b / cand).exists()), None)
+        missing += 0 if base else 1
+        print(f'    {"OK    " if base else "FALTA "} {tok:56s} {base or "NO EXISTE en ninguna base"}')
+
+print()
+print(f'{missing} ruta(s) sin resolver')
+sys.exit(1 if missing else 0)

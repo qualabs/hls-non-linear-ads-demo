@@ -3279,3 +3279,73 @@ grep de autosuficiencia de `test/` va acotado a `*.js`—, y se corrieron igual.
 
 La evidencia, con la salida verbatim del chequeo de links y de la suite, en
 `phases/05-la-sdk-y-sus-demos/tasks/T-05/`.
+
+## 2026-09-08 — T-06 de la fase 05: la fase probada como un todo, y los dos hallazgos que quedaban, cerrados
+
+La verificación de la fase corrida sobre el resultado entero, en el orden que el
+`PHASE.md` fija. `./run.sh` levantó la demo desde la estructura nueva sin
+argumento, el recorrido de los cinco breaks corrió entero hasta el final
+—`video.ended` en 180.03 s— y de los 250 pedidos de la corrida ninguno volvió con
+status >= 400, que es el chequeo que atrapa una ruta que sólo falla en runtime.
+`npm test` en 46 de 46, `npm run check` en `both seams hold.`, y el grep de
+autosuficiencia de `test/` en cero líneas.
+
+**La cuenta de tests es la misma que antes de la fase**, y era la forma en que
+esto podía salir mal en silencio: 43 en `test/` antes y 43 después, con los
+mismos tres archivos y las mismas cuentas por archivo, más los 3 de la demo. El
+número que más podía moverse, el de `program-ranges-and-volume.test.js`, quedó en
+12 de los dos lados: las tres afirmaciones que bajaron a la demo se compensan con
+el test de integridad del fixture que la T-01 agregó.
+
+**Y lo que sólo se podía mirar acá, porque es sobre el conjunto**: el `ls` de la
+raíz devuelve `lib/`, `dist/`, `test/`, `docs/`, `vendor/`, `demo/`, `scripts/`,
+`server.mjs`, `run.sh`, `package.json` y `README.md`, y nada de la página. Ni un
+archivo de la demo quedó arriba, que es el defecto que ninguna task anterior iba a
+encontrar porque cada una miraba su propio pedazo.
+
+**Los seis cuadros, mirados como imagen**, uno por break más el del aviso a cuadro
+entero de adentro del mezclado. Los cinco layouts se ven como tienen que verse, y
+el del break 2 se comparó contra el de la T-03: la misma composición, los mismos
+recuadros, el mismo segundo. La mudanza no movió un píxel.
+
+**La etiqueta de `server.mjs` quedó decidida.** La T-04 la había dejado abierta
+con razón, porque ningún ADR dice cuál tiene que ser y copiarle el `name` del
+manifiesto a un servidor que sirve una demo era la respuesta cómoda. El criterio
+que la cierra es que **la etiqueta nombra a la herramienta que imprime la línea**,
+que es la convención que las otras dos ya usaban: `construir-libreria:` sale de
+`scripts/construir-libreria.sh` y `verificar-cortes:` de
+`scripts/verificar-cortes.mjs`, las dos el nombre del archivo sin extensión. Así
+que dice `server:`. No le corresponde el nombre del producto porque no sirve la
+sdk, y tampoco el de una demo porque sirve la que se le nombre; qué carpeta está
+sirviendo ya lo dice la misma línea después del guión. Con eso el nombre viejo no
+queda en ningún archivo tracked fuera de `.project/`.
+
+**El chequeo de rutas se corrió sobre el árbol entero y no sobre dos archivos**,
+que es el otro hallazgo que la fase dejó abierto: lo que se quedó viejo dos veces
+acá fue una ruta adentro de un comentario, no un link. Los 36 archivos de texto
+tracked fuera de `.project/`, con los links markdown y además cada ruta escrita en
+prosa, en un bloque de código o en un comentario. 12 links y 179 rutas resueltas,
+y **una ruta vieja**: `test/fixtures/README.md` decía que `run.json` reemplaza el
+parseo de `scripts/senalizar-contenido.sh`, y ese script bajó a
+`demo/compatibility-pair/scripts/` con la mudanza, así que la ruta apuntaba al
+`scripts/` de la sdk, que no lo tiene. Quedó nombrado por lo que es, el script de
+señalización de la demo.
+
+**Y una frase que un ajuste de la propia fase dejó falsa.** Ese mismo README
+justificaba escribir sus rutas sin prefijo diciendo que el grep de autosuficiencia
+mira la carpeta entera, "este README incluido"; el grep se acotó al código cuando
+la T-01 encontró las quince líneas de dato medido, así que el README dejó de estar
+adentro del alcance y la razón escrita dejó de ser cierta. El párrafo ahora dice
+el alcance que el chequeo tiene, y la omisión se queda, porque una ruta completa
+es algo para seguir y la procedencia de una copia es algo para saber. Los dos
+arreglos quedaron anotados como `post-ejecución:` en las tasks que los
+introdujeron.
+
+**Lo que se reporta y no se toca**: las cinco citas a `.project/` de ese README
+podrían escribirse completas, porque el ADR 0023 dice explícitamente que la
+documentación cita el registro y el grep acotado ya no las alcanza. Es cambiar una
+decisión de la T-01 y no arreglar un defecto, así que queda dicho para el cierre.
+
+Cero hallazgos abiertos. La evidencia, con la salida verbatim de los cuatro
+chequeos, los seis cuadros y el chequeo de rutas con su script, en
+`phases/05-la-sdk-y-sus-demos/tasks/T-06/`.

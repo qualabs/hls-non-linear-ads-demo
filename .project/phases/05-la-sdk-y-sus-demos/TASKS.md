@@ -48,7 +48,7 @@ pedía, y aplica a las tres tasks que lo repiten.
 | T-03 | La mudanza: la página baja a `demo/compatibility-pair/`             | done    | —    | [tasks/T-03/](tasks/T-03/) |
 | T-04 | El manifiesto declara la sdk                                        | done    | —    | [tasks/T-04/](tasks/T-04/) |
 | T-05 | El README de la raíz enruta y la demo cuenta su corrida             | done    | —    | [tasks/T-05/](tasks/T-05/) |
-| T-06 | La corrida entera desde la estructura nueva                         | pending | —    | —        |
+| T-06 | La corrida entera desde la estructura nueva                         | done    | —    | [tasks/T-06/](tasks/T-06/) |
 
 ---
 
@@ -135,6 +135,13 @@ pedía, y aplica a las tres tasks que lo repiten.
     copias se comparan a propósito: el ADR 0023 prohíbe un chequeo **permanente**,
     no verificar la copia el día que se hace.
   - **Se fue:** la verificación visual, porque acá no hay nada que mirar.
+- **post-ejecución:** 2026-09-08, la T-06 encontró que `test/fixtures/README.md`
+  justifica escribir sus rutas sin prefijo diciendo que el grep de autosuficiencia
+  mira la carpeta entera, "este README incluido", y eso dejó de ser cierto cuando
+  el grep se acotó al código por las quince líneas de dato medido que esta misma
+  task encontró. El párrafo ahora dice el alcance que el chequeo tiene; la omisión
+  se queda, porque una ruta completa es algo para seguir y la procedencia de una
+  copia es algo para saber.
 
 ## T-02 — El servidor sirve la carpeta que se le nombra
 
@@ -284,6 +291,13 @@ pedía, y aplica a las tres tasks que lo repiten.
   - **Se fue:** la comparación de la caja pedida contra la dibujada. Esta task no
     toca el renderizado ni los controles, y el recorrido corriendo con los cinco
     cuadros ya muestra que la composición se dibuja.
+- **post-ejecución:** 2026-09-08, la T-06 encontró una ruta que la mudanza dejó
+  vieja: `test/fixtures/README.md` decía que `run.json` reemplaza el parseo de
+  `scripts/senalizar-contenido.sh`, y ese script bajó a
+  `demo/compatibility-pair/scripts/`, así que la ruta apuntaba al `scripts/` de la
+  sdk, que no lo tiene. Quedó nombrado por lo que es, el script de señalización de
+  la demo, que es como ese mismo documento ya nombra a `signalling/`. La encontró
+  el chequeo de rutas corrido sobre el árbol entero y no sólo sobre los dos README.
 
 ## T-04 — El manifiesto declara la sdk
 
@@ -324,6 +338,11 @@ pedía, y aplica a las tres tasks que lo repiten.
   - **Campaña de mutación: no.**
   - **La verificación es la salida de los cinco comandos**, pegada en la
     evidencia.
+- **post-ejecución:** 2026-09-08, la etiqueta de `server.mjs:107` que esta task
+  reportó sin tocar quedó decidida y cambiada en la T-06: la etiqueta nombra a la
+  herramienta que imprime la línea, que es la convención de `construir-libreria:`
+  y `verificar-cortes:`, así que dice `server:`. Con eso el nombre viejo no queda
+  en ningún archivo tracked fuera de `.project/`.
 
 ## T-05 — El README de la raíz enruta y la demo cuenta su corrida
 
