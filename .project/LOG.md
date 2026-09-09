@@ -4404,3 +4404,56 @@ midió, y el `play()` reanuda cada caja en el cuadro donde quedó, así que el g
 guarda ni restaura posiciones. El hallazgo del ADR 0040 no se disparó.
 
 `npm test` en 49 verdes y `npm run check` en `both seams hold.`
+
+## 2026-09-09 — T-05 de la fase 08: los cuatro creativos son nuestros, y el generador no derivó esta vez
+
+Los cuatro avisos del minuto son de tres marcas inventadas: **NEONECTAR** (gaseosa),
+**KALTO** (zapatillas) y **MERIDIA** (viajes). Cada creativo tiene las dos mitades del
+ADR 0045: lo pictórico generado, y la geometría y toda la tipografía escritas como SVG y
+rasterizadas con Chrome headless.
+
+**Cero generaciones de Veo de las dos autorizadas.** El clip de 8 s de NEONECTAR ya
+existía y ya estaba pagado —es el que se generó para resolver si Veo estaba disponible— y
+es exactamente lo que el spot lineal necesitaba. Con la tipografía compuesta encima al
+final, es el ADR 0045 corriendo en lugar de descrito. Las dos imágenes de `agy` van contra
+la suscripción.
+
+**Un refinamiento del hallazgo del ADR 0045, medido acá.** La investigación midió que el
+generador deriva hacia el vestido comercial real aunque se le prohíba: con la pipa y las
+tiras prohibidas, el zapato volvió con un destello lateral parecido a una pipa. **Esta vez
+no derivó**, y la única diferencia entre los dos prompts es que éste **nombra la
+alternativa**: no dice sólo "no imites una pipa", dice "un único acento continuo en ámbar
+recorriendo la entresuela". La hipótesis, con una observación a favor y no como ley:
+**prohibir deja el hueco y el modelo lo llena con lo que conoce; describir la alternativa
+le da con qué llenarlo.** Cuesta una oración en el prompt.
+
+El chequeo de vestido comercial se hizo pieza por pieza y está escrito: el zapato mirado a
+cuadro completo y en dos ampliaciones —la línea ámbar sigue la curva de la suela y **no
+sube al empeine**, que es la diferencia entre un acento propio y una pipa—, y la costa sin
+edificios, personas, carteles ni texto.
+
+**Dos defectos encontrados mirando la pantalla, y el primero era el más caro.** Cada
+creativo salía perfecto al tamaño exacto de su caja y después `empaquetar-contenido.sh` lo
+empaquetaba a 1280×720 como el plate, así que **el recorte centrado del ADR 0013 se
+llevaba la mitad de la tipografía**. El script pasó a recibir el tamaño como argumento y
+cada aviso se sirve a su medida, verificado con `ffprobe`: 512×720, 1280×288, 320×180 y
+1280×720. Y el segundo: **la barra de progreso del cromo se come el pie de los creativos
+que llegan al borde inferior**; el cromo se esconde solo, pero un creativo que sólo se lee
+cuando el cromo está abajo es un creativo que a veces no se lee, así que los dos SVG
+llevan la restricción escrita.
+
+**Y un defecto de la T-04 que esta task encontró**, anotado como `post-ejecución` en su
+bloque: la placa quedaba visible después de terminar la guiada, con `card.hidden` leyendo
+`true` todo el tiempo, porque el `display: grid` de la hoja de estilos le gana al
+`[hidden]` del navegador —uno es regla de autor y el otro de user-agent—. **Lo encontró una
+captura y no la verificación**, que había leído la propiedad en lugar de mirar la imagen.
+Es la lección de nivel `bajo` del skill, en vivo: un estilo computado no es evidencia de
+que algo se ve.
+
+Las fuentes generadas quedaron **versionadas** en `graphics/creativos/fuentes/` con su
+razón escrita: `content/` está gitignoreado porque se puede reconstruir, y **una
+generación no se repite**. Sin ellas la demo sólo correría en la máquina donde se
+generaron. Y con esto el material de la Blender Foundation salió del todo: la línea de
+crédito de la página ya no lo nombra.
+
+`npm test` en 49 verdes y `npm run check` en `both seams hold.`

@@ -23,7 +23,7 @@ y pregunta.
 | T-02 | La demo nueva corre, con el plate suplente                     | done    | —    | [tasks/T-02/](tasks/T-02/) |
 | T-03 | El plate y el paquete de canal ficticio                        | done    | —    | [tasks/T-03/](tasks/T-03/) |
 | T-04 | El guion: anclas, placa, botón, y el freno                     | done    | —    | [tasks/T-04/](tasks/T-04/) |
-| T-05 | Los creativos de las tres marcas de fantasía                   | pending | —    | —        |
+| T-05 | Los creativos de las tres marcas de fantasía                   | done    | —    | [tasks/T-05/](tasks/T-05/) |
 | T-06 | La página: las secciones, la estética y las marcas             | pending | —    | —        |
 | T-07 | El suite de la demo, y el control de su chequeo negativo        | pending | —    | —        |
 | T-08 | La documentación: el README de la demo, la fila de la raíz      | pending | —    | —        |
@@ -202,6 +202,12 @@ y pregunta.
 - **nivel de verificación:** bajo. Es interfaz y el error está en la pantalla —una placa
   sobre lo que no corresponde se ve en la primera pasada—; la lógica no visual que agrega,
   que es la resolución de las anclas, la asierta la T-07.
+- **post-ejecución:** 2026-09-09, la placa quedaba visible después de terminar la guiada, y
+  `card.hidden` leía `true` todo el tiempo: el `display: grid` de la hoja de estilos le gana
+  al `[hidden]` del navegador, porque uno es regla de autor y el otro de user-agent. Se
+  agregó `.card[hidden] { display: none }` y el `end()` ahora también borra el `data-on`
+  que la dejaba opaca. **Lo encontró una captura de la T-05 y no la verificación de la
+  T-04**, que había leído la propiedad en lugar de mirar la imagen.
 
 ## T-05 — Los creativos de las tres marcas de fantasía
 

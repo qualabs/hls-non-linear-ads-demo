@@ -175,6 +175,15 @@ body {
 
 .card[data-on] { opacity: 1; }
 
+/* AND THIS RULE IS NOT REDUNDANT, which is the whole reason it has a comment. The UA
+ * stylesheet hides `[hidden]` with `display: none`, but that is a UA rule and the
+ * `display: grid` above is an author rule, so the author rule wins and `el.hidden =
+ * true` stops hiding anything. Measured by looking at the picture: with the
+ * walkthrough over, the last card was still on screen over a player that was playing
+ * underneath it -- and `card.hidden` read `true` the whole time, which is exactly why
+ * a property read is not evidence that something is not visible. */
+.card[hidden] { display: none; }
+
 /* ONE WAY OUT, and it is deliberately quiet: it is for the person who has seen
  * the walkthrough already, not an invitation to skip it. It disappears when the
  * walkthrough ends, because a button that ends something already over is a

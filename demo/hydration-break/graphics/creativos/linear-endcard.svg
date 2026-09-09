@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NEONECTAR, la placa de cierre del spot lineal, a cuadro entero.
+     ESTA PIEZA ES LA RAZÓN POR LA QUE EL ADR 0045 DICE LO QUE DICE. Está medido que Veo
+     honra el primer cuadro con el titular intacto y que **el titular se va de cuadro cuando
+     la cámara empuja**: en el último cuadro del clip generado no queda tipografía, sólo un
+     plano de producto. Eso no es un defecto del modelo, es lo que hace un movimiento de
+     cámara. Así que la tipografía vuelve acá, compuesta, exacta, y no re-renderizada por el
+     generador. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect x="0" y="0" width="1920" height="1080" fill="#050a0d" fill-opacity="0.55"/>
+  <text x="960" y="512" text-anchor="middle" font-family="Lato, DejaVu Sans, sans-serif"
+        font-size="118" font-weight="700" letter-spacing="16" fill="#f6f8f9">NEONECTAR</text>
+  <text x="960" y="586" text-anchor="middle" font-family="Lato, DejaVu Sans, sans-serif"
+        font-size="38" letter-spacing="11" fill="#5fe0cf">IGNITE YOUR SENSES</text>
+  <rect x="836" y="646" width="248" height="4" fill="#5fe0cf" fill-opacity="0.7"/>
+</svg>

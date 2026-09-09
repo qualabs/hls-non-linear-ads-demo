@@ -126,6 +126,10 @@ export async function runStory({ provider, video, card, skip, url = './story/sto
 
   function end() {
     running = false;
+    // Both, and in this order: the flag that hides it and the attribute that made it
+    // opaque. Leaving `data-on` behind kept the last card at full opacity, and the
+    // `hidden` was not hiding it either (see the stylesheet).
+    delete card.dataset.on;
     card.hidden = true;
     document.body.dataset.story = 'done';
     video.play().catch(() => {});
