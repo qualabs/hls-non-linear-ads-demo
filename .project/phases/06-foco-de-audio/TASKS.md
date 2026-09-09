@@ -14,7 +14,7 @@ break.
 
 | id   | brief                                                        | status  | plan | evidence |
 | ---- | ------------------------------------------------------------ | ------- | ---- | -------- |
-| T-01 | El foco cambia la mezcla, y el índice es uno solo            | pending | —    | —        |
+| T-01 | El foco cambia la mezcla, y el índice es uno solo            | done    | —    | [tasks/T-01/](tasks/T-01/) |
 | T-02 | El gesto mueve el foco, y el anillo dice cuál es             | pending | —    | —        |
 | T-03 | Las dos oraciones del README, y la corrida mirada entera     | pending | —    | —        |
 
