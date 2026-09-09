@@ -3969,3 +3969,54 @@ un rect viejo manda el toque a donde la barra ya no está —se ve como "el gest
 anda" y es el harness, y costó tres corridas—. Y antes de arrastrar hay que
 verificar que el cromo esté arriba en lugar de suponerlo: el arrastre de control
 pasa por la imagen y de paso lo baja.
+
+## 2026-09-09 — Fase 07 cerrada: la barra se arrastra, y un chequeo que no podía fallar
+
+La fase 07 cierra con las dos tasks en `done`, **ninguna corrección
+post-ejecución** y el informe en `phases/07-la-pelotita-de-la-barra/REPORT.md`. El
+`PHASE.md` pasa a `closed` con `closed: 2026-09-09` y la línea de la fase entra al
+índice del `PROJECT.md`. Abierta, diseñada, generada, ejecutada y cerrada el mismo
+día.
+
+**Lo que queda construido.** Un press en cualquier parte de la barra pone la
+pelotita ahí y empieza el arrastre, la pelotita sigue al puntero, y al soltar el
+video seekea a donde quedó, con mouse y con el dedo. Lo que lo hizo chico es que
+es **un gesto y no dos**: un toque suelto es un arrastre de longitud cero, así que
+no hay rama por tipo de gesto y nada tiene que averiguar si el puntero cayó sobre
+un punto de 14 px. Y la pelotita no se agregó porque **ya existía y se veía** desde
+la fase 02: lo que faltaba era el gesto, que es lo que el propio pedido decía en su
+segunda oración.
+
+**El riesgo R1 medido y no impresionado.** Lo único que este cambio podía romper
+es el toque suelto, porque el seek pasó del press al release: 45,0 s contra 45,0
+esperados al 25 % de la barra, y otras tres lecturas con delta 0. La mitigación
+funcionó porque el criterio estaba escrito como número.
+
+**El hallazgo es de método.** El chequeo del scroll con el dedo, tal como el
+`PHASE.md` lo pedía, **no podía fallar**: la página de la demo no scrollea
+—`scrollHeight` 760 contra 760 de ventana— así que arrastrar sin scrollear da verde
+aunque `touch-action` no exista. Con un viewport donde la página sí scrollea, 687
+contra 420, y con un control —el mismo arrastre vertical fuera del player, que
+lleva el `scrollY` de 120 a 265— la verificación dice algo: empezando en la barra
+el `scrollY` se queda en 267 a lo largo de 160 px. Es la segunda vez en el proyecto
+que un chequeo escrito de buena fe no podía fallar, y agrega la otra mitad de la
+recomendación 2 de la fase 05: **un chequeo negativo pide su control.**
+
+**Dos cosas del proceso que salieron distinto que las dos fases anteriores.** El
+`status` del `PHASE.md` lo movió la ejecución —a `in-progress` en el primer commit
+de la T-01 y a `closing` al terminar la T-02—, que es el agujero que los cierres de
+la 05 y de la 06 tuvieron que arreglar. Y la corrección de
+`docs/integrating-the-library.md` la encontró **la task y no el cierre**, porque el
+bloque de la T-02 la pedía por nombre: es el hallazgo 2 del cierre de la fase 06
+puesto a trabajar, y funcionó.
+
+**Un hilo viejo que se cerró y no es de esta fase.** Las fases 02 y 04 sin
+`DESIGN.md` dejaron de estar en rojo: el commit `6d4eb79` las bajó de la lista
+`EXCEPTIONS` del skill a `.project/EXCEPTIONS.md` con su razón escrita. El
+validador sale en **GREEN** con las dos aceptadas y las imprime con su razón en
+cada corrida.
+
+**Verificación del cierre.** `npm test` en 49 verdes, `npm run check` en
+`both seams hold.`, y `validar-proyecto.py` en verde con 36 ADR y 7 fases. El
+`status` del proyecto queda en `ongoing`: quedan la grabación, iOS y la
+especificación de SVTA.

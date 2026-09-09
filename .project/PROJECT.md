@@ -588,3 +588,19 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   una salida más —un toque en el primario también suelta el foco—, que entró como
   corrección de la T-02 con el ADR 0031 y sin reabrir la fase. Sus seis ADR son
   todos `scope: project`. Informe en `phases/06-foco-de-audio/REPORT.md`.
+- **07-la-pelotita-de-la-barra**: cerrada con la barra arrastrable, que es lo que
+  Nicolás pidió probando la demo: un press en cualquier parte de ella pone la
+  pelotita ahí, la pelotita sigue al puntero, y al soltar es el seek. Lo que la
+  hizo chica es que es **un gesto y no dos** —un toque suelto es un arrastre de
+  longitud cero, así que no hay rama por tipo de gesto y nada tiene que averiguar
+  si el puntero cayó sobre un punto de 14 px—, y que **la pelotita ya existía y se
+  veía** desde la fase 02: lo que faltaba era el gesto y no el punto. El único
+  cambio sobre algo que ya funcionaba es que el seek pasó del press al release, y
+  se verificó como comparación y no como impresión: 45,0 s contra 45,0 esperados.
+  Su hallazgo es de método y no de código: **el chequeo del scroll con el dedo no
+  podía fallar**, porque la página de la demo no scrollea, y hizo falta un control
+  —el mismo arrastre fuera del player, que sí scrollea— para que la verificación
+  dijera algo. Es la segunda vez en el proyecto que un chequeo escrito de buena fe
+  no podía fallar. Sus cinco ADR son `scope: phase-07`, que es el default del skill
+  y la práctica vieja del proyecto: deciden cómo se comporta un control y no qué es
+  este repositorio. Informe en `phases/07-la-pelotita-de-la-barra/REPORT.md`.
