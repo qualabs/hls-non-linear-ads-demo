@@ -152,9 +152,19 @@ existe.
 Un cambio de foco disparado desde un blanco invisible tiene el defecto que la
 fase 04 midió, agravado: el sonido cambia y no hay nada en pantalla que explique
 por qué. Así que el toque sobre una caja enfoca **sólo cuando el cromo está
-arriba**, que es la misma regla que ya gobierna los botones y la barra. En
-celular queda en dos toques, que es lo que ya cuesta cualquier control de este
-player.
+arriba**, que es la misma regla que ya gobierna los botones y la barra.
+
+**Una regla, dos comportamientos, y ninguno escrito aparte.** El predicado es
+*¿está el cromo arriba?* y no *¿es el segundo toque?*, y el cromo ya distingue
+las dos entradas: su `pointermove` sólo actúa con `pointerType === 'mouse'`
+(`lib/controls.js:717-720`, con la razón escrita de que el movimiento de un dedo
+es un drag y no un hover). De ahí sale la asimetría sin una segunda regla. **Con
+mouse el hover ya puso el cromo arriba, así que el click actúa de una** y no hay
+sorpresa, porque el cromo está a la vista todo el tiempo. **En celular no hay
+hover: el primer toque muestra y el segundo actúa**, que es lo que ya cuesta
+cualquier control de este player. Y en un híbrido —una notebook con pantalla
+táctil— la respuesta no depende de qué dispositivo es sino de si el cromo está
+visible en ese momento, que es la única forma de que no haya un tercer caso.
 
 **Es un `pointerdown` y no un `click`, y eso lo decide el punto 11.** En el
 segundo toque, el `pointerdown` del contenedor baja el cromo antes de que llegue
