@@ -4185,3 +4185,45 @@ Con D10 las decisiones del diseño pasan a ser **diez**, así que los ADR de la 
 van del **0037 al 0046**. El chequeo 3 del suite ahora asierta las tres formas: cuatro
 avisos, exactamente uno sin bloque de layout y tercero, y exactamente uno cuyos
 elementos son `image/*`.
+
+## 2026-09-09 — Fase 08 generada del diseño aprobado: ocho tasks y diez ADR
+
+Nicolás aprobó el diseño y la cadena entera: *"bien, cualquier cosa corregimos post
+ejecución. Dale!"* — autorización para generar y ejecutar, sin puertas de aprobación en
+el medio, con las dudas chicas resueltas por el criterio del diseño y reportadas en
+lugar de preguntadas.
+
+**Diez ADR, del 0037 al 0046**, todos `accepted`. Nueve con `scope: phase-08` y uno
+`project`: el **0045**, lo pictórico se genera, la tipografía se compone y el movimiento
+se genera sólo donde la tipografía puede irse de cuadro, porque gobierna cualquier
+trabajo de assets del proyecto y no sólo el de esta demo.
+
+**Ocho tasks, ordenadas por riesgo y no por dependencia**, que es el criterio del
+ADR 0008. La T-01 mide el freno de la composición en el navegador, que es la propiedad de
+la que cuelga el guion entero y **lo único que puede cambiar el tamaño de la fase**
+(R6). La T-02 deja la demo corriendo con el material de la demo actual como suplente, que
+es la mitigación de R3 y lo que desacopla la página del trabajo de assets. La T-03 ataca
+el plate y el paquete de canal ficticio, que es lo que puede no aparecer (R1) y la pieza
+de mayor palanca. Después: el guion, los creativos, la página, el suite y la
+documentación.
+
+**Un riesgo nuevo que no estaba en el diseño, el R7**: un chequeo escrito de buena fe
+puede no poder fallar, y ya pasó tres veces en este proyecto —el scroll de la fase 07
+sobre una página que no scrollea, el cuerpo vacío que devuelve 400 exista el modelo o no,
+y el 404 que no distingue "no existe" de "no tenés acceso"—. Su mitigación es un paso de
+la T-07: el chequeo de anclas se corre con un ancla deliberadamente equivocada y tiene
+que fallar, y el resultado de ese control va en la evidencia.
+
+**Los niveles de verificación**: la T-07 es la única `alto`, porque es código que corre
+desatendido y cuya falla es un verde que no significa nada, y su campaña de mutación es
+una rotura por regla asertada. La T-01 y la T-08 son `mínimo`, porque toda su salida es
+algo que una persona lee antes de que algo dependa de ello. Las otras cinco son `bajo`:
+son pantalla, y el error está en la pantalla.
+
+**El límite de gasto quedó escrito en el `PHASE.md`** y no en un mensaje: `agy` libre,
+Veo hasta dos generaciones de hasta 10 s con `veo-3.1-fast-generate-001`, cualquier otro
+servicio pago no. La T-05 para y pregunta antes de encadenar una tercera.
+
+`validar-proyecto.py` en **GREEN** con 46 ADR y 8 fases, con las dos excepciones
+históricas de siempre impresas con su razón. El `status` de la fase queda en
+`in-progress`.
