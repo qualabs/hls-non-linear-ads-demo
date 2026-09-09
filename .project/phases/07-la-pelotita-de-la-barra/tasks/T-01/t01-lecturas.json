@@ -1,0 +1,95 @@
+[
+  {
+    "rail": {
+      "x": 857.59375,
+      "y": 644.09375,
+      "width": 608.21875,
+      "height": 8,
+      "top": 644.09375,
+      "right": 1465.8125,
+      "bottom": 652.09375,
+      "left": 857.59375
+    }
+  },
+  {
+    "duracion": 180
+  },
+  {
+    "touch_action": "none"
+  },
+  {
+    "user_select": "none"
+  },
+  {
+    "click_suelto": {
+      "x_fraccion": 0.25,
+      "esperado_s": 45.0,
+      "currentTime": 45,
+      "delta_s": 0.0
+    }
+  },
+  {
+    "durante_el_arrastre": {
+      "currentTime_antes": 45,
+      "lecturas": [
+        {
+          "f": 0.4,
+          "knobLeft": "40%",
+          "currentTime": 45,
+          "knob_px": 20,
+          "cromo": true
+        },
+        {
+          "f": 0.55,
+          "knobLeft": "55%",
+          "currentTime": 45,
+          "knob_px": 20,
+          "cromo": true
+        },
+        {
+          "f": 0.7,
+          "knobLeft": "70%",
+          "currentTime": 45,
+          "knob_px": 20,
+          "cromo": true
+        }
+      ],
+      "el_video_no_se_movio": true
+    }
+  },
+  {
+    "al_soltar": {
+      "esperado_s": 126.0,
+      "currentTime": 126.0,
+      "delta_s": 0.0,
+      "knob_px": 14
+    }
+  },
+  {
+    "afuera_de_la_barra": {
+      "mientras": {
+        "knobLeft": "50%",
+        "currentTime": 126.0,
+        "cromo": true
+      },
+      "esperado_s": 153.0,
+      "currentTime": 153.0,
+      "delta_s": 0.0
+    }
+  },
+  {
+    "cromo_durante_el_arrastre": {
+      "cromo_a_los_4200ms": true,
+      "knobLeft": "45%",
+      "currentTime": 153.0,
+      "cromo_al_soltar": true,
+      "seleccion_de_texto": ""
+    }
+  },
+  {
+    "en_reposo": {
+      "knob_px": 14,
+      "knobLeft": "45%"
+    }
+  }
+]

@@ -15,8 +15,8 @@ con el player. Sin campaña de mutación, por la misma razón.
 
 | id   | brief                                                    | status  | plan | evidence |
 | ---- | -------------------------------------------------------- | ------- | ---- | -------- |
-| T-01 | El scrub: un solo camino, y el seek al soltar            | pending | —    | —        |
-| T-02 | Los dos punteros, mirados sobre el resultado final       | pending | —    | —        |
+| T-01 | El scrub: un solo camino, y el seek al soltar            | done    | —    | [tasks/T-01/](tasks/T-01/) |
+| T-02 | Los dos punteros, mirados sobre el resultado final       | in-progress | —    | —        |
 
 ---
 
