@@ -1,0 +1,102 @@
+== el switch de la composicion, encendido con el boton del cromo
+    primario muted=False
+
+== CASO 1 -- Quad (break 4, t=95..107): un cuadrante suena solo
+--- el Quad sin foco, la mezcla declarada
+    t=97.96s  paused=False  cromo=ARRIBA
+    primario        vol=0.1  muted=False
+    view2           vol=0.1  muted=False opacity=1   pointer-events=auto  --  
+    view3           vol=1    muted=False opacity=1   pointer-events=auto  --  
+    view4           vol=0.1  muted=False opacity=1   pointer-events=auto  --  
+    captura: t02-quad-sin-foco.png
+--- un click con mouse sobre view2 (cuadrante arriba a la derecha)
+    t=98.83s  paused=False  cromo=ARRIBA
+    primario        vol=0    muted=False
+    view2           vol=1    muted=False opacity=1   pointer-events=auto  ANILLO rgb(255, 212, 0) solid 4px -4px
+    view3           vol=0    muted=True  opacity=1   pointer-events=auto  --  
+    view4           vol=0    muted=True  opacity=1   pointer-events=auto  --  
+    captura: t02-quad-con-foco.png
+--- el mismo cuadrante tocado de nuevo
+    t=99.36s  paused=False  cromo=ARRIBA
+    primario        vol=0.1  muted=False
+    view2           vol=0.1  muted=False opacity=1   pointer-events=auto  --  
+    view3           vol=1    muted=False opacity=1   pointer-events=auto  --  
+    view4           vol=0.1  muted=False opacity=1   pointer-events=auto  --  
+    captura: t02-quad-foco-suelto.png
+
+== CASO 2 -- cornerOverlay (break 1, t=20..32): el aviso calla el programa
+--- el overlay sin foco
+    t=23.99s  paused=False  cromo=abajo
+    primario        vol=1    muted=False
+    adOverlay1      vol=0    muted=True  opacity=1   pointer-events=auto  --  
+--- un click sobre el overlay
+    t=24.49s  paused=False  cromo=ARRIBA
+    primario        vol=0    muted=False
+    adOverlay1      vol=1    muted=False opacity=1   pointer-events=auto  ANILLO rgb(255, 212, 0) solid 4px -4px
+    captura: t02-overlay-con-foco.png
+--- el overlay tocado de nuevo
+    t=25.19s  paused=False  cromo=ARRIBA
+    primario        vol=1    muted=False
+    adOverlay1      vol=0    muted=True  opacity=1   pointer-events=auto  --  
+
+== CASO 3 -- break 5 (t=120..168): el nodo precargado y el borde
+--- ad1 en pantalla y ad2 precargado detras
+    t=129.86s  paused=False  cromo=ARRIBA
+    primario        vol=1    muted=False
+    ad1-overlay     vol=0    muted=True  opacity=1   pointer-events=auto  --  
+    ad2-box         vol=1    muted=True  opacity=0   pointer-events=none  --  
+    captura: t02-break5-precargado.png
+    nodos precargados (opacity 0): ['ad2-box']
+--- un click sobre la caja de ad2-box, que todavia no entro
+    t=130.64s  paused=False  cromo=ARRIBA
+    primario        vol=1    muted=False
+    ad1-overlay     vol=0    muted=True  opacity=1   pointer-events=auto  --  
+    ad2-box         vol=1    muted=True  opacity=0   pointer-events=none  --  
+--- ad1-overlay enfocado
+    t=131.11s  paused=False  cromo=ARRIBA
+    primario        vol=0    muted=False
+    ad1-overlay     vol=1    muted=False opacity=1   pointer-events=auto  ANILLO rgb(255, 212, 0) solid 4px -4px
+    ad2-box         vol=1    muted=True  opacity=0   pointer-events=none  --  
+    esperando el borde al aviso siguiente (t=132)...
+--- pasado el borde: la composicion se rearmo
+    t=133.61s  paused=False  cromo=abajo
+    primario        vol=1    muted=False
+    ad2-box         vol=0    muted=True  opacity=1   pointer-events=auto  --  
+    captura: t02-break5-borde.png
+
+== CASO 4 -- tactil, con el cromo abajo: el primer toque no cambia el audio
+--- el cromo abajo, antes de tocar
+    t=98.48s  paused=False  cromo=abajo
+    primario        vol=0.1  muted=False
+    view2           vol=0.1  muted=False opacity=1   pointer-events=auto  --  
+    view3           vol=1    muted=False opacity=1   pointer-events=auto  --  
+    view4           vol=0.1  muted=False opacity=1   pointer-events=auto  --  
+--- PRIMER toque tactil sobre view2
+    t=98.91s  paused=False  cromo=ARRIBA
+    primario        vol=0.1  muted=False
+    view2           vol=0.1  muted=False opacity=1   pointer-events=auto  --  
+    view3           vol=1    muted=False opacity=1   pointer-events=auto  --  
+    view4           vol=0.1  muted=False opacity=1   pointer-events=auto  --  
+--- SEGUNDO toque tactil sobre view2
+    t=99.37s  paused=False  cromo=abajo
+    primario        vol=0    muted=False
+    view2           vol=1    muted=False opacity=1   pointer-events=auto  ANILLO rgb(255, 212, 0) solid 4px -4px
+    view3           vol=0    muted=True  opacity=1   pointer-events=auto  --  
+    view4           vol=0    muted=True  opacity=1   pointer-events=auto  --  
+    captura: t02-quad-tactil-segundo-toque.png
+
+== VEREDICTO
+    [OK ] Quad sin foco: la mezcla declarada (view2 10, view3 100, view4 10, primario 10)
+    [OK ] Quad, UN click con mouse: view2 a 100 y sin mutear, el resto a 0 y muteados, el primario a 0
+    [OK ] Quad: el anillo esta sobre view2 y sobre ninguna otra caja
+    [OK ] Quad: tocarlo de nuevo devuelve view3 a 100 y el resto a 10, y el anillo se va
+    [OK ] cornerOverlay sin foco: el programa a 100 y el aviso callado
+    [OK ] cornerOverlay: un click sobre el aviso calla el programa y el aviso suena
+    [OK ] cornerOverlay: tocado de nuevo, vuelve la mezcla declarada
+    [OK ] break 5: el nodo precargado no recibe punteros
+    [OK ] break 5: un click sobre la caja del aviso que no entro no cambia el audio y no pone anillo
+    [OK ] break 5: en el borde al siguiente aviso el anillo desaparece y vuelve la mezcla declarada
+    [OK ] tactil con el cromo abajo: el PRIMER toque no cambia el audio ni pone anillo, y sube el cromo
+    [OK ] tactil: el SEGUNDO toque si actua -- view2 a 100 y el anillo encima
+
+    TODO EN VERDE
