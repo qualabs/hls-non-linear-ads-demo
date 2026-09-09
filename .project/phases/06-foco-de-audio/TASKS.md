@@ -204,6 +204,16 @@ break.
   visual, y sin campaña de mutación. La única trampa que no se ve es el nodo
   precargado con `opacity: 0`, y se cierra por construcción —los punteros van en
   `place()`— y se mira en el borde entre los cuatro avisos del break 5.
+- **post-ejecución:** 2026-09-09, Nicolás pidió que un toque en el primario,
+  cuando algo ya está enfocado, también suelte ese foco y devuelva la mezcla
+  declarada. Se agregó `releaseFocus()` en `lib/renderer.js`, el parámetro
+  homónimo de `createControls` en `lib/controls.js` (mismo default seguro que
+  `chromeUp`, `() => false`) y su cableado en `attach()`
+  (`lib/concurrent-hls.js`). El primario sigue sin ser blanco del gesto —el
+  ADR 0027 no se reabre— porque la salida nueva sólo actúa con algo enfocado y
+  cae al comportamiento de siempre cuando no lo hay. Registrado en el ADR
+  0031, que supersede al 0027 en su afirmación de que el primario nunca tiene
+  efecto de audio.
 
 ## T-03 — Las dos oraciones del README, y la corrida mirada entera
 

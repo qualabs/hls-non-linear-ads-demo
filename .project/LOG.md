@@ -3698,3 +3698,47 @@ ancla en `#player`, porque la página tiene dos players con el mismo cromo y un
 selector global mide el pane de fábrica y reporta que el gesto no funciona cuando
 sí funciona. El audio audible, esta vez, se apagó con `--mute-audio` en el Chrome
 de la corrida en lugar de tocar el sink del sistema.
+
+## 2026-09-09 — Corrección post-ejecución en la T-02: el primario también suelta el foco
+
+Nicolás pidió, sobre el gesto que la T-02 ya había cerrado: *"si toco el
+contenido principal de nuevo, entonces vuelva el contenido principal. Además,
+que si toco el contenido principal, también sea como deseleccionar."* El ADR
+0027 ya había mirado esa puerta durante la T-02 y la había descartado por una
+colisión: hacer enfocable el primario convertiría cada toque sobre la imagen
+con el cromo arriba en un cambio de audio, y el gesto que baja el cromo (fase
+04) pasaría a cambiar el sonido en su lugar.
+
+La colisión seguía siendo válida, así que el pedido no se resolvió reabriendo
+esa puerta sino agregando una angosta y condicional: con el cromo arriba y
+algo enfocado, un `pointerdown` sobre el primario suelta ese foco y el toque
+se consume ahí, sin llegar a alternar el cromo; con nada enfocado, la misma
+condición contesta que no hay nada que soltar y el toque cae al comportamiento
+de siempre. Las dos lecturas son mutuamente excluyentes por construcción, así
+que la colisión que el ADR 0027 describió no reaparece: no hay un estado en el
+que el mismo toque pueda significar las dos cosas.
+
+**El diff son las mismas tres piezas que la T-02 ya tocaba, y nada del blanco
+del gesto cambió.** `lib/renderer.js` gana `releaseFocus()`, que suelta el foco
+si hay uno puesto; `lib/controls.js` recibe ese predicado en `createControls`
+con el mismo default seguro que `chromeUp` (`() => false`); `lib/concurrent-hls.js`
+lo cablea en `attach()` con la misma forma que `chromeUp`, evaluado en el
+momento del toque. Es una corrección sobre una task ya `done` y no una task
+nueva —queda anotada como `post-ejecución:` en el bloque de la T-02 de
+`phases/06-foco-de-audio/TASKS.md`— y quedó registrada en el **ADR 0031**, que
+supersede al **ADR 0027** en su afirmación de que el primario nunca tiene
+efecto de audio; lo que el 0027 decidió sobre qué es enfocable y por qué el
+primario queda afuera de esa lista sigue en pie tal como está escrito ahí.
+
+**Verificación.** `npm test` sigue en 49 verdes y `npm run check` en `both
+seams hold.`, sin cambios en ninguno de los dos. Con el player corriendo y
+anclado en `#player` —la página tiene dos paneles con el mismo cromo, y un
+selector global mide el de fábrica— se comprobaron los cuatro casos del
+pedido sobre el Quad del break 4: con `view2` enfocado, un toque en el
+primario devuelve la mezcla declarada (`view3` a 100, el resto y el primario a
+10) y saca el anillo; hecho con un toque táctil, que es el caso que antes
+hubiera bajado el cromo en el segundo toque, el cromo se queda arriba; sin
+nada enfocado, un toque en el primario sigue alternando el cromo como
+siempre (primero lo sube, un segundo toque lo baja); y re-tocar la caja
+enfocada —el camino que ya existía— sigue soltando el foco sin que este
+cambio le haya tocado una línea.
