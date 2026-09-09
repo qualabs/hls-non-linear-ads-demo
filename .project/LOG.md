@@ -3349,3 +3349,94 @@ decisión de la T-01 y no arreglar un defecto, así que queda dicho para el cier
 Cero hallazgos abiertos. La evidencia, con la salida verbatim de los cuatro
 chequeos, los seis cuadros y el chequeo de rutas con su script, en
 `phases/05-la-sdk-y-sus-demos/tasks/T-06/`.
+
+## 2026-09-08 — Fase 06 abierta y generada el mismo día: el foco de audio, y cinco ADR
+
+La fase 06 se abrió en diseño y se generó el mismo día. El `DESIGN.md` —405
+líneas, siete decisiones, cada una con sus alternativas descartadas y una tabla
+de descartes al final— quedó aprobado, y de ahí salieron el `PHASE.md`, el
+`TASKS.md` con tres tasks y cinco ADR nuevos, el 0026 al 0030.
+
+**Lo que la fase hace**: darle a quien mira la mitad que el ADR 0014 le había
+dejado a quien arma la campaña. Con el cromo arriba, un toque sobre una caja de
+video del aviso y esa caja es la que suena; el resto de la composición, primario
+incluido, va a 0. Es una fase chica y es un POC: lo que se muestra es cómo sería,
+así que nada se mide más allá de lo que hace falta para que el gesto funcione en
+pantalla.
+
+**El insumo** es el análisis en `sandbox/analisis-foco-de-audio-2026-09-09.md` del
+repo padre, que midió catorce hechos del código y dejó cinco casos abiertos; el
+diseño los cierra.
+
+**Los cinco ADR y qué decidió cada uno.**
+
+- **0026** — el foco es exclusivo y es **un índice único de toda la composición**,
+  no un flag por elemento. El elemento con foco suena a 100 y todo el resto va a
+  0, el primario con `volume = 0` y nunca con `muted`. De ahí salen gratis el Quad
+  (tres cuadrantes más el primario) y dos experiencias solapadas. La aritmética va
+  en una función pura al lado de `volumeOf`. **Generaliza el ADR 0014**, que queda
+  `accepted` con `generalized_by: "0026"` y una nota fechada: el asset list
+  declara el estado inicial y eso no cambia; lo que se ensancha es quién contesta
+  cuál de varias fuentes concurrentes se escucha, que el 0014 le asignaba a quien
+  arma la campaña. Descartada la regla como venía enunciada, "el elemento tocado
+  se lleva el nivel del primario", que medida contra el código es un no-op en el
+  Quad y produce audio doble en `cornerOverlay`.
+- **0027** — enfocable es **una caja de video del aviso y nada más**. El primario
+  no es blanco del gesto porque un `pointerdown` sobre la imagen ya significa
+  alternar el cromo, y hacerlo enfocable convertiría cada toque en un cambio de
+  audio. Las imágenes tampoco, porque no tienen audio. El aviso lineal a cuadro
+  entero del break 5 sí es enfocable y no molesta: declara 100 en el aviso y 0 en
+  el programa, así que enfocarlo da la mezcla que ya estaba.
+- **0028** — el gesto es un **`pointerdown` sobre la caja** y **sólo cuenta con el
+  cromo arriba**. Una regla, dos comportamientos: con mouse el hover ya subió el
+  cromo, así que el click actúa de una y en escritorio es un click y no dos; en
+  celular el primer toque muestra y el segundo actúa; en un híbrido decide si el
+  cromo está visible. Es `pointerdown` y no `click` porque en el segundo toque el
+  `pointerdown` del contenedor baja el cromo antes de que llegue el `click`. Los
+  punteros se habilitan en el **nodo** y en **`place()`**, no en la capa y no en
+  `createNode`: `bringAhead` construye nodos posicionados con `opacity: 0` y
+  opacity no detiene un dedo. El cableado va en `attach()`, con `up` agregado al
+  handle de `createControls` y un predicado que el renderer consulta.
+- **0029** — el foco **se suelta a la mezcla declarada**, no al primario (en el
+  Quad el primario declara 10), por cuatro caminos y sin preguntar nada: se toca
+  de nuevo el elemento enfocado, se rearma la composición, el asset se termina
+  antes que su ventana, o cierra el break. Los dos últimos ya están detectados en
+  el código; el cierre de break ya funciona con `clear()`.
+- **0030** — la **marca la dibuja el renderer** sobre el nodo que creó, porque
+  `controls.js` tiene prohibido tocar la capa de los avisos. Un `outline` de 4 px
+  en `#FFD400` con `outline-offset` negativo, inline sobre el nodo, escrito en la
+  misma función que mueve el índice y recalcula la mezcla. Sobrevive al auto-hide
+  por construcción, porque vive en la otra capa. Descartados el toast y el parlante
+  al lado del anillo.
+
+**Dos de las siete decisiones del diseño no se volvieron ADR, y es a propósito.**
+La sexta decide que el ADR de esta fase **generaliza el 0014 y no lo supersede**:
+eso no es una decisión sobre el sistema sino sobre cómo se escribe el registro, y
+queda expresada donde vive, en el `generalizes: ["0014"]` del 0026 y en la nota
+fechada del 0014. Un ADR cuyo contenido fuera "este ADR generaliza a aquél" no
+afirma nada del sistema. La séptima decide que **el foco es un paso opcional de la
+corrida grabada** y que el guion no lo pide: es alcance y calendario, no forma del
+sistema, así que vive en el `PHASE.md` —en el fuera de alcance y en la sección de
+calendario— y su parte entregable, las dos oraciones del README de la demo, es la
+T-03.
+
+**Las tres tasks, y las tres en `bajo`.** T-01, el foco cambia la mezcla y el
+índice es uno solo, con el test unitario de la función pura que es la única lógica
+no visual de la fase; T-02, el gesto mueve el foco y el anillo dice cuál es;
+T-03, las dos oraciones del README y la corrida mirada entera. Ninguna lleva
+campaña de mutación: lo que la fase entrega se escucha y se mira en pantalla, y
+su modo de falla está a la vista en el primer break. Vara de POC, escrita en el
+`TASKS.md` para que quien ejecute no la suba por prolijidad.
+
+**La documentación del producto no cambia, y la respuesta es del propio
+documento.** El contrato de señalización y renderizado ya trae `volume` y dice de
+sí mismo que la política de audio no está ahí
+(`docs/contrato-senalizacion-renderizado.md:214`), así que un override en tiempo
+de ejecución es del renderizado por definición: la costura del ADR 0003 aguanta
+sin excepciones nuevas y el grep de `scripts/verificar-cortes.mjs` no crece. El
+proyecto no tiene `docs/arc42/` y esta fase no lo crea, por la misma razón que la
+fase 05: los dos documentos de `docs/` cumplen ese papel para el único lector que
+tienen.
+
+**El validador** quedó con los dos rojos conocidos y ninguno nuevo: las fases 02 y
+04 sin `DESIGN.md`, que es una decisión pendiente y no se toca acá.

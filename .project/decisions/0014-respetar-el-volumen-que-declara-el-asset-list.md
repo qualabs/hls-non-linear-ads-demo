@@ -6,6 +6,8 @@ scope: project
 date: 2026-09-04
 supersedes: "0010"
 superseded_by: null
+generalizes: null
+generalized_by: "0026"
 ---
 
 ## Contexto
@@ -104,3 +106,14 @@ la herramienta no emite `volume` nunca; lo correcto es que no lo emite en el
 default. Lo que sigue abierto es la otra mitad, que es cuál de varias fuentes
 concurrentes querría escuchar quien mira, y esto no la contesta: la contesta
 quien arma la campaña, y ahora tiene dónde escribirlo.
+
+> **Nota del 2026-09-08.** El **ADR 0026 generaliza esta decisión** y no le
+> contradice nada. Lo que este ADR fija es el **estado inicial** del audio de cada
+> elemento, y esa palabra es la que el 0026 usa: el asset list declara la mezcla y
+> quien mira puede sobrescribirla mientras el aviso está en pantalla, con el
+> override muriendo con el aviso y el default volviendo a lo declarado. Lo único
+> que se ensancha es la frase de cierre de acá, la que reparte quién contesta cuál
+> de varias fuentes concurrentes querría escuchar quien mira: este ADR le asigna
+> la respuesta a quien arma la campaña, y el 0026 se la da también a quien mira.
+> Todo lo de arriba sigue valiendo, incluida la divergencia deliberada con la
+> semántica de SVTA y la asimetría del default.
