@@ -2,11 +2,10 @@
 # Baja el material y lo empaqueta: el plate del partido y los tres creativos del
 # minuto que son video.
 #
-# ATENCIÓN, PORQUE ESTE MATERIAL ES PROVISORIO. Lo que esta demo va a mostrar es
-# un partido amateur limpio de derechos con un paquete de canal ficticio quemado
-# encima, y eso lo produce la T-03 de la fase 08. Hasta que exista, el plate y
-# los creativos son las películas abiertas de la Blender Foundation, que es el
-# mismo material que empaqueta la demo del par de compatibilidad.
+# EL PLATE YA ES EL PROPIO: partido amateur limpio de derechos, en tres actos, con
+# el paquete de canal ficticio quemado encima. LOS CREATIVOS DEL MINUTO TODAVÍA NO:
+# son las películas abiertas de la Blender Foundation hasta que la T-05 produzca
+# los de las tres marcas de fantasía.
 #
 # Por qué la demo se construye contra un suplente en lugar de esperar el
 # material: el guion se ancla a la señalización y no al material (ADR 0037), así
@@ -54,16 +53,28 @@ saca_del_zip() { # $1 zip, $2 destino
 saca_del_zip ed.zip ed.mp4
 saca_del_zip caminandes.zip caminandes.mp4
 
-# EL PLATE, y su largo sale de plate.json y no de acá (ADR 0044). El mismo
-# archivo declara en qué segundo arranca la parada del juego, y el script de
-# señalización lo lee de ahí para poner el break exactamente ahí: son dos
-# lectores de un solo número, en lugar de dos números escritos a mano.
+# LOS CLIPS DEL PLATE, de Pexels, bajo la Pexels License y sin atribución
+# exigida. Cada uno pasó el chequeo de cuadro y lo que se miró de cada uno está
+# escrito en la evidencia de la T-03. Los títulos de un banco de stock no dicen
+# nada sobre derechos: lo que decide es mirar los cuadros.
+baja https://www.pexels.com/download/video/31370180/ 31370180.mp4
+baja https://www.pexels.com/download/video/9502518/  9502518.mp4
+baja https://www.pexels.com/download/video/9517718/  9517718.mp4
+baja https://www.pexels.com/download/video/9441632/  9441632.mp4
+
+# EL PLATE: tres actos de metraje amateur limpio de derechos, con el paquete de
+# canal ficticio quemado encima. Los dos pasos están en scripts propios porque
+# son los dos que hacen que esto se lea como una transmisión y no como un video
+# de cancha, y porque el chequeo de cuadro vive con ellos.
 #
-# La ventana de Tears of Steel arranca en el minuto 4:30 por la misma razón que
-# en la demo vecina: ahí no hay placas de créditos ni armas ni sangre, y la
-# imagen cambia bastante, que es lo que hace visible un aviso dibujado encima.
+# Los largos de los tres actos salen de plate.json (ADR 0044), que es el mismo
+# archivo del que el script de señalización saca dónde poner el break.
+mkdir -p "$F/plate"
+./scripts/armar-plate.sh "$F/plate/crudo.mp4"
+./scripts/paquete-de-canal.sh "$F/plate/crudo.mp4" "$F/plate/con-paquete.mp4"
+
 LARGO=$(node -e 'process.stdout.write(String(require("./plate.json").largo))')
-./scripts/empaquetar-contenido.sh "$F/tos.mov" content/primary 270 "$LARGO"
+./scripts/empaquetar-contenido.sh "$F/plate/con-paquete.mp4" content/primary 0 "$LARGO"
 
 # LOS CREATIVOS DEL MINUTO. Tres son video y uno es una imagen fija, que es la
 # capacidad que este minuto demuestra (ADR 0046): el mecanismo acepta las dos
@@ -95,4 +106,4 @@ ffmpeg -hide_banner -loglevel error -y -ss 25.0 -i "$F/caminandes.mp4" -frames:v
 echo "content/adBanner/creative.jpg  ($(du -h content/adBanner/creative.jpg | cut -f1))"
 
 echo
-echo "contenido listo en content/  (material PROVISORIO: ver el encabezado de este script)"
+echo "contenido listo en content/  (los creativos del minuto son PROVISORIOS: ver el encabezado)"

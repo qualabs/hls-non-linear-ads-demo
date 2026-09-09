@@ -4306,3 +4306,51 @@ encabezado del script que lo empaqueta, en la línea de crédito de la página y
 salida del script.
 
 `npm test` en 49 verdes y `npm run check` en `both seams hold.`
+
+## 2026-09-09 — T-03 de la fase 08: el plate propio, el paquete de canal, y cinco de seis clips que no pasaron el chequeo de cuadro
+
+El plate propio existe: 88 s en tres actos —14 de juego, 60 de parada, 14 de juego— con
+metraje amateur limpio de derechos y el paquete de canal ficticio quemado encima. El
+material de la Blender Foundation dejó de ser el plate y quedó sólo como creativo
+provisorio de los avisos, que es de la T-05.
+
+**El paquete de canal salió como el ADR 0045 lo reparte, y el reparto se notó.** El
+scorebug, el bug del canal y la placa de parada son SVG rasterizado con Chrome headless
+—alfa real, 1280×720 exactos— y **el reloj lo dibuja ffmpeg y no el SVG**, porque un
+reloj que no corre es la diferencia entre un gráfico y una transmisión. El SVG deja el
+hueco y la herramienta lo llena: 32:16 a los 6 s, 32:30 a los 20, 33:30 a los 80. La
+placa **COOLING BREAK · PLAY STOPPED** aparece sólo entre los segundos 14 y 74, y esos
+números salen de `plate.json`: el gráfico que dice "play stopped" y el break que dibuja
+publicidad encima leen un solo número (ADR 0044).
+
+**El chequeo de cuadro no fue una formalidad: de seis candidatos, cinco fallaron, y
+ninguno lo decía en su título.** Todos se presentan como "free to use". Uno traía una
+camiseta réplica de selección con **escudo de federación y las tres tiras de una marca
+real**; otro mostraba **menores**; otros dos, marca comercial legible en primer plano. El
+del escudo se recuperó con un recorte verificado en cuatro momentos del clip, y el
+recorte quedó escrito en el script con la frase de que **no es encuadre, es el chequeo**.
+
+El criterio con el que se aceptó lo que se aceptó es el de la investigación de contenido:
+lo que descalifica es un escudo de club profesional, una marca de liga o una valla, porque
+eso convierte al clip en la grabación de un partido con derechos encima; la ropa deportiva
+con marca sobre un equipo amateur es aparición incidental, que es el caso débil, y **queda
+anotado para el chequeo final de cuadro antes de grabar**.
+
+**La debilidad que queda es de relato y no de derechos, y se reporta en lugar de
+esconderse**: los actos de juego y los de parada son equipos y canchas distintos. Se buscó
+la versión coherente —el mismo equipo tiene clips de juego— y son planos cortos sin
+profundidad, no planos anchos de transmisión. Las dos opciones existen y ninguna tiene las
+dos cosas; se eligió el plano ancho porque **es lo que hace que el paquete de canal
+funcione**, y se puede dar vuelta con una línea del script.
+
+**Dos defectos propios, del mismo tipo y los dos encontrados mirando.** La placa de parada
+salió con las dos etiquetas pisándose y la segunda fuera de su caja: 13 caracteres de
+13 px bold con 1,4 de tracking miden 123 px, así que la segunda no podía arrancar en 176.
+Vale anotarlo porque **la lección no son esos números**: la investigación dice que el
+generador deforma el texto chico, y esto era SVG escrito a mano y salió mal igual —
+tipografía sobre una forma se mira, la haya escrito quien la haya escrito. Y el factor de
+estiramiento de la parada estaba invertido, `PTS/factor` acelera en lugar de estirar, así
+que el plate salió de 62,3 s en vez de 88. **Lo delató el número y no la pantalla**: un
+plate corto no se ve mal, se ve como otro plate.
+
+`npm test` en 49 verdes y `npm run check` en `both seams hold.`
