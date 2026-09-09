@@ -1,0 +1,234 @@
+[
+  {
+    "break": "quad (multiView, t=95..107)",
+    "lectura": "antes-del-pause",
+    "t": 100.959,
+    "primarioPausado": false,
+    "activo": [
+      "AD-4-CONCURRENT.0 / multiView"
+    ],
+    "cajas": [
+      {
+        "currentTime": 5.958,
+        "paused": false,
+        "readyState": 4
+      },
+      {
+        "currentTime": 5.958,
+        "paused": false,
+        "readyState": 4
+      },
+      {
+        "currentTime": 5.958,
+        "paused": false,
+        "readyState": 4
+      }
+    ]
+  },
+  {
+    "break": "quad (multiView, t=95..107)",
+    "lectura": "pausa-t0",
+    "t": 100.959,
+    "primarioPausado": true,
+    "activo": [
+      "AD-4-CONCURRENT.0 / multiView"
+    ],
+    "cajas": [
+      {
+        "currentTime": 5.959,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 5.959,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 5.959,
+        "paused": true,
+        "readyState": 4
+      }
+    ]
+  },
+  {
+    "break": "quad (multiView, t=95..107)",
+    "lectura": "pausa-t0-mas-1600ms",
+    "t": 100.959,
+    "primarioPausado": true,
+    "activo": [
+      "AD-4-CONCURRENT.0 / multiView"
+    ],
+    "cajas": [
+      {
+        "currentTime": 5.959,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 5.959,
+        "paused": true,
+        "readyState": 4
+      },
+      {
+        "currentTime": 5.959,
+        "paused": true,
+        "readyState": 4
+      }
+    ]
+  },
+  {
+    "break": "quad (multiView, t=95..107)",
+    "lectura": "despues-del-play",
+    "t": 102.17,
+    "primarioPausado": false,
+    "activo": [
+      "AD-4-CONCURRENT.0 / multiView"
+    ],
+    "cajas": [
+      {
+        "currentTime": 7.169,
+        "paused": false,
+        "readyState": 4
+      },
+      {
+        "currentTime": 7.168,
+        "paused": false,
+        "readyState": 4
+      },
+      {
+        "currentTime": 7.167,
+        "paused": false,
+        "readyState": 4
+      }
+    ]
+  },
+  {
+    "break": "mezclado aviso 3 lineal a cuadro entero (t=144..156)",
+    "lectura": "antes-del-pause",
+    "t": 149.959,
+    "primarioPausado": false,
+    "activo": [
+      "AD-5-CONCURRENT.2 / linear"
+    ],
+    "cajas": [
+      {
+        "currentTime": 5.958,
+        "paused": false,
+        "readyState": 4
+      }
+    ]
+  },
+  {
+    "break": "mezclado aviso 3 lineal a cuadro entero (t=144..156)",
+    "lectura": "pausa-t0",
+    "t": 149.959,
+    "primarioPausado": true,
+    "activo": [
+      "AD-5-CONCURRENT.2 / linear"
+    ],
+    "cajas": [
+      {
+        "currentTime": 5.959,
+        "paused": true,
+        "readyState": 4
+      }
+    ]
+  },
+  {
+    "break": "mezclado aviso 3 lineal a cuadro entero (t=144..156)",
+    "lectura": "pausa-t0-mas-1600ms",
+    "t": 149.959,
+    "primarioPausado": true,
+    "activo": [
+      "AD-5-CONCURRENT.2 / linear"
+    ],
+    "cajas": [
+      {
+        "currentTime": 5.959,
+        "paused": true,
+        "readyState": 4
+      }
+    ]
+  },
+  {
+    "break": "mezclado aviso 3 lineal a cuadro entero (t=144..156)",
+    "lectura": "despues-del-play",
+    "t": 151.168,
+    "primarioPausado": false,
+    "activo": [
+      "AD-5-CONCURRENT.2 / linear"
+    ],
+    "cajas": [
+      {
+        "currentTime": 7.167,
+        "paused": false,
+        "readyState": 4
+      }
+    ]
+  },
+  {
+    "break": "mezclado aviso 1 cornerOverlay (t=120..132)",
+    "lectura": "antes-del-pause",
+    "t": 125.961,
+    "primarioPausado": false,
+    "activo": [
+      "AD-5-CONCURRENT.0 / cornerOverlay"
+    ],
+    "cajas": [
+      {
+        "currentTime": 5.96,
+        "paused": false,
+        "readyState": 4
+      }
+    ]
+  },
+  {
+    "break": "mezclado aviso 1 cornerOverlay (t=120..132)",
+    "lectura": "pausa-t0",
+    "t": 125.961,
+    "primarioPausado": true,
+    "activo": [
+      "AD-5-CONCURRENT.0 / cornerOverlay"
+    ],
+    "cajas": [
+      {
+        "currentTime": 5.96,
+        "paused": true,
+        "readyState": 4
+      }
+    ]
+  },
+  {
+    "break": "mezclado aviso 1 cornerOverlay (t=120..132)",
+    "lectura": "pausa-t0-mas-1600ms",
+    "t": 125.961,
+    "primarioPausado": true,
+    "activo": [
+      "AD-5-CONCURRENT.0 / cornerOverlay"
+    ],
+    "cajas": [
+      {
+        "currentTime": 5.96,
+        "paused": true,
+        "readyState": 4
+      }
+    ]
+  },
+  {
+    "break": "mezclado aviso 1 cornerOverlay (t=120..132)",
+    "lectura": "despues-del-play",
+    "t": 127.167,
+    "primarioPausado": false,
+    "activo": [
+      "AD-5-CONCURRENT.0 / cornerOverlay"
+    ],
+    "cajas": [
+      {
+        "currentTime": 7.166,
+        "paused": false,
+        "readyState": 4
+      }
+    ]
+  }
+]
