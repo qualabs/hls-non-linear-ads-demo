@@ -1,0 +1,8 @@
+=== invariante A: un gesto sobre los controles NO corta la guiada (ADR 0042) ===
+"{\n \"antes\": \"running\",\n \"despues\": \"running\",\n \"placaArriba\": true,\n \"programaPausado\": true,\n \"t\": 0\n}"
+
+=== invariante B: qué recibe un click real en el centro del player ===
+"{\n \"centro\": \"card\",\n \"sobreLaBarra\": \"card\"\n}"
+
+=== invariante C: el botón sí la corta, en cualquier momento ===
+"{\n \"story\": \"done\",\n \"placaOculta\": true,\n \"botonVisible\": \"none\",\n \"programaPausado\": false\n}"
