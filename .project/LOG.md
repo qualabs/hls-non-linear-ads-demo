@@ -4020,3 +4020,75 @@ cada corrida.
 `both seams hold.`, y `validar-proyecto.py` en verde con 36 ADR y 7 fases. El
 `status` del proyecto queda en `ongoing`: quedan la grabación, iOS y la
 especificación de SVTA.
+
+## 2026-09-09 — Fase 08 abierta: la demo del break de hidratación
+
+Una demo nueva en `demo/`, para el HLS Interest Group, y el objetivo lo fijó
+Nicolás: *"es una demo nueva en `demo/`. La demo que ya tenemos debe quedar y es
+una demo técnica que su objetivo es validar el desarrollo. Esta es una demo que su
+objetivo es mostrar el potencial de uno o varios casos de uso reales de esta forma
+de poner ads y como este desarrollo lo resuelve."* La fase 08 se abre en diseño con
+ese alcance.
+
+**Es la primera fase del proyecto cuyo entregable es lo que se ve en escenario y no
+lo que lo hace posible**, y eso mueve la vara: no es que el layout caiga en el píxel
+correcto, es que un ingeniero de un broadcaster entienda el caso de negocio en
+treinta segundos de mirar la pantalla. El caso de uso lo decidió Nicolás y es uno
+solo, el break de hidratación: el partido para un minuto, la transmisión no corta a
+tanda y le pone publicidad no lineal encima de la imagen en vivo, con cuatro avisos
+adentro —uno lineal de diez segundos y tres no lineales— y marcas de fantasía.
+
+**Lo que se midió antes de diseñar acota la fase entera: nada de lo que ya funciona
+se toca.** La demo actual no cambia, la sdk no cambia, y el mecanismo está
+construido. `./run.sh <demo>` ya sirve la carpeta de cualquier demo como raíz de
+documentos (ADR 0022), así que una demo nueva es una carpeta y no un cambio en la
+raíz. Y frenar el primario congela la composición entera, porque el renderer aplica
+el estado de reproducción en cada `pause` leyendo `video.paused`: eso está **leído en
+el código y no medido en el navegador**, y es el riesgo R6 y lo primero que la fase
+mide.
+
+**La decisión que había que resolver era de dónde salen los tiempos del guion.** No
+eran dos lugares sino cuatro —el plate, el `RECORRIDO`, el asset list y el guion—, y
+la cadena queda en una sola dirección con cada número en un solo lugar: el guion se
+ancla a la señalización y los segundos se resuelven en vivo contra
+`provider.programRanges()` y `provider.experiences`, que es lo que el contrato ya
+expone. Un beat dice "antes del break 1" o "antes del aviso 2 del break 1", nunca un
+segundo absoluto. Se descartó que el script de señalización emita un
+`recorrido.json`: es una copia de números que el `provider` ya tiene resueltos, y
+encima resueltos contra lo que el player bajó y no contra lo que el script creyó.
+
+**Las nueve decisiones.** D1, el guion se ancla a la señalización. D2, es un archivo
+declarado y es JSON. D3, se arma con `settled` y el primer beat es una placa con el
+player en pausa, lo que hace desaparecer la carrera con la red en lugar de mitigarla.
+D4, el freno es `video.pause()` y la página no toca la librería. D5, la placa es una
+capa de la página, y el contenedor del player necesita `isolation: isolate` porque el
+cromo se dibuja con `z-index: 2147483000`. D6, una sola salida y es el botón, porque
+esto se graba. D7, el aviso lineal va primero y ahí se cuenta el caso de negocio, lo
+que mete la comparación adentro de un solo minuto y **hace que esta demo no necesite
+el par de compatibilidad**. D8, el corrimiento de la parada se declara una vez y el
+suite lo chequea. D9, lo pictórico se genera, la geometría se escribe como SVG, y
+cada creativo generado pasa un chequeo humano de vestido comercial, porque está
+medido que el generador deriva hacia el vestido comercial real aunque se le prohíba.
+
+Que el lineal sea un `ASSET` sin bloque de layout no es interpretación: es el
+requerimiento 4 del documento que David armó para el evento, y en este repositorio
+ya se reproduce por el camino único del ADR 0019.
+
+**Un dato que se midió durante el diseño porque el input se dio vuelta dos veces:
+Veo no está disponible en `cto-assistant-501315`.** Los cinco modelos de Veo e
+`imagen-3.0-generate-002` devuelven 404 *"does not have access"* con
+`{"instances":[{}],"parameters":{}}`. La confusión venía de un chequeo con el cuerpo
+vacío, que devuelve `400 Empty instances.` exista el modelo o no porque la validación
+corre antes del lookup: **es la segunda vez en el proyecto que un chequeo no podía
+fallar**, después del scroll de la fase 07. Queda escrito como "no disponible hoy,
+con la vía para tenerlo" —se habilita en la consola y es un hilo de Nicolás— y sin
+calidad medida. El spot lineal se compone con ffmpeg, y el metraje del programa no se
+genera por una razón que no es el acceso: un minuto pide seis o más generaciones que
+coincidan en estadio, camiseta, luz y cámara.
+
+**El fuera de alcance es la mitad del diseño**, porque una demo "linda" no tiene
+criterio de terminado. Y el contenido está decidido: partido amateur limpio de
+derechos más los gráficos de transmisión hechos por nosotros, con el paquete de canal
+ficticio como pieza de mayor palanca. El trabajo de assets es de 1,5 a 2 días de una
+persona (riesgo R3), y su mitigación es que la página se construya contra el
+contenido de la demo actual como suplente, para que los dos frentes no se bloqueen.
