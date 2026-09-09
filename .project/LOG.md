@@ -4135,3 +4135,53 @@ que antes: el generador está disponible y aun así el plate se construye, porqu
 pide seis o más generaciones que coincidan en estadio, camiseta, luz y cámara, y porque
 la sala mira video por trabajo. Un spot de producto de ocho segundos con un solo
 movimiento de cámara es donde el modelo hoy es bueno; un minuto de partido no lo es.
+
+## 2026-09-09 — Tres cambios de Nicolás al diseño de la fase 08: el lineal tercero, el banner como imagen fija, y la fecha cerrada
+
+**1. El aviso lineal se movió de primero a tercero**, que es lo que Nicolás pidió
+—*"el lineal lo quiero en 2do o tercer lugar"*—. El argumento de fondo de D7 no se
+movió: la comparación entre lineal y no lineal sigue entrando adentro de un solo
+minuto y en un solo player, y con eso esta demo sigue sin necesitar el par de
+compatibilidad. Lo que se reescribió es el por qué de la posición. **Elegí tercero y
+no segundo por tres razones que apuntan al mismo lado**: la línea de base tiene que
+estar construida antes de romperla, y con un solo aviso no lineal delante la
+comparación es contra una impresión y no contra una costumbre; la adyacencia con la L
+es la más filosa del minuto, porque la L es lo más intrusivo que todavía deja ver el
+partido y el lineal es lo primero que no lo deja, así que el corte queda entre "casi
+no puedo verlo" y "no puedo verlo"; y el minuto termina en la solución, porque después
+del lineal queda el overlay y el último cuadro del break es el partido a la vista con
+publicidad encima. **El orden del minuto es ahora una curva de intrusión**: banner, L,
+lineal, overlay.
+
+**2. El banner inferior pasa a ser imagen fija, y entró como decisión propia, D10.** No
+es un detalle de assets: el minuto pasa a mostrar **tres formas de aviso** —lineal a
+cuadro entero, imagen fija no lineal, video no lineal— y eso es una capacidad que la
+demo demuestra. **No cuesta trabajo nuevo, y esto es lo que puede sorprender: está
+construido, verificado y ya corre en la demo actual.** El elemento del layout declara
+su MIME, `isImage` lo mira y `build` crea un `<img>` en lugar de un `<video>`
+(`lib/renderer.js:80` y `:294`); los tres lugares donde una imagen no es un video ya
+están resueltos desde la fase 01 —no entra en `playable()`, `applyAudio` la saltea, y
+el aviso de asset cortado no aplica—; el asset list ya tiene la forma en
+`asset-list-squeezebackLShape-image.json`, que es el break 3 del recorrido de la demo
+actual; y la ventana la declara la señalización y no el asset, que es la regla que la
+fase 03 midió. **Lo único que obliga es una restricción de autoría**: el ADR 0013 llena
+cada caja con recorte centrado, así que una imagen que no tiene la relación de aspecto
+de su caja se recorta por los bordes, que es donde vive la tipografía de un banner. El
+banner se escribe como SVG a la relación de aspecto exacta de su caja. Y encaja con D9
+en lugar de tensionarlo: los no lineales ya iban a ser imagen fija con tipografía
+compuesta, y esta decisión convierte eso en algo que la demo dice.
+
+**3. La fecha se cerró y no queda como riesgo.** *"no importa la fecha! guardá por algún
+lado de que esto no importa... no me lo preguntes más."* El R7 dejó de ser un riesgo
+abierto: **las fechas del proyecto gobiernan la librería y no gobiernan esta demo**, y
+está escrito en el lugar donde estaba el riesgo, porque el lugar donde no está es el
+que hace que alguien lo vuelva a levantar. La sección de calendario pasó a llamarse
+"Quién mira" y dice lo mismo. Y el R3 se reescribió sin apoyarse en fechas: el riesgo
+de los 1,5 a 2 días de assets no es de plazo sino de secuencia, que la página no se
+pueda empezar si primero hay que juntar el plate, y su mitigación es la misma —la
+página se construye contra el contenido de la demo actual como suplente—.
+
+Con D10 las decisiones del diseño pasan a ser **diez**, así que los ADR de la etapa 2
+van del **0037 al 0046**. El chequeo 3 del suite ahora asierta las tres formas: cuatro
+avisos, exactamente uno sin bloque de layout y tercero, y exactamente uno cuyos
+elementos son `image/*`.

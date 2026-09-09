@@ -148,34 +148,36 @@ guion como archivo se escriben en español, que es el idioma del repositorio.
 Un solo `EXT-X-DATERANGE` de la clase concurrente, con un asset list de cuatro
 `ASSETS`, sobre un plate de ~90 s que tiene tres actos: juego, parada, juego.
 
-**El aviso lineal es un `ASSET` sin bloque de layout, y va primero.**
+**El aviso lineal es un `ASSET` sin bloque de layout.** Que sea un asset sin bloque no
+es una interpretación: es el requerimiento 4 del documento que David armó para el
+evento, que pide que la clase concurrente extienda a la interstitial existente *"para
+mantener compatibilidad hacia atrás cuando el asset-list JSON responde un interstitial
+tradicional"*. Un `ASSET` con `URI` y `DURATION` y sin bloque de los nuestros es
+exactamente ese caso, y en este repositorio ya se reproduce a cuadro entero con el
+programa corriendo detrás por el camino único del ADR 0019. Nada nuevo que construir.
 
-Que sea un asset sin bloque no es una interpretación: es el requerimiento 4 del
-documento que David armó para el evento, que pide que la clase concurrente extienda a
-la interstitial existente *"para mantener compatibilidad hacia atrás cuando el
-asset-list JSON responde un interstitial tradicional"*. Un `ASSET` con `URI` y
-`DURATION` y sin bloque de los nuestros es exactamente ese caso, y en este repositorio
-ya se reproduce a cuadro entero con el programa corriendo detrás por el camino único
-del ADR 0019. Nada nuevo que construir.
-
-Que vaya **primero** es una decisión y está abajo (D7): es lo que pone la comparación
-adentro de un solo minuto.
+**Y el minuto muestra tres formas de aviso y no dos**, porque uno de los tres no
+lineales es una **imagen fija**: lineal a cuadro entero, imagen fija no lineal, y video
+no lineal. Es una capacidad del mecanismo y por eso está acá y no en la sección de
+assets (D10).
 
 El reparto del minuto, y los segundos son propuesta de esta fase y no una restricción
 del mecanismo:
 
-| # | aviso | largo | forma | marca |
+| # | aviso | largo | forma | asset |
 | --- | --- | --- | --- | --- |
-| 1 | lineal | 10 s | cuadro entero, el programa corre detrás | una de las tres |
-| 2 | no lineal | ~16 s | banner inferior que tapa parte de la pantalla | otra |
-| 3 | no lineal | ~16 s | formato L, el programa se repliega a la esquina | otra |
-| 4 | no lineal | ~16 s | overlay de esquina, el más liviano de los tres | la primera otra vez |
+| 1 | no lineal | ~16 s | banner inferior que tapa parte de la pantalla | **imagen fija** |
+| 2 | no lineal | ~16 s | formato L, el programa se repliega a la esquina | video |
+| 3 | **lineal** | 10 s | cuadro entero, el programa corre detrás | video |
+| 4 | no lineal | ~16 s | overlay de esquina, el más liviano de los tres | video |
 
-Suma ~58 s, que es el minuto. **Qué identificador de la herramienta de SVTA le toca a
-cada forma lo decide la task**, con el criterio de que el `type` es una etiqueta opaca
-y lo que gobierna la pantalla son las cajas (`docs/contrato-senalizacion-renderizado.md`,
-regla 1). La L en el medio es deliberada: es el formato más fuerte de los tres y el
-minuto tiene que subir hacia él.
+Suma ~58 s, que es el minuto, y **el orden es una curva de intrusión**: el banner deja
+el partido entero a la vista, la L lo repliega a una esquina, el lineal lo tapa, y el
+overlay lo devuelve. Por qué el lineal cae tercero está en D7.
+
+**Qué identificador de la herramienta de SVTA le toca a cada forma lo decide la task**,
+con el criterio de que el `type` es una etiqueta opaca y lo que gobierna la pantalla son
+las cajas (`docs/contrato-senalizacion-renderizado.md`, regla 1).
 
 ## De dónde salen los tiempos: la cadena va en una sola dirección
 
@@ -271,7 +273,7 @@ La forma de un beat, y son cuatro campos:
     },
     {
       "id": "el-lineal",
-      "anchor": { "at": { "break": 1, "ad": 1 }, "lead": 1.5 },
+      "anchor": { "at": { "break": 1, "ad": 3 }, "lead": 1.5 },
       "text": "Así se hace hoy: diez segundos de pantalla tapada.",
       "hold": 6
     }
@@ -369,28 +371,42 @@ sólo en la página.
 **Descartado: que cualquier gesto sobre el player ceda el control.** Es lo que haría un
 producto y no lo que le sirve a una grabación.
 
-### D7 — El aviso lineal va primero, y ahí se pone el caso de negocio
+### D7 — El aviso lineal va tercero, y ahí se pone el caso de negocio
 
-**Decisión.** El lineal de diez segundos es el primero de los cuatro, y el beat que se
-dispara en el cambio del aviso 1 al 2 es donde el guion cuenta el caso de negocio.
+**Decisión.** El lineal de diez segundos es el **tercero** de los cuatro, y el beat que
+se dispara en el cambio del aviso 2 al 3 es donde el guion cuenta el caso de negocio.
 
-Lo que compra: **la comparación entra adentro de un solo minuto y en un solo player.**
-Primero se ven diez segundos de la forma tradicional, con la pantalla tapada y el
-huddle del técnico pasando detrás sin que se vea; después se ven cuarenta y ocho
-segundos de la forma nueva, con la imagen en vivo entera y la publicidad encima. El
-espectador **acaba de sentir** lo que la frase le va a explicar, que es la diferencia
-entre un argumento y una demostración.
+Lo que compra, y es lo que no se puede tener de otra manera: **la comparación entra
+adentro de un solo minuto y en un solo player.** El espectador ve la forma nueva, la
+siente cuando la pantalla se le tapa, y la recupera. **Acaba de sentir** lo que la frase
+le va a explicar, que es la diferencia entre un argumento y una demostración.
 
-Y tiene una consecuencia de alcance que vale plata: **esta demo no necesita el par de
-compatibilidad.** La comparación está en el tiempo y no en el espacio, así que no hay
+De ahí sale una consecuencia de alcance que vale plata: **esta demo no necesita el par
+de compatibilidad.** La comparación está en el tiempo y no en el espacio, así que no hay
 dos players en pantalla, no hay un segundo `EXT-X-DATERANGE` de la clase de Apple, y no
 hay que explicar por qué uno de los dos paneles se ve distinto. Ese argumento ya lo hace
 `compatibility-pair`, que es la demo técnica y se queda como está.
 
-**Descartado: el lineal último.** Cierra el minuto con la pantalla tapada, que es
-terminar con la imagen del problema en lugar de la de la solución. **Descartado: el
+**Por qué tercero y no segundo**, que son las dos posiciones posibles, y las tres
+razones apuntan al mismo lado:
+
+- **La línea de base tiene que estar construida antes de romperla.** En segundo lugar el
+  lineal interrumpe cuando el espectador vio un solo aviso no lineal, así que la
+  comparación es contra una impresión y no contra una costumbre. Con dos avisos delante,
+  mirar el partido con publicidad encima ya se volvió lo normal, y taparlo se siente.
+- **La adyacencia con la L es la más filosa del minuto.** La L es lo más intrusivo que
+  todavía deja ver el partido —el programa replegado a una esquina— y el lineal es lo
+  primero que no lo deja. Ponerlos uno al lado del otro hace que el corte sea entre
+  "casi no puedo verlo" y "no puedo verlo", que es el corte exacto que la tesis usa.
+- **El minuto termina en la solución y no en el problema.** Después del lineal queda el
+  overlay, el más liviano de los tres, así que el último cuadro del break es el partido
+  a la vista con publicidad encima.
+
+**Descartado: el lineal primero.** Pone la comparación antes de que haya algo con qué
+comparar, y arranca el minuto con la imagen del problema. **Descartado: el lineal
+último.** Cierra con la pantalla tapada, que es terminar en el problema. **Descartado: el
 lineal afuera del minuto**, en un break propio antes de la parada. Es más fiel a cómo
-sería en aire y rompe lo anterior: la comparación deja de ser inmediata y el minuto de
+sería en aire y rompe lo de arriba: la comparación deja de ser inmediata y el minuto de
 hidratación deja de ser el único break de la demo.
 
 ### D8 — El corrimiento de la parada del juego se declara una vez en la demo
@@ -490,6 +506,46 @@ no en un párrafo del README. Marcas de fantasía sí; imitación de vestido com
 no: nada de script cursivo blanco sobre rojo para la cola, nada de pipa para los
 zapatos.
 
+### D10 — El banner inferior es una imagen fija, y eso es una capacidad que la demo demuestra
+
+**Decisión.** El primero de los tres avisos no lineales es una **imagen fija** y no un
+video, y el guion lo nombra: el minuto muestra **tres formas de aviso** —lineal a cuadro
+entero, imagen fija no lineal, video no lineal— en lugar de dos. Es un argumento y no un
+asset, porque lo que demuestra es que el mecanismo acepta las dos cosas.
+
+**Y no cuesta trabajo nuevo: está construido, verificado, y ya corre en la demo actual.**
+Medido leyendo el repositorio:
+
+- El elemento del layout declara su MIME y el renderer decide con él: `isImage` mira el
+  `mediaType` y `build` crea un `<img>` en lugar de un `<video>`
+  (`lib/renderer.js:80` y `:294`). Nada más cambia en el camino.
+- **Los tres lugares donde una imagen no es un video ya están resueltos**, y son de la
+  fase 01: una imagen no entra en `playable()`, así que el `play`, el `pause` y el seek
+  del primario no la tocan; `applyAudio` la saltea, porque una fija no tiene audio; y el
+  aviso de asset cortado no aplica, porque no hay nada que cortar.
+- El asset list ya tiene la forma: `asset-list-squeezebackLShape-image.json`, donde los
+  elementos declaran `"type": "image/jpeg"` y un `uri` a un `.jpg`. Es el break 3 del
+  recorrido de la demo actual, "LBox image", y es uno de los cinco layouts del documento
+  de requerimientos.
+- La ventana la declara la señalización y no el asset, que es lo que hace que una imagen
+  —que no tiene largo propio— pueda ocupar un tramo del break igual que un video. Es la
+  regla que la fase 03 midió y dejó escrita: **la ventana declarada decide.**
+
+**Lo que sí obliga es una restricción de autoría del creativo, y es concreta.** El ADR
+0013 llena cada caja con recorte centrado y sin deformar (`object-fit: cover`), así que
+una imagen que no tiene la relación de aspecto de su caja **se recorta**, y lo que se
+recorta son los bordes, que es donde vive la tipografía de un banner. Así que el banner
+se escribe como SVG **a la relación de aspecto exacta de su caja**, calculada de los
+porcentajes del `viewport` sobre el área de la imagen. Es una cuenta y la hace la task.
+
+Encaja con D9 en lugar de tensionarlo: los formatos no lineales ya iban a ser imagen fija
+con la tipografía compuesta, porque el texto tiene que quedarse quieto y legible durante
+todo el break. Esta decisión toma eso y lo convierte en algo que la demo **dice**.
+
+**Descartado: que las tres formas no lineales sean video** y que la capacidad de imagen
+se cuente en el README. Un README no lo lee nadie en escenario, y la capacidad se ve en
+un cuadro.
+
 ## Los assets, y las trampas legales que ya están medidas
 
 El anexo completo está en
@@ -540,7 +596,7 @@ Lo que hay que producir, con el esfuerzo medido del anexo:
 | pieza | esfuerzo | cómo |
 | --- | --- | --- |
 | identidad de las tres marcas de fantasía | 2–3 h | wordmarks SVG a mano, imágenes generadas, más el chequeo de vestido comercial |
-| creativos no lineales: L, banner, panel | 2–3 h | SVG a 1920×1080 exacto con alfa real |
+| creativos no lineales: L, banner, overlay | 2–3 h | SVG con alfa real, cada uno a la relación de aspecto exacta de su caja (D10) |
 | spot lineal de 10 s | ~2 h | imagen generada, movida con Veo, y la tipografía compuesta encima con SVG; más una cama musical CC0, porque Veo sale sin audio |
 | paquete de canal ficticio: bug, scorebug, reloj, equipos inventados | 2–3 h | SVG quemado sobre el plate |
 | armado del plate: buscar, recortar, concatenar a ~90 s, ambiente | ~4 h | los clips gratis son de 7 a 20 s, así que hay que concatenar varios |
@@ -611,12 +667,13 @@ veces en la investigación, con la prohibición escrita en el prompt. Mitigació
 chequeo humano de vestido comercial es un paso de la definición de done de la task de
 creativos (D9), no una recomendación.
 
-**R3. El trabajo de assets es de 1,5 a 2 días de una persona, y compite por la misma
-persona que la librería.** El primer draft para David es el 21 de septiembre y la
-ventana de grabación es del 28 al 30. Mitigación: **la página se construye contra el
-contenido de la demo actual como suplente.** El plate y los creativos entran cuando
-estén, y hasta entonces el guion se resuelve igual porque se ancla a la señalización y
-no al material (D1). Los dos frentes no se bloquean.
+**R3. El trabajo de assets es de 1,5 a 2 días de una persona, y es la misma persona que
+la librería.** No es un riesgo de fecha —esta demo no tiene una— es de secuencia: la
+página no se puede empezar si primero hay que juntar el plate. Mitigación: **la página se
+construye contra el contenido de la demo actual como suplente.** El plate y los creativos
+entran cuando estén, y hasta entonces el guion se resuelve igual porque se ancla a la
+señalización y no al material (D1). Los dos frentes no se bloquean, y ninguno de los dos
+espera al otro para arrancar.
 
 **R4. La página se convierte en un pozo sin fondo.** "Linda" no tiene criterio de
 terminado. Mitigación: la sección de fuera de alcance, el tope de cuatro secciones, y
@@ -634,13 +691,11 @@ que sigue corriendo y el mecanismo de la demo guiada se cae. Mitigación: **es l
 que la fase mide**, antes de escribir el guion, y se mide en el break de cuatro avisos y
 no en uno de un aviso solo.
 
-**R7. Esta demo puede no estar en la misma fecha que el resto del proyecto.** El
-proyecto corre contra el evento del 7 de octubre, con la grabación del 28 al 30 de
-septiembre; el pedido de esta fase nombra al HLS Interest Group. Si es la misma
-presentación, la ventana de grabación la ata; si es una sesión aparte, tiene su propia
-fecha. **El trabajo es el mismo en los dos casos y sólo cambia la fecha límite**, así
-que el diseño asume la ventana del 28 al 30 —que es la más exigente— y lo deja anotado
-en lugar de esperar la respuesta. Aceptado y anotado.
+**La fecha no es un riesgo de esta fase, y es una decisión de Nicolás y no una pregunta
+pendiente.** El proyecto corre contra el evento del 7 de octubre y la ventana de
+grabación del 28 al 30 de septiembre; **esta demo no está atada a ninguna de las dos.**
+Está escrito acá, donde estaría el riesgo, porque el lugar donde no está es el que hace
+que alguien lo vuelva a levantar: la fecha **no se pregunta de nuevo**.
 
 ## Arquitectura del producto y documentación
 
@@ -675,8 +730,10 @@ Tres chequeos, y el primero es el que hace que D1 sea una propiedad y no una int
    el aviso 4 de un break que tiene tres es lo que este chequeo agarra, y es exactamente
    el modo en que la desincronización va a volver a aparecer.
 2. **El break arranca en el corrimiento declarado de la parada** (D8).
-3. **El asset list del break declara cuatro avisos y exactamente uno sin bloque de
-   layout**, que es el lineal del ADR 0019.
+3. **El asset list del break declara cuatro avisos, exactamente uno sin bloque de
+   layout** —el lineal del ADR 0019, y está tercero— **y exactamente uno cuyos elementos
+   son `image/*`**, que es el banner de D10. Las tres formas del minuto quedan asertadas
+   en lugar de confiadas al que edite el archivo.
 
 Y una condición sobre el chequeo 1, que sale del hallazgo de la fase 07 —**un chequeo
 negativo pide su control**—: el chequeo tiene que poder fallar, así que se verifica con
@@ -689,13 +746,16 @@ pantalla, y lo que corresponde es mirarla —una captura por estado del guion y 
 entera mirada de punta a punta—, que es el nivel de verificación que las fases 04, 06 y
 07 usaron para el cromo.
 
-## Calendario y quién mira
+## Quién mira
 
-El primer draft para David es el 21 de septiembre y la ventana de grabación es del 28 al
-30. Esta fase **no está en el camino crítico de la librería** —el mecanismo está
-construido y verificado— pero **sí está en el camino crítico de la presentación**, que
-es una diferencia nueva respecto de las siete fases anteriores: es la primera cuyo
-entregable es lo que se ve en escenario y no lo que lo hace posible.
+**Sin fecha, y es decisión tomada.** Las fechas del proyecto —el draft del 21 de
+septiembre, la ventana de grabación del 28 al 30, el evento del 7 de octubre— gobiernan
+la librería y no gobiernan esta demo. No se planifica contra ninguna de ellas y no se
+vuelve a preguntar.
+
+Lo que la fase sí tiene es una diferencia de naturaleza con las siete anteriores, y esa
+no cambia: **es la primera cuyo entregable es lo que se ve en escenario y no lo que lo
+hace posible.**
 
 Quien mira es Nicolás, y lo que mira son los treinta segundos: abrir la página, no tocar
 nada, y ver si el caso de negocio llegó.
