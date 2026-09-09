@@ -575,10 +575,16 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   único de 347 líneas quedó en dos que se leen solos. La mudanza no movió un píxel:
   180 s de recorrido, 250 pedidos sin uno ≥ 400, 46 tests y las dos costuras.
   Informe en `phases/05-la-sdk-y-sus-demos/REPORT.md`.
-- **06-foco-de-audio**: abierta para que quien mira elija cuál de las fuentes que
-  hay en pantalla escucha. Con los controles del player visibles, un toque sobre
-  una caja del aviso deja sonando esa caja sola y todo el resto de la composición
-  en silencio, el programa incluido; al soltarse, vuelve la mezcla que declara el
-  asset list. Generaliza el ADR 0014 en vez de supersederlo: el asset list declara
-  el **estado inicial** y quien mira lo sobrescribe mientras el aviso está en
-  pantalla. Es un POC y son tres tasks.
+- **06-foco-de-audio**: cerrada con la otra mitad de la política de audio en manos
+  de quien mira. Con los controles del player a la vista, un toque sobre una caja
+  de video del aviso le da todo el sonido a esa caja —el resto de la composición a
+  0, el programa incluido—, un anillo amarillo dice cuál es, y la mezcla declarada
+  vuelve por cinco caminos. Generaliza el ADR 0014 en vez de supersederlo: el asset
+  list declara el **estado inicial** y quien mira lo sobrescribe mientras el aviso
+  está en pantalla. Lo que la deja barata de extender es que **todo pasa por una
+  puerta**, `setFocus`, que mueve el índice, el anillo y la mezcla en un solo
+  lugar; y que la asimetría entre el mouse y el dedo sale de **un solo predicado**,
+  ¿está el cromo arriba?, sin una rama por dispositivo. Nicolás la probó y pidió
+  una salida más —un toque en el primario también suelta el foco—, que entró como
+  corrección de la T-02 con el ADR 0031 y sin reabrir la fase. Sus seis ADR son
+  todos `scope: project`. Informe en `phases/06-foco-de-audio/REPORT.md`.

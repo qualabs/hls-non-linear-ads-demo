@@ -3742,3 +3742,58 @@ nada enfocado, un toque en el primario sigue alternando el cromo como
 siempre (primero lo sube, un segundo toque lo baja); y re-tocar la caja
 enfocada —el camino que ya existía— sigue soltando el foco sin que este
 cambio le haya tocado una línea.
+
+## 2026-09-09 — Fase 06 cerrada: el foco de audio, y una línea de `docs/` que nadie tenía como entregable
+
+La fase 06 cierra con las tres tasks en `done`, una corrección post-ejecución y
+el informe en `phases/06-foco-de-audio/REPORT.md`. El `PHASE.md` pasa a `closed`
+con `closed: 2026-09-09` y la línea de la fase en el índice del `PROJECT.md` se
+reescribió de la intención al resultado.
+
+**Lo que queda construido.** Con los controles a la vista, un toque sobre una
+caja de video del aviso le da todo el sonido a esa caja y deja el resto de la
+composición en 0, el programa incluido; un anillo amarillo dice cuál es; y la
+mezcla que declara el asset list vuelve por cinco caminos. Las dos propiedades
+que lo dejan barato de extender son de forma: **todo pasa por una puerta**,
+`setFocus`, que mueve el índice, el anillo y la mezcla en un solo lugar, y la
+asimetría entre el mouse y el dedo sale de **un solo predicado**, ¿está el cromo
+arriba?, sin una rama por dispositivo en ninguna parte.
+
+**Los seis ADR de la fase son `scope: project`, y el informe lo dice.** Filtrar
+por `scope: phase-06` devuelve cero, porque ninguna de las seis decide cómo se
+ejecuta esta fase: deciden quién contesta qué se escucha en este producto. Se
+identifican por la ventana de fechas, el 0026 al 0030 del 2026-09-08 y el 0031
+del 2026-09-09.
+
+**Los dos hallazgos del cierre.**
+
+1. **El `PHASE.md` llegó diciendo `planning` con las tres tasks en `done`, y es
+   la segunda fase seguida** —a la 05 le pasó lo mismo el día anterior, commit
+   `20923ef`—. Nadie mueve el `status` al arrancar la ejecución, y el contrato
+   afirma algo falso de sí mismo durante toda la fase. Las dos veces lo encontró
+   alguien que estaba mirando otra cosa. Su lugar natural no es este proyecto
+   sino el skill `create-project`, que es el dueño del ciclo de vida de una fase,
+   y no se escribe solo: va con su texto exacto a Nicolás.
+2. **La documentación del producto se revisó por el README de la demo y no por
+   `docs/`.** La T-03 tenía como entregable las dos oraciones del README de la
+   demo y leyó su sección línea por línea; los dos documentos de `docs/`, que son
+   el documento de arquitectura de este producto, no los leyó nadie. La línea que
+   quedó vieja es una y se corrigió en este pase: la fila de §5 de
+   `docs/integrating-the-library.md` decía que el volumen de cada elemento
+   durante un break es *"which the asset-list declares"*, que con foco es la
+   mitad de la política. `docs/contrato-senalizacion-renderizado.md` se re-leyó y
+   sigue describiendo el sistema, por su propia línea 214.
+
+**La corrección post-ejecución, leída como medición.** Una sola en tres tasks, y
+no dice que el `done` de la T-02 estuviera flojo: el comportamiento que Nicolás
+pidió estaba en el fuera de alcance del `PHASE.md` con su razón escrita en el
+ADR 0027, así que ninguna verificación de la task podía encontrarlo. Dice otra
+cosa: **un gesto se juzga usándolo.** El diseño miró esa puerta y la descartó por
+una colisión real, y la colisión resultó evitable con una condición que el diseño
+no consideró.
+
+**Verificación del cierre.** `npm test` en 49 verdes y `npm run check` en
+`both seams hold.`. El validador sale en rojo con los dos hallazgos de siempre
+—las fases 02 y 04 sin `DESIGN.md`—, ninguno de esta fase y la decisión sigue
+siendo de Nicolás. El `status` del proyecto queda en `ongoing`: quedan la
+grabación, iOS y la especificación de SVTA.

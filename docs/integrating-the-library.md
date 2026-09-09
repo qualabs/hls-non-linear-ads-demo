@@ -219,7 +219,7 @@ and no npm dependency (§8).
 | **The library's** | everything drawn inside the container: the layer the ads live in, the boxes of each layout, the second instances that play the assets |
 | | the geometry of the primary content **while a break is on screen** — its position, its size and its scale |
 | | the controls of the composition, and the element that goes fullscreen |
-| | the volume of every element during a break, including the primary's, which the asset-list declares |
+| | the volume of every element during a break, including the primary's: the asset-list declares the initial mix, and with the chrome on screen a press on a video box of the ad hands that box the whole sound until it is let go (ADR 0026) |
 
 The library takes the media element from the instance you pass — either it is
 attached already, or it arrives on `MEDIA_ATTACHED` — so there is nothing to
