@@ -3797,3 +3797,47 @@ no consideró.
 —las fases 02 y 04 sin `DESIGN.md`—, ninguno de esta fase y la decisión sigue
 siendo de Nicolás. El `status` del proyecto queda en `ongoing`: quedan la
 grabación, iOS y la especificación de SVTA.
+
+## 2026-09-09 — Fase 07 abierta: la pelotita de la barra se agarra y se arrastra
+
+Nicolás probó la demo y pidió una sola cosa: poder agarrar la pelotita de la
+barra de progreso y moverla, con mouse y con el dedo, y que el seek pase al
+soltar. *"Es como un drag and drop en una dimensión."* La fase 07 se abre en
+diseño con ese alcance y nada más. Es reactiva y su precedente es la fase 04:
+si aparecen dos o tres detalles más de usabilidad, caen acá.
+
+**Un dato que se midió antes de diseñar, y que cambia una línea del pedido: la
+pelotita ya existe y se ve.** `.qa-track__knob` está en el código desde la fase
+02 (`7c2a228`) y `paint()` la mueve todos los frames con el `currentTime`. Mirada
+en el player corriendo en el 8080, con el cromo arriba y el programa en el
+segundo 60, es un punto de 14 px en `rgb(55,180,167)` —el `--qa-accent` que la
+demo le pasa— con anillo blanco, sobre la cabeza del fill y por encima de las
+cinco marcas. Así que la fase **no agrega la pelotita: le agrega el gesto**, que
+es lo que el pedido dice en su segunda oración.
+
+Por qué él la vio ausente queda escrito como lectura y no como medición: un punto
+que sólo informa no se lee como un agarre. De ahí sale la única decisión que el
+diseño se lleva de ese párrafo, que la pelotita crezca mientras se arrastra, y
+nada más: el tamaño en reposo y el color no se tocan porque ninguna decisión de
+hoy necesita ese número.
+
+**El modelo del gesto es uno solo y no dos.** `pointerdown` en cualquier parte de
+la barra y la pelotita salta ahí y empieza el scrub; `pointermove` y la pelotita
+sigue al puntero; `pointerup` y ahí es el seek. Un toque suelto es un arrastre de
+longitud cero, así que no hay rama de "modo toque" contra "modo arrastre" y no
+hay que acertar si el dedo cayó sobre la pelotita o al lado. Es la misma forma que
+la asimetría mouse/dedo de la fase 06: un solo camino da los dos casos.
+
+**Las cinco decisiones del diseño.** D1, mientras se arrastra la posición la manda
+el puntero y no el video, con un estado de scrub que el frame loop respeta —sin
+eso la pelotita salta atrás sola en cada frame—. D2, `setPointerCapture` sobre la
+barra, para que el arrastre sobreviva a salirse de los 44 px. D3,
+`touch-action: none` en la barra, que hoy está en `auto`: no habilita el gesto,
+impide que el browser lo lea como scroll. D4, el cromo no se baja en medio de un
+arrastre. D5, la pelotita crece mientras se arrastra.
+
+**El único cambio sobre lo que ya funciona, y es lo que hay que cuidar**: hoy el
+seek pasa en el `pointerdown` de la barra y con esto pasa en el `pointerup`. Es
+lo que habilita el arrastre, porque un gesto que seekea al apretar no tiene nada
+que arrastrar. Un toque suelto tiene que seguir seekeando exactamente donde
+seekea hoy, y eso está escrito como riesgo R1 y como criterio de la task.
