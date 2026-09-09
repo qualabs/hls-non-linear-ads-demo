@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The hydration break — non-linear ads in HLS</title>
+<!--
+  The fonts and the favicon are copies of the Qualabs brand kit on disk, not
+  links to it: a demo that reads a file out of another project on this laptop
+  fails the day it is shown from anywhere else. Provenance in brand/README.md.
+-->
+<link rel="stylesheet" href="./brand/fonts-embedded.css">
+<link rel="stylesheet" href="./css/page.css">
+<link rel="icon" href="./brand/favicon.svg">
+</head>
+<body>
+
+<!--
+  THE HYDRATION BREAK. Play stops for a minute: the players drink, the coach
+  talks to the team. The broadcast does not cut to a commercial break. It keeps
+  the live picture and puts the advertising on top of it.
+
+  That is the whole argument, and it is an argument about money: the viewer stays
+  watching, so the advertising is seen; a linear break in that minute sends them
+  to the kitchen.
+
+  ONE PLAYER, NOT TWO. This page is not the compatibility pair -- that argument
+  belongs to the other demo in this repository, and it is made by putting two
+  clients side by side on one playlist. Here the comparison is in TIME: the third
+  of the four ads in the minute is a traditional linear one, at full frame, so
+  the same minute shows both ways of doing it and the viewer feels the difference
+  instead of being told about it.
+
+  THE MINUTE IS A CURVE OF INTRUSION, and each step is a different shape of ad:
+
+    1  a bottom banner, and it is a STILL IMAGE      the match is fully visible
+    2  the L, video                                  the match folds into a corner
+    3  the linear ad, video, at full frame           the match is not visible
+    4  a corner overlay, video                       the match comes back
+
+  Three shapes of ad and not two, and the still image is the point of the first
+  one: the mechanism takes an image as happily as it takes a video, and this
+  minute says so on screen rather than in a README.
+
+  NONE OF IT IS A RECORDING. The programme is real HLS, the EXT-X-DATERANGE is
+  real, the asset-list is fetched over the network and resolved, and the ads are
+  video elements playing. That property is what the guided run is built on, and
+  it is why no caption on this page can claim something it has not read off the
+  contract.
+
+  #player  is the container the page hands to the library, and the only thing it
+           hands over besides the hls.js instance. Everything the concurrent
+           experience draws lives inside it. It carries `isolation: isolate` in
+           the stylesheet on purpose: the chrome the library draws sits at
+           z-index 2147483000, and without a stacking context of its own it
+           would draw over anything this page puts on top of the picture.
+
+  No bundler and no framework. The library is one classic <script src> that
+  defines a global, assembled from lib/ on every start; this page's own file is a
+  native ES module. hls.js is vendored at 1.7.2, which is the version the
+  measurements ran on.
+-->
+
+<header class="masthead">
+  <span class="brand"><img src="./brand/logo-qualabs.svg" alt="Qualabs"></span>
+  <p class="collab">with the <abbr title="Streaming Video Technology Alliance">SVTA</abbr></p>
+</header>
+
+<section class="stage" aria-label="The hydration break">
+
+  <div class="player" id="player">
+    <video class="video" id="video" playsinline></video>
+  </div>
+
+  <p class="state" id="state"></p>
+  <p class="hud" id="hud"></p>
+
+</section>
+
+<p class="credit">
+  Placeholder footage — the match plate and the channel package are still to be
+  produced: <em>Tears of Steel</em>, <em>Sintel</em>,
+  <em>Caminandes: Gran Dillama</em> (CC BY 3.0), <em>Elephants Dream</em>
+  (CC BY 2.5) &middot; &copy; Blender Foundation,
+  <a href="https://www.blender.org">blender.org</a>. Re-encoded and shortened for
+  this demo.
+</p>
+
+<script src="/vendor/hls.min.js"></script>
+<script src="/dist/qualabs-concurrent-hls.js"></script>
+<script type="module" src="./js/app.js"></script>
+
+</body>
+</html>

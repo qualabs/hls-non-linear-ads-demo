@@ -20,7 +20,7 @@ y pregunta.
 | id   | brief                                                          | status  | plan | evidence |
 | ---- | -------------------------------------------------------------- | ------- | ---- | -------- |
 | T-01 | El freno de la composición, medido en el navegador (R6)         | done    | —    | [tasks/T-01/](tasks/T-01/) |
-| T-02 | La demo nueva corre, con el plate suplente                     | pending | —    | —        |
+| T-02 | La demo nueva corre, con el plate suplente                     | done    | —    | [tasks/T-02/](tasks/T-02/) |
 | T-03 | El plate y el paquete de canal ficticio                        | pending | —    | —        |
 | T-04 | El guion: anclas, placa, botón, y el freno                     | pending | —    | —        |
 | T-05 | Los creativos de las tres marcas de fantasía                   | pending | —    | —        |

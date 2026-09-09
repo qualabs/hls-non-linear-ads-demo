@@ -4264,3 +4264,45 @@ reanudar no paga un rebuffer.
 
 `npm test` en 49 verdes y `npm run check` en `both seams hold.`, sin cambios en el
 repositorio que pudieran haberlos movido.
+
+## 2026-09-09 — T-02 de la fase 08: la demo nueva corre, y el minuto entero se ve
+
+`demo/hydration-break/` existe y `PORT=8081 ./run.sh hydration-break` la levanta. El
+minuto del break de hidratación corre con sus cuatro avisos en la curva de intrusión del
+ADR 0043, todavía con el material de la demo actual como suplente (mitigación de R3).
+
+**La sdk no se tocó y `demo/compatibility-pair/` tampoco.** El único archivo de la raíz
+que participa es `run.sh` tal como está, y el puerto sale de la variable `PORT` que
+`server.mjs` ya leía: **el ADR 0022 alcanzó para una demo nueva sin una línea de cambio
+en la raíz**, que era la apuesta del alcance.
+
+**El recorrido, impreso por el propio script**: break de 15 a 73 s, y adentro
+`lowerThirdOverlay` de 15 a 31 con `image/jpeg`, `squeezebackLShape` de 31 a 47,
+`linear` de 47 a 57 a cuadro entero, y `cornerOverlay` de 57 a 73. El plate son 90 s.
+
+**Lo que el player resolvió, leído del contrato**: un solo rango `HYDRATION-BREAK`,
+`kind: concurrent`, en el 15 y por 58 s, y las cuatro experiencias con los `itemId`
+`HYDRATION-BREAK.0` a `.3`. El lineal llega como experiencia de tipo `linear` con el
+primario y el aviso los dos en caja `{0,0,0,0}` y el aviso un `zDepth` más arriba: **el
+camino único del ADR 0019 sin una línea de código nueva.**
+
+**La línea de estado de la página dice de qué forma es cada aviso leyendo sólo el
+contrato**, y en el primero dice `still image`. En el lineal dice
+`the match is underneath, covered`, y eso también sale del contrato y no del tipo del
+aviso: un aviso que tapa es una caja y un `zDepth`.
+
+**Un defecto encontrado y arreglado en el camino, y es de la estética.** El picture no
+entraba en el viewport: con el ancho como único tope, un cuadro de 16:9 en una ventana de
+1920×887 mide 1600×900 y **la franja del banner —que es justamente el aviso— caía abajo
+del pliegue.** Se ve en la primera captura que saqué. El ancho ahora está topeado también
+por el alto disponible y la relación de aspecto lo convierte de vuelta en ancho; medido
+después, el player mide 1115×627 y termina en el píxel 730 de 887. Una idea por pantalla,
+y una página que hay que scrollear para ver el pie del video tiene dos.
+
+**Dos cosas dichas y no resueltas.** No hay asset de la marca de SVTA en el repositorio
+—lo único vendorizado es el kit de Qualabs— así que la página pone `with the SVTA` como
+texto: **no se fabrica el logo de un tercero.** Y el material es provisorio, dicho en el
+encabezado del script que lo empaqueta, en la línea de crédito de la página y en la
+salida del script.
+
+`npm test` en 49 verdes y `npm run check` en `both seams hold.`

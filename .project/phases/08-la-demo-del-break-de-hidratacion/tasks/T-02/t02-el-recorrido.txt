@@ -1,0 +1,19 @@
+content/primary/con-daterange.m3u8  (1 Date Range)
+
+El minuto, que es la curva de intrusión del ADR 0043:
+  break  t= 15s a  73s  (58s)  la parada del juego
+      aviso 1  t= 15s a  31s  lowerThirdOverlay  concurrente, el partido se sigue viendo image/jpeg
+      aviso 2  t= 31s a  47s  squeezebackLShape  concurrente, el partido se sigue viendo application/vnd.apple.mpegurl
+      aviso 3  t= 47s a  57s  linear             a cuadro entero, el programa corre detrás -
+      aviso 4  t= 57s a  73s  cornerOverlay      concurrente, el partido se sigue viendo application/vnd.apple.mpegurl
+
+Tres formas de aviso y no dos: el primero es una IMAGEN FIJA (ADR 0046), el
+tercero es el lineal a cuadro entero por el camino del ADR 0019, y los otros
+dos son video concurrente. Es lo que este minuto demuestra.
+
+Antes de grabar, y esto se hace UNA vez al empezar: encender el audio con el
+control de arriba a la derecha de la imagen, que lo dibuja la librería
+(ADR 0015). La página arranca muteada por la política de autoplay del browser.
+Los avisos concurrentes entran callados sobre un partido que se sigue
+escuchando, y el aviso a cuadro entero es el único que se queda con el audio
+(ADR 0019).
