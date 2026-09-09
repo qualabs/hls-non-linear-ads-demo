@@ -1,0 +1,127 @@
+/* The look of the hydration-break demo.
+ *
+ * The aesthetic this page is aiming at has six properties, and each one rules
+ * something out rather than adding something: one idea per screen, in
+ * full-height sections; a lot of air; a hierarchy of two or three type sizes and
+ * no more; a short and almost entirely neutral palette, WITH THE COLOUR COMING
+ * FROM THE VIDEO AND NOT FROM THE PAGE; no decoration -- no ornamental
+ * gradients, no dramatic shadows; and restrained motion. The video is the
+ * product: it goes first, big, and without a frame.
+ *
+ * Nothing here styles the concurrent experience and nothing here styles the
+ * controls. Both are drawn and styled by the library inside the container this
+ * page hands it, because how that layer stacks is an invariant of the renderer
+ * and not a choice of whoever writes the page (ADR 0015).
+ *
+ * The one value this page hands the chrome is `--qa-accent`. */
+
+:root {
+  --q-teal-500: #37b4a7;
+  --q-ink-900: #12141a;
+  --q-paper-50: #f8f9fa;
+  --q-slate-400: #7f8aa3;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--q-ink-900);
+  color: var(--q-paper-50);
+  font-family: 'Poppins', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* THE MARK GOES ON A LIGHT PLATE AND NOT ON THE DARK PAGE, and that is the
+ * brand's own rule: its wordmark is ink, so on this background half of it
+ * disappears, and recolouring somebody's logo is the other way to break it.
+ * The plate is the size of the logo and no bigger.
+ *
+ * It is also the ONLY mark on the page, and it is outside the picture, which is
+ * what phase 04 settled: nothing of ours sits over the frame the layout uses. */
+.masthead {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 26px clamp(20px, 4vw, 56px) 0;
+}
+
+.brand {
+  display: inline-flex;
+  background: var(--q-paper-50);
+  border-radius: 10px;
+  padding: 9px 14px;
+}
+
+.brand img { display: block; height: 22px; width: auto; }
+
+.collab {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: var(--q-slate-400);
+}
+
+.collab abbr { text-decoration: none; border-bottom: 1px dotted currentColor; }
+
+/* ONE IDEA PER SCREEN. The player section is the height of the viewport minus
+ * the masthead, so the picture is the thing you land on and there is nothing
+ * else competing with it. */
+.stage {
+  min-height: calc(100vh - 96px);
+  display: grid;
+  align-content: center;
+  gap: 18px;
+  padding: 24px clamp(20px, 4vw, 56px) 40px;
+}
+
+/* THE VIDEO IS THE PRODUCT: big and without a frame. No border, no rounded
+ * corners, no shadow -- the picture ends where the picture ends.
+ *
+ * `isolation: isolate` is NOT decoration and it is the reason this rule has a
+ * comment: the chrome the library draws sits at z-index 2147483000, a number
+ * picked to beat anything on the page it is embedded in. Without a stacking
+ * context of its own here, that z-index competes with this page's own elements
+ * and wins, so the card the guided run draws over the picture would be painted
+ * and never seen -- with nothing in the console to say why (ADR 0041). */
+/* THE PICTURE HAS TO FIT ON ONE SCREEN, and that is not a detail of taste: the
+ * aesthetic is one idea per screen, and a page that scrolls to show the bottom
+ * of the video has two. So the width is capped by the height as well -- the
+ * viewport minus everything else on the section -- and the aspect ratio turns
+ * that height back into a width. Measured the other way round first: with the
+ * width alone capped, the bottom banner of the first ad fell below the fold. */
+.player {
+  position: relative;
+  isolation: isolate;
+  width: min(1600px, 100%, calc((100vh - 260px) * 16 / 9));
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  --qa-accent: var(--q-teal-500);
+}
+
+.player .video { width: 100%; height: 100%; display: block; }
+
+/* The two lines of text under the picture. They are the contract read out loud,
+ * which is what makes a run auditable, and they are deliberately small: this is
+ * a page about a picture. */
+.state, .hud {
+  margin: 0 auto;
+  max-width: min(1600px, 100%);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--q-slate-400);
+}
+
+.state { color: var(--q-paper-50); }
+
+.credit {
+  margin: 0;
+  padding: 0 clamp(20px, 4vw, 56px) 40px;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--q-slate-400);
+}
+
+.credit a { color: inherit; }
