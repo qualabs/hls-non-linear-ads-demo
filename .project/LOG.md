@@ -3841,3 +3841,46 @@ seek pasa en el `pointerdown` de la barra y con esto pasa en el `pointerup`. Es
 lo que habilita el arrastre, porque un gesto que seekea al apretar no tiene nada
 que arrastrar. Un toque suelto tiene que seguir seekeando exactamente donde
 seekea hoy, y eso está escrito como riesgo R1 y como criterio de la task.
+
+## 2026-09-09 — Fase 07 generada del diseño: dos tasks y cinco ADR
+
+El diseño de la fase 07 quedó acordado y de ahí salieron el `PHASE.md`, el
+`TASKS.md` con dos tasks y cinco ADR nuevos, el **0032 al 0036**.
+
+**Los cinco ADR van con `scope: phase-07`, y es una decisión de esta generación.**
+Las fases 05 y 06 marcaron todas las suyas `project` y sus informes lo dijeron
+como dato; éstas van al scope que el skill fija por default y que la práctica
+vieja del proyecto ya usaba —el ADR 0002, apagar la maquinaria de interstitials,
+es `phase-01`, y el 0015, el límite del sdk, es `phase-02`—. El criterio es el que
+distingue esos dos grupos: las de la 05 y la 06 dicen qué es este repositorio y
+quién contesta qué se escucha, y éstas dicen cómo se comporta un control. Efecto
+práctico, y por eso se anota: el filtro por scope del cierre (Mode D) vuelve a
+devolver algo, que es la primera vez desde la fase 02.
+
+**Las dos tasks.** La T-01 es el gesto entero y es entero un solo archivo,
+`lib/controls.js`: el scrub, el seek movido al soltar, el pintado que sigue al
+puntero, la captura, el cromo que se queda arriba y la pelotita que crece. La
+T-02 lo mira con los dos punteros sobre el resultado final, más las dos
+superficies de `docs/`, que es el hallazgo 2 del cierre de la fase 06 puesto a
+trabajar: esa fase revisó el README de la demo y no los documentos del producto.
+
+**Las dos en `bajo` y sin tests nuevos**, y está argumentado en el preámbulo del
+`TASKS.md` para que quien ejecute no lo suba por prolijidad: la fase no agrega
+lógica no visual, la cuenta de la fracción es la que ya existe en `seekFromEvent`,
+y las dos fallas posibles —el toque suelto que seekea en otro lado, o el arrastre
+que no arrastra— están a la vista en la primera pasada con el player.
+
+**La documentación del producto no cambia por la generación.** La superficie
+pública no se mueve —ni `attach` ni `attachControls` reciben nada nuevo— y el
+contrato entre señalización y renderizado no habla del cromo. Lo que sí queda
+escrito en el `PHASE.md` es que la revisión del cierre lee los dos documentos de
+`docs/` y no sólo el README de la demo.
+
+**El validador sale en verde, y por primera vez.** Los dos hallazgos de siempre
+—las fases 02 y 04 sin `DESIGN.md`— dejaron de ser rojos mientras esta fase se
+diseñaba: el commit `6d4eb79` los bajó de la lista `EXCEPTIONS` del skill a
+`.project/EXCEPTIONS.md`, con su razón escrita, una por hallazgo. No es trabajo de
+esta fase y se anota igual, porque cierra el hilo que los informes de la 05 y de
+la 06 dejaron abierto como decisión de Nicolás: quedaron aceptados y no
+silenciados, y el validador los imprime con su razón en cada corrida. La fase 07
+sale limpia y los 36 ADR pasan el chequeo de frontmatter.
