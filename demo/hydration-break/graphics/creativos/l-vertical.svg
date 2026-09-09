@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- KALTO, la barra vertical de la L. 512x720 = la caja `0 0 0 60`, que son 0,71 a 1: los
+     mismos 0,71 que la T-03 de la fase 01 midió sobre la herramienta de SVTA. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="720" viewBox="0 0 512 720">
+  <defs>
+    <linearGradient id="velo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#0b1216" stop-opacity="0.88"/>
+      <stop offset="0.30" stop-color="#0b1216" stop-opacity="0.10"/>
+      <stop offset="0.72" stop-color="#0b1216" stop-opacity="0.20"/>
+      <stop offset="1"    stop-color="#0b1216" stop-opacity="0.94"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="512" height="720" fill="url(#velo)"/>
+  <text x="40" y="78" font-family="Lato, DejaVu Sans, sans-serif" font-size="46"
+        font-weight="700" letter-spacing="9" fill="#f6f8f9">KALTO</text>
+  <text x="43" y="112" font-family="Lato, DejaVu Sans, sans-serif" font-size="16"
+        letter-spacing="4" fill="#ffb84d">RUN LONGER</text>
+  <text x="40" y="628" font-family="Lato, DejaVu Sans, sans-serif" font-size="30"
+        font-weight="700" letter-spacing="1" fill="#f6f8f9">The 41st kilometre</text>
+  <text x="41" y="662" font-family="Lato, DejaVu Sans, sans-serif" font-size="18"
+        letter-spacing="1.4" fill="#c3ccd6">is the one we built it for.</text>
+</svg>

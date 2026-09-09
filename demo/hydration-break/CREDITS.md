@@ -35,17 +35,28 @@ de cuadro antes de grabar.**
 como SVG en `graphics/` y quemado sobre el plate por `scripts/paquete-de-canal.sh`. No
 imita el vestido de ningún broadcaster real.
 
-## Los creativos del minuto — PROVISORIOS
+## Los creativos del minuto
 
-Hasta que la T-05 produzca los de las tres marcas de fantasía, los cuatro avisos son
-películas abiertas de la Blender Foundation:
+**Nuestros, y de tres marcas de fantasía: NEONECTAR** (una gaseosa botánica), **KALTO**
+(zapatillas) y **MERIDIA** (viajes). Ninguna imita el vestido comercial de una marca real.
 
-- *Sintel* (CC BY 3.0)
-- *Caminandes: Gran Dillama* (CC BY 3.0)
-- *Elephants Dream* (CC BY 2.5)
+Cada creativo tiene dos mitades, y el corte es el del ADR 0045: **lo pictórico se genera y
+la tipografía se escribe a mano como SVG.**
 
-© Blender Foundation, [blender.org](https://www.blender.org). Recodificados y recortados
-para esta demo.
+| aviso | marca | pictórico | tipografía |
+| --- | --- | --- | --- |
+| banner inferior, imagen fija | MERIDIA | costa generada con `agy generate_image`, 16:9 | `graphics/creativos/banner.svg`, 1280×216 |
+| la L, video | KALTO | zapatilla generada con `agy generate_image`, 3:2 | `l-vertical.svg` 512×720 y `l-horizontal.svg` 1280×288 |
+| lineal de 10 s, cuadro entero | NEONECTAR | 8 s generados con Veo `veo-3.1-fast-generate-001` desde una imagen fija | `linear-endcard.svg`, 1920×1080, los 2 s de cierre |
+| overlay de esquina, video | MERIDIA | la misma costa generada | `overlay.svg`, 320×180 |
+
+Las fuentes generadas están versionadas en `graphics/creativos/fuentes/` con su propio
+README, y ahí está escrito por qué: **una generación no se repite**, así que sin ellas la
+demo sólo correría en la máquina donde se generaron.
+
+**El chequeo de vestido comercial se hizo pieza por pieza y está en la evidencia de la
+T-05**, porque está medido que el generador deriva hacia marcas reales aunque se le
+prohíba. No es una formalidad ni una nota: es un paso.
 
 ## La marca de Qualabs
 

@@ -30,13 +30,23 @@ DUR=${4:?duración en segundos}
 # les saca antes, el recorte a 16:9 conserva las bandas y el aviso aparece
 # rodeado de negro.
 CROP=${5:-}
+# El tamaño de salida, y por defecto es el de la medición de arriba. Se pasa distinto
+# para LOS CREATIVOS DE LOS AVISOS, y no por gusto: el ADR 0013 llena cada caja del
+# layout con recorte centrado, así que un creativo que no tiene la relación de aspecto
+# de su caja se recorta por los bordes, que es donde vive la tipografía. La barra
+# vertical de la L es 512x720 y la horizontal 1280x288 porque ésas son sus cajas.
+#
+# Forzar 1280x720 acá era el defecto silencioso: el creativo salía perfecto, se
+# empaquetaba a 16:9, y el recorte de la caja se llevaba la mitad del texto.
+ANCHO=${6:-1280}
+ALTO=${7:-720}
 
 mkdir -p "$OUT"
 rm -f "$OUT"/*.ts "$OUT"/index.m3u8
 
 ffmpeg -hide_banner -loglevel error -y \
   -ss "$SS" -i "$SRC" -t "$DUR" \
-  -vf "${CROP:+crop=$CROP,}scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,fps=30" \
+  -vf "${CROP:+crop=$CROP,}scale=$ANCHO:$ALTO:force_original_aspect_ratio=increase,crop=$ANCHO:$ALTO,fps=30" \
   -c:v libx264 -preset ultrafast -tune zerolatency -g 60 -b:v 2000k -pix_fmt yuv420p \
   -c:a aac -b:a 96k -ac 2 -ar 48000 \
   -f hls -hls_time 2 -hls_playlist_type vod -hls_segment_type mpegts \

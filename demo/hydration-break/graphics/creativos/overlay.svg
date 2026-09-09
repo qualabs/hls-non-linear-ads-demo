@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- MERIDIA, el overlay de esquina del cierre. 320x180 = la caja `75 0 0 75`, que es 16:9.
+     Es el aviso más liviano del minuto y su tipografía es la más chica de las cuatro, así
+     que es la que más se juega en el chequeo de legibilidad.
+
+     NADA BAJA DE y=136, por la misma razón que en el banner: la barra de progreso del
+     cromo ocupa los últimos ~44 px de la imagen y esta caja llega al borde inferior.
+     Por eso la línea de acento está arriba y no abajo. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect x="0" y="0" width="320" height="180" fill="#0b1216" fill-opacity="0.55"/>
+  <rect x="0" y="0" width="320" height="4" fill="#e8b04b"/>
+  <text x="22" y="52" font-family="Lato, DejaVu Sans, sans-serif" font-size="27"
+        font-weight="700" letter-spacing="4.5" fill="#f6f8f9">MERIDIA</text>
+  <text x="24" y="76" font-family="Lato, DejaVu Sans, sans-serif" font-size="12"
+        letter-spacing="2.6" fill="#e8b04b">SOMEWHERE ELSE</text>
+  <text x="22" y="122" font-family="Lato, DejaVu Sans, sans-serif" font-size="16"
+        letter-spacing="0.6" fill="#f6f8f9">Book by Sunday.</text>
+</svg>

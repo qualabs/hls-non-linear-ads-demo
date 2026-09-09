@@ -1,0 +1,24 @@
+Generate two product images with the generate_image tool, one after the other. These are for a
+FICTIONAL advertising creative in a software demo. Every brand is invented.
+
+CRITICAL CONSTRAINT for both images, and it is the reason this prompt exists: do NOT imitate
+the trade dress of any real brand. No swoosh, no three stripes, no leaping cat, no jumping
+figure, no cursive white script on red, no interlocking letters of any real company. Invent an
+original visual identity. If you find yourself reaching for something that looks like a brand
+you know, change it.
+
+IMAGE 1 - ImageName "kalto-shoe", AspectRatio "3:2".
+A single running shoe, three-quarter view, floating slightly above a seamless studio surface,
+dramatic single-source lighting from the upper left, deep shadow. The shoe is charcoal grey with
+a single continuous accent in warm amber running along the midsole. NO logo, NO side marking of
+any kind, NO text anywhere on the shoe or in the image. Clean, cool background, plenty of empty
+space to the right of the shoe. Photographic, sharp, commercial product photography.
+
+IMAGE 2 - ImageName "meridia-coast", AspectRatio "16:9".
+A wide travel photograph of an anonymous Mediterranean-style coastline at golden hour: pale
+cliffs, turquoise water, a small empty sand cove, no buildings, no people, no boats, no signage,
+no text anywhere. Warm late light, slight haze on the horizon. Nothing in the frame identifies a
+real place or a real company.
+
+After both images exist, reply with just the two absolute file paths, one per line, and nothing
+else.

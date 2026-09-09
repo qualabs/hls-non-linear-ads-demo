@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- KALTO, la barra horizontal de la L. 1280x288 = la caja `60 0 0 0`, que son 4,44 a 1:
+     los mismos 4,44 que la T-03 midió. La tipografía va a la izquierda porque la barra
+     vertical de la L ocupa la derecha del cuadro y las dos se leen como una sola pieza. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="288" viewBox="0 0 1280 288">
+  <defs>
+    <linearGradient id="velo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#0b1216" stop-opacity="0.92"/>
+      <stop offset="0.48" stop-color="#0b1216" stop-opacity="0.62"/>
+      <stop offset="0.86" stop-color="#0b1216" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="1280" height="288" fill="url(#velo)"/>
+  <rect x="0" y="0" width="1280" height="4" fill="#ffb84d"/>
+  <text x="52" y="124" font-family="Lato, DejaVu Sans, sans-serif" font-size="66"
+        font-weight="700" letter-spacing="10" fill="#f6f8f9">KALTO</text>
+  <text x="56" y="172" font-family="Lato, DejaVu Sans, sans-serif" font-size="24"
+        letter-spacing="4.5" fill="#ffb84d">RUN LONGER</text>
+  <text x="56" y="222" font-family="Lato, DejaVu Sans, sans-serif" font-size="21"
+        letter-spacing="1.2" fill="#c3ccd6">Cushioning that is still there at the end.</text>
+</svg>
