@@ -1,0 +1,95 @@
+[
+  {
+    "1_la_pelotita_donde_esta_el_video": {
+      "currentTime": 90,
+      "knobLeft": "50%",
+      "fillWidth": "50%",
+      "esperado": "50% con 90 s de 180",
+      "visible": "visible",
+      "px": 14
+    }
+  },
+  {
+    "2_click_suelto": {
+      "esperado_s": 18.0,
+      "currentTime": 18.0
+    }
+  },
+  {
+    "3_arrastre": {
+      "antes": 18.0,
+      "mientras": {
+        "knobLeft": "60%",
+        "currentTime": 18.0
+      },
+      "quieto": true,
+      "al_soltar": 108.0,
+      "esperado_s": 108.0
+    }
+  },
+  {
+    "4_afuera": {
+      "esperado_s": 36.0,
+      "currentTime": 36.0
+    }
+  },
+  {
+    "6_cromo_durante_el_arrastre": {
+      "arriba_a_los_4300ms": true,
+      "arriba_al_soltar": true
+    }
+  },
+  {
+    "las_marcas": {
+      "cuantas": 5,
+      "colores": [
+        "rgb(162, 115, 255)",
+        "rgb(162, 115, 255)",
+        "rgb(162, 115, 255)",
+        "rgb(162, 115, 255)",
+        "rgb(162, 115, 255)"
+      ]
+    }
+  },
+  {
+    "break_1_en_cuadro": {
+      "currentTime": 21,
+      "nodos_de_aviso": 2
+    }
+  },
+  {
+    "5a_primer_toque_con_el_cromo_abajo": {
+      "cromo_antes": false,
+      "currentTime_antes": 30,
+      "cromo_despues_del_primer_toque": true,
+      "currentTime_despues": 30
+    }
+  },
+  {
+    "5b_arrastre_con_el_dedo": {
+      "antes": 30,
+      "scrollY_antes": 0,
+      "lecturas": [
+        {
+          "f": 0.45,
+          "knobLeft": "45%",
+          "currentTime": 30,
+          "scrollY": 0,
+          "cromo": true
+        },
+        {
+          "f": 0.7,
+          "knobLeft": "70%",
+          "currentTime": 30,
+          "scrollY": 0,
+          "cromo": true
+        }
+      ],
+      "quieto_durante": true,
+      "no_scrolleo": true,
+      "al_soltar": 126.0,
+      "esperado_s": 126.0,
+      "scrollY_al_final": 0
+    }
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "break1": {
+    "currentTime": 25.34,
+    "videos_en_el_pane": 2,
+    "marcas": 5,
+    "knobLeft": "14.0535%"
+  },
+  "break4-quad": {
+    "currentTime": 100.12,
+    "videos_en_el_pane": 4,
+    "marcas": 5,
+    "knobLeft": "55.6327%"
+  },
+  "errores_de_consola": [
+    "[stock] error networkError aborted fatal: false"
+  ]
+}
