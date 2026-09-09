@@ -1,11 +1,11 @@
 ---
 id: "0027"
 title: Enfocable es una caja de video del aviso, y nada más
-status: accepted
+status: superseded
 scope: project
 date: 2026-09-08
 supersedes: null
-superseded_by: null
+superseded_by: "0031"
 generalizes: null
 generalized_by: null
 ---
@@ -51,3 +51,11 @@ existe.
 La consecuencia de implementación es que los punteros se habilitan sobre los
 nodos de video del aviso y sobre ninguna otra cosa, que es lo que el ADR 0028
 detalla, y que la capa de los avisos sigue sin recibirlos.
+
+---
+
+**2026-09-09 — superseded por el ADR 0031.** Esta decisión sigue vigente en
+qué es enfocable y en por qué el primario queda afuera de esa lista; lo que
+ya no es cierto sin matiz es "y nada más": el ADR 0031 le agrega al primario
+una salida de foco angosta y condicional, sin sumarlo al índice de foco ni
+tocar la colisión que esta decisión describió.
