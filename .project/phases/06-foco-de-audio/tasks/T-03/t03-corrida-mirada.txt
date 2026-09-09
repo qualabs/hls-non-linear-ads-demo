@@ -1,0 +1,186 @@
+== arranque:  t=0.02  paused=False  primario muted=True
+== el switch de la composicion, encendido con el boton del cromo del pane de la demo
+    primario muted=False  vol=1  cromo=ARRIBA
+>>> t=  0.95  la pantalla queda con el programa solo
+>>> t= 20.22  ENTRA en pantalla: adOverlay1
+
+== BREAK 1 -- cornerOverlay (20 s a 32 s)
+--- el break en pantalla, la mezcla declarada
+    t=24.37s  paused=False  cromo=abajo  |  primary content + CONCURRENT AD (cornerOverlay) · 24.2s · nothing was replaced
+    de fabrica: LINEAR AD "AD-1-LINEAR" · 4.3s of 12.0s · the content is off the screen
+    primario        vol=1     muted=False
+    (primario en la composicion) vol=1     muted=False  declarado=100
+    adOverlay1     vol=0     muted=True  opacity=1    pointer-events=auto  declarado=0    --
+    captura: t03-break1-cornerOverlay.png
+--- el gesto sobre el aviso (antes del gesto)
+    t=25.32s  paused=False  cromo=ARRIBA  |  primary content + CONCURRENT AD (cornerOverlay) · 25.3s · nothing was replaced
+    de fabrica: LINEAR AD "AD-1-LINEAR" · 5.4s of 12.0s · the content is off the screen
+    primario        vol=1     muted=False
+    (primario en la composicion) vol=1     muted=False  declarado=100
+    adOverlay1     vol=0     muted=True  opacity=1    pointer-events=auto  declarado=0    --
+    press sobre adOverlay1 en (917, 371) [centro], cromo=ARRIBA
+--- el gesto sobre el aviso (despues del gesto)
+    t=25.88s  paused=False  cromo=ARRIBA  |  primary content + CONCURRENT AD (cornerOverlay) · 25.6s · nothing was replaced
+    de fabrica: LINEAR AD "AD-1-LINEAR" · 5.6s of 12.0s · the content is off the screen
+    primario        vol=0     muted=False
+    (primario en la composicion) vol=0     muted=False  declarado=100
+    adOverlay1     vol=1     muted=False opacity=1    pointer-events=auto  declarado=0    ANILLO rgb(255, 212, 0) solid 4px -4px
+    captura: t03-break1-foco.png
+--- el mismo aviso tocado de nuevo (antes del gesto)
+    t=27.63s  paused=False  cromo=ARRIBA  |  primary content + CONCURRENT AD (cornerOverlay) · 27.5s · nothing was replaced
+    de fabrica: LINEAR AD "AD-1-LINEAR" · 7.5s of 12.0s · the content is off the screen
+    primario        vol=0     muted=False
+    (primario en la composicion) vol=0     muted=False  declarado=100
+    adOverlay1     vol=1     muted=False opacity=1    pointer-events=auto  declarado=0    ANILLO rgb(255, 212, 0) solid 4px -4px
+    press sobre adOverlay1 en (917, 371) [centro], cromo=ARRIBA
+--- el mismo aviso tocado de nuevo (despues del gesto)
+    t=28.05s  paused=False  cromo=ARRIBA  |  primary content + CONCURRENT AD (cornerOverlay) · 28.0s · nothing was replaced
+    de fabrica: LINEAR AD "AD-1-LINEAR" · 8.0s of 12.0s · the content is off the screen
+    primario        vol=1     muted=False
+    (primario en la composicion) vol=1     muted=False  declarado=100
+    adOverlay1     vol=0     muted=True  opacity=1    pointer-events=auto  declarado=0    --
+>>> t= 32.23  la pantalla queda con el programa solo
+>>> t= 45.38  ENTRA en pantalla: adBarHorizontal, adBarVertical
+
+== BREAK 2 -- squeezebackLShape, assets de video (45 s a 57 s)
+--- el break en pantalla
+    t=51.16s  paused=False  cromo=abajo  |  primary content + CONCURRENT AD (squeezebackLShape) · 51.1s · nothing was replaced
+    de fabrica: LINEAR AD "AD-2-LINEAR" · 6.0s of 12.0s · the content is off the screen
+    primario        vol=1     muted=False
+    (primario en la composicion) vol=1     muted=False  declarado=100
+    adBarVertical  vol=0     muted=True  opacity=1    pointer-events=auto  declarado=0    --
+    adBarHorizontal vol=0     muted=True  opacity=1    pointer-events=auto  declarado=0    --
+    captura: t03-break2-lbox-video.png
+>>> t= 57.41  la pantalla queda con el programa solo
+>>> t= 70.16  ENTRA en pantalla: adBarHorizontal, adBarVertical
+
+== BREAK 3 -- squeezebackLShape, assets de imagen (70 s a 82 s)
+--- el break en pantalla
+    t=76.36s  paused=False  cromo=abajo  |  primary content + CONCURRENT AD (squeezebackLShape) · 76.3s · nothing was replaced · stills: this ad has no audio
+    de fabrica: LINEAR AD "AD-3-LINEAR" · 6.1s of 12.0s · the content is off the screen
+    primario        vol=1     muted=False
+    (primario en la composicion) vol=1     muted=False  declarado=100
+    adBarVertical  vol=None  muted=None  opacity=1    pointer-events=none  declarado=0    --
+    adBarHorizontal vol=None  muted=None  opacity=1    pointer-events=none  declarado=0    --
+    captura: t03-break3-lbox-image.png
+>>> t= 82.18  la pantalla queda con el programa solo
+>>> t= 95.33  ENTRA en pantalla: view2, view3, view4
+
+== BREAK 4 -- multiView, el Quad (95 s a 107 s)
+--- el Quad sin foco, la mezcla declarada
+    t=98.20s  paused=False  cromo=abajo  |  primary content + CONCURRENT AD (multiView) · 98.1s · nothing was replaced
+    de fabrica: LINEAR AD "AD-4-LINEAR" · 2.6s of 12.0s · the content is off the screen
+    primario        vol=0.1   muted=False
+    (primario en la composicion) vol=0.1   muted=False  declarado=10
+    view2          vol=0.1   muted=False opacity=1    pointer-events=auto  declarado=10   --
+    view3          vol=1     muted=False opacity=1    pointer-events=auto  declarado=100  --
+    view4          vol=0.1   muted=False opacity=1    pointer-events=auto  declarado=10   --
+    captura: t03-break4-quad.png
+--- un click sobre un cuadrante (antes del gesto)
+    t=100.01s  paused=False  cromo=ARRIBA  |  primary content + CONCURRENT AD (multiView) · 99.9s · nothing was replaced
+    de fabrica: LINEAR AD "AD-4-LINEAR" · 4.4s of 12.0s · the content is off the screen
+    primario        vol=0.1   muted=False
+    (primario en la composicion) vol=0.1   muted=False  declarado=10
+    view2          vol=0.1   muted=False opacity=1    pointer-events=auto  declarado=10   --
+    view3          vol=1     muted=False opacity=1    pointer-events=auto  declarado=100  --
+    view4          vol=0.1   muted=False opacity=1    pointer-events=auto  declarado=10   --
+    press sobre view2 en (1364, 413) [centro], cromo=ARRIBA
+--- un click sobre un cuadrante (despues del gesto)
+    t=100.53s  paused=False  cromo=ARRIBA  |  primary content + CONCURRENT AD (multiView) · 100.5s · nothing was replaced
+    de fabrica: LINEAR AD "AD-4-LINEAR" · 4.7s of 12.0s · the content is off the screen
+    primario        vol=0     muted=False
+    (primario en la composicion) vol=0     muted=False  declarado=10
+    view2          vol=1     muted=False opacity=1    pointer-events=auto  declarado=10   ANILLO rgb(255, 212, 0) solid 4px -4px
+    view3          vol=0     muted=True  opacity=1    pointer-events=auto  declarado=100  --
+    view4          vol=0     muted=True  opacity=1    pointer-events=auto  declarado=10   --
+    captura: t03-break4-quad-foco.png
+--- el mismo cuadrante tocado de nuevo (antes del gesto)
+    t=102.63s  paused=False  cromo=ARRIBA  |  primary content + CONCURRENT AD (multiView) · 102.6s · nothing was replaced
+    de fabrica: LINEAR AD "AD-4-LINEAR" · 6.8s of 12.0s · the content is off the screen
+    primario        vol=0     muted=False
+    (primario en la composicion) vol=0     muted=False  declarado=10
+    view2          vol=1     muted=False opacity=1    pointer-events=auto  declarado=10   ANILLO rgb(255, 212, 0) solid 4px -4px
+    view3          vol=0     muted=True  opacity=1    pointer-events=auto  declarado=100  --
+    view4          vol=0     muted=True  opacity=1    pointer-events=auto  declarado=10   --
+    press sobre view2 en (1364, 413) [centro], cromo=ARRIBA
+--- el mismo cuadrante tocado de nuevo (despues del gesto)
+    t=103.09s  paused=False  cromo=ARRIBA  |  primary content + CONCURRENT AD (multiView) · 102.9s · nothing was replaced
+    de fabrica: LINEAR AD "AD-4-LINEAR" · 7.4s of 12.0s · the content is off the screen
+    primario        vol=0.1   muted=False
+    (primario en la composicion) vol=0.1   muted=False  declarado=10
+    view2          vol=0.1   muted=False opacity=1    pointer-events=auto  declarado=10   --
+    view3          vol=1     muted=False opacity=1    pointer-events=auto  declarado=100  --
+    view4          vol=0.1   muted=False opacity=1    pointer-events=auto  declarado=10   --
+    captura: t03-break4-quad-foco-suelto.png
+>>> t=107.04  la pantalla queda con el programa solo
+>>> t=120.18  ENTRA en pantalla: ad1-overlay
+
+== BREAK 5 -- cuatro avisos en fila (120 s a 168 s)
+--- aviso 1 del break 5
+    t=126.35s  paused=False  cromo=abajo  |  primary content + CONCURRENT AD (cornerOverlay) · 126.3s · nothing was replaced
+    de fabrica: LINEAR AD "AD-5-LINEAR" · 5.6s of 12.0s · the content is off the screen
+    primario        vol=1     muted=False
+    (primario en la composicion) vol=1     muted=False  declarado=100
+    ad1-overlay    vol=0     muted=True  opacity=1    pointer-events=auto  declarado=0    --
+    captura: t03-break5-aviso1.png
+>>> t=132.24  ENTRA en pantalla: ad2-box
+--- aviso 2 del break 5
+    t=138.04s  paused=False  cromo=abajo  |  primary content + CONCURRENT AD (squeezebackDoubleBox) · 137.9s · nothing was replaced
+    de fabrica: primary content · 136.8s
+    primario        vol=1     muted=False
+    (primario en la composicion) vol=1     muted=False  declarado=100
+    ad2-box        vol=0     muted=True  opacity=1    pointer-events=auto  declarado=0    --
+    captura: t03-break5-aviso2.png
+>>> t=144.33  ENTRA en pantalla: linear
+--- aviso 3 del break 5
+    t=150.12s  paused=False  cromo=abajo  |  primary content + CONCURRENT AD (linear) · 149.9s · the programme is still playing underneath, covered and silent
+    de fabrica: primary content · 149.0s
+    primario        vol=0     muted=False
+    (primario en la composicion) vol=0     muted=False  declarado=0
+    linear         vol=1     muted=False opacity=1    pointer-events=auto  declarado=100  --
+    captura: t03-break5-aviso3.png
+>>> t=156.39  ENTRA en pantalla: ad4-overlay
+--- aviso 4 del break 5
+    t=162.17s  paused=False  cromo=abajo  |  primary content + CONCURRENT AD (cornerOverlay) · 162.1s · nothing was replaced
+    de fabrica: primary content · 160.9s
+    primario        vol=1     muted=False
+    (primario en la composicion) vol=1     muted=False  declarado=100
+    ad4-overlay    vol=0     muted=True  opacity=1    pointer-events=auto  declarado=0    --
+    captura: t03-break5-aviso4.png
+>>> t=168.40  la pantalla queda con el programa solo
+
+== DESPUES DEL ULTIMO BREAK
+--- el programa solo, con el audio devuelto
+    t=171.26s  paused=False  cromo=abajo  |  primary content · 171.2s
+    de fabrica: primary content · 170.2s
+    primario        vol=1     muted=False
+    captura: t03-final-fuera-de-break.png
+
+== LOS CINCO BREAKS, VISTOS
+    break 1  cornerOverlay        t= 24.37  en pantalla: adOverlay1
+    break 2  LBox video          t= 51.16  en pantalla: adBarVertical, adBarHorizontal
+    break 3  LBox image          t= 76.36  en pantalla: adBarVertical, adBarHorizontal
+    break 4  Quad                t= 98.20  en pantalla: view2, view3, view4
+    break 5 aviso 1  Overlay     t=126.35  en pantalla: ad1-overlay
+    break 5 aviso 2  DoubleBox   t=138.04  en pantalla: ad2-box
+    break 5 aviso 3  a cuadro    t=150.12  en pantalla: linear
+    break 5 aviso 4  Overlay     t=162.17  en pantalla: ad4-overlay
+
+== VEREDICTO
+    [OK ] el switch de la composicion queda encendido con un click en el cromo de #player
+    [OK ] break 1: el aviso se lleva el audio (aviso a 100, programa a 0) y el anillo aparece
+    [OK ] break 1: tocado de nuevo vuelve la mezcla declarada y el anillo se va
+    [OK ] break 4: sin foco, la mezcla del asset list (un cuadrante a 100, dos a 10, primario a 10)
+    [OK ] break 4: el cuadrante tocado a 100, los otros dos y el primario a 0, y un solo anillo
+    [OK ] break 4: tocado de nuevo vuelve el 100/10 declarado y no queda anillo
+    [OK ] cerrado el break 5 no queda aviso en pantalla y el programa vuelve a 100
+    [OK ] break 1  cornerOverlay se vio en la corrida
+    [OK ] break 2  LBox video se vio en la corrida
+    [OK ] break 3  LBox image se vio en la corrida
+    [OK ] break 4  Quad se vio en la corrida
+    [OK ] break 5 aviso 1  Overlay se vio en la corrida
+    [OK ] break 5 aviso 2  DoubleBox se vio en la corrida
+    [OK ] break 5 aviso 3  a cuadro se vio en la corrida
+    [OK ] break 5 aviso 4  Overlay se vio en la corrida
+
+    TODO EN VERDE

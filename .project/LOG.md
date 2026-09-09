@@ -3654,3 +3654,47 @@ CDP: el primero sube el cromo y no toca el audio, el segundo enfoca.
 audible hubo que apagar el sink del sistema**, porque la verificación honesta pide
 levantar el switch de la composición y eran las cuatro de la mañana. Se restauró
 al terminar.
+
+## 2026-09-09 — T-03 de la fase 06: las dos oraciones del README, y la corrida mirada entera
+
+El README de la demo decía que la mezcla del asset list la declara la campaña y
+el reproductor la obedece, y con foco eso quedó a mitad de camino: la mezcla es
+el **estado inicial** y quien mira se la lleva a una caja tocándola. Las dos
+oraciones —una en el párrafo del switch de `Before you record` y una en el del
+Quad— dicen la política completa del ADR 0026 entre las dos: el estado inicial,
+el override mientras el aviso está en pantalla, el foco exclusivo con el primario
+callado incluido, el gesto que cuenta sólo con el cromo arriba, la caja de video
+del aviso como único blanco, y el override que muere con el aviso.
+
+**El anillo se nombra en el párrafo del Quad y no en el del switch.** El del
+switch es donde vive la política y el del Quad es el beat que se ve en cámara, así
+que la marca que dice cuál caja se escucha va donde alguien la va a estar mirando.
+Escribirla en los dos era la misma frase dos veces.
+
+**El encabezado de la sección sigue diciendo "six to expect" y no envejeció**,
+porque las dos oraciones entraron adentro de párrafos que ya existían y no
+agregaron un ítem en negrita. Era la afirmación de la sección con más chance de
+quedar vieja por un cambio de este tamaño, y el resto se leyó línea por línea.
+
+**La corrida se miró de punta a punta en un solo playback de 171 s, sin seeks.**
+Los cinco breaks entran en su segundo —20,2 / 45,4 / 70,2 / 95,3 / 120,2— y los
+cuatro avisos del break 5 se relevan en el 132, el 144 y el 156. El foco anda en
+el `cornerOverlay` del break 1, donde un click calla el programa, y en el Quad del
+break 4, donde el cuadrante tocado va a 100, el resto y el primario a 0 y queda un
+anillo y uno solo; tocado de nuevo vuelve el 100/10 declarado. Con mouse alcanzó
+**un** click las dos veces. Doce cuadros y quince lecturas, todas en verde;
+`npm test` sigue en 49 y `npm run check` en `both seams hold.`.
+
+**Una línea de la sección la corrida no puede confirmar ni desmentir, y se dejó
+como está**: los 0,7 s de atraso del pane de fábrica. La lectura del final da
+alrededor de un segundo, y no es una medición de eso —dos líneas de estado con su
+propio `timeupdate`, medio segundo de holgura— y el costo que produce el número es
+el traspaso del MediaSource, que en un Chrome headless sobre una máquina
+compartida no cuesta lo que en la máquina donde se graba. El número es de la fase
+04 y nada de la 06 tocó la implementación que lo produjo.
+
+**Y una nota de harness que ya se pagó dos veces**: todo lo que lee el cromo se
+ancla en `#player`, porque la página tiene dos players con el mismo cromo y un
+selector global mide el pane de fábrica y reporta que el gesto no funciona cuando
+sí funciona. El audio audible, esta vez, se apagó con `--mute-audio` en el Chrome
+de la corrida en lugar de tocar el sink del sistema.

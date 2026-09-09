@@ -100,7 +100,12 @@ policy lets it begin without a click, and that control is the one that lifts it:
 it is the audio of the composition, drawn by the library along with the progress
 bar, the play/pause and the fullscreen (ADR 0015). It is one switch for the
 whole thing, primary content and ad together; what each element is worth inside
-it is the mix the asset-list declares, and the player obeys it (ADR 0014).
+it is the mix the asset-list declares, and the player obeys it (ADR 0014). That
+mix is the initial state and not the last word: while the chrome is on screen, a
+press on any video box of the ad hands that box the whole sound -- it goes to
+100 and everything else to 0, the programme included -- and the declared mix
+comes back on a second press, or on its own when the ad leaves the screen
+(ADR 0026).
 
 **The last break carries four ads in a row, and the third of them is at full
 frame.** The first four breaks are one ad each and walk four of the five names
@@ -116,12 +121,15 @@ programme's timeline (ADR 0016).
 **Two breaks bring audio of their own.** The Quad, break 4, is the one with a
 mix: its asset-list asks for 100 in the bottom-left quadrant and 10 in the other
 three, which is what a quad of concurrent sources sounds like when the
-signalling picks one to listen to. The full-frame ad inside break 5 is the
-other, and it is the only ad of the run that takes the sound off the programme,
-because an ad covering the whole screen with no audio is a fault nothing on
-screen reports. Every other ad declares no `volume` at all, and an absent field
-is silence on the ad and full volume on the show, so those come in quietly over
-a programme that keeps its audio.
+signalling picks one to listen to. Here the signalling only proposes: with the
+chrome on screen, a press on a quadrant moves the whole sound over to it, a
+yellow ring marks the box being heard, and the declared 100/10 comes back when
+that box is pressed again or when the break ends (ADR 0026). The full-frame ad
+inside break 5 is the other, and it is the only ad of the run that takes the
+sound off the programme, because an ad covering the whole screen with no audio
+is a fault nothing on screen reports. Every other ad declares no `volume` at
+all, and an absent field is silence on the ad and full volume on the show, so
+those come in quietly over a programme that keeps its audio.
 
 **One of the breaks has no audio at all.** The two assets of LBox image are
 stills, so that ad has no soundtrack to mix in, and the state line under the
