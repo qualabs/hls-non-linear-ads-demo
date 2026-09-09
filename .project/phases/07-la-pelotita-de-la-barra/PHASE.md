@@ -1,9 +1,9 @@
 ---
 phase: 07-la-pelotita-de-la-barra
 title: "La pelotita de la barra se agarra y se arrastra"
-status: closing
+status: closed
 started: 2026-09-09
-closed: null
+closed: 2026-09-09
 ---
 
 # Fase 07: la pelotita de la barra
