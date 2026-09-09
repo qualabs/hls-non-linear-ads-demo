@@ -71,6 +71,7 @@ body {
   min-height: calc(100vh - 96px);
   display: grid;
   align-content: center;
+  justify-items: stretch;
   gap: 18px;
   padding: 24px clamp(20px, 4vw, 56px) 40px;
 }
@@ -90,11 +91,19 @@ body {
  * viewport minus everything else on the section -- and the aspect ratio turns
  * that height back into a width. Measured the other way round first: with the
  * width alone capped, the bottom banner of the first ad fell below the fold. */
+/* The box that holds the picture and the card of the guided run, exactly the
+ * size of the picture. It exists so the card can be a SIBLING of the container
+ * the library governs instead of a child of it (ADR 0041). */
+.frame {
+  position: relative;
+  width: min(1600px, 100%, calc((100vh - 260px) * 16 / 9));
+  margin: 0 auto;
+}
+
 .player {
   position: relative;
   isolation: isolate;
-  width: min(1600px, 100%, calc((100vh - 260px) * 16 / 9));
-  margin: 0 auto;
+  width: 100%;
   aspect-ratio: 16 / 9;
   background: #000;
   --qa-accent: var(--q-teal-500);
@@ -125,3 +134,66 @@ body {
 }
 
 .credit a { color: inherit; }
+
+/* THE CARD OF THE GUIDED RUN.
+ *
+ * This is where the minimal half of the page lives, and the reason it can be
+ * minimal is that it is never on screen at the same time as the player's four
+ * simultaneous ads: dark ground, one sentence, big type. The two halves do not
+ * compete because they never share the frame -- and the viewer gets told what
+ * they are about to look at before they look at it, which is what makes a screen
+ * with four things on it legible to somebody seeing it for the first time.
+ *
+ * IT SITS ABOVE THE CHROME, and two things together are what make that possible
+ * (ADR 0041). `.player` carries `isolation: isolate`, so the chrome's z-index of
+ * 2147483000 cannot escape the container; and the card is a SIBLING of that
+ * container rather than a child, so it is not competing inside the context where
+ * that number still wins. With the card as a child, the progress bar, the mute
+ * button and the play button were all drawn over it -- measured by looking at
+ * the picture, which is the only way that shows.
+ *
+ * It takes pointer events, so a click while the programme is paused cannot reach
+ * the play button underneath a card that says the programme is about to start. */
+.card {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  margin: 0;
+  display: grid;
+  align-content: center;
+  padding: 6% clamp(28px, 9%, 140px);
+  background: rgba(9, 10, 13, 0.97);
+  color: var(--q-paper-50);
+  font-size: clamp(20px, 2.45vw, 40px);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.card[data-on] { opacity: 1; }
+
+/* ONE WAY OUT, and it is deliberately quiet: it is for the person who has seen
+ * the walkthrough already, not an invitation to skip it. It disappears when the
+ * walkthrough ends, because a button that ends something already over is a
+ * control that lies. */
+.skip {
+  justify-self: center;
+  margin: 0 auto;
+  padding: 9px 18px;
+  border: 1px solid #2b323d;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--q-slate-400);
+  font-family: inherit;
+  font-size: 12.5px;
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.skip:hover { color: var(--q-paper-50); border-color: #47505f; }
+
+body[data-story="done"] .skip { display: none; }

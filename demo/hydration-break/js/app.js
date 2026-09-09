@@ -10,6 +10,8 @@
 // What crosses out of the library is the contract -- `provider.activeAt(time)`
 // and `provider.programRanges()` -- and nothing else.
 
+import { runStory } from './story.js';
+
 // The signalled playlist: the same segments as the plate plus one Date Range,
 // written by scripts/senalizar-contenido.sh on every start. Its START-DATE is
 // computed from the playlist's own EXT-X-PROGRAM-DATE-TIME, so it cannot be a
@@ -43,8 +45,14 @@ hls.on(Hls.Events.MANIFEST_PARSED, () => {
 // Muted, so the autoplay policy lets the page start without a click. The audio
 // control the library draws at the top right of the picture is the one that
 // lifts it, and lifting it once at the start is a step of the run.
+//
+// AND THE PAGE DOES NOT PRESS PLAY: the walkthrough does, when its opening card
+// goes (ADR 0039). Pressing it here as well showed the first seconds of the
+// match before the card that says what is about to happen, which is the one
+// thing the opening card exists to prevent. If the walkthrough cannot start, the
+// handler at the bottom of this file presses it instead, so a broken story never
+// costs the demo its player.
 video.muted = true;
-video.play().catch(() => {});
 
 /**
  * THE STATE LINE, read off the contract and off nothing else.
@@ -96,6 +104,23 @@ function paint() {
 }
 video.addEventListener('timeupdate', paint);
 paint();
+
+// THE GUIDED RUN STARTS BY ITSELF, and that is the decision and not an
+// oversight: somebody who opens this link from an email does not know there is a
+// button, and without the walkthrough the business case is the thing they miss.
+// One state and not two pages -- when it ends, the player is theirs.
+runStory({
+  provider: concurrent.provider,
+  video,
+  card: document.getElementById('card'),
+  skip: document.getElementById('skip')
+}).catch((error) => {
+  // A walkthrough that cannot load is not a reason to lose the demo: the player
+  // keeps playing and the console says what happened.
+  console.error('[story] the walkthrough did not start, the player carries on', error);
+  document.body.dataset.story = 'done';
+  video.play().catch(() => {});
+});
 
 // For the console and for whoever comes next.
 window.demo = {

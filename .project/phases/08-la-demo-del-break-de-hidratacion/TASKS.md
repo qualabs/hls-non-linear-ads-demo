@@ -22,7 +22,7 @@ y pregunta.
 | T-01 | El freno de la composición, medido en el navegador (R6)         | done    | —    | [tasks/T-01/](tasks/T-01/) |
 | T-02 | La demo nueva corre, con el plate suplente                     | done    | —    | [tasks/T-02/](tasks/T-02/) |
 | T-03 | El plate y el paquete de canal ficticio                        | done    | —    | [tasks/T-03/](tasks/T-03/) |
-| T-04 | El guion: anclas, placa, botón, y el freno                     | pending | —    | —        |
+| T-04 | El guion: anclas, placa, botón, y el freno                     | done    | —    | [tasks/T-04/](tasks/T-04/) |
 | T-05 | Los creativos de las tres marcas de fantasía                   | pending | —    | —        |
 | T-06 | La página: las secciones, la estética y las marcas             | pending | —    | —        |
 | T-07 | El suite de la demo, y el control de su chequeo negativo        | pending | —    | —        |

@@ -4354,3 +4354,53 @@ que el plate salió de 62,3 s en vez de 88. **Lo delató el número y no la pant
 plate corto no se ve mal, se ve como otro plate.
 
 `npm test` en 49 verdes y `npm run check` en `both seams hold.`
+
+## 2026-09-09 — T-04 de la fase 08: el guion corre, y ningún beat nombra un segundo del programa
+
+La demo guiada arranca sola: el player en pausa con la primera placa, y en cada beat la
+experiencia se frena, una línea de tipografía dice lo que está por pasar, se va, y el
+player sigue para que se vea pasar. Cuando el último beat termina, el player queda libre.
+
+**El ADR 0037 quedó cumplido y verificable: ni el guion ni el código contienen un segundo
+del programa.** Los cinco beats se anclan a la señalización —`{"at":"start"}`,
+`{"before":{"break":1},"lead":2.5}`, `{"at":{"break":1,"ad":3},"lead":1.5}`— y
+`resolveAnchor` es el único lugar de la demo que convierte señalización en segundos,
+leyendo `programRanges()` y `experiences`. La página no construye identificadores:
+`HYDRATION-BREAK` es una convención del script de señalización y el guion no sabe que
+existe. Un ancla que no resuelve devuelve `null`, se dice por consola y el beat se saltea
+en lugar de inventarse en otro segundo.
+
+**Medido, los cinco beats frenan antes de lo que anuncian**: 0, 11,75, 28,71, 45,36 y
+54,66 contra anclas en 0, 11,5, 28,5, 44,5 y 54,5. Y **un número que conviene tener a la
+vista: el loop llega hasta ~1 s tarde cuando la pestaña no tiene el foco**, porque
+`requestAnimationFrame` se estrangula a ~1 Hz en segundo plano. El margen real es el
+`lead` menos ese segundo, así que bajar el `lead` de 1,5 s deja de ser seguro. Está
+escrito para que nadie lo baje creyendo que gana precisión.
+
+**Las tres invariantes quedaron medidas.** Un `pointerdown` y un click despachados directo
+al botón de play del cromo y a la barra no cortan la guiada y no arrancan el programa; un
+click real ni llega al cromo, porque `elementFromPoint` devuelve la placa en el centro del
+player y sobre la barra; y el botón sí la corta en cualquier momento, dejando el player
+libre y desapareciendo él mismo.
+
+**Tres defectos encontrados y arreglados, y los tres se vieron y no se razonaron.**
+
+1. **La placa no tapaba el cromo, y el ADR 0041 ya decía por qué.** La escribí como hija de
+   `#player` y el ADR dice afuera del contenedor que el renderer gobierna:
+   `isolation: isolate` impide que el `z-index: 2147483000` escape, pero una placa adentro
+   compite en el mismo contexto y pierde. En la primera captura la barra de progreso, el
+   mute y el play estaban dibujados encima de la placa. Pasó a ser hermana de `#player`.
+2. **El programa arrancaba detrás de una placa que decía que estaba por arrancar.** La
+   placa se come los gestos de una persona, pero eso es un hecho de la hoja de estilos;
+   ahora hay un hecho del estado: mientras una placa está arriba, cualquier `play` vuelve
+   a pausar. Es la versión que sobrevive a que alguien mueva un `z-index`.
+3. **Y esa guarda, escrita en el orden natural, trabó el guion entero**: el `play()` que el
+   propio beat hace al terminar es un `play`, así que con `speaking` en `true` se cancelaba
+   a sí mismo y la guiada no pasaba de su primera placa. El orden de dos líneas es la
+   diferencia y está escrito al lado.
+
+**La librería no se tocó.** El freno es `video.pause()` y nada más, que es lo que la T-01
+midió, y el `play()` reanuda cada caja en el cuadro donde quedó, así que el guion no
+guarda ni restaura posiciones. El hallazgo del ADR 0040 no se disparó.
+
+`npm test` en 49 verdes y `npm run check` en `both seams hold.`

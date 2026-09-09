@@ -68,9 +68,35 @@
 
 <section class="stage" aria-label="The hydration break">
 
-  <div class="player" id="player">
-    <video class="video" id="video" playsinline></video>
+  <!--
+    THE CARD IS A SIBLING OF THE PLAYER AND NOT A CHILD OF IT, and that is the
+    whole of ADR 0041 rather than a detail of markup. The chrome the library
+    draws sits at z-index 2147483000; `isolation: isolate` on #player keeps that
+    number from escaping the container, but a card INSIDE the container still
+    competes with it in the same stacking context and loses. Measured by looking:
+    with the card as a child, the progress bar, the mute button and the play
+    button were all drawn on top of it.
+  -->
+  <div class="frame">
+    <div class="player" id="player">
+      <video class="video" id="video" playsinline></video>
+    </div>
+
+    <!--
+      It swallows pointer events on purpose: while it is up the programme is
+      paused, and a click that reached the chrome underneath would start the
+      match behind a card that says it is about to start.
+    -->
+    <p class="card" id="card" hidden></p>
   </div>
+
+  <!--
+    ONE WAY OUT (ADR 0042). Visible for the whole walkthrough, and nothing else
+    ends it: a tap on the player's own controls does not. This gets recorded, and
+    a second exit that fires on any gesture is an exit that fires by itself in
+    the middle of a take.
+  -->
+  <button class="skip" id="skip" type="button">Skip the walkthrough</button>
 
   <p class="state" id="state"></p>
   <p class="hud" id="hud"></p>
