@@ -4092,3 +4092,46 @@ derechos más los gráficos de transmisión hechos por nosotros, con el paquete 
 ficticio como pieza de mayor palanca. El trabajo de assets es de 1,5 a 2 días de una
 persona (riesgo R3), y su mitigación es que la página se construya contra el
 contenido de la demo actual como suplente, para que los dos frentes no se bloqueen.
+
+## 2026-09-09 — Corrección al diseño de la fase 08: Veo sí está disponible, y el reparto de la tipografía cambia
+
+La entrada anterior dice que Veo no está disponible en `cto-assistant-501315`, y está
+mal. **Queda en pie porque el LOG es registro y no documento vigente**, y porque cómo
+se llegó al error es parte del hallazgo: el diseño ya está corregido y es el que vale.
+
+**Lo que faltaba era ir a la documentación a buscar los ids vigentes.** Los `-preview`
+que probamos —el relevamiento de contenido y las dos mediciones de hoy— **no existen
+más**, y los vivos terminan en `-001`. Verificado: `veo-3.1-fast-generate-001` y
+`veo-3.1-generate-001` devuelven `400 No inputs provided`, o sea que el lookup del
+modelo pasó; `veo-3.1-fast-generate-preview` sigue en 404.
+
+**Y la trampa es del mensaje**: el 404 dice *"was not found **or** your project does not
+have access to it"* y **no distingue las dos cosas**, así que probar candidatos hasta que
+uno responda mide la lista de candidatos y no la disponibilidad. Es del mismo orden que
+el chequeo del cuerpo vacío y que el chequeo del scroll de la fase 07: **tres veces
+seguidas el instrumento decidió el resultado.**
+
+**Lo medido corriéndolo**, con `veo-3.1-fast-generate-001` en `us-central1` sobre la
+imagen fija de una marca de fantasía: 8,0 s de 1920×1080 a 24 fps, h264, 25.353.878
+bytes, sin pista de audio, en 118 s. Honra el primer cuadro con el titular intacto; sale
+a 1920×1080 exactos, que el generador de imagen no hace; mejora el texto chico sin
+garantizarlo —`S9KIMLING BOTANICAL SODL` en la entrada, `SPARKLING BOTANICAL SOOL` en el
+video—; y **el titular se va de cuadro cuando la cámara empuja**, que no es un defecto
+sino lo que hace un movimiento de cámara. El archivo y tres cuadros están en
+`sandbox/veo-neonectar-8s-2026-09-09.mp4`.
+
+**Ese último punto es el que cambia el diseño, y lo cambia hacia un reparto y no hacia
+un "sí, se puede".** El D9 pasa a ser: lo pictórico se genera, la tipografía se compone,
+y **el movimiento se genera sólo donde la tipografía puede irse de cuadro**. O sea que el
+spot lineal de diez segundos se genera con Veo y la tipografía vuelve al final compuesta
+con SVG —exacta, en lugar de re-renderizada por el modelo—, y los formatos no lineales
+siguen siendo imagen fija con tipografía compuesta, porque ahí el texto tiene que
+quedarse quieto y legible durante todo el break. El costo de la variante fast, entre
+US$0,10 y US$0,15 el segundo, queda escrito como **leído y no verificado en la factura**.
+
+**Lo que no se movió: el metraje del programa se sigue construyendo.** El argumento nunca
+fue la disponibilidad, así que tenerla no lo toca, y el diseño ahora lo dice más fuerte
+que antes: el generador está disponible y aun así el plate se construye, porque un minuto
+pide seis o más generaciones que coincidan en estadio, camiseta, luz y cámara, y porque
+la sala mira video por trabajo. Un spot de producto de ocho segundos con un solo
+movimiento de cámara es donde el modelo hoy es bueno; un minuto de partido no lo es.

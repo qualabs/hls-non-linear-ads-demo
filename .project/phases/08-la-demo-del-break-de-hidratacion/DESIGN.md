@@ -410,53 +410,79 @@ puede leerse del contrato porque todavía no hay player: el plate no está en gi
 acuerdo verbal: el break que el script señaliza tiene que arrancar en el corrimiento
 declarado.
 
-### D9 — Lo pictórico se genera, la geometría se escribe como SVG, y cada creativo generado pasa un chequeo humano
+### D9 — Lo pictórico se genera, la tipografía se compone, y el movimiento se genera sólo donde la tipografía puede irse de cuadro
 
-**Decisión.** Dos caminos y el corte es por tipo de pieza, no por comodidad:
+**Decisión.** Tres caminos, y el corte es por tipo de pieza y no por comodidad:
 
-- **Lo pictórico se genera**: la lata, el zapato, la foto del destino, el titular
-  grande. `agy` tiene una herramienta `generate_image` con siete proporciones y hasta
+- **Lo pictórico se genera**: la lata, el zapato, la foto del destino, el fondo del
+  panel. `agy` tiene una herramienta `generate_image` con siete proporciones y hasta
   tres imágenes de referencia para editar o componer; el skill `antigravity-cli` quedó
   actualizado con lo medido. Vertex `gemini-2.5-flash-image` también anda.
-- **La geometría se escribe a mano como SVG**: el marco de la L, el banner, el
-  scorebug, el reloj, el bug de canal y toda la tipografía chica. Rasterizado con
-  Chrome headless, que da alfa real y dimensiones exactas.
+- **La geometría y la tipografía se escriben a mano como SVG**: el marco de la L, el
+  banner, el scorebug, el reloj, el bug de canal, los wordmarks y todo el texto chico.
+  Rasterizado con Chrome headless, que da alfa real y dimensiones exactas.
+- **El movimiento se genera con Veo**, y sólo en el spot lineal de diez segundos.
 
-El corte no es una preferencia, es una medición del anexo: **la L generada volvió como
-la foto de una L dentro de un rectángulo negro, sin alfa y con las dimensiones
+Las dos primeras las decide una medición y no una preferencia: **la L generada volvió
+como la foto de una L dentro de un rectángulo negro, sin alfa y con las dimensiones
 equivocadas, y la versión SVG compuso perfecto en el primer intento**; el titular grande
-sale tipográficamente perfecto y **el texto chico sobre el producto sale deformado**.
+sale tipográficamente perfecto y **el texto chico sobre el producto sale deformado.**
 
-**El spot lineal de diez segundos se compone con ffmpeg**: imágenes generadas más
-`zoompan`/`xfade`, ~2 h y costo cero. Es el camino verificado y es el que entra en el
-plan.
+**La tercera la decide una corrida, y es la que fija dónde el movimiento sirve y dónde
+no.** Medido en `cto-assistant-501315` con `veo-3.1-fast-generate-001` en `us-central1`,
+dándole como entrada la imagen fija de una marca de fantasía: 8,0 s de 1920×1080 a
+24 fps, h264, 25.353.878 bytes, **sin pista de audio**, en 118 s de generación por
+`:predictLongRunning` más polling de `:fetchPredictOperation`. El archivo y tres cuadros
+extraídos están en
+`/home/nicolas/Develop/ai_workspace/cto-assistant/sandbox/veo-neonectar-8s-2026-09-09.mp4`.
+Tres cosas mirando los cuadros:
 
-**No hay generación de video en este proyecto**, y la distinción entre "no se puede" y
-"no lo tenemos" importa porque tiene dueño. Veo existe y hace image-to-video —toma una
-imagen como primer cuadro y la anima—, así que la cadena `agy` genera la imagen y Veo la
-mueve es la que mejoraría este spot. **Lo que falta es acceso al modelo en este
-proyecto**, y se pide habilitándolo en la consola de Google Cloud: es un hilo abierto de
-Nicolás y no una imposibilidad técnica. Medido en `cto-assistant-501315`: los cinco
-modelos de Veo y `imagen-3.0-generate-002` devuelven **404**, *"not found or your project
-does not have access"*, en cuatro regiones.
+1. **Honra el primer cuadro.** El frame 0 es la imagen de entrada, con el titular y el
+   tagline intactos y legibles. Y sale a 1920×1080 exactos, que es algo que el generador
+   de imagen no hace.
+2. **Mejora el texto chico pero no lo garantiza.** En la imagen de entrada el texto de la
+   botella era un renglón de caracteres dados vuelta —`S9KIMLING BOTANICAL SODL`— y en el
+   video se lee `SPARKLING BOTANICAL SOOL`: legible, y con una palabra todavía mal.
+3. **Y el hallazgo que fija la regla: el titular se va de cuadro cuando la cámara
+   empuja.** En el último cuadro no está, y lo que queda es un plano de producto sin
+   tipografía. No es un defecto del modelo —no hay nada deformado ni desaparecido en los
+   cuadros mirados— es lo que hace un movimiento de cámara.
 
-Y una nota sobre el instrumento, porque esta medición se dio vuelta dos veces antes de
-quedar firme y la razón es la misma trampa que encontró la fase 07: **con el cuerpo vacío
-el chequeo no puede dar otra cosa que un 400.** La validación corre antes del lookup del
-modelo, así que `{}` devuelve `400 Empty instances.` exista el modelo o no. El
-instrumento que dice algo es `{"instances":[{}],"parameters":{}}`, y sobre el mismo
-modelo en la misma corrida los dos dan cosas distintas: `400 Empty instances.` con el
-cuerpo vacío, `404 ... does not have access` con el válido.
+**De ahí sale el reparto, y es lo contrario de lo que la comodidad sugeriría:**
 
-Si algún día se habilita, **la calidad de Veo para esto sigue sin estar medida**: lo
-único que se midió es el acceso, y para el POC el camino de ffmpeg alcanza.
+- **El spot lineal de diez segundos se genera con Veo, y la tipografía vuelve al final
+  compuesta con SVG.** Es mejor así y no un remiendo: la tipografía queda exacta en lugar
+  de que el modelo la re-renderice, y el movimiento se usa para lo que sirve, que es la
+  parte pictórica.
+- **Los formatos no lineales —la L, el banner inferior, el panel— siguen siendo imagen
+  fija con la tipografía compuesta.** Ahí el texto tiene que quedarse quieto y legible
+  durante todo el break, así que un movimiento que se lleva el titular es exactamente lo
+  que no se quiere. Es la misma razón por la que la geometría es SVG, aplicada al tiempo
+  en lugar del espacio.
+
+**Dos trampas de instrumento que esta medición dejó, y las dos son del mismo tipo que el
+hallazgo de la fase 07.** La primera: **los ids de modelo se buscan en la documentación y
+no se inventan.** Los `-preview` no existen más y los vivos terminan en `-001`
+(`veo-3.1-fast-generate-001`, `veo-3.1-generate-001`), y el 404 de un id retirado dice
+*"was not found **or** your project does not have access to it"*, que **no distingue las
+dos cosas**: probar candidatos hasta que uno responda mide la lista de candidatos y no la
+disponibilidad. La segunda: **con un cuerpo vacío el chequeo no puede dar otra cosa que
+un 400**, porque la validación corre antes del lookup del modelo. Los tres resultados
+sobre el mismo endpoint dicen cosas distintas y sólo uno dice algo: `{}` da
+`400 Empty instances.` exista el modelo o no; `{"instances":[{}],"parameters":{}}` da
+`404 ... does not have access` sobre un id retirado y `400 No inputs provided` sobre uno
+vivo, que es el que confirma el acceso.
+
+**Del costo, leído y no medido**: la variante fast está entre US$0,10 y US$0,15 por
+segundo según la documentación, o sea del orden de un dólar el clip. **No está verificado
+contra la factura.**
 
 **El chequeo de vestido comercial es un paso y no una nota**, y aplica igual al video
 generado. El dato que lo obliga está medido: **el generador deriva hacia el vestido
-comercial real incluso cuando se le prohíbe explícitamente.** Con la pipa de Nike y las tiras de Adidas prohibidas en el
-prompt, el zapato volvió con un destello lateral curvo incómodamente parecido a una
-pipa; y un fondo de fútbol no pedido salió con una camiseta parecida a la de un club
-conocido, con parche de sponsor en el pecho.
+comercial real incluso cuando se le prohíbe explícitamente.** Con la pipa de Nike y las
+tiras de Adidas prohibidas en el prompt, el zapato volvió con un destello lateral curvo
+incómodamente parecido a una pipa; y un fondo de fútbol no pedido salió con una camiseta
+parecida a la de un club conocido, con parche de sponsor en el pecho.
 
 Así que **cada creativo generado pasa un chequeo humano de vestido comercial antes de ir
 a pantalla**, y eso entra en la definición de done de la task que produce los creativos,
@@ -468,9 +494,9 @@ zapatos.
 
 El anexo completo está en
 `/home/nicolas/Develop/ai_workspace/cto-assistant/sandbox/contenido-demo-hls-ig-2026-09-09.md`,
-y se sostiene entero, incluida la fila que dice que Veo e Imagen no están disponibles en
-este proyecto: se volvió a medir con el instrumento correcto y sigue siendo así (D9).
-Lo que decide esta fase:
+y se sostiene salvo en una fila de su tabla de herramientas: la que dice que no hay
+generación de video en este proyecto. Sí la hay, con los ids vigentes de Veo, y está
+medido corriéndolo (D9). Todo lo demás del anexo queda en pie. Lo que decide esta fase:
 
 **El contenido está decidido: partido amateur limpio de derechos, más los gráficos de
 transmisión hechos por nosotros.** Es decisión de Nicolás y coincide con lo que la
@@ -515,7 +541,7 @@ Lo que hay que producir, con el esfuerzo medido del anexo:
 | --- | --- | --- |
 | identidad de las tres marcas de fantasía | 2–3 h | wordmarks SVG a mano, imágenes generadas, más el chequeo de vestido comercial |
 | creativos no lineales: L, banner, panel | 2–3 h | SVG a 1920×1080 exacto con alfa real |
-| spot lineal de 10 s | ~2 h | imágenes generadas más `zoompan`/`xfade` y una cama musical CC0 |
+| spot lineal de 10 s | ~2 h | imagen generada, movida con Veo, y la tipografía compuesta encima con SVG; más una cama musical CC0, porque Veo sale sin audio |
 | paquete de canal ficticio: bug, scorebug, reloj, equipos inventados | 2–3 h | SVG quemado sobre el plate |
 | armado del plate: buscar, recortar, concatenar a ~90 s, ambiente | ~4 h | los clips gratis son de 7 a 20 s, así que hay que concatenar varios |
 | **total** | **≈ 1,5 a 2 días de una persona** | |
@@ -544,14 +570,16 @@ Es la mitad del valor del diseño, porque una demo "linda" es un pozo sin fondo.
   juego en lugar de serla.
 - **No se filma nada y no se compra stock.** La decisión de contenido lo resuelve, y
   con eso la pregunta del tier de Storyblocks se cae sola.
-- **El metraje del programa no se genera**, y hoy tampoco se podría: no hay acceso a
-  Veo en este proyecto (D9). Pero el argumento no es la falta de acceso, y conviene que
-  no lo sea, porque el acceso se puede pedir: es que un minuto pide seis o más
-  generaciones de 8 a 10 segundos que tienen que coincidir en estadio, camiseta, luz y
-  posición de cámara, y los modelos de hoy no sostienen eso. Y el público del HLS
-  Interest Group mira video por trabajo: un miembro que se deforma, una pelota que
-  desaparece o una textura de tribuna que repta se van a notar, y van a distraer del
-  mecanismo que se está mostrando. El plate se construye.
+- **El metraje del programa no se genera**, y esto es lo primero que hay que leer junto
+  con D9: **el generador de video está disponible y aun así el plate se construye.** El
+  argumento nunca fue la falta de acceso, así que tenerlo no lo mueve. Es que un minuto
+  pide seis o más generaciones de 8 a 10 segundos que tengan que coincidir en estadio,
+  camiseta, luz y posición de cámara, y los modelos de hoy no sostienen eso. Y el
+  público del HLS Interest Group mira video por trabajo: un miembro que se deforma, una
+  pelota que desaparece o una textura de tribuna que repta se van a notar, y van a
+  distraer del mecanismo que se está mostrando. Un spot de producto de ocho segundos con
+  un solo movimiento de cámara es el caso donde el modelo hoy es bueno; un minuto de
+  partido con continuidad no lo es.
 - **No hay diseño responsive completo.** El objetivo es la grabación y la sala. El
   celular tiene que ser **usable** —Nicolás prueba desde ahí, y es de donde salieron las
   fases 04 y 07— y no tiene una versión propia.
