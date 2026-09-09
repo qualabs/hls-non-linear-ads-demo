@@ -3440,3 +3440,53 @@ tienen.
 
 **El validador** quedó con los dos rojos conocidos y ninguno nuevo: las fases 02 y
 04 sin `DESIGN.md`, que es una decisión pendiente y no se toca acá.
+
+## 2026-09-09 — T-01 de la fase 06: el audio sale de un índice único, y el índice compara por identidad
+
+El audio de la composición pasó a salir de un índice de foco único. Con nadie
+enfocado suena la mezcla que declara el asset list, que es lo que ya sonaba; con
+un elemento enfocado suena ése a 100 y todo el resto va a 0, el primario
+incluido. El gesto que mueve el índice es de la T-02, así que **en pantalla no
+cambió nada**: lo que esta task entrega es la aritmética, y por eso su
+verificación es un test unitario y no una mirada.
+
+**Cinco lugares de `lib/renderer.js`, y uno solo es código nuevo de decisión.**
+`effectiveVolumeOf(element, focused)` es la función pura exportada al lado de
+`volumeOf`, con tres ramas: lo declarado cuando nadie tiene el foco, 1 en el que
+lo tiene, 0 en el resto. `applyAudio` cambió en una línea, la que decía
+`volumeOf(element)`. El índice es un `let focused = null` junto al resto del
+estado del renderer. Y las tres salidas del ADR 0029 que no dependen del gesto
+quedaron donde el evento ya estaba: la segunda y la cuarta en `clear()`, que en
+el código son el mismo evento, y la tercera en el `ended` del nodo.
+
+**`video.muted` no se toca en ningún camino**, que era el invariante de riesgo: el
+foco escribe `volume`, y `muted` sólo en los nodos del aviso, donde `applyAudio`
+ya lo escribía. La compuerta `const off = video.muted` sigue apareciendo una sola
+vez y es la misma línea de código. Con la composición muteada, tocar una caja
+cambia qué se escucharía y no se escucha nada, que es lo correcto: el switch
+decide si suena algo y el foco decide qué, de lo que suena.
+
+**El índice compara por identidad del elemento y no por `id`, y es una decisión
+de la task.** Un `id` nombra un elemento adentro de un layout, y la composición
+puede tener elementos de más de un layout a la vez —dos experiencias solapadas
+ponen avisos de dos breaks distintos encima del programa—, así que la identidad
+es la única comparación que no depende de que dos layouts no hayan coincidido en
+un nombre. Los elementos son estables porque `activeAt` filtra un array guardado
+(`lib/signalling.js:519`), que es de lo que ya depende `bringAhead` para
+reconocer un nodo precargado.
+
+**El foco se suelta en todo `ended` y no sólo en los que la advertencia
+reporta**, que es la otra decisión. Un nodo que terminó está callado igual, y el
+foco quedándose ahí deja la composición entera en 0: audio faltante, que es la
+falla que no se ve en un cuadro.
+
+**Verificación, nivel `bajo` y sin campaña de mutación.** `npm test` da **49 en
+verde**, los 46 de antes más los tres casos de la función pura, sin un solo valor
+esperado de los que ya existían tocado; `npm run check` sigue en
+`both seams hold.`. El test nuevo es `test/audio-focus.test.js` y no una sección
+adentro de `program-ranges-and-volume.test.js`, cuyo encabezado declara ser la
+medición de la T-06 de otra fase. Sus datos son los asset lists reales de
+`test/fixtures/`, y eso es lo que hace que los casos sean los que importan: el
+Quad, donde una regla que le diera al elemento tocado el nivel del primario no
+cambiaría nada audible, y el cornerOverlay, donde quedarían dos bandas sonoras a
+la vez.
