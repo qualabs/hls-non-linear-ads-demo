@@ -3598,3 +3598,59 @@ tiene línea en el índice de fases del `PROJECT.md`.** Está abierta desde el
 estaba abierta, así que no es un olvido de una vez: el índice se está escribiendo
 al cerrar y no al abrir, y el comentario del propio índice dice que la línea de
 una fase abierta dice para qué está.
+
+## 2026-09-09 — T-02 de la fase 06: el gesto mueve el foco, y el anillo se va cuando el asset se termina
+
+Con el cromo arriba, un toque sobre una caja de video del aviso enfoca esa caja:
+suena ésa sola —el primario callado incluido—, un anillo amarillo aparece encima,
+y tocarla de nuevo devuelve la mezcla que declara el asset list. Con el cromo
+abajo el toque no cambia el audio: muestra el cromo, que es lo que ya hace
+cualquier control de este player. El índice que la T-01 dejó en `null` ahora se
+mueve, así que la fase se ve y se escucha en pantalla.
+
+**La asimetría salió del predicado y no de dos reglas.** El gesto pregunta *¿está
+el cromo arriba?* y nada más, así que con mouse —donde el hover ya lo subió— **un
+click actúa de una**, y con dedo el primer toque muestra y el segundo actúa. No
+hay una rama por dispositivo en ninguna parte, y por eso una notebook con pantalla
+táctil no es un tercer caso: la respuesta depende de si el cromo está visible en
+ese momento y no de qué la tocó.
+
+**Cuatro lugares de tres archivos.** El gesto es un `pointerdown` en el nodo,
+agregado en `createNode` adentro de la rama de video, que es la que sólo corren
+las cajas de video del aviso; los punteros se habilitan en `place()`, que sólo
+recorre lo que está en pantalla; `setFocus` mueve el índice, mueve el anillo y
+recalcula la mezcla en un solo lugar, y las dos salidas que la T-01 había escrito
+pasaron a llamarlo. `lib/controls.js` devuelve `up` en su handle y
+`lib/concurrent-hls.js` le pasa al renderer `chromeUp: () => controls?.up() ??
+false`. Lo que cruza es un booleano: el renderer no lee ninguna clase del cromo y
+el cromo no aprende qué es una caja de aviso.
+
+**El anillo se va en el `ended` del nodo, y es la decisión de la task.** El
+ADR 0030 dice que el anillo se va con el nodo, y en dos de las cuatro salidas eso
+es literal porque el nodo se destruye. En la tercera no: un asset que se terminó
+antes que su ventana **se queda en pantalla** con su último cuadro hasta que la
+ventana cierre, así que un anillo que sobreviviera ahí estaría marcando la única
+caja que con seguridad no suena. Por eso el `ended` pasa por `setFocus(null)`,
+que es la misma puerta que las otras tres, y no por una línea propia.
+
+**El invariante de la capa se tocó por primera vez desde que se escribió y quedó
+con su nota**: la capa sigue con `pointerEvents: 'none'` y sigue sin `z-index`, y
+lo que recibe el press es el nodo de adentro, así que no se come ningún click de
+lo que está abajo.
+
+**Verificación, nivel `bajo` y sin campaña de mutación.** `npm test` da **49 en
+verde**, los mismos 49 de la T-01, porque esta task no agrega lógica no visual;
+`npm run check` sigue en `both seams hold.`. Lo demás se miró con el player
+corriendo y el switch de la composición encendido a mano —sin eso el `muted` de
+los nodos del aviso no dice nada—: doce lecturas, todas en verde. El Quad con un
+click de mouse deja `view2` a 100 sin mutear, todo el resto a 0 y el anillo sobre
+esa caja sola; el `cornerOverlay` con un click calla el programa, que es el audio
+doble que la fase existe para resolver; y en el break 5 el nodo precargado de
+`ad2-box` está sobre su caja con `opacity: 0` y `pointer-events: none`, así que un
+click ahí no cambia un solo nivel. El caso táctil se hizo con toques reales por
+CDP: el primero sube el cromo y no toca el audio, el segundo enfoca.
+
+**Y una nota de la corrida y no del código: para que la medición fuera del audio
+audible hubo que apagar el sink del sistema**, porque la verificación honesta pide
+levantar el switch de la composición y eran las cuatro de la mañana. Se restauró
+al terminar.
