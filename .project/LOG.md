@@ -3490,3 +3490,111 @@ medición de la T-06 de otra fase. Sus datos son los asset lists reales de
 Quad, donde una regla que le diera al elemento tocado el nivel del primario no
 cambiaría nada audible, y el cornerOverlay, donde quedarían dos bandas sonoras a
 la vez.
+
+## 2026-09-09 — Fase 05 cerrada: la raíz es la sdk, y el cierre llegó sin decisiones adentro
+
+Las seis tasks en `done` y el informe en
+`phases/05-la-sdk-y-sus-demos/REPORT.md`. La fase se abrió, se diseñó y se
+ejecutó el 2026-09-08 y se cerró al día siguiente.
+
+**Lo que entrega, y las dos cosas son verificables sin opinión.** La raíz es la
+sdk: el `ls` devuelve `lib/`, `dist/`, `test/`, `docs/`, `vendor/`, `demo/`,
+`scripts/`, `server.mjs`, `run.sh`, `package.json` y `README.md`, y ni un archivo
+de la página quedó arriba. Y una demo es una carpeta que se nombra, se levanta y
+se multiplica sin tocar la librería: `./run.sh <demo>` sirve su propia carpeta
+como raíz de documentos con `/dist/` y `/vendor/` de la sdk montados encima
+(ADR 0022), que es lo que dejó los trece asset-lists y los tres scripts de
+contenido byte por byte iguales y la cuenta de rutas de runtime por editar en dos
+`src`.
+
+**Lo que midió la T-06 sobre el resultado entero**: el recorrido de punta a punta
+desde la estructura nueva sin un salto, `video.ended` en 180,03 s; 250 pedidos y
+ninguno con status ≥ 400; 46 tests en verde, los 43 de `test/` —los mismos 43 que
+antes de la fase, con los mismos nombres y las mismas cuentas por archivo— más
+los 3 de la demo; las dos costuras en `both seams hold.`; el grep de
+autosuficiencia en cero; y los cinco breaks mirados en cuadro, con el del break 2
+comparado contra el de la T-03. La mudanza no movió un píxel.
+
+**Nueve commits**: los seis de las tasks (`94677ca`, `e69166b`, `e1ad898`,
+`dbcca8d`, `c9fccad`, `aa89d90`) y tres arreglos que la fase se hizo a sí misma
+—`a797f37` el grep acotado al código, `20923ef` el `status` que decía `planning`
+con las seis tasks hechas, y `4ac7ee6` las cinco citas de
+`test/fixtures/README.md` escritas completas—.
+
+**El cierre no llevó ninguna decisión adentro, y la que llegó se resolvió antes
+de él.** La T-06 dejó dicho que las cinco citas a `.project/` podían escribirse
+completas y lo dejó "para el cierre" porque cambiaba una decisión de la T-01. No
+era una decisión pendiente: el ADR 0023 de esta misma fase ya la había tomado, y
+su título la dice entera. Las citas estaban abreviadas para no disparar un grep
+que buscaba esos nombres en la carpeta entera, ese grep se acotó al código en
+`a797f37`, y con eso la razón de la abreviatura desapareció. Se escribieron
+completas y las cinco resuelven.
+
+**Los cuatro hallazgos que la fase produjo y no arregló**, que son los que tienen
+que sobrevivir al cierre y están en la sección 4 del informe:
+
+- **La definición de done de tres tasks pedía un grep que no podía pasar nunca.**
+  Devuelve quince líneas y las quince están adentro de dos JSON de mediciones:
+  son líneas de consola que el navegador imprimió durante la corrida medida, o
+  sea dato medido, y editarlo falsificaría un registro. Lo encontró la T-01
+  corriendo el grep que su propio done le pedía en lugar de declararlo pasado. Lo
+  que queda abierto no es el grep, es cómo se escribió: **un chequeo que no puede
+  pasar nunca y un chequeo que pasa siempre son el mismo defecto.**
+- **El `..` que uno escribiría nunca disparó el 403, y nunca lo disparó**, porque
+  `new URL()` colapsa los `../` del path antes de que el servidor vea nada y el
+  pedido llega como una ruta abajo de la raíz de documentos: 404 y no 403. El
+  vector real es el percent-encodeado con la barra adentro, `%2e%2e%2f`. La
+  guarda hoy anda, y no la cubre ningún test ni la puede cubrir, porque un test
+  que importara `server.mjs` rompería el ADR 0023: la única red son los cuatro
+  pedidos de la evidencia de la T-02.
+- **El verbo `content` del manifiesto estaba roto desde la T-03 y sacarlo lo
+  arregló de rebote.** La T-04 lo sacó porque nombraba una ruta de una demo, y el
+  dato es que además apuntaba a una ruta que la mudanza ya había movido. Nada en
+  el repositorio chequea que un `script` del manifiesto resuelva a un archivo que
+  existe: el `package.json` no está adentro de la lista de ninguna de las dos
+  costuras.
+- **La etiqueta de consola de `server.mjs` quedó decidida por la T-06 con un
+  criterio que ya estaba en el repositorio sin estar escrito**: la etiqueta nombra
+  a la herramienta que imprime la línea, que es lo que `construir-libreria:` y
+  `verificar-cortes:` ya hacían. Por eso dice `server:`, y por eso costó una
+  decisión en la última task en lugar de resolverse sola.
+
+**Tres correcciones post-ejecución, en la T-01, la T-03 y la T-04, y las tres las
+encontró la T-06.** Es la primera fase del proyecto con más de dos, y leídas como
+medición dicen algo del instrumento y no del `done`: el bloque de la T-06 pide
+explícitamente que lo que encuentre se corrija en la task que lo introdujo, así
+que tres correcciones son la convención funcionando. Dos de las tres son
+documentación y ninguna es código, en el mismo archivo —`test/fixtures/README.md`,
+que ninguna task tenía como entregable después de la T-01—, y la tercera no es
+una corrección sino una decisión que la T-04 devolvió a propósito.
+
+**De los cinco riesgos se materializó uno, el R2, y en una forma adyacente a la
+escrita**: la ruta que se queda vieja apareció dos veces y las dos veces adentro
+de un comentario, no en un `src` ni en una URI. Es el ADR 0022 funcionando mejor
+que el enunciado del riesgo, y el instrumento que lo atrapó fue un chequeo de
+rutas sobre los 36 archivos de texto tracked —12 links y 179 rutas resueltas— y
+no el navegador. El R5 no se materializó: 26 archivos con `git mv`, 25 renombres
+al 100 % y el de `index.html` al 98 %, y `content/.fuentes/` mudado con un `mv`
+sin volver a bajar nada, 660 MB medidos contra los 535 MB que estimaba el riesgo.
+
+**La revisión de documentación cerró trece superficies.** Los dos README y la
+cláusula de procedencia de `docs/` los habían dejado al día las tasks, no el
+cierre; `docs/contrato-senalizacion-renderizado.md` se re-leyó entero y sigue
+describiendo este sistema, porque el delta de la fase es de forma y no de
+comportamiento; `docs/arc42/`, el `CLAUDE.md` del proyecto, `.project/knowledge/`
+y un `INSTALL.md` no existen y este cierre no los crea, con la razón escrita en
+cada caso. Lo único que el cierre escribió es la línea de la fase en el índice del
+`PROJECT.md` y `last_update`. **El `status` del proyecto queda en `ongoing`**: la
+fase 06 está abierta.
+
+**El validador sale en rojo con dos hallazgos y ninguno es de esta fase**: las
+fases 02 y 04 siguen sin `DESIGN.md`. Son los mismos dos que reportó la apertura,
+no se silencian y no se rellenan, y la decisión es de Nicolás. La fase 05 sale
+limpia.
+
+**Y un agujero que el cierre encontró y no le corresponde llenar: la fase 06 no
+tiene línea en el índice de fases del `PROJECT.md`.** Está abierta desde el
+2026-09-08 y el índice no la nombra. Es el mismo agujero que tuvo la 05 mientras
+estaba abierta, así que no es un olvido de una vez: el índice se está escribiendo
+al cerrar y no al abrir, y el comentario del propio índice dice que la línea de
+una fase abierta dice para qué está.

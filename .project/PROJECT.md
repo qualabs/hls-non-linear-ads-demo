@@ -15,7 +15,7 @@ status: ongoing
 type: desarrollo
 owner: nicolas-levy
 started: 2026-09-02
-last_update: 2026-09-08
+last_update: 2026-09-09
 tags: [hls, hls-interstitials, non-linear-ads, svta, apple, hlsjs, avfoundation, demo]
 repo: https://github.com/qualabs/hls-non-linear-ads-demo
 output_pointers:
@@ -550,3 +550,18 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   adentro del cuadro. Su costo es el argumento del atraso, retirado a propósito
   (ADR 0017), que se cambia por uno que se ve en un cuadro solo. Informe en
   `phases/04-refinamiento/REPORT.md`.
+- **05-la-sdk-y-sus-demos**: cerrada con la línea del ADR 0015 movida del código al
+  árbol: la raíz es la sdk y la página vive entera en `demo/compatibility-pair/`,
+  la primera de varias demos. Las dos propiedades que entrega son verificables sin
+  opinión: el `ls` de la raíz no devuelve ni un archivo de la página, y una demo se
+  levanta con `./run.sh <demo>` sirviendo su propia carpeta como raíz de documentos,
+  con `/dist/` y `/vendor/` de la sdk montados encima (ADR 0022), que es lo que dejó
+  los trece asset-lists y los tres scripts de contenido byte por byte iguales. El
+  precio lo pagó la suite: **`test/` sólo lee `test/` y `lib/`** (ADR 0023), con los
+  fixtures copiados una vez y sin chequeo contra el original, y el efecto es que
+  nada de la raíz que no sea `lib/` se puede testear unitariamente, así que
+  `server.mjs` y los dos scripts de la sdk se chequean corriéndolos. El manifiesto
+  pasó a declarar qué es el producto por lo que `files` **no** lista, y el README
+  único de 347 líneas quedó en dos que se leen solos. La mudanza no movió un píxel:
+  180 s de recorrido, 250 pedidos sin uno ≥ 400, 46 tests y las dos costuras.
+  Informe en `phases/05-la-sdk-y-sus-demos/REPORT.md`.

@@ -1,9 +1,9 @@
 ---
 phase: 05-la-sdk-y-sus-demos
 title: "La sdk y sus demos: la raíz es la librería y demo/ es donde se la muestra"
-status: closing
+status: closed
 started: 2026-09-08
-closed: null
+closed: 2026-09-09
 ---
 
 # Fase 05: la sdk y sus demos
