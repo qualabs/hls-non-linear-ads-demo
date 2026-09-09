@@ -3884,3 +3884,42 @@ esta fase y se anota igual, porque cierra el hilo que los informes de la 05 y de
 la 06 dejaron abierto como decisión de Nicolás: quedaron aceptados y no
 silenciados, y el validador los imprime con su razón en cada corrida. La fase 07
 sale limpia y los 36 ADR pasan el chequeo de frontmatter.
+
+## 2026-09-09 — T-01 de la fase 07: la barra se arrastra, y el seek pasó al soltar
+
+Un press en cualquier parte de la barra pone la pelotita ahí y empieza el
+arrastre, la pelotita sigue al puntero, y al soltar el video seekea a donde
+quedó. Un press y release sin mover seekea a ese punto, que es lo que la barra ya
+hacía y **con el mismo número**: 45,0 s medidos contra 45,0 esperados sobre el
+25 % de un programa de 180 s, delta 0. Ése era el riesgo R1 de la fase y es lo
+único que este cambio podía romper.
+
+**Un solo archivo, `lib/controls.js`, y el corte está en una función que se
+partió en dos.** La cuenta de la fracción quedó igual y se llama
+`fractionFromEvent`; escribir `video.currentTime` se mudó a `endScrub`, que es el
+release. El estado es uno, `let scrubbing = null`, la fracción que el puntero
+pide, y `paint()` lo lee en lugar del `currentTime` mientras dura el gesto, con
+lo que el fill, la pelotita y el reloj de la izquierda cuentan lo mismo. Las
+marcas no participan: son el largo y no la posición.
+
+**Cuatro decisiones de la task que su bloque no decidía.** La captura no se
+suelta a mano porque el browser la devuelve sola en el `pointerup` y en el
+`pointercancel`, y lo que sí se agregó es `lostpointercapture`, que es la red del
+caso en que la captura se vaya por abajo: **un scrub que queda abierto deja el
+cromo arriba para siempre**, porque `hide()` no corre mientras existe. Se agregó
+`user-select: none` en la barra, que no estaba en el diseño ni en ningún ADR: es
+un defecto que el arrastre introduce y que antes no podía existir, porque un
+press con mouse que viaja selecciona el texto que cruza y los dos relojes están
+pegados a esa caja; va sobre el elemento del que el arrastre sale y sobre ninguno
+más. El `pointerup` no actúa si no había arrastre. Y la pelotita crece a 2,5
+veces el riel, que son 20 px medidos contra 14 en reposo.
+
+**Verificación, nivel `bajo` y sin campaña de mutación.** `npm test` da **49 en
+verde**, los mismos de antes y sin un valor esperado tocado; `npm run check`
+sigue en `both seams hold.`. Lo demás se miró con el player corriendo, anclado en
+`#player`: `touch-action` pasó de `auto` a `none`; durante el arrastre la
+pelotita va a 40 %, 55 % y 70 % y el `currentTime` **se queda quieto en 45,0** en
+las tres lecturas; al soltar en el 70 % da 126,0 contra 126,0 esperados; un
+arrastre 260 px arriba de la barra sigue vivo y soltado al 85 % y 300 px arriba
+da 153,0 contra 153,0; con el puntero apretado y quieto 4,2 s el cromo sigue
+arriba; y la selección de texto después del arrastre vuelve vacía.

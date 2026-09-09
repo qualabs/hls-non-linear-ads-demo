@@ -1,0 +1,24 @@
+$ npm test
+✔ with no volume in the asset-list the ad comes out silent and the programme does not (0.827619ms)
+✔ the mix of the Quad is the one the asset-list declares, element by element (0.910747ms)
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||` (0.418828ms)
+✔ a volume that is not a number falls back to the element own default, and there are two (0.371141ms)
+ℹ tests 49
+ℹ suites 0
+ℹ pass 49
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 437.301218
+
+$ npm run check
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
+
+$ bash scripts/construir-libreria.sh
+construir-libreria: dist/qualabs-concurrent-hls.js (2663 lines, global QualabsConcurrentHls)
