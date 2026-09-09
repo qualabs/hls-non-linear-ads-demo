@@ -150,6 +150,11 @@ bar itself** and nothing hanging below it; play/pause centred over the
 composition; one audio control at the top right; and fullscreen **of the
 composition**, which is the container and everything in it.
 
+The bar is dragged as well as pressed, and it is one gesture and not two: a press
+anywhere on it takes the dot there, the dot follows the pointer, and **the seek
+happens on the release** — so a press and release without moving seeks where it
+was pressed, and a drag seeks where it was let go (ADR 0032).
+
 What a bar marks is what the player it is attached to plays, and only that. The
 breaks come from the `provider` you hand over (§6), so a bar over your own
 player marks your own breaks and a bar over a second player marks that one's.

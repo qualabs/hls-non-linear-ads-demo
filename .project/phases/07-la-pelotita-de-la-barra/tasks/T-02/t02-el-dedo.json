@@ -1,0 +1,44 @@
+{
+  "la_pagina_scrollea": {
+    "alto": 687,
+    "ventana": 420
+  },
+  "control_arrastre_vertical_fuera_del_player": {
+    "antes": 120,
+    "despues": 265
+  },
+  "cromo_arriba": {
+    "toques_que_costo": 1,
+    "arriba": true
+  },
+  "arrastre_con_el_dedo": {
+    "currentTime_antes": 0,
+    "scrollY_antes": 267,
+    "lecturas": [
+      {
+        "paso": 4,
+        "scrollY": 267,
+        "px_arriba_de_la_barra": 80,
+        "knobLeft": "45%",
+        "knob_px": 20,
+        "currentTime": 0,
+        "cromo": true
+      },
+      {
+        "paso": 8,
+        "scrollY": 267,
+        "px_arriba_de_la_barra": 160,
+        "knobLeft": "60%",
+        "knob_px": 20,
+        "currentTime": 0,
+        "cromo": true
+      }
+    ],
+    "quieto_durante": true,
+    "no_scrolleo": true,
+    "scrollY_despues": 267,
+    "currentTime_al_soltar": 108.0,
+    "esperado_s": 108.0,
+    "cromo_al_soltar": true
+  }
+}

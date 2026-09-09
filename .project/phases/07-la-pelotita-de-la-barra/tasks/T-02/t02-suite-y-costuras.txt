@@ -1,0 +1,17 @@
+$ npm test
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||` (0.548646ms)
+✔ a volume that is not a number falls back to the element own default, and there are two (0.369728ms)
+ℹ tests 49
+ℹ suites 0
+ℹ pass 49
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 240.331583
+
+$ npm run check
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.

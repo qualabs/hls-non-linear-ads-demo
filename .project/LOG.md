@@ -3923,3 +3923,49 @@ las tres lecturas; al soltar en el 70 % da 126,0 contra 126,0 esperados; un
 arrastre 260 px arriba de la barra sigue vivo y soltado al 85 % y 300 px arriba
 da 153,0 contra 153,0; con el puntero apretado y quieto 4,2 s el cromo sigue
 arriba; y la selección de texto después del arrastre vuelve vacía.
+
+## 2026-09-09 — T-02 de la fase 07: los dos punteros, y el chequeo del scroll que no podía fallar
+
+Los seis casos corridos con mouse y con el dedo sobre el resultado de la T-01,
+todos en verde, y anclados en `#player`. Con mouse: la pelotita al 50 % con el
+programa en 90 s de 180; un click suelto al 10 % da 18,0 contra 18,0 esperados;
+un arrastre del 10 % al 60 % deja el `currentTime` quieto en 18,0 y al soltar da
+108,0; apretado y llevado 400 px arriba de la barra sigue vivo y soltado al 20 %
+da 36,0; y con el puntero apretado y casi quieto 4,3 s el cromo sigue arriba.
+
+**El caso del scroll necesitó un control, y sin él era un chequeo que no podía
+fallar.** A 420 × 900 la página **no scrollea** —`scrollHeight` 760 contra 760 de
+ventana—, así que "arrastrar no scrolleó" ahí no prueba nada. A 420 × 420 sí
+scrollea, 687 contra 420, y con eso la pregunta tiene respuesta: el mismo
+arrastre vertical **fuera** del player lleva el `scrollY` de 120 a 265, y
+**empezando en la barra** el `scrollY` se queda en 267 a lo largo de 160 px de
+movimiento hacia arriba, con la pelotita yendo a 45 % y 60 %, creciendo a 20 px, y
+el seek al soltar en 108,0 contra 108,0. Es la segunda vez en el proyecto que un
+chequeo escrito de buena fe no podía fallar; la primera fue el grep del hallazgo 1
+de la fase 05.
+
+**Lo que ya andaba, sigue.** Las cinco marcas en el riel en los dos punteros; la
+regla de la fase 04 intacta —con el cromo abajo el primer toque lo sube y no
+cambia el `currentTime`, medido 30 s antes y 30 s después—; y la composición sin
+moverse, con dos cuadros sacados con el Chrome del sistema, que es el que tiene
+los códecs: el break 1 en el 25,3 y el Quad del break 4 en el 100,1 con sus cuatro
+videos, las cinco marcas y la pelotita al 55,6 %.
+
+**La documentación, y una superficie de tres necesitaba algo.**
+`docs/integrating-the-library.md` enumera en su §3 lo que el cromo le da a quien
+integra, y la barra pasó a hacer algo que esa lista no decía: se corrigió con una
+oración que dice el gesto entero. Es la misma forma de hallazgo que el cierre de
+la fase 06 encontró en ese mismo archivo —la lista no era falsa, describía de
+menos—, y esta vez la encontró la task y no el cierre, que era exactamente para lo
+que estaba escrita. El contrato de señalización no dice nada del seek ni del
+gesto: sus seis menciones a la barra son sobre qué se pinta. El README de la demo
+no quedó viejo y el gesto no entra al guion, que es decisión del `PHASE.md`.
+
+`npm test` en 49 verdes y `npm run check` en `both seams hold.`
+
+**Dos notas del harness.** Las coordenadas de la barra se leen justo antes de
+despachar el toque, porque un `currentTime` escrito a mano reacomoda la página y
+un rect viejo manda el toque a donde la barra ya no está —se ve como "el gesto no
+anda" y es el harness, y costó tres corridas—. Y antes de arrastrar hay que
+verificar que el cromo esté arriba en lugar de suponerlo: el arrastre de control
+pasa por la imagen y de paso lo baja.
