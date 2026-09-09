@@ -1,7 +1,7 @@
 ---
 phase: 06-foco-de-audio
 title: "El foco de audio: un toque sobre una caja y esa caja es la que suena"
-status: planning
+status: closing
 started: 2026-09-08
 closed: null
 ---
