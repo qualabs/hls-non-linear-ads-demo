@@ -452,6 +452,16 @@ la sección 4 del informe de cierre de la fase 01
   100. Está implementado así y anotado en el ADR 0014; falta que David
   confirme que contó al programa entre "the other ones". Es una línea de asset
   list, y se escucha en cámara.
+- **De qué es la barra de progreso**, cuando hay varios videos en pantalla: del
+  pane de la demo o de la página. David lo dijo mirando el multiview, así que lo
+  más probable es que sea de la composición. Y hay una tensión que conviene mirar
+  de frente: si el pane de fábrica conserva sus controles nativos, la asimetría
+  visual **refuerza** el argumento de compatibilidad, porque un cliente de mercado
+  se ve como un cliente de mercado.
+- **Cómo se entrega la librería a quien la integra**: un `<script src>` o módulos
+  ES. "Alguien que no somos nosotros la agrega a su página" suena a script tag, y
+  hoy el repo **no tiene bundler**, que es una propiedad deliberada de la fase 01.
+  Romperla es una decisión, no un detalle de empaquetado.
 - **La dirección del skin y la marca**, que David no vio. Lo más cercano que
   dijo es "make it look a little more Pro", sobre el marcador de los breaks.
   Ver la sección 4 del informe de cierre de la fase 02.
@@ -565,3 +575,10 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   único de 347 líneas quedó en dos que se leen solos. La mudanza no movió un píxel:
   180 s de recorrido, 250 pedidos sin uno ≥ 400, 46 tests y las dos costuras.
   Informe en `phases/05-la-sdk-y-sus-demos/REPORT.md`.
+- **06-foco-de-audio**: abierta para que quien mira elija cuál de las fuentes que
+  hay en pantalla escucha. Con los controles del player visibles, un toque sobre
+  una caja del aviso deja sonando esa caja sola y todo el resto de la composición
+  en silencio, el programa incluido; al soltarse, vuelve la mezcla que declara el
+  asset list. Generaliza el ADR 0014 en vez de supersederlo: el asset list declara
+  el **estado inicial** y quien mira lo sobrescribe mientras el aviso está en
+  pantalla. Es un POC y son tres tasks.
