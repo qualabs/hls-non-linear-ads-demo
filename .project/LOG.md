@@ -4227,3 +4227,40 @@ servicio pago no. La T-05 para y pregunta antes de encadenar una tercera.
 `validar-proyecto.py` en **GREEN** con 46 ADR y 8 fases, con las dos excepciones
 históricas de siempre impresas con su razón. El `status` de la fase queda en
 `in-progress`.
+
+## 2026-09-09 — T-01 de la fase 08: el freno de la composición, medido, y el riesgo R6 cerrado a favor
+
+**`video.pause()` sobre el contenido primario congela también las cajas de video del
+aviso, y `video.play()` las reanuda.** Así que el freno del guion es un `pause` y la
+librería no se toca (ADR 0040): la fase no crece, que es lo que este riesgo decidía.
+
+Medido en Chrome real por el skill `playwright`, en una pestaña propia, contra la demo
+actual servida en el 8080 —que quedó arriba y **no se tocó: la task no modificó un solo
+archivo del repositorio**—, con las consultas ancladas en `#player` porque la página
+tiene dos players con el mismo cromo.
+
+**El Quad es el caso que valía medir**, porque dibuja tres cajas de video a la vez. El
+primario pasa de 100,959 a pausado en 100,959, y las tres cajas de 5,958 corriendo a
+5,959 pausadas, **y a 5,959 otra vez 1600 ms después**. Con el `play`, 7,169 · 7,168 ·
+7,167 y las tres corriendo. Lo mismo con una caja en el aviso a cuadro entero del break
+mezclado y en su `cornerOverlay`. La corrida se repitió entera y dio los mismos números.
+
+**Las dos lecturas separadas por 1600 ms son el instrumento y no un detalle**: distinguen
+"quieto" de "todavía no arrancó", que en una captura se ven igual.
+
+**Y el chequeo trae su control adentro de la misma corrida**, que es lo que el riesgo R7
+de esta fase pide. Este chequeo podría no poder fallar: si los nodos nunca hubieran
+arrancado, `paused` habría dado `true` durante la pausa igual. Lo que lo salva son las
+lecturas de los extremos: antes del `pause` los nodos están en `paused: false` y su
+`currentTime` avanza 1,21 s entre esa lectura y la de después del `play`, sobre ~1200 ms
+de reloj de pared. Los nodos pueden correr y estaban corriendo, así que el cero de avance
+durante la pausa dice algo.
+
+**Tres cosas que quedan escritas para la T-04**: el `play` reanuda cada caja en el mismo
+cuadro donde había quedado, así que no hay que guardar ni restaurar posiciones; el
+`currentTime` del primario tampoco se mueve, así que un beat puede leer la posición
+durante la pausa sin carrera; y el `readyState` se queda en 4 en todos los nodos, así que
+reanudar no paga un rebuffer.
+
+`npm test` en 49 verdes y `npm run check` en `both seams hold.`, sin cambios en el
+repositorio que pudieran haberlos movido.
