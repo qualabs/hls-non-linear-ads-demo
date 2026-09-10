@@ -71,3 +71,20 @@ sobre uno.
   así que el plate a 24 y un creativo a 30 no se pelean.
 - Un creativo con dos fps según cómo se armó sería una cosa de más para recordar, así
   que la L va a 24 también mientras su fondo sea fijo, donde el número es inocuo.
+
+---
+
+## 2026-09-10 — nota: por qué la aceptación de los siete cuadros era legítima
+
+Agregado el mismo día por quien lo midió (`hls-demo`), sobre la última consecuencia
+de arriba, y sin tocar nada de lo que ya decía.
+
+**Ningún test fija el largo del plate en 92 s, y eso se chequeó antes de aceptar la
+diferencia.** Es la condición que hace que aceptarla sea legítimo en lugar de
+conveniente: mientras el número sea una **declaración**, un plate de 91,70 s contra un
+`paradaDura` de 64 s por asset no rompe nada. Si algún test lo hubiera fijado, el
+número habría sido un **contrato** y la decisión tendría que haber sido otra —o
+rellenar, o corregir el contrato— en lugar de aceptar la diferencia.
+
+La alternativa que se descartó era rellenar, y rellenar habría sido inventar cuadros
+para que un número cerrara.

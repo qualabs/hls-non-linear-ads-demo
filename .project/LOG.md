@@ -5207,3 +5207,37 @@ gráfica —la imagen nueva del zapato y la regeneración de la cadena de la L�
 los seis ADR cambia por cómo salga.
 
 Validador en verde: 62 ADR, 10 fases.
+
+## 2026-09-10 — Post-cierre de la fase 10: el dato que faltaba y el hallazgo ya arreglado
+
+Dos notas fechadas, ninguna reescritura.
+
+**El ADR 0059 tenía un hueco que sólo podía llenar quien midió.** La aceptación de que
+la parada quede siete cuadros más corta que lo que `paradaDura` declara era legítima por
+una razón que no estaba escrita: **ningún test fija el largo del plate en 92 s**, y eso
+se chequeó antes de aceptar la diferencia. Mientras el número sea una **declaración** no
+rompe nada; si un test lo hubiera fijado, era un **contrato** y la decisión tendría que
+haber sido otra. Va como nota fechada al pie del ADR, porque un ADR aceptado no se
+reescribe, y la prosa de arriba quedó intacta.
+
+**Y el hallazgo del README de `demo/hydration-break/` ya está arreglado**, en `b19be23`
+de la sesión `hls-demo`, que confirmó los tres puntos antes de tocarlo. El informe de la
+fase 10 lo dice en una nota fechada debajo y no corrigiendo la sección 4: el informe es
+un registro y en su momento el hueco estaba ahí. **Reportar en lugar de arreglar salió
+mejor que arreglar**: el hueco se ve desde afuera, que es la única forma de verlo, y el
+contexto de qué cambió exactamente lo tenía la otra sesión.
+
+Y una devolución que corrige de más y no de menos: la sesión que hizo el trabajo leyó el
+ADR 0062 y dijo que la generalización va más lejos de lo que ella tenía. Había escrito
+que el QR no puede pasar por el generador pensándolo como una regla del QR, y ponerlo
+junto a la tipografía deformada muestra que **son el mismo caso** — el QR es la versión
+extrema porque una tipografía deformada se lee mal y un QR deformado no escanea.
+
+**Viene una decisión nueva y no es una corrección a las seis**, esperando el OK de
+Nicolás: la imagen del producto se genera con el encuadre del aviso, así que el campo
+oscuro es parte de la imagen y no hay borde que enmascarar —el salto máximo en el
+perímetro pasa de 180 a entre 2 y 4 sobre 255, sin ninguna máscara—. Y su segunda mitad,
+que puede ser la que vale: **el generador no acata el tamaño** —pedido al 25 % del ancho
+salió al 44 %, y pedido más fuerte al 55 %— así que la geometría se le saca de las manos
+y la hace un script. Cuando llegue el OK se escribe, y conviene mirar si generaliza al
+ADR 0045 igual que el 0062.
