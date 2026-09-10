@@ -272,6 +272,20 @@ y pregunta.
   dos lugares se despegarían, y el creativo quedaría con tipografía debajo del partido o con
   una franja negra al costado **sin que nada falle** — el criterio del ADR 0044 aplicado a la
   geometría de un creativo.
+- **post-ejecución:** 2026-09-10, Nicolás marcó que el plate no convence: el corte de escena
+  en el segundo del break le hace percibir **que el video principal cambió**, que es la
+  lectura opuesta a lo que la demo demuestra. Se intentó regenerar la parada con Veo desde
+  cuadros del propio clip de juego, en **siete generaciones** y US$ 5,44. **No entró**, y el
+  registro de por qué está en `tasks/T-03/generacion-de-la-parada/`. Lo que funcionó: la
+  continuidad generada es inequívocamente el mismo partido y `lastFrame` converge. Lo que lo
+  frenó: **el generador dibuja marcas comerciales sobre la ropa** —felino, tres tiras,
+  swooshes, un escudo— y el único prompt que las eliminó reinventó la cancha; y el puente de
+  8 s con los dos extremos clavados **inventó una tercera escena en el medio**, peor que el
+  corte que venía a arreglar. El mecanismo que explica los siete: **Veo honra los extremos e
+  inventa el medio**, así que **un puente sólo disuelve un corte entre cosas que ya son casi
+  la misma** — y este corte es entre dos rodajes distintos. **Decisión de Nicolás: no se
+  dibujan marcas de terceros**, que es la misma que ya había tomado al elegir marcas de
+  fantasía. El plate se queda con el corte.
 
 ## T-06 — La página: las secciones, la estética y las marcas
 

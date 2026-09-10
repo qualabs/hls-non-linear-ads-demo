@@ -174,7 +174,17 @@ negocio llegó.
 
 ## Límite de gasto
 
-Autorizado: **`agy` con `generate_image`**, libre, contra la suscripción. **Veo: hasta
-dos generaciones** de hasta 10 s con `veo-3.1-fast-generate-001`, del orden de un dólar
-cada una. **Cualquier otro servicio pago, no.** Si hicieran falta más de dos generaciones
-de Veo, la task para y pregunta en lugar de encadenarlas.
+**2026-09-10 — el límite de Veo quedó levantado.** Nicolás: *"Tenés vía libre para gastar
+acá. La cuenta de Google ya tiene tope."* El techo lo pone la cuenta del lado de Google y
+no una cuenta de generaciones de este archivo, así que **no hace falta pedir autorización
+por tanda**. Lo que sigue en pie es `agy` con `generate_image`, libre contra la
+suscripción, y que **cualquier otro servicio pago sigue siendo no**.
+
+**Y la escalera se mantiene, por método y no por plata**: se genera **una** y se mira antes
+de encadenar el resto. Lo que decide un plan de video generado no es el presupuesto sino si
+la continuación se lee como la misma escena, y eso se sabe con la primera; ocho generadas
+de una vez que derivan son ocho para tirar.
+
+*Lo que decía hasta el 2026-09-09, y por qué cambió: el límite eran dos generaciones de
+Veo, con la task parando a preguntar antes de una tercera. Se levantó cuando la propuesta de
+regenerar la parada del juego pidió ocho, y la cuenta ya tenía tope propio.*

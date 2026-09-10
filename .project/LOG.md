@@ -4663,3 +4663,61 @@ Aplicado como `post-ejecución` en la T-02 —la señalización— y en la T-05 
 con una sección nueva en el `REPORT.md` que cuenta las dos correcciones posteriores al
 cierre. `npm test` en 55 verdes, `npm run check` en `both seams hold.`, `npm run mutaciones`
 con las siete roturas en rojo, y `validar-proyecto.py` en verde con **47 ADR**.
+
+## 2026-09-10 — El plate no convence, se intentó regenerar la parada, y no entró
+
+Nicolás probó la demo y marcó el defecto: *"veo un video de gente jugando un deporte y
+luego un video de cuando se están hidratando, y el problema es que el usuario final
+percibe como que el video principal cambió... queda la duda de si es un interstitial de
+cuando se reemplaza el video primario."* **Es el peor defecto posible para esta demo**,
+porque la propiedad que existe para demostrar es que el primario nunca se reemplaza.
+
+Su propuesta: regenerar la parada con Veo desde cuadros del propio clip de juego, para que
+el plate sea un solo partido de punta a punta. **Se intentó en siete generaciones, US$ 5,44,
+y no entró.** El registro completo, con los siete cuadros y el mecanismo, está en
+`phases/08-.../tasks/T-03/generacion-de-la-parada/`.
+
+**Lo que funcionó, y hay que decirlo primero**: la continuidad generada es inequívocamente
+el mismo partido —misma cancha, misma reja, mismos banderines, misma luz, cámara quieta— y
+los jugadores van y toman agua. Y `lastFrame` converge de verdad: cerrando contra un cuadro
+dado, el último generado queda prácticamente igual a ése. **El mecanismo que Nicolás
+propuso anda.**
+
+**Lo que lo frenó**: el generador **dibuja marcas comerciales sobre la ropa**. Felino
+saltando en tres pecheras; con la pechera resuelta como "un número y nada más", tres tiras
+y un swoosh en una botineta; dándole al buzo y al botín algo que dibujar, regresó con más
+tiras y un escudo; con el modelo no-fast, swooshes en el pecho más grandes y legibles. El
+único prompt que las eliminó —la gente lejos y el primer plano vacío— **reinventó la
+cancha**.
+
+**Y el puente de 8 s con los dos extremos clavados —la idea que salía de que el intento 1
+no fracasara sino que fracasara para el trabajo equivocado— inventó una tercera escena en
+el medio**: jugó el primer plano, cortó a un lugar que no existe en ninguno de los dos
+extremos, y cortó al segundo. Peor que el corte que venía a arreglar.
+
+**El mecanismo que explica los siete de una sola vez**: Veo honra los extremos que se le
+dan e **inventa todo lo que queda en el medio**. Con el medio corto y los dos extremos en
+la misma escena, lo que inventa es plausible y la costura desaparece; **con los extremos en
+escenas distintas, lo del medio es una escena nueva**, y ahí aparecen las marcas y las
+canchas que no existen. De ahí la regla: **un puente sólo puede disolver un corte entre
+cosas que ya son casi la misma**, y este corte es entre dos rodajes distintos — no es un
+problema de prompt ni de modelo.
+
+**La decisión es de Nicolás y es de postura: no se dibujan marcas de terceros.** Es la
+misma que ya había tomado al elegir marcas de fantasía en lugar de reales; dibujar un
+swoosh es esa decisión con otra ropa, en la dirección que ya había descartado. Y la
+distinción que decide no es técnica: comparado al tamaño de entrega, en el clip real las
+prendas están limpias y en el generado las marcas están **dibujadas**. No se hereda una
+marca incidental — se la dibuja. La investigación de contenido trata la ropa deportiva con
+marca como el caso débil, y lo es cuando la filmaste.
+
+**El plate se queda con el corte**, que era la salida declarada de antemano por la regla de
+aceptación: o el puente entra limpio, o se vuelve al corte. No había una tercera donde
+entra con una marca chica.
+
+Y quedan escritos los tres caminos ya descartados, para que nadie los recorra de nuevo: la
+continuidad gráfica **ya estaba** y no alcanzó —el scorebug, el bug y el reloj persisten a
+través del corte y Nicolás percibió el cambio igual—; reordenar los clips de la parada no
+ayuda porque los tres son del mismo rodaje ajeno; y el perfil del autor en Pexels no tiene
+clips hermanos del mismo picado. **La vía que sí lo resolvería es la que la investigación ya
+había nombrado: metraje propio con una parada real, filmado.**

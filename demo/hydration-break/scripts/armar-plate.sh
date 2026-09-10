@@ -38,10 +38,12 @@ COLA=$(awk -v l="$LARGO" -v j="$JUEGO" -v p="$PARADA" 'BEGIN { printf "%s", l - 
 # en la manga—. El recorte lo saca, y se verificó en cuatro momentos del clip.
 # Cambiar estos números sin volver a mirar los cuadros vuelve a meter la marca.
 RECORTE_JUEGO=2688:1512:1152:400
-# El acto 3 usa OTRA ventana del mismo cuadro 4K, así que se lee como otro
-# encuadre de cámara en lugar de como el mismo plano repetido. Sigue afuera del
-# tercio izquierdo, que es lo que importa.
-RECORTE_COLA=2688:1512:700:500
+# LOS DOS ACTOS DE JUEGO COMPARTEN EL RECORTE, y eso es un requisito y no una
+# preferencia: la parada se genera encadenando desde el último cuadro del acto 1
+# hasta el primero del acto 3, así que si los dos actos tuvieran encuadres
+# distintos la cadena no cerraría en los dos extremos. La variación entre el
+# principio y el final la aporta el video generado, que es donde corresponde.
+RECORTE_COLA=$RECORTE_JUEGO
 
 # La parada se arma con tres clips del mismo equipo amateur adulto y se ESTIRA al
 # largo declarado. Estirar es legítimo acá y no lo sería en el juego: son planos
