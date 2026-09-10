@@ -1,5 +1,10 @@
 {
   "skip": "Skip the walkthrough",
+  "opening": [
+    "What if the ad never took the game away?",
+    "The match keeps going. So does the viewer.",
+    "More room to advertise. Fewer reasons to leave."
+  ],
   "beats": [
     {
       "id": "apertura",

@@ -32,6 +32,85 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* THE OPENING.
+ *
+ * A tall section with a sticky panel inside it. The panel does not move while the
+ * section scrolls past, which is what makes it read as pinned; when the section runs
+ * out the panel lets go and the player comes up from underneath. Nothing animates on a
+ * timer -- the only input is `--t`, the fraction of the section already scrolled, and
+ * `js/opening.js` writes it once per frame.
+ *
+ * TWO NUMBERS COME OUT OF `--t` AND EVERYTHING ELSE IS DERIVED FROM THEM.
+ *
+ * `--s` is the shrink, and it finishes early on purpose: the type is nearly the whole
+ * screen at the start and settles into its reading size in the first third, so what is
+ * left of the scroll is the sentences and not the resizing. The size itself is an
+ * interpolation between two clamped sizes, so it stays sane on a phone and on a wall.
+ *
+ * `--u` places each sentence in its own stretch of the scroll: 0 where it takes over, 1
+ * where the next one does. It is fully lit across its whole stretch and the two ends
+ * cross-fade -- one goes out over the same fifteen hundredths the next one comes in, so
+ * the two opacities always add up to one and there is never a moment with nothing on
+ * screen, nor one with two sentences on top of each other. THE FIRST LINE IS LIT AT
+ * `--u = 0` AND NOT ON THE WAY IN, which is what makes the page open with the sentence
+ * already there instead of with a black screen that has to be scrolled to reveal.
+ *
+ * And the last one does not go out: `--salida` turns its exit term off, so it holds
+ * until the player scrolls over it rather than leaving a dead black stretch at the
+ * bottom. Adding a fourth sentence to `story.json` needs no change here -- `--n` is the
+ * count and `:last-child` finds the end. */
+.opening {
+  --t: 0;
+  --n: 3;
+  --s: min(1, calc(var(--t) / 0.34));
+  height: 300vh;
+  background: #000;
+}
+
+.opening__panel {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 0 clamp(20px, 6vw, 110px);
+  background: #000;
+}
+
+.opening__line {
+  --u: calc(var(--t) * var(--n) - var(--i));
+  --salida: 1;
+  grid-area: 1 / 1;
+  margin: 0;
+  /* Se ensancha a medida que se achica, y por eso son dos números y no uno: `ch`
+   * escala con el cuerpo, así que un ancho fijo en `ch` que reparte bien la frase
+   * enorme en dos renglones parte la chica en tres. Medido en pantalla. */
+  max-width: calc(17ch + 7ch * var(--s));
+  text-align: center;
+  text-wrap: balance;
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  /* El factor en `vw` es alto y el techo lo frena: en un escritorio la frase llega al
+   * techo y se queda ahí, y en un teléfono —donde 10,5vw daba 42 px y la frase ocupaba
+   * un séptimo de la pantalla en vez de casi toda— sube a 60 px y llena. Medido a
+   * 400x780 y a 1907 de ancho. */
+  font-size: calc(clamp(44px, 15vw, 148px)
+    + (clamp(24px, 3.3vw, 46px) - clamp(44px, 15vw, 148px)) * var(--s));
+  opacity: calc(
+    clamp(0, calc((var(--u) + 0.15) / 0.15), 1)
+    - clamp(0, calc((var(--u) - 0.85) / 0.15), 1) * var(--salida));
+}
+
+.opening__line:last-child { --salida: 0; }
+
+/* Con movimiento reducido la tipografía no cambia de tamaño: se queda en la chica y las
+ * frases siguen pasando con el scroll, que es la parte que no es movimiento sino
+ * lectura. */
+@media (prefers-reduced-motion: reduce) {
+  .opening { --s: 1; }
+}
+
 /* THE MARK GOES ON A LIGHT PLATE AND NOT ON THE DARK PAGE, and that is the
  * brand's own rule: its wordmark is ink, so on this background half of it
  * disappears, and recolouring somebody's logo is the other way to break it.
@@ -40,6 +119,11 @@ body {
  * It is also the ONLY mark on the page, and it is outside the picture, which is
  * what phase 04 settled: nothing of ours sits over the frame the layout uses. */
 .masthead {
+  /* Negro y no el fondo de la página, porque lo único que hay debajo del masthead es la
+   * apertura: sobre #12141a se veía una franja más clara arriba del negro. Cuando la
+   * apertura termina el masthead ya salió de pantalla, así que este color no se ve en
+   * ningún otro lado. */
+  background: #000;
   display: flex;
   align-items: baseline;
   gap: 18px;
