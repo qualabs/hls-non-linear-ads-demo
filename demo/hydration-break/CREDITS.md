@@ -50,9 +50,10 @@ la tipografía se escribe a mano como SVG.**
 | lineal de 10 s, cuadro entero | NEONECTAR | 8 s generados con Veo `veo-3.1-fast-generate-001` desde una imagen fija | `linear-endcard.svg`, 1920×1080, los 2 s de cierre |
 | overlay de esquina, video | MERIDIA | la misma costa generada | `overlay.svg`, 320×180 |
 
-Las fuentes generadas están versionadas en `graphics/creativos/fuentes/` con su propio
-README, y ahí está escrito por qué: **una generación no se repite**, así que sin ellas la
-demo sólo correría en la máquina donde se generaron.
+**Las imágenes generadas están versionadas** en `graphics/creativos/fuentes/`, y **el
+video no**: el repositorio no carga video, y lo que carga en su lugar es la receta —los
+prompts, el modelo, la región y el método— que `scripts/setup-content.sh` ejecuta. Las
+razones de cada línea de esos prompts están en el README de esa carpeta.
 
 **El chequeo de vestido comercial se hizo pieza por pieza y está en la evidencia de la
 T-05**, porque está medido que el generador deriva hacia marcas reales aunque se le

@@ -8,3 +8,10 @@ node_modules/
 # on every start, exactly like the signalled playlist, so a copy in git could
 # only be a stale one.
 dist/
+
+# El video generado. No va en git por decisión de Nicolás, y la razón es del
+# repositorio y no del archivo: subir video es pesado y no aporta. Lo que sí va es
+# la receta para volver a generarlo, con los prompts exactos, en
+# demo/hydration-break/graphics/creativos/fuentes/README.md. Las imágenes generadas
+# sí se quedan: son livianas.
+*.mp4
