@@ -11,14 +11,33 @@ Nothing here is a compositing pass over a recording.
 
 ## Run it
 
+**The repository carries no video** — not the match footage and not the generated spot. It
+carries where each one comes from and the prompt that makes it, so there is one step to run
+once before the demo will start:
+
+```bash
+./demo/hydration-break/scripts/setup-content.sh
+```
+
+It downloads the match clips and generates the ten-second linear spot with Vertex AI. **It
+needs your own Google Cloud configured and it spends on your account**, which is why it is
+a step of its own and not something `run.sh` does behind your back. If something is missing
+it says which thing, before doing any work.
+
+The generated video does not have to come out identical to the one recorded here — with a
+generative model there is no such thing. What matters is that the prompt is the right one,
+and why it says what it says is written in
+[`graphics/creativos/fuentes/README.md`](graphics/creativos/fuentes/README.md). The
+generated **images** are in the repository: they are light.
+
+Then, and from then on:
+
 ```bash
 ./run.sh hydration-break
 ```
 
-Nothing else is needed: it downloads the match clips if they are not there, assembles the
-plate, burns the channel package over it, composes the four ad creatives, writes the
-signalled playlist, builds the library, and serves this folder.
-
+That assembles the plate, burns the channel package over it, composes the four ad
+creatives, writes the signalled playlist, builds the library, and serves this folder.
 `PORT` picks the port when 8080 is taken:
 
 ```bash
@@ -74,6 +93,7 @@ plate.json          where the stoppage starts, and how long it lasts (ADR 0044)
 story/story.json    the walkthrough: what is said and when
 signalling/         the asset-list of the break
 graphics/           the channel package and the typography of the creatives, as SVG
+graphics/creativos/fuentes/   the generated images, and the prompts that make them
 ```
 
 **Two of them are where you edit, and neither is code.** `story/story.json` is the text of
