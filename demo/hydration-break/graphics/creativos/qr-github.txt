@@ -1,0 +1,47 @@
+# El QR del aviso de la L, como matriz de modulos: '#' es negro y '.' es blanco.
+#
+# A DONDE APUNTA, y no puede quedar solo en la imagen: un QR que no lleva a ningun
+# lado es una mentira en una demo que se muestra a ingenieros, y alguien lo escanea.
+# Este lleva al repositorio de este mismo proyecto.
+#
+#   https://github.com/qualabs/hls-non-linear-ads-demo
+#
+# COMO SE REGENERA si esa URL cambia. Con una herramienta descartable, para que el
+# repo no gane una dependencia por una imagen que se hace una vez:
+#
+#   uv run --with qrcode python3 -c "import qrcode;q=qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_M,border=0);q.add_data('<URL>');q.make(fit=True);print('\n'.join(''.join('#' if c else '.' for c in f) for f in q.get_matrix()))"
+#
+# Correccion de errores M: aguanta que se ensucie hasta un 15 % del codigo.
+#######...##......#..##...#######
+#.....#.#.#.###..#..##....#.....#
+#.###.#.##.#.#.####.###...#.###.#
+#.###.#.#.##...#.....##...#.###.#
+#.###.#..##.#..#..#..#.#..#.###.#
+#.....#...#..#..#.#.##..#.#.....#
+#######.#.#.#.#.#.#.#.#.#.#######
+........###...#..................
+#.....#.#.####.#.#..#....##..###.
+#.#.........#.##..##.###....###..
+.#..#.#.#.##...#..#.###.##..#.##.
+#.#.##.##..##.#.......#.##.######
+#...####....###.#####...#.##.....
+###..#..#.##..#.##..##.#..##.#.##
+##..###..#.#.##....#..#..####..#.
+#..#.#.....##..#..##..#.##.#..#.#
+#...#.#...#..#...#.##.#.##.##...#
+######.##...#########..#..#..##.#
+..###.#.....####...#.#.#####.##.#
+#.#.##..##.###.######....#..###.#
+########.##.....#..#..#.##.###.##
+####...#.####...#.#.#.##.#.###...
+#.#..######.#..##.#.#....#...###.
+#.#.##..##.###.....##.#..##.###.#
+##.##.#..#..##.##...#...######.##
+........###.####..##...##...#.#.#
+#######...##..###.#.#####.#.#.##.
+#.....#..###.#.##......##...#####
+#.###.#...##.###..##..#.######.##
+#.###.#..###.#..#..###.###.###.##
+#.###.#...#...#.#.##...#.#.######
+#.....#..###...##.#.#.#....####..
+#######.#....##.##.#..#.#.##...#.
