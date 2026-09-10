@@ -54,6 +54,7 @@ PLATE=${1:?el mp4 del plate}
 
 JUEGO=$(node -e 'process.stdout.write(String(require("./plate.json").paradaEn))')
 PARADA=$(node -e 'process.stdout.write(String(require("./plate.json").paradaDura))')
+DISOLVENCIA=$(node -e 'process.stdout.write(String(require("./plate.json").disolvenciaDeVuelta || 0))')
 FPS=$(ffprobe -v error -select_streams v:0 -show_entries stream=r_frame_rate -of csv=p=0 "$PLATE" | awk -F/ '{printf "%d", $1/$2}')
 
 TMP=$(mktemp -d "${TMPDIR:-/dev/shm}/verificar-plate-XXXXXX")
@@ -66,9 +67,10 @@ ffmpeg -v error -i "$PLATE" \
   -vf "format=rgb24,tblend=all_mode=difference,format=gray,signalstats,metadata=print:file=-" \
   -f null - 2>/dev/null | grep YAVG | sed 's/.*YAVG=//' | nl -v1 -ba > "$TMP/serie.txt"
 
-FPS="$FPS" JUEGO="$JUEGO" PARADA="$PARADA" node -e '
+FPS="$FPS" JUEGO="$JUEGO" PARADA="$PARADA" DISOLVENCIA="$DISOLVENCIA" node -e '
   const fs = require("fs");
   const fps = +process.env.FPS, juego = +process.env.JUEGO, parada = +process.env.PARADA;
+  const disolvencia = +process.env.DISOLVENCIA || 0;
   const val = new Map(fs.readFileSync(process.argv[1], "utf8").trim().split("\n")
     .map((l) => l.trim().split(/\s+/)).map(([n, v]) => [+n, +v]));
 
@@ -82,20 +84,24 @@ FPS="$FPS" JUEGO="$JUEGO" PARADA="$PARADA" node -e '
     bordes.push([cursor, `eslabón ${String(k - 1).padStart(2, "0")} -> ${String(k).padStart(2, "0")}`]);
     cursor += largoEslabon;
   }
-  bordes.push([cursor, "parada -> acto 3"]);
+  // La vuelta al juego entra con una disolvencia, así que no es un cuadro sino un
+  // tramo: se mide el PICO de la transición y no el salto de un par. Sin disolvencia
+  // declarada, el pico de un tramo de un cuadro es el mismo salto de siempre.
+  bordes.push([cursor - disolvencia, `parada -> acto 3${disolvencia ? ` (disolvencia de ${disolvencia})` : ""}`, disolvencia]);
 
   const mediana = (a) => { const b = [...a].sort((x, y) => x - y); return b[b.length >> 1]; };
   let peor = 0;
-  console.log("costura              cuadro    salto   vecindario   razón");
-  for (const [n, nombre] of bordes) {
-    const v = val.get(n);
-    if (v === undefined) { console.log(`${nombre.padEnd(20)} ${String(n).padStart(6)}   (fuera del plate)`); continue; }
+  console.log("costura                      cuadro    salto   vecindario   razón");
+  for (const [n, nombre, tramo = 0] of bordes) {
+    if (!val.has(n)) { console.log(`${nombre.padEnd(28)} ${String(n).padStart(6)}   (fuera del plate)`); continue; }
+    let v = val.get(n);
+    for (let k = n; k <= n + tramo + 1; k++) if (val.has(k)) v = Math.max(v, val.get(k));
     const vec = [];
-    for (let k = n - 12; k <= n + 12; k++) if (k !== n && val.has(k)) vec.push(val.get(k));
+    for (let k = n - 30; k <= n + tramo + 32; k++) if ((k < n - 1 || k > n + tramo + 2) && val.has(k)) vec.push(val.get(k));
     const m = mediana(vec), r = v / m;
     peor = Math.max(peor, r);
     const marca = r >= 3 ? "  <== MIRALA" : r >= 2 ? "  <-- alta" : "";
-    console.log(`${nombre.padEnd(20)} ${String(n).padStart(6)} ${v.toFixed(2).padStart(8)} ${m.toFixed(2).padStart(12)}   ${r.toFixed(2)}x${marca}`);
+    console.log(`${nombre.padEnd(28)} ${String(n).padStart(6)} ${v.toFixed(2).padStart(8)} ${m.toFixed(2).padStart(12)}   ${r.toFixed(2)}x${marca}`);
   }
   const todos = [...val.values()];
   console.log(`\nmediana del plate entero: ${mediana(todos).toFixed(2)}   máximo: ${Math.max(...todos).toFixed(2)}`);
