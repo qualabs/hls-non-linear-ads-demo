@@ -1,9 +1,9 @@
 ---
 phase: 09-las-transiciones-de-la-composicion
 title: "Las transiciones de la composición"
-status: in-progress
+status: closed
 started: 2026-09-10
-closed: null
+closed: 2026-09-10
 ---
 
 # Fase 09: las transiciones de la composición
