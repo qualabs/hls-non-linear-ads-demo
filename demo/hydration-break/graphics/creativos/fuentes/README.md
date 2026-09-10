@@ -6,7 +6,7 @@ arriba.
 
 | archivo | qué es | proporción pedida | qué salió |
 | --- | --- | --- | --- |
-| `kalto-shoe.jpg` | la zapatilla de KALTO | `3:2` | 1264×848 |
+| `kalto-shoe.jpg` | la zapatilla de KALTO | `16:9` | 1376×768 |
 | `meridia-coast.jpg` | la costa de MERIDIA | `16:9` | 1376×768 |
 | `neonectar-panel.jpg` | el panel de NEONECTAR, que es la **entrada** del spot de video | `16:9` | 1376×768 |
 
@@ -31,14 +31,47 @@ Antigravity y no contra una tarjeta. Elegís una proporción, nunca un tamaño e
 > of any real company. Invent an original visual identity. If you find yourself reaching
 > for something that looks like a brand you know, change it.*
 
-**`kalto-shoe`**, proporción `3:2`:
+**`kalto-shoe`**, proporción `16:9`:
 
-> *A single running shoe, three-quarter view, floating slightly above a seamless studio
-> surface, dramatic single-source lighting from the upper left, deep shadow. The shoe is
-> charcoal grey with a single continuous accent in warm amber running along the midsole.
-> NO logo, NO side marking of any kind, NO text anywhere on the shoe or in the image.
-> Clean, cool background, plenty of empty space to the right of the shoe. Photographic,
-> sharp, commercial product photography.*
+> *A single charcoal grey knit running shoe, three-quarter view, with its toe pointing to
+> the right. THE SHOE IS SMALL AND IT SITS IN THE BOTTOM LEFT CORNER. It fits entirely
+> inside the lower left quarter of the picture and does not cross the horizontal middle of
+> the frame nor the vertical middle of the frame: everything above the middle and
+> everything to the right of the middle is empty. The whole right half of the frame and the
+> whole top half of the frame are unbroken darkness with nothing in them at all. The
+> darkness is one single deep near black that continues from just around the shoe out to
+> all four edges of the picture, with no surface underneath the shoe, no horizon line, no
+> wall, no floor, no reflection and no cast shadow anywhere. The only lit thing in the
+> picture is the shoe itself, picked out by a soft light coming from the upper left; the
+> darkness around it and behind it does not brighten in any direction. The shoe is charcoal
+> grey throughout, including a DARK CHARCOAL midsole and a DARK outsole: nothing on the
+> shoe is white or pale. The single exception is one continuous accent line in warm amber
+> running along the midsole. There is no logo, no side marking, no lettering and no numbers
+> anywhere on the shoe or anywhere in the image. Photographic, sharp, commercial product
+> photography.*
+
+**Y este prompt es largo por una razón, no por prolijidad.** La versión anterior pedía la
+zapatilla *"floating slightly above a seamless studio surface"* en `3:2`, y esa imagen se
+usaba adentro de un aviso `16:9`: traía su propio piso de estudio, de otro tono que el
+campo del aviso, así que el creativo tenía que **desvanecerle el borde con una máscara**.
+Durante un día entero se arregló la máscara —primero de un lado, después con una elipse—
+cuando el problema era que hiciera falta una máscara.
+
+**La imagen se genera con el encuadre del aviso y entonces no hay borde que ocultar**: el
+campo oscuro es parte de la imagen. Medido sobre el perímetro del cuadro, sin ninguna
+máscara, el salto de luminancia máximo es de **2 a 4 sobre 255**, contra los 180 que llegó
+a tener el velo del creativo.
+
+Lo que se paga: **esta imagen es de este aviso y no se reusa en otra caja.** Es el
+intercambio, y es el correcto para una pieza que se compone una sola vez.
+
+**El tamaño del zapato NO se le pide al generador**, y eso está medido: pedido al 25 % del
+ancho volvió al 44 %, y pedido más fuerte —que no cruce ni la mitad horizontal ni la
+vertical— volvió al 55 %. **El modelo no obedece un número.** `l-capas.sh` coloca la imagen
+a escala sobre un campo del mismo negro que ella trae, y así el zapato mide exactamente los
+264 px que la plantilla pide y el borde de la colocación no se ve, porque es negro contra
+el mismo negro (medido en 0 y 1 sobre 255). Es el reparto del ADR 0045 un paso más allá: al
+generador se le pide lo que sólo él puede hacer, y la geometría la hace un script.
 
 **`meridia-coast`**, proporción `16:9`:
 

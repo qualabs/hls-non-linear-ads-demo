@@ -41,29 +41,20 @@ DEST="$DEST" G="$G" node -e '
   const T = Math.round(720 * (100 - bottom) / 100); // donde arranca la banda inferior
   const TH = 720 - T;
 
-  // LA CAJA DEL ZAPATO ADENTRO DE LA FOTO, medida por energía de borde sobre
-  // `kalto-shoe.jpg` (1264x848). Es lo que permite colocar el ZAPATO y no la foto: la
-  // versión anterior colocaba la foto con constantes y el zapato terminaba con el 55 %
-  // de su alto fuera del cuadro.
-  const Z = { x: 218, y: 171, w: 623, h: 604, W: 1264, H: 848 };
+  // LA CAJA DEL ZAPATO ADENTRO DE LA IMAGEN, medida por luminancia contra el campo.
+  // Es lo que permite colocar el ZAPATO y no la imagen. Si se regenera la imagen del
+  // producto, este rectángulo se vuelve a medir: es el único número de este bloque que
+  // no se deriva de otro.
+  const Z = { x: 90, y: 326, w: 752, h: 360, W: 1376, H: 768 };
+  const CAMPO = "#010101";      // el negro que la imagen trae, medido en sus cinco esquinas
+  const ANCHO_ZAPATO = 264;     // lo que la plantilla pide para el codo
 
-  // Coloca la foto para que el zapato entre en (zx,zy) con alto zh, y calcula la
-  // elipse de la máscara: llega al borde MÁS LEJANO de la foto en cada eje, con la
-  // meseta cubriendo el zapato entero.
-  const colocar = (zx, zy, zh) => {
-    const s = zh / Z.h;
-    const FW = Z.W * s, FH = Z.H * s, FX = zx - Z.x * s, FY = zy - Z.y * s;
-    const zw = Z.w * s, cx = zx + zw / 2, cy = zy + zh / 2;
-    const rx = Math.max(cx - FX, FX + FW - cx), ry = Math.max(cy - FY, FY + FH - cy);
-    const ky = rx / ry;
-    const meseta = Math.min(0.9, Math.max((zw / 2) / rx, ((zh / 2) * ky) / rx) + 0.03);
-    return { FX: +FX.toFixed(1), FY: +FY.toFixed(1), FW: +FW.toFixed(1), FH: +FH.toFixed(1),
-      cx: Math.round(cx), cy: Math.round(cy), rx: Math.round(rx), ky: +ky.toFixed(4),
-      meseta: +meseta.toFixed(3), zw: Math.round(zw), zh: Math.round(zh), der: Math.round(zx + zw) };
-  };
-  // EL ZAPATO EN EL CODO: el área contigua más grande que la L tiene, y la única forma
-  // de darle superficie al producto sin achicar el partido.
-  const z = colocar(30, 450, 256);
+  // LA IMAGEN SE COLOCA A ESCALA CONTRA EL BORDE INFERIOR IZQUIERDO, sobre un campo del
+  // mismo negro que ella trae: el borde de la colocación no puede verse. No hay máscara
+  // y no hace falta, porque la imagen se generó con el encuadre del aviso.
+  const escala = ANCHO_ZAPATO / Z.w;
+  const FW = Math.round(Z.W * escala), FH = Math.round(Z.H * escala), FY = 720 - FH;
+  const ZAPATO_DER = Math.round((Z.x + Z.w) * escala);
 
   // LA FILA DE LA BANDA INFERIOR. Los tres elementos comparten el eje horizontal de la
   // banda, y los centros salen de ese eje en lugar de escribirse a mano.
@@ -76,16 +67,14 @@ DEST="$DEST" G="$G" node -e '
   // porque un script no puede medir texto. Si cambia el cuerpo o el texto, se vuelve a
   // medir: es lo único de este bloque que no se deriva.
   const LEY_ANCHO = 194;
-  const PIE_X = Math.round((z.der + (LEY_X - LEY_ANCHO)) / 2);
+  const PIE_X = Math.round((ZAPATO_DER + (LEY_X - LEY_ANCHO)) / 2);
 
   const comun = { L, T, TH, PCT: left, PERDIDO: Math.round(1280 * (40 - left) / 100) };
 
   const fondo = {
     ...comun,
     FOTO: "file://" + process.cwd() + "/" + process.env.G + "/kalto-shoe.jpg",
-    FX: z.FX, FY: z.FY, FW: z.FW, FH: z.FH,
-    ZCX: z.cx, ZCY: z.cy, ZRX: z.rx, ZKY: z.ky, ZMESETA: z.meseta,
-    HALOX: (z.cx / 1280).toFixed(3), HALOY: (z.cy / 720).toFixed(3)
+    CAMPO, FW, FH, FY
   };
 
   // EL QR SE DIBUJA COMO RECTÁNGULOS Y VIVE EN ESTA CAPA. Pasado por el generador deja
@@ -123,7 +112,8 @@ DEST="$DEST" G="$G" node -e '
   render("l-fondo.svg.tpl", fondo, process.env.DEST + "/l-fondo.svg");
   render("l-tipografia.svg.tpl", tipo, process.env.DEST + "/l-tipografia.svg");
   console.log(`  bandas del ${left}%: izquierda 0..${L}px, inferior ${T}..720px (${TH}px de alto)`);
-  console.log(`  el zapato entero, ${z.zw}x${z.zh} px, en el codo; los tres de la banda inferior sobre el eje y=${EJE}`);
+  console.log(`  la imagen a ${FW}x${FH} contra el borde inferior, sin máscara; el zapato mide ${ANCHO_ZAPATO} px y termina en x=${ZAPATO_DER}`);
+  console.log(`  los tres de la banda inferior sobre el eje y=${EJE}`);
 '
 
 # El fondo va OPACO y la tipografía CON ALFA, y esa diferencia es el punto: el fondo es
