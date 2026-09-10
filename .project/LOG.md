@@ -4895,3 +4895,40 @@ las dos genuinamente no van de este lado de la costura — lo que los comentario
 querían decir era "quien integra la librería" y "un dato que la capa de abajo
 recibe de afuera". Gastar una excepción en prosa deja el chequeo más flojo para
 siempre. Las dos costuras en verde.
+
+## 2026-09-10 — T-02 de la fase 09: R1 medido y a favor, el primario se mueve con tiempo
+
+**El riesgo que decidía el tamaño de la fase salió a favor.** La declaración de la
+transición sobrevive a que `clear()` le borre al primario el atributo `style`
+entero en la misma pasada, porque lo que decide es el estilo posterior al cambio.
+Medido en el navegador sobre la L de la demo técnica: la escala va 1.0000 → 0.9421
+→ 0.7912 → 0.6965 → 0.6442 → 0.6067 → 0.6004 y llega en 45.38 sobre una ventana
+que abre en 45.00, con **28 muestras estrictamente entre los dos extremos**. No
+hace falta la hoja de estilos inyectada que el diseño tenía como alternativa.
+
+**Y la exclusión del aviso a cuadro entero quedó verificada sin una sola rama
+escrita.** Dentro de la ventana del aviso lineal del break mezclado, de 144.05 a
+155.95, el conjunto de escalas distintas del primario es `{ 1 }`: una sola. En los
+dos bordes tampoco se mueve. Lo que sí se mueve es la salida del aviso anterior,
+que devuelve el primario de 0.5 a 1.0 entre 143.62 y 144.00 — dentro de su propia
+ventana y antes de que el lineal abra la suya, que es la forma del ADR 0052 medida
+sobre el caso que más se parece al de la L seguida del lineal en la otra demo.
+
+**El salto que deja `clear()`, con su número: 0,67 % de escala** en el último
+cuadro, porque la transición se corta al borrarse el atributo si el cuadro
+anterior no llegó al final. Era la única consecuencia de que `clear()` no cambie y
+a esa escala es invisible.
+
+`tick()` pasó de dos disparadores de `place()` a tres y sólo el de re-colocar no
+anima; el redimensionado se midió aparte y el rectángulo base cambió en un cuadro
+con la transición en `none`. `clear()` no cambió en una línea, como el diseño
+decía. La entrada de `drawn` del primario ahora lleva su experiencia.
+
+La captura del medio de la transición se hizo **pausando la animación real en su
+`currentTime` 190 de 380** en lugar de hacerla más lenta, así que la imagen es el
+cuadro que de verdad se ve: el primario en escala 0.650843, todavía más grande que
+su caja final y tapando parte de donde van las bandas, que ya están puestas
+debajo. Es el efecto que se pidió.
+
+70 tests y las dos costuras siguen en verde. Los nodos de aviso todavía no
+difuminan: eso es la T-03.

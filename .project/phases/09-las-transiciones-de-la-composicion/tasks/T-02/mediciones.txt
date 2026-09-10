@@ -1,0 +1,82 @@
+Mediciones de la T-02 -- 2026-09-10, demo/compatibility-pair, Chrome del skill
+playwright, muestreo por requestAnimationFrame sobre getComputedStyle(#video).
+La columna de escala es el primer termino de la matriz del transform.
+
+La L de video de esta demo esta senalizada en el segundo 45 y dura 12 s, o sea
+ventana 45.00..57.00. Su primaryContent declara viewport "0 40 40 0", que es el
+60 % del ancho y del alto anclado arriba a la izquierda: escala 0.6.
+
+
+== R1: LA TRANSICION ARRANCA. Entrada de la L, ventana abriendo en 45.00 ==
+
+   t (s)     escala   transition-property   duracion
+   44.968    1.0000   (vacio)               (vacio)
+   45.028    0.9421   transform             380ms
+   45.089    0.7912   transform             380ms
+   45.149    0.6965   transform             380ms
+   45.214    0.6442   transform             380ms
+   45.318    0.6067   transform             380ms
+   45.379    0.6004   transform             380ms   <- llega en 45.38 = 45.00 + 0.380
+   45.429    0.6000   transform             380ms
+
+28 muestras cayeron estrictamente entre 0.605 y 0.995, o sea que interpola y no
+salta. La curva se ve en los numeros: cubre la mayor parte de la distancia en el
+primer tercio y se asienta despacio, que es la curva de salida declarada.
+
+QUE PRUEBA: que la declaracion de la transicion sobrevive a que `clear()` le
+borre el atributo `style` entero en la misma pasada, porque lo que decide es el
+estilo POSTERIOR al cambio. Era el riesgo que decidia el tamano de la fase. No
+hace falta la hoja de estilos inyectada.
+
+
+== La salida de la L, ventana cerrando en 57.00 ==
+
+   t (s)     escala   transition-property
+   56.676    0.6000   transform
+   56.734    0.7646   transform            <- arranco en ~56.62 = 57.00 - 0.380
+   56.788    0.8778   transform
+   56.848    0.9419   transform
+   56.910    0.9762   transform
+   56.969    0.9933   transform
+   57.026    1.0000   (vacio)              <- `clear()` borro el atributo
+
+EL SALTO QUE `clear()` DEJA, MEDIDO: 0.9933 -> 1.0000, o sea 0.67 % de escala en
+el ultimo cuadro. Es el residuo de que la transicion se corta al borrarse el
+atributo si el cuadro anterior no llego al final. Invisible, y era la unica
+consecuencia de que `clear()` no cambie.
+
+
+== La exclusion del aviso a cuadro entero, sin una sola rama escrita ==
+
+El break mezclado del segundo 120: overlay 120..132, doubleBox 132..144,
+LINEAL 144..156, overlay 156..168.
+
+Borde doubleBox -> lineal (144.00):
+   143.605   0.5000    <- la caja del doubleBox
+   143.672   0.6419    <- crece, arranco en ~143.62 = 144.00 - 0.380
+   143.968   0.9981
+   144.026   1.0000    <- termino ANTES de que abra la ventana del lineal
+
+Dentro de la ventana del lineal, de 144.05 a 155.95:
+   el conjunto de escalas distintas es { 1 }.
+   Una sola. El primario no se mueve en ningun momento del aviso a cuadro entero.
+
+Borde lineal -> overlay (156.00):
+   de 155.805 a 156.426 la escala es 1 en todas las muestras. Sin movimiento.
+
+QUE PRUEBA: el ADR 0050. La geometria se anima siempre y el aviso a cuadro
+entero igual no muestra nada, porque su caja es la identidad. No hay
+discriminante escrito para esto.
+
+
+== El redimensionado no anima (ADR 0053) ==
+
+Encogiendo el contenedor 140 px en medio de la L, muestras relativas al instante
+del cambio:
+
+   -21.9 ms   matrix(0.6, 0, 0, 0.6, 0, 0)   transition-property: transform   base 715px
+   +19.6 ms   matrix(0.6, 0, 0, 0.6, 0, 0)   transition-property: none        base 575px
+   +58.9 ms   idem                            none                            575px
+
+El rectangulo base cambio de 715 a 575 en UN cuadro, y en esa pasada la
+propiedad de transicion quedo en `none`. No hubo animacion.
