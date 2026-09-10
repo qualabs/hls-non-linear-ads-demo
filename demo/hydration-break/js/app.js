@@ -11,6 +11,7 @@
 // and `provider.programRanges()` -- and nothing else.
 
 import { runStory } from './story.js';
+import { runOpening } from './opening.js';
 
 // The signalled playlist: the same segments as the plate plus one Date Range,
 // written by scripts/senalizar-contenido.sh on every start. Its START-DATE is
@@ -109,7 +110,13 @@ paint();
 // oversight: somebody who opens this link from an email does not know there is a
 // button, and without the walkthrough the business case is the thing they miss.
 // One state and not two pages -- when it ends, the player is theirs.
-runStory({
+//
+// IT STARTS WHEN THE OPENING ENDS, and that is the one thing the opening changed. The
+// page still never presses play itself: the walkthrough does, when its first card
+// goes. What moved is when the walkthrough is allowed to begin -- from "on load" to
+// "once the reader has scrolled past the sentences" -- so the match does not start
+// behind a screen that is still making the argument for it.
+const arrancarLaCorrida = () => runStory({
   provider: concurrent.provider,
   video,
   card: document.getElementById('card'),
@@ -121,6 +128,25 @@ runStory({
   document.body.dataset.story = 'done';
   video.play().catch(() => {});
 });
+
+// The sentences come out of the same file as the beats, and it is read once here
+// instead of twice: `runStory` takes what it already fetched.
+//
+// AND A BROKEN OPENING CANNOT COST THE DEMO ITS PLAYER, which is the same rule the
+// walkthrough obeys one block up. If the file does not load, the section is hidden and
+// the run starts as it did before.
+fetch('./story/story.json')
+  .then((r) => r.json())
+  .then((story) => runOpening({
+    section: document.getElementById('opening'),
+    lines: story.opening,
+    onDone: arrancarLaCorrida
+  }))
+  .catch((error) => {
+    console.error('[opening] the opening did not load, the run starts as it used to', error);
+    document.getElementById('opening').hidden = true;
+    arrancarLaCorrida();
+  });
 
 /**
  * THE SIGNALLING, SHOWN AS ITSELF, and read off what this player is actually playing

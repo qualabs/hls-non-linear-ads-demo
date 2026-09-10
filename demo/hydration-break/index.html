@@ -66,6 +66,32 @@
   <p class="collab">with the <abbr title="Streaming Video Technology Alliance">SVTA</abbr></p>
 </header>
 
+<!--
+  THE OPENING, and it is the only part of this page that is not about the mechanism.
+
+  Black, one sentence at a time, and the type shrinks as you scroll: the panel is
+  sticky, so it does not move while the page under it does, and when the section runs
+  out the panel lets go and the player comes up from below. That is the whole of the
+  effect -- it looks pinned, but what is changing is the size.
+
+  IT SAYS WHAT THIS IS FOR AND NOT HOW IT WORKS. Advertising that does not take the
+  match away, a viewer who stays, more room to sell without more reason to leave. The
+  how starts one screen down, and the first card of the walkthrough is the one that
+  says what is about to happen on the picture -- so nothing up here repeats it.
+
+  THE WORDS ARE NOT IN THIS FILE. They are in `story/story.json`, next to the beats,
+  for the same reason the beats are (ADR 0038): the copy of this page is edited by
+  whoever is making the argument, and that person should not have to open the markup.
+  `js/opening.js` puts them in and drives `--t`; `css/page.css` does the rest.
+
+  AND THE VIDEO WAITS FOR IT. The page never pressed play on its own -- the walkthrough
+  does, when its opening card goes (ADR 0039). This does not add a gate, it delays the
+  one that was already there.
+-->
+<section class="opening" id="opening" aria-label="Non-linear advertising in HLS">
+  <div class="opening__panel" data-opening-panel></div>
+</section>
+
 <section class="stage" aria-label="The hydration break">
 
   <!--
