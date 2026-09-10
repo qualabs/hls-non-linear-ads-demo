@@ -13,6 +13,7 @@ folder per demo, and each demo tells its own run.
 | demo | what it argues |
 | --- | --- |
 | [`compatibility-pair`](demo/compatibility-pair/README.md) | the same URL on two clients at once: an off-the-shelf hls.js, which schedules the linear Date Range and replaces the content with the ad, next to the same version of hls.js driven by this library, which keeps the content on screen and draws the ad over it. That is the pair (ADR 0007), and what it argues is that this deploys without breaking the clients already in the market |
+| [`hydration-break`](demo/hydration-break/README.md) | why anybody would want this. A minute of stopped play in a football match, with four ads over the live picture instead of a commercial break — and the traditional linear ad third, so the comparison happens inside one minute and one player. What it argues is the business case: the viewer stays watching, so the advertising is seen. The page walks you through it by itself and stops the composition to explain each step, which the library allows without a line of it changing |
 
 ```bash
 ./run.sh <demo>   # with no argument, and through npm start, it is compatibility-pair
