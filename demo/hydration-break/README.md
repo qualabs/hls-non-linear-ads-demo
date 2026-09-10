@@ -52,11 +52,27 @@ sound (ADR 0019).
 
 ## What you will see
 
-The walkthrough **starts by itself**: the player holds still on a card, a line of type says
-what is about to happen, the card goes, and the player carries on so you watch it happen.
-When the ad is about to change it stops again. There is one way out and it is the button
-below the picture — a tap on the player's own controls will not end it (ADR 0042). When
-the last beat is done the player is yours.
+**It opens on black**, with one sentence almost the size of the screen. Scrolling shrinks
+the type and takes you through four of them — the last one names the thing — and only then
+does the picture come up from underneath. The panel is stuck to the top while its section
+scrolls past, so it reads as pinned when what is really changing is the size. The four
+sentences are in `story/story.json`, next to the beats, and adding a fifth needs no code.
+
+The walkthrough **starts when the picture is on screen**: not when the page loads, and not
+when the opening ends either, because a section can finish scrolling with the player still
+below the fold. It waits until sixty per cent of the player is visible. Somebody who stays
+up top reading never starts it, and that is the point rather than a defect — the match
+must not run behind a screen that is still making the argument for it.
+
+Then the player holds still on a card, a line of type says what is about to happen, the
+card goes, and the player carries on so you watch it happen. When the ad is about to change
+it stops again. There is one way out and it is the button below the picture — a tap on the
+player's own controls will not end it (ADR 0042).
+
+When the last beat is done the player is yours, and **the button turns into "play the
+walkthrough again"**, in the same place, because the hand already knows where it is. A demo
+gets shown several times in a row at an event, and reloading would send whoever is
+presenting back to the opening.
 
 The minute is one break with four ads, and the shape of it is **a curve of intrusion**: a
 bottom banner with the match fully visible, the L with the match folded into a corner, the
