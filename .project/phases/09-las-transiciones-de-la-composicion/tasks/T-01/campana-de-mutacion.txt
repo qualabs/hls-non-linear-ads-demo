@@ -1,0 +1,12 @@
+== Campana de mutacion T-01 -- 2026-09-10T16:28:50Z ==
+
+M1  ROJO (3 de 3 tests caidos)  --  el aviso a cuadro entero NO difumina (control de R7: predicado invertido)
+M2  ROJO (1 de 1 tests caidos)  --  la etiqueta es la que escribe la capa de senalizacion
+M3  ROJO (1 de 2 tests caidos)  --  la ventana se lee desde el arranque del AVISO y no del break
+M4  ROJO (2 de 2 tests caidos)  --  el lead viene en milisegundos y la ventana en segundos
+M5  ROJO (2 de 2 tests caidos)  --  la salida es el FINAL de la ventana y no el principio
+M6  ROJO (1 de 1 tests caidos)  --  una experiencia ausente no revienta y cae del lado del efecto
+
+Las seis roturas quedaron ROJAS. El archivo esta restaurado.
+Verificacion de restauracion:
+  renderer.js identico al original

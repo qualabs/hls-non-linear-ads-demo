@@ -4848,3 +4848,50 @@ fase 08. `docs/contrato-senalizacion-renderizado.md` **no cambia**: la superfici
 entre las dos capas queda igual y el discriminante sale de lo que el contrato ya
 declara (ADR 0050). Lo que cambia es un párrafo en
 `docs/integrating-the-library.md`, que es la T-04.
+
+## 2026-09-10 — T-01 de la fase 09: el discriminante y la agenda, en tres funciones puras
+
+`lib/renderer.js` gana tres duraciones y dos curvas como constantes exportadas, la
+etiqueta del aviso a cuadro entero, y tres funciones puras: `fadesInAndOut`,
+`remainingIn` e `isLeaving`. Ninguna función existente cambió y ninguna firma se
+movió. De 56 tests a **70, 0 fallos**, con `test/transition-schedule.test.js`.
+
+**El fixture que carga el peso es `asset-list-mezclado.json`**, un break de cuatro
+avisos cuyo tercero es a cuadro entero: es donde una regla escrita sobre el break
+—o sobre el identificador de la señalización, que todos los avisos de un break
+comparten— pasa todos los demás fixtures y falla ése. Es la regla 6 del contrato
+apareciendo por segunda vez en el proyecto.
+
+**Campaña de mutación: seis roturas, una por regla, cada una corriendo sólo los
+tests de esa regla. Las seis rojas**, y el archivo verificado idéntico al original
+después. El control de R7 es la primera: el discriminante contra el predicado
+invertido a propósito, tres de tres tests caídos, así que pueden fallar. Una cayó
+en uno de sus dos tests y eso es información: el fixture cuya ventana arranca en 0
+no puede detectar que se saque el `startTime`, que es la razón por la que existe
+el test del aviso que arranca en 24.
+
+**El chequeo contra fuente independiente confirmó con números la afirmación sobre
+la que se apoya la fase.** Sobre el asset list real del break de hidratación
+—`DURATION` 16 + 16 + 8 + 24, o sea ventanas 0..16, 16..32, 32..40 y 40..64— la L
+termina en 32.00, el primario empieza a crecer en 31.62 y el aviso a cuadro entero
+arranca en 32.00: **la salida entra completa adentro de la ventana de la L**, con
+0,38 s de esa ventana todavía abiertos. El número dice que el tiempo alcanza; que
+se vea bien lo dice la T-05.
+
+**Dos cosas aparecieron al medir.**
+
+El test del umbral exacto **no podía pasar**, y no por lógica: con la ventana en
+segundos y el lead en milisegundos, `12 - 0.38` deja un resto de
+0,3800000000000008. El instante exacto del borde no es representable y ningún
+cuadro de un bucle a 60 Hz cae ahí, así que el test afirma los dos lados y deja de
+afirmar el borde. Fijarlo habría sido fijar un artefacto de la aritmética, que es
+la forma de R7 al revés: un test que no puede fallar es tan malo como uno que
+afirma algo que no importa.
+
+Y **`npm run check` se puso rojo dos veces, por dos comentarios míos**: la palabra
+"demo" (ADR 0015) y "asset-list" (ADR 0003) en prosa nueva de `lib/renderer.js`.
+Las dos veces el arreglo fue la palabra y no una excepción en el script, porque
+las dos genuinamente no van de este lado de la costura — lo que los comentarios
+querían decir era "quien integra la librería" y "un dato que la capa de abajo
+recibe de afuera". Gastar una excepción en prosa deja el chequeo más flojo para
+siempre. Las dos costuras en verde.
