@@ -4771,3 +4771,80 @@ la única coordenada del paquete que la elige la librería y no el diseño.
 Verificado en pantalla sobre el plate real: t=12 s tanteador y pelota en juego; t=15 s
 `HYDRATION BREAK` y los jugadores caminando a tomar agua. Tres segundos de distancia, un cambio
 de gráfico, ningún corte. 56 tests verdes, los cuatro chequeos verdes, las diez roturas rojas.
+
+## 2026-09-10 — Fase 09 abierta y en diseño: las transiciones, y viven en `lib/`
+
+Nicolás pidió que la composición deje de cambiar de golpe, y lo pidió como trabajo
+de la sdk: **la L ya está puesta y el primario se achica sobre ella**, así que se
+lee como que el contenido ya estaba abajo y se destapa; el banner y las imágenes
+entran y salen con opacidad; y el aviso a cuadro entero no lleva ningún efecto,
+porque ahí el corte brusco es lo correcto. Va fijo en la librería y no como algo
+que cada demo prenda.
+
+Es fase nueva y no un parche en la 08 porque la 08 lo prohíbe por escrito: *"la
+librería no cambia... si la página necesita algo que la sdk no da, eso es un
+hallazgo para reportar y no un cambio para hacer acá"* (ADR 0040). Éste es el caso
+que ese ADR anticipó.
+
+El diseño está en `phases/09-las-transiciones-de-la-composicion/DESIGN.md`, con
+diez decisiones para levantar en la generación. Lo que contestó la pregunta que
+decidía la fase —cómo distingue la librería una L de un aviso a cuadro entero— es
+que **el discriminante ya existe y la superficie pública no cambia en nada**. La
+geometría no necesita ni una rama: el aviso a cuadro entero declara el primario a
+`viewport: '0 0 0 0'`, así que `movePrimary` calcula la identidad y una transición
+sobre el `transform` interpola entre dos geometrías idénticas. El difuminado sí
+necesita un bit, y es `type === 'linear'`, que es una etiqueta de este contrato y
+no un campo que alguien escriba en un asset list.
+
+Dos hallazgos que no son trabajo de esta fase. **La salida de la L no se ve en
+`demo/hydration-break/`**: el aviso a cuadro entero entra pegado al final de la L
+y tapa al primario mientras crece de vuelta, así que la mitad de salida del efecto
+no aparece en esa demo — sí en `demo/compatibility-pair`, donde cada break trae un
+aviso solo, y ahí es donde la fase verifica. Y **el primario sí se compone en el
+aviso a cuadro entero** (`lib/signalling.js:214`): lo que apaga el efecto no es que
+el primario falte, es que su caja es la identidad.
+
+La fase queda en etapa 1. No hay `PHASE.md` ni `TASKS.md`: se generan cuando
+Nicolás dé el OK al diseño.
+
+## 2026-09-10 — Fase 09 generada: la transición se paga con el tiempo del aviso
+
+Nicolás dio el OK al diseño con una corrección que cayó justo sobre la salida:
+*"la entrada y salida de las cosas debe ocupar el tiempo definido para que estas
+publicidades se muestren en pantalla, entonces debería verse sí."*
+
+**La corrección hizo el mecanismo más chico y no más grande, y eso se verificó en
+el código antes de generar.** La forma anterior era un cambio de ciclo de vida:
+`clear()` dejaba de destruir y pasaba a retirar, con el `detach` postergado, un
+temporizador de limpieza, punteros apagados sobre un nodo invisible y una guarda
+para el caso de que empezara otro break en el medio. Con la transición **adentro**
+de la ventana, mientras corre el nodo está vivo por derecho propio y el backplate
+también, así que el problema desaparece en lugar de resolverse: `clear()` no cambia
+en una línea, y tres de los riesgos que la forma anterior traía se fueron con el
+mecanismo. Queda una agenda —cuánto falta para que la ventana cierre, que es la
+misma cuenta de `renderer.js:330`— y un tercer disparador de `place()`.
+
+Lo que aparece a cambio es un campo: el contenido primario entra a `drawn` sin su
+experiencia (`renderer.js:383`), así que no había de dónde leer su ventana.
+`warnIfCut` ya se protege de que no esté.
+
+**Y el hallazgo de la etapa 1 se disolvió sin que nadie toque un asset list.** Los
+últimos 380 ms de la L siguen siendo tiempo de la L, así que el aviso a cuadro
+entero todavía no arrancó y la salida se ve. Queda por mirarlo en pantalla, que es
+la T-05: las dos demos autoran la L distinto —dos tiras encima en la técnica, un
+backplate debajo en la del break de hidratación (ADR 0047)— así que bajo el mismo
+mecanismo las dos salidas se ven distinto y las dos son correctas.
+
+La generación produjo `PHASE.md` en `in-progress`, `TASKS.md` con cinco tasks y
+seis ADRs, del **0050** al **0055**. El mapeo contra las diez decisiones del diseño:
+el 0050 se llevó el discriminante de la geometría, el del difuminado y el límite del
+nodo construido en el momento, porque son la misma decisión mirada desde tres
+lados; el 0052 se llevó la agenda de la salida junto con el escritor único y los
+tres disparadores; y la verificación en `demo/compatibility-pair` no es un ADR sino
+alcance, así que quedó en `PHASE.md`.
+
+`docs/arc42/` sigue sin existir y esta fase no lo crea, por la misma razón de la
+fase 08. `docs/contrato-senalizacion-renderizado.md` **no cambia**: la superficie
+entre las dos capas queda igual y el discriminante sale de lo que el contrato ya
+declara (ADR 0050). Lo que cambia es un párrafo en
+`docs/integrating-the-library.md`, que es la T-04.
