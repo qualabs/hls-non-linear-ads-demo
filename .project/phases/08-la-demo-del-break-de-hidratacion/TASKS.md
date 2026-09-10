@@ -25,7 +25,7 @@ y pregunta.
 | T-04 | El guion: anclas, placa, botón, y el freno                     | done    | —    | [tasks/T-04/](tasks/T-04/) |
 | T-05 | Los creativos de las tres marcas de fantasía                   | done    | —    | [tasks/T-05/](tasks/T-05/) |
 | T-06 | La página: las secciones, la estética y las marcas             | done    | —    | [tasks/T-06/](tasks/T-06/) |
-| T-07 | El suite de la demo, y el control de su chequeo negativo        | pending | —    | —        |
+| T-07 | El suite de la demo, y el control de su chequeo negativo        | done    | —    | [tasks/T-07/](tasks/T-07/) |
 | T-08 | La documentación: el README de la demo, la fila de la raíz      | pending | —    | —        |
 
 ---

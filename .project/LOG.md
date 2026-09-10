@@ -4493,3 +4493,41 @@ celular existe para agarrar, y no era gusto: scrollear de costado es la única c
 página no puede hacer nunca.
 
 `npm test` en 49 verdes y `npm run check` en `both seams hold.`
+
+## 2026-09-09 — T-07 de la fase 08: el suite de la demo, y las siete roturas que dieron rojo
+
+La demo nueva tiene su propio suite adentro de su carpeta, que es lo que el ADR 0023 deja
+como única forma. `npm test` pasó de 49 a **55 verdes**.
+
+**Cuatro chequeos**, y el primero es el que hace que el ADR 0037 sea una propiedad y no
+una intención: toda ancla del guion cae en un break y en un aviso que existen, **y el beat
+frena antes de lo que anuncia**. La segunda mitad no es un extra — un `lead` negativo o un
+ancla al aviso equivocado resuelven perfecto y ponen la placa tarde, que es el mismo
+defecto con otra cara. Los otros tres: el break arranca en el `paradaEn` declarado y la
+parada cabe adentro del plate (ADR 0044); el minuto declara sus tres formas —cuatro
+avisos, uno sin bloque de layout y tercero, uno de imagen fija— (ADR 0043 y 0046); y cada
+`uri` apunta adentro de `/content/`.
+
+**Lo que hace que el chequeo de anclas pruebe algo: ejecuta `resolveAnchor` de
+`js/story.js`, que es el código de la página y no una reimplementación.** El test arma un
+proveedor desde los archivos declarados y le pasa ese proveedor a la misma función que
+corre en el navegador. Y los tres chequeos son funciones puras en `comprobaciones.js` en
+lugar de asserts sueltos, por la campaña: **un chequeo reimplementado es un chequeo
+distinto que puede pasar donde el original falla**, así que las dos corridas ejecutan el
+mismo código.
+
+**La campaña de mutación: siete roturas, una por regla, cada una corriendo sólo el chequeo
+que la cubre, y las siete dieron ROJO.** `npm run mutaciones`. La que más vale es la del
+`image/jpeg` del banner cambiado por un `.m3u8`: **es una línea que deja la demo andando y
+le saca el argumento** —el aviso se ve, el break pasa, y el minuto deja de mostrar tres
+formas para mostrar dos— y nada excepto ese chequeo lo notaría.
+
+**Y la campaña trae su propio control**: antes de romper nada corre los tres chequeos sobre
+los archivos como están y exige verde. Sin eso, una campaña donde todo da rojo se vería
+igual de exitosa que una correcta, que es la misma trampa un escalón más arriba.
+
+Es la única task `alto` de la fase, y la razón está escrita: es código que corre
+desatendido y cuya falla es un verde que no significa nada, que es exactamente el modo en
+que este proyecto ya se equivocó tres veces.
+
+`npm run check` en `both seams hold.`
