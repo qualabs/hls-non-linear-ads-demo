@@ -63,18 +63,88 @@ trap 'rm -rf "$SEMILLA"' EXIT
 # Y el movimiento se pide chico a propósito: lo que tiene que moverse es el producto,
 # no la cámara. Un empuje de cámara sobre un aviso que ocupa la banda de una L hace que
 # el fondo se salga de la banda, y la banda no se mueve.
-PROMPT='A slow, quiet studio product shot. The charcoal grey knit running shoe floats in
-the air and turns very slowly on its own axis, drifting a few centimetres, as if suspended.
-The dark background stays exactly as dark and as empty as it is: a deep near black field
-with a faint warm glow behind the shoe, no floor, no horizon, no props and no set. The
-camera does not move, pan or zoom. Soft studio light from the upper left, unchanged
-throughout. No cuts, no flashes, no text, no graphics, no captions.
+#
+# TRES ENUNCIADOS QUE LA PRIMERA VERSIÓN NO TENÍA, y cada uno arregla un defecto medido
+# de la primera generación:
+#
+# 1. DÓNDE VIVE EL ZAPATO. El prompt viejo hablaba de la cámara y nunca decía dónde
+#    tenía que estar el producto, así que el zapato se fue al centro del cuadro --que es
+#    donde un producto se pone-- y ahí el partido lo tapa: medido, la región que el
+#    partido cubre se aclaró un 87 %. Ahora dice el cuarto inferior izquierdo, que es
+#    donde el layout lo pone.
+#
+# 2. QUÉ HAY DEBAJO, en lugar de prohibir un piso. Decía "no floor, no horizon, no props
+#    and no set": cuatro prohibiciones seguidas y nada que dibujar en su lugar, y el
+#    modelo llenó el hueco con un piso de estudio con sombra proyectada. La banda
+#    inferior subió de 30,2 a 65,9 de luz media. Es la misma lección que ya está escrita
+#    en `generar-parada.sh` --"liso" es una prohibición con otras palabras-- aplicada
+#    donde faltaba.
+#
+# 6. NO PEDIRLE QUE FLOTE Y DESPUES PEDIRLE QUE NO SE MUEVA. El prompt abría con
+#    "floats in the air ... as if suspended" y tres párrafos después le pedía que se
+#    quedara quieto en su cuarto. Flotar ES irse: el tercer intento salió sin
+#    resplandor, sin piso y moviéndose bien, pero el zapato subía y a la mitad del clip
+#    estaba detrás del partido. Ahora gira en el lugar, sobre una plataforma giratoria
+#    invisible: el movimiento tiene de dónde salir sin que el producto se desplace.
+#
+# 4. QUE EL FONDO NO SE PRENDA. El segundo intento salió sin piso y con el zapato en su
+#    cuarto, pero "a single faint warm amber glow behind the shoe" volvió como un
+#    resplandor naranja que inundó la banda inferior: medido, la esquina donde vive el
+#    zapato pasó de 57,2 a 79,6 de luz media a lo largo del clip. Pedir un resplandor
+#    "tenue" es pedir un resplandor, y el modelo elige cuánto. Ahora no hay resplandor
+#    que pedir: lo único brillante del cuadro es el zapato y su línea ámbar, y el fondo
+#    detrás del producto vale lo mismo que el de las esquinas.
+#
+# 5. QUE EL ZAPATO NO SE AGRANDE NI SE CORRA. En el mismo intento el zapato subía y se
+#    iba a la derecha a lo largo del clip hasta cruzar el borde del partido. Decirle
+#    dónde arranca no alcanzaba: hay que decirle que se queda.
+#
+# 3. QUE SE NOTE QUE ES UN VIDEO. "Turns very slowly" puede salir tan sutil que en
+#    dieciséis segundos parezca una foto, y un movimiento correcto pero imperceptible es
+#    un fracaso igual. Ahora pide un cuarto de vuelta a lo largo del clip, que es un
+#    movimiento que se ve sin buscarlo.
+PROMPT='A slow, quiet studio product shot of a charcoal grey knit running shoe.
+THE SHOE IS HELD STEADY AND TURNS IN PLACE, as if it were standing on an invisible
+turntable: the turntable is what moves, not the shoe. It does not float, it does not
+drift and it does not rise.
+THE SHOE STAYS IN THE LOWER LEFT QUARTER OF THE FRAME for the whole clip. It never rises
+above the middle of the frame and never drifts towards the centre or the right: it hangs
+low and to the left, and turns there.
+IT TURNS VISIBLY. Over the clip the shoe rotates steadily on its own vertical axis by
+about a quarter turn, so that the toe swings and the side of the sole comes into view. It
+is unmistakably moving footage and not a still photograph, but the movement is smooth and
+unhurried, never fast and never jerky.
+BELOW THE SHOE THE DARKNESS SIMPLY CONTINUES. The field fades to pure black towards the
+bottom edge of the frame: there is nothing for the shoe to stand on, no surface, no line
+where a floor would meet a wall, and no shadow falling on anything. The shoe hangs in
+open darkness all the way down.
+THE BACKGROUND IS ONE FLAT NEAR BLACK AND STAYS THAT WAY. The darkness right behind the
+shoe is the same value as the darkness in the corners of the frame: it does not brighten,
+it does not warm up, and it does not spread. THE ONLY BRIGHT THINGS IN THE WHOLE FRAME
+ARE THE SHOE ITSELF AND THE THIN AMBER LINE ON ITS MIDSOLE. No pool of light, no glow
+behind the product, no coloured wash across the lower part of the frame.
+THE SHOE KEEPS ITS SIZE AND ITS PLACE. It does not grow, it does not come closer, and its
+centre stays within about a tenth of the frame of where it starts. It stays in the lower
+left quarter from the first frame to the last. Soft studio light from the upper
+left, unchanged throughout. The camera does not move, pan or zoom. No cuts, no flashes,
+no text, no graphics, no captions.
 The upper of the shoe is a single flat charcoal knit with the mesh weave visible and no
 printed mark of any kind anywhere on it. The only marking on the whole shoe is ONE
 continuous amber line running along the midsole, and nothing else at all: no other
 printing, no emblem, no symbol, no lettering and no numbers. No brand mark anywhere in
 the frame: no swoosh, no three stripes, no leaping cat, no interlocking letters, no crown
 and no sponsor name.'
+
+# EL PROMPT SE CHEQUEA ENTERO ANTES DE MANDARLO, y no es celo. Va entre comillas
+# simples, así que UN APÓSTROFO ADENTRO cierra la cadena y el resto del texto se
+# convierte en comandos de shell. `bash -n` no lo ve, porque las comillas se vuelven a
+# balancear más abajo y el archivo queda sintácticamente válido: el síntoma fue un
+# `width: command not found` y una generación que no se hizo. Se chequea contra la
+# última frase, que es lo que se pierde si la cadena se cortó antes.
+case "$PROMPT" in
+  *"no sponsor name."*) ;;
+  *) echo "el PROMPT se cortó: ¿hay un apóstrofo adentro? no se manda nada" >&2; exit 1;;
+esac
 
 command -v gcloud >/dev/null || { echo "falta gcloud" >&2; exit 1; }
 TOKEN=$(gcloud auth print-access-token 2>/dev/null) || { echo "sin credenciales: gcloud auth login" >&2; exit 1; }

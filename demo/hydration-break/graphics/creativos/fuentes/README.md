@@ -120,11 +120,12 @@ suponer que es la salida buena, y esta nota es lo único que lo evita.
 vecinos, 5,9).
 
 
-## Los tres modos en que una generación sale mal, y los tres pasan el chequeo de costura
+## Los modos en que una generación sale mal, y los tres primeros pasan el chequeo de costura
 
-Aparecieron los tres en un mismo día de generar, y la lista está acá y no en el informe
-de una fase porque es **qué mirar la próxima vez** y no un registro de qué pasó. Ninguno
-se deduce de los otros dos.
+Aparecieron todos en un mismo día de generar, y la lista está acá y no en el informe de
+una fase porque es **qué mirar la próxima vez** y no un registro de qué pasó. Ninguno se
+deduce de los otros. Los tres primeros son del contenido generado y los dos últimos son
+del prompt que lo pide, que es donde se arreglan.
 
 **1. Deriva de escena entre eslabones.** El eslabón se ve perfecto y la costura mide
 bien, pero la cámara --que el prompt manda tener quieta-- se fue caminando a otra parte
@@ -149,7 +150,26 @@ es suave por construcción: la diferencia cuadro a cuadro se queda en el rango s
 punta a punta y la costura con el eslabón anterior mide como las buenas. Lo agarra el
 fondo contra el acto 1 (dio 57) y lo agarra el ojo.
 
-**Los tres pasan `verificar-plate.sh`.** Ese chequeo mide continuidad, no identidad de
+**4. Describir algo es pedirle que lo dibuje, y la intensidad no la elegís vos.** Es la
+otra mitad de la regla 2 y costó una generación aprenderla. El prompt de la L decía
+*"a single faint warm amber glow behind the shoe"* — una descripción, no una
+prohibición, y encima con un adjetivo que la achica. Volvió un resplandor naranja que
+inundó la banda inferior: medido, la esquina donde vive el producto pasó de 57,2 a 79,6
+de luz media a lo largo del clip. **Pedir un resplandor tenue es pedir un resplandor.**
+Lo que funcionó fue no dejar nada que dibujar ahí: el fondo detrás del producto vale lo
+mismo que el de las esquinas, y lo único brillante del cuadro son el producto y su
+acento. Así que la regla completa tiene dos filos: **prohibir sin alternativa deja un
+hueco que el modelo llena, y describir de más le da permiso.**
+
+**5. No le pidas que flote y después que no se mueva.** El mismo prompt abría con
+*"floats in the air ... as if suspended"* y tres párrafos más abajo le pedía al producto
+que se quedara en su cuarto del cuadro. **Flotar es irse**: el clip salió sin
+resplandor, sin piso y moviéndose bien, y aun así el zapato subía hasta quedar detrás
+del contenido primario a mitad de camino. Lo que lo arregló no fue insistir con la
+posición sino **sacarle la contradicción**: gira en el lugar, sobre una plataforma
+giratoria invisible. El movimiento tiene de dónde salir sin que el producto se desplace.
+
+**Los tres primeros pasan `verificar-plate.sh`.** Ese chequeo mide continuidad, no identidad de
 escena. El que compara la escena es `verificar-cadena.sh`, y se corre sobre cada
 eslabón, no sólo cuando uno sospecha: la sospecha es el peor disparador de una medición
 --la del fundido apareció porque veníamos de la deriva, y si hubiera sido el primero
