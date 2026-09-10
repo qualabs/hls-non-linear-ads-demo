@@ -1,9 +1,9 @@
 ---
 phase: 08-la-demo-del-break-de-hidratacion
 title: "La demo del break de hidratación"
-status: closing
+status: closed
 started: 2026-09-09
-closed: null
+closed: 2026-09-09
 ---
 
 # Fase 08: la demo del break de hidratación

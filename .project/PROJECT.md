@@ -588,6 +588,20 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   una salida más —un toque en el primario también suelta el foco—, que entró como
   corrección de la T-02 con el ADR 0031 y sin reabrir la fase. Sus seis ADR son
   todos `scope: project`. Informe en `phases/06-foco-de-audio/REPORT.md`.
+- **08-la-demo-del-break-de-hidratacion**: cerrada con la segunda demo del repositorio, y
+  es la primera fase cuyo entregable es lo que se ve en escenario y no lo que lo hace
+  posible: un minuto de juego detenido con cuatro avisos encima de la imagen en vivo, con
+  el lineal tercero para que la comparación entre las dos formas de poner publicidad entre
+  **adentro de un solo minuto y un solo player** — y con eso esta demo no necesita el par
+  de compatibilidad. Lo que la hace defendible es que **la página no afirma nada que no
+  haya leído**: el guion se ancla a la señalización y no a un cronómetro, así que ni él ni
+  el código contienen un segundo del programa, y la sección que muestra el tag lo lee de la
+  playlist que el player está tocando. **La librería no se tocó**, y eso salió de medir
+  antes de construir: el `pause` del primario congela las tres cajas de video del aviso, así
+  que el freno del guion es una línea. Su hallazgo más caro no es de código: **de seis
+  clips de metraje "libre de uso", cinco no pasaron el chequeo de cuadro** —escudo de
+  federación, marca real, menores—, y el que se usó se salvó con un recorte. Informe en
+  `phases/08-la-demo-del-break-de-hidratacion/REPORT.md`.
 - **07-la-pelotita-de-la-barra**: cerrada con la barra arrastrable, que es lo que
   Nicolás pidió probando la demo: un press en cualquier parte de ella pone la
   pelotita ahí, la pelotita sigue al puntero, y al soltar es el seek. Lo que la

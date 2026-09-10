@@ -4562,3 +4562,63 @@ apertura arriba con el player quieto, y el tag real en la sección de señalizac
 las siete roturas en rojo. El 8080 de Nicolás quedó arriba todo el tiempo.
 
 Las ocho tasks están hechas, así que el `status` del `PHASE.md` pasa a `closing`.
+
+## 2026-09-09 — Fase 08 cerrada: la segunda demo, y la página que no afirma nada que no haya leído
+
+La fase entrega `demo/hydration-break/` y es **la primera del proyecto cuyo entregable es
+lo que se ve en escenario y no lo que lo hace posible**. Un minuto de juego detenido con
+cuatro avisos encima de la imagen en vivo, el lineal tercero, y con eso la comparación
+entre las dos formas de poner publicidad entra **adentro de un solo minuto y un solo
+player** — que es lo que hace que esta demo **no necesite el par de compatibilidad**.
+
+**Diez ADR, del 0037 al 0046**, nueve `phase-08` y uno `project`, el 0045. Ocho tasks,
+todas `done`, ordenadas por riesgo. `npm test` de 49 a **55 verdes**, `npm run check` en
+`both seams hold.`, `npm run mutaciones` con **siete roturas en rojo**, y
+`validar-proyecto.py` en GREEN con 46 ADR y 8 fases.
+
+**Lo que la hace defendible frente a la sala es una propiedad y no una lista de features:
+la página no afirma nada que no haya leído.** El guion se ancla a la señalización y no a
+un cronómetro —ni él ni el código contienen un segundo del programa—, la línea de estado
+dice de qué forma es cada aviso leyendo el contrato, y la sección que muestra el
+`EXT-X-DATERANGE` lo lee de la playlist que el player está tocando.
+
+**Y la librería no se tocó, que no fue disciplina sino consecuencia de medir antes de
+construir.** La T-01 midió que el `pause` del primario congela las tres cajas de video del
+aviso, así que el freno del guion es una línea y el hallazgo del ADR 0040 nunca se disparó.
+En ocho tasks no hubo un solo cambio en `lib/`.
+
+**El hallazgo más caro no es de código: de seis candidatos de metraje "free to use", cinco
+no pasaron el chequeo de cuadro** —escudo de federación con tres tiras, menores, marca
+comercial legible— **y ninguno lo decía en su título**. El que se usó se salvó con un
+recorte verificado en cuatro momentos, escrito en el script como lo que es: no es encuadre,
+es el chequeo.
+
+**El R7 se materializó dos veces adentro de la fase y las dos veces lo agarró un control.**
+En la T-01 el chequeo del freno podría haber dado verde con nodos que nunca arrancaron, y
+lo salvan las lecturas de los extremos; y la campaña de mutación de la T-07 existe entera
+por eso, con su propio control. **Y apareció un riesgo que no estaba escrito: mirar la
+propiedad en lugar de la imagen.** Dos defectos se escondieron detrás de un valor correcto
+—`card.hidden` en `true` con la placa en pantalla, y el creativo perfecto que el empaquetado
+re-recortaba— y los dos los encontró una captura.
+
+**La revisión de documentación encontró una corrección que ninguna task había visto**:
+`docs/integrating-the-library.md` tenía dos reglas de hoja de estilos y le faltaba la que
+esta fase pagó con una hora — si la página dibuja algo encima de la imagen, el contenedor
+necesita `isolation: isolate` **y** el elemento propio tiene que ser hermano y no hijo. Le
+pasa a cualquier integrador, no sólo a esta demo. El contrato entre las dos capas se releyó
+y sigue vigente sin cambios, y que una demo entera se haya construido contra él sin pedirle
+un campo es la mejor evidencia de que describe lo que hay.
+
+**Una decisión de Nicolás revirtió una mía, y el informe la cuenta así.** Yo versioné el
+video generado con el argumento de que una generación no se repite; su criterio es que el
+repositorio no carga video y que **el resultado no tiene que ser idéntico**, así que alcanza
+con el prompt correcto. El mp4 salió de git sin borrarse del disco, las imágenes se quedaron
+—más la de entrada del video, que faltaba—, y `setup-content.sh` es el punto de entrada
+único que baja los clips y genera el spot.
+
+Quedan cuatro hilos abiertos, y el primero es de contenido: **los actos de juego y de parada
+del plate son equipos distintos.** La versión coherente existe y no tiene plano ancho de
+transmisión; se da vuelta con una línea si Nicolás prefiere lo otro.
+
+El `status` del proyecto queda en `ongoing`: quedan la grabación, iOS y la especificación
+de SVTA.

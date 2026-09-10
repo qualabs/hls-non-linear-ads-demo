@@ -168,7 +168,7 @@ drawn inside.
 
 ## 3. What your stylesheet has to say
 
-Two rules and one prohibition.
+Three rules and one prohibition.
 
 **`object-fit: contain` on the media element.** This is the one that bites
 silently. While a layout is on screen the library owns the primary's box; the
@@ -187,6 +187,20 @@ straightforward way. A container of zero height draws nothing.
 You do not have to make it a positioning context — the library sets
 `position: relative` on it if it computes to `static`, and leaves it alone if
 your stylesheet already made it one.
+
+**If your page draws anything over the picture, the container needs
+`isolation: isolate`.** The chrome is drawn at a `z-index` of 2147483000 — a
+number picked so that it wins over whatever page the library is embedded in — and
+that is the right default until the page wants to put something of its own on
+top: a caption, a card, a cover. Without a stacking context of its own on the
+container, that number competes with your page's elements and beats them, so what
+you drew is painted and never seen, with nothing in the console to say why.
+
+`isolation: isolate` on the container keeps the number inside the box. And then
+your own element has to be a **sibling of the container, not a child of it**: a
+child is inside the same stacking context and loses to the chrome all the same.
+The two together are what it takes; either one alone is not enough. Both halves
+were found by looking at the picture, which is the only place this shows.
 
 **Do not style the media element inline.** At the end of every break the library
 calls `removeAttribute('style')` on it, so any inline style you wrote is gone
