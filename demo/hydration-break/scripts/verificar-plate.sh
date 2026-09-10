@@ -31,6 +31,18 @@
 # una sola regla: una costura sana da alrededor de 1x y hasta 2x; de 3x para arriba hay
 # algo que mirar con el ojo.
 #
+# LO QUE ESTE CHEQUEO NO PUEDE VER, y hay que decirlo acá o se usa como si viera todo.
+# Mide la diferencia entre cuadros consecutivos, o sea CONTINUIDAD, y un corte suave la
+# atraviesa sin despeinarse. Pasó: un eslabón volvió con un fundido encadenado adentro
+# --los jugadores duplicados y semitransparentes durante treinta cuadros, y del otro
+# lado del fundido la escena era otra-- y su serie se quedó entre 3,1 y 6,0 de punta a
+# punta, con la costura en 1,9x, igual que las buenas.
+#
+# Lo que agarra eso es comparar el fondo contra el clip filmado, y vive en
+# `verificar-cadena.sh`, que se corre ANTES de armar el plate. Son dos chequeos y no uno
+# porque miden cosas distintas: acá, que no haya saltos; allá, que la escena sea la
+# misma. Ninguno de los dos reemplaza al otro.
+
 # EL VEREDICTO NO ES ESTE NÚMERO. El número dice que las costuras son continuas; si el
 # plate se lee como un solo partido lo dice el ojo. Este script existe para que no haya
 # que mirar 92 segundos cuadro por cuadro, no para reemplazar el mirarlos.
