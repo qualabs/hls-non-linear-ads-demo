@@ -4531,3 +4531,34 @@ desatendido y cuya falla es un verde que no significa nada, que es exactamente e
 que este proyecto ya se equivocó tres veces.
 
 `npm run check` en `both seams hold.`
+
+## 2026-09-09 — T-08 de la fase 08: la documentación, y el status pasa a closing
+
+Tres archivos, con el reparto del ADR 0025: el README de la raíz enruta y cada demo cuenta
+su corrida. `demo/hydration-break/README.md`, una fila nueva en la tabla de `demo/` que
+dice **qué argumenta** esta demo y no qué contiene, y el `CREDITS.md` completado. El README
+de `compatibility-pair` no se tocó y su fila quedó como estaba.
+
+**Cómo se aplicó la política de documentación del repo padre.** El punto de entrada va
+exacto y una sola vez, `./run.sh hydration-break`, y lo demás apunta en lugar de
+transcribir: en particular **el README no reproduce el recorrido del minuto con sus
+segundos**, porque el script de señalización lo imprime en cada arranque y una tabla ahí
+sería una copia que se despega. Tampoco lleva los tamaños de las cajas, ni la cuenta de
+tests, ni los segundos de la parada: cada uno de esos datos tiene otro dueño.
+
+Y las dos cosas que el README dice porque no se pueden averiguar corriendo nada: **encender
+el audio una vez antes de grabar**, con la razón; y **cuáles son los dos archivos que se
+editan y que no son código** —`story/story.json` para el texto del guion y `plate.json`
+para el segundo de la parada—, que es lo que hace que reescribir el guion diez veces no sea
+tocar JavaScript.
+
+**La demo se levantó desde el punto de entrada documentado y con `content/` borrado**, para
+que el README se pruebe y no se declare: bajó los clips, armó el plate, quemó el paquete de
+canal, compuso los cuatro creativos, escribió la playlist, construyó la librería y sirvió
+la carpeta. Después: un rango concurrente, cuatro avisos, 88 s de programa, la placa de
+apertura arriba con el player quieto, y el tag real en la sección de señalización.
+
+`npm test` en 55 verdes, `npm run check` en `both seams hold.`, `npm run mutaciones` con
+las siete roturas en rojo. El 8080 de Nicolás quedó arriba todo el tiempo.
+
+Las ocho tasks están hechas, así que el `status` del `PHASE.md` pasa a `closing`.
