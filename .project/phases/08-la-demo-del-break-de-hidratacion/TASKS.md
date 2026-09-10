@@ -119,6 +119,14 @@ y pregunta.
 - **nivel de verificación:** bajo. Lo que esta task produce se ve en la pantalla y un
   error se corrige barato; la lógica no visual que agrega —el corrimiento declarado y la
   forma del asset list— la asierta la T-07.
+- **post-ejecución:** 2026-09-09, la L estaba declarada como **dos elementos de aviso** —una
+  tira vertical y una horizontal— y sin primario declarado, y **eso no es como la industria
+  autora una L**. Nicolás lo marcó probando la demo. Pasó a ser un solo aviso a cuadro
+  entero en `zDepth` 0 con el **contenido primario declarado como elemento** en `zDepth` 1,
+  encogido al 60 % de los dos ejes —que es lo que mantiene su relación de aspecto— y anclado
+  contra los bordes superior y derecho (ADR 0047). **El contrato lo expresó sin pedirle
+  nada**: su regla 2 ya nombraba esta forma y el renderizador ya la contemplaba por nombre.
+  Evidencia en `tasks/T-05/t05-la-l-autorada-como-la-industria.png`.
 
 ## T-03 — El plate y el paquete de canal ficticio
 
@@ -256,6 +264,14 @@ y pregunta.
 - **nivel de verificación:** bajo. Son imágenes y un spot: el error está en la pantalla.
   El chequeo de vestido comercial no es un test sino un paso de la definición de done, y
   ahí es donde vive el rigor de esta task.
+- **post-ejecución:** 2026-09-09, el creativo de la L era una tira vertical de 512×720 y una
+  horizontal de 1280×288, y con el cambio del ADR 0047 pasó a ser **un solo video a viewport
+  completo** cuyo contenido vive en la banda izquierda y en la inferior. Su SVG es ahora una
+  **plantilla**: dónde terminan las bandas es la caja del primario vista del otro lado, así
+  que `scripts/creativos.sh` lee los números del asset list y los sustituye. Escritos en los
+  dos lugares se despegarían, y el creativo quedaría con tipografía debajo del partido o con
+  una franja negra al costado **sin que nada falle** — el criterio del ADR 0044 aplicado a la
+  geometría de un creativo.
 
 ## T-06 — La página: las secciones, la estética y las marcas
 

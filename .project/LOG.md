@@ -4622,3 +4622,44 @@ transmisión; se da vuelta con una línea si Nicolás prefiere lo otro.
 
 El `status` del proyecto queda en `ongoing`: quedan la grabación, iOS y la especificación
 de SVTA.
+
+## 2026-09-09 — Post-cierre de la fase 08: la L estaba autorada al revés, y el contrato ya tenía la forma correcta
+
+Nicolás probó la demo y marcó que **la L no está hecha como la industria la hace**. Estaba
+declarada como **dos elementos de aviso** —una tira vertical y una horizontal— con el
+primario replegado a una esquina y sin declararse como elemento.
+
+Lo que se hace de verdad, en sus palabras: *"el video principal se encoge y se pone por
+delante, manteniendo su relación de aspecto y quedando unido contra los bordes superior y
+derecho... el aviso es un único video que ocupa todo el viewport completo pero está en el
+fondo... El usuario final percibe una banda con forma de L, pero la realidad es que es un
+video completo de fondo con el principal arriba."*
+
+**Y no es estético: el público del HLS Interest Group es el que sabe cómo se autora una L
+de verdad**, así que una demo que existe para mostrar el mecanismo tenía su propia L hecha
+de la forma que ese público no usa. Es exactamente quien lo iba a notar.
+
+**El dato que más importa del arreglo: el contrato lo expresó sin pedirle nada.** Su regla
+2 ya nombraba la forma —"el aviso está en `zDepth` 0 y el contenido primario en 1, o sea
+que el aviso es el fondo"— y su regla 3 dice que el primario es un elemento del layout como
+cualquier otro. El renderizador ya la contemplaba **por nombre**: posiciona el primario en
+absoluto para que su `z-index` sea comparable, y su comentario dice que sin eso *"the
+layouts where the ad is the background and the picture goes on top of it would come out
+inverted"*. **Rehacer la L fue leer el documento y declarar distinto, con cero cambios en
+`lib/`.**
+
+Queda como **ADR 0047**. La caja del primario es `0 0 40 40` —el 60 % de los dos ejes, que
+es lo que mantiene la relación de aspecto sobre un área de 16:9— y el aviso es un solo
+elemento a cuadro entero en `zDepth` 0.
+
+**Y el creativo cambió de forma con él**: de dos tiras a un video a viewport completo cuyo
+contenido vive en las dos bandas. Su SVG pasó a ser **una plantilla**, porque dónde
+terminan las bandas es la caja del primario vista del otro lado: `scripts/creativos.sh` lee
+esos números del asset list y los sustituye. Escritos en los dos lugares se despegarían y
+el creativo quedaría con tipografía debajo del partido o con una franja negra al costado,
+**sin que nada falle**. Es el criterio del ADR 0044 aplicado a la geometría de un creativo.
+
+Aplicado como `post-ejecución` en la T-02 —la señalización— y en la T-05 —el creativo—, y
+con una sección nueva en el `REPORT.md` que cuenta las dos correcciones posteriores al
+cierre. `npm test` en 55 verdes, `npm run check` en `both seams hold.`, `npm run mutaciones`
+con las siete roturas en rojo, y `validar-proyecto.py` en verde con **47 ADR**.

@@ -39,23 +39,16 @@
             "duration": 16.0,
             "layout": {
               "primaryContent": {
-                "zDepth": 0,
-                "viewport": "0 40 40 0"
+                "zDepth": 1,
+                "viewport": "0 0 40 40"
               },
               "assets": [
                 {
-                  "id": "lBarVertical",
+                  "id": "lBackplate",
                   "type": "application/vnd.apple.mpegurl",
                   "uri": "/content/adL/index.m3u8",
-                  "viewport": "0 0 0 60",
-                  "zDepth": 1
-                },
-                {
-                  "id": "lBarHorizontal",
-                  "type": "application/vnd.apple.mpegurl",
-                  "uri": "/content/adLBarra/index.m3u8",
-                  "viewport": "60 0 0 0",
-                  "zDepth": 2
+                  "viewport": "0 0 0 0",
+                  "zDepth": 0
                 }
               ]
             }

@@ -33,11 +33,16 @@ trap 'rm -rf "$TMP"' EXIT
 
 # `--default-background-color=00000000` es el flag sin el cual todo esto no sirve:
 # sin él el fondo sale blanco en lugar de transparente.
-rasteriza() { # $1 svg, $2 png, $3 ancho, $4 alto
+rasteriza() { # $1 svg relativo a la demo, $2 png, $3 ancho, $4 alto
+  rasteriza_abs "$PWD/$1" "$2" "$3" "$4"
+}
+
+rasteriza_abs() { # $1 svg con ruta absoluta, $2 png, $3 ancho, $4 alto
   google-chrome --headless=new --disable-gpu \
     --default-background-color=00000000 \
+    --allow-file-access-from-files \
     --window-size="$3,$4" \
-    --screenshot="$2" "$PWD/$1" >/dev/null 2>&1
+    --screenshot="$2" "$1" >/dev/null 2>&1
   [ -s "$2" ] || { echo "no se pudo rasterizar $1" >&2; exit 1; }
 }
 
@@ -69,9 +74,44 @@ setsar=1[bg];[bg][1:v]overlay=0:0:format=auto[v]" \
 echo "== el banner, imagen fija (ADR 0046) =="
 fijo "$G/meridia-coast.jpg" graphics/creativos/banner.svg 1280 216 content/adBanner/creative.jpg
 
-echo "== las dos barras de la L, video con la tipografía quieta =="
-movido "$G/kalto-shoe.jpg" graphics/creativos/l-vertical.svg   512  720 16 "$TMP/l-vertical.mp4"
-movido "$G/kalto-shoe.jpg" graphics/creativos/l-horizontal.svg 1280 288 16 "$TMP/l-horizontal.mp4"
+# LA L, Y ES UN SOLO VIDEO A CUADRO ENTERO. Así la autora la industria y no como
+# dos tiras: el aviso ocupa el viewport completo y va al fondo, y el contenido
+# primario se encoge, mantiene su relación de aspecto, se ancla contra los bordes
+# superior y derecho, y va arriba. El espectador percibe una banda en L; lo que hay
+# es un video entero con el partido tapándole el centro.
+#
+# LOS NÚMEROS DE LAS DOS BANDAS SALEN DEL ASSET LIST Y NO DE ACÁ. Son la caja del
+# primario vista del otro lado, así que si vivieran en los dos lados se despegarían
+# y el creativo quedaría con tipografía debajo del partido o con una franja negra al
+# costado -- sin que nada falle. Es el mismo criterio del ADR 0044 aplicado a la
+# geometría de un creativo.
+echo "== la L: un solo backplate, con las bandas leídas del asset list =="
+eval "$(node -e '
+  const lista = require("./signalling/asset-list-hydration-break.json");
+  const capa = lista.ASSETS
+    .map((a) => a["X-AD-CREATIVE-SIGNALING"]?.payload?.[0])
+    .find((p) => p?.type === "squeezebackLShape")?.layout;
+  const [top, right, bottom, left] = capa.primaryContent.viewport.split(/\s+/).map(Number);
+  // La banda izquierda es el inset izquierdo del primario; la inferior, el de abajo.
+  const L = Math.round(1280 * left / 100);
+  const T = Math.round(720 * (100 - bottom) / 100);
+  console.log(`L=${L}; T=${T}`);
+')"
+[ -n "${L:-}" ] && [ -n "${T:-}" ] || { echo "no se pudo leer la caja del primario del asset list" >&2; exit 1; }
+echo "  banda izquierda 0..${L}px, banda inferior ${T}..720px"
+
+sed -e "s/{{L}}/$L/g" -e "s/{{T}}/$T/g" \
+    -e "s/{{TH}}/$((720 - T))/g" \
+    -e "s/{{LM3}}/$((L - 3))/g" \
+    -e "s/{{FY}}/$T/g" -e "s/{{FH}}/$((720 - T))/g" \
+    -e "s/{{ARG1}}/$((T - 150))/g" -e "s/{{ARG2}}/$((T - 114))/g" -e "s/{{ARG3}}/$((T - 78))/g" \
+    -e "s/{{PIE}}/$((T + 58))/g" \
+    -e "s#{{FOTO}}#file://$PWD/$G/kalto-shoe.jpg#g" \
+    graphics/creativos/l-backplate.svg.tpl > "$TMP/l-backplate.svg"
+
+rasteriza_abs "$TMP/l-backplate.svg" "$TMP/l-tipo.png" 1280 720
+ffmpeg -hide_banner -loglevel error -y -loop 1 -t 16 -i "$TMP/l-tipo.png" \
+  -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -r 30 -an "$TMP/l-backplate.mp4"
 
 echo "== el overlay de cierre, video con la tipografía quieta =="
 movido "$G/meridia-coast.jpg" graphics/creativos/overlay.svg 320 180 16 "$TMP/overlay.mp4"
@@ -93,14 +133,9 @@ ffmpeg -hide_banner -loglevel error -y \
 # recorte centrado del ADR 0013 se lleva la mitad de la tipografía. Los dos últimos
 # argumentos son el tamaño, y son los mismos números del SVG.
 echo "== empaquetando los cuatro videos como HLS, cada uno al tamaño de su caja =="
-./scripts/empaquetar-contenido.sh "$TMP/l-vertical.mp4"   content/adL       0 16 "" 512  720
-./scripts/empaquetar-contenido.sh "$TMP/overlay.mp4"      content/adOverlay 0 16 "" 320  180
-./scripts/empaquetar-contenido.sh "$TMP/lineal.mp4"       content/adLinear  0 10 "" 1280 720
-
-# La barra horizontal de la L es el segundo asset de ese layout y necesita su propia
-# carpeta: el asset list la nombra aparte porque las dos barras de la L son dos
-# elementos con dos cajas distintas.
-./scripts/empaquetar-contenido.sh "$TMP/l-horizontal.mp4" content/adLBarra  0 16 "" 1280 288
+./scripts/empaquetar-contenido.sh "$TMP/l-backplate.mp4" content/adL       0 16 "" 1280 720
+./scripts/empaquetar-contenido.sh "$TMP/overlay.mp4"     content/adOverlay 0 16 "" 320  180
+./scripts/empaquetar-contenido.sh "$TMP/lineal.mp4"      content/adLinear  0 10 "" 1280 720
 
 echo
 echo "los cuatro creativos del minuto están en content/"

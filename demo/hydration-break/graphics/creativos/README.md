@@ -21,13 +21,23 @@ salen de los porcentajes del `viewport` de cada elemento en
 | archivo | caja del asset list | píxeles | relación |
 | --- | --- | --- | --- |
 | `banner.svg` | `70 0 0 0` | 1280 × 216 | 5,93 : 1 |
-| `l-vertical.svg` | `0 0 0 60` | 512 × 720 | 0,71 : 1 |
-| `l-horizontal.svg` | `60 0 0 0` | 1280 × 288 | 4,44 : 1 |
+| `l-backplate.svg.tpl` | cuadro entero, al fondo | 1280 × 720 | 16 : 9 |
 | `overlay.svg` | `75 0 0 75` | 320 × 180 | 16 : 9 |
 | `linear-endcard.svg` | cuadro entero | 1920 × 1080 | 16 : 9 |
 
-Los tres primeros números coinciden con los que la T-03 de la fase 01 midió sobre la
-herramienta de SVTA, que es de donde salen las cajas.
+## La L es un solo video a cuadro entero, y no dos tiras
+
+**Así la autora la industria** (ADR 0047): el aviso ocupa el viewport completo y va **al
+fondo**, y el contenido primario se encoge, mantiene su relación de aspecto, se ancla
+contra los bordes superior y derecho, y va **arriba**. El espectador percibe una banda en
+forma de L; lo que hay es un video entero con el partido tapándole el centro y la esquina.
+
+Por eso `l-backplate.svg.tpl` es **una plantilla y no un SVG**: dónde termina la banda
+izquierda y dónde empieza la inferior es **la caja del primario vista del otro lado**, y
+ese número vive en el asset list. `scripts/creativos.sh` lo lee de ahí y lo sustituye. Si
+viviera en los dos lugares se despegaría, y el creativo quedaría con tipografía debajo del
+partido o con una franja negra al costado **sin que nada falle**. Es el criterio del
+ADR 0044 aplicado a la geometría de un creativo.
 
 ## Las tres marcas son de fantasía y no imitan a nadie
 

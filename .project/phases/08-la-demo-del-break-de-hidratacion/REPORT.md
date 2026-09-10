@@ -261,6 +261,38 @@ con preflight que dice qué falta antes de trabajar. El README de `graphics/crea
 pasó a ser la receta: los prompts textuales y **las tres razones del prompt del video**, que
 es la parte que ninguna documentación de Google trae.
 
+## Correcciones posteriores al cierre
+
+La fase quedó cerrada y Nicolás la probó. Lo que encontró está aplicado como
+`post-ejecución` sobre las tasks que corresponden, y las dos correcciones merecen estar acá
+porque cambian lo que el informe dice más arriba.
+
+**El player que la guiada no soltaba** (T-04). Termina la guiada, aprieta play, y el
+programa no arranca. Medidos los cuatro caminos antes de tocar nada, el roto no era el que
+él describió sino **saltear con una placa arriba**: las dos salidas tempranas de `say()`
+dejaban la bandera de la guarda prendida para siempre y desde ahí **todo** `play` se
+cancelaba. El player no estaba muerto, seguía agarrado. La guarda pasó a **vivir lo que vive
+la placa** y hay una sola función que suelta lo que la guiada tomó. Es la segunda vez que
+esa guarda muerde, y la primera vez se arregló el caso —el orden de dos líneas— y no la
+forma; ése es el hallazgo.
+
+**La L estaba autorada al revés** (T-02 y T-05, ADR 0047). Estaba declarada como dos
+elementos de aviso, y la industria la autora como **un aviso a cuadro entero al fondo con el
+contenido primario encogido encima**, manteniendo su relación de aspecto y anclado contra los
+bordes superior y derecho. No es estético: **el público de esta demo es el que sabe cómo se
+hace de verdad**, y una demo que existe para mostrar el mecanismo tenía su propia L
+autorada de la forma que ese público no usa.
+
+**Y el dato que esa corrección deja sobre el proyecto: el contrato lo expresó sin pedirle
+nada.** Su regla 2 ya nombraba la forma —*"el aviso está en `zDepth` 0 y el contenido
+primario en 1, o sea que el aviso es el fondo"*— y el renderizador ya la contemplaba por
+nombre, con un comentario que dice que sin posicionar el primario en absoluto *"the layouts
+where the ad is the background and the picture goes on top of it would come out inverted"*.
+Rehacer la L fue **leer el documento y declarar distinto**, con cero cambios en `lib/`. Eso
+refuerza lo que la sección 8 dice del contrato: que una demo entera se haya construido
+contra él sin pedirle un campo, y que además se haya podido rehacer un layout leyéndolo, es
+la mejor evidencia de que describe lo que hay.
+
 ## Verificación del cierre
 
 `npm test` en **55 verdes**, `npm run check` en `both seams hold.`, `npm run mutaciones` con
