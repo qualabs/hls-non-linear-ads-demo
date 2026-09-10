@@ -1,9 +1,11 @@
 {
   "skip": "Skip the walkthrough",
+  "restart": "Play the walkthrough again",
   "opening": [
     "What if the ad never took the game away?",
     "The match keeps going. So does the viewer.",
-    "More room to advertise. Fewer reasons to leave."
+    "More room to advertise. Fewer reasons to leave.",
+    "Introducing Non-linear Ads for HLS"
   ],
   "beats": [
     {

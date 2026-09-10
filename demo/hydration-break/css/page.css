@@ -42,10 +42,13 @@ body {
  *
  * TWO NUMBERS COME OUT OF `--t` AND EVERYTHING ELSE IS DERIVED FROM THEM.
  *
- * `--s` is the shrink, and it finishes early on purpose: the type is nearly the whole
- * screen at the start and settles into its reading size in the first third, so what is
- * left of the scroll is the sentences and not the resizing. The size itself is an
- * interpolation between two clamped sizes, so it stays sane on a phone and on a wall.
+ * `--s` is the shrink, and it finishes exactly when the first sentence hands over to
+ * the second: the type is nearly the whole screen at the start and has settled into its
+ * reading size by the time there is a second thing to read, so what is left of the
+ * scroll is the sentences and not the resizing. It is written against `--n` and not
+ * against a hand-picked fraction, so adding a sentence does not leave the resizing
+ * bleeding into it. The size itself is an interpolation between two clamped sizes, so
+ * it stays sane on a phone and on a wall.
  *
  * `--u` places each sentence in its own stretch of the scroll: 0 where it takes over, 1
  * where the next one does. It is fully lit across its whole stretch and the two ends
@@ -61,8 +64,12 @@ body {
  * count and `:last-child` finds the end. */
 .opening {
   --t: 0;
-  --n: 3;
-  --s: min(1, calc(var(--t) / 0.34));
+  /* Lo escribe `js/opening.js` con la cantidad real de frases, que vive en
+   * `story.json`. Este valor sólo existe para que la propiedad sea válida antes de que
+   * el JS corra, y en ese instante todavía no hay ninguna frase en el panel: no es una
+   * copia del dato, es un piso. */
+  --n: 1;
+  --s: min(1, calc(var(--t) * var(--n)));
   height: 300vh;
   background: #000;
 }
@@ -102,7 +109,16 @@ body {
     - clamp(0, calc((var(--u) - 0.85) / 0.15), 1) * var(--salida));
 }
 
-.opening__line:last-child { --salida: 0; }
+/* LA ÚLTIMA FRASE ES LA REVELACIÓN Y PESA DISTINTO. Las anteriores construyen la
+ * falta —una pregunta y dos consecuencias— y ninguna nombra la cosa; ésta la nombra, y
+ * es el momento en que el nombre aparece. Así que vuelve a subir de cuerpo en lugar de
+ * quedarse en el tamaño de lectura, y no se apaga: `--salida` en 0 la deja en pie hasta
+ * que el player la tapa, que es lo que hace que el video entre sobre el nombre y no
+ * sobre una pantalla vacía. */
+.opening__line:last-child {
+  --salida: 0;
+  font-size: clamp(30px, 6.2vw, 84px);
+}
 
 /* Con movimiento reducido la tipografía no cambia de tamaño: se queda en la chica y las
  * frases siguen pasando con el scroll, que es la parte que no es movimiento sino
@@ -289,7 +305,11 @@ body {
 
 .skip:hover { color: var(--q-paper-50); border-color: #47505f; }
 
-body[data-story="done"] .skip { display: none; }
+/* Al terminar el recorrido el botón NO se va: pasa a ser el de volver a empezar, y en
+ * el mismo lugar. La demo se muestra varias veces seguidas y quien la presenta no puede
+ * recargar la página, porque recargar lo devuelve a la apertura. El rótulo lo cambia
+ * `app.js` con el texto de `story.json`. */
+body[data-story="done"] .skip { color: var(--q-paper-50); border-color: #47505f; }
 
 /* THE SCROLL BELOW THE PICTURE.
  *

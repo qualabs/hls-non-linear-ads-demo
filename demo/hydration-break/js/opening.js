@@ -15,32 +15,41 @@
 // línea de JS. El soporte todavía no está en todos los navegadores y esta página se
 // muestra en vivo: no es el lugar para estrenar soporte.
 //
-// EL VIDEO ARRANCA CUANDO LA APERTURA TERMINA, y ése es el otro trabajo de este
-// archivo. La página nunca apretó play por su cuenta —lo hace el walkthrough cuando se
-// va su primera card (ADR 0039)—, así que acá no se inventa un gate: se retrasa el que
-// ya existía. `onDone` se llama UNA sola vez.
+// Y ESTE ARCHIVO NO DECIDE CUÁNDO ARRANCA EL VIDEO. Lo decide `app.js`, mirando si la
+// imagen está efectivamente en pantalla. Acá se intentó primero avisar cuando la
+// sección terminaba, y era el disparador equivocado: la sección se termina en el
+// scroll, y lo que importa es el viewport — con la apertura terminada el player todavía
+// puede estar abajo del pliegue, y el recorrido arrancaba contra una pantalla que nadie
+// estaba mirando.
 
 /** Arranca la apertura y avisa cuando termina.
  *
  * @param {object} opciones
  * @param {HTMLElement} opciones.section  la sección alta que contiene el panel sticky
  * @param {string[]} opciones.lines       las frases, en orden (de `story.json`)
- * @param {() => void} opciones.onDone    se llama una vez, cuando la apertura termina
  * @returns {() => void} para soltarlo todo, si alguna vez hace falta
  */
-export function runOpening({ section, lines, onDone }) {
+export function runOpening({ section, lines }) {
   const panel = section.querySelector('[data-opening-panel]');
   if (!panel || !lines?.length) {
-    // Sin panel o sin frases no hay apertura, y eso no puede costarle el video a nadie.
+    // Sin panel o sin frases no hay apertura, y eso no puede costarle el video a nadie:
+    // escondida la sección, el player pasa a ser lo primero de la página y el
+    // observador de `app.js` lo ve solo.
     section.hidden = true;
-    onDone();
     return () => {};
   }
 
   for (const [i, texto] of lines.entries()) {
     const p = document.createElement('p');
     p.className = 'opening__line';
-    p.textContent = texto;
+    // UN GUION NO ES UN LUGAR PARA CORTAR EL RENGLON, y acá se vio: "Introducing
+    // Non-linear Ads for HLS" cortaba en "Introducing Non-" / "linear Ads for HLS",
+    // partiendo el nombre de la cosa al medio. El JUNTADOR DE PALABRAS (U+2060) es de
+    // ancho cero y no se ve: el texto que se lee es exactamente el que está en
+    // `story.json`, y el renglón corta en un espacio como corresponde. Se hace acá y no
+    // en el JSON para que el archivo que edita quien escribe el copy no tenga adentro
+    // un carácter invisible que nadie puede explicar.
+    p.textContent = texto.replace(/-/g, '-\u2060');
     // Cada frase se enciende en su tramo de `--t`. Los tramos los reparte el CSS a
     // partir de este índice y del total, así que agregar una cuarta frase al JSON no
     // pide tocar nada acá ni allá.
@@ -49,13 +58,9 @@ export function runOpening({ section, lines, onDone }) {
   }
   section.style.setProperty('--n', String(lines.length));
 
-  let listo = false;
-  const terminar = () => {
-    if (listo) return;
-    listo = true;
-    section.dataset.done = '';
-    onDone();
-  };
+  // `data-done` no dispara nada: es lo que deja ver desde afuera —una prueba, la
+  // consola— que la apertura llegó al final.
+  const terminar = () => { section.dataset.done = ''; };
 
   // EL CÁLCULO, y es una división. `top` es negativo mientras la sección sube: cuánto
   // de ella ya pasó por arriba del viewport. El recorrido útil es su alto menos una

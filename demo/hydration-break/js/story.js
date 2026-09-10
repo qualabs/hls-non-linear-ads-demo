@@ -148,7 +148,11 @@ export async function runStory({ provider, video, card, skip, url = './story/sto
     document.body.dataset.story = 'done';
     video.play().catch(() => {});
   }
-  skip.addEventListener('click', end);
+  // EL BOTÓN NO ES DE ESTE ARCHIVO, y eso cambió cuando apareció el de reiniciar. Un
+  // recorrido que se engancha solo al botón deja su listener atado para siempre, así que
+  // el segundo recorrido tenía dos y el primer clic hacía las dos cosas. Acá se pone el
+  // rótulo y se devuelve `end`; quién llama a qué, y cuándo, lo decide `app.js`, que es
+  // el único que sabe si hay un recorrido corriendo o uno terminado.
   document.body.dataset.story = 'running';
 
   async function say(beat) {
