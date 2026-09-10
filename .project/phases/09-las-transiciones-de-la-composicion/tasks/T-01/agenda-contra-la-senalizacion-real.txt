@@ -1,0 +1,15 @@
+DURATION declaradas en el asset list: 16 + 16 + 8 + 24 = 64 s
+
+  lowerThirdOverlay    ventana  0..16   el primario crece desde 15.62   el nodo difumina desde 15.88
+  squeezebackLShape    ventana 16..32   el primario crece desde 31.62   el nodo difumina desde 31.88
+  linear               ventana 32..40   el primario crece desde 39.62   el nodo difumina desde 39.88
+  cornerOverlay        ventana 40..64   el primario crece desde 63.62   el nodo difumina desde 63.88
+
+LA SALIDA DE LA L, A MANO
+  la L termina en           32
+  el primario empieza en    31.62   (32.00 - 0.380)
+  el aviso a cuadro entero arranca en 32
+  => la salida entra completa adentro de la ventana de la L, con 0.38 s todavia abiertos
+
+  isLeaving(L, 31.61, 380ms) = false
+  isLeaving(L, 31.63, 380ms) = true   resto = 0.370 s

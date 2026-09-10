@@ -2,7 +2,7 @@
 
 | id | brief | status | plan | evidence |
 | --- | --- | --- | --- | --- |
-| T-01 | Las dos funciones puras, las constantes y sus tests | pending | — | — |
+| T-01 | Las dos funciones puras, las constantes y sus tests | done | — | tasks/T-01/ |
 | T-02 | La geometría del primario, entrada y salida | pending | — | — |
 | T-03 | El difuminado de los nodos de aviso, entrada y salida | pending | — | — |
 | T-04 | El párrafo al integrador | pending | — | — |
