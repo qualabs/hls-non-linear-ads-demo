@@ -25,7 +25,7 @@ cd "$(dirname "$0")/.."
 
 # Las imágenes generadas. No están en git —`content/` está gitignoreado— y el script
 # que las trajo desde el generador es la evidencia de la T-05.
-G=content/.fuentes/creativos
+export G=content/.fuentes/creativos
 [ -d "$G" ] || { echo "faltan las imágenes generadas en $G" >&2; exit 1; }
 
 # LOS LARGOS SALEN DE plate.json Y NO DE ACÁ, que es el mismo criterio del ADR 0044
@@ -40,7 +40,7 @@ eval "$(node -e '
 [ -n "${D1:-}" ] && [ -n "${D4:-}" ] || { echo "plate.json no declara los cuatro avisos" >&2; exit 1; }
 echo "largos del reparto, de plate.json: $D1 / $D2 / $D3 / $D4"
 
-TMP=$(mktemp -d "${TMPDIR:-/dev/shm}/creativos-XXXXXX")
+export TMP=$(mktemp -d "${TMPDIR:-/dev/shm}/creativos-XXXXXX")
 trap 'rm -rf "$TMP"' EXIT
 
 # `--default-background-color=00000000` es el flag sin el cual todo esto no sirve:
@@ -50,6 +50,19 @@ rasteriza() { # $1 svg relativo a la demo, $2 png, $3 ancho, $4 alto
 }
 
 rasteriza_abs() { # $1 svg con ruta absoluta, $2 png, $3 ancho, $4 alto
+  # EL SVG SE VALIDA COMO XML ANTES DE RASTERIZARLO, y esto no es celo: si el archivo no
+  # parsea, Chrome **rasteriza su propia pantalla de error** y devuelve un PNG del tamaño
+  # pedido, con contenido, sin código de salida distinto de cero y sin una sola línea en la
+  # consola. El creativo sale mal y todo dice que salió bien.
+  #
+  # Ya pasó dos veces en esta fase, las dos por lo mismo: **un comentario XML no puede
+  # contener `- -` pegados**, y los comentarios de estos archivos explican flags de línea
+  # de comandos que empiezan justamente así. La primera vez el síntoma fue tres SVG que no
+  # rasterizaban; la segunda, un banner cuya forma medida era un rectángulo que nadie había
+  # dibujado. El arreglo va acá, en el instrumento, porque acordarse de no escribir dos
+  # guiones es exactamente la clase de cosa que no se recuerda.
+  python3 -c 'import sys, xml.etree.ElementTree as ET; ET.parse(sys.argv[1])' "$1" \
+    || { echo "el SVG $1 no parsea como XML: Chrome rasterizaría su pantalla de error" >&2; exit 1; }
   google-chrome --headless=new --disable-gpu \
     --default-background-color=00000000 \
     --allow-file-access-from-files \
@@ -87,8 +100,81 @@ setsar=1[bg];[bg][1:v]overlay=0:0:format=auto[v]" \
   echo "$6  ($3x$4, ${5}s)"
 }
 
-echo "== el banner, imagen fija (ADR 0046) =="
-fijo "$G/meridia-coast.jpg" graphics/creativos/banner.svg 1280 216 content/adBanner/creative.jpg
+# EL BANNER, Y NO PASA POR ffmpeg. Es lo único de este script que se rasteriza directo al
+# archivo final, y la razón es el alfa: `fijo()` compone la tipografía sobre un fondo opaco
+# con `overlay`, que **aplana el canal alfa sin fallar**. El síntoma sería un rectángulo
+# negro donde tiene que verse la cancha. Chrome headless con
+# `--default-background-color=00000000` da alfa real, así que el camino corto es también el
+# único que conserva la transparencia.
+#
+# LA GEOMETRÍA SALE DEL ASSET LIST, igual que la de la L: la caja del banner está declarada
+# ahí y acá sólo se lee. Escritos en los dos lados se despegarían y el creativo saldría con
+# otra relación de aspecto que la de su caja, que el ADR 0013 recorta por los bordes.
+echo "== el banner: PNG con alfa, forma propia y caja despegada de los bordes (ADR 0046) =="
+
+# La sustitución la hace node y no `sed` a propósito: los veinte números de la plantilla
+# salen todos del alto de la caja, así que calcularlos y sustituirlos en el mismo lugar es
+# lo que impide que uno quede escrito a mano contra otro calculado.
+node -e '
+  const fs = require("fs");
+  const lista = require("./signalling/asset-list-hydration-break.json");
+  const caja = lista.ASSETS
+    .map((a) => a["X-AD-CREATIVE-SIGNALING"]?.payload?.[0])
+    .find((p) => p?.type === "lowerThirdOverlay")?.layout.assets[0];
+  if (!caja) { console.error("el asset list no declara el banner"); process.exit(1); }
+  const [top, right, bottom, left] = caja.viewport.split(/\s+/).map(Number);
+  const W = Math.round(1280 * (100 - left - right) / 100);
+  const H = Math.round(720 * (100 - top - bottom) / 100);
+  const r = (k) => Math.round(H * k);
+  const lean = r(0.21);
+  const v = {
+    W, H, VIEWPORT: caja.viewport,
+    MX: Math.round(1280 * left / 100), MY: Math.round(720 * bottom / 100),
+    RATIO: (W / H).toFixed(2),
+    LEAN: lean, WL: W - lean, LEANR: lean + r(0.055), RULE: r(0.055),
+    FOTOX: Math.round(W * 0.50), FOTOW: Math.round(W * 0.56), FOTOH: H + 80,
+    TX: r(0.60), T1: r(0.445), FS1: r(0.333), LS1: (H * 0.048).toFixed(1),
+    TX2: r(0.63), T2: r(0.70), FS2: r(0.123), LS2: (H * 0.030).toFixed(1),
+    BX: Math.round(W * 0.42), BY: r(0.34), BW: r(1.51), BH: r(0.32), BR: r(0.16),
+    FS3: r(0.119),
+    FOTO: "file://" + process.cwd() + "/" + process.env.G + "/meridia-coast.jpg"
+  };
+  v.BWM = Math.round(v.BW / 2);
+  v.BTY = Math.round(v.BH * 0.66);
+  let svg = fs.readFileSync("graphics/creativos/banner.svg.tpl", "utf8");
+  for (const [k, x] of Object.entries(v)) svg = svg.split(`{{${k}}}`).join(String(x));
+  const sobran = svg.match(/{{[A-Z0-9]+}}/g);
+  if (sobran) { console.error("marcadores sin sustituir: " + [...new Set(sobran)].join(" ")); process.exit(1); }
+  fs.writeFileSync(process.env.TMP + "/banner.svg", svg);
+  fs.writeFileSync(process.env.TMP + "/banner.dim", `${W} ${H}\n`);
+  console.log(`  caja ${W}x${H} px (${v.RATIO} a 1), margen ${v.MX} px a los costados y ${v.MY} px abajo`);
+'
+read -r B_W B_H < "$TMP/banner.dim"
+
+mkdir -p content/adBanner
+rm -f content/adBanner/creative.jpg
+rasteriza_abs "$TMP/banner.svg" content/adBanner/creative.png "$B_W" "$B_H"
+
+# EL CHEQUEO DEL ALFA, y va acá y no en un test porque es una propiedad del archivo que se
+# acaba de escribir. Un PNG sin canal alfa, o con alfa opaco en las esquinas, es un aviso
+# rectangular que dice ser una forma: se ve como un rectángulo negro sobre la cancha y no
+# falla en ningún lado. Se miran las dos esquinas que la placa inclinada deja afuera.
+B_W="$B_W" B_H="$B_H" node -e '
+  const { execFileSync } = require("child_process");
+  const [W, H] = [process.env.B_W, process.env.B_H].map(Number);
+  const raw = execFileSync("ffmpeg", ["-v", "error", "-i", "content/adBanner/creative.png",
+    "-f", "rawvideo", "-pix_fmt", "rgba", "-"], { maxBuffer: 1 << 28 });
+  if (raw.length !== W * H * 4) { console.error(`  el PNG no salió ${W}x${H}`); process.exit(1); }
+  const a = (x, y) => raw[(y * W + x) * 4 + 3];
+  const esquinas = [["arriba-izq", 3, 3], ["abajo-der", W - 4, H - 4]];
+  const centro = a(Math.round(W / 2), Math.round(H / 2));
+  const malas = esquinas.filter(([, x, y]) => a(x, y) > 8);
+  console.log(`  alfa: centro ${centro}/255, ${esquinas.map(([n, x, y]) => n + "=" + a(x, y)).join(", ")}`);
+  if (centro < 200) { console.error("  el centro del banner no es opaco: el aviso no se vería"); process.exit(1); }
+  if (malas.length) { console.error(`  ${malas.map((m) => m[0]).join(" y ")} sin transparencia: la forma es la caja`); process.exit(1); }
+  console.log("  la forma NO es la caja: las dos esquinas de la diagonal transparentes y el centro opaco");
+'
+echo "content/adBanner/creative.png  (${B_W}x${B_H})"
 
 # LA L, Y ES UN SOLO VIDEO A CUADRO ENTERO. Así la autora la industria y no como
 # dos tiras: el aviso ocupa el viewport completo y va al fondo, y el contenido
@@ -96,38 +182,61 @@ fijo "$G/meridia-coast.jpg" graphics/creativos/banner.svg 1280 216 content/adBan
 # superior y derecho, y va arriba. El espectador percibe una banda en L; lo que hay
 # es un video entero con el partido tapándole el centro.
 #
+# Y SON DOS CAPAS, NO UNA (ADR 0045). El fondo pictórico va por un lado y la tipografía
+# por otro, y se componen acá. La división no es de gusto: el fondo es lo que entra al
+# generador como cuadro semilla, y el modelo re-dibuja cada cuadro, así que una
+# tipografía adentro de la semilla vuelve con el texto deformado. Afuera del modelo las
+# letras quedan exactas. Las dos capas las arma `l-capas.sh`, que es también quien las
+# arma para la generación, así que la geometría vive en un solo lugar.
+#
 # LOS NÚMEROS DE LAS DOS BANDAS SALEN DEL ASSET LIST Y NO DE ACÁ. Son la caja del
 # primario vista del otro lado, así que si vivieran en los dos lados se despegarían
 # y el creativo quedaría con tipografía debajo del partido o con una franja negra al
 # costado -- sin que nada falle. Es el mismo criterio del ADR 0044 aplicado a la
-# geometría de un creativo.
-echo "== la L: un solo backplate, con las bandas leídas del asset list =="
-eval "$(node -e '
-  const lista = require("./signalling/asset-list-hydration-break.json");
-  const capa = lista.ASSETS
-    .map((a) => a["X-AD-CREATIVE-SIGNALING"]?.payload?.[0])
-    .find((p) => p?.type === "squeezebackLShape")?.layout;
-  const [top, right, bottom, left] = capa.primaryContent.viewport.split(/\s+/).map(Number);
-  // La banda izquierda es el inset izquierdo del primario; la inferior, el de abajo.
-  const L = Math.round(1280 * left / 100);
-  const T = Math.round(720 * (100 - bottom) / 100);
-  console.log(`L=${L}; T=${T}`);
-')"
-[ -n "${L:-}" ] && [ -n "${T:-}" ] || { echo "no se pudo leer la caja del primario del asset list" >&2; exit 1; }
-echo "  banda izquierda 0..${L}px, banda inferior ${T}..720px"
+# geometría de un creativo. `l-capas.sh` los lee y los reporta.
+#
+# EL FONDO SE MUEVE SI LA CADENA ESTÁ, Y SI NO SE QUEDA QUIETO. Los dos eslabones de
+# `generar-la-l.sh` cuestan plata de quien los corre, así que no pueden ser un
+# requisito de este script: sin ellos la L sale con el fondo fijo, que es exactamente lo
+# que era antes, y con ellos sale animada sin cambiar una línea acá. El camino es el
+# mismo y lo único que cambia es si los archivos están.
+./scripts/l-capas.sh "$TMP/capas"
 
-sed -e "s/{{L}}/$L/g" -e "s/{{T}}/$T/g" \
-    -e "s/{{TH}}/$((720 - T))/g" \
-    -e "s/{{LM3}}/$((L - 3))/g" \
-    -e "s/{{FY}}/$T/g" -e "s/{{FH}}/$((720 - T))/g" \
-    -e "s/{{ARG1}}/$((T - 150))/g" -e "s/{{ARG2}}/$((T - 114))/g" -e "s/{{ARG3}}/$((T - 78))/g" \
-    -e "s/{{PIE}}/$((T + 58))/g" \
-    -e "s#{{FOTO}}#file://$PWD/$G/kalto-shoe.jpg#g" \
-    graphics/creativos/l-backplate.svg.tpl > "$TMP/l-backplate.svg"
+FL=content/.fuentes/l
+ESLABONES_L=2
+CADENA_L=1
+for n in $(seq 1 "$ESLABONES_L"); do
+  [ -s "$(printf '%s/%02d.mp4' "$FL" "$n")" ] || CADENA_L=0
+done
 
-rasteriza_abs "$TMP/l-backplate.svg" "$TMP/l-tipo.png" 1280 720
-ffmpeg -hide_banner -loglevel error -y -loop 1 -t "$D2" -i "$TMP/l-tipo.png" \
-  -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -r 30 -an "$TMP/l-backplate.mp4"
+if [ "$CADENA_L" = 1 ]; then
+  # Los eslabones se pegan con la misma regla que la parada del juego: cada uno menos
+  # el primero entra SIN SU CUADRO 0, porque ese cuadro es la versión que el generador
+  # hace del último del anterior y pegados tal cual el instante se ve dos veces.
+  echo "== la L: fondo generado ($ESLABONES_L eslabones) + tipografía compuesta encima =="
+  ENTRADAS_L=(); FILTRO_L=""; ETIQUETAS_L=""
+  for n in $(seq 1 "$ESLABONES_L"); do
+    ENTRADAS_L+=(-i "$(printf '%s/%02d.mp4' "$FL" "$n")")
+    i=$((n - 1))
+    if [ "$n" -eq 1 ]; then
+      FILTRO_L+="[$i:v]setpts=PTS-STARTPTS[l$i];"
+    else
+      FILTRO_L+="[$i:v]select=gte(n\,1),setpts=PTS-STARTPTS[l$i];"
+    fi
+    ETIQUETAS_L+="[l$i]"
+  done
+  ffmpeg -hide_banner -loglevel error -y "${ENTRADAS_L[@]}" -i "$TMP/capas/l-tipografia.png" \
+    -filter_complex "${FILTRO_L}${ETIQUETAS_L}concat=n=$ESLABONES_L:v=1:a=0,scale=1280:720,fps=30,setsar=1,trim=duration=$D2,setpts=PTS-STARTPTS[bg];[bg][${ESLABONES_L}:v]overlay=0:0:format=auto[v]" \
+    -map "[v]" -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -an "$TMP/l-backplate.mp4"
+else
+  echo "== la L: fondo FIJO (falta la cadena en $FL) + tipografía compuesta encima =="
+  echo "   para que se mueva:  ./scripts/generar-la-l.sh $ESLABONES_L"
+  echo "   genera video con Vertex AI y cuesta plata de quien lo corre."
+  ffmpeg -hide_banner -loglevel error -y -loop 1 -t "$D2" -i "$TMP/capas/l-fondo.png" \
+    -i "$TMP/capas/l-tipografia.png" \
+    -filter_complex "[0:v]scale=1280:720,fps=30,setsar=1[bg];[bg][1:v]overlay=0:0:format=auto[v]" \
+    -map "[v]" -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -an "$TMP/l-backplate.mp4"
+fi
 
 echo "== el overlay de cierre, video con la tipografía quieta =="
 movido "$G/meridia-coast.jpg" graphics/creativos/overlay.svg 320 180 "$D4" "$TMP/overlay.mp4"
