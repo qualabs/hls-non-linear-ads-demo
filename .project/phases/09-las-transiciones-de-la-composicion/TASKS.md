@@ -4,7 +4,7 @@
 | --- | --- | --- | --- | --- |
 | T-01 | Las dos funciones puras, las constantes y sus tests | done | — | tasks/T-01/ |
 | T-02 | La geometría del primario, entrada y salida | done | — | tasks/T-02/ |
-| T-03 | El difuminado de los nodos de aviso, entrada y salida | pending | — | — |
+| T-03 | El difuminado de los nodos de aviso, entrada y salida | done | — | tasks/T-03/ |
 | T-04 | El párrafo al integrador | pending | — | — |
 | T-05 | La corrida mirada y las suites | pending | — | — |
 | T-06 | La cama negra deja de romper el alfa de una imagen | done | — | tasks/T-06/ |
