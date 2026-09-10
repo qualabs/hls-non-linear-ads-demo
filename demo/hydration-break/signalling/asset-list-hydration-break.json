@@ -77,7 +77,7 @@
                   "id": "overlay",
                   "type": "application/vnd.apple.mpegurl",
                   "uri": "/content/adOverlay/index.m3u8",
-                  "viewport": "75 0 0 75",
+                  "viewport": "62.5 6.25 12.5 68.75",
                   "zDepth": 1
                 }
               ]
