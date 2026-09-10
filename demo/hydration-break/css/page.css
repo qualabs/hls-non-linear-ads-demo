@@ -206,3 +206,109 @@ body {
 .skip:hover { color: var(--q-paper-50); border-color: #47505f; }
 
 body[data-story="done"] .skip { display: none; }
+
+/* THE SCROLL BELOW THE PICTURE.
+ *
+ * One idea per screen, in full-height sections, and the cap is four sections in total
+ * counting the player. The hierarchy is three type sizes and no more: the kicker, the
+ * heading, and the body. No cards, no borders, no ornamental gradients, no shadows --
+ * what separates one section from the next is the air between them.
+ *
+ * There is no colour here on purpose. The palette is neutral and the only colour on
+ * the page comes from the video, which is the property the whole design hangs off:
+ * a page that brings its own colour competes with the picture it exists to show. */
+.chapter {
+  min-height: 100vh;
+  display: grid;
+  align-content: center;
+  padding: 8vh clamp(20px, 4vw, 56px);
+}
+
+/* `min-width: 0` is not tidying: a grid item refuses to shrink below the size of its
+ * content, so the `white-space: pre` of the code blocks pushed the whole page wider
+ * than the viewport on a phone -- `overflow-x: auto` on the block does nothing while
+ * its parent is happy to grow. Measured at 500 px wide: the document scrolled to 539
+ * before this line, and the page body is the one thing on this page that must never
+ * scroll sideways. */
+.chapter__inner { width: min(880px, 100%); min-width: 0; margin: 0 auto; }
+
+.kicker {
+  margin: 0 0 22px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--q-slate-400);
+}
+
+.chapter h2 {
+  margin: 0 0 24px;
+  font-size: clamp(28px, 4.2vw, 54px);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.lede {
+  margin: 0;
+  max-width: 62ch;
+  font-size: clamp(16px, 1.35vw, 20px);
+  font-weight: 300;
+  line-height: 1.62;
+  color: #c8cfd9;
+}
+
+.lede code, .credit code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.86em;
+}
+
+/* Three numbers, and they are the whole argument in numerals. Not a table: a table
+ * compares things and there is nothing here to compare against. */
+.facts {
+  list-style: none;
+  margin: 56px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 64px;
+  font-size: 15px;
+  color: var(--q-slate-400);
+}
+
+.facts span {
+  display: block;
+  font-size: clamp(34px, 3.4vw, 46px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--q-paper-50);
+}
+
+/* The signalling, shown as itself. It is the one place a monospace block earns its
+ * keep on this page: the audience reads playlists for a living, and a paraphrase of a
+ * tag would be worth nothing to them. */
+.code {
+  margin: 24px 0 0;
+  padding: 18px 22px;
+  overflow-x: auto;
+  background: #0b0d11;
+  border-left: 2px solid #262d38;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12.5px;
+  line-height: 1.72;
+  color: #b9c2ce;
+  white-space: pre;
+  tab-size: 2;
+}
+
+/* The asset-list is a hundred lines and this page is one idea per screen, so the block
+ * scrolls inside itself instead of pushing its own section past the fold. It is the one
+ * element on the page allowed to scroll horizontally too, which is the exception a code
+ * block gets and nothing else does. */
+#list { max-height: 26vh; overflow: auto; }
+
+.chapter--end { min-height: 72vh; }
+
+.chapter--end .credit { max-width: 68ch; padding: 0; font-size: 14px; line-height: 1.7; }

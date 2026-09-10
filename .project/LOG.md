@@ -4457,3 +4457,39 @@ generaron. Y con esto el material de la Blender Foundation salió del todo: la l
 crédito de la página ya no lo nombra.
 
 `npm test` en 49 verdes y `npm run check` en `both seams hold.`
+
+## 2026-09-09 — T-06 de la fase 08: la página, y la señalización mostrada como lo que es
+
+Cuatro secciones contando el player, que es el tope, y las tres de abajo están abajo del
+pliegue a propósito: **nada de lo que hay ahí explica el caso de negocio**, porque eso ya
+pasó en la imagen y en treinta segundos. El scroll es para el ingeniero que ahora pregunta
+qué fue lo que vio.
+
+**La sección que vale para esta sala es la de la señalización, y no es una ilustración.**
+La página fetchea la propia playlist que el player está tocando, saca la línea del
+`EXT-X-DATERANGE` —la parte por las comas para que se lea en cuatro renglones—, sigue su
+`X-ASSET-LIST` y muestra la forma de cada asset, incluido el tercero, que aparece como
+`"(no layout block: a linear ad, played full frame)"`. Es la misma regla de la línea de
+estado aplicada al scroll: **esta página no afirma nada que no haya leído.** Un tag pegado
+en el HTML sería una ilustración, y una ilustración de una playlist no vale nada para gente
+que lee playlists para vivir; además el `START-DATE` se mueve en cada empaquetado, así que
+uno pegado a mano estaría mal mañana.
+
+Las seis propiedades de la estética quedaron con su medición donde se podía: **una idea por
+pantalla** son 887 px de sección sobre 887 de viewport en las dos secciones de contenido, y
+lo que costó fue el bloque del asset list —cien líneas— que scrollea adentro de sí mismo en
+lugar de empujar su sección abajo del pliegue. **Cero color en las tres secciones de
+abajo**, que es la propiedad de la que cuelga el diseño: una página que trae su propio color
+compite con la imagen que existe para mostrar.
+
+**Un defecto encontrado en el celular que no se veía en el escritorio.** La página
+desbordaba horizontalmente: medido a 500 px de ancho, el documento scrolleaba hasta 539. Y
+la causa no era el bloque de código sino su padre — **un ítem de grid se niega a encogerse
+por debajo del tamaño de su contenido**, así que el `white-space: pre` del `<pre>`
+ensanchaba la sección entera y el `overflow-x: auto` del bloque no hacía nada mientras su
+contenedor crecía feliz. Una línea, `min-width: 0`. Después: 485 sobre 500 y los dos
+bloques scrolleando adentro de sí mismos. Es exactamente el tipo de defecto que la vara del
+celular existe para agarrar, y no era gusto: scrollear de costado es la única cosa que esta
+página no puede hacer nunca.
+
+`npm test` en 49 verdes y `npm run check` en `both seams hold.`

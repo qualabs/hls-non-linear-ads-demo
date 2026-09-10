@@ -103,14 +103,60 @@
 
 </section>
 
-<p class="credit">
-  Match footage: amateur clips under the
-  <a href="https://www.pexels.com/license/">Pexels License</a>, cut and re-framed
-  for this demo. &middot; Everything else on screen is ours and fictional: the
-  channel package — the bug, the scorebug, the clock, the two clubs and the score —
-  and the four ad creatives, for three invented brands that imitate nobody.
-  &middot; Full provenance in CREDITS.md.
-</p>
+<!--
+  BELOW THE PICTURE, the scroll for whoever wants to know how. Three sections and a
+  hard cap of four in total counting the player: one idea per screen, and three is
+  better than four. Nothing here explains the business case -- that already happened,
+  on the picture, in thirty seconds. This is for the engineer in the room who is
+  now asking what they just watched.
+-->
+
+<section class="chapter" aria-label="What the player did">
+  <div class="chapter__inner">
+    <p class="kicker">What the player did</p>
+    <h2>One playlist. One tag. Four ads, and the match never stopped.</h2>
+    <p class="lede">
+      The programme carries a single <code>EXT-X-DATERANGE</code> of a custom class.
+      An unmodified hls.js plays it; a library on top reads the asset-list the tag
+      points at, and draws each ad into the box the layout declares — over the
+      picture, without replacing it. The primary content is never interrupted, which
+      is why the clock in the corner keeps running through all fifty-eight seconds.
+    </p>
+    <ul class="facts">
+      <li><span>4</span> ads in one break</li>
+      <li><span>3</span> shapes: still image, concurrent video, linear at full frame</li>
+      <li><span>0</span> seconds of programme replaced</li>
+    </ul>
+  </div>
+</section>
+
+<section class="chapter" aria-label="The signalling">
+  <div class="chapter__inner">
+    <p class="kicker">The signalling, as it is served</p>
+    <h2>Read off this page&rsquo;s own playlist, right now.</h2>
+    <p class="lede">
+      Not an illustration. The tag below is the one in the media playlist this player
+      is playing, and the JSON is the asset-list it fetched.
+    </p>
+    <pre class="code" id="tag">loading…</pre>
+    <pre class="code" id="list">loading…</pre>
+  </div>
+</section>
+
+<footer class="chapter chapter--end" aria-label="Credits">
+  <div class="chapter__inner">
+    <p class="kicker">Credits</p>
+    <h2>Everything that is not the match is invented.</h2>
+    <p class="credit">
+      Match footage: amateur clips under the
+      <a href="https://www.pexels.com/license/">Pexels License</a>, cut and re-framed
+      for this demo. &middot; Everything else on screen is ours and fictional: the
+      channel package — the bug, the scorebug, the clock, the two clubs and the score —
+      and the four ad creatives, for three invented brands that imitate nobody.
+      &middot; Full provenance in <code>CREDITS.md</code>.
+    </p>
+  </div>
+</footer>
 
 <script src="/vendor/hls.min.js"></script>
 <script src="/dist/qualabs-concurrent-hls.js"></script>
