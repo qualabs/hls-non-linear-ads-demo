@@ -195,6 +195,27 @@ echo "content/adBanner/creative.png  (${B_W}x${B_H})"
 # costado -- sin que nada falle. Es el mismo criterio del ADR 0044 aplicado a la
 # geometría de un creativo. `l-capas.sh` los lee y los reporta.
 #
+# LOS CREATIVOS QUE NACEN DE VIDEO GENERADO VAN A 24 fps, QUE ES EL PASO DE SU FUENTE.
+# El default de la medición de la T-01 son 30 y ahí se queda para los demás; la
+# excepción no es "la L", es **tener movimiento generado**, y medido con ffprobe hoy
+# eso son dos creativos y no uno:
+#
+#   la L       su fondo son los eslabones de `generar-la-l.sh`  24 fps, 192 cuadros en 8,00 s
+#   el lineal  su cuerpo es `neonectar-8s.mp4`                  24 fps, 192 cuadros en 8,00 s
+#
+# Empaquetarlos a 30 duplica un cuadro de cada cuatro, que es exactamente el tironeo
+# que se sacó del plate del partido por la misma razón. El porqué largo, y de dónde
+# salía el 30, está en `empaquetar-contenido.sh`.
+#
+# EL BANNER Y EL OVERLAY SIGUEN A 30 y no ganan nada bajando: los dos nacen de una
+# imagen fija, y una imagen fija no tiene cadencia que romper. El `zoompan` del overlay
+# ya lo dice más arriba: reetiqueta cuadros, no remuestrea.
+#
+# Y la L va a 24 también cuando su fondo es la imagen fija, o sea mientras la cadena no
+# esté generada: ahí el número no cambia nada, y un creativo con dos fps según cómo se
+# armó sería una cosa de más para recordar.
+FPS_GEN=24
+
 # EL FONDO SE MUEVE SI LA CADENA ESTÁ, Y SI NO SE QUEDA QUIETO. Los dos eslabones de
 # `generar-la-l.sh` cuestan plata de quien los corre, así que no pueden ser un
 # requisito de este script: sin ellos la L sale con el fondo fijo, que es exactamente lo
@@ -226,7 +247,7 @@ if [ "$CADENA_L" = 1 ]; then
     ETIQUETAS_L+="[l$i]"
   done
   ffmpeg -hide_banner -loglevel error -y "${ENTRADAS_L[@]}" -i "$TMP/capas/l-tipografia.png" \
-    -filter_complex "${FILTRO_L}${ETIQUETAS_L}concat=n=$ESLABONES_L:v=1:a=0,scale=1280:720,fps=30,setsar=1,trim=duration=$D2,setpts=PTS-STARTPTS[bg];[bg][${ESLABONES_L}:v]overlay=0:0:format=auto[v]" \
+    -filter_complex "${FILTRO_L}${ETIQUETAS_L}concat=n=$ESLABONES_L:v=1:a=0,scale=1280:720,fps=$FPS_GEN,setsar=1,trim=duration=$D2,setpts=PTS-STARTPTS[bg];[bg][${ESLABONES_L}:v]overlay=0:0:format=auto[v]" \
     -map "[v]" -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -an "$TMP/l-backplate.mp4"
 else
   echo "== la L: fondo FIJO (falta la cadena en $FL) + tipografía compuesta encima =="
@@ -234,7 +255,7 @@ else
   echo "   genera video con Vertex AI y cuesta plata de quien lo corre."
   ffmpeg -hide_banner -loglevel error -y -loop 1 -t "$D2" -i "$TMP/capas/l-fondo.png" \
     -i "$TMP/capas/l-tipografia.png" \
-    -filter_complex "[0:v]scale=1280:720,fps=30,setsar=1[bg];[bg][1:v]overlay=0:0:format=auto[v]" \
+    -filter_complex "[0:v]scale=1280:720,fps=$FPS_GEN,setsar=1[bg];[bg][1:v]overlay=0:0:format=auto[v]" \
     -map "[v]" -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -an "$TMP/l-backplate.mp4"
 fi
 
@@ -252,8 +273,8 @@ echo "== el spot lineal: $(awk -v d="$D3" 'BEGIN { printf "%s", d - 2 }')s gener
 rasteriza graphics/creativos/linear-endcard.svg "$TMP/endcard.png" 1920 1080
 ffmpeg -hide_banner -loglevel error -y \
   -i "$G/neonectar-8s.mp4" -loop 1 -t 2 -i "$TMP/endcard.png" \
-  -filter_complex "[0:v]scale=1280:720,fps=30,setsar=1,trim=duration=$(awk -v d="$D3" 'BEGIN { printf "%s", d - 2 }'),setpts=PTS-STARTPTS[a];\
-[1:v]scale=1280:720,fps=30,setsar=1[b];[a][b]concat=n=2:v=1:a=0[v]" \
+  -filter_complex "[0:v]scale=1280:720,fps=$FPS_GEN,setsar=1,trim=duration=$(awk -v d="$D3" 'BEGIN { printf "%s", d - 2 }'),setpts=PTS-STARTPTS[a];\
+[1:v]scale=1280:720,fps=$FPS_GEN,setsar=1[b];[a][b]concat=n=2:v=1:a=0[v]" \
   -map "[v]" -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -an "$TMP/lineal.mp4"
 
 # EMPAQUETAR CADA CREATIVO AL TAMAÑO DE SU CAJA Y NO A 1280x720. Es el defecto
@@ -261,9 +282,9 @@ ffmpeg -hide_banner -loglevel error -y \
 # recorte centrado del ADR 0013 se lleva la mitad de la tipografía. Los dos últimos
 # argumentos son el tamaño, y son los mismos números del SVG.
 echo "== empaquetando los cuatro videos como HLS, cada uno al tamaño de su caja =="
-./scripts/empaquetar-contenido.sh "$TMP/l-backplate.mp4" content/adL       0 "$D2" "" 1280 720
+./scripts/empaquetar-contenido.sh "$TMP/l-backplate.mp4" content/adL       0 "$D2" "" 1280 720 "$FPS_GEN"
 ./scripts/empaquetar-contenido.sh "$TMP/overlay.mp4"     content/adOverlay 0 "$D4" "" 320  180
-./scripts/empaquetar-contenido.sh "$TMP/lineal.mp4"      content/adLinear  0 "$D3" "" 1280 720
+./scripts/empaquetar-contenido.sh "$TMP/lineal.mp4"      content/adLinear  0 "$D3" "" 1280 720 "$FPS_GEN"
 
 echo
 echo "los cuatro creativos del minuto están en content/"
