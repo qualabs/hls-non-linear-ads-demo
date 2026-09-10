@@ -5103,3 +5103,46 @@ y queda cubierto por el test de la T-01 sobre el fixture real.
 
 **Las seis tasks de la fase están hechas.** Lo que falta para cerrarla no es
 trabajo: es que Nicolás lo mire una vez, que es la vara que la fase se puso.
+
+## 2026-09-10 — Fase 09 cerrada: las transiciones, y una corrección que hizo el mecanismo más chico
+
+Nicolás la miró y la aprobó: *"bien cerremos la fase 9, commit y push"*. Las seis
+tasks hechas, `PHASE.md` en `closed`, `REPORT.md` con sus ocho secciones, y la línea
+de la fase escrita en el índice de `PROJECT.md`. Validador en verde: 56 ADR, 9
+fases, y las dos findings que imprime son las excepciones viejas de las fases 02 y
+04 con su razón.
+
+**Lo que la fase deja y no se deduce del diff** es que la corrección de Nicolás
+—que la transición se pague con el tiempo del propio aviso y termine en el borde de
+su ventana en lugar de arrancar ahí— **achicó el mecanismo**. El diseño anterior
+cambiaba el ciclo de vida de los nodos: `detach` postergado, temporizador de
+limpieza, punteros apagados sobre un nodo invisible, y una guarda para el caso de
+que empezara otro break en el medio. Con la salida adentro de la ventana el nodo
+está vivo por derecho propio mientras se va, así que `clear()` no cambió en una
+línea y tres de los siete riesgos se fueron con el mecanismo que los traía.
+
+**Y el discriminante salió del contrato sin agregarle un campo**, que es la segunda
+vez después del ADR 0047, y las dos veces pagó la misma regla 3.
+
+Siete ADR, del 0050 al 0056. El 0056 no lo encontró la fase: lo encontró Nicolás en
+el inspector, y entró como T-06 porque un nodo con cama negra difumina la cama, o
+sea que era precondición del difuminado del banner y no una capacidad vecina.
+
+**Ninguna corrección post-ejecución**, y el informe lo lee como lo que es: no prueba
+que las definiciones de done fueran buenas, prueba que lo que hubo que corregir se
+corrigió antes de que una task se declarara terminada.
+
+**Dos riesgos se materializaron.** R7 en su forma invertida —el test del umbral
+exacto no podía pasar, porque el borde no es representable en punto flotante— y R8
+como estaba previsto más una mitad que no: **`dist/` también es compartido**, así que
+el cambio de esta fase estuvo vivo en la demo de la otra sesión desde el primer
+commit sin que lo pidieran. No hizo daño y de hecho fue donde se verificó la forma
+del ADR 0047, pero es una vía de acoplamiento entre dos sesiones que el riesgo
+escrito no nombraba.
+
+El status del proyecto queda en `ongoing`: la fase cerró, el proyecto sigue, y la
+ventana de grabación del 28 al 30 de septiembre no se movió.
+
+**El umbral de costura de cadena generada que la sesión `hls-demo` está midiendo no
+entró en este informe, y no por olvido.** Es de su fase y su hallazgo está vivo; un
+informe de fase cerrada es un registro y no el lugar donde alguien lo va a buscar.

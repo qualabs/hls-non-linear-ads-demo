@@ -618,3 +618,25 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   no podía fallar. Sus cinco ADR son `scope: phase-07`, que es el default del skill
   y la práctica vieja del proyecto: deciden cómo se comporta un control y no qué es
   este repositorio. Informe en `phases/07-la-pelotita-de-la-barra/REPORT.md`.
+
+- **09-las-transiciones-de-la-composicion**: cerrada con la composición dejando de
+  cambiar de golpe, y toda en `lib/`: el contenido primario se mueve con tiempo
+  entre las cajas que los layouts le dan, los elementos de un aviso entran y salen
+  con opacidad, y el aviso a cuadro entero no lleva ninguna de las dos porque un
+  corte es lo que tiene que parecer. **Lo que la hizo chica fue una corrección de
+  Nicolás**: que la transición se pague con el tiempo del propio aviso y termine en
+  el borde de su ventana en lugar de arrancar ahí. El diseño anterior cambiaba el
+  ciclo de vida de los nodos —`detach` postergado, temporizador de limpieza, una
+  guarda— y con la salida adentro de la ventana **`clear()` no cambió en una línea**
+  y tres de los siete riesgos se fueron con el mecanismo que los traía. **Y el
+  discriminante salió del contrato sin agregarle un campo**, que es la segunda vez
+  que pasa después del ADR 0047 y las dos veces pagó la misma regla 3: la geometría
+  no necesita rama porque el aviso a cuadro entero declara el primario a
+  `viewport: '0 0 0 0'`, o sea la identidad. Trajo una task que no estaba en el plan,
+  la T-06, porque Nicolás encontró en el inspector que la librería le escribía una
+  cama negra a todo nodo de aviso y se comía el alfa de las imágenes —el 46,7 % de
+  los píxeles del banner— y eso era precondición del difuminado y no una capacidad
+  vecina: un nodo con cama difumina la cama. Su hallazgo de método es R7 al revés:
+  el test del umbral exacto **no podía pasar**, porque el borde no es representable
+  en punto flotante. Informe en
+  `phases/09-las-transiciones-de-la-composicion/REPORT.md`.
