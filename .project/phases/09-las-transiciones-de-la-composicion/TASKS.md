@@ -7,10 +7,13 @@
 | T-03 | El difuminado de los nodos de aviso, entrada y salida | pending | — | — |
 | T-04 | El párrafo al integrador | pending | — | — |
 | T-05 | La corrida mirada y las suites | pending | — | — |
+| T-06 | La cama negra deja de romper el alfa de una imagen | done | — | tasks/T-06/ |
 
 El orden lo pone el riesgo: la T-01 es lo único que se cierra sin navegador, y la
 T-02 es donde se mide R1 antes de construir nada encima. La T-03 depende de la
-agenda que deja la T-02.
+agenda que deja la T-02, y **de la T-06**, que corre antes que ella aunque su
+número sea posterior: un nodo con cama negra difumina la cama, así que el
+difuminado del banner no se puede entregar bien hasta que la T-06 esté.
 
 **Por qué no hay una task de tests aparte.** El default del proyecto es que lo que
 se construye viaja con tests propios, y acá esos tests **son** la T-01: el renderer
@@ -234,3 +237,40 @@ y lo que queda es pintura, que se mira en la T-05.
 - **nivel de verificación:** **bajo**. La task es la verificación, y su forma es
   mirar: capturas al tamaño real de uso, una por estado. Un estilo computado no es
   evidencia de que algo se vea.
+
+## T-06 — La cama negra deja de romper el alfa de una imagen
+
+- **Objective:** una imagen de aviso con canal alfa **conserva su transparencia**
+  cuando la librería la compone sobre el contenido primario, y el nodo de video
+  conserva su cama negra. Importa por dos cosas a la vez: es una capacidad que la
+  demo del break de hidratación anuncia y que con la línea puesta no existía, y es
+  una precondición de la T-03, porque un nodo con cama difumina la cama.
+
+- **What it must cover:**
+  - **La condición y no el borrado.** `createNode` escribía `background: '#000'`
+    incondicionalmente; pasa a escribirlo sólo cuando el nodo no es una imagen. La
+    cama del video se queda: sacarla devuelve el parpadeo del contenido primario a
+    través del aviso mientras decodifica.
+  - **El discriminante es `isImage`**, que el archivo ya calcula para decidir qué
+    elemento crear. No una tabla de qué formatos llevan alfa: el contrato rechaza
+    que esta capa lea un contenedor para deducir lo que hay adentro (ADR 0056).
+  - **Entry points:** `lib/renderer.js`, `createNode` y la constante `isImage` de
+    arriba del archivo. El ADR 0056.
+  - **Constraints:** no se toca `demo/`, ni el creativo, ni el SVG que lo genera.
+    Lo que esta task arregla es que la librería deje de romper el alfa; que el
+    creativo se vea bien es de quien lo hace. Sin dependencias — corre antes de la
+    T-03.
+
+- **Definition of done:** la misma aserción sobre el DOM vivo, corrida antes y
+  después del arreglo, muestra que el `<img>` del banner pasó de tener el
+  `background` inline a no tenerlo **y que el `<video>` del backplate lo tiene en
+  las dos corridas**; una captura del mismo cuadro antes y después muestra la
+  diferencia; y `npm test` en verde con los casos de `isImage`.
+
+- **nivel de verificación:** **bajo**. El error se ve en pantalla en las dos
+  direcciones y arreglarlo es una línea. Lo que eso pide acá: tests para la lógica
+  no visual, que es `isImage` decidiendo sobre un `mediaType` —incluido el ausente,
+  que tiene que caer del lado que conserva la cama—; la verificación principal es
+  mirar, con la captura del mismo cuadro antes y después; y sin campaña de
+  mutación, porque la regla tiene un solo eje y la aserción antes/después ya la
+  prueba en sus dos valores.

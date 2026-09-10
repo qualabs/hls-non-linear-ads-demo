@@ -4960,3 +4960,45 @@ salida ya pasó— y es la misma razón por la que un nodo construido en el mome
 difumina (ADR 0050). Y el guion de la demo guiada **frena el player en sus beats**,
 así que para mirar la corrida seguida hay que apretar el botón de saltear, que es la
 única salida que el guion tiene (ADR 0042).
+
+## 2026-09-10 — T-06 de la fase 09: la cama negra era del video y se la comía el alfa de las imágenes
+
+Nicolás encontró en el inspector que `createNode` le escribía `background: '#000'`
+a **todo** nodo de aviso. La razón escrita al lado es legítima y es de video —un
+elemento de video es transparente hasta que decodifica su primer cuadro— pero la
+línea corría antes de distinguir de qué nodo se trata, así que una imagen con
+canal alfa se componía contra negro para siempre.
+
+**Entró en esta fase, y el argumento no es el que parecía.** "Es una línea en el
+archivo que ya estaba abierto" es exactamente el razonamiento con el que se estira
+el alcance de una fase, y si fuera el único, el objetivo escrito de la fase habría
+ganado. El que decide es otro: **un nodo con cama difumina la cama.** A opacidad
+0,5 lo que aparece sobre la imagen es un rectángulo medio negro y no medio banner,
+así que el difuminado del banner que la T-03 entrega no se podía entregar bien con
+la línea puesta. Es una precondición de esa task y no una capacidad vecina.
+
+**Medido antes de afirmarlo**: el creativo del banner es 1120×126 color type 6 y
+usa su alfa de verdad — 51,1 % de píxeles opacos, 2,2 % transparentes y **46,7 %
+con alfa parcial**. Casi medio creativo se estaba pintando sobre negro.
+
+El arreglo es la condición y no el borrado, y la razón no es prudencia: **los dos
+daños no duran lo mismo.** A un video la cama le cuesta hasta que decodifica y de
+ahí en más es invisible; a una imagen con alfa le cuesta para siempre. Una sola
+respuesta para los dos no puede estar bien. El discriminante es `isImage`, que el
+archivo ya calcula nueve líneas más arriba, y no una tabla de qué formatos llevan
+alfa: el contrato ya rechazó que esta capa lea un contenedor para deducir lo que
+hay adentro.
+
+**El chequeo se corrió antes del arreglo, que es lo que lo vuelve un chequeo.** La
+misma aserción sobre el DOM vivo, en el mismo instante del programa, con las dos
+filas cambiando de forma distinta: el `<img>` del banner pasó de `rgb(0, 0, 0)` a
+sin valor y el `<video>` del backplate lo conserva en las dos corridas. Un test que
+sólo mirara la imagen no habría protegido la cama del video. Y las dos capturas
+son el mismo cuadro: el rectángulo negro de esquinas rectas se fue y la cancha se
+ve a través de los bordes en ángulo del banner.
+
+`isImage` no tenía tests y ahora los tiene, incluido el `mediaType` ausente, que
+cae del lado que conserva la cama. 72 tests, 0 fallos, las dos costuras en verde.
+
+La T-06 corre **antes** de la T-03 aunque su número sea posterior, y el índice de
+`TASKS.md` lo dice. La T-04 gana una línea sobre el alfa en su párrafo.
