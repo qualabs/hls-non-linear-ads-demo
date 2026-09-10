@@ -87,15 +87,29 @@ echo "plate: ${JUEGO}s de juego + ${PARADA}s de parada generada (${ESLABONES} es
 # plate, no sólo en las costuras. Nada en esta cadena es de 30, así que a 24 el
 # remuestreo desaparece. Los creativos sí son de 30 (`creativos.sh`), y no necesitan
 # coincidir: son streams HLS separados del primario.
+# EL ACTO 1 CIERRA UN CUADRO ANTES DE LOS 14 s, y ese cuadro no es un redondeo. El
+# cuadro contra el que se generó la parada es `entrada-arranca-la-parada.png`, y está
+# medido: es el cuadro **334** del clip. `trim=duration=14` a 24 fps deja los cuadros
+# 0..335, o sea que el acto 1 terminaba UN CUADRO DESPUÉS de donde la generación
+# arrancaba, y la costura se leía `333, 334, 335, 334-redibujado`: un cuadro de más y
+# después uno para atrás. Cortando en el 334 la secuencia queda `333, 334` y sigue.
+#
+# Y ESTO NO FUNCIONA SOLO: va junto con que el eslabón 01 entre sin su cuadro 0, más
+# abajo. Con el acto 1 cerrando en el 334, ese cuadro 0 --que es el 334 redibujado--
+# pasa a ser un duplicado, que es exactamente lo que le pasaba a los otros siete. Uno
+# solo de los dos cambios deja el defecto por el otro lado: el primero sin el segundo
+# duplica el 334, y el segundo sin el primero deja el paso atrás.
+CUADROS_ACTO1=$(awk -v j="$JUEGO" 'BEGIN { printf "%d", j * 24 - 1 }')
 ffmpeg -hide_banner -loglevel error -y -i "$F/$CLIP" \
-  -filter_complex "[0:v]crop=$RECORTE,scale=1280:720,fps=24,setsar=1,trim=duration=$JUEGO,setpts=PTS-STARTPTS[v]" \
+  -filter_complex "[0:v]crop=$RECORTE,scale=1280:720,fps=24,setsar=1,trim=end_frame=$CUADROS_ACTO1,setpts=PTS-STARTPTS[v]" \
   -map "[v]" -an -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p "$TMP/acto1.mp4"
 
-# CADA ESLABÓN MENOS EL PRIMERO ENTRA SIN SU CUADRO 0, y es la otra mitad de la costura.
-# El eslabón N+1 se genera sembrado con el último cuadro de N, así que su cuadro 0 es la
-# versión que Veo hace de ese mismo instante: pegados tal cual, el instante se ve dos
-# veces y queda un cuadro congelado en cada costura. Se descarta el de la copia generada
-# y se conserva el del eslabón que ya venía corriendo.
+# CADA ESLABÓN ENTRA SIN SU CUADRO 0, y es la otra mitad de la costura.
+# Cada eslabón se genera sembrado con el último cuadro del anterior --y el primero, con
+# el último cuadro del acto 1--, así que su cuadro 0 es la versión que Veo hace de ese
+# mismo instante: pegados tal cual, el instante se ve dos veces y queda un cuadro
+# congelado en cada costura. Se descarta el de la copia generada y se conserva el del
+# material que ya venía corriendo.
 #
 # Por eso son `$ESLABONES` entradas y un `concat` de filtro en lugar del demuxer: el
 # demuxer pega archivos enteros y no sabe saltear un cuadro.
@@ -103,11 +117,10 @@ ENTRADAS=(); FILTRO=""; ETIQUETAS=""
 for n in $(seq 1 "$ESLABONES"); do
   ENTRADAS+=(-i "$(printf '%s/%02d.mp4' "$P" "$n")")
   i=$((n - 1))
-  if [ "$n" -eq 1 ]; then
-    FILTRO+="[$i:v]setpts=PTS-STARTPTS[e$i];"
-  else
-    FILTRO+="[$i:v]select=gte(n\,1),setpts=PTS-STARTPTS[e$i];"
-  fi
+  # TODOS entran sin su cuadro 0, el primero incluido. El del primero es el cuadro 334
+  # redibujado, y el acto 1 ahora cierra en el 334: sin descartarlo se vería dos veces,
+  # igual que en las otras siete costuras.
+  FILTRO+="[$i:v]select=gte(n\,1),setpts=PTS-STARTPTS[e$i];"
   ETIQUETAS+="[e$i]"
 done
 FILTRO+="${ETIQUETAS}concat=n=$ESLABONES:v=1:a=0,scale=1280:720,fps=24,setsar=1,trim=duration=$PARADA,setpts=PTS-STARTPTS[v]"
