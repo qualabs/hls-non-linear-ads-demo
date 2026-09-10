@@ -122,6 +122,49 @@ runStory({
   video.play().catch(() => {});
 });
 
+/**
+ * THE SIGNALLING, SHOWN AS ITSELF, and read off what this player is actually playing
+ * rather than typed into the page.
+ *
+ * It is the same rule the state line above obeys, applied to the scroll: this page
+ * does not get to claim something it has not read. A tag pasted into the HTML would
+ * be an illustration, and an illustration of a playlist is worth nothing to an
+ * audience that reads playlists for a living -- besides which the START-DATE moves
+ * every time the content is packaged, so a pasted one would be wrong by tomorrow.
+ */
+async function showSignalling() {
+  const tag = document.getElementById('tag');
+  const list = document.getElementById('list');
+  try {
+    const playlist = await fetch(SRC).then((r) => r.text());
+    const line = playlist.split('\n').find((l) => l.startsWith('#EXT-X-DATERANGE:'));
+    // Wrapped on the commas, because the real line is one long tag and a horizontal
+    // scrollbar is a worse way to read it than four short lines.
+    tag.textContent = line ? line.replace(/,(?=[A-Z-]+=)/g, ',\n  ') : 'no Date Range in the playlist';
+
+    const url = line?.match(/X-ASSET-LIST="([^"]+)"/)?.[1];
+    const assets = url ? await fetch(url).then((r) => r.json()) : null;
+    // Only the shape of each asset, because the whole file is 100 lines and the point
+    // is what a break declares, not every viewport of every box.
+    list.textContent = assets
+      ? JSON.stringify(assets.ASSETS.map((a) => {
+        const block = a['X-AD-CREATIVE-SIGNALING']?.payload?.[0];
+        return {
+          URI: a.URI,
+          DURATION: a.DURATION,
+          type: block?.type ?? '(no layout block: a linear ad, played full frame)',
+          ...(block ? { boxes: block.layout.assets.map((e) => `${e.type}  ${e.viewport}`) } : {})
+        };
+      }), null, 2)
+      : 'no asset-list on the tag';
+  } catch (error) {
+    // Says what happened instead of leaving "loading…" on the page for good.
+    tag.textContent = list.textContent = `could not read the signalling: ${error.message}`;
+    console.error('[page] the signalling could not be shown', error);
+  }
+}
+showSignalling();
+
 // For the console and for whoever comes next.
 window.demo = {
   hls,
