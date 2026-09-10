@@ -5040,3 +5040,23 @@ su ventana; con la salida adentro de la ventana está activo por derecho propio
 mientras se va, así que apagárselos sería inventar una regla.
 
 72 tests, 0 fallos, las dos costuras en verde.
+
+## 2026-09-10 — T-04 de la fase 09: el párrafo al integrador, sin copiar un número
+
+`docs/integrating-the-library.md` gana una subsección 5.1 debajo de la tabla de qué
+es de la librería y qué queda del integrador, que es donde ya vivía la fila de la
+geometría del contenido primario. Dice las tres cosas: la imagen se anima cuando el
+layout le da otra caja, un elemento de aviso difumina, y el aviso a cuadro entero no
+lleva ninguna de las dos porque un corte es lo que tiene que parecer.
+
+**Y dice lo que un integrador no puede deducir de la superficie pública**: que el
+tiempo sale de la ventana del propio aviso y nunca de después, así que no se le
+saltea ni se le demora un cuadro a ningún creativo; que no hay opción ni custom
+property que lo apague; que la librería escribe `transition-*` inline sobre el
+elemento de media, así que una transición de su hoja de estilos no sobrevive a un
+break; y que una imagen conserva su alfa mientras un video lleva cama negra debajo.
+
+**No copia ni un número.** Nombra las cinco constantes y manda a leerlas en
+`lib/renderer.js`, que es la regla C de la política de documentación: un dato del
+que otro artefacto es dueño no se copia. Y `docs/contrato-senalizacion-renderizado.md`
+no tiene ningún cambio, porque la superficie entre las dos capas quedó igual.
