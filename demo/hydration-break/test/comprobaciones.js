@@ -119,6 +119,51 @@ export function elBreakArrancaEnLaParada({ plate, senalizador }) {
 }
 
 /**
+ * CHEQUEO 2b -- el reparto de los avisos sale de plate.json y no del asset list.
+ *
+ * `plate.json` declara `avisos`, y las `DURATION` del asset list tienen que ser ésas.
+ * Si los dos no coinciden, la demo **miente sin fallar**: el break dura lo que suman
+ * las `DURATION` y el gráfico de la parada dura `paradaDura`, así que la publicidad
+ * termina antes o después de la parada y en pantalla no se ve como un error, se ve como
+ * otra demo.
+ *
+ * Y dos condiciones que vienen del techo de la generación: los avisos suman
+ * `paradaDura`, y **cada uno es múltiplo de 8** -- que es el largo máximo de un
+ * segmento generado, así que la parada entera es una cantidad entera de eslabones sin
+ * un resto corto, que es el que peor sale.
+ */
+export function elRepartoSaleDeUnSoloLugar({ plate, assetList }) {
+  const hallazgos = [];
+  const avisos = plate.avisos;
+  if (!Array.isArray(avisos) || avisos.length === 0) {
+    hallazgos.push('plate.json no declara `avisos`, que es de donde sale el reparto');
+    return hallazgos;
+  }
+
+  const suma = avisos.reduce((a, b) => a + b, 0);
+  if (suma !== plate.paradaDura) {
+    hallazgos.push(`los avisos suman ${suma}s y la parada dura ${plate.paradaDura}s: ` +
+      'la publicidad no cubre la parada, y eso no falla, se ve como otra demo');
+  }
+
+  const noMultiplos = avisos.filter((a) => a % 8 !== 0);
+  if (noMultiplos.length > 0) {
+    hallazgos.push(`estos avisos no son múltiplos de 8: ${noMultiplos.join(', ')}. El ` +
+      'techo de una generación son 8 s, así que un aviso que no es múltiplo deja un ' +
+      'resto corto, que es el eslabón que peor sale');
+  }
+
+  const declaradas = (assetList.ASSETS || []).map((a) => Number(a.DURATION));
+  if (declaradas.length !== avisos.length ||
+      declaradas.some((d, i) => d !== avisos[i])) {
+    hallazgos.push(`el asset list declara [${declaradas.join(', ')}] y plate.json ` +
+      `[${avisos.join(', ')}]: el reparto vive en dos lugares y ya se despegó`);
+  }
+
+  return hallazgos;
+}
+
+/**
  * CHEQUEO 3 -- el minuto declara sus tres formas de aviso.
  *
  * Cuatro avisos; exactamente uno SIN bloque de layout, que es el lineal del ADR 0019, y

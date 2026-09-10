@@ -1,42 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  THE CHANNEL PACKAGE, and it is the piece with the most leverage of the whole
-  demo: it is what makes rights-clean amateur footage read as a live broadcast.
-  Nothing that IS legally clean looks like a broadcast, and everything that looks
-  like a broadcast is a real professional match with league, club and sponsor
-  rights on top of it. The graphics are what close that gap, and they are ours.
+  EL PAQUETE DE CANAL, partido en tres piezas porque el grafico CAMBIA cuando entra la
+  parada.
 
-  EVERYTHING HERE IS INVENTED. The channel, the two clubs, the score. There is no
-  real broadcaster's dress being imitated: no swoosh, no wordmark of anybody's,
-  and the palette is the demo's own.
+  POR QUE CAMBIA, y la razon importa mas que la implementacion: **porque el estado del
+  partido cambio**, y el grafico es como una transmision dice eso. En ese minuto no hay
+  nada que tantear. **No mitiga una discontinuidad: no hay discontinuidad.** La parada
+  sale generada desde el cuadro de juego, asi que la imagen muestra a los jugadores
+  dejando de jugar y yendo a tomar agua.
 
-  It is an SVG and not a generated image, and that is measured and not a
-  preference: the generator gives no alpha channel and no exact dimensions, and
-  small type over a shape comes back deformed. Geometry and type are written by
-  hand and rasterised with Chrome headless, which gives real alpha at exactly
-  1280x720 (ADR 0045).
+  Vale escrito asi porque una razon equivocada sobrevive mejor que un error: si aca
+  dijera "el grafico disimula el corte", el dia que alguien mire y vea que no hay corte
+  lo sacaria, con toda la logica del mundo.
 
-  THE CLOCK IS NOT IN HERE. Its digits are drawn by ffmpeg over the dark slot
-  below, because a clock that does not tick is the difference between a graphic
-  and a broadcast, and an SVG cannot tick. The slot is the hole the tool fills.
+    bug-de-canal.svg     siempre, es el canal
+    scorebug.svg         solo durante el juego: los dos clubes y el marcador
+    hydration-break.svg  solo durante la parada, y ocupa el lugar del scorebug
+
+  EL RELOJ SE QUEDA EN LAS DOS, y la razon es de futbol: en una parada de hidratacion el
+  partido no esta detenido reglamentariamente y el reloj no se para. Un reloj que sigue
+  corriendo mientras el tanteador se va dice exactamente "el partido no se detuvo, la
+  transmision cambio de grafico", que es la propiedad que esta demo existe para mostrar,
+  dicha con graficos. Por eso las dos piezas dejan el hueco del reloj en las MISMAS
+  coordenadas: la placa cambia por debajo y los digitos no se mueven.
+
+  Todo inventado: el canal, los dos clubes, el marcador. Y es SVG y no imagen generada
+  porque la generacion no da alfa ni dimensiones exactas (ADR 0045).
 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
-  <defs>
-    <clipPath id="pill">
-      <rect x="40" y="34" width="286" height="46" rx="8"/>
-    </clipPath>
-  </defs>
+  <defs><clipPath id="pill"><rect x="40" y="34" width="286" height="46" rx="8"/></clipPath></defs>
 
-  <!-- THE SCOREBUG, top left, where every broadcast puts it. One bar, two clubs,
-       the score, and the slot for the clock. -->
+  <!-- Los dos clubes y el marcador. Se va cuando entra la parada. -->
   <g clip-path="url(#pill)">
     <rect x="40" y="34" width="286" height="46" fill="#0e1116" fill-opacity="0.92"/>
-    <!-- The colour chip of each club: the only colour in the package, and it is
-         what lets somebody reading the bug tell the two apart at a glance. -->
     <rect x="40" y="34" width="7" height="23" fill="#2f6df6"/>
     <rect x="40" y="57" width="7" height="23" fill="#d94a3d"/>
   </g>
-
   <g font-family="DejaVu Sans, Verdana, sans-serif" fill="#f4f6f8">
     <text x="60" y="52" font-size="16" font-weight="bold" letter-spacing="1.2">NOR</text>
     <text x="60" y="74" font-size="16" font-weight="bold" letter-spacing="1.2">HAV</text>
@@ -44,20 +43,7 @@
     <text x="118" y="74" font-size="16" font-weight="bold">0</text>
   </g>
 
-  <!-- THE SLOT FOR THE CLOCK. ffmpeg draws the digits here; this is the plate
-       they sit on, so the type has a surface of its own and stays legible over
-       any frame of the match. -->
+  <!-- EL HUECO DEL RELOJ, en las mismas coordenadas que en hydration-break.svg. -->
   <rect x="146" y="34" width="180" height="46" fill="#181d25" fill-opacity="0.92"/>
   <line x1="146" y1="34" x2="146" y2="80" stroke="#2b323d" stroke-width="1.5"/>
-
-  <!-- THE CHANNEL BUG, top right, small and translucent, which is what a
-       broadcaster's bug actually is. -->
-  <g opacity="0.88">
-    <rect x="1092" y="34" width="148" height="34" rx="6" fill="#0e1116" fill-opacity="0.82"/>
-    <rect x="1104" y="43" width="16" height="16" rx="3" fill="#37b4a7"/>
-    <text x="1130" y="56" font-family="DejaVu Sans, Verdana, sans-serif" font-size="14"
-          font-weight="bold" letter-spacing="1.6" fill="#f4f6f8">VEKTA</text>
-    <text x="1200" y="56" font-family="DejaVu Sans, Verdana, sans-serif" font-size="14"
-          letter-spacing="1.6" fill="#8b97ab">SPORT</text>
-  </g>
 </svg>

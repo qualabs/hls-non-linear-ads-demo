@@ -1,5 +1,11 @@
 {
-  "largo": 88,
+  "largo": 92,
   "paradaEn": 14,
-  "paradaDura": 60
+  "paradaDura": 64,
+  "avisos": [
+    16,
+    16,
+    8,
+    24
+  ]
 }
