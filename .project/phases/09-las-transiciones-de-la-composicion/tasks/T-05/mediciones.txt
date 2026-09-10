@@ -1,0 +1,93 @@
+Mediciones de la T-05 -- 2026-09-10. Lo que la T-02 y la T-03 ya midieron esta en
+sus propias carpetas y no se repite aca; esto es lo que faltaba.
+
+
+== R4 (a): NO SE LE RECORTA NADA A NINGUN CREATIVO -- corrida limpia sin tocar nada ==
+
+demo/compatibility-pair recargada y dejada correr sola desde el segundo 0 hasta el
+84.18, o sea a traves de TRES breaks: el overlay (20..32), la L de video (45..57) y
+la L de imagen (70..82). Colector de consola puesto antes de arrancar, filtrando
+[renderer], [signalling] y [concurrent].
+
+   mensajes: 0
+
+Cero. Ni una advertencia de warnIfCut, o sea que ningun creativo se saco antes de
+terminar y ninguna ventana se movio. Y ningun mensaje nuevo de ninguna clase.
+
+CONTRASTE, y es lo que separa lo que causa la fase de lo que causaba yo: en una
+corrida ANTERIOR, en la que estuve haciendo seeks a mano, aparecieron 3 mensajes,
+los tres de warnIfCut ("taken off with Ns of its asset still unplayed") sobre
+adBarVertical, adBarHorizontal y linear. Son de su propia razon de ser -- un seek
+saca un nodo a mitad del asset -- y no de la fase.
+
+
+== R4 (b): NO QUEDAN PIXELES VIEJOS DESPUES DE UN BREAK ==
+
+Con el player pausado en t=88, que esta entre el break de 70..82 y el de 95..107:
+
+   antes de encoger    0 nodos de aviso
+                       style inline del video: (sin atributo)
+                       video 715.0 px   contenedor 715.0 px
+
+   encogiendo el contenedor 180 px
+
+   despues             style inline del video: (sin atributo)
+                       video 535.0 px   contenedor 535.0 px
+
+El video siguio al contenedor. `clear()` le borra el atributo en el acto, asi que
+no hay nada viejo que un redimensionado entre dos breaks pueda revelar. Era el
+riesgo que la primera forma del diseno traia con su reset postergado, y con la
+salida adentro de la ventana no existe.
+
+
+== UN SEEK HACIA ATRAS QUE SALE DE LA VENTANA DE SALIDA ==
+
+Sobre el overlay de 20..32:
+
+   t=31.95  (adentro de los ultimos 120 ms)    adOverlay1 = 0.000
+   seek atras a 25.00                          adOverlay1 = 1.000
+
+Vuelve solo. Es la propiedad de que el valor se escribe como funcion del instante
+y no como reaccion a un evento que ya paso: nadie tiene que acordarse de deshacer
+nada.
+
+
+== R5: ANIMAR NO CUESTA NADA MEDIBLE EN EL CUADRO ==
+
+Deltas entre cuadros de requestAnimationFrame, en la corrida del break mezclado,
+comparando las ventanas de transicion contra el regimen de al lado:
+
+                              n     medio     max     sobre 25 ms
+   regimen 118.0 .. 119.9     95    19.94     30.8     15
+   TRANSICION en 120.00       24    20.75     35.1      7
+   regimen 122.0 .. 131.9    495    20.00     42.3     60
+   TRANSICION en 132.00       25    19.84     34.9      6
+   regimen 133.0 .. 135.0     99    20.14     36.3     15
+
+Las dos ventanas de transicion son indistinguibles del regimen: 20.75 y 19.84
+contra 19.94, 20.00 y 20.14. Y el maximo DENTRO de una transicion (35.1 y 34.9) es
+mas bajo que el maximo del regimen (42.3).
+
+EL LIMITE DE ESTA MEDICION, dicho: la linea de base de este entorno es de ~20 ms
+por cuadro -- Chrome headful, dos players en la misma pagina, maquina ocupada --
+asi que lo que esto prueba es que la animacion NO AGREGA costo, no que la pagina
+corra a 60 fps. Es lo que la fase necesita saber: limitar lo animado a `transform`
+y `opacity` (ADR 0051) hizo lo que tenia que hacer.
+
+
+== LAS DOS SUITES ==
+
+   npm test        72 tests, 72 pass, 0 fail, 0 skipped, 0 todo
+   npm run check   ADR 0003: GREEN, 3 ocurrencias, todas en la lista aceptada
+                   ADR 0015: GREEN, cero hits
+
+
+== UN CASO QUE NO SE PUEDE MIRAR, Y SE DICE EN LUGAR DE OMITIRLO ==
+
+El REPLIEGUE del ADR 0019 -- un bloque que este cliente no puede dibujar y que cae
+al camino del aviso a cuadro entero -- no esta en el recorrido de la demo tecnica.
+Sus asset-list existen en demo/compatibility-pair/signalling/ pero el recorrido
+senaliza otros cinco. Asi que no se miro en pantalla: esta cubierto por el test de
+la T-01, que lo afirma sobre el fixture real
+(asset-list-repliegue-bloque-roto.json) y comprueba que cae del lado del lineal, o
+sea sin difuminado.
