@@ -31,7 +31,7 @@ import { readFileSync } from 'node:fs';
 
 import { resolveAssetList, LINEAR_TYPE } from '../lib/signalling.js';
 import {
-  fadesInAndOut, remainingIn, isLeaving,
+  fadesInAndOut, remainingIn, isLeaving, isImage,
   FULL_FRAME_TYPE, PRIMARY_MOVE_MS, AD_FADE_IN_MS, AD_FADE_OUT_MS
 } from '../lib/renderer.js';
 
@@ -171,4 +171,40 @@ test('the three durations are the ones the phase declared, and the way out is th
   assert.equal(AD_FADE_OUT_MS, 120);
   assert.ok(AD_FADE_OUT_MS < AD_FADE_IN_MS);
   assert.ok(AD_FADE_IN_MS < PRIMARY_MOVE_MS);
+});
+
+// --- Which node gets an opaque bed under it --------------------------------
+//
+// `isImage` decided which ELEMENT this file creates long before it decided
+// anything about painting, and now the black bed hangs off the same answer: a
+// video gets one and a still does not, because a still with an alpha channel is
+// composited against it forever (ADR 0056). So the cases below are not about
+// the tag any more, and the one that matters is the absent `mediaType`: it has
+// to fall on the side that KEEPS the bed, because that is the side where being
+// wrong costs a frame instead of a creative.
+
+test('a still is told apart from a video, including when nothing is declared', () => {
+  assert.equal(isImage('image/png'), true);
+  assert.equal(isImage('image/jpeg'), true);
+  assert.equal(isImage('IMAGE/PNG'), true);
+  assert.equal(isImage('application/vnd.apple.mpegurl'), false);
+  assert.equal(isImage('video/mp4'), false);
+  // The two shapes of "the contract said nothing", and both keep the bed.
+  assert.equal(isImage(null), false);
+  assert.equal(isImage(undefined), false);
+  assert.equal(isImage(''), false);
+  // And not a substring match: a type that merely mentions an image is not one.
+  assert.equal(isImage('application/image-list'), false);
+});
+
+test('the ad the phase fades is a still, so the two rules meet on the banner', () => {
+  // The banner of the hydration break is a still inside an overlay layout, so
+  // it fades in and out AND it must not be painted onto black. This is the one
+  // element where both rules of the phase land at once, and it is the reason
+  // the bed had to be fixed before the fade was written: a node with a bed
+  // fades the bed, so at half opacity a half-black rectangle appears over the
+  // picture instead of half a banner.
+  const banner = { mediaType: 'image/png' };
+  assert.equal(isImage(banner.mediaType), true);
+  assert.equal(fadesInAndOut({ type: 'lowerThirdOverlay' }), true);
 });

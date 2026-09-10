@@ -1,0 +1,37 @@
+La misma asercion sobre el DOM vivo de demo/hydration-break, en el mismo instante
+del programa (t=28.50, con el banner en pantalla y la L ya anticipada), corrida
+antes y despues del arreglo. Correrla ANTES es lo que la convierte en un chequeo
+que puede fallar en lugar de uno escrito de buena fe.
+
+  [...document.querySelectorAll('.ad')].map(n =>
+    n.tagName + ' ' + n.dataset.elementId + ' -> background inline: ' +
+    (n.style.background || '(sin valor)'))
+
+
+ANTES del arreglo
+   t=28.50
+   IMG   banner       ->  background inline: rgb(0, 0, 0)     <- el defecto
+   VIDEO lBackplate   ->  background inline: rgb(0, 0, 0)
+
+DESPUES del arreglo
+   t=28.50
+   IMG   banner       ->  background inline: (sin valor)      <- arreglado
+   VIDEO lBackplate   ->  background inline: rgb(0, 0, 0)     <- conservado
+
+
+Las dos filas cambian de forma distinta, que es lo que el chequeo tiene que
+distinguir: un test que solo mirara el <img> no protegeria la cama del video.
+
+
+EL ALFA DEL CREATIVO, MEDIDO (no supuesto)
+
+   demo/hydration-break/content/adBanner/creative.png
+   1120x126, bit depth 8, color type 6 (RGBA)
+
+   pixeles totales      141120
+   alfa = 255 (opacos)   72124   51.1 %
+   alfa = 0 (transp.)     3130    2.2 %
+   0 < alfa < 255        65866   46.7 %   <- casi medio creativo
+
+O sea que el alfa se usa de verdad y el 47 % del creativo se estaba pintando
+sobre negro. No era un caso de borde.
