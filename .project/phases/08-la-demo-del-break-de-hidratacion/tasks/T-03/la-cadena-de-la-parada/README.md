@@ -14,6 +14,31 @@ continuidad no es una intención del prompt sino una entrada del modelo. El octa
 octavo, lleva además `lastFrame`: el primer cuadro del acto 3, que es donde el clip filmado
 retoma. Por eso el plate no necesita disolvencias en ninguno de los dos empalmes.
 
+> **Nota del 2026-09-10: los dos enunciados del párrafo de arriba resultaron falsos.**
+> El bloque queda en pie sin tocar porque es la prueba de qué se corrió en su momento;
+> esto es lo que se midió después.
+>
+> **No era el último cuadro.** `-sseof -1 -update 1 -frames:v 1` se para un segundo
+> antes del final y se queda con el PRIMERO de ahí en adelante: medido sobre el eslabón
+> 01, el cuadro **168 de 192** (YAVG 0 contra el 168, 22,36 contra el 191). Cada eslabón
+> arrancaba donde el anterior estaba un segundo antes de terminar, y en el concat la
+> acción saltaba un segundo para atrás en cada costura. Las siete medían 24,17 / 32,37 /
+> 27,21 / 25,59 / 32,04 / 25,67 / 35,15.
+>
+> **El octavo no cerraba contra el acto 3.** Cerraba contra
+> `salida-vuelve-el-juego.png`, y esa imagen **no pertenece al clip**: comparada contra
+> sus 341 cuadros, el más parecido da 37,7 y el menos parecido 38,1. Hoy ese cuadro se
+> extrae del clip por índice.
+>
+> Lo vigente está en `scripts/generar-parada.sh` (cómo se siembra) y en
+> `scripts/verificar-plate.sh` (cómo se mide una costura, con las dos calibraciones).
+>
+> **Lo que sí se sostuvo es el veredicto de esta página.** La cadena que documenta acá
+> no tiene deriva de escena, y se volvió a verificar midiendo el fondo: 22,3 contra el
+> acto 1, la misma distancia que un eslabón sano. La cadena regenerada con la semilla
+> corregida sí derivó, y por una corrida con mala suerte y no por el método -- el
+> eslabón 03 rehecho desde la misma semilla volvió a 23,8.
+
 ## Deriva de escena: ninguna
 
 Muestreado cada 8 s en los 64. En los ocho cuadros se repiten la **misma cancha** —la reja de
