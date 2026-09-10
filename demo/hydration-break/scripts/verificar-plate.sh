@@ -72,14 +72,15 @@ FPS="$FPS" JUEGO="$JUEGO" PARADA="$PARADA" node -e '
   const val = new Map(fs.readFileSync(process.argv[1], "utf8").trim().split("\n")
     .map((l) => l.trim().split(/\s+/)).map(([n, v]) => [+n, +v]));
 
-  // Dónde caen las costuras. El primer eslabón entra entero; los demás entran sin su
-  // cuadro 0, así que aportan un cuadro menos cada uno (ver `armar-plate.sh`).
-  const eslabones = Math.round(parada / 8), largoEslabon = 8 * fps;
-  const bordes = [[Math.round(juego * fps), "acto 1 -> parada"]];
+  // Dónde caen las costuras. TODOS los eslabones entran sin su cuadro 0 --incluido el
+  // primero, desde que el acto 1 cierra en el cuadro 334-- así que cada uno aporta un
+  // cuadro menos, y el acto 1 aporta uno menos que `juego * fps` (ver `armar-plate.sh`).
+  const eslabones = Math.round(parada / 8), largoEslabon = 8 * fps - 1;
+  const bordes = [[Math.round(juego * fps) - 1, "acto 1 -> parada"]];
   let cursor = bordes[0][0] + largoEslabon;
   for (let k = 2; k <= eslabones; k++) {
     bordes.push([cursor, `eslabón ${String(k - 1).padStart(2, "0")} -> ${String(k).padStart(2, "0")}`]);
-    cursor += largoEslabon - 1;
+    cursor += largoEslabon;
   }
   bordes.push([cursor, "parada -> acto 3"]);
 
