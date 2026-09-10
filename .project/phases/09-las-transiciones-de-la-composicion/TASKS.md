@@ -6,7 +6,7 @@
 | T-02 | La geometría del primario, entrada y salida | done | — | tasks/T-02/ |
 | T-03 | El difuminado de los nodos de aviso, entrada y salida | done | — | tasks/T-03/ |
 | T-04 | El párrafo al integrador | done | — | — |
-| T-05 | La corrida mirada y las suites | pending | — | — |
+| T-05 | La corrida mirada y las suites | done | — | tasks/T-05/ |
 | T-06 | La cama negra deja de romper el alfa de una imagen | done | — | tasks/T-06/ |
 
 El orden lo pone el riesgo: la T-01 es lo único que se cierra sin navegador, y la

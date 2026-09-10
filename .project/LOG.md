@@ -5060,3 +5060,46 @@ break; y que una imagen conserva su alfa mientras un video lleva cama negra deba
 `lib/renderer.js`, que es la regla C de la política de documentación: un dato del
 que otro artefacto es dueño no se copia. Y `docs/contrato-senalizacion-renderizado.md`
 no tiene ningún cambio, porque la superficie entre las dos capas quedó igual.
+
+## 2026-09-10 — T-05 de la fase 09: la corrida mirada, y los tres riesgos cerrados con números
+
+**R4, en sus dos mitades.** Una corrida limpia de `demo/compatibility-pair` desde
+el segundo 0 hasta el 84.18, a través de tres breaks y sin tocar nada, dejó **cero
+mensajes** de consola: ningún creativo se sacó antes de terminar y ninguna ventana
+se movió. El contraste importa porque separa lo mío de lo de la fase: en una
+corrida anterior, en la que estuve haciendo seeks a mano, aparecieron tres
+advertencias de `warnIfCut`, y son de su propia razón de ser —un seek saca un nodo
+a mitad del asset— y no del cambio. La otra mitad: con el player pausado entre dos
+breaks, encoger el contenedor 180 px llevó el video de 715 a 535 px siguiendo al
+contenedor, sin atributo `style` y sin píxeles viejos.
+
+**R5, medido en lugar de mirado.** Los deltas de cuadro dentro de las ventanas de
+transición —medias de 20,75 y 19,84 ms— son indistinguibles del régimen de al lado
+—19,94, 20,00 y 20,14— y el máximo dentro de una transición (35,1 ms) es más bajo
+que el del régimen (42,3 ms). Con el límite dicho: la línea de base de este entorno
+es de ~20 ms por cuadro, así que lo que se prueba es que animar **no agrega** costo
+y no que la página corra a 60 fps. Es exactamente lo que el ADR 0051 compró al
+limitar lo animado a `transform` y `opacity`.
+
+**R3** ya estaba cerrado por aritmética en la T-03 y en la corrida limpia no
+apareció nada que la aritmética no hubiera predicho. **No hizo falta la línea del
+`zDepth`** que el ADR 0052 dejaba preparada.
+
+**Y un seek hacia atrás** desde los últimos 120 ms de un aviso devuelve la opacidad
+de 0.000 a 1.000 solo, que es la propiedad de escribir el valor como función del
+instante y no como reacción a un evento que ya pasó.
+
+La captura que se agregó es **el cuadro más completo de la fase**: la L de imagen de
+la demo técnica con las dos animaciones corriendo a la vez, el aviso en opacidad
+0.295 y el primario en escala 0.886. Es además la otra forma de autorar una L —las
+tiras encima del primario— así que entre ésta y la del break de hidratación quedan
+miradas las dos formas, distintas y las dos correctas bajo el mismo mecanismo.
+
+**Un caso que no se puede mirar y se dice en lugar de omitirlo**: el repliegue del
+ADR 0019 no está en el recorrido de la demo técnica, así que no se miró en pantalla
+y queda cubierto por el test de la T-01 sobre el fixture real.
+
+`npm test`: 72 tests, 0 fallos. `npm run check`: las dos costuras en verde.
+
+**Las seis tasks de la fase están hechas.** Lo que falta para cerrarla no es
+trabajo: es que Nicolás lo mire una vez, que es la vara que la fase se puso.
