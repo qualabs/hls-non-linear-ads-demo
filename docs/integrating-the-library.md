@@ -236,7 +236,8 @@ and no npm dependency (§8).
 | | the container: where it sits on the page, how big it is, its background and its corners |
 | | your brand: the logo file, the accent colour, the typeface (§7) |
 | **The library's** | everything drawn inside the container: the layer the ads live in, the boxes of each layout, the second instances that play the assets |
-| | the geometry of the primary content **while a break is on screen** — its position, its size and its scale |
+| | the geometry of the primary content **while a break is on screen** — its position, its size, its scale, and **the time it takes to get there** (§5.1) |
+| | whether an element of an ad fades in and out, and whether it is painted onto an opaque bed (§5.1) |
 | | the controls of the composition, and the element that goes fullscreen |
 | | the volume of every element during a break, including the primary's: the asset-list declares the initial mix, and with the chrome on screen a press on a video box of the ad hands that box the whole sound until it is let go (ADR 0026) |
 
@@ -245,6 +246,49 @@ attached already, or it arrives on `MEDIA_ATTACHED` — so there is nothing to
 pass twice. **It has to be a descendant of the container**: the primary is moved
 and scaled within that box, so an element living elsewhere would be dragged
 around outside it. The library says so on `console.error` and carries on.
+
+### 5.1 The composition moves, and there is no switch for it
+
+An ad does not cut into the picture, it arrives. Two things carry that, and one
+of them deliberately does not:
+
+- **The picture of the primary content is animated**, with a `transform`,
+  whenever a layout gives it a box other than the one it is in. A squeezeback
+  then reads as the picture retreating over an ad that was already behind it,
+  rather than as the frame changing all at once — and on the way out the picture
+  grows back and covers the ad again.
+- **An element of an ad fades in and out**, by opacity.
+- **An ad at full frame gets neither**, in or out. A full-frame ad is a cut, and
+  a cut is what it is meant to look like. Nothing has to be declared for this:
+  the library recognises it as the ad it drew no layout for.
+
+**The time comes out of the ad's own window, and never from after it.** The way
+in happens in the first stretch of the window; the way out *ends* on the edge of
+it rather than starting there. So nothing on screen outlives the window the
+signalling gave it, and **no frame of a creative is skipped or delayed to make
+room for an effect** — the asset starts at the first instant of its window and
+plays whole, and what moves over it is the picture. On a window shorter than the
+transition there is simply no effect, because the window is what pays for it.
+
+**It is fixed behaviour and it takes no configuration.** `attach` has no option
+for it and no custom property of your stylesheet reaches it. The durations and
+the curves are exported constants of `lib/renderer.js` —
+`PRIMARY_MOVE_MS`, `AD_FADE_IN_MS`, `AD_FADE_OUT_MS`, `MOVE_EASING` and
+`FADE_EASING` — and if you want the numbers, read them there. They are not
+repeated here on purpose: a number copied into a document is a number that goes
+stale.
+
+Two things worth knowing because they touch what stays yours:
+
+- **The library writes `transition-*` inline on the media element** while a break
+  is on screen, so a transition your stylesheet puts on that element does not
+  survive a break. Only `transform` and `opacity` are ever animated, so nothing
+  here costs a layout pass per frame.
+- **A still keeps its alpha and a video gets an opaque bed.** A `<video>` is
+  transparent until it decodes its first frame, so the library paints black
+  behind it; an image is composited with its own transparency, which is what a
+  PNG with an alpha channel is for. The difference is not configurable either,
+  and it is the reason a transparent creative works.
 
 ---
 
