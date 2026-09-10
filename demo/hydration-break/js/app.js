@@ -111,41 +111,94 @@ paint();
 // button, and without the walkthrough the business case is the thing they miss.
 // One state and not two pages -- when it ends, the player is theirs.
 //
-// IT STARTS WHEN THE OPENING ENDS, and that is the one thing the opening changed. The
-// page still never presses play itself: the walkthrough does, when its first card
-// goes. What moved is when the walkthrough is allowed to begin -- from "on load" to
-// "once the reader has scrolled past the sentences" -- so the match does not start
-// behind a screen that is still making the argument for it.
-const arrancarLaCorrida = () => runStory({
-  provider: concurrent.provider,
-  video,
-  card: document.getElementById('card'),
-  skip: document.getElementById('skip')
-}).catch((error) => {
-  // A walkthrough that cannot load is not a reason to lose the demo: the player
-  // keeps playing and the console says what happened.
-  console.error('[story] the walkthrough did not start, the player carries on', error);
-  document.body.dataset.story = 'done';
-  video.play().catch(() => {});
+// IT STARTS WHEN THE PICTURE IS ON SCREEN, and that is the one thing the opening
+// changed. The page still never presses play itself: the walkthrough does, when its
+// first card goes. What moved is WHEN the walkthrough is allowed to begin.
+//
+// AND EL DISPARADOR ES EL VIEWPORT Y NO EL SCROLL DE LA APERTURA, que fue el defecto
+// que la apertura introdujo. Atado al final de la sección, el recorrido podía arrancar
+// con el player todavía abajo del pliegue: las primeras placas corrían contra una
+// pantalla que nadie estaba mirando y el espectador entraba tarde. Que la sección
+// terminó y que la imagen se ve son dos cosas distintas, y la que importa es la
+// segunda.
+//
+// EL UMBRAL ES 0,6 Y NO 0. Con 0 alcanza un píxel asomando por abajo, que es
+// exactamente el caso que se quiere evitar; con 0,6 la imagen ya está mayormente en
+// pantalla cuando aparece la primera placa. Y no arranca nunca si el lector se queda
+// arriba leyendo, que es lo pedido y no un defecto.
+const boton = document.getElementById('skip');
+let corrida = null;
+
+const arrancarLaCorrida = async () => {
+  try {
+    corrida = await runStory({
+      provider: concurrent.provider,
+      video,
+      card: document.getElementById('card'),
+      skip: boton
+    });
+  } catch (error) {
+    // A walkthrough that cannot load is not a reason to lose the demo: the player
+    // keeps playing and the console says what happened.
+    console.error('[story] the walkthrough did not start, the player carries on', error);
+    corrida = null;
+    document.body.dataset.story = 'done';
+    video.play().catch(() => {});
+  }
+};
+
+const mirando = new IntersectionObserver((entradas) => {
+  if (!entradas.some((e) => e.isIntersecting)) return;
+  mirando.disconnect();
+  arrancarLaCorrida();
+}, { threshold: 0.6 });
+mirando.observe(document.getElementById('player'));
+
+// UN SOLO LISTENER PARA LOS DOS TRABAJOS DEL BOTÓN, y por eso el recorrido ya no se
+// engancha solo. Con dos listeners sobre el mismo botón el orden decide el resultado:
+// el del recorrido corre primero, marca `done`, y el de acá lo leía como "terminado" y
+// reiniciaba en el mismo clic. Preguntando por el recorrido en lugar de por el atributo
+// del body, la pregunta se contesta antes de que nadie la haya cambiado.
+//
+// A MITAD DE RECORRIDO EL BOTÓN SIGUE SIENDO EL DE SALTEAR. Es donde más se aprieta, y
+// convertirlo en "reiniciar" ahí sería cambiarle el significado justo cuando la mano ya
+// aprendió dónde está.
+boton.addEventListener('click', () => {
+  if (corrida?.running) return corrida.end();
+  reiniciarLaCorrida();
 });
 
-// The sentences come out of the same file as the beats, and it is read once here
-// instead of twice: `runStory` takes what it already fetched.
-//
-// AND A BROKEN OPENING CANNOT COST THE DEMO ITS PLAYER, which is the same rule the
-// walkthrough obeys one block up. If the file does not load, the section is hidden and
-// the run starts as it did before.
+// REINICIAR ES VOLVER AL PRINCIPIO Y NO ENCIMAR UN SEGUNDO RECORRIDO. La demo se
+// muestra varias veces seguidas en un evento, y recargar la página devolvería al
+// visitante a la apertura, que es peor que no tener botón. El estado que hay que
+// deshacer es el que el recorrido toma: el programa parado en un segundo cualquiera y
+// el atributo del body. La placa y el guard ya los soltó `end()` al terminar, que es la
+// razón por la que ese release existe.
+async function reiniciarLaCorrida() {
+  video.pause();
+  video.currentTime = 0;
+  delete document.body.dataset.story;
+  await arrancarLaCorrida();
+}
+
+// LOS RÓTULOS DEL BOTÓN VIVEN CON LOS BEATS (ADR 0038). `runStory` pone el de saltear
+// cuando arma; el de reiniciar se pone cuando el recorrido termina, y se lee del mismo
+// archivo para que quien edita el copy no tenga que abrir el código.
 fetch('./story/story.json')
   .then((r) => r.json())
-  .then((story) => runOpening({
-    section: document.getElementById('opening'),
-    lines: story.opening,
-    onDone: arrancarLaCorrida
-  }))
+  .then((story) => {
+    runOpening({ section: document.getElementById('opening'), lines: story.opening });
+    if (!story.restart) return;
+    new MutationObserver(() => {
+      if (document.body.dataset.story === 'done') boton.textContent = story.restart;
+    }).observe(document.body, { attributes: true, attributeFilter: ['data-story'] });
+  })
   .catch((error) => {
-    console.error('[opening] the opening did not load, the run starts as it used to', error);
+    // A BROKEN OPENING CANNOT COST THE DEMO ITS PLAYER. If the file does not load the
+    // section is hidden, and the player is then the first thing on the page, so the
+    // observer above fires on its own.
+    console.error('[opening] the opening did not load, the player is what is left', error);
     document.getElementById('opening').hidden = true;
-    arrancarLaCorrida();
   });
 
 /**
