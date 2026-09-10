@@ -15,3 +15,12 @@ dist/
 # demo/hydration-break/graphics/creativos/fuentes/README.md. Las imágenes generadas
 # sí se quedan: son livianas.
 *.mp4
+
+# La investigación: lo que se probó para llegar a lo que está en `demo/`. Generaciones
+# descartadas, láminas de contacto, mediciones, capturas del antes y el después, y las
+# variantes que no entraron. Es material de trabajo y no del producto: son cientos de
+# megabytes, y lo que sí va en git es la conclusión —el script, el prompt, el ADR— no el
+# camino. Vive acá y no en `sandbox/` del repo padre porque es de este proyecto: cuando
+# alguien pregunte por qué la cadena se siembra así, la evidencia tiene que estar al lado
+# del código que la usa.
+research/
