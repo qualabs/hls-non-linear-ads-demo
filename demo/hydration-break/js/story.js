@@ -112,25 +112,39 @@ export async function runStory({ provider, video, card, skip, url = './story/sto
   let running = true;
   let speaking = false;
 
-  // WHILE A CARD IS UP THE PROGRAMME STAYS STILL, whoever pressed play. The card
-  // takes pointer events, so a person cannot reach the chrome underneath it --
-  // but "the card is on top" is a fact about the stylesheet, and this is a fact
-  // about the state, which is the one that survives somebody moving a z-index.
+  // THE WALKTHROUGH TAKES THREE THINGS FROM THE PLAYER, AND `release()` IS THE ONLY
+  // PLACE THAT GIVES THEM BACK. That is the shape and not a tidiness preference: the
+  // flow is guided and then free, so a walkthrough that ends still holding one thread
+  // leaves a player that looks dead, and every symptom of it looks like a different
+  // bug.
   //
-  // It is here because it was measured: dispatching a click straight at the play
-  // button of the chrome, which is what a test does and a person cannot, started
-  // the match behind a card that says it is about to start. Without this the
-  // cost is silent and expensive -- the card goes and the moment it was
-  // announcing has already passed.
-  video.addEventListener('play', () => { if (speaking) video.pause(); });
+  // What it takes: the frame loop, the card over the picture, and the guard below.
+  //
+  // WHILE A CARD IS UP THE PROGRAMME STAYS STILL, whoever pressed play. The card takes
+  // pointer events, so a person cannot reach the chrome underneath it -- but that is a
+  // fact about the stylesheet, and this is a fact about the player, which is the one
+  // that survives somebody moving a z-index. Measured: a click dispatched straight at
+  // the chrome's play button started the match behind a card that says it is about to
+  // start.
+  //
+  // AND ITS LIFETIME IS THE CARD'S LIFETIME, not the value of a flag. That is the
+  // correction, and the bug that forced it is worth writing down because the first
+  // version looked correct: the guard used to be permanent and consult a `speaking`
+  // flag, and `say()` bails early when the walkthrough ends underneath it -- so
+  // pressing skip while a card was up left `speaking` true for good, and from then on
+  // EVERY play was cancelled. The player was not dead; it was still being held. A flag
+  // that means "released" can be left behind. A listener that is not attached cannot.
+  const holdStill = () => video.pause();
+
+  function release() {
+    video.removeEventListener('play', holdStill);
+    delete card.dataset.on;
+    card.hidden = true;
+  }
 
   function end() {
     running = false;
-    // Both, and in this order: the flag that hides it and the attribute that made it
-    // opaque. Leaving `data-on` behind kept the last card at full opacity, and the
-    // `hidden` was not hiding it either (see the stylesheet).
-    delete card.dataset.on;
-    card.hidden = true;
+    release();
     document.body.dataset.story = 'done';
     video.play().catch(() => {});
   }
@@ -140,6 +154,11 @@ export async function runStory({ provider, video, card, skip, url = './story/sto
   async function say(beat) {
     speaking = true;
     video.pause();
+    // The guard goes up with the card and comes down with it, which is what makes it
+    // impossible to leave behind. Every path out of this function goes through
+    // `release()`, including the two that bail because the walkthrough ended
+    // underneath it.
+    video.addEventListener('play', holdStill);
     card.textContent = beat.text;
     card.hidden = false;
     // Two frames, so the element is laid out before the transition starts;
@@ -150,12 +169,11 @@ export async function runStory({ provider, video, card, skip, url = './story/sto
     if (!running) return;
     delete card.dataset.on;
     await wait(320);
-    card.hidden = true;
     if (!running) return;
-    // THE ORDER OF THESE TWO LINES IS THE WHOLE THING. The guard above pauses
-    // the programme on any `play` that arrives while a card is up, and this call
-    // is a `play`: with `speaking` still true it cancels itself and the
-    // walkthrough never gets past its first card. Measured that way round first.
+    // And the release comes BEFORE the play, because this call is a `play`: with the
+    // guard still attached it cancels itself and the walkthrough never gets past its
+    // first card. Measured that way round first, too.
+    release();
     speaking = false;
     await video.play().catch(() => {});
   }

@@ -208,6 +208,14 @@ y pregunta.
   agregó `.card[hidden] { display: none }` y el `end()` ahora también borra el `data-on`
   que la dejaba opaca. **Lo encontró una captura de la T-05 y no la verificación de la
   T-04**, que había leído la propiedad en lugar de mirar la imagen.
+- **post-ejecución:** 2026-09-09, Nicolás probó la demo y el player no arrancaba después de
+  la guiada. Medidos los cuatro caminos, el roto era saltear **con una placa arriba**: las
+  dos salidas tempranas de `say()` dejaban `speaking` en `true` para siempre y desde ahí
+  todo `play` se cancelaba —los del cromo, los de la página y el del propio `end()`—. El
+  player no estaba muerto, seguía agarrado. **La guarda pasó a vivir lo que vive la placa**
+  —se agrega y se saca con ella— y hay una sola función que suelta todo lo que la guiada
+  tomó: una bandera que significa "solté" se puede quedar prendida, un listener que no está
+  puesto no puede. Evidencia en `tasks/T-04/t04-el-player-que-no-se-soltaba.md`.
 
 ## T-05 — Los creativos de las tres marcas de fantasía
 
