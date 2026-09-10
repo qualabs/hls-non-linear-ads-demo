@@ -1,0 +1,75 @@
+Mediciones de la T-03 -- 2026-09-10, demo/hydration-break (servidor de f08 en el
+8081, mirado desde una pestana aparte, cero escrituras). Muestreo por
+requestAnimationFrame sobre getComputedStyle de cada nodo .ad.
+
+Ventanas de esa demo: banner 14..30, L 30..46, lineal 46..54, overlay 54..78.
+La columna despues de la barra es la transition-duration inline del nodo.
+
+
+== ENTRADA DEL BANNER, ventana abriendo en 14.00 ==
+
+   t (s)     opacidad     duracion
+   13.962    0            (sin valor)   <- el nodo anticipado, esperando en 0
+   14.023    0            200ms         <- la transicion recien declarada
+   14.082    0.29521      200ms
+   14.141    0.802388     200ms
+   14.201    0.975621     200ms
+   14.261    1            200ms         <- llega en ~14.20 = 14.00 + 0.200
+
+8 muestras parciales. Interpola, y lo hace ADENTRO de la ventana del aviso.
+
+
+== SALIDA DEL BANNER, ventana cerrando en 30.00 ==
+
+   t (s)     opacidad     duracion
+   29.879    1            200ms         <- todavia con el valor de la entrada
+   29.918    0.77938      120ms         <- arranco en ~29.88 = 30.00 - 0.120
+   29.957    0.197621     120ms
+   29.997    0.0165311    120ms         <- practicamente 0 en el borde
+   30.036    (sin nodo)                 <- clear() lo destruyo despues
+
+La salida termina EN el borde y el nodo muere despues, no antes. Es el ADR 0052
+sobre la opacidad.
+
+
+== EL AVISO A CUADRO ENTERO NO DIFUMINA, en sus DOS puntas ==
+
+Borde L -> lineal (46.00):
+   45.864   lBackplate=1.000/200ms   linear=0.000/-
+   45.902   lBackplate=1.000/120ms   linear=0.000/-     <- la L empieza a irse
+   45.943   lBackplate=0.779/120ms   linear=0.000/-
+   46.011                            linear=1.000/0ms   <- APARECE ENTERO, sin transicion
+
+Dentro de la ventana del lineal, de 46.15 a 53.85:
+   382 muestras, y el conjunto de opacidades distintas es { 1.000 }.
+
+Borde lineal -> overlay (54.00):
+   53.999   linear=1.000/0ms    overlay=0.000/-        <- ultima muestra antes del borde:
+                                                          sigue ENTERO, no se fue temprano
+   54.037                       overlay=0.095/200ms    <- el lineal desaparecio de golpe
+   54.072                       overlay=0.513/200ms       y el overlay entra difuminado
+   54.114                       overlay=0.802/200ms
+
+LA MUESTRA DE 53.999 ES LA QUE IMPORTA. Si un nodo que no difumina pudiera estar
+"saliendo", su opacidad se habria ido a 0 en 53.88 y habria destapado el
+contenido primario durante 120 ms antes de que entre el overlay. Por eso
+`leavingNow` contesta false para el aviso a cuadro entero: no tiene salida que
+pintar, su salida es que `clear()` lo destruya en el borde.
+
+
+== R3, CONTESTADO CON DOS MEDICIONES EN LUGAR DE UNA FOTO ==
+
+El riesgo era que en los ultimos 120 ms las dos cosas pasan juntas: el backplate
+de la L difuminandose mientras el primario todavia crece encima, dejando ver una
+banda de fondo.
+
+En ~45.96, dos corridas distintas sobre el mismo instante:
+   el primario esta en escala 0.9990   (medicion de la T-02)
+   el backplate esta en opacidad 0.198 (medicion de arriba)
+
+O sea que cuando el backplate empieza a irse de verdad, el primario ya cubre el
+99,9 % del cuadro. La banda sin tapar es (1 - 0.999) del ancho: sobre el cuadro
+de ~1062 px de la captura son ~1 px, y al 20 % de opacidad. No hay nada que ver.
+
+Queda igual como cosa para mirar en la corrida de la T-05, por si aparece algo
+que la aritmetica no predijo.

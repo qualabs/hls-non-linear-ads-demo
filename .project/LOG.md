@@ -5002,3 +5002,41 @@ cae del lado que conserva la cama. 72 tests, 0 fallos, las dos costuras en verde
 
 La T-06 corre **antes** de la T-03 aunque su número sea posterior, y el índice de
 `TASKS.md` lo dice. La T-04 gana una línea sobre el alfa en su párrafo.
+
+## 2026-09-10 — T-03 de la fase 09: el difuminado, y el defecto que el diseño evitó a tiempo
+
+`place()` escribe la opacidad del nodo de aviso, 200 ms entrando y 120 ms saliendo,
+y `build()` dejó de borrarle la opacidad al nodo anticipado porque ése era el 0
+desde el que la entrada interpola.
+
+**Lo que decidió la forma del código fue un defecto que apareció al escribirlo.**
+Si un nodo que no difumina pudiera estar "saliendo", su opacidad se iría a 0
+**120 ms antes** de que cierre su ventana y destaparía el contenido primario
+durante esos 120 ms — lo contrario del corte seco que el aviso a cuadro entero
+tiene que ser. Así que `leavingNow` contesta `false` para él: no tiene salida que
+pintar, su salida es que `clear()` lo destruya en el borde. La muestra que lo
+prueba es la de **53.999**, la última antes del borde, donde el aviso a cuadro
+entero sigue en opacidad 1.
+
+Las tres rampas, medidas en `demo/hydration-break` sin tocarla: la entrada del
+banner va 0 → 0.295 → 0.802 → 0.976 → 1 entre 14.00 y 14.20; la salida va 1 →
+0.779 → 0.198 → 0.017 entre 29.88 y 30.00 y el nodo desaparece **después** del
+borde; y el aviso a cuadro entero aparece con `duration: 0ms`, mantiene una sola
+opacidad distinta en 382 muestras y sigue entero antes de su borde.
+
+**R3 quedó contestado con dos mediciones en lugar de una foto.** En ~45.96 el
+primario está en escala 0.9990 y el backplate en opacidad 0.198: cuando el
+backplate empieza a irse, el primario ya cubre el 99,9 % del cuadro, así que la
+banda sin tapar es de ~1 píxel al 20 % de opacidad. **No hace falta la línea del
+`zDepth`** que el ADR 0052 dejaba preparada. Se mira igual en la T-05.
+
+Y la captura de la entrada del banner congelada en 0.295 prueba además que la T-06
+y la T-03 componen bien juntas: ese mismo cuadro, antes de la T-06, habría sido un
+rectángulo negro translúcido.
+
+**Una cosa que no se hizo a propósito**: no se le apagan los punteros al nodo que
+se está yendo. La primera forma del diseño lo pedía porque ahí el nodo sobrevivía a
+su ventana; con la salida adentro de la ventana está activo por derecho propio
+mientras se va, así que apagárselos sería inventar una regla.
+
+72 tests, 0 fallos, las dos costuras en verde.
