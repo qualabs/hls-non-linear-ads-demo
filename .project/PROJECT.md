@@ -640,3 +640,28 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   el test del umbral exacto **no podía pasar**, porque el borde no es representable
   en punto flotante. Informe en
   `phases/09-las-transiciones-de-la-composicion/REPORT.md`.
+
+- **10-la-demo-medida-contra-si-misma**: el registro de gobierno de **once commits que
+  no pertenecían a ninguna fase**, hechos el 2026-09-10 después de que la 08 cerrara,
+  más ocho archivos que la sesión `hls-f08` dejó sin commitear al quedarse colgada y que
+  Nicolás autorizó adoptar. Se abrió y se cerró en la misma pasada porque el trabajo ya
+  estaba hecho y verificado: lo que faltaba era que sus decisiones estuvieran donde
+  alguien las va a leer. **Y la lectura del día no era la que parecía.** Lo visible es
+  que la demo se volvió presentable —la página abre en negro con una frase que el scroll
+  achica, la L pasó a la plantilla que Nicolás eligió con el zapato entero y el QR, su
+  fondo se mueve—, pero eso no explica los dos scripts de verificación nuevos ni las
+  cinco lecciones de prompt. Lo que explica los once es que **el día fue sobre la
+  distancia entre lo que una cosa afirmaba y lo que era**: el comentario que decía que
+  `-sseof -1 -frames:v 1` daba el último cuadro y daba el 168 de 192, el chequeo que
+  dice verificar la cadena y mide continuidad, el prompt que pedía un resplandor tenue y
+  trajo un resplandor, el apóstrofo que mató el script y dejó medir el archivo del
+  intento anterior con números idénticos hasta el decimal. Y los arreglos son todos de
+  la misma forma: una afirmación reemplazada por una medición contra el fenómeno. Sus
+  seis ADR, del 0057 al 0062, son los que alguien rompería por no saber por qué son así
+  —dos chequeos y no uno, umbrales relativos, 24 fps donde la fuente es de 24, un solo
+  velo en L—, y el 0062 trae **la primera generalización del proyecto**: el movimiento
+  generado va donde la tipografía vive en su propia capa, que ensancha el ADR 0045 sin
+  que nada del 0045 deje de ser cierto. Su riesgo propio se materializó dos veces y las
+  dos se atajaron antes del ADR: un número relatado que no era el que quedó en el
+  código, y otro que yo leí de menos y corrigió quien lo había medido. Informe en
+  `phases/10-la-demo-medida-contra-si-misma/REPORT.md`.

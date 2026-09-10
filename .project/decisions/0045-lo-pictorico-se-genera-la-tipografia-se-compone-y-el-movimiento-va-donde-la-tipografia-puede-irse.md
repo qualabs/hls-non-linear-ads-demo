@@ -7,7 +7,7 @@ date: 2026-09-09
 supersedes: null
 superseded_by: null
 generalizes: null
-generalized_by: null
+generalized_by: "0062"
 ---
 
 ## Contexto
@@ -71,3 +71,17 @@ parecida a la de un club conocido con parche de sponsor en el pecho.
   candidatos y no la disponibilidad. **Y con un cuerpo vacío el chequeo no puede dar otra
   cosa que un 400**, porque la validación corre antes del lookup del modelo: el
   instrumento que dice algo es `{"instances":[{}],"parameters":{}}`.
+
+---
+
+## 2026-09-10 — generalizado por el ADR 0062
+
+Este ADR sigue **aceptado** y nada de lo que dice dejó de ser cierto: sus tres
+caminos y su chequeo humano de vestido comercial están en pie.
+
+Lo que se ensanchó es **dónde cabe el movimiento generado**. Acá la enumeración
+decía que hoy era un solo lugar, el spot lineal, y que los formatos no lineales
+seguían siendo imagen fija. Partir la L en dos capas —el fondo generado y la
+tipografía encima— saca la tipografía del cuadro que el modelo redibuja, así que la
+L entró en el alcance de la regla en lugar de contradecirla. El ADR 0062 lo dice como
+propiedad de cómo está armada la pieza y no como lista de formatos.

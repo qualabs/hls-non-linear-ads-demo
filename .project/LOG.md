@@ -5146,3 +5146,64 @@ ventana de grabación del 28 al 30 de septiembre no se movió.
 **El umbral de costura de cadena generada que la sesión `hls-demo` está midiendo no
 entró en este informe, y no por olvido.** Es de su fase y su hallazgo está vivo; un
 informe de fase cerrada es un registro y no el lugar donde alguien lo va a buscar.
+
+## 2026-09-10 — Fase 10 abierta y cerrada: el registro de once commits que no tenían fase
+
+Once commits de la sesión `hls-demo`, hechos después de que la 08 cerrara, más ocho
+archivos que la sesión `hls-f08` dejó sin commitear al quedarse colgada y que Nicolás
+autorizó adoptar. El trabajo estaba medido y verificado en pantalla; lo que faltaba era
+que sus decisiones estuvieran donde alguien las va a leer. Abierta y cerrada en la misma
+pasada, porque es un registro y no un plan.
+
+**Y la lectura del día no era la que traía el pedido.** La lectura que me dieron fue "la
+demo se volvió presentable", que es cierta y es la mitad visible. Pero no explica los dos
+scripts de verificación nuevos, ni la nota fechada sobre el README de una fase cerrada,
+ni por qué quedaron escritas cinco lecciones de prompt. **Lo que explica los once es que
+el día fue sobre la distancia entre lo que una cosa afirmaba y lo que era**, y apareció
+once veces seguidas: el comentario que decía que `-sseof -1 -frames:v 1` daba el último
+cuadro y daba el 168 de 192 —el commit lo nombra como la premisa que causó el bug—, el
+chequeo que dice verificar la cadena y mide continuidad, el prompt que pedía un
+resplandor tenue y trajo un resplandor, el apóstrofo que mató el script y dejó medir el
+archivo del intento anterior con números idénticos hasta el decimal. Y los arreglos son
+todos de la misma forma: una afirmación reemplazada por una medición contra el fenómeno.
+
+Seis ADR, del **0057 al 0062**, elegidos con un solo filtro: ¿alguien lo rompería dentro
+de dos meses por no saber por qué es así? Cuatro cosas del día quedaron afuera porque no
+son decisiones y una porque ya estaba decidida — que la semilla se declare en
+`plate.json` es el ADR 0044 aplicado a un dato nuevo, así que se referencia.
+
+**El 0062 es la primera generalización del proyecto.** El movimiento generado va donde
+la tipografía vive en su propia capa, lo que ensancha al ADR 0045 sin que nada del 0045
+deje de ser cierto: sus tres caminos y su chequeo humano siguen en pie, y lo que se
+rompió fue su enumeración y no su regla. El 0045 queda `accepted` con
+`generalized_by: "0062"` y una nota fechada. El criterio que elige entre supersede y
+generalización no es cuánto cambió: es si algo dejó de ser verdad.
+
+**El riesgo propio de esta fase —un ADR que afirma un número que no es— se materializó
+dos veces y las dos se atajaron antes de escribirlo.** Primero un error ajeno: el
+hallazgo de los umbrales me llegó como "3,5-6,0 calibrado sobre pasos internos, se
+propuso 7,0 para costura", y en `verificar-plate.sh` el paso interno es 3,5 a 7,4, el
+ruido de la costura se mide aparte y da 3,6 a 6,9, y la respuesta no fue un umbral nuevo
+sino la razón contra la mediana de los 24 vecinos, que vuelve las dos calibraciones una
+sola regla. Después uno mío: le mandé esa corrección a `hls-demo` para que la revisara
+quien la había medido, y me corrigió un cuarto número —el veredicto tiene dos escalones,
+2x avisa y 3x manda a mirar, y el rango final es 1,00x a 1,84x—. **La traza contra la
+fuente me sacó un error ajeno y me dejó uno propio, y lo encontró quien lo había
+medido.**
+
+Preguntar sirvió para lo que no existía en ningún archivo: el estado de la L animada. Ya
+está empaquetada a 24 fps en ocho segmentos y **verificada en pantalla** —en los segundos
+33 y 45 el zapato está en una rotación distinta y la tipografía queda clavada—, así que
+el ADR 0059 dice verificado y no previsto.
+
+**Un hallazgo que no es de esta fase y se reporta**: el README de `demo/hydration-break/`
+quedó incompleto. Dice qué esperar mientras la demo corre y el día le cambió el
+principio; su texto sigue diciendo que el recorrido *"starts by itself"*, cierto pero ya
+no preciso, y no menciona la apertura ni el botón de reiniciar. Es de la carpeta de otra
+sesión.
+
+La fase cierra con dos commits más en camino y **de común acuerdo**: son una pieza
+gráfica —la imagen nueva del zapato y la regeneración de la cadena de la L— y ninguno de
+los seis ADR cambia por cómo salga.
+
+Validador en verde: 62 ADR, 10 fases.
