@@ -99,3 +99,22 @@ lookup corre primero, y un 404 significa que el modelo no está.
 
 **NEONECTAR** (una gaseosa botánica), **KALTO** (zapatillas) y **MERIDIA** (viajes).
 Ninguna imita el vestido comercial de una marca real.
+
+## `salida-vuelve-el-juego.png` no se usa, y hay que decirlo acá
+
+El archivo sigue en esta carpeta y **ningún script lo nombra**. Era el cuadro contra el
+que cerraba el último eslabón de la parada del juego, y está mal: comparado contra los
+341 cuadros del clip del partido, el más parecido da YAVG 37,7 y el menos parecido 38,1.
+Que los dos extremos den casi lo mismo es la firma de que **la imagen no pertenece al
+clip** — si fuera otro segundo del mismo metraje, habría un mínimo claro.
+
+Mientras estuvo en uso, la cadena cerraba contra una imagen ajena y el juego volvía a un
+encuadre que no era el del acto 3.
+
+Hoy ese cuadro **se extrae del clip por índice**, en `generar-parada.sh`, con el mismo
+recorte que el plate: los dos valores salen de `plate.json` para que no puedan
+despegarse. Se deja el png acá y no se borra porque el próximo que lo encuentre va a
+suponer que es la salida buena, y esta nota es lo único que lo evita.
+
+`entrada-arranca-la-parada.png` sí pertenece al clip: es el cuadro 334 (YAVG 0,48; sus
+vecinos, 5,9).
