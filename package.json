@@ -15,6 +15,7 @@
     "start": "./run.sh",
     "build": "./scripts/construir-libreria.sh",
     "check": "./scripts/verificar-cortes.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "mutaciones": "node demo/hydration-break/test/mutaciones.mjs"
   }
 }

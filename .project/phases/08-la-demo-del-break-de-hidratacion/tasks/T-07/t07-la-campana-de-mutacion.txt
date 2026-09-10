@@ -1,0 +1,36 @@
+== sin romper nada, los tres chequeos tienen que estar en verde ==
+  VERDE  anclasDelGuion
+  VERDE  elBreakArrancaEnLaParada
+  VERDE  lasTresFormasDelMinuto
+
+== una rotura por regla, y cada una tiene que poner ROJO a su chequeo ==
+  ROJO   anclasDelGuion
+         regla:  un ancla del guion tiene que caer en un aviso que existe (ADR 0037)
+         rotura: el beat del caso de negocio pasa a anclarse al aviso 9 del break 1
+         dijo:   el beat "el-caso-de-negocio" ancla a algo que la señalización no tiene: {"at":{"break":1,"ad":9},"lead":1.5}
+  ROJO   anclasDelGuion
+         regla:  un beat tiene que frenar ANTES de lo que anuncia (ADR 0037)
+         rotura: el mismo beat pasa a tener `lead: -3`, así que resuelve después del aviso
+         dijo:   el beat "el-caso-de-negocio" resuelve en 49s y lo que anuncia arranca en 46s: la placa llega tarde o justo encima
+  ROJO   elBreakArrancaEnLaParada
+         regla:  el segundo del break lo declara plate.json y no el script (ADR 0044)
+         rotura: el script de señalización pasa a tener el segundo escrito a mano
+         dijo:   el script de señalización no lee `paradaEn` de plate.json: si el segundo del break está escrito a mano, deja de seguir al plate (ADR 0044)
+  ROJO   elBreakArrancaEnLaParada
+         regla:  la parada del juego tiene que caber adentro del plate (ADR 0044)
+         rotura: la parada pasa a durar 200 s sobre un plate de 88
+         dijo:   la parada del juego termina en 214s y el plate dura 88s: el break se sale del programa
+  ROJO   lasTresFormasDelMinuto
+         regla:  el minuto declara exactamente un aviso de imagen fija (ADR 0046)
+         rotura: el banner pasa de `image/jpeg` a un `.m3u8`, que es lo que la demo deja de demostrar
+         dijo:   hay 0 avisos de imagen fija y tiene que haber exactamente uno (ADR 0046): es la tercera forma que este minuto demuestra
+  ROJO   lasTresFormasDelMinuto
+         regla:  el aviso lineal va tercero (ADR 0043)
+         rotura: el lineal se mueve al primer lugar del break
+         dijo:   el aviso lineal está en la posición 1 y va tercero (ADR 0043): ahí es donde el guion cuenta el caso de negocio
+  ROJO   lasTresFormasDelMinuto
+         regla:  el break son cuatro avisos (ADR 0043)
+         rotura: se le saca el overlay de cierre
+         dijo:   el break declara 3 avisos y el minuto son cuatro
+
+las siete roturas dieron rojo y los tres chequeos dan verde sin romper nada
