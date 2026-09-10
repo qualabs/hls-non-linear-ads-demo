@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
-# Quema el paquete de canal ficticio sobre el plate: el scorebug, el bug del
-# canal, el reloj que corre, y la placa de parada del juego durante la parada.
+# Quema el paquete de canal ficticio sobre el plate: el bug del canal, el reloj que
+# corre, y el gráfico que CAMBIA cuando entra la parada -- el tanteador durante el
+# juego, y `HYDRATION BREAK` en su lugar durante la parada.
+#
+# POR QUÉ CAMBIA: porque **el estado del partido cambió**, y el gráfico es cómo una
+# transmisión dice eso. En ese minuto no hay nada que tantear. **No mitiga una
+# discontinuidad: no hay discontinuidad** — la parada sale generada desde el cuadro
+# de juego, así que la imagen muestra a los jugadores dejando de jugar y yendo a
+# tomar agua.
+#
+# La razón va escrita así a propósito, porque una razón equivocada sobrevive mejor
+# que un error: si acá dijera "disimula el corte", el día que alguien mire y vea que
+# no hay corte lo sacaría, con toda la lógica del mundo.
 #
 # ES LA PIEZA DE MAYOR PALANCA DE LA DEMO, y por eso es un paso propio y no una
 # línea adentro de otro script. El mercado de metraje se parte en dos y no hay
@@ -27,8 +38,7 @@
 #
 # Los segundos de la parada del juego salen de plate.json (ADR 0044), que es el
 # mismo lugar de donde el script de señalización saca dónde poner el break: el
-# gráfico que dice "play stopped" y el break que dibuja publicidad encima leen
-# un solo número.
+# gráfico que cambia y el break que dibuja publicidad encima leen un solo número.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -39,9 +49,11 @@ PARADA_EN=$(node -e 'process.stdout.write(String(require("./plate.json").paradaE
 PARADA_DURA=$(node -e 'process.stdout.write(String(require("./plate.json").paradaDura))')
 PARADA_FIN=$(awk -v a="$PARADA_EN" -v b="$PARADA_DURA" 'BEGIN { printf "%s", a + b }')
 
-# El reloj arranca en 32:10 y corre todo el plate. En fútbol el reloj NO se
-# detiene durante una parada de hidratación, así que sigue corriendo también
-# durante la parada: es lo que hace un reloj de verdad y es gratis.
+# EL RELOJ ARRANCA EN 32:10 Y NO SE DETIENE, tampoco durante la parada, y la razón
+# es de fútbol y no de diseño: en una parada de hidratación el partido no está
+# detenido reglamentariamente. Un reloj corriendo mientras el tanteador se va dice
+# exactamente "el partido no se detuvo, la transmisión cambió de gráfico", que es la
+# propiedad que esta demo existe para mostrar.
 RELOJ_DESDE=$((32 * 60 + 10))
 
 TMP=$(mktemp -d "${TMPDIR:-/dev/shm}/paquete-de-canal-XXXXXX")
@@ -58,34 +70,38 @@ rasteriza() { # $1 svg, $2 png
   [ -s "$2" ] || { echo "no se pudo rasterizar $1" >&2; exit 1; }
 }
 
-rasteriza "$PWD/graphics/scorebug.svg" "$TMP/scorebug.png"
-rasteriza "$PWD/graphics/cooling-break.svg" "$TMP/cooling.png"
+rasteriza "$PWD/graphics/bug-de-canal.svg"    "$TMP/bug.png"
+rasteriza "$PWD/graphics/scorebug.svg"        "$TMP/scorebug.png"
+rasteriza "$PWD/graphics/hydration-break.svg" "$TMP/hydration.png"
 
 FUENTE=/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf
 [ -f "$FUENTE" ] || FUENTE=/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf
 [ -f "$FUENTE" ] || { echo "falta una fuente monoespaciada en /usr/share/fonts" >&2; exit 1; }
 
-# El orden del filtro importa y es el de una transmisión: primero el scorebug,
-# que está siempre; encima el reloj, que va adentro de su hueco; y encima la
-# placa de la parada, que sólo existe entre `PARADA_EN` y `PARADA_FIN`.
+# El orden del filtro importa y es el de una transmisión: el bug del canal, que está
+# siempre; después el tanteador SÓLO durante el juego y `HYDRATION BREAK` SÓLO durante la
+# parada, los dos con `enable` sobre `t`, que es lo que hace el cambio; y encima el reloj,
+# que va adentro del hueco que las dos placas dejan en las mismas coordenadas.
 #
-# El reloj se arma con la aritmética de `drawtext` sobre `t`: minutos y segundos
-# del tiempo de reproducción más el arranque, con dos dígitos cada uno.
+# El reloj se dibuja ÚLTIMO a propósito: así queda sobre cualquiera de las dos placas y no
+# hay un instante del cambio en el que los dígitos queden tapados.
 ffmpeg -hide_banner -loglevel error -y \
-  -i "$SRC" -i "$TMP/scorebug.png" -i "$TMP/cooling.png" \
+  -i "$SRC" -i "$TMP/bug.png" -i "$TMP/scorebug.png" -i "$TMP/hydration.png" \
   -filter_complex "\
 [0:v]scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,setsar=1[bg];\
 [bg][1:v]overlay=0:0:format=auto[conbug];\
-[conbug]drawtext=fontfile=$FUENTE:\
+[conbug][2:v]overlay=0:0:format=auto:enable='lt(t,$PARADA_EN)+gt(t,$PARADA_FIN)'[conjuego];\
+[conjuego][3:v]overlay=0:0:format=auto:enable='between(t,$PARADA_EN,$PARADA_FIN)'[conplacas];\
+[conplacas]drawtext=fontfile=$FUENTE:\
 text='%{eif\\:floor((t+$RELOJ_DESDE)/60)\\:d\\:2}\\:%{eif\\:mod(floor(t+$RELOJ_DESDE)\\,60)\\:d\\:2}':\
-x=186:y=44:fontsize=27:fontcolor=0xF4F6F8[conreloj];\
-[conreloj][2:v]overlay=0:0:format=auto:enable='between(t,$PARADA_EN,$PARADA_FIN)'[v]" \
+x=186:y=44:fontsize=27:fontcolor=0xF4F6F8[v]" \
   -map "[v]" -map 0:a? \
   -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p \
   -c:a copy \
   "$OUT"
 
 echo "$OUT"
-echo "  scorebug y bug de canal: siempre"
-echo "  reloj: corre desde 32:10"
-echo "  placa de parada del juego: de ${PARADA_EN}s a ${PARADA_FIN}s (de plate.json)"
+echo "  bug de canal: siempre"
+echo "  reloj: corre desde 32:10, y NO se detiene en la parada"
+echo "  tanteador: de 0s a ${PARADA_EN}s y de ${PARADA_FIN}s en adelante"
+echo "  HYDRATION BREAK: de ${PARADA_EN}s a ${PARADA_FIN}s (de plate.json)"

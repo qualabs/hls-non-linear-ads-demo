@@ -58,11 +58,11 @@
     },
     {
       "URI": "/content/adLinear/index.m3u8",
-      "DURATION": 10.0
+      "DURATION": 8.0
     },
     {
       "URI": "/content/adOverlay/index.m3u8",
-      "DURATION": 16.0,
+      "DURATION": 24.0,
       "X-AD-CREATIVE-SIGNALING": {
         "version": 2,
         "type": "slot",
@@ -70,7 +70,7 @@
           {
             "type": "cornerOverlay",
             "start": 0,
-            "duration": 16.0,
+            "duration": 24.0,
             "layout": {
               "assets": [
                 {

@@ -272,6 +272,16 @@ y pregunta.
   dos lugares se despegarían, y el creativo quedaría con tipografía debajo del partido o con
   una franja negra al costado **sin que nada falle** — el criterio del ADR 0044 aplicado a la
   geometría de un creativo.
+- **post-ejecución:** 2026-09-10, **los cuatro creativos se re-temporizaron al reparto de
+  múltiplos de 8** (ADR 0048): 16 / 16 / 8 / 24, leídos de `plate.json` y no escritos acá. Y
+  al medir los largos empaquetados apareció un defecto que llevaba toda la fase adentro:
+  **`movido()` entregaba creativos más cortos que su ventana**. `-loop 1` sirve la imagen a 25
+  fps y el `fps=30` de `zoompan` **reetiqueta** esos cuadros en lugar de remuestrearlos, así
+  que 24 s de imagen salían como 20 s de video — un aviso que termina antes de su ventana, que
+  es exactamente el defecto que nada en pantalla reporta. Se arregla con `-framerate 30` en la
+  entrada. **Lo delató el número y no la pantalla**: 20,00 s medidos contra 24 declarados. Sin
+  la medición se veía como un aviso que se cortó, y se habría leído como un problema de la
+  librería.
 - **post-ejecución:** 2026-09-10, Nicolás marcó que el plate no convence: el corte de escena
   en el segundo del break le hace percibir **que el video principal cambió**, que es la
   lectura opuesta a lo que la demo demuestra. Se intentó regenerar la parada con Veo desde
@@ -286,6 +296,22 @@ y pregunta.
   la misma** — y este corte es entre dos rodajes distintos. **Decisión de Nicolás: no se
   dibujan marcas de terceros**, que es la misma que ya había tomado al elegir marcas de
   fantasía. El plate se queda con el corte.
+- **post-ejecución:** 2026-09-10, **el plate se rehízo y la parada quedó generada.** Lo que
+  cambió no fue el prompt sino **el umbral**: Nicolás miró los cinco primeros clips y fijó la
+  distinción que faltaba — *"en el programa, una marca incidental en la ropa se acepta, igual
+  que si estuviera filmada. En la publicidad, las marcas son inventadas y nunca imitan a una
+  real"* —, y con ese umbral lo que no entra es **una marca dominando el cuadro**, no
+  cualquier marca. Los cinco clips que la línea anterior daba por rechazados entraban.
+  La cadena quedó en **ocho eslabones de 8 s** (`content/.fuentes/parada/01..08.mp4`, 64,03 s
+  concatenados), cada uno sembrado del último cuadro del anterior y el octavo cerrando contra
+  el primer cuadro del acto 3 con `lastFrame`. **Sin deriva de escena**, muestreado cada 8 s
+  en los 64. El plate es ahora **un solo partido de punta a punta**: 14 s de juego filmado +
+  64 s de parada generada + 14 s de juego filmado, los dos actos con el **mismo recorte**
+  (requisito de la cadena, no encuadre). **Y sin disolvencias**, con la razón escrita al lado:
+  los dos empalmes están sembrados desde los cuadros que empalman, así que ya son continuos, y
+  una disolvencia sobre movimiento continuo **no suaviza un corte, inventa uno**. Verificado
+  en pantalla: t=12 s tanteador y pelota en juego; t=15 s `HYDRATION BREAK` y los jugadores
+  caminando a tomar agua. Tres segundos de distancia, un cambio de gráfico, ningún corte.
 
 ## T-06 — La página: las secciones, la estética y las marcas
 

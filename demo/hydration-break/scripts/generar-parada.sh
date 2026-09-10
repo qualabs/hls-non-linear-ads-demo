@@ -55,7 +55,7 @@ P=content/.fuentes/parada
 mkdir -p "$P"
 
 ENTRADA="$G/entrada-arranca-la-parada.png"
-SALIDA="$G/salida-arranca-la-hidratacion.png"
+SALIDA="$G/salida-vuelve-el-juego.png"
 [ -s "$ENTRADA" ] && [ -s "$SALIDA" ] || { echo "faltan los cuadros de entrada y salida en $G" >&2; exit 1; }
 
 # EL PROMPT, y sus dos mitades están medidas.
@@ -87,15 +87,19 @@ SALIDA="$G/salida-arranca-la-hidratacion.png"
 #
 # El chequeo humano corre igual: lo generado es material nuevo aunque el clip original
 # haya pasado el chequeo de cuadro.
-PROMPT='An eight second dissolve between two shots of the same football afternoon. Nothing
-happens: no new people enter, nobody does anything new. The wide overcast shot of players on
-the synthetic pitch settles, and the frame drifts slowly and continuously towards the group
-resting at the side of the field. One single continuous move, no cut, no jump, no camera
-shake. The light shifts gradually from flat overcast to warm late afternoon across the eight
-seconds. Nothing is added to the frame that is not already in one of the two ends: no new
-garment, no new object, no writing.
-No manufacturer marks anywhere in the frame: no swoosh, no leaping cat, no three stripes,
-no chevron, no crown, no club crest and no sponsor name.'
+PROMPT='The same wide sideline shot of the same amateur football match, on the same
+synthetic turf pitch, from the same fixed camera position and at the same distance. Play
+has stopped for a drinks break: the players walk unhurriedly towards the sideline, stand
+around in loose groups and drink from plastic water bottles, a couple of them stretch.
+Same people, same clothes: yellow and pale blue training bibs over black tracksuit
+bottoms. The green mesh fence, the red corner flags, the white pitch markings and the
+mown stripes in the grass all stay exactly where they are. Flat overcast daylight, no
+change in exposure. The camera does not move, pan or zoom. No cuts, no slow motion, no
+text and no graphics.
+Every training bib is a single flat colour with ONE large black printed number on it and
+nothing else at all: no other printing, no emblem, no symbol, no lettering. No large or
+centred brand mark anywhere in the frame: no leaping cat, no swoosh, no crown, no
+interlocking letters, no club crest and no sponsor name on any bib.'
 
 # ¿Se puede generar? El chequeo va con `instances` presente y no con un cuerpo vacío:
 # con el cuerpo vacío la validación corre antes del lookup del modelo y el 400 sale

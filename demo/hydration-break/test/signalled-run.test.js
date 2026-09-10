@@ -26,6 +26,7 @@ import {
   proveedorDeclarado,
   anclasDelGuion,
   elBreakArrancaEnLaParada,
+  elRepartoSaleDeUnSoloLugar,
   lasTresFormasDelMinuto
 } from './comprobaciones.js';
 
@@ -52,6 +53,10 @@ test('toda ancla del guion cae en un break y en un aviso que existen, y frena an
 
 test('el break arranca en el corrimiento declarado de la parada del juego', () => {
   assert.deepEqual(elBreakArrancaEnLaParada({ plate, senalizador }), []);
+});
+
+test('el reparto de los avisos sale de plate.json y no del asset list', () => {
+  assert.deepEqual(elRepartoSaleDeUnSoloLugar({ plate, assetList }), []);
 });
 
 test('el minuto declara sus tres formas de aviso', () => {

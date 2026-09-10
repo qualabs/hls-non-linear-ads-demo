@@ -1,4 +1,4 @@
-// mutaciones.mjs -- la campaña de mutación de los tres chequeos de esta demo.
+// mutaciones.mjs -- la campaña de mutación de los chequeos de esta demo.
 //
 // POR QUÉ EXISTE, y es lo único que hay que leer de este archivo: **un chequeo que nunca
 // se vio fallar no se sabe si puede fallar.** Este proyecto se cruzó tres veces con un
@@ -19,6 +19,7 @@ import {
   proveedorDeclarado,
   anclasDelGuion,
   elBreakArrancaEnLaParada,
+  elRepartoSaleDeUnSoloLugar,
   lasTresFormasDelMinuto
 } from './comprobaciones.js';
 
@@ -63,12 +64,42 @@ const roturas = [
   },
   {
     regla: 'la parada del juego tiene que caber adentro del plate (ADR 0044)',
-    rotura: 'la parada pasa a durar 200 s sobre un plate de 88',
+    rotura: `la parada pasa a durar el doble del plate (${PLATE.largo * 2}s sobre ${PLATE.largo}s)`,
     chequeo: 'elBreakArrancaEnLaParada',
     correr: () => elBreakArrancaEnLaParada({
-      plate: { ...PLATE, paradaDura: 200 },
+      plate: { ...PLATE, paradaDura: PLATE.largo * 2 },
       senalizador: SENAL
     })
+  },
+  {
+    regla: 'los avisos suman lo que dura la parada (el reparto de plate.json)',
+    rotura: 'el overlay de cierre pasa de 24 a 20 s, así que la publicidad no cubre la parada',
+    chequeo: 'elRepartoSaleDeUnSoloLugar',
+    correr: () => {
+      const plate = { ...PLATE, avisos: [16, 16, 8, 20] };
+      const assetList = copia(LISTA);
+      assetList.ASSETS[3].DURATION = 20;
+      return elRepartoSaleDeUnSoloLugar({ plate, assetList });
+    }
+  },
+  {
+    regla: 'cada aviso es múltiplo de 8, que es el techo de una generación',
+    rotura: 'el lineal vuelve a 10 s, que deja un resto corto en la cadena',
+    correr: () => elRepartoSaleDeUnSoloLugar({
+      plate: { ...PLATE, avisos: [16, 16, 10, 22] },
+      assetList: (() => { const a = copia(LISTA); a.ASSETS[2].DURATION = 10; a.ASSETS[3].DURATION = 22; return a; })()
+    }),
+    chequeo: 'elRepartoSaleDeUnSoloLugar'
+  },
+  {
+    regla: 'el reparto vive en un solo lugar (plate.json), no en el asset list',
+    rotura: 'una DURATION del asset list se edita a mano y deja de coincidir con plate.json',
+    chequeo: 'elRepartoSaleDeUnSoloLugar',
+    correr: () => {
+      const assetList = copia(LISTA);
+      assetList.ASSETS[0].DURATION = 12;
+      return elRepartoSaleDeUnSoloLugar({ plate: PLATE, assetList });
+    }
   },
   {
     regla: 'el minuto declara exactamente un aviso de imagen fija (ADR 0046)',
@@ -105,17 +136,18 @@ const roturas = [
   }
 ];
 
-// El control del control: con los archivos como están, los tres chequeos tienen que dar
+// El control del control: con los archivos como están, todos los chequeos tienen que dar
 // verde. Sin esto, una campaña donde todo da rojo se vería igual de exitosa.
 const provider = proveedorDeclarado({ plate: PLATE, assetList: LISTA });
 const verdeBase = [
   ['anclasDelGuion', anclasDelGuion({ story: STORY, provider })],
   ['elBreakArrancaEnLaParada', elBreakArrancaEnLaParada({ plate: PLATE, senalizador: SENAL })],
+  ['elRepartoSaleDeUnSoloLugar', elRepartoSaleDeUnSoloLugar({ plate: PLATE, assetList: LISTA })],
   ['lasTresFormasDelMinuto', lasTresFormasDelMinuto({ assetList: LISTA })]
 ];
 
 let mal = 0;
-console.log('== sin romper nada, los tres chequeos tienen que estar en verde ==');
+console.log('== sin romper nada, todos los chequeos tienen que estar en verde ==');
 for (const [nombre, hallazgos] of verdeBase) {
   const ok = hallazgos.length === 0;
   if (!ok) mal += 1;
@@ -134,6 +166,6 @@ for (const r of roturas) {
 }
 
 console.log(`\n${mal === 0
-  ? 'las siete roturas dieron rojo y los tres chequeos dan verde sin romper nada'
+  ? `las ${roturas.length} roturas dieron rojo y los ${verdeBase.length} chequeos dan verde sin romper nada`
   : `${mal} problema(s): un chequeo que no puede fallar, o uno que falla sin motivo`}`);
 process.exit(mal === 0 ? 0 : 1);

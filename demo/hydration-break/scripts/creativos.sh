@@ -28,6 +28,18 @@ cd "$(dirname "$0")/.."
 G=content/.fuentes/creativos
 [ -d "$G" ] || { echo "faltan las imágenes generadas en $G" >&2; exit 1; }
 
+# LOS LARGOS SALEN DE plate.json Y NO DE ACÁ, que es el mismo criterio del ADR 0044
+# aplicado a la duración de cada creativo. Un creativo más corto que su ventana **se
+# corta**, y ese es el único defecto del mecanismo que nada en pantalla reporta: la
+# librería lo avisa por consola y en cámara se ve como que el aviso terminó antes.
+# Escritos acá a mano, un cambio del reparto los dejaría cortos sin que nada falle.
+eval "$(node -e '
+  const a = require("./plate.json").avisos;
+  console.log(`D1=${a[0]}; D2=${a[1]}; D3=${a[2]}; D4=${a[3]}`);
+')"
+[ -n "${D1:-}" ] && [ -n "${D4:-}" ] || { echo "plate.json no declara los cuatro avisos" >&2; exit 1; }
+echo "largos del reparto, de plate.json: $D1 / $D2 / $D3 / $D4"
+
 TMP=$(mktemp -d "${TMPDIR:-/dev/shm}/creativos-XXXXXX")
 trap 'rm -rf "$TMP"' EXIT
 
@@ -63,7 +75,11 @@ fijo() { # $1 imagen de fondo, $2 svg, $3 ancho, $4 alto, $5 salida
 movido() { # $1 imagen, $2 svg, $3 ancho, $4 alto, $5 segundos, $6 salida
   rasteriza "$2" "$TMP/tipo.png" "$3" "$4"
   local cuadros=$(( $5 * 30 ))
-  ffmpeg -hide_banner -loglevel error -y -loop 1 -t "$5" -i "$1" -i "$TMP/tipo.png" \
+  # `-framerate 30` EN LA ENTRADA, y no es cosmético: `-loop 1` sirve la imagen a 25 fps,
+  # y el `fps=30` de zoompan **reetiqueta** esos cuadros en lugar de remuestrearlos, así
+  # que 24 s de imagen a 25 fps salen como 20 s de video a 30. El creativo quedaba corto
+  # contra su ventana, que es exactamente el defecto que nada en pantalla reporta.
+  ffmpeg -hide_banner -loglevel error -y -loop 1 -framerate 30 -t "$5" -i "$1" -i "$TMP/tipo.png" \
     -filter_complex "[0:v]scale=$(( $3 * 3 )):-1,\
 zoompan=z='1+0.08*on/$cuadros':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=$3x$4:fps=30,\
 setsar=1[bg];[bg][1:v]overlay=0:0:format=auto[v]" \
@@ -110,21 +126,24 @@ sed -e "s/{{L}}/$L/g" -e "s/{{T}}/$T/g" \
     graphics/creativos/l-backplate.svg.tpl > "$TMP/l-backplate.svg"
 
 rasteriza_abs "$TMP/l-backplate.svg" "$TMP/l-tipo.png" 1280 720
-ffmpeg -hide_banner -loglevel error -y -loop 1 -t 16 -i "$TMP/l-tipo.png" \
+ffmpeg -hide_banner -loglevel error -y -loop 1 -t "$D2" -i "$TMP/l-tipo.png" \
   -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -r 30 -an "$TMP/l-backplate.mp4"
 
 echo "== el overlay de cierre, video con la tipografía quieta =="
-movido "$G/meridia-coast.jpg" graphics/creativos/overlay.svg 320 180 16 "$TMP/overlay.mp4"
+movido "$G/meridia-coast.jpg" graphics/creativos/overlay.svg 320 180 "$D4" "$TMP/overlay.mp4"
 
 # EL SPOT LINEAL. El movimiento acá SÍ es generado —un clip de Veo de 8 s que toma la
 # imagen fija como primer cuadro y la anima— y por eso su tipografía vuelve compuesta
 # al final: está medido que el titular se va de cuadro cuando la cámara empuja, así
 # que el último cuadro del clip generado no tiene tipografía. La placa la pone el SVG.
-echo "== el spot lineal: 8 s generados + 2 s de placa compuesta =="
+# El spot dura lo que el reparto dice, con los dos últimos segundos de placa compuesta:
+# el clip generado se recorta a D3 menos 2. Sin el recorte el spot sale más largo que su
+# ventana y el aviso no termina, que en cámara se ve como que se cortó.
+echo "== el spot lineal: $(awk -v d="$D3" 'BEGIN { printf "%s", d - 2 }')s generados + 2 s de placa compuesta =="
 rasteriza graphics/creativos/linear-endcard.svg "$TMP/endcard.png" 1920 1080
 ffmpeg -hide_banner -loglevel error -y \
   -i "$G/neonectar-8s.mp4" -loop 1 -t 2 -i "$TMP/endcard.png" \
-  -filter_complex "[0:v]scale=1280:720,fps=30,setsar=1[a];\
+  -filter_complex "[0:v]scale=1280:720,fps=30,setsar=1,trim=duration=$(awk -v d="$D3" 'BEGIN { printf "%s", d - 2 }'),setpts=PTS-STARTPTS[a];\
 [1:v]scale=1280:720,fps=30,setsar=1[b];[a][b]concat=n=2:v=1:a=0[v]" \
   -map "[v]" -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -an "$TMP/lineal.mp4"
 
@@ -133,9 +152,9 @@ ffmpeg -hide_banner -loglevel error -y \
 # recorte centrado del ADR 0013 se lleva la mitad de la tipografía. Los dos últimos
 # argumentos son el tamaño, y son los mismos números del SVG.
 echo "== empaquetando los cuatro videos como HLS, cada uno al tamaño de su caja =="
-./scripts/empaquetar-contenido.sh "$TMP/l-backplate.mp4" content/adL       0 16 "" 1280 720
-./scripts/empaquetar-contenido.sh "$TMP/overlay.mp4"     content/adOverlay 0 16 "" 320  180
-./scripts/empaquetar-contenido.sh "$TMP/lineal.mp4"      content/adLinear  0 10 "" 1280 720
+./scripts/empaquetar-contenido.sh "$TMP/l-backplate.mp4" content/adL       0 "$D2" "" 1280 720
+./scripts/empaquetar-contenido.sh "$TMP/overlay.mp4"     content/adOverlay 0 "$D4" "" 320  180
+./scripts/empaquetar-contenido.sh "$TMP/lineal.mp4"      content/adLinear  0 "$D3" "" 1280 720
 
 echo
 echo "los cuatro creativos del minuto están en content/"

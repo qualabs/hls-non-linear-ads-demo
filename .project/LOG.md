@@ -4721,3 +4721,53 @@ través del corte y Nicolás percibió el cambio igual—; reordenar los clips d
 ayuda porque los tres son del mismo rodaje ajeno; y el perfil del autor en Pexels no tiene
 clips hermanos del mismo picado. **La vía que sí lo resolvería es la que la investigación ya
 había nombrado: metraje propio con una parada real, filmado.**
+
+## 2026-09-10 — La parada generada, el gráfico que cambia y el reparto de múltiplos de ocho
+
+Tres cosas cerraron juntas y la primera habilitó las otras dos.
+
+**La cadena entró.** La parada del juego son ocho eslabones de 8 s generados con Veo, 64,03 s
+concatenados, cada uno sembrado del último cuadro del anterior y el octavo cerrando contra el
+primer cuadro del acto 3. Sin deriva de escena, muestreado cada 8 s en los 64. El plate es
+ahora **un solo partido de punta a punta** y el corte de escena que hacía percibir *que el
+video principal había cambiado* ya no existe.
+
+Lo que cambió no fue el prompt: fue **el umbral**. Nicolás miró los clips y fijó la distinción
+que faltaba — *"en el programa, una marca incidental en la ropa se acepta, igual que si
+estuviera filmada. En la publicidad, las marcas son inventadas y nunca imitan a una real"* —.
+Con ese umbral lo que no entra es una marca **dominando el cuadro**, no cualquier marca, y
+cinco clips que yo había dado por rechazados entraban. **El chequeo estaba bien medido y mal
+calibrado**, y esa diferencia no la podía ver quien escribió el chequeo.
+
+**Sin disolvencias, y la razón va escrita.** Los dos empalmes están sembrados desde los cuadros
+que empalman, así que ya son continuos: una disolvencia sobre movimiento continuo **no suaviza
+un corte, inventa uno**. Se ve como un defecto de codificación y no como una edición.
+
+**El gráfico cambia porque cambió el estado del partido** (ADR 0049), no para disimular nada:
+no hay nada que disimular. El tanteador se va, `HYDRATION BREAK` ocupa su lugar, el bug del
+canal se queda, y **el reloj corre a través del cambio** porque en una parada de hidratación el
+partido no está detenido reglamentariamente. Nicolás corrigió la razón que yo había escrito, no
+la implementación, y tenía razón en corregir eso: **una razón equivocada sobrevive mejor que un
+error**.
+
+**El espacio publicitario quedó en múltiplos de 8** (ADR 0048), porque ésa es la unidad de una
+generación. El reparto es 16 / 16 / 8 / 24 y vive en `plate.json`, de donde salen los `DURATION`
+del asset list, el `-t` de cada creativo y el largo de su empaquetado. Con su chequeo y tres
+roturas propias en la campaña de mutación.
+
+**Y al medir los largos empaquetados apareció un defecto que llevaba toda la fase adentro.**
+`movido()` entregaba creativos más cortos que su ventana: `-loop 1` sirve la imagen a 25 fps y el
+`fps=30` de `zoompan` **reetiqueta** esos cuadros en lugar de remuestrearlos, así que 24 s de
+imagen salían como 20 s de video. Un aviso que termina antes de su ventana es el único defecto
+de este mecanismo que **nada en pantalla reporta** — se ve como que el aviso se cortó, y se
+habría leído como un problema de la librería. Lo delató el número y no la pantalla: 20,00 medidos
+contra 24 declarados.
+
+**Y uno que sí se veía, en todos los cuadros de la demo.** El bug del canal terminaba en x=1240
+sobre 1280 y la librería dibuja su control de audio en x 1222..1261 (ADR 0015), así que la
+palabra SPORT quedaba debajo del botón. Ahora cierra en 1210, con el número escrito al lado: es
+la única coordenada del paquete que la elige la librería y no el diseño.
+
+Verificado en pantalla sobre el plate real: t=12 s tanteador y pelota en juego; t=15 s
+`HYDRATION BREAK` y los jugadores caminando a tomar agua. Tres segundos de distancia, un cambio
+de gráfico, ningún corte. 56 tests verdes, los cuatro chequeos verdes, las diez roturas rojas.
