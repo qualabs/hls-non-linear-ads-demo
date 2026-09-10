@@ -38,6 +38,7 @@ OUT=${1:?mp4 de salida}
 JUEGO=$(node -e 'process.stdout.write(String(require("./plate.json").paradaEn))')
 PARADA=$(node -e 'process.stdout.write(String(require("./plate.json").paradaDura))')
 LARGO=$(node -e 'process.stdout.write(String(require("./plate.json").largo))')
+CLIP=$(node -e 'process.stdout.write(String(require("./plate.json").clip))')
 COLA=$(awk -v l="$LARGO" -v j="$JUEGO" -v p="$PARADA" 'BEGIN { printf "%s", l - j - p }')
 
 # EL RECORTE DEL CLIP DE JUEGO NO ES ENCUADRE: ES EL CHEQUEO DE CUADRO. En el tercio
@@ -49,7 +50,12 @@ COLA=$(awk -v l="$LARGO" -v j="$JUEGO" -v p="$PARADA" 'BEGIN { printf "%s", l - 
 # Y LOS DOS ACTOS DE JUEGO COMPARTEN EL RECORTE, que es un requisito de la cadena: la
 # parada se genera del último cuadro del acto 1 al primero del acto 3, así que con
 # encuadres distintos no cerraría en los dos extremos.
-RECORTE=2688:1512:1152:400
+#
+# POR ESO EL RECORTE Y EL CLIP VIVEN EN plate.json Y NO ACÁ (ADR 0044, aplicado a la
+# geometría). `generar-parada.sh` necesita los mismos dos valores para sacar el cuadro
+# contra el que cierra la cadena, y escritos en los dos lados se despegan: el eslabón
+# final cerraría contra un encuadre que el plate ya no usa, sin que nada falle.
+RECORTE=$(node -e 'process.stdout.write(String(require("./plate.json").recorte))')
 
 # La parada son los eslabones generados, concatenados. Cada uno son 8 s, que es el techo
 # de una generación, y por eso `paradaDura` es múltiplo de 8: sin eso queda un resto
@@ -72,23 +78,45 @@ trap 'rm -rf "$TMP"' EXIT
 
 echo "plate: ${JUEGO}s de juego + ${PARADA}s de parada generada (${ESLABONES} eslabones) + ${COLA}s de juego = ${LARGO}s"
 
-# Los tres actos por separado y después una concatenación sin recodificar el medio: los
-# eslabones ya vienen a 1280x720 y 24 fps de la generación, así que se normalizan una
-# sola vez acá.
-ffmpeg -hide_banner -loglevel error -y -i "$F/31370180.mp4" \
-  -filter_complex "[0:v]crop=$RECORTE,scale=1280:720,fps=30,setsar=1,trim=duration=$JUEGO,setpts=PTS-STARTPTS[v]" \
+# Los tres actos por separado y después una concatenación sin recodificar el medio: se
+# normalizan una sola vez acá.
+#
+# A 24 FPS, QUE ES EL PASO DE TODA LA CADENA. El clip filmado es de 24, y los eslabones
+# generados también (192 cuadros en 8,00 s). Normalizar a 30 remuestrea 24 a 30
+# duplicando un cuadro de cada cuatro, y eso es un tironeo parejo a lo largo de TODO el
+# plate, no sólo en las costuras. Nada en esta cadena es de 30, así que a 24 el
+# remuestreo desaparece. Los creativos sí son de 30 (`creativos.sh`), y no necesitan
+# coincidir: son streams HLS separados del primario.
+ffmpeg -hide_banner -loglevel error -y -i "$F/$CLIP" \
+  -filter_complex "[0:v]crop=$RECORTE,scale=1280:720,fps=24,setsar=1,trim=duration=$JUEGO,setpts=PTS-STARTPTS[v]" \
   -map "[v]" -an -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p "$TMP/acto1.mp4"
 
-: > "$TMP/lista.txt"
+# CADA ESLABÓN MENOS EL PRIMERO ENTRA SIN SU CUADRO 0, y es la otra mitad de la costura.
+# El eslabón N+1 se genera sembrado con el último cuadro de N, así que su cuadro 0 es la
+# versión que Veo hace de ese mismo instante: pegados tal cual, el instante se ve dos
+# veces y queda un cuadro congelado en cada costura. Se descarta el de la copia generada
+# y se conserva el del eslabón que ya venía corriendo.
+#
+# Por eso son `$ESLABONES` entradas y un `concat` de filtro en lugar del demuxer: el
+# demuxer pega archivos enteros y no sabe saltear un cuadro.
+ENTRADAS=(); FILTRO=""; ETIQUETAS=""
 for n in $(seq 1 "$ESLABONES"); do
-  printf "file '%s'\n" "$PWD/$(printf '%s/%02d.mp4' "$P" "$n")" >> "$TMP/lista.txt"
+  ENTRADAS+=(-i "$(printf '%s/%02d.mp4' "$P" "$n")")
+  i=$((n - 1))
+  if [ "$n" -eq 1 ]; then
+    FILTRO+="[$i:v]setpts=PTS-STARTPTS[e$i];"
+  else
+    FILTRO+="[$i:v]select=gte(n\,1),setpts=PTS-STARTPTS[e$i];"
+  fi
+  ETIQUETAS+="[e$i]"
 done
-ffmpeg -hide_banner -loglevel error -y -f concat -safe 0 -i "$TMP/lista.txt" \
-  -filter_complex "[0:v]scale=1280:720,fps=30,setsar=1,trim=duration=$PARADA,setpts=PTS-STARTPTS[v]" \
+FILTRO+="${ETIQUETAS}concat=n=$ESLABONES:v=1:a=0,scale=1280:720,fps=24,setsar=1,trim=duration=$PARADA,setpts=PTS-STARTPTS[v]"
+ffmpeg -hide_banner -loglevel error -y "${ENTRADAS[@]}" \
+  -filter_complex "$FILTRO" \
   -map "[v]" -an -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p "$TMP/acto2.mp4"
 
-ffmpeg -hide_banner -loglevel error -y -i "$F/31370180.mp4" \
-  -filter_complex "[0:v]crop=$RECORTE,scale=1280:720,fps=30,setsar=1,trim=duration=$COLA,setpts=PTS-STARTPTS[v]" \
+ffmpeg -hide_banner -loglevel error -y -i "$F/$CLIP" \
+  -filter_complex "[0:v]crop=$RECORTE,scale=1280:720,fps=24,setsar=1,trim=duration=$COLA,setpts=PTS-STARTPTS[v]" \
   -map "[v]" -an -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p "$TMP/acto3.mp4"
 
 printf "file '%s'\nfile '%s'\nfile '%s'\n" "$TMP/acto1.mp4" "$TMP/acto2.mp4" "$TMP/acto3.mp4" > "$TMP/actos.txt"

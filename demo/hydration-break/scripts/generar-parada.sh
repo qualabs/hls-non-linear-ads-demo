@@ -51,12 +51,35 @@ REGION=us-central1
 SEGUNDOS=8
 
 G=graphics/creativos/fuentes
-P=content/.fuentes/parada
+F=content/.fuentes
+P=$F/parada
 mkdir -p "$P"
 
 ENTRADA="$G/entrada-arranca-la-parada.png"
-SALIDA="$G/salida-vuelve-el-juego.png"
-[ -s "$ENTRADA" ] && [ -s "$SALIDA" ] || { echo "faltan los cuadros de entrada y salida en $G" >&2; exit 1; }
+[ -s "$ENTRADA" ] || { echo "falta el cuadro de entrada $ENTRADA" >&2; exit 1; }
+
+# EL CUADRO DE SALIDA SE SACA DEL CLIP Y NO ES UN ARCHIVO, y ésa es la corrección que
+# más costó. El último eslabón tiene que cerrar contra el PRIMER CUADRO DEL ACTO 3, que
+# es lo que hace que el juego vuelva exactamente donde el clip retoma. Había un png
+# guardado para eso —`salida-vuelve-el-juego.png`— y se midió: comparado contra los 341
+# cuadros del clip, el más parecido da YAVG 37,7 y el menos parecido 38,1. O sea que no
+# es "otro segundo del clip", es que **no pertenece al clip**. La cadena estaba cerrando
+# contra una imagen ajena y el juego volvía a otro lado.
+#
+# El acto 3 es el mismo metraje que el acto 1, y no por descuido: el clip dura 14,208 s
+# y el acto 1 usa 14, así que no quedan segundos para un tercer acto distinto. El acto 3
+# es un loop forzado por la fuente, y su primer cuadro es el cuadro 0 del clip.
+#
+# SE EXTRAE POR ÍNDICE Y NO CON UN SEEK. Es la misma disciplina que el cuadro semilla de
+# cada eslabón: un `-ss` devuelve el cuadro que le queda cómodo al decodificador, y de
+# ahí salió el bug que rompió las siete costuras. `select=eq(n\,0)` devuelve el cuadro 0.
+#
+# Y el clip y el recorte salen de plate.json, que es donde los lee el script que arma el
+# plate: escritos acá, el eslabón final cerraría contra un encuadre que el plate ya no
+# usa, sin que nada falle.
+CLIP=$(node -e 'process.stdout.write(String(require("./plate.json").clip))')
+RECORTE=$(node -e 'process.stdout.write(String(require("./plate.json").recorte))')
+[ -s "$F/$CLIP" ] || { echo "falta el clip $F/$CLIP" >&2; exit 1; }
 
 # EL PROMPT, y sus dos mitades están medidas.
 #
@@ -112,6 +135,11 @@ BASE="https://$REGION-aiplatform.googleapis.com/v1/projects/$PROYECTO/locations/
 TMP=$(mktemp -d "${TMPDIR:-/dev/shm}/parada-XXXXXX")
 trap 'rm -rf "$TMP"' EXIT
 
+SALIDA="$TMP/salida-primer-cuadro-del-acto-3.png"
+ffmpeg -hide_banner -loglevel error -y -i "$F/$CLIP" \
+  -vf "crop=$RECORTE,scale=1280:720,setsar=1,select=eq(n\,0)" -vsync 0 -frames:v 1 "$SALIDA"
+[ -s "$SALIDA" ] || { echo "no se pudo extraer el primer cuadro del acto 3 de $F/$CLIP" >&2; exit 1; }
+
 for n in $(seq 1 "$HASTA"); do
   NN=$(printf '%02d' "$n")
   SEG="$P/$NN.mp4"
@@ -125,8 +153,13 @@ for n in $(seq 1 "$HASTA"); do
     ANT="$P/$(printf '%02d' $((n - 1))).mp4"
     [ -s "$ANT" ] || { echo "falta el segmento anterior $ANT" >&2; exit 1; }
     PRIMER="$TMP/desde-$NN.png"
-    # `-sseof -1` toma el último cuadro sin tener que saber cuánto dura.
-    ffmpeg -hide_banner -loglevel error -y -sseof -1 -i "$ANT" -update 1 -frames:v 1 "$PRIMER"
+    # EL ÚLTIMO CUADRO, y la forma de sacarlo no es un detalle. `-sseof -1` se para un
+    # segundo antes del final y de ahí en adelante `-update 1` sobrescribe el mismo png
+    # cuadro por cuadro, así que al terminar queda el último. Con `-frames:v 1` se
+    # quedaba con el PRIMERO de ese último segundo —medido, el cuadro 168 de 192—, y
+    # cada eslabón arrancaba donde el anterior estaba un segundo antes de terminar: en
+    # el concat la acción saltaba un segundo para atrás en cada costura.
+    ffmpeg -hide_banner -loglevel error -y -sseof -1 -i "$ANT" -update 1 "$PRIMER"
   fi
 
   # El ÚLTIMO ESLABÓN DE LA CADENA cierra contra el cuadro de salida, que es lo que hace
