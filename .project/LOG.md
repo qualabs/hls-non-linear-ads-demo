@@ -4932,3 +4932,31 @@ debajo. Es el efecto que se pidió.
 
 70 tests y las dos costuras siguen en verde. Los nodos de aviso todavía no
 difuminan: eso es la T-03.
+
+## 2026-09-10 — La salida de la L se ve, verificada en pantalla y no calculada
+
+El hallazgo de la etapa 1 —que la salida de la L quedaba tapada por el aviso a
+cuadro entero— queda **cerrado con una medición y no con un argumento**. En
+`demo/hydration-break` el break arranca en el segundo 14.000 del programa y la L va
+de 30.00 a 46.00: la entrada baja la escala de 1 a 0.74 entre 30.00 y 30.38, y la
+salida la devuelve a 1 entre 45.62 y 46.00, terminando justo cuando el aviso a
+cuadro entero abre. Dentro de la ventana de ese aviso, 387 muestras y una sola
+escala distinta: 1.
+
+La captura del crecimiento congelado a 60 ms de sus 380 muestra la imagen del
+partido tapando el creativo de la L, con el copy a medio cubrir y la banda de abajo
+todavía asomando. Es lo que Nicolás describió, fotografiado.
+
+**Y esa demo no se tocó.** Su servidor ya estaba corriendo en el 8081 —lo tiene
+levantado la sesión de la fase 08— y `dist/` es compartido, así que el cambio de
+`lib/` ya estaba vivo ahí; se miró desde una pestaña aparte, con cero escrituras.
+Antes de decidirlo se verificó que su `senalizar-contenido.sh` es idempotente (la
+playlist regenerada salió idéntica byte a byte) y que `content/` está gitignoreada,
+así que incluso correrla no habría tocado nada trackeado.
+
+Dos cosas que aparecieron al medir. Un **seek que cae adentro de los últimos 380 ms
+de un aviso** compone el primario ya en su destino, sin animar: es correcto —ahí la
+salida ya pasó— y es la misma razón por la que un nodo construido en el momento no
+difumina (ADR 0050). Y el guion de la demo guiada **frena el player en sus beats**,
+así que para mirar la corrida seguida hay que apretar el botón de saltear, que es la
+única salida que el guion tiene (ADR 0042).

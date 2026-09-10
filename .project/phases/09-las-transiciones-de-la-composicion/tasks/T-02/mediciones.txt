@@ -80,3 +80,48 @@ del cambio:
 
 El rectangulo base cambio de 715 a 575 en UN cuadro, y en esa pasada la
 propiedad de transicion quedo en `none`. No hubo animacion.
+
+
+== LAS DOS MITADES EN demo/hydration-break, QUE ES LA FORMA DEL ADR 0047 ==
+
+Esa demo no se toco. Su servidor ya estaba corriendo en el 8081 (la sesion de la
+fase 08 lo tiene levantado) y `dist/` es compartido, asi que el cambio de `lib/`
+ya estaba vivo ahi. Se abrio una pestana aparte y se miro: cero escrituras.
+
+Antes de eso se verifico que `senalizar-contenido.sh` de esa demo es IDEMPOTENTE
+-- la playlist regenerada salio identica byte a byte -- y que `content/` esta
+gitignoreada, asi que ni correrla habria tocado nada trackeado.
+
+El break arranca en el segundo 14.000 del programa, calculado del START-DATE del
+EXT-X-DATERANGE contra el EXT-X-PROGRAM-DATE-TIME de la playlist generada, y dura
+64 s. Con DURATION 16 + 16 + 8 + 24 las ventanas son: banner 14..30, L 30..46,
+lineal 46..54, overlay 54..78. El primaryContent de la L declara viewport
+"0 0 26 26", o sea el 74 % anclado arriba a la derecha: escala 0.74.
+
+Entrada de la L, ventana abriendo en 30.00:
+   29.991   1.0000
+   30.069   0.9624
+   30.150   0.8397
+   30.231   0.7778
+   30.310   0.7508
+   30.391   0.7410   <- llega en 30.38 = 30.00 + 0.380
+   30.469   0.7400
+
+Salida de la L, ventana cerrando en 46.00:
+   45.564   0.7400
+   45.663   0.8137   <- arranco en ~45.62 = 46.00 - 0.380
+   45.763   0.9373
+   45.863   0.9845
+   45.964   0.9990
+   46.064   1.0000   <- el aviso a cuadro entero abre justo aca
+
+Dentro de la ventana del lineal, de 46.1 a 53.9: 387 muestras y el conjunto de
+escalas distintas es { 1 }. Sin movimiento.
+
+EL SALTO DE `clear()` ACA: 0.9990 -> 1.0000, o sea 0.1 % de escala. Mas chico que
+en la demo tecnica.
+
+QUE PRUEBA, Y ES LO QUE FALTABA: la salida de la L SE VE en esta demo. Los
+ultimos 380 ms de la L son tiempo de la L y el aviso a cuadro entero todavia no
+arranco, asi que el primario crece y tapa al backplate en lugar de quedar tapado.
+Nadie tuvo que cambiarle el asset list a nadie.

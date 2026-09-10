@@ -65,6 +65,26 @@ pasada. Sin animación (ADR 0053).
 - `d-redimensionado-durante-la-l.png` — mirada: las tres cajas siguen al área
   nueva sin desalinearse, sin hueco y sin desborde.
 
+## Las dos mitades, verificadas también en la demo del break de hidratación
+
+Es la forma del ADR 0047 —el backplate a cuadro entero por detrás y el primario
+encima— y es la única de las dos demos que la tiene, así que es donde se ve lo que
+Nicolás describió. **No se tocó**: su servidor ya estaba corriendo, `dist/` es
+compartido, y se miró desde una pestaña aparte. Antes se verificó que su script de
+señalización es idempotente (la playlist regenerada salió idéntica byte a byte) y
+que `content/` está gitignoreada.
+
+El break arranca en el segundo **14.000** del programa y dura 64 s, así que la L va
+de **30.00 a 46.00**. La entrada baja la escala de 1 a 0.74 entre 30.00 y 30.38, y
+la salida la devuelve a 1 entre 45.62 y 46.00, **terminando justo cuando el aviso a
+cuadro entero abre su ventana**. Dentro de esa ventana, 387 muestras y una sola
+escala: 1.
+
+- `e-hidratacion-crecimiento-60ms-de-380.png` — la salida congelada a 60 ms de sus
+  380, mirada: la imagen del partido creciendo y **tapando** el aviso de la L. Se ve
+  cómo el copy del creativo de la izquierda queda a medio cubrir y la banda de abajo
+  todavía asoma. Es *"el primario se agranda de vuelta y la tapa"*, fotografiado.
+
 ## Lo que esta task no hizo
 
 Los nodos de aviso todavía **no difuminan**: aparecen y desaparecen de golpe. Es
