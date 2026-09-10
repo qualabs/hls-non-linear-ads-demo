@@ -14,11 +14,13 @@
 # agua. El último eslabón cierra contra el primer cuadro del acto 3, así que el juego
 # vuelve exactamente donde el clip real retoma.
 #
-# NO HAY DISOLVENCIAS EN LOS BORDES, y es una decisión: los dos empalmes están sembrados
-# desde los cuadros que empalman, así que ya son continuos. Una disolvencia de medio
-# segundo sobre movimiento continuo no suaviza un corte, **inventa uno** -- se ve como un
-# defecto de codificación y no como una edición. Se probó la versión con disolvencias
-# sobre el plate de dos rodajes, donde sí hacía falta, y quedó como respaldo.
+# LA COSTURA DE ENTRADA NO LLEVA DISOLVENCIA Y LA DE VUELTA SÍ, y la diferencia es que
+# una es continua y la otra no puede serlo. Los dos empalmes están sembrados desde los
+# cuadros que empalman, pero sólo el de entrada aterriza: el de vuelta lo decide
+# `lastFrame`, que orienta y no clava. Una disolvencia sobre movimiento continuo no
+# suaviza un corte, **inventa uno** -- se ve como un defecto de codificación y no como
+# una edición--, y por eso las ocho costuras continuas van a hueso. Sobre la
+# discontinuidad real de la vuelta hace lo contrario, y está medido más abajo.
 #
 # EL CHEQUEO DE CUADRO CORRE IGUAL SOBRE LO GENERADO, con el umbral que Nicolás fijó: una
 # marca incidental en la ropa entra, igual que si estuviera filmada, porque en un partido
@@ -132,8 +134,39 @@ ffmpeg -hide_banner -loglevel error -y -i "$F/$CLIP" \
   -filter_complex "[0:v]crop=$RECORTE,scale=1280:720,fps=24,setsar=1,trim=duration=$COLA,setpts=PTS-STARTPTS[v]" \
   -map "[v]" -an -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p "$TMP/acto3.mp4"
 
-printf "file '%s'\nfile '%s'\nfile '%s'\n" "$TMP/acto1.mp4" "$TMP/acto2.mp4" "$TMP/acto3.mp4" > "$TMP/actos.txt"
+# LOS DOS PRIMEROS ACTOS SE PEGAN A HUESO Y EL TERCERO ENTRA CON UNA DISOLVENCIA CORTA,
+# y esto **precisa** la decisión de "sin disolvencias" de más arriba en lugar de
+# contradecirla. Esa decisión valía porque las costuras internas YA ERAN CONTINUAS: una
+# disolvencia sobre movimiento continuo no suaviza un corte, inventa uno.
+#
+# La costura de vuelta no es continua, y ahora está medido por qué no puede serlo. El
+# último cuadro del eslabón 08 se comparó contra LOS 341 cuadros del clip buscando cuál
+# empalma mejor: el mejor de todos da YAVG 8,39 y el que se usa hoy 9,46. O sea que **el
+# cuadro no existe en el metraje** --lo generado convergió sólo aproximadamente-- y
+# elegir otro arranque para el acto 3 no arregla nada. Acortar la cola tampoco: con 13 s
+# ya se alcanza el mejor cuadro que hay, y cien cuadros más de libertad no mueven una
+# décima. Regenerar el eslabón con el mismo `lastFrame` se probó y salió peor: 15,9
+# contra 12,2.
+#
+# Así que acá hay una discontinuidad real, que es exactamente para lo que una
+# disolvencia sirve. Medido con el mismo método y la misma ventana: sin disolvencia el
+# pico es 2,51x su vecindario; con seis cuadros baja a **0,55x**, o sea que la
+# transición pasa a ser más suave que el movimiento que la rodea. Se probaron 6, 10 y 16
+# cuadros; 6 y 10 miden igual y se eligió el más corto, que es el que menos se nota como
+# edición.
+printf "file '%s'\nfile '%s'\n" "$TMP/acto1.mp4" "$TMP/acto2.mp4" > "$TMP/actos.txt"
 ffmpeg -hide_banner -loglevel error -y -f concat -safe 0 -i "$TMP/actos.txt" \
+  -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -an "$TMP/dos.mp4"
+
+# El largo vive en plate.json porque `verificar-plate.sh` necesita el mismo número
+# para saber dónde cae la transición: escrito en los dos lados se despega y el chequeo
+# mide el cuadro equivocado.
+DISOLVENCIA=$(node -e 'process.stdout.write(String(require("./plate.json").disolvenciaDeVuelta))')
+CUADROS_DOS=$(ffprobe -v error -select_streams v:0 -count_frames -show_entries stream=nb_read_frames -of csv=p=0 "$TMP/dos.mp4")
+DUR=$(awk -v c="$DISOLVENCIA" 'BEGIN { printf "%.6f", c / 24 }')
+OFFSET=$(awk -v n="$CUADROS_DOS" -v c="$DISOLVENCIA" 'BEGIN { printf "%.6f", (n - c) / 24 }')
+ffmpeg -hide_banner -loglevel error -y -i "$TMP/dos.mp4" -i "$TMP/acto3.mp4" \
+  -filter_complex "[0:v][1:v]xfade=transition=fade:duration=$DUR:offset=$OFFSET,fps=24" \
   -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -an "$OUT"
 
 echo "$OUT  ($(ffprobe -v error -show_entries format=duration -of csv=p=0 "$OUT")s)"
