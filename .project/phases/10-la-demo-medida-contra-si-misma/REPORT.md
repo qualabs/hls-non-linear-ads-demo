@@ -232,3 +232,35 @@ agregó ni rompió un paso de setup.
 **La carpeta `tasks/` de esta fase** — marcada como **registro**. Su único archivo
 arranca diciendo "Registro de lo que se verificó el 2026-09-10. No es instrucción
 vigente", escrito en la misma pasada que lo produjo.
+
+---
+
+## 2026-09-10 — nota fechada sobre dos puntos de este informe
+
+Este informe es un registro y su cuerpo queda como se escribió. Dos de sus puntos
+cambiaron de estado el mismo día, y la regla B de `knowledge/documentation-policy.md`
+dice que eso va en una nota debajo y no reescribiendo lo de arriba.
+
+**El hallazgo del README de `demo/hydration-break/` (sección 4) ya está arreglado**,
+en el commit `b19be23` de la sesión `hls-demo`, que es la dueña de esa carpeta.
+Confirmó los tres puntos antes de tocarlo. El README ahora dice la apertura, el
+disparador real —el 60 % del player en pantalla, con la aclaración explícita de que no
+arranque si el visitante se queda arriba es lo pedido y no un defecto, para que el
+próximo no lo reporte como bug— y el botón que pasa a reiniciar. Se corrigió y no se
+anotó, porque es instrucción viva y no registro.
+
+**El ADR 0059 recibió una nota fechada** con el dato que faltaba para que la
+aceptación de los siete cuadros se pueda auditar: **ningún test fija el largo del
+plate en 92 s**, y eso se chequeó antes de aceptar la diferencia. Es la condición que
+la vuelve legítima en lugar de conveniente — mientras el número sea una declaración no
+rompe nada, y si un test lo hubiera fijado habría sido un contrato y la decisión
+tendría que haber sido otra. Lo aportó quien lo midió, el mismo día, y va como nota
+porque un ADR aceptado no se reescribe.
+
+**Y una devolución que corrige de más y no de menos.** La sesión que hizo el trabajo
+leyó el ADR 0062 y dijo que la generalización va más lejos de lo que ella tenía:
+escribió que el QR no puede pasar por el generador pensándolo como una regla del QR, y
+ponerlo junto a la tipografía deformada muestra que **son el mismo caso**. El QR es la
+versión extrema porque una tipografía deformada se lee mal y un QR deformado no
+escanea. Queda anotado como confirmación de que la generalización no era una lectura
+de más.
