@@ -118,3 +118,39 @@ suponer que es la salida buena, y esta nota es lo único que lo evita.
 
 `entrada-arranca-la-parada.png` sí pertenece al clip: es el cuadro 334 (YAVG 0,48; sus
 vecinos, 5,9).
+
+
+## Los tres modos en que una generación sale mal, y los tres pasan el chequeo de costura
+
+Aparecieron los tres en un mismo día de generar, y la lista está acá y no en el informe
+de una fase porque es **qué mirar la próxima vez** y no un registro de qué pasó. Ninguno
+se deduce de los otros dos.
+
+**1. Deriva de escena entre eslabones.** El eslabón se ve perfecto y la costura mide
+bien, pero la cámara --que el prompt manda tener quieta-- se fue caminando a otra parte
+de la cancha, y los eslabones que siguen heredan obedientemente el mundo equivocado. Se
+midió: el fondo contra el acto 1 pasa de 22-28 a ~70. **Y es de la corrida y no del
+método**: el mismo eslabón, regenerado desde la misma semilla y con el mismo prompt,
+volvió a 23,8. Por eso la escalera se mira de a uno.
+
+**2. Una prohibición sin alternativa se llena con lo que el modelo conoce.** El prompt
+del fondo de la L decía *"no floor, no horizon, no props and no set"* --cuatro
+prohibiciones seguidas y nada que dibujar en su lugar-- y volvió con un piso de estudio,
+sombra proyectada incluida: la banda inferior subió de 30,2 a 65,9 de luz media. Y como
+nunca decía **dónde** tenía que estar el producto, el zapato se fue al centro del cuadro,
+que es donde el partido lo tapa. Es la misma lección que ya está escrita más arriba en
+este archivo, aplicada al revés: **"sin piso" es una prohibición con otras palabras**, y
+lo que funciona es describir qué hay en su lugar y dónde vive cada cosa.
+
+**3. Un fundido encadenado con un corte de escena adentro de un eslabón.** Los
+jugadores vuelven duplicados y semitransparentes durante unos treinta cuadros, y del
+otro lado del fundido la escena es otra. **Es el que más cuesta ver**, porque un fundido
+es suave por construcción: la diferencia cuadro a cuadro se queda en el rango sano de
+punta a punta y la costura con el eslabón anterior mide como las buenas. Lo agarra el
+fondo contra el acto 1 (dio 57) y lo agarra el ojo.
+
+**Los tres pasan `verificar-plate.sh`.** Ese chequeo mide continuidad, no identidad de
+escena. El que compara la escena es `verificar-cadena.sh`, y se corre sobre cada
+eslabón, no sólo cuando uno sospecha: la sospecha es el peor disparador de una medición
+--la del fundido apareció porque veníamos de la deriva, y si hubiera sido el primero
+pasaba de largo--.
