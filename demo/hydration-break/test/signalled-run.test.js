@@ -27,8 +27,23 @@ import {
   anclasDelGuion,
   elBreakArrancaEnLaParada,
   elRepartoSaleDeUnSoloLugar,
-  lasTresFormasDelMinuto
+  lasTresFormasDelMinuto,
+  laGaleriaSeDibujaDelContrato,
+  losMediosSalenDelContrato,
+  cadaPliegueRotulaSuAviso,
+  laGlosaDelBloqueExplicaSusCampos,
+  elRitmoDelGuion
 } from './comprobaciones.js';
+import { labelsOfAssetList, blockGlossOf } from '../js/senalizacion.js';
+
+/** Los archivos que dibujan rótulos de la página leyendo el asset list. La lista se
+ * amplía cuando aparece otro que los derive: un identificador o un MIME escrito a mano es
+ * el mismo defecto en cualquiera de ellos. */
+const FUENTES = () => [
+  { nombre: 'index.html', texto: leer('../index.html') },
+  { nombre: 'js/tipos.js', texto: leer('../js/tipos.js') },
+  { nombre: 'js/senalizacion.js', texto: leer('../js/senalizacion.js') }
+];
 
 const leer = (ruta) => readFileSync(new URL(ruta, import.meta.url), 'utf8');
 const json = (ruta) => JSON.parse(leer(ruta));
@@ -61,6 +76,57 @@ test('el reparto de los avisos sale de plate.json y no del asset list', () => {
 
 test('el minuto declara sus tres formas de aviso', () => {
   assert.deepEqual(lasTresFormasDelMinuto({ assetList }), []);
+});
+
+test('la galería de formas se dibuja del contrato y no de una lista escrita a mano', () => {
+  // La propiedad del ADR 0073, medida sobre TODOS los archivos que derivan rótulos del
+  // asset list, y no sólo sobre los de la sección 1: la lista se amplía cuando aparece
+  // otro que los derive, porque un identificador escrito a mano es el mismo defecto en
+  // cualquiera de ellos. Su control -- la corrida con un identificador plantado, que
+  // tiene que dar rojo -- está en `mutaciones.mjs`, por la misma razón que el de las
+  // anclas: un chequeo que nadie vio fallar es un chequeo que nadie sabe que puede fallar.
+  assert.deepEqual(laGaleriaSeDibujaDelContrato({ assetList, fuentes: FUENTES() }), []);
+});
+
+test('lo que puede ir en una caja se lee del contrato y no está escrito en la página', () => {
+  // La misma propiedad del ADR 0073 sobre la otra mitad derivada de la sección 1: la
+  // galería dice dónde va cada caja y el bloque de abajo qué puede ir adentro, y los dos
+  // se caen igual si alguien tipea lo que el asset list ya declara. Su control -- un MIME
+  // plantado a mano, que tiene que dar rojo -- está en `mutaciones.mjs`.
+  assert.deepEqual(losMediosSalenDelContrato({ assetList, fuentes: FUENTES() }), []);
+});
+
+test('cada pliegue de la señalización rotula el aviso que tiene adentro', () => {
+  // Los rótulos los produce la página -- `labelsOfAssetList` es el código que la sección
+  // corre en vivo, no una reimplementación -- y el chequeo los coteja contra el asset
+  // list. Su control está en `mutaciones.mjs`: cuatro tandas escritas a mano, una por
+  // cada forma en que el rótulo y el aviso se pueden despegar.
+  assert.deepEqual(cadaPliegueRotulaSuAviso({
+    assetList,
+    rotulos: labelsOfAssetList(assetList)
+  }), []);
+});
+
+test('la glosa del bloque explica los campos que el asset list trae, y ninguno más', () => {
+  // Las filas las produce la página -- `blockGlossOf` es el código que la sección corre en
+  // vivo -- y el chequeo recorre el asset list por su cuenta para cotejarlas. Sus controles
+  // están en `mutaciones.mjs`: un campo que el archivo trae y la glosa no explica, y una
+  // fila que explica un campo que el archivo no trae.
+  assert.deepEqual(laGlosaDelBloqueExplicaSusCampos({
+    assetList,
+    filas: blockGlossOf(assetList)
+  }), []);
+});
+
+test('entre dos placas se ve partido, y ninguna placa se queda', () => {
+  // El chequeo de anclas mira cada placa sola y ésta la relación entre dos, que es
+  // donde las separaciones viven hoy: no están declaradas en ningún lado, salen de los
+  // `lead` del guion calculados a mano, así que la próxima edición de textos las mueve
+  // sin que nada avise. Sus controles -- dos placas resolviendo en el mismo segundo, y
+  // un `hold` absurdo -- están en `mutaciones.mjs`, por lo mismo que los otros: un
+  // chequeo que nadie vio fallar es un chequeo que nadie sabe que puede fallar.
+  const provider = proveedorDeclarado({ plate, assetList });
+  assert.deepEqual(elRitmoDelGuion({ story, provider }), []);
 });
 
 test('cada creativo del asset list tiene una carpeta de contenido nombrada', () => {

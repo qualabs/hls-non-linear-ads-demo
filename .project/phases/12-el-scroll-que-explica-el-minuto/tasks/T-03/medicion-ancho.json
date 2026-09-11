@@ -1,0 +1,14 @@
+{
+  "pliegues cerrados": {
+    "scrollWidth": 400,
+    "clientWidth": 400
+  },
+  "pliegue 2 abierto, con min-width: 0": {
+    "scrollWidth": 400,
+    "clientWidth": 400
+  },
+  "el mismo pliegue abierto, sin la linea": {
+    "scrollWidth": 471,
+    "clientWidth": 400
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "400x780": {
+    "scrollWidth": 400,
+    "clientWidth": 400,
+    "innerWidth": 400,
+    "figurePresent": true,
+    "figureBox": {
+      "x": 20,
+      "y": -2485,
+      "w": 360,
+      "h": 741
+    },
+    "columns": [
+      {
+        "x": 20,
+        "y": -2266,
+        "w": 360,
+        "h": 178
+      },
+      {
+        "x": 20,
+        "y": -2054,
+        "w": 360,
+        "h": 178
+      }
+    ],
+    "stacked": true,
+    "labels": [
+      "One media playlist, and it carries both.",
+      "EXT-X-DATERANGE com.apple.hls.interstitial",
+      "EXT-X-DATERANGE com.qualabs.hls.concurrentInterstitial",
+      "Same START-DATE, one ID each.",
+      "A client in the market today",
+      "plays com.apple.hls.interstitial",
+      "The class it does not know is compared as an exact string, with no inheritance to fall back on, so it goes straight past it. The Ad replaces the programme, exactly as it does today, and not one option of the player had to change.",
+      "The same client, with the library on top",
+      "plays com.qualabs.hls.concurrentInterstitial",
+      "Same hls.js and the same version: the new class is read by a library on top of the player and not by a change inside it. The Ad is drawn into the box the layout declares, and the programme underneath keeps running.",
+      "Drawn, not read. This page runs one client, so the playlist under it carries the concurrent tag alone; the pair of clients on a single playlist is the other demo in this repository."
+    ],
+    "shapes": 4,
+    "assets": 4,
+    "sections": [
+      "Two ways to run an Ad",
+      "The signalling class",
+      "The signalling, as it is served",
+      "Credits"
+    ],
+    "console_errors": []
+  },
+  "1907": {
+    "scrollWidth": 1907,
+    "clientWidth": 1907,
+    "innerWidth": 1907,
+    "figurePresent": true,
+    "figureBox": {
+      "x": 514,
+      "y": -1721,
+      "w": 880,
+      "h": 459
+    },
+    "columns": [
+      {
+        "x": 514,
+        "y": -1549,
+        "w": 424,
+        "h": 178
+      },
+      {
+        "x": 970,
+        "y": -1549,
+        "w": 424,
+        "h": 178
+      }
+    ],
+    "stacked": false,
+    "labels": [
+      "One media playlist, and it carries both.",
+      "EXT-X-DATERANGE com.apple.hls.interstitial",
+      "EXT-X-DATERANGE com.qualabs.hls.concurrentInterstitial",
+      "Same START-DATE, one ID each.",
+      "A client in the market today",
+      "plays com.apple.hls.interstitial",
+      "The class it does not know is compared as an exact string, with no inheritance to fall back on, so it goes straight past it. The Ad replaces the programme, exactly as it does today, and not one option of the player had to change.",
+      "The same client, with the library on top",
+      "plays com.qualabs.hls.concurrentInterstitial",
+      "Same hls.js and the same version: the new class is read by a library on top of the player and not by a change inside it. The Ad is drawn into the box the layout declares, and the programme underneath keeps running.",
+      "Drawn, not read. This page runs one client, so the playlist under it carries the concurrent tag alone; the pair of clients on a single playlist is the other demo in this repository."
+    ],
+    "shapes": 4,
+    "assets": 4,
+    "sections": [
+      "Two ways to run an Ad",
+      "The signalling class",
+      "The signalling, as it is served",
+      "Credits"
+    ],
+    "console_errors": []
+  }
+}

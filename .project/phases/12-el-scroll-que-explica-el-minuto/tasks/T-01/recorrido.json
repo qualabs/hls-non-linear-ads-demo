@@ -1,0 +1,11 @@
+{
+  "opening_lines": 4,
+  "first_card": "In this soccer match the hydration break is about to start.",
+  "skip_label_during": "Skip the walkthrough",
+  "state_line": "0.0s · the match, no ad",
+  "hud": "hls.js 1.7.2 · playing ./content/primary/con-daterange.m3u8",
+  "skip_label_after": "Play the walkthrough again",
+  "restarted_card": "In this soccer match the hydration break is about to start.",
+  "currentTime_after_restart": 0,
+  "errors": []
+}

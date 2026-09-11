@@ -1,0 +1,28 @@
+== 1907 ==
+  IGUAL  Ad 1 · lowerThirdOverlay · still image · 16 s
+         declarado en asset-list: lowerThirdOverlay: 0 0 0 0 (default de la capa, ADR 0004) | 70 6.25 12.5 6.25
+         dibujado en la ficha:                primaryContent 0 0 0 0 (primario) | banner 70 6.25 12.5 6.25
+  IGUAL  Ad 2 · squeezebackLShape · video · 16 s
+         declarado en asset-list: squeezebackLShape: 0 0 26 26 | 0 0 0 0
+         dibujado en la ficha:                lBackplate 0 0 0 0 | primaryContent 0 0 26 26 (primario)
+  IGUAL  Ad 3 · linear · 8 sAt full frame, over a programme that never stopped.
+         declarado en sin bloque: lineal sintetizado (ADR 0019): 0 0 0 0 | 0 0 0 0
+         dibujado en la ficha:                primaryContent 0 0 0 0 (primario) | linear 0 0 0 0
+  IGUAL  Ad 4 · cornerOverlay · video · 24 s
+         declarado en asset-list: cornerOverlay: 0 0 0 0 (default de la capa, ADR 0004) | 62.5 6.25 12.5 68.75
+         dibujado en la ficha:                primaryContent 0 0 0 0 (primario) | overlay 62.5 6.25 12.5 68.75
+== 400x780 ==
+  IGUAL  Ad 1 · lowerThirdOverlay · still image · 16 s
+         declarado en asset-list: lowerThirdOverlay: 0 0 0 0 (default de la capa, ADR 0004) | 70 6.25 12.5 6.25
+         dibujado en la ficha:                primaryContent 0 0 0 0 (primario) | banner 70 6.25 12.5 6.25
+  IGUAL  Ad 2 · squeezebackLShape · video · 16 s
+         declarado en asset-list: squeezebackLShape: 0 0 26 26 | 0 0 0 0
+         dibujado en la ficha:                lBackplate 0 0 0 0 | primaryContent 0 0 26 26 (primario)
+  IGUAL  Ad 3 · linear · 8 sAt full frame, over a programme that never stopped.
+         declarado en sin bloque: lineal sintetizado (ADR 0019): 0 0 0 0 | 0 0 0 0
+         dibujado en la ficha:                primaryContent 0 0 0 0 (primario) | linear 0 0 0 0
+  IGUAL  Ad 4 · cornerOverlay · video · 24 s
+         declarado en asset-list: cornerOverlay: 0 0 0 0 (default de la capa, ADR 0004) | 62.5 6.25 12.5 68.75
+         dibujado en la ficha:                primaryContent 0 0 0 0 (primario) | overlay 62.5 6.25 12.5 68.75
+
+las cajas dibujadas son las declaradas, en los dos anchos

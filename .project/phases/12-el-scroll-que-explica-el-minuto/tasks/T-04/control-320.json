@@ -1,0 +1,22 @@
+{
+ "figure in place": {
+  "doc": 334,
+  "client": 320,
+  "overflowing": [
+   {
+    "el": "code.",
+    "right": 334
+   }
+  ]
+ },
+ "figure hidden": {
+  "doc": 334,
+  "client": 320,
+  "overflowing": [
+   {
+    "el": "code.",
+    "right": 334
+   }
+  ]
+ }
+}

@@ -1,0 +1,19 @@
+{
+  "start_date_plantado": "2001-01-02T03:04:05.678-0300",
+  "control_1": {
+    "start_date_en_pantalla": "2001-01-02T03:04:05.678-0300",
+    "siguio_a_la_red": true,
+    "rojo": true
+  },
+  "control_2": {
+    "con_la_guarda": {
+      "scrollWidth": 400,
+      "clientWidth": 400
+    },
+    "sin_la_guarda": {
+      "scrollWidth": 471,
+      "clientWidth": 400
+    },
+    "rojo": true
+  }
+}

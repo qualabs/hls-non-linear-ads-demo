@@ -5241,3 +5241,134 @@ que puede ser la que vale: **el generador no acata el tamaño** —pedido al 25 
 salió al 44 %, y pedido más fuerte al 55 %— así que la geometría se le saca de las manos
 y la hace un script. Cuando llegue el OK se escribe, y conviene mirar si generaliza al
 ADR 0045 igual que el 0062.
+
+## 2026-09-11 — Fase 11 abierta y en diseño: el multi view que elige quien mira
+
+Nicolás pidió un tag hermano del concurrente para una experiencia distinta: **el que
+publica ofrece un catálogo de contenidos y quien mira arma su propia composición**. Es
+otra relación y no un layout más — en el aviso el proveedor decide cómo se ve y punto;
+acá ofrece y la elección es de quien mira.
+
+La fase se abrió en diseño (`phases/11-el-multi-view-que-elige-quien-mira/DESIGN.md`),
+sin `PHASE.md` ni `TASKS.md`, que es el estado "no operable" de la etapa 1.
+
+El diseño se llevó con cuatro decisiones de alcance abiertas y sus recomendaciones, y
+**una respuesta de Nicolás cambió el modelo de entrada**: no hay botón de "enable
+multiview" sino un selector en la barra de controles donde se van agregando videos,
+replicando la experiencia de `projects/aws-multiview`. Con eso el diseño se rehizo:
+el programa cuenta como una de las vistas, el tope de cuatro es de pantalla y no de
+oferta, y agrandar una caja pasó a ser foco completo de imagen y audio.
+
+Dos cosas que salieron de ir a la fuente y que no se habrían visto de memoria. **El
+`type` `multiView` ya está tomado** por la herramienta de SVTA, y en este repositorio
+nombra al Quad editorial del break 4 del recorrido que se graba. Y **el side by side
+no son dos medias pantallas**: el primario se achica con un `transform`, así que media
+pantalla de alto completo lo deforma al doble de ancho aparente — la herramienta ya lo
+había resuelto con bandas negras en su `squeezebackDoubleBox`, y de ahí se copió.
+
+Y un número que se corrigió antes de que llegara a ningún lado: el borrador citaba "36
+segundos de spread entre fuentes" de `aws-multiview` y **eso no existe en ese repo**.
+Se reemplazó por lo que la fuente sí dice. Las otras cuatro citas de ese proyecto se
+verificaron una por una.
+
+## 2026-09-11 — Fase 11: diseño acordado y fase generada
+
+Nicolás aprobó el diseño y cerró lo último que quedaba abierto: **sólo `name` en el
+asset list, sin descripción**. Las cuatro decisiones de alcance se cerraron por la
+recomendada.
+
+El evento de generación produjo `PHASE.md`, `TASKS.md` con trece tasks, y **diez ADR,
+del 0063 al 0072**. Siete son `scope: project` porque deciden cómo se señaliza la
+experiencia y cómo se comporta la librería, no sólo esta fase; dos —el selector y el
+anuncio— son `scope: phase-11` porque deciden cómo se comporta un control, que es el
+criterio con el que la fase 07 marcó los suyos.
+
+**Y la fase entró con un requisito que Nicolás agregó sobre la marcha:** *"en el proceso
+también verificar que no se rompa nada de lo que hicimos de ads, si hay tests o cosas
+correrlas obviamente"*. La línea de base se midió antes de tocar nada — **`npm test`:
+72 pruebas, 72 pasan, 0 fallan**; `npm run check` verde con las dos costuras — y está
+escrita en `PHASE.md`.
+
+Lo que hizo falta pensar ahí es que **la suite sola no alcanza, y por una razón
+estructural**: el cambio grande de la fase es `build()` y `clear()` pasando a trabajar
+por diferencia, que es justo el código que dibuja los avisos que ya andan, y las 72
+pruebas fueron escritas contra el comportamiento **total**. Pueden pasar enteras
+mientras la composición de un aviso quedó distinta en pantalla. De ahí salió la
+propiedad que la T-01 tiene que fijar y que no existía porque no hacía falta: **para una
+experiencia que no cambia, la ruta incremental y la total dejan la misma composición**.
+Y de ahí salió la T-12, que compara el recorrido de `compatibility-pair` contra una
+lectura tomada **antes** de empezar la fase — que es lo primero que esa task hace,
+aunque cierre última.
+
+Tres chequeos de la fase llevan su control escrito, porque sin él no pueden fallar: el
+grep del CC se corre sobre un `lib/` con una ocurrencia plantada, el auto-ocultado se
+mide también sin hold, y el comparador del recorrido se corre una vez contra una lectura
+alterada a mano. Es la lección que el proyecto pagó seis veces en dos días.
+
+**Y lo que la fase NO va a producir está escrito adentro de `PHASE.md`**, para que no
+quede como un supuesto de quien lea: ningún dato sobre viabilidad en red. La T-01 de la
+fase 01 midió decodificación con contenido local y esta demo también sirve local, así
+que al cerrar no se va a poder afirmar nada sobre cuánto ancho de banda pide una grilla
+de cuatro sobre una conexión real.
+
+Validador en verde: 72 ADR, 11 fases.
+
+## 2026-09-11 — Fase 12 abierta, diseñada y generada: el scroll que explica el minuto
+
+Nicolás pidió reestructurar todo lo que va desde la sección *What the player did*
+para abajo en la página del break de hidratación, en cuatro secciones y en este
+orden: qué son los avisos lineales y los no lineales con imágenes de los tipos, cómo
+funciona el `concurrentInterstitial` y cómo convive con el interstitial común, el
+DateRange y el asset list del ejemplo navegables, y los créditos. La copia va en
+inglés porque la presenta David Hassoun el 7 de octubre.
+
+**Una sola entrada para las dos etapas, y conviene decir por qué.** La fase se abrió
+como propuesta y se aprobó el mismo día, en el mismo hilo: el diseño se escribió con
+un banner de *propuesto, no aprobado*, Nicolás contestó *"Aprobada!"* sin objeciones y
+sin cambiar ninguna de las cinco decisiones, y ahí se sacó el banner y se generaron
+los artefactos. No hubo tiempo entre una cosa y la otra que un segundo asiento
+pudiera registrar.
+
+**El pedido traía dos problemas de diseño y los dos se resolvieron contra la misma
+vara**, que es la que la propia página se puso y que está escrita en el comentario de
+cabecera de su `index.html`: nada afirma algo que no haya leído del contrato, y nada
+de lo que se ve es una grabación.
+
+- **Las capturas no entran.** Una captura es una afirmación congelada que envejece sin
+  avisar, y envejece en silencio. Las formas de aviso se **dibujan** con las cajas que
+  el proveedor ya resolvió, así que si el asset-list cambia el dibujo cambia solo y no
+  hay a quién acordarse de avisarle (ADR 0073). La premisa que lo sostiene se verificó
+  en la fuente antes de proponerlo, y no de memoria: `activeAt` es un `filter` sobre el
+  array completo de experiencias resueltas, así que contesta por tiempos que todavía no
+  se reprodujeron.
+- **Navegable se suma y no reemplaza.** El tag y el asset-list se siguen leyendo en
+  vivo, que es lo que hace verdadera a esa sección. Lo que cambia es que el resumen de
+  hoy pasa a ser el rótulo de un pliegue y el JSON crudo —cien líneas que hoy no están
+  en ningún lado de la página— entra adentro (ADR 0075).
+
+**El encuadre quedó como ADR de proyecto y no de fase.** Nicolás lo fijó así: *"es una
+forma más polite, no es reemplazar una cosa con otra, es dar más opciones"*. Es lo que
+el repositorio ya sostenía técnicamente en el ADR 0007, el 0009 y el 0019, y lo que la
+propia demo ya dice en un beat del guion, y no se veía en pantalla en ningún lado
+(ADR 0076).
+
+Generó `PHASE.md`, `TASKS.md` con cinco tasks, y los **ADR 0073 a 0077**.
+
+**La documentación de `docs/` no cambia, y la respuesta es por decisión y no en
+bloque.** Ninguno de los cinco ADR toca la superficie entre las dos capas ni la
+pública: el 0073 y el 0074 consumen `activeAt` y `programRanges` tal como el contrato
+ya los documenta, el 0075 es la página leyendo lo que ya leía, el 0076 es encuadre de
+material y el 0077 es la forma de una página. La única documentación que la fase
+vuelve falsa es el comentario de cabecera de `index.html`, y lo arregla la T-01, que
+es la task que lo rompe.
+
+**Dos cosas del contexto en que se abre quedaron escritas adentro de `PHASE.md` en
+lugar de confiadas a la memoria.** La primera es la lista de archivos que la fase
+toca, que es lo que permite que corra en paralelo con la fase 11 sin pisarla: la 12
+vive entera en `demo/hydration-break/` y no entra a `lib/`, donde la 11 tiene tres
+tasks corriendo. La segunda es que **no se sabe si el scroll de abajo entra en la
+grabación del 28 al 30 o si se graba sólo el player**; Nicolás aprobó sin contestarla,
+así que queda como un dato que cambia cuánto conviene invertir y no como una decisión
+que frene la fase. Se diseñó con todo construido, y lo que se pierde si al final se
+graba sólo el player está acotado a una task, la T-04, que está aislada exactamente
+por eso.

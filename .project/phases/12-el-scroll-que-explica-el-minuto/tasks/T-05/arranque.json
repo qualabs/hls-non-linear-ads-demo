@@ -1,0 +1,34 @@
+{
+  "a_sin_scrollear": {
+    "visible_del_player": 0,
+    "placa_visible": false,
+    "data_story": null,
+    "currentTime": 0,
+    "paused": true
+  },
+  "b_al_30_por_ciento": {
+    "visible_del_player": 0.3,
+    "placa_visible": false,
+    "data_story": null,
+    "currentTime": 0,
+    "paused": true
+  },
+  "c_en_pantalla": {
+    "visible_del_player": 1,
+    "placa_visible": true,
+    "data_story": "running",
+    "currentTime": 0,
+    "paused": true,
+    "segundos_hasta_la_placa": 0.06
+  },
+  "c_placa": "In this soccer match the hydration break is about to start.",
+  "placa_1_en_pantalla_s": 5.44,
+  "despues_de_la_placa_1": {
+    "visible_del_player": 1,
+    "placa_visible": false,
+    "data_story": "running",
+    "currentTime": 0.02,
+    "paused": false
+  },
+  "errores": []
+}

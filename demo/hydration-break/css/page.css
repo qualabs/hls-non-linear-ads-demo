@@ -127,42 +127,48 @@ body {
   .opening { --s: 1; }
 }
 
-/* THE MARK GOES ON A LIGHT PLATE AND NOT ON THE DARK PAGE, and that is the
- * brand's own rule: its wordmark is ink, so on this background half of it
- * disappears, and recolouring somebody's logo is the other way to break it.
- * The plate is the size of the logo and no bigger.
+/* THE MARK GOES ON THE PAGE AND NOT ON A PLATE OF ITS OWN, and what that decides
+ * is the logo and not the page. The wordmark of the brand file is ink `#383838`,
+ * so on this background it is not there; the answer used to be a white rectangle
+ * under it, and a white rectangle is the thing Nicolas rejected -- twice. So the
+ * file changes instead: `brand/logo-qualabs-on-dark.svg`, the same artwork with
+ * its seven wordmark paths in white and the mark keeping its four inks.
  *
- * It is also the ONLY mark on the page, and it is outside the picture, which is
- * what phase 04 settled: nothing of ours sits over the frame the layout uses. */
+ * CENTRED, WITH THE LINE STACKED UNDER IT. A logo with something beside it is not
+ * centred on the page, it is centred on what is left over. The same mark, at the
+ * same size, closes the credits at the foot, so the page opens and shuts on one
+ * thing rather than on two different ones.
+ *
+ * It is still the ONLY mark outside the picture, which is what phase 04 settled:
+ * nothing of ours sits over the frame the layout uses. */
 .masthead {
   /* Negro y no el fondo de la página, porque lo único que hay debajo del masthead es la
    * apertura: sobre #12141a se veía una franja más clara arriba del negro. Cuando la
    * apertura termina el masthead ya salió de pantalla, así que este color no se ve en
    * ningún otro lado. */
   background: #000;
-  display: flex;
-  align-items: baseline;
-  gap: 18px;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
   padding: 26px clamp(20px, 4vw, 56px) 0;
 }
 
-.brand {
-  display: inline-flex;
-  background: var(--q-paper-50);
-  border-radius: 10px;
-  padding: 9px 14px;
-}
+/* 44 px and not the 22 it was. The plate used to give the mark an edge to sit
+ * against; with the plate gone the mark has to carry itself, and a 4.4:1 logo at
+ * 22 px is a line of thin type rather than a mark. 30 was the first try and still
+ * read small on its own. */
+.brand { display: block; height: 44px; width: auto; }
 
-.brand img { display: block; height: 22px; width: auto; }
-
-.collab {
-  margin: 0;
-  font-size: 13px;
-  letter-spacing: .04em;
-  color: var(--q-slate-400);
-}
-
-.collab abbr { text-decoration: none; border-bottom: 1px dotted currentColor; }
+/* THE SAME MARK CLOSING THE CREDITS, AND NOT A SECOND FOOTER UNDER THEM. The
+ * credits are the foot of this page (ADR 0077); a band of its own below them
+ * would be two feet arguing about which one is last.
+ *
+ * AND IT SITS AT THE BOTTOM, not after the text. `.chapter` centres its content,
+ * so a mark that follows the credits lands in the middle of the block and reads as
+ * if the page had not finished. `.chapter--end` distributes instead, and the small
+ * bottom padding is what puts the mark near the edge of the page rather than a
+ * screen-height away from it. */
+.brand--foot { display: block; margin: 0 auto; height: 30px; }
 
 /* ONE IDEA PER SCREEN. The player section is the height of the viewport minus
  * the masthead, so the picture is the thing you land on and there is nothing
@@ -390,6 +396,225 @@ body[data-story="done"] .skip { color: var(--q-paper-50); border-color: #47505f;
   color: var(--q-paper-50);
 }
 
+/* THE GALLERY OF SHAPES (ADR 0073), and every rectangle in it is the box the
+ * layout declared rather than a picture of the demo. The markup is built by
+ * `js/tipos.js` at load time and there is not one shape typed in, here or there.
+ *
+ * TWO COLUMNS AND NOT FOUR, which is a measurement and not a taste: the boxes
+ * carry their own inset numbers inside them, and that is the whole of what the
+ * drawing has to show. Across four columns the corner overlay of the last card
+ * is a quarter of a 200 px frame, and its four numbers do not fit in it.
+ *
+ * NO COLOUR, like the rest of this page. What tells the Ad from the picture is
+ * the weight of the fill and the kind of border, not a second hue: the palette
+ * is neutral so that the only colour in the browser window comes from the
+ * video. */
+.shapes {
+  margin: 48px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 32px;
+}
+
+@media (max-width: 640px) { .shapes { grid-template-columns: minmax(0, 1fr); } }
+
+.shape { margin: 0; }
+
+/* The picture, and the frame is 16:9 because the insets are percentages OF THE
+ * PICTURE and not of whatever screen this is being read on -- rule 1 of the
+ * contract, which is the same reason the renderer measures the area of the
+ * player and not of its container. */
+.shape__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #0b0d11;
+  border: 1px solid #262d38;
+  overflow: hidden;
+}
+
+.shape__box {
+  position: absolute;
+  /* THE LABEL FLOWS AND SITS AT THE FOOT OF ITS BOX, and both halves of that
+   * were measured rather than chosen. It flows because the smallest box of the
+   * four cards is 90 px wide at 400 px of viewport: on one line where there is
+   * room, wrapped where there is not, and set in a column it was a pixel too
+   * tall for the banner. It sits at the foot because a box drawn over another
+   * one covers its top first -- with the labels at the top, the name of the
+   * L's backplate was cut in half by the primary content drawn over it, which
+   * reads as a defect rather than as the point. */
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-end;
+  gap: 0 7px;
+  padding: 3px 5px;
+  overflow: hidden;
+  /* OPAQUE, AND THAT IS THE DRAWING TELLING THE TRUTH RATHER THAN A CHOICE OF
+   * FINISH: a box on top of another one hides it, which is what happens on the
+   * picture. Translucent, the linear Ad -- an element at full frame over a
+   * primary at full frame -- came out as its own label printed on top of the
+   * label underneath it, which reads as a defect and is the opposite of what
+   * the card says. */
+  background: #232935;
+  border: 1px solid #6c7688;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  line-height: 1.35;
+  color: #c8cfd9;
+}
+
+/* The programme is an element of the layout like any other (rule 3), so it is
+ * drawn as a box like any other -- and it is the one box the eye has to be able
+ * to tell from the rest, because what the section argues is which of the two is
+ * underneath. Quieter fill, dashed border, and no third treatment. */
+.shape__box--primary {
+  background: #151a21;
+  border-style: dashed;
+  border-color: #3a4250;
+  color: var(--q-slate-400);
+}
+
+.shape__id { font-weight: 600; letter-spacing: .02em; }
+
+.shape__inset { opacity: .78; }
+
+.shape__caption {
+  margin: 12px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #c8cfd9;
+}
+
+.shape__note { display: block; color: var(--q-slate-400); }
+
+/* WHAT GOES IN A BOX. The gallery above says where the boxes are; this says what
+ * can be inside one, and the three tiles are the three branches of `attachAsset`
+ * in `lib/media.js` rather than three things somebody chose to mention. The markup
+ * is built by `js/tipos.js` and the media types printed in it are read off the
+ * contract, for the same reason the shapes are.
+ *
+ * THE SWATCH CARRIES THE DISTINCTION AND IS NOT ORNAMENT, which is the only ground
+ * a drawing gets on this page. A chequer is an alpha channel, and what shows
+ * through it is the picture underneath -- the one property of a still that a
+ * sentence has to argue for and a texture just shows. A row of ticks is a media
+ * playlist: segments, and a player of its own to fetch them. One filled block is
+ * one file, handed to the video element whole.
+ *
+ * NO COLOUR, like the rest of the scroll: the three are told apart by texture, in
+ * the greys the gallery above already uses. */
+.media__title {
+  margin: 52px 0 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--q-paper-50);
+}
+
+.media {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px 32px;
+}
+
+@media (max-width: 640px) { .media { grid-template-columns: minmax(0, 1fr); } }
+
+.media__kind { min-width: 0; }
+
+.media__swatch {
+  height: 42px;
+  background: #0b0d11;
+  border: 1px solid #262d38;
+}
+
+/* The chequer of an alpha channel, at the size it is drawn at in every editor
+ * that has ever shown one. */
+.media__swatch--still {
+  background-color: #151a21;
+  background-image:
+    linear-gradient(45deg, #262d38 25%, transparent 25% 75%, #262d38 75%),
+    linear-gradient(45deg, #262d38 25%, transparent 25% 75%, #262d38 75%);
+  background-size: 14px 14px;
+  background-position: 0 0, 7px 7px;
+}
+
+/* Segments, and the gaps between them are the boundaries a playlist declares. The
+ * ink is the one the tile below uses, so that what tells the two apart is the gaps
+ * and not the shade: the whole point of the pair is that one is cut and one is not. */
+.media__swatch--stream {
+  background-image: repeating-linear-gradient(90deg, #3a4250 0 15px, #0b0d11 15px 18px);
+}
+
+/* One piece, with nothing declaring where it can be cut. */
+.media__swatch--file { background: #3a4250; }
+
+.media__name {
+  margin: 13px 0 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--q-paper-50);
+}
+
+.media__mime {
+  margin: 6px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--q-slate-400);
+  overflow-wrap: anywhere;
+}
+
+.media__what {
+  margin: 11px 0 0;
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.62;
+  color: #c8cfd9;
+}
+
+
+/* A section that describes a mechanism and then takes a position needs the two to read
+ * as two things, and the only separator this page has is air: no rule, no card, and no
+ * second colour to reach for. So the gap does it, and emphasis inside the paragraph is
+ * weight and nothing else -- `strong` at 500 against a body set at 300. */
+.chapter .lede + .lede { margin-top: 26px; }
+.points + .lede { margin-top: 44px; }
+.lede strong { font-weight: 500; color: var(--q-paper-50); }
+
+/* What the class can do: five short lines, and a list rather than a table for the same
+ * reason the three numbers above are not one -- a table compares, and there is nothing
+ * here to compare against. The marker is the rule down the left, borrowed from the code
+ * block, because a bullet disc in front of a sentence this size reads as a slide. */
+.points {
+  list-style: none;
+  margin: 44px 0 0;
+  padding: 0;
+  max-width: 62ch;
+  display: grid;
+  gap: 16px;
+  font-size: clamp(15px, 1.2vw, 17px);
+  font-weight: 300;
+  line-height: 1.6;
+  color: #c8cfd9;
+}
+
+.points li { padding-left: 20px; border-left: 1px solid #262d38; }
+
+/* The line that says what the section is NOT showing (ADR 0074). Smaller than the body
+ * on purpose: it is a caveat and not an argument, and a caveat set at reading size
+ * competes with the thing it qualifies. */
+.note {
+  margin: 40px 0 0;
+  max-width: 62ch;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--q-slate-400);
+}
+
 /* The signalling, shown as itself. It is the one place a monospace block earns its
  * keep on this page: the audience reads playlists for a living, and a paraphrase of a
  * tag would be worth nothing to them. */
@@ -407,12 +632,290 @@ body[data-story="done"] .skip { color: var(--q-paper-50); border-color: #47505f;
   tab-size: 2;
 }
 
-/* The asset-list is a hundred lines and this page is one idea per screen, so the block
- * scrolls inside itself instead of pushing its own section past the fold. It is the one
- * element on the page allowed to scroll horizontally too, which is the exception a code
- * block gets and nothing else does. */
-#list { max-height: 26vh; overflow: auto; }
+/* THE GLOSS OF THE TAG, one line per attribute the line really carries. It is drawn by
+ * `js/senalizacion.js` off the tag itself, so an attribute that is not in the playlist
+ * has no line here and nothing has to be kept in step by hand.
+ *
+ * Two columns where there is room and stacked where there is not, which is a width and
+ * not a taste: at 400 px the name of an attribute is a third of the viewport, and the
+ * sentence next to it would be reading four words to a line. */
+.gloss {
+  margin: 22px 0 0;
+  max-width: 74ch;
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+  gap: 10px 24px;
+}
 
-.chapter--end { min-height: 72vh; }
+.gloss dt {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--q-paper-50);
+  overflow-wrap: anywhere;
+}
+
+.gloss dd {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--q-slate-400);
+}
+
+@media (max-width: 640px) {
+  .gloss { grid-template-columns: minmax(0, 1fr); gap: 3px 0; }
+  .gloss dd { margin-bottom: 14px; }
+}
+
+/* THE GLOSS OF THE BLOCK, which is the gloss of the tag one level down and reuses
+ * its two columns. The tag says where the break is and which client it is for; the
+ * block the tag points at says what the break draws, and that is the half an
+ * audience that reads playlists has never seen before.
+ *
+ * WHAT GROUPS THE ROWS IS WHERE THE FIELD LIVES, and it is not tidying: the same
+ * name means three different things at three depths -- `type` is the kind of block
+ * for the tool that writes it, the name of a layout for an item, and the MIME of an
+ * asset for a box -- so a flat list of names would print it three times and read as
+ * a repetition. */
+.payload { margin: 40px 0 0; }
+
+.payload__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--q-paper-50);
+}
+
+.payload__lede {
+  margin: 8px 0 0;
+  max-width: 66ch;
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.62;
+  color: var(--q-slate-400);
+}
+
+.payload__level {
+  margin: 28px 0 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--q-slate-400);
+}
+
+.payload .gloss { margin: 12px 0 0; }
+
+/* ONE ALIGNMENT ACROSS THE FIVE GROUPS AND NOT FIVE, which is what `max-content`
+ * gave: every group sized its own column, so the sentences of one started to the
+ * left of the next and the section read as five little tables instead of one
+ * gloss. The cap is the longest name that is not the block's -- `primaryContent`,
+ * fourteen characters -- and the name of the block itself wraps at a hyphen, which
+ * is where somebody reading it would break it too.
+ *
+ * And only where there are two columns to align: under 640 the gloss stacks, and a
+ * width written here without the query would take that away. */
+@media (min-width: 641px) {
+  .payload .gloss { grid-template-columns: minmax(0, 14ch) minmax(0, 1fr); }
+}
+
+/* Required or optional, said in a word and set apart from the sentence: it is the
+ * first thing somebody writing an asset-list is looking for, and a sentence that
+ * has to be read to the end to answer it is a sentence they read four times. */
+.payload__must {
+  margin-right: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #6c7688;
+}
+
+.payload__must--required { color: #c8cfd9; }
+
+/* THE ASSET-LIST, FOLD BY FOLD (ADR 0075). The summary of an Ad used to be the content
+ * of this section and is now the label of its fold, with the raw JSON of that Ad
+ * inside: closed, the section is the same four lines it was, and the hundred lines that
+ * were nowhere on this page are one click away.
+ *
+ * `<details>` and nothing else, so it arrives keyboard-accessible without a line of
+ * library, which is the line this page has been doing without since the first phase.
+ *
+ * AND AN OPEN FOLD IS NOT CAPPED, which is the one place this section departs from the
+ * block it replaces. The summary block that used to be here was capped and scrolled
+ * inside itself because it was on screen whether anybody wanted it or not; a fold is
+ * shut until somebody asks for it, and what keeps the section to one screen is that all
+ * four start closed. A second scrolling box inside a page that scrolls is worse than a
+ * long one on a phone: the finger ends up moving the JSON when it meant to move the
+ * page. Horizontally it still scrolls, which is the exception a code block gets. */
+.assets { margin: 26px 0 0; display: grid; gap: 10px; }
+
+/* `min-width: 0` is the same line `.chapter__inner` carries and the same defect it
+ * was written for, one level further in: a grid item refuses to shrink below its own
+ * content, and the `white-space: pre` of the JSON inside an OPEN fold is content 449 px
+ * wide. Measured at 400 px of viewport with the second fold open: the document scrolled
+ * to 471 before this line and to 400 after it, which is the one thing the body of this
+ * page must never do. The `overflow-x: auto` of `.code` cannot save it on its own --
+ * the box it sits in was happy to grow. */
+.asset { min-width: 0; background: #0b0d11; border-left: 2px solid #262d38; }
+
+.asset > summary {
+  padding: 11px 22px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #b9c2ce;
+  overflow-wrap: anywhere;
+}
+
+.asset > .code { margin: 0; border-left: 0; }
+
+/* THE ONE ON SCREEN IS MARKED AND IS NOT OPENED (ADR 0075). The mark is weight, a
+ * brighter rule and four words, and no second colour: the palette of this page is
+ * neutral so that the only colour in the window comes from the video, and a live Ad
+ * picked out in green would be the one thing on the scroll competing with the picture.
+ *
+ * It is said in words and not only in a shade, because a shade is a legend somebody has
+ * to be told about. */
+.asset__live { display: none; }
+
+.asset[data-live] { border-left-color: var(--q-paper-50); }
+
+.asset[data-live] > summary { color: var(--q-paper-50); }
+
+.asset[data-live] .asset__live {
+  display: inline;
+  margin-left: 12px;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--q-slate-400);
+}
+
+
+/* THE FIGURE OF COEXISTENCE (ADR 0076). One playlist on top, two clients under it,
+ * and the drawing is that relation and nothing else: what is shared sits above, what
+ * differs sits below, and a stem forks from one into the other.
+ *
+ * THE TWO COLUMNS ARE IDENTICAL IN WEIGHT, which is the argument written as
+ * typography rather than a default nobody thought about. Lighting the column on the
+ * right and dimming the one on the left would say replacement in the type while the
+ * paragraph above says coexistence, and the type is the half that gets believed.
+ * There is no active state and no winner here: the same size, the same colour and
+ * the same rule on both sides.
+ *
+ * NO COLOUR AND NO CARD, like the rest of this scroll. The separator is the same
+ * left rule the points above use, and the one filled block is the playlist, which
+ * gets the fill the code of the next section gets because it is the same thing: a
+ * playlist shown as itself.
+ *
+ * THE STEMS GO WHEN THE COLUMNS STACK, at the 640 px the gallery stacks at. Two
+ * stems under one block read as a fork; stacked, the stem of the second column
+ * would rise into the first one instead of into the playlist, and it would be
+ * drawing a sequence where the mechanism is a fork. */
+.coexist { margin: 44px 0 0; }
+
+.coexist__label {
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--q-paper-50);
+}
+
+/* `min-width: 0` for the third time on this page and for the third instance of the
+ * same defect: the class of the sibling is 38 characters of monospace with no space
+ * in it, and a grid item -- which this is, inside `.chapter__inner` -- refuses to
+ * shrink under its own content. `overflow-wrap: anywhere` is the other half: the
+ * block may wrap the name, and what it may never do is push the document sideways. */
+.coexist__tags {
+  list-style: none;
+  margin: 0;
+  padding: 14px 22px;
+  min-width: 0;
+  background: #0b0d11;
+  border-left: 2px solid #262d38;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: #b9c2ce;
+  overflow-wrap: anywhere;
+}
+
+.coexist__same {
+  margin: 12px 0 0;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--q-slate-400);
+}
+
+.coexist__grid {
+  margin: 28px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 34px 32px;
+}
+
+@media (max-width: 640px) { .coexist__grid { grid-template-columns: minmax(0, 1fr); } }
+
+.coexist__client {
+  position: relative;
+  min-width: 0;
+  padding-left: 20px;
+  border-left: 1px solid #262d38;
+}
+
+/* The fork: the left rule of each column carried up into the gap, so it arrives from
+ * the playlist instead of starting on its own. */
+.coexist__client::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: -28px;
+  height: 28px;
+  border-left: 1px solid #262d38;
+}
+
+@media (max-width: 640px) { .coexist__client::before { display: none; } }
+
+.coexist__client h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--q-paper-50);
+}
+
+.coexist__takes {
+  margin: 12px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #c8cfd9;
+  overflow-wrap: anywhere;
+}
+
+.coexist__kind,
+.coexist__verb { color: var(--q-slate-400); }
+
+.coexist__what {
+  margin: 12px 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.62;
+  color: #c8cfd9;
+}
+
+.coexist__same code,
+.coexist__what code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.9em;
+}
+
+.chapter--end { min-height: 72vh; align-content: space-between; padding-bottom: clamp(18px, 3vh, 34px); }
 
 .chapter--end .credit { max-width: 68ch; padding: 0; font-size: 14px; line-height: 1.7; }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The hydration break — non-linear ads in HLS</title>
+<title>The hydration break — Non-linear Ads in HLS</title>
 <!--
   The fonts and the favicon are copies of the Qualabs brand kit on disk, not
   links to it: a demo that reads a file out of another project on this laptop
@@ -61,9 +61,23 @@
   measurements ran on.
 -->
 
+<!--
+  THE MARK GOES ON THE PAGE AND NOT ON A PLATE OF ITS OWN. What changes to suit a
+  dark surface is the logo, and `brand/logo-qualabs-on-dark.svg` is that logo: the
+  same file with its seven wordmark paths in white and the mark untouched. The
+  white plate that used to sit under it here is gone, which is what Nicolas asked
+  for -- twice -- and the reason it was there in the first place is answered one
+  level down instead of by a rectangle on the page.
+
+  CENTRED, AND THE LINE UNDER IT TOO. Centring the logo while something sat beside
+  it would put the logo off centre, so the two stack: the mark, and who this is
+  with. It is the same mark that closes the page at the foot of the credits.
+
+  It is still the ONLY mark outside the picture, which is what phase 04 settled:
+  nothing of ours sits over the frame the layout uses.
+-->
 <header class="masthead">
-  <span class="brand"><img src="./brand/logo-qualabs.svg" alt="Qualabs"></span>
-  <p class="collab">with the <abbr title="Streaming Video Technology Alliance">SVTA</abbr></p>
+  <img class="brand" src="./brand/logo-qualabs-on-dark.svg" alt="Qualabs">
 </header>
 
 <!--
@@ -130,33 +144,225 @@
 </section>
 
 <!--
-  BELOW THE PICTURE, the scroll for whoever wants to know how. Three sections and a
-  hard cap of four in total counting the player: one idea per screen, and three is
-  better than four. Nothing here explains the business case -- that already happened,
-  on the picture, in thirty seconds. This is for the engineer in the room who is
-  now asking what they just watched.
+  BELOW THE PICTURE, the scroll for whoever wants to know how. It answers three
+  questions, in this order: what a linear Ad and a non-linear Ad each do to the
+  picture and what can go inside one of those boxes, what the concurrent class can
+  do and how it stands next to the interstitial, and what the signalling of this
+  run actually says -- the tag, the block it points at, field by field, and the
+  asset-list itself. Then it says whose everything on screen is.
+
+  THE CAP IS NOT A NUMBER OF SECTIONS, IT IS ONE IDEA PER SCREEN (ADR 0077), and
+  the count below the player is the same as it has always been: three full-height
+  sections and the credits as the foot. The credits are not a fourth idea and never
+  were -- they carry `chapter--end` and are shorter than a screen. Adding a section
+  here means having a fourth idea, not having more to say about these three.
+
+  NOTHING HERE EXPLAINS THE BUSINESS CASE. That already happened, on the picture,
+  in thirty seconds. This is for the engineer in the room who is now asking what
+  they just watched.
+
+  AND ALL OF IT ARGUES COEXISTENCE AND NOT REPLACEMENT (ADR 0076). The interstitial
+  we are used to is one of the options and not the thing being taken away: the two
+  classes are siblings, a playlist can carry both, and each client keeps the one it
+  understands (ADR 0009, ADR 0007). Copy written here is measured against that.
+
+  FOUR CONTAINERS BELOW ARE EMPTY IN THE MARKUP ON PURPOSE, and it is the rule at
+  the top of this file applied to a box instead of to a caption: what the contract
+  can tell us does not get typed in. An empty box is honest about what is not there
+  yet; a "loading…" that never loads is not. They are the gallery of shapes and the
+  list of what goes in a box, in the first section; and the gloss of the block and
+  the folds of the asset-list, in the third. The list of numbers is the same rule
+  applied to one item of a list: two of the three are shapes of the asset-list that
+  the suite already checks, and the third is a sum over the boxes, which only the
+  contract knows.
 -->
 
-<section class="chapter" aria-label="What the player did">
+<section class="chapter" aria-label="Two ways to run an Ad">
   <div class="chapter__inner">
-    <p class="kicker">What the player did</p>
-    <h2>One playlist. One tag. Four ads, and the match never stopped.</h2>
+    <p class="kicker">Two ways to run an Ad</p>
+    <h2>A linear Ad takes the picture. A non-linear Ad shares it.</h2>
     <p class="lede">
-      The programme carries a single <code>EXT-X-DATERANGE</code> of a custom class.
-      An unmodified hls.js plays it; a library on top reads the asset-list the tag
-      points at, and draws each ad into the box the layout declares — over the
-      picture, without replacing it. The primary content is never interrupted, which
-      is why the clock in the corner keeps running through all fifty-eight seconds.
+      A linear Ad replaces the programme for as long as it runs: the viewer cannot
+      see the match, and the programme comes back when the Ad ends. That is the break
+      everybody knows, and it still works. A non-linear Ad is drawn into a box over a
+      programme that never stopped. Same break, same inventory, and the picture
+      underneath keeps running.
     </p>
-    <ul class="facts">
-      <li><span>4</span> ads in one break</li>
+
+    <!--
+      THE GALLERY OF SHAPES GOES HERE, one card per Ad of this minute, and the box is
+      empty on purpose (ADR 0073): every card is drawn with the boxes the provider
+      resolved for this run, in the percentages the layout declares. Typing the shapes
+      in would be the one claim this page is not allowed to make -- and it would be the
+      claim that goes stale in silence the day the asset-list is edited.
+    -->
+    <div class="shapes" id="shapes"></div>
+
+    <!--
+      WHAT GOES IN ONE OF THOSE BOXES, and the box below is empty for the same
+      reason the gallery above it is. The three kinds are the three branches of
+      `attachAsset` in `lib/media.js` and the media types beside them are the ones
+      THIS run declares, read off the contract: typing them in would be the same
+      claim going stale in silence, and `test/comprobaciones.js` asserts that none
+      of them is written here or in `js/tipos.js`.
+    -->
+    <p class="media__title">And what goes inside one of those boxes</p>
+    <div class="media" id="media"></div>
+
+    <!--
+      THE THIRD NUMBER IS NOT TYPED IN, AND IT IS THE ONE THAT WAS WRONG. What used
+      to stand here was "0 seconds of programme replaced", and this minute contradicts
+      it on the picture: the third Ad is linear and at full frame, so for as long as
+      it runs the match cannot be seen. The sentence was true about the timeline --
+      the programme is never stopped and never shortened (ADR 0016) -- and read
+      backwards about the screen, which is the only place an audience is looking.
+
+      What replaces it is the same question answered off the boxes: how much of the
+      break has an element of the Ad covering the picture. `js/tipos.js` sums it and
+      appends the item, so it cannot disagree with the gallery above, which is drawn
+      from the same boxes.
+    -->
+    <ul class="facts" id="facts">
+      <li><span>4</span> Ads in one break</li>
       <li><span>3</span> shapes: still image, concurrent video, linear at full frame</li>
-      <li><span>0</span> seconds of programme replaced</li>
     </ul>
+
+    <p class="note">
+      Three shapes because that is what this minute plays, not because the mechanism
+      has three. A layout declares where each box sits over the picture, which is a
+      geometry and not a list of names.
+    </p>
   </div>
 </section>
 
-<section class="chapter" aria-label="The signalling">
+<section class="chapter" aria-label="The signalling class">
+  <div class="chapter__inner">
+    <p class="kicker">The signalling class</p>
+    <h2>One playlist. One tag. Four Ads, and the match never stopped.</h2>
+    <p class="lede">
+      The programme carries a single <code>EXT-X-DATERANGE</code> of a custom class.
+      An unmodified hls.js plays it; a library on top reads the asset-list the tag
+      points at, and draws each Ad into the box the layout declares — over the
+      picture, without replacing it.
+    </p>
+
+    <ul class="points">
+      <li>
+        A break carries several Ads, and they play in the order the asset-list
+        declares them.
+      </li>
+      <li>
+        Every box is declared as percentage insets of the picture, and the programme
+        is one of those boxes: the primary content is an element of the layout like
+        any other.
+      </li>
+      <li>
+        An element can be a video or a still image, and this minute plays both.
+      </li>
+      <li>
+        Audio is declared per element, so each box arrives with its own volume, and
+        the composition keeps one control for all of it.
+      </li>
+      <li>
+        The concurrent class never changes the length of the timeline. Nothing is
+        skipped and nothing is added: the Ad is drawn over a clock that was already
+        running.
+      </li>
+    </ul>
+
+    <p class="lede">
+      <strong>It does not replace the interstitial. It stands next to it.</strong>
+      <code>com.apple.hls.interstitial</code> goes on meaning exactly what it means
+      today. The concurrent class is its sibling and not an extension of it: in HLS
+      the class of a Date Range is compared as an exact string, so a client that has
+      never heard of <code>com.qualabs.hls.concurrentInterstitial</code> ignores it.
+      That is not a limitation to work around. It is what lets both be served at
+      once — one playlist can carry the two tags at the same
+      <code>START-DATE</code>, and each client keeps the one it understands, which is
+      what the other demo in this repository shows with two players side by side.
+      Inside the break the same thing holds: an <code>ASSET</code> with no layout
+      block is a full-frame Ad, played down the same code path. The interstitial we
+      are used to is one of the options, not the thing being taken away.
+    </p>
+
+    <!--
+      THE FIGURE OF COEXISTENCE (ADR 0076), and what it has to make felt is that
+      neither column is the wrong one. One playlist on top, two clients under it,
+      and each of them keeping the tag it understands (ADR 0007). That relation is
+      the whole of the drawing: what is shared is above, and what differs is below.
+
+      THE TWO COLUMNS CARRY THE SAME WEIGHT ON PURPOSE. A figure that lit one side
+      and dimmed the other would be arguing replacement in the typography while the
+      paragraph above it argues coexistence, and the typography is the half that
+      gets believed. The interstitial we are used to is one of the options here, not
+      the before-picture of a comparison.
+
+      IT IS DRAWN AND NOT READ, AND IT SAYS SO. The playlist in it carries the two
+      Date Ranges; the one this page is playing carries the concurrent one alone,
+      because this page runs one client. The rule at the top of this file is that no
+      caption here claims something it has not read, so what is drawn is class names
+      -- constants of the protocol, and of ADR 0009 -- and never a tag with its
+      attributes and its values. The tag of this run, read off the network, is one
+      section down, and it is one section down that a tag belongs.
+
+      Markup and CSS, no image and no library: an image of an argument goes stale in
+      silence exactly the way a caption does, which is the reasoning of ADR 0073 one
+      section up applied to this one.
+    -->
+    <figure class="coexist">
+      <p class="coexist__label">One media playlist, and it carries both.</p>
+      <ul class="coexist__tags">
+        <li>
+          <span class="coexist__kind">EXT-X-DATERANGE</span>
+          <code>com.apple.hls.interstitial</code>
+        </li>
+        <li>
+          <span class="coexist__kind">EXT-X-DATERANGE</span>
+          <code>com.qualabs.hls.concurrentInterstitial</code>
+        </li>
+      </ul>
+      <p class="coexist__same">
+        Same <code>START-DATE</code>, one <code>ID</code> each.
+      </p>
+
+      <div class="coexist__grid">
+        <div class="coexist__client">
+          <h3>A client in the market today</h3>
+          <p class="coexist__takes">
+            <span class="coexist__verb">plays</span>
+            <code>com.apple.hls.interstitial</code>
+          </p>
+          <p class="coexist__what">
+            The class it does not know is compared as an exact string, with no
+            inheritance to fall back on, so it goes straight past it. The Ad replaces
+            the programme, exactly as it does today, and not one option of the player
+            had to change.
+          </p>
+        </div>
+        <div class="coexist__client">
+          <h3>The same client, with the library on top</h3>
+          <p class="coexist__takes">
+            <span class="coexist__verb">plays</span>
+            <code>com.qualabs.hls.concurrentInterstitial</code>
+          </p>
+          <p class="coexist__what">
+            Same hls.js and the same version: the new class is read by a library on
+            top of the player and not by a change inside it. The Ad is drawn into the
+            box the layout declares, and the programme underneath keeps running.
+          </p>
+        </div>
+      </div>
+
+      <figcaption class="note">
+        Drawn, not read. This page runs one client, so the playlist under it carries
+        the concurrent tag alone; the pair of clients on a single playlist is the
+        other demo in this repository.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter" aria-label="The signalling, as it is served">
   <div class="chapter__inner">
     <p class="kicker">The signalling, as it is served</p>
     <h2>Read off this page&rsquo;s own playlist, right now.</h2>
@@ -165,7 +371,33 @@
       is playing, and the JSON is the asset-list it fetched.
     </p>
     <pre class="code" id="tag">loading…</pre>
-    <pre class="code" id="list">loading…</pre>
+
+    <!--
+      WHAT THE BLOCK CARRIES, FIELD BY FIELD, GOES HERE, and it is the gloss of the
+      tag above carried one level down: the tag says where the break is and which
+      client it is for, and the block the tag points at says what the break draws.
+      Empty in the markup, and drawn by `js/senalizacion.js` off the asset-list this
+      player fetched -- so a field is explained here only when the list in front of
+      the reader really carries it, and a field it carries that nobody wrote a gloss
+      for says so on the page instead of being left out.
+    -->
+    <div class="payload" id="payload"></div>
+
+    <!--
+      THE ASSET-LIST, FOLD BY FOLD, GOES HERE: one fold per Ad, closed, with the raw
+      JSON of that Ad inside, and the one on screen marked live (ADR 0075). Empty in
+      the markup for the same reason as the gallery above -- it is read off what this
+      player fetched, and a tag or a JSON pasted into this file would be an
+      illustration of a playlist, which is worth nothing to an audience that reads
+      playlists for a living.
+
+      The summary of each Ad used to be a block of its own here. It is now the LABEL
+      of its fold, with the raw JSON of that Ad inside, so the same four lines are on
+      screen and the hundred that were nowhere on this page are one click away. The
+      gloss of the tag is drawn under it by `js/senalizacion.js`, which is where the
+      attributes it explains are read.
+    -->
+    <div class="assets" id="assets"></div>
   </div>
 </section>
 
@@ -178,11 +410,27 @@
       <a href="https://www.pexels.com/license/">Pexels License</a>, cut and re-framed
       for this demo. &middot; Everything else on screen is ours and fictional: the
       channel package — the bug, the scorebug, the clock, the two clubs and the score —
-      and the four ad creatives, for three invented brands that imitate nobody.
+      and the four Ad creatives, for three invented brands that imitate nobody.
       &middot; Full provenance in <code>CREDITS.md</code>.
     </p>
+
   </div>
+
+  <!--
+    THE SAME MARK CLOSES THE PAGE, and it is inside the credits rather than under
+    them: a second footer below this one would be two feet arguing about which is
+    the last thing on the page. The credits are already the foot (ADR 0077), so
+    what the mark does here is end them.
+
+    IT HANGS OFF THE FOOT AND NOT OFF ITS INNER COLUMN, which is what lets it sit
+    AT the bottom instead of wherever the credits text happens to end. `.chapter`
+    centres its content; this one distributes it, so the text stays up and the mark
+    goes down. Inside the column the mark floated in the middle of a 72vh block and
+    read as unfinished.
+  -->
+  <img class="brand brand--foot" src="./brand/logo-qualabs-on-dark.svg" alt="Qualabs">
 </footer>
+
 
 <script src="/vendor/hls.min.js"></script>
 <script src="/dist/qualabs-concurrent-hls.js"></script>

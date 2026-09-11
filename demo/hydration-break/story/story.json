@@ -2,8 +2,8 @@
   "skip": "Skip the walkthrough",
   "restart": "Play the walkthrough again",
   "opening": [
-    "What if the ad never took the game away?",
-    "The match keeps going. So does the viewer.",
+    "What if the Ad never took the game away?",
+    "If the broadcast keeps going, so does the viewer.",
     "More room to advertise. Fewer reasons to leave.",
     "Introducing Non-linear Ads for HLS"
   ],
@@ -11,31 +11,37 @@
     {
       "id": "apertura",
       "anchor": { "at": "start" },
-      "text": "A football match. Play is about to stop for a minute — the players drink, the coach talks. The broadcast will not cut away.",
-      "hold": 7
+      "text": "In this soccer match the hydration break is about to start.",
+      "hold": 5
+    },
+    {
+      "id": "la-senalizacion",
+      "anchor": { "before": { "break": 1 }, "lead": 8 },
+      "text": "A concurrentInterstitial is inserted, signalling four Ad opportunities during the hydration break.",
+      "hold": 5.5
     },
     {
       "id": "el-banner",
       "anchor": { "before": { "break": 1 }, "lead": 2.5 },
-      "text": "Play stops. The first ad is a still image, laid over the live picture — the mechanism takes an image as happily as it takes video.",
-      "hold": 7
+      "text": "The first Ad is an image, a transparent PNG.",
+      "hold": 4.5
     },
     {
       "id": "la-l",
       "anchor": { "at": { "break": 1, "ad": 2 }, "lead": 1.5 },
-      "text": "More of the screen, and the match never leaves it. The picture folds into a corner and the ad takes the L.",
+      "text": "The second Ad is a video in an L-SHAPE. The picture folds into a corner and the Ad takes the L.",
       "hold": 6.5
     },
     {
       "id": "el-caso-de-negocio",
       "anchor": { "at": { "break": 1, "ad": 3 }, "lead": 1.5 },
-      "text": "This is how it is done today: ten seconds with the match gone. It is still playing underneath — you just cannot see it. That is when the viewer leaves the room, and the ad plays to nobody.",
-      "hold": 10
+      "text": "Full-screen Ads can live here too, the interstitials we are used to today.",
+      "hold": 5
     },
     {
       "id": "la-vuelta",
       "anchor": { "at": { "break": 1, "ad": 4 }, "lead": 1.5 },
-      "text": "And back. Fifty-eight seconds of advertising in one stoppage, and nobody was given a reason to look away.",
+      "text": "And back. Sixty-four seconds of advertising in one stoppage, and nobody was given a reason to look away.",
       "hold": 7
     }
   ]

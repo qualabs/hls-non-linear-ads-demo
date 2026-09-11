@@ -1,0 +1,141 @@
+{
+  "tag_del_m3u8": "#EXT-X-DATERANGE:ID=\"HYDRATION-BREAK\",CLASS=\"com.qualabs.hls.concurrentInterstitial\",START-DATE=\"2026-09-10T23:45:37.717-0300\",X-ASSET-LIST=\"/signalling/asset-list-hydration-break.json\",X-RESUME-OFFSET=0,X-SNAP=\"OUT,IN\",X-RESTRICT=\"SKIP\",PLANNED-DURATION=64",
+  "start_date_del_m3u8": "2026-09-10T23:45:37.717-0300",
+  "tag_en_pantalla": "#EXT-X-DATERANGE:ID=\"HYDRATION-BREAK\",\n  CLASS=\"com.qualabs.hls.concurrentInterstitial\",\n  START-DATE=\"2026-09-10T23:45:37.717-0300\",\n  X-ASSET-LIST=\"/signalling/asset-list-hydration-break.json\",\n  X-RESUME-OFFSET=0,\n  X-SNAP=\"OUT,IN\",\n  X-RESTRICT=\"SKIP\",\n  PLANNED-DURATION=64",
+  "start_date_en_pantalla": "2026-09-10T23:45:37.717-0300",
+  "la_pagina_lee_en_vivo": true,
+  "glosa": [
+    [
+      "ID",
+      "Names the break. Every Ad resolved out of it reports this same id, which is what tells one break from another."
+    ],
+    [
+      "CLASS",
+      "The one attribute that decides who plays this tag. In HLS the class of a Date Range is compared as an exact string and there is no inheritance, so a client that has never heard of this one ignores the tag whole. That is what lets the two classes be served on the same playlist."
+    ],
+    [
+      "START-DATE",
+      "Where the break sits on the programme's own clock. It is resolved against the playlist's EXT-X-PROGRAM-DATE-TIME, which is why this tag is written on every start instead of being a file in git."
+    ],
+    [
+      "X-ASSET-LIST",
+      "The URL of what the break plays. The library fetches it and resolves it into the Ads below; the JSON inside each fold is what came back."
+    ],
+    [
+      "X-RESUME-OFFSET",
+      "Means nothing in a Date Range of this class: nothing was interrupted, so there is nothing to resume. It is written because the tag this one was modelled on is an interstitial, no client in this demo reads it, and which attributes of an interstitial keep their meaning in the sibling class is an open question for the SVTA."
+    ],
+    [
+      "X-SNAP",
+      "An interstitial's: where the player is asked to snap the join to a segment boundary. No client in this demo reads it either, and a concurrent break has no join to snap, because the programme is never cut."
+    ],
+    [
+      "X-RESTRICT",
+      "An interstitial's too: what the viewer must not be allowed to do while the break runs. No client in this demo reads it."
+    ],
+    [
+      "PLANNED-DURATION",
+      "How long the break declares it will be, which is the sum of the DURATION of every asset in the list. For this class the window comes from the assets that actually resolved, so this number is read and not obeyed."
+    ]
+  ],
+  "atributos_del_tag": [
+    "ID",
+    "CLASS",
+    "START-DATE",
+    "X-ASSET-LIST",
+    "X-RESUME-OFFSET",
+    "X-SNAP",
+    "X-RESTRICT",
+    "PLANNED-DURATION"
+  ],
+  "por_instantes": [
+    {
+      "t": 5,
+      "marcado": [],
+      "estado": "5.0s · the match, no ad",
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "t": 20,
+      "marcado": [
+        "Ad 1 · lowerThirdOverlay · 16 s · still image"
+      ],
+      "estado": "20.0s · ad on screen: lowerThirdOverlay · still image · the match is still playing",
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "t": 35,
+      "marcado": [
+        "Ad 2 · squeezebackLShape · 16 s · video"
+      ],
+      "estado": "35.0s · ad on screen: squeezebackLShape · video · the match is still playing",
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "t": 48,
+      "marcado": [
+        "Ad 3 · no layout block, played full frame · 8 s"
+      ],
+      "estado": "48.0s · ad on screen: linear · video · the match is underneath, covered",
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "t": 60,
+      "marcado": [
+        "Ad 4 · cornerOverlay · 24 s · video"
+      ],
+      "estado": "60.0s · ad on screen: cornerOverlay · video · the match is still playing",
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "t": 76,
+      "marcado": [
+        "Ad 4 · cornerOverlay · 24 s · video"
+      ],
+      "estado": "76.0s · ad on screen: cornerOverlay · video · the match is still playing",
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "t": 80,
+      "marcado": [],
+      "estado": "80.0s · the match, no ad",
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  ],
+  "errores": []
+}
