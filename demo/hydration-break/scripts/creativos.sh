@@ -281,10 +281,16 @@ ffmpeg -hide_banner -loglevel error -y \
 # silencioso de este paso: el creativo sale perfecto, se empaqueta a 16:9, y después el
 # recorte centrado del ADR 0013 se lleva la mitad de la tipografía. Los dos últimos
 # argumentos son el tamaño, y son los mismos números del SVG.
+# CADA AVISO LLEVA SU CAMA, y las tres son distintas a proposito. Lo que la demo
+# demuestra es que quien mira ELIGE que escuchar, y para elegir hay que oir la
+# diferencia: tres camas parecidas dejarian el cambio de foco sin nada que mostrar.
+#
+# El banner no lleva ninguna, y eso es correcto: es una imagen fija y una imagen fija
+# no suena. `applyAudio` ni siquiera le pone volumen a un <img> (ADR 0014).
 echo "== empaquetando los cuatro videos como HLS, cada uno al tamaño de su caja =="
-./scripts/empaquetar-contenido.sh "$TMP/l-backplate.mp4" content/adL       0 "$D2" "" 1280 720 "$FPS_GEN"
-./scripts/empaquetar-contenido.sh "$TMP/overlay.mp4"     content/adOverlay 0 "$D4" "" 320  180
-./scripts/empaquetar-contenido.sh "$TMP/lineal.mp4"      content/adLinear  0 "$D3" "" 1280 720 "$FPS_GEN"
+./scripts/empaquetar-contenido.sh "$TMP/l-backplate.mp4" content/adL       0 "$D2" "" 1280 720 "$FPS_GEN" audio/kalto.m4a
+./scripts/empaquetar-contenido.sh "$TMP/overlay.mp4"     content/adOverlay 0 "$D4" "" 320  180 30         audio/meridia.m4a
+./scripts/empaquetar-contenido.sh "$TMP/lineal.mp4"      content/adLinear  0 "$D3" "" 1280 720 "$FPS_GEN" audio/neonectar.m4a
 
 echo
 echo "los cuatro creativos del minuto están en content/"
