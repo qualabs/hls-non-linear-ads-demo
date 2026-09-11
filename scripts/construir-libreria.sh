@@ -34,7 +34,7 @@ cd "$(dirname "$0")/.."
 GLOBAL=QualabsConcurrentHls
 SALIDA=dist/qualabs-concurrent-hls.js
 # In dependency order. The entry point goes last.
-FUENTES=(lib/signalling.js lib/renderer.js lib/controls.js lib/media.js lib/concurrent-hls.js)
+FUENTES=(lib/signalling.js lib/multiview.js lib/renderer.js lib/controls.js lib/media.js lib/concurrent-hls.js)
 
 mkdir -p dist
 {

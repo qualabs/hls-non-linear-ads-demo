@@ -75,7 +75,7 @@ serves it, and everything below `demo/` is a page that uses it.
 | `lib/` | **the library.** No bundler and no dependencies |
 | `lib/signalling.js` | the signalling layer: Date Ranges in, the contract out |
 | `lib/renderer.js` | the rendering layer: the contract in, the boxes drawn over the video. Knows nothing about HLS |
-| `lib/controls.js` | the composition's own controls: one progress bar over the whole programme, pause, audio, fullscreen, and the marks on its rail that say where the breaks this player plays are |
+| `lib/controls.js` | the composition's own controls: one progress bar over the whole programme, pause, audio, fullscreen, the list of feeds whoever is watching picks from, and the marks on its rail that say where the breaks this player plays are |
 | `lib/media.js` | how a `uri` becomes pixels: one instance of hls.js per ad asset |
 | `lib/concurrent-hls.js` | the entry point and the public surface: `attach` for the concurrent experience, `attachControls` for the chrome on its own, and the configuration the instance has to be built with |
 | `dist/` | the built library: one classic script that defines a global. Generated, gitignored |

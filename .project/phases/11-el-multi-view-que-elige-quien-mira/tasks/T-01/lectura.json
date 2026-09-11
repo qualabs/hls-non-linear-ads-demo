@@ -1,0 +1,423 @@
+{
+  "navegador": "Chrome 153.0.8010.36",
+  "url": "http://localhost:50813/.project/phases/11-el-multi-view-que-elige-quien-mira/tasks/T-01/medicion-t01.html",
+  "resultados": [
+    {
+      "nombre": "incremental",
+      "mismoItemId": true,
+      "correr": 3000,
+      "despues": 1500,
+      "antes": {
+        "programa": 3.071,
+        "primario": {
+          "caja": [
+            0,
+            0,
+            480,
+            270
+          ]
+        },
+        "cajas": [
+          {
+            "id": "boxA",
+            "serial": 1,
+            "t": 2.848,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              480,
+              0,
+              480,
+              270
+            ]
+          },
+          {
+            "id": "boxB",
+            "serial": 2,
+            "t": 2.84,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              0,
+              270,
+              480,
+              270
+            ]
+          },
+          {
+            "id": "boxC",
+            "serial": 3,
+            "t": 2.831,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              480,
+              270,
+              480,
+              270
+            ]
+          }
+        ]
+      },
+      "justoDespues": {
+        "programa": 3.145,
+        "primario": {
+          "caja": [
+            0,
+            0,
+            480,
+            270
+          ]
+        },
+        "cajas": [
+          {
+            "id": "boxA",
+            "serial": 1,
+            "t": 2.919,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              634,
+              0,
+              326,
+              184
+            ]
+          },
+          {
+            "id": "boxB",
+            "serial": 2,
+            "t": 2.914,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              0,
+              0,
+              326,
+              184
+            ]
+          },
+          {
+            "id": "boxD",
+            "serial": 4,
+            "t": 0,
+            "readyState": 0,
+            "pausado": false,
+            "caja": [
+              634,
+              356,
+              326,
+              184
+            ]
+          }
+        ]
+      },
+      "masTarde": {
+        "programa": 4.646,
+        "primario": {
+          "caja": [
+            0,
+            0,
+            960,
+            540
+          ]
+        },
+        "cajas": [
+          {
+            "id": "boxA",
+            "serial": 1,
+            "t": 4.422,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              634,
+              0,
+              326,
+              184
+            ]
+          },
+          {
+            "id": "boxB",
+            "serial": 2,
+            "t": 4.415,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              0,
+              0,
+              326,
+              184
+            ]
+          },
+          {
+            "id": "boxD",
+            "serial": 4,
+            "t": 4.375,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              634,
+              356,
+              326,
+              184
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "nombre": "total",
+      "mismoItemId": false,
+      "correr": 3000,
+      "despues": 1500,
+      "antes": {
+        "programa": 7.721,
+        "primario": {
+          "caja": [
+            0,
+            0,
+            480,
+            270
+          ]
+        },
+        "cajas": [
+          {
+            "id": "boxA",
+            "serial": 5,
+            "t": 7.405,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              480,
+              0,
+              480,
+              270
+            ]
+          },
+          {
+            "id": "boxB",
+            "serial": 6,
+            "t": 7.39,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              0,
+              270,
+              480,
+              270
+            ]
+          },
+          {
+            "id": "boxC",
+            "serial": 7,
+            "t": 7.386,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              480,
+              270,
+              480,
+              270
+            ]
+          }
+        ]
+      },
+      "justoDespues": {
+        "programa": 7.785,
+        "primario": {
+          "caja": [
+            0,
+            0,
+            595,
+            334
+          ]
+        },
+        "cajas": [
+          {
+            "id": "boxA",
+            "serial": 8,
+            "t": 0,
+            "readyState": 0,
+            "pausado": false,
+            "caja": [
+              634,
+              0,
+              326,
+              184
+            ]
+          },
+          {
+            "id": "boxB",
+            "serial": 9,
+            "t": 0,
+            "readyState": 0,
+            "pausado": false,
+            "caja": [
+              0,
+              0,
+              326,
+              184
+            ]
+          },
+          {
+            "id": "boxD",
+            "serial": 10,
+            "t": 0,
+            "readyState": 0,
+            "pausado": false,
+            "caja": [
+              634,
+              356,
+              326,
+              184
+            ]
+          }
+        ]
+      },
+      "masTarde": {
+        "programa": 9.285,
+        "primario": {
+          "caja": [
+            0,
+            0,
+            960,
+            540
+          ]
+        },
+        "cajas": [
+          {
+            "id": "boxA",
+            "serial": 8,
+            "t": 8.924,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              634,
+              0,
+              326,
+              184
+            ]
+          },
+          {
+            "id": "boxB",
+            "serial": 9,
+            "t": 8.916,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              0,
+              0,
+              326,
+              184
+            ]
+          },
+          {
+            "id": "boxD",
+            "serial": 10,
+            "t": 8.91,
+            "readyState": 4,
+            "pausado": false,
+            "caja": [
+              634,
+              356,
+              326,
+              184
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "veredictos": [
+    {
+      "sobreviven": [
+        {
+          "id": "boxA",
+          "mismoNodo": true,
+          "tAntes": 2.848,
+          "tJustoDespues": 2.919,
+          "tMasTarde": 4.422,
+          "volvioACero": false
+        },
+        {
+          "id": "boxB",
+          "mismoNodo": true,
+          "tAntes": 2.84,
+          "tJustoDespues": 2.914,
+          "tMasTarde": 4.415,
+          "volvioACero": false
+        }
+      ],
+      "nueva": {
+        "id": "boxD",
+        "serial": 4,
+        "t": 0,
+        "readyState": 0,
+        "pausado": false,
+        "caja": [
+          634,
+          356,
+          326,
+          184
+        ]
+      },
+      "bajo": true,
+      "cajas": [
+        "boxA 634x0x326x184",
+        "boxB 0x0x326x184",
+        "boxD 634x356x326x184"
+      ]
+    },
+    {
+      "sobreviven": [
+        {
+          "id": "boxA",
+          "mismoNodo": false,
+          "tAntes": 7.405,
+          "tJustoDespues": 0,
+          "tMasTarde": 8.924,
+          "volvioACero": true
+        },
+        {
+          "id": "boxB",
+          "mismoNodo": false,
+          "tAntes": 7.39,
+          "tJustoDespues": 0,
+          "tMasTarde": 8.916,
+          "volvioACero": true
+        }
+      ],
+      "nueva": {
+        "id": "boxD",
+        "serial": 10,
+        "t": 0,
+        "readyState": 0,
+        "pausado": false,
+        "caja": [
+          634,
+          356,
+          326,
+          184
+        ]
+      },
+      "bajo": true,
+      "cajas": [
+        "boxA 634x0x326x184",
+        "boxB 0x0x326x184",
+        "boxD 634x356x326x184"
+      ]
+    }
+  ],
+  "avisos": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "warning: [renderer] boxC: taken off with 9.19s of its asset still unplayed -- the asset is 12.03s long and the window it was given is 36000s. The composition follows the window.",
+    "warning: [renderer] boxA: taken off with 7.60s of its asset still unplayed -- the asset is 12.03s long and the window it was given is 36000s. The composition follows the window.",
+    "warning: [renderer] boxB: taken off with 7.61s of its asset still unplayed -- the asset is 12.03s long and the window it was given is 36000s. The composition follows the window.",
+    "warning: [renderer] boxD: taken off with 7.63s of its asset still unplayed -- the asset is 12.01s long and the window it was given is 36000s. The composition follows the window.",
+    "warning: [renderer] boxA: taken off with 4.58s of its asset still unplayed -- the asset is 12.01s long and the window it was given is 36000s. The composition follows the window.",
+    "warning: [renderer] boxB: taken off with 4.59s of its asset still unplayed -- the asset is 12.01s long and the window it was given is 36000s. The composition follows the window.",
+    "warning: [renderer] boxC: taken off with 4.59s of its asset still unplayed -- the asset is 12.01s long and the window it was given is 36000s. The composition follows the window.",
+    "warning: [renderer] boxA: taken off with 3.05s of its asset still unplayed -- the asset is 12.01s long and the window it was given is 36000s. The composition follows the window.",
+    "warning: [renderer] boxB: taken off with 3.06s of its asset still unplayed -- the asset is 12.01s long and the window it was given is 36000s. The composition follows the window.",
+    "warning: [renderer] boxD: taken off with 3.06s of its asset still unplayed -- the asset is 12.01s long and the window it was given is 36000s. The composition follows the window."
+  ]
+}

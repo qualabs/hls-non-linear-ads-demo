@@ -1,0 +1,221 @@
+<!doctype html><meta charset="utf-8"><title>M-T01 - la composicion cambia sin reconstruirse</title>
+<!--
+  La medicion de la T-01, con el molde de `medicion-1.html` de la fase 01: una
+  pagina que maneja el renderizado a mano y deja el resultado en `window`, para
+  que un script lo lea y para que una persona lo vea.
+
+  QUE MIDE. Dos composiciones que COMPARTEN elementos, una detras de la otra,
+  leyendo el `currentTime` de cada nodo antes y despues del cambio. Lo que la
+  decision de ADR 0070 promete es que los nodos que sobreviven al cambio no se
+  reconstruyen, y un nodo que se reconstruye vuelve a bufferear: su reloj
+  arranca de cero otra vez.
+
+  CUAL ES SU REFERENCIA, Y POR QUE LA NECESITA. Un reloj que avanza no prueba
+  nada por si solo: hay que haber visto la otra rama. Asi que las dos mismas
+  composiciones se corren por DOS rutas. En la incremental la segunda
+  composicion lleva el mismo `itemId` que la primera, que es lo que el multi
+  view produce; en la total lleva uno distinto, que es exactamente la
+  alternativa que el ADR descarto -- "si cada cambio produjera un itemId nuevo".
+  Misma pagina, mismos assets, misma espera: lo unico que cambia es la
+  identidad, y el reloj de los que sobreviven tiene que separarse ahi.
+
+  NO HAY LIBRERIA DE PRUEBA NI DOBLE DE NINGUN TIPO. El proveedor es un objeto
+  de esta pagina que contesta `activeAt` con la composicion que la pagina tiene
+  puesta -- que es lo unico que el contrato del ADR 0003 pide -- y el
+  renderizado es `lib/renderer.js` tal cual, con su propio bucle de cuadros.
+
+  Se sirve desde la raiz del repositorio: `node server.mjs .`, y despues
+  http://localhost:PUERTO/.project/phases/11-el-multi-view-que-elige-quien-mira/tasks/T-01/medicion-t01.html
+-->
+<style>
+ body{margin:0;background:#111;color:#eee;font:13px/1.5 monospace}
+ #player{position:relative;width:960px;height:540px;background:#000}
+ #player video#video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+ #ads{position:absolute;inset:0;pointer-events:none}
+ #out{padding:8px;white-space:pre-wrap}
+ .ok{color:#5f5}.mal{color:#f66}
+</style>
+<div id="player"><video id="video" playsinline muted></video><div id="ads"></div></div>
+<pre id="out">cargando...</pre>
+<script src="/vendor/hls.min.js"></script>
+<script type="module">
+import { createRenderer } from '/lib/renderer.js';
+import { attachAsset } from '/lib/media.js';
+
+const HLS_TYPE = 'application/vnd.apple.mpegurl';
+const CONTENIDO = '/demo/compatibility-pair/content';
+// La ventana se declara larga a proposito: nada tiene que estar saliendo
+// mientras se mide, porque una salida mueve las cajas por su cuenta y la
+// lectura dejaria de ser sobre el cambio de composicion.
+const VENTANA = { startTime: 0, duration: 36000 };
+
+const caja = (top, right, bottom, left) => ({ top, right, bottom, left });
+
+/** Un elemento del layout, en la forma que el contrato declara. */
+const elemento = (id, box, zDepth, uri) => ({
+  id, primary: !uri, box, zDepth, volume: 0, uri: uri ?? null, mediaType: uri ? HLS_TYPE : null
+});
+
+const PRIMARIO_ENTERO = elemento('primaryContent', caja(0, 0, 0, 0), 0);
+const PRIMARIO_CUARTO = elemento('primaryContent', caja(0, 50, 50, 0), 0);
+
+/**
+ * Las dos composiciones, y lo que importa de ellas es que se pisan: `boxA` y
+ * `boxB` estan en las dos, con cajas distintas, y son las que tienen que
+ * sobrevivir. `boxC` esta solo en la primera -- baja -- y `boxD` solo en la
+ * segunda -- sube --, asi que el plan tiene las tres cosas que hace: conservar,
+ * destruir y crear.
+ */
+const PRIMERA = [
+  PRIMARIO_CUARTO,
+  elemento('boxA', caja(0, 0, 50, 50), 1, `${CONTENIDO}/adA/index.m3u8`),
+  elemento('boxB', caja(50, 50, 0, 0), 2, `${CONTENIDO}/adB/index.m3u8`),
+  elemento('boxC', caja(50, 0, 0, 50), 3, `${CONTENIDO}/adC/index.m3u8`)
+];
+const SEGUNDA = [
+  PRIMARIO_ENTERO,
+  elemento('boxA', caja(0, 0, 66, 66), 1, `${CONTENIDO}/adA/index.m3u8`),
+  elemento('boxB', caja(0, 66, 66, 0), 2, `${CONTENIDO}/adB/index.m3u8`),
+  elemento('boxD', caja(66, 0, 0, 66), 3, `${CONTENIDO}/adC/index.m3u8`)
+];
+
+const experiencia = (itemId, elements) => ({
+  id: 'MEDICION', itemId, type: 'multiView', ...VENTANA, elements
+});
+
+const video = document.getElementById('video');
+const capa = document.getElementById('ads');
+const out = document.getElementById('out');
+
+// El proveedor del ADR 0003 y nada mas que eso: contesta que hay activo, y lo
+// que hay activo lo pone esta pagina.
+let objetivo = [];
+const provider = { activeAt: () => objetivo, programRanges: () => ({ ranges: [], settled: true }) };
+
+const renderer = createRenderer({ provider, video, layer: capa, attachAsset });
+
+const primario = new Hls({ interstitialsController: undefined });
+primario.loadSource(`${CONTENIDO}/primary/index.m3u8`);
+primario.attachMedia(video);
+
+const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+const cuadro = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+// El serial es de esta pagina y dice si el NODO es el mismo: el renderizado no
+// lo toca, asi que un nodo que sobrevivio lo conserva y uno reconstruido llega
+// sin serial y se lleva uno nuevo. Es lo unico que distingue "se quedo" de "se
+// volvio a hacer y quedo igual".
+let serie = 0;
+function leer() {
+  const nodos = [...capa.querySelectorAll('.ad')];
+  for (const n of nodos) if (!n.dataset.serial) n.dataset.serial = String(++serie);
+  const pr = document.getElementById('player').getBoundingClientRect();
+  const rect = (el) => {
+    const r = el.getBoundingClientRect();
+    return [Math.round(r.left - pr.left), Math.round(r.top - pr.top),
+            Math.round(r.width), Math.round(r.height)];
+  };
+  return {
+    programa: +video.currentTime.toFixed(3),
+    primario: { caja: rect(video) },
+    cajas: nodos.map((n) => ({
+      id: n.dataset.elementId,
+      serial: +n.dataset.serial,
+      t: +(n.currentTime || 0).toFixed(3),
+      readyState: n.readyState,
+      pausado: n.paused,
+      caja: rect(n)
+    }))
+  };
+}
+
+/**
+ * Una ruta: se arranca de nada, se pone la primera composicion, se la deja
+ * correr, y se cambia a la segunda. `mismoItemId` es lo unico que separa las
+ * dos rutas.
+ */
+async function ruta(nombre, mismoItemId, correr = 3000, despues = 1500) {
+  objetivo = [];
+  await cuadro();
+  objetivo = [experiencia('MEDICION.0', PRIMERA)];
+  await esperar(correr);
+  const antes = leer();
+  objetivo = [experiencia(mismoItemId ? 'MEDICION.0' : 'MEDICION.1', SEGUNDA)];
+  await cuadro();
+  const justoDespues = leer();
+  await esperar(despues);
+  const masTarde = leer();
+  objetivo = [];
+  await cuadro();
+  return { nombre, mismoItemId, correr, despues, antes, justoDespues, masTarde };
+}
+
+function veredicto(r) {
+  const por = (lectura, id) => lectura.cajas.find((c) => c.id === id);
+  const sobreviven = ['boxA', 'boxB'].map((id) => {
+    const a = por(r.antes, id);
+    const d = por(r.justoDespues, id);
+    const t = por(r.masTarde, id);
+    return {
+      id,
+      mismoNodo: !!(a && d && a.serial === d.serial),
+      tAntes: a?.t ?? null,
+      tJustoDespues: d?.t ?? null,
+      tMasTarde: t?.t ?? null,
+      volvioACero: !!(a && d && d.t < a.t - 0.25)
+    };
+  });
+  return {
+    sobreviven,
+    // La que sube es la referencia de adentro de la misma lectura: un nodo
+    // recien creado SI arranca de cero, asi que un cero es un cero y no un
+    // efecto de como se mide.
+    nueva: por(r.justoDespues, 'boxD'),
+    bajo: !por(r.justoDespues, 'boxC'),
+    cajas: r.justoDespues.cajas.map((c) => `${c.id} ${c.caja.join('x')}`)
+  };
+}
+
+const n = (v) => (v === null || v === undefined ? '   --' : v.toFixed(3).padStart(8));
+
+function imprimir(resultados) {
+  const lineas = [];
+  for (const r of resultados) {
+    const v = veredicto(r);
+    lineas.push(`== ruta ${r.nombre} (itemId ${r.mismoItemId ? 'IGUAL' : 'DISTINTO'} en la segunda composicion)`);
+    lineas.push('   caja      mismo nodo   t antes   t justo despues   t mas tarde');
+    for (const s of v.sobreviven) {
+      lineas.push(`   ${s.id.padEnd(9)} ${String(s.mismoNodo).padEnd(12)}${n(s.tAntes)}` +
+        `${n(s.tJustoDespues)}       ${n(s.tMasTarde)}   ` +
+        (s.volvioACero ? '<- VOLVIO ATRAS' : ''));
+    }
+    lineas.push(`   la que sube (boxD) arranca en ${n(v.nueva ? v.nueva.t : null)}` +
+      `   ${v.bajo ? 'y la que baja (boxC) no esta' : 'y boxC SIGUE ESTANDO'}`);
+    lineas.push(`   la composicion: ${v.cajas.join(' | ')}`);
+    lineas.push('');
+  }
+  out.textContent = lineas.join('\n');
+}
+
+window.medicion = {
+  listo: false,
+  resultados: null,
+  correr: async () => {
+    const resultados = [
+      await ruta('incremental', true),
+      await ruta('total', false)
+    ];
+    window.medicion.resultados = resultados;
+    window.medicion.veredictos = resultados.map(veredicto);
+    imprimir(resultados);
+    return resultados;
+  }
+};
+
+video.addEventListener('loadedmetadata', () => {
+  video.play().catch(() => {});
+  window.medicion.listo = true;
+  out.textContent = 'listo -- window.medicion.correr()';
+  document.title = 'M-T01 ready';
+});
+</script>

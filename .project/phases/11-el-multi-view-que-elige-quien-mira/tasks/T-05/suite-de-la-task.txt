@@ -1,0 +1,35 @@
+✔ an ad goes through the decorator as the same object, elements and all (14.393543ms)
+✔ programRanges is the one underneath, unchanged (2.117826ms)
+✔ with nothing raised the offer comes back untouched, which is the programme as it was (3.11211ms)
+✔ the control: the same shape, written by hand and legal, is accepted (2.152643ms)
+✔ a hand-written state with five boxes is refused, and the cap counts the programme (2.681423ms)
+✔ a hand-written state with the same view twice is refused (4.616559ms)
+✔ a hand-written state whose enlarged box is not on the grid is refused (1.41045ms)
+✔ a hand-written state naming a view the offer does not announce is refused (0.703869ms)
+✔ a state that is not a selection at all is refused, and each one says which (0.712644ms)
+✔ what an operation returns is frozen, so the chrome cannot re-compose the screen (1.27664ms)
+✔ raising the first view is what entering the multi view is, and there is no other door (0.96976ms)
+✔ with the grid full a view that is not up is refused, and its row says so (1.097613ms)
+✔ lowering the last view leaves one box, which is the way out and not a case of its own (0.521548ms)
+✔ lowering the box that is enlarged takes the enlargement with it (0.547501ms)
+✔ an offer that closes with views raised draws nothing, and leaves nothing behind (0.913383ms)
+✔ the programme is the first row, ticked and locked, and no gesture takes it down (0.883302ms)
+✔ the boxes are the shapes of the table, in the order the views were raised (0.574307ms)
+✔ the opening mix is the programme sounding and the views silent (0.377225ms)
+✔ a view carries its uri and its MIME into the box, which is what fills it (0.316038ms)
+✔ enlarging puts one box at full frame above the others, and leaves them where they are (0.597126ms)
+✔ the programme can be the enlarged box, because it is a box like the others (0.264886ms)
+✔ what is not on the grid cannot be enlarged, and neither can nothing (0.330112ms)
+✔ for one selection the composition is the same object, which is what the preload matches on (0.407113ms)
+✔ asking about a time ahead of now does not touch what is raised now (0.364166ms)
+✔ the handle drives the same operations, on the offer a gesture was made on (0.821195ms)
+✔ raising a view keeps every node that was already up, and only builds the new one (1.41533ms)
+✔ enlarging builds nothing and destroys nothing: it moves one box (0.946718ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 217.759312

@@ -1,0 +1,32 @@
+== CONTROL: el arbol sin mutar, con cada uno de los recortes de tests ==
+
+  [VERDE] R1 la identidad se compara por el `id` del break y no por el `itemId`
+          ℹ pass 1 / ℹ fail 0
+  [VERDE] R2 la identidad se compara solo por el `id` del elemento
+          ℹ pass 1 / ℹ fail 0
+  [VERDE] R3 no se destruye lo que sobra
+          ℹ pass 2 / ℹ fail 0
+  [VERDE] R4 no se marca lo que cambio de caja
+          ℹ pass 2 / ℹ fail 0
+  [VERDE] R5 el plan se aplica a medias: solo los que sobreviven
+          ℹ pass 1 / ℹ fail 0
+
+== LAS CINCO ROTURAS ==
+
+  [ROJO (la rotura se ve)] R1 la identidad se compara por el `id` del break y no por el `itemId`
+          ℹ pass 0 / ℹ fail 1
+          primera que cae: ✖ the second ad of a break recognises no box of the first one as its own (6.337949ms)
+  [ROJO (la rotura se ve)] R2 la identidad se compara solo por el `id` del elemento
+          ℹ pass 0 / ℹ fail 1
+          primera que cae: ✖ two overlapping breaks that name their boxes the same keep them apart (5.808096ms)
+  [ROJO (la rotura se ve)] R3 no se destruye lo que sobra
+          ℹ pass 0 / ℹ fail 2
+          primera que cae: ✖ with an empty target, every entry is destroyed and the composition comes back empty (4.935925ms)
+  [ROJO (la rotura se ve)] R4 no se marca lo que cambio de caja
+          ℹ pass 0 / ℹ fail 2
+          primera que cae: ✖ an element that changes box without changing identity is kept, and it is the one that moves (6.137489ms)
+  [ROJO (la rotura se ve)] R5 el plan se aplica a medias: solo los que sobreviven
+          ℹ pass 0 / ℹ fail 1
+          primera que cae: ✖ applied, the composition is exactly the target: not one node more and not one less (5.83216ms)
+
+== las cinco roturas se ven, y el arbol sin mutar esta verde en las cinco ==

@@ -1,0 +1,68 @@
+{
+  "compatibility-pair": {
+    "fila": {
+      "left": 1305,
+      "top": 312,
+      "ancho": 34,
+      "alto": 34
+    },
+    "hijos": [
+      {
+        "clase": "qa-btn qa-btn--views",
+        "oculto": true,
+        "display": "none",
+        "caja": {
+          "left": 0,
+          "top": 0,
+          "ancho": 0,
+          "alto": 0
+        }
+      },
+      {
+        "clase": "qa-btn qa-btn--audio",
+        "oculto": false,
+        "display": "grid",
+        "caja": {
+          "left": 1305,
+          "top": 312,
+          "ancho": 34,
+          "alto": 34
+        }
+      }
+    ],
+    "audioPegadoAlBorde": true
+  },
+  "hydration-break": {
+    "fila": {
+      "left": 1219,
+      "top": 2806,
+      "ancho": 34,
+      "alto": 34
+    },
+    "hijos": [
+      {
+        "clase": "qa-btn qa-btn--views",
+        "oculto": true,
+        "display": "none",
+        "caja": {
+          "left": 0,
+          "top": 0,
+          "ancho": 0,
+          "alto": 0
+        }
+      },
+      {
+        "clase": "qa-btn qa-btn--audio",
+        "oculto": false,
+        "display": "grid",
+        "caja": {
+          "left": 1219,
+          "top": 2806,
+          "ancho": 34,
+          "alto": 34
+        }
+      }
+    ],
+    "audioPegadoAlBorde": true
+  }
+}

@@ -38,11 +38,11 @@ mean anything.
 | `t05-la-medicion.json` | `.project/phases/02-sdk-y-controles/tasks/T-05/` | the volume every media node started at, element by element, over three breaks |
 | `t05-el-recorrido-con-el-break-mezclado.json` | `.project/phases/03-breaks-multiples-y-repliegue/tasks/T-05/` | the ten ranges read off the contract with the mixed break in the run |
 
-## `asset-lists/` — the thirteen, whole
+## `asset-lists/` — the thirteen of the recording, whole, plus one offer
 
-Copied from the folder the demo serves its asset-lists from: the five of the
-recording, the three phase 03 added, the linear ad of phase 01 and the four
-fixtures broken on purpose.
+Copied from the folder the demo of the recording serves its asset-lists from:
+the five of the recording, the three phase 03 added, the linear ad of phase 01
+and the four fixtures broken on purpose.
 
 All thirteen and not a subset, because the set the tests read **is computed** —
 one helper takes the name as a parameter and another one takes it off the table
@@ -52,6 +52,20 @@ than copying.
 Four of them, the ones for the fallback rungs, therefore exist twice: here and in
 the demo, with no check between the two copies. Accepted residual, by the same
 decision that governs the rest of this folder.
+
+| file | copied from | what it is |
+| --- | --- | --- |
+| `asset-list-offer-3.json` | `demo/multiview-offer/signalling/` | the first of the two multi view windows of that demo: a catalogue of three views with their names, and no `layout` |
+
+That one is here for the same reason as the other thirteen and it is **one and
+not both**: the set the tests of the offer read is written out and not computed,
+so what the second window of that demo adds — a catalogue longer than the grid —
+is about the state of whoever is watching and not about reading the catalogue.
+The day a test needs it, it is copied then. The cases that are NOT copies — an
+offer with its label taken out, one that declares a field an offer does not
+carry, a break of two assets — are built in the test out of this one and say so
+where they are: they describe no run, so freezing them as files would be
+freezing nothing.
 
 ## `run.json` — the run of the recording, declared
 

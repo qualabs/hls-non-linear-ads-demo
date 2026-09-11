@@ -1,0 +1,97 @@
+El recorrido de los cinco breaks de compatibility-pair, corrido tres veces con el comparador de la T-12.
+Las dos lecturas se tomaron sobre un worktree aparte, en RAM, con lib/ = HEAD y unicamente
+lib/renderer.js cambiado, servido en un puerto propio (8791) para no tocar el 8080 de nadie.
+
+############ A) el arbol HEAD -- sin un solo cambio -- contra la base committeada de la T-12
+############    Existe para aislar el unico rojo que hay: el puerto. Los 14 segundos son iguales.
+
+== comparando /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/.project/phases/11-el-multi-view-que-elige-quien-mira/tasks/T-01/recorrido-sin-la-t01.json contra la base lectura-base.json ==
+
+## Las condiciones de las dos lecturas
+   base:  2026-09-11T14:50:38Z  ·  11a1f8c65987 · sin commitear: .project/LOG.md, .project/PROJECT.md, .project/decisions/0063-la-clase-de-multi-view-es-hermana-y-su-kind-toca-tres-tablas.md (+11 más)
+   ahora: 2026-09-11T15:28:57Z  ·  11a1f8c65987 · sin commitear: .project/LOG.md, .project/PROJECT.md, demo/hydration-break/index.html (+29 más)
+   DISTINTO url: base http://localhost:8080/ → ahora http://localhost:8791/
+   Las dos lecturas no se tomaron en las mismas condiciones, así que
+   una diferencia de píxeles de acá abajo no prueba nada.
+
+## Los segundos muestreados
+     10.0s  igual     [primario]
+     26.0s  igual     [primario, adOverlay1]
+     38.0s  igual     [primario]
+     51.0s  igual     [primario, adBarVertical, adBarHorizontal]
+     63.0s  igual     [primario]
+     76.0s  igual     [primario, adBarVertical, adBarHorizontal]
+     88.0s  igual     [primario]
+    101.0s  igual     [primario, view2, view3, view4]
+    113.0s  igual     [primario]
+    126.0s  igual     [primario, ad1-overlay]
+    138.0s  igual     [primario, ad2-box]
+    150.0s  igual     [primario, linear]
+    162.0s  igual     [primario, ad4-overlay]
+    174.0s  igual     [primario]
+
+== ROJO: 14 de 14 segundos iguales ==
+   El recorrido cambió. Lo que cambió está arriba, y es un hallazgo:
+   se reporta antes de tocar nada.
+
+############ B) con la T-01 aplicada, contra ese mismo arbol sin ella, en el MISMO puerto
+############    Es la comparacion de la task: mismas condiciones y ninguna diferencia.
+
+== comparando /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/.project/phases/11-el-multi-view-que-elige-quien-mira/tasks/T-01/recorrido-con-la-t01.json contra la base /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/.project/phases/11-el-multi-view-que-elige-quien-mira/tasks/T-01/recorrido-sin-la-t01.json ==
+
+## Las condiciones de las dos lecturas
+   base:  2026-09-11T15:28:57Z  ·  11a1f8c65987 · sin commitear: .project/LOG.md, .project/PROJECT.md, demo/hydration-break/index.html (+29 más)
+   ahora: 2026-09-11T15:25:07Z  ·  11a1f8c65987 · sin commitear: .project/LOG.md, .project/PROJECT.md, demo/hydration-break/index.html (+22 más)
+   Las mismas: mismo contenedor, mismo video, mismos segundos.
+
+## Los segundos muestreados
+     10.0s  igual     [primario]
+     26.0s  igual     [primario, adOverlay1]
+     38.0s  igual     [primario]
+     51.0s  igual     [primario, adBarVertical, adBarHorizontal]
+     63.0s  igual     [primario]
+     76.0s  igual     [primario, adBarVertical, adBarHorizontal]
+     88.0s  igual     [primario]
+    101.0s  igual     [primario, view2, view3, view4]
+    113.0s  igual     [primario]
+    126.0s  igual     [primario, ad1-overlay]
+    138.0s  igual     [primario, ad2-box]
+    150.0s  igual     [primario, linear]
+    162.0s  igual     [primario, ad4-overlay]
+    174.0s  igual     [primario]
+
+== VERDE: 14 de 14 segundos iguales ==
+   El recorrido dibuja lo mismo, en las mismas cajas, que antes de la fase.
+
+############ C) el control, que es lo que le da forma de fallar: la misma lectura de la T-01
+############    contra la base alterada a mano de la T-12 -- adOverlay1 movido 10 px.
+
+== comparando /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/.project/phases/11-el-multi-view-que-elige-quien-mira/tasks/T-01/recorrido-con-la-t01.json contra la base lectura-alterada-para-el-control.json ==
+
+## Las condiciones de las dos lecturas
+   base:  2026-09-11T14:50:38Z (ALTERADA A MANO: adOverlay1 movido +10 px en x, para el control del comparador)  ·  11a1f8c65987 · sin commitear: .project/LOG.md, .project/PROJECT.md, .project/decisions/0063-la-clase-de-multi-view-es-hermana-y-su-kind-toca-tres-tablas.md (+11 más)
+   ahora: 2026-09-11T15:25:07Z  ·  11a1f8c65987 · sin commitear: .project/LOG.md, .project/PROJECT.md, demo/hydration-break/index.html (+22 más)
+   DISTINTO url: base http://localhost:8080/ → ahora http://localhost:8791/
+   Las dos lecturas no se tomaron en las mismas condiciones, así que
+   una diferencia de píxeles de acá abajo no prueba nada.
+
+## Los segundos muestreados
+     10.0s  igual     [primario]
+     26.0s  DISTINTO  (2 nodos en la base)
+      nodo 1 (adOverlay1) · caja: base [10, 0, 179, 101] → ahora [0, 0, 179, 101]   (movida -10, +0 px; tamaño +0, +0 px)
+     38.0s  igual     [primario]
+     51.0s  igual     [primario, adBarVertical, adBarHorizontal]
+     63.0s  igual     [primario]
+     76.0s  igual     [primario, adBarVertical, adBarHorizontal]
+     88.0s  igual     [primario]
+    101.0s  igual     [primario, view2, view3, view4]
+    113.0s  igual     [primario]
+    126.0s  igual     [primario, ad1-overlay]
+    138.0s  igual     [primario, ad2-box]
+    150.0s  igual     [primario, linear]
+    162.0s  igual     [primario, ad4-overlay]
+    174.0s  igual     [primario]
+
+== ROJO: 13 de 14 segundos iguales ==
+   El recorrido cambió. Lo que cambió está arriba, y es un hallazgo:
+   se reporta antes de tocar nada.

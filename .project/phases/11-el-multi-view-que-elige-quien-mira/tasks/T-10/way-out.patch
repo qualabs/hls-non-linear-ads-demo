@@ -1,0 +1,133 @@
+--- a/lib/controls.js
++++ b/lib/controls.js
+@@ -771,7 +771,14 @@
+   expand: '<path d="M21 11V3h-8l3.29 3.29-4.3 4.29 1.42 1.42 4.29-4.3L21 11zM3 13v8h8l-3.29-3.29' +
+     ' 4.3-4.29-1.42-1.42-4.29 4.3L3 13z"/>',
+   collapse: '<path d="M12 12V4h-2v3.59L5.41 3 4 4.41 8.59 9H5v2h7zm0 0v8h2v-3.59L18.59 21 20' +
+-    ' 19.59 15.41 15H19v-2h-7z"/>'
++    ' 19.59 15.41 15H19v-2h-7z"/>',
++  // ONE SCREEN, WHICH IS THE SHAPE OF WHAT THE WAY OUT LEADS TO, by the same
++  // rule the four boxes are drawn under a few lines above: what this button
++  // reaches is the programme alone, and the two icons read as a pair because
++  // they are the two ends of one gesture. It is a FRAME and not a filled
++  // square, because a solid block beside four solid blocks reads as a stop
++  // button, and a frame reads as a picture.
++  oneView: '<path d="M3 4.5h18v15H3zM5 6.5v11h14v-11z"/>'
+ };
+ 
+ /**
+@@ -831,6 +838,14 @@
+ const VIEWS_LABEL = 'the feeds on screen';
+ 
+ /**
++ * What the way out is called. It names the DESTINATION and not the mechanism --
++ * "back to the programme" and not "close the grid" -- because that is what
++ * ADR 0071 says happens: the content comes back exactly as it was, and the
++ * composition is simply not there any more.
++ */
++const WAY_OUT_LABEL = 'back to the programme alone';
++
++/**
+  * The token this list holds the chrome with. A value of its own and not a flag,
+  * because the point of a `Set` of holds is that two open things do not take
+  * each other's chrome down (T-06): whatever opens next brings its own token and
+@@ -1047,7 +1062,7 @@
+  *                   Default `() => false`: a chrome wired without it enlarges
+  *                   the picture and leaves the mix the layout declared.
+  * @param multiview  optional, the state of whoever is watching (ADR 0067).
+- *                   FOUR CALLS AND NOTHING ELSE: `offerAt(time)`, which
++ *                   SEVEN CALLS AND NOTHING ELSE: `offerAt(time)`, which
+  *                   answers whether there is a catalogue on screen right now
+  *                   and hands it over; `rows(offer)`, the rows of the list
+  *                   already decided -- name, ticked, locked, greyed;
+@@ -1055,7 +1070,11 @@
+  *                   and `boxes(offer)`, which is what is on the screen and
+  *                   therefore what a button can be hung on, with
+  *                   `enlarge(offer, id)` and `shrink(offer)` as the two that
+- *                   move it.
++ *                   move it; and `exit(offer)`, which empties the selection.
++ *                   That last one is a SECOND ENTRANCE AND NOT A SECOND DOOR
++ *                   (ADR 0071): it reaches the state unticking the last row
++ *                   reaches, so the way back to the programme has one
++ *                   implementation, and this file owns neither half of it.
+  *                   What this file does with them is DRAW them: it re-decides
+  *                   none of the three flags, so the cap of the screen, the
+  *                   order of the boxes and the programme being fixed are stated
+@@ -1105,6 +1124,25 @@
+   // choose what of the composition reaches you. It comes FIRST in the row so
+   // that the audio keeps the corner it has had, and it is not there at all
+   // until there is a catalogue to open.
++  //
++  // AND THE WAY OUT GOES FIRST, WHICH IS THE OUTER END OF THE ROW. The row is
++  // anchored to the right corner, so the button that comes and goes grows it
++  // leftwards: neither the audio nor the list moves under a thumb that was
++  // already reaching for one of them. It is the only one of the three whose
++  // presence depends on the composition and not on the window.
++  //
++  // WHAT IT DOES IS EMPTY THE SELECTION AND NOTHING ELSE (ADR 0071). That
++  // leaves one box, which is no composition, which is the event that already
++  // ends an ad -- so the button is a SECOND ENTRANCE TO A DOOR THAT EXISTS and
++  // not a second door. There is nothing restored here and nothing remembered:
++  // the rendering side takes the whole `style` attribute off the primary
++  // content and gives it its volume back, and a chrome that tried to help
++  // would be the second source of truth the ADR exists to prevent.
++  const wayOutBtn = multiview ? button('qa-btn--way-out', ICON.oneView, WAY_OUT_LABEL) : null;
++  if (wayOutBtn) {
++    wayOutBtn.hidden = true;
++    top.appendChild(wayOutBtn);
++  }
+   const viewsBtn = multiview ? button('qa-btn--views', ICON.views, VIEWS_LABEL) : null;
+   if (viewsBtn) {
+     viewsBtn.hidden = true;
+@@ -1448,6 +1486,15 @@
+       boxRectKey = null;
+       boxNodes = boxes.map(boxButton);
+       boxLayer.replaceChildren(...boxNodes);
++      // THE WAY OUT IS DRAWN OFF THE SAME ANSWER, because it is the same
++      // question asked once: a composition on the screen is what there is to
++      // leave. With nothing raised there is no button, which is the honest
++      // reading -- the programme alone has nowhere to go back to -- and it
++      // keeps no flag of its own, so the button and the boxes cannot come to
++      // disagree about whether there is a grid. It rides on this key and not
++      // on a line of its own because WHETHER there are boxes is a function of
++      // WHICH boxes, which is exactly what this key is.
++      wayOutBtn.hidden = !boxes.length;
+     }
+     if (!boxes.length) return;
+     const frame = layer.getBoundingClientRect();
+@@ -1751,6 +1798,17 @@
+     holds.release(VIEWS_HOLD);
+   }
+ 
++  if (wayOutBtn) {
++    wayOutBtn.addEventListener('click', () => {
++      // The window can close between the frame that drew this and the press,
++      // and that race ends where the press was going anyway: with nothing
++      // composed. It is the same guard the button on a box takes.
++      if (!offer) return;
++      multiview.exit(offer);
++      show();
++    });
++  }
++
+   function pick(id) {
+     if (!offer) return;
+     multiview.toggle(offer, id);
+--- a/lib/renderer.js
++++ b/lib/renderer.js
+@@ -1184,6 +1184,15 @@
+    * closes and the last box that comes down go out through here exactly as
+    * they always did (ADR 0070, ADR 0071).
+    *
++   * AND THE WAY OUT OF A MULTI VIEW HAS NO ROUTE OF ITS OWN (ADR 0071). Three
++   * gestures end here and they are one event: the last box unticked, the
++   * button of the way out in the chrome, and the window closing under whoever
++   * is watching. NONE OF THEM RESTORES ANYTHING -- the `style` attribute is
++   * removed whole and the page's stylesheet decides again -- so there is no
++   * saved state that can be out of step with the screen. That is what makes
++   * the invariant cheap, and it is why a second implementation of it would be
++   * a regression even if it worked.
++   *
+    * THE SECOND AND FOURTH EXITS OF THE FOCUS (ADR 0029) ARE NO LONGER HERE, and
+    * that is not them being dropped: they are asked in `apply`, where the
+    * question can be the exact one -- whether the node that HAD the focus stopped

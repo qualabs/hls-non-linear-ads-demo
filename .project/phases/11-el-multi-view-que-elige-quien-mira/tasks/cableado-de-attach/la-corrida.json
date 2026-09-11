@@ -1,0 +1,419 @@
+{
+  "1-sin-ventana": {
+    "t": 10.91,
+    "pausado": false,
+    "contrato": "contract: nothing active",
+    "boton": {
+      "oculto": true,
+      "expandido": "false"
+    },
+    "lista": {
+      "existe": true,
+      "abierta": false,
+      "filas": [],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "marcas": [
+      "concurrent ad: drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops"
+    ],
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 1100,
+        "alto": 619
+      }
+    ]
+  },
+  "2-el-aviso-concurrente": {
+    "t": 27.28,
+    "pausado": false,
+    "contrato": "cornerOverlay#BREAK-1-CONCURRENT.0 · 2 element(s)",
+    "boton": {
+      "oculto": true,
+      "expandido": "false"
+    },
+    "lista": {
+      "existe": true,
+      "abierta": false,
+      "filas": [],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "marcas": [
+      "concurrent ad: drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops"
+    ],
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 1100,
+        "alto": 619
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "pausado": false,
+        "left": 0,
+        "top": 0,
+        "ancho": 275,
+        "alto": 155
+      }
+    ]
+  },
+  "3-la-ventana-abierta": {
+    "t": 50.98,
+    "pausado": false,
+    "contrato": "multiViewOffer#BREAK-2-MULTIVIEW.0 · 0 element(s)",
+    "boton": {
+      "oculto": false,
+      "expandido": "false"
+    },
+    "lista": {
+      "existe": true,
+      "abierta": false,
+      "filas": [],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "marcas": [
+      "concurrent ad: drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops"
+    ],
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 1100,
+        "alto": 619
+      }
+    ]
+  },
+  "3-la-lista-abierta": {
+    "t": 51.32,
+    "pausado": false,
+    "contrato": "multiViewOffer#BREAK-2-MULTIVIEW.0 · 0 element(s)",
+    "boton": {
+      "oculto": false,
+      "expandido": "true"
+    },
+    "lista": {
+      "existe": true,
+      "abierta": true,
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "marcas": [
+      "concurrent ad: drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops"
+    ],
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 1100,
+        "alto": 619
+      }
+    ]
+  },
+  "4-forma-de-2": {
+    "t": 53.52,
+    "pausado": false,
+    "contrato": "multiViewOffer#BREAK-2-MULTIVIEW.0 · 2 element(s)",
+    "boton": {
+      "oculto": false,
+      "expandido": "true"
+    },
+    "lista": {
+      "existe": true,
+      "abierta": true,
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "marcas": [
+      "concurrent ad: drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops"
+    ],
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 155,
+        "ancho": 550,
+        "alto": 309
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "pausado": false,
+        "left": 550,
+        "top": 155,
+        "ancho": 550,
+        "alto": 309
+      }
+    ]
+  },
+  "4-forma-de-3": {
+    "t": 55.18,
+    "pausado": false,
+    "contrato": "multiViewOffer#BREAK-2-MULTIVIEW.0 · 3 element(s)",
+    "boton": {
+      "oculto": false,
+      "expandido": "true"
+    },
+    "lista": {
+      "existe": true,
+      "abierta": true,
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "marcas": [
+      "concurrent ad: drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops"
+    ],
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 550,
+        "alto": 309
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "pausado": false,
+        "left": 550,
+        "top": 0,
+        "ancho": 550,
+        "alto": 309
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "pausado": false,
+        "left": 275,
+        "top": 309,
+        "ancho": 550,
+        "alto": 309
+      }
+    ]
+  },
+  "5-destildadas": {
+    "t": 57.82,
+    "pausado": false,
+    "contrato": "multiViewOffer#BREAK-2-MULTIVIEW.0 · 0 element(s)",
+    "boton": {
+      "oculto": false,
+      "expandido": "true"
+    },
+    "lista": {
+      "existe": true,
+      "abierta": true,
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "marcas": [
+      "concurrent ad: drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops"
+    ],
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 1100,
+        "alto": 619
+      }
+    ]
+  },
+  "6-la-ventana-cerro": {
+    "t": 110.96,
+    "pausado": false,
+    "contrato": "contract: nothing active",
+    "boton": {
+      "oculto": true,
+      "expandido": "false"
+    },
+    "lista": {
+      "existe": true,
+      "abierta": false,
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "marcas": [
+      "concurrent ad: drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops",
+      "multi view: several feeds to pick from, drawn over the content, which never stops"
+    ],
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 1100,
+        "alto": 619
+      }
+    ]
+  }
+}

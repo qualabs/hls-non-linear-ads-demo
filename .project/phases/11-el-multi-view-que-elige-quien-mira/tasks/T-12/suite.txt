@@ -1,0 +1,153 @@
+$ npm test   --  2026-09-11T15:01:03Z
+
+> qualabs-concurrent-hls@0.0.0 test
+> node --test
+
+✔ the script signals the five breaks of the recording, and every one names an asset-list of this demo (4.093145ms)
+✔ the length a break declares is computed from its asset-list and not typed into the script (0.557926ms)
+✔ the two classes the script writes are the two the library translates (2.652978ms)
+✔ demo/hydration-break/test/comprobaciones.js (63.257423ms)
+== sin romper nada, todos los chequeos tienen que estar en verde ==
+  VERDE  anclasDelGuion
+  VERDE  elBreakArrancaEnLaParada
+  VERDE  elRepartoSaleDeUnSoloLugar
+  VERDE  lasTresFormasDelMinuto
+
+== una rotura por regla, y cada una tiene que poner ROJO a su chequeo ==
+  ROJO   anclasDelGuion
+         regla:  un ancla del guion tiene que caer en un aviso que existe (ADR 0037)
+         rotura: el beat del caso de negocio pasa a anclarse al aviso 9 del break 1
+         dijo:   el beat "el-caso-de-negocio" ancla a algo que la señalización no tiene: {"at":{"break":1,"ad":9},"lead":1.5}
+  ROJO   anclasDelGuion
+         regla:  un beat tiene que frenar ANTES de lo que anuncia (ADR 0037)
+         rotura: el mismo beat pasa a tener `lead: -3`, así que resuelve después del aviso
+         dijo:   el beat "el-caso-de-negocio" resuelve en 49s y lo que anuncia arranca en 46s: la placa llega tarde o justo encima
+  ROJO   elBreakArrancaEnLaParada
+         regla:  el segundo del break lo declara plate.json y no el script (ADR 0044)
+         rotura: el script de señalización pasa a tener el segundo escrito a mano
+         dijo:   el script de señalización no lee `paradaEn` de plate.json: si el segundo del break está escrito a mano, deja de seguir al plate (ADR 0044)
+  ROJO   elBreakArrancaEnLaParada
+         regla:  la parada del juego tiene que caber adentro del plate (ADR 0044)
+         rotura: la parada pasa a durar el doble del plate (184s sobre 92s)
+         dijo:   la parada del juego termina en 198s y el plate dura 92s: el break se sale del programa
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  los avisos suman lo que dura la parada (el reparto de plate.json)
+         rotura: el overlay de cierre pasa de 24 a 20 s, así que la publicidad no cubre la parada
+         dijo:   los avisos suman 60s y la parada dura 64s: la publicidad no cubre la parada, y eso no falla, se ve como otra demo
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  cada aviso es múltiplo de 8, que es el techo de una generación
+         rotura: el lineal vuelve a 10 s, que deja un resto corto en la cadena
+         dijo:   estos avisos no son múltiplos de 8: 10, 22. El techo de una generación son 8 s, así que un aviso que no es múltiplo deja un resto corto, que es el eslabón que peor sale
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  el reparto vive en un solo lugar (plate.json), no en el asset list
+         rotura: una DURATION del asset list se edita a mano y deja de coincidir con plate.json
+         dijo:   el asset list declara [12, 16, 8, 24] y plate.json [16, 16, 8, 24]: el reparto vive en dos lugares y ya se despegó
+  ROJO   lasTresFormasDelMinuto
+         regla:  el minuto declara exactamente un aviso de imagen fija (ADR 0046)
+         rotura: el banner pasa de `image/jpeg` a un `.m3u8`, que es lo que la demo deja de demostrar
+         dijo:   hay 0 avisos de imagen fija y tiene que haber exactamente uno (ADR 0046): es la tercera forma que este minuto demuestra
+  ROJO   lasTresFormasDelMinuto
+         regla:  el aviso lineal va tercero (ADR 0043)
+         rotura: el lineal se mueve al primer lugar del break
+         dijo:   el aviso lineal está en la posición 1 y va tercero (ADR 0043): ahí es donde el guion cuenta el caso de negocio
+  ROJO   lasTresFormasDelMinuto
+         regla:  el break son cuatro avisos (ADR 0043)
+         rotura: se le saca el overlay de cierre
+         dijo:   el break declara 3 avisos y el minuto son cuatro
+
+las 10 roturas dieron rojo y los 4 chequeos dan verde sin romper nada
+✔ demo/hydration-break/test/mutaciones.mjs (65.002927ms)
+✔ toda ancla del guion cae en un break y en un aviso que existen, y frena antes (8.870744ms)
+✔ el break arranca en el corrimiento declarado de la parada del juego (0.688219ms)
+✔ el reparto de los avisos sale de plate.json y no del asset list (0.993223ms)
+✔ el minuto declara sus tres formas de aviso (0.782421ms)
+✔ cada creativo del asset list tiene una carpeta de contenido nombrada (1.296264ms)
+✔ the script signals the three breaks of the run, and every one names an asset-list of this demo (8.105943ms)
+✔ the run fits inside the 180 s of the primary, and the windows are the ones the phase declared (1.099034ms)
+✔ the playlist comes out with one Date Range of the concurrent class and two of multi view (434.364281ms)
+✔ every tag points at its own asset-list, starts where the table says, and declares its real length (343.321125ms)
+✔ the multi view tag drops X-RESTRICT and the concurrent one keeps it (341.372038ms)
+✔ the offers announce a catalogue and not a layout (1.518716ms)
+✔ the two catalogues are three views and five, and the long one is longer than the grid (0.419258ms)
+✔ the content is packaged with the configuration the five decoders were measured at (0.379483ms)
+✔ with nobody focused every element comes out at the level the layout declared (9.973995ms)
+✔ the focused element comes out at full volume even when it declared 10 (2.308542ms)
+✔ everything else goes to 0 with the focus taken, the primary content included (1.780362ms)
+✔ the fixtures of the phase are the breaks the readings were taken on (3.540716ms)
+✔ a break of one asset opens at the START-DATE, which is every break of the recording (1.901846ms)
+✔ each asset begins where the one before it ended, over the breaks of three, four and two (1.155794ms)
+✔ the start of an item is an offset inside its own asset and not from the START-DATE (0.427594ms)
+✔ two ads of one break are two identities even when they share the layout (0.535001ms)
+✔ the ordinal of an ad is of the whole break, so two items of one asset are two ads (0.705895ms)
+✔ an ASSET with a URI and a DURATION and nothing else is one full-frame ad (1.529566ms)
+✔ in the mixed break the full-frame ad silences the programme and the concurrent ones do not (2.808449ms)
+✔ the three shapes this client cannot draw are the three that cannot become a box (1.253019ms)
+✔ a block this client cannot draw plays the asset own URI, and the ads around it do not move (1.00931ms)
+✔ an empty uri and a media type nobody knows are not failures of the block (0.818798ms)
+✔ none of the asset-lists the demo serves falls back, and the two linear ads are declared ones (1.261275ms)
+✔ an asset with nothing to play is skipped alone, and the ads after it keep their windows (0.6866ms)
+✔ the asset-list that cannot be read cancels the whole break, which is not skipping an asset (0.616737ms)
+✔ a list that declares no ASSETS plays nothing and reports no range (0.321579ms)
+✔ a break of several ads is one range, from the first to start to the last to end (0.767282ms)
+✔ viewport is four inset percentages in the order top right bottom left (5.597225ms)
+✔ a viewport that is not four numbers falls back to the full frame, and warns (0.76876ms)
+✔ each of the six asset-lists resolves to one experience with its type and window (1.069042ms)
+✔ the fifteen elements come out with the ids, the uri and the mediaType of the payload (1.152578ms)
+✔ elements come out ordered by ascending zDepth in the six layouts (0.721161ms)
+✔ in squeezebackFrame the ad is the background and the primary content is on top (0.434579ms)
+✔ on an equal zDepth the order of the payload holds (0.515091ms)
+✔ the two overlays carry no primaryContent, and the layer assumes the full frame at zDepth 0 (0.581364ms)
+✔ the four layouts that do carry primaryContent keep its zDepth and its viewport (0.764953ms)
+✔ no payload of the tool carries volume: the ad comes out silent and the show does not (0.720117ms)
+✔ an explicit volume of 0 survives, because a silent ad is silent on purpose (0.517494ms)
+✔ the activation window is half open: in at startTime, out at the end (0.533096ms)
+✔ activeAt returns every experience active at that instant (0.44487ms)
+✔ the insets become the fifteen boxes in pixels T-03 measured (1.592166ms)
+✔ the conversion follows the player area, which is what a resize depends on (0.339694ms)
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ the run of the recording is five breaks, each naming an asset-list of this suite (4.847673ms)
+✔ the two classes the playlist signals become the two kinds the contract carries (0.28099ms)
+✔ the five breaks are the ten ranges T-05 read off the contract (5.464692ms)
+✔ a break of no experiences is no range, and a tag that declares no length is no range either (0.990693ms)
+✔ the window of a concurrent break spans every experience its asset-list declares (0.469858ms)
+✔ the ten ranges land where T-04 measured them on the bar (2.19234ms)
+✔ the same ten ranges on a programme of another length land somewhere else (1.277651ms)
+✔ a range that cannot be placed is not a mark (1.426736ms)
+✔ with no volume in the asset-list the ad comes out silent and the programme does not (0.723473ms)
+✔ the mix of the Quad is the one the asset-list declares, element by element (0.813575ms)
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||` (0.376118ms)
+✔ a volume that is not a number falls back to the element own default, and there are two (0.240925ms)
+[signalling] asset-list-linear.json: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] asset-list-mezclado.json: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] asset-list-repliegue-bloque-roto.json: an ASSET carries a layout block this client cannot draw, so it falls back to the asset's own URI and plays as a linear ad (ADR 0019).
+[signalling] asset-list-mezclado.json: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] asset-list-mezclado.json: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ the ads that are drawn a layout fade, and the one at full frame does not (5.20459ms)
+✔ inside one break the answer is per ad and not per break (1.474198ms)
+✔ the fallback of ADR 0019 lands on the side of the full-frame ad (0.696934ms)
+✔ the label this file copies is the one the layer underneath writes (0.283792ms)
+✔ an experience with no type at all still fades (0.203252ms)
+✔ what is left of a window is the window minus where the playhead is (0.316061ms)
+✔ the ad of a break that does not start at zero is read against its own window (0.491286ms)
+✔ the middle of a window is not leaving, on either lead (0.313751ms)
+✔ a frame inside the lead is leaving and a frame outside it is not (0.331827ms)
+✔ before the window opens nothing is leaving, and after it closes everything is (1.52914ms)
+✔ a window shorter than its own transition is leaving from its first frame (0.218786ms)
+✔ a window of zero length is leaving the moment it opens (0.151357ms)
+✔ a playhead that is not a number is not leaving (0.22115ms)
+✔ the three durations are the ones the phase declared, and the way out is the shortest (0.195036ms)
+✔ a still is told apart from a video, including when nothing is declared (0.268129ms)
+✔ the ad the phase fades is a still, so the two rules meet on the banner (0.142149ms)
+ℹ tests 80
+ℹ suites 0
+ℹ pass 80
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1456.381331
+$? = 0

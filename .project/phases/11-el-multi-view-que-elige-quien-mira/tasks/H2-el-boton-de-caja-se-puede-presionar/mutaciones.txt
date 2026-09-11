@@ -1,0 +1,78 @@
+
+==============================================================
+== M0 -- sin mutar: el control
+==============================================================
+✔ in the three shapes, no button lands on a control of the chrome (2.574531ms)
+✔ the 2x2 is the shape that needed this, and it is its fourth box (2.269168ms)
+✔ the two shapes that were right keep the screen they had (0.546306ms)
+✔ with nothing in the way the answer is the first corner, every time (0.698372ms)
+✔ when every corner is taken, the least buried one wins (0.584622ms)
+✔ the four corners are four different places, and each is inside the box (0.583734ms)
+ℹ tests 6
+ℹ pass 6
+ℹ fail 0
+
+==============================================================
+== M1 -- la regla de la T-09: siempre la esquina de arriba a la izquierda
+==============================================================
+✖ in the three shapes, no button lands on a control of the chrome (5.527613ms)
+✖ the 2x2 is the shape that needed this, and it is its fourth box (2.194986ms)
+✔ the two shapes that were right keep the screen they had (0.362011ms)
+✔ with nothing in the way the answer is the first corner, every time (0.307317ms)
+✖ when every corner is taken, the least buried one wins (0.43033ms)
+✔ the four corners are four different places, and each is inside the box (0.402478ms)
+ℹ tests 6
+ℹ pass 3
+ℹ fail 3
+✖ failing tests:
+✖ in the three shapes, no button lands on a control of the chrome (5.527613ms)
+✖ the 2x2 is the shape that needed this, and it is its fourth box (2.194986ms)
+✖ when every corner is taken, the least buried one wins (0.43033ms)
+
+==============================================================
+== M2 -- siempre la de abajo a la derecha
+==============================================================
+✖ in the three shapes, no button lands on a control of the chrome (4.117758ms)
+✖ the 2x2 is the shape that needed this, and it is its fourth box (1.978083ms)
+✖ the two shapes that were right keep the screen they had (0.448444ms)
+✖ with nothing in the way the answer is the first corner, every time (0.357725ms)
+✔ when every corner is taken, the least buried one wins (0.412817ms)
+✔ the four corners are four different places, and each is inside the box (0.397994ms)
+ℹ tests 6
+ℹ pass 2
+ℹ fail 4
+✖ failing tests:
+✖ in the three shapes, no button lands on a control of the chrome (4.117758ms)
+✖ the 2x2 is the shape that needed this, and it is its fourth box (1.978083ms)
+✖ the two shapes that were right keep the screen they had (0.448444ms)
+✖ with nothing in the way the answer is the first corner, every time (0.357725ms)
+
+==============================================================
+== M3 -- el orden de preferencia dado vuelta
+==============================================================
+✔ in the three shapes, no button lands on a control of the chrome (2.372909ms)
+✖ the 2x2 is the shape that needed this, and it is its fourth box (3.728073ms)
+✖ the two shapes that were right keep the screen they had (0.998127ms)
+✔ with nothing in the way the answer is the first corner, every time (1.943928ms)
+✔ when every corner is taken, the least buried one wins (0.339151ms)
+✖ the four corners are four different places, and each is inside the box (0.731162ms)
+ℹ tests 6
+ℹ pass 3
+ℹ fail 3
+✖ failing tests:
+✖ the 2x2 is the shape that needed this, and it is its fourth box (3.728073ms)
+✖ the two shapes that were right keep the screen they had (0.998127ms)
+✖ the four corners are four different places, and each is inside the box (0.731162ms)
+
+==============================================================
+== M4 -- sin mutar otra vez, para que el verde del final sea del codigo y no del cansancio
+==============================================================
+✔ in the three shapes, no button lands on a control of the chrome (4.039655ms)
+✔ the 2x2 is the shape that needed this, and it is its fourth box (1.296532ms)
+✔ the two shapes that were right keep the screen they had (0.261687ms)
+✔ with nothing in the way the answer is the first corner, every time (0.304515ms)
+✔ when every corner is taken, the least buried one wins (0.320178ms)
+✔ the four corners are four different places, and each is inside the box (0.38577ms)
+ℹ tests 6
+ℹ pass 6
+ℹ fail 0

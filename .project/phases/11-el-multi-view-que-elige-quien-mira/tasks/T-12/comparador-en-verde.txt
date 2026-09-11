@@ -1,0 +1,41 @@
+== el recorrido otra vez, contra la base .project/phases/11-el-multi-view-que-elige-quien-mira/tasks/T-12/lectura-base.json ==
+    10.0s  leido en   10.09s  1 nodos  0 experiencia(s)
+    26.0s  leido en   26.01s  2 nodos  1 experiencia(s)
+    38.0s  leido en   38.03s  1 nodos  0 experiencia(s)
+    51.0s  leido en   51.05s  3 nodos  1 experiencia(s)
+    63.0s  leido en   63.01s  1 nodos  0 experiencia(s)
+    76.0s  leido en   76.11s  3 nodos  1 experiencia(s)
+    88.0s  leido en   88.07s  1 nodos  0 experiencia(s)
+   101.0s  leido en  101.03s  4 nodos  1 experiencia(s)
+   113.0s  leido en  113.09s  1 nodos  0 experiencia(s)
+   126.0s  leido en  126.08s  2 nodos  1 experiencia(s)
+   138.0s  leido en  138.04s  2 nodos  1 experiencia(s)
+   150.0s  leido en  150.02s  2 nodos  1 experiencia(s)
+   162.0s  leido en  162.08s  2 nodos  1 experiencia(s)
+   174.0s  leido en  174.09s  1 nodos  0 experiencia(s)
+
+lectura nueva guardada en /dev/shm/t12-base-20260911-b7c2/lectura-de-hoy-2.json
+
+## Las condiciones de las dos lecturas
+   base:  2026-09-11T14:50:38Z  ·  11a1f8c65987 · sin commitear: .project/LOG.md, .project/PROJECT.md, .project/decisions/0063-la-clase-de-multi-view-es-hermana-y-su-kind-toca-tres-tablas.md (+11 más)
+   ahora: 2026-09-11T14:57:48Z  ·  11a1f8c65987 · sin commitear: .project/LOG.md, .project/PROJECT.md, demo/hydration-break/index.html (+13 más)
+   Las mismas: mismo contenedor, mismo video, mismos segundos.
+
+## Los segundos muestreados
+     10.0s  igual     [primario]
+     26.0s  igual     [primario, adOverlay1]
+     38.0s  igual     [primario]
+     51.0s  igual     [primario, adBarVertical, adBarHorizontal]
+     63.0s  igual     [primario]
+     76.0s  igual     [primario, adBarVertical, adBarHorizontal]
+     88.0s  igual     [primario]
+    101.0s  igual     [primario, view2, view3, view4]
+    113.0s  igual     [primario]
+    126.0s  igual     [primario, ad1-overlay]
+    138.0s  igual     [primario, ad2-box]
+    150.0s  igual     [primario, linear]
+    162.0s  igual     [primario, ad4-overlay]
+    174.0s  igual     [primario]
+
+== VERDE: 14 de 14 segundos iguales ==
+   El recorrido dibuja lo mismo, en las mismas cajas, que antes de la fase.

@@ -1,0 +1,16 @@
+== ruta incremental (itemId IGUAL en la segunda composicion)
+   caja      mismo nodo   t antes   t justo despues   t mas tarde
+   boxA      true           2.848   2.919          4.422   
+   boxB      true           2.840   2.914          4.415   
+   la que sube (boxD) arranca en    0.000   y la que baja (boxC) no esta
+   la composicion: boxA 634x0x326x184 | boxB 0x0x326x184 | boxD 634x356x326x184
+
+== ruta total (itemId DISTINTO en la segunda composicion)
+   caja      mismo nodo   t antes   t justo despues   t mas tarde
+   boxA      false          7.405   0.000          8.924   <- VOLVIO ATRAS
+   boxB      false          7.390   0.000          8.916   <- VOLVIO ATRAS
+   la que sube (boxD) arranca en    0.000   y la que baja (boxC) no esta
+   la composicion: boxA 634x0x326x184 | boxB 0x0x326x184 | boxD 634x356x326x184
+
+lectura completa en /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/.project/phases/11-el-multi-view-que-elige-quien-mira/tasks/T-01/lectura.json
+== VERDE: lo que sobrevive no se reconstruye, y la ruta total muestra lo contrario ==
