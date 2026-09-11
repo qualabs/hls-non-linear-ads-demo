@@ -11,6 +11,9 @@ acá y llega al empaquetador como un archivo al lado del video.
 | `meridia.m4a` | el overlay de esquina, elemento `overlay` | 24 s | −20,1 LUFS |
 | `neonectar.m4a` | el lineal a cuadro entero | 8 s | −23,1 LUFS |
 
+**Cómo se midió cada pieza, y dónde engaña cada medición**, en
+[`medir.md`](medir.md).
+
 **El banner no lleva audio y eso es correcto**: es una imagen fija, y `applyAudio` ni
 siquiera le pone volumen a un `<img>`.
 
