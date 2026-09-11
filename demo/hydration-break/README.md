@@ -19,7 +19,7 @@ once before the demo will start:
 ./demo/hydration-break/scripts/setup-content.sh
 ```
 
-It downloads the match clips and generates the ten-second linear spot with Vertex AI. **It
+It downloads the match clips and generates the eight-second linear spot with Vertex AI. **It
 needs your own Google Cloud configured and it spends on your account**, which is why it is
 a step of its own and not something `run.sh` does behind your back. If something is missing
 it says which thing, before doing any work.

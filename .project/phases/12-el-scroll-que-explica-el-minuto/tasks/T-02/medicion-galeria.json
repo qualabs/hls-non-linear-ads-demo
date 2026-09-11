@@ -1,0 +1,232 @@
+{
+  "1907": {
+    "scrollWidth": 1907,
+    "clientWidth": 1907,
+    "cards": [
+      {
+        "caption": "Ad 1 · lowerThirdOverlay · still image · 16 s",
+        "boxes": [
+          {
+            "id": "primaryContent",
+            "inset": "0 0 0 0",
+            "primary": true,
+            "css": "0px",
+            "rect": {
+              "w": 422,
+              "h": 237
+            },
+            "overflows": false
+          },
+          {
+            "id": "banner",
+            "inset": "70 6.25 12.5 6.25",
+            "primary": false,
+            "css": "165.547px 26.375px 29.5625px",
+            "rect": {
+              "w": 369,
+              "h": 41
+            },
+            "overflows": false
+          }
+        ]
+      },
+      {
+        "caption": "Ad 2 · squeezebackLShape · video · 16 s",
+        "boxes": [
+          {
+            "id": "lBackplate",
+            "inset": "0 0 0 0",
+            "primary": false,
+            "css": "0px",
+            "rect": {
+              "w": 422,
+              "h": 237
+            },
+            "overflows": false
+          },
+          {
+            "id": "primaryContent",
+            "inset": "0 0 26 26",
+            "primary": true,
+            "css": "0px 0px 61.4844px 109.719px",
+            "rect": {
+              "w": 312,
+              "h": 175
+            },
+            "overflows": false
+          }
+        ]
+      },
+      {
+        "caption": "Ad 3 · linear · 8 sAt full frame, over a programme that never stopped.",
+        "boxes": [
+          {
+            "id": "primaryContent",
+            "inset": "0 0 0 0",
+            "primary": true,
+            "css": "0px",
+            "rect": {
+              "w": 422,
+              "h": 237
+            },
+            "overflows": false
+          },
+          {
+            "id": "linear",
+            "inset": "0 0 0 0",
+            "primary": false,
+            "css": "0px",
+            "rect": {
+              "w": 422,
+              "h": 237
+            },
+            "overflows": false
+          }
+        ]
+      },
+      {
+        "caption": "Ad 4 · cornerOverlay · video · 24 s",
+        "boxes": [
+          {
+            "id": "primaryContent",
+            "inset": "0 0 0 0",
+            "primary": true,
+            "css": "0px",
+            "rect": {
+              "w": 422,
+              "h": 237
+            },
+            "overflows": false
+          },
+          {
+            "id": "overlay",
+            "inset": "62.5 6.25 12.5 68.75",
+            "primary": false,
+            "css": "147.812px 26.375px 29.5625px 290.125px",
+            "rect": {
+              "w": 106,
+              "h": 59
+            },
+            "overflows": false
+          }
+        ]
+      }
+    ],
+    "console_errors": []
+  },
+  "400x780": {
+    "scrollWidth": 400,
+    "clientWidth": 400,
+    "cards": [
+      {
+        "caption": "Ad 1 · lowerThirdOverlay · still image · 16 s",
+        "boxes": [
+          {
+            "id": "primaryContent",
+            "inset": "0 0 0 0",
+            "primary": true,
+            "css": "0px",
+            "rect": {
+              "w": 358,
+              "h": 201
+            },
+            "overflows": false
+          },
+          {
+            "id": "banner",
+            "inset": "70 6.25 12.5 6.25",
+            "primary": false,
+            "css": "140.344px 22.375px 25.0625px",
+            "rect": {
+              "w": 313,
+              "h": 35
+            },
+            "overflows": false
+          }
+        ]
+      },
+      {
+        "caption": "Ad 2 · squeezebackLShape · video · 16 s",
+        "boxes": [
+          {
+            "id": "lBackplate",
+            "inset": "0 0 0 0",
+            "primary": false,
+            "css": "0px",
+            "rect": {
+              "w": 358,
+              "h": 201
+            },
+            "overflows": false
+          },
+          {
+            "id": "primaryContent",
+            "inset": "0 0 26 26",
+            "primary": true,
+            "css": "0px 0px 52.125px 93.0781px",
+            "rect": {
+              "w": 265,
+              "h": 148
+            },
+            "overflows": false
+          }
+        ]
+      },
+      {
+        "caption": "Ad 3 · linear · 8 sAt full frame, over a programme that never stopped.",
+        "boxes": [
+          {
+            "id": "primaryContent",
+            "inset": "0 0 0 0",
+            "primary": true,
+            "css": "0px",
+            "rect": {
+              "w": 358,
+              "h": 201
+            },
+            "overflows": false
+          },
+          {
+            "id": "linear",
+            "inset": "0 0 0 0",
+            "primary": false,
+            "css": "0px",
+            "rect": {
+              "w": 358,
+              "h": 201
+            },
+            "overflows": false
+          }
+        ]
+      },
+      {
+        "caption": "Ad 4 · cornerOverlay · video · 24 s",
+        "boxes": [
+          {
+            "id": "primaryContent",
+            "inset": "0 0 0 0",
+            "primary": true,
+            "css": "0px",
+            "rect": {
+              "w": 358,
+              "h": 201
+            },
+            "overflows": false
+          },
+          {
+            "id": "overlay",
+            "inset": "62.5 6.25 12.5 68.75",
+            "primary": false,
+            "css": "125.312px 22.375px 25.0625px 246.125px",
+            "rect": {
+              "w": 90,
+              "h": 50
+            },
+            "overflows": false
+          }
+        ]
+      }
+    ],
+    "console_errors": []
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "1907": {
+    "cerrado": {
+      "scrollWidth": 1907,
+      "clientWidth": 1907,
+      "bodyScrollWidth": 1907,
+      "folds": [
+        {
+          "label": "Ad 1 · lowerThirdOverlay · 16 s · still image",
+          "open": false,
+          "width": 880,
+          "preScrollWidth": 878,
+          "preClientWidth": 878
+        },
+        {
+          "label": "Ad 2 · squeezebackLShape · 16 s · video",
+          "open": false,
+          "width": 880,
+          "preScrollWidth": 878,
+          "preClientWidth": 878
+        },
+        {
+          "label": "Ad 3 · no layout block, played full frame · 8 s",
+          "open": false,
+          "width": 880,
+          "preScrollWidth": 878,
+          "preClientWidth": 878
+        },
+        {
+          "label": "Ad 4 · cornerOverlay · 24 s · video",
+          "open": false,
+          "width": 880,
+          "preScrollWidth": 878,
+          "preClientWidth": 878
+        }
+      ],
+      "gloss": [
+        "ID",
+        "CLASS",
+        "START-DATE",
+        "X-ASSET-LIST",
+        "X-RESUME-OFFSET",
+        "X-SNAP",
+        "X-RESTRICT",
+        "PLANNED-DURATION"
+      ]
+    },
+    "abierto": {
+      "scrollWidth": 1907,
+      "clientWidth": 1907,
+      "bodyScrollWidth": 1907,
+      "folds": [
+        {
+          "label": "Ad 1 · lowerThirdOverlay · 16 s · still image",
+          "open": false,
+          "width": 880,
+          "preScrollWidth": 878,
+          "preClientWidth": 878
+        },
+        {
+          "label": "Ad 2 · squeezebackLShape · 16 s · video",
+          "open": true,
+          "width": 880,
+          "preScrollWidth": 878,
+          "preClientWidth": 878
+        },
+        {
+          "label": "Ad 3 · no layout block, played full frame · 8 s",
+          "open": false,
+          "width": 880,
+          "preScrollWidth": 878,
+          "preClientWidth": 878
+        },
+        {
+          "label": "Ad 4 · cornerOverlay · 24 s · video",
+          "open": false,
+          "width": 880,
+          "preScrollWidth": 878,
+          "preClientWidth": 878
+        }
+      ],
+      "gloss": [
+        "ID",
+        "CLASS",
+        "START-DATE",
+        "X-ASSET-LIST",
+        "X-RESUME-OFFSET",
+        "X-SNAP",
+        "X-RESTRICT",
+        "PLANNED-DURATION"
+      ]
+    },
+    "console_errors": []
+  },
+  "400x780": {
+    "cerrado": {
+      "scrollWidth": 400,
+      "clientWidth": 400,
+      "bodyScrollWidth": 400,
+      "folds": [
+        {
+          "label": "Ad 1 · lowerThirdOverlay · 16 s · still image",
+          "open": false,
+          "width": 360,
+          "preScrollWidth": 449,
+          "preClientWidth": 358
+        },
+        {
+          "label": "Ad 2 · squeezebackLShape · 16 s · video",
+          "open": false,
+          "width": 360,
+          "preScrollWidth": 449,
+          "preClientWidth": 358
+        },
+        {
+          "label": "Ad 3 · no layout block, played full frame · 8 s",
+          "open": false,
+          "width": 360,
+          "preScrollWidth": 358,
+          "preClientWidth": 358
+        },
+        {
+          "label": "Ad 4 · cornerOverlay · 24 s · video",
+          "open": false,
+          "width": 360,
+          "preScrollWidth": 449,
+          "preClientWidth": 358
+        }
+      ],
+      "gloss": [
+        "ID",
+        "CLASS",
+        "START-DATE",
+        "X-ASSET-LIST",
+        "X-RESUME-OFFSET",
+        "X-SNAP",
+        "X-RESTRICT",
+        "PLANNED-DURATION"
+      ]
+    },
+    "abierto": {
+      "scrollWidth": 400,
+      "clientWidth": 400,
+      "bodyScrollWidth": 400,
+      "folds": [
+        {
+          "label": "Ad 1 · lowerThirdOverlay · 16 s · still image",
+          "open": false,
+          "width": 360,
+          "preScrollWidth": 449,
+          "preClientWidth": 358
+        },
+        {
+          "label": "Ad 2 · squeezebackLShape · 16 s · video",
+          "open": true,
+          "width": 360,
+          "preScrollWidth": 449,
+          "preClientWidth": 358
+        },
+        {
+          "label": "Ad 3 · no layout block, played full frame · 8 s",
+          "open": false,
+          "width": 360,
+          "preScrollWidth": 358,
+          "preClientWidth": 358
+        },
+        {
+          "label": "Ad 4 · cornerOverlay · 24 s · video",
+          "open": false,
+          "width": 360,
+          "preScrollWidth": 449,
+          "preClientWidth": 358
+        }
+      ],
+      "gloss": [
+        "ID",
+        "CLASS",
+        "START-DATE",
+        "X-ASSET-LIST",
+        "X-RESUME-OFFSET",
+        "X-SNAP",
+        "X-RESTRICT",
+        "PLANNED-DURATION"
+      ]
+    },
+    "console_errors": []
+  }
+}

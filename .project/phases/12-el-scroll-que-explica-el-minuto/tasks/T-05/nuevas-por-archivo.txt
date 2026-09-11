@@ -1,0 +1,41 @@
+demo/hydration-break/test/signalled-run.test.js                cada pliegue de la señalización rotula el aviso que tiene adentro
+demo/hydration-break/test/signalled-run.test.js                entre dos placas se ve partido, y ninguna placa se queda
+demo/hydration-break/test/signalled-run.test.js                la galería de formas se dibuja del contrato y no de una lista escrita a mano
+test/enlarge-and-shrink.test.js                                a box at full frame that did not take the audio is a box nobody hears
+test/enlarge-and-shrink.test.js                                and the third reading is measured against the one it must not be
+test/enlarge-and-shrink.test.js                                one button per box on the grid, on the box the picture is in
+test/enlarge-and-shrink.test.js                                the programme at full frame is the mix the layout declared
+test/enlarge-and-shrink.test.js                                the three moments of the mix, with the third equal to the second
+test/enlarge-and-shrink.test.js                                while one box is at full frame there is one button, and it is on that box
+test/enlarge-and-shrink.test.js                                with no composition there is nothing to enlarge and nothing to draw on
+test/multiview-state.test.js                                   a hand-written state naming a view the offer does not announce is refused
+test/multiview-state.test.js                                   a hand-written state whose enlarged box is not on the grid is refused
+test/multiview-state.test.js                                   a hand-written state with five boxes is refused, and the cap counts the programme
+test/multiview-state.test.js                                   a hand-written state with the same view twice is refused
+test/multiview-state.test.js                                   an ad goes through the decorator as the same object, elements and all
+test/multiview-state.test.js                                   an offer that closes with views raised draws nothing, and leaves nothing behind
+test/multiview-state.test.js                                   asking about a time ahead of now does not touch what is raised now
+test/multiview-state.test.js                                   a state that is not a selection at all is refused, and each one says which
+test/multiview-state.test.js                                   a view carries its uri and its MIME into the box, which is what fills it
+test/multiview-state.test.js                                   enlarging builds nothing and destroys nothing: it moves one box
+test/multiview-state.test.js                                   enlarging puts one box at full frame above the others, and leaves them where they are
+test/multiview-state.test.js                                   for one selection the composition is the same object, which is what the preload matches on
+test/multiview-state.test.js                                   lowering the box that is enlarged takes the enlargement with it
+test/multiview-state.test.js                                   lowering the last view leaves one box, which is the way out and not a case of its own
+test/multiview-state.test.js                                   programRanges is the one underneath, unchanged
+test/multiview-state.test.js                                   raising a view keeps every node that was already up, and only builds the new one
+test/multiview-state.test.js                                   raising the first view is what entering the multi view is, and there is no other door
+test/multiview-state.test.js                                   the boxes are the shapes of the table, in the order the views were raised
+test/multiview-state.test.js                                   the control: the same shape, written by hand and legal, is accepted
+test/multiview-state.test.js                                   the handle drives the same operations, on the offer a gesture was made on
+test/multiview-state.test.js                                   the opening mix is the programme sounding and the views silent
+test/multiview-state.test.js                                   the programme can be the enlarged box, because it is a box like the others
+test/multiview-state.test.js                                   the programme is the first row, ticked and locked, and no gesture takes it down
+test/multiview-state.test.js                                   what an operation returns is frozen, so the chrome cannot re-compose the screen
+test/multiview-state.test.js                                   what is not on the grid cannot be enlarged, and neither can nothing
+test/multiview-state.test.js                                   with nothing raised the offer comes back untouched, which is the programme as it was
+test/multiview-state.test.js                                   with the grid full a view that is not up is refused, and its row says so
+test/views-selector.test.js                                    a full grid with nothing left to raise says nothing either
+test/views-selector.test.js                                    the line is decided by the flag the state ships and not by counting ticks
+test/views-selector.test.js                                    with room on the grid the list says nothing, because there is nothing to explain
+test/views-selector.test.js                                    with the grid full the line is there, and it names the cap of the screen

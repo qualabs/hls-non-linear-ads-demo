@@ -1,0 +1,97 @@
+{
+  "url": "http://localhost:8094/index.html",
+  "anchos": {
+    "400x780": {
+      "scrollWidth": 400,
+      "clientWidth": 400,
+      "bodyScrollWidth": 400,
+      "secciones": [
+        "Non-linear advertising in HLS",
+        "The hydration break",
+        "Two ways to run an Ad",
+        "The signalling class",
+        "The signalling, as it is served"
+      ],
+      "fichas": 4,
+      "rotulos_fichas": [
+        "Ad 1 · lowerThirdOverlay · still image · 16 s",
+        "Ad 2 · squeezebackLShape · video · 16 s",
+        "Ad 3 · linear · 8 sAt full frame, over a programme that never stopped.",
+        "Ad 4 · cornerOverlay · video · 24 s"
+      ],
+      "pliegues": 4,
+      "rotulos_pliegues": [
+        "Ad 1 · lowerThirdOverlay · 16 s · still imageon screen now",
+        "Ad 2 · squeezebackLShape · 16 s · videoon screen now",
+        "Ad 3 · no layout block, played full frame · 8 son screen now",
+        "Ad 4 · cornerOverlay · 24 s · videoon screen now"
+      ],
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "glosa": [],
+      "figura": 1,
+      "columnas_figura": [
+        360,
+        360
+      ],
+      "tag": "#EXT-X-DATERANGE:ID=\"HYDRATION-BREAK\",\n  CLASS=\"com.qualabs.hls.concurrentInterstitial\",\n  START-DATE=\"2026-09-10T23:45:37.717-0300\",\n  X-ASSET-LIST=\"/signalling/asset-list-hydration-break.json\",\n  X-RESUME-OFFSET=0,\n  X-SNAP=\"OUT,IN\",\n  X-RESTRICT=\"SKIP\",\n  PLANNED-DURATION=64",
+      "estado": "0.0s · the match, no ad",
+      "hud": "hls.js 1.7.2 · playing ./content/primary/con-daterange.m3u8",
+      "errores": [],
+      "con_el_pliegue_2_abierto": {
+        "scrollWidth": 400,
+        "clientWidth": 400
+      }
+    },
+    "1907": {
+      "scrollWidth": 1907,
+      "clientWidth": 1907,
+      "bodyScrollWidth": 1907,
+      "secciones": [
+        "Non-linear advertising in HLS",
+        "The hydration break",
+        "Two ways to run an Ad",
+        "The signalling class",
+        "The signalling, as it is served"
+      ],
+      "fichas": 4,
+      "rotulos_fichas": [
+        "Ad 1 · lowerThirdOverlay · still image · 16 s",
+        "Ad 2 · squeezebackLShape · video · 16 s",
+        "Ad 3 · linear · 8 sAt full frame, over a programme that never stopped.",
+        "Ad 4 · cornerOverlay · video · 24 s"
+      ],
+      "pliegues": 4,
+      "rotulos_pliegues": [
+        "Ad 1 · lowerThirdOverlay · 16 s · still imageon screen now",
+        "Ad 2 · squeezebackLShape · 16 s · videoon screen now",
+        "Ad 3 · no layout block, played full frame · 8 son screen now",
+        "Ad 4 · cornerOverlay · 24 s · videoon screen now"
+      ],
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "glosa": [],
+      "figura": 1,
+      "columnas_figura": [
+        424,
+        424
+      ],
+      "tag": "#EXT-X-DATERANGE:ID=\"HYDRATION-BREAK\",\n  CLASS=\"com.qualabs.hls.concurrentInterstitial\",\n  START-DATE=\"2026-09-10T23:45:37.717-0300\",\n  X-ASSET-LIST=\"/signalling/asset-list-hydration-break.json\",\n  X-RESUME-OFFSET=0,\n  X-SNAP=\"OUT,IN\",\n  X-RESTRICT=\"SKIP\",\n  PLANNED-DURATION=64",
+      "estado": "0.0s · the match, no ad",
+      "hud": "hls.js 1.7.2 · playing ./content/primary/con-daterange.m3u8",
+      "errores": [],
+      "con_el_pliegue_2_abierto": {
+        "scrollWidth": 1907,
+        "clientWidth": 1907
+      }
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "seeks": [
+    {
+      "t": 5,
+      "marcado": [],
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "enPantalla": "5.0s · the match, no ad"
+    },
+    {
+      "t": 20,
+      "marcado": [
+        "Ad 1 · lowerThirdOverlay · 16 s · still image"
+      ],
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "enPantalla": "20.0s · ad on screen: lowerThirdOverlay · still image · the match is still playing"
+    },
+    {
+      "t": 35,
+      "marcado": [
+        "Ad 2 · squeezebackLShape · 16 s · video"
+      ],
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "enPantalla": "35.0s · ad on screen: squeezebackLShape · video · the match is still playing"
+    },
+    {
+      "t": 48,
+      "marcado": [
+        "Ad 3 · no layout block, played full frame · 8 s"
+      ],
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "enPantalla": "48.0s · ad on screen: linear · video · the match is underneath, covered"
+    },
+    {
+      "t": 60,
+      "marcado": [
+        "Ad 4 · cornerOverlay · 24 s · video"
+      ],
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "enPantalla": "60.0s · ad on screen: cornerOverlay · video · the match is still playing"
+    },
+    {
+      "t": 76,
+      "marcado": [
+        "Ad 4 · cornerOverlay · 24 s · video"
+      ],
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "enPantalla": "76.0s · ad on screen: cornerOverlay · video · the match is still playing"
+    },
+    {
+      "t": 80,
+      "marcado": [],
+      "abiertos": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "enPantalla": "80.0s · the match, no ad"
+    }
+  ],
+  "errors": [],
+  "libre_cambios": [
+    {
+      "t": 13.2,
+      "marcado": []
+    },
+    {
+      "t": 15.29,
+      "marcado": [
+        "Ad 1 · lowerThirdOverlay · 16 s · still image"
+      ]
+    },
+    {
+      "t": 33.66,
+      "marcado": [
+        "Ad 2 · squeezebackLShape · 16 s · video"
+      ]
+    },
+    {
+      "t": 48.03,
+      "marcado": [
+        "Ad 3 · no layout block, played full frame · 8 s"
+      ]
+    },
+    {
+      "t": 56.2,
+      "marcado": [
+        "Ad 4 · cornerOverlay · 24 s · video"
+      ]
+    },
+    {
+      "t": 80.65,
+      "marcado": []
+    }
+  ],
+  "libre_abiertos": [
+    [
+      false,
+      false,
+      false,
+      false
+    ]
+  ]
+}

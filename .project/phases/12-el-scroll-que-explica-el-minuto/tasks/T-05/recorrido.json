@@ -1,0 +1,217 @@
+{
+  "url": "http://localhost:8094/index.html",
+  "story_opening": [
+    "What if the Ad never took the game away?",
+    "If the broadcast keeps going, so does the viewer.",
+    "More room to advertise. Fewer reasons to leave.",
+    "Introducing Non-linear Ads for HLS"
+  ],
+  "story_beats": [
+    {
+      "id": "apertura",
+      "text": "In this soccer match the hydration break is about to start.",
+      "hold": 5
+    },
+    {
+      "id": "la-senalizacion",
+      "text": "A concurrentInterstitial is inserted, signalling four Ad opportunities during the hydration break.",
+      "hold": 5.5
+    },
+    {
+      "id": "el-banner",
+      "text": "The first Ad is an image, a transparent PNG.",
+      "hold": 4.5
+    },
+    {
+      "id": "la-l",
+      "text": "The second Ad is a video in an L-SHAPE. The picture folds into a corner and the Ad takes the L.",
+      "hold": 6.5
+    },
+    {
+      "id": "el-caso-de-negocio",
+      "text": "Full-screen Ads can live here too, the interstitials we are used to today.",
+      "hold": 5
+    },
+    {
+      "id": "la-vuelta",
+      "text": "And back. Fifty-eight seconds of advertising in one stoppage, and nobody was given a reason to look away.",
+      "hold": 7
+    }
+  ],
+  "apertura_lineas_dom": [
+    "What if the Ad never took the game away?",
+    "If the broadcast keeps going, so does the viewer.",
+    "More room to advertise. Fewer reasons to leave.",
+    "Introducing Non-linear Ads for HLS"
+  ],
+  "apertura_coincide_con_json": true,
+  "apertura_t": [
+    {
+      "scroll": 0,
+      "t": "0.0000",
+      "done": false,
+      "frase_encendida": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "scroll": 600,
+      "t": "0.3337",
+      "done": false,
+      "frase_encendida": [
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "scroll": 1200,
+      "t": "0.7087",
+      "done": false,
+      "frase_encendida": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "scroll": 1800,
+      "t": "1.0000",
+      "done": true,
+      "frase_encendida": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "scroll": 2400,
+      "t": "1.0000",
+      "done": true,
+      "frase_encendida": [
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "con_player_abajo_del_pliegue": {
+    "visible_del_player": 0,
+    "placa_visible": true,
+    "data_story": "running",
+    "currentTime": 0
+  },
+  "con_el_player_en_pantalla": {
+    "visible_del_player": 1,
+    "segundos_hasta_la_primera_placa": 0.03,
+    "data_story": "running"
+  },
+  "placas": [
+    {
+      "texto": "In this soccer match the hydration break is about to start.",
+      "aparece_en_t": 0,
+      "wall_desde": 0.0,
+      "boton": "Skip the walkthrough",
+      "paused_al_aparecer": true,
+      "desaparece_en_t": 0.02,
+      "segundos_en_pantalla": 1.78,
+      "programa_avanzo_mientras_estuvo": 0.02
+    },
+    {
+      "texto": "A concurrentInterstitial is inserted, signalling four Ad opportunities during the hydration break.",
+      "aparece_en_t": 6.02,
+      "wall_desde": 7.8,
+      "boton": "Skip the walkthrough",
+      "paused_al_aparecer": true,
+      "desaparece_en_t": 6.1,
+      "segundos_en_pantalla": 5.91,
+      "programa_avanzo_mientras_estuvo": 0.08
+    },
+    {
+      "texto": "The first Ad is an image, a transparent PNG.",
+      "aparece_en_t": 11.52,
+      "wall_desde": 19.15,
+      "boton": "Skip the walkthrough",
+      "paused_al_aparecer": true,
+      "desaparece_en_t": 11.62,
+      "segundos_en_pantalla": 4.94,
+      "programa_avanzo_mientras_estuvo": 0.1
+    },
+    {
+      "texto": "The second Ad is a video in an L-SHAPE. The picture folds into a corner and the Ad takes the L.",
+      "aparece_en_t": 28.51,
+      "wall_desde": 40.99,
+      "boton": "Skip the walkthrough",
+      "paused_al_aparecer": true,
+      "desaparece_en_t": 28.6,
+      "segundos_en_pantalla": 6.93,
+      "programa_avanzo_mientras_estuvo": 0.09
+    },
+    {
+      "texto": "Full-screen Ads can live here too, the interstitials we are used to today.",
+      "aparece_en_t": 44.53,
+      "wall_desde": 63.93,
+      "boton": "Skip the walkthrough",
+      "paused_al_aparecer": true,
+      "desaparece_en_t": 44.62,
+      "segundos_en_pantalla": 5.35,
+      "programa_avanzo_mientras_estuvo": 0.09
+    },
+    {
+      "texto": "And back. Fifty-eight seconds of advertising in one stoppage, and nobody was given a reason to look away.",
+      "aparece_en_t": 52.51,
+      "wall_desde": 77.2,
+      "boton": "Skip the walkthrough",
+      "paused_al_aparecer": true,
+      "desaparece_en_t": 52.57,
+      "segundos_en_pantalla": 7.34,
+      "programa_avanzo_mientras_estuvo": 0.06
+    }
+  ],
+  "muestras_totales": 742,
+  "boton_durante": [
+    "Skip the walkthrough"
+  ],
+  "al_terminar": {
+    "t": 54.15,
+    "paused": false,
+    "placa": null,
+    "boton": "Play the walkthrough again",
+    "story": "done",
+    "estado": "54.1s · ad on screen: cornerOverlay · video · the match is still playing",
+    "marca": "Ad 4 · cornerOverlay · 24 s · videoon screen now",
+    "fichas": 4,
+    "pliegues": 4,
+    "abiertos": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "el_programa_sigue_solo": {
+    "antes": 54.54,
+    "dos_segundos_despues": 56.54,
+    "avanzo": 2.0
+  },
+  "boton_al_terminar": "Play the walkthrough again",
+  "reinicio": {
+    "placa": "In this soccer match the hydration break is about to start.",
+    "currentTime": 0,
+    "data_story": "running",
+    "boton": "Skip the walkthrough"
+  },
+  "salida_por_el_boton": {
+    "data_story": "done",
+    "boton": "Play the walkthrough again",
+    "placa_visible": false
+  },
+  "errores": []
+}

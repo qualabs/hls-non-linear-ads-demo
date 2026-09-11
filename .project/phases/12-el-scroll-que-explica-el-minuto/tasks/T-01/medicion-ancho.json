@@ -1,0 +1,38 @@
+{
+  "400x780": {
+    "scrollWidth": 400,
+    "clientWidth": 400,
+    "bodyScrollWidth": 400,
+    "innerWidth": 400,
+    "docHeight": 6872,
+    "tag": "#EXT-X-DATERANGE:ID=\"HYDRATION-BREAK\",\n  CLASS=\"com.qualabs.hls.concurrentInterstitial\",\n  START-DATE=\"2026-09-10T23:45:37.717-0300\",\n  X-ASSET-LIST=\"/signalling/asset-list-hydration-break.json\",\n  X-RESUME-OFFSET=0,\n  X-SNAP=\"OUT,IN\",\n  X-RESTRICT=\"SKIP\",\n  PLANNED-DURATION=64",
+    "list": "[\n  {\n    \"URI\": \"/content/adL/index.m3u8\",\n    \"DURATION\": 16,\n    \"type\": \"lowerThirdOverlay\",\n    \"boxes\": [\n      \"image/png  70 6.25 12.5 6.25\"\n    ]\n  },\n  {\n    \"URI\": \"/content/adL/index.m3u8\"",
+    "shapes": "",
+    "assets": "",
+    "sections": [
+      "Two ways to run an Ad",
+      "The signalling class",
+      "The signalling, as it is served",
+      "Credits"
+    ],
+    "console_errors": []
+  },
+  "1907": {
+    "scrollWidth": 1907,
+    "clientWidth": 1907,
+    "bodyScrollWidth": 1907,
+    "innerWidth": 1907,
+    "docHeight": 8036,
+    "tag": "#EXT-X-DATERANGE:ID=\"HYDRATION-BREAK\",\n  CLASS=\"com.qualabs.hls.concurrentInterstitial\",\n  START-DATE=\"2026-09-10T23:45:37.717-0300\",\n  X-ASSET-LIST=\"/signalling/asset-list-hydration-break.json\",\n  X-RESUME-OFFSET=0,\n  X-SNAP=\"OUT,IN\",\n  X-RESTRICT=\"SKIP\",\n  PLANNED-DURATION=64",
+    "list": "[\n  {\n    \"URI\": \"/content/adL/index.m3u8\",\n    \"DURATION\": 16,\n    \"type\": \"lowerThirdOverlay\",\n    \"boxes\": [\n      \"image/png  70 6.25 12.5 6.25\"\n    ]\n  },\n  {\n    \"URI\": \"/content/adL/index.m3u8\"",
+    "shapes": "",
+    "assets": "",
+    "sections": [
+      "Two ways to run an Ad",
+      "The signalling class",
+      "The signalling, as it is served",
+      "Credits"
+    ],
+    "console_errors": []
+  }
+}
