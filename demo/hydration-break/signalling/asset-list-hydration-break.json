@@ -48,7 +48,8 @@
                   "type": "application/vnd.apple.mpegurl",
                   "uri": "/content/adL/index.m3u8",
                   "viewport": "0 0 0 0",
-                  "zDepth": 0
+                  "zDepth": 0,
+                  "volume": 35
                 }
               ]
             }
@@ -78,7 +79,8 @@
                   "type": "application/vnd.apple.mpegurl",
                   "uri": "/content/adOverlay/index.m3u8",
                   "viewport": "62.5 6.25 12.5 68.75",
-                  "zDepth": 1
+                  "zDepth": 1,
+                  "volume": 25
                 }
               ]
             }

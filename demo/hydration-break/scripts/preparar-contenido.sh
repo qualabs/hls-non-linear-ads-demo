@@ -63,7 +63,14 @@ mkdir -p "$F/plate"
 ./scripts/paquete-de-canal.sh "$F/plate/crudo.mp4" "$F/plate/con-paquete.mp4"
 
 LARGO=$(node -e 'process.stdout.write(String(require("./plate.json").largo))')
-./scripts/empaquetar-contenido.sh "$F/plate/con-paquete.mp4" content/primary 0 "$LARGO"
+# LOS 24 CUADROS POR SEGUNDO SON DEL PLATE Y HAY QUE PASARLOS. `armar-plate.sh` arma los
+# tres actos a 24 porque el material generado sale a 24, y empaquetar a los 30 del
+# default duplicaba uno de cada cuatro cuadros: exactamente el tironeo que armar el
+# plate a 24 había sacado, comprado de vuelta en el último paso.
+#
+# Y EL AUDIO DEL PROGRAMA ENTRA ACÁ. El plate es mudo -- los clips del partido no traen
+# pista -- así que la cancha y los dos relatores llegan como un archivo aparte.
+./scripts/empaquetar-contenido.sh "$F/plate/con-paquete.mp4" content/primary 0 "$LARGO" "" 1280 720 24 audio/primario.m4a
 
 # LOS CREATIVOS DEL MINUTO, en su propio script porque el reparto de herramientas del
 # ADR 0045 y el tamaño exacto de cada caja son de ahí. Tres son video y uno es una

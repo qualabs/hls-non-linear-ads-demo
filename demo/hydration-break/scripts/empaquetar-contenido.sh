@@ -62,13 +62,36 @@ ANCHO=${6:-1280}
 ALTO=${7:-720}
 # Los cuadros por segundo, y el porqué de que sea un argumento está arriba.
 FPS=${8:-30}
+# EL AUDIO, opcional, como archivo aparte.
+#
+# Va por argumento y no adentro del video porque NINGUNA de las fuentes de esta demo
+# trae audio: los clips del partido son mudos, y el spot generado también salió mudo.
+# Todo lo que suena se produjo aparte -- el relator y la cama de cancha para el
+# programa, una cama musical por aviso -- y llega acá como un archivo al lado del video.
+#
+# Y SIN ÉL NO SUENA NADA, que no es un descuido sino la mitad visible de una regla que
+# vive en otro lado: un elemento del aviso sin `volume` en el asset list está en
+# silencio (ADR 0014). Un aviso necesita las dos cosas, el audio acá y el número allá;
+# con una sola de las dos no se oye, y cuál de las dos falta no se distingue mirando.
+AUDIO=${9:-}
 
 mkdir -p "$OUT"
 rm -f "$OUT"/*.ts "$OUT"/index.m3u8
 
+# El `-map` sólo aparece cuando hay audio aparte. Sin él ffmpeg elige solo, que es lo
+# que hacía antes de que existiera este argumento y lo que sigue haciendo para una
+# entrada que ya trae su propia pista.
+ENTRADA_AUDIO=()
+MAPEO=()
+if [ -n "$AUDIO" ]; then
+  ENTRADA_AUDIO=(-i "$AUDIO")
+  MAPEO=(-map 0:v:0 -map 1:a:0)
+fi
+
 ffmpeg -hide_banner -loglevel error -y \
-  -ss "$SS" -i "$SRC" -t "$DUR" \
+  -ss "$SS" -i "$SRC" "${ENTRADA_AUDIO[@]}" -t "$DUR" \
   -vf "${CROP:+crop=$CROP,}scale=$ANCHO:$ALTO:force_original_aspect_ratio=increase,crop=$ANCHO:$ALTO,fps=$FPS" \
+  "${MAPEO[@]}" \
   -c:v libx264 -preset ultrafast -tune zerolatency -g "$((FPS * 2))" -b:v 2000k -pix_fmt yuv420p \
   -c:a aac -b:a 96k -ac 2 -ar 48000 \
   -f hls -hls_time 2 -hls_playlist_type vod -hls_segment_type mpegts \

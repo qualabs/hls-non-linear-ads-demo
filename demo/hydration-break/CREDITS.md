@@ -59,6 +59,26 @@ razones de cada línea de esos prompts están en el README de esa carpeta.
 T-05**, porque está medido que el generador deriva hacia marcas reales aunque se le
 prohíba. No es una formalidad ni una nota: es un paso.
 
+## El audio
+
+**Nada del material traía audio**: los cuatro clips del partido son mudos y el spot
+generado también salió mudo. Todo lo que suena se produjo acá, y la receta completa está
+en `audio/README.md`.
+
+| pieza | de dónde sale |
+| --- | --- |
+| los dos relatores | sintetizados con `gemini-2.5-flash-tts`, voces Charon y Kore, en `en-GB`. El texto es nuestro |
+| la cama de cancha | una toma aportada por Nicolás, recortada al tramo estable y loopeada |
+| las tres camas musicales | generadas con `lyria-002`, una por marca |
+
+**Los equipos y el relato son inventados.** Norvik y Haverstone no son clubes reales, no
+se nombra a ningún jugador, y el marcador y el reloj que se cantan son los del paquete de
+canal ficticio.
+
+> **La licencia de la toma de cancha está sin confirmar.** La medición dice que sirve
+> técnicamente, no que se pueda mostrar. **Va al chequeo final antes de grabar**, junto
+> con el chequeo de cuadro de los clips. Si no se puede usar, se rehace sólo esa cama.
+
 ## La marca de Qualabs
 
 Copias del kit de marca, con su procedencia en `brand/README.md`. **No hay asset de la
