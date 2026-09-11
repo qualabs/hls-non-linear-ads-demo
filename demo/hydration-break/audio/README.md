@@ -71,7 +71,7 @@ juntador de palabras de `js/opening.js` vive del lado del navegador y no del cop
 
 ### La cama de cancha
 
-Una toma aportada por Nicolás. **Sólo 15,5 de sus 22 segundos sirven**: el archivo entra
+Una toma **grabada por Nicolás**. **Sólo 15,5 de sus 22 segundos sirven**: el archivo entra
 en fundido durante los primeros 2 s y empieza a irse a los 17,5, y un bucle que incluya
 un fundido lo repite en cada vuelta. Un bucle armado con los 22 s completos deja **dos
 huecos de 15 dB** donde la tribuna desaparece durante dos segundos; armado sólo con el
@@ -86,9 +86,8 @@ con deriva lo bajan a 0,20 y 0,01, y ninguno de los dos aparece entre los picos.
 La cama va **12 dB debajo de las voces**. Una tribuna es fondo: si compite con el
 relator, se pierden los dos.
 
-> **La licencia de esta toma está sin confirmar.** Sirve técnicamente —está medido— pero
-> nadie verificó de dónde salió ni bajo qué términos. **No mostrar la demo en un evento
-> sin que alguien lo haya mirado.** Si no se puede usar, se rehace sólo la cama.
+**Es grabación propia y no hay licencia de terceros que respetar**, así que se puede
+mostrar sin atribuir a nadie más.
 
 ## Las tres camas musicales
 

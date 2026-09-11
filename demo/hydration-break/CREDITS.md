@@ -68,16 +68,16 @@ en `audio/README.md`.
 | pieza | de dónde sale |
 | --- | --- |
 | los dos relatores | sintetizados con `gemini-2.5-flash-tts`, voces Charon y Kore, en `en-GB`. El texto es nuestro |
-| la cama de cancha | una toma aportada por Nicolás, recortada al tramo estable y loopeada |
+| la cama de cancha | **grabada por Nicolás**, recortada al tramo estable y loopeada |
 | las tres camas musicales | generadas con `lyria-002`, una por marca |
 
 **Los equipos y el relato son inventados.** Norvik y Haverstone no son clubes reales, no
 se nombra a ningún jugador, y el marcador y el reloj que se cantan son los del paquete de
 canal ficticio.
 
-> **La licencia de la toma de cancha está sin confirmar.** La medición dice que sirve
-> técnicamente, no que se pueda mostrar. **Va al chequeo final antes de grabar**, junto
-> con el chequeo de cuadro de los clips. Si no se puede usar, se rehace sólo esa cama.
+**La cama de cancha la grabó Nicolás**, así que no hay licencia de terceros que respetar
+ni atribución que poner. Se dice acá y no en una nota al pie porque una grabación sin
+procedencia escrita se termina sacando por las dudas.
 
 ## La marca de Qualabs
 
