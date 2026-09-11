@@ -1,0 +1,899 @@
+{
+  "1-la-ventana-abierta": {
+    "t": 8.02,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "clase": "qa-controls qa-controls--on",
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "false"
+    },
+    "lista": {
+      "abierta": false,
+      "opacidad": "0",
+      "filas": [],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 960,
+        "alto": 540
+      }
+    ]
+  },
+  "2-la-lista-abierta-a-los-6s": {
+    "t": 14.12,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "clase": "qa-controls qa-controls--on",
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "true"
+    },
+    "lista": {
+      "abierta": true,
+      "opacidad": "1",
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, late",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Sintel",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 960,
+        "alto": 540
+      }
+    ]
+  },
+  "3-forma-de-2": {
+    "t": 16.1,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "clase": "qa-controls qa-controls--on",
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "true"
+    },
+    "lista": {
+      "abierta": true,
+      "opacidad": "1",
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, late",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Sintel",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 135,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 11.84,
+        "left": 480,
+        "top": 135,
+        "ancho": 480,
+        "alto": 270
+      }
+    ]
+  },
+  "3-forma-de-3": {
+    "t": 17.62,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "clase": "qa-controls qa-controls--on",
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "true"
+    },
+    "lista": {
+      "abierta": true,
+      "opacidad": "1",
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, late",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Sintel",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 13.35,
+        "left": 480,
+        "top": 0,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 13.41,
+        "left": 240,
+        "top": 270,
+        "ancho": 480,
+        "alto": 270
+      }
+    ]
+  },
+  "3-forma-de-4": {
+    "t": 19.15,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "clase": "qa-controls qa-controls--on",
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "true"
+    },
+    "lista": {
+      "abierta": true,
+      "opacidad": "1",
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, late",
+          "tildada": "false",
+          "deshabilitada": true,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Sintel",
+          "tildada": "false",
+          "deshabilitada": true,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": false,
+        "texto": "4 boxes is what the screen holds. Lower one to raise another."
+      }
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 14.89,
+        "left": 480,
+        "top": 0,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 14.95,
+        "left": 0,
+        "top": 270,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 14.94,
+        "left": 480,
+        "top": 270,
+        "ancho": 480,
+        "alto": 270
+      }
+    ]
+  },
+  "5-despues-del-toque-afuera": {
+    "t": 20.22,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "clase": "qa-controls qa-controls--on",
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "false"
+    },
+    "lista": {
+      "abierta": false,
+      "opacidad": "0",
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, late",
+          "tildada": "false",
+          "deshabilitada": true,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Sintel",
+          "tildada": "false",
+          "deshabilitada": true,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": false,
+        "texto": "4 boxes is what the screen holds. Lower one to raise another."
+      }
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 15.95,
+        "left": 480,
+        "top": 0,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 16.01,
+        "left": 0,
+        "top": 270,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 16,
+        "left": 480,
+        "top": 270,
+        "ancho": 480,
+        "alto": 270
+      }
+    ]
+  },
+  "5-el-cromo-ya-se-fue": {
+    "t": 22.82,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": false,
+      "clase": "qa-controls",
+      "opacidad": "0"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "false"
+    },
+    "lista": {
+      "abierta": false,
+      "opacidad": "0",
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, late",
+          "tildada": "false",
+          "deshabilitada": true,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Sintel",
+          "tildada": "false",
+          "deshabilitada": true,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": false,
+        "texto": "4 boxes is what the screen holds. Lower one to raise another."
+      }
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 18.55,
+        "left": 480,
+        "top": 0,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 18.61,
+        "left": 0,
+        "top": 270,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 18.6,
+        "left": 480,
+        "top": 270,
+        "ancho": 480,
+        "alto": 270
+      }
+    ]
+  },
+  "log": [
+    {
+      "ms": 758.5,
+      "arriba": true
+    },
+    {
+      "ms": 773.9,
+      "arriba": true
+    },
+    {
+      "ms": 780.5,
+      "marca": "el mouse se movio"
+    },
+    {
+      "ms": 860.3,
+      "arriba": true
+    },
+    {
+      "ms": 863.3,
+      "arriba": true
+    },
+    {
+      "ms": 874.4,
+      "arriba": true
+    },
+    {
+      "ms": 887.8,
+      "marca": "se abrio la lista"
+    },
+    {
+      "ms": 6968.9,
+      "arriba": true
+    },
+    {
+      "ms": 8181.6,
+      "arriba": true
+    },
+    {
+      "ms": 8182.3,
+      "arriba": true
+    },
+    {
+      "ms": 8183,
+      "arriba": true
+    },
+    {
+      "ms": 8924.7,
+      "arriba": true
+    },
+    {
+      "ms": 9694.7,
+      "arriba": true
+    },
+    {
+      "ms": 9695.3,
+      "arriba": true
+    },
+    {
+      "ms": 9695.8,
+      "arriba": true
+    },
+    {
+      "ms": 10423.1,
+      "arriba": true
+    },
+    {
+      "ms": 11210.8,
+      "arriba": true
+    },
+    {
+      "ms": 11212,
+      "arriba": true
+    },
+    {
+      "ms": 11213.3,
+      "arriba": true
+    },
+    {
+      "ms": 11963.7,
+      "arriba": true
+    },
+    {
+      "ms": 12722.9,
+      "arriba": true
+    },
+    {
+      "ms": 12727.5,
+      "marca": "el mouse se movio afuera de la lista"
+    },
+    {
+      "ms": 12730.7,
+      "arriba": true
+    },
+    {
+      "ms": 12740.6,
+      "marca": "toque afuera"
+    },
+    {
+      "ms": 15332.2,
+      "arriba": false
+    }
+  ],
+  "5-desde-el-toque": {
+    "toque_ms": 12740.6,
+    "bajada_ms": 15332.2,
+    "tardanza_ms": 2591.6
+  },
+  "6-escape": {
+    "t": 24.25,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "clase": "qa-controls qa-controls--on",
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "false"
+    },
+    "lista": {
+      "abierta": false,
+      "opacidad": "0",
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, late",
+          "tildada": "false",
+          "deshabilitada": true,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Sintel",
+          "tildada": "false",
+          "deshabilitada": true,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": false,
+        "texto": "4 boxes is what the screen holds. Lower one to raise another."
+      }
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 19.99,
+        "left": 480,
+        "top": 0,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 20.05,
+        "left": 0,
+        "top": 270,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "listo": 4,
+        "pausado": false,
+        "t": 20.04,
+        "left": 480,
+        "top": 270,
+        "ancho": 480,
+        "alto": 270
+      }
+    ]
+  },
+  "7-destildadas-todas": {
+    "t": 27.04,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "clase": "qa-controls qa-controls--on",
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "true"
+    },
+    "lista": {
+      "abierta": true,
+      "opacidad": "1",
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true",
+          "deshabilitada": false,
+          "bloqueada": true
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Elephants Dream, late",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        },
+        {
+          "nombre": "Sintel",
+          "tildada": "false",
+          "deshabilitada": false,
+          "bloqueada": false
+        }
+      ],
+      "nota": {
+        "oculta": true,
+        "texto": ""
+      }
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 960,
+        "alto": 540
+      }
+    ]
+  },
+  "8-pantalla-completa": {
+    "panel": 290,
+    "fila": 46,
+    "texto": "18px"
+  }
+}

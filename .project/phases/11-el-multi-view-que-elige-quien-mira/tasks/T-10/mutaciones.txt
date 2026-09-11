@@ -1,0 +1,23 @@
+# La campaña de mutación de la T-10: una rotura por regla.
+#
+# Cada mutación se aplica sobre la copia del SDK en /dev/shm, se reconstruye
+# dist/ y se vuelven a correr las TRES entradas con el mismo guion de la
+# medición (medir-salida.py). VERDE es la lectura de salida esperada:
+# style=null, volume=1, nodes=0. El guion entero es mutar.sh.
+
+== M1: el botón no llega a clear() (exit() devuelve el mismo estado) ==
+  A_after  style=ESCRITO  volume=0  nodes=3  -> ROJO
+  B_after  style=null  volume=1  nodes=0  -> VERDE
+  C_after  style=null  volume=1  nodes=0  -> VERDE
+== M2: clear() no devuelve el audio del primario (se saca node.volume = 1) ==
+  A_after  style=null  volume=0  nodes=0  -> ROJO
+  B_after  style=null  volume=0  nodes=0  -> ROJO
+  C_after  style=null  volume=0  nodes=0  -> ROJO
+== M3: clear() deja el nodo en la capa (se saca node.remove()) ==
+  A_after  style=null  volume=1  nodes=3  -> ROJO
+  B_after  style=null  volume=1  nodes=1  -> ROJO
+  C_after  style=null  volume=1  nodes=2  -> ROJO
+== restaurado y medido sin mutación (el control de la campaña) ==
+  A_after  style=null  volume=1  nodes=0  -> VERDE
+  B_after  style=null  volume=1  nodes=0  -> VERDE
+  C_after  style=null  volume=1  nodes=0  -> VERDE

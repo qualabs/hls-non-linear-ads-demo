@@ -1,0 +1,142 @@
+{
+  "url": "http://localhost:8106/",
+  "espera_ms": 6000,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "corridas": [
+    {
+      "etiqueta": "con-hold",
+      "inicial": {
+        "arriba": true,
+        "clase": "qa-controls qa-controls--on",
+        "opacidad": "1",
+        "pausado": false,
+        "ms": 186.1
+      },
+      "a_los_6s": {
+        "arriba": true,
+        "clase": "qa-controls qa-controls--on",
+        "opacidad": "1",
+        "pausado": false,
+        "ms": 6283.6
+      },
+      "despues_de_soltar": {
+        "arriba": false,
+        "clase": "qa-controls",
+        "opacidad": "0",
+        "pausado": false,
+        "ms": 9369
+      },
+      "bajo_al_soltar": true,
+      "log": [
+        {
+          "ms": 243.3,
+          "ev": "clase",
+          "arriba": true
+        },
+        {
+          "ms": 259.7,
+          "ev": "clase",
+          "arriba": true
+        },
+        {
+          "ms": 269,
+          "ev": "marca",
+          "texto": "el mouse se movio",
+          "arriba": true
+        },
+        {
+          "ms": 272.6,
+          "ev": "marca",
+          "texto": "hold tomado",
+          "arriba": true
+        },
+        {
+          "ms": 272.6,
+          "ev": "clase",
+          "arriba": true
+        },
+        {
+          "ms": 6277.7,
+          "ev": "marca",
+          "texto": "pasaron 6000 ms sin actividad",
+          "arriba": true
+        },
+        {
+          "ms": 6549.6,
+          "ev": "marca",
+          "texto": "hold soltado",
+          "arriba": true
+        },
+        {
+          "ms": 9149.9,
+          "ev": "clase",
+          "arriba": false
+        }
+      ],
+      "desde_el_mouse": {
+        "movimiento_ms": 269,
+        "bajada_ms": 9149.9,
+        "tardanza_ms": 8880.9
+      },
+      "desde_el_soltar": {
+        "soltado_ms": 6549.6,
+        "bajada_ms": 9149.9,
+        "tardanza_ms": 2600.3
+      }
+    },
+    {
+      "etiqueta": "sin-hold",
+      "inicial": {
+        "arriba": true,
+        "clase": "qa-controls qa-controls--on",
+        "opacidad": "1",
+        "pausado": false,
+        "ms": 100.4
+      },
+      "a_los_6s": {
+        "arriba": false,
+        "clase": "qa-controls",
+        "opacidad": "0",
+        "pausado": false,
+        "ms": 6162.8
+      },
+      "log": [
+        {
+          "ms": 138.2,
+          "ev": "clase",
+          "arriba": true
+        },
+        {
+          "ms": 154.1,
+          "ev": "clase",
+          "arriba": true
+        },
+        {
+          "ms": 156.6,
+          "ev": "marca",
+          "texto": "el mouse se movio",
+          "arriba": true
+        },
+        {
+          "ms": 2754.8,
+          "ev": "clase",
+          "arriba": false
+        },
+        {
+          "ms": 6160.7,
+          "ev": "marca",
+          "texto": "pasaron 6000 ms sin actividad",
+          "arriba": false
+        }
+      ],
+      "desde_el_mouse": {
+        "movimiento_ms": 156.6,
+        "bajada_ms": 2754.8,
+        "tardanza_ms": 2598.2
+      }
+    }
+  ]
+}

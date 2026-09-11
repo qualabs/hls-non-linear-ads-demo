@@ -1,0 +1,55 @@
+$ npm run mutaciones   --  2026-09-11T15:01:28Z
+
+> qualabs-concurrent-hls@0.0.0 mutaciones
+> node demo/hydration-break/test/mutaciones.mjs
+
+== sin romper nada, todos los chequeos tienen que estar en verde ==
+  VERDE  anclasDelGuion
+  VERDE  elBreakArrancaEnLaParada
+  VERDE  elRepartoSaleDeUnSoloLugar
+  VERDE  lasTresFormasDelMinuto
+
+== una rotura por regla, y cada una tiene que poner ROJO a su chequeo ==
+  ROJO   anclasDelGuion
+         regla:  un ancla del guion tiene que caer en un aviso que existe (ADR 0037)
+         rotura: el beat del caso de negocio pasa a anclarse al aviso 9 del break 1
+         dijo:   el beat "el-caso-de-negocio" ancla a algo que la señalización no tiene: {"at":{"break":1,"ad":9},"lead":1.5}
+  ROJO   anclasDelGuion
+         regla:  un beat tiene que frenar ANTES de lo que anuncia (ADR 0037)
+         rotura: el mismo beat pasa a tener `lead: -3`, así que resuelve después del aviso
+         dijo:   el beat "el-caso-de-negocio" resuelve en 49s y lo que anuncia arranca en 46s: la placa llega tarde o justo encima
+  ROJO   elBreakArrancaEnLaParada
+         regla:  el segundo del break lo declara plate.json y no el script (ADR 0044)
+         rotura: el script de señalización pasa a tener el segundo escrito a mano
+         dijo:   el script de señalización no lee `paradaEn` de plate.json: si el segundo del break está escrito a mano, deja de seguir al plate (ADR 0044)
+  ROJO   elBreakArrancaEnLaParada
+         regla:  la parada del juego tiene que caber adentro del plate (ADR 0044)
+         rotura: la parada pasa a durar el doble del plate (184s sobre 92s)
+         dijo:   la parada del juego termina en 198s y el plate dura 92s: el break se sale del programa
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  los avisos suman lo que dura la parada (el reparto de plate.json)
+         rotura: el overlay de cierre pasa de 24 a 20 s, así que la publicidad no cubre la parada
+         dijo:   los avisos suman 60s y la parada dura 64s: la publicidad no cubre la parada, y eso no falla, se ve como otra demo
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  cada aviso es múltiplo de 8, que es el techo de una generación
+         rotura: el lineal vuelve a 10 s, que deja un resto corto en la cadena
+         dijo:   estos avisos no son múltiplos de 8: 10, 22. El techo de una generación son 8 s, así que un aviso que no es múltiplo deja un resto corto, que es el eslabón que peor sale
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  el reparto vive en un solo lugar (plate.json), no en el asset list
+         rotura: una DURATION del asset list se edita a mano y deja de coincidir con plate.json
+         dijo:   el asset list declara [12, 16, 8, 24] y plate.json [16, 16, 8, 24]: el reparto vive en dos lugares y ya se despegó
+  ROJO   lasTresFormasDelMinuto
+         regla:  el minuto declara exactamente un aviso de imagen fija (ADR 0046)
+         rotura: el banner pasa de `image/jpeg` a un `.m3u8`, que es lo que la demo deja de demostrar
+         dijo:   hay 0 avisos de imagen fija y tiene que haber exactamente uno (ADR 0046): es la tercera forma que este minuto demuestra
+  ROJO   lasTresFormasDelMinuto
+         regla:  el aviso lineal va tercero (ADR 0043)
+         rotura: el lineal se mueve al primer lugar del break
+         dijo:   el aviso lineal está en la posición 1 y va tercero (ADR 0043): ahí es donde el guion cuenta el caso de negocio
+  ROJO   lasTresFormasDelMinuto
+         regla:  el break son cuatro avisos (ADR 0043)
+         rotura: se le saca el overlay de cierre
+         dijo:   el break declara 3 avisos y el minuto son cuatro
+
+las 10 roturas dieron rojo y los 4 chequeos dan verde sin romper nada
+$? = 0

@@ -1,0 +1,62 @@
+enlarged box: Caminandes, late: to the whole picture
+
+1_in_the_grid  clock=53.257s  chromeUp=True  layerOpacity=1  buttons=4
+  id                    volume   muted currentTime  ring  rdy  rect
+  primaryContent             1   False      53.257 False    4  [90, 87, 550, 309]
+  view-caminandes-a          0    True         8.1 False    4  [640, 87, 550, 309]
+  view-caminandes-b          0    True        8.06 False    4  [90, 396, 550, 309]
+  view-ed-a                  0    True        8.09 False    4  [640, 396, 550, 309]
+
+2_at_full_frame  clock=54.977s  chromeUp=True  layerOpacity=1  buttons=1
+  id                    volume   muted currentTime  ring  rdy  rect
+  primaryContent             0   False      54.977 False    4  [90, 87, 550, 309]
+  view-caminandes-a          0    True       9.695 False    4  [640, 87, 550, 309]
+  view-caminandes-b          1   False       9.525  True    4  [90, 87, 1100, 619]
+  view-ed-a                  0    True       9.685 False    4  [640, 396, 550, 309]
+
+3_back_in_the_grid  clock=56.5s  chromeUp=True  layerOpacity=1  buttons=4
+  id                    volume   muted currentTime  ring  rdy  rect
+  primaryContent             0   False        56.5 False    4  [90, 87, 550, 309]
+  view-caminandes-a          0    True      11.218 False    4  [640, 87, 550, 309]
+  view-caminandes-b          1   False      11.077  True    4  [90, 396, 550, 309]
+  view-ed-a                  0    True      11.208 False    4  [640, 396, 550, 309]
+
+5_enlarged_again  clock=58.078s  chromeUp=True  layerOpacity=1  buttons=1
+  id                    volume   muted currentTime  ring  rdy  rect
+  primaryContent             0   False      58.078 False    4  [90, 87, 550, 309]
+  view-caminandes-a          0    True      12.793 False    4  [640, 87, 550, 309]
+  view-caminandes-b          1   False      12.671  True    4  [90, 87, 1100, 619]
+  view-ed-a                  0    True      12.785 False    4  [640, 396, 550, 309]
+
+6_back_again  clock=59.297s  chromeUp=True  layerOpacity=1  buttons=4
+  id                    volume   muted currentTime  ring  rdy  rect
+  primaryContent             0   False      59.297 False    4  [90, 87, 550, 309]
+  view-caminandes-a          0    True      14.015 False    4  [640, 87, 550, 309]
+  view-caminandes-b          1   False      13.899  True    4  [90, 396, 550, 309]
+  view-ed-a                  0    True      14.005 False    4  [640, 396, 550, 309]
+
+4_chrome_down  clock=62.51s  chromeUp=False  layerOpacity=0  buttons=4
+  id                    volume   muted currentTime  ring  rdy  rect
+  primaryContent             0   False       62.51 False    4  [90, 87, 550, 309]
+  view-caminandes-a          0    True      17.228 False    4  [640, 87, 550, 309]
+  view-caminandes-b          1   False      17.107  True    4  [90, 396, 550, 309]
+  view-ed-a                  0    True      17.218 False    4  [640, 396, 550, 309]
+
+VOLUME 1_in_the_grid          {'primaryContent': 1, 'view-caminandes-a': 0, 'view-caminandes-b': 0, 'view-ed-a': 0}
+VOLUME 2_at_full_frame        {'primaryContent': 0, 'view-caminandes-a': 0, 'view-caminandes-b': 1, 'view-ed-a': 0}
+VOLUME 3_back_in_the_grid     {'primaryContent': 0, 'view-caminandes-a': 0, 'view-caminandes-b': 1, 'view-ed-a': 0}
+VOLUME 5_enlarged_again       {'primaryContent': 0, 'view-caminandes-a': 0, 'view-caminandes-b': 1, 'view-ed-a': 0}
+VOLUME 6_back_again           {'primaryContent': 0, 'view-caminandes-a': 0, 'view-caminandes-b': 1, 'view-ed-a': 0}
+VOLUME 4_chrome_down          {'primaryContent': 0, 'view-caminandes-a': 0, 'view-caminandes-b': 1, 'view-ed-a': 0}
+
+THE CHECK  3 == 2 : True   (ring too: True )
+ITS CONTROL 1 != 2 : True
+NO COLLISION, the box enlarged twice is still the one heard : ['view-caminandes-b']
+
+currentTime, no jump to zero:
+  1_in_the_grid          {'primaryContent': 53.257, 'view-caminandes-a': 8.1, 'view-caminandes-b': 8.06, 'view-ed-a': 8.09}
+  2_at_full_frame        {'primaryContent': 54.977, 'view-caminandes-a': 9.695, 'view-caminandes-b': 9.525, 'view-ed-a': 9.685}
+  3_back_in_the_grid     {'primaryContent': 56.5, 'view-caminandes-a': 11.218, 'view-caminandes-b': 11.077, 'view-ed-a': 11.208}
+  5_enlarged_again       {'primaryContent': 58.078, 'view-caminandes-a': 12.793, 'view-caminandes-b': 12.671, 'view-ed-a': 12.785}
+  6_back_again           {'primaryContent': 59.297, 'view-caminandes-a': 14.015, 'view-caminandes-b': 13.899, 'view-ed-a': 14.005}
+  4_chrome_down          {'primaryContent': 62.51, 'view-caminandes-a': 17.228, 'view-caminandes-b': 17.107, 'view-ed-a': 17.218}

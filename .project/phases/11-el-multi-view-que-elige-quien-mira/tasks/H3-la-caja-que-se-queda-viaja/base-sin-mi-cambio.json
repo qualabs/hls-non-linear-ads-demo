@@ -1,0 +1,1041 @@
+{
+  "tomada": "2026-09-11T21:21:54Z",
+  "commit": "4950543e664388d4b4f3b3f163ed9f9489cd54c3 \u00b7 sin commitear: README.md, lib/concurrent-hls.js, lib/controls.js, lib/renderer.js, lib/signalling.js, scripts/construir-libreria.sh, scripts/verificar-cortes.mjs, test/fixtures/README.md, .project/decisions/0063-la-clase-de-multi-view-es-hermana-y-su-kind-toca-tres-tablas.md, .project/decisions/0064-el-bloque-de-multi-view-anuncia-un-catalogo-y-no-un-layout.md, .project/decisions/0065-la-geometria-del-multi-view-la-calcula-la-libreria-y-una-caja-es-la-salida.md, .project/decisions/0066-el-tope-de-cuatro-es-de-pantalla-y-no-de-oferta.md, .project/decisions/0067-el-selector-es-una-lista-de-casilleros-en-la-barra-y-no-se-oculta-sola.md, .project/decisions/0068-el-anuncio-son-dos-piezas-un-popup-que-se-va-y-un-punto-que-se-queda.md, .project/decisions/0069-agrandar-es-foco-completo-y-desagrandar-no-toca-el-audio.md, .project/decisions/0070-cambiar-la-composicion-mueve-las-cajas-y-no-la-reconstruye.md, .project/decisions/0071-la-salida-del-multi-view-es-clear-y-tiene-dos-entradas.md, .project/decisions/0072-el-estado-de-quien-mira-vive-en-un-modulo-que-decora-al-proveedor.md, .project/phases/11-el-multi-view-que-elige-quien-mira/, demo/multiview-offer/, lib/multiview.js, test/box-button-corner.test.js, test/chrome-holds.test.js, test/composition-plan.test.js, test/enlarge-and-shrink.test.js, test/fixtures/asset-lists/asset-list-offer-3.json, test/focus-after-a-composition-change.test.js, test/multiview-geometry.test.js, test/multiview-offer.test.js, test/multiview-state.test.js, test/views-selector.test.js",
+  "url": "http://localhost:8090/",
+  "viewport": [
+    1600,
+    1000
+  ],
+  "segundos": [
+    10.0,
+    26.0,
+    38.0,
+    51.0,
+    63.0,
+    76.0,
+    88.0,
+    101.0,
+    113.0,
+    126.0,
+    138.0,
+    150.0,
+    162.0,
+    174.0
+  ],
+  "muestras": [
+    {
+      "t": 10.08,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            715,
+            402
+          ],
+          "z": "auto",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        }
+      ],
+      "contrato": [],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          274,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 10.0
+    },
+    {
+      "t": 26.01,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            715,
+            402
+          ],
+          "z": "0",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        },
+        {
+          "id": "adOverlay1",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            179,
+            101
+          ],
+          "z": "1",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 0
+        }
+      ],
+      "contrato": [
+        {
+          "tipo": "cornerOverlay",
+          "itemId": "AD-1-CONCURRENT.0",
+          "elementos": [
+            "primaryContent",
+            "adOverlay1"
+          ]
+        }
+      ],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          274,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 26.0
+    },
+    {
+      "t": 38.02,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            715,
+            402
+          ],
+          "z": "auto",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        }
+      ],
+      "contrato": [],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          274,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 38.0
+    },
+    {
+      "t": 51.08,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            429,
+            241
+          ],
+          "z": "0",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        },
+        {
+          "id": "adBarVertical",
+          "etiqueta": "VIDEO",
+          "caja": [
+            429,
+            0,
+            286,
+            402
+          ],
+          "z": "1",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 0
+        },
+        {
+          "id": "adBarHorizontal",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            241,
+            715,
+            161
+          ],
+          "z": "2",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 0
+        }
+      ],
+      "contrato": [
+        {
+          "tipo": "squeezebackLShape",
+          "itemId": "AD-2-CONCURRENT.0",
+          "elementos": [
+            "primaryContent",
+            "adBarVertical",
+            "adBarHorizontal"
+          ]
+        }
+      ],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          274,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 51.0
+    },
+    {
+      "t": 63.06,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            715,
+            402
+          ],
+          "z": "auto",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        }
+      ],
+      "contrato": [],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          274,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 63.0
+    },
+    {
+      "t": 76.06,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            429,
+            241
+          ],
+          "z": "0",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        },
+        {
+          "id": "adBarVertical",
+          "etiqueta": "IMG",
+          "caja": [
+            429,
+            0,
+            286,
+            402
+          ],
+          "z": "1",
+          "opacidad": 1,
+          "mudo": false,
+          "volumen": null
+        },
+        {
+          "id": "adBarHorizontal",
+          "etiqueta": "IMG",
+          "caja": [
+            0,
+            241,
+            715,
+            161
+          ],
+          "z": "2",
+          "opacidad": 1,
+          "mudo": false,
+          "volumen": null
+        }
+      ],
+      "contrato": [
+        {
+          "tipo": "squeezebackLShape",
+          "itemId": "AD-3-CONCURRENT.0",
+          "elementos": [
+            "primaryContent",
+            "adBarVertical",
+            "adBarHorizontal"
+          ]
+        }
+      ],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          274,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 76.0
+    },
+    {
+      "t": 88.03,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            715,
+            402
+          ],
+          "z": "auto",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        }
+      ],
+      "contrato": [],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          274,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 88.0
+    },
+    {
+      "t": 101.03,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            358,
+            201
+          ],
+          "z": "0",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 0.1
+        },
+        {
+          "id": "view2",
+          "etiqueta": "VIDEO",
+          "caja": [
+            358,
+            0,
+            358,
+            201
+          ],
+          "z": "1",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 0.1
+        },
+        {
+          "id": "view3",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            201,
+            358,
+            201
+          ],
+          "z": "2",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        },
+        {
+          "id": "view4",
+          "etiqueta": "VIDEO",
+          "caja": [
+            358,
+            201,
+            358,
+            201
+          ],
+          "z": "3",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 0.1
+        }
+      ],
+      "contrato": [
+        {
+          "tipo": "multiView",
+          "itemId": "AD-4-CONCURRENT.0",
+          "elementos": [
+            "primaryContent",
+            "view2",
+            "view3",
+            "view4"
+          ]
+        }
+      ],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          274,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 101.0
+    },
+    {
+      "t": 113.08,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            715,
+            402
+          ],
+          "z": "auto",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        }
+      ],
+      "contrato": [],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          274,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 113.0
+    },
+    {
+      "t": 126.01,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            715,
+            402
+          ],
+          "z": "0",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        },
+        {
+          "id": "ad1-overlay",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            179,
+            101
+          ],
+          "z": "1",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 0
+        }
+      ],
+      "contrato": [
+        {
+          "tipo": "cornerOverlay",
+          "itemId": "AD-5-CONCURRENT.0",
+          "elementos": [
+            "primaryContent",
+            "ad1-overlay"
+          ]
+        }
+      ],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          274,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 126.0
+    },
+    {
+      "t": 138.02,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            101,
+            358,
+            201
+          ],
+          "z": "0",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        },
+        {
+          "id": "ad2-box",
+          "etiqueta": "VIDEO",
+          "caja": [
+            358,
+            101,
+            358,
+            201
+          ],
+          "z": "1",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 0
+        }
+      ],
+      "contrato": [
+        {
+          "tipo": "squeezebackDoubleBox",
+          "itemId": "AD-5-CONCURRENT.1",
+          "elementos": [
+            "primaryContent",
+            "ad2-box"
+          ]
+        }
+      ],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          274,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 138.0
+    },
+    {
+      "t": 150.09,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            715,
+            402
+          ],
+          "z": "0",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 0
+        },
+        {
+          "id": "linear",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            715,
+            402
+          ],
+          "z": "1",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        }
+      ],
+      "contrato": [
+        {
+          "tipo": "linear",
+          "itemId": "AD-5-CONCURRENT.2",
+          "elementos": [
+            "primaryContent",
+            "linear"
+          ]
+        }
+      ],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          273,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 150.0
+    },
+    {
+      "t": 162.04,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            715,
+            402
+          ],
+          "z": "0",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        },
+        {
+          "id": "ad4-overlay",
+          "etiqueta": "VIDEO",
+          "caja": [
+            536,
+            302,
+            179,
+            101
+          ],
+          "z": "1",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 0
+        }
+      ],
+      "contrato": [
+        {
+          "tipo": "cornerOverlay",
+          "itemId": "AD-5-CONCURRENT.3",
+          "elementos": [
+            "primaryContent",
+            "ad4-overlay"
+          ]
+        }
+      ],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          273,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 162.0
+    },
+    {
+      "t": 174.02,
+      "pausado": false,
+      "composicion": [
+        {
+          "id": "primario",
+          "etiqueta": "VIDEO",
+          "caja": [
+            0,
+            0,
+            715,
+            402
+          ],
+          "z": "auto",
+          "opacidad": 1,
+          "mudo": true,
+          "volumen": 1
+        }
+      ],
+      "contrato": [],
+      "marcas": [
+        [
+          123,
+          360,
+          36,
+          8
+        ],
+        [
+          198,
+          360,
+          36,
+          8
+        ],
+        [
+          273,
+          360,
+          36,
+          8
+        ],
+        [
+          349,
+          360,
+          36,
+          8
+        ],
+        [
+          424,
+          360,
+          144,
+          8
+        ]
+      ],
+      "objetivo": 174.0
+    }
+  ],
+  "navegador": "Chrome 153.0.8010.36",
+  "contexto": {
+    "contenedor": [
+      715,
+      402
+    ],
+    "video": [
+      1280,
+      720
+    ],
+    "duracion": 180,
+    "hls": "1.7.2"
+  },
+  "avisos": []
+}

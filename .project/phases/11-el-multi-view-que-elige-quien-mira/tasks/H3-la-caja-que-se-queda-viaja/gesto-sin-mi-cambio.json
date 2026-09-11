@@ -1,0 +1,4618 @@
+{
+ "url": "http://localhost:8092/",
+ "tomada": "2026-09-11T21:34:47Z",
+ "ms": 700,
+ "gestos": [
+  {
+   "gesto": "agrandar una vista",
+   "boton": "Caminandes, early: to the whole picture",
+   "cuadros": [
+    {
+     "ms": 13.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 31,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 49.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 64.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 82.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 97.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 113.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 131.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 150.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 164.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 180.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 197.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 213.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 230.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 248.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 264.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 280.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 298,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 314,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 330.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 348.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 364.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 382.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 397.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 413.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 430.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 448.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 464.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 480.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 497.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 513.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 531.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 549.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 564.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 581.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 598.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 615.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 630.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 648.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 664.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 681.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 697.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 713.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    }
+   ]
+  },
+  {
+   "gesto": "desagrandar una vista",
+   "boton": "Caminandes, early: back to the grid",
+   "cuadros": [
+    {
+     "ms": 15.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 33.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 48.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 64.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 80.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 96.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 115.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 130.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 147.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 163.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 180.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 197.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 214.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 230.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 247.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 263.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 280.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 296.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 314.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 330.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 347.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 363.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 380.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 397,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 413.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 464.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 497.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 531.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 564.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 597.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 631.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 664.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 697.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 730.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    }
+   ]
+  },
+  {
+   "gesto": "agrandar el primario (la referencia)",
+   "boton": "Tears of Steel: to the whole picture",
+   "cuadros": [
+    {
+     "ms": 2.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 14.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 35.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 52,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 72.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 81.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       616.5,
+       346.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 102.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       681.3,
+       383.3
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 114.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       742.3,
+       417.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 135.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       797.4,
+       448.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 150.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       846.4,
+       476.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 172.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       889,
+       500.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 181.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       925.3,
+       520.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 203.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       956.4,
+       538
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 214.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       982.7,
+       552.7
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 235.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1004.7,
+       565.2
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 250.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1023.5,
+       575.7
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 270.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1039.2,
+       584.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 281.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1052.4,
+       592
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 303,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1063.4,
+       598.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 314.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1072.5,
+       603.3
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 335.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1080.1,
+       607.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 349.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1086.1,
+       610.9
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 370.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1090.8,
+       613.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 381.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1094.5,
+       615.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 402.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1097.1,
+       617.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 415,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1098.8,
+       618.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 434.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1099.8,
+       618.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 470.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 499.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 533,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 549.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 566.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 581.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 603.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 676.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 693.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 700.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    }
+   ]
+  },
+  {
+   "gesto": "desagrandar el primario (la referencia)",
+   "boton": "Tears of Steel: back to the grid",
+   "cuadros": [
+    {
+     "ms": 10.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 26.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 44.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 60.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 77.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1033.3,
+       581.2
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 96.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       968.5,
+       544.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 114.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       908,
+       510.7
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 132.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       852.5,
+       479.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 146.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       803.4,
+       451.9
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 163.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       761.1,
+       428.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 177.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       724.6,
+       407.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 194,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       693.6,
+       390.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 211.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       667.4,
+       375.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 226.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       645.2,
+       362.9
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 243.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       626.6,
+       352.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 261.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       610.8,
+       343.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 277.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       597.6,
+       336.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 293.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       586.6,
+       330
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 314.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       577.5,
+       324.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 327.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       570,
+       320.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 344,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       563.9,
+       317.2
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 360.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       559.2,
+       314.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 377.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       555.5,
+       312.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 393.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       552.9,
+       311
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 410.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       551.2,
+       310
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 460.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 493.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 528.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 585.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 617.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 634.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 661.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 693.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 726.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    }
+   ]
+  },
+  {
+   "gesto": "subir una tercera c\u00e1mara",
+   "boton": "Elephants Dream, early",
+   "cuadros": [
+    {
+     "ms": 7.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 23.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 46.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 61.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 80.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 96,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 115.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 130.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 150.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 166,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 182.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 199,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 208.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 224.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 244.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 256.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 279.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 289.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 308.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 322.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 356.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 359.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 384,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 411.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 427.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 448.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 517.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 541.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 571.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 588.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 593.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 617.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 623.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 652.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 658.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 687.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    },
+    {
+     "ms": 723.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "navegador": "Chrome 153.0.8010.36",
+ "contexto": {
+  "contenedor": [
+   1100,
+   619
+  ],
+  "video": [
+   1280,
+   720
+  ],
+  "hls": "1.7.2"
+ },
+ "grilla": {
+  "primario": [
+   0,
+   0,
+   550,
+   309
+  ],
+  "view-caminandes-a": [
+   550,
+   0,
+   550,
+   309
+  ],
+  "view-caminandes-b": [
+   275,
+   309,
+   550,
+   309
+  ],
+  "view-ed-a": null
+ },
+ "avisos": [
+  "Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}

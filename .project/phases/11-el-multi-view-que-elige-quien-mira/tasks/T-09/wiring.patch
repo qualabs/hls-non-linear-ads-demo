@@ -1,0 +1,57 @@
+--- a/lib/renderer.js
++++ b/lib/renderer.js
+@@ -1095,6 +1095,31 @@
+   }
+ 
+   /**
++   * WHICH BOX IS THE ONE THAT SOUNDS, asked from outside by the name the
++   * contract gives it (ADR 0069). It is the mirror of `releaseFocus` and the
++   * second user of the same seam: the chrome draws the button that takes a box
++   * to full frame, the geometry of that is the state of whoever is watching,
++   * and the audio of it is this one index -- so the chrome asks each side for
++   * its half and neither one learns what the other is made of.
++   *
++   * THE PRIMARY CONTENT AND A STILL BOTH MEAN "NOBODY", and that is not a
++   * refusal. Neither is enfocable (ADR 0027), and what makes the programme the
++   * only thing heard is precisely nobody being focused, which is the mix the
++   * layout declared. So the one sentence -- make this box the only one that
++   * sounds -- has one answer for every box of the composition, and the caller
++   * needs no branch.
++   *
++   * `false` when nothing on screen carries that `id`, which is the composition
++   * having moved under the press.
++   */
++  function focusOn(id) {
++    const entry = drawn.find((slot) => slot.element.id === id);
++    if (!entry) return false;
++    setFocus(entry.element.primary || entry.image ? null : entry.element);
++    return true;
++  }
++
++  /**
+    * Whether the elements of the ad are playing, which is a state of the
+    * COMPOSITION and not a property of each one.
+    *
+@@ -1231,5 +1256,5 @@
+     requestAnimationFrame(loop);
+   })();
+ 
+-  return { tick, get drawn() { return drawn; }, FILL_MODE, releaseFocus };
++  return { tick, get drawn() { return drawn; }, FILL_MODE, releaseFocus, focusOn };
+ }
+--- a/lib/concurrent-hls.js
++++ b/lib/concurrent-hls.js
+@@ -308,6 +308,13 @@
+       // a value -- asked at the moment of the touch, so the build order of
+       // the two pieces still does not matter.
+       releaseFocus: () => renderer?.releaseFocus() ?? false,
++      // The other half of the same seam (ADR 0069). The button on a box is
++      // drawn by the chrome, because enlarging is two things at once and
++      // neither side owns both: the box goes to full frame, which is the
++      // selection, and the box takes the audio, which is the renderer's one
++      // index. The chrome asks each side for its half, and this is the line
++      // that hands it the second one.
++      focusOn: (id) => renderer?.focusOn(id) ?? false,
+       // The selector of ADR 0067, and it is THE SAME OBJECT the renderer was
+       // given a few lines above. What somebody ticks and what gets drawn are
+       // two faces of one piece of state, so there is no copy to keep in step

@@ -1,0 +1,14 @@
+$ cd <repo>
+$ /usr/bin/grep -i -n "texttrack\|cue\|subtitle\|caption" lib/*.js ; echo "exit=$?"
+exit=1
+
+# EL CONTROL: el mismo grep sobre una copia de lib/ con una ocurrencia plantada
+# (video.textTracks[0].mode = "showing", metida a proposito adentro de clear()).
+$ /usr/bin/grep -i -n "texttrack\|cue\|subtitle\|caption" lib-plantada/*.js ; echo "exit=$?"
+lib-plantada/renderer.js:1197:    video.textTracks[0].mode = 'showing';
+exit=0
+
+# Y el mismo grep sobre el lib/ CON EL PARCHE del boton puesto, que es lo que
+# se commitearia: el boton no agrega una sola palabra del CC.
+$ /usr/bin/grep -i -n "texttrack\|cue\|subtitle\|caption" sdk/lib/*.js ; echo "exit=$?"
+exit=1

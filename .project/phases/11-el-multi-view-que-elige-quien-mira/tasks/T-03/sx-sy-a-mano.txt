@@ -1,0 +1,29 @@
+area = la imagen del primario, 1280x720
+
+N=2, caja 1 (primario), fila de la tabla:  viewport "25 50 25 0"
+  box      top=25% right=50% bottom=25% left=0%
+  px       left=0 top=180 width=640 height=360
+  sx = px.width/area.width   = 640/1280 = 0.5
+  sy = px.height/area.height = 360/720 = 0.5
+  |sx-sy| = 0   umbral de movePrimary = 0.001  ->  no deforma
+
+N=2 DESCARTADO (mitad de alto completo):  viewport "0 50 0 0"
+  box      top=0% right=50% bottom=0% left=0%
+  px       left=0 top=0 width=640 height=720
+  sx = px.width/area.width   = 640/1280 = 0.5
+  sy = px.height/area.height = 720/720 = 1
+  |sx-sy| = 0.5   umbral de movePrimary = 0.001  ->  DEFORMA (avisa en cada cuadro)
+
+N=3, caja 1 (primario):  viewport "0 50 50 0"
+  box      top=0% right=50% bottom=50% left=0%
+  px       left=0 top=0 width=640 height=360
+  sx = px.width/area.width   = 640/1280 = 0.5
+  sy = px.height/area.height = 360/720 = 0.5
+  |sx-sy| = 0   umbral de movePrimary = 0.001  ->  no deforma
+
+N=4, caja 1 (primario):  viewport "0 50 50 0"
+  box      top=0% right=50% bottom=50% left=0%
+  px       left=0 top=0 width=640 height=360
+  sx = px.width/area.width   = 640/1280 = 0.5
+  sy = px.height/area.height = 360/720 = 0.5
+  |sx-sy| = 0   umbral de movePrimary = 0.001  ->  no deforma

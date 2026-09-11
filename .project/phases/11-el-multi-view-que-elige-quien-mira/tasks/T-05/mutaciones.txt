@@ -1,0 +1,22 @@
+red (the rule is checked)   the cap of four boxes is not applied
+                            tests named /five boxes/: ℹ pass 0, ℹ fail 1
+red (the rule is checked)   the same view can be raised twice
+                            tests named /the same view twice/: ℹ pass 0, ℹ fail 1
+red (the rule is checked)   the enlarged box does not have to be on the grid
+                            tests named /enlarged box is not on the grid/: ℹ pass 0, ℹ fail 1
+red (the rule is checked)   the row of the programme is not locked
+                            tests named /the programme is the first row/: ℹ pass 0, ℹ fail 1
+red (the rule is checked)   the programme can be taken off the grid
+                            tests named /the programme is the first row/: ℹ pass 0, ℹ fail 1
+red (the rule is checked)   a full grid does not disable the rows that are down
+                            tests named /with the grid full/: ℹ pass 0, ℹ fail 1
+red (the rule is checked)   the composition is rebuilt on every frame
+                            tests named /the same object/: ℹ pass 1, ℹ fail 1
+red (the rule is checked)   a view loses its MIME on the way into the box
+                            tests named /uri and its MIME/: ℹ pass 0, ℹ fail 1
+red (the rule is checked)   lowering the enlarged view leaves the enlargement pointing at it
+                            tests named /lowering the box that is enlarged/: ℹ pass 0, ℹ fail 1
+red (the rule is checked)   the boxes come out in the order of the catalogue and not of the selection
+                            tests named /in the order the views were raised/: ℹ pass 0, ℹ fail 1
+
+all 10 deliberate breaks were caught by the tests that cover their rule

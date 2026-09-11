@@ -1,0 +1,27 @@
+== comparando base-alterada-para-el-control.json contra la base base-mia.json ==
+
+## Las condiciones de las dos lecturas
+   base:  2026-09-11T20:25:07Z  ·  11a1f8c65987 · sin commitear: .project/LOG.md, .project/PROJECT.md, README.md (+46 más)
+   ahora: 2026-09-11T20:25:07Z  ·  11a1f8c65987 · sin commitear: .project/LOG.md, .project/PROJECT.md, README.md (+46 más)
+   Las mismas: mismo contenedor, mismo video, mismos segundos.
+
+## Los segundos muestreados
+     10.0s  igual     [primario]
+     26.0s  DISTINTO  (2 nodos en la base)
+      nodo 1 (adOverlay1) · caja: base [0, 0, 179, 101] → ahora [10, 0, 179, 101]   (movida +10, +0 px; tamaño +0, +0 px)
+     38.0s  igual     [primario]
+     51.0s  igual     [primario, adBarVertical, adBarHorizontal]
+     63.0s  igual     [primario]
+     76.0s  igual     [primario, adBarVertical, adBarHorizontal]
+     88.0s  igual     [primario]
+    101.0s  igual     [primario, view2, view3, view4]
+    113.0s  igual     [primario]
+    126.0s  igual     [primario, ad1-overlay]
+    138.0s  igual     [primario, ad2-box]
+    150.0s  igual     [primario, linear]
+    162.0s  igual     [primario, ad4-overlay]
+    174.0s  igual     [primario]
+
+== ROJO: 13 de 14 segundos iguales ==
+   El recorrido cambió. Lo que cambió está arriba, y es un hallazgo:
+   se reporta antes de tocar nada.

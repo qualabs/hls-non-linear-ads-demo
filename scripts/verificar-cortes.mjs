@@ -69,13 +69,21 @@ const SEAMS = [
     // That is also why the library is assembled by a build step instead of being
     // written by hand (scripts/construir-libreria.sh).
     //
-    // Two of the four are inside a demo, and they are named one by one for the
+    // Two of them are inside a demo, and they are named one by one for the
     // same reason: they are the proof that the contract is enough to draw with,
     // which is the argument of ADR 0003. What must not depend on any demo is the
     // completeness check below, and that one is only over `lib/`.
+    //
+    // `lib/multiview.js` is on this side and it is worth saying why, because it
+    // is the one file that sits between the two: it decorates the provider, so
+    // it reads what the layer underneath resolved and hands the same contract
+    // on. What it must never do is name the transport -- the state of whoever
+    // is watching has nothing to do with how the window was announced -- so it
+    // is checked by the same grep that keeps the rendering side clean.
     files: [
       'lib/renderer.js',
       'lib/controls.js',
+      'lib/multiview.js',
       'demo/compatibility-pair/js/contract-trace.js',
       'demo/compatibility-pair/css/player.css'
     ],

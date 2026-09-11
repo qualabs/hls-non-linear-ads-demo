@@ -1,0 +1,715 @@
+{
+ "tag": "m1-esquina-fija",
+ "url": "http://localhost:8088/index.html",
+ "shapes": {
+  "2-cajas": {
+   "layer": [
+    90,
+    87,
+    1100,
+    619
+   ],
+   "furniture": {
+    "row": [
+     1067,
+     103,
+     107,
+     34
+    ],
+    "play": [
+     603,
+     359,
+     74,
+     74
+    ],
+    "bar": [
+     90,
+     646,
+     1100,
+     60
+    ]
+   },
+   "buttons": [
+    {
+     "label": "Tears of Steel: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      96,
+      248,
+      34,
+      34
+     ],
+     "point": [
+      113,
+      265
+     ],
+     "owner": "svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]",
+     "belongs": true,
+     "overPlay": [
+      0,
+      0,
+      0
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "label": "Caminandes, early: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      646,
+      248,
+      34,
+      34
+     ],
+     "point": [
+      663,
+      265
+     ],
+     "owner": "svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]",
+     "belongs": true,
+     "overPlay": [
+      0,
+      0,
+      0
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "viewNodes": 1,
+   "raised": [
+    "Caminandes, early"
+   ],
+   "viewport": {
+    "width": 1280,
+    "height": 900
+   },
+   "boxes": 2,
+   "presses": [
+    {
+     "index": 0,
+     "label": "Tears of Steel: to the whole picture",
+     "clicked": true,
+     "afterLabels": [
+      "Tears of Steel: back to the grid"
+     ],
+     "enlargedOne": true,
+     "enlargedIsTheOnePressed": true,
+     "backToGrid": 2
+    },
+    {
+     "index": 1,
+     "label": "Caminandes, early: to the whole picture",
+     "clicked": true,
+     "afterLabels": [
+      "Caminandes, early: back to the grid"
+     ],
+     "enlargedOne": true,
+     "enlargedIsTheOnePressed": true,
+     "backToGrid": 2
+    }
+   ],
+   "green": true
+  },
+  "3-cajas": {
+   "layer": [
+    90,
+    87,
+    1100,
+    619
+   ],
+   "furniture": {
+    "row": [
+     1067,
+     103,
+     107,
+     34
+    ],
+    "play": [
+     603,
+     359,
+     74,
+     74
+    ],
+    "bar": [
+     90,
+     646,
+     1100,
+     60
+    ]
+   },
+   "buttons": [
+    {
+     "label": "Tears of Steel: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      96,
+      93,
+      34,
+      34
+     ],
+     "point": [
+      113,
+      110
+     ],
+     "owner": "svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]",
+     "belongs": true,
+     "overPlay": [
+      0,
+      0,
+      0
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "label": "Caminandes, early: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      646,
+      93,
+      34,
+      34
+     ],
+     "point": [
+      663,
+      110
+     ],
+     "owner": "svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]",
+     "belongs": true,
+     "overPlay": [
+      0,
+      0,
+      0
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "label": "Caminandes, late: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      371,
+      403,
+      34,
+      34
+     ],
+     "point": [
+      388,
+      420
+     ],
+     "owner": "svg in qa-btn qa-box__btn[Caminandes, late: to the whole picture]",
+     "belongs": true,
+     "overPlay": [
+      0,
+      0,
+      0
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "viewNodes": 2,
+   "raised": [
+    "Caminandes, early",
+    "Caminandes, late"
+   ],
+   "viewport": {
+    "width": 1280,
+    "height": 900
+   },
+   "boxes": 3,
+   "presses": [
+    {
+     "index": 0,
+     "label": "Tears of Steel: to the whole picture",
+     "clicked": true,
+     "afterLabels": [
+      "Tears of Steel: back to the grid"
+     ],
+     "enlargedOne": true,
+     "enlargedIsTheOnePressed": true,
+     "backToGrid": 3
+    },
+    {
+     "index": 1,
+     "label": "Caminandes, early: to the whole picture",
+     "clicked": true,
+     "afterLabels": [
+      "Caminandes, early: back to the grid"
+     ],
+     "enlargedOne": true,
+     "enlargedIsTheOnePressed": true,
+     "backToGrid": 3
+    },
+    {
+     "index": 2,
+     "label": "Caminandes, late: to the whole picture",
+     "clicked": true,
+     "afterLabels": [
+      "Caminandes, late: back to the grid"
+     ],
+     "enlargedOne": true,
+     "enlargedIsTheOnePressed": true,
+     "backToGrid": 3
+    }
+   ],
+   "green": true
+  },
+  "4-cajas": {
+   "layer": [
+    90,
+    87,
+    1100,
+    619
+   ],
+   "furniture": {
+    "row": [
+     1067,
+     103,
+     107,
+     34
+    ],
+    "play": [
+     603,
+     359,
+     74,
+     74
+    ],
+    "bar": [
+     90,
+     646,
+     1100,
+     60
+    ]
+   },
+   "buttons": [
+    {
+     "label": "Tears of Steel: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      96,
+      93,
+      34,
+      34
+     ],
+     "point": [
+      113,
+      110
+     ],
+     "owner": "svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]",
+     "belongs": true,
+     "overPlay": [
+      0,
+      0,
+      0
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "label": "Caminandes, early: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      646,
+      93,
+      34,
+      34
+     ],
+     "point": [
+      663,
+      110
+     ],
+     "owner": "svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]",
+     "belongs": true,
+     "overPlay": [
+      0,
+      0,
+      0
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "label": "Caminandes, late: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      96,
+      403,
+      34,
+      34
+     ],
+     "point": [
+      113,
+      420
+     ],
+     "owner": "svg in qa-btn qa-box__btn[Caminandes, late: to the whole picture]",
+     "belongs": true,
+     "overPlay": [
+      0,
+      0,
+      0
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "label": "Elephants Dream, early: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      646,
+      403,
+      34,
+      34
+     ],
+     "point": [
+      663,
+      420
+     ],
+     "owner": "button.qa-btn.qa-btn--play in qa-btn qa-btn--play[play or pause the composition]",
+     "belongs": false,
+     "overPlay": [
+      31,
+      30,
+      930
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "viewNodes": 3,
+   "raised": [
+    "Caminandes, early",
+    "Caminandes, late",
+    "Elephants Dream, early"
+   ],
+   "viewport": {
+    "width": 1280,
+    "height": 900
+   },
+   "boxes": 4,
+   "presses": [
+    {
+     "index": 0,
+     "label": "Tears of Steel: to the whole picture",
+     "clicked": true,
+     "afterLabels": [
+      "Tears of Steel: back to the grid"
+     ],
+     "enlargedOne": true,
+     "enlargedIsTheOnePressed": true,
+     "backToGrid": 4
+    },
+    {
+     "index": 1,
+     "label": "Caminandes, early: to the whole picture",
+     "clicked": true,
+     "afterLabels": [
+      "Caminandes, early: back to the grid"
+     ],
+     "enlargedOne": true,
+     "enlargedIsTheOnePressed": true,
+     "backToGrid": 4
+    },
+    {
+     "index": 2,
+     "label": "Caminandes, late: to the whole picture",
+     "clicked": true,
+     "afterLabels": [
+      "Caminandes, late: back to the grid"
+     ],
+     "enlargedOne": true,
+     "enlargedIsTheOnePressed": true,
+     "backToGrid": 4
+    },
+    {
+     "index": 3,
+     "label": "Elephants Dream, early: to the whole picture",
+     "clicked": false,
+     "error": "Locator.click: Timeout 4000ms exceeded."
+    }
+   ],
+   "green": false
+  },
+  "4-cajas-en-un-telefono": {
+   "layer": [
+    20,
+    123,
+    380,
+    214
+   ],
+   "furniture": {
+    "row": [
+     277,
+     139,
+     107,
+     34
+    ],
+    "play": [
+     173,
+     193,
+     74,
+     74
+    ],
+    "bar": [
+     20,
+     277,
+     380,
+     60
+    ]
+   },
+   "buttons": [
+    {
+     "label": "Tears of Steel: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      26,
+      129,
+      34,
+      34
+     ],
+     "point": [
+      43,
+      146
+     ],
+     "owner": "svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]",
+     "belongs": true,
+     "overPlay": [
+      0,
+      0,
+      0
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "label": "Caminandes, early: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      216,
+      129,
+      34,
+      34
+     ],
+     "point": [
+      233,
+      146
+     ],
+     "owner": "svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]",
+     "belongs": true,
+     "overPlay": [
+      0,
+      0,
+      0
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "label": "Caminandes, late: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      26,
+      236,
+      34,
+      34
+     ],
+     "point": [
+      43,
+      253
+     ],
+     "owner": "svg in qa-btn qa-box__btn[Caminandes, late: to the whole picture]",
+     "belongs": true,
+     "overPlay": [
+      0,
+      0,
+      0
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "label": "Elephants Dream, early: to the whole picture",
+     "corner": "nw",
+     "rect": [
+      216,
+      236,
+      34,
+      34
+     ],
+     "point": [
+      233,
+      253
+     ],
+     "owner": "button.qa-btn.qa-btn--play in qa-btn qa-btn--play[play or pause the composition]",
+     "belongs": false,
+     "overPlay": [
+      31,
+      31,
+      961
+     ],
+     "overRow": [
+      0,
+      0,
+      0
+     ],
+     "overBar": [
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "viewNodes": 3,
+   "raised": [
+    "Caminandes, early",
+    "Caminandes, late",
+    "Elephants Dream, early"
+   ],
+   "viewport": {
+    "width": 420,
+    "height": 820
+   },
+   "boxes": 4,
+   "presses": [
+    {
+     "index": 0,
+     "label": "Tears of Steel: to the whole picture",
+     "clicked": true,
+     "afterLabels": [
+      "Tears of Steel: back to the grid"
+     ],
+     "enlargedOne": true,
+     "enlargedIsTheOnePressed": true,
+     "backToGrid": 4
+    },
+    {
+     "index": 1,
+     "label": "Caminandes, early: to the whole picture",
+     "clicked": true,
+     "afterLabels": [
+      "Caminandes, early: back to the grid"
+     ],
+     "enlargedOne": true,
+     "enlargedIsTheOnePressed": true,
+     "backToGrid": 4
+    },
+    {
+     "index": 2,
+     "label": "Caminandes, late: to the whole picture",
+     "clicked": true,
+     "afterLabels": [
+      "Caminandes, late: back to the grid"
+     ],
+     "enlargedOne": true,
+     "enlargedIsTheOnePressed": true,
+     "backToGrid": 4
+    },
+    {
+     "index": 3,
+     "label": "Elephants Dream, early: to the whole picture",
+     "clicked": false,
+     "error": "Locator.click: Timeout 4000ms exceeded."
+    }
+   ],
+   "green": false
+  }
+ }
+}

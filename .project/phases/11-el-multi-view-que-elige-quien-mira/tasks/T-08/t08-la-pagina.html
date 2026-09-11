@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-08 -- el anuncio: el popup que se va y el punto que se queda</title>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; background: #0b0d12; color: #e8ecf2;
+               font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .page { padding: 28px; }
+  /* La misma caja que la demo le da a la libreria: posicionada, 16/9, negra, y
+     el acento de quien integra. Nada mas. */
+  .player {
+    position: relative;
+    isolation: isolate;
+    width: 960px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    --qa-accent: #37b4a7;
+  }
+  .player .video { width: 100%; height: 100%; display: block; }
+  .nota { margin: 14px 0 0; font-size: 12.5px; color: #93a0b4; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="player" id="stage">
+    <video class="video" id="v" playsinline muted></video>
+  </div>
+  <p class="nota" id="nota">cargando</p>
+</div>
+<script src="/vendor/hls.min.js"></script>
+<script type="module">
+// El instrumento de la T-08, que es el de la T-07 con dos lecturas nuevas: el
+// popup y el punto. Lo que corre es lib/ VIVO, traido por un enlace: esta
+// pagina no copia una linea de la libreria, la cablea igual que attach().
+import { activeAt, resolveAssetList } from '/lib/signalling.js';
+import { createMultiview } from '/lib/multiview.js';
+import { createRenderer } from '/lib/renderer.js';
+import { createControls } from '/lib/controls.js';
+import { attachAsset } from '/lib/media.js';
+import { hlsConfig } from '/lib/concurrent-hls.js';
+
+const stage = document.getElementById('stage');
+const video = document.getElementById('v');
+
+// La capa de los avisos, tal como la crea `createLayer` de concurrent-hls.js.
+const layer = document.createElement('div');
+layer.className = 'qa-concurrent-layer';
+layer.setAttribute('aria-hidden', 'true');
+layer.style.position = 'absolute';
+layer.style.inset = '0';
+layer.style.pointerEvents = 'none';
+stage.appendChild(layer);
+
+// LA OFERTA. El asset-list es el de la demo nueva -- la primera ventana, de
+// tres vistas -- resuelto por la capa de senalizacion. La ventana se declara
+// aca en lugar de salir de un Date Range porque lo que se mira es el anuncio y
+// no el transporte: lo que la capa de abajo produce es exactamente este objeto.
+const VENTANA = 4;
+const lista = await fetch('/signalling/asset-list-offer-3.json').then((r) => r.json());
+const experiences = resolveAssetList(lista, { id: 'MV-1-OFFER', slotStart: VENTANA });
+const ranges = {
+  ranges: experiences.map((e) => ({ id: e.id, kind: 'multiview', startTime: e.startTime, duration: e.duration })),
+  settled: true
+};
+const provider = {
+  activeAt: (t) => activeAt(experiences, t),
+  programRanges: () => ranges,
+  experiences
+};
+
+const mv = createMultiview(provider);
+let controls = null;
+const renderer = createRenderer({
+  provider: mv, video, layer, attachAsset, chromeUp: () => controls?.up() ?? false
+});
+controls = createControls({
+  container: stage,
+  video,
+  provider: { programRanges: () => ranges },
+  releaseFocus: () => renderer.releaseFocus(),
+  focusOn: (id) => renderer.focusOn(id),
+  multiview: mv
+});
+
+const hls = new Hls({ ...hlsConfig });
+hls.loadSource('/content/primary/index.m3u8');
+hls.attachMedia(video);
+video.muted = true;
+video.play().catch(() => {});
+
+const box = (el) => {
+  const r = el.getBoundingClientRect();
+  const s = stage.getBoundingClientRect();
+  return {
+    left: Math.round(r.left - s.left), top: Math.round(r.top - s.top),
+    ancho: Math.round(r.width), alto: Math.round(r.height)
+  };
+};
+
+const chrome = () => stage.getElementsByClassName('qa-controls')[0];
+const panel = () => stage.getElementsByClassName('qa-views')[0];
+const popup = () => stage.getElementsByClassName('qa-announce')[0];
+const botonVistas = () => stage.getElementsByClassName('qa-btn--views')[0];
+
+/**
+ * EL PUNTO SE LEE DEL PSEUDO-ELEMENTO Y NO DE LA CLASE. La clase es lo que este
+ * cambio escribe; lo que se ve es la regla que la clase enciende, y las dos
+ * pueden estar desacopladas -- una regla mal escrita deja la clase puesta y la
+ * pantalla sin punto. `content` vale "none" cuando ninguna regla la genera.
+ */
+function punto() {
+  const b = botonVistas();
+  if (!b) return null;
+  const s = getComputedStyle(b, '::after');
+  return {
+    clase: b.classList.contains('qa-btn--new'),
+    content: s.content,
+    ancho: s.width,
+    color: s.backgroundColor
+  };
+}
+
+/** Lo que esta EN PANTALLA, leido del DOM y no del estado. */
+window.__t08 = {
+  mv,
+  estado() {
+    const capa = chrome();
+    const p = panel();
+    const pop = popup();
+    const boton = botonVistas();
+    const offer = mv.offerAt(video.currentTime);
+    return {
+      t: Number(video.currentTime.toFixed(2)),
+      pausado: video.paused,
+      imagen: { ancho: video.videoWidth, alto: video.videoHeight },
+      ventanaAbierta: Boolean(offer),
+      cromo: {
+        arriba: controls.up(),
+        opacidad: getComputedStyle(capa).opacity
+      },
+      boton: boton ? { oculto: boton.hidden, expandido: boton.getAttribute('aria-expanded') } : null,
+      punto: punto(),
+      popup: pop ? {
+        clase: pop.classList.contains('qa-announce--on'),
+        opacidad: getComputedStyle(pop).opacity,
+        // LO QUE SE VE, QUE NO ES LA OPACIDAD PROPIA. `getComputedStyle` de un
+        // nodo devuelve SU opacidad y no la del grupo: adentro de una capa en
+        // cero sigue contestando 1, y eso deja pasar exactamente el error que
+        // este anuncio no puede tener -- un popup que se apaga con el cromo.
+        // `checkVisibility` mira tambien a los ancestros.
+        visible: pop.checkVisibility({ opacityProperty: true, visibilityProperty: true }),
+        padre: pop.parentElement.className,
+        texto: pop.textContent,
+        rol: pop.getAttribute('role'),
+        pointerEvents: getComputedStyle(pop).pointerEvents,
+        caja: box(pop)
+      } : null,
+      lista: {
+        abierta: p ? p.classList.contains('qa-views--on') : false,
+        filas: p ? [...p.getElementsByClassName('qa-views__row')].map((f) => ({
+          nombre: f.getElementsByClassName('qa-views__name')[0].textContent,
+          tildada: f.getAttribute('aria-checked')
+        })) : []
+      },
+      cajas: [
+        { id: 'primaryContent', ...box(video) },
+        ...[...layer.children].map((n) => ({
+          id: n.dataset.id ?? n.className, tag: n.tagName,
+          pausado: n.paused, ...box(n)
+        }))
+      ]
+    };
+  },
+
+  /**
+   * EL CENTRO DEL POPUP EN COORDENADAS DE LA PAGINA, que es donde el raton de
+   * playwright tiene que ir: lo que se prueba es un toque de verdad sobre el
+   * popup, no una llamada a una funcion.
+   */
+  centroDelPopup() {
+    const r = popup().getBoundingClientRect();
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+  },
+
+  /** Quien recibiria el toque en ese punto, segun el propio navegador. */
+  quienEstaAbajo() {
+    const c = this.centroDelPopup();
+    const el = document.elementFromPoint(c.x, c.y);
+    return el ? (el.id || el.className || el.tagName) : null;
+  },
+
+  /**
+   * EL CONTROL DEL CHEQUEO: el mismo punto con el popup tomando punteros. Sin
+   * esto, "el toque llega al primario" pasa igual aunque el popup no este ahi.
+   */
+  conPunteros(on) {
+    popup().style.pointerEvents = on ? 'auto' : '';
+    return getComputedStyle(popup()).pointerEvents;
+  },
+
+  /** Lo que el primario recibio: se limpia antes de cada toque. */
+  toques: [],
+  limpiarToques() { window.__t08.toques.length = 0; }
+};
+
+video.addEventListener('pointerdown', (e) => {
+  window.__t08.toques.push({ en: 'primario', x: Math.round(e.clientX), y: Math.round(e.clientY) });
+});
+stage.addEventListener('pointerdown', (e) => {
+  const t = e.target;
+  if (t !== video) {
+    window.__t08.toques.push({ en: t.className || t.tagName, x: Math.round(e.clientX), y: Math.round(e.clientY) });
+  }
+}, true);
+
+// EL RELOJ DE LA PAGINA, que es lo que dice cuando se fue cada cosa: los ms son
+// de `performance.now` y no la suma de los sleep del script (leccion de T-06).
+window.__log = [];
+window.__marca = (texto) => window.__log.push({ ms: Number(performance.now().toFixed(1)), marca: texto });
+new MutationObserver(() => window.__log.push({
+  ms: Number(performance.now().toFixed(1)),
+  quien: 'cromo',
+  arriba: chrome().classList.contains('qa-controls--on')
+})).observe(chrome(), { attributes: true, attributeFilter: ['class'] });
+new MutationObserver(() => window.__log.push({
+  ms: Number(performance.now().toFixed(1)),
+  quien: 'popup',
+  arriba: popup().classList.contains('qa-announce--on')
+})).observe(popup(), { attributes: true, attributeFilter: ['class'] });
+
+document.getElementById('nota').textContent =
+  'la ventana abre en el segundo ' + VENTANA + ' y dura ' + experiences[0].duration + ' s';
+</script>
+</body>
+</html>

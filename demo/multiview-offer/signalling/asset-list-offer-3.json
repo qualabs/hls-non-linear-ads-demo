@@ -1,0 +1,40 @@
+{
+  "ASSETS": [
+    {
+      "URI": "/content/view-caminandes-a/index.m3u8",
+      "DURATION": 60.0,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "offer",
+        "payload": [
+          {
+            "type": "multiViewOffer",
+            "start": 0,
+            "duration": 60.0,
+            "primaryName": "Tears of Steel",
+            "views": [
+              {
+                "id": "view-caminandes-a",
+                "name": "Caminandes, early",
+                "type": "application/vnd.apple.mpegurl",
+                "uri": "/content/view-caminandes-a/index.m3u8"
+              },
+              {
+                "id": "view-caminandes-b",
+                "name": "Caminandes, late",
+                "type": "application/vnd.apple.mpegurl",
+                "uri": "/content/view-caminandes-b/index.m3u8"
+              },
+              {
+                "id": "view-ed-a",
+                "name": "Elephants Dream, early",
+                "type": "application/vnd.apple.mpegurl",
+                "uri": "/content/view-ed-a/index.m3u8"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

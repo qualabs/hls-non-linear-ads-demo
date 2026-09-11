@@ -1,0 +1,21 @@
+[signalling] there is no shape for 5 boxes: the grid goes from 1 to 4 (ADR 0065), so nothing is composed. The cap is of the screen and it belongs to whoever keeps the selection (ADR 0066).
+✔ the shapes are the four rows of the decision, in their order (4.44734ms)
+✔ one box is the empty list, which is the way out of the multi view (0.347753ms)
+✔ every shape places every box it was asked for (0.733168ms)
+✔ the cap of the screen is the largest shape there is, and it is four (1.42709ms)
+✔ the four boxes of the full grid are the Quad already in the repository (1.530302ms)
+✔ the primary content keeps the aspect ratio of the area in the three shapes (0.464992ms)
+✔ the two halves of full height that were discarded do deform the picture (0.321482ms)
+✔ the boxes come out in reading order, and the primary content is the first (0.394039ms)
+✔ no two boxes of a shape are the same box (0.282108ms)
+✔ a count the table has no shape for composes nothing and says so (0.853604ms)
+✔ a count that is a number written as text is still that many boxes (0.198844ms)
+✔ the table cannot be edited through the list it hands over (0.191284ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 130.632645

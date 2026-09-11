@@ -1,0 +1,643 @@
+{
+  "A-sin-oferta": {
+    "t": 0.42,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": false,
+    "cromo": {
+      "arriba": true,
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": true,
+      "expandido": "false"
+    },
+    "punto": {
+      "clase": false,
+      "content": "none",
+      "ancho": "auto",
+      "color": "rgba(0, 0, 0, 0)"
+    },
+    "popup": {
+      "clase": false,
+      "opacidad": "0",
+      "visible": false,
+      "padre": "player",
+      "texto": "",
+      "rol": "status",
+      "pointerEvents": "none",
+      "caja": {
+        "left": 920,
+        "top": 53,
+        "ancho": 24,
+        "alto": 17
+      }
+    },
+    "lista": {
+      "abierta": false,
+      "filas": []
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 960,
+        "alto": 540
+      }
+    ]
+  },
+  "B-la-ventana-abierta": {
+    "t": 8.04,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "false"
+    },
+    "punto": {
+      "clase": true,
+      "content": "\"\"",
+      "ancho": "7.46875px",
+      "color": "rgb(51, 204, 102)"
+    },
+    "popup": {
+      "clase": true,
+      "opacidad": "1",
+      "visible": true,
+      "padre": "player",
+      "texto": "Multi view available",
+      "rol": "status",
+      "pointerEvents": "none",
+      "caja": {
+        "left": 775,
+        "top": 58,
+        "ancho": 169,
+        "alto": 34
+      }
+    },
+    "lista": {
+      "abierta": false,
+      "filas": []
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 960,
+        "alto": 540
+      }
+    ]
+  },
+  "C-el-toque-atraviesa": {
+    "debajo": "v",
+    "toques": [
+      {
+        "en": "primario",
+        "x": 888,
+        "y": 103
+      }
+    ],
+    "centro": {
+      "x": 887.734375,
+      "y": 102.921875
+    }
+  },
+  "C-el-control": {
+    "pointerEvents": "auto",
+    "debajo": "qa-announce qa-announce--on",
+    "toques": [
+      {
+        "en": "qa-announce qa-announce--on",
+        "x": 888,
+        "y": 103
+      }
+    ]
+  },
+  "D-el-popup-se-fue": {
+    "t": 12.89,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "false"
+    },
+    "punto": {
+      "clase": true,
+      "content": "\"\"",
+      "ancho": "7.46875px",
+      "color": "rgb(51, 204, 102)"
+    },
+    "popup": {
+      "clase": false,
+      "opacidad": "0",
+      "visible": false,
+      "padre": "player",
+      "texto": "",
+      "rol": "status",
+      "pointerEvents": "none",
+      "caja": {
+        "left": 920,
+        "top": 53,
+        "ancho": 24,
+        "alto": 17
+      }
+    },
+    "lista": {
+      "abierta": false,
+      "filas": []
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 960,
+        "alto": 540
+      }
+    ]
+  },
+  "E-una-camara-arriba": {
+    "t": 15.59,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "false"
+    },
+    "punto": {
+      "clase": false,
+      "content": "none",
+      "ancho": "auto",
+      "color": "rgba(0, 0, 0, 0)"
+    },
+    "popup": {
+      "clase": false,
+      "opacidad": "0",
+      "visible": false,
+      "padre": "player",
+      "texto": "",
+      "rol": "status",
+      "pointerEvents": "none",
+      "caja": {
+        "left": 920,
+        "top": 53,
+        "ancho": 24,
+        "alto": 17
+      }
+    },
+    "lista": {
+      "abierta": false,
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true"
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "true"
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "false"
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false"
+        }
+      ]
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 135,
+        "ancho": 480,
+        "alto": 270
+      },
+      {
+        "id": "ad",
+        "tag": "VIDEO",
+        "pausado": false,
+        "left": 480,
+        "top": 135,
+        "ancho": 480,
+        "alto": 270
+      }
+    ]
+  },
+  "E-la-camara-bajo": {
+    "t": 17.45,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": true,
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "true"
+    },
+    "punto": {
+      "clase": true,
+      "content": "\"\"",
+      "ancho": "7.46875px",
+      "color": "rgb(51, 204, 102)"
+    },
+    "popup": {
+      "clase": false,
+      "opacidad": "0",
+      "visible": false,
+      "padre": "player",
+      "texto": "",
+      "rol": "status",
+      "pointerEvents": "none",
+      "caja": {
+        "left": 920,
+        "top": 53,
+        "ancho": 24,
+        "alto": 17
+      }
+    },
+    "lista": {
+      "abierta": true,
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true"
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "false"
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "false"
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false"
+        }
+      ]
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 960,
+        "alto": 540
+      }
+    ]
+  },
+  "F-la-ventana-se-cerro": {
+    "t": 70.27,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": false,
+    "cromo": {
+      "arriba": true,
+      "opacidad": "1"
+    },
+    "boton": {
+      "oculto": true,
+      "expandido": "false"
+    },
+    "punto": {
+      "clase": false,
+      "content": "none",
+      "ancho": "auto",
+      "color": "rgba(0, 0, 0, 0)"
+    },
+    "popup": {
+      "clase": false,
+      "opacidad": "0",
+      "visible": false,
+      "padre": "player",
+      "texto": "",
+      "rol": "status",
+      "pointerEvents": "none",
+      "caja": {
+        "left": 920,
+        "top": 53,
+        "ancho": 24,
+        "alto": 17
+      }
+    },
+    "lista": {
+      "abierta": false,
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true"
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "false"
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "false"
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false"
+        }
+      ]
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 960,
+        "alto": 540
+      }
+    ]
+  },
+  "G-el-cromo-se-fue-y-el-popup-no": {
+    "t": 10.6,
+    "pausado": false,
+    "imagen": {
+      "ancho": 1280,
+      "alto": 720
+    },
+    "ventanaAbierta": true,
+    "cromo": {
+      "arriba": false,
+      "opacidad": "0"
+    },
+    "boton": {
+      "oculto": false,
+      "expandido": "false"
+    },
+    "punto": {
+      "clase": true,
+      "content": "\"\"",
+      "ancho": "7.46875px",
+      "color": "rgb(51, 204, 102)"
+    },
+    "popup": {
+      "clase": true,
+      "opacidad": "1",
+      "visible": true,
+      "padre": "player",
+      "texto": "Multi view available",
+      "rol": "status",
+      "pointerEvents": "none",
+      "caja": {
+        "left": 775,
+        "top": 58,
+        "ancho": 169,
+        "alto": 34
+      }
+    },
+    "lista": {
+      "abierta": false,
+      "filas": [
+        {
+          "nombre": "Tears of Steel",
+          "tildada": "true"
+        },
+        {
+          "nombre": "Caminandes, early",
+          "tildada": "false"
+        },
+        {
+          "nombre": "Caminandes, late",
+          "tildada": "false"
+        },
+        {
+          "nombre": "Elephants Dream, early",
+          "tildada": "false"
+        }
+      ]
+    },
+    "cajas": [
+      {
+        "id": "primaryContent",
+        "left": 0,
+        "top": 0,
+        "ancho": 960,
+        "alto": 540
+      }
+    ]
+  },
+  "log": [
+    {
+      "ms": 759.2,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 771.4,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 2057.8,
+      "quien": "popup",
+      "arriba": true
+    },
+    {
+      "ms": 2071,
+      "marca": "la ventana abrio"
+    },
+    {
+      "ms": 2089.9,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 3576.2,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 3577.6,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 3731.5,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 3731.8,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 6333.1,
+      "quien": "cromo",
+      "arriba": false
+    },
+    {
+      "ms": 6557.3,
+      "quien": "popup",
+      "arriba": false
+    },
+    {
+      "ms": 6772.4,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 8350.7,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 8353.2,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 8360.7,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 8360.7,
+      "quien": "popup",
+      "arriba": false
+    },
+    {
+      "ms": 8749.7,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 8751,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 8752.4,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 9481.1,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 10563.9,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 10565.2,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 10570.1,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 10570.2,
+      "quien": "popup",
+      "arriba": false
+    },
+    {
+      "ms": 10946.8,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 10947.6,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 10948.6,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 11706.1,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 11720.2,
+      "quien": "popup",
+      "arriba": false
+    },
+    {
+      "ms": 11778.7,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 12141.4,
+      "quien": "popup",
+      "arriba": true
+    },
+    {
+      "ms": 12155.4,
+      "quien": "cromo",
+      "arriba": true
+    },
+    {
+      "ms": 12160.1,
+      "marca": "la ventana abrio por segunda vez"
+    },
+    {
+      "ms": 14755.6,
+      "quien": "cromo",
+      "arriba": false
+    },
+    {
+      "ms": 16641.5,
+      "quien": "popup",
+      "arriba": false
+    }
+  ],
+  "G-los-tiempos": {
+    "abrio": 12160.1,
+    "cromo_abajo": 14755.6,
+    "popup_abajo": 16641.5,
+    "cromo_ms": 2595.5,
+    "popup_ms": 4481.4
+  }
+}

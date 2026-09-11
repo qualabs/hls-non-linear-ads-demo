@@ -1,0 +1,349 @@
+{
+ "A_0_before": {
+  "clock": 50.068,
+  "style": null,
+  "transform": "none",
+  "volume": 1,
+  "muted": false,
+  "nodes": 0,
+  "nodeIds": [],
+  "rings": [],
+  "boxButtons": 0,
+  "buttonRects": [],
+  "playRect": [
+   603,
+   359,
+   74,
+   74
+  ],
+  "wayOutPresent": true,
+  "wayOutHidden": true,
+  "viewsHidden": false,
+  "contract": "multiViewOffer#BREAK-2-MULTIVIEW.0 \u00b7 0 element(s)"
+ },
+ "A_rows": [
+  "Caminandes, early",
+  "Caminandes, late",
+  "Elephants Dream, early"
+ ],
+ "A_1a_grid_of_four": {
+  "clock": 54.021,
+  "style": "object-fit: cover; z-index: 0; transition-property: transform; transition-duration: 380ms; transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1); position: absolute; left: 0px; top: 0px; width: 1100px; height: 618.75px; transform-origin: 0px 0px; transform: translate(0px, 0px) scale(0.5, 0.5);",
+  "transform": "matrix(0.5, 0, 0, 0.5, 0, 0)",
+  "volume": 0,
+  "muted": false,
+  "nodes": 3,
+  "nodeIds": [
+   "view-caminandes-a",
+   "view-caminandes-b",
+   "view-ed-a"
+  ],
+  "rings": [
+   "view-ed-a"
+  ],
+  "boxButtons": 4,
+  "buttonRects": [
+   {
+    "label": "Tears of Steel: to the whole picture",
+    "rect": [
+     96,
+     93,
+     34,
+     34
+    ]
+   },
+   {
+    "label": "Caminandes, early: to the whole picture",
+    "rect": [
+     646,
+     93,
+     34,
+     34
+    ]
+   },
+   {
+    "label": "Caminandes, late: to the whole picture",
+    "rect": [
+     96,
+     403,
+     34,
+     34
+    ]
+   },
+   {
+    "label": "Elephants Dream, early: to the whole picture",
+    "rect": [
+     646,
+     403,
+     34,
+     34
+    ]
+   }
+  ],
+  "playRect": [
+   603,
+   359,
+   74,
+   74
+  ],
+  "wayOutPresent": true,
+  "wayOutHidden": false,
+  "viewsHidden": false,
+  "contract": "multiViewOffer#BREAK-2-MULTIVIEW.0 \u00b7 4 element(s)"
+ },
+ "A_1_grid": {
+  "clock": 55.687,
+  "style": "object-fit: cover; z-index: 0; transition-property: transform; transition-duration: 380ms; transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1); position: absolute; left: 0px; top: 0px; width: 1100px; height: 618.75px; transform-origin: 0px 0px; transform: translate(0px, 0px) scale(0.5, 0.5);",
+  "transform": "matrix(0.5, 0, 0, 0.5, 0, 0)",
+  "volume": 0,
+  "muted": false,
+  "nodes": 3,
+  "nodeIds": [
+   "view-caminandes-a",
+   "view-caminandes-b",
+   "view-ed-a"
+  ],
+  "rings": [
+   "view-caminandes-b"
+  ],
+  "boxButtons": 1,
+  "buttonRects": [
+   {
+    "label": "Caminandes, late: back to the grid",
+    "rect": [
+     96,
+     93,
+     34,
+     34
+    ]
+   }
+  ],
+  "playRect": [
+   603,
+   359,
+   74,
+   74
+  ],
+  "wayOutPresent": true,
+  "wayOutHidden": false,
+  "viewsHidden": false,
+  "contract": "multiViewOffer#BREAK-2-MULTIVIEW.0 \u00b7 4 element(s)"
+ },
+ "A_2_after": {
+  "clock": 57.482,
+  "style": null,
+  "transform": "none",
+  "volume": 1,
+  "muted": false,
+  "nodes": 0,
+  "nodeIds": [],
+  "rings": [],
+  "boxButtons": 0,
+  "buttonRects": [],
+  "playRect": [
+   603,
+   359,
+   74,
+   74
+  ],
+  "wayOutPresent": true,
+  "wayOutHidden": true,
+  "viewsHidden": false,
+  "contract": "multiViewOffer#BREAK-2-MULTIVIEW.0 \u00b7 0 element(s)"
+ },
+ "B_0_before": {
+  "clock": 50.053,
+  "style": null,
+  "transform": "none",
+  "volume": 1,
+  "muted": false,
+  "nodes": 0,
+  "nodeIds": [],
+  "rings": [],
+  "boxButtons": 0,
+  "buttonRects": [],
+  "playRect": [
+   603,
+   359,
+   74,
+   74
+  ],
+  "wayOutPresent": true,
+  "wayOutHidden": true,
+  "viewsHidden": false,
+  "contract": "multiViewOffer#BREAK-2-MULTIVIEW.0 \u00b7 0 element(s)"
+ },
+ "B_rows": [
+  "Caminandes, early"
+ ],
+ "B_1_grid": {
+  "clock": 52.712,
+  "style": "object-fit: cover; z-index: 0; transition-property: transform; transition-duration: 380ms; transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1); position: absolute; left: 0px; top: 0px; width: 1100px; height: 618.75px; transform-origin: 0px 0px; transform: translate(0px, 154.688px) scale(0.5, 0.5);",
+  "transform": "matrix(0.5, 0, 0, 0.5, 0, 154.688)",
+  "volume": 0,
+  "muted": false,
+  "nodes": 1,
+  "nodeIds": [
+   "view-caminandes-a"
+  ],
+  "rings": [
+   "view-caminandes-a"
+  ],
+  "boxButtons": 2,
+  "buttonRects": [
+   {
+    "label": "Tears of Steel: to the whole picture",
+    "rect": [
+     96,
+     248,
+     34,
+     34
+    ]
+   },
+   {
+    "label": "Caminandes, early: to the whole picture",
+    "rect": [
+     646,
+     248,
+     34,
+     34
+    ]
+   }
+  ],
+  "playRect": [
+   603,
+   359,
+   74,
+   74
+  ],
+  "wayOutPresent": true,
+  "wayOutHidden": false,
+  "viewsHidden": false,
+  "contract": "multiViewOffer#BREAK-2-MULTIVIEW.0 \u00b7 2 element(s)"
+ },
+ "B_2_after": {
+  "clock": 54.924,
+  "style": null,
+  "transform": "none",
+  "volume": 1,
+  "muted": false,
+  "nodes": 0,
+  "nodeIds": [],
+  "rings": [],
+  "boxButtons": 0,
+  "buttonRects": [],
+  "playRect": [
+   603,
+   359,
+   74,
+   74
+  ],
+  "wayOutPresent": true,
+  "wayOutHidden": true,
+  "viewsHidden": false,
+  "contract": "multiViewOffer#BREAK-2-MULTIVIEW.0 \u00b7 0 element(s)"
+ },
+ "C_0_before": {
+  "clock": 95.098,
+  "style": null,
+  "transform": "none",
+  "volume": 1,
+  "muted": false,
+  "nodes": 0,
+  "nodeIds": [],
+  "rings": [],
+  "boxButtons": 0,
+  "buttonRects": [],
+  "playRect": [
+   603,
+   359,
+   74,
+   74
+  ],
+  "wayOutPresent": true,
+  "wayOutHidden": true,
+  "viewsHidden": false,
+  "contract": "contract: nothing active"
+ },
+ "C_rows": [
+  "Caminandes, early",
+  "Caminandes, late"
+ ],
+ "C_1_grid": {
+  "clock": 98.226,
+  "style": "object-fit: cover; z-index: 0; transition-property: transform; transition-duration: 380ms; transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1); position: absolute; left: 0px; top: 0px; width: 1100px; height: 618.75px; transform-origin: 0px 0px; transform: translate(0px, 0px) scale(0.5, 0.5);",
+  "transform": "matrix(0.5, 0, 0, 0.5, 0, 0)",
+  "volume": 0,
+  "muted": false,
+  "nodes": 2,
+  "nodeIds": [
+   "view-caminandes-a",
+   "view-caminandes-b"
+  ],
+  "rings": [
+   "view-caminandes-b"
+  ],
+  "boxButtons": 3,
+  "buttonRects": [
+   {
+    "label": "Tears of Steel: to the whole picture",
+    "rect": [
+     96,
+     93,
+     34,
+     34
+    ]
+   },
+   {
+    "label": "Caminandes, early: to the whole picture",
+    "rect": [
+     646,
+     93,
+     34,
+     34
+    ]
+   },
+   {
+    "label": "Caminandes, late: to the whole picture",
+    "rect": [
+     371,
+     403,
+     34,
+     34
+    ]
+   }
+  ],
+  "playRect": [
+   603,
+   359,
+   74,
+   74
+  ],
+  "wayOutPresent": true,
+  "wayOutHidden": false,
+  "viewsHidden": false,
+  "contract": "multiViewOffer#BREAK-2-MULTIVIEW.0 \u00b7 3 element(s)"
+ },
+ "C_2_after": {
+  "clock": 106.184,
+  "style": null,
+  "transform": "none",
+  "volume": 1,
+  "muted": false,
+  "nodes": 0,
+  "nodeIds": [],
+  "rings": [],
+  "boxButtons": 0,
+  "buttonRects": [],
+  "playRect": [
+   603,
+   359,
+   74,
+   74
+  ],
+  "wayOutPresent": true,
+  "wayOutHidden": true,
+  "viewsHidden": true,
+  "contract": "contract: nothing active"
+ }
+}

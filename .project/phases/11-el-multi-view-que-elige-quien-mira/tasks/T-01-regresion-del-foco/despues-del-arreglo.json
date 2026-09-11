@@ -1,0 +1,75 @@
+===JSON===
+{
+ "1_one_view_up": {
+  "programme": 1,
+  "views": [
+   {
+    "id": "view-caminandes-a",
+    "volume": 0,
+    "muted": true,
+    "ring": false
+   }
+  ],
+  "anythingAudible": true
+ },
+ "2_tap_on_it__the_reference": {
+  "programme": 0,
+  "views": [
+   {
+    "id": "view-caminandes-a",
+    "volume": 1,
+    "muted": false,
+    "ring": true
+   }
+  ],
+  "anythingAudible": true
+ },
+ "3_tap_again_lets_it_go": {
+  "programme": 1,
+  "views": [
+   {
+    "id": "view-caminandes-a",
+    "volume": 0,
+    "muted": true,
+    "ring": false
+   }
+  ],
+  "anythingAudible": true
+ },
+ "4_second_view_up": {
+  "programme": 1,
+  "views": [
+   {
+    "id": "view-caminandes-a",
+    "volume": 0,
+    "muted": true,
+    "ring": false
+   },
+   {
+    "id": "view-caminandes-b",
+    "volume": 0,
+    "muted": true,
+    "ring": false
+   }
+  ],
+  "anythingAudible": true
+ },
+ "5_same_tap_on_the_same_box": {
+  "programme": 0,
+  "views": [
+   {
+    "id": "view-caminandes-a",
+    "volume": 1,
+    "muted": false,
+    "ring": true
+   },
+   {
+    "id": "view-caminandes-b",
+    "volume": 0,
+    "muted": true,
+    "ring": false
+   }
+  ],
+  "anythingAudible": true
+ }
+}

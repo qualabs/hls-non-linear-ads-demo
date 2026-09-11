@@ -1,0 +1,20 @@
+=== M1: shrinking lets the focus go ===
+  1_in_the_grid {'primaryContent': 1, 'view-caminandes-a': 0, 'view-caminandes-b': 0, 'view-ed-a': 0}
+  2_at_full_frame {'primaryContent': 0, 'view-caminandes-a': 0, 'view-caminandes-b': 1, 'view-ed-a': 0}
+  3_back_in_the_grid {'primaryContent': 1, 'view-caminandes-a': 0, 'view-caminandes-b': 0, 'view-ed-a': 0}
+  THE CHECK 3 == 2 : False
+  CONTROL   1 != 2 : True
+
+=== M2: enlarging does not take the audio ===
+  1_in_the_grid {'primaryContent': 1, 'view-caminandes-a': 0, 'view-caminandes-b': 0, 'view-ed-a': 0}
+  2_at_full_frame {'primaryContent': 1, 'view-caminandes-a': 0, 'view-caminandes-b': 0, 'view-ed-a': 0}
+  3_back_in_the_grid {'primaryContent': 1, 'view-caminandes-a': 0, 'view-caminandes-b': 0, 'view-ed-a': 0}
+  THE CHECK 3 == 2 : True
+  CONTROL   1 != 2 : False
+
+=== M3: the press on the button also reaches the box ===
+  1_in_the_grid {'primaryContent': 1, 'view-caminandes-a': 0, 'view-caminandes-b': 0, 'view-ed-a': 0}
+  2_at_full_frame {'primaryContent': 1, 'view-caminandes-a': 0, 'view-caminandes-b': 0, 'view-ed-a': 0}
+  3_back_in_the_grid {'primaryContent': 1, 'view-caminandes-a': 0, 'view-caminandes-b': 0, 'view-ed-a': 0}
+  THE CHECK 3 == 2 : True
+  CONTROL   1 != 2 : False

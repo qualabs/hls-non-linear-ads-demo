@@ -1,0 +1,6 @@
+M1  entryOf contesta con la primera caja y no con la que se toco         | prueba nueva: 0 pasan, 3 fallan      | suite entera: 167 pasan, 3 fallan
+M2  entryOf no encuentra nunca nada                                      | prueba nueva: 1 pasan, 2 fallan      | suite entera: 168 pasan, 2 fallan
+M3  el listener del toque vuelve a quedarse con el elemento de su creacion | prueba nueva: 3 pasan, 0 fallan      | suite entera: 170 pasan, 0 fallan
+--  sin mutacion, el control                                             | prueba nueva: 3 pasan, 0 fallan      | suite entera: 170 pasan, 0 fallan
+
+el arbol queda sano: 170 pasan, 0 fallan

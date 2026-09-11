@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>T-07 -- el selector, la lista de casilleros</title>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; background: #0b0d12; color: #e8ecf2;
+               font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .page { padding: 28px; }
+  /* La misma caja que la demo le da a la libreria: posicionada, 16/9, negra, y
+     el acento de quien integra. Nada mas. */
+  .player {
+    position: relative;
+    isolation: isolate;
+    width: 960px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    --qa-accent: #37b4a7;
+  }
+  .player .video { width: 100%; height: 100%; display: block; }
+  .nota { margin: 14px 0 0; font-size: 12.5px; color: #93a0b4; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="player" id="stage">
+    <video class="video" id="v" playsinline muted></video>
+  </div>
+  <p class="nota" id="nota">cargando</p>
+</div>
+<script src="/vendor/hls.min.js"></script>
+<script type="module">
+// El instrumento de la T-07. Lo que corre es lib/ VIVO, traido por un enlace:
+// esta pagina no copia una linea de la libreria, la cablea igual que attach().
+import { activeAt, resolveAssetList } from '/lib/signalling.js';
+import { createMultiview } from '/lib/multiview.js';
+import { createRenderer } from '/lib/renderer.js';
+import { createControls } from '/lib/controls.js';
+import { attachAsset } from '/lib/media.js';
+import { hlsConfig } from '/lib/concurrent-hls.js';
+
+const stage = document.getElementById('stage');
+const video = document.getElementById('v');
+
+// La capa de los avisos, tal como la crea `createLayer` de concurrent-hls.js.
+const layer = document.createElement('div');
+layer.className = 'qa-concurrent-layer';
+layer.setAttribute('aria-hidden', 'true');
+layer.style.position = 'absolute';
+layer.style.inset = '0';
+layer.style.pointerEvents = 'none';
+stage.appendChild(layer);
+
+// LA OFERTA. El asset-list es el de la demo nueva -- cinco vistas, que es mas
+// que las cuatro cajas que entran -- resuelto por la capa de senalizacion. La
+// ventana se declara aca en lugar de salir de un Date Range porque lo que se
+// mira es el selector y no el transporte: lo que la capa de abajo produce es
+// exactamente este objeto.
+const VENTANA = 4;
+const lista = await fetch('/signalling/asset-list-offer-5.json').then((r) => r.json());
+const experiences = resolveAssetList(lista, { id: 'MV-1-OFFER', slotStart: VENTANA });
+const ranges = {
+  ranges: experiences.map((e) => ({ id: e.id, kind: 'multiview', startTime: e.startTime, duration: e.duration })),
+  settled: true
+};
+const provider = {
+  activeAt: (t) => activeAt(experiences, t),
+  programRanges: () => ranges,
+  experiences
+};
+
+const mv = createMultiview(provider);
+let controls = null;
+const renderer = createRenderer({
+  provider: mv, video, layer, attachAsset, chromeUp: () => controls?.up() ?? false
+});
+controls = createControls({
+  container: stage,
+  video,
+  provider: { programRanges: () => ranges },
+  releaseFocus: () => renderer.releaseFocus(),
+  multiview: mv
+});
+
+const hls = new Hls({ ...hlsConfig });
+hls.loadSource('/content/primary/index.m3u8');
+hls.attachMedia(video);
+video.muted = true;
+video.play().catch(() => {});
+
+const box = (el) => {
+  const r = el.getBoundingClientRect();
+  const s = stage.getBoundingClientRect();
+  return {
+    left: Math.round(r.left - s.left), top: Math.round(r.top - s.top),
+    ancho: Math.round(r.width), alto: Math.round(r.height)
+  };
+};
+
+const chrome = () => stage.getElementsByClassName('qa-controls')[0];
+const panel = () => stage.getElementsByClassName('qa-views')[0];
+
+/** Lo que esta EN PANTALLA, leido del DOM y no del estado. */
+window.__t07 = {
+  mv,
+  estado() {
+    const capa = chrome();
+    const p = panel();
+    const filas = p ? [...p.getElementsByClassName('qa-views__row')] : [];
+    const nota = p ? p.getElementsByClassName('qa-views__note')[0] : null;
+    const boton = stage.getElementsByClassName('qa-btn--views')[0];
+    const offer = mv.offerAt(video.currentTime);
+    return {
+      t: Number(video.currentTime.toFixed(2)),
+      pausado: video.paused,
+      imagen: { ancho: video.videoWidth, alto: video.videoHeight },
+      ventanaAbierta: Boolean(offer),
+      cromo: {
+        arriba: controls.up(),
+        clase: capa.className,
+        opacidad: getComputedStyle(capa).opacity
+      },
+      boton: boton ? { oculto: boton.hidden, expandido: boton.getAttribute('aria-expanded') } : null,
+      lista: {
+        abierta: p ? p.classList.contains('qa-views--on') : false,
+        opacidad: p ? getComputedStyle(p).opacity : null,
+        filas: filas.map((f) => ({
+          nombre: f.getElementsByClassName('qa-views__name')[0].textContent,
+          tildada: f.getAttribute('aria-checked'),
+          deshabilitada: f.disabled,
+          bloqueada: f.className.includes('qa-views__row--locked')
+        })),
+        nota: nota ? { oculta: nota.hidden, texto: nota.textContent } : null
+      },
+      // Las cajas de la composicion: el primario, que el renderer mueve con un
+      // transform, mas un nodo por vista subida.
+      cajas: [
+        { id: 'primaryContent', ...box(video) },
+        ...[...layer.children].map((n) => ({
+          id: n.dataset.id ?? n.className, tag: n.tagName,
+          listo: n.readyState, pausado: n.paused,
+          t: Number((n.currentTime ?? 0).toFixed(2)),
+          ...box(n)
+        }))
+      ]
+    };
+  }
+};
+
+// EL RELOJ DE LA PAGINA, que es lo que dice cuando bajo el cromo: los ms son
+// de `performance.now` y no la suma de los sleep del script (leccion de T-06).
+const capa = chrome();
+window.__log = [];
+window.__marca = (texto) => window.__log.push({ ms: Number(performance.now().toFixed(1)), marca: texto });
+new MutationObserver(() => window.__log.push({
+  ms: Number(performance.now().toFixed(1)),
+  arriba: capa.classList.contains('qa-controls--on')
+})).observe(capa, { attributes: true, attributeFilter: ['class'] });
+
+document.getElementById('nota').textContent =
+  'la ventana abre en el segundo ' + VENTANA + ' y dura ' + experiences[0].duration + ' s';
+</script>
+</body>
+</html>
