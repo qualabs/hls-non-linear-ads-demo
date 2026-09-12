@@ -1,0 +1,53 @@
+== npm test ==
+[signalling] asset-list-mezclado.json: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] asset-list-mezclado.json: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ the ads that are drawn a layout fade, and the one at full frame does not (6.119813ms)
+✔ inside one break the answer is per ad and not per break (2.336416ms)
+✔ the fallback of ADR 0019 lands on the side of the full-frame ad (1.020435ms)
+✔ the label this file copies is the one the layer underneath writes (0.353422ms)
+✔ an experience with no type at all still fades (0.399346ms)
+✔ what is left of a window is the window minus where the playhead is (0.645405ms)
+✔ the ad of a break that does not start at zero is read against its own window (0.838348ms)
+✔ the middle of a window is not leaving, on either lead (1.533078ms)
+✔ a frame inside the lead is leaving and a frame outside it is not (1.280829ms)
+✔ before the window opens nothing is leaving, and after it closes everything is (4.049881ms)
+✔ a window shorter than its own transition is leaving from its first frame (0.387926ms)
+✔ a window of zero length is leaving the moment it opens (1.113629ms)
+✔ a playhead that is not a number is not leaving (0.431697ms)
+✔ the three durations are the ones the phase declared, and the way out is the shortest (0.368693ms)
+✔ a still is told apart from a video, including when nothing is declared (0.224284ms)
+✔ the ad the phase fades is a still, so the two rules meet on the banner (0.186888ms)
+✔ with room on the grid the list says nothing, because there is nothing to explain (4.487869ms)
+✔ with the grid full the line is there, and it names the cap of the screen (0.894463ms)
+✔ a full grid with nothing left to raise says nothing either (0.742518ms)
+✔ the line is decided by the flag the state ships and not by counting ticks (0.253266ms)
+ℹ tests 183
+ℹ suites 0
+ℹ pass 183
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1745.098903
+
+== npm run check ==
+
+> qualabs-concurrent-hls@0.0.0 check
+> ./scripts/verificar-cortes.mjs
+
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js lib/multiview.js demo/compatibility-pair/js/contract-trace.js demo/compatibility-pair/css/player.css
+
+   GREEN: 3 occurrence(s), all of them on the accepted list.
+     lib/controls.js:33  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:133  interstitial: '#ffcc00'
+     lib/controls.js:169  interstitial: 'traditional interstitial: the content is replaced by the ad'
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.

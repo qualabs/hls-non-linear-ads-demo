@@ -1,0 +1,32 @@
+=== h2-con-la-nota ===
+2-cajas  1280x900  boxes=2  play=[603, 696, 74, 74]  bar=[78, 989, 1124, 60]  GREEN
+   Tears of Steel: to the whole pictu corner=nw rect=[84, 582, 34, 34] point=[101, 599] belongs=True owner=svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, early: to the whole pi corner=nw rect=[646, 582, 34, 34] point=[663, 599] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+3-cajas  1280x900  boxes=3  play=[603, 696, 74, 74]  bar=[78, 989, 1124, 60]  GREEN
+   Tears of Steel: to the whole pictu corner=nw rect=[84, 424, 34, 34] point=[101, 441] belongs=True owner=svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, early: to the whole pi corner=nw rect=[646, 424, 34, 34] point=[663, 441] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, late: to the whole pic corner=nw rect=[365, 740, 34, 34] point=[382, 757] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, late: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+4-cajas  1280x900  boxes=4  play=[603, 696, 74, 74]  bar=[78, 989, 1124, 60]  GREEN
+   Tears of Steel: to the whole pictu corner=nw rect=[84, 424, 34, 34] point=[101, 441] belongs=True owner=svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, early: to the whole pi corner=nw rect=[646, 424, 34, 34] point=[663, 441] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, late: to the whole pic corner=nw rect=[84, 740, 34, 34] point=[101, 757] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, late: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Elephants Dream, early: to the who corner=ne rect=[1162, 740, 34, 34] point=[1179, 757] belongs=True owner=svg in qa-btn qa-box__btn[Elephants Dream, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+4-cajas-en-un-telefono  420x820  boxes=4  play=[173, 451, 74, 74]  bar=[14, 538, 392, 60]  GREEN
+   Tears of Steel: to the whole pictu corner=nw rect=[20, 384, 34, 34] point=[37, 401] belongs=True owner=svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, early: to the whole pi corner=nw rect=[216, 384, 34, 34] point=[233, 401] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, late: to the whole pic corner=nw rect=[20, 494, 34, 34] point=[37, 511] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, late: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Elephants Dream, early: to the who corner=ne rect=[366, 494, 34, 34] point=[383, 511] belongs=True owner=svg in qa-btn qa-box__btn[Elephants Dream, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+ALL GREEN

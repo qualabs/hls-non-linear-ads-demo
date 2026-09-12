@@ -1,0 +1,33 @@
+[http FAIL] http://127.0.0.1:8093/content/primary/seg002.ts net::ERR_ABORTED
+=== antes ===
+2-cajas  1280x900  boxes=2  play=[603, 359, 74, 74]  bar=[90, 646, 1100, 60]  GREEN
+   Tears of Steel: to the whole pictu corner=nw rect=[96, 248, 34, 34] point=[113, 265] belongs=True owner=svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, early: to the whole pi corner=nw rect=[646, 248, 34, 34] point=[663, 265] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+3-cajas  1280x900  boxes=3  play=[603, 359, 74, 74]  bar=[90, 646, 1100, 60]  GREEN
+   Tears of Steel: to the whole pictu corner=nw rect=[96, 93, 34, 34] point=[113, 110] belongs=True owner=svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, early: to the whole pi corner=nw rect=[646, 93, 34, 34] point=[663, 110] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, late: to the whole pic corner=nw rect=[371, 403, 34, 34] point=[388, 420] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, late: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+4-cajas  1280x900  boxes=4  play=[603, 359, 74, 74]  bar=[90, 646, 1100, 60]  GREEN
+   Tears of Steel: to the whole pictu corner=nw rect=[96, 93, 34, 34] point=[113, 110] belongs=True owner=svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, early: to the whole pi corner=nw rect=[646, 93, 34, 34] point=[663, 110] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, late: to the whole pic corner=nw rect=[96, 403, 34, 34] point=[113, 420] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, late: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Elephants Dream, early: to the who corner=ne rect=[1162, 403, 34, 34] point=[1179, 420] belongs=True owner=svg in qa-btn qa-box__btn[Elephants Dream, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+4-cajas-en-un-telefono  420x820  boxes=4  play=[173, 193, 74, 74]  bar=[20, 277, 380, 60]  GREEN
+   Tears of Steel: to the whole pictu corner=nw rect=[26, 129, 34, 34] point=[43, 146] belongs=True owner=svg in qa-btn qa-box__btn[Tears of Steel: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, early: to the whole pi corner=nw rect=[216, 129, 34, 34] point=[233, 146] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Caminandes, late: to the whole pic corner=nw rect=[26, 236, 34, 34] point=[43, 253] belongs=True owner=svg in qa-btn qa-box__btn[Caminandes, late: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+   Elephants Dream, early: to the who corner=ne rect=[372, 236, 34, 34] point=[389, 253] belongs=True owner=svg in qa-btn qa-box__btn[Elephants Dream, early: to the whole picture]
+      overPlay=[0, 0, 0] overBar=[0, 0, 0] overRow=[0, 0, 0] clicked=True enlargedIsTheOnePressed=True 
+ALL GREEN

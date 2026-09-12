@@ -1,0 +1,7498 @@
+{
+ "url": "http://127.0.0.1:8093/index.html",
+ "tomada": "2026-09-12T00:35:37Z",
+ "ms": 700,
+ "gestos": [
+  {
+   "gesto": "agrandar una vista",
+   "boton": "Caminandes, early: to the whole picture",
+   "cuadros": [
+    {
+     "ms": 12.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 31.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 45.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 63.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 77.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       483.1,
+       0,
+       616.9,
+       347
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       489.5,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 100.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       418.7,
+       0,
+       681.3,
+       383.2
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       425.1,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 117.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       357.8,
+       0,
+       742.2,
+       417.5
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       364.2,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 138.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       302.7,
+       0,
+       797.3,
+       448.5
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       309.1,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 180.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       174.5,
+       0,
+       925.5,
+       520.6
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       180.9,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 204.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       143.7,
+       0,
+       956.3,
+       537.9
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       150.1,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 222.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       117.5,
+       0,
+       982.5,
+       552.6
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       123.9,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 242.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       95.3,
+       0,
+       1004.7,
+       565.2
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       101.7,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 274.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       60.8,
+       0,
+       1039.2,
+       584.6
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       67.2,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 289,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       47.6,
+       0,
+       1052.4,
+       592
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       54,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 303.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       36.6,
+       0,
+       1063.4,
+       598.2
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       43,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 321.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       27.5,
+       0,
+       1072.5,
+       603.3
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       33.9,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 337.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       20,
+       0,
+       1080,
+       607.5
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       26.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 355.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       13.9,
+       0,
+       1086.1,
+       610.9
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       20.3,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 371.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       9.2,
+       0,
+       1090.8,
+       613.6
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       15.6,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 389,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       5.5,
+       0,
+       1094.5,
+       615.6
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       11.9,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 404.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       2.9,
+       0,
+       1097.1,
+       617.1
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       9.3,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 422.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       1.2,
+       0,
+       1098.8,
+       618.1
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       7.6,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 438.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0.2,
+       0,
+       1099.8,
+       618.6
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.6,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 462.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 495.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 528.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 543.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 561.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 579.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 594.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 611.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 629,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 644,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 661.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 680.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 697,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 716.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    }
+   ]
+  },
+  {
+   "gesto": "desagrandar una vista",
+   "boton": "Caminandes, early: back to the grid",
+   "cuadros": [
+    {
+     "ms": 16.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 31.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": null,
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 52,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 65.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 86.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       66.5,
+       0,
+       1033.5,
+       581.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       72.9,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 177.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       339,
+       0,
+       761,
+       428
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       345.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 194.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       375.5,
+       0,
+       724.5,
+       407.5
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       381.9,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 210.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       406.4,
+       0,
+       693.6,
+       390.2
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       412.7,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 221.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       432.6,
+       0,
+       667.4,
+       375.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       439,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 235.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       454.7,
+       0,
+       645.3,
+       363
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       461.1,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 249.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       473.5,
+       0,
+       626.5,
+       352.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       479.9,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 270.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       489.2,
+       0,
+       610.8,
+       343.6
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       495.5,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 282.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       502.4,
+       0,
+       597.6,
+       336.2
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       508.8,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 301,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       513.4,
+       0,
+       586.6,
+       329.9
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       519.8,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 315.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       522.6,
+       0,
+       577.4,
+       324.8
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       529,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 334.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       530.1,
+       0,
+       569.9,
+       320.6
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       536.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 350.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       536.1,
+       0,
+       563.9,
+       317.2
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       542.5,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 368.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       540.8,
+       0,
+       559.2,
+       314.5
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       547.2,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 382.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       544.5,
+       0,
+       555.5,
+       312.5
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       550.9,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 400.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       547.1,
+       0,
+       552.9,
+       311
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       553.5,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 415.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       548.8,
+       0,
+       551.2,
+       310
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       555.2,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 434.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       549.8,
+       0,
+       550.2,
+       309.5
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.2,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 470.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 500.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 534.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 570.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 601.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 634.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 671,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 701,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    }
+   ]
+  },
+  {
+   "gesto": "agrandar el primario",
+   "boton": "Tears of Steel: to the whole picture",
+   "cuadros": [
+    {
+     "ms": 8.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 26.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 37.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 57.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 71.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 90.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       616.8,
+       346.9
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 107,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       681.6,
+       383.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 127.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       742.1,
+       417.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 137.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       797.6,
+       448.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 157.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       846.4,
+       476.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 171.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       889,
+       500
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 191.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       925.3,
+       520.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 207.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       956.3,
+       537.9
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 227.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       982.5,
+       552.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 238.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1004.7,
+       565.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 257.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1023.4,
+       575.7
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 271.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1039.2,
+       584.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 290.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1052.4,
+       592
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 305.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1063.4,
+       598.2
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 326.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1072.6,
+       603.3
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 337.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1080,
+       607.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 361.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1086.1,
+       610.9
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 402.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1094.5,
+       615.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 457,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 487.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 505.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 521.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 537.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 554.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 571,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 587.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 606.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 621.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 637.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 654.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 671,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 691.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 730.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    }
+   ]
+  },
+  {
+   "gesto": "desagrandar el primario",
+   "boton": "Tears of Steel: back to the grid",
+   "cuadros": [
+    {
+     "ms": 7.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 23.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 39.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": null,
+      "view-caminandes-b": null,
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 57.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 73.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1100,
+       618.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 90.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       1033.7,
+       581.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 107.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       968.9,
+       545
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 123.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       907.9,
+       510.7
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 140,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       852.5,
+       479.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 157.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       803.7,
+       452.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 173.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       761.1,
+       428.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 190.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       724.6,
+       407.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 208.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       693.6,
+       390.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 223.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       667.4,
+       375.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 240,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       645.2,
+       362.9
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 257,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       626.5,
+       352.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 273.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       610.8,
+       343.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 290.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       597.6,
+       336.1
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 308.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       586.6,
+       330
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 323.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       577.5,
+       324.8
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 340.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       570,
+       320.6
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 358.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       563.9,
+       317.2
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 395.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       555.5,
+       312.5
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 437.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       551.2,
+       310
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 465.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 490.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 524.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 556.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 590.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 623.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 657,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 691.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 723.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    }
+   ]
+  },
+  {
+   "gesto": "subir una tercera c\u00e1mara",
+   "boton": "Elephants Dream, early",
+   "cuadros": [
+    {
+     "ms": 4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 22.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 36.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 56.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 72.7,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 89.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 103.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 122.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 138.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 156.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 171.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 190.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 203.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 222.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 236.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 256.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": null
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": null
+     }
+    },
+    {
+     "ms": 275.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 290.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       275,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       281.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 303.5,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       241.7,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       248.1,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 323,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       209.3,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       215.7,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 337.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       178.8,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       185.2,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 355.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       151.4,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       157.8,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 371.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       126.9,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       133.3,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 391.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       105.6,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       112,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 414.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       87.3,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       93.7,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 436.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       71.9,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       78.3,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 486.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       38.3,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       44.7,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 507.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       23.8,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       30.2,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 533.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       18.3,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       24.7,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 548.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       13.7,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       20.1,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 567.8,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       10,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       16.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 585,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       7,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       13.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 601.3,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       4.6,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       11,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 617.9,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       2.8,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       9.2,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 634.2,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       1.5,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       7.8,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 653.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0.6,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       7,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 668.4,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0.1,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       6.5,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 691.6,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       6.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    },
+    {
+     "ms": 723.1,
+     "cajas": {
+      "primario": [
+       0,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-a": [
+       550,
+       0,
+       550,
+       309.4
+      ],
+      "view-caminandes-b": [
+       0,
+       309.4,
+       550,
+       309.4
+      ],
+      "view-ed-a": [
+       550,
+       309.4,
+       550,
+       309.4
+      ]
+     },
+     "botones": {
+      "primario": [
+       6.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-a": [
+       556.4,
+       6.4,
+       34,
+       34
+      ],
+      "view-caminandes-b": [
+       6.4,
+       315.8,
+       34,
+       34
+      ],
+      "view-ed-a": [
+       1072.4,
+       315.8,
+       34,
+       34
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "navegador": "Chrome 153.0.8010.36",
+ "contexto": {
+  "contenedor": [
+   1100,
+   619
+  ],
+  "video": [
+   1280,
+   720
+  ],
+  "hls": "1.7.2"
+ },
+ "avisos": [
+  "Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "[hls] error mediaError bufferSeekOverHole fatal: false"
+ ]
+}

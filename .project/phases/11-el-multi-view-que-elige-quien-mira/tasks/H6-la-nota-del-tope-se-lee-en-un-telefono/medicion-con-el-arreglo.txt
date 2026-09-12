@@ -1,0 +1,84 @@
+[http FAIL] http://localhost:8093/content/primary/seg007.ts
+=== con ===
+
+420 px  420x860  GREEN
+  [con-lugar] panel 137 px of 247 (overflow 110, scrollTop 0)  green
+     title  visible  30.2 of  30.2  whole=True
+     note   visible     0 of     0  whole=True  hidden=True
+     row up   Tears of Steel           visible    34 of    34  whole=True
+     row up   Caminandes, early        visible    34 of    34  whole=True
+     row      Caminandes, late         visible  32.3 of    34  whole=False
+     row      Elephants Dream, early   visible     0 of    34  whole=False
+     row      Elephants Dream, late    visible     0 of    34  whole=False
+     row      Sintel                   visible     0 of    34  whole=False
+     OK   no note
+     OK   no grey rows
+     OK   the head is shown
+  [grilla-llena] panel 137 px of 297 (overflow 160, scrollTop 160)  green
+     title  visible     0 of  30.2  whole=False
+     note   visible  44.4 of  44.4  whole=True  hidden=False
+     row up   Tears of Steel           visible     0 of    34  whole=False
+     row up   Caminandes, early        visible     0 of    34  whole=False
+     row up   Caminandes, late         visible     0 of    34  whole=False
+     row up   Elephants Dream, early   visible  12.7 of    34  whole=False
+     row grey Elephants Dream, late    visible    34 of    34  whole=True
+     row grey Sintel                   visible    34 of    34  whole=True
+     OK   note is shown
+     OK   note is whole
+     OK   there are grey rows
+     OK   every grey row is whole
+  [reabierto] panel 137 px of 297 (overflow 160, scrollTop 160)  green
+     title  visible     0 of  30.2  whole=False
+     note   visible  44.4 of  44.4  whole=True  hidden=False
+     row up   Tears of Steel           visible     0 of    34  whole=False
+     row up   Caminandes, early        visible     0 of    34  whole=False
+     row up   Caminandes, late         visible     0 of    34  whole=False
+     row up   Elephants Dream, early   visible  12.7 of    34  whole=False
+     row grey Elephants Dream, late    visible    34 of    34  whole=True
+     row grey Sintel                   visible    34 of    34  whole=True
+     OK   note is shown
+     OK   note is whole
+     OK   there are grey rows
+     OK   every grey row is whole
+
+1440 px  1440x900  GREEN
+  [con-lugar] panel 247 px of 247 (overflow 0, scrollTop 0)  green
+     title  visible  30.2 of  30.2  whole=True
+     note   visible     0 of     0  whole=True  hidden=True
+     row up   Tears of Steel           visible    34 of    34  whole=True
+     row up   Caminandes, early        visible    34 of    34  whole=True
+     row      Caminandes, late         visible    34 of    34  whole=True
+     row      Elephants Dream, early   visible    34 of    34  whole=True
+     row      Elephants Dream, late    visible    34 of    34  whole=True
+     row      Sintel                   visible    34 of    34  whole=True
+     OK   no note
+     OK   no grey rows
+     OK   the head is shown
+  [grilla-llena] panel 297 px of 297 (overflow 0, scrollTop 0)  green
+     title  visible  30.2 of  30.2  whole=True
+     note   visible  44.4 of  44.4  whole=True  hidden=False
+     row up   Tears of Steel           visible    34 of    34  whole=True
+     row up   Caminandes, early        visible    34 of    34  whole=True
+     row up   Caminandes, late         visible    34 of    34  whole=True
+     row up   Elephants Dream, early   visible    34 of    34  whole=True
+     row grey Elephants Dream, late    visible    34 of    34  whole=True
+     row grey Sintel                   visible    34 of    34  whole=True
+     OK   note is shown
+     OK   note is whole
+     OK   there are grey rows
+     OK   every grey row is whole
+  [reabierto] panel 297 px of 297 (overflow 0, scrollTop 0)  green
+     title  visible  30.2 of  30.2  whole=True
+     note   visible  44.4 of  44.4  whole=True  hidden=False
+     row up   Tears of Steel           visible    34 of    34  whole=True
+     row up   Caminandes, early        visible    34 of    34  whole=True
+     row up   Caminandes, late         visible    34 of    34  whole=True
+     row up   Elephants Dream, early   visible    34 of    34  whole=True
+     row grey Elephants Dream, late    visible    34 of    34  whole=True
+     row grey Sintel                   visible    34 of    34  whole=True
+     OK   note is shown
+     OK   note is whole
+     OK   there are grey rows
+     OK   every grey row is whole
+
+ALL GREEN

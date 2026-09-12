@@ -1,0 +1,30 @@
+### /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/.project/phases/11-el-multi-view-que-elige-quien-mira/tasks/H6-la-nota-del-tope-se-lee-en-un-telefono/heredadas/h4-lectura.json   (Chrome 153.0.8010.36, contenedor [1124, 632], 2026-09-12T01:09:32Z)
+  agrandar una vista
+    primario             caja quieta (  0 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los   14.1 ms   ok
+    view-caminandes-a    caja VIAJA  ( 19 cuadros intermedios)   esquina wn   deriva máx     0.1 px a los  282.4 ms   ok
+    view-caminandes-b    caja quieta (  0 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los   14.1 ms   ok
+    view-ed-a            sin botón en pantalla durante el gesto
+  desagrandar una vista
+    primario             caja quieta (  0 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los   67.3 ms   ok
+    view-caminandes-a    caja VIAJA  ( 21 cuadros intermedios)   esquina wn   deriva máx     0.1 px a los  328.2 ms   ok
+    view-caminandes-b    caja quieta (  0 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los   67.3 ms   ok
+    view-ed-a            sin botón en pantalla durante el gesto
+  agrandar el primario
+    primario             caja VIAJA  ( 21 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los   12.6 ms   ok
+    view-caminandes-a    caja quieta (  0 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los   12.6 ms   ok
+    view-caminandes-b    caja quieta (  0 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los   12.6 ms   ok
+    view-ed-a            sin botón en pantalla durante el gesto
+  desagrandar el primario
+    primario             caja VIAJA  ( 21 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los   15.1 ms   ok
+    view-caminandes-a    caja quieta (  0 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los   49.1 ms   ok
+    view-caminandes-b    caja quieta (  0 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los   49.1 ms   ok
+    view-ed-a            sin botón en pantalla durante el gesto
+  subir una tercera cámara
+    primario             caja quieta (  0 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los    5.8 ms   ok
+    view-caminandes-a    caja quieta (  0 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los    5.8 ms   ok
+    view-caminandes-b    caja VIAJA  ( 20 cuadros intermedios)   esquina wn   deriva máx     0.0 px a los    5.8 ms   ok
+    view-ed-a            caja quieta (  0 cuadros intermedios)   esquina en   deriva máx     0.0 px a los  329.5 ms   ok
+
+== VERDE: el botón se mantuvo en su esquina en todos los cuadros de todos los gestos ==
+
+JUZGAR EXIT=0

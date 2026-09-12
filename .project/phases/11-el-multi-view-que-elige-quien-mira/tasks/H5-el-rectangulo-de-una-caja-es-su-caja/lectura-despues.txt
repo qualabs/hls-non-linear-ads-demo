@@ -1,0 +1,16 @@
+esperando la ventana de la oferta (t=48s)...
+### H5-el-rectangulo-de-una-caja-es-su-caja/despues.json   (Chrome 153.0.8010.36, contenedor [1100, 618.8], imagen [0, 0, 1100, 618.8])
+  qa-box qa-box--nw    box-sizing=border-box  padding=6.4px
+    escrito   550.0 x   309.4   pintado   550.0 x   309.4   sobra +0.0 x +0.0   mide la caja
+    botón [6.4, 6.4, 34, 34]   adentro de la imagen
+  qa-box qa-box--nw    box-sizing=border-box  padding=6.4px
+    escrito   550.0 x   309.4   pintado   550.0 x   309.4   sobra +0.0 x +0.0   mide la caja
+    botón [556.4, 6.4, 34, 34]   adentro de la imagen
+  qa-box qa-box--nw    box-sizing=border-box  padding=6.4px
+    escrito   550.0 x   309.4   pintado   550.0 x   309.4   sobra +0.0 x +0.0   mide la caja
+    botón [6.4, 315.8, 34, 34]   adentro de la imagen
+  qa-box qa-box--ne    box-sizing=border-box  padding=6.4px
+    escrito   550.0 x   309.4   pintado   550.0 x   309.4   sobra +0.0 x +0.0   mide la caja
+    botón [1059.6, 315.8, 34, 34]   adentro de la imagen
+
+== VERDE: los cuatro rectángulos miden su caja y los cuatro botones caen adentro de la imagen ==
