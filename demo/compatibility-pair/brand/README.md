@@ -14,11 +14,12 @@ version over; a divergent local edit is a fork of somebody else's brand that nob
 
 ## Two things worth knowing before using them
 
-**The logo needs a light surface.** Its wordmark is ink `#383838` and its mark carries a `#dbdfe2`
-and a `#fff` shape, so on the dark page of the player half of it disappears. It goes on a white
-plate, which is what the brand's own documents do. Recolouring it to suit a dark interface is not an
-option that was rejected for taste: it is how a brand gets broken. This page does not use the logo
-yet; the file is here for the recording.
+**The logo needs a light surface, and what changes to get one is the logo.** The wordmark of
+`logo-qualabs.svg` is ink `#383838`, so on a dark page half of it disappears. The answer is a
+variant with the wordmark in white and the mark untouched, not a white rectangle under it: Nicolás
+rejected the plate, twice, and `demo/hydration-break/brand/logo-qualabs-on-dark.svg` is that
+variant. **This page still puts the mark on a light plate**, which predates that decision and is a
+pending call, not an endorsement.
 
 **The palette is used as accents, not as surfaces.** The reference document these came from is a
 light page that fills whole bands with teal. A player is the opposite case: the picture is the

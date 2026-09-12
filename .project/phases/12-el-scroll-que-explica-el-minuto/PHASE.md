@@ -1,9 +1,9 @@
 ---
 phase: 12-el-scroll-que-explica-el-minuto
 title: "El scroll que explica el minuto: la página de abajo deja de recapitular y pasa a explicar"
-status: planning
+status: closed
 started: 2026-09-11
-closed: null
+closed: 2026-09-11
 ---
 
 # Fase 12: el scroll que explica el minuto

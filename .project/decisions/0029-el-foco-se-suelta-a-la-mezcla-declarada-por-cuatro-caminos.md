@@ -7,7 +7,7 @@ date: 2026-09-08
 supersedes: null
 superseded_by: null
 generalizes: null
-generalized_by: null
+generalized_by: "0078"
 ---
 
 ## Contexto
@@ -67,3 +67,21 @@ sigue la ventana declarada.
 
 Descartado **volver al primario** en vez de a la mezcla declarada, por la
 aritmética del Quad del contexto.
+
+---
+
+## 2026-09-11 — nota: generalizado por el ADR 0078
+
+**El segundo y el cuarto camino de arriba están escritos nombrando el mecanismo
+que los producía, y ese mecanismo dejó de ser el único.** Cuando se escribió
+esto, cualquier cambio de composición destruía todos los nodos, así que "se
+rearma la composición" y "el nodo enfocado ya no existe" eran la misma frase. El
+ADR 0070 hizo que los nodos que sobreviven se queden, y el **ADR 0078** enuncia
+esas dos salidas al nivel al que siempre se referían: el foco se suelta cuando el
+nodo que lo tenía deja de existir.
+
+Nada de lo que este ADR decide se vuelve falso, y por eso queda `accepted` con su
+`superseded_by` en `null`: el destino sigue siendo la mezcla declarada, las
+salidas siguen siendo las mismas, y sus cuatro descartes —incluido conservar el
+foco por posición de caja o por `id` de elemento— siguen en pie tal como están
+escritos.

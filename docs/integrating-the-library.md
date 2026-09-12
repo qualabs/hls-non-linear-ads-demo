@@ -5,13 +5,20 @@ ad runs beside the content instead of replacing it. You keep your own player
 instance and your own content; the library takes over one box of your page and
 draws the composition inside it.
 
+It reads a second class of Date Range as well, and what separates the two is who
+composes the picture. An ad declares where every box goes and the client draws
+what it was told; a **multi view** announces a catalogue of feeds and whoever is
+watching builds the grid out of it. Nothing on your page changes for that — no
+call of your own, no option, no second container — and §5.2 is why.
+
 What you add is a `<script src>`, a container, and one call. What you have to
 get right is on this page, and two of those things are requirements the library
 cannot fix for you afterwards — they are §2.
 
-The chrome it draws — the progress bar, the play/pause, the audio control and
-fullscreen of the composition — can also be used on its own, over a player this
-library does nothing else to. That is a second call and it is §6.
+The chrome it draws — the progress bar, the play/pause, the audio control, the
+list of feeds and fullscreen of the composition — can also be used on its own,
+over a player this library does nothing else to. That is a second call and it is
+§6.
 
 The seam between the two layers inside the library is a different document,
 `contrato-senalizacion-renderizado.md`. You do not need it to integrate; you
@@ -147,8 +154,9 @@ picture.
 What you get instead, drawn by the library inside your container: one progress
 bar along the bottom for the **whole programme**, with the breaks marked **on the
 bar itself** and nothing hanging below it; play/pause centred over the
-composition; one audio control at the top right; and fullscreen **of the
-composition**, which is the container and everything in it.
+composition; one audio control at the top right; the list of feeds beside it,
+which appears only while a multi view is being offered (§5.2); and fullscreen
+**of the composition**, which is the container and everything in it.
 
 The bar is dragged as well as pressed, and it is one gesture and not two: a press
 anywhere on it takes the dot there, the dot follows the pointer, and **the seek
@@ -239,6 +247,7 @@ and no npm dependency (§8).
 | | the geometry of the primary content **while a break is on screen** — its position, its size, its scale, and **the time it takes to get there** (§5.1) |
 | | whether an element of an ad fades in and out, and whether it is painted onto an opaque bed (§5.1) |
 | | the controls of the composition, and the element that goes fullscreen |
+| | which feeds of an offer are on the grid, in what order and which one is enlarged, while that window is open (§5.2) |
 | | the volume of every element during a break, including the primary's: the asset-list declares the initial mix, and with the chrome on screen a press on a video box of the ad hands that box the whole sound until it is let go (ADR 0026) |
 
 The library takes the media element from the instance you pass — either it is
@@ -290,6 +299,50 @@ Two things worth knowing because they touch what stays yours:
   PNG with an alpha channel is for. The difference is not configurable either,
   and it is the reason a transparent creative works.
 
+### 5.2 The viewer can compose the picture, and your page does nothing for it
+
+A Date Range of the multi view class announces a **catalogue** instead of a
+layout: what else can be watched during that window and what each feed is
+called. Where any of it goes is not in the payload, and cannot be — where a box
+goes depends on how many boxes end up on screen, and that is decided here, more
+than once, while the window is open.
+
+**There is nothing to integrate.** No call, no option, no container of your own,
+and no switch. A playlist that signals no offer resolves none, so a player of a
+single feed comes out exactly as it did before this existed; a playlist that
+signals one grows the list of feeds in the chrome for the length of that window
+and puts it away afterwards. What decides it is what the playlist carries.
+
+What the library does inside the container while a window is open: it announces
+the offer once, in a popup that leaves, and marks the button that opens the list
+for as long as there is something on offer; a row raises a feed and the same row
+lowers it; a button on a box takes that box to full frame **with the sound**,
+which is one gesture and not two, and brings it back still sounding; and one
+control puts the programme back alone. The programme is a row of that list like
+any other, and it is the one row that is ticked and cannot be unticked: it
+carries the clock everything else is placed against.
+
+**The cap on the grid is of the screen and never of the catalogue.** A catalogue
+is as long as whoever published it wants; what is capped is how much of it is up
+at once, counting the programme. With the grid full the rows that are not up go
+grey with a line saying why, and the way past it is to lower one and raise
+another. The number comes from the table of shapes the library composes with,
+derived from it rather than written beside it — `MAX_BOXES` in
+`lib/signalling.js`.
+
+**A full grid is that many video decoders playing at once**, which is exactly the
+number `decoderCount` exists to tell your ad server before it picks what to send
+(§6). Nothing here reads that option back or refuses a catalogue over it: what to
+offer a device is the server's decision, and this is the seam the input arrives
+on.
+
+**What is not known, and it is not an omission that measuring here would close:
+how much bandwidth a full grid asks of a real connection, and what an adaptive
+bitrate algorithm does with that many players competing.** Everything measured so
+far ran against content served from the same machine, so what has been shown is
+that the decoders keep up, and nothing at all about the network. If you are
+sizing this for a live service, that number is yours to take.
+
 ---
 
 ## 6. The public surface
@@ -299,11 +352,17 @@ The global is `QualabsConcurrentHls`, and this is all of it:
 | | |
 | --- | --- |
 | `VERSION` | the library's version, a string |
-| `CONCURRENT_CLASS` | `'com.qualabs.hls.concurrentInterstitial'`, the Date Range class this reads |
+| `CONCURRENT_CLASS` | `'com.qualabs.hls.concurrentInterstitial'`, the Date Range class of a concurrent ad |
 | `DECODER_COUNT_PARAM` | `'qa-decoder-count'`, the query parameter `decoderCount` travels in |
 | `hlsConfig` | the configuration your instance has to be built with (§2.1) |
 | `attach(hls, options)` | turns the concurrent experience on, and returns a handle |
 | `attachControls(video, options)` | draws the chrome on a player, with nothing else turned on |
+
+**The multi view class is not on the global**, and it is better known than
+discovered. The library reads `com.qualabs.hls.multiViewInterstitial` too, and the
+only place that string is published is the source — `MULTIVIEW_CLASS` in
+`lib/signalling.js`. A packager or an ad server that has to spell it writes it
+out, with no name to check itself against.
 
 ### `attach(hls, options)`
 
@@ -379,6 +438,34 @@ and a client-side one can be written against the same string.
 
 `provider` is the one to build on. The last three are there to be inspected, not
 to be driven.
+
+### The list of breaks is not complete until it says so
+
+`provider.programRanges()` answers `{ ranges, settled }`, and the second half is
+the one that gets missed.
+
+The ranges resolve **one at a time**, as each asset-list comes back off the
+network, and nothing announces the last one. So a page that draws the moment it
+has something draws whatever had arrived by then. Measured on the multi view demo
+of this repository: drawn on the first frame that had enough, the section under
+the player showed **two of the three breaks** of a playlist that signals three —
+no error, no warning, and nothing on the screen to say one was missing.
+
+`settled` is the contract's own answer to *is this the whole list*. `false` means
+the list is partial and you ask again; `true` means the signalling has handed over
+every range it is going to and none is still resolving. Waiting for it costs a few
+hundred milliseconds of an empty container, and an empty container is the honest
+state of a section whose subject has not finished arriving.
+
+What it talks about is the **signalling and not the programme**: it turns `true`
+when the source of the ranges is closed — a playlist that cannot grow — and
+everything that source fired has finished. Over a source that keeps growing it
+never turns `true`, and what you draw off it repaints as the ranges arrive, which
+is the same thing the bar does.
+
+The bar the library draws needs none of this, because it re-reads on every paint
+the way it re-reads the length. It is your own reading of the contract that gets
+one chance to be wrong.
 
 ### `attachControls(video, options)`
 
@@ -482,11 +569,16 @@ and copy the one file it writes.
 Ten lines: six of JavaScript and four of markup, plus the two CSS rules of §3.
 That is the page of §1 with the optional things left out.
 
-The demo in this repository is that page with one option added, `onResolved`,
-plus one more call of §6 -- `attachControls` over the second player, so that both
-pictures carry the same chrome. Everything else it contains is there to make its
-own argument: that second player at its factory configuration for the
-compatibility pair, the object it hands over so its bar reads the programme and
-not the ad it replaces it with, and the trace of the contract under the picture
-and in the console. None of that is plumbing this library needs, and the second
-call is the same one line the section above documents.
+The compatibility-pair demo in this repository is that page with one option
+added, `onResolved`, plus one more call of §6 -- `attachControls` over the second
+player, so that both pictures carry the same chrome. Everything else it contains
+is there to make its own argument: that second player at its factory
+configuration for the compatibility pair, the object it hands over so its bar
+reads the programme and not the ad it replaces it with, and the trace of the
+contract under the picture and in the console. None of that is plumbing this
+library needs, and the second call is the same one line the section above
+documents.
+
+The multi view demo is those ten lines exactly, with no option at all: what makes
+it a multi view is the second class in its playlist and not a line of its page.
+What it adds is its own reading of `provider`, to draw the run under the picture.

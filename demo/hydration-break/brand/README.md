@@ -3,22 +3,25 @@
 Copies. Not links, not a CDN, not a path into another project on somebody's laptop: a file that
 resolves off a sibling repo works exactly until the demo is recorded or shown from anywhere else.
 
-| file | what it is | copied from |
+| file | what it is | where it comes from |
 | --- | --- | --- |
 | `logo-qualabs.svg` | the full logo, mark plus wordmark, 1920x436 | `projects/mtv-accelerators/design-references/qualabs-brand/assets/logo_qualabs.svg` |
+| `logo-qualabs-on-dark.svg` | the same artwork with its seven wordmark paths in white and the mark keeping its four inks | derived here from `logo-qualabs.svg` |
 | `favicon.svg` | the mark alone, for the browser tab | `.../qualabs-brand/assets/favicon.svg` |
 | `fonts-embedded.css` | Poppins 400/500/600/700 + italic 600, and JetBrains Mono 400/500/600, as base64 woff2 in eight `@font-face` rules | `.../qualabs-brand/fonts/fonts-embedded.css` |
 
-Copied on 2026-08-18, byte for byte. **Do not edit them here.** If the brand changes, copy the new
-version over; a divergent local edit is a fork of somebody else's brand that nobody will find.
+The three copied on 2026-08-18, byte for byte. **Do not edit those here.** If the brand changes,
+copy the new version over; a divergent local edit is a fork of somebody else's brand that nobody
+will find.
 
 ## Two things worth knowing before using them
 
-**The logo needs a light surface.** Its wordmark is ink `#383838` and its mark carries a `#dbdfe2`
-and a `#fff` shape, so on the dark page of the player half of it disappears. It goes on a white
-plate, which is what the brand's own documents do. Recolouring it to suit a dark interface is not an
-option that was rejected for taste: it is how a brand gets broken. This page does not use the logo
-yet; the file is here for the recording.
+**The logo needs a light surface, and what changes to get one is the logo.** The wordmark of
+`logo-qualabs.svg` is ink `#383838`, so on the dark page of this demo it is not there. The answer
+is `logo-qualabs-on-dark.svg` — the same artwork with the wordmark in white and the mark untouched
+— and not a white rectangle under it, which is what Nicolás rejected, twice. That is what this page
+uses, at the masthead and at the foot of the credits. It is still the only mark outside the
+picture: nothing of ours sits over the frame a layout uses.
 
 **The palette is used as accents, not as surfaces.** The reference document these came from is a
 light page that fills whole bands with teal. A player is the opposite case: the picture is the

@@ -665,3 +665,48 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   dos se atajaron antes del ADR: un número relatado que no era el que quedó en el
   código, y otro que yo leí de menos y corrigió quien lo había medido. Informe en
   `phases/10-la-demo-medida-contra-si-misma/REPORT.md`.
+- **11-el-multi-view-que-elige-quien-mira**: cerrada con un segundo tag hermano del
+  concurrente donde **el que publica ofrece un catálogo y quien mira arma la
+  composición** — una lista de casilleros en la barra, tres formas de grilla calculadas
+  por la librería, agrandar con foco completo, y una salida que devuelve el contenido
+  principal como venía —, más la demo `demo/multiview-offer/` con los dos tags en una
+  sola playlist. El cambio caro no se ve: `build()` y `clear()` pasaron a trabajar por
+  diferencia, que es el código que dibuja **todos** los avisos, así que la fase se apoyó
+  en una lectura del recorrido de `compatibility-pair` tomada antes de empezar y en un
+  comparador probado en rojo; cerró con 183 pruebas en verde contra 72 de base, las dos
+  costuras, 20 roturas rojas en la campaña, y 14 de 14 segundos iguales. **Lo que deja y
+  no está en el diff son cinco líneas del plan que estaban mal** —un test que pedía que
+  las tres tablas del `kind` tuvieran las mismas claves y no pueden, un botón que no
+  podía vivir del lado que dibuja porque agrandar es geometría y audio a la vez, un
+  selector que no se cierra al tildar porque armar la grilla serían tres aperturas, una
+  aserción que no podía leer de `demo/` por el ADR 0023, y un módulo que nadie tenía
+  asignado cablear— y **seis hallazgos que no eran tasks**. El más caro es de audio y
+  ninguna prueba lo atrapó: tocar una caja cuya composición había cambiado después de
+  crearse dejaba toda la composición en silencio, con la suite entera en verde, porque
+  un listener del DOM no se observa sin DOM. De ahí salen sus dos ADR de ejecución, el
+  0078 y el 0079, que **generalizan y anotan en lugar de supersederse**, los dos
+  corrigiendo una consecuencia que un ADR anterior había dado por construida sin medirla.
+  No produjo, y estaba escrito de antemano, ningún dato sobre ancho de banda en una
+  conexión real: todo se midió con contenido local. Informe en
+  `phases/11-el-multi-view-que-elige-quien-mira/REPORT.md`.
+
+- **12-el-scroll-que-explica-el-minuto**: cerrada con la página del break de hidratación
+  explicando el mecanismo en lugar de recapitular el minuto, en cuatro secciones y en
+  inglés. Lo que la hace distinta de un PowerPoint es de dónde sale cada afirmación: la
+  galería de formas son **las cajas que el proveedor ya resolvió** y no capturas, con una
+  guarda que se pone roja si alguien escribe un identificador de layout a mano; los
+  pliegues del asset-list se **suman** a la lectura en vivo en lugar de reemplazarla; y la
+  figura de la convivencia dibuja clases y nunca un tag, con las dos columnas del mismo
+  peso, porque una figura que apaga una mitad argumenta reemplazo mientras el párrafo
+  argumenta convivencia. **Su hallazgo son dos números que la página afirmaba y no eran
+  ciertos**, los dos encontrados cruzando lo que la página dice contra lo que la página
+  sirve: la placa final decía 58 segundos de publicidad y son 64 —el `PLANNED-DURATION`
+  que la propia página muestra dos pantallas más abajo—, y `0 seconds of programme
+  replaced` era falso porque el aviso lineal tapa el partido; el segundo no se borró, se
+  reemplazó por un número derivado del contrato. Y su lección de método es que **la
+  verificación del arranque no podía fallar**: la corrida larga había cruzado el umbral
+  del player antes de medir el caso que tenía que dar "no arrancó", y lo encontró quien
+  la escribió leyendo su propia salida. Creció de cinco tasks a ocho con el feedback de
+  Nicolás sobre la página ya construida. Su ADR 0076 es de proyecto y no de fase porque
+  es el encuadre que también gobierna lo que David dice en escenario. Informe en
+  `phases/12-el-scroll-que-explica-el-minuto/REPORT.md`.

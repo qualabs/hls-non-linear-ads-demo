@@ -24,6 +24,12 @@ mismos objetos mientras la experiencia siga activa.
 otra pregunta y no una versión más larga de la primera. Tiene su propia sección
 más abajo.
 
+Hay además una propiedad, `provider.experiences`, que es la lista de experiencias
+que la capa fue resolviendo, **entregada por referencia**. No contesta ninguna de
+las dos preguntas —no filtra por instante ni ordena por tiempo— y está para que
+una página pueda nombrar un break que todavía no ocurrió. Quien la lee no la
+ordena ni la modifica: es el estado de la capa y no una copia.
+
 ## Los datos
 
 ```js
@@ -32,9 +38,12 @@ Experience {
   itemId: string      // identidad de este aviso adentro del break; única entre todas las experiencias
   type: string        // etiqueta opaca del layout: 'cornerOverlay', 'squeezebackLShape', ...
                       // 'linear' es el de un aviso al que esta capa no le dibuja layout
+                      // 'multiViewOffer' es el de una oferta, que trae catálogo y no layout
   startTime: number   // segundos de reproducción en que arranca
   duration: number    // segundos que dura
-  elements: Element[] // ordenados por zDepth ascendente
+  elements: Element[] // ordenados por zDepth ascendente; vacío cuando no hay composición
+  views: View[]       // SÓLO en una oferta: el catálogo que se ofrece
+  primaryName: string // SÓLO en una oferta: cómo se llama el contenido primario en la lista
 }
 
 Element {
@@ -46,7 +55,20 @@ Element {
   uri: string|null    // el asset a reproducir; null en el primario, que ya está en pantalla
   mediaType: string|null  // el MIME del asset; null en el primario
 }
+
+View {
+  id: string          // identidad de la vista; es por donde se la sube y se la baja
+  name: string        // la etiqueta que alguien lee en la lista
+  uri: string|null    // el asset a reproducir
+  mediaType: string|null  // el MIME del asset
+}
 ```
+
+**Las formas de `Element` y de `Range` no cambiaron para agregar la oferta, y eso
+es el dato y no una tranquilidad.** Una vista que sube se entrega como un
+`Element` igual a cualquier otro, con su `box`, su `zDepth` y su `volume` ya
+resueltos, así que el lado que dibuja no aprendió una forma nueva ni un campo
+nuevo. Lo único que se sumó son los dos campos que sólo trae una oferta.
 
 ## Las seis reglas de lectura
 
@@ -97,6 +119,68 @@ Element {
    cualquiera de los otros dos, el segundo creativo de un break no se dibuja
    nunca y en pantalla se ve el primero corriendo de largo.
 
+## La oferta de varias vistas
+
+Una experiencia puede traer un **catálogo** en lugar de un layout, y las dos se
+distinguen por el campo: la que trae `views` es una oferta. Lo que la señalización
+anuncia ahí es qué más se puede mirar y cómo se llama cada cosa; **dónde va cada
+caja no lo dice, porque no lo puede saber**: depende de cuántas cajas terminen en
+pantalla, y eso se decide de este lado y varias veces mientras la ventana está
+abierta.
+
+De ahí salen las tres consecuencias que hay que leer, y ninguna cambia la forma
+de un dato:
+
+1. **Una vista no declara `viewport`, ni `zDepth`, ni `volume`.** Los tres
+   dependen de la composición, que no existe cuando se escribe el catálogo. Si el
+   payload los trae, la capa los ignora y lo dice por consola: obedecerlos
+   colocaría una caja contra un número que su autor nunca conoció, y rechazar la
+   oferta entera por una clave de más sería replegar por algo que no se ve en
+   ninguna pantalla.
+
+2. **`elements` vacío es una respuesta y no un dato que falta.** Es lo que
+   contesta una oferta mientras nadie eligió nada: una sola caja no es una
+   composición, así que lo que hay que dibujar es el programa exactamente como
+   estaba. La ventana abierta y la composición armada son dos cosas distintas y
+   pueden no coincidir en ningún instante de la ventana.
+
+3. **Las cajas las calcula la librería, en una lista ordenada y con el primario
+   siempre primero.** La forma sale de cuántas cajas hay: dos van lado a lado con
+   banda arriba y abajo, tres y cuatro se reparten la pantalla. El orden es el de
+   la selección y es una promesa: una lista en otro orden es cada caja con la
+   imagen de otro, y no hay nada en una pantalla que lo diga.
+
+**El tope de cajas es de la pantalla y nunca de la oferta.** Un catálogo es tan
+largo como quiera quien lo publica, y lo que está topeado es cuánto de él está
+arriba a la vez. El número sale de la tabla de formas y no está escrito al lado
+de ella.
+
+**El sobre es el mismo que el de un aviso.** `start`, `duration`, `id`, `itemId`
+y la acumulación de offsets por `DURATION` significan exactamente lo mismo en los
+dos casos: una oferta se coloca sobre la línea de tiempo por la misma suma. Lo
+único que no comparten es qué hay adentro.
+
+## Qué promete el renderizado sobre los nodos
+
+El contrato de arriba dice qué se entrega; esto dice qué le pasa a lo entregado,
+y es una promesa del lado que dibuja porque es donde se rompe.
+
+**Un elemento que sigue estando entre dos respuestas conserva su nodo.** Cuando
+la composición cambia no se destruye y se reconstruye todo: se crea sólo lo que
+aparece, se destruye sólo lo que se va, y lo que queda se mueve a su caja nueva.
+Lo que eso compra es que una caja que no se fue a ninguna parte no se rebuffere
+—no vuelve a cero, no se pone negra— y que el foco de audio que alguien le puso
+siga donde lo puso.
+
+**Lo que decide si un elemento "sigue estando" es la identidad de la regla 6**,
+`itemId` más la identidad del elemento, y nunca el `id` ni la posición de la
+caja. Dos experiencias solapadas sin `id` propio comparten ese campo, y comparar
+por ahí le entrega a un anunciante el nodo —y el audio— de otro, en silencio y
+por una coincidencia de layout.
+
+**Y aplicar el cambio no deja la composición a medias**: terminado, lo dibujado
+es exactamente lo que el contrato pidió, ni un nodo de más ni uno de menos.
+
 ## Los rangos del programa
 
 `activeAt` alcanza para dibujar lo que está pasando y no alcanza para dibujar
@@ -108,7 +192,7 @@ provider.programRanges() -> { ranges: Range[], settled: boolean }
 
 Range {
   id: string        // el mismo identificador de la señalización que trae la experiencia
-  kind: string      // 'concurrent' | 'interstitial'
+  kind: string      // 'concurrent' | 'multiview' | 'interstitial'
   startTime: number // segundos de reproducción en que arranca
   duration: number  // segundos que dura
 }
@@ -118,21 +202,27 @@ Range {
 puede llamar en cada pintada.
 
 **`kind` dice de qué clase es el rango, y es un dato y no una decoración.** El
-programa lleva dos clases de rango encima de la misma línea de tiempo. Uno es la
-experiencia concurrente, que se dibuja sobre el contenido sin detenerlo. El otro
-es el interstitial tradicional que la misma playlist señaliza en cada break para
-los clientes que ya están en el mercado (ADR 0007), que este reproductor no
-reproduce y que igual está ahí: marca dónde un cliente de mercado se habría
-detenido. Son dos cosas distintas, se pintan de colores distintos, y sin este
-campo la barra no puede pintar dos colores.
+programa lleva tres clases de rango encima de la misma línea de tiempo. Dos se
+dibujan sobre el contenido sin detenerlo: la experiencia concurrente, y la oferta
+de varias vistas. La tercera es el interstitial tradicional que la misma playlist
+señaliza en cada break para los clientes que ya están en el mercado (ADR 0007),
+que este reproductor no reproduce y que igual está ahí: marca dónde un cliente de
+mercado se habría detenido. Son cosas distintas, se pintan de colores distintos, y
+sin este campo la barra no puede pintar más de un color.
 
-**Lo que cruza es la clase de rango y no la clase del transporte.** `kind` es
-`'concurrent'` o `'interstitial'`, no el string de la clase de HLS: la capa de
-señalización es la que traduce, y un Date Range de cualquier otra clase no es un
-rango de esta lista. Un rango es concurrente o es de reemplazo, y esa distinción
-es de semántica —la primera nunca cambia el largo de la línea de tiempo y la
-segunda sí (ADR 0016)—, así que sobrevive a un cambio de transporte, que es
-exactamente lo que el ADR 0003 compra.
+**Qué kinds están en la lista y cuáles marca una barra son dos preguntas
+distintas.** Esta lista los lleva todos, porque es lo que hace legible el par de
+clientes; cuáles de ellos son breaks **de este** player lo decide quien cablea un
+proveedor a una barra, y no la barra (ADR 0018). Una barra sobre un player que
+sí reemplaza el contenido marca justamente el kind que éste no marca.
+
+**Lo que cruza es la clase de rango y no la clase del transporte.** `kind` es uno
+de esos tres strings, no el de la clase de HLS: la capa de señalización es la que
+traduce, y un Date Range de cualquier otra clase no es un rango de esta lista. Un
+rango es de los que se dibujan encima o es de reemplazo, y esa distinción es de
+semántica —los primeros nunca cambian el largo de la línea de tiempo y el segundo
+sí (ADR 0016)—, así que sobrevive a un cambio de transporte, que es exactamente lo
+que el ADR 0003 compra.
 
 **No hay largo total acá.** Un `Range` dice en qué segundo empieza y cuántos
 dura, y nada más. La posición sobre la barra es una división que hace quien
@@ -209,6 +299,10 @@ el renderizado no cambia, que es exactamente lo que el ADR 0003 compra.
   abajo.
 - **Nada de píxeles.** El área del player la conoce el renderizado y solo el
   renderizado.
+- **Nada de quién compuso.** Una composición que armó quien mira llega igual que
+  una que declaró quien publica: los mismos `Element`, con sus cajas ya
+  resueltas. Quién eligió, y cómo se guarda esa elección, viven entre las dos
+  capas y ninguna de las dos se entera.
 - **El largo total del programa.** Lo lee quien pinta, del contenido primario y
   cada vez (ADR 0016).
 - **La política de audio no está acá.** El `volume` es el estado inicial
@@ -321,10 +415,8 @@ dos entradas apuntan al mismo elemento y gana la última. Medido sobre un
 asset-list solapado a propósito, en el instante del solape el contenido primario
 quedó en la caja de la segunda experiencia, a **357,5 píxeles** de la que la
 primera había pedido, con el aviso de la primera dibujado contra un área que el
-primario ya no ocupaba. Y al cerrarse el solape el aviso que seguía corriendo se
-destruyó y se reconstruyó, tirando **6,09 s** de asset ya traído. La divergencia
-que la regla declarada deja es un aviso cortado o congelado; la que la otra abre
-es la composición entera mal dibujada.
+primario ya no ocupaba. La divergencia que la regla declarada deja es un aviso
+cortado o congelado; la que la otra abre es la composición entera mal dibujada.
 
 ## Qué pasa con un asset que este cliente no puede dibujar
 
@@ -364,8 +456,8 @@ Se detectan tres formas, y las tres son sobre la forma del dato:
 - **No hay bloque.** No es una falla: es un aviso lineal.
 - **El bloque no tiene payload usable**: no hay `payload`, está vacío, o alguno
   de sus items no tiene ventana —un `duration` que no es un número positivo— o
-  declara un layout sin assets adentro. Nada de eso puede volverse una caja en
-  una pantalla.
+  declara un layout sin assets adentro, o un catálogo sin vistas adentro. Nada de
+  eso puede volverse una caja en una pantalla.
 - **El asset no tiene nada reproducible**: ni bloque usable ni un `URI` con una
   `DURATION` positiva. Ahí se saltea ese asset, y **el desplazamiento de los que
   siguen no se mueve**: la `DURATION` declarada se acumula igual, así que las

@@ -5,6 +5,12 @@ runs *concurrently* with the content instead of replacing it, signalled with
 `EXT-X-DATERANGE` of the class `com.qualabs.hls.concurrentInterstitial` and laid
 out from the asset-list that the SVTA Layout Controller emits.
 
+A sibling class, `com.qualabs.hls.multiViewInterstitial`, signals the other
+relationship: instead of declaring a layout it announces a **catalogue** of feeds,
+and the composition is built by whoever is watching. The two are siblings and
+neither extends the other — in HLS a Date Range class is compared as an exact
+string — and one playlist carries both.
+
 The root of this repository is that library. `demo/` is where it is shown: one
 folder per demo, and each demo tells its own run.
 
@@ -14,6 +20,7 @@ folder per demo, and each demo tells its own run.
 | --- | --- |
 | [`compatibility-pair`](demo/compatibility-pair/README.md) | the same URL on two clients at once: an off-the-shelf hls.js, which schedules the linear Date Range and replaces the content with the ad, next to the same version of hls.js driven by this library, which keeps the content on screen and draws the ad over it. That is the pair (ADR 0007), and what it argues is that this deploys without breaking the clients already in the market |
 | [`hydration-break`](demo/hydration-break/README.md) | why anybody would want this. A minute of stopped play in a football match, with four ads over the live picture instead of a commercial break — and the traditional linear ad third, so the comparison happens inside one minute and one player. What it argues is the business case: the viewer stays watching, so the advertising is seen. The page walks you through it by itself and stops the composition to explain each step, which the library allows without a line of it changing |
+| [`multiview-offer`](demo/multiview-offer/README.md) | the break where the publisher offers and the viewer composes. One playlist carrying both classes: a concurrent ad of the class this repository started with, and two windows in which a catalogue of feeds is on offer and the grid takes its shape from how many of them somebody raised. What it argues is that the same signalling covers a relationship where the payload cannot declare a layout, because where a box goes is not known when the playlist is written |
 
 ```bash
 ./run.sh <demo>   # with no argument, and through npm start, it is compatibility-pair
@@ -36,7 +43,7 @@ the library's, in `test/`, and each demo's, inside its own folder.
 
 `test/` covers what can fail in silence in the library and nothing else --
 everything else is on the screen. That is the pure functions of the two layers,
-in three files. The layout resolution: the parsing of `viewport`, the two
+one file per subject. The layout resolution: the parsing of `viewport`, the two
 defaults the tool omits, the order by `zDepth`, the activation window, and the
 conversion of insets into a box in pixels. The sequence of a break: where each
 of its ads lands on the timeline of the programme, which ad is which, and the
@@ -45,6 +52,13 @@ controls stand on: where the breaks of the programme are, which kind each one
 is, where that lands as a fraction of the whole programme, and the volume every
 element starts at, which is the one place where a single character turns the
 show mute or an ad declared silent into the loudest thing on the screen.
+
+It covers by the same standard the plan that decides which nodes are kept,
+created and destroyed when a composition changes; the table that turns a number
+of boxes into their geometry, and every rule a selection of feeds has to hold;
+the schedule of the transitions; and the audio focus, including what becomes of
+it when the composition changes around a box that never stopped playing. All of
+it is arithmetic over data, which is what a test can aim at without a browser.
 
 No case is invented unless it says so, and no case is read out of a demo:
 `test/` reads `test/` and `lib/`, and nothing else (ADR 0023). The six payloads
@@ -76,6 +90,7 @@ serves it, and everything below `demo/` is a page that uses it.
 | `lib/signalling.js` | the signalling layer: Date Ranges in, the contract out |
 | `lib/renderer.js` | the rendering layer: the contract in, the boxes drawn over the video. Knows nothing about HLS |
 | `lib/controls.js` | the composition's own controls: one progress bar over the whole programme, pause, audio, fullscreen, the list of feeds whoever is watching picks from, and the marks on its rail that say where the breaks this player plays are |
+| `lib/multiview.js` | the state of whoever is watching: which feeds are up, in what order, and which one is enlarged. It decorates the provider, so the rendering side never learns that somebody is choosing |
 | `lib/media.js` | how a `uri` becomes pixels: one instance of hls.js per ad asset |
 | `lib/concurrent-hls.js` | the entry point and the public surface: `attach` for the concurrent experience, `attachControls` for the chrome on its own, and the configuration the instance has to be built with |
 | `dist/` | the built library: one classic script that defines a global. Generated, gitignored |
@@ -97,6 +112,15 @@ the consumer draws it. Only the first side knows what HLS is. The contract is
 written down, field by field and rule by rule, in
 [`docs/contrato-senalizacion-renderizado.md`](docs/contrato-senalizacion-renderizado.md),
 which owns it.
+
+**The state of whoever is watching sits between the two and neither of them
+learns about it.** `lib/multiview.js` decorates the provider: same signature,
+same meaning, and everything that is not an offer crosses it as the same object
+in the same place of the list. An offer comes out carrying the boxes of whatever
+was raised, in the same `Element` shape an ad produces, which is why the multi
+view was added without the contract changing by a field. Underneath, a viewer's
+choices would live in the file that is defined by knowing the transport; above,
+the drawing side would have to learn what an offer is. Both were refused.
 
 **The mix is signalled, and the default is silence.** Each element of a layout
 starts at the `volume` its asset-list declares, and the audio of the composition

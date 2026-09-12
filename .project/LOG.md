@@ -5372,3 +5372,91 @@ así que queda como un dato que cambia cuánto conviene invertir y no como una d
 que frene la fase. Se diseñó con todo construido, y lo que se pierde si al final se
 graba sólo el player está acotado a una task, la T-04, que está aislada exactamente
 por eso.
+
+## 2026-09-11 — Fase 11 cerrada: el multi view, y una regresión de audio que la suite no podía ver
+
+Trece tasks en `done`, `REPORT.md` escrito, `status` a `closed`. Cerró con **183 pruebas
+en verde** contra las 72 de la línea de base del árbol heredado, las dos costuras, la
+campaña en **20 roturas rojas y 9 chequeos verdes**, y el recorrido de
+`compatibility-pair` **igual en 14 de 14 segundos** contra la lectura tomada antes de que
+la fase tocara `lib/`, con su comparador corrido una vez contra una lectura alterada a
+mano para verlo dar rojo.
+
+**Lo que el cierre encontró y no estaba junto en ningún lado son dos listas.**
+
+La primera son **cinco líneas del plan que estaban mal**, cada una desobedecida con su
+razón escrita: el test que pedía que las tres tablas del `kind` tuvieran las mismas
+claves y no pueden, porque `KINDS_PLAYED` deja afuera al `interstitial` a propósito
+(ADR 0018); el botón de agrandar, que no podía vivir en `createNode` porque agrandar es
+geometría **y** audio y el ADR 0072 prohíbe que el renderizado sepa qué es una oferta; el
+selector, que no se cierra al tildar porque armar la grilla de cuatro serían tres
+aperturas; la aserción del N=4, que no podía leer de `demo/` por el ADR 0023 y leyó la
+copia de `test/fixtures/`; y el cableado de `createMultiview` en `attach()`, que ninguna
+fila del `TASKS.md` nombraba y se hizo con evidencia propia.
+
+La segunda son **seis hallazgos que no eran tasks**, cinco de los cuales tocaron `lib/`.
+El más caro es de audio y es el que nada en pantalla reporta: tocar una caja cuya
+composición había cambiado después de que el nodo se creara dejaba **toda la composición
+en silencio**, porque el listener de `pointerdown` cerró sobre el elemento con el que el
+nodo se creó y `applyPlan` lo reemplaza. La campaña que se escribió después lo prueba en
+la columna que importa: con la regresión vuelta a plantar, **170 pruebas pasan y 0
+fallan**. Un listener del DOM no se observa sin DOM.
+
+De ahí salieron los ADR **0078** y **0079**, los dos escritos durante la ejecución y los
+dos corrigiendo una consecuencia que un ADR anterior había dado por construida sin
+medirla. El 0078 **generaliza** al 0029 y el 0079 **ni supersede ni generaliza** al 0070:
+argumenta en su propio texto por qué ninguna de las dos relaciones es cierta, y le deja
+una nota fechada al pie con la prosa intacta.
+
+Se corrigió además una celda vieja de la tabla de la fase: la evidencia de la T-10 decía
+que su `way-out.patch` estaba *"sin aplicar"*, y hoy está aplicado —`lib/controls.js:1265`,
+`wayOutBtn`—. Lo mismo con el de la T-09, que ya estaba asentado.
+
+Y queda dicho lo que la fase **no** produjo, porque estaba escrito de antemano en
+`PHASE.md` y sigue valiendo: **ningún dato sobre cuánto ancho de banda pide una grilla de
+cuatro en una conexión real.** Todo se midió con contenido local servido por
+`server.mjs`. Es el riesgo R5, aceptado sin mitigar.
+
+Validador en verde: 79 ADR, 12 fases, 2 hallazgos aceptados con su razón.
+
+## 2026-09-11 — Fase 12 cerrada: el scroll explica, y dos números que la página afirmaba eran falsos
+
+Ocho tasks en `done` —cinco del plan y tres del feedback de Nicolás sobre la página ya
+construida—, `REPORT.md` escrito, `status` a `closed`. Cerró con **170 pruebas en verde**
+contra 124 de línea de base, **cero pruebas desaparecidas** (medido comparando nombres y
+no conteos), las dos costuras, y la campaña en 20 roturas rojas y 9 chequeos verdes. De
+las pruebas nuevas, la mayoría son de la fase 11, que corría en paralelo.
+
+**El hallazgo de la fase son dos afirmaciones falsas de la propia página, encontradas
+cruzando lo que la página dice contra lo que la página sirve.** La placa con la que cierra
+el recorrido guiado decía *"Fifty-eight seconds of advertising"* y son **64**: el reparto
+de `plate.json` es 16+16+8+24 y el `PLANNED-DURATION=64` lo muestra la propia página dos
+pantallas más abajo, glosado por esta misma fase como *"the sum of the DURATION of every
+asset in the list"*. Y `0 seconds of programme replaced` era falso sobre la pantalla
+—cierto sobre la línea de tiempo, ADR 0016—, porque el tercer aviso es lineal y tapa el
+partido; el repositorio ya lo sabía en dos comentarios y nadie lo había cruzado con la
+copia. No se reemplazó por nada escrito a mano: lo que ocupa su lugar es
+**`8 seconds of the 64 without the match on screen`**, derivado del contrato.
+
+**Y su lección de método es una verificación que no podía fallar.** La referencia del
+arranque por viewport —*"con el player abajo del pliegue el recorrido NO arranca"*— salió
+contaminada: la corrida larga había recorrido la apertura antes para leer el tiempo, el
+player cruzó el umbral en ese scroll, y el caso que tenía que decir "no arrancó" registró
+`data_story: "running"`. Lo encontró el propio ejecutor leyendo la salida de su
+instrumento, y no lo parcheó: escribió un segundo instrumento que mide al revés sobre una
+carga limpia. La placa 1 pasó de medir 1,78 s a medir 5,44 s contra su `hold` declarado
+de 5.
+
+Una línea del plan no se siguió y está argumentada: la sección 3 conservaba sus dos
+`<pre>` y **el `<pre id="list">` se eliminó**, porque el ADR 0075 convierte ese resumen en
+el rótulo del pliegue y un `<pre>` que dice `loading…` y nadie vuelve a escribir es la
+mentira que el comentario de cabecera prohíbe. Y ninguna de las ocho tasks pudo usar
+`./run.sh`: reconstruye `dist/` desde `lib/` en cada arranque y la fase 11 estaba editando
+`lib/`, así que las ocho sirvieron con `node server.mjs` y la playlist que se verificó es
+la del empaquetado del día anterior.
+
+Queda abierto el mismo dato que quedó abierto al diseñarla: **no se sabe si el scroll
+entra en la grabación del 28 al 30 o si se graba sólo el player**, que es lo que decide si
+la T-04 sobra. Y queda un hilo chico que ninguna task registró: la galería y el pliegue
+**nombran al aviso 3 de dos maneras distintas** —`linear` contra *"no layout block, played
+full frame"*—, las dos leídas del contrato a profundidades distintas.
