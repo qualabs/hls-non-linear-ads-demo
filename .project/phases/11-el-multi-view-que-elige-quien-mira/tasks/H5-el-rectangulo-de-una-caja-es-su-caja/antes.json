@@ -1,0 +1,112 @@
+{
+ "contenedor": [
+  1100,
+  618.8
+ ],
+ "imagen": [
+  0,
+  0,
+  1100,
+  618.8
+ ],
+ "cajas": [
+  {
+   "id": "primaryContent",
+   "clase": "qa-box qa-box--nw",
+   "boxSizing": "content-box",
+   "padding": "6.4px",
+   "escrito": {
+    "ancho": "550px",
+    "alto": "309.375px",
+    "izq": "0px",
+    "arriba": "0px"
+   },
+   "rectangulo": [
+    0,
+    0,
+    562.8,
+    322.2
+   ],
+   "boton": [
+    6.4,
+    6.4,
+    34,
+    34
+   ]
+  },
+  {
+   "id": "view-caminandes-a",
+   "clase": "qa-box qa-box--nw",
+   "boxSizing": "content-box",
+   "padding": "6.4px",
+   "escrito": {
+    "ancho": "550px",
+    "alto": "309.375px",
+    "izq": "550px",
+    "arriba": "0px"
+   },
+   "rectangulo": [
+    550,
+    0,
+    562.8,
+    322.2
+   ],
+   "boton": [
+    556.4,
+    6.4,
+    34,
+    34
+   ]
+  },
+  {
+   "id": "view-caminandes-b",
+   "clase": "qa-box qa-box--nw",
+   "boxSizing": "content-box",
+   "padding": "6.4px",
+   "escrito": {
+    "ancho": "550px",
+    "alto": "309.375px",
+    "izq": "0px",
+    "arriba": "309.375px"
+   },
+   "rectangulo": [
+    0,
+    309.4,
+    562.8,
+    322.2
+   ],
+   "boton": [
+    6.4,
+    315.8,
+    34,
+    34
+   ]
+  },
+  {
+   "id": "view-ed-a",
+   "clase": "qa-box qa-box--ne",
+   "boxSizing": "content-box",
+   "padding": "6.4px",
+   "escrito": {
+    "ancho": "550px",
+    "alto": "309.375px",
+    "izq": "550px",
+    "arriba": "309.375px"
+   },
+   "rectangulo": [
+    550,
+    309.4,
+    562.8,
+    322.2
+   ],
+   "boton": [
+    1072.4,
+    315.8,
+    34,
+    34
+   ]
+  }
+ ],
+ "url": "http://127.0.0.1:8093/index.html",
+ "navegador": "Chrome 153.0.8010.36"
+}

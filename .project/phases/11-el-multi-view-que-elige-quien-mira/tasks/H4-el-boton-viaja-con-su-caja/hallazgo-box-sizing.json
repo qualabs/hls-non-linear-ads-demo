@@ -1,0 +1,89 @@
+{
+ "boxSizing": "content-box",
+ "cajas": [
+  {
+   "id": "(sin dataset)",
+   "escrito": {
+    "ancho": "550px",
+    "izq": "0px"
+   },
+   "rectangulo": [
+    0,
+    0,
+    562.8,
+    322.2
+   ],
+   "boton": [
+    6.4,
+    6.4,
+    34,
+    34
+   ],
+   "imagen": null,
+   "clase": "qa-box qa-box--nw"
+  },
+  {
+   "id": "(sin dataset)",
+   "escrito": {
+    "ancho": "550px",
+    "izq": "550px"
+   },
+   "rectangulo": [
+    550,
+    0,
+    562.8,
+    322.2
+   ],
+   "boton": [
+    556.4,
+    6.4,
+    34,
+    34
+   ],
+   "imagen": null,
+   "clase": "qa-box qa-box--nw"
+  },
+  {
+   "id": "(sin dataset)",
+   "escrito": {
+    "ancho": "550px",
+    "izq": "0px"
+   },
+   "rectangulo": [
+    0,
+    309.4,
+    562.8,
+    322.2
+   ],
+   "boton": [
+    6.4,
+    315.8,
+    34,
+    34
+   ],
+   "imagen": null,
+   "clase": "qa-box qa-box--nw"
+  },
+  {
+   "id": "(sin dataset)",
+   "escrito": {
+    "ancho": "550px",
+    "izq": "550px"
+   },
+   "rectangulo": [
+    550,
+    309.4,
+    562.8,
+    322.2
+   ],
+   "boton": [
+    1072.4,
+    315.8,
+    34,
+    34
+   ],
+   "imagen": null,
+   "clase": "qa-box qa-box--ne"
+  }
+ ]
+}

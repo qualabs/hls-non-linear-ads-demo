@@ -2,7 +2,7 @@
 # The one command of a demo: package its content if it is not there yet, write
 # its signalled playlist, build the library, and serve the demo.
 #
-# THE DEMO IS THE ARGUMENT, with the only one that exists as the default:
+# THE DEMO IS THE ARGUMENT, with the oldest one as the default:
 # `./run.sh` is `./run.sh compatibility-pair`. This file stays in the root of
 # the sdk and is not split into a run.sh per demo, because that would repeat
 # the two lines of the sdk in every one of them and hand "build the library

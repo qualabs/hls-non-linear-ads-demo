@@ -1,0 +1,874 @@
+{
+ "tag": "con",
+ "url": "http://localhost:8093/index.html",
+ "widths": {
+  "420": {
+   "viewport": {
+    "width": 420,
+    "height": 860
+   },
+   "states": {
+    "con-lugar": {
+     "frame": {
+      "width": 392,
+      "height": 220.5
+     },
+     "panel": {
+      "rect": {
+       "left": 178.5,
+       "top": 455.3,
+       "width": 211.5,
+       "height": 138.5
+      },
+      "port": {
+       "left": 179.53125,
+       "top": 456.25,
+       "width": 209,
+       "height": 137
+      },
+      "scrollTop": 0,
+      "scrollHeight": 247,
+      "clientHeight": 137,
+      "overflow": 110
+     },
+     "title": {
+      "rect": {
+       "left": 186,
+       "top": 462.8,
+       "width": 196.5,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "Tears of Steel",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 186,
+        "top": 493,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Caminandes, early",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 186,
+        "top": 527,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Caminandes, late",
+       "checked": false,
+       "disabled": false,
+       "rect": {
+        "left": 186,
+        "top": 561,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 32.3,
+       "fraction": 0.949,
+       "whole": false
+      },
+      {
+       "name": "Elephants Dream, early",
+       "checked": false,
+       "disabled": false,
+       "rect": {
+        "left": 186,
+        "top": 595,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "Elephants Dream, late",
+       "checked": false,
+       "disabled": false,
+       "rect": {
+        "left": 186,
+        "top": 629,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "Sintel",
+       "checked": false,
+       "disabled": false,
+       "rect": {
+        "left": 186,
+        "top": 663,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      }
+     ],
+     "boxes": 2,
+     "checks": {
+      "no note": true,
+      "no grey rows": true,
+      "the head is shown": true
+     },
+     "green": true
+    },
+    "grilla-llena": {
+     "frame": {
+      "width": 392,
+      "height": 220.5
+     },
+     "panel": {
+      "rect": {
+       "left": 147,
+       "top": 455.3,
+       "width": 243,
+       "height": 138.5
+      },
+      "port": {
+       "left": 147.96875,
+       "top": 456.25,
+       "width": 241,
+       "height": 137
+      },
+      "scrollTop": 160,
+      "scrollHeight": 297,
+      "clientHeight": 137,
+      "overflow": 160
+     },
+     "title": {
+      "rect": {
+       "left": 154.5,
+       "top": 302.8,
+       "width": 228,
+       "height": 30.2
+      },
+      "visible": 0,
+      "fraction": 0,
+      "whole": false
+     },
+     "note": {
+      "hidden": false,
+      "text": "4 boxes is what the screen holds. Lower one to raise another.",
+      "rect": {
+       "left": 154.5,
+       "top": 542.2,
+       "width": 228,
+       "height": 44.4
+      },
+      "visible": 44.4,
+      "fraction": 1,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "Tears of Steel",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 154.5,
+        "top": 333,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "Caminandes, early",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 154.5,
+        "top": 367,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "Caminandes, late",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 154.5,
+        "top": 401,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "Elephants Dream, early",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 154.5,
+        "top": 435,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 12.7,
+       "fraction": 0.375,
+       "whole": false
+      },
+      {
+       "name": "Elephants Dream, late",
+       "checked": false,
+       "disabled": true,
+       "rect": {
+        "left": 154.5,
+        "top": 469,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Sintel",
+       "checked": false,
+       "disabled": true,
+       "rect": {
+        "left": 154.5,
+        "top": 503,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 4,
+     "checks": {
+      "note is shown": true,
+      "note is whole": true,
+      "there are grey rows": true,
+      "every grey row is whole": true
+     },
+     "green": true
+    },
+    "reabierto": {
+     "frame": {
+      "width": 392,
+      "height": 220.5
+     },
+     "panel": {
+      "rect": {
+       "left": 147,
+       "top": 455.3,
+       "width": 243,
+       "height": 138.5
+      },
+      "port": {
+       "left": 147.96875,
+       "top": 456.25,
+       "width": 241,
+       "height": 137
+      },
+      "scrollTop": 160,
+      "scrollHeight": 297,
+      "clientHeight": 137,
+      "overflow": 160
+     },
+     "title": {
+      "rect": {
+       "left": 154.5,
+       "top": 302.8,
+       "width": 228,
+       "height": 30.2
+      },
+      "visible": 0,
+      "fraction": 0,
+      "whole": false
+     },
+     "note": {
+      "hidden": false,
+      "text": "4 boxes is what the screen holds. Lower one to raise another.",
+      "rect": {
+       "left": 154.5,
+       "top": 542.2,
+       "width": 228,
+       "height": 44.4
+      },
+      "visible": 44.4,
+      "fraction": 1,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "Tears of Steel",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 154.5,
+        "top": 333,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "Caminandes, early",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 154.5,
+        "top": 367,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "Caminandes, late",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 154.5,
+        "top": 401,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "Elephants Dream, early",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 154.5,
+        "top": 435,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 12.7,
+       "fraction": 0.375,
+       "whole": false
+      },
+      {
+       "name": "Elephants Dream, late",
+       "checked": false,
+       "disabled": true,
+       "rect": {
+        "left": 154.5,
+        "top": 469,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Sintel",
+       "checked": false,
+       "disabled": true,
+       "rect": {
+        "left": 154.5,
+        "top": 503,
+        "width": 228,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 4,
+     "checks": {
+      "note is shown": true,
+      "note is whole": true,
+      "there are grey rows": true,
+      "every grey row is whole": true
+     },
+     "green": true
+    }
+   },
+   "green": true
+  },
+  "1440": {
+   "viewport": {
+    "width": 1440,
+    "height": 900
+   },
+   "states": {
+    "con-lugar": {
+     "frame": {
+      "width": 1124,
+      "height": 632.3
+     },
+     "panel": {
+      "rect": {
+       "left": 1054.5,
+       "top": 475.1,
+       "width": 211.5,
+       "height": 249.2
+      },
+      "port": {
+       "left": 1055.53125,
+       "top": 476.140625,
+       "width": 209,
+       "height": 247
+      },
+      "scrollTop": 0,
+      "scrollHeight": 247,
+      "clientHeight": 247,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 1062,
+       "top": 482.6,
+       "width": 196.5,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "Tears of Steel",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 1062,
+        "top": 512.9,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Caminandes, early",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 1062,
+        "top": 546.9,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Caminandes, late",
+       "checked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1062,
+        "top": 580.9,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Elephants Dream, early",
+       "checked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1062,
+        "top": 614.9,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Elephants Dream, late",
+       "checked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1062,
+        "top": 648.9,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Sintel",
+       "checked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1062,
+        "top": 682.9,
+        "width": 196.5,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 2,
+     "checks": {
+      "no note": true,
+      "no grey rows": true,
+      "the head is shown": true
+     },
+     "green": true
+    },
+    "grilla-llena": {
+     "frame": {
+      "width": 1124,
+      "height": 632.3
+     },
+     "panel": {
+      "rect": {
+       "left": 954,
+       "top": 475.1,
+       "width": 312,
+       "height": 298.8
+      },
+      "port": {
+       "left": 955,
+       "top": 476.140625,
+       "width": 310,
+       "height": 297
+      },
+      "scrollTop": 0,
+      "scrollHeight": 297,
+      "clientHeight": 297,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 961.5,
+       "top": 482.6,
+       "width": 297,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": false,
+      "text": "4 boxes is what the screen holds. Lower one to raise another.",
+      "rect": {
+       "left": 961.5,
+       "top": 722.1,
+       "width": 297,
+       "height": 44.4
+      },
+      "visible": 44.4,
+      "fraction": 1,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "Tears of Steel",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 961.5,
+        "top": 512.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Caminandes, early",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 961.5,
+        "top": 546.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Caminandes, late",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 961.5,
+        "top": 580.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Elephants Dream, early",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 961.5,
+        "top": 614.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Elephants Dream, late",
+       "checked": false,
+       "disabled": true,
+       "rect": {
+        "left": 961.5,
+        "top": 648.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Sintel",
+       "checked": false,
+       "disabled": true,
+       "rect": {
+        "left": 961.5,
+        "top": 682.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 4,
+     "checks": {
+      "note is shown": true,
+      "note is whole": true,
+      "there are grey rows": true,
+      "every grey row is whole": true
+     },
+     "green": true
+    },
+    "reabierto": {
+     "frame": {
+      "width": 1124,
+      "height": 632.3
+     },
+     "panel": {
+      "rect": {
+       "left": 954,
+       "top": 475.1,
+       "width": 312,
+       "height": 298.8
+      },
+      "port": {
+       "left": 955,
+       "top": 476.140625,
+       "width": 310,
+       "height": 297
+      },
+      "scrollTop": 0,
+      "scrollHeight": 297,
+      "clientHeight": 297,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 961.5,
+       "top": 482.6,
+       "width": 297,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": false,
+      "text": "4 boxes is what the screen holds. Lower one to raise another.",
+      "rect": {
+       "left": 961.5,
+       "top": 722.1,
+       "width": 297,
+       "height": 44.4
+      },
+      "visible": 44.4,
+      "fraction": 1,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "Tears of Steel",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 961.5,
+        "top": 512.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Caminandes, early",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 961.5,
+        "top": 546.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Caminandes, late",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 961.5,
+        "top": 580.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Elephants Dream, early",
+       "checked": true,
+       "disabled": false,
+       "rect": {
+        "left": 961.5,
+        "top": 614.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Elephants Dream, late",
+       "checked": false,
+       "disabled": true,
+       "rect": {
+        "left": 961.5,
+        "top": 648.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "Sintel",
+       "checked": false,
+       "disabled": true,
+       "rect": {
+        "left": 961.5,
+        "top": 682.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 4,
+     "checks": {
+      "note is shown": true,
+      "note is whole": true,
+      "there are grey rows": true,
+      "every grey row is whole": true
+     },
+     "green": true
+    }
+   },
+   "green": true
+  }
+ }
+}

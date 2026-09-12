@@ -1,0 +1,16 @@
+esperando la ventana de la oferta (t=48s)...
+### antes.json   (Chrome 153.0.8010.36, contenedor [1100, 618.8], imagen [0, 0, 1100, 618.8])
+  qa-box qa-box--nw    box-sizing=content-box padding=6.4px
+    escrito   550.0 x   309.4   pintado   562.8 x   322.2   sobra +12.8 x +12.8   MIDE DE MAS
+    botón [6.4, 6.4, 34, 34]   adentro de la imagen
+  qa-box qa-box--nw    box-sizing=content-box padding=6.4px
+    escrito   550.0 x   309.4   pintado   562.8 x   322.2   sobra +12.8 x +12.8   MIDE DE MAS
+    botón [556.4, 6.4, 34, 34]   adentro de la imagen
+  qa-box qa-box--nw    box-sizing=content-box padding=6.4px
+    escrito   550.0 x   309.4   pintado   562.8 x   322.2   sobra +12.8 x +12.8   MIDE DE MAS
+    botón [6.4, 315.8, 34, 34]   adentro de la imagen
+  qa-box qa-box--ne    box-sizing=content-box padding=6.4px
+    escrito   550.0 x   309.4   pintado   562.8 x   322.2   sobra +12.8 x +12.8   MIDE DE MAS
+    botón [1072.4, 315.8, 34, 34]   RECORTADO por el borde de la imagen
+
+== ROJO: 4 caja(s) cuyo rectángulo no mide la caja o cuyo botón se sale de la imagen ==

@@ -1,0 +1,4 @@
+panel 210.0 px, padding 6.5px/6.5px, ancho de contenido 197.0
+fila  195.0 px, box-sizing border-box, padding 9.75px
+la fila se pasa -2.0 px del ancho de contenido del panel
+desborde horizontal del panel: 0 px

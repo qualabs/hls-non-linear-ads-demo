@@ -349,3 +349,19 @@ test('the geometry of an element is its box and its place in the stack, and noth
     assert.equal(sameGeometry(element, { ...element, box }), false, edge);
   }
 });
+
+test('two different pairs cannot share an identity, whatever the fields hold', () => {
+  // THE CASE THAT USED TO COLLIDE, found porting the library to iOS. Joined by a NUL
+  // these two produce the same key, and a NUL is reachable: both fields come out of a
+  // JSON asset-list and JSON can carry one.
+  const a = identityOf({ itemId: 'a' }, { id: 'b\u0000c' }, 0);
+  const b = identityOf({ itemId: 'a\u0000b' }, { id: 'c' }, 0);
+  assert.notEqual(a, b);
+
+  // AND ITS CONTROL: the same pair still answers the same thing twice, which is what
+  // an identity is for. Without this, a function returning a random string passes.
+  assert.equal(identityOf({ itemId: 'a' }, { id: 'b' }, 0),
+               identityOf({ itemId: 'a' }, { id: 'b' }, 0));
+  assert.notEqual(identityOf({ itemId: 'a' }, { id: 'b' }, 0),
+                  identityOf({ itemId: 'a' }, { id: 'b' }, 1));
+});
