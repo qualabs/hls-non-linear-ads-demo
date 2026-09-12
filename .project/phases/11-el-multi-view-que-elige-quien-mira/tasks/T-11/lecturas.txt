@@ -1,0 +1,161 @@
+La corrida de 180 s, a 1440x900, leida del contrato y del DOM cada 0,5 s.
+Una linea por CAMBIO de estado; entre dos lineas no cambio nada.
+
+Columnas: t (s del programa) | cajas del contrato | <video> en el contenedor
+          pan = lista abierta, pop = popup, dot = punto en el boton
+
+t=  1.70  pan=0 pop=0 dot=0
+          contrato: nada activo
+          1 <video>: rs4 corriendo ct=1.70 vol=1
+          la linea de la pagina: 1.7 s · the programme, nothing signalled · 1 video element in the player, 1 decoding
+
+t= 17.06  pan=0 pop=0 dot=0
+          contrato: nada activo
+          2 <video>: rs4 corriendo ct=17.06 vol=1; rs1 pausado ct=0.00 vol=1 muted
+          la linea de la pagina: 17.1 s · the programme, nothing signalled · 2 video elements in the player, 1 decoding
+
+t= 20.13  pan=0 pop=0 dot=0
+          contrato: cornerOverlay (BREAK-1-CONCURRENT.0) 2 elementos: primaryContent [0 0 0 0] z0 vol100; adOverlay1 [0 75 75 0] z1 vol0
+          2 <video>: rs4 corriendo ct=20.13 vol=1; rs4 corriendo ct=0.07 vol=0 muted
+          la linea de la pagina: 20.1 s · ad on screen: cornerOverlay, 1 element(s) · 2 video elements in the player, 2 decoding
+
+t= 32.15  pan=0 pop=0 dot=0
+          contrato: nada activo
+          1 <video>: rs4 corriendo ct=32.15 vol=1
+          la linea de la pagina: 32.1 s · the programme, nothing signalled · 1 video element in the player, 1 decoding
+
+t= 45.41  pan=0 pop=1 dot=1
+          contrato: multiViewOffer (BREAK-2-MULTIVIEW.0) 0 elementos: (ninguno)
+          1 <video>: rs4 corriendo ct=45.41 vol=1
+          la linea de la pagina: 45.4 s · multi view offered · 3 feeds · nothing raised · 1 video element in the player, 1 decoding
+
+t= 48.85  pan=1 pop=0 dot=1
+          contrato: multiViewOffer (BREAK-2-MULTIVIEW.0) 0 elementos: (ninguno)
+          1 <video>: rs4 corriendo ct=48.85 vol=1
+          la linea de la pagina: 48.8 s · multi view offered · 3 feeds · nothing raised · 1 video element in the player, 1 decoding
+
+t= 51.88  pan=1 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-2-MULTIVIEW.0) 2 elementos: primaryContent [25 50 25 0] z0 vol100; view-caminandes-a [25 0 25 50] z1 vol0
+          2 <video>: rs4 corriendo ct=51.88 vol=1; rs4 corriendo ct=6.66 vol=0 muted
+          la linea de la pagina: 51.9 s · multi view · 2 boxes · 2 video elements in the player, 2 decoding
+
+t= 61.05  pan=1 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-2-MULTIVIEW.0) 3 elementos: primaryContent [0 50 50 0] z0 vol100; view-caminandes-a [0 0 50 50] z1 vol0; view-caminandes-b [50 25 0 25] z2 vol0
+          3 <video>: rs4 corriendo ct=61.05 vol=1; rs4 corriendo ct=15.84 vol=0 muted; rs4 corriendo ct=15.77 vol=0 muted
+          la linea de la pagina: 61.0 s · multi view · 3 boxes · 3 video elements in the player, 3 decoding
+
+t= 69.83  pan=1 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-2-MULTIVIEW.0) 4 elementos: primaryContent [0 50 50 0] z0 vol100; view-caminandes-a [0 0 50 50] z1 vol0; view-caminandes-b [50 50 0 0] z2 vol0; view-ed-a [50 0 0 50] z3 vol0
+          4 <video>: rs4 corriendo ct=69.83 vol=1; rs4 corriendo ct=24.60 vol=0 muted; rs4 corriendo ct=24.52 vol=0 muted; rs4 corriendo ct=24.57 vol=0 muted
+          la linea de la pagina: 69.8 s · multi view · 4 boxes · 4 video elements in the player, 4 decoding
+
+t= 79.12  pan=0 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-2-MULTIVIEW.0) 4 elementos: primaryContent [0 50 50 0] z0 vol100; view-caminandes-b [50 50 0 0] z2 vol0; view-ed-a [50 0 0 50] z3 vol0; view-caminandes-a [0 0 0 0] z4 vol0
+          4 <video>: rs4 corriendo ct=79.12 vol=0; rs4 corriendo ct=33.85 vol=1; rs4 corriendo ct=33.79 vol=0 muted; rs4 corriendo ct=33.83 vol=0 muted
+          la linea de la pagina: 79.1 s · multi view · 4 boxes · Caminandes, early at full frame · 4 video elements in the player, 4 decoding
+
+t= 88.15  pan=0 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-2-MULTIVIEW.0) 4 elementos: primaryContent [0 50 50 0] z0 vol100; view-caminandes-a [0 0 50 50] z1 vol0; view-caminandes-b [50 50 0 0] z2 vol0; view-ed-a [50 0 0 50] z3 vol0
+          4 <video>: rs4 corriendo ct=88.15 vol=0; rs4 corriendo ct=42.87 vol=1; rs4 corriendo ct=42.82 vol=0 muted; rs4 corriendo ct=42.86 vol=0 muted
+          la linea de la pagina: 88.1 s · multi view · 4 boxes · 4 video elements in the player, 4 decoding
+
+t= 96.69  pan=0 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-2-MULTIVIEW.0) 0 elementos: (ninguno)
+          1 <video>: rs4 corriendo ct=96.69 vol=1
+          la linea de la pagina: 96.7 s · multi view offered · 3 feeds · nothing raised · 1 video element in the player, 1 decoding
+
+t=105.41  pan=0 pop=0 dot=0
+          contrato: nada activo
+          1 <video>: rs4 corriendo ct=105.41 vol=1
+          la linea de la pagina: 105.4 s · the programme, nothing signalled · 1 video element in the player, 1 decoding
+
+t=120.20  pan=0 pop=1 dot=1
+          contrato: multiViewOffer (BREAK-3-MULTIVIEW.0) 0 elementos: (ninguno)
+          1 <video>: rs4 corriendo ct=120.20 vol=1
+          la linea de la pagina: 120.2 s · multi view offered · 5 feeds · nothing raised · 1 video element in the player, 1 decoding
+
+t=125.26  pan=1 pop=0 dot=1
+          contrato: multiViewOffer (BREAK-3-MULTIVIEW.0) 0 elementos: (ninguno)
+          1 <video>: rs4 corriendo ct=125.26 vol=1
+          la linea de la pagina: 125.2 s · multi view offered · 5 feeds · nothing raised · 1 video element in the player, 1 decoding
+
+t=127.01  pan=1 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-3-MULTIVIEW.0) 2 elementos: primaryContent [25 50 25 0] z0 vol100; view-caminandes-a [25 0 25 50] z1 vol0
+          2 <video>: rs4 corriendo ct=127.01 vol=1; rs4 corriendo ct=6.78 vol=0 muted
+          la linea de la pagina: 127.0 s · multi view · 2 boxes · 2 video elements in the player, 2 decoding
+
+t=132.04  pan=1 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-3-MULTIVIEW.0) 3 elementos: primaryContent [0 50 50 0] z0 vol100; view-caminandes-a [0 0 50 50] z1 vol0; view-caminandes-b [50 25 0 25] z2 vol0
+          3 <video>: rs4 corriendo ct=132.04 vol=1; rs4 corriendo ct=11.80 vol=0 muted; rs4 corriendo ct=11.75 vol=0 muted
+          la linea de la pagina: 132.0 s · multi view · 3 boxes · 3 video elements in the player, 3 decoding
+
+t=137.02  pan=1 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-3-MULTIVIEW.0) 4 elementos: primaryContent [0 50 50 0] z0 vol100; view-caminandes-a [0 0 50 50] z1 vol0; view-caminandes-b [50 50 0 0] z2 vol0; view-ed-a [50 0 0 50] z3 vol0
+          4 <video>: rs4 corriendo ct=137.02 vol=1; rs4 corriendo ct=16.78 vol=0 muted; rs4 corriendo ct=16.73 vol=0 muted; rs4 corriendo ct=16.87 vol=0 muted
+          la linea de la pagina: 137.0 s · multi view · 4 boxes · 4 video elements in the player, 4 decoding
+
+t=145.79  pan=1 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-3-MULTIVIEW.0) 3 elementos: primaryContent [0 50 50 0] z0 vol100; view-caminandes-b [0 0 50 50] z1 vol0; view-ed-a [50 25 0 25] z2 vol0
+          3 <video>: rs4 corriendo ct=145.79 vol=1; rs4 corriendo ct=25.50 vol=0 muted; rs4 corriendo ct=25.65 vol=0 muted
+          la linea de la pagina: 145.8 s · multi view · 3 boxes · 3 video elements in the player, 3 decoding
+
+t=148.09  pan=1 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-3-MULTIVIEW.0) 4 elementos: primaryContent [0 50 50 0] z0 vol100; view-caminandes-b [0 0 50 50] z1 vol0; view-ed-a [50 50 0 0] z2 vol0; view-ed-b [50 0 0 50] z3 vol0
+          4 <video>: rs4 corriendo ct=148.09 vol=1; rs4 corriendo ct=27.79 vol=0 muted; rs4 corriendo ct=27.94 vol=0 muted; rs4 corriendo ct=27.89 vol=0 muted
+          la linea de la pagina: 148.1 s · multi view · 4 boxes · 4 video elements in the player, 4 decoding
+
+t=157.90  pan=1 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-3-MULTIVIEW.0) 3 elementos: primaryContent [0 50 50 0] z0 vol100; view-ed-a [0 0 50 50] z1 vol0; view-ed-b [50 25 0 25] z2 vol0
+          3 <video>: rs4 corriendo ct=157.90 vol=1; rs4 corriendo ct=37.75 vol=0 muted; rs4 corriendo ct=37.70 vol=0 muted
+          la linea de la pagina: 157.9 s · multi view · 3 boxes · 3 video elements in the player, 3 decoding
+
+t=160.16  pan=1 pop=0 dot=0
+          contrato: multiViewOffer (BREAK-3-MULTIVIEW.0) 2 elementos: primaryContent [25 50 25 0] z0 vol100; view-ed-b [25 0 25 50] z1 vol0
+          2 <video>: rs4 corriendo ct=160.16 vol=1; rs4 corriendo ct=39.96 vol=0 muted
+          la linea de la pagina: 160.1 s · multi view · 2 boxes · 2 video elements in the player, 2 decoding
+
+t=161.91  pan=1 pop=0 dot=1
+          contrato: multiViewOffer (BREAK-3-MULTIVIEW.0) 0 elementos: (ninguno)
+          1 <video>: rs4 corriendo ct=161.91 vol=1
+          la linea de la pagina: 161.9 s · multi view offered · 5 feeds · nothing raised · 1 video element in the player, 1 decoding
+
+t=175.39  pan=0 pop=0 dot=0
+          contrato: nada activo
+          1 <video>: rs4 corriendo ct=175.39 vol=1
+          la linea de la pagina: 175.4 s · the programme, nothing signalled · 1 video element in the player, 1 decoding
+
+
+=== Los cuatro decodificadores, tres lecturas seguidas con la grilla llena ===
+t=69.83
+   video[0]  readyState=4  paused=False  currentTime=69.83  1280x720  volume=1  muted=False
+   video[1]  readyState=4  paused=False  currentTime=24.60  1280x720  volume=0  muted=True
+   video[2]  readyState=4  paused=False  currentTime=24.52  1280x720  volume=0  muted=True
+   video[3]  readyState=4  paused=False  currentTime=24.57  1280x720  volume=0  muted=True
+t=72.93
+   video[0]  readyState=4  paused=False  currentTime=72.93  1280x720  volume=1  muted=False
+   video[1]  readyState=4  paused=False  currentTime=27.70  1280x720  volume=0  muted=True
+   video[2]  readyState=4  paused=False  currentTime=27.63  1280x720  volume=0  muted=True
+   video[3]  readyState=4  paused=False  currentTime=27.68  1280x720  volume=0  muted=True
+t=75.69
+   video[0]  readyState=4  paused=False  currentTime=75.69  1280x720  volume=1  muted=False
+   video[1]  readyState=4  paused=False  currentTime=30.48  1280x720  volume=0  muted=True
+   video[2]  readyState=4  paused=False  currentTime=30.41  1280x720  volume=0  muted=True
+   video[3]  readyState=4  paused=False  currentTime=30.46  1280x720  volume=0  muted=True
+
+=== La lista con la grilla llena (segunda ventana) ===
+t=137.02
+   Tears of Steel           tildada=true  deshabilitada=False bloqueada=True
+   Caminandes, early        tildada=true  deshabilitada=False bloqueada=False
+   Caminandes, late         tildada=true  deshabilitada=False bloqueada=False
+   Elephants Dream, early   tildada=true  deshabilitada=False bloqueada=False
+   Elephants Dream, late    tildada=false deshabilitada=True bloqueada=False
+   Sintel                   tildada=false deshabilitada=True bloqueada=False
+   nota: 4 boxes is what the screen holds. Lower one to raise another.
+
+=== La galeria de formas y la salida, al final de la corrida ===
+   2 boxes · first seen at 51.4 s
+   3 boxes · first seen at 60.6 s
+   4 boxes · first seen at 69.3 s
+   one box at full frame, over 3 that keep playing · first seen at 78.6 s
+   el primario cuando cargo la pagina: style=null · volume=1
+   el primario al final:               style=null · volume=1

@@ -3,121 +3,305 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Multi view offer — Qualabs demo</title>
+<title>The multi view you build — Non-linear Ads in HLS</title>
 <!--
-  THE TWO TAGS IN ONE PLAYLIST, which is the whole of what this demo argues
-  (ADR 0063). One media playlist carries three EXT-X-DATERANGE of two sibling
-  classes: the concurrent one that has been drawing ads over the content since
-  phase 01, and the multi view one, which announces a CATALOGUE instead of a
-  composition. What the first one signals, the publisher composed; what the
-  second one signals, whoever is watching composes, by ticking rows in the
-  selector the library draws in its own chrome.
-
-  #player  is the container the page hands to the library, and the only thing it
-           hands over besides the hls.js instance. Everything lives inside it:
-           the layer the views are drawn into, the primary content that moves
-           within it, the selector, and the bar that marks the three windows.
-
-  There is no narration on this page and no card that explains a step. The run
-  is the one the signalling script prints when it writes the playlist, and the
-  page is the six lines of the integration around the picture.
+  The fonts and the favicon are copies of the Qualabs brand kit on disk, not
+  links to it: this page is published, and a file that resolves off another
+  folder on somebody's laptop is a file that is not in the bucket. Provenance in
+  brand/README.md.
 -->
-<style>
-  :root { color-scheme: dark; }
-  html, body { margin: 0; background: #0b0d12; color: #e8ecf2;
-               font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
-  .stage { max-width: 1100px; margin: 0 auto; padding: 24px 20px 32px; }
-  h1 { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
-  .sub { margin: 0 0 18px; font-size: 13px; color: #93a0b4; }
-  .sub code { color: #c6d1e0; }
-  /* The box the composition lives in: positioned, 16/9, black, and the one
-     value this page hands the chrome, which is the colour of somebody's brand
-     and never a constant of the library. */
-  .player {
-    position: relative;
-    isolation: isolate;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #000;
-    --qa-accent: #37b4a7;
-  }
-  .player .video { width: 100%; height: 100%; display: block; }
-  .hud { margin: 12px 0 0; font-size: 12.5px; color: #93a0b4; }
-  .credit { margin: 22px 0 0; font-size: 11.5px; line-height: 1.6; color: #6f7d92; }
-  .credit a { color: #8fa2ba; }
-</style>
+<link rel="stylesheet" href="./brand/fonts-embedded.css">
+<link rel="stylesheet" href="./css/page.css">
+<link rel="icon" href="./brand/favicon.svg">
 </head>
 <body>
 
-<div class="stage">
-  <h1>One playlist, two classes of break</h1>
-  <p class="sub">
-    <code>com.qualabs.hls.concurrentInterstitial</code> at 20 s ·
-    <code>com.qualabs.hls.multiViewInterstitial</code> at 45 s and at 120 s
-  </p>
+<!--
+  THE MULTI VIEW THE VIEWER BUILDS, and the whole of what this demo argues is a
+  change of who decides.
 
-  <div class="player" id="player">
-    <video class="video" id="video" playsinline></video>
+  An ad break is composed by whoever sells it: the payload declares a box per
+  asset, in percentages of the picture, and the client draws what it was told.
+  That is the other demo in this repository and it still works here -- the first
+  break of this run is one of those, unchanged.
+
+  A MULTI VIEW IS NOT COMPOSED BY ANYBODY WHEN IT IS SIGNALLED. The playlist
+  announces a CATALOGUE: what else can be watched, what each one is called, and
+  nothing about where any of it goes. Where it goes cannot be written down,
+  because it depends on how many feeds whoever is watching raised, and that is
+  decided on the other side of the network, after the playlist was written, and
+  it changes several times while the window is open.
+
+  So the page is about a relation and not about a layout:
+
+    the publisher   offers a catalogue, and names every item in it
+    the player      works out the geometry, because it is the only one that
+                    knows how many boxes there are and how big the screen is
+    whoever watches raises and lowers feeds, gives one the sound, enlarges one,
+                    and leaves
+
+  ONE PLAYLIST CARRIES BOTH CLASSES, and that is the second thing this demo
+  shows. `com.qualabs.hls.concurrentInterstitial` at 20 s and
+  `com.qualabs.hls.multiViewInterstitial` at 45 s and at 120 s: siblings, not
+  one extending the other, because in HLS the class of a Date Range is compared
+  as an exact string and the format has no inheritance.
+
+  NONE OF IT IS A RECORDING. Real HLS, real EXT-X-DATERANGE, asset-lists fetched
+  over the network and resolved, and one video element decoding per box. The
+  rule that follows from it governs every caption on this page: NOTHING HERE
+  CLAIMS ANYTHING IT HAS NOT READ OFF THE CONTRACT. Where a number, a name, a
+  box or a field would have to be typed in, the markup carries an empty
+  container instead and the page fills it with what the provider resolved for
+  THIS run. An empty box is honest about what has not happened yet; a sentence
+  that used to be true is not.
+
+  THERE IS NO GUIDED RUN HERE, AND THAT IS THE DEMO AND NOT AN OMISSION. The
+  other demo drives itself: the ads arrive on their own and a walkthrough can
+  stop the picture and say what is about to happen. Here nothing happens until
+  somebody ticks a row. A walkthrough that ticked rows on your behalf would be
+  arguing the opposite of what this page is for. So what is under the player is
+  a MAP OF THE RUN -- the three windows, read off the contract, with the one that
+  is open lit -- and the instruction for the window you are in, chosen by what
+  that window announces and not by its position in a list.
+
+  #player  is the container the page hands the library, and the only thing it
+           hands over besides the hls.js instance. Everything lives inside it:
+           the layer the boxes are drawn into, the primary content that moves
+           within it, the bar, the selector, and the buttons on each box. It
+           carries `isolation: isolate` in the stylesheet on purpose -- the
+           chrome the library draws sits at z-index 2147483000, and without a
+           stacking context of its own it would draw over anything this page
+           puts on top of the picture.
+
+  No bundler and no framework. The library is one classic <script src> that
+  defines a global, assembled from lib/ on every start; this page's own files
+  are native ES modules. hls.js is vendored at 1.7.2, which is the version the
+  measurements ran on.
+-->
+
+<!--
+  THE MARK, centred, and the only one outside the picture: nothing of ours sits
+  over the frame the composition uses. The same file closes the page at the foot
+  of the credits, so the page opens and shuts on one thing.
+-->
+<header class="masthead">
+  <img class="brand" src="./brand/logo-qualabs-on-dark.svg" alt="Qualabs">
+</header>
+
+<!--
+  THE OPENING. Black, one sentence at a time, and the type shrinks as you
+  scroll: the panel is sticky, so it does not move while the page under it does,
+  and when the section runs out the panel lets go and the player comes up from
+  below. It looks pinned; what is changing is the size.
+
+  IT SAYS WHO DECIDES AND NOT HOW IT WORKS. The how starts one screen down. The
+  last sentence names the thing, which is why it is the only one that grows back
+  and the only one that does not fade: the picture arrives over the name.
+
+  The sentences live in the markup here and not in a JSON next door. The other
+  demo keeps its copy in a file because its walkthrough anchors beats to breaks
+  and the two are edited together; there is no walkthrough here, so a file would
+  be a second place to look for four lines.
+-->
+<section class="opening" id="opening" aria-label="Multi view in HLS">
+  <div class="opening__panel">
+    <p class="opening__line">One playlist. Two kinds of break.</p>
+    <p class="opening__line">In the first one, the publisher composed the picture.</p>
+    <p class="opening__line">In the second one, the publisher only offers.</p>
+    <p class="opening__line">Multi view: you build the picture.</p>
+  </div>
+</section>
+
+<section class="stage" aria-label="The run">
+
+  <div class="frame">
+    <div class="player" id="player">
+      <video class="video" id="video" playsinline></video>
+    </div>
   </div>
 
-  <p class="hud" id="hud"></p>
-  <p class="hud" id="contract"></p>
+  <!--
+    THE STATE LINE AND THE DECODER COUNT, and neither is a caption.
 
-  <p class="credit">
-    <em>Tears of Steel</em>, <em>Caminandes: Gran Dillama</em>,
-    <em>Elephants Dream</em> and <em>Sintel</em> (CC BY) &copy; Blender
-    Foundation, <a href="https://www.blender.org">blender.org</a>.
-    Re-encoded and shortened for this demo; the full attribution is in
-    CREDITS.md.
-  </p>
-</div>
+    The left half is the contract read at the playhead: what is active, how many
+    boxes it resolved, and which one is at full frame. The right half is not the
+    contract at all, it is the DOM: how many <video> elements are inside the
+    container, how many of them have data and are not paused. It is here because
+    it is the one claim of this demo that the contract cannot make -- that a grid
+    of four is four decoders and not one composited picture -- and it is the same
+    reading the phase takes as its instrument.
+  -->
+  <p class="state" id="state"></p>
+
+  <!--
+    THE MAP OF THE RUN. Empty in the markup: the windows are read off
+    `programRanges()` and the instruction of each one is chosen by WHAT IT
+    ANNOUNCES -- an ad, a catalogue that fits on the grid, or a catalogue longer
+    than the grid -- so moving a break in the signalling moves its row here, and
+    adding one adds a row nobody had to remember to write.
+  -->
+  <ol class="run" id="run"></ol>
+
+  <p class="hud" id="hud"></p>
+
+</section>
+
+<!--
+  BELOW THE PICTURE, the scroll for whoever wants to know how. Three ideas, one
+  per screen, and the credits as the foot rather than a fourth section: what
+  arrives in a break of each class, what shape the boxes take and how the way
+  out works, and what this run's own signalling says.
+
+  Every container below is EMPTY IN THE MARKUP on purpose. It is the rule at the
+  top of this file applied to a box instead of to a sentence: a drawing of a
+  layout, a field name, a catalogue, a tag and a JSON are all things the contract
+  or the network can hand over, so none of them is typed in. Two of them stay
+  empty until somebody does something, which is the honest state of a page whose
+  subject is a composition that does not exist until a viewer makes it.
+-->
+
+<section class="chapter" aria-label="What a break announces">
+  <div class="chapter__inner">
+    <p class="kicker">What a break announces</p>
+    <h2>One kind declares boxes. The other declares names.</h2>
+    <p class="lede">
+      Both are an <code>EXT-X-DATERANGE</code> of a custom class, both point at an
+      asset-list, and both are drawn over a programme that never stops. What differs
+      is what the block inside declares — and therefore who is left holding the
+      decision about where things go on the screen. Below is every break of this run,
+      each one drawn from what it actually announces.
+    </p>
+
+    <!--
+      THE TWO CARDS ARE DRAWN AND NOT DESCRIBED, and what each one draws is what
+      the provider resolved for the breaks of THIS run: for the ad, the boxes in
+      the percentages its payload declared; for the offer, the rows of its
+      catalogue with the names it gave them. Neither the layout type nor a view
+      name is written anywhere in this repository's markup.
+    -->
+    <div class="cards" id="announces"></div>
+
+    <!--
+      WHAT ARRIVES PER ITEM, side by side, and it is the field names themselves
+      rather than a sentence about them: the keys of one element of the ad, and
+      the keys of one view of the catalogue, read off the objects the contract
+      handed over. The three the offer does not carry are the three whoever
+      published cannot decide — two of them because they depend on a number the
+      author did not know, and `volume` because the opening mix of an offer is
+      not a mix somebody composed, it is "the programme keeps sounding".
+    -->
+    <p class="fields__title">And what arrives for one item of each</p>
+    <div class="fields" id="fields"></div>
+
+    <p class="note">
+      A catalogue is allowed to be longer than the screen, and one of the windows of
+      this run is. The cap is of the grid and never of the offer: a playlist may
+      announce eight cameras without anything being wrong, and what is capped is how
+      many of them are up at once.
+    </p>
+  </div>
+</section>
+
+<section class="chapter" aria-label="The shape of the grid">
+  <div class="chapter__inner">
+    <p class="kicker">The shape of the grid</p>
+    <h2>Nobody chose these shapes. They are a function of how many boxes there are.</h2>
+    <p class="lede">
+      An offer carries no geometry, so the player works it out — it is the only one of
+      the three parties that knows both things at once: how many boxes there are right
+      now, and how big the screen is. The programme is the first box of every shape,
+      because it is one of the views and not a backdrop. Nothing below was drawn in
+      advance: each shape appears the first time the composition on screen reaches that
+      many boxes, with the second it happened.
+    </p>
+
+    <!--
+      THE GALLERY FILLS ITSELF AS YOU WALK THE RUN, and that is the point of it
+      rather than a limitation. Every cell is empty until the composition on
+      screen reaches that many boxes; when it does, the cell is drawn with the
+      boxes the contract resolved at that instant, the names in them, and the
+      second it happened. A screenshot would be a claim about the day somebody
+      pressed the shutter; this is a record of the run the reader just did, and
+      it cannot disagree with the picture because it is read off the same
+      provider that drew it.
+    -->
+    <div class="shapes" id="shapes"></div>
+
+    <!--
+      THE WAY OUT, read and not promised. Leaving is not a restore: it is the
+      same `clear()` that ends an ad, and what it does to the primary content is
+      REMOVE the style attribute the composition wrote — not put a saved value
+      back. So there is no state that can fall out of step, and the proof is two
+      readings of the same attribute: one taken before anything had been
+      composed, and one taken now, which is live. During a composition they
+      differ, which is the transform that moved the picture; once a window is
+      left they have to be the same again, and anybody can watch that happen
+      instead of being told it does.
+    -->
+    <dl class="wayout" id="wayout"></dl>
+
+    <p class="note">
+      Unticking the last feed and pressing the one-view button are the same event and
+      not two: one box is no composition, so both end in the same call. That is why
+      leaving cannot restore the wrong thing — there is nothing to restore.
+    </p>
+  </div>
+</section>
+
+<section class="chapter" aria-label="The signalling, as it is served">
+  <div class="chapter__inner">
+    <p class="kicker">The signalling, as it is served</p>
+    <h2>Read off this page&rsquo;s own playlist, right now.</h2>
+    <p class="lede">
+      Not an illustration. The tags below are the ones in the media playlist this
+      player is playing, and the JSON is the asset-list each one points at, fetched
+      from the same URL the library fetched it from.
+    </p>
+    <pre class="code" id="tags">loading…</pre>
+
+    <!--
+      THE BLOCK OF AN OFFER, FIELD BY FIELD. Empty in the markup and drawn off
+      the asset-list this player fetched, so a field is explained here only when
+      the document in front of the reader really carries it — and a field it
+      carries that nobody wrote a gloss for says so on the page instead of being
+      quietly left out.
+    -->
+    <div class="payload" id="payload"></div>
+
+    <!--
+      THE ASSET-LISTS THEMSELVES, one fold each, closed, with the raw JSON
+      inside and the one whose window is open marked live.
+    -->
+    <div class="assets" id="assets"></div>
+  </div>
+</section>
+
+<footer class="chapter chapter--end" aria-label="Credits">
+  <div class="chapter__inner">
+    <p class="kicker">Credits</p>
+    <h2>Four films, under a licence that lets them be here.</h2>
+    <p class="credit">
+      <em>Tears of Steel</em> (the programme), <em>Caminandes: Gran Dillama</em> (the ad,
+      and two of the feeds), <em>Elephants Dream</em> and <em>Sintel</em> (the rest of the
+      catalogue) &copy; Blender Foundation,
+      <a href="https://www.blender.org">blender.org</a>, under Creative Commons
+      Attribution: <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>,
+      and <a href="https://creativecommons.org/licenses/by/2.5/">CC BY 2.5</a> for
+      <em>Elephants Dream</em>. Re-encoded and cut for this demo; nothing was added to
+      them and nothing of ours is drawn over them. Every file, with the source it came
+      from, is in <code>CREDITS.md</code>.
+      &middot; Two feeds of the long catalogue are the same film at different moments, on
+      purpose: it is what makes it evident that a grid of four is four decoders and not one
+      picture shown twice.
+    </p>
+  </div>
+
+  <img class="brand brand--foot" src="./brand/logo-qualabs-on-dark.svg" alt="Qualabs">
+</footer>
 
 <script src="/vendor/hls.min.js"></script>
 <script src="/dist/qualabs-concurrent-hls.js"></script>
-<script type="module">
-// The signalled playlist: the same segments as the plate plus one Date Range per
-// break, written by scripts/senalizar-contenido.sh on every start. Its
-// START-DATE is resolved against the playlist's own EXT-X-PROGRAM-DATE-TIME, so
-// it cannot be a file in git: the clock moves every time the content is packaged.
-const SRC = './content/primary/con-daterange.m3u8';
-
-const video = document.getElementById('video');
-const hud = document.getElementById('hud');
-const contract = document.getElementById('contract');
-
-// ===========================================================================
-// WHAT AN INTEGRATOR WRITES (with the <script src> and the container above).
-const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
-const concurrent = QualabsConcurrentHls.attach(hls, {
-  container: document.getElementById('player')
-});
-hls.loadSource(SRC);
-hls.attachMedia(video);
-// ===========================================================================
-
-// Muted, so the autoplay policy lets the page start without a click. The audio
-// control the library draws at the top right of the picture is the one that
-// lifts it, and lifting it once at the start is a step of the run.
-video.muted = true;
-
-hls.on(Hls.Events.ERROR, (_e, d) => {
-  console.error('[hls] error', d.type, d.details, 'fatal:', d.fatal);
-  if (d.fatal) hud.textContent = `error: ${d.details}`;
-});
-hls.on(Hls.Events.MANIFEST_PARSED, () => {
-  hud.textContent = `hls.js ${Hls.version} · playing ${SRC}`;
-  video.play().catch(() => {});
-});
-
-// THE CONTRACT, read off the handle and off nothing else: what the signalling
-// layer says is active right now, with the boxes whoever is watching composed.
-setInterval(() => {
-  const active = concurrent.provider.activeAt(video.currentTime);
-  contract.textContent = active.length
-    ? active.map((e) => `${e.type}#${e.itemId} · ${e.elements.length} element(s)`).join(' | ')
-    : 'contract: nothing active';
-}, 250);
-</script>
+<script type="module" src="./js/app.js"></script>
 
 </body>
 </html>

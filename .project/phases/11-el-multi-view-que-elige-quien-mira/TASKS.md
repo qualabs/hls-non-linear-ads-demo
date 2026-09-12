@@ -9,12 +9,12 @@
 | T-05 | El estado de quien mira: `lib/multiview.js` | done | — | `tasks/T-05/` |
 | T-06 | El cromo se puede quedar quieto: el mecanismo de *holds* | done | — | tasks/T-06/ |
 | T-07 | El selector, la lista de casilleros en los controles | done | — | [`tasks/T-07/`](tasks/T-07/t07-el-selector.md) |
-| T-08 | El anuncio: el popup que se va y el punto que se queda | pending | — | — |
+| T-08 | El anuncio: el popup que se va y el punto que se queda | done | — | `tasks/T-08/` |
 | T-09 | Agrandar y desagrandar | done | — | `tasks/T-09/` (mas el wiring.patch, aplicado por el coordinador) |
-| T-10 | La salida, por sus dos entradas | done | — | [`tasks/T-10/`](tasks/T-10/README.md) (mas el `way-out.patch`, sin aplicar: el boton vive en `lib/controls.js`) |
-| T-11 | La página de la demo y la corrida mirada | pending | — | — |
-| T-12 | La no-regresión: las tres suites y las dos demos que ya andan | pending | — | — |
-| T-13 | La documentación: los dos de `docs/` y el README de la demo | pending | — | — |
+| T-10 | La salida, por sus dos entradas | done | — | [`tasks/T-10/`](tasks/T-10/README.md) (mas el `way-out.patch`, aplicado despues por el coordinador: el boton vive en `lib/controls.js`, que era de otra task) |
+| T-11 | La página de la demo y la corrida mirada | done | — | `tasks/T-11/` |
+| T-12 | La no-regresión: las tres suites y las dos demos que ya andan | done | — | `tasks/T-12/` (base, comparador, control en rojo y cierre) |
+| T-13 | La documentación: los dos de `docs/` y el README de la demo | done | — | `docs/`, `README.md`, ADR 0078 y 0079 |
 
 **El orden lo pone el riesgo y no la dependencia.** La T-01 va primera porque es
 la más grande, porque todo lo demás se apoya en que la composición pueda cambiar

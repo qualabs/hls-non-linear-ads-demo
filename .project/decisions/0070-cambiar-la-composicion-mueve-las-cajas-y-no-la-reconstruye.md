@@ -68,3 +68,24 @@ de creíble, y es assertable porque el plan es una función pura sobre datos.
 **Que el reparto sea puro es la decisión que hace todo lo anterior posible.** Un
 diff enredado con el DOM se prueba mirando, y mirar es lo que este proyecto ya
 descubrió dos veces que no alcanza.
+
+---
+
+## 2026-09-11 — nota: la transición no estaba construida, y la construye el ADR 0079
+
+**La primera consecuencia de arriba —*"la transición sale gratis y ya está
+construida"*— era falsa cuando se escribió, y lo era para los nodos de aviso.**
+`place({ animate: true })` animaba `transform` y `opacity`, y un nodo de aviso no
+tenía ningún `transform`: se coloca con `left`, `top`, `width` y `height`, así que
+una caja que cambiaba de lugar saltaba en vez de viajar. El contenido primario sí
+se mueve con un `transform`, que es de dónde venía la confusión. Se vio mirando la
+demo.
+
+El mecanismo que faltaba es el **ADR 0079**: la caja se escribe en su destino, una
+transformación inversa la pinta donde estaba, y soltar esa transformación es el
+viaje.
+
+**La decisión de este ADR no cambia y queda `accepted`**: los nodos que sobreviven
+se quedan, `build` y `clear` trabajan por diferencia a partir de una función pura,
+y la composición no puede quedar a medias. Lo que falló fue una consecuencia que
+afirmó construido un mecanismo que no existía, no la decisión que la motivó.

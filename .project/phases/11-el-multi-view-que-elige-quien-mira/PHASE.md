@@ -1,9 +1,9 @@
 ---
 phase: 11-el-multi-view-que-elige-quien-mira
 title: "El multi view que elige quien mira: el que publica ofrece un catálogo y quien mira arma la composición"
-status: planning
+status: closed
 started: 2026-09-11
-closed: null
+closed: 2026-09-11
 ---
 
 # Fase 11: el multi view que elige quien mira
@@ -58,14 +58,21 @@ La línea de base está medida hoy, antes de tocar nada:
 | chequeo | comando | línea de base 2026-09-11 |
 | --- | --- | --- |
 | la suite | `npm test` | **72 pruebas, 72 pasan, 0 fallan** |
-| las dos costuras | `npm run check` | verde, cero hits en las dos |
+| las dos costuras | `npm run check` | verde |
 | la campaña de la demo grabada | `npm run mutaciones` | corre |
 
 De ahí salen tres reglas de ejecución.
 
-**Los 72 en verde son condición de cierre de cada task que toque `lib/`, no un
-paso al final.** Al final es donde se descubre tarde cuál de seis cambios lo
-rompió.
+**La suite entera en verde es condición de cierre de cada task que toque `lib/`,
+no un paso al final.** Al final es donde se descubre tarde cuál de seis cambios lo
+rompió. El número de la tabla es el del día en que se abrió la fase y sube cada vez
+que una task agrega pruebas: lo que se compara es contra el conteo con el que esa
+task arrancó, nunca contra un número escrito acá.
+
+> **Nota del 2026-09-11.** La celda de las costuras decía "cero hits en las dos" y
+> nunca fue cierto: la primera tiene tres ocurrencias, las tres en la lista aceptada
+> del propio chequeo, así que está verde. Se corrige la celda y se deja dicho, porque
+> la frase sobrevivió a toda la fase repetida en los despachos.
 
 **Y la suite sola no alcanza, y hay que decir exactamente por qué.** El cambio
 grande de la fase es `build()` y `clear()` pasando a trabajar por diferencia, y

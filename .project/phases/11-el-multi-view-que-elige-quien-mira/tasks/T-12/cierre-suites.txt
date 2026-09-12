@@ -1,0 +1,70 @@
+== las suites de cierre -- 2026-09-12T01:20:30Z ==
+
+### npm test
+ℹ tests 183
+ℹ suites 0
+ℹ pass 183
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1720.998159
+EXIT=0
+
+### los 5 archivos de test heredados que la fase 11 no toco
+ℹ tests 62
+ℹ pass 62
+ℹ fail 0
+EXIT=0
+
+### npm run check
+
+> qualabs-concurrent-hls@0.0.0 check
+> ./scripts/verificar-cortes.mjs
+
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js lib/multiview.js demo/compatibility-pair/js/contract-trace.js demo/compatibility-pair/css/player.css
+
+   GREEN: 3 occurrence(s), all of them on the accepted list.
+     lib/controls.js:33  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:133  interstitial: '#ffcc00'
+     lib/controls.js:169  interstitial: 'traditional interstitial: the content is replaced by the ad'
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
+EXIT=0
+
+### npm run mutaciones (ultima linea)
+las 20 roturas dieron rojo y los 9 chequeos dan verde sin romper nada
+EXIT=0
+
+### demo/compatibility-pair/test/signalled-run.test.js
+✔ the script signals the five breaks of the recording, and every one names an asset-list of this demo (2.572119ms)
+✔ the length a break declares is computed from its asset-list and not typed into the script (4.634972ms)
+✔ the two classes the script writes are the two the library translates (0.222663ms)
+ℹ tests 3
+ℹ pass 3
+ℹ fail 0
+EXIT=0
+
+### demo/hydration-break/test/signalled-run.test.js
+✔ toda ancla del guion cae en un break y en un aviso que existen, y frena antes (2.827145ms)
+✔ el break arranca en el corrimiento declarado de la parada del juego (0.427813ms)
+✔ el reparto de los avisos sale de plate.json y no del asset list (0.704787ms)
+✔ el minuto declara sus tres formas de aviso (0.840371ms)
+✔ la galería de formas se dibuja del contrato y no de una lista escrita a mano (2.604063ms)
+✔ lo que puede ir en una caja se lee del contrato y no está escrito en la página (0.808392ms)
+✔ cada pliegue de la señalización rotula el aviso que tiene adentro (0.771435ms)
+✔ la glosa del bloque explica los campos que el asset list trae, y ninguno más (1.083076ms)
+✔ entre dos placas se ve partido, y ninguna placa se queda (0.580414ms)
+✔ cada creativo del asset list tiene una carpeta de contenido nombrada (0.612379ms)
+ℹ tests 10
+ℹ pass 10
+ℹ fail 0
+EXIT=0

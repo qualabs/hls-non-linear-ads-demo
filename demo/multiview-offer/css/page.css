@@ -1,0 +1,618 @@
+/* The look of the multiview-offer demo.
+ *
+ * The aesthetic is the one the demo next door settled on, and it is stated as
+ * what it rules out rather than what it adds: one idea per screen, in full-height
+ * sections; a lot of air; two or three type sizes and no more; a short and almost
+ * entirely neutral palette, WITH THE COLOUR COMING FROM THE VIDEO AND NOT FROM
+ * THE PAGE; no ornamental gradients and no dramatic shadows; restrained motion.
+ * The video is the product: it goes first, big, and without a frame.
+ *
+ * NOTHING HERE STYLES THE COMPOSITION AND NOTHING HERE STYLES THE CONTROLS. The
+ * boxes of a multi view, the selector, the bar and the buttons on each box are
+ * drawn and styled by the library inside the container this page hands it,
+ * because how that layer stacks is an invariant of the renderer and not a choice
+ * of whoever writes a page. The one value this page hands the chrome is
+ * `--qa-accent`, which is somebody's brand colour and never a constant of the
+ * library.
+ *
+ * THE DIAGRAMS ARE NOT PICTURES. `.figure` and `.box` are an empty 16/9 area and
+ * an absolutely positioned rectangle; what puts a rectangle anywhere is an
+ * `inset` written by `js/contrato.js` out of the four percentages the contract
+ * resolved. There is not one coordinate in this file. */
+
+:root {
+  --q-teal-500: #37b4a7;
+  --q-teal-200: #c2e0de;
+  --q-ink-900: #12141a;
+  --q-ink-700: #1a1e27;
+  --q-ink-500: #262b36;
+  --q-slate-400: #7f8aa3;
+  --q-paper-50: #f8f9fa;
+  --q-rule: #2a303d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--q-ink-900);
+  color: var(--q-paper-50);
+  font-family: 'Poppins', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+code, pre, .tag, .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+a { color: var(--q-teal-200); }
+
+/* THE MARK, at the top and at the foot, and nowhere over the picture. The file is
+ * the brand logo with its wordmark in white, because the original is ink on a
+ * light surface and half of it would disappear here. */
+.masthead { display: grid; place-items: center; padding: 26px 20px 10px; }
+.brand { width: clamp(120px, 14vw, 168px); height: auto; display: block; }
+.brand--foot { margin: 0 auto 34px; opacity: 0.75; }
+
+/* ---------------------------------------------------------------------------
+ * THE OPENING.
+ *
+ * A tall section with a sticky panel inside it: the panel holds still while the
+ * section scrolls past, which is what makes it read as pinned, and when the
+ * section runs out the panel lets go and the player comes up from underneath.
+ * Nothing animates on a timer. The only input is `--t`, the fraction of the
+ * section already scrolled, written once per frame by `js/opening.js`.
+ *
+ * TWO NUMBERS COME OUT OF `--t` AND THE REST IS DERIVED FROM THEM.
+ *
+ * `--s` is the shrink, and it finishes exactly when the first sentence hands
+ * over to the second: the type is nearly the whole screen at the start and has
+ * settled into its reading size by the time there is a second thing to read. It
+ * is written against `--n`, the number of sentences, so adding one does not
+ * leave the resizing bleeding into it.
+ *
+ * `--u` places each sentence in its own stretch of the scroll: 0 where it takes
+ * over, 1 where the next one does. The two ends cross-fade over the same fifteen
+ * hundredths, so the opacities always add to one and there is never a moment
+ * with nothing on screen nor one with two sentences on top of each other. The
+ * first line is lit at `--u = 0` rather than on the way in, so the page opens
+ * with the sentence already there.
+ *
+ * The last one does not go out: `--salida` turns its exit term off, so it holds
+ * until the player scrolls over it instead of leaving a dead black stretch.
+ * ------------------------------------------------------------------------- */
+.opening {
+  --t: 0;
+  /* Written by `js/opening.js` with the real count. This value exists only so
+   * the property is valid before the script runs, and at that instant there is
+   * nothing to divide: it is a floor and not a copy of the data. */
+  --n: 1;
+  --s: min(1, calc(var(--t) * var(--n)));
+  height: 300vh;
+  background: #000;
+}
+
+.opening__panel {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 0 clamp(20px, 6vw, 110px);
+  background: #000;
+}
+
+.opening__line {
+  --u: calc(var(--t) * var(--n) - var(--i));
+  --salida: 1;
+  grid-area: 1 / 1;
+  margin: 0;
+  /* It widens as it shrinks, and that is why it is two numbers and not one: `ch`
+   * scales with the body, so a fixed width in `ch` that breaks the huge sentence
+   * into two lines breaks the small one into three. */
+  max-width: calc(18ch + 8ch * var(--s));
+  text-align: center;
+  text-wrap: balance;
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  font-size: calc(clamp(40px, 14vw, 140px)
+    + (clamp(23px, 3.2vw, 44px) - clamp(40px, 14vw, 140px)) * var(--s));
+  opacity: calc(
+    clamp(0, calc((var(--u) + 0.15) / 0.15), 1)
+    - clamp(0, calc((var(--u) - 0.85) / 0.15), 1) * var(--salida));
+}
+
+/* THE LAST SENTENCE NAMES THE THING and therefore weighs differently: the ones
+ * before it build the question and none of them says the word. So it goes back
+ * up in size instead of staying at reading size, and it does not fade -- the
+ * picture arrives over the name rather than over an empty screen. */
+.opening__line:last-child {
+  --salida: 0;
+  font-size: clamp(29px, 6vw, 80px);
+  color: var(--q-teal-200);
+}
+
+/* With reduced motion the type does not resize: it stays at the small size and
+ * the sentences still pass with the scroll, which is the part that is reading
+ * and not movement. */
+@media (prefers-reduced-motion: reduce) {
+  .opening { --s: 1; }
+}
+
+/* ---------------------------------------------------------------------------
+ * THE PLAYER AND WHAT IS UNDER IT.
+ * ------------------------------------------------------------------------- */
+.stage {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(18px, 4vw, 46px) clamp(14px, 3vw, 28px) clamp(40px, 8vw, 96px);
+}
+
+.frame { position: relative; }
+
+/* The box the composition lives in, and the only thing this page hands the
+ * library besides the instance.
+ *
+ * `isolation: isolate` is not decoration: the chrome the library draws sits at
+ * z-index 2147483000, and without a stacking context of its own that number
+ * would escape the container and draw over anything on the page. */
+.player {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  --qa-accent: var(--q-teal-500);
+}
+
+.player .video { width: 100%; height: 100%; display: block; }
+
+/* THE STATE LINE. Monospace, because two of the three things it reports are
+ * numbers that change several times a second and proportional type makes them
+ * jitter. */
+.state {
+  margin: 14px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: clamp(11px, 1.15vw, 13px);
+  line-height: 1.6;
+  color: var(--q-teal-200);
+  word-break: break-word;
+}
+
+.hud { margin: 6px 0 0; font-size: 12px; color: var(--q-slate-400); }
+
+/* THE MAP OF THE RUN. One row per window, and the one that is open is lit. A
+ * grid of three columns on a wide screen and a stack on a narrow one: the time
+ * and the class are labels and the copy is the body, so they read as a row when
+ * there is room and as a block when there is not. */
+.run {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--q-rule);
+}
+
+.run__row {
+  display: grid;
+  grid-template-columns: 150px 120px 1fr;
+  gap: 4px 18px;
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--q-rule);
+  color: var(--q-slate-400);
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.run__row--past { opacity: 0.55; }
+
+.run__row--open {
+  background: rgba(55, 180, 167, 0.08);
+  color: var(--q-paper-50);
+  box-shadow: inset 2px 0 0 var(--q-teal-500);
+}
+
+.run__when {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.run__kind {
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--q-teal-200);
+}
+
+.run__what { font-size: 13.5px; line-height: 1.65; }
+.run__what p { margin: 0; }
+.run__more { margin-top: 8px !important; color: var(--q-teal-200); }
+
+.run__names {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.run__names li {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  padding: 3px 9px;
+  border: 1px solid var(--q-rule);
+  border-radius: 999px;
+  color: var(--q-paper-50);
+}
+
+@media (max-width: 720px) {
+  .run__row { grid-template-columns: 1fr; gap: 6px; }
+}
+
+/* ---------------------------------------------------------------------------
+ * THE SECTIONS BELOW: one idea per screen.
+ * ------------------------------------------------------------------------- */
+.chapter {
+  min-height: 100vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(56px, 9vw, 110px) clamp(16px, 4vw, 40px);
+  border-top: 1px solid var(--q-rule);
+}
+
+/* The credits are the foot and not a fourth idea: shorter than a screen, and
+ * distributing instead of centring is what lets the mark sit AT the bottom
+ * rather than wherever the text happens to end. */
+.chapter--end { min-height: 66vh; align-content: space-between; }
+
+.chapter__inner { max-width: 1000px; margin: 0 auto; width: 100%; }
+
+.kicker {
+  margin: 0 0 12px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--q-teal-500);
+}
+
+.chapter h2 {
+  margin: 0 0 20px;
+  font-size: clamp(25px, 3.6vw, 44px);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.lede {
+  margin: 0 0 30px;
+  max-width: 66ch;
+  font-size: clamp(14px, 1.5vw, 17px);
+  line-height: 1.7;
+  color: #c8d0dd;
+}
+
+.note {
+  margin: 26px 0 0;
+  max-width: 62ch;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--q-slate-400);
+}
+
+.chapter code { font-size: 0.9em; color: var(--q-teal-200); }
+
+/* ---------------------------------------------------------------------------
+ * SECTION 1: the two cards, and the two lists of field names.
+ * ------------------------------------------------------------------------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  padding: 20px;
+  border: 1px solid var(--q-rule);
+  border-radius: 10px;
+  background: var(--q-ink-700);
+}
+
+.card__kind {
+  margin: 0 0 6px;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--q-teal-500);
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 15px;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.card__lede { margin: 0 0 16px; font-size: 13px; line-height: 1.65; color: #c8d0dd; }
+.card__note { margin: 14px 0 0; font-size: 12px; line-height: 1.6; color: var(--q-slate-400); }
+
+.card__catalogue {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 13.5px;
+  line-height: 1.9;
+}
+
+.card__catalogue .card__primary { color: var(--q-teal-200); }
+
+/* A DIAGRAM OF A COMPOSITION: an empty 16/9 area, and one absolutely positioned
+ * rectangle per element. The position of a rectangle is an `inset` written in
+ * percentages by the script out of the contract, so there is no coordinate here
+ * and none of these can disagree with the picture. */
+.figure {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #05070b;
+  border: 1px solid var(--q-rule);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* OPAQUE, AND NOT A TINT. A box that let the ones under it show through would
+ * draw four labels in the cell where one box covers the other three, which is
+ * the opposite of what that cell is showing. The stacking order is written by
+ * the script off the `zDepth` the contract carries. */
+.box {
+  position: absolute;
+  border: 1px solid var(--q-teal-500);
+  background: #0f2b2c;
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  padding: 3px;
+  overflow: hidden;
+}
+
+/* The programme is drawn differently from a feed on purpose: it is one of the
+ * boxes, and a diagram where it looked like the background would be arguing that
+ * it is a backdrop, which is the thing this demo says it is not. */
+.box--primary { border-style: dashed; background: #1c212b; }
+
+.box__name {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--q-paper-50);
+  word-break: break-word;
+}
+
+.fields__title {
+  margin: 38px 0 14px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.fields__col {
+  padding: 18px 20px;
+  border: 1px solid var(--q-rule);
+  border-radius: 10px;
+  background: var(--q-ink-700);
+}
+
+.fields__col h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.fields__sub { margin: 3px 0 14px; font-size: 12px; color: var(--q-slate-400); }
+
+.fields__list { margin: 0; font-size: 12.5px; }
+
+.fields__list dt {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--q-paper-50);
+  margin-top: 10px;
+}
+
+/* The fields one side carries and the other does not: the point of the whole
+ * comparison, so it is the one thing here that is coloured. */
+.fields__list dt.fields__only { color: var(--q-teal-500); }
+.fields__list dt.fields__only::after { content: ' ·'; }
+
+.fields__list dd { margin: 2px 0 0; color: var(--q-slate-400); line-height: 1.6; }
+
+.fields__foot {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  max-width: 70ch;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--q-slate-400);
+}
+
+/* ---------------------------------------------------------------------------
+ * SECTION 2: the gallery that fills itself, and the two readings of the way out.
+ * ------------------------------------------------------------------------- */
+.shapes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.shapes__empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 34px 24px;
+  border: 1px dashed var(--q-rule);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--q-slate-400);
+}
+
+.shape { margin: 0; }
+
+.shape figcaption {
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: var(--q-paper-50);
+}
+
+.shape__when {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--q-slate-400);
+}
+
+.wayout {
+  margin: 34px 0 0;
+  padding: 18px 20px;
+  border: 1px solid var(--q-rule);
+  border-radius: 10px;
+  background: var(--q-ink-700);
+  font-size: 12.5px;
+}
+
+.wayout dt { color: var(--q-slate-400); margin-top: 10px; }
+.wayout dt:first-child { margin-top: 0; }
+
+.wayout dd {
+  margin: 3px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--q-paper-50);
+  word-break: break-all;
+}
+
+.wayout__now { color: var(--q-teal-200); }
+
+/* ---------------------------------------------------------------------------
+ * SECTION 3: the tags, the gloss and the folds.
+ * ------------------------------------------------------------------------- */
+.code {
+  margin: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--q-rule);
+  border-radius: 10px;
+  background: #05070b;
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: #c8d0dd;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* A Date Range is one very long line. Printed as one it either overflows or is
+ * scrolled sideways to be read, so each attribute goes on its own line with the
+ * tag name hanging above: the same characters, in a shape a reader can scan. */
+#tags { white-space: normal; }
+
+.tag { margin: 0 0 14px; }
+.tag:last-child { margin-bottom: 0; }
+
+.tag__name { display: block; color: var(--q-teal-500); }
+
+.tag__attr {
+  display: block;
+  padding-left: 2ch;
+  color: #c8d0dd;
+  word-break: break-all;
+}
+
+.payload { margin: 26px 0 0; }
+
+.payload__lede {
+  margin: 0 0 18px;
+  max-width: 66ch;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #c8d0dd;
+}
+
+.payload__level {
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  border: 1px solid var(--q-rule);
+  border-radius: 10px;
+  background: var(--q-ink-700);
+}
+
+.payload__level h3 {
+  margin: 0 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--q-teal-500);
+}
+
+.payload__level dl { margin: 0; font-size: 12.5px; }
+
+.payload__level dt {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.payload__level dt:first-child { margin-top: 0; }
+.payload__level dd { margin: 2px 0 0; color: var(--q-slate-400); line-height: 1.6; }
+
+.assets { margin: 22px 0 0; }
+
+.asset {
+  border: 1px solid var(--q-rule);
+  border-radius: 10px;
+  background: var(--q-ink-700);
+  margin-bottom: 10px;
+}
+
+.asset summary {
+  cursor: pointer;
+  padding: 13px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12.5px;
+}
+
+.asset__url { color: var(--q-slate-400); font-size: 11px; word-break: break-all; }
+
+/* The fold whose window is open right now. It is hidden rather than absent when
+ * it is not, so the row does not change width the instant the window opens. */
+.asset__live {
+  margin-left: auto;
+  visibility: hidden;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--q-ink-900);
+  background: var(--q-teal-500);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+
+.asset--live { border-color: var(--q-teal-500); }
+.asset--live .asset__live { visibility: visible; }
+
+.asset .code { border: 0; border-top: 1px solid var(--q-rule); border-radius: 0 0 10px 10px; }
+
+/* ---------------------------------------------------------------------------
+ * THE FOOT.
+ * ------------------------------------------------------------------------- */
+.credit {
+  margin: 0;
+  max-width: 72ch;
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--q-slate-400);
+}
+
+.credit em { color: #c8d0dd; font-style: italic; }
