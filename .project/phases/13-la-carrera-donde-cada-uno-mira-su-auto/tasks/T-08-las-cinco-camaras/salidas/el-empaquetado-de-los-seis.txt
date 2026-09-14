@@ -1,0 +1,28 @@
+### el programa
+content/primary/index.m3u8  (56 segmentos, 24 fps)
+
+### las cámaras (6 de 6)
+content/view-caldrix/index.m3u8  (32 segmentos, 24 fps)
+content/view-marvok/index.m3u8  (32 segmentos, 24 fps)
+content/view-noctev/index.m3u8  (32 segmentos, 24 fps)
+content/view-runtak/index.m3u8  (32 segmentos, 24 fps)
+content/view-pentav/index.m3u8  (32 segmentos, 24 fps)
+content/view-quentra/index.m3u8  (32 segmentos, 24 fps)
+
+race.json: largo 112 s, ofertaDura 64 s, 24 fps
+tolerancia: un cuadro, 41.7 ms
+
+VERDE  el programa                        112.000000 s contra 112.000 declarados (0.000000 s) · 56 segmentos, target 2 s, ninguno lo pasa
+VERDE  CALDRIX, on-board                  64.000000 s contra 64.000 declarados (0.000000 s) · 32 segmentos, target 2 s, ninguno lo pasa
+VERDE  MARVOK, on-board                   64.000000 s contra 64.000 declarados (0.000000 s) · 32 segmentos, target 2 s, ninguno lo pasa
+VERDE  NOCTEV, trackside                  64.000000 s contra 64.000 declarados (0.000000 s) · 32 segmentos, target 2 s, ninguno lo pasa
+VERDE  RUNTAK, trackside                  64.000000 s contra 64.000 declarados (0.000000 s) · 32 segmentos, target 2 s, ninguno lo pasa
+VERDE  PENTAV, on-board                   64.000000 s contra 64.000 declarados (0.000000 s) · 32 segmentos, target 2 s, ninguno lo pasa
+VERDE  QUENTRA, trackside                 64.000000 s contra 64.000 declarados (0.000000 s) · 32 segmentos, target 2 s, ninguno lo pasa
+
+ROJO   CONTROL sin el último segmento     110.000000 s contra 112.000 declarados (-2.000000 s) · 55 segmentos, target 2 s, ninguno lo pasa
+ROJO   CONTROL con un #EXTINF estirado    112.500000 s contra 112.000 declarados (0.500000 s) · 56 segmentos, target 2 s, 1 lo pasan: 2.500
+
+PASA, y se vieron los dos controles en rojo.
+
+contenido listo en content/

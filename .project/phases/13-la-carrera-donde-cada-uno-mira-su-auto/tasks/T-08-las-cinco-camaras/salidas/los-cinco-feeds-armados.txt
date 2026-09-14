@@ -1,0 +1,185 @@
+######## marvok
+### 1. cada clip mide lo que tiene que medir
+  01-arco-recta                      192 cuadros  8.000000 s
+  02-morro-curvon                    192 cuadros  8.000000 s
+  03-arco-costa                      192 cuadros  8.000000 s
+  04-casco-tribuna                   192 cuadros  8.000000 s
+  05-ponton-curva-larga              192 cuadros  8.000000 s
+  06-rueda-piano                     192 cuadros  8.000000 s
+  07-aleron-recta                    192 cuadros  8.000000 s
+  08-arco-dunas                      192 cuadros  8.000000 s
+  total 1536 cuadros, esperados 1536
+
+### 2. el destino sale de programa.mp4, medido ahora: -23.0 LUFS
+
+### 3. el audio de cada clip: antes y despues de emparejar
+  clip                                I_antes pico_antes ganancia I_despues
+  01-arco-recta                         -22.8    -12.8    -0.20    -23.0
+  02-morro-curvon                       -22.6    -13.4    -0.40    -23.0
+  03-arco-costa                         -21.0    -10.1    -2.00    -23.0
+  04-casco-tribuna                      -27.7    -16.0     4.70    -23.0
+  05-ponton-curva-larga                 -22.6    -11.9    -0.40    -23.0
+  06-rueda-piano                        -19.1     -8.0    -3.90    -23.0
+  07-aleron-recta                       -29.3    -16.4     6.30    -23.0
+  08-arco-dunas                         -25.4    -15.0     2.40    -23.0
+
+### 4. el video: concat plano, sin fundidos, sin descartar cuadros
+
+### 5. lo que salio
+  archivo                /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/demo/race-multiview/content/.fuentes/marvok.mp4
+  video                  1280,720,24/1,1536
+  duracion               64.000000 s
+
+  el nivel, contra su referencia -- el de arriba es el que se pego, el de abajo el que
+  habria salido sin emparejar, y el programa es el destino:
+  marvok.mp4                      I: -23.1 LUFS LRA: 1.9 LU Peak: -10.1 dBFS 
+  audio-sin-emparejar.wav         I: -22.8 LUFS LRA: 9.5 LU Peak: -8.0 dBFS 
+  programa.mp4                    I: -23.0 LUFS LRA: 4.7 LU Peak: -6.7 dBFS 
+######## noctev
+### 1. cada clip mide lo que tiene que medir
+  01-recta-principal                 192 cuadros  8.000000 s
+  02-costa-quieta                    192 cuadros  8.000000 s
+  03-costa                           192 cuadros  8.000000 s
+  04-tribuna-cerrado                 192 cuadros  8.000000 s
+  05-dunas-alto                      192 cuadros  8.000000 s
+  06-recta-bajo                      192 cuadros  8.000000 s
+  07-curva-larga                     192 cuadros  8.000000 s
+  08-muro-diagonales                 192 cuadros  8.000000 s
+  total 1536 cuadros, esperados 1536
+
+### 2. el destino sale de programa.mp4, medido ahora: -23.0 LUFS
+
+### 3. el audio de cada clip: antes y despues de emparejar
+  clip                                I_antes pico_antes ganancia I_despues
+  01-recta-principal                    -21.6    -10.5    -1.40    -23.0
+  02-costa-quieta                       -22.3    -12.5    -0.70    -23.0
+  03-costa                              -21.6    -11.6    -1.40    -23.0
+  04-tribuna-cerrado                    -22.5    -11.7    -0.50    -23.0
+  05-dunas-alto                         -22.0    -13.4    -1.00    -23.0
+  06-recta-bajo                         -21.2    -11.0    -1.80    -23.0
+  07-curva-larga                        -22.9    -11.8    -0.10    -23.0
+  08-muro-diagonales                    -21.5     -9.1    -1.50    -23.0
+
+### 4. el video: concat plano, sin fundidos, sin descartar cuadros
+
+### 5. lo que salio
+  archivo                /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/demo/race-multiview/content/.fuentes/noctev.mp4
+  video                  1280,720,24/1,1536
+  duracion               64.000000 s
+
+  el nivel, contra su referencia -- el de arriba es el que se pego, el de abajo el que
+  habria salido sin emparejar, y el programa es el destino:
+  noctev.mp4                      I: -23.0 LUFS LRA: 3.1 LU Peak: -10.7 dBFS 
+  audio-sin-emparejar.wav         I: -21.9 LUFS LRA: 3.4 LU Peak: -9.1 dBFS 
+  programa.mp4                    I: -23.0 LUFS LRA: 4.7 LU Peak: -6.7 dBFS 
+######## runtak
+### 1. cada clip mide lo que tiene que medir
+  01-costa                           192 cuadros  8.000000 s
+  02-tribuna                         192 cuadros  8.000000 s
+  03-curvon-alto                     192 cuadros  8.000000 s
+  04-recta-piano                     192 cuadros  8.000000 s
+  05-dunas                           192 cuadros  8.000000 s
+  06-muro-cerrado                    192 cuadros  8.000000 s
+  07-curva-larga-bajo                192 cuadros  8.000000 s
+  08-recta-principal                 192 cuadros  8.000000 s
+  total 1536 cuadros, esperados 1536
+
+### 2. el destino sale de programa.mp4, medido ahora: -23.0 LUFS
+
+### 3. el audio de cada clip: antes y despues de emparejar
+  clip                                I_antes pico_antes ganancia I_despues
+  01-costa                              -19.9    -10.5    -3.10    -23.0
+  02-tribuna                            -22.2    -10.6    -0.80    -23.0
+  03-curvon-alto                        -23.3    -10.3     0.30    -23.0
+  04-recta-piano                        -18.3     -2.6    -4.70    -23.0
+  05-dunas                              -21.2     -7.9    -1.80    -23.0
+  06-muro-cerrado                       -21.6     -9.9    -1.40    -23.0
+  07-curva-larga-bajo                   -21.5     -5.2    -1.50    -23.0
+  08-recta-principal                    -20.9    -10.4    -2.10    -23.0
+
+### 4. el video: concat plano, sin fundidos, sin descartar cuadros
+
+### 5. lo que salio
+  archivo                /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/demo/race-multiview/content/.fuentes/runtak.mp4
+  video                  1280,720,24/1,1536
+  duracion               64.000000 s
+
+  el nivel, contra su referencia -- el de arriba es el que se pego, el de abajo el que
+  habria salido sin emparejar, y el programa es el destino:
+  runtak.mp4                      I: -23.0 LUFS LRA: 3.2 LU Peak: -6.7 dBFS 
+  audio-sin-emparejar.wav         I: -20.8 LUFS LRA: 4.8 LU Peak: -2.6 dBFS 
+  programa.mp4                    I: -23.0 LUFS LRA: 4.7 LU Peak: -6.7 dBFS 
+######## pentav
+### 1. cada clip mide lo que tiene que medir
+  01-morro-recta                     192 cuadros  8.000000 s
+  02-arco-curva-larga                192 cuadros  8.000000 s
+  03-ponton-costa                    192 cuadros  8.000000 s
+  04-arco-tribuna                    192 cuadros  8.000000 s
+  05-casco-curvon                    192 cuadros  8.000000 s
+  06-aleron-dunas                    192 cuadros  8.000000 s
+  07-rueda-piano                     192 cuadros  8.000000 s
+  08-morro-costa                     192 cuadros  8.000000 s
+  total 1536 cuadros, esperados 1536
+
+### 2. el destino sale de programa.mp4, medido ahora: -23.0 LUFS
+
+### 3. el audio de cada clip: antes y despues de emparejar
+  clip                                I_antes pico_antes ganancia I_despues
+  01-morro-recta                        -23.1    -11.8     0.10    -23.0
+  02-arco-curva-larga                   -25.3    -15.3     2.30    -23.0
+  03-ponton-costa                       -26.9    -15.5     3.90    -23.0
+  04-arco-tribuna                       -19.6     -7.4    -3.40    -23.0
+  05-casco-curvon                       -18.8     -7.9    -4.20    -23.0
+  06-aleron-dunas                       -23.3    -13.9     0.30    -23.0
+  07-rueda-piano                        -23.9    -13.4     0.90    -23.0
+  08-morro-costa                        -24.0    -11.9     1.00    -23.0
+
+### 4. el video: concat plano, sin fundidos, sin descartar cuadros
+
+### 5. lo que salio
+  archivo                /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/demo/race-multiview/content/.fuentes/pentav.mp4
+  video                  1280,720,24/1,1536
+  duracion               64.000000 s
+
+  el nivel, contra su referencia -- el de arriba es el que se pego, el de abajo el que
+  habria salido sin emparejar, y el programa es el destino:
+  pentav.mp4                      I: -23.1 LUFS LRA: 2.3 LU Peak: -10.9 dBFS 
+  audio-sin-emparejar.wav         I: -22.3 LUFS LRA: 8.2 LU Peak: -7.4 dBFS 
+  programa.mp4                    I: -23.0 LUFS LRA: 4.7 LU Peak: -6.7 dBFS 
+######## quentra
+### 1. cada clip mide lo que tiene que medir
+  01-tribuna                         192 cuadros  8.000000 s
+  02-curvon                          192 cuadros  8.000000 s
+  03-costa-alto                      192 cuadros  8.000000 s
+  04-dunas-cerrado                   192 cuadros  8.000000 s
+  05-muro                            192 cuadros  8.000000 s
+  06-recta-principal                 192 cuadros  8.000000 s
+  07-piano-bajo                      192 cuadros  8.000000 s
+  08-curva-larga                     192 cuadros  8.000000 s
+  total 1536 cuadros, esperados 1536
+
+### 2. el destino sale de programa.mp4, medido ahora: -23.0 LUFS
+
+### 3. el audio de cada clip: antes y despues de emparejar
+  clip                                I_antes pico_antes ganancia I_despues
+  01-tribuna                            -24.5    -14.1     1.50    -23.0
+  02-curvon                             -19.9     -6.7    -3.10    -23.0
+  03-costa-alto                         -20.3    -10.6    -2.70    -23.0
+  04-dunas-cerrado                      -23.7    -12.9     0.70    -23.0
+  05-muro                               -24.9     -7.5     1.90    -23.0
+  06-recta-principal                    -22.2    -10.8    -0.80    -23.0
+  07-piano-bajo                         -18.8     -8.8    -4.20    -23.0
+  08-curva-larga                        -20.1     -8.6    -2.90    -23.0
+
+### 4. el video: concat plano, sin fundidos, sin descartar cuadros
+
+### 5. lo que salio
+  archivo                /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/demo/race-multiview/content/.fuentes/quentra.mp4
+  video                  1280,720,24/1,1536
+  duracion               64.000000 s
+
+  el nivel, contra su referencia -- el de arriba es el que se pego, el de abajo el que
+  habria salido sin emparejar, y el programa es el destino:
+  quentra.mp4                     I: -23.0 LUFS LRA: 4.6 LU Peak: -5.6 dBFS 
+  audio-sin-emparejar.wav         I: -21.3 LUFS LRA: 7.2 LU Peak: -6.7 dBFS 
+  programa.mp4                    I: -23.0 LUFS LRA: 4.7 LU Peak: -6.7 dBFS 

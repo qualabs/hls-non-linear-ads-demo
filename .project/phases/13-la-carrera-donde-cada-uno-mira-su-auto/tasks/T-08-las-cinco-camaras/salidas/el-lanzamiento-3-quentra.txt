@@ -1,0 +1,24 @@
+== quentra: 8 generacion(es), veo-3.1-fast-generate-001, 8s, 720p, con audio -- US$6.40 ==
+   lanzadas hasta ahora: 16 de 72 (US$12.80 de US$57.60)
+
+  clip  1 (01-tribuna)  op 2dbdebf9-e53f-454d-8f93-dbd764ceb040
+  clip  2 (02-curvon)  op a813151a-94aa-4498-bd8d-197d1a63b75a
+  clip  3 (03-costa-alto)  op c03ef439-6dd9-4417-8ad6-deb766a203d9
+  clip  4 (04-dunas-cerrado)  op e970af1b-4817-4a50-9211-17a1f96c08f4
+  clip  5 (05-muro)  op c4d87c7b-c00c-4aec-9cd0-3f2f89f20774
+  clip  6 (06-recta-principal)  op 20dbe80c-33c0-408f-ba88-b1d08d1f624f
+  clip  7 (07-piano-bajo)  op 178c6d96-357f-43c9-b5d3-e71179f95965
+  clip  8 (08-curva-larga)  op a5ea62ae-4eda-4dc4-a0d9-a946fe31788c
+
+  ... esperando 8 generacion(es)
+     siguen 8 ...
+     siguen 8 ...
+  clip  7 LISTO  07-piano-bajo.mp4  (8.000000s, 6.1 MB)
+     siguen 7 ...
+  clip  1 LISTO  01-tribuna.mp4  (8.000000s, 5.2 MB)
+  clip  2 LISTO  02-curvon.mp4  (8.000000s, 5.0 MB)
+  clip  3 LISTO  03-costa-alto.mp4  (8.000000s, 4.8 MB)
+  clip  4 LISTO  04-dunas-cerrado.mp4  (8.000000s, 4.5 MB)
+  clip  5 LISTO  05-muro.mp4  (8.000000s, 6.6 MB)
+  clip  6 LISTO  06-recta-principal.mp4  (8.000000s, 6.5 MB)
+  clip  8 LISTO  08-curva-larga.mp4  (8.000000s, 6.9 MB)

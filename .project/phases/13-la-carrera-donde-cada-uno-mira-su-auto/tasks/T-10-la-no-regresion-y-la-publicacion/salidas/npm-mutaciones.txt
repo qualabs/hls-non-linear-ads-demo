@@ -1,0 +1,100 @@
+$ npm run mutaciones
+
+> qualabs-concurrent-hls@0.0.0 mutaciones
+> node demo/hydration-break/test/mutaciones.mjs
+
+== sin romper nada, todos los chequeos tienen que estar en verde ==
+  VERDE  anclasDelGuion
+  VERDE  elBreakArrancaEnLaParada
+  VERDE  elRepartoSaleDeUnSoloLugar
+  VERDE  lasTresFormasDelMinuto
+  VERDE  laGaleriaSeDibujaDelContrato
+  VERDE  losMediosSalenDelContrato
+  VERDE  laGlosaDelBloqueExplicaSusCampos
+  VERDE  cadaPliegueRotulaSuAviso
+  VERDE  elRitmoDelGuion
+
+== una rotura por regla, y cada una tiene que poner ROJO a su chequeo ==
+  ROJO   anclasDelGuion
+         regla:  un ancla del guion tiene que caer en un aviso que existe (ADR 0037)
+         rotura: el beat del caso de negocio pasa a anclarse al aviso 9 del break 1
+         dijo:   el beat "el-caso-de-negocio" ancla a algo que la señalización no tiene: {"at":{"break":1,"ad":9},"lead":1.5}
+  ROJO   anclasDelGuion
+         regla:  un beat tiene que frenar ANTES de lo que anuncia (ADR 0037)
+         rotura: el mismo beat pasa a tener `lead: -3`, así que resuelve después del aviso
+         dijo:   el beat "el-caso-de-negocio" resuelve en 49s y lo que anuncia arranca en 46s: la placa llega tarde o justo encima
+  ROJO   elBreakArrancaEnLaParada
+         regla:  el segundo del break lo declara plate.json y no el script (ADR 0044)
+         rotura: el script de señalización pasa a tener el segundo escrito a mano
+         dijo:   el script de señalización no lee `paradaEn` de plate.json: si el segundo del break está escrito a mano, deja de seguir al plate (ADR 0044)
+  ROJO   elBreakArrancaEnLaParada
+         regla:  la parada del juego tiene que caber adentro del plate (ADR 0044)
+         rotura: la parada pasa a durar el doble del plate (184s sobre 92s)
+         dijo:   la parada del juego termina en 198s y el plate dura 92s: el break se sale del programa
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  los avisos suman lo que dura la parada (el reparto de plate.json)
+         rotura: el overlay de cierre pasa de 24 a 20 s, así que la publicidad no cubre la parada
+         dijo:   los avisos suman 60s y la parada dura 64s: la publicidad no cubre la parada, y eso no falla, se ve como otra demo
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  cada aviso es múltiplo de 8, que es el techo de una generación
+         rotura: el lineal vuelve a 10 s, que deja un resto corto en la cadena
+         dijo:   estos avisos no son múltiplos de 8: 10, 22. El techo de una generación son 8 s, así que un aviso que no es múltiplo deja un resto corto, que es el eslabón que peor sale
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  el reparto vive en un solo lugar (plate.json), no en el asset list
+         rotura: una DURATION del asset list se edita a mano y deja de coincidir con plate.json
+         dijo:   el asset list declara [12, 16, 8, 24] y plate.json [16, 16, 8, 24]: el reparto vive en dos lugares y ya se despegó
+  ROJO   lasTresFormasDelMinuto
+         regla:  el minuto declara exactamente un aviso de imagen fija (ADR 0046)
+         rotura: el banner pasa de `image/jpeg` a un `.m3u8`, que es lo que la demo deja de demostrar
+         dijo:   hay 0 avisos de imagen fija y tiene que haber exactamente uno (ADR 0046): es la tercera forma que este minuto demuestra
+  ROJO   lasTresFormasDelMinuto
+         regla:  el aviso lineal va tercero (ADR 0043)
+         rotura: el lineal se mueve al primer lugar del break
+         dijo:   el aviso lineal está en la posición 1 y va tercero (ADR 0043): ahí es donde el guion cuenta el caso de negocio
+  ROJO   lasTresFormasDelMinuto
+         regla:  el break son cuatro avisos (ADR 0043)
+         rotura: se le saca el overlay de cierre
+         dijo:   el break declara 3 avisos y el minuto son cuatro
+  ROJO   laGaleriaSeDibujaDelContrato
+         regla:  ningún identificador de layout está escrito a mano en la página (ADR 0073)
+         rotura: a una copia de index.html se le planta `lowerThirdOverlay` como rótulo escrito a mano, que es la galería degradada a una lista de nombres
+         dijo:   `index.html` tiene escrito el identificador de layout `lowerThirdOverlay`: la galería dejó de derivarse del contrato y pasó a ser una afirmación, que es lo que envejece sin que nadie se entere (ADR 0073)
+  ROJO   losMediosSalenDelContrato
+         regla:  ningún tipo de medio está escrito a mano en la página (ADR 0073)
+         rotura: a una copia de index.html se le planta `image/png` escrito al lado del dibujo, que es lo que puede ir en una caja degradado a una lista de formatos
+         dijo:   `index.html` tiene escrito el tipo de medio `image/png`: lo que la sección dice que se puede poner en una caja dejó de leerse del asset list y pasó a ser una afirmación, que es lo que envejece sin que nadie se entere (ADR 0073)
+  ROJO   laGlosaDelBloqueExplicaSusCampos
+         regla:  todo campo que el asset list trae está explicado en la glosa del bloque
+         rotura: el asset list gana un campo que la herramienta todavía no emitía y la glosa se queda como estaba, así que el lector lo ve en el JSON y la página no dice qué es
+         dijo:   el asset list trae `X-FIT` en el nivel `element` y la glosa no lo explica: el lector lo tiene adelante en el JSON del pliegue y la página no dice qué es
+  ROJO   laGlosaDelBloqueExplicaSusCampos
+         regla:  la glosa del bloque no explica un campo que el asset list no trae
+         rotura: la glosa se escribe a mano y le queda una fila de un campo que este archivo no declara, que se lee como que el archivo lo declara
+         dijo:   la glosa explica `opacity` en el nivel `element`, que este asset list no trae: la glosa dejó de salir del archivo que la sección muestra
+  ROJO   cadaPliegueRotulaSuAviso
+         regla:  el rótulo de un pliegue nombra el layout de su propio aviso (ADR 0075)
+         rotura: el pliegue del aviso lineal pasa a decir `lowerThirdOverlay` escrito a mano, que es un rótulo que ya no sale del asset list
+         dijo:   el pliegue 3 nombra `lowerThirdOverlay`, que su aviso no declara: el rótulo dejó de salir del asset list
+  ROJO   cadaPliegueRotulaSuAviso
+         regla:  hay un pliegue por ASSET y ninguno de menos (ADR 0075)
+         rotura: se dibujan tres pliegues para cuatro avisos, que es un aviso del break que la página no muestra en ningún lado
+         dijo:   la sección dibuja 3 pliegues y el asset list declara 4 avisos: hay un aviso sin pliegue o un pliegue sin aviso
+  ROJO   cadaPliegueRotulaSuAviso
+         regla:  el rótulo dice la duración que declara su aviso (ADR 0075)
+         rotura: el rótulo del primer pliegue se queda con los 12 s de una versión anterior del asset list
+         dijo:   el pliegue 1 no dice los 16 s que declara su aviso
+  ROJO   cadaPliegueRotulaSuAviso
+         regla:  el ordinal del rótulo es el del aviso que el pliegue tiene adentro (ADR 0075)
+         rotura: los dos primeros pliegues se rotulan al revés, que es la lista corrida un lugar
+         dijo:   el pliegue 1 se rotula "Ad 2 · squeezebackLShape · 16 s · video" y tiene adentro el aviso 1 del break: el ordinal no es el del aviso que muestra
+  ROJO   elRitmoDelGuion
+         regla:  entre dos placas consecutivas se ve partido (ADR 0037)
+         rotura: el beat de la señalización pasa a tener el mismo `lead` que el del banner, así que los dos resuelven en el mismo segundo y una placa entra pegada a la otra
+         dijo:   entre "la-senalizacion" y "el-banner" se ven 0 s de programa y el piso son 4 s: las dos placas se encadenan con un parpadeo de partido en el medio, que no falla, se ve como que la demo atropella
+  ROJO   elRitmoDelGuion
+         regla:  ninguna placa se queda en pantalla más que el tope (ADR 0037)
+         rotura: el beat de la vuelta pasa de `hold: 7` a `hold: 40`, que con el programa congelado atrás se ve como que la demo se colgó
+         dijo:   la placa "la-vuelta" se queda 40 s en pantalla y el tope son 10 s: con el programa congelado atrás, eso no se lee como una placa larga, se lee como que la demo se colgó
+
+las 20 roturas dieron rojo y los 9 chequeos dan verde sin romper nada
+EXIT=0

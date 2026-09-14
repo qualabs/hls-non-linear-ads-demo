@@ -1,0 +1,50 @@
+El cielo de los seis feeds -- mediana de hasta 32 cuadros por feed
+
+  feed       cielo     votaron  no votaron (sin cielo suficiente)
+  caldrix    #F4F9F9   32       0
+  marvok     #F5F8F8   32       0
+  noctev     #D1DAD8   32       0
+  runtak     #CED8DC   32       0
+  pentav     #EDF4F2   32       0
+  quentra    #D8DDDC   32       0
+
+================================================================================
+LOS QUINCE PARES -- dE00 entre los cielos de los seis feeds
+================================================================================
+
+  caldrix    marvok       0.9
+  caldrix    pentav       1.9
+  noctev     quentra      2.1
+  marvok     pentav       2.5
+  noctev     runtak       3.1
+  runtak     quentra      3.2
+  pentav     quentra      5.0
+  noctev     pentav       5.8
+  marvok     quentra      6.0
+  caldrix    quentra      6.0
+  runtak     pentav       6.9
+  caldrix    noctev       7.3
+  marvok     noctev       7.5
+  caldrix    runtak       7.8
+  marvok     runtak       7.9
+
+  entre los seis: 0.9 a 7.9
+
+================================================================================
+LOS CONTROLES
+================================================================================
+
+  1. HORA DORADA -- los mismos cuadros de caldrix virados: #FCFCDE
+     contra su propio original (#F4F9F9): dE00 11.7
+     contra los seis: 10.8 a 16.0
+
+  2. OTRO MUNDO -- metraje real de la demo del break: #C0B6BC
+     contra los seis: 12.5 a 17.0
+
+  3. LA MITAD DE ABAJO de los mismos cuadros -- asfalto, piano y carroceria:
+     de 32 cuadros, 3 NO votaron y 29 votaron: el piso del 2 % NO los rechaza,
+     porque el asfalto claro y los pianos blancos tambien son claros y sin color.
+     Lo que separa no es el piso sino el color: la mitad de abajo devuelve #DAE1CC,
+     contra #F4F9F9 de la mitad de arriba -- dE00 10.8.
+     Ese numero contra el 0,9-7,9 de los seis pares es lo que dice que arriba y
+     abajo no son el mismo parche, y que los seis coinciden en ALGO y no en todo.

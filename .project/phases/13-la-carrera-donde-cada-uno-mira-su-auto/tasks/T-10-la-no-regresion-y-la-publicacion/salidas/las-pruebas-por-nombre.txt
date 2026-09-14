@@ -1,0 +1,49 @@
+# Las pruebas comparadas POR NOMBRE contra la linea de base de la T-01
+
+El extractor: cada linea de resultado de `node --test`, sin el signo y sin el tiempo.
+
+$ extract() { grep -E '^(✔|✖|✗) ' "$1" | sed -E 's/^. //; s/ \([0-9.]+ms\)$//' | sort; }
+$ extract T-01/salidas/npm-test.txt > nombres-linea-de-base.txt   # 2026-09-12, commit e2f7f3f
+$ extract npm-test.txt             > nombres-hoy.txt              # 2026-09-14, arbol de la T-09
+
+linea de base: 184 nombres
+hoy          : 193 nombres
+
+$ comm -23 nombres-linea-de-base.txt nombres-hoy.txt    # las que SE FUERON
+(ninguna)
+
+$ comm -13 nombres-linea-de-base.txt nombres-hoy.txt    # las que LLEGARON
+the catalogue is the cameras that are packaged, named as race.json names them
+the check for typed numbers can see one
+the content is packaged at 1280x720 and at the cadence of the footage
+the cue sheet prints the seconds of the window, and they are computed and not typed
+the multi view tag drops X-RESTRICT
+the numbers this demo runs on are declared once, in race.json
+the offer announces a catalogue and not a layout
+the playlist comes out with one Date Range, of the multi view class, and no other
+the window opens at the second race.json declares, and lasts what it declares
+
+## EL CONTROL, porque un comparador que siempre dice "ninguna" no compara nada
+
+Sobre una copia de los nombres de hoy se saca una prueba y se renombra otra. El
+conteo pasa de 193 a 192 -- una diferencia de uno que un ojo perdona -- y lo que el
+comparador tiene que decir es CUAL se fue.
+
+$ sed -e '/^the two classes the script writes are the two the library translates$/d' \
+      -e 's/^the multi view tag drops X-RESTRICT$/… (renombrada)/' nombres-hoy.txt | sort > nombres-mutilados.txt
+$ comm -23 nombres-linea-de-base.txt nombres-mutilados.txt
+the two classes the script writes are the two the library translates
+
+$ comm -13 nombres-linea-de-base.txt nombres-mutilados.txt
+the catalogue is the cameras that are packaged, named as race.json names them
+the check for typed numbers can see one
+the content is packaged at 1280x720 and at the cadence of the footage
+the cue sheet prints the seconds of the window, and they are computed and not typed
+the multi view tag drops X-RESTRICT (renombrada)
+the numbers this demo runs on are declared once, in race.json
+the offer announces a catalogue and not a layout
+the playlist comes out with one Date Range, of the multi view class, and no other
+the window opens at the second race.json declares, and lasts what it declares
+
+ROJO como tiene que ser: nombra la que falta, y la renombrada aparece como una que
+llego -- que es exactamente el par que un conteo igual esconderia.

@@ -1,0 +1,20 @@
+$ for u in ...; do curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8099$u; done
+/                                          200
+/index.html                                200
+/brand/fonts-embedded.css                  200
+/css/page.css                              200
+/brand/favicon.svg                         200
+/brand/logo-qualabs-on-dark.svg            200
+/vendor/hls.min.js                         200
+/dist/qualabs-concurrent-hls.js            200
+/js/app.js                                 200
+/js/opening.js                             200
+/js/recorrido.js                           200
+/js/senalizacion.js                        200
+/js/dom.js                                 200
+/content/primary/con-daterange.m3u8        200
+/signalling/asset-list-offer.json          200
+
+alto de la captura de página entera (ffprobe):
+  400x780-pagina-entera      400,6533
+  1907x1000-pagina-entera    1907,7511

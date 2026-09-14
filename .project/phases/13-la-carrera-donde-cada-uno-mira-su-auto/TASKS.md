@@ -9,18 +9,19 @@
 | T-05 | La cámara de a bordo del que va adelante: ocho clips, sesenta y cuatro segundos | done | — | [`tasks/T-05-la-camara-de-a-bordo/`](tasks/T-05-la-camara-de-a-bordo/la-camara-de-caldrix.md) |
 | T-06 | La cadena: el concat y el empaquetado a 24 fps | done | — | [`tasks/T-06-la-cadena/`](tasks/T-06-la-cadena/la-cadena-a-24-fps.md) |
 | T-07 | La señalización, el asset-list y el test de la demo | done | — | [`tasks/T-07-la-senalizacion/`](tasks/T-07-la-senalizacion/la-senalizacion-y-la-demo-corriendo.md) |
-| T-08 | Las cinco cámaras restantes | todo | — | — |
-| T-09 | La página, los créditos y el README | todo | — | — |
-| T-10 | La no-regresión y la publicación | todo | — | — |
+| T-08 | Las cinco cámaras restantes | done | — | [`tasks/T-08-las-cinco-camaras/`](tasks/T-08-las-cinco-camaras/las-cinco-camaras.md) |
+| T-09 | La página, los créditos y el README | done | — | [`tasks/T-09-la-pagina/`](tasks/T-09-la-pagina/la-pagina-los-creditos-y-el-readme.md) |
+| T-10 | La no-regresión y la publicación | done | — | [`tasks/T-10-la-no-regresion-y-la-publicacion/`](tasks/T-10-la-no-regresion-y-la-publicacion/la-no-regresion-y-la-publicacion.md) |
 
 **Las tasks están agrupadas en tres etapas y el orden es el de las etapas.** El reparto,
 sus techos de gasto y qué queda en disco si se aborta están en `PHASE.md`, que es el
 contrato; acá van una vez, en la tabla de abajo, para que quien ejecute no tenga que
-cambiar de archivo para saber cuándo parar.
+cambiar de archivo para saber cuándo parar. El de la etapa 1 es el techo vigente: Nicolás lo
+subió dos veces durante la T-03, y `PHASE.md` registra cuándo y de cuánto a cuánto.
 
 | etapa | tasks | techo de generaciones | techo en US$ |
 | --- | --- | ---: | ---: |
-| **1. El programa** | T-01 a T-04 | **28** (2 del sondeo + 26 del programa) | **22,40** |
+| **1. El programa** | T-01 a T-04 | **37** (4 del sondeo + 33 del programa) | **30,00** |
 | **2. Una cámara** | T-05 a T-07 | **16** | **12,80** |
 | **3. Las cinco restantes** | T-08 a T-10 | **72** | **57,60** |
 

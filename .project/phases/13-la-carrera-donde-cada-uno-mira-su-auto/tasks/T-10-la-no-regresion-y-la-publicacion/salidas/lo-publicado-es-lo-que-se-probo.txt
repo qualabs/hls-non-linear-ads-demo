@@ -1,0 +1,31 @@
+$ auditar-lo-publicado.py <repo> qualabs-hls-demo-race-multiview
+objetos publicados en gs://qualabs-hls-demo-race-multiview: 324
+  identicos byte por byte al archivo local : 324
+  DISTINTOS                                : 0 []
+  publicados sin archivo local             : 0 []
+  locales publicables que faltan arriba    : 0 []
+  .ts con content type que no es video/mp2t: 0 []
+
+content types, agrupados:
+    248  video/mp2t
+     26  audio/mp4
+     13  text/javascript
+      8  application/vnd.apple.mpegurl
+      6  application/x-sh
+      4  text/markdown
+      4  application/json
+      4  text/x-python
+      3  image/svg+xml
+      2  text/css
+      2  text/plain
+      2  application/octet-stream
+      1  text/tab-separated-values
+      1  text/html
+
+EL CONTROL, sobre index.html:
+  md5 publicado                    IqbibgesuZcbg2X5dVmQfg==
+  md5 del archivo local            IqbibgesuZcbg2X5dVmQfg==   -> IGUAL
+  md5 del archivo local + un byte  RwbdiznO5QE4T1321esgUg==   -> DISTINTO
+
+VERDE: lo que esta arriba es lo que se probo, esta entero, no sobra nada, no hay un solo clip crudo, y los 248 segmentos son video/mp2t
+exit=0

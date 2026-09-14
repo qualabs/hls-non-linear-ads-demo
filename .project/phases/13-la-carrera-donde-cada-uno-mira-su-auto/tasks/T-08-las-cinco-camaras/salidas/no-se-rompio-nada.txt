@@ -1,0 +1,29 @@
+### npm test
+✔ with room on the grid the list says nothing, because there is nothing to explain (2.684688ms)
+✔ with the grid full the line is there, and it names the cap of the screen (0.462172ms)
+✔ a full grid with nothing left to raise says nothing either (0.366401ms)
+✔ the line is decided by the flag the state ships and not by counting ticks (0.183018ms)
+ℹ tests 193
+ℹ suites 0
+ℹ pass 193
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2479.724128
+salida 0
+
+### npm run check
+
+   GREEN: 3 occurrence(s), all of them on the accepted list.
+     lib/controls.js:33  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:133  interstitial: '#ffcc00'
+     lib/controls.js:169  interstitial: 'traditional interstitial: the content is replaced by the ad'
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
+salida 0

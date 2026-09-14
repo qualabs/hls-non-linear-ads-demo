@@ -1,0 +1,23 @@
+== pentav: 8 generacion(es), veo-3.1-fast-generate-001, 8s, 720p, con audio -- US$6.40 ==
+   lanzadas hasta ahora: 0 de 72 (US$0.00 de US$57.60)
+
+  clip  1 (01-morro-recta)  op 685c2d42-615c-4c27-9167-86a5d325990b
+  clip  2 (02-arco-curva-larga)  op d0f91a4f-99fa-4535-8404-8c704014b182
+  clip  3 (03-ponton-costa)  op a7bcbcf3-9ab9-4dfd-8f14-d0ae7180d98e
+  clip  4 (04-arco-tribuna)  op e0aaf87a-6cb0-435e-a17b-eef35e0ab6d2
+  clip  5 (05-casco-curvon)  op f5709a5f-2407-42d2-b39a-0afa0ce1ea88
+  clip  6 (06-aleron-dunas)  op a108bef2-dd61-4b2f-a275-0c79d569e574
+  clip  7 (07-rueda-piano)  op 2c51d9ab-a2ec-430c-bc2d-869fd577d3cb
+  clip  8 (08-morro-costa)  op 0a32e67b-545f-473c-95ac-02f39a9f75d2
+
+  ... esperando 8 generacion(es)
+     siguen 8 ...
+     siguen 8 ...
+  clip  1 LISTO  01-morro-recta.mp4  (8.000000s, 4.9 MB)
+  clip  2 LISTO  02-arco-curva-larga.mp4  (8.000000s, 4.5 MB)
+  clip  3 LISTO  03-ponton-costa.mp4  (8.000000s, 3.5 MB)
+  clip  4 LISTO  04-arco-tribuna.mp4  (8.000000s, 4.9 MB)
+  clip  5 LISTO  05-casco-curvon.mp4  (8.000000s, 3.6 MB)
+  clip  6 LISTO  06-aleron-dunas.mp4  (8.000000s, 3.9 MB)
+  clip  7 LISTO  07-rueda-piano.mp4  (8.000000s, 4.5 MB)
+  clip  8 LISTO  08-morro-costa.mp4  (8.000000s, 4.6 MB)

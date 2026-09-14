@@ -4,40 +4,209 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pick your car — Non-linear Ads in HLS</title>
+<!--
+  The fonts and the favicon are copies of the Qualabs brand kit on disk, not links to it:
+  this page is published, and a file that resolves off another folder on somebody's laptop is
+  a file that is not in the bucket. Provenance in brand/README.md.
+-->
+<link rel="stylesheet" href="./brand/fonts-embedded.css">
 <link rel="stylesheet" href="./css/page.css">
+<link rel="icon" href="./brand/favicon.svg">
 </head>
 <body>
 
 <!--
   THE RACE WHERE EVERYBODY WATCHES THEIR OWN CAR.
 
-  A 112 second programme that never stops, cutting between six cars. At second 28 the
-  commentators say the on-board cameras are open, and an EXT-X-DATERANGE of class
-  `com.qualabs.hls.multiViewInterstitial` opens a 64 second window announcing a catalogue.
-  Whoever is watching raises the camera of the driver they care about, enlarges it, hears
-  that car, and leaves. The programme never stopped.
+  A race programme that never stops, cutting between six cars the way a director cuts. Part
+  way through it the commentators say the on-board cameras are open, and at that same second
+  an EXT-X-DATERANGE of class `com.qualabs.hls.multiViewInterstitial` opens a window that
+  announces a CATALOGUE: the cameras that were packaged for this race, each one named after
+  its driver. Whoever is watching raises the car they care about, enlarges it, hears that
+  engine instead of the commentary, and leaves. The race never stopped.
 
-  THIS PAGE IS THE MINIMUM THE DEMO NEEDS TO RUN, and it says so instead of pretending
-  otherwise: the container, the video, and the six lines an integrator writes. The opening,
-  the two scroll sections that draw themselves off the contract, the credits and the brand
-  are the next task; what this one proves is that the content produced by this phase is read
-  by the software, which is the material the second gate is decided on.
+  THAT IS THE ARGUMENT OF THIS PAGE, and it is a use case and not a format. Why a racing
+  channel wants this: the programme is a single picture and the story is six of them, so the
+  director has to choose for everybody at once. An offer does not take that choice away from
+  him -- the world feed goes on exactly as it is, and a client that never heard of any of this
+  plays it and nothing else. What it adds is a second thing on the same playlist, for whoever
+  wants to stay with one driver.
 
-  #player is the container the page hands the library, and the only thing it hands over
-  besides the hls.js instance. It carries `isolation: isolate` in the stylesheet on purpose:
-  the chrome the library draws sits at z-index 2147483000, and without a stacking context of
-  its own it would draw over anything this page puts on top of the picture.
+  WHAT A CATALOGUE IS, AND WHY IT IS NOT A LAYOUT. An ad break is composed by whoever sells
+  it: the payload declares a box per asset, in percentages of the picture, and the client
+  draws what it was told. A MULTI VIEW IS NOT COMPOSED BY ANYBODY WHEN IT IS SIGNALLED. The
+  playlist announces what else can be watched and what each one is called, and nothing about
+  where any of it goes -- because where it goes depends on how many cameras whoever is
+  watching raised, and that is decided on the other side of the network, after the playlist
+  was written, and it changes several times while the window is open.
+
+  So the page is about a relation and not about a layout:
+
+    the publisher   offers a catalogue, and names every camera in it after its driver
+    the player      works out the geometry, because it is the only one that knows how many
+                    boxes there are and how big the screen is
+    whoever watches raises and lowers cameras, enlarges one to hear that car, and leaves
+
+  NONE OF IT IS A RECORDING. Real HLS, real EXT-X-DATERANGE, an asset-list fetched over the
+  network and resolved, and one video element decoding per box. The rule that follows from it
+  governs every caption on this page: NOTHING HERE CLAIMS ANYTHING IT HAS NOT READ OFF THE
+  CONTRACT. Where a number, a name or a catalogue would have to be typed in, the markup
+  carries an empty container instead and the page fills it with what the provider resolved for
+  THIS run -- which matters more here than in the demo this page is built from, because this
+  catalogue is not a file somebody wrote: it is derived at packaging time from the cameras
+  that really exist on disk.
+
+  THERE IS NO GUIDED RUN HERE, AND THAT IS THE DEMO AND NOT AN OMISSION. Nothing happens until
+  somebody ticks a driver. A walkthrough that ticked one on your behalf would be arguing the
+  opposite of what this page is for. What the page does instead is announce the window the way
+  a broadcast does: with a voice inside the transmission, which is the one thing this demo can
+  do that the others cannot, because it is the only one whose programme has commentators.
+
+  TWO SECTIONS UNDER THE PICTURE AND THE CREDITS AS THE FOOT -- one idea per screen (ADR
+  0077). What the window offers, and the signalling as it is served. The format field by field
+  is the subject of `demo/multiview-offer/`; the subject here is the use case.
+
+  #player  is the container the page hands the library, and the only thing it hands over
+           besides the hls.js instance. Everything lives inside it: the layer the boxes are
+           drawn into, the world feed that moves within it, the bar, the selector, and the
+           buttons on each box. It carries `isolation: isolate` in the stylesheet on purpose
+           -- the chrome the library draws sits at z-index 2147483000, and without a stacking
+           context of its own it would draw over anything this page puts on top of the picture.
+
+  No bundler and no framework. The library is one classic <script src> that defines a global,
+  assembled from lib/ on every start; this page's own files are native ES modules. hls.js is
+  vendored at the version the measurements ran on.
 -->
 
-<section class="stage" aria-label="The run">
+<!--
+  THE MARK, centred, and the only one outside the picture: nothing of ours sits over the
+  frame the composition uses. The same file closes the page at the foot of the credits, so the
+  page opens and shuts on one thing.
+-->
+<header class="masthead">
+  <img class="brand" src="./brand/logo-qualabs-on-dark.svg" alt="Qualabs">
+</header>
+
+<!--
+  THE OPENING. Black, one sentence at a time, and the type shrinks as you scroll: the panel is
+  sticky, so it does not move while the page under it does, and when the section runs out the
+  panel lets go and the picture comes up from below. It looks pinned; what is changing is the
+  size.
+
+  IT SAYS WHAT THE VIEWER GETS AND NOT HOW IT WORKS. The how starts one screen down. The last
+  sentence names the thing, which is why it is the only one that grows back and the only one
+  that does not fade: the race arrives over the name.
+-->
+<section class="opening" id="opening" aria-label="Pick your car">
+  <div class="opening__panel">
+    <p class="opening__line">A race is six stories at once.</p>
+    <p class="opening__line">The picture can only be on one of them.</p>
+    <p class="opening__line">So the broadcast offers you the rest.</p>
+    <p class="opening__line">Pick your car.</p>
+  </div>
+</section>
+
+<section class="stage" aria-label="The race">
+
   <div class="frame">
     <div class="player" id="player">
       <video class="video" id="video" playsinline></video>
     </div>
   </div>
+
+  <!--
+    THE STATE LINE AND THE DECODER COUNT, and neither is a caption.
+
+    The left half is the contract read at the playhead: whether the window is open, how many
+    boxes it resolved, and which one is at full frame. The right half is not the contract at
+    all, it is the DOM: how many <video> elements are inside the container, how many of them
+    have data and are not paused. It is here because it is the one claim of this demo that the
+    contract cannot make -- that a world feed and three on-board cameras are four decoders and
+    not one composed picture -- and it is the same reading the previous task took as its
+    instrument, word for word, so its captures can still be read against this page.
+  -->
   <p class="state" id="state"></p>
+
   <p class="hud" id="hud"></p>
+
 </section>
+
+<section class="chapter" aria-label="What the window offers">
+  <div class="chapter__inner">
+    <p class="kicker">What the window offers</p>
+    <h2>The race does not stop. A catalogue opens beside it.</h2>
+    <p class="lede">
+      The commentators say the on-board cameras are available, and at that second the playlist
+      opens a window announcing what else can be watched. Not a layout: a list of cameras with
+      the name of the driver on each one, because a list somebody chooses from cannot be a list
+      of identifiers. Below is the window of this run, read off the contract at the playhead —
+      the cameras in it are the cameras that were packaged, under the names the race declares
+      for them.
+    </p>
+
+    <!--
+      THE WINDOW. Empty in the markup: the row is a range of `programRanges()` and the names
+      in it are the rows of the selector, so a camera added to the catalogue -- which in this
+      demo is a camera whose footage got packaged -- appears here without anybody editing a
+      file. The row lights while the window is open and greys once it has passed.
+    -->
+    <ol class="run" id="run"></ol>
+
+    <p class="note">
+      A catalogue is allowed to be longer than the screen. The cap is of the grid and never of
+      the offer: a race may announce more cameras than fit at once without anything being
+      wrong, and what is capped is how many of them are up — never how many are on offer.
+    </p>
+  </div>
+</section>
+
+<section class="chapter" aria-label="The signalling, as it is served">
+  <div class="chapter__inner">
+    <p class="kicker">The signalling, as it is served</p>
+    <h2>Read off this page&rsquo;s own playlist, right now.</h2>
+    <p class="lede">
+      Not an illustration. The tag below is the one in the media playlist this player is
+      playing, and the JSON is the asset-list it points at, fetched from the same URL the
+      library fetched it from — the document that was written when this race was packaged, and
+      not a copy kept in the repository.
+    </p>
+    <pre class="code" id="tags">loading…</pre>
+
+    <!--
+      THE BLOCK OF THE OFFER, FIELD BY FIELD. Empty in the markup and drawn off the asset-list
+      this player fetched, so a field is explained here only when the document in front of the
+      reader really carries it -- and a field it carries that nobody wrote a gloss for says so
+      on the page instead of being quietly left out.
+    -->
+    <div class="payload" id="payload"></div>
+
+    <!--
+      THE ASSET-LIST ITSELF, in a fold, closed, with the raw JSON inside and marked live while
+      its window is open.
+    -->
+    <div class="assets" id="assets"></div>
+  </div>
+</section>
+
+<footer class="chapter chapter--end" aria-label="Credits">
+  <div class="chapter__inner">
+    <p class="kicker">Credits</p>
+    <h2>Every frame and every voice here was generated for this demo.</h2>
+    <p class="credit">
+      The race, the cars, the on-board cameras and the two commentators do not exist: the
+      picture and its sound come from Google&rsquo;s Veo, the commentary from a
+      text-to-speech model, and the cars were designed for this demo so that no real livery,
+      number or sponsor is drawn anywhere. <strong>There is no third-party footage in this
+      demo and therefore no licence to honour</strong> — which is worth saying rather than
+      leaving the reader to assume, because the other demos in this repository do carry
+      third-party films and do credit them. What each piece is and which model made it is in
+      <code>CREDITS.md</code>, and the prompt that made each one is in the generator that
+      sent it.
+    </p>
+  </div>
+
+  <img class="brand brand--foot" src="./brand/logo-qualabs-on-dark.svg" alt="Qualabs">
+</footer>
 
 <script src="/vendor/hls.min.js"></script>
 <script src="/dist/qualabs-concurrent-hls.js"></script>

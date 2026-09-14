@@ -1,0 +1,24 @@
+== noctev: 8 generacion(es), veo-3.1-fast-generate-001, 8s, 720p, con audio -- US$6.40 ==
+   lanzadas hasta ahora: 16 de 72 (US$12.80 de US$57.60)
+
+  clip  1 (01-recta-principal)  op 26e6eb80-6e7b-4f6e-9712-26be9463db97
+  clip  2 (02-curvon-piano)  op b59cc465-b315-482d-872f-d5ea66f3fade
+  clip  3 (03-costa)  op f8c9a6a6-c098-421e-948a-5dc8b5e4cf2f
+  clip  4 (04-tribuna-cerrado)  op 0ff1eed5-ab43-449e-8c66-dd5bb86b56b3
+  clip  5 (05-dunas-alto)  op a71fdfbb-548d-4c96-a7be-8b8cee11ee49
+  clip  6 (06-recta-bajo)  op 51a6a92b-0da7-40a5-b0d6-0430748cdd55
+  clip  7 (07-curva-larga)  op 3377b726-1a58-4196-8a1a-3b19c90af2fd
+  clip  8 (08-muro-diagonales)  op ed0e3c71-3569-4457-8b75-ec4864d7aad2
+
+  ... esperando 8 generacion(es)
+     siguen 8 ...
+     siguen 8 ...
+     siguen 8 ...
+  clip  1 LISTO  01-recta-principal.mp4  (8.000000s, 5.2 MB)
+  clip  2 LISTO  02-curvon-piano.mp4  (8.000000s, 6.7 MB)
+  clip  3 LISTO  03-costa.mp4  (8.000000s, 5.2 MB)
+  clip  4 LISTO  04-tribuna-cerrado.mp4  (8.000000s, 5.3 MB)
+  clip  5 LISTO  05-dunas-alto.mp4  (8.000000s, 4.8 MB)
+  clip  6 LISTO  06-recta-bajo.mp4  (8.000000s, 5.7 MB)
+  clip  7 LISTO  07-curva-larga.mp4  (8.000000s, 5.0 MB)
+  clip  8 LISTO  08-muro-diagonales.mp4  (8.000000s, 6.1 MB)

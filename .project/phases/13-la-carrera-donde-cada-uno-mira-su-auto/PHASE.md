@@ -38,16 +38,33 @@ cómo va quedando el resultado al menos no gastamos tanto antes de desechar el t
 
 | etapa | qué produce | generaciones (esperadas / techo) | US$ (esperado / techo) |
 | --- | --- | ---: | ---: |
-| **1. El programa** | `programa.mp4`, 112 s, con los dos relatores | 23 / **28** | 18,40 / **22,40** |
+| **1. El programa** | `programa.mp4`, 112 s, con los dos relatores | 23 / **37** | 18,40 / **30,00** |
 | **2. Una cámara** | la demo corriendo con un catálogo de una vista | 12 / **16** | 9,60 / **12,80** |
 | **3. Las cinco restantes** | la demo completa, publicada | 60 / **72** | 48,00 / **57,60** |
 | | **la fase entera** | **95 / 116** | **76,00 / 92,80** |
 
+**El techo de la etapa 1 lo levantó Nicolás dos veces y el de la tabla es el vigente.**
+Arrancó en **US$22,40** (28 generaciones). El 2026-09-14, después de mirar las catorce
+casillas del programa y pedir que se regeneraran las que no servían, lo subió a **US$26,00**
+para pagar la segunda regeneración, y más tarde ese mismo día a **US$30,00** para regenerar la
+casilla 10, que era la única que quedaba inutilizable. Los dos aumentos están escritos en los
+informes de gasto de esas dos regeneraciones —[`tasks/T-03-el-programa/regeneracion-de-cuatro-casillas/el-gasto.md`](tasks/T-03-el-programa/regeneracion-de-cuatro-casillas/el-gasto.md)
+y [`tasks/T-03-el-programa/la-casilla-diez-sin-la-marca/el-gasto.md`](tasks/T-03-el-programa/la-casilla-diez-sin-la-marca/el-gasto.md)—
+y el generador hizo cumplir el techo nuevo igual que el viejo, contando líneas de su registro.
+La etapa 1 cerró en **US$26,40 / 33 generaciones**, por debajo del techo vigente. Las 37
+generaciones de la tabla son lo que US$30,00 compra a US$0,80 cada una.
+
+**El techo de la fase entera no se movió con ese aumento y sigue siendo el declarado:
+US$92,80 / 116 generaciones**, así que la última fila dejó de ser la suma de las tres de
+arriba, a propósito. La fase cerró en **US$74,40 / 93 generaciones**.
+
 De esa tabla salen los dos números que la decisión de Nicolás necesita, y por eso están
 escritos y no estimados:
 
-- **Lo máximo que se puede gastar antes de que él vea algo son US$22,40.**
-- **Lo máximo antes de que apruebe cómo se ve una cámara son US$35,20.**
+- **Lo máximo que se puede gastar antes de que él vea algo son US$30,00** (US$22,40 cuando la
+  fase arrancó).
+- **Lo máximo antes de que apruebe cómo se ve una cámara son US$42,80** (US$35,20 cuando la
+  fase arrancó).
 
 **El techo no es una esperanza, es un corte por task.** Pasado el techo de su etapa, la
 task **para y reporta con lo que tenga** en lugar de seguir generando. Una estimación sin

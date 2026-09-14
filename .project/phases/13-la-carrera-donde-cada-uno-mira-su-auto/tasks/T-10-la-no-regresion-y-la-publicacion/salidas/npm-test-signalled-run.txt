@@ -1,0 +1,20 @@
+$ node --test demo/hydration-break/test/signalled-run.test.js
+✔ toda ancla del guion cae en un break y en un aviso que existen, y frena antes (4.251196ms)
+✔ el break arranca en el corrimiento declarado de la parada del juego (0.613829ms)
+✔ el reparto de los avisos sale de plate.json y no del asset list (0.419265ms)
+✔ el minuto declara sus tres formas de aviso (0.564462ms)
+✔ la galería de formas se dibuja del contrato y no de una lista escrita a mano (1.212413ms)
+✔ lo que puede ir en una caja se lee del contrato y no está escrito en la página (2.480882ms)
+✔ cada pliegue de la señalización rotula el aviso que tiene adentro (1.154449ms)
+✔ la glosa del bloque explica los campos que el asset list trae, y ninguno más (2.853523ms)
+✔ entre dos placas se ve partido, y ninguna placa se queda (1.00028ms)
+✔ cada creativo del asset list tiene una carpeta de contenido nombrada (1.032706ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 186.13938
+EXIT=0

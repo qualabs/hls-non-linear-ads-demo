@@ -1,0 +1,95 @@
+$ curl -s http://127.0.0.1:8099/signalling/asset-list-offer.json | node -e "..."  -> las vistas ofrecidas
+primaryName: World feed
+  view: view-caldrix | CALDRIX, on-board
+
+$ medir-el-selector.py http://127.0.0.1:8099/ ...
+
+================ 400x780 ================
+
+[con-lugar]
+  sideways  document 400 wide in a viewport of 400  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 111 px of 111 (overflow 0, scrollTop 0)
+  title     visible   30.2 of   30.2  whole=True
+  note      visible      0 of      0  whole=True  hidden=True
+  row locked World feed                 visible     34 of     34  whole=True
+  row up     CALDRIX, on-board          visible     34 of     34  whole=True
+  boxes     2
+  state     t=32.8s  ·  multi view · 2 boxes  ·  2 video elements in the player, 2 decoding
+
+[grilla-llena]
+  sideways  document 400 wide in a viewport of 400  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 111 px of 111 (overflow 0, scrollTop 0)
+  title     visible   30.2 of   30.2  whole=True
+  note      visible      0 of      0  whole=True  hidden=True
+  row locked World feed                 visible     34 of     34  whole=True
+  row up     CALDRIX, on-board          visible     34 of     34  whole=True
+  boxes     2
+  state     t=33.0s  ·  multi view · 2 boxes  ·  2 video elements in the player, 2 decoding
+
+[reabierto]
+  sideways  document 400 wide in a viewport of 400  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 111 px of 111 (overflow 0, scrollTop 0)
+  title     visible   30.2 of   30.2  whole=True
+  note      visible      0 of      0  whole=True  hidden=True
+  row locked World feed                 visible     34 of     34  whole=True
+  row up     CALDRIX, on-board          visible     34 of     34  whole=True
+  boxes     2
+  state     t=34.1s  ·  multi view · 2 boxes  ·  2 video elements in the player, 2 decoding
+
+[pagina-entera]
+  sideways  document 400 wide in a viewport of 400  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 111 px of 111 (overflow 0, scrollTop 0)
+  title     visible   28.7 of   28.7  whole=True
+  note      visible      0 of      0  whole=True  hidden=True
+  row locked World feed                 visible   32.3 of   32.3  whole=True
+  row up     CALDRIX, on-board          visible   32.3 of   32.3  whole=True
+  boxes     2
+  state     t=35.2s  ·  multi view · 2 boxes  ·  2 video elements in the player, 2 decoding
+
+  CONTROL   with a block 400 px wider than the viewport: overflow 400 px  ->  SCROLLS, as it must   ; removed again: overflow 0 px
+
+================ 1907x1000 ================
+
+[con-lugar]
+  sideways  document 1907 wide in a viewport of 1907  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 111 px of 111 (overflow 0, scrollTop 0)
+  title     visible   30.2 of   30.2  whole=True
+  note      visible      0 of      0  whole=True  hidden=True
+  row locked World feed                 visible     34 of     34  whole=True
+  row up     CALDRIX, on-board          visible     34 of     34  whole=True
+  boxes     2
+  state     t=32.7s  ·  multi view · 2 boxes  ·  2 video elements in the player, 2 decoding
+
+[grilla-llena]
+  sideways  document 1907 wide in a viewport of 1907  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 111 px of 111 (overflow 0, scrollTop 0)
+  title     visible   30.2 of   30.2  whole=True
+  note      visible      0 of      0  whole=True  hidden=True
+  row locked World feed                 visible     34 of     34  whole=True
+  row up     CALDRIX, on-board          visible     34 of     34  whole=True
+  boxes     2
+  state     t=33.0s  ·  multi view · 2 boxes  ·  2 video elements in the player, 2 decoding
+
+[reabierto]
+  sideways  document 1907 wide in a viewport of 1907  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 111 px of 111 (overflow 0, scrollTop 0)
+  title     visible   30.2 of   30.2  whole=True
+  note      visible      0 of      0  whole=True  hidden=True
+  row locked World feed                 visible     34 of     34  whole=True
+  row up     CALDRIX, on-board          visible     34 of     34  whole=True
+  boxes     2
+  state     t=34.2s  ·  multi view · 2 boxes  ·  2 video elements in the player, 2 decoding
+
+[pagina-entera]
+  sideways  document 1907 wide in a viewport of 1907  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 111 px of 111 (overflow 0, scrollTop 0)
+  title     visible   28.7 of   28.7  whole=True
+  note      visible      0 of      0  whole=True  hidden=True
+  row locked World feed                 visible   32.3 of   32.3  whole=True
+  row up     CALDRIX, on-board          visible   32.3 of   32.3  whole=True
+  boxes     2
+  state     t=35.8s  ·  multi view · 2 boxes  ·  2 video elements in the player, 2 decoding
+
+  CONTROL   with a block 400 px wider than the viewport: overflow 400 px  ->  SCROLLS, as it must   ; removed again: overflow 0 px
+
+EVERY ROW WHOLE AND NO SIDEWAYS SCROLL

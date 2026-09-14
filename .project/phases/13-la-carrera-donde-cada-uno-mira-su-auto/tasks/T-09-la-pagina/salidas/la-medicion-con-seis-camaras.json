@@ -1,0 +1,1330 @@
+{
+ "url": "http://127.0.0.1:8099/",
+ "at": 31.0,
+ "widths": {
+  "400x780": {
+   "viewport": {
+    "width": 400,
+    "height": 780
+   },
+   "states": {
+    "con-lugar": {
+     "sideways": {
+      "docScrollWidth": 400,
+      "docClientWidth": 400,
+      "bodyScrollWidth": 400,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 175,
+       "top": 343.3,
+       "width": 195,
+       "height": 127.3
+      },
+      "port": {
+       "left": 176,
+       "top": 344.25,
+       "width": 193,
+       "height": 125
+      },
+      "scrollTop": 0,
+      "scrollHeight": 281,
+      "clientHeight": 125,
+      "overflow": 156
+     },
+     "title": {
+      "rect": {
+       "left": 182.5,
+       "top": 350.8,
+       "width": 180,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 381,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 415,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "MARVOK, on-board",
+       "checked": false,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 449,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 20.3,
+       "fraction": 0.596,
+       "whole": false
+      },
+      {
+       "name": "NOCTEV, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 483,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "RUNTAK, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 517,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "PENTAV, on-board",
+       "checked": false,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 551,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "QUENTRA, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 585,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      }
+     ],
+     "boxes": 2,
+     "state": "t=32.6s  \u00b7  multi view \u00b7 2 boxes  \u00b7  2 video elements in the player, 2 decoding"
+    },
+    "grilla-llena": {
+     "sideways": {
+      "docScrollWidth": 400,
+      "docClientWidth": 400,
+      "bodyScrollWidth": 400,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 139.4,
+       "top": 343.3,
+       "width": 230.6,
+       "height": 127.3
+      },
+      "port": {
+       "left": 140.375,
+       "top": 344.25,
+       "width": 229,
+       "height": 125
+      },
+      "scrollTop": 206,
+      "scrollHeight": 331,
+      "clientHeight": 125,
+      "overflow": 206
+     },
+     "title": {
+      "rect": {
+       "left": 146.9,
+       "top": 144.8,
+       "width": 215.6,
+       "height": 30.2
+      },
+      "visible": 0,
+      "fraction": 0,
+      "whole": false
+     },
+     "note": {
+      "hidden": false,
+      "text": "4 boxes is what the screen holds. Lower one to raise another.",
+      "rect": {
+       "left": 146.9,
+       "top": 418.2,
+       "width": 215.6,
+       "height": 44.4
+      },
+      "visible": 44.4,
+      "fraction": 1,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 146.9,
+        "top": 175,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 146.9,
+        "top": 209,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "MARVOK, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 146.9,
+        "top": 243,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "NOCTEV, trackside",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 146.9,
+        "top": 277,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "RUNTAK, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 146.9,
+        "top": 311,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 0.7,
+       "fraction": 0.022,
+       "whole": false
+      },
+      {
+       "name": "PENTAV, on-board",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 146.9,
+        "top": 345,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "QUENTRA, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 146.9,
+        "top": 379,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 4,
+     "state": "t=34.1s  \u00b7  multi view \u00b7 4 boxes  \u00b7  4 video elements in the player, 4 decoding",
+     "raised": 3
+    },
+    "reabierto": {
+     "sideways": {
+      "docScrollWidth": 400,
+      "docClientWidth": 400,
+      "bodyScrollWidth": 400,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 139.4,
+       "top": 343.3,
+       "width": 230.6,
+       "height": 127.3
+      },
+      "port": {
+       "left": 140.375,
+       "top": 344.25,
+       "width": 229,
+       "height": 125
+      },
+      "scrollTop": 206,
+      "scrollHeight": 331,
+      "clientHeight": 125,
+      "overflow": 206
+     },
+     "title": {
+      "rect": {
+       "left": 146.9,
+       "top": 144.8,
+       "width": 215.6,
+       "height": 30.2
+      },
+      "visible": 0,
+      "fraction": 0,
+      "whole": false
+     },
+     "note": {
+      "hidden": false,
+      "text": "4 boxes is what the screen holds. Lower one to raise another.",
+      "rect": {
+       "left": 146.9,
+       "top": 418.2,
+       "width": 215.6,
+       "height": 44.4
+      },
+      "visible": 44.4,
+      "fraction": 1,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 146.9,
+        "top": 175,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 146.9,
+        "top": 209,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "MARVOK, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 146.9,
+        "top": 243,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "NOCTEV, trackside",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 146.9,
+        "top": 277,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "RUNTAK, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 146.9,
+        "top": 311,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 0.7,
+       "fraction": 0.022,
+       "whole": false
+      },
+      {
+       "name": "PENTAV, on-board",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 146.9,
+        "top": 345,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "QUENTRA, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 146.9,
+        "top": 379,
+        "width": 215.6,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 4,
+     "state": "t=35.2s  \u00b7  multi view \u00b7 4 boxes  \u00b7  4 video elements in the player, 4 decoding"
+    },
+    "pagina-entera": {
+     "sideways": {
+      "docScrollWidth": 400,
+      "docClientWidth": 400,
+      "bodyScrollWidth": 400,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 150.9,
+       "top": 2474.3,
+       "width": 219.1,
+       "height": 120.9
+      },
+      "port": {
+       "left": 151.90625,
+       "top": 2475.31005859375,
+       "width": 229,
+       "height": 125
+      },
+      "scrollTop": 206,
+      "scrollHeight": 331,
+      "clientHeight": 125,
+      "overflow": 206
+     },
+     "title": {
+      "rect": {
+       "left": 158,
+       "top": 2285.7,
+       "width": 204.8,
+       "height": 28.7
+      },
+      "visible": 0,
+      "fraction": 0,
+      "whole": false
+     },
+     "note": {
+      "hidden": false,
+      "text": "4 boxes is what the screen holds. Lower one to raise another.",
+      "rect": {
+       "left": 158,
+       "top": 2545.5,
+       "width": 204.8,
+       "height": 42.2
+      },
+      "visible": 42.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 158,
+        "top": 2314.5,
+        "width": 204.8,
+        "height": 32.3
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 158,
+        "top": 2346.8,
+        "width": 204.8,
+        "height": 32.3
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "MARVOK, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 158,
+        "top": 2379.1,
+        "width": 204.8,
+        "height": 32.3
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "NOCTEV, trackside",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 158,
+        "top": 2411.4,
+        "width": 204.8,
+        "height": 32.3
+       },
+       "visible": 0,
+       "fraction": 0,
+       "whole": false
+      },
+      {
+       "name": "RUNTAK, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 158,
+        "top": 2443.7,
+        "width": 204.8,
+        "height": 32.3
+       },
+       "visible": 0.6,
+       "fraction": 0.02,
+       "whole": false
+      },
+      {
+       "name": "PENTAV, on-board",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 158,
+        "top": 2476,
+        "width": 204.8,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "QUENTRA, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 158,
+        "top": 2508.3,
+        "width": 204.8,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 4,
+     "state": "t=36.3s  \u00b7  multi view \u00b7 4 boxes  \u00b7  4 video elements in the player, 4 decoding"
+    }
+   },
+   "control-de-ancho": {
+    "overflowX": 400,
+    "bodyOverflowX": 400,
+    "clean": false,
+    "after": {
+     "overflowX": 0,
+     "bodyOverflowX": 0
+    }
+   }
+  },
+  "1907x1000": {
+   "viewport": {
+    "width": 1907,
+    "height": 1000
+   },
+   "states": {
+    "con-lugar": {
+     "sideways": {
+      "docScrollWidth": 1907,
+      "docClientWidth": 1907,
+      "bodyScrollWidth": 1907,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 1304.5,
+       "top": 242.1,
+       "width": 195,
+       "height": 283.2
+      },
+      "port": {
+       "left": 1305.5,
+       "top": 243.140625,
+       "width": 193,
+       "height": 281
+      },
+      "scrollTop": 0,
+      "scrollHeight": 281,
+      "clientHeight": 281,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 1312,
+       "top": 249.6,
+       "width": 180,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 279.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 313.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "MARVOK, on-board",
+       "checked": false,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 347.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "NOCTEV, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 381.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "RUNTAK, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 415.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "PENTAV, on-board",
+       "checked": false,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 449.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "QUENTRA, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 483.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 2,
+     "state": "t=32.7s  \u00b7  multi view \u00b7 2 boxes  \u00b7  2 video elements in the player, 2 decoding"
+    },
+    "grilla-llena": {
+     "sideways": {
+      "docScrollWidth": 1907,
+      "docClientWidth": 1907,
+      "bodyScrollWidth": 1907,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 1187.5,
+       "top": 242.1,
+       "width": 312,
+       "height": 332.8
+      },
+      "port": {
+       "left": 1188.5,
+       "top": 243.140625,
+       "width": 310,
+       "height": 331
+      },
+      "scrollTop": 0,
+      "scrollHeight": 331,
+      "clientHeight": 331,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 1195,
+       "top": 249.6,
+       "width": 297,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": false,
+      "text": "4 boxes is what the screen holds. Lower one to raise another.",
+      "rect": {
+       "left": 1195,
+       "top": 523.1,
+       "width": 297,
+       "height": 44.4
+      },
+      "visible": 44.4,
+      "fraction": 1,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 1195,
+        "top": 279.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1195,
+        "top": 313.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "MARVOK, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1195,
+        "top": 347.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "NOCTEV, trackside",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1195,
+        "top": 381.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "RUNTAK, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 1195,
+        "top": 415.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "PENTAV, on-board",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 1195,
+        "top": 449.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "QUENTRA, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 1195,
+        "top": 483.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 4,
+     "state": "t=34.4s  \u00b7  multi view \u00b7 4 boxes  \u00b7  4 video elements in the player, 4 decoding",
+     "raised": 3
+    },
+    "reabierto": {
+     "sideways": {
+      "docScrollWidth": 1907,
+      "docClientWidth": 1907,
+      "bodyScrollWidth": 1907,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 1187.5,
+       "top": 242.1,
+       "width": 312,
+       "height": 332.8
+      },
+      "port": {
+       "left": 1188.5,
+       "top": 243.140625,
+       "width": 310,
+       "height": 331
+      },
+      "scrollTop": 0,
+      "scrollHeight": 331,
+      "clientHeight": 331,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 1195,
+       "top": 249.6,
+       "width": 297,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": false,
+      "text": "4 boxes is what the screen holds. Lower one to raise another.",
+      "rect": {
+       "left": 1195,
+       "top": 523.1,
+       "width": 297,
+       "height": 44.4
+      },
+      "visible": 44.4,
+      "fraction": 1,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 1195,
+        "top": 279.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1195,
+        "top": 313.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "MARVOK, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1195,
+        "top": 347.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "NOCTEV, trackside",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1195,
+        "top": 381.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "RUNTAK, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 1195,
+        "top": 415.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "PENTAV, on-board",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 1195,
+        "top": 449.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "QUENTRA, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 1195,
+        "top": 483.9,
+        "width": 297,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 4,
+     "state": "t=35.7s  \u00b7  multi view \u00b7 4 boxes  \u00b7  4 video elements in the player, 4 decoding"
+    },
+    "pagina-entera": {
+     "sideways": {
+      "docScrollWidth": 1907,
+      "docClientWidth": 1907,
+      "bodyScrollWidth": 1907,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 1203.1,
+       "top": 3173.2,
+       "width": 296.4,
+       "height": 316.2
+      },
+      "port": {
+       "left": 1204.0999755859375,
+       "top": 3174.20068359375,
+       "width": 310,
+       "height": 331
+      },
+      "scrollTop": 0,
+      "scrollHeight": 331,
+      "clientHeight": 331,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 1210.2,
+       "top": 3180.3,
+       "width": 282.2,
+       "height": 28.7
+      },
+      "visible": 28.7,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": false,
+      "text": "4 boxes is what the screen holds. Lower one to raise another.",
+      "rect": {
+       "left": 1210.2,
+       "top": 3440.1,
+       "width": 282.2,
+       "height": 42.2
+      },
+      "visible": 42.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 1210.2,
+        "top": 3209,
+        "width": 282.2,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1210.2,
+        "top": 3241.3,
+        "width": 282.2,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "MARVOK, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1210.2,
+        "top": 3273.6,
+        "width": 282.2,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "NOCTEV, trackside",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1210.2,
+        "top": 3305.9,
+        "width": 282.2,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "RUNTAK, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 1210.2,
+        "top": 3338.2,
+        "width": 282.2,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "PENTAV, on-board",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 1210.2,
+        "top": 3370.5,
+        "width": 282.2,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "QUENTRA, trackside",
+       "checked": false,
+       "locked": false,
+       "disabled": true,
+       "rect": {
+        "left": 1210.2,
+        "top": 3402.8,
+        "width": 282.2,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 4,
+     "state": "t=37.7s  \u00b7  multi view \u00b7 4 boxes  \u00b7  4 video elements in the player, 4 decoding"
+    }
+   },
+   "control-de-ancho": {
+    "overflowX": 400,
+    "bodyOverflowX": 400,
+    "clean": false,
+    "after": {
+     "overflowX": 0,
+     "bodyOverflowX": 0
+    }
+   }
+  }
+ }
+}

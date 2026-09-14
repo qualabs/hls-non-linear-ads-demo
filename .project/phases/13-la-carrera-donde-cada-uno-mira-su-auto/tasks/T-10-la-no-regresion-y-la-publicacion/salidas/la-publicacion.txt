@@ -1,0 +1,72 @@
+# La publicacion, comando por comando
+
+## 1. el bucket, con el nombre en el HOST y no en el path
+$ gcloud storage buckets create gs://qualabs-hls-demo-race-multiview --project=cto-assistant-501315 --location=US-CENTRAL1 --default-storage-class=STANDARD --uniform-bucket-level-access
+Creating gs://qualabs-hls-demo-race-multiview/...
+
+$ gcloud storage buckets add-iam-policy-binding gs://qualabs-hls-demo-race-multiview --member=allUsers --role=roles/storage.legacyObjectReader
+bindings:
+- members:
+  - projectEditor:cto-assistant-501315
+  - projectOwner:cto-assistant-501315
+  role: roles/storage.legacyBucketOwner
+- members:
+  - projectViewer:cto-assistant-501315
+  role: roles/storage.legacyBucketReader
+- members:
+  - projectEditor:cto-assistant-501315
+  - projectOwner:cto-assistant-501315
+  role: roles/storage.legacyObjectOwner
+- members:
+  - allUsers
+  - projectViewer:cto-assistant-501315
+  role: roles/storage.legacyObjectReader
+etag: CAI=
+kind: storage#policy
+resourceId: projects/_/buckets/qualabs-hls-demo-race-multiview
+version: 1
+
+## 2. y queda igual que los otros tres buckets, que es como se comprueba que no se invento nada
+$ gcloud storage buckets describe gs://qualabs-hls-demo-race-multiview --format="yaml(name,location,location_type,default_storage_class,uniform_bucket_level_access,public_access_prevention)"
+default_storage_class: STANDARD
+location: US-CENTRAL1
+location_type: region
+name: qualabs-hls-demo-race-multiview
+public_access_prevention: inherited
+uniform_bucket_level_access: true
+
+$ gcloud storage buckets describe gs://qualabs-hls-demo-multiview-offer --format="yaml(name,location,location_type,default_storage_class,uniform_bucket_level_access,public_access_prevention)"
+default_storage_class: STANDARD
+location: US-CENTRAL1
+location_type: region
+name: qualabs-hls-demo-multiview-offer
+public_access_prevention: inherited
+uniform_bucket_level_access: true
+
+## 3. dist/ se reconstruye antes de subir
+$ ./scripts/construir-libreria.sh
+construir-libreria: dist/qualabs-concurrent-hls.js (5455 lines, global QualabsConcurrentHls)
+EXIT=0
+
+## 4. la carpeta de la demo en la raiz del bucket, sin content/.fuentes
+$ gcloud storage rsync -r -x '(^|/)__pycache__/|^content/\.fuentes/' demo/race-multiview gs://qualabs-hls-demo-race-multiview
+.Copying file://demo/race-multiview/test/signalled-run.test.js to gs://qualabs-hls-demo-race-multiview/test/signalled-run.test.js
+....................................................
+
+Average throughput: 3.3MiB/s
+
+$ gcloud storage cp -r dist vendor gs://qualabs-hls-demo-race-multiview/
+.............
+
+Average throughput: 734.7kiB/s
+
+El patron de __pycache__ NO excluyo nada -- gcloud ancla el regex al principio del path
+relativo, asi que solo mordio el de content/.fuentes/, que es el que importaba. El unico
+.pyc que existe en la demo se subio y se saco a mano:
+
+$ gcloud storage rm gs://qualabs-hls-demo-race-multiview/scripts/__pycache__/generar-programa.cpython-314.pyc
+
+## 5. el content type de cada .ts, puesto a mano
+$ gcloud storage objects update "gs://qualabs-hls-demo-race-multiview/content/**/*.ts" --content-type=video/mp2t
+Patching gs://qualabs-hls-demo-race-multiview/content/primary/seg003.ts...
+.................

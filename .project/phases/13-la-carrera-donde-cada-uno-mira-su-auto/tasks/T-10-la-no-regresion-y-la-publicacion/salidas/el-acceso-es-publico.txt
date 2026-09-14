@@ -1,0 +1,38 @@
+# El acceso es publico, comprobado SIN credenciales
+
+Un curl que lleve el token del entorno prueba que yo lo veo, no que lo vea otro. Asi
+que la comprobacion corre con el entorno VACIADO: `env -i` no le pasa una sola
+variable al proceso -- ni PATH, ni HOME, ni nada de gcloud -- y por eso el binario va
+por path absoluto.
+
+$ env | grep -iE "GOOGLE|GCLOUD|CLOUDSDK|BEARER|TOKEN"
+CLAUDE_CODE_MESSAGING_TOKEN=<presente>
+(la unica del entorno es la del canal del agente, y tampoco viaja: env -i la saca)
+
+$ for u in …; do env -i /usr/bin/curl -s -o /dev/null -w "%{http_code} %{content_type} %{size_download}" URL; done
+/index.html                                   200  text/html  11112 bytes
+/css/page.css                                 200  text/css  13509 bytes
+/js/app.js                                    200  text/javascript  4504 bytes
+/dist/qualabs-concurrent-hls.js               200  text/javascript  273987 bytes
+/race.json                                    200  application/json  628 bytes
+/content/primary/con-daterange.m3u8           200  application/vnd.apple.mpegurl  4964 bytes
+/content/primary/seg000.ts                    200  video/mp2t  586184 bytes
+/signalling/asset-list-offer.json             200  application/json  1794 bytes
+/content/view-caldrix/index.m3u8              200  application/vnd.apple.mpegurl  2765 bytes
+/brand/favicon.svg                            200  image/svg+xml  802 bytes
+
+## LOS TRES CONTROLES, porque un 200 solo no dice nada si todo diera 200
+
+$ env -i /usr/bin/curl -s -o /dev/null -w "%{http_code}" https://qualabs-hls-demo-race-multiview.storage.googleapis.com/
+403
+   la raiz del host es un pedido de LISTAR el bucket, y listar esta denegado a proposito
+
+$ env -i /usr/bin/curl -s -o /dev/null -w "%{http_code}" https://qualabs-hls-demo-race-multiview.storage.googleapis.com/no-existe.html
+404
+   un objeto que no existe
+
+$ env -i /usr/bin/curl -s -o /dev/null -w "%{http_code}" https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/.fuentes/programa.mp4
+404
+   un clip crudo de .fuentes: no se publico, y por eso no esta
+
+Los tres controles dan algo que no es 200, asi que los 200 de arriba son una lectura.

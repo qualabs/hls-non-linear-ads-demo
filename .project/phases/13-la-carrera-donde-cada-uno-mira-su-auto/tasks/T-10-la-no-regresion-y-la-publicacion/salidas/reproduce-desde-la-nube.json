@@ -1,0 +1,105 @@
+{
+ "url": "https://qualabs-hls-demo-race-multiview.storage.googleapis.com/index.html",
+ "real": {
+  "hosts": {
+   "qualabs-hls-demo-race-multiview.storage.googleapis.com": 41
+  },
+  "blobs": 1,
+  "fallidos": [
+   "net::ERR_ABORTED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg001.ts"
+  ],
+  "respuestas>=400": [],
+  "antes": {
+   "principal": 31,
+   "pausado": false,
+   "readyState": 1,
+   "cajas": 0,
+   "videos": 1,
+   "tiempos": [
+    31
+   ]
+  },
+  "despues": {
+   "principal": 34.019578,
+   "pausado": false,
+   "readyState": 4,
+   "cajas": 0,
+   "videos": 1,
+   "tiempos": [
+    34.02
+   ]
+  },
+  "avanzo": 3.0195780000000028,
+  "oferta": {
+   "filas": 1,
+   "camaras": [
+    "CALDRIX, on-board",
+    "MARVOK, on-board",
+    "NOCTEV, trackside",
+    "RUNTAK, trackside",
+    "PENTAV, on-board",
+    "QUENTRA, trackside"
+   ],
+   "estado": "t=41.5s  \u00b7  multi view \u00b7 4 boxes  \u00b7  4 video elements in the player, 4 decoding",
+   "pliegues": 1
+  },
+  "subidas": 3,
+  "grilla": {
+   "cajas": 4,
+   "videos": 4,
+   "antes": [
+    37.453,
+    7.115,
+    0,
+    0
+   ],
+   "despues": [
+    41.461,
+    10.37,
+    10.072,
+    9.1
+   ],
+   "avanzaron": 4
+  }
+ },
+ "control": {
+  "hosts": {
+   "qualabs-hls-demo-race-multiview.storage.googleapis.com": 23
+  },
+  "blobs": 0,
+  "fallidos": [
+   "net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts",
+   "net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts",
+   "net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts",
+   "net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts",
+   "net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts",
+   "net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts",
+   "net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts"
+  ],
+  "respuestas>=400": [],
+  "antes": {
+   "principal": 31,
+   "pausado": false,
+   "readyState": 0,
+   "cajas": 0,
+   "videos": 1,
+   "tiempos": [
+    31
+   ]
+  },
+  "despues": {
+   "principal": 31,
+   "pausado": false,
+   "readyState": 0,
+   "cajas": 0,
+   "videos": 1,
+   "tiempos": [
+    31
+   ]
+  },
+  "avanzo": 0,
+  "oferta": null,
+  "subidas": 0,
+  "grilla": null
+ }
+}

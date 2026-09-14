@@ -1,0 +1,41 @@
+content/primary/con-daterange.m3u8  (1 Date Range)
+signalling/asset-list-offer.json  (6 de 6 cámaras empaquetadas)
+
+El recorrido, sobre un programa de 112 s:
+  la ventana   t=28s a 92s  (64s)  multi view   signalling/asset-list-offer.json
+      World feed               el contenido principal
+      CALDRIX, on-board        /content/view-caldrix/index.m3u8
+      MARVOK, on-board         /content/view-marvok/index.m3u8
+      NOCTEV, trackside        /content/view-noctev/index.m3u8
+      RUNTAK, trackside        /content/view-runtak/index.m3u8
+      PENTAV, on-board         /content/view-pentav/index.m3u8
+      QUENTRA, trackside       /content/view-quentra/index.m3u8
+
+Qué mirar, y en qué segundo:
+
+  t=0          arranca la carrera. ANTES DE NADA, encender el audio con el control de
+               arriba a la derecha de la imagen, que lo dibuja la librería (ADR 0015):
+               la página arranca muteada por la política de autoplay del browser, y esta
+               demo se maneja de oído.
+
+  t=28         los relatores dicen que las cámaras están disponibles y la ventana abre
+               EN ESE MISMO SEGUNDO. La voz entra un instante antes que el tag, que es
+               como pasa en una transmisión: primero se oye, después se ve. Aparece el
+               anuncio y el selector se llena.
+
+  t=31         subir la cámara. La grilla pasa a dos cajas y el programa se corre a la
+               suya: es una vista más y no un fondo.
+
+  t=47         agrandar la cámara. Acá está el beat de audio de esta demo y no de las
+               otras tres: el foco es exclusivo (ADR 0026), así que la transmisión se
+               calla y quedás adentro del auto, con su motor. Los dos están mezclados al
+               mismo nivel a propósito, así que el cambio es de contenido y no de volumen.
+
+  t=69         desagrandar. Vuelve la grilla y vuelve el relato; el audio no se toca al
+               desagrandar (ADR 0069).
+
+  t=82         salir. Destildar la última vista y apretar el botón de una sola vista son
+               el mismo evento: una caja no es una composición.
+
+  t=92         cierra la ventana. Si quedaba algo arriba, se baja solo y el programa
+               vuelve como venía. La carrera sigue hasta 112.

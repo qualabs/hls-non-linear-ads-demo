@@ -1,0 +1,52 @@
+$ git diff --stat -- lib/
+(vacío: lib/ no cambió)
+
+$ git status --short -- demo/race-multiview
+ M demo/race-multiview/css/page.css
+ M demo/race-multiview/index.html
+ M demo/race-multiview/js/app.js
+?? demo/race-multiview/CREDITS.md
+?? demo/race-multiview/README.md
+?? demo/race-multiview/audio/marvok.m4a
+?? demo/race-multiview/audio/noctev.m4a
+?? demo/race-multiview/audio/pentav.m4a
+?? demo/race-multiview/audio/quentra.m4a
+?? demo/race-multiview/audio/runtak.m4a
+?? demo/race-multiview/brand/
+?? demo/race-multiview/js/dom.js
+?? demo/race-multiview/js/opening.js
+?? demo/race-multiview/js/recorrido.js
+?? demo/race-multiview/js/senalizacion.js
+?? demo/race-multiview/scripts/generar-camaras.py
+
+$ npm test 2>&1 | tail -8
+ℹ tests 193
+ℹ suites 0
+ℹ pass 193
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4028.748128
+
+$ npm run check 2>&1 | tail -4
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
+
+$ for u in ...; do curl -s -o /dev/null -w "%{http_code}"; done
+  /                                        200
+  /brand/fonts-embedded.css                200
+  /css/page.css                            200
+  /brand/favicon.svg                       200
+  /brand/logo-qualabs-on-dark.svg          200
+  /vendor/hls.min.js                       200
+  /dist/qualabs-concurrent-hls.js          200
+  /js/app.js                               200
+  /js/opening.js                           200
+  /js/recorrido.js                         200
+  /js/senalizacion.js                      200
+  /js/dom.js                               200
+  /content/primary/con-daterange.m3u8      200
+  /signalling/asset-list-offer.json        200

@@ -1,0 +1,66 @@
+######################################################################
+# 1 y 2 -- EL TOPE, en sus dos casos
+######################################################################
+
+El registro de verdad tiene 0 generaciones anotadas.
+Los dos casos se corren contra un registro FALSO en /dev/shm/guardas-20260914T170216-aqr4XT, con el de verdad intacto.
+
+----------------------------------------------------------------------
+# 1. con 72 anotadas y una pedida, TIENE que frenar
+  $ python3 /dev/shm/guardas-20260914T170216-aqr4XT/proj/demo/race-multiview/scripts/generar-camaras.py marvok 1 --contar
+
+  TOPE: hay 72 generaciones lanzadas y se piden 1; el tope de la etapa 3 es 72 (US$57.60). Corre menos clips o cierra la task con lo que hay.
+  [salida 1]
+
+----------------------------------------------------------------------
+# 2. con 60 anotadas y ocho pedidas, NO tiene que frenar (y no lanza: --contar)
+  $ python3 /dev/shm/guardas-20260914T170216-aqr4XT/proj/demo/race-multiview/scripts/generar-camaras.py marvok 1-8 --contar
+
+  == marvok: 8 generacion(es), veo-3.1-fast-generate-001, 8s, 720p, con audio -- US$6.40 ==
+     lanzadas hasta ahora: 60 de 72 (US$48.00 de US$57.60)
+  
+      1 01-arco-recta
+      2 02-morro-curvon
+      3 03-arco-costa
+      4 04-casco-tribuna
+      5 05-ponton-curva-larga
+      6 06-rueda-piano
+      7 07-aleron-recta
+      8 08-arco-dunas
+  
+     --contar: no se lanzo nada.
+  [salida 0]
+
+######################################################################
+# 3 -- LA CAMARA QUIETA QUE VIAJA
+######################################################################
+
+----------------------------------------------------------------------
+# 3. al clip 2 de NOCTEV (de pista) se le agrega el bloque del seguimiento
+  $ python3 /dev/shm/guardas-20260914T170216-aqr4XT/romper-pista.py ../../../../../../demo/race-multiview/scripts/generar-camaras.py
+
+  noctev clip 2: el prompt lleva la camara quieta Y la camara que viaja al lado del auto. Son excluyentes y juntas piden una camara que se queda quieta viajando.
+  [salida 1]
+
+######################################################################
+# 4 -- EL AUTO EQUIVOCADO
+######################################################################
+
+----------------------------------------------------------------------
+# 4. la ficha de RUNTAK dice bronce y sus clips nombran magenta
+  $ python3 /dev/shm/guardas-20260914T170216-aqr4XT/romper-color.py ../../../../../../demo/race-multiview/scripts/generar-camaras.py
+
+  runtak clip 1: los bloques de este clip no nombran 'DARK BRONZE GOLD', que es el color de su auto en el padron de seis. El clip saldria de otro auto.
+  [salida 1]
+
+######################################################################
+# 5 -- EL CONTROL DEL CONTROL: sin romper nada, los cuarenta prompts se arman
+######################################################################
+
+----------------------------------------------------------------------
+# 5. los cuarenta, sin tocar nada
+  $ python3 /dev/shm/guardas-20260914T170216-aqr4XT/todos.py ../../../../../../demo/race-multiview/scripts/generar-camaras.py
+
+  40 prompts armados, ningun guarda salto
+  [salida 0]
+

@@ -24,7 +24,7 @@ Nicolás and rewriting it would break its traceability.
 
 ## Where the demos are published
 
-All three are **public on the internet**, on Google Cloud Storage, project
+All four are **public on the internet**, on Google Cloud Storage, project
 `cto-assistant-501315`, served as static files with no server:
 
 | demo | URL |
@@ -32,6 +32,7 @@ All three are **public on the internet**, on Google Cloud Storage, project
 | `demo/hydration-break/` | https://qualabs-hls-demo-hydration-break.storage.googleapis.com/index.html |
 | `demo/multiview-offer/` | https://qualabs-hls-demo-multiview-offer.storage.googleapis.com/index.html |
 | `demo/compatibility-pair/` | https://qualabs-hls-demo-compatibility-pair.storage.googleapis.com/index.html |
+| `demo/race-multiview/` | https://qualabs-hls-demo-race-multiview.storage.googleapis.com/index.html |
 
 One bucket per demo, `US-CENTRAL1`, uniform access, `allUsers` holding
 `roles/storage.legacyObjectReader`: **objects are readable and the bucket is not
@@ -64,6 +65,13 @@ the two `server.mjs` mounts from the root. Rebuild `dist/` with
 **A `.ts` needs its content type set by hand.** Google guesses
 `text/vnd.trolltech.linguist`, which is Qt's translation format, from the extension. It
 has to be `video/mp2t`. Every other type comes out right on its own.
+
+**`gcloud storage rsync -x` anchors its regex at the start of the path**, and it is the
+same trap as the content type: it fails silently, because nothing warns you that a pattern
+matched nothing. `gcloud` evaluates the pattern against the relative path with `re.match`,
+so `^content/\.fuentes/` works and `scripts/__pycache__/` never matches anything in the
+middle of a path. The one that works is `.*__pycache__/`. A `.pyc` was published this way
+once and had to be deleted by hand.
 
 **`content/.fuentes/` is NOT published**, for two independent reasons: no page ever asks
 for it, and the Pexels License advises against redistributing the original file. It is

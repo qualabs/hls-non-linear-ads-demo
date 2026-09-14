@@ -1,0 +1,730 @@
+{
+ "url": "http://127.0.0.1:8099/",
+ "at": 31.0,
+ "widths": {
+  "400x780": {
+   "viewport": {
+    "width": 400,
+    "height": 780
+   },
+   "states": {
+    "con-lugar": {
+     "sideways": {
+      "docScrollWidth": 400,
+      "docClientWidth": 400,
+      "bodyScrollWidth": 400,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 175,
+       "top": 343.3,
+       "width": 195,
+       "height": 113.2
+      },
+      "port": {
+       "left": 176,
+       "top": 344.25,
+       "width": 193,
+       "height": 111
+      },
+      "scrollTop": 0,
+      "scrollHeight": 111,
+      "clientHeight": 111,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 182.5,
+       "top": 350.8,
+       "width": 180,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 381,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 415,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 2,
+     "state": "t=32.7s  \u00b7  multi view \u00b7 2 boxes  \u00b7  2 video elements in the player, 2 decoding"
+    },
+    "grilla-llena": {
+     "sideways": {
+      "docScrollWidth": 400,
+      "docClientWidth": 400,
+      "bodyScrollWidth": 400,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 175,
+       "top": 343.3,
+       "width": 195,
+       "height": 113.2
+      },
+      "port": {
+       "left": 176,
+       "top": 344.25,
+       "width": 193,
+       "height": 111
+      },
+      "scrollTop": 0,
+      "scrollHeight": 111,
+      "clientHeight": 111,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 182.5,
+       "top": 350.8,
+       "width": 180,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 381,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 415,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 2,
+     "state": "t=32.9s  \u00b7  multi view \u00b7 2 boxes  \u00b7  2 video elements in the player, 2 decoding",
+     "raised": 1
+    },
+    "reabierto": {
+     "sideways": {
+      "docScrollWidth": 400,
+      "docClientWidth": 400,
+      "bodyScrollWidth": 400,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 175,
+       "top": 343.3,
+       "width": 195,
+       "height": 113.2
+      },
+      "port": {
+       "left": 176,
+       "top": 344.25,
+       "width": 193,
+       "height": 111
+      },
+      "scrollTop": 0,
+      "scrollHeight": 111,
+      "clientHeight": 111,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 182.5,
+       "top": 350.8,
+       "width": 180,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 381,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 182.5,
+        "top": 415,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 2,
+     "state": "t=34.0s  \u00b7  multi view \u00b7 2 boxes  \u00b7  2 video elements in the player, 2 decoding"
+    },
+    "pagina-entera": {
+     "sideways": {
+      "docScrollWidth": 400,
+      "docClientWidth": 400,
+      "bodyScrollWidth": 400,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 184.8,
+       "top": 2474.3,
+       "width": 185.3,
+       "height": 107.6
+      },
+      "port": {
+       "left": 185.75,
+       "top": 2475.31005859375,
+       "width": 193,
+       "height": 111
+      },
+      "scrollTop": 0,
+      "scrollHeight": 111,
+      "clientHeight": 111,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 191.9,
+       "top": 2481.4,
+       "width": 171,
+       "height": 28.7
+      },
+      "visible": 28.7,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 191.9,
+        "top": 2510.2,
+        "width": 171,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 191.9,
+        "top": 2542.5,
+        "width": 171,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 2,
+     "state": "t=35.0s  \u00b7  multi view \u00b7 2 boxes  \u00b7  2 video elements in the player, 2 decoding"
+    }
+   },
+   "control-de-ancho": {
+    "overflowX": 400,
+    "bodyOverflowX": 400,
+    "clean": false,
+    "after": {
+     "overflowX": 0,
+     "bodyOverflowX": 0
+    }
+   }
+  },
+  "1907x1000": {
+   "viewport": {
+    "width": 1907,
+    "height": 1000
+   },
+   "states": {
+    "con-lugar": {
+     "sideways": {
+      "docScrollWidth": 1907,
+      "docClientWidth": 1907,
+      "bodyScrollWidth": 1907,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 1304.5,
+       "top": 242.1,
+       "width": 195,
+       "height": 113.2
+      },
+      "port": {
+       "left": 1305.5,
+       "top": 243.140625,
+       "width": 193,
+       "height": 111
+      },
+      "scrollTop": 0,
+      "scrollHeight": 111,
+      "clientHeight": 111,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 1312,
+       "top": 249.6,
+       "width": 180,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 279.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 313.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 2,
+     "state": "t=32.7s  \u00b7  multi view \u00b7 2 boxes  \u00b7  2 video elements in the player, 2 decoding"
+    },
+    "grilla-llena": {
+     "sideways": {
+      "docScrollWidth": 1907,
+      "docClientWidth": 1907,
+      "bodyScrollWidth": 1907,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 1304.5,
+       "top": 242.1,
+       "width": 195,
+       "height": 113.2
+      },
+      "port": {
+       "left": 1305.5,
+       "top": 243.140625,
+       "width": 193,
+       "height": 111
+      },
+      "scrollTop": 0,
+      "scrollHeight": 111,
+      "clientHeight": 111,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 1312,
+       "top": 249.6,
+       "width": 180,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 279.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 313.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 2,
+     "state": "t=33.0s  \u00b7  multi view \u00b7 2 boxes  \u00b7  2 video elements in the player, 2 decoding",
+     "raised": 1
+    },
+    "reabierto": {
+     "sideways": {
+      "docScrollWidth": 1907,
+      "docClientWidth": 1907,
+      "bodyScrollWidth": 1907,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 1304.5,
+       "top": 242.1,
+       "width": 195,
+       "height": 113.2
+      },
+      "port": {
+       "left": 1305.5,
+       "top": 243.140625,
+       "width": 193,
+       "height": 111
+      },
+      "scrollTop": 0,
+      "scrollHeight": 111,
+      "clientHeight": 111,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 1312,
+       "top": 249.6,
+       "width": 180,
+       "height": 30.2
+      },
+      "visible": 30.2,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 279.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1312,
+        "top": 313.9,
+        "width": 180,
+        "height": 34
+       },
+       "visible": 34,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 2,
+     "state": "t=34.2s  \u00b7  multi view \u00b7 2 boxes  \u00b7  2 video elements in the player, 2 decoding"
+    },
+    "pagina-entera": {
+     "sideways": {
+      "docScrollWidth": 1907,
+      "docClientWidth": 1907,
+      "bodyScrollWidth": 1907,
+      "overflowX": 0,
+      "bodyOverflowX": 0,
+      "clean": true
+     },
+     "panel": {
+      "rect": {
+       "left": 1314.3,
+       "top": 3173.2,
+       "width": 185.3,
+       "height": 107.6
+      },
+      "port": {
+       "left": 1315.25,
+       "top": 3174.20068359375,
+       "width": 193,
+       "height": 111
+      },
+      "scrollTop": 0,
+      "scrollHeight": 111,
+      "clientHeight": 111,
+      "overflow": 0
+     },
+     "title": {
+      "rect": {
+       "left": 1321.4,
+       "top": 3180.3,
+       "width": 171,
+       "height": 28.7
+      },
+      "visible": 28.7,
+      "fraction": 1,
+      "whole": true
+     },
+     "note": {
+      "hidden": true,
+      "text": "",
+      "rect": {
+       "left": 0,
+       "top": 0,
+       "width": 0,
+       "height": 0
+      },
+      "visible": 0,
+      "fraction": NaN,
+      "whole": true
+     },
+     "rows": [
+      {
+       "name": "World feed",
+       "checked": true,
+       "locked": true,
+       "disabled": false,
+       "rect": {
+        "left": 1321.4,
+        "top": 3209,
+        "width": 171,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      },
+      {
+       "name": "CALDRIX, on-board",
+       "checked": true,
+       "locked": false,
+       "disabled": false,
+       "rect": {
+        "left": 1321.4,
+        "top": 3241.3,
+        "width": 171,
+        "height": 32.3
+       },
+       "visible": 32.3,
+       "fraction": 1,
+       "whole": true
+      }
+     ],
+     "boxes": 2,
+     "state": "t=35.6s  \u00b7  multi view \u00b7 2 boxes  \u00b7  2 video elements in the player, 2 decoding"
+    }
+   },
+   "control-de-ancho": {
+    "overflowX": 400,
+    "bodyOverflowX": 400,
+    "clean": false,
+    "after": {
+     "overflowX": 0,
+     "bodyOverflowX": 0
+    }
+   }
+  }
+ }
+}
