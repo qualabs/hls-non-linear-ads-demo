@@ -1,0 +1,10 @@
+[
+ {"etiqueta":"1-amarillo(auto entero)","rect":[490,360,290,240],"ref":"#CEBC35"},
+ {"etiqueta":"2-verde+bronce(auto entero)","rect":[800,370,430,220],"ref":"#38822D"},
+ {"etiqueta":"3-violeta(auto entero)","rect":[470,300,140,90],"ref":"#632EA3"},
+ {"etiqueta":"4-cyan(auto entero)","rect":[685,300,140,85],"ref":"#09B3A1"},
+ {"etiqueta":"5-rosa(auto entero)","rect":[630,270,90,50],"ref":"#5B223C"},
+ {"etiqueta":"6-fondo(auto entero)","rect":[610,245,60,35],"ref":"#09B3A1"},
+ {"etiqueta":"CTRL-asfalto(sin auto)","rect":[333,600,134,67],"ref":"#CEBC35"},
+ {"etiqueta":"CTRL-pasto(sin auto)","rect":[900,280,200,40],"ref":"#38822D"}
+]

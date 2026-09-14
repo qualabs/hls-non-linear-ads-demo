@@ -1,0 +1,9 @@
+[
+ {"etiqueta":"A cielo t=7.5","cuadro":"@T@/cuadros/a-casilla-04-aereo-los-seis-t7.5.png","rect":[200,40,500,80]},
+ {"etiqueta":"B cielo t=7.5","cuadro":"@T@/cuadros/b-casilla-12-rueda-runtak-t7.5.png","rect":[200,30,500,60]},
+ {"etiqueta":"A cuadro entero t=7.5","cuadro":"@T@/cuadros/a-casilla-04-aereo-los-seis-t7.5.png","rect":null},
+ {"etiqueta":"B cuadro entero t=7.5","cuadro":"@T@/cuadros/b-casilla-12-rueda-runtak-t7.5.png","rect":null},
+ {"etiqueta":"CTRL hora dorada cielo","cuadro":"@T@/cuadros/CONTROL-hora-dorada.png","rect":[200,40,500,80]},
+ {"etiqueta":"CTRL hora dorada cuadro","cuadro":"@T@/cuadros/CONTROL-hora-dorada.png","rect":null},
+ {"etiqueta":"CTRL otro mundo cuadro","cuadro":"@T@/cuadros/CONTROL-otro-mundo.png","rect":null}
+]

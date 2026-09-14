@@ -1,0 +1,44 @@
+### npm test
+✔ a full grid with nothing left to raise says nothing either (0.375297ms)
+✔ the line is decided by the flag the state ships and not by counting ticks (0.185323ms)
+ℹ tests 193
+ℹ suites 0
+ℹ pass 193
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2394.948618
+exit=
+
+### npm run check
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js lib/multiview.js demo/compatibility-pair/js/contract-trace.js demo/compatibility-pair/css/player.css
+
+   GREEN: 3 occurrence(s), all of them on the accepted list.
+     lib/controls.js:33  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:133  interstitial: '#ffcc00'
+     lib/controls.js:169  interstitial: 'traditional interstitial: the content is replaced by the ad'
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
+
+### npm run mutaciones
+         rotura: el beat de la señalización pasa a tener el mismo `lead` que el del banner, así que los dos resuelven en el mismo segundo y una placa entra pegada a la otra
+         dijo:   entre "la-senalizacion" y "el-banner" se ven 0 s de programa y el piso son 4 s: las dos placas se encadenan con un parpadeo de partido en el medio, que no falla, se ve como que la demo atropella
+  ROJO   elRitmoDelGuion
+         regla:  ninguna placa se queda en pantalla más que el tope (ADR 0037)
+         rotura: el beat de la vuelta pasa de `hold: 7` a `hold: 40`, que con el programa congelado atrás se ve como que la demo se colgó
+         dijo:   la placa "la-vuelta" se queda 40 s en pantalla y el tope son 10 s: con el programa congelado atrás, eso no se lee como una placa larga, se lee como que la demo se colgó
+
+las 20 roturas dieron rojo y los 9 chequeos dan verde sin romper nada
+
+### git: lib/ y las otras demos
+?? .project/phases/13-la-carrera-donde-cada-uno-mira-su-auto/
+?? demo/race-multiview/
+--- diff sobre lib/ ---
+(vacio = lib/ no cambio)

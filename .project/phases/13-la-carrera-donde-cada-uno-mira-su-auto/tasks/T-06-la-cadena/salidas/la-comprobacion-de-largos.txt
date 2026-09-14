@@ -1,0 +1,18 @@
+### la comprobacion de largos, con sus dos controles
+race.json: largo 112 s, ofertaDura 64 s, 24 fps
+tolerancia: un cuadro, 41.7 ms
+
+VERDE  el programa                        112.000000 s contra 112.000 declarados (0.000000 s) · 56 segmentos, target 2 s, ninguno lo pasa
+VERDE  CALDRIX, on-board                  64.000000 s contra 64.000 declarados (0.000000 s) · 32 segmentos, target 2 s, ninguno lo pasa
+
+ROJO   CONTROL sin el último segmento     110.000000 s contra 112.000 declarados (-2.000000 s) · 55 segmentos, target 2 s, ninguno lo pasa
+ROJO   CONTROL con un #EXTINF estirado    112.500000 s contra 112.000 declarados (0.500000 s) · 56 segmentos, target 2 s, 1 lo pasan: 2.500
+
+PASA, y se vieron los dos controles en rojo.
+exit=0
+
+### el control real: la misma camara empaquetada con el GOP desacoplado del fps (-g 60 a 24 fps)
+GOP 48 (el bueno)      32 segmentos suma 64.000000 s target 2 s 0 lo pasan largos: 2.000
+GOP 60 (desacoplado)   26 segmentos suma 64.000000 s target 2 s 25 lo pasan largos: 2.500 1.500
+
+la suma NO lo ve (las dos dan 64,000000); lo que lo ve es la grilla contra el target duration.

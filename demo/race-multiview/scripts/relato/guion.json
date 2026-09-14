@@ -1,0 +1,21 @@
+[
+ { "id": "01", "voz": "R", "casilla": 1,  "texto": "Eleven laps gone here on the coast, and this is still one race." },
+ { "id": "02", "voz": "C", "casilla": 2,  "texto": "Caldrix in front, and he has not put a wheel wrong all afternoon." },
+ { "id": "03", "voz": "R", "casilla": 3,  "texto": "Marvok has been in that mirror for three laps now, looking for a way through." },
+ { "id": "04", "voz": "R", "casilla": 4,  "texto": "The cameras on all six cars are open.", "anuncio": true },
+ { "id": "05", "voz": "C", "casilla": 4,  "texto": "Six of them, and you choose which one you watch." },
+ { "id": "06", "voz": "R", "casilla": 5,  "texto": "Noctev third, and he has been quicker than the leader for two laps now." },
+ { "id": "07", "voz": "R", "casilla": 6,  "texto": "Runtak and Pentav side by side into the braking zone, and neither of them lifts." },
+ { "id": "08", "voz": "R", "casilla": 7,  "texto": "And here comes Quentra, round the outside of Pentav." },
+ { "id": "09", "voz": "C", "casilla": 7,  "texto": "Fifth place, and it sticks." },
+ { "id": "10", "voz": "R", "casilla": 8,  "texto": "And back to the leader. Caldrix, still with a second in hand." },
+ { "id": "11", "voz": "R", "casilla": 9,  "texto": "Marvok and Noctev now, wheel to wheel through this long corner." },
+ { "id": "12", "voz": "C", "casilla": 9,  "texto": "And Noctev is close enough to try something." },
+ { "id": "13", "voz": "R", "casilla": 10, "texto": "Down to the sea section, Pentav and Quentra still together." },
+ { "id": "14", "voz": "C", "casilla": 11, "texto": "That is three separate fights, and all of them are alive." },
+ { "id": "15", "voz": "R", "casilla": 12, "texto": "Look at Runtak, running right along that kerb." },
+ { "id": "16", "voz": "C", "casilla": 12, "texto": "And the car keeps taking it." },
+ { "id": "17", "voz": "R", "casilla": 13, "texto": "Marvok is right on the back of Caldrix again." },
+ { "id": "18", "voz": "C", "casilla": 13, "texto": "The gap has gone." },
+ { "id": "19", "voz": "R", "casilla": 14, "texto": "And they are on their feet as this field goes by." }
+]

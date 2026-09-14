@@ -1,0 +1,5 @@
+REFERENCIA  casilla  6 (PENTAV, APPLE GREEN, sin tocar)  (99, 158, 116)  #639E74  (127045 px)
+REFERENCIA  casilla  7 (PENTAV, APPLE GREEN, sin tocar)  (62, 143, 101)  #3E8F65  (60153 px)
+MEDIDA      casilla 10 (PENTAV, LIME GREEN, nueva)       (155, 186, 64)  #9BBA40  (218240 px)
+CONTROL -   casilla  5 (NOCTEV, AQUAMARINE, no verde)    (117, 176, 148)  #75B094  (14052 px)
+CONTROL -   casilla 10 RECHAZADA (APPLE GREEN)           (84, 129, 76)  #54814C  (306751 px)

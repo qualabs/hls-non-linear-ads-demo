@@ -1,0 +1,7 @@
+# El asset-list se GENERA en cada arranque, a partir de race.json y de las cámaras que
+# estén empaquetadas, así que una copia en git sólo podría ser una vieja: es el mismo
+# argumento por el que están ignorados dist/ y la playlist señalizada.
+#
+# Lo dice el .gitignore de esta carpeta y no el de la raíz porque el archivo es de esta
+# demo: el de la raíz ignora `content/` y `dist/`, que son de todas.
+asset-list-*.json

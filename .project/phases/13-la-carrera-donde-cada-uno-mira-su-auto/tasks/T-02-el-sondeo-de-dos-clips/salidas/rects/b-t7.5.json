@@ -1,0 +1,5 @@
+[
+ {"etiqueta":"RUNTAK-carroceria","rect":[460,240,320,90],"ref":"#5B223C"},
+ {"etiqueta":"CTRL-asfalto","rect":[950,520,250,150],"ref":"#5B223C"},
+ {"etiqueta":"CTRL-aleron-negro","rect":[430,160,400,40],"ref":"#5B223C"}
+]

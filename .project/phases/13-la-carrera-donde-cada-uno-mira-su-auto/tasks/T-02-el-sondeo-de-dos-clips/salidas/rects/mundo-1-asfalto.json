@@ -1,0 +1,10 @@
+[
+ {"etiqueta":"A asfalto t=2.0","cuadro":"@T@/cuadros/a-casilla-04-aereo-los-seis-t2.0.png","rect":[333,600,134,67]},
+ {"etiqueta":"A asfalto t=4.0","cuadro":"@T@/cuadros/a-casilla-04-aereo-los-seis-t4.0.png","rect":[333,600,134,67]},
+ {"etiqueta":"A asfalto t=7.5","cuadro":"@T@/cuadros/a-casilla-04-aereo-los-seis-t7.5.png","rect":[333,600,134,67]},
+ {"etiqueta":"B asfalto t=0.5","cuadro":"@T@/cuadros/b-casilla-12-rueda-runtak-t0.5.png","rect":[133,533,200,107]},
+ {"etiqueta":"B asfalto t=4.0","cuadro":"@T@/cuadros/b-casilla-12-rueda-runtak-t4.0.png","rect":[950,500,250,150]},
+ {"etiqueta":"B asfalto t=7.5","cuadro":"@T@/cuadros/b-casilla-12-rueda-runtak-t7.5.png","rect":[950,520,250,150]},
+ {"etiqueta":"CTRL hora dorada asfalto","cuadro":"@T@/cuadros/CONTROL-hora-dorada.png","rect":[333,600,134,67]},
+ {"etiqueta":"CTRL otro mundo piso","cuadro":"@T@/cuadros/CONTROL-otro-mundo.png","rect":[600,430,300,60]}
+]

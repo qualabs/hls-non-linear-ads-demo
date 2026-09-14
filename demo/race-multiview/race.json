@@ -1,0 +1,17 @@
+{
+  "fps": 24,
+  "clipDura": 8,
+  "largo": 112,
+  "ofertaEn": 28,
+  "ofertaDura": 64,
+  "anuncioLargoMax": 4,
+  "primaryName": "World feed",
+  "feeds": [
+    { "id": "view-caldrix", "name": "CALDRIX, on-board", "color": "#CCB21F" },
+    { "id": "view-marvok", "name": "MARVOK, on-board", "color": "#381A6A" },
+    { "id": "view-noctev", "name": "NOCTEV, trackside", "color": "#24ACC8" },
+    { "id": "view-runtak", "name": "RUNTAK, trackside", "color": "#661955" },
+    { "id": "view-pentav", "name": "PENTAV, on-board", "color": "#2D6E24" },
+    { "id": "view-quentra", "name": "QUENTRA, trackside", "color": "#876E46" }
+  ]
+}

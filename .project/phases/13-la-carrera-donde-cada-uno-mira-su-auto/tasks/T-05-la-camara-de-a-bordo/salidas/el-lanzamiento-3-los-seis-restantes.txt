@@ -1,0 +1,21 @@
+== 6 generacion(es), veo-3.1-fast-generate-001, 8s, 720p, con audio -- US$4.80 ==
+
+  clip  3 (03-trasera-marvok)  op 9162d0af-eef7-4894-90cc-78eb5178c3cf
+  clip  4 (04-morro-costa)  op ca35b972-5206-4c60-a1bc-02178195170c
+  clip  5 (05-rueda-piano)  op 53aea7a9-b1b7-418a-844d-41f680808557
+  clip  6 (06-arco-tribuna)  op c4976f0f-9b8a-4932-ba6e-998242d3c31f
+  clip  7 (07-trasera-costa)  op 66209345-fbc7-403c-b8ca-8bdeaa407291
+  clip  8 (08-arco-curvon)  op d4627149-fae5-41ed-9762-93c58b88380d
+
+  ... esperando 6 generacion(es)
+     siguen 6 ...
+     siguen 6 ...
+     siguen 6 ...
+     siguen 6 ...
+  clip  3: Vertex devolvio error: {"code": 14, "message": "Service is currently unavailable. Please try again later. Operation ID: 9162d0af-eef7-4894-90cc-78eb5178c3cf."}
+  clip  7: Vertex devolvio error: {"code": 14, "message": "Service is currently unavailable. Please try again later. Operation ID: 66209345-fbc7-403c-b8ca-8bdeaa407291."}
+     siguen 4 ...
+  clip  4 LISTO  04-morro-costa.mp4  (8.000000s, 4.5 MB)
+  clip  5 LISTO  05-rueda-piano.mp4  (8.000000s, 4.1 MB)
+  clip  6 LISTO  06-arco-tribuna.mp4  (8.000000s, 4.7 MB)
+  clip  8 LISTO  08-arco-curvon.mp4  (8.000000s, 3.6 MB)

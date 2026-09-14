@@ -1,0 +1,37 @@
+# CONTROL — los dos chequeos vistos en rojo, sobre una COPIA del árbol en /dev/shm (el repo no se tocó)
+
+## 1. npm run check, con el término del transporte devuelto al comentario de lib/renderer.js:401
+
+$ sed -i '401s|.*|// these two strings arrive as a DATERANGE in the m3u8 manifest|' lib/renderer.js
+$ ./scripts/verificar-cortes.mjs ; echo $?
+
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js lib/multiview.js demo/compatibility-pair/js/contract-trace.js demo/compatibility-pair/css/player.css
+
+   RED: 1 occurrence(s) that are not on the accepted list.
+
+     lib/renderer.js:401
+       // these two strings arrive as a DATERANGE in the m3u8 manifest
+
+   If the seam was crossed, this is the finding and the mention has to go.
+   If the occurrence is legitimate, it goes in `accepted` in this script WITH ITS
+   REASON WRITTEN, which is what keeps the next one from being added on its own.
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+exit=1
+
+## 2. node --test, con MAX_BOXES cambiado de Math.max a Math.min en lib/signalling.js:197
+
+$ sed -i '197s|Math.max|Math.min|' lib/signalling.js
+$ node --test ; echo $?
+
+ℹ tests 184
+ℹ pass 151
+ℹ fail 33
+exit=1

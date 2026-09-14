@@ -1,0 +1,59 @@
+A. CADA INSTANCIA CONTRA SU PROPIO REPRESENTANTE Y CONTRA EL MAS CERCANO DE LOS OTROS
+   (si el de otro auto queda mas cerca, esa casilla dibujo un auto que se lee como otro)
+
+  CALDRIX   casilla 02  #D6BA50   propio=  4.5   mas cercano ajeno = QUENTRA    26.8
+  CALDRIX   casilla 03  #ADAE10   propio=  7.5   mas cercano ajeno = QUENTRA    26.2
+  CALDRIX   casilla 08  #C1A70E   propio=  3.1   mas cercano ajeno = QUENTRA    24.2
+  CALDRIX   casilla 13  #D6B52E   propio=  2.4   mas cercano ajeno = QUENTRA    27.1
+  MARVOK    casilla 03  #3B1F5B   propio=  4.1   mas cercano ajeno = RUNTAK     11.6
+  MARVOK    casilla 09  #361679   propio=  3.1   mas cercano ajeno = RUNTAK     15.5
+  NOCTEV    casilla 05  #16BEE3   propio=  5.4   mas cercano ajeno = QUENTRA    43.0
+  NOCTEV    casilla 09  #3299AD   propio=  6.1   mas cercano ajeno = QUENTRA    35.1
+  RUNTAK    casilla 06  #5D1D53   propio=  2.1   mas cercano ajeno = MARVOK     12.4
+  RUNTAK    casilla 12  #701557   propio=  2.1   mas cercano ajeno = MARVOK     15.4
+  PENTAV    casilla 06  #1E6E16   propio=  2.2   mas cercano ajeno = QUENTRA    26.9
+  PENTAV    casilla 07  #4A996D   propio= 18.4   mas cercano ajeno = NOCTEV     27.8
+  PENTAV    casilla 10  #2D6C24   propio=  0.7   mas cercano ajeno = QUENTRA    25.4
+  QUENTRA   casilla 07  #BA9A63   propio= 16.4   mas cercano ajeno = CALDRIX    14.1  <-- MAS CERCA DEL AJENO
+  QUENTRA   casilla 10  #54432A   propio= 16.4   mas cercano ajeno = PENTAV     26.0
+
+  instancias que se leen como otro auto: 1 de 15
+
+B. EL PEOR PAR POSIBLE EN TODO EL PROGRAMA
+   (la distancia mas chica entre UNA instancia de un auto y UNA de otro)
+
+  CALDRIX   vs MARVOK     min dE00 =  74.4   (casillas 08 y 03)
+  CALDRIX   vs NOCTEV     min dE00 =  43.0   (casillas 02 y 09)
+  CALDRIX   vs RUNTAK     min dE00 =  71.8   (casillas 08 y 06)
+  CALDRIX   vs PENTAV     min dE00 =  26.2   (casillas 03 y 07)
+  CALDRIX   vs QUENTRA    min dE00 =  12.4   (casillas 02 y 07)
+  MARVOK    vs NOCTEV     min dE00 =  45.0   (casillas 09 y 09)
+  MARVOK    vs RUNTAK     min dE00 =   9.9   (casillas 03 y 06)
+  MARVOK    vs PENTAV     min dE00 =  47.8   (casillas 03 y 10)
+  MARVOK    vs QUENTRA    min dE00 =  36.0   (casillas 03 y 10)
+  NOCTEV    vs RUNTAK     min dE00 =  52.6   (casillas 09 y 06)
+  NOCTEV    vs PENTAV     min dE00 =  24.4   (casillas 09 y 07)
+  NOCTEV    vs QUENTRA    min dE00 =  36.3   (casillas 09 y 07)
+  RUNTAK    vs PENTAV     min dE00 =  51.7   (casillas 06 y 07)
+  RUNTAK    vs QUENTRA    min dE00 =  33.5   (casillas 06 y 10)
+  PENTAV    vs QUENTRA    min dE00 =  25.6   (casillas 10 y 10)
+
+  --> EL PEOR PAR = 9.9   ('MARVOK', 'RUNTAK', '03', '06')
+
+C. LA ESCALA, para leer los numeros de arriba
+   dos verdes casi iguales (control de la T-01)                  dE00  5,6
+   el pasto del costado contra el verde de PENTAV (T-02)         dE00 11,0
+     -> en esta serie, 11 ya no es 'parecido': es otro color
+
+D. LOS DOS AUTOS QUE COMPARTEN CUADRO, EN CADA CASILLA DE DOS
+   (es la unica distancia que un espectador puede comparar de un vistazo)
+
+  casilla 03   CALDRIX   #ADAE10  vs  MARVOK    #3B1F5B   dE00 =  77.6
+  casilla 06   RUNTAK    #5D1D53  vs  PENTAV    #1E6E16   dE00 =  66.6
+  casilla 07   QUENTRA   #BA9A63  vs  PENTAV    #4A996D   dE00 =  28.4
+  casilla 09   MARVOK    #361679  vs  NOCTEV    #3299AD   dE00 =  45.0
+  casilla 10   PENTAV    #2D6C24  vs  QUENTRA   #54432A   dE00 =  25.6
+  casilla 13   CALDRIX   #D6B52E  vs  MARVOK    #361E52   dE00 =  77.6
+
+  --> el par mas cercano que comparte cuadro = 25.6 (casilla 10)
+     MARVOK y RUNTAK, que son el par mas cercano de los seis, no comparten ninguna casilla del programa.

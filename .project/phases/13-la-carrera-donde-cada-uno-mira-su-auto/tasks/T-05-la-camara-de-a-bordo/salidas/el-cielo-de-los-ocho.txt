@@ -1,0 +1,63 @@
+===============================================================================
+EL CIELO DE LOS OCHO, con los dos controles sobre EL MISMO rectangulo
+===============================================================================
+
+mediana del parche, y su Lab
+
+  CAM cielo 01-arco-recta            #FFFFFF   L*=100.0  a*=  -0.0  b*=   0.0  hue=  0deg
+  CTRL hora dorada MISMO parche      #FCFFE1   L*= 99.1  a*=  -6.0  b*=  14.0  hue= 66deg
+  CTRL otro mundo MISMO parche       #747E66   L*= 51.4  a*=  -8.4  b*=  11.8  hue= 85deg
+  CAM cielo 02-ponton-curv           #F0F6F4   L*= 96.4  a*=  -2.3  b*=   0.3  hue=160deg
+  CAM cielo 03-casco-costa           #FFFFFF   L*=100.0  a*=  -0.0  b*=   0.0  hue=  0deg
+  CAM cielo 04-morro-costa           #F0F1F4   L*= 95.1  a*=   0.2  b*=  -1.6  hue=225deg
+  CAM cielo 05-rueda-piano           #F3FAFD   L*= 97.8  a*=  -1.8  b*=  -2.2  hue=198deg
+  CAM cielo 06-arco                  #F6F6F3   L*= 96.8  a*=  -0.5  b*=   1.4  hue= 60deg
+  CAM cielo 07-aleron-rect           #FFFFFF   L*=100.0  a*=  -0.0  b*=   0.0  hue=  0deg
+  CAM cielo 08-arco-curvon           #FFFFFF   L*=100.0  a*=  -0.0  b*=   0.0  hue=  0deg
+
+dE00 entre parches:
+  CAM cielo 01-arco-recta            vs CTRL hora dorada MISMO parche        12.1
+  CAM cielo 01-arco-recta            vs CTRL otro mundo MISMO parche         37.4
+  CAM cielo 01-arco-recta            vs CAM cielo 02-ponton-curv              3.9
+  CAM cielo 01-arco-recta            vs CAM cielo 03-casco-costa              0.0
+  CAM cielo 01-arco-recta            vs CAM cielo 04-morro-costa              3.2
+  CAM cielo 01-arco-recta            vs CAM cielo 05-rueda-piano              3.4
+  CAM cielo 01-arco-recta            vs CAM cielo 06-arco                     2.4
+  CAM cielo 01-arco-recta            vs CAM cielo 07-aleron-rect              0.0
+  CAM cielo 01-arco-recta            vs CAM cielo 08-arco-curvon              0.0
+  CTRL hora dorada MISMO parche      vs CTRL otro mundo MISMO parche         34.9
+  CTRL hora dorada MISMO parche      vs CAM cielo 02-ponton-curv             10.8
+  CTRL hora dorada MISMO parche      vs CAM cielo 03-casco-costa             12.1
+  CTRL hora dorada MISMO parche      vs CAM cielo 04-morro-costa             14.0
+  CTRL hora dorada MISMO parche      vs CAM cielo 05-rueda-piano             13.4
+  CTRL hora dorada MISMO parche      vs CAM cielo 06-arco                    10.7
+  CTRL hora dorada MISMO parche      vs CAM cielo 07-aleron-rect             12.1
+  CTRL hora dorada MISMO parche      vs CAM cielo 08-arco-curvon             12.1
+  CTRL otro mundo MISMO parche       vs CAM cielo 02-ponton-curv             34.9
+  CTRL otro mundo MISMO parche       vs CAM cielo 03-casco-costa             37.4
+  CTRL otro mundo MISMO parche       vs CAM cielo 04-morro-costa             35.4
+  CTRL otro mundo MISMO parche       vs CAM cielo 05-rueda-piano             36.5
+  CTRL otro mundo MISMO parche       vs CAM cielo 06-arco                    35.3
+  CTRL otro mundo MISMO parche       vs CAM cielo 07-aleron-rect             37.4
+  CTRL otro mundo MISMO parche       vs CAM cielo 08-arco-curvon             37.4
+  CAM cielo 02-ponton-curv           vs CAM cielo 03-casco-costa              3.9
+  CAM cielo 02-ponton-curv           vs CAM cielo 04-morro-costa              4.0
+  CAM cielo 02-ponton-curv           vs CAM cielo 05-rueda-piano              2.7
+  CAM cielo 02-ponton-curv           vs CAM cielo 06-arco                     2.8
+  CAM cielo 02-ponton-curv           vs CAM cielo 07-aleron-rect              3.9
+  CAM cielo 02-ponton-curv           vs CAM cielo 08-arco-curvon              3.9
+  CAM cielo 03-casco-costa           vs CAM cielo 04-morro-costa              3.2
+  CAM cielo 03-casco-costa           vs CAM cielo 05-rueda-piano              3.4
+  CAM cielo 03-casco-costa           vs CAM cielo 06-arco                     2.4
+  CAM cielo 03-casco-costa           vs CAM cielo 07-aleron-rect              0.0
+  CAM cielo 03-casco-costa           vs CAM cielo 08-arco-curvon              0.0
+  CAM cielo 04-morro-costa           vs CAM cielo 05-rueda-piano              3.2
+  CAM cielo 04-morro-costa           vs CAM cielo 06-arco                     3.3
+  CAM cielo 04-morro-costa           vs CAM cielo 07-aleron-rect              3.2
+  CAM cielo 04-morro-costa           vs CAM cielo 08-arco-curvon              3.2
+  CAM cielo 05-rueda-piano           vs CAM cielo 06-arco                     3.9
+  CAM cielo 05-rueda-piano           vs CAM cielo 07-aleron-rect              3.4
+  CAM cielo 05-rueda-piano           vs CAM cielo 08-arco-curvon              3.4
+  CAM cielo 06-arco                  vs CAM cielo 07-aleron-rect              2.4
+  CAM cielo 06-arco                  vs CAM cielo 08-arco-curvon              2.4
+  CAM cielo 07-aleron-rect           vs CAM cielo 08-arco-curvon              0.0

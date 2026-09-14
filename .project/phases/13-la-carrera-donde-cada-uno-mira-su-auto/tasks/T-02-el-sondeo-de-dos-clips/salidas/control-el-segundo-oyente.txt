@@ -1,0 +1,20 @@
+--- a-casilla-04-aereo-los-seis ---
+SPEECH: NO
+TRANSCRIPT: NONE
+SOUNDS: Race car engine, vehicle passing
+MUSIC: NO
+--- b-casilla-12-rueda-runtak ---
+SPEECH: NO
+TRANSCRIPT: NONE
+SOUNDS: Car engine, tire squeal, whoosh
+MUSIC: NO
+--- c-casilla-04-correccion-aereo-y-lista ---
+SPEECH: NO
+TRANSCRIPT: NONE
+SOUNDS: Vehicle accelerating, engine noise, tire noise
+MUSIC: NO
+--- CONTROL-con-habla ---
+SPEECH: YES
+TRANSCRIPT: Norvick are still in front here, one nil, and we are just past the half hour.
+SOUNDS: Male speech, race car engine, crowd cheering.
+MUSIC: NO

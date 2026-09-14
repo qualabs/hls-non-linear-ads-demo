@@ -1,0 +1,12 @@
+[
+ {"etiqueta":"f1-amarillo","rect":[400,400,80,60],"ref":"#CEBC35"},
+ {"etiqueta":"f1-violeta","rect":[615,380,70,70],"ref":"#632EA3"},
+ {"etiqueta":"f1-verde","rect":[800,385,60,35],"ref":"#38822D"},
+ {"etiqueta":"f1-bronce-morro","rect":[845,435,60,35],"ref":"#55432E"},
+ {"etiqueta":"f2-magenta","rect":[505,300,55,30],"ref":"#5B223C"},
+ {"etiqueta":"f2-cyan","rect":[730,295,55,30],"ref":"#09B3A1"},
+ {"etiqueta":"f3-izq","rect":[552,252,45,28],"ref":"#CEBC35"},
+ {"etiqueta":"f3-der","rect":[697,248,42,26],"ref":"#55432E"},
+ {"etiqueta":"CTRL-asfalto","rect":[150,600,200,80],"ref":"#CEBC35"},
+ {"etiqueta":"CTRL-pasto","rect":[1050,380,150,50],"ref":"#38822D"}
+]

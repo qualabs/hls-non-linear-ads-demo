@@ -1,0 +1,8 @@
+CONTROL DEL PORTON -- una linea con el prompt de estilo metido en el texto
+
+se le pide:  A calm British motor racing commentator on live television, calling a race from the commentary box. Warm, level, unhurried. Never shouting, never like an advertisement. The cameras on all six cars are open.
+duracion:    10.031396 s
+veredicto:   MAL  leyo el prompt en voz alta (shouting, advertisement, unhurried) | dijo 17 palabras y se le pidieron 8
+     Warm, level, unhurried. Never shouting, never like an advertisement. The cameras on all six cars are open.
+
+El porton la rechazo, que es lo que este control tiene que ver.

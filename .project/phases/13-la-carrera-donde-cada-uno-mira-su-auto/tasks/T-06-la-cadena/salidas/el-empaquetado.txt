@@ -1,0 +1,18 @@
+### el programa
+content/primary/index.m3u8  (56 segmentos, 24 fps)
+
+### las cámaras (1 de 6)
+content/view-caldrix/index.m3u8  (32 segmentos, 24 fps)
+
+race.json: largo 112 s, ofertaDura 64 s, 24 fps
+tolerancia: un cuadro, 41.7 ms
+
+VERDE  el programa                        112.000000 s  contra 112.000 s declarados  (56 segmentos, 0.000000 s de diferencia)
+VERDE  CALDRIX, on-board                  64.000000 s  contra 64.000 s declarados  (32 segmentos, 0.000000 s de diferencia)
+
+ROJO   CONTROL sin el último segmento     110.000000 s  contra 112.000 s declarados  (55 segmentos, -2.000000 s de diferencia)
+ROJO   CONTROL con un #EXTINF estirado    112.500000 s  contra 112.000 s declarados  (56 segmentos, 0.500000 s de diferencia)
+
+PASA, y se vieron los dos controles en rojo.
+
+contenido listo en content/

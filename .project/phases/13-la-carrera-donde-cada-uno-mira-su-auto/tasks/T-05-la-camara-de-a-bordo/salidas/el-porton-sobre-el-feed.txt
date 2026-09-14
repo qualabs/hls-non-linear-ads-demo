@@ -1,0 +1,8 @@
+# EL PORTON SOBRE EL ENTREGABLE, no sobre sus insumos. Los ocho clips ya pasaron uno
+# por uno (el-porton-de-audio.txt); esto pregunta lo mismo sobre los 64 s pegados y
+# emparejados, que es el archivo que se va a empaquetar.
+
+--- caldrix.mp4, los 64 s enteros ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Racing car engine, gear shifts, tire squeal

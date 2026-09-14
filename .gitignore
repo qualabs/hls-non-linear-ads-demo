@@ -24,3 +24,11 @@ dist/
 # alguien pregunte por qué la cadena se siembra así, la evidencia tiene que estar al lado
 # del código que la usa.
 research/
+
+# El bytecode que CPython escribe al lado de cualquier script que se importe. No es
+# del repositorio: se regenera solo y depende de la versión del intérprete que lo
+# escribió. Va declarado acá y no como `sys.dont_write_bytecode` adentro de cada
+# script, porque una línea que hay que acordarse de poner en el próximo script no es
+# un arreglo: ya apareció en dos tasks distintas de la fase 13.
+__pycache__/
+*.pyc

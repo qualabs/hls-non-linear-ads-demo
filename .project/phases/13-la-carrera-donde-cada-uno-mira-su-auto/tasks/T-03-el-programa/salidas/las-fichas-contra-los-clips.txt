@@ -1,0 +1,28 @@
+la ficha regenerada contra el color que Veo dibuja
+
+  1-caldrix    ficha #D1BD31  hue= 52deg  (42.9% del recorte)   Veo #CCB21F   dE00 =   3.2   CONTROL esquina: (ninguno)
+  2-marvok     ficha #5F28A1  hue=267deg  (40.5% del recorte)   Veo #381A6A   dE00 =  10.4   CONTROL esquina: (ninguno)
+  3-noctev     ficha #21AAC6  hue=190deg  (38.5% del recorte)   Veo #24ACC8   dE00 =   0.6   CONTROL esquina: (ninguno)
+  4-runtak     ficha #652B4C  hue=326deg  (17.5% del recorte)   Veo #661955   dE00 =   6.1   CONTROL esquina: (ninguno)
+  5-pentav     ficha #337E29  hue=113deg  (36.5% del recorte)   Veo #2D6E24   dE00 =   5.6   CONTROL esquina: (ninguno)
+  6-quentra    ficha #866C44  hue= 36deg  (16.3% del recorte)   Veo #876E46   dE00 =   0.8   CONTROL esquina: (ninguno)
+
+mutuas sobre las fichas regeneradas:
+  1-caldrix    vs 2-marvok       82.3
+  1-caldrix    vs 3-noctev       46.4
+  1-caldrix    vs 4-runtak       71.0
+  1-caldrix    vs 5-pentav       33.7
+  1-caldrix    vs 6-quentra      29.5
+  2-marvok     vs 3-noctev       47.2
+  2-marvok     vs 4-runtak       19.5
+  2-marvok     vs 5-pentav       54.3
+  2-marvok     vs 6-quentra      49.3
+  3-noctev     vs 4-runtak       61.7
+  3-noctev     vs 5-pentav       40.7
+  3-noctev     vs 6-quentra      39.3
+  4-runtak     vs 5-pentav       61.0
+  4-runtak     vs 6-quentra      36.5
+  5-pentav     vs 6-quentra      26.3
+  --> MIN MUTUA = 19.5  ('2-marvok', '4-runtak')
+
+  referencia: sobre los clips del programa la minima mutua es 13,7 (MARVOK/RUNTAK)

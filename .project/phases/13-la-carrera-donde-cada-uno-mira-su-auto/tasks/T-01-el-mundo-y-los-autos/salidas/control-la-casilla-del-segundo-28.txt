@@ -1,0 +1,28 @@
+$ node verificar-plan.mjs race.json
+programa 112s = 14 casillas de 8s a 24 fps
+ventana 28..92s = 8 clips por feed, 6 feeds
+el segundo 28 cae en la casilla 4 (24..32s); una linea de 4s arranca en 24s
+
+VERDE: el plan y race.json dicen lo mismo, y el anuncio entra entero en su casilla.
+exit=0
+
+=== CONTROL 1: anuncioLargoMax 4 -> 5 (la linea se derrama fuera de su casilla) ===
+$ node verificar-plan.mjs mut1.json
+programa 112s = 14 casillas de 8s a 24 fps
+ventana 28..92s = 8 clips por feed, 6 feeds
+el segundo 28 cae en la casilla 4 (24..32s); una linea de 5s arranca en 23s
+
+ROJO:
+  - una linea de 5s arranca en 23s y la casilla 4 arranca en 24s: el anuncio se derrama
+exit=1
+
+=== CONTROL 2: ofertaEn 28 -> 40 (cae en una casilla que el plan no marca) ===
+$ node verificar-plan.mjs mut2.json
+programa 112s = 14 casillas de 8s a 24 fps
+ventana 40..104s = 8 clips por feed, 6 feeds
+el segundo 40 cae en la casilla 6 (40..48s); una linea de 4s arranca en 36s
+
+ROJO:
+  - ofertaEn=40 cae en la casilla 6, que el plan no marca como que admite el anuncio
+  - una linea de 4s arranca en 36s y la casilla 6 arranca en 40s: el anuncio se derrama
+exit=1

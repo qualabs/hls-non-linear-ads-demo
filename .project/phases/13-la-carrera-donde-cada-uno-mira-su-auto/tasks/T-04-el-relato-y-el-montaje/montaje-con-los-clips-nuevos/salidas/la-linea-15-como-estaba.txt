@@ -1,0 +1,18 @@
+LA LINEA 15 COMO ESTABA, MEDIDA CONTRA EL MISMO CORTE
+
+Es el rojo que no hay que preparar: la pista de voces del montaje anterior, rendida
+por armar-relato.mjs antes de tocar el guion, contra el corte del clip 12 que
+verificar-linea-15.mjs mide en el segundo 92,375 del programa.
+
+$ node armar-relato.mjs --salida relato-antes.wav        # guion y tiempos de antes
+$ ffmpeg -ss 88.3 -to 96.0 -i relato-antes.wav -af silencedetect=n=-50dB:d=0.10 -f null -
+  [Parsed_silencedetect_0 @ 0x7efc28002ec0] silence_start: 4.48075
+  [Parsed_silencedetect_0 @ 0x7efc28002ec0] silence_end: 4.920958 | silence_duration: 0.440208
+  [Parsed_silencedetect_0 @ 0x7efc28002ec0] silence_start: 6.950917
+  [Parsed_silencedetect_0 @ 0x7efc28002ec0] silence_end: 7.7 | silence_duration: 0.749083
+
+  el primer silence_start es relativo al -ss: 88,300 + 4,48075 = 92,781 s
+
+  fin hablado de la linea 15 vieja   92,781 s
+  corte del clip 12                  92,375 s
+  ROJO: seguia hablando de la rueda 0,406 s despues de que ese plano salio de cuadro.

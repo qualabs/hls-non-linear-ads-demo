@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pick your car — Non-linear Ads in HLS</title>
+<link rel="stylesheet" href="./css/page.css">
+</head>
+<body>
+
+<!--
+  THE RACE WHERE EVERYBODY WATCHES THEIR OWN CAR.
+
+  A 112 second programme that never stops, cutting between six cars. At second 28 the
+  commentators say the on-board cameras are open, and an EXT-X-DATERANGE of class
+  `com.qualabs.hls.multiViewInterstitial` opens a 64 second window announcing a catalogue.
+  Whoever is watching raises the camera of the driver they care about, enlarges it, hears
+  that car, and leaves. The programme never stopped.
+
+  THIS PAGE IS THE MINIMUM THE DEMO NEEDS TO RUN, and it says so instead of pretending
+  otherwise: the container, the video, and the six lines an integrator writes. The opening,
+  the two scroll sections that draw themselves off the contract, the credits and the brand
+  are the next task; what this one proves is that the content produced by this phase is read
+  by the software, which is the material the second gate is decided on.
+
+  #player is the container the page hands the library, and the only thing it hands over
+  besides the hls.js instance. It carries `isolation: isolate` in the stylesheet on purpose:
+  the chrome the library draws sits at z-index 2147483000, and without a stacking context of
+  its own it would draw over anything this page puts on top of the picture.
+-->
+
+<section class="stage" aria-label="The run">
+  <div class="frame">
+    <div class="player" id="player">
+      <video class="video" id="video" playsinline></video>
+    </div>
+  </div>
+  <p class="state" id="state"></p>
+  <p class="hud" id="hud"></p>
+</section>
+
+<script src="/vendor/hls.min.js"></script>
+<script src="/dist/qualabs-concurrent-hls.js"></script>
+<script type="module" src="./js/app.js"></script>
+
+</body>
+</html>

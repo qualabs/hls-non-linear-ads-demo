@@ -1,0 +1,20 @@
+=== npm test ===
+salida: 0
+ℹ tests 184
+ℹ suites 0
+ℹ pass 184
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1228.675159
+
+=== npm run check ===
+salida: 0
+   GREEN: 3 occurrence(s), all of them on the accepted list.
+   GREEN: zero hits.
+verificar-cortes: both seams hold.
+
+=== git status --short : ni un archivo trackeado modificado ===
+?? .project/phases/13-la-carrera-donde-cada-uno-mira-su-auto/
+?? demo/race-multiview/

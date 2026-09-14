@@ -1,0 +1,6 @@
+EXT-X-PROGRAM-DATE-TIME del primer segmento : 2026-09-14T16:02:55.531-0300
+START-DATE del EXT-X-DATERANGE             : 2026-09-14T16:03:23.531-0300
+la ventana abre en el segundo              : 28.000 s de reproduccion
+race.json ofertaEn                         : 28 s
+fin hablado del anuncio (verificar-anuncio): 27.64 s
+el tag cae 0.360 s DESPUES de que la voz se callo

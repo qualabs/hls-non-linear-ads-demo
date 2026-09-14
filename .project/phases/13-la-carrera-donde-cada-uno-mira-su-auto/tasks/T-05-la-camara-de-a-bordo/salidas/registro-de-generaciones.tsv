@@ -1,0 +1,16 @@
+# una linea por GENERACION LANZADA, que es lo que se paga.
+# fecha	clip	operacion	US$	estado
+2026-09-14T15:06:03	1	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/59cd1a6a-ebb5-4825-8de0-c98848dd169c	0.80	lanzada
+2026-09-14T15:06:05	2	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/700b7344-2d3b-4d00-a753-b29a514de603	0.80	lanzada
+2026-09-14T15:08:53	2	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/4e7e5573-ba87-47a1-b3e0-7abc3877e636	0.80	lanzada
+2026-09-14T15:12:05	3	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/9162d0af-eef7-4894-90cc-78eb5178c3cf	0.80	lanzada
+2026-09-14T15:12:07	4	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/ca35b972-5206-4c60-a1bc-02178195170c	0.80	lanzada
+2026-09-14T15:12:08	5	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/53aea7a9-b1b7-418a-844d-41f680808557	0.80	lanzada
+2026-09-14T15:12:09	6	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/c4976f0f-9b8a-4932-ba6e-998242d3c31f	0.80	lanzada
+2026-09-14T15:12:11	7	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/66209345-fbc7-403c-b8ca-8bdeaa407291	0.80	lanzada
+2026-09-14T15:12:12	8	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/d4627149-fae5-41ed-9762-93c58b88380d	0.80	lanzada
+2026-09-14T15:15:05	3	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/c9a6883b-40d7-4442-b37a-0693fd306182	0.80	lanzada
+2026-09-14T15:15:06	7	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/7ce7d321-e037-4218-8bd5-129962fcd219	0.80	lanzada
+2026-09-14T15:20:37	3	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/02a28027-155f-45c9-a2a4-05e60c8ace42	0.80	lanzada
+2026-09-14T15:20:38	7	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/170ad7dd-3c67-4c13-a166-0862fd502ab3	0.80	lanzada
+2026-09-14T15:43:17	1	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/dc07baf0-4db8-4fb6-b40e-f991b36e48f2	0.80	lanzada

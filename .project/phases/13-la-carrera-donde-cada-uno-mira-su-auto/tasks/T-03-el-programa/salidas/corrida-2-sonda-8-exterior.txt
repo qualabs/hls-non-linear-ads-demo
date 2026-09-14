@@ -1,0 +1,9 @@
+== 1 generacion(es), veo-3.1-fast-generate-001, 8s, 720p, con audio -- US$0.80 ==
+
+  casilla  8 (08-caldrix-cerrado)  op 0ff76425-b7d9-492e-a8d7-4da741f1f7d0
+
+  ... esperando 1 generacion(es)
+     siguen 1 ...
+     siguen 1 ...
+     siguen 1 ...
+  casilla  8 LISTA  08-caldrix-cerrado.mp4  (8.000000s, 4.4 MB)

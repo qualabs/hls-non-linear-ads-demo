@@ -1,0 +1,58 @@
+/* page.css -- the minimum this demo needs to be watched, and nothing else.
+ *
+ * The page of this demo is the next task; what is here is the box the composition lives in
+ * and the two lines under it. Every rule below is one of those two things, so that what the
+ * next task replaces is a page and not a pile of overrides. No colours are introduced: the
+ * three used are the ones the other demos already use for the ground, the rule and the
+ * secondary text. */
+
+:root {
+  --q-ink: #0b0f14;
+  --q-teal-200: #9fd8dd;
+  --q-slate-400: #7a8794;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--q-ink);
+  color: #e8edf2;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.stage {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(18px, 4vw, 46px) clamp(14px, 3vw, 28px) clamp(40px, 8vw, 96px);
+}
+
+.frame { position: relative; }
+
+/* The box the composition lives in, and the only thing this page hands the library besides
+ * the instance.
+ *
+ * `isolation: isolate` is not decoration: the chrome the library draws sits at
+ * z-index 2147483000, and without a stacking context of its own that number would escape
+ * the container and draw over anything on the page. */
+.player {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.player .video { width: 100%; height: 100%; display: block; }
+
+/* THE STATE LINE. Monospace, because what it reports are numbers that change several times
+ * a second and proportional type makes them jitter. */
+.state {
+  margin: 14px 0 0;
+  font-family: ui-monospace, 'JetBrains Mono', monospace;
+  font-size: clamp(11px, 1.15vw, 13px);
+  line-height: 1.6;
+  color: var(--q-teal-200);
+  word-break: break-word;
+}
+
+.hud { margin: 6px 0 0; font-size: 12px; color: var(--q-slate-400); }

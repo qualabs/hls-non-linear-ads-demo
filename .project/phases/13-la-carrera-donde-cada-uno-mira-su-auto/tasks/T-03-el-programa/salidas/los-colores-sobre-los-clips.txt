@@ -1,0 +1,126 @@
+==============================================================================
+1. CADA CUADRO, CADA RECORTE
+==============================================================================
+
+--- 02-caldrix-seguimiento  t=4.0s  (1280x720) ---
+  CALDRIX          filtrado #D6BA50   85.7%   cromatico #D7BC54   94.0%  hue= 48deg  dE00 vs ficha=  4.3
+  CTRL-asfalto     filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+
+--- 03-caldrix-marvok-rebufo  t=4.0s  (1280x720) ---
+  CALDRIX          filtrado #ADAE10   53.7%   cromatico #ABAD12   60.7%  hue= 61deg  dE00 vs ficha=  7.2
+  MARVOK           filtrado #3B1F5B   37.0%   cromatico #412961   54.5%  hue=266deg  dE00 vs ficha= 12.3
+  CTRL-asfalto     filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+
+--- 05-noctev-chicana  t=4.0s  (1280x720) ---
+  NOCTEV           filtrado #16BEE3   79.7%   cromatico #18BDE2   87.0%  hue=191deg  dE00 vs ficha= 19.5
+  CTRL-asfalto     filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+
+--- 06-runtak-pentav-frenada  t=4.0s  (1280x720) ---
+  RUNTAK           filtrado #5D1D53   15.6%   cromatico #4B2244   29.4%  hue=310deg  dE00 vs ficha=  6.5
+  PENTAV           filtrado #1E6E16   37.5%   cromatico #367636   61.2%  hue=120deg  dE00 vs ficha=  5.2
+  CTRL-asfalto     filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+
+--- 07-quentra-sobrepaso  t=4.0s  (1280x720) ---
+  QUENTRA          filtrado #BA9A63   72.2%   cromatico #B69A67   90.0%  hue= 39deg  dE00 vs ficha= 35.4
+  PENTAV           filtrado #4A996D   63.9%   cromatico #4B976E   81.2%  hue=148deg  dE00 vs ficha= 13.1
+  CTRL-asfalto     filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+
+--- 08-caldrix-cerrado  t=4.0s  (1280x720) ---
+  CALDRIX          filtrado #C1A70E   66.6%   cromatico #C2A80F   73.6%  hue= 51deg  dE00 vs ficha=  5.6
+  CTRL-asfalto     filtrado (ninguno)   0.0%   cromatico #454C50   10.7%  hue=202deg
+
+--- 09-marvok-noctev-curvon  t=4.0s  (1280x720) ---
+  MARVOK           filtrado #361679   21.0%   cromatico #9D93C4   58.9%  hue=252deg  dE00 vs ficha= 33.5
+  NOCTEV           filtrado #3299AD   31.1%   cromatico #8FCBD9   72.7%  hue=191deg  dE00 vs ficha= 18.3
+  CTRL-asfalto     filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+
+--- 10-pentav-quentra-eses  t=4.0s  (1280x720) ---
+  PENTAV           filtrado #2D6C24   25.4%   cromatico #73A570   63.7%  hue=117deg  dE00 vs ficha= 15.5
+  QUENTRA          filtrado #54432A   19.0%   cromatico #898670   57.1%  hue= 53deg  dE00 vs ficha= 25.4
+  CTRL-asfalto     filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+
+--- 12-runtak-rueda-piano  t=2.0s  (1280x720) ---
+  RUNTAK           filtrado #701557   70.8%   cromatico #772060   82.3%  hue=316deg  dE00 vs ficha=  9.7
+  CTRL-asfalto     filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+
+--- 13-caldrix-marvok-recta  t=4.0s  (1280x720) ---
+  CALDRIX          filtrado #D6B52E   40.3%   cromatico #EBDB89   69.7%  hue= 50deg  dE00 vs ficha= 10.4
+  MARVOK           filtrado #361E52    4.3%   cromatico #A693C2   22.6%  hue=264deg  dE00 vs ficha= 34.2
+  CTRL-asfalto     filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+
+==============================================================================
+2. EL COLOR DE CADA AUTO -- mediana de sus medidas con >= 15% del recorte
+==============================================================================
+
+  CALDRIX   #CCB21F  hue= 51deg   n=4 medidas   dispersion entre casillas (max dE00) = 9.9   dE00 vs su ficha = 3.3
+      02-caldrix-seguimiento     t=4.0s  #D6BA50  (85.7%)  dE00 vs representante=  4.5
+      03-caldrix-marvok-rebufo   t=4.0s  #ADAE10  (53.7%)  dE00 vs representante=  7.5
+      08-caldrix-cerrado         t=4.0s  #C1A70E  (66.6%)  dE00 vs representante=  3.1
+      13-caldrix-marvok-recta    t=4.0s  #D6B52E  (40.3%)  dE00 vs representante=  2.4
+
+  MARVOK    #381A6A  hue=262deg   n=2 medidas   dispersion entre casillas (max dE00) = 7.2   dE00 vs su ficha = 11.3
+      03-caldrix-marvok-rebufo   t=4.0s  #3B1F5B  (37.0%)  dE00 vs representante=  4.1
+      09-marvok-noctev-curvon    t=4.0s  #361679  (21.0%)  dE00 vs representante=  3.1
+
+  NOCTEV    #24ACC8  hue=190deg   n=2 medidas   dispersion entre casillas (max dE00) = 11.5   dE00 vs su ficha = 17.1
+      05-noctev-chicana          t=4.0s  #16BEE3  (79.7%)  dE00 vs representante=  5.4
+      09-marvok-noctev-curvon    t=4.0s  #3299AD  (31.1%)  dE00 vs representante=  6.1
+
+  RUNTAK    #661955  hue=313deg   n=2 medidas   dispersion entre casillas (max dE00) = 4.2   dE00 vs su ficha = 8.2
+      06-runtak-pentav-frenada   t=4.0s  #5D1D53  (15.6%)  dE00 vs representante=  2.1
+      12-runtak-rueda-piano      t=2.0s  #701557  (70.8%)  dE00 vs representante=  2.1
+
+  PENTAV    #2D6E24  hue=113deg   n=3 medidas   dispersion entre casillas (max dE00) = 19.6   dE00 vs su ficha = 7.1
+      06-runtak-pentav-frenada   t=4.0s  #1E6E16  (37.5%)  dE00 vs representante=  2.2
+      07-quentra-sobrepaso       t=4.0s  #4A996D  (63.9%)  dE00 vs representante= 18.4
+      10-pentav-quentra-eses     t=4.0s  #2D6C24  (25.4%)  dE00 vs representante=  0.7
+
+  QUENTRA   #876E46  hue= 37deg   n=2 medidas   dispersion entre casillas (max dE00) = 35.8   dE00 vs su ficha = 16.7
+      07-quentra-sobrepaso       t=4.0s  #BA9A63  (72.2%)  dE00 vs representante= 16.4
+      10-pentav-quentra-eses     t=4.0s  #54432A  (19.0%)  dE00 vs representante= 16.4
+
+==============================================================================
+3. LA SEPARACION ENTRE LOS SEIS -- lo que decide si el selector significa algo
+==============================================================================
+
+  los clips del programa (Veo)
+    CALDRIX   #CCB21F  vs  MARVOK    #381A6A   dE00=  81.4
+    CALDRIX   #CCB21F  vs  NOCTEV    #24ACC8   dE00=  46.3
+    CALDRIX   #CCB21F  vs  PENTAV    #2D6E24   dE00=  37.6
+    CALDRIX   #CCB21F  vs  QUENTRA   #876E46   dE00=  26.6
+    CALDRIX   #CCB21F  vs  RUNTAK    #661955   dE00=  75.6
+    MARVOK    #381A6A  vs  NOCTEV    #24ACC8   dE00=  53.4
+    MARVOK    #381A6A  vs  PENTAV    #2D6E24   dE00=  51.1
+    MARVOK    #381A6A  vs  QUENTRA   #876E46   dE00=  49.2
+    MARVOK    #381A6A  vs  RUNTAK    #661955   dE00=  13.7
+    NOCTEV    #24ACC8  vs  PENTAV    #2D6E24   dE00=  42.8
+    NOCTEV    #24ACC8  vs  QUENTRA   #876E46   dE00=  39.1
+    NOCTEV    #24ACC8  vs  RUNTAK    #661955   dE00=  62.1
+    PENTAV    #2D6E24  vs  QUENTRA   #876E46   dE00=  25.5
+    PENTAV    #2D6E24  vs  RUNTAK    #661955   dE00=  65.7
+    QUENTRA   #876E46  vs  RUNTAK    #661955   dE00=  43.1
+    --> MIN MUTUA = 13.7   ('MARVOK', 'RUNTAK')
+
+  las fichas de la T-01 (Imagen) -- REFERENCIA, medida por otra task sobre otras imagenes
+    CALDRIX   #CEBC35  vs  MARVOK    #632EA3   dE00=  80.4
+    CALDRIX   #CEBC35  vs  NOCTEV    #09B3A1   dE00=  35.4
+    CALDRIX   #CEBC35  vs  PENTAV    #38822D   dE00=  31.8
+    CALDRIX   #CEBC35  vs  QUENTRA   #55432E   dE00=  49.2
+    CALDRIX   #CEBC35  vs  RUNTAK    #5B223C   dE00=  71.6
+    MARVOK    #632EA3  vs  NOCTEV    #09B3A1   dE00=  54.1
+    MARVOK    #632EA3  vs  PENTAV    #38822D   dE00=  54.1
+    MARVOK    #632EA3  vs  QUENTRA   #55432E   dE00=  39.6
+    MARVOK    #632EA3  vs  RUNTAK    #5B223C   dE00=  22.3
+    NOCTEV    #09B3A1  vs  PENTAV    #38822D   dE00=  25.4
+    NOCTEV    #09B3A1  vs  QUENTRA   #55432E   dE00=  46.8
+    NOCTEV    #09B3A1  vs  RUNTAK    #5B223C   dE00=  67.1
+    PENTAV    #38822D  vs  QUENTRA   #55432E   dE00=  31.2
+    PENTAV    #38822D  vs  RUNTAK    #5B223C   dE00=  60.3
+    QUENTRA   #55432E  vs  RUNTAK    #5B223C   dE00=  25.2
+    --> MIN MUTUA = 22.3   ('MARVOK', 'RUNTAK')
+
+
+==============================================================================
+4. LA MISMA MEDICION SOBRE LAS FICHAS, PARA QUE EL RETRATO NO CONTRADIGA AL CLIP
+==============================================================================
+(ver las-fichas-contra-los-clips.txt)

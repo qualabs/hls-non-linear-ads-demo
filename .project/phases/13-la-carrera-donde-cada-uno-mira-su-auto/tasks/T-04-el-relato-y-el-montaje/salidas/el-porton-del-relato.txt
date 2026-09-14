@@ -1,0 +1,23 @@
+### generar-relato.sh -- las diecinueve lineas, con el porton sobre cada una
+
+01 R  intento 1   5.34s   -3.00 dB  bien 11 laps gone here on the coast and this is still one race.
+02 C  intento 1   5.24s   -6.10 dB  bien Well, Caldrix in front and he has not put a wheel wrong all afternoon.
+03 R  intento 1   5.88s   -2.50 dB  bien Marvok has been in that mirror for three laps now, looking for a way through.
+04 R  intento 1   3.58s   -3.20 dB  bien The cameras on all six cars are open.
+05 C  intento 1   2.87s   -3.60 dB  bien Six of them, and you choose which one you watch.
+06 R  intento 1   6.17s   -1.80 dB  bien Noctave third and he is using every inch of the curbs through the chicane.
+07 R  intento 1   6.21s   -3.10 dB  bien Runtack and Pentath side by side into the breaking zone and neither of them lifts.
+08 R  intento 1   4.65s   -4.20 dB  bien And here comes Quintra, round the outside of Pentav.
+09 C  intento 1   2.12s   -5.80 dB  bien Fifth place, and it sticks.
+10 R  intento 1   4.85s   -3.70 dB  bien And back to the leader, Coldrix, still with a second in hand.
+11 R  intento 1   5.16s   -1.90 dB  bien Mavok and Noktef now nose to tail through the fast left.
+12 C  intento 1   3.65s   -5.60 dB  bien And Noctev is close enough to try something.
+13 R  intento 1   5.91s   -1.00 dB  bien Down to the sea section, Pentava and Quentra still together.
+14 C  intento 1   4.56s   -5.00 dB  bien That is three separate fights and all of them are alive.
+15 R  intento 1   4.64s   -3.90 dB  bien Look at run tack over the curb, the rear wheels taking all of it.
+16 C  intento 1   2.15s   -0.90 dB  bien And the car keeps taking it.
+17 R  intento 1   7.36s  MAL  repitio "marvok is right on" | dijo 18 palabras y se le pidieron 9
+     Marvok is right on the back of Caldrix again. Marvok is right on the back of Caldrix again.
+17 R  intento 2   3.86s   -2.20 dB  bien Mavok is right on the back of Caldrix again.
+18 C  intento 1   1.30s   -3.10 dB  bien Gap has gone.
+19 R  intento 1   4.14s   -4.20 dB  bien And they are on their feet as this field goes by.

@@ -1,0 +1,31 @@
+# una linea por GENERACION LANZADA, que es lo que se paga.
+# fecha	casilla	operacion	US$	estado
+2026-09-12T23:04:54	4	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/9d87a427-9b4c-4e63-9944-071eb2c47bd1	0.80	lanzada
+2026-09-12T23:04:56	8	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/49ed4264-0038-44cc-a228-b16f7be98da7	0.80	lanzada
+2026-09-12T23:09:18	8	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/0ff76425-b7d9-492e-a8d7-4da741f1f7d0	0.80	lanzada
+2026-09-12T23:11:40	1	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/d7238c7f-00bb-476f-b3bc-841d60539b73	0.80	lanzada
+2026-09-12T23:15:54	2	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/d4bd4865-6931-4974-9c05-bbaf62fd3e32	0.80	lanzada
+2026-09-12T23:15:56	3	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/2cf77400-edf7-4f86-99ab-40b614f3bbc5	0.80	lanzada
+2026-09-12T23:15:57	4	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/a69c3901-e4b9-48c2-be45-3742bf7dcb15	0.80	lanzada
+2026-09-12T23:15:59	5	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/35b78d22-b48f-4174-9ef7-6da6bae155b1	0.80	lanzada
+2026-09-12T23:16:00	6	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/46ea32fb-1103-4409-b5b8-e9066b7d75e8	0.80	lanzada
+2026-09-12T23:16:01	7	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/701bc8b3-f93d-496f-b36d-c2cf8a1181f5	0.80	lanzada
+2026-09-12T23:16:02	8	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/a8e3e28a-9dea-45a9-a721-f5d98bd8b8aa	0.80	lanzada
+2026-09-12T23:16:03	9	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/754bc69a-d765-474e-a3cd-66fc7b4814e1	0.80	lanzada
+2026-09-12T23:16:05	10	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/61195ce7-88a8-4c9c-bc0f-9e20779c48d7	0.80	lanzada
+2026-09-12T23:16:06	11	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/ad9b7365-4c0d-4c7a-acd4-177b711d1557	0.80	lanzada
+2026-09-12T23:17:55	12	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/632eecb7-44f5-4bda-9d4a-5e82b3f21cc3	0.80	lanzada
+2026-09-12T23:17:56	13	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/83788cf3-6be1-4a55-945b-68cf7513d2ce	0.80	lanzada
+2026-09-12T23:17:57	14	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/3cd07c57-d939-400c-8dcc-c62e8b989612	0.80	lanzada
+2026-09-14T12:36:22	1	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/41bd48b2-3793-4bce-a0ee-b1d667484d36	0.80	lanzada
+2026-09-14T12:36:24	5	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/c48b9d47-80e1-41fa-9ddb-2336c53113e5	0.80	lanzada
+2026-09-14T12:36:25	6	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/23f68a7c-cbff-422c-b50e-d1721bb6c006	0.80	lanzada
+2026-09-14T12:36:26	10	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/54c817ab-714b-4e40-80a5-dd703e7dad4a	0.80	lanzada
+2026-09-14T12:36:28	12	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/870045b3-ac9e-4cb8-a973-6099fcf79cae	0.80	lanzada
+2026-09-14T13:16:33	1	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/a7c811e2-2472-4c6b-9222-55f30980f763	0.80	lanzada
+2026-09-14T13:16:34	5	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/33acbe75-14db-441c-b98a-7f495b6d71e8	0.80	lanzada
+2026-09-14T13:16:35	10	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/9ad4157a-2db9-4ae6-a6da-44982abe3c78	0.80	lanzada
+2026-09-14T13:16:37	12	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/3cbe9b92-10f3-42ec-bded-734d4dfc669a	0.80	lanzada
+2026-09-14T13:25:29	1	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/e6bd13ae-5ec3-4255-ba33-fa216474409b	0.80	lanzada
+2026-09-14T13:25:31	10	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/fb03ac28-96bc-426c-9b67-d5409698f5ae	0.80	lanzada
+2026-09-14T14:04:30	10	projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/c1f4278f-db32-41e8-bc56-6b1834866e2a	0.80	lanzada
