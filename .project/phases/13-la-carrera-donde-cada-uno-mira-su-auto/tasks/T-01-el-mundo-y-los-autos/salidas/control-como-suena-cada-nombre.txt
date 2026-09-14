@@ -1,0 +1,150 @@
+# CONTROL Y EVIDENCIA — cómo suena cada nombre en la voz que lo va a decir
+
+Instrumento: se sintetiza `And there goes <nombre>, <nombre> holding the line into turn four.`
+con `gemini-2.5-flash-tts`, `en-GB`, voz **Charon** (la del relato, la misma de
+`demo/hydration-break/audio/`), y se transcribe con `gemini-2.5-flash` pidiéndole cuatro
+líneas: transcripción textual, cómo se oye el nombre, IPA, y si lo que oyó coincide con una
+palabra, un lugar, una marca o una persona que existen.
+
+**El control, sin el cual esto no es un chequeo:** dos nombres plantados. `Mercedes`, que
+tiene que volver marcado como palabra real, y `Norvik`, que es el caso documentado en
+`demo/hydration-break/audio/README.md` donde esta voz lo convertía en *Norwich*.
+
+## 01
+TRANSCRIPT: And there goes Corvex. Corvex holding the line into turn four.
+HEARD-AS: CORVEX
+IPA: /ˈkɔːrvɛks/
+REAL-WORD: CORVEX
+
+## 02
+TRANSCRIPT: And there goes Altiva. Altiva holding the line into turn four.
+HEARD-AS: Alteeva
+IPA: /ælˈtiːvə/
+REAL-WORD: Altiva
+
+## 03
+TRANSCRIPT: And there goes Selvac. Selvac holding the line into turn four.
+HEARD-AS: SELL-vack
+IPA: /ˈsɛlvæk/
+REAL-WORD: Selvac
+
+## 04
+TRANSCRIPT: And there goes Torvin, Torvin holding the line into turn four.
+HEARD-AS: TOR-vin
+IPA: /tɔːrvɪn/
+REAL-WORD: Torvin
+
+## 05
+TRANSCRIPT: Caldrix
+HEARD-AS: KAL-drix
+IPA: /kældrɪks/
+REAL-WORD: NONE
+
+## 06
+TRANSCRIPT: And there goes Noktev. Noktev holding the line into turn four.
+HEARD-AS: Noktev
+IPA: /nɒktɛv/
+REAL-WORD: NONE
+
+## 07
+TRANSCRIPT: And there goes Helva, Helva holding the line into turn four.
+HEARD-AS: Helva
+IPA: /ˈhɛlvə/
+REAL-WORD: Helva
+
+## 08
+TRANSCRIPT: And there goes Xanther. Xanther holding the line into turn four.
+HEARD-AS: zan-ther
+IPA: /zænðər/
+REAL-WORD: NONE
+
+## 09
+TRANSCRIPT: And there goes Mirren. Mirren holding the line into turn four.
+HEARD-AS: Meer-in
+IPA: /ˈmɪrən/
+REAL-WORD: Mirren
+
+## 21
+TRANSCRIPT: And there goes Delvoc. Delvoc holding the line into turn four.
+HEARD-AS: Delvock
+IPA: ˈdɛlvɒk
+REAL-WORD: Delvoc
+
+## 22
+TRANSCRIPT: And there goes Peltra. Peltra holding the line into turn four.
+HEARD-AS: PEL-truh
+IPA: /pɛltrə/
+REAL-WORD: Peltra
+
+## 23
+TRANSCRIPT: And there goes Brentac, Brentac holding the line into turn four.
+HEARD-AS: Brent-ack
+IPA: /brɛnˈtæk/
+REAL-WORD: NONE
+
+## 24
+TRANSCRIPT: And there goes Eltrix. Eltrix holding the line into turn four.
+HEARD-AS: EL-triks
+IPA: /ɛl.trɪks/
+REAL-WORD: NONE
+
+## 25
+TRANSCRIPT: Pentav
+HEARD-AS: Pen-tav
+IPA: /pɛnˈtæv/
+REAL-WORD: NONE
+
+## 26
+TRANSCRIPT: And there goes Quentra. Quentra holding the line into turn four.
+HEARD-AS: Kwen-tra
+IPA: /kwɛntrə/
+REAL-WORD: NONE
+
+## 27
+TRANSCRIPT: And there goes Mervek. Mervek holding the line into turn four.
+HEARD-AS: MER-vek
+IPA: ˈmɜːvɛk
+REAL-WORD: Mervek
+
+## 31
+TRANSCRIPT: And there goes Marvok. Marvok holding the line into turn four.
+HEARD-AS: Marvok
+IPA: /mɑːrvɒk/
+REAL-WORD: NONE
+
+## 32
+TRANSCRIPT: Sorvan
+HEARD-AS: Soar-van
+IPA: /sɔːrvən/
+REAL-WORD: Sorvan
+
+## 33
+TRANSCRIPT: And there goes Voska. Voska holding the line into turn four.
+HEARD-AS: Voss-kuh
+IPA: /vɒskə/
+REAL-WORD: Voska
+
+## 34
+TRANSCRIPT: And there goes Maltev. Maltev holding the line into turn four.
+HEARD-AS: Maltev
+IPA: /ˈmɑːltɛv/
+REAL-WORD: NONE
+
+## 35
+TRANSCRIPT: And there goes Runtack. Runtack holding the line into turn four.
+HEARD-AS: Runtack
+IPA: /ˈrʌn.tæk/
+REAL-WORD: NONE
+
+## C1
+TRANSCRIPT: And there goes Norvic. Norvic holding the line into turn four.
+HEARD-AS: Norvic
+IPA: /ˈnɔːrvɪk/
+REAL-WORD: Norvic
+
+## C2
+TRANSCRIPT: And there goes Mercedes. Mercedes holding the line into turn four.
+HEARD-AS: Mer-say-deez
+IPA: /mərˈseɪdiːs/
+REAL-WORD: Mercedes
+

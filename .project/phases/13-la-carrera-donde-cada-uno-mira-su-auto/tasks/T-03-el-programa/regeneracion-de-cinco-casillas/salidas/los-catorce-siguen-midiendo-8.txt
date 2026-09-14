@@ -1,0 +1,19 @@
+# Los catorce clips despues de regenerar cinco. El programa son 14 x 192 cuadros a 24 fps
+# = 112,000 s exactos; si un clip no da 192, los 112 no cierran y hay que recortar.
+
+  01-los-seis-trackside.mp4      8.000000 s  192 cuadros  24/1 fps
+  02-caldrix-seguimiento.mp4     8.000000 s  192 cuadros  24/1 fps
+  03-caldrix-marvok-rebufo.mp4   8.000000 s  192 cuadros  24/1 fps
+  04-los-seis-aereo.mp4          8.000000 s  192 cuadros  24/1 fps
+  05-noctev-chicana.mp4          8.000000 s  192 cuadros  24/1 fps
+  06-runtak-pentav-frenada.mp4   8.000000 s  192 cuadros  24/1 fps
+  07-quentra-sobrepaso.mp4       8.000000 s  192 cuadros  24/1 fps
+  08-caldrix-cerrado.mp4         8.000000 s  192 cuadros  24/1 fps
+  09-marvok-noctev-curvon.mp4    8.000000 s  192 cuadros  24/1 fps
+  10-pentav-quentra-eses.mp4     8.000000 s  192 cuadros  24/1 fps
+  11-los-seis-aereo-costa.mp4    8.000000 s  192 cuadros  24/1 fps
+  12-runtak-rueda-piano.mp4      8.000000 s  192 cuadros  24/1 fps
+  13-caldrix-marvok-recta.mp4    8.000000 s  192 cuadros  24/1 fps
+  14-los-seis-tribuna.mp4        8.000000 s  192 cuadros  24/1 fps
+
+  SUMA = 112.000000 s

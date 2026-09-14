@@ -1,0 +1,9 @@
+[
+ {"etiqueta":"A asfalto t=4.0","cuadro":"@T@/cuadros/a-casilla-04-aereo-los-seis-t4.0.png","rect":[333,600,134,67]},
+ {"etiqueta":"B asfalto t=7.5","cuadro":"@T@/cuadros/b-casilla-12-rueda-runtak-t7.5.png","rect":[950,520,250,150]},
+ {"etiqueta":"C asfalto t=4.0","cuadro":"@T@/cuadros/c-casilla-04-correccion-aereo-y-lista-t4.0.png","rect":[465,617,233,81]},
+ {"etiqueta":"A cielo t=7.5","cuadro":"@T@/cuadros/a-casilla-04-aereo-los-seis-t7.5.png","rect":[200,40,500,80]},
+ {"etiqueta":"B cielo t=7.5","cuadro":"@T@/cuadros/b-casilla-12-rueda-runtak-t7.5.png","rect":[200,30,500,60]},
+ {"etiqueta":"C cielo t=4.0","cuadro":"@T@/cuadros/c-casilla-04-correccion-aereo-y-lista-t4.0.png","rect":[200,30,500,60]},
+ {"etiqueta":"CTRL hora dorada asfalto","cuadro":"@T@/cuadros/CONTROL-hora-dorada.png","rect":[333,600,134,67]}
+]

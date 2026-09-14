@@ -1,0 +1,8 @@
+la linea: "The cameras on all six cars are open."   3.582 s   anuncioLargoMax 4 s
+race.json: ofertaEn 28 s
+
+VERDE  el relato como se entrega          fin hablado 27.640 s   ventana [27.5 ; 28]
+ROJO   CONTROL la linea corrida +3 s      seguia hablando en 28.020 s, que es donde arranca la linea siguiente   ventana [27.5 ; 28]
+ROJO   CONTROL la linea corrida -3 s      fin hablado 24.640 s   ventana [27.5 ; 28]
+
+PASA, y se vieron los dos controles en rojo.

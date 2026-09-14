@@ -1,0 +1,9 @@
+[
+ {"etiqueta":"1-amarillo","rect":[262,332,215,180],"ref":"#CEBC35"},
+ {"etiqueta":"2-magenta","rect":[541,349,204,198],"ref":"#5B223C"},
+ {"etiqueta":"3-bronce","rect":[791,332,256,180],"ref":"#55432E"},
+ {"etiqueta":"4-violeta","rect":[465,250,105,82],"ref":"#632EA3"},
+ {"etiqueta":"5-cyan","rect":[588,250,110,82],"ref":"#09B3A1"},
+ {"etiqueta":"6-verde","rect":[716,250,99,76],"ref":"#38822D"},
+ {"etiqueta":"CTRL-asfalto","rect":[465,617,233,81],"ref":"#CEBC35"}
+]

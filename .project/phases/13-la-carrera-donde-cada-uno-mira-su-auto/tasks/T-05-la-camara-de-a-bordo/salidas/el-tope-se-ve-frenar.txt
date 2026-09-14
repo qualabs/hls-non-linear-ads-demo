@@ -1,0 +1,11 @@
+# EL CONTROL DEL TOPE: se lo ve frenar antes de gastar. Con 13 lineas anotadas y un
+# tope de 16, pedir cuatro regeneraciones tiene que morir SIN llamar a Vertex.
+
+$ ./generar-camara.py --regenerar 1 2 3 4
+TOPE: hay 13 generaciones lanzadas y se piden 4; el tope de la etapa 2 es 16 (US$12.80). Corre menos clips o cierra la task con lo que hay.
+
+# y pidiendo tres, que si entran, se lo ve NO frenar -- sin esto el tope podria estar
+# rechazando todo. Se corta antes de lanzar con Ctrl-C del propio script: se muestra
+# el encabezado de gasto, que es la linea inmediatamente anterior al primer POST.
+
+$ ./generar-camara.py --regenerar 1 2 3   (interrumpido al imprimir el gasto)

@@ -1,0 +1,26 @@
+color de la carroceria, MEDIANA de los pixeles saturados
+
+  1-caldrix    #CEBC35  hue  53deg   prohibido_min= 26.7 (plateado)  parrilla_min= 26.7 (plata Cadillac)
+  2-marvok     #632EA3  hue 266deg   prohibido_min= 15.8 (azul)  parrilla_min= 15.8 (navy Red Bull)
+  3-noctev     #09B3A1  hue 173deg   prohibido_min= 25.8 (plateado)  parrilla_min= 11.4 (verde Aston)
+  4-runtak     #5B223C  hue 329deg   prohibido_min= 20.5 (azul)  parrilla_min= 20.5 (navy Red Bull)
+  5-pentav     #38822D  hue 113deg   prohibido_min= 16.2 (verde oscuro)  parrilla_min= 14.5 (verde Aston)
+  6-quentra    #55432E  hue  34deg   prohibido_min= 26.0 (verde oscuro)  parrilla_min= 18.7 (negro Haas)
+
+mutuas:
+  1-caldrix    vs 2-marvok       80.4
+  1-caldrix    vs 3-noctev       35.4
+  1-caldrix    vs 4-runtak       71.6
+  1-caldrix    vs 5-pentav       31.8
+  1-caldrix    vs 6-quentra      49.2
+  2-marvok     vs 3-noctev       54.1
+  2-marvok     vs 4-runtak       22.3
+  2-marvok     vs 5-pentav       54.1
+  2-marvok     vs 6-quentra      39.6
+  3-noctev     vs 4-runtak       67.1
+  3-noctev     vs 5-pentav       25.4
+  3-noctev     vs 6-quentra      46.8
+  4-runtak     vs 5-pentav       60.3
+  4-runtak     vs 6-quentra      25.2
+  5-pentav     vs 6-quentra      31.2
+  --> MIN MUTUA = 22.3  ('2-marvok', '4-runtak')

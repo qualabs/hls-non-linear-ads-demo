@@ -1,0 +1,70 @@
+mediana del parche, y su Lab
+
+  SONDEO A (parrafo viejo)           #6C6864   L*= 44.2  a*=   0.8  b*=   2.8  hue= 30deg
+  SONDEO B (parrafo viejo)           #5D605A   L*= 40.3  a*=  -2.4  b*=   3.0  hue= 90deg
+  SONDEO C (parrafo viejo)           #68625E   L*= 42.0  a*=   1.6  b*=   3.1  hue= 24deg
+  prog 04 (parrafo nuevo)            #656565   L*= 42.8  a*=  -0.0  b*=   0.0  hue=  0deg
+  prog 08 (parrafo nuevo)            #545A5D   L*= 37.8  a*=  -1.7  b*=  -2.5  hue=200deg
+  prog 13 (parrafo nuevo)            #676D69   L*= 45.4  a*=  -3.1  b*=   1.4  hue=140deg
+  prog 09 (parrafo nuevo)            #6E7274   L*= 47.8  a*=  -1.1  b*=  -1.6  hue=200deg
+  CONTROL hora dorada                #845E3C   L*= 43.1  a*=  11.3  b*=  25.5  hue= 28deg
+  CONTROL otro mundo                 #223033   L*= 18.8  a*=  -5.0  b*=  -3.8  hue=191deg
+
+dE00 entre parches:
+  SONDEO A (parrafo viejo)           vs SONDEO B (parrafo viejo)              5.8
+  SONDEO A (parrafo viejo)           vs SONDEO C (parrafo viejo)              2.4
+  SONDEO A (parrafo viejo)           vs prog 04 (parrafo nuevo)               3.1
+  SONDEO A (parrafo viejo)           vs prog 08 (parrafo nuevo)               8.4
+  SONDEO A (parrafo viejo)           vs prog 13 (parrafo nuevo)               5.7
+  SONDEO A (parrafo viejo)           vs prog 09 (parrafo nuevo)               6.0
+  SONDEO A (parrafo viejo)           vs CONTROL hora dorada                  15.6
+  SONDEO A (parrafo viejo)           vs CONTROL otro mundo                   22.2
+  SONDEO B (parrafo viejo)           vs SONDEO C (parrafo viejo)              6.0
+  SONDEO B (parrafo viejo)           vs prog 04 (parrafo nuevo)               4.8
+  SONDEO B (parrafo viejo)           vs prog 08 (parrafo nuevo)               5.7
+  SONDEO B (parrafo viejo)           vs prog 13 (parrafo nuevo)               5.0
+  SONDEO B (parrafo viejo)           vs prog 09 (parrafo nuevo)               8.4
+  SONDEO B (parrafo viejo)           vs CONTROL hora dorada                  19.4
+  SONDEO B (parrafo viejo)           vs CONTROL otro mundo                   17.9
+  SONDEO C (parrafo viejo)           vs prog 04 (parrafo nuevo)               3.7
+  SONDEO C (parrafo viejo)           vs prog 08 (parrafo nuevo)               7.9
+  SONDEO C (parrafo viejo)           vs prog 13 (parrafo nuevo)               7.6
+  SONDEO C (parrafo viejo)           vs prog 09 (parrafo nuevo)               8.0
+  SONDEO C (parrafo viejo)           vs CONTROL hora dorada                  14.9
+  SONDEO C (parrafo viejo)           vs CONTROL otro mundo                   20.9
+  prog 04 (parrafo nuevo)            vs prog 08 (parrafo nuevo)               5.5
+  prog 04 (parrafo nuevo)            vs prog 13 (parrafo nuevo)               5.1
+  prog 04 (parrafo nuevo)            vs prog 09 (parrafo nuevo)               5.2
+  prog 04 (parrafo nuevo)            vs CONTROL hora dorada                  18.0
+  prog 04 (parrafo nuevo)            vs CONTROL otro mundo                   20.0
+  prog 08 (parrafo nuevo)            vs prog 13 (parrafo nuevo)               8.0
+  prog 08 (parrafo nuevo)            vs prog 09 (parrafo nuevo)               9.2
+  prog 08 (parrafo nuevo)            vs CONTROL hora dorada                  21.9
+  prog 08 (parrafo nuevo)            vs CONTROL otro mundo                   15.0
+  prog 13 (parrafo nuevo)            vs prog 09 (parrafo nuevo)               4.6
+  prog 13 (parrafo nuevo)            vs CONTROL hora dorada                  20.9
+  prog 13 (parrafo nuevo)            vs CONTROL otro mundo                   21.8
+  prog 09 (parrafo nuevo)            vs CONTROL hora dorada                  20.7
+  prog 09 (parrafo nuevo)            vs CONTROL otro mundo                   23.9
+  CONTROL hora dorada                vs CONTROL otro mundo                   31.1
+
+mediana del parche, y su Lab
+
+  SONDEO A (parrafo viejo)           #D9D9D9   L*= 86.7  a*=  -0.0  b*=   0.0  hue=  0deg
+  SONDEO C (parrafo viejo)           #DAD7DC   L*= 86.3  a*=   1.9  b*=  -2.1  hue=276deg
+  prog 04 (parrafo nuevo)            #D9D8D9   L*= 86.4  a*=   0.5  b*=  -0.4  hue=300deg
+  prog 13 (parrafo nuevo)            #E7EDEC   L*= 93.3  a*=  -2.2  b*=  -0.2  hue=170deg
+  CONTROL hora dorada                #F3D6B7   L*= 87.3  a*=   5.4  b*=  19.0  hue= 31deg
+
+dE00 entre parches:
+  SONDEO A (parrafo viejo)           vs SONDEO C (parrafo viejo)              3.3
+  SONDEO A (parrafo viejo)           vs prog 04 (parrafo nuevo)               0.9
+  SONDEO A (parrafo viejo)           vs prog 13 (parrafo nuevo)               5.1
+  SONDEO A (parrafo viejo)           vs CONTROL hora dorada                  14.1
+  SONDEO C (parrafo viejo)           vs prog 04 (parrafo nuevo)               2.5
+  SONDEO C (parrafo viejo)           vs prog 13 (parrafo nuevo)               7.4
+  SONDEO C (parrafo viejo)           vs CONTROL hora dorada                  15.8
+  prog 04 (parrafo nuevo)            vs prog 13 (parrafo nuevo)               5.8
+  prog 04 (parrafo nuevo)            vs CONTROL hora dorada                  14.4
+  prog 13 (parrafo nuevo)            vs CONTROL hora dorada                  16.5
+

@@ -1,0 +1,11 @@
+[
+ {"etiqueta":"SONDEO A (parrafo viejo)","cuadro":"@T@/cuadros/sondeo-A.png","rect":[333,600,134,67]},
+ {"etiqueta":"SONDEO B (parrafo viejo)","cuadro":"@T@/cuadros/sondeo-B.png","rect":[950,500,250,150]},
+ {"etiqueta":"SONDEO C (parrafo viejo)","cuadro":"@T@/cuadros/sondeo-C.png","rect":[500,620,280,80]},
+ {"etiqueta":"prog 04 (parrafo nuevo)","cuadro":"@T@/cuadros/prog-04-los-seis-aereo.png","rect":[150,600,200,80]},
+ {"etiqueta":"prog 08 (parrafo nuevo)","cuadro":"@T@/cuadros/prog-08-caldrix-cerrado.png","rect":[350,620,250,70]},
+ {"etiqueta":"prog 13 (parrafo nuevo)","cuadro":"@T@/cuadros/prog-13-caldrix-marvok-recta.png","rect":[200,640,250,60]},
+ {"etiqueta":"prog 09 (parrafo nuevo)","cuadro":"@T@/cuadros/prog-09-marvok-noctev-curvon.png","rect":[520,600,240,80]},
+ {"etiqueta":"CONTROL hora dorada","cuadro":"@T@/cuadros/CONTROL-hora-dorada.png","rect":[333,600,134,67]},
+ {"etiqueta":"CONTROL otro mundo","cuadro":"@T@/cuadros/CONTROL-otro-mundo.png","rect":[600,430,300,60]}
+]

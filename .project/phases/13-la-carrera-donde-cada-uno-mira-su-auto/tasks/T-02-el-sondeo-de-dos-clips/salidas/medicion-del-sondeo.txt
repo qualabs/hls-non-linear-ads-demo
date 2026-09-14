@@ -1,0 +1,411 @@
+################################################################
+# 1. EL COLOR DE CADA AUTO, SOBRE EL CUADRO EN MOVIMIENTO
+################################################################
+
+a-casilla-04-aereo-los-seis-t4.0.png  (1280x720)
+  1-amarillo             rect=(507, 360, 240, 227)   ref=#CEBC35
+      filtrado S>.35  #E2D969  hue= 56deg  n=  13009 ( 23.9%)  dE00 vs ref =   7.8
+      cromatico S>.12  #E0D776  hue= 55deg  n=  19364 ( 35.5%)  dE00 vs ref =   8.4
+      crudo  todos    #6D6950  hue= 52deg  n=  54480 (100.0%)  dE00 vs ref =  33.3
+  2-verde+bronce         rect=(813, 340, 427, 233)   ref=#38822D
+      filtrado S>.35  #656C31  hue= 67deg  n=  25229 ( 25.4%)  dE00 vs ref =  13.7
+      cromatico S>.12  #697038  hue= 68deg  n=  35499 ( 35.7%)  dE00 vs ref =  13.3
+      crudo  todos    #666A4E  hue= 69deg  n=  99491 (100.0%)  dE00 vs ref =  17.1
+  3-violeta              rect=(487, 273, 120, 87)    ref=#632EA3
+      filtrado S>.35  #533361  hue=282deg  n=    437 (  4.2%)  dE00 vs ref =  13.3
+      cromatico S>.12  #A28AB0  hue=278deg  n=   2292 ( 22.0%)  dE00 vs ref =  31.7
+      crudo  todos    #8C8988  hue= 15deg  n=  10440 (100.0%)  dE00 vs ref =  36.6
+  4-cyan                 rect=(700, 287, 113, 80)    ref=#09B3A1
+      filtrado S>.35  #387591  hue=199deg  n=   1693 ( 18.7%)  dE00 vs ref =  27.7
+      cromatico S>.12  #6D96A9  hue=199deg  n=   3624 ( 40.1%)  dE00 vs ref =  20.4
+      crudo  todos    #72888B  hue=187deg  n=   9040 (100.0%)  dE00 vs ref =  20.3
+  5-rosa                 rect=(633, 260, 80, 53)     ref=#5B223C
+      filtrado S>.35  #613953  hue=321deg  n=    375 (  8.8%)  dE00 vs ref =   7.1
+      cromatico S>.12  #8B6D81  hue=320deg  n=   1334 ( 31.5%)  dE00 vs ref =  23.8
+      crudo  todos    #7C6F76  hue=328deg  n=   4240 (100.0%)  dE00 vs ref =  25.8
+  6-fondo                rect=(616, 240, 51, 33)     ref=#09B3A1
+      filtrado S>.35  #2C4961  hue=207deg  n=    101 (  6.0%)  dE00 vs ref =  42.6
+      cromatico S>.12  #657E89  hue=198deg  n=    443 ( 26.3%)  dE00 vs ref =  23.9
+      crudo  todos    #9D9C9B  hue= 30deg  n=   1683 (100.0%)  dE00 vs ref =  24.5
+  CTRL-asfalto           rect=(333, 600, 134, 67)    ref=#CEBC35
+      filtrado S>.35  (ninguno)            n=      0 (  0.0%)
+      cromatico S>.12  (ninguno)            n=      0 (  0.0%)
+      crudo  todos    #6C6864  hue= 30deg  n=   8978 (100.0%)  dE00 vs ref =  37.4
+  CTRL-pasto             rect=(1067, 307, 186, 40)   ref=#38822D
+      filtrado S>.35  #65742A  hue= 72deg  n=   5759 ( 77.4%)  dE00 vs ref =  11.0
+      cromatico S>.12  #64732A  hue= 72deg  n=   6253 ( 84.0%)  dE00 vs ref =  11.1
+      crudo  todos    #65732C  hue= 72deg  n=   7440 (100.0%)  dE00 vs ref =  11.3
+
+a-casilla-04-aereo-los-seis-t7.5.png  (1280x720)
+  1-amarillo(auto entero) rect=(490, 360, 290, 240)   ref=#CEBC35
+      filtrado S>.35  #E4DA6D  hue= 55deg  n=  15651 ( 22.5%)  dE00 vs ref =   8.1
+      cromatico S>.12  #E0D876  hue= 55deg  n=  22726 ( 32.7%)  dE00 vs ref =   8.6
+      crudo  todos    #6E6C5A  hue= 54deg  n=  69600 (100.0%)  dE00 vs ref =  33.5
+  2-verde+bronce(auto entero) rect=(800, 370, 430, 220)   ref=#38822D
+      filtrado S>.35  #616B2D  hue= 70deg  n=  14094 ( 14.9%)  dE00 vs ref =  13.1
+      cromatico S>.12  #687238  hue= 70deg  n=  24483 ( 25.9%)  dE00 vs ref =  12.3
+      crudo  todos    #616352  hue= 67deg  n=  94600 (100.0%)  dE00 vs ref =  20.5
+  3-violeta(auto entero) rect=(470, 300, 140, 90)    ref=#632EA3
+      filtrado S>.35  #5A3766  hue=285deg  n=    812 (  6.4%)  dE00 vs ref =  12.9
+      cromatico S>.12  #9A8493  hue=319deg  n=   3407 ( 27.0%)  dE00 vs ref =  32.5
+      crudo  todos    #767173  hue=336deg  n=  12600 (100.0%)  dE00 vs ref =  30.0
+  4-cyan(auto entero)    rect=(685, 300, 140, 85)    ref=#09B3A1
+      filtrado S>.35  #367496  hue=201deg  n=   1852 ( 15.6%)  dE00 vs ref =  29.2
+      cromatico S>.12  #5D8FA6  hue=199deg  n=   4015 ( 33.7%)  dE00 vs ref =  21.5
+      crudo  todos    #586A70  hue=195deg  n=  11900 (100.0%)  dE00 vs ref =  29.0
+  5-rosa(auto entero)    rect=(630, 270, 90, 50)     ref=#5B223C
+      filtrado S>.35  #6B3652  hue=328deg  n=    287 (  6.4%)  dE00 vs ref =   6.1
+      cromatico S>.12  #886378  hue=326deg  n=   1282 ( 28.5%)  dE00 vs ref =  20.3
+      crudo  todos    #6F6169  hue=326deg  n=   4500 (100.0%)  dE00 vs ref =  21.3
+  6-fondo(auto entero)   rect=(610, 245, 60, 35)     ref=#09B3A1
+      filtrado S>.35  #355161  hue=202deg  n=    147 (  7.0%)  dE00 vs ref =  39.0
+      cromatico S>.12  #5E7586  hue=206deg  n=    564 ( 26.9%)  dE00 vs ref =  27.5
+      crudo  todos    #939495  hue=210deg  n=   2100 (100.0%)  dE00 vs ref =  24.3
+  CTRL-asfalto(sin auto) rect=(333, 600, 134, 67)    ref=#CEBC35
+      filtrado S>.35  (ninguno)            n=      0 (  0.0%)
+      cromatico S>.12  (ninguno)            n=      0 (  0.0%)
+      crudo  todos    #686562  hue= 30deg  n=   8978 (100.0%)  dE00 vs ref =  38.7
+  CTRL-pasto(sin auto)   rect=(900, 280, 200, 40)    ref=#38822D
+      filtrado S>.35  #797D41  hue= 64deg  n=   6812 ( 85.2%)  dE00 vs ref =  14.0
+      cromatico S>.12  #797D42  hue= 64deg  n=   7074 ( 88.4%)  dE00 vs ref =  14.0
+      crudo  todos    #797D43  hue= 64deg  n=   8000 (100.0%)  dE00 vs ref =  14.1
+
+b-casilla-12-rueda-runtak-t0.5.png  (1280x720)
+  RUNTAK-carroceria      rect=(467, 233, 360, 127)   ref=#5B223C
+      filtrado S>.35  #5C2E45  hue=330deg  n=   1358 (  3.0%)  dE00 vs ref =   3.5
+      cromatico S>.12  #A87F8F  hue=337deg  n=  10706 ( 23.4%)  dE00 vs ref =  31.3
+      crudo  todos    #9A8C93  hue=330deg  n=  45720 (100.0%)  dE00 vs ref =  36.2
+  CTRL-asfalto           rect=(133, 533, 200, 107)   ref=#5B223C
+      filtrado S>.35  (ninguno)            n=      0 (  0.0%)
+      cromatico S>.12  (ninguno)            n=      0 (  0.0%)
+      crudo  todos    #626661  hue=108deg  n=  21400 (100.0%)  dE00 vs ref =  32.3
+  CTRL-aleron-negro      rect=(420, 170, 300, 40)    ref=#5B223C
+      filtrado S>.35  #544F33  hue= 51deg  n=    455 (  3.8%)  dE00 vs ref =  33.5
+      cromatico S>.12  #51513E  hue= 60deg  n=   2234 ( 18.6%)  dE00 vs ref =  33.0
+      crudo  todos    #080A0C  hue=210deg  n=  12000 (100.0%)  dE00 vs ref =  24.9
+
+b-casilla-12-rueda-runtak-t4.0.png  (1280x720)
+  RUNTAK-carroceria      rect=(450, 225, 380, 90)    ref=#5B223C
+      filtrado S>.35  #70703A  hue= 60deg  n=   1115 (  3.3%)  dE00 vs ref =  44.1
+      cromatico S>.12  #B790AA  hue=320deg  n=   9552 ( 27.9%)  dE00 vs ref =  38.8
+      crudo  todos    #B6A0AE  hue=322deg  n=  34200 (100.0%)  dE00 vs ref =  44.8
+  CTRL-asfalto           rect=(950, 500, 250, 150)   ref=#5B223C
+      filtrado S>.35  (ninguno)            n=      0 (  0.0%)
+      cromatico S>.12  #303732  hue=137deg  n=      7 (  0.0%)  dE00 vs ref =  30.8
+      crudo  todos    #5D605A  hue= 90deg  n=  37500 (100.0%)  dE00 vs ref =  31.1
+  CTRL-aleron-negro      rect=(420, 130, 420, 50)    ref=#5B223C
+      filtrado S>.35  #422C2A  hue=  5deg  n=      2 (  0.0%)  dE00 vs ref =  13.6
+      cromatico S>.12  #5A5D55  hue= 82deg  n=    715 (  3.4%)  dE00 vs ref =  31.6
+      crudo  todos    #212222  hue=180deg  n=  21000 (100.0%)  dE00 vs ref =  20.1
+
+b-casilla-12-rueda-runtak-t7.5.png  (1280x720)
+  RUNTAK-carroceria      rect=(460, 240, 320, 90)    ref=#5B223C
+      filtrado S>.35  #A5658E  hue=322deg  n=    564 (  2.0%)  dE00 vs ref =  24.3
+      cromatico S>.12  #BB92AE  hue=319deg  n=   7181 ( 24.9%)  dE00 vs ref =  40.0
+      crudo  todos    #B8A1B0  hue=321deg  n=  28800 (100.0%)  dE00 vs ref =  45.3
+  CTRL-asfalto           rect=(950, 520, 250, 150)   ref=#5B223C
+      filtrado S>.35  (ninguno)            n=      0 (  0.0%)
+      cromatico S>.12  (ninguno)            n=      0 (  0.0%)
+      crudo  todos    #656964  hue=108deg  n=  37500 (100.0%)  dE00 vs ref =  32.8
+  CTRL-aleron-negro      rect=(430, 160, 400, 40)    ref=#5B223C
+      filtrado S>.35  #5D394F  hue=323deg  n=      1 (  0.0%)  dE00 vs ref =   7.2
+      cromatico S>.12  #404949  hue=180deg  n=    410 (  2.6%)  dE00 vs ref =  21.9
+      crudo  todos    #515958  hue=173deg  n=  16000 (100.0%)  dE00 vs ref =  23.4
+
+c-casilla-04-correccion-aereo-y-lista-t4.0.png  (1280x720)
+  1-amarillo             rect=(262, 332, 215, 180)   ref=#CEBC35
+      filtrado S>.35  #DFCD4A  hue= 53deg  n=  14536 ( 37.6%)  dE00 vs ref =   4.3
+      cromatico S>.12  #D6BA4B  hue= 48deg  n=  18285 ( 47.2%)  dE00 vs ref =   3.8
+      crudo  todos    #6E674A  hue= 48deg  n=  38700 (100.0%)  dE00 vs ref =  33.1
+  2-magenta              rect=(541, 349, 204, 198)   ref=#5B223C
+      filtrado S>.35  #8E69B5  hue=269deg  n=   6827 ( 16.9%)  dE00 vs ref =  28.9
+      cromatico S>.12  #9270B5  hue=270deg  n=  14992 ( 37.1%)  dE00 vs ref =  30.2
+      crudo  todos    #5C505A  hue=310deg  n=  40392 (100.0%)  dE00 vs ref =  17.4
+  3-bronce               rect=(791, 332, 256, 180)   ref=#55432E
+      filtrado S>.35  #70603C  hue= 42deg  n=   2771 (  6.0%)  dE00 vs ref =  11.4
+      cromatico S>.12  #B9A086  hue= 31deg  n=  10548 ( 22.9%)  dE00 vs ref =  37.4
+      crudo  todos    #635D58  hue= 27deg  n=  46080 (100.0%)  dE00 vs ref =  12.0
+  4-violeta              rect=(465, 250, 105, 82)    ref=#632EA3
+      filtrado S>.35  #784C6F  hue=312deg  n=    528 (  6.1%)  dE00 vs ref =  17.6
+      cromatico S>.12  #8F7484  hue=324deg  n=   2644 ( 30.7%)  dE00 vs ref =  28.1
+      crudo  todos    #736D6B  hue= 15deg  n=   8610 (100.0%)  dE00 vs ref =  30.9
+  5-cyan                 rect=(588, 250, 110, 82)    ref=#09B3A1
+      filtrado S>.35  #508CB3  hue=204deg  n=   1776 ( 19.7%)  dE00 vs ref =  25.3
+      cromatico S>.12  #6893B2  hue=205deg  n=   3351 ( 37.2%)  dE00 vs ref =  23.7
+      crudo  todos    #616D6F  hue=189deg  n=   9020 (100.0%)  dE00 vs ref =  28.2
+  6-verde                rect=(716, 250, 99, 76)     ref=#38822D
+      filtrado S>.35  #438C54  hue=134deg  n=    896 ( 11.9%)  dE00 vs ref =   7.3
+      cromatico S>.12  #6B9A7A  hue=139deg  n=   2493 ( 33.1%)  dE00 vs ref =  16.2
+      crudo  todos    #5D665D  hue=120deg  n=   7524 (100.0%)  dE00 vs ref =  21.4
+  CTRL-asfalto           rect=(465, 617, 233, 81)    ref=#CEBC35
+      filtrado S>.35  (ninguno)            n=      0 (  0.0%)
+      cromatico S>.12  #655F58  hue= 32deg  n=    287 (  1.5%)  dE00 vs ref =  39.7
+      crudo  todos    #69635E  hue= 27deg  n=  18873 (100.0%)  dE00 vs ref =  38.8
+
+################################################################
+# 2. LA SEPARACION ENTRE LOS SEIS, CONTRA LA DE LAS FICHAS
+################################################################
+
+pares-1-fichas-T01
+  CALDRIX          #CEBC35  vs  MARVOK           #632EA3   dE00=  80.4
+  CALDRIX          #CEBC35  vs  NOCTEV           #09B3A1   dE00=  35.4
+  CALDRIX          #CEBC35  vs  RUNTAK           #5B223C   dE00=  71.6
+  CALDRIX          #CEBC35  vs  PENTAV           #38822D   dE00=  31.8
+  CALDRIX          #CEBC35  vs  QUENTRA          #55432E   dE00=  49.2
+  MARVOK           #632EA3  vs  NOCTEV           #09B3A1   dE00=  54.1
+  MARVOK           #632EA3  vs  RUNTAK           #5B223C   dE00=  22.3
+  MARVOK           #632EA3  vs  PENTAV           #38822D   dE00=  54.1
+  MARVOK           #632EA3  vs  QUENTRA          #55432E   dE00=  39.6
+  NOCTEV           #09B3A1  vs  RUNTAK           #5B223C   dE00=  67.1
+  NOCTEV           #09B3A1  vs  PENTAV           #38822D   dE00=  25.4
+  NOCTEV           #09B3A1  vs  QUENTRA          #55432E   dE00=  46.8
+  RUNTAK           #5B223C  vs  PENTAV           #38822D   dE00=  60.3
+  RUNTAK           #5B223C  vs  QUENTRA          #55432E   dE00=  25.2
+  PENTAV           #38822D  vs  QUENTRA          #55432E   dE00=  31.2
+  --> MIN MUTUA = 22.3   ('MARVOK', 'RUNTAK')
+
+pares-2-clipA-t4.0-estimador-T01
+  CALDRIX          #E2D969  vs  PENTAV/QUENTRA   #656C31   dE00=  35.5
+  CALDRIX          #E2D969  vs  MARVOK           #533361   dE00=  76.1
+  CALDRIX          #E2D969  vs  NOCTEV           #387591   dE00=  53.9
+  CALDRIX          #E2D969  vs  RUNTAK           #613953   dE00=  68.8
+  CALDRIX          #E2D969  vs  sexto            #2C4961   dE00=  66.3
+  PENTAV/QUENTRA   #656C31  vs  MARVOK           #533361   dE00=  49.1
+  PENTAV/QUENTRA   #656C31  vs  NOCTEV           #387591   dE00=  36.3
+  PENTAV/QUENTRA   #656C31  vs  RUNTAK           #613953   dE00=  43.0
+  PENTAV/QUENTRA   #656C31  vs  sexto            #2C4961   dE00=  37.3
+  MARVOK           #533361  vs  NOCTEV           #387591   dE00=  32.1
+  MARVOK           #533361  vs  RUNTAK           #613953   dE00=   8.0
+  MARVOK           #533361  vs  sexto            #2C4961   dE00=  20.1
+  NOCTEV           #387591  vs  RUNTAK           #613953   dE00=  38.1
+  NOCTEV           #387591  vs  sexto            #2C4961   dE00=  15.8
+  RUNTAK           #613953  vs  sexto            #2C4961   dE00=  26.3
+  --> MIN MUTUA = 8.0   ('MARVOK', 'RUNTAK')
+
+pares-3-clipA-t7.5-estimador-T01
+  CALDRIX          #E4DA6D  vs  PENTAV/QUENTRA   #616B2D   dE00=  36.4
+  CALDRIX          #E4DA6D  vs  MARVOK           #5A3766   dE00=  74.2
+  CALDRIX          #E4DA6D  vs  NOCTEV           #367496   dE00=  56.1
+  CALDRIX          #E4DA6D  vs  RUNTAK           #6B3652   dE00=  69.0
+  CALDRIX          #E4DA6D  vs  sexto            #355161   dE00=  60.2
+  PENTAV/QUENTRA   #616B2D  vs  MARVOK           #5A3766   dE00=  49.9
+  PENTAV/QUENTRA   #616B2D  vs  NOCTEV           #367496   dE00=  39.4
+  PENTAV/QUENTRA   #616B2D  vs  RUNTAK           #6B3652   dE00=  45.2
+  PENTAV/QUENTRA   #616B2D  vs  sexto            #355161   dE00=  32.6
+  MARVOK           #5A3766  vs  NOCTEV           #367496   dE00=  31.4
+  MARVOK           #5A3766  vs  RUNTAK           #6B3652   dE00=   9.2
+  MARVOK           #5A3766  vs  sexto            #355161   dE00=  21.8
+  NOCTEV           #367496  vs  RUNTAK           #6B3652   dE00=  38.9
+  NOCTEV           #367496  vs  sexto            #355161   dE00=  13.3
+  RUNTAK           #6B3652  vs  sexto            #355161   dE00=  30.1
+  --> MIN MUTUA = 9.2   ('MARVOK', 'RUNTAK')
+
+pares-4-clipA-t4.0-cromatico
+  CALDRIX          #E0D776  vs  PENTAV+QUENTRA   #697038   dE00=  33.2
+  CALDRIX          #E0D776  vs  MARVOK           #A28AB0   dE00=  49.5
+  CALDRIX          #E0D776  vs  NOCTEV           #6D96A9   dE00=  41.5
+  CALDRIX          #E0D776  vs  RUNTAK           #8B6D81   dE00=  49.2
+  CALDRIX          #E0D776  vs  sexto-cyan       #657E89   dE00=  42.0
+  PENTAV+QUENTRA   #697038  vs  MARVOK           #A28AB0   dE00=  44.4
+  PENTAV+QUENTRA   #697038  vs  NOCTEV           #6D96A9   dE00=  33.8
+  PENTAV+QUENTRA   #697038  vs  RUNTAK           #8B6D81   dE00=  37.4
+  PENTAV+QUENTRA   #697038  vs  sexto-cyan       #657E89   dE00=  27.2
+  MARVOK           #A28AB0  vs  NOCTEV           #6D96A9   dE00=  25.1
+  MARVOK           #A28AB0  vs  RUNTAK           #8B6D81   dE00=  12.4
+  MARVOK           #A28AB0  vs  sexto-cyan       #657E89   dE00=  23.9
+  NOCTEV           #6D96A9  vs  RUNTAK           #8B6D81   dE00=  32.0
+  NOCTEV           #6D96A9  vs  sexto-cyan       #657E89   dE00=   9.0
+  RUNTAK           #8B6D81  vs  sexto-cyan       #657E89   dE00=  26.0
+  --> MIN MUTUA = 9.0   ('NOCTEV', 'sexto-cyan')
+
+pares-5-clipA-t7.5-cromatico
+  CALDRIX          #E0D876  vs  PENTAV+QUENTRA   #687238   dE00=  32.9
+  CALDRIX          #E0D876  vs  MARVOK           #9A8493   dE00=  42.5
+  CALDRIX          #E0D876  vs  NOCTEV           #5D8FA6   dE00=  44.8
+  CALDRIX          #E0D876  vs  RUNTAK           #886378   dE00=  52.3
+  CALDRIX          #E0D876  vs  sexto-cyan       #5E7586   dE00=  47.1
+  PENTAV+QUENTRA   #687238  vs  MARVOK           #9A8493   dE00=  36.6
+  PENTAV+QUENTRA   #687238  vs  NOCTEV           #5D8FA6   dE00=  34.8
+  PENTAV+QUENTRA   #687238  vs  RUNTAK           #886378   dE00=  39.2
+  PENTAV+QUENTRA   #687238  vs  sexto-cyan       #5E7586   dE00=  30.6
+  MARVOK           #9A8493  vs  NOCTEV           #5D8FA6   dE00=  29.9
+  MARVOK           #9A8493  vs  RUNTAK           #886378   dE00=  12.3
+  MARVOK           #9A8493  vs  sexto-cyan       #5E7586   dE00=  23.1
+  NOCTEV           #5D8FA6  vs  RUNTAK           #886378   dE00=  35.8
+  NOCTEV           #5D8FA6  vs  sexto-cyan       #5E7586   dE00=  10.5
+  RUNTAK           #886378  vs  sexto-cyan       #5E7586   dE00=  25.9
+  --> MIN MUTUA = 10.5   ('NOCTEV', 'sexto-cyan')
+
+pares-6-clipC-t4.0-estimador-T01
+  CALDRIX          #DFCD4A  vs  RUNTAK           #8E69B5   dE00=  65.5
+  CALDRIX          #DFCD4A  vs  QUENTRA          #70603C   dE00=  37.8
+  CALDRIX          #DFCD4A  vs  MARVOK           #784C6F   dE00=  63.5
+  CALDRIX          #DFCD4A  vs  NOCTEV           #508CB3   dE00=  53.8
+  CALDRIX          #DFCD4A  vs  PENTAV           #438C54   dE00=  33.5
+  RUNTAK           #8E69B5  vs  QUENTRA          #70603C   dE00=  42.3
+  RUNTAK           #8E69B5  vs  MARVOK           #784C6F   dE00=  16.3
+  RUNTAK           #8E69B5  vs  NOCTEV           #508CB3   dE00=  23.5
+  RUNTAK           #8E69B5  vs  PENTAV           #438C54   dE00=  43.2
+  QUENTRA          #70603C  vs  MARVOK           #784C6F   dE00=  33.5
+  QUENTRA          #70603C  vs  NOCTEV           #508CB3   dE00=  37.9
+  QUENTRA          #70603C  vs  PENTAV           #438C54   dE00=  25.0
+  MARVOK           #784C6F  vs  NOCTEV           #508CB3   dE00=  36.7
+  MARVOK           #784C6F  vs  PENTAV           #438C54   dE00=  54.3
+  NOCTEV           #508CB3  vs  PENTAV           #438C54   dE00=  36.1
+  --> MIN MUTUA = 16.3   ('RUNTAK', 'MARVOK')
+
+pares-7-clipC-t4.0-cromatico
+  CALDRIX          #D6BA4B  vs  RUNTAK           #9270B5   dE00=  58.3
+  CALDRIX          #D6BA4B  vs  QUENTRA          #B9A086   dE00=  18.2
+  CALDRIX          #D6BA4B  vs  MARVOK           #8F7484   dE00=  43.1
+  CALDRIX          #D6BA4B  vs  NOCTEV           #6893B2   dE00=  46.7
+  CALDRIX          #D6BA4B  vs  PENTAV           #6B9A7A   dE00=  28.4
+  RUNTAK           #9270B5  vs  QUENTRA          #B9A086   dE00=  35.9
+  RUNTAK           #9270B5  vs  MARVOK           #8F7484   dE00=  14.8
+  RUNTAK           #9270B5  vs  NOCTEV           #6893B2   dE00=  20.4
+  RUNTAK           #9270B5  vs  PENTAV           #6B9A7A   dE00=  36.9
+  QUENTRA          #B9A086  vs  MARVOK           #8F7484   dE00=  24.1
+  QUENTRA          #B9A086  vs  NOCTEV           #6893B2   dE00=  30.0
+  QUENTRA          #B9A086  vs  PENTAV           #6B9A7A   dE00=  25.9
+  MARVOK           #8F7484  vs  NOCTEV           #6893B2   dE00=  28.9
+  MARVOK           #8F7484  vs  PENTAV           #6B9A7A   dE00=  40.4
+  NOCTEV           #6893B2  vs  PENTAV           #6B9A7A   dE00=  26.5
+  --> MIN MUTUA = 14.8   ('RUNTAK', 'MARVOK')
+
+################################################################
+# 3. EL MUNDO: EL MISMO CIRCUITO Y LA MISMA LUZ
+################################################################
+
+mediana del parche, y su Lab
+
+  A asfalto t=2.0                    #6B6763   L*= 43.8  a*=   0.8  b*=   2.8  hue= 30deg
+  A asfalto t=4.0                    #6C6864   L*= 44.2  a*=   0.8  b*=   2.8  hue= 30deg
+  A asfalto t=7.5                    #686562   L*= 43.0  a*=   0.6  b*=   2.1  hue= 30deg
+  B asfalto t=0.5                    #626661   L*= 42.7  a*=  -2.6  b*=   2.3  hue=108deg
+  B asfalto t=4.0                    #5D605A   L*= 40.3  a*=  -2.4  b*=   3.0  hue= 90deg
+  B asfalto t=7.5                    #656964   L*= 43.9  a*=  -2.6  b*=   2.3  hue=108deg
+  CTRL hora dorada asfalto           #7E5B3A   L*= 41.6  a*=  10.2  b*=  24.6  hue= 29deg
+  CTRL otro mundo piso               #223033   L*= 18.8  a*=  -5.0  b*=  -3.8  hue=191deg
+
+dE00 entre parches:
+  A asfalto t=2.0                    vs A asfalto t=4.0                       0.4
+  A asfalto t=2.0                    vs A asfalto t=7.5                       1.1
+  A asfalto t=2.0                    vs B asfalto t=0.5                       4.9
+  A asfalto t=2.0                    vs B asfalto t=4.0                       5.6
+  A asfalto t=2.0                    vs B asfalto t=7.5                       4.8
+  A asfalto t=2.0                    vs CTRL hora dorada asfalto             15.1
+  A asfalto t=2.0                    vs CTRL otro mundo piso                 21.9
+  A asfalto t=4.0                    vs A asfalto t=7.5                       1.4
+  A asfalto t=4.0                    vs B asfalto t=0.5                       5.0
+  A asfalto t=4.0                    vs B asfalto t=4.0                       5.8
+  A asfalto t=4.0                    vs B asfalto t=7.5                       4.8
+  A asfalto t=4.0                    vs CTRL hora dorada asfalto             15.2
+  A asfalto t=4.0                    vs CTRL otro mundo piso                 22.2
+  A asfalto t=7.5                    vs B asfalto t=0.5                       4.5
+  A asfalto t=7.5                    vs B asfalto t=4.0                       4.9
+  A asfalto t=7.5                    vs B asfalto t=7.5                       4.5
+  A asfalto t=7.5                    vs CTRL hora dorada asfalto             15.6
+  A asfalto t=7.5                    vs CTRL otro mundo piso                 20.9
+  B asfalto t=0.5                    vs B asfalto t=4.0                       2.3
+  B asfalto t=0.5                    vs B asfalto t=7.5                       1.1
+  B asfalto t=0.5                    vs CTRL hora dorada asfalto             19.1
+  B asfalto t=0.5                    vs CTRL otro mundo piso                 19.7
+  B asfalto t=4.0                    vs B asfalto t=7.5                       3.4
+  B asfalto t=4.0                    vs CTRL hora dorada asfalto             18.5
+  B asfalto t=4.0                    vs CTRL otro mundo piso                 17.9
+  B asfalto t=7.5                    vs CTRL hora dorada asfalto             19.2
+  B asfalto t=7.5                    vs CTRL otro mundo piso                 20.7
+  CTRL hora dorada asfalto           vs CTRL otro mundo piso                 29.8
+
+mediana del parche, y su Lab
+
+  A cielo t=7.5                      #D6D5D6   L*= 85.4  a*=   0.5  b*=  -0.4  hue=300deg
+  B cielo t=7.5                      #D8DAD8   L*= 86.8  a*=  -1.0  b*=   0.7  hue=120deg
+  A cuadro entero t=7.5              #797970   L*= 50.6  a*=  -1.7  b*=   4.9  hue= 60deg
+  B cuadro entero t=7.5              #6B6E68   L*= 46.0  a*=  -2.4  b*=   2.9  hue= 90deg
+  CTRL hora dorada cielo             #EFD1B3   L*= 85.6  a*=   6.0  b*=  18.8  hue= 30deg
+  CTRL hora dorada cuadro            #8F7048   L*= 49.4  a*=   6.9  b*=  26.8  hue= 34deg
+  CTRL otro mundo cuadro             #565A4D   L*= 37.5  a*=  -4.2  b*=   7.0  hue= 78deg
+
+dE00 entre parches:
+  A cielo t=7.5                      vs B cielo t=7.5                         2.7
+  A cielo t=7.5                      vs A cuadro entero t=7.5                28.2
+  A cielo t=7.5                      vs B cuadro entero t=7.5                32.5
+  A cielo t=7.5                      vs CTRL hora dorada cielo               14.3
+  A cielo t=7.5                      vs CTRL hora dorada cuadro              33.8
+  A cielo t=7.5                      vs CTRL otro mundo cuadro               42.2
+  B cielo t=7.5                      vs A cuadro entero t=7.5                28.7
+  B cielo t=7.5                      vs B cuadro entero t=7.5                33.1
+  B cielo t=7.5                      vs CTRL hora dorada cielo               14.6
+  B cielo t=7.5                      vs CTRL hora dorada cuadro              34.6
+  B cielo t=7.5                      vs CTRL otro mundo cuadro               42.6
+  A cuadro entero t=7.5              vs B cuadro entero t=7.5                 4.9
+  A cuadro entero t=7.5              vs CTRL hora dorada cielo               30.5
+  A cuadro entero t=7.5              vs CTRL hora dorada cuadro              15.5
+  A cuadro entero t=7.5              vs CTRL otro mundo cuadro               12.6
+  B cuadro entero t=7.5              vs CTRL hora dorada cielo               35.4
+  B cuadro entero t=7.5              vs CTRL hora dorada cuadro              17.7
+  B cuadro entero t=7.5              vs CTRL otro mundo cuadro                8.5
+  CTRL hora dorada cielo             vs CTRL hora dorada cuadro              29.2
+  CTRL hora dorada cielo             vs CTRL otro mundo cuadro               43.9
+  CTRL hora dorada cuadro            vs CTRL otro mundo cuadro               20.0
+
+mediana del parche, y su Lab
+
+  A asfalto t=4.0                    #6C6864   L*= 44.2  a*=   0.8  b*=   2.8  hue= 30deg
+  B asfalto t=7.5                    #656964   L*= 43.9  a*=  -2.6  b*=   2.3  hue=108deg
+  C asfalto t=4.0                    #69635E   L*= 42.4  a*=   1.4  b*=   3.7  hue= 27deg
+  A cielo t=7.5                      #D6D5D6   L*= 85.4  a*=   0.5  b*=  -0.4  hue=300deg
+  B cielo t=7.5                      #D8DAD8   L*= 86.8  a*=  -1.0  b*=   0.7  hue=120deg
+  C cielo t=4.0                      #CFD4DA   L*= 84.7  a*=  -0.6  b*=  -3.5  hue=213deg
+  CTRL hora dorada asfalto           #7E5B3A   L*= 41.6  a*=  10.2  b*=  24.6  hue= 29deg
+
+dE00 entre parches:
+  A asfalto t=4.0                    vs B asfalto t=7.5                       4.8
+  A asfalto t=4.0                    vs C asfalto t=4.0                       2.1
+  A asfalto t=4.0                    vs A cielo t=7.5                        34.1
+  A asfalto t=4.0                    vs B cielo t=7.5                        35.0
+  A asfalto t=4.0                    vs C cielo t=4.0                        34.1
+  A asfalto t=4.0                    vs CTRL hora dorada asfalto             15.2
+  B asfalto t=7.5                    vs C asfalto t=4.0                       6.0
+  B asfalto t=7.5                    vs A cielo t=7.5                        34.6
+  B asfalto t=7.5                    vs B cielo t=7.5                        35.2
+  B asfalto t=7.5                    vs C cielo t=4.0                        34.4
+  B asfalto t=7.5                    vs CTRL hora dorada asfalto             19.2
+  C asfalto t=4.0                    vs A cielo t=7.5                        36.1
+  C asfalto t=4.0                    vs B cielo t=7.5                        37.0
+  C asfalto t=4.0                    vs C cielo t=4.0                        36.2
+  C asfalto t=4.0                    vs CTRL hora dorada asfalto             14.0
+  A cielo t=7.5                      vs B cielo t=7.5                         2.7
+  A cielo t=7.5                      vs C cielo t=4.0                         3.4
+  A cielo t=7.5                      vs CTRL hora dorada asfalto             40.7
+  B cielo t=7.5                      vs C cielo t=4.0                         4.3
+  B cielo t=7.5                      vs CTRL hora dorada asfalto             41.8
+  C cielo t=4.0                      vs CTRL hora dorada asfalto             41.9
+
+################################################################
+# 4. EL AUDIO: NIVEL Y PORTON DE TRANSCRIPCION
+################################################################
+
+--- a-casilla-04-aereo-los-seis ---
+        I:         -19.0 LUFS
+        LRA:         4.8 LU
+        Peak:       -4.6 dBFS
+--- b-casilla-12-rueda-runtak ---
+        I:         -19.9 LUFS
+        LRA:         0.8 LU
+        Peak:       -3.1 dBFS
+--- c-casilla-04-correccion-aereo-y-lista ---
+        I:         -25.0 LUFS
+        LRA:         0.8 LU
+        Peak:      -14.3 dBFS
+--- referencia: DESIGN.md normaliza cada linea de relator a -20 LUFS ---
+
+--- transcripcion de a-casilla-04-aereo-los-seis ---
+ (engine revving)
+--- transcripcion de b-casilla-12-rueda-runtak ---
+ (car engine revving)
+--- transcripcion de c-casilla-04-correccion-aereo-y-lista ---
+ (airplane engine roaring)
+--- transcripcion de CONTROL-con-habla ---
+ Norvik are still in front here, 1-0, and we are just past the half hour.

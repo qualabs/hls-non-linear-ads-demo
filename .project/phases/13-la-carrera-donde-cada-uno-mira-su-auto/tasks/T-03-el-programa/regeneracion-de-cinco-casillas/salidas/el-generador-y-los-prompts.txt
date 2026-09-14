@@ -1,0 +1,7 @@
+# El generador tiene que reproducir letra por letra los 14 .prompt.txt que viajaron.
+# Si no, hay dos copias del mismo texto y una se despego -- que es como nacio H1.
+
+arbol tal cual:            reproduce 14/14, distintos 0 
+
+# CONTROL: se le saca el bloque de geometria a la casilla 12 y tiene que dar rojo.
+control (sin PISTA en 12): reproduce 13/14, distintos 1 ['12-runtak-rueda-piano']

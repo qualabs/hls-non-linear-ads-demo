@@ -1,0 +1,117 @@
+################################################################
+# 1. PRIMER OYENTE -- whisper.cpp (medium, en)
+################################################################
+
+01-los-seis-trackside                          (engine revving)
+02-caldrix-seguimiento                         (engine revving)
+03-caldrix-marvok-rebufo                       (engine revving)
+04-los-seis-aereo                              (airplane engine roaring)
+05-noctev-chicana                              (engine revving)
+06-runtak-pentav-frenada                       (tires squealing)
+07-quentra-sobrepaso                           (engine revving)
+08-caldrix-cerrado                             (engine revving)
+09-marvok-noctev-curvon                        (engine revving)
+10-pentav-quentra-eses                         (engine revving)
+11-los-seis-aereo-costa                        (airplane engine roaring)
+12-runtak-rueda-piano                          (engine revving)
+13-caldrix-marvok-recta                        (engine revving)
+14-los-seis-tribuna                            (engine revving)
+CONTROL-POSITIVO-linea-mezclada                Norvik are still in front here, 1-0, and we are just past the half hour.
+CONTROL-PARADA-01                              Yeah, we needed this break, I'm shattered. Drink up, only five minutes left.
+CONTROL-PARADA-02                              need this break. How are you holding up? Yeah, I'm shattered. Good game though.
+CONTROL-PARADA-03                              That was a good run, finally getting some space. How much longer till the break ends?
+CONTROL-PARADA-04                              How's the hamstring feeling? Better now, thanks. Coach said five more minutes.
+CONTROL-PARADA-05                              How are your legs feeling? A bit tight, need more stretching.
+CONTROL-PARADA-06                              I'm just glad for this break, I'm shattered. Yeah, need this water.
+CONTROL-PARADA-07                              We need to press higher up the pitch. Yeah, but conserve energy for the second half.
+CONTROL-PARADA-08                              (crunching)
+
+################################################################
+# 2. SEGUNDO OYENTE -- gemini-2.5-flash escuchando el archivo
+################################################################
+
+--- 01-los-seis-trackside ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Vehicle engine, vehicle pass-by
+--- 02-caldrix-seguimiento ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Car engine (accelerating), tire squeal
+--- 03-caldrix-marvok-rebufo ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car, engine, tire squeal
+--- 04-los-seis-aereo ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Engine whine, engine rumble
+--- 05-noctev-chicana ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Engine revving, vehicle passing, engine whine, acceleration
+--- 06-runtak-pentav-frenada ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Car engine, vehicle passing
+--- 07-quentra-sobrepaso ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Vehicle engine, turbocharger whine
+--- 08-caldrix-cerrado ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Car engine, tire squeal, vehicle
+--- 09-marvok-noctev-curvon ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Car engine revving, car accelerating
+--- 10-pentav-quentra-eses ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car, engine, tires
+--- 11-los-seis-aereo-costa ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Vehicle accelerating, tire squeal
+--- 12-runtak-rueda-piano ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Car engine, tire squeal
+--- 13-caldrix-marvok-recta ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Vehicle, engine, horn
+--- 14-los-seis-tribuna ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Car engine (accelerating, revving), Tire squeal
+--- CONTROL-POSITIVO-linea-mezclada ---
+    SPEECH: YES
+    TRANSCRIPT: Novik are still in front here, 1-0, and we are just past the half hour.
+    SOUNDS: Speech, Engine sound
+--- CONTROL-PARADA-01 ---
+    SPEECH: YES
+    TRANSCRIPT: Good half everyone. Yeah, we needed this break. I'm shattered. Drink up, only five minutes left.
+    SOUNDS: Speech, Whistle, Background noise
+
+################################################################
+# 3. EL NIVEL DE CADA CLIP -- insumo del montaje, no del porton
+################################################################
+
+    (DESIGN.md normaliza cada linea de relator a -20 LUFS)
+
+  01-los-seis-trackside                           I: -21.4 LUFS LRA: 2.4 LU Peak: -9.1 dBFS 
+  02-caldrix-seguimiento                          I: -17.6 LUFS LRA: 2.5 LU Peak: -4.6 dBFS 
+  03-caldrix-marvok-rebufo                        I: -21.6 LUFS LRA: 1.6 LU Peak: -5.7 dBFS 
+  04-los-seis-aereo                               I: -24.8 LUFS LRA: 0.6 LU Peak: -11.3 dBFS 
+  05-noctev-chicana                               I: -19.7 LUFS LRA: 2.6 LU Peak: -6.4 dBFS 
+  06-runtak-pentav-frenada                        I: -19.2 LUFS LRA: 1.7 LU Peak: -3.2 dBFS 
+  07-quentra-sobrepaso                            I: -15.3 LUFS LRA: 1.1 LU Peak: -3.6 dBFS 
+  08-caldrix-cerrado                              I: -18.0 LUFS LRA: 2.2 LU Peak: -6.2 dBFS 
+  09-marvok-noctev-curvon                         I: -23.3 LUFS LRA: 2.0 LU Peak: -8.5 dBFS 
+  10-pentav-quentra-eses                          I: -21.7 LUFS LRA: 2.4 LU Peak: -9.4 dBFS 
+  11-los-seis-aereo-costa                         I: -23.5 LUFS LRA: 1.3 LU Peak: -11.9 dBFS 
+  12-runtak-rueda-piano                           I: -16.8 LUFS LRA: 6.3 LU Peak: -0.9 dBFS 
+  13-caldrix-marvok-recta                         I: -22.6 LUFS LRA: 0.8 LU Peak: -9.7 dBFS 
+  14-los-seis-tribuna                             I: -16.5 LUFS LRA: 1.3 LU Peak: -5.1 dBFS 

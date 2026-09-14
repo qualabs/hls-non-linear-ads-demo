@@ -1,0 +1,52 @@
+### 1. cada clip mide lo que tiene que medir
+  01-los-seis-trackside              192 cuadros  8.000000 s
+  02-caldrix-seguimiento             192 cuadros  8.000000 s
+  03-caldrix-marvok-rebufo           192 cuadros  8.000000 s
+  04-los-seis-aereo                  192 cuadros  8.000000 s
+  05-noctev-chicana                  192 cuadros  8.000000 s
+  06-runtak-pentav-frenada           192 cuadros  8.000000 s
+  07-quentra-sobrepaso               192 cuadros  8.000000 s
+  08-caldrix-cerrado                 192 cuadros  8.000000 s
+  09-marvok-noctev-curvon            192 cuadros  8.000000 s
+  10-pentav-quentra-eses             192 cuadros  8.000000 s
+  11-los-seis-aereo-costa            192 cuadros  8.000000 s
+  12-runtak-rueda-piano              192 cuadros  8.000000 s
+  13-caldrix-marvok-recta            192 cuadros  8.000000 s
+  14-los-seis-tribuna                192 cuadros  8.000000 s
+  total 2688 cuadros, esperados 2688
+
+### 2. el ambiente, clip por clip: antes y despues de emparejar
+  clip                                I_antes pico_antes ganancia I_despues
+  01-los-seis-trackside                 -21.4     -9.1    -8.60    -30.0
+  02-caldrix-seguimiento                -17.6     -4.6   -12.40    -30.0
+  03-caldrix-marvok-rebufo              -21.6     -5.7    -8.40    -30.0
+  04-los-seis-aereo                     -24.8    -11.3    -5.20    -30.0
+  05-noctev-chicana                     -19.7     -6.4   -10.30    -30.0
+  06-runtak-pentav-frenada              -19.2     -3.2   -10.80    -30.0
+  07-quentra-sobrepaso                  -15.3     -3.6   -14.70    -30.0
+  08-caldrix-cerrado                    -18.0     -6.2   -12.00    -30.0
+  09-marvok-noctev-curvon               -23.3     -8.5    -6.70    -30.0
+  10-pentav-quentra-eses                -21.7     -9.4    -8.30    -30.0
+  11-los-seis-aereo-costa               -23.5    -11.9    -6.50    -30.0
+  12-runtak-rueda-piano                 -16.8     -0.9   -13.20    -30.0
+  13-caldrix-marvok-recta               -22.6     -9.7    -7.40    -30.0
+  14-los-seis-tribuna                   -16.5     -5.1   -13.50    -30.0
+
+### 3. el video: concat plano, sin fundidos, sin descartar cuadros
+
+### 4. la mezcla: las voces encima, el ambiente debajo
+  suma -20.7 LUFS  ->  ganancia -2.30 dB  ->  destino -23.0 LUFS
+
+### 5. lo que salio
+  archivo                /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/demo/race-multiview/content/.fuentes/programa.mp4
+  video                  1280,720,24/1,2688
+  duracion               112.000000 s
+  relato.wav                      I: -20.3 LUFS LRA: 5.1 LU Peak: -1.4 dBFS 
+  ambiente.wav                    I: -30.0 LUFS LRA: 3.4 LU Peak: -14.0 dBFS 
+  ambiente-sin-emparejar.wav      I: -19.3 LUFS LRA: 8.8 LU Peak: -0.9 dBFS 
+  programa.mp4                    I: -23.0 LUFS LRA: 4.4 LU Peak: -6.8 dBFS 
+
+  relato y ambiente estan medidos ANTES de la ganancia final de -2.30 dB, que los mueve a
+  los dos por igual: en el programa suenan a -22.5 y -32.3 LUFS, con los mismos 10.0 dB entre uno y otro.
+  Cuanto margen queda durante el habla, que es lo unico que decide si el numero sirvio:
+  ./medir-mezcla.py

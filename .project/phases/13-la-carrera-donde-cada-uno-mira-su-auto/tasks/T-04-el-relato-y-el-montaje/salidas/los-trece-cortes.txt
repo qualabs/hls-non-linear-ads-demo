@@ -1,0 +1,35 @@
+casilla   el clip mas parecido               distancia   el segundo mas parecido      distancia
+   1      01-los-seis-trackside               1.12   10-pentav-quentra-eses       52.09
+   2      02-caldrix-seguimiento              1.34   09-marvok-noctev-curvon      59.20
+   3      03-caldrix-marvok-rebufo            1.13   06-runtak-pentav-frenada     48.32
+   4      04-los-seis-aereo                   1.21   11-los-seis-aereo-costa      40.90
+   5      05-noctev-chicana                   1.18   09-marvok-noctev-curvon      41.33
+   6      06-runtak-pentav-frenada            1.82   03-caldrix-marvok-rebufo     48.31
+   7      07-quentra-sobrepaso                1.22   03-caldrix-marvok-rebufo     51.88
+   8      08-caldrix-cerrado                  1.50   07-quentra-sobrepaso         57.18
+   9      09-marvok-noctev-curvon             1.25   05-noctev-chicana            41.36
+  10      10-pentav-quentra-eses              1.17   03-caldrix-marvok-rebufo     49.95
+  11      11-los-seis-aereo-costa             1.14   04-los-seis-aereo            40.92
+  12      12-runtak-rueda-piano               1.09   04-los-seis-aereo            60.60
+  13      13-caldrix-marvok-recta             1.28   09-marvok-noctev-curvon      50.55
+  14      14-los-seis-tribuna                 1.62   10-pentav-quentra-eses       59.52
+
+14 de 14 casillas salieron del clip que el plan les asigna.
+
+corte  casilla       distancia en el corte   REFERENCIA dentro de la casilla   razon
+   1    1 -> 2               52.6                      12.6                     4.2x
+   2    2 -> 3               54.5                      11.6                     4.7x
+   3    3 -> 4               58.0                       8.8                     6.6x
+   4    4 -> 5               60.6                       6.1                    10.0x
+   5    5 -> 6               49.7                       6.6                     7.6x
+   6    6 -> 7               32.1                      11.0                     2.9x
+   7    7 -> 8               68.9                       5.0                    13.8x
+   8    8 -> 9               55.6                       4.9                    11.3x
+   9    9 -> 10              60.3                       9.5                     6.3x
+  10    10 -> 11              50.9                       8.0                     6.3x
+  11    11 -> 12              61.9                       5.5                    11.2x
+  12    12 -> 13              56.0                       9.2                     6.1x
+  13    13 -> 14              78.5                       8.8                     8.9x
+
+el corte mas flojo mide 32.1 y el interior mas movido mide 12.6: no se tocan, o sea que los trece son cortes
+lamina: /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/.project/phases/13-la-carrera-donde-cada-uno-mira-su-auto/tasks/T-04-el-relato-y-el-montaje/cuadros/1-los-trece-cortes.jpg

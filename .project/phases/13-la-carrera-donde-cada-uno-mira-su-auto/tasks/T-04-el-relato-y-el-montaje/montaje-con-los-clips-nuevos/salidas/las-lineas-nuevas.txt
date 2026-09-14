@@ -1,0 +1,19 @@
+las cuatro sintesis de esta corrida (gemini-2.5-flash-tts, en-GB, voz Charon)
+-- la columna de la derecha es lo que el porton OYO, no lo que se pidio --
+
+06 R  intento 1   5.59s   -0.80 dB  bien Noctave third and he has been quicker than the leader for two laps now.
+11 R  intento 1   5.06s   -2.80 dB  bien Ma and now wheel to wheel through this long corner.
+15 R  intento 1   4.12s   -2.00 dB  bien Look at Runtack, the rear wheels right over the curb.
+15 R  intento 1   3.66s   -1.40 dB  bien Look at Runtack, running right along that curb.
+
+la 15 se sintetizo dos veces: la primera version ('the rear wheels right over the kerb')
+se descarto al mirar los cuadros, porque el auto corre AL LADO del piano y no encima.
+
+segundo oyente sobre las tres primeras, whisper.cpp medium local, sin ver el guion:
+  06  Noctev third, and he has been quicker than the leader for two laps now.
+  11  Marvok and Noctev now wheel to wheel through this long corner.
+  15  Look at Runtac, the rear wheels right over the kerb.   (version descartada)
+
+La 11 vale la pena: gemini transcribio 'Ma and now wheel to wheel through this long
+corner' y el porton la dejo pasar igual. whisper recupera la linea entera, asi que
+lo que se comio los dos nombres fue el transcriptor y no el sintetizador.

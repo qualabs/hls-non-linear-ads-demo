@@ -1,0 +1,257 @@
+mediana del parche, y su Lab
+
+  CAM asfalto  01-arco-recta         #6D6B60   L*= 45.1  a*=  -1.3  b*=   6.4  hue= 51deg
+  CAM cielo    01-arco-recta         #FFFFFF   L*=100.0  a*=  -0.0  b*=   0.0  hue=  0deg
+  CAM asfalto  02-ponton-curv        #111810   L*=  7.3  a*=  -4.9  b*=   3.9  hue=112deg
+  CAM cielo    02-ponton-curv        #F0F6F4   L*= 96.4  a*=  -2.3  b*=   0.3  hue=160deg
+  CAM asfalto  03-casco-costa        #7D8483   L*= 54.6  a*=  -2.8  b*=  -0.4  hue=171deg
+  CAM cielo    03-casco-costa        #FFFFFF   L*=100.0  a*=  -0.0  b*=   0.0  hue=  0deg
+  CAM asfalto  04-morro-costa        #7F8385   L*= 54.5  a*=  -1.1  b*=  -1.6  hue=200deg
+  CAM cielo    04-morro-costa        #F0F1F4   L*= 95.1  a*=   0.2  b*=  -1.6  hue=225deg
+  CAM asfalto  05-rueda-piano        #CBC5C9   L*= 80.1  a*=   2.8  b*=  -1.3  hue=320deg
+  CAM cielo    05-rueda-piano        #F3FAFD   L*= 97.8  a*=  -1.8  b*=  -2.2  hue=198deg
+  CAM asfalto  06-arco               #8C9088   L*= 59.3  a*=  -3.0  b*=   3.7  hue= 90deg
+  CAM cielo    06-arco               #F6F6F3   L*= 96.8  a*=  -0.5  b*=   1.4  hue= 60deg
+  CAM asfalto  07-aleron-rect        #757E81   L*= 52.2  a*=  -2.7  b*=  -2.8  hue=195deg
+  CAM cielo    07-aleron-rect        #FFFFFF   L*=100.0  a*=  -0.0  b*=   0.0  hue=  0deg
+  CAM asfalto  08-arco-curvon        #76776E   L*= 49.7  a*=  -2.1  b*=   4.8  hue= 67deg
+  CAM cielo    08-arco-curvon        #FFFFFF   L*=100.0  a*=  -0.0  b*=   0.0  hue=  0deg
+  PROG asfalto 02-caldrix-seg        #B7B8C0   L*= 74.9  a*=   1.2  b*=  -4.2  hue=233deg
+  PROG asfalto 03-caldrix-mar        #6C6A68   L*= 44.9  a*=   0.4  b*=   1.4  hue= 30deg
+  PROG asfalto 08-caldrix-cer        #545A5D   L*= 37.8  a*=  -1.7  b*=  -2.5  hue=200deg
+  PROG asfalto 13-caldrix-mar        #676D69   L*= 45.4  a*=  -3.1  b*=   1.4  hue=140deg
+  CTRL hora dorada asfalto           #836236   L*= 44.0  a*=   8.0  b*=  29.9  hue= 34deg
+  CTRL otro mundo piso               #223033   L*= 18.8  a*=  -5.0  b*=  -3.8  hue=191deg
+
+dE00 entre parches:
+  CAM asfalto  01-arco-recta         vs CAM cielo    01-arco-recta           41.6
+  CAM asfalto  01-arco-recta         vs CAM asfalto  02-ponton-curv          28.4
+  CAM asfalto  01-arco-recta         vs CAM cielo    02-ponton-curv          39.7
+  CAM asfalto  01-arco-recta         vs CAM asfalto  03-casco-costa          11.4
+  CAM asfalto  01-arco-recta         vs CAM cielo    03-casco-costa          41.6
+  CAM asfalto  01-arco-recta         vs CAM asfalto  04-morro-costa          11.9
+  CAM asfalto  01-arco-recta         vs CAM cielo    04-morro-costa          39.4
+  CAM asfalto  01-arco-recta         vs CAM asfalto  05-rueda-piano          31.1
+  CAM asfalto  01-arco-recta         vs CAM cielo    05-rueda-piano          40.9
+  CAM asfalto  01-arco-recta         vs CAM asfalto  06-arco                 14.3
+  CAM asfalto  01-arco-recta         vs CAM cielo    06-arco                 39.8
+  CAM asfalto  01-arco-recta         vs CAM asfalto  07-aleron-rect          11.0
+  CAM asfalto  01-arco-recta         vs CAM cielo    07-aleron-rect          41.6
+  CAM asfalto  01-arco-recta         vs CAM asfalto  08-arco-curvon           4.9
+  CAM asfalto  01-arco-recta         vs CAM cielo    08-arco-curvon          41.6
+  CAM asfalto  01-arco-recta         vs PROG asfalto 02-caldrix-seg          28.2
+  CAM asfalto  01-arco-recta         vs PROG asfalto 03-caldrix-mar           4.9
+  CAM asfalto  01-arco-recta         vs PROG asfalto 08-caldrix-cer          10.4
+  CAM asfalto  01-arco-recta         vs PROG asfalto 13-caldrix-mar           5.0
+  CAM asfalto  01-arco-recta         vs CTRL hora dorada asfalto             15.4
+  CAM asfalto  01-arco-recta         vs CTRL otro mundo piso                 23.2
+  CAM cielo    01-arco-recta         vs CAM asfalto  02-ponton-curv          89.8
+  CAM cielo    01-arco-recta         vs CAM cielo    02-ponton-curv           3.9
+  CAM cielo    01-arco-recta         vs CAM asfalto  03-casco-costa          32.6
+  CAM cielo    01-arco-recta         vs CAM cielo    03-casco-costa           0.0
+  CAM cielo    01-arco-recta         vs CAM asfalto  04-morro-costa          32.5
+  CAM cielo    01-arco-recta         vs CAM cielo    04-morro-costa           3.2
+  CAM cielo    01-arco-recta         vs CAM asfalto  05-rueda-piano          13.1
+  CAM cielo    01-arco-recta         vs CAM cielo    05-rueda-piano           3.4
+  CAM cielo    01-arco-recta         vs CAM asfalto  06-arco                 28.8
+  CAM cielo    01-arco-recta         vs CAM cielo    06-arco                  2.4
+  CAM cielo    01-arco-recta         vs CAM asfalto  07-aleron-rect          34.8
+  CAM cielo    01-arco-recta         vs CAM cielo    07-aleron-rect           0.0
+  CAM cielo    01-arco-recta         vs CAM asfalto  08-arco-curvon          37.2
+  CAM cielo    01-arco-recta         vs CAM cielo    08-arco-curvon           0.0
+  CAM cielo    01-arco-recta         vs PROG asfalto 02-caldrix-seg          16.6
+  CAM cielo    01-arco-recta         vs PROG asfalto 03-caldrix-mar          41.4
+  CAM cielo    01-arco-recta         vs PROG asfalto 08-caldrix-cer          48.8
+  CAM cielo    01-arco-recta         vs PROG asfalto 13-caldrix-mar          41.2
+  CAM cielo    01-arco-recta         vs CTRL hora dorada asfalto             46.2
+  CAM cielo    01-arco-recta         vs CTRL otro mundo piso                 72.4
+  CAM asfalto  02-ponton-curv        vs CAM cielo    02-ponton-curv          88.2
+  CAM asfalto  02-ponton-curv        vs CAM asfalto  03-casco-costa          37.2
+  CAM asfalto  02-ponton-curv        vs CAM cielo    03-casco-costa          89.8
+  CAM asfalto  02-ponton-curv        vs CAM asfalto  04-morro-costa          37.5
+  CAM asfalto  02-ponton-curv        vs CAM cielo    04-morro-costa          87.8
+  CAM asfalto  02-ponton-curv        vs CAM asfalto  05-rueda-piano          68.6
+  CAM asfalto  02-ponton-curv        vs CAM cielo    05-rueda-piano          89.1
+  CAM asfalto  02-ponton-curv        vs CAM asfalto  06-arco                 41.9
+  CAM asfalto  02-ponton-curv        vs CAM cielo    06-arco                 88.5
+  CAM asfalto  02-ponton-curv        vs CAM asfalto  07-aleron-rect          35.2
+  CAM asfalto  02-ponton-curv        vs CAM cielo    07-aleron-rect          89.8
+  CAM asfalto  02-ponton-curv        vs CAM asfalto  08-arco-curvon          32.4
+  CAM asfalto  02-ponton-curv        vs CAM cielo    08-arco-curvon          89.8
+  CAM asfalto  02-ponton-curv        vs PROG asfalto 02-caldrix-seg          61.3
+  CAM asfalto  02-ponton-curv        vs PROG asfalto 03-caldrix-mar          28.7
+  CAM asfalto  02-ponton-curv        vs PROG asfalto 08-caldrix-cer          22.8
+  CAM asfalto  02-ponton-curv        vs PROG asfalto 13-caldrix-mar          28.4
+  CAM asfalto  02-ponton-curv        vs CTRL hora dorada asfalto             33.7
+  CAM asfalto  02-ponton-curv        vs CTRL otro mundo piso                 10.1
+  CAM cielo    02-ponton-curv        vs CAM asfalto  03-casco-costa          30.4
+  CAM cielo    02-ponton-curv        vs CAM cielo    03-casco-costa           3.9
+  CAM cielo    02-ponton-curv        vs CAM asfalto  04-morro-costa          30.6
+  CAM cielo    02-ponton-curv        vs CAM cielo    04-morro-costa           4.0
+  CAM cielo    02-ponton-curv        vs CAM asfalto  05-rueda-piano          12.7
+  CAM cielo    02-ponton-curv        vs CAM cielo    05-rueda-piano           2.7
+  CAM cielo    02-ponton-curv        vs CAM asfalto  06-arco                 26.5
+  CAM cielo    02-ponton-curv        vs CAM cielo    06-arco                  2.8
+  CAM cielo    02-ponton-curv        vs CAM asfalto  07-aleron-rect          32.7
+  CAM cielo    02-ponton-curv        vs CAM cielo    07-aleron-rect           3.9
+  CAM cielo    02-ponton-curv        vs CAM asfalto  08-arco-curvon          35.1
+  CAM cielo    02-ponton-curv        vs CAM cielo    08-arco-curvon           3.9
+  CAM cielo    02-ponton-curv        vs PROG asfalto 02-caldrix-seg          15.4
+  CAM cielo    02-ponton-curv        vs PROG asfalto 03-caldrix-mar          39.7
+  CAM cielo    02-ponton-curv        vs PROG asfalto 08-caldrix-cer          47.0
+  CAM cielo    02-ponton-curv        vs PROG asfalto 13-caldrix-mar          39.0
+  CAM cielo    02-ponton-curv        vs CTRL hora dorada asfalto             45.2
+  CAM cielo    02-ponton-curv        vs CTRL otro mundo piso                 70.9
+  CAM asfalto  03-casco-costa        vs CAM cielo    03-casco-costa          32.6
+  CAM asfalto  03-casco-costa        vs CAM asfalto  04-morro-costa           2.6
+  CAM asfalto  03-casco-costa        vs CAM cielo    04-morro-costa          30.0
+  CAM asfalto  03-casco-costa        vs CAM asfalto  05-rueda-piano          21.9
+  CAM asfalto  03-casco-costa        vs CAM cielo    05-rueda-piano          31.3
+  CAM asfalto  03-casco-costa        vs CAM asfalto  06-arco                  5.7
+  CAM asfalto  03-casco-costa        vs CAM cielo    06-arco                 30.8
+  CAM asfalto  03-casco-costa        vs CAM asfalto  07-aleron-rect           3.2
+  CAM asfalto  03-casco-costa        vs CAM cielo    07-aleron-rect          32.6
+  CAM asfalto  03-casco-costa        vs CAM asfalto  08-arco-curvon           6.7
+  CAM asfalto  03-casco-costa        vs CAM cielo    08-arco-curvon          32.6
+  CAM asfalto  03-casco-costa        vs PROG asfalto 02-caldrix-seg          18.0
+  CAM asfalto  03-casco-costa        vs PROG asfalto 03-caldrix-mar          10.7
+  CAM asfalto  03-casco-costa        vs PROG asfalto 08-caldrix-cer          16.3
+  CAM asfalto  03-casco-costa        vs PROG asfalto 13-caldrix-mar           9.3
+  CAM asfalto  03-casco-costa        vs CTRL hora dorada asfalto             23.5
+  CAM asfalto  03-casco-costa        vs CTRL otro mundo piso                 30.3
+  CAM cielo    03-casco-costa        vs CAM asfalto  04-morro-costa          32.5
+  CAM cielo    03-casco-costa        vs CAM cielo    04-morro-costa           3.2
+  CAM cielo    03-casco-costa        vs CAM asfalto  05-rueda-piano          13.1
+  CAM cielo    03-casco-costa        vs CAM cielo    05-rueda-piano           3.4
+  CAM cielo    03-casco-costa        vs CAM asfalto  06-arco                 28.8
+  CAM cielo    03-casco-costa        vs CAM cielo    06-arco                  2.4
+  CAM cielo    03-casco-costa        vs CAM asfalto  07-aleron-rect          34.8
+  CAM cielo    03-casco-costa        vs CAM cielo    07-aleron-rect           0.0
+  CAM cielo    03-casco-costa        vs CAM asfalto  08-arco-curvon          37.2
+  CAM cielo    03-casco-costa        vs CAM cielo    08-arco-curvon           0.0
+  CAM cielo    03-casco-costa        vs PROG asfalto 02-caldrix-seg          16.6
+  CAM cielo    03-casco-costa        vs PROG asfalto 03-caldrix-mar          41.4
+  CAM cielo    03-casco-costa        vs PROG asfalto 08-caldrix-cer          48.8
+  CAM cielo    03-casco-costa        vs PROG asfalto 13-caldrix-mar          41.2
+  CAM cielo    03-casco-costa        vs CTRL hora dorada asfalto             46.2
+  CAM cielo    03-casco-costa        vs CTRL otro mundo piso                 72.4
+  CAM asfalto  04-morro-costa        vs CAM cielo    04-morro-costa          29.8
+  CAM asfalto  04-morro-costa        vs CAM asfalto  05-rueda-piano          21.2
+  CAM asfalto  04-morro-costa        vs CAM cielo    05-rueda-piano          31.3
+  CAM asfalto  04-morro-costa        vs CAM asfalto  06-arco                  7.1
+  CAM asfalto  04-morro-costa        vs CAM cielo    06-arco                 30.8
+  CAM asfalto  04-morro-costa        vs CAM asfalto  07-aleron-rect           3.2
+  CAM asfalto  04-morro-costa        vs CAM cielo    07-aleron-rect          32.5
+  CAM asfalto  04-morro-costa        vs CAM asfalto  08-arco-curvon           7.7
+  CAM asfalto  04-morro-costa        vs CAM cielo    08-arco-curvon          32.5
+  CAM asfalto  04-morro-costa        vs PROG asfalto 02-caldrix-seg          17.3
+  CAM asfalto  04-morro-costa        vs PROG asfalto 03-caldrix-mar          10.2
+  CAM asfalto  04-morro-costa        vs PROG asfalto 08-caldrix-cer          16.1
+  CAM asfalto  04-morro-costa        vs PROG asfalto 13-caldrix-mar           9.9
+  CAM asfalto  04-morro-costa        vs CTRL hora dorada asfalto             23.2
+  CAM asfalto  04-morro-costa        vs CTRL otro mundo piso                 30.4
+  CAM cielo    04-morro-costa        vs CAM asfalto  05-rueda-piano          10.3
+  CAM cielo    04-morro-costa        vs CAM cielo    05-rueda-piano           3.2
+  CAM cielo    04-morro-costa        vs CAM asfalto  06-arco                 26.4
+  CAM cielo    04-morro-costa        vs CAM cielo    06-arco                  3.3
+  CAM cielo    04-morro-costa        vs CAM asfalto  07-aleron-rect          32.1
+  CAM cielo    04-morro-costa        vs CAM cielo    07-aleron-rect           3.2
+  CAM cielo    04-morro-costa        vs CAM asfalto  08-arco-curvon          34.8
+  CAM cielo    04-morro-costa        vs CAM cielo    08-arco-curvon           3.2
+  CAM cielo    04-morro-costa        vs PROG asfalto 02-caldrix-seg          13.6
+  CAM cielo    04-morro-costa        vs PROG asfalto 03-caldrix-mar          38.9
+  CAM cielo    04-morro-costa        vs PROG asfalto 08-caldrix-cer          46.4
+  CAM cielo    04-morro-costa        vs PROG asfalto 13-caldrix-mar          38.7
+  CAM cielo    04-morro-costa        vs CTRL hora dorada asfalto             44.6
+  CAM cielo    04-morro-costa        vs CTRL otro mundo piso                 70.5
+  CAM asfalto  05-rueda-piano        vs CAM cielo    05-rueda-piano          13.1
+  CAM asfalto  05-rueda-piano        vs CAM asfalto  06-arco                 18.8
+  CAM asfalto  05-rueda-piano        vs CAM cielo    06-arco                 11.9
+  CAM asfalto  05-rueda-piano        vs CAM asfalto  07-aleron-rect          24.1
+  CAM asfalto  05-rueda-piano        vs CAM cielo    07-aleron-rect          13.1
+  CAM asfalto  05-rueda-piano        vs CAM asfalto  08-arco-curvon          26.6
+  CAM asfalto  05-rueda-piano        vs CAM cielo    08-arco-curvon          13.1
+  CAM asfalto  05-rueda-piano        vs PROG asfalto 02-caldrix-seg           5.1
+  CAM asfalto  05-rueda-piano        vs PROG asfalto 03-caldrix-mar          30.2
+  CAM asfalto  05-rueda-piano        vs PROG asfalto 08-caldrix-cer          38.3
+  CAM asfalto  05-rueda-piano        vs PROG asfalto 13-caldrix-mar          30.7
+  CAM asfalto  05-rueda-piano        vs CTRL hora dorada asfalto             36.8
+  CAM asfalto  05-rueda-piano        vs CTRL otro mundo piso                 62.3
+  CAM cielo    05-rueda-piano        vs CAM asfalto  06-arco                 27.7
+  CAM cielo    05-rueda-piano        vs CAM cielo    06-arco                  3.9
+  CAM cielo    05-rueda-piano        vs CAM asfalto  07-aleron-rect          33.4
+  CAM cielo    05-rueda-piano        vs CAM cielo    07-aleron-rect           3.4
+  CAM cielo    05-rueda-piano        vs CAM asfalto  08-arco-curvon          36.2
+  CAM cielo    05-rueda-piano        vs CAM cielo    08-arco-curvon           3.4
+  CAM cielo    05-rueda-piano        vs PROG asfalto 02-caldrix-seg          15.5
+  CAM cielo    05-rueda-piano        vs PROG asfalto 03-caldrix-mar          40.5
+  CAM cielo    05-rueda-piano        vs PROG asfalto 08-caldrix-cer          47.7
+  CAM cielo    05-rueda-piano        vs PROG asfalto 13-caldrix-mar          40.0
+  CAM cielo    05-rueda-piano        vs CTRL hora dorada asfalto             46.5
+  CAM cielo    05-rueda-piano        vs CTRL otro mundo piso                 71.4
+  CAM asfalto  06-arco               vs CAM cielo    06-arco                 26.8
+  CAM asfalto  06-arco               vs CAM asfalto  07-aleron-rect           9.0
+  CAM asfalto  06-arco               vs CAM cielo    07-aleron-rect          28.8
+  CAM asfalto  06-arco               vs CAM asfalto  08-arco-curvon           9.2
+  CAM asfalto  06-arco               vs CAM cielo    08-arco-curvon          28.8
+  CAM asfalto  06-arco               vs PROG asfalto 02-caldrix-seg          15.5
+  CAM asfalto  06-arco               vs PROG asfalto 03-caldrix-mar          15.0
+  CAM asfalto  06-arco               vs PROG asfalto 08-caldrix-cer          22.1
+  CAM asfalto  06-arco               vs PROG asfalto 13-caldrix-mar          13.8
+  CAM asfalto  06-arco               vs CTRL hora dorada asfalto             24.1
+  CAM asfalto  06-arco               vs CTRL otro mundo piso                 35.8
+  CAM cielo    06-arco               vs CAM asfalto  07-aleron-rect          33.2
+  CAM cielo    06-arco               vs CAM cielo    07-aleron-rect           2.4
+  CAM cielo    06-arco               vs CAM asfalto  08-arco-curvon          35.3
+  CAM cielo    06-arco               vs CAM cielo    08-arco-curvon           2.4
+  CAM cielo    06-arco               vs PROG asfalto 02-caldrix-seg          15.4
+  CAM cielo    06-arco               vs PROG asfalto 03-caldrix-mar          39.7
+  CAM cielo    06-arco               vs PROG asfalto 08-caldrix-cer          47.3
+  CAM cielo    06-arco               vs PROG asfalto 13-caldrix-mar          39.4
+  CAM cielo    06-arco               vs CTRL hora dorada asfalto             44.5
+  CAM cielo    06-arco               vs CTRL otro mundo piso                 71.2
+  CAM asfalto  07-aleron-rect        vs CAM cielo    07-aleron-rect          34.8
+  CAM asfalto  07-aleron-rect        vs CAM asfalto  08-arco-curvon           7.4
+  CAM asfalto  07-aleron-rect        vs CAM cielo    08-arco-curvon          34.8
+  CAM asfalto  07-aleron-rect        vs PROG asfalto 02-caldrix-seg          19.8
+  CAM asfalto  07-aleron-rect        vs PROG asfalto 03-caldrix-mar           9.2
+  CAM asfalto  07-aleron-rect        vs PROG asfalto 08-caldrix-cer          13.6
+  CAM asfalto  07-aleron-rect        vs PROG asfalto 13-caldrix-mar           7.8
+  CAM asfalto  07-aleron-rect        vs CTRL hora dorada asfalto             23.9
+  CAM asfalto  07-aleron-rect        vs CTRL otro mundo piso                 27.8
+  CAM cielo    07-aleron-rect        vs CAM asfalto  08-arco-curvon          37.2
+  CAM cielo    07-aleron-rect        vs CAM cielo    08-arco-curvon           0.0
+  CAM cielo    07-aleron-rect        vs PROG asfalto 02-caldrix-seg          16.6
+  CAM cielo    07-aleron-rect        vs PROG asfalto 03-caldrix-mar          41.4
+  CAM cielo    07-aleron-rect        vs PROG asfalto 08-caldrix-cer          48.8
+  CAM cielo    07-aleron-rect        vs PROG asfalto 13-caldrix-mar          41.2
+  CAM cielo    07-aleron-rect        vs CTRL hora dorada asfalto             46.2
+  CAM cielo    07-aleron-rect        vs CTRL otro mundo piso                 72.4
+  CAM asfalto  08-arco-curvon        vs CAM cielo    08-arco-curvon          37.2
+  CAM asfalto  08-arco-curvon        vs PROG asfalto 02-caldrix-seg          23.5
+  CAM asfalto  08-arco-curvon        vs PROG asfalto 03-caldrix-mar           6.5
+  CAM asfalto  08-arco-curvon        vs PROG asfalto 08-caldrix-cer          13.0
+  CAM asfalto  08-arco-curvon        vs PROG asfalto 13-caldrix-mar           5.4
+  CAM asfalto  08-arco-curvon        vs CTRL hora dorada asfalto             18.0
+  CAM asfalto  08-arco-curvon        vs CTRL otro mundo piso                 26.6
+  CAM cielo    08-arco-curvon        vs PROG asfalto 02-caldrix-seg          16.6
+  CAM cielo    08-arco-curvon        vs PROG asfalto 03-caldrix-mar          41.4
+  CAM cielo    08-arco-curvon        vs PROG asfalto 08-caldrix-cer          48.8
+  CAM cielo    08-arco-curvon        vs PROG asfalto 13-caldrix-mar          41.2
+  CAM cielo    08-arco-curvon        vs CTRL hora dorada asfalto             46.2
+  CAM cielo    08-arco-curvon        vs CTRL otro mundo piso                 72.4
+  PROG asfalto 02-caldrix-seg        vs PROG asfalto 03-caldrix-mar          26.9
+  PROG asfalto 02-caldrix-seg        vs PROG asfalto 08-caldrix-cer          34.7
+  PROG asfalto 02-caldrix-seg        vs PROG asfalto 13-caldrix-mar          27.0
+  PROG asfalto 02-caldrix-seg        vs CTRL hora dorada asfalto             35.4
+  PROG asfalto 02-caldrix-seg        vs CTRL otro mundo piso                 55.2
+  PROG asfalto 03-caldrix-mar        vs PROG asfalto 08-caldrix-cer           7.9
+  PROG asfalto 03-caldrix-mar        vs PROG asfalto 13-caldrix-mar           4.9
+  PROG asfalto 03-caldrix-mar        vs CTRL hora dorada asfalto             17.4
+  PROG asfalto 03-caldrix-mar        vs CTRL otro mundo piso                 22.3
+  PROG asfalto 08-caldrix-cer        vs PROG asfalto 13-caldrix-mar           8.0
+  PROG asfalto 08-caldrix-cer        vs CTRL hora dorada asfalto             22.5
+  PROG asfalto 08-caldrix-cer        vs CTRL otro mundo piso                 15.0
+  PROG asfalto 13-caldrix-mar        vs CTRL hora dorada asfalto             20.2
+  PROG asfalto 13-caldrix-mar        vs CTRL otro mundo piso                 21.8
+  CTRL hora dorada asfalto           vs CTRL otro mundo piso                 31.4

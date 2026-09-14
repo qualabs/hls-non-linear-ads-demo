@@ -1,0 +1,17 @@
+# el-tope-se-ve-frenar.txt
+#
+# QUE MIDE. Que el tope de gasto frena de verdad y no es un comentario. Con 29 lineas
+# en el registro y TOPE_GENERACIONES=33, pedir 5 casillas tiene que MORIR y pedir 4
+# tiene que pasar el control. El chequeo corre ANTES de pedir el token, asi que
+# ninguna de las dos corridas puede lanzar nada.
+
+$ ./generar-programa.py --regenerar 1 2 3 4 5     # 29+5 = 34 > 33, tiene que frenar
+TOPE: hay 29 generaciones lanzadas y se piden 5; el tope de la T-03 es 33 (US$26.40). Corre menos casillas o cierra la task con lo que hay.
+  exit=
+
+$ ./generar-programa.py 1 2 3 4                   # los clips ya estan: no hay nada que lanzar
+== casilla  1 (01-los-seis-trackside): ya esta, no se regenera ==
+== casilla  2 (02-caldrix-seguimiento): ya esta, no se regenera ==
+== casilla  3 (03-caldrix-marvok-rebufo): ya esta, no se regenera ==
+== casilla  4 (04-los-seis-aereo): ya esta, no se regenera ==
+nada para generar

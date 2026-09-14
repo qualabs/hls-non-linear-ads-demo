@@ -1,0 +1,30 @@
+# medir-el-barrido.py sobre los tres grupos. La referencia son los nueve que Nicolas dio
+# por buenos y los cinco que rechazo: si el instrumento no los separa, no mide lo que dice.
+
+### LOS NUEVE QUE DIO POR BUENOS
+02-caldrix-seguimiento.mp4         R=0.31  neto=119  recorrido=383
+03-caldrix-marvok-rebufo.mp4       R=1.00  neto= 29  recorrido= 29
+04-los-seis-aereo.mp4              R=0.00  neto=  0  recorrido=  0
+07-quentra-sobrepaso.mp4           R=0.07  neto= 12  recorrido=178
+08-caldrix-cerrado.mp4             R=0.67  neto=454  recorrido=680
+09-marvok-noctev-curvon.mp4        R=0.83  neto=356  recorrido=428
+11-los-seis-aereo-costa.mp4        R=0.00  neto=  0  recorrido=  0
+13-caldrix-marvok-recta.mp4        R=0.89  neto= 16  recorrido= 18
+14-los-seis-tribuna.mp4            R=1.00  neto= 24  recorrido= 24
+
+### LOS CINCO QUE RECHAZO
+01-los-seis-trackside.mp4          R=0.48  neto=132  recorrido=276
+05-noctev-chicana.mp4              R=0.85  neto=313  recorrido=367
+06-runtak-pentav-frenada.mp4       R=0.32  neto=134  recorrido=420
+10-pentav-quentra-eses.mp4         R=0.29  neto=116  recorrido=402
+12-runtak-rueda-piano.mp4          R=0.59  neto=139  recorrido=235
+
+### LOS CINCO NUEVOS
+01-los-seis-trackside.mp4          R=0.02  neto=  1  recorrido= 41
+05-noctev-chicana.mp4              R=0.51  neto=239  recorrido=467
+06-runtak-pentav-frenada.mp4       R=0.83  neto=183  recorrido=221
+10-pentav-quentra-eses.mp4         R=0.04  neto= 13  recorrido=317
+12-runtak-rueda-piano.mp4          R=0.62  neto= 61  recorrido= 99
+
+# VEREDICTO: los dos primeros grupos se superponen enteros (0,00-1,00 contra 0,29-0,85),
+# asi que el instrumento NO separa lo que Nicolas separo mirando. El numero no vota.

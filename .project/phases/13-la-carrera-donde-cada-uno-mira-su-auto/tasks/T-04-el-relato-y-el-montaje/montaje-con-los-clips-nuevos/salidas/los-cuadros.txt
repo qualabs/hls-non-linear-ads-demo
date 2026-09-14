@@ -1,0 +1,12 @@
+escritos en /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/.project/phases/13-la-carrera-donde-cada-uno-mira-su-auto/tasks/T-04-el-relato-y-el-montaje/montaje-con-los-clips-nuevos/cuadros
+  0-las-tres-casillas-a-470-y-190.jpg (940, 2585)
+  1-los-trece-cortes.jpg (628, 2477)
+  casilla-04-t28s-1280.png (1280, 720)
+  casilla-04-t28s-190px.png (190, 107)
+  casilla-04-t28s-470px.png (470, 264)
+  casilla-10-t76s-1280.png (1280, 720)
+  casilla-10-t76s-190px.png (190, 107)
+  casilla-10-t76s-470px.png (470, 264)
+  casilla-12-t91s-1280.png (1280, 720)
+  casilla-12-t91s-190px.png (190, 107)
+  casilla-12-t91s-470px.png (470, 264)

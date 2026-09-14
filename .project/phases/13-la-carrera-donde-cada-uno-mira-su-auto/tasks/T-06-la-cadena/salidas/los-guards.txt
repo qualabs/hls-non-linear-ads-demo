@@ -1,0 +1,19 @@
+### el guard de fuentes faltantes, visto disparar
+falta el material que no está en el repositorio:
+  audio/programa.m4a  ->  ./scripts/armar-programa.sh
+
+  armar-programa.sh pega los catorce clips de content/.fuentes/programa/ con el
+  relato encima. Los clips los genera ./scripts/generar-programa.py con Vertex AI,
+  y eso cuesta plata: el detalle está en la task T-03 de la fase 13.
+exit=1
+
+### y el guard de ninguna camara
+no hay ninguna cámara en content/.fuentes: la oferta quedaría vacía
+  correr por cámara:  ./scripts/armar-camara.sh <nombre>
+  pega los ocho clips de content/.fuentes/camaras/<nombre>/, que genera
+  ./scripts/generar-camara.py con Vertex AI. Cuesta plata: ver la task T-05.
+exit=
+
+### todo de vuelta en su lugar
+-rw-rw-r-- 1 nicolas nicolas  1833656 Sep 14 14:26 audio/programa.m4a
+-rw-rw-r-- 1 nicolas nicolas 31664197 Sep 14 15:40 content/.fuentes/caldrix.mp4

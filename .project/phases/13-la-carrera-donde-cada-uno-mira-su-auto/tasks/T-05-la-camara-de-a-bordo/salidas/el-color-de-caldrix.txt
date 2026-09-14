@@ -1,0 +1,92 @@
+======================================================================================
+1. LOS OCHO CLIPS DE LA CAMARA -- cada recorte, con su control de asfalto
+======================================================================================
+  01-arco-recta-t4.0                 CALDRIX        filtrado #FCF855    62.7%   cromatico #FCF855    63.8%  hue= 59deg
+  01-arco-recta-t4.0                 CTRL-asfalto   filtrado #45482C     1.1%   cromatico #585748    41.1%  hue= 66deg
+  01-arco-recta-t4.0                 CIELO          filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+  02-ponton-curva-larga-t4.0         CALDRIX        filtrado #F0E433   100.0%   cromatico #F0E433   100.0%  hue= 56deg
+  02-ponton-curva-larga-t4.0         CTRL-asfalto   filtrado #646A20     3.1%   cromatico #C78E8C     8.2%  hue= 65deg
+  02-ponton-curva-larga-t4.0         CIELO          filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+  03-casco-costa-t4.0                CALDRIX        filtrado #D3C20B    90.2%   cromatico #D3C20B    92.0%  hue= 55deg
+  03-casco-costa-t4.0                CTRL-asfalto   filtrado #4D4521     0.0%   cromatico #EEECB7     3.1%  hue= 49deg
+  03-casco-costa-t4.0                CIELO          filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+  04-morro-costa-t4.0                CALDRIX        filtrado #F6F891    82.3%   cromatico #F6F895   100.0%  hue= 61deg
+  04-morro-costa-t4.0                CTRL-asfalto   filtrado #A39C58     0.3%   cromatico #9C996D     0.6%  hue= 54deg
+  04-morro-costa-t4.0                CIELO          filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+  05-rueda-piano-t4.0                CALDRIX        filtrado #D5C30C    82.1%   cromatico #D5C30C    82.3%  hue= 55deg
+  05-rueda-piano-t4.0                CTRL-asfalto   filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+  05-rueda-piano-t4.0                CIELO          filtrado (ninguno)   0.0%   cromatico #393038     2.8%
+  06-arco-tribuna-t4.0               CALDRIX        filtrado #F5ED5E    60.9%   cromatico #F5EE61    65.6%  hue= 57deg
+  06-arco-tribuna-t4.0               CTRL-asfalto   filtrado (ninguno)   0.0%   cromatico #BBAE97     4.5%
+  06-arco-tribuna-t4.0               CIELO          filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+  07-aleron-recta-t4.0               CALDRIX        filtrado #FDFA50   100.0%   cromatico #FDFA50   100.0%  hue= 59deg
+  07-aleron-recta-t4.0               CTRL-asfalto   filtrado #B7A855     0.6%   cromatico #485359    37.8%  hue= 51deg
+  07-aleron-recta-t4.0               CIELO          filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+  08-arco-curvon-t4.0                CALDRIX        filtrado #F9F781    77.7%   cromatico #F8F780    89.3%  hue= 59deg
+  08-arco-curvon-t4.0                CTRL-asfalto   filtrado #423C25     0.0%   cromatico #787E6E     0.2%  hue= 48deg
+  08-arco-curvon-t4.0                CIELO          filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+
+======================================================================================
+2. LAS CUATRO CASILLAS DEL PROGRAMA DONDE ESTA CALDRIX -- la referencia
+======================================================================================
+   (recortes de la T-03, cargados por path: los midio otra task sobre otras imagenes)
+  02-caldrix-seguimiento-t4.0        CALDRIX        filtrado #D6BA50    85.7%   cromatico #D7BC54    94.0%  hue= 47deg
+  02-caldrix-seguimiento-t4.0        CTRL-asfalto   filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+  03-caldrix-marvok-rebufo-t4.0      CALDRIX        filtrado #ADAE10    53.7%   cromatico #ABAD12    60.7%  hue= 60deg
+  03-caldrix-marvok-rebufo-t4.0      MARVOK         filtrado #3B1F5B    37.0%   cromatico #412961    54.5%  hue=268deg
+  03-caldrix-marvok-rebufo-t4.0      CTRL-asfalto   filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+  08-caldrix-cerrado-t4.0            CALDRIX        filtrado #C1A70E    66.6%   cromatico #C2A80F    73.6%  hue= 51deg
+  08-caldrix-cerrado-t4.0            CTRL-asfalto   filtrado (ninguno)   0.0%   cromatico #454C50    10.7%
+  13-caldrix-marvok-recta-t4.0       CALDRIX        filtrado #D6B52E    40.3%   cromatico #EBDB89    69.7%  hue= 48deg
+  13-caldrix-marvok-recta-t4.0       MARVOK         filtrado #361E52     4.3%   cromatico #A693C2    22.6%  hue=268deg
+  13-caldrix-marvok-recta-t4.0       CTRL-asfalto   filtrado (ninguno)   0.0%   cromatico (ninguno)   0.0%
+
+======================================================================================
+3. EL CRUCE: el auto de la camara contra el auto del programa
+======================================================================================
+
+  la camara de a bordo  #F6F252  hue= 59deg   n=8 clips
+  el programa           #CCB21F  hue= 51deg   n=4 casillas
+  race.json             #CCB21F  hue= 51deg   (lo que el selector pinta en la fila)
+
+  dE00  camara  vs  programa   =  15.4
+  dE00  camara  vs  race.json  =  15.4
+
+  y clip por clip contra la casilla 8, que es la unica que cae DENTRO de la ventana:
+    01-arco-recta-t4.0                 #FCF855  vs  casilla 8 #C1A70E   dE00= 19.4
+    02-ponton-curva-larga-t4.0         #F0E433  vs  casilla 8 #C1A70E   dE00= 15.2
+    03-casco-costa-t4.0                #D3C20B  vs  casilla 8 #C1A70E   dE00=  7.5
+    04-morro-costa-t4.0                #F6F891  vs  casilla 8 #C1A70E   dE00= 20.7
+    05-rueda-piano-t4.0                #D5C30C  vs  casilla 8 #C1A70E   dE00=  7.7
+    06-arco-tribuna-t4.0               #F5ED5E  vs  casilla 8 #C1A70E   dE00= 17.2
+    07-aleron-recta-t4.0               #FDFA50  vs  casilla 8 #C1A70E   dE00= 19.8
+    08-arco-curvon-t4.0                #F9F781  vs  casilla 8 #C1A70E   dE00= 19.8
+
+======================================================================================
+4. LA CONSTANCIA ENTRE LOS OCHO -- un feed es el mismo auto ocho veces
+======================================================================================
+
+    01-arco-recta-t4.0                 #FCF855  (62.7% del recorte)  dE00 vs representante=  1.3
+    02-ponton-curva-larga-t4.0         #F0E433  (100.0% del recorte)  dE00 vs representante=  3.6
+    03-casco-costa-t4.0                #D3C20B  (90.2% del recorte)  dE00 vs representante= 11.1
+    04-morro-costa-t4.0                #F6F891  (82.3% del recorte)  dE00 vs representante=  7.0
+    05-rueda-piano-t4.0                #D5C30C  (82.1% del recorte)  dE00 vs representante= 10.9
+    06-arco-tribuna-t4.0               #F5ED5E  (60.9% del recorte)  dE00 vs representante=  1.9
+    07-aleron-recta-t4.0               #FDFA50  (100.0% del recorte)  dE00 vs representante=  1.8
+    08-arco-curvon-t4.0                #F9F781  (77.7% del recorte)  dE00 vs representante=  4.7
+
+    DISPERSION MAXIMA = 14.8   entre 03-casco-costa-t4.0 y 04-morro-costa-t4.0
+
+======================================================================================
+5. SI SE PUEDE CONFUNDIR CON OTRO AUTO -- el color del feed contra los otros cinco
+======================================================================================
+
+    QUENTRA   #876E46   dE00=  39.7
+    PENTAV    #2D6E24   dE00=  46.0
+    NOCTEV    #24ACC8   dE00=  50.2
+    RUNTAK    #661955   dE00=  88.7
+    MARVOK    #381A6A   dE00=  97.4
+
+    el mas cercano de los otros cinco esta a 39.7; el propio CALDRIX del programa,
+    a 15.4. Si el primero fuera menor que el segundo, la fila del selector no
+    significaria nada.

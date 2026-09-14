@@ -1,0 +1,42 @@
+== 1. LOS CATORCE CONTRA SU .prompt.txt EN DISCO
+ 1 01-los-seis-trackside        IDENTICO
+ 2 02-caldrix-seguimiento       IDENTICO
+ 3 03-caldrix-marvok-rebufo     IDENTICO
+ 4 04-los-seis-aereo            IDENTICO
+ 5 05-noctev-chicana            IDENTICO
+ 6 06-runtak-pentav-frenada     IDENTICO
+ 7 07-quentra-sobrepaso         IDENTICO
+ 8 08-caldrix-cerrado           IDENTICO
+ 9 09-marvok-noctev-curvon      IDENTICO
+10 10-pentav-quentra-eses       DISTINTO
+11 11-los-seis-aereo-costa      IDENTICO
+12 12-runtak-rueda-piano        IDENTICO
+13 13-caldrix-marvok-recta      IDENTICO
+14 14-los-seis-tribuna          IDENTICO
+
+== 2. LA PALABRA `APPLE` EN EL PROMPT QUE EL GENERADOR ARMA HOY
+ 1 01-los-seis-trackside        apple=2  lime=0
+ 2 02-caldrix-seguimiento       apple=1  lime=0
+ 3 03-caldrix-marvok-rebufo     apple=1  lime=0
+ 4 04-los-seis-aereo            apple=2  lime=0
+ 5 05-noctev-chicana            apple=1  lime=0
+ 6 06-runtak-pentav-frenada     apple=2  lime=0
+ 7 07-quentra-sobrepaso         apple=2  lime=0
+ 8 08-caldrix-cerrado           apple=1  lime=0
+ 9 09-marvok-noctev-curvon      apple=1  lime=0
+10 10-pentav-quentra-eses       apple=0  lime=2
+11 11-los-seis-aereo-costa      apple=2  lime=0
+12 12-runtak-rueda-piano        apple=1  lime=0
+13 13-caldrix-marvok-recta      apple=1  lime=0
+14 14-los-seis-tribuna          apple=2  lime=0
+
+== 3. EL CONTROL: el renombre se ve dar distinto y se ve fallar
+con renombre: apple=0 lime=2  |  sin renombre: apple=2 lime=0  |  iguales? False
+el diff, las dos apariciones:
+   - THE CARS IN THIS SHOT: two only -- the BRIGHT APPLE GREEN car and the DARK BRONZE GOLD car, close together. Al
+   + THE CARS IN THIS SHOT: two only -- the BRIGHT LIME GREEN car and the DARK BRONZE GOLD car, close together. All
+   - THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey 
+   + THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey 
+
+== 4. EL CONTROL DEL GUARDA: un renombre que no engancha tiene que MORIR, no pasar
+   muere: casilla 10: color_renombrado pide reemplazar 'BRIGHT TANGERINE ORANGE' y ese texto no esta en el prompt. El renombre se convirtio en un no-op y el cli

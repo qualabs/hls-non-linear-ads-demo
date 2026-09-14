@@ -1,0 +1,23 @@
+el salto de imagen mas grande de cada clip, sin contar el primer cuadro:
+     01-los-seis-trackside.mp4          0.0158  en 2.250 s
+     02-caldrix-seguimiento.mp4         0.0218  en 6.750 s
+     03-caldrix-marvok-rebufo.mp4       0.0073  en 4.458 s
+     04-los-seis-aereo.mp4              0.0065  en 1.583 s
+     05-noctev-chicana.mp4              0.0141  en 5.042 s
+     06-runtak-pentav-frenada.mp4       0.0209  en 3.458 s
+     07-quentra-sobrepaso.mp4           0.0262  en 2.833 s
+     08-caldrix-cerrado.mp4             0.0236  en 2.458 s
+     09-marvok-noctev-curvon.mp4        0.0263  en 7.833 s
+     10-pentav-quentra-eses.mp4         0.0133  en 0.250 s
+     11-los-seis-aereo-costa.mp4        0.0064  en 1.500 s
+  -> 12-runtak-rueda-piano.mp4          0.0643  en 4.375 s
+     13-caldrix-marvok-recta.mp4        0.0184  en 2.167 s
+     14-los-seis-tribuna.mp4            0.0179  en 4.250 s
+
+el clip de la casilla 12 salta 0.0643; el mas alto de los otros 13 es 0.0263  (2.4 veces)
+corte del clip a los 4.375 s  ->  segundo 92.375 del programa
+
+VERDE  el relato como se entrega      fin hablado 91.803 s   0.572 s antes del corte
+ROJO   CONTROL la linea corrida +1 s  fin hablado 92.803 s   0.428 s DESPUES del corte
+
+PASA, y se vio el control en rojo.

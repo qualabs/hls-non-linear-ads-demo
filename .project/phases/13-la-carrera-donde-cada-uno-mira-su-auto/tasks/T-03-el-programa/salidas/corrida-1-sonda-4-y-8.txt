@@ -1,0 +1,11 @@
+== 2 generacion(es), veo-3.1-fast-generate-001, 8s, 720p, con audio -- US$1.60 ==
+
+  casilla  4 (04-los-seis-aereo)  op 9d87a427-9b4c-4e63-9944-071eb2c47bd1
+  casilla  8 (08-caldrix-cerrado)  op 49ed4264-0038-44cc-a228-b16f7be98da7
+
+  ... esperando 2 generacion(es)
+     siguen 2 ...
+     siguen 2 ...
+     siguen 2 ...
+  casilla  4 LISTA  04-los-seis-aereo.mp4  (8.000000s, 8.5 MB)
+  casilla  8 LISTA  08-caldrix-cerrado.mp4  (8.000000s, 4.1 MB)

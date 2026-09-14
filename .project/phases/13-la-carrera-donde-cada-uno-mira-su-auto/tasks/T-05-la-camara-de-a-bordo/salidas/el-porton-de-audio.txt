@@ -1,0 +1,79 @@
+################################################################
+# 1. PRIMER OYENTE -- whisper.cpp (medium, en)
+################################################################
+
+01-arco-recta                                  (upbeat music)
+02-ponton-curva-larga                          (tires squealing) (tires squealing)
+03-casco-costa                                 [MUSIC PLAYING]
+04-morro-costa                                 (upbeat music)
+05-rueda-piano                                 (engine revving)
+06-arco-tribuna                                (tires squealing) (engine revving)
+07-aleron-recta                                (dramatic music)
+08-arco-curvon                                 (tires squealing) (tires squealing)
+CONTROL-POSITIVO-linea-mezclada                Norvik are still in front here, 1-0, and we are just past the half hour.
+CONTROL-PARADA-01                              Yeah, we needed this break, I'm shattered. Drink up, only five minutes left.
+CONTROL-PARADA-02                              need this break. How are you holding up? Yeah, I'm shattered. Good game though.
+CONTROL-PARADA-03                              That was a good run, finally getting some space. How much longer till the break ends?
+CONTROL-PARADA-04                              How's the hamstring feeling? Better now, thanks. Coach said five more minutes.
+CONTROL-PARADA-05                              How are your legs feeling? A bit tight, need more stretching.
+CONTROL-PARADA-06                              I'm just glad for this break, I'm shattered. Yeah, need this water.
+CONTROL-PARADA-07                              We need to press higher up the pitch. Yeah, but conserve energy for the second half.
+CONTROL-PARADA-08                              (crunching)
+
+################################################################
+# 2. SEGUNDO OYENTE -- gemini-2.5-flash escuchando el archivo
+################################################################
+
+--- 01-arco-recta ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, tire squeal
+--- 02-ponton-curva-larga ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine (high-pitched whine, accelerating, decelerating), car passing
+--- 03-casco-costa ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Racing car engine
+--- 04-morro-costa ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Car engine, Tire squeal
+--- 05-rueda-piano ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Engine revving, tire squeal, vehicle movement.
+--- 06-arco-tribuna ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Racing car engine, engine acceleration
+--- 07-aleron-recta ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, Acceleration, Gear shifts
+--- 08-arco-curvon ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Engine, Tire squeal
+--- CONTROL-POSITIVO-linea-mezclada ---
+    SPEECH: YES
+    TRANSCRIPT: Norvic car still in front here, one-nil, and we are just past the half-hour.
+    SOUNDS: Speech (commentary), Car engine
+--- CONTROL-PARADA-01 ---
+    SPEECH: YES
+    TRANSCRIPT: Good half, everyone. Yeah, we needed this break. I'm shattered. Drink up, only five minutes left.
+    SOUNDS: Speech, Whistle, Footsteps, Rustling
+
+################################################################
+# 3. EL NIVEL DE CADA CLIP -- insumo del montaje, no del porton
+################################################################
+
+  01-arco-recta                                   I: -24.2 LUFS LRA: 3.0 LU Peak: -12.3 dBFS 
+  02-ponton-curva-larga                           I: -20.3 LUFS LRA: 4.9 LU Peak: -8.1 dBFS 
+  03-casco-costa                                  I: -26.1 LUFS LRA: 0.8 LU Peak: -13.4 dBFS 
+  04-morro-costa                                  I: -26.0 LUFS LRA: 3.5 LU Peak: -14.1 dBFS 
+  05-rueda-piano                                  I: -10.3 LUFS LRA: 1.5 LU Peak: 0.1 dBFS 
+  06-arco-tribuna                                 I: -20.2 LUFS LRA: 1.3 LU Peak: -9.8 dBFS 
+  07-aleron-recta                                 I: -21.7 LUFS LRA: 2.0 LU Peak: -11.3 dBFS 
+  08-arco-curvon                                  I: -22.1 LUFS LRA: 0.2 LU Peak: -12.0 dBFS 

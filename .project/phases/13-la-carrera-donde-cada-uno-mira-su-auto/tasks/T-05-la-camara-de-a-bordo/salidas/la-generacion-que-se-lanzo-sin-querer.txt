@@ -1,0 +1,8 @@
+# La generacion que se lanzo sin querer: se baja con su operationName, que no cuesta
+# una segunda vez. Va a descartes/ porque el clip 1 que esta en el feed es el bueno y
+# no se toca; este queda como la segunda tirada del mismo prompt.
+
+done: None   error: (ninguno)
+la operacion no devolvio video
+segundo intento --> done: True  error: (ninguno)
+bajado: /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/demo/race-multiview/content/.fuentes/camaras/caldrix/descartes/01-arco-recta-segunda-tirada.mp4

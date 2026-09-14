@@ -1,0 +1,29 @@
+# El color de RUNTAK sobre los clips NUEVOS, con el estimador de la T-01 cargado por path.
+# La referencia es el hexadecimal de race.json, que se midio sobre los clips VIEJOS.
+# El control es un recorte de asfalto vacio del MISMO cuadro: tiene que devolver (ninguno).
+
+$ python3 T-02/salidas/medir-color.py n06-t4.png rects/n06-t4.0.json
+n06-t4.png  (1280x720)
+  RUNTAK                 rect=(90, 340, 190, 55)     ref=#661955
+      filtrado S>.35  #672849  hue=329deg  n=   3645 ( 34.9%)  dE00 vs ref =   6.3
+      cromatico S>.12  #7F635F  hue=  8deg  n=   6898 ( 66.0%)  dE00 vs ref =  26.1
+      crudo  todos    #907382  hue=329deg  n=  10450 (100.0%)  dE00 vs ref =  26.9
+  PENTAV                 rect=(950, 300, 100, 45)    ref=#2D6E24
+      filtrado S>.35  #578E4B  hue=109deg  n=    208 (  4.6%)  dE00 vs ref =  12.8
+      cromatico S>.12  #7CA273  hue=109deg  n=    964 ( 21.4%)  dE00 vs ref =  22.7
+      crudo  todos    #839F7E  hue=111deg  n=   4500 (100.0%)  dE00 vs ref =  24.1
+  CTRL-asfalto           rect=(1060, 610, 190, 50)   ref=#661955
+      filtrado S>.35  (ninguno)            n=      0 (  0.0%)
+      cromatico S>.12  (ninguno)            n=      0 (  0.0%)
+      crudo  todos    #5E5E5D  hue= 60deg  n=   9500 (100.0%)  dE00 vs ref =  28.0
+
+$ python3 T-02/salidas/medir-color.py n12-t2.5.png rects/n12-t2.5.json
+n12-t2.5.png  (1280x720)
+  RUNTAK                 rect=(380, 300, 250, 70)    ref=#661955
+      filtrado S>.35  #691349  hue=322deg  n=  11548 ( 66.0%)  dE00 vs ref =   3.7
+      cromatico S>.12  #6B164C  hue=322deg  n=  14454 ( 82.6%)  dE00 vs ref =   3.3
+      crudo  todos    #620E3D  hue=326deg  n=  17500 (100.0%)  dE00 vs ref =   6.1
+  CTRL-asfalto           rect=(60, 470, 190, 55)     ref=#661955
+      filtrado S>.35  (ninguno)            n=      0 (  0.0%)
+      cromatico S>.12  (ninguno)            n=      0 (  0.0%)
+      crudo  todos    #5F5E5F  hue=300deg  n=  10450 (100.0%)  dE00 vs ref =  26.6

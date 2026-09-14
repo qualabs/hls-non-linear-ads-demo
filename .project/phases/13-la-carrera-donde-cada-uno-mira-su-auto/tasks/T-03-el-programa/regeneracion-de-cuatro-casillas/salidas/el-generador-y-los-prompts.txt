@@ -1,0 +1,42 @@
+# el-generador-y-los-prompts.txt
+#
+# QUE MIDE. Que generar-programa.py reproduce LETRA POR LETRA el .prompt.txt que viajo a
+# Vertex, para cada una de las catorce casillas. Las catorce dan IDENTICO: las diez que no
+# se tocaron porque su texto no cambio, y las cuatro nuevas porque el generador escribe el
+# .prompt.txt al lado del clip en el momento de lanzarlo, asi que el archivo ES el texto
+# que viajo. Antes de generar, esta misma comparacion daba las cuatro en DISTINTO.
+#
+# POR QUE IMPORTA EN ESTA CORRIDA. El bloque PISTA se partio en dos (CALZADA + la oracion
+# de la camara quieta) para que las cuatro nuevas puedan pedir una camara que se mueve.
+# La casilla 6 es la unica aprobada que lleva PISTA: si el corte hubiera movido un solo
+# caracter, aparecería en la lista de DISTINTO. No aparece.
+#
+# EL CONTROL. Abajo se le saca el bloque de seguimiento a la casilla 5 y se vuelve a
+# comparar: tiene que cambiar de DISTINTO-por-el-texto-nuevo a un diff visible. Sin verlo
+# dar distinto, el comparador podria estar comparando cualquier cosa contra si misma.
+
+== 1. LOS CATORCE CONTRA SU .prompt.txt EN DISCO
+ 1 01-los-seis-trackside        IDENTICO
+ 2 02-caldrix-seguimiento       IDENTICO
+ 3 03-caldrix-marvok-rebufo     IDENTICO
+ 4 04-los-seis-aereo            IDENTICO
+ 5 05-noctev-chicana            IDENTICO
+ 6 06-runtak-pentav-frenada     IDENTICO
+ 7 07-quentra-sobrepaso         IDENTICO
+ 8 08-caldrix-cerrado           IDENTICO
+ 9 09-marvok-noctev-curvon      IDENTICO
+10 10-pentav-quentra-eses       IDENTICO
+11 11-los-seis-aereo-costa      IDENTICO
+12 12-runtak-rueda-piano        IDENTICO
+13 13-caldrix-marvok-recta      IDENTICO
+14 14-los-seis-tribuna          IDENTICO
+
+== 2. EL CONTROL: a la casilla 5 se le saca `seguimiento` y se compara de nuevo
+con el bloque: 3083 caracteres / sin el bloque: 2051 caracteres
+iguales? False
+
+lo que el control saca:
+   -
+   -THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs thr ...
+   -
+   -THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at the ...

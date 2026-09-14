@@ -1,0 +1,84 @@
+################################################################
+# EL PROGRAMA MEZCLADO -- voces sobre el ambiente de los clips
+################################################################
+
+--- programa.mp4 ---
+    
+    [00:00:00.000 --> 00:00:07.000]   Eleven laps gone here on the coast, and this is still one race.
+    [00:00:07.000 --> 00:00:16.000]   Well, Kaldrick's in front and he has not put a wheel wrong all afternoon.
+    [00:00:16.000 --> 00:00:24.000]   Marvok has been in that mirror for three laps now, looking for a way through.
+    [00:00:24.000 --> 00:00:28.000]   The cameras on all six cars are open.
+    [00:00:28.000 --> 00:00:32.000]   Six of them and you choose which one you watch.
+    [00:00:32.000 --> 00:00:40.000]   Noctav third and he is using every inch of the kerbs through the chicane.
+    [00:00:40.000 --> 00:00:48.000]   Runtak and Pentath side by side into the braking zone and neither of them lifts.
+    [00:00:48.000 --> 00:00:53.000]   And here comes Quentra round the outside of Pentath.
+    [00:00:53.000 --> 00:00:56.000]   Fifth place and it sticks.
+    [00:00:56.000 --> 00:01:03.000]   And back to the leader, Kaldrick's still with a second in hand.
+    [00:01:03.000 --> 00:01:09.000]   Marvok and Noctav now nose to tail through the fast left.
+    [00:01:09.000 --> 00:01:13.000]   And Noctav is close enough to try something.
+    [00:01:13.000 --> 00:01:20.000]   Down to the C section, Pentava and Quentra still together.
+    [00:01:20.000 --> 00:01:28.000]   That is three separate fights and all of them are alive.
+    [00:01:28.000 --> 00:01:33.000]   Look at Runtak over the kerb, the rear wheels taking all of it.
+    [00:01:33.000 --> 00:01:36.000]   And the car keeps taking it.
+    [00:01:36.000 --> 00:01:40.000]   Marvok is right on the back of Kaldrick's again.
+    [00:01:40.000 --> 00:01:45.000]   Gap has gone.
+    [00:01:45.000 --> 00:01:52.000]   And they are on their feet as this field goes by.
+
+################################################################
+# CONTROL NEGATIVO -- el ambiente solo, sin una voz encima
+################################################################
+
+--- ambiente.wav ---
+    
+    [00:00:00.000 --> 00:00:02.760]   (engine revving)
+    [00:00:30.000 --> 00:00:32.740]   (engine revving)
+    [00:01:00.000 --> 00:01:02.740]   (engine revving)
+    [00:01:30.000 --> 00:01:32.740]   (engine revving)
+
+################################################################
+# CONTROL POSITIVO -- el relato solo, sin ambiente. Es el techo.
+################################################################
+
+--- relato.wav ---
+    
+    [00:00:00.000 --> 00:00:07.560]   11 laps gone here on the coast and this is still one race.
+    [00:00:07.560 --> 00:00:15.300]   Well, Kaldrick's in front and he has not put a wheel wrong all afternoon.
+    [00:00:15.300 --> 00:00:23.360]   Marvok has been in that mirror for three laps now, looking for a way through.
+    [00:00:23.640 --> 00:00:31.960]   The cameras on all six cars are open, six of them, and you choose which one you watch.
+    [00:00:31.960 --> 00:00:39.800]   Noctave third and he is using every inch of the kerbs through the chicane.
+    [00:00:39.800 --> 00:00:47.800]   Runtak and Pentath side by side into the braking zone and neither of them lifts.
+    [00:00:47.800 --> 00:00:55.960]   And here comes Quentra round the outside of Pentav. Fifth place and it sticks.
+    [00:00:55.960 --> 00:01:03.120]   And back to the leader, Kaldrick's still with a second in hand.
+    [00:01:03.120 --> 00:01:08.760]   Marvok and Noctave now nose to tail through the fast left.
+    [00:01:08.760 --> 00:01:12.920]   And Noctave is close enough to try something.
+    [00:01:12.920 --> 00:01:20.040]   Down to the C section. Pentava and Quentra still together.
+    [00:01:20.040 --> 00:01:27.840]   That is three separate fights and all of them are alive.
+    [00:01:27.840 --> 00:01:32.880]   Look at Runtak over the kerb, the rear wheels taking all of it.
+    [00:01:32.880 --> 00:01:36.120]   And the car keeps taking it.
+    [00:01:36.120 --> 00:01:40.320]   Marvok is right on the back of Kaldrick's again.
+    [00:01:40.320 --> 00:01:44.720]   Gap has gone.
+    [00:01:44.720 --> 00:01:49.080]   And they are on their feet as this field goes by.
+
+################################################################
+# EL GUION, PARA COMPARAR CONTRA LO DE ARRIBA
+################################################################
+
+    [  0.500 ->   5.838]  R  Eleven laps gone here on the coast, and this is still one race.
+    [  8.300 ->  13.540]  C  Caldrix in front, and he has not put a wheel wrong all afternoon.
+    [ 15.900 ->  21.778]  R  Marvok has been in that mirror for three laps now, looking for a way through.
+    [ 24.118 ->  27.700]  R  The cameras on all six cars are open.
+    [ 28.020 ->  30.888]  C  Six of them, and you choose which one you watch.
+    [ 32.300 ->  38.468]  R  Noctev third, and he is using every inch of the kerbs through the chicane.
+    [ 40.300 ->  46.511]  R  Runtak and Pentav side by side into the braking zone, and neither of them lifts.
+    [ 48.200 ->  52.854]  R  And here comes Quentra, round the outside of Pentav.
+    [ 53.174 ->  55.290]  C  Fifth place, and it sticks.
+    [ 56.400 ->  61.245]  R  And back to the leader. Caldrix, still with a second in hand.
+    [ 63.600 ->  68.758]  R  Marvok and Noctev now, nose to tail through the fast left.
+    [ 69.078 ->  72.733]  C  And Noctev is close enough to try something.
+    [ 73.100 ->  79.006]  R  Down to the sea section, Pentav and Quentra still together.
+    [ 80.300 ->  84.860]  C  That is three separate fights, and all of them are alive.
+    [ 88.200 ->  92.841]  R  Look at Runtak over the kerb, the rear wheels taking all of it.
+    [ 93.161 ->  95.311]  C  And the car keeps taking it.
+    [ 96.400 -> 100.258]  R  Marvok is right on the back of Caldrix again.
+    [100.578 -> 101.881]  C  The gap has gone.
+    [105.000 -> 109.140]  R  And they are on their feet as this field goes by.

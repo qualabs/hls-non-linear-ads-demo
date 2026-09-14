@@ -1,0 +1,192 @@
+[
+ {
+  "id": "01",
+  "voz": "R",
+  "casilla": 1,
+  "inicio": 0.5,
+  "fin": 5.838,
+  "d": 5.338,
+  "anuncio": false,
+  "texto": "Eleven laps gone here on the coast, and this is still one race."
+ },
+ {
+  "id": "02",
+  "voz": "C",
+  "casilla": 2,
+  "inicio": 8.3,
+  "fin": 13.54,
+  "d": 5.24,
+  "anuncio": false,
+  "texto": "Caldrix in front, and he has not put a wheel wrong all afternoon."
+ },
+ {
+  "id": "03",
+  "voz": "R",
+  "casilla": 3,
+  "inicio": 15.9,
+  "fin": 21.778,
+  "d": 5.878,
+  "anuncio": false,
+  "texto": "Marvok has been in that mirror for three laps now, looking for a way through."
+ },
+ {
+  "id": "04",
+  "voz": "R",
+  "casilla": 4,
+  "inicio": 24.118,
+  "fin": 27.7,
+  "d": 3.582,
+  "anuncio": true,
+  "texto": "The cameras on all six cars are open."
+ },
+ {
+  "id": "05",
+  "voz": "C",
+  "casilla": 4,
+  "inicio": 28.02,
+  "fin": 30.888,
+  "d": 2.868,
+  "anuncio": false,
+  "texto": "Six of them, and you choose which one you watch."
+ },
+ {
+  "id": "06",
+  "voz": "R",
+  "casilla": 5,
+  "inicio": 32.3,
+  "fin": 37.894,
+  "d": 5.594,
+  "anuncio": false,
+  "texto": "Noctev third, and he has been quicker than the leader for two laps now."
+ },
+ {
+  "id": "07",
+  "voz": "R",
+  "casilla": 6,
+  "inicio": 40.3,
+  "fin": 46.511,
+  "d": 6.211,
+  "anuncio": false,
+  "texto": "Runtak and Pentav side by side into the braking zone, and neither of them lifts."
+ },
+ {
+  "id": "08",
+  "voz": "R",
+  "casilla": 7,
+  "inicio": 48.2,
+  "fin": 52.854,
+  "d": 4.654,
+  "anuncio": false,
+  "texto": "And here comes Quentra, round the outside of Pentav."
+ },
+ {
+  "id": "09",
+  "voz": "C",
+  "casilla": 7,
+  "inicio": 53.174,
+  "fin": 55.29,
+  "d": 2.116,
+  "anuncio": false,
+  "texto": "Fifth place, and it sticks."
+ },
+ {
+  "id": "10",
+  "voz": "R",
+  "casilla": 8,
+  "inicio": 56.4,
+  "fin": 61.245,
+  "d": 4.845,
+  "anuncio": false,
+  "texto": "And back to the leader. Caldrix, still with a second in hand."
+ },
+ {
+  "id": "11",
+  "voz": "R",
+  "casilla": 9,
+  "inicio": 63.6,
+  "fin": 68.663,
+  "d": 5.063,
+  "anuncio": false,
+  "texto": "Marvok and Noctev now, wheel to wheel through this long corner."
+ },
+ {
+  "id": "12",
+  "voz": "C",
+  "casilla": 9,
+  "inicio": 68.983,
+  "fin": 72.638,
+  "d": 3.655,
+  "anuncio": false,
+  "texto": "And Noctev is close enough to try something."
+ },
+ {
+  "id": "13",
+  "voz": "R",
+  "casilla": 10,
+  "inicio": 73.1,
+  "fin": 79.006,
+  "d": 5.906,
+  "anuncio": false,
+  "texto": "Down to the sea section, Pentav and Quentra still together."
+ },
+ {
+  "id": "14",
+  "voz": "C",
+  "casilla": 11,
+  "inicio": 80.3,
+  "fin": 84.86,
+  "d": 4.56,
+  "anuncio": false,
+  "texto": "That is three separate fights, and all of them are alive."
+ },
+ {
+  "id": "15",
+  "voz": "R",
+  "casilla": 12,
+  "inicio": 88.2,
+  "fin": 91.863,
+  "d": 3.663,
+  "anuncio": false,
+  "texto": "Look at Runtak, running right along that kerb."
+ },
+ {
+  "id": "16",
+  "voz": "C",
+  "casilla": 12,
+  "inicio": 92.183,
+  "fin": 94.333,
+  "d": 2.15,
+  "anuncio": false,
+  "texto": "And the car keeps taking it."
+ },
+ {
+  "id": "17",
+  "voz": "R",
+  "casilla": 13,
+  "inicio": 96.4,
+  "fin": 100.258,
+  "d": 3.858,
+  "anuncio": false,
+  "texto": "Marvok is right on the back of Caldrix again."
+ },
+ {
+  "id": "18",
+  "voz": "C",
+  "casilla": 13,
+  "inicio": 100.578,
+  "fin": 101.881,
+  "d": 1.303,
+  "anuncio": false,
+  "texto": "The gap has gone."
+ },
+ {
+  "id": "19",
+  "voz": "R",
+  "casilla": 14,
+  "inicio": 105,
+  "fin": 109.14,
+  "d": 4.14,
+  "anuncio": false,
+  "texto": "And they are on their feet as this field goes by."
+ }
+]

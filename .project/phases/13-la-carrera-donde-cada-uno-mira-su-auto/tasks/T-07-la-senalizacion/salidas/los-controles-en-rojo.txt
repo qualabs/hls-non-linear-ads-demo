@@ -1,0 +1,45 @@
+############ CONTROL A: el script TIPEA el segundo en vez de leerlo de race.json
+151:OFERTA_EN=31
+✔ the playlist comes out with one Date Range, of the multi view class, and no other (239.304191ms)
+✖ the window opens at the second race.json declares, and lasts what it declares (254.982753ms)
+✔ the multi view tag drops X-RESTRICT (242.703633ms)
+✔ the offer announces a catalogue and not a layout (226.638538ms)
+✔ the catalogue is the cameras that are packaged, named as race.json names them (484.490971ms)
+✖ the cue sheet prints the seconds of the window, and they are computed and not typed (224.25755ms)
+✔ the content is packaged at 1280x720 and at the cadence of the footage (0.428444ms)
+✔ the numbers this demo runs on are declared once, in race.json (9.952764ms)
+✔ the check for typed numbers can see one (0.744345ms)
+ℹ tests 9
+ℹ pass 7
+ℹ fail 2
+✖ failing tests:
+✖ the window opens at the second race.json declares, and lasts what it declares (254.982753ms)
+✖ the cue sheet prints the seconds of the window, and they are computed and not typed (224.25755ms)
+
+############ CONTROL B: el generador TIPEA el nombre de la vista en vez de leerlo
+86:      name: "Camera 1",
+✔ the playlist comes out with one Date Range, of the multi view class, and no other (276.139699ms)
+✔ the window opens at the second race.json declares, and lasts what it declares (292.276322ms)
+✔ the multi view tag drops X-RESTRICT (264.526207ms)
+✔ the offer announces a catalogue and not a layout (257.59102ms)
+✖ the catalogue is the cameras that are packaged, named as race.json names them (290.227818ms)
+✖ the cue sheet prints the seconds of the window, and they are computed and not typed (278.384461ms)
+✔ the content is packaged at 1280x720 and at the cadence of the footage (0.439946ms)
+✔ the numbers this demo runs on are declared once, in race.json (9.764044ms)
+✔ the check for typed numbers can see one (0.762512ms)
+ℹ tests 9
+ℹ pass 7
+ℹ fail 2
+✖ failing tests:
+✖ the catalogue is the cameras that are packaged, named as race.json names them (290.227818ms)
+✖ the cue sheet prints the seconds of the window, and they are computed and not typed (278.384461ms)
+
+############ CONTROL C: race.json mueve ofertaEn y el AUDIO ya no lo sigue
+ROJO   el relato como se entrega          fin hablado 27.640 s   ventana [30.5 ; 31]
+ROJO   CONTROL la linea corrida +3 s      seguia hablando en 28.020 s, que es donde arranca la linea siguiente   ventana [30.5 ; 31]
+ROJO   CONTROL la linea corrida -3 s      fin hablado 21.718 s   ventana [30.5 ; 31]
+FALLA: el anuncio no termina adentro de la ventana.
+  exit=
+
+demo/race-multiview/scripts/senalizar-contenido.sh: OK
+demo/race-multiview/race.json: OK

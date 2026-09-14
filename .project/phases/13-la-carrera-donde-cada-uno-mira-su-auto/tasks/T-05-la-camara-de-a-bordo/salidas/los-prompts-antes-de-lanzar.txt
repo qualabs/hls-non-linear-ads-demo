@@ -1,0 +1,42 @@
+===============================================================================
+LOS OCHO PROMPTS, ANTES DE LANZAR: que dicen y que NO dicen
+===============================================================================
+
+clip  chars  APPLE  'past the camera'  'on-board'  'LEMON YELLOW'  'LIME GREEN'
+  1    3438      no              no           2               4             1
+  2    3370      no              no           2               4             1
+  3    3473      no              no           2               4             1
+  4    3381      no              no           2               4             1
+  5    3353      no              no           2               4             1
+  6    3449      no              no           2               4             1
+  7    3513      no              no           2               4             1
+  8    3437      no              no           2               4             1
+
+--- el prompt del clip 3 entero, que es el del cruce contra el programa ---
+
+CAMERA: television race coverage, on-board camera facing backwards. The shot comes from a camera mounted high on the roll hoop and pointing back down the road behind the car, and it faces backwards from the first frame to the last.
+
+IN FRAME: the yellow engine cover and the yellow rear wing of the car filling the bottom of the frame, the road running away behind them, and a second car following a couple of lengths back in the middle of the frame.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT LEMON YELLOW car, which is leading the race. Its own bright lemon yellow bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright lemon yellow. The yellow paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: one only, the BRIGHT ELECTRIC PURPLE car, following behind and holding its distance. It never comes alongside and it never reaches the camera.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board camera on the roll hoop pointing backwards down the road, fixed to the car, with the car's own yellow rear wing held still in the frame.
+
+===============================================================================
+EL CONTROL DEL GUARDA DEL RENOMBRE: se lo ve dar rojo
+===============================================================================
+
+$ se le pide renombrar un texto que no esta en el prompt
+SystemExit: clip 1: el renombre pide reemplazar 'BRIGHT APPLE GREENERY' y ese texto no esta en el prompt. El renombre se convirtio en un no-op y el clip saldria con el nombre viejo sin que nada avise.

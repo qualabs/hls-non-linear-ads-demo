@@ -1,0 +1,38 @@
+== casilla  1 (01-los-seis-trackside): ya esta, no se regenera ==
+== 13 generacion(es), veo-3.1-fast-generate-001, 8s, 720p, con audio -- US$10.40 ==
+
+  casilla  2 (02-caldrix-seguimiento)  op d4bd4865-6931-4974-9c05-bbaf62fd3e32
+  casilla  3 (03-caldrix-marvok-rebufo)  op 2cf77400-edf7-4f86-99ab-40b614f3bbc5
+  casilla  4 (04-los-seis-aereo)  op a69c3901-e4b9-48c2-be45-3742bf7dcb15
+  casilla  5 (05-noctev-chicana)  op 35b78d22-b48f-4174-9ef7-6da6bae155b1
+  casilla  6 (06-runtak-pentav-frenada)  op 46ea32fb-1103-4409-b5b8-e9066b7d75e8
+  casilla  7 (07-quentra-sobrepaso)  op 701bc8b3-f93d-496f-b36d-c2cf8a1181f5
+  casilla  8 (08-caldrix-cerrado)  op a8e3e28a-9dea-45a9-a721-f5d98bd8b8aa
+  casilla  9 (09-marvok-noctev-curvon)  op 754bc69a-d765-474e-a3cd-66fc7b4814e1
+  casilla 10 (10-pentav-quentra-eses)  op 61195ce7-88a8-4c9c-bc0f-9e20779c48d7
+  casilla 11 (11-los-seis-aereo-costa)  op ad9b7365-4c0d-4c7a-acd4-177b711d1557
+
+  ... esperando 10 generacion(es)
+     siguen 10 ...
+     siguen 10 ...
+  casilla  2 LISTA  02-caldrix-seguimiento.mp4  (8.000000s, 6.0 MB)
+  casilla  3 LISTA  03-caldrix-marvok-rebufo.mp4  (8.000000s, 6.1 MB)
+  casilla  4 LISTA  04-los-seis-aereo.mp4  (8.000000s, 7.2 MB)
+  casilla  5 LISTA  05-noctev-chicana.mp4  (8.000000s, 5.1 MB)
+  casilla  6 LISTA  06-runtak-pentav-frenada.mp4  (8.000000s, 8.6 MB)
+  casilla  7 LISTA  07-quentra-sobrepaso.mp4  (8.000000s, 6.1 MB)
+  casilla  8 LISTA  08-caldrix-cerrado.mp4  (8.000000s, 7.0 MB)
+  casilla  9 LISTA  09-marvok-noctev-curvon.mp4  (8.000000s, 7.0 MB)
+  casilla 10 LISTA  10-pentav-quentra-eses.mp4  (8.000000s, 6.1 MB)
+  casilla 11 LISTA  11-los-seis-aereo-costa.mp4  (8.000000s, 7.3 MB)
+  casilla 12 (12-runtak-rueda-piano)  op 632eecb7-44f5-4bda-9d4a-5e82b3f21cc3
+  casilla 13 (13-caldrix-marvok-recta)  op 83788cf3-6be1-4a55-945b-68cf7513d2ce
+  casilla 14 (14-los-seis-tribuna)  op 3cd07c57-d939-400c-8dcc-c62e8b989612
+
+  ... esperando 3 generacion(es)
+     siguen 3 ...
+     siguen 3 ...
+     siguen 3 ...
+  casilla 12 LISTA  12-runtak-rueda-piano.mp4  (8.000000s, 7.1 MB)
+  casilla 13 LISTA  13-caldrix-marvok-recta.mp4  (8.000000s, 8.3 MB)
+  casilla 14 LISTA  14-los-seis-tribuna.mp4  (8.000000s, 10.9 MB)

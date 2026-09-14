@@ -1,0 +1,25 @@
+mutuas:
+   CALDRIX limon vs MARVOK violeta   76.7
+   CALDRIX limon vs NOCTEV agua    36.0
+   CALDRIX limon vs RUNTAK ciruela   79.5
+   CALDRIX limon vs PENTAV lima    31.0
+   CALDRIX limon vs QUENTRA bronce   33.3
+   MARVOK violeta vs NOCTEV agua    50.2
+   MARVOK violeta vs RUNTAK ciruela   30.0
+   MARVOK violeta vs PENTAV lima    57.0
+   MARVOK violeta vs QUENTRA bronce   59.1
+   NOCTEV agua  vs RUNTAK ciruela   85.4
+   NOCTEV agua  vs PENTAV lima    25.4
+   NOCTEV agua  vs QUENTRA bronce   43.4
+   RUNTAK ciruela vs PENTAV lima    79.5
+   RUNTAK ciruela vs QUENTRA bronce   50.8
+   PENTAV lima  vs QUENTRA bronce   27.9
+   MIN MUTUA = 25.4  (('NOCTEV agua', 'PENTAV lima'))
+
+contra los cinco prohibidos / la parrilla 2026:
+   CALDRIX limon #F2DC12  prohibido_min= 29.9 (plateado)   parrilla_min= 29.7 (blanco RacingBulls)
+   MARVOK violeta #A46BE8  prohibido_min= 32.5 (plateado)   parrilla_min= 18.9 (azul Alpine)
+   NOCTEV agua  #10D9B0  prohibido_min= 25.4 (plateado)   parrilla_min= 17.8 (verde Aston)
+   RUNTAK ciruela #96125C  prohibido_min= 26.8 (azul)   parrilla_min= 23.1 (rojo Audi)
+   PENTAV lima  #479E14  prohibido_min= 27.5 (verde oscuro)   parrilla_min= 16.9 (verde Aston)
+   QUENTRA bronce #8B6E18  prohibido_min= 27.2 (papaya)   parrilla_min= 23.2 (gris Cadillac)

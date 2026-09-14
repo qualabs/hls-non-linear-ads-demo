@@ -1,0 +1,9 @@
+instantes medidos: 642 de 0,1 s (64.2 s con voz sonando, de los 112 s del programa). Quedaron afuera 16 instantes de pausa adentro de una linea.
+
+margen del relato sobre el ambiente, en dB, momento a momento:
+  el ambiente emparejado             n= 642  min   -0.4  p10    5.3  mediana    9.7  max   21.8  debajo de 6 dB:   89 (13.9 %)
+       los tres peores instantes: 45.0 s (casilla 6): -0.4 dB   81.3 s (casilla 11): 1.2 dB   45.1 s (casilla 6): 1.4 dB
+  REFERENCIA sin emparejar           n= 642  min  -11.3  p10   -5.6  mediana    0.1  max   13.4  debajo de 6 dB:  587 (91.4 %)
+       los tres peores instantes: 90.2 s (casilla 12): -11.3 dB   45.0 s (casilla 6): -11.2 dB   107.2 s (casilla 14): -11.1 dB
+
+  la normalizacion por clip mueve la mediana 9.6 dB y el peor momento 10.9 dB.

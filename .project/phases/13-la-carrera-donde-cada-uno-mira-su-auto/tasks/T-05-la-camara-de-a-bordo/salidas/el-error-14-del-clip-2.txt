@@ -1,0 +1,48 @@
+# Se vuelve a pedir la operacion del clip 2, que volvio con code 14. Si devuelve el
+# mismo error, la generacion no existe y relanzar no es un reintento a ciegas.
+$ :fetchPredictOperation  700b7344-2d3b-4d00-a753-b29a514de603
+{
+  "name": "projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/700b7344-2d3b-4d00-a753-b29a514de603",
+  "done": true,
+  "error": {
+    "code": 14,
+    "message": "Service is currently unavailable. Please try again later. Operation ID: 700b7344-2d3b-4d00-a753-b29a514de603."
+  }
+}
+
+# y el clip 2 no esta en disco:
+total 3912
+drwxrwxr-x 2 nicolas nicolas    4096 Sep 14 15:08 .
+drwxrwxr-x 3 nicolas nicolas    4096 Sep 14 15:06 ..
+-rw-rw-r-- 1 nicolas nicolas 3987915 Sep 14 15:08 01-arco-recta.mp4
+-rw-rw-r-- 1 nicolas nicolas    3439 Sep 14 15:06 01-arco-recta.prompt.txt
+-rw-rw-r-- 1 nicolas nicolas    3371 Sep 14 15:06 02-ponton-curva-larga.prompt.txt
+# Las dos operaciones del segundo lote que volvieron con code 14, vueltas a pedir.
+
+$ :fetchPredictOperation  9162d0af-eef7-4894-90cc-78eb5178c3cf
+{
+  "name": "projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/9162d0af-eef7-4894-90cc-78eb5178c3cf",
+  "done": true,
+  "error": {
+    "code": 14,
+    "message": "Service is currently unavailable. Please try again later. Operation ID: 9162d0af-eef7-4894-90cc-78eb5178c3cf."
+  }
+}
+
+$ :fetchPredictOperation  66209345-fbc7-403c-b8ca-8bdeaa407291
+{
+  "name": "projects/cto-assistant-501315/locations/us-central1/publishers/google/models/veo-3.1-fast-generate-001/operations/66209345-fbc7-403c-b8ca-8bdeaa407291",
+  "done": true,
+  "error": {
+    "code": 14,
+    "message": "Service is currently unavailable. Please try again later. Operation ID: 66209345-fbc7-403c-b8ca-8bdeaa407291."
+  }
+}
+
+# y los dos clips no estan en disco:
+../content/.fuentes/camaras/caldrix/01-arco-recta.mp4
+../content/.fuentes/camaras/caldrix/02-ponton-curva-larga.mp4
+../content/.fuentes/camaras/caldrix/04-morro-costa.mp4
+../content/.fuentes/camaras/caldrix/05-rueda-piano.mp4
+../content/.fuentes/camaras/caldrix/06-arco-tribuna.mp4
+../content/.fuentes/camaras/caldrix/08-arco-curvon.mp4
