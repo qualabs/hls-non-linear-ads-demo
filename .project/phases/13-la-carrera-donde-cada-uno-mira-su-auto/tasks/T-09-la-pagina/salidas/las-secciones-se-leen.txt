@@ -1,0 +1,21 @@
+$ control-de-lectura.py  (con las seis cámaras empaquetadas)
+
+== CON el asset-list ==
+  filas     1
+  camaras   ['CALDRIX, on-board', 'MARVOK, on-board', 'NOCTEV, trackside', 'RUNTAK, trackside', 'PENTAV, on-board', 'QUENTRA, trackside']
+  copia     A catalogue of 6 cameras, and the race carries o
+  tags      1
+  pliegues  1
+  niveles   4
+  estado    t=34.5s  ·  multi view offered · 6 feed(s) · nothing raised  ·  1 video element in the player, 1 decoding
+
+== SIN el asset-list (abortado) ==
+  filas     0
+  camaras   []
+  copia     (sin fila)
+  tags      1
+  pliegues  1
+  niveles   0
+  estado    t=34.5s  ·  the programme, nothing signalled  ·  1 video element in the player, 1 decoding
+
+VERDE: con la red las dos secciones se llenan, y sin ella quedan vacias -- o sea que lo que muestran lo leyeron

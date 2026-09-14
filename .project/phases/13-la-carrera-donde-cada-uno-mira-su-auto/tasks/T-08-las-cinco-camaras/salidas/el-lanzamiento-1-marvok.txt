@@ -1,0 +1,24 @@
+== marvok: 8 generacion(es), veo-3.1-fast-generate-001, 8s, 720p, con audio -- US$6.40 ==
+   lanzadas hasta ahora: 0 de 72 (US$0.00 de US$57.60)
+
+  clip  1 (01-arco-recta)  op 1c74719e-d3ab-47b1-a9bd-48a433d6bb52
+  clip  2 (02-morro-curvon)  op 2e34ad53-4bab-401f-b163-fd8618711754
+  clip  3 (03-arco-costa)  op 268d0b1a-5906-4017-8686-01dcd195eee8
+  clip  4 (04-casco-tribuna)  op a4f4db29-5fd1-4d22-aa21-f8e3f3335bbd
+  clip  5 (05-ponton-curva-larga)  op 4fc7c87a-72cc-4959-9718-7ea20649a157
+  clip  6 (06-rueda-piano)  op 2a7693fa-5977-49f8-ae49-b7a94e342775
+  clip  7 (07-aleron-recta)  op 050696a7-c2e0-44a1-9ef9-f283e16286bb
+  clip  8 (08-arco-dunas)  op 2951df5d-1ca2-4605-ae4d-db8076e70b4d
+
+  ... esperando 8 generacion(es)
+     siguen 8 ...
+     siguen 8 ...
+  clip  2 LISTO  02-morro-curvon.mp4  (8.000000s, 5.0 MB)
+  clip  3 LISTO  03-arco-costa.mp4  (8.000000s, 4.2 MB)
+  clip  6 LISTO  06-rueda-piano.mp4  (8.000000s, 4.5 MB)
+  clip  7 LISTO  07-aleron-recta.mp4  (8.000000s, 4.5 MB)
+  clip  8 LISTO  08-arco-dunas.mp4  (8.000000s, 3.8 MB)
+     siguen 3 ...
+  clip  1 LISTO  01-arco-recta.mp4  (8.000000s, 4.9 MB)
+  clip  4 LISTO  04-casco-tribuna.mp4  (8.000000s, 3.9 MB)
+  clip  5 LISTO  05-ponton-curva-larga.mp4  (8.000000s, 4.6 MB)

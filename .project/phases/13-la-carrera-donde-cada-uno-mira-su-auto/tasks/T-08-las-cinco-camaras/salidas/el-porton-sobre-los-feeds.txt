@@ -1,0 +1,40 @@
+gemini-2.5-flash escuchando los seis feeds de 64 s y el control
+
+--- caldrix ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Racing car engine, gear shifts
+--- marvok ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, tire squeal.
+--- noctev ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, engine revving, tire squeal, gear shifts.
+--- runtak ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, tire squeal, gear changes
+--- pentav ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, Tire squeal, Wind noise
+--- quentra ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Engine, tire squeal, gear shift
+--- CONTROL-POSITIVO-sobre-el-feed ---
+    SPEECH: YES
+    TRANSCRIPT: Norfolk are still in front here, one nil, and we are just past the half hour.
+    SOUNDS: Race car engine, tire squeal, speech
+
+EL NIVEL DE LOS SEIS FEEDS Y DEL PROGRAMA, que es su destino
+
+  caldrix       I: -23.0 LUFS LRA: 2.4 LU Peak: -10.5 dBFS 
+  marvok        I: -23.1 LUFS LRA: 1.9 LU Peak: -10.1 dBFS 
+  noctev        I: -23.0 LUFS LRA: 3.1 LU Peak: -10.7 dBFS 
+  runtak        I: -23.0 LUFS LRA: 3.2 LU Peak: -6.7 dBFS 
+  pentav        I: -23.1 LUFS LRA: 2.3 LU Peak: -10.9 dBFS 
+  quentra       I: -23.0 LUFS LRA: 4.6 LU Peak: -5.6 dBFS 
+  programa      I: -23.0 LUFS LRA: 4.7 LU Peak: -6.7 dBFS 

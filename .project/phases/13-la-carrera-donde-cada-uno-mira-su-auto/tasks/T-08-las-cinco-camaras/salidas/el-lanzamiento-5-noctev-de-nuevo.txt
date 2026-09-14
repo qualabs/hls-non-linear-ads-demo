@@ -1,0 +1,15 @@
+== noctev: 3 generacion(es), veo-3.1-fast-generate-001, 8s, 720p, con audio -- US$2.40 ==
+   lanzadas hasta ahora: 42 de 72 (US$33.60 de US$57.60)
+
+  clip  2 (02-curvon-piano)  op 1ab886d6-2790-480b-91af-55441c7ebbec
+  clip  4 (04-tribuna-cerrado)  op cb3ec58f-38c2-4a4b-8212-a56ec03feffc
+  clip  6 (06-recta-bajo)  op 08ca2697-7c01-43d1-9610-77658e74cde6
+
+  ... esperando 3 generacion(es)
+     siguen 3 ...
+     siguen 3 ...
+     siguen 3 ...
+  clip  4 LISTO  04-tribuna-cerrado.mp4  (8.000000s, 5.1 MB)
+     siguen 2 ...
+  clip  2 LISTO  02-curvon-piano.mp4  (8.000000s, 4.8 MB)
+  clip  6 LISTO  06-recta-bajo.mp4  (8.000000s, 5.0 MB)

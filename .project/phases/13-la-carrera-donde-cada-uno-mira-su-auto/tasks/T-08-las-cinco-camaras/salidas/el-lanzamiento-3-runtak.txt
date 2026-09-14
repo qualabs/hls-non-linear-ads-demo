@@ -1,0 +1,24 @@
+== runtak: 8 generacion(es), veo-3.1-fast-generate-001, 8s, 720p, con audio -- US$6.40 ==
+   lanzadas hasta ahora: 16 de 72 (US$12.80 de US$57.60)
+
+  clip  1 (01-costa)  op 20cdedc9-f58a-45a6-a1d4-cc7c430ee29c
+  clip  2 (02-tribuna)  op 2ab2f7c2-ba83-4ecd-84b4-9c3f4132c3dc
+  clip  3 (03-curvon-alto)  op 45e94bf4-5feb-464f-8010-4e5b28fba13b
+  clip  4 (04-recta-piano)  op 11ba56c2-e587-4f58-8954-38e94246febb
+  clip  5 (05-dunas)  op 5e916cfd-5e06-4f60-afa9-d563136d34f4
+  clip  6 (06-muro-cerrado)  op c2b24126-62a9-44dd-ae7d-e5ede09689cd
+  clip  7 (07-curva-larga-bajo)  op c3fdf24d-aeb1-490a-9cbf-83f2f0d45843
+  clip  8 (08-recta-principal)  op 1cc75fee-f435-4577-b9aa-028e61fe7f4c
+
+  ... esperando 8 generacion(es)
+     siguen 8 ...
+     siguen 8 ...
+  clip  2 LISTO  02-tribuna.mp4  (8.000000s, 4.9 MB)
+  clip  4 LISTO  04-recta-piano.mp4  (8.000000s, 5.6 MB)
+  clip  6 LISTO  06-muro-cerrado.mp4  (8.000000s, 5.2 MB)
+  clip  7 LISTO  07-curva-larga-bajo.mp4  (8.000000s, 5.5 MB)
+     siguen 4 ...
+  clip  1 LISTO  01-costa.mp4  (8.000000s, 5.3 MB)
+  clip  3 LISTO  03-curvon-alto.mp4  (8.000000s, 6.2 MB)
+  clip  5 LISTO  05-dunas.mp4  (8.000000s, 5.2 MB)
+  clip  8 LISTO  08-recta-principal.mp4  (8.000000s, 5.4 MB)

@@ -1,0 +1,84 @@
+# Las dos costuras se ven en rojo, sobre una COPIA del arbol en /dev/shm
+
+El repositorio no se toca: se copian a /dev/shm los archivos que el script mira
+(el script resuelve su raiz desde su propia ubicacion, asi que corre igual alla).
+
+$ cp scripts/verificar-cortes.mjs scripts/construir-libreria.sh  <copia>/scripts/
+$ cp lib/*.js <copia>/lib/ ; cp demo/compatibility-pair/js/contract-trace.js demo/compatibility-pair/css/player.css <copia>/demo/compatibility-pair/…
+
+## 1. la copia sin tocar, que es la referencia
+$ ./scripts/verificar-cortes.mjs
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js lib/multiview.js demo/compatibility-pair/js/contract-trace.js demo/compatibility-pair/css/player.css
+
+   GREEN: 3 occurrence(s), all of them on the accepted list.
+     lib/controls.js:33  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:133  interstitial: '#ffcc00'
+     lib/controls.js:169  interstitial: 'traditional interstitial: the content is replaced by the ad'
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+verificar-cortes: both seams hold.
+EXIT=0
+
+## 2. una CUARTA ocurrencia en la primera costura tiene que ponerla roja
+$ printf '// planted by T-10 control: this line names the m3u8 transport on purpose
+' >> lib/renderer.js
+$ ./scripts/verificar-cortes.mjs
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js lib/multiview.js demo/compatibility-pair/js/contract-trace.js demo/compatibility-pair/css/player.css
+
+   RED: 1 occurrence(s) that are not on the accepted list.
+
+     lib/renderer.js:1448
+       // planted by T-10 control: this line names the m3u8 transport on purpose
+
+   If the seam was crossed, this is the finding and the mention has to go.
+   If the occurrence is legitimate, it goes in `accepted` in this script WITH ITS
+   REASON WRITTEN, which is what keeps the next one from being added on its own.
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   GREEN: zero hits.
+
+EXIT=1
+
+## 3. y un hit en la segunda costura tiene que ponerla roja a ella
+$ sed -i '$ d' lib/renderer.js   # se saca la de arriba
+$ printf '// planted by T-10 control: document.getElementById is named inside the library
+' >> lib/media.js
+$ ./scripts/verificar-cortes.mjs
+# The two seams of the project, verified and not asserted
+
+## ADR 0003 -- the rendering side does not know one word of the transport
+   /usr/bin/grep -n -i -E "hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\." lib/renderer.js lib/controls.js lib/multiview.js demo/compatibility-pair/js/contract-trace.js demo/compatibility-pair/css/player.css
+
+   GREEN: 3 occurrence(s), all of them on the accepted list.
+     lib/controls.js:33  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:133  interstitial: '#ffcc00'
+     lib/controls.js:169  interstitial: 'traditional interstitial: the content is replaced by the ad'
+
+## ADR 0015 -- the library side does not name the demo application
+   /usr/bin/grep -n -i -E "demo|app\.js|contract-trace|stock-player|index\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state" lib/*.js scripts/construir-libreria.sh
+
+   RED: 1 occurrence(s) that are not on the accepted list.
+
+     lib/media.js:39
+       // planted by T-10 control: document.getElementById is named inside the library
+
+   If the seam was crossed, this is the finding and the mention has to go.
+   If the occurrence is legitimate, it goes in `accepted` in this script WITH ITS
+   REASON WRITTEN, which is what keeps the next one from being added on its own.
+
+EXIT=1
+
+Las dos costuras tienen una forma de dar distinto, y en la corrida 3 se ve que las dos
+son independientes: la primera vuelve a VERDE mientras la segunda esta en ROJO.

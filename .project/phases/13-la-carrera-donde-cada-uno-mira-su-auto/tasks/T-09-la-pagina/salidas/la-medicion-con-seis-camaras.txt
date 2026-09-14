@@ -1,0 +1,140 @@
+$ curl -s http://127.0.0.1:8099/signalling/asset-list-offer.json  -> las vistas ofrecidas
+primaryName: World feed
+   view-caldrix | CALDRIX, on-board
+   view-marvok | MARVOK, on-board
+   view-noctev | NOCTEV, trackside
+   view-runtak | RUNTAK, trackside
+   view-pentav | PENTAV, on-board
+   view-quentra | QUENTRA, trackside
+
+$ medir-el-selector.py http://127.0.0.1:8099/ ...
+
+================ 400x780 ================
+
+[con-lugar]
+  sideways  document 400 wide in a viewport of 400  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 125 px of 281 (overflow 156, scrollTop 0)
+  title     visible   30.2 of   30.2  whole=True
+  note      visible      0 of      0  whole=True  hidden=True
+  row locked World feed                 visible     34 of     34  whole=True
+  row up     CALDRIX, on-board          visible     34 of     34  whole=True
+  row        MARVOK, on-board           visible   20.3 of     34  whole=False
+  row        NOCTEV, trackside          visible      0 of     34  whole=False
+  row        RUNTAK, trackside          visible      0 of     34  whole=False
+  row        PENTAV, on-board           visible      0 of     34  whole=False
+  row        QUENTRA, trackside         visible      0 of     34  whole=False
+  boxes     2
+  state     t=32.6s  ·  multi view · 2 boxes  ·  2 video elements in the player, 2 decoding
+
+[grilla-llena]
+  sideways  document 400 wide in a viewport of 400  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 125 px of 331 (overflow 206, scrollTop 206)
+  title     visible      0 of   30.2  whole=False
+  note      visible   44.4 of   44.4  whole=True  hidden=False
+  row locked World feed                 visible      0 of     34  whole=False
+  row up     CALDRIX, on-board          visible      0 of     34  whole=False
+  row up     MARVOK, on-board           visible      0 of     34  whole=False
+  row up     NOCTEV, trackside          visible      0 of     34  whole=False
+  row grey   RUNTAK, trackside          visible    0.7 of     34  whole=False
+  row grey   PENTAV, on-board           visible     34 of     34  whole=True
+  row grey   QUENTRA, trackside         visible     34 of     34  whole=True
+  boxes     4
+  state     t=34.1s  ·  multi view · 4 boxes  ·  4 video elements in the player, 4 decoding
+
+[reabierto]
+  sideways  document 400 wide in a viewport of 400  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 125 px of 331 (overflow 206, scrollTop 206)
+  title     visible      0 of   30.2  whole=False
+  note      visible   44.4 of   44.4  whole=True  hidden=False
+  row locked World feed                 visible      0 of     34  whole=False
+  row up     CALDRIX, on-board          visible      0 of     34  whole=False
+  row up     MARVOK, on-board           visible      0 of     34  whole=False
+  row up     NOCTEV, trackside          visible      0 of     34  whole=False
+  row grey   RUNTAK, trackside          visible    0.7 of     34  whole=False
+  row grey   PENTAV, on-board           visible     34 of     34  whole=True
+  row grey   QUENTRA, trackside         visible     34 of     34  whole=True
+  boxes     4
+  state     t=35.2s  ·  multi view · 4 boxes  ·  4 video elements in the player, 4 decoding
+
+[pagina-entera]
+  sideways  document 400 wide in a viewport of 400  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 125 px of 331 (overflow 206, scrollTop 206)
+  title     visible      0 of   28.7  whole=False
+  note      visible   42.2 of   42.2  whole=True  hidden=False
+  row locked World feed                 visible      0 of   32.3  whole=False
+  row up     CALDRIX, on-board          visible      0 of   32.3  whole=False
+  row up     MARVOK, on-board           visible      0 of   32.3  whole=False
+  row up     NOCTEV, trackside          visible      0 of   32.3  whole=False
+  row grey   RUNTAK, trackside          visible    0.6 of   32.3  whole=False
+  row grey   PENTAV, on-board           visible   32.3 of   32.3  whole=True
+  row grey   QUENTRA, trackside         visible   32.3 of   32.3  whole=True
+  boxes     4
+  state     t=36.3s  ·  multi view · 4 boxes  ·  4 video elements in the player, 4 decoding
+
+  CONTROL   with a block 400 px wider than the viewport: overflow 400 px  ->  SCROLLS, as it must   ; removed again: overflow 0 px
+
+================ 1907x1000 ================
+
+[con-lugar]
+  sideways  document 1907 wide in a viewport of 1907  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 281 px of 281 (overflow 0, scrollTop 0)
+  title     visible   30.2 of   30.2  whole=True
+  note      visible      0 of      0  whole=True  hidden=True
+  row locked World feed                 visible     34 of     34  whole=True
+  row up     CALDRIX, on-board          visible     34 of     34  whole=True
+  row        MARVOK, on-board           visible     34 of     34  whole=True
+  row        NOCTEV, trackside          visible     34 of     34  whole=True
+  row        RUNTAK, trackside          visible     34 of     34  whole=True
+  row        PENTAV, on-board           visible     34 of     34  whole=True
+  row        QUENTRA, trackside         visible     34 of     34  whole=True
+  boxes     2
+  state     t=32.7s  ·  multi view · 2 boxes  ·  2 video elements in the player, 2 decoding
+
+[grilla-llena]
+  sideways  document 1907 wide in a viewport of 1907  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 331 px of 331 (overflow 0, scrollTop 0)
+  title     visible   30.2 of   30.2  whole=True
+  note      visible   44.4 of   44.4  whole=True  hidden=False
+  row locked World feed                 visible     34 of     34  whole=True
+  row up     CALDRIX, on-board          visible     34 of     34  whole=True
+  row up     MARVOK, on-board           visible     34 of     34  whole=True
+  row up     NOCTEV, trackside          visible     34 of     34  whole=True
+  row grey   RUNTAK, trackside          visible     34 of     34  whole=True
+  row grey   PENTAV, on-board           visible     34 of     34  whole=True
+  row grey   QUENTRA, trackside         visible     34 of     34  whole=True
+  boxes     4
+  state     t=34.4s  ·  multi view · 4 boxes  ·  4 video elements in the player, 4 decoding
+
+[reabierto]
+  sideways  document 1907 wide in a viewport of 1907  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 331 px of 331 (overflow 0, scrollTop 0)
+  title     visible   30.2 of   30.2  whole=True
+  note      visible   44.4 of   44.4  whole=True  hidden=False
+  row locked World feed                 visible     34 of     34  whole=True
+  row up     CALDRIX, on-board          visible     34 of     34  whole=True
+  row up     MARVOK, on-board           visible     34 of     34  whole=True
+  row up     NOCTEV, trackside          visible     34 of     34  whole=True
+  row grey   RUNTAK, trackside          visible     34 of     34  whole=True
+  row grey   PENTAV, on-board           visible     34 of     34  whole=True
+  row grey   QUENTRA, trackside         visible     34 of     34  whole=True
+  boxes     4
+  state     t=35.7s  ·  multi view · 4 boxes  ·  4 video elements in the player, 4 decoding
+
+[pagina-entera]
+  sideways  document 1907 wide in a viewport of 1907  ->  overflow 0 px (body 0)  CLEAN
+  panel     shows 331 px of 331 (overflow 0, scrollTop 0)
+  title     visible   28.7 of   28.7  whole=True
+  note      visible   42.2 of   42.2  whole=True  hidden=False
+  row locked World feed                 visible   32.3 of   32.3  whole=True
+  row up     CALDRIX, on-board          visible   32.3 of   32.3  whole=True
+  row up     MARVOK, on-board           visible   32.3 of   32.3  whole=True
+  row up     NOCTEV, trackside          visible   32.3 of   32.3  whole=True
+  row grey   RUNTAK, trackside          visible   32.3 of   32.3  whole=True
+  row grey   PENTAV, on-board           visible   32.3 of   32.3  whole=True
+  row grey   QUENTRA, trackside         visible   32.3 of   32.3  whole=True
+  boxes     4
+  state     t=37.7s  ·  multi view · 4 boxes  ·  4 video elements in the player, 4 decoding
+
+  CONTROL   with a block 400 px wider than the viewport: overflow 400 px  ->  SCROLLS, as it must   ; removed again: overflow 0 px
+
+SOMETHING IS RED

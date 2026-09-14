@@ -1,0 +1,42 @@
+$ reproduce-desde-la-nube.py https://qualabs-hls-demo-race-multiview.storage.googleapis.com/index.html demo/race-multiview/race.json
+
+== LA CORRIDA ==
+  hosts de los requests      {'qualabs-hls-demo-race-multiview.storage.googleapis.com': 41}
+  URLs blob: (MediaSource)   1  -- no salen a la red
+  requests fallidos          1
+      net::ERR_ABORTED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg001.ts
+  respuestas >= 400          0 []
+  currentTime antes          31.000  (pausado=False, readyState=1)
+  currentTime despues        34.020
+  avanzo en 4000 ms de pared +3.020 s
+  camaras subidas            3
+  cajas / <video> adentro    4 / 4
+  tiempos antes              [37.453, 7.115, 0, 0]
+  tiempos despues            [41.461, 10.37, 10.072, 9.1]
+  cuantos avanzaron          4 de 4
+  la fila de la ventana       1
+  camaras nombradas           ['CALDRIX, on-board', 'MARVOK, on-board', 'NOCTEV, trackside', 'RUNTAK, trackside', 'PENTAV, on-board', 'QUENTRA, trackside']
+  la linea de estado          t=41.5s  ·  multi view · 4 boxes  ·  4 video elements in the player, 4 decoding
+
+== EL CONTROL: sin segmentos (.ts abortados) ==
+  hosts de los requests      {'qualabs-hls-demo-race-multiview.storage.googleapis.com': 23}
+  URLs blob: (MediaSource)   0  -- no salen a la red
+  requests fallidos          7
+      net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts
+      net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts
+      net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts
+      net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts
+      net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts
+      net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts
+      net::ERR_FAILED  https://qualabs-hls-demo-race-multiview.storage.googleapis.com/content/primary/seg000.ts
+  respuestas >= 400          0 []
+  currentTime antes          31.000  (pausado=False, readyState=0)
+  currentTime despues        31.000
+  avanzo en 4000 ms de pared +0.000 s
+
+  (los 1 fallidos de arriba son .ts que el reproductor cancelo al saltar,
+   y los mismos objetos responden 200 a un curl sin credenciales)
+VERDE: la pagina publicada pide todo a qualabs-hls-demo-race-multiview.storage.googleapis.com y a nadie mas, el programa avanza,
+       cuatro cajas decodifican a la vez desde el bucket, y el catalogo nombra seis
+       camaras -- y con los .ts abortados el mismo instrumento dice que no avanzo.
+exit=0

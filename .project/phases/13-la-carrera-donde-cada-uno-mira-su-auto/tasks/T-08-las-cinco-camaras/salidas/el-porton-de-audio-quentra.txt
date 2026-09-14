@@ -1,0 +1,79 @@
+################################################################
+# 1. PRIMER OYENTE -- whisper.cpp (medium, en)
+################################################################
+
+01-tribuna                                     (engine revving)
+02-curvon                                      (engine revving)
+03-costa-alto                                  (tires squealing) (tires squealing)
+04-dunas-cerrado                               (engine revving)
+05-muro                                        (engine revving)
+06-recta-principal                             (engine revving)
+07-piano-bajo                                  (engine revving)
+08-curva-larga                                 (engine revving)
+CONTROL-POSITIVO-linea-mezclada                Norvik are still in front here, 1-0, and we are just past the half hour.
+CONTROL-PARADA-01                              Yeah, we needed this break, I'm shattered. Drink up, only five minutes left.
+CONTROL-PARADA-02                              need this break. How are you holding up? Yeah, I'm shattered. Good game though.
+CONTROL-PARADA-03                              That was a good run, finally getting some space. How much longer till the break ends?
+CONTROL-PARADA-04                              How's the hamstring feeling? Better now, thanks. Coach said five more minutes.
+CONTROL-PARADA-05                              How are your legs feeling? A bit tight, need more stretching.
+CONTROL-PARADA-06                              I'm just glad for this break, I'm shattered. Yeah, need this water.
+CONTROL-PARADA-07                              We need to press higher up the pitch. Yeah, but conserve energy for the second half.
+CONTROL-PARADA-08                              (crunching)
+
+################################################################
+# 2. SEGUNDO OYENTE -- gemini-2.5-flash escuchando el archivo
+################################################################
+
+--- 01-tribuna ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, engine acceleration, engine deceleration
+--- 02-curvon ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, tire squeal, wind
+--- 03-costa-alto ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, vehicle acceleration, gear shifts
+--- 04-dunas-cerrado ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Car engine (racing), engine acceleration, engine deceleration
+--- 05-muro ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine revving, engine shifting, vehicle passing.
+--- 06-recta-principal ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Racing car engine (accelerating, revving, decelerating)
+--- 07-piano-bajo ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, tire squeal
+--- 08-curva-larga ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, vehicle pass-by.
+--- CONTROL-POSITIVO-linea-mezclada ---
+    SPEECH: YES
+    TRANSCRIPT: Novak are still in front here, one nil, and we are just past the half hour.
+    SOUNDS: Engine (race car), speech, crowd
+--- CONTROL-PARADA-01 ---
+    SPEECH: YES
+    TRANSCRIPT: Good half everyone. Yeah, we needed this break. I'm shattered. Drink up, only five minutes left.
+    SOUNDS: Speech, Whistle, Footsteps, Background chatter
+
+################################################################
+# 3. EL NIVEL DE CADA CLIP -- insumo del montaje, no del porton
+################################################################
+
+  01-tribuna                                      I: -24.5 LUFS LRA: 4.0 LU Peak: -14.1 dBFS 
+  02-curvon                                       I: -19.9 LUFS LRA: 2.4 LU Peak: -6.7 dBFS 
+  03-costa-alto                                   I: -20.3 LUFS LRA: 0.7 LU Peak: -10.6 dBFS 
+  04-dunas-cerrado                                I: -23.7 LUFS LRA: 2.1 LU Peak: -12.9 dBFS 
+  05-muro                                         I: -24.9 LUFS LRA: 1.7 LU Peak: -7.5 dBFS 
+  06-recta-principal                              I: -22.2 LUFS LRA: 6.8 LU Peak: -10.8 dBFS 
+  07-piano-bajo                                   I: -18.8 LUFS LRA: 0.8 LU Peak: -8.8 dBFS 
+  08-curva-larga                                  I: -20.1 LUFS LRA: 2.4 LU Peak: -8.6 dBFS 

@@ -1,0 +1,21 @@
+$ md5sum demo/multiview-offer/brand/* demo/race-multiview/brand/* demo/multiview-offer/js/dom.js demo/race-multiview/js/dom.js demo/multiview-offer/js/opening.js demo/race-multiview/js/opening.js
+43b1a35092f5f6be2f24faa21845a85e  demo/multiview-offer/brand/favicon.svg
+9f266fbb787a76d4da0bc4b37f2ef1c6  demo/multiview-offer/brand/fonts-embedded.css
+04f24d832b12a8bbc117ffed05582b43  demo/multiview-offer/brand/logo-qualabs-on-dark.svg
+47f31fce6b6353b1c43cd1087819a046  demo/multiview-offer/brand/logo-qualabs.svg
+92d5ebb1c61f0b84f2975894c4529a52  demo/multiview-offer/brand/README.md
+43b1a35092f5f6be2f24faa21845a85e  demo/race-multiview/brand/favicon.svg
+9f266fbb787a76d4da0bc4b37f2ef1c6  demo/race-multiview/brand/fonts-embedded.css
+04f24d832b12a8bbc117ffed05582b43  demo/race-multiview/brand/logo-qualabs-on-dark.svg
+47f31fce6b6353b1c43cd1087819a046  demo/race-multiview/brand/logo-qualabs.svg
+8eb68b525d39f5afa7847ba277d4deda  demo/race-multiview/brand/README.md
+43d8858e7334af10182c2407cad2ac18  demo/multiview-offer/js/dom.js
+43d8858e7334af10182c2407cad2ac18  demo/race-multiview/js/dom.js
+7af50b25790406d2c4048c733f8f1f73  demo/multiview-offer/js/opening.js
+7af50b25790406d2c4048c733f8f1f73  demo/race-multiview/js/opening.js
+
+# los cuatro archivos de marca y los dos modulos dan el mismo md5 a los dos lados.
+# brand/README.md es el unico distinto, y es la correccion de procedencia que el informe explica.
+
+$ diff <(sed -n "/^// ====/,/^// ====/p" .../multiview-offer/js/app.js | grep -v "^//") <(idem race-multiview)
+(sin diferencias: las seis lineas que escribe un integrador son las mismas)

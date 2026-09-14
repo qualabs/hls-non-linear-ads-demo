@@ -1,0 +1,44 @@
+# lib/ no cambio, y eso se comprueba y no se afirma
+
+La fase arranco sobre el commit e2f7f3f, que es el que la T-01 midio el 2026-09-12 y
+el padre del unico commit que la fase escribio (f050ddd). Contra ese commit, y contra
+ese commit mas lo que la fase ya llevaba commiteado, el diff de lib/ esta vacio.
+
+$ git log --oneline -3
+f050ddd La carrera donde cada uno mira su auto: las dos primeras etapas de la fase 13
+e2f7f3f La costura vuelve a verde: el comentario nombraba el asset-list
+1767254 Las fases 11 y 12 cerradas, la pagina de la demo nueva, y la documentacion al dia
+
+$ git diff --stat e2f7f3f -- lib/
+(vacio)
+
+$ git diff --stat f050ddd -- lib/
+(vacio)
+
+$ git diff --stat -- lib/            # el arbol de trabajo contra HEAD
+(vacio)
+
+## EL CONTROL: el mismo comando sabe decir que si hubo un cambio
+
+Contra 1767254 -- el commit anterior al arranque de la fase -- el mismo comando NO
+vuelve vacio: muestra la linea de comentario que e2f7f3f arreglo, que es de antes de
+esta fase. O sea que el vacio de arriba es una lectura y no un comando que no mira nada.
+
+$ git diff --stat 1767254 -- lib/
+ lib/renderer.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git diff 1767254 -- lib/
+diff --git a/lib/renderer.js b/lib/renderer.js
+index eb87eae..62916ab 100644
+--- a/lib/renderer.js
++++ b/lib/renderer.js
+@@ -398,7 +398,7 @@ function moved(a, b) {
+  */
+ export function identityOf(experience, element, ordinal = 0) {
+   // THE LENGTH GOES IN FRONT OF EACH FIELD, and it is not belt and braces: these
+-  // two strings come out of a JSON asset-list, and JSON can carry a NUL. Joined by
++  // two strings arrive as JSON, and JSON can carry a NUL. Joined by
+   // a separator the field itself may contain, two different pairs produce the same
+   // key -- which is one advertiser handed the node of another, the exact failure
+   // this identity exists to prevent. Writing the length first makes the encoding

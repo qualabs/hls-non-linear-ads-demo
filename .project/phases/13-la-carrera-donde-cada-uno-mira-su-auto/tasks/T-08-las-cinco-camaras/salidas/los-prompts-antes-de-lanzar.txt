@@ -1,0 +1,882 @@
+Los cuarenta prompts, tal cual van a viajar a Vertex. Se imprimen ANTES de lanzar
+porque un prompt que se lee despues de pagarlo ya no es una revision.
+
+##########################################################################################
+# MARVOK -- BRIGHT ELECTRIC PURPLE -- bordo
+##########################################################################################
+
+==========================================================================================
+marvok clip 1 -- 01-arco-recta
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from the camera mounted on the roll hoop behind the driver's head, looking forward over the top of the car and down the main straight.
+
+IN FRAME: the purple nose of the car stretching away below the camera with the purple halo bar across the bottom of the frame and the purple mirrors on either side, the grey road running straight ahead between its white edge lines, the barrier wall on one side and the grandstand beyond it.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT ELECTRIC PURPLE car, which is running second and chasing the car ahead of it. Its own bright electric purple bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright electric purple. The purple paint stays the same shade from the first frame to the last.
+
+THE CARS IN THIS SHOT: two only -- this BRIGHT ELECTRIC PURPLE car, and the BRIGHT LEMON YELLOW car a long way ahead of it down the road, small in the distance and never getting closer. All the colours in frame are different from one another: no two cars share a colour and no colour is repeated anywhere.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board roll-hoop camera looking forward over the nose, fixed to the car, with the car's purple bodywork held still in the frame.
+
+==========================================================================================
+marvok clip 2 -- 02-morro-curvon
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from a camera mounted on the nose of the car, low and close to the road, looking forward through one long open left-hand curve.
+
+IN FRAME: the purple nose and the purple front wing of the car across the bottom of the frame with the two front wheels turning on either side, and the road curving away ahead with its white and red kerb on the inside.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT ELECTRIC PURPLE car, which is running second and chasing the car ahead of it. Its own bright electric purple bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright electric purple. The purple paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: the road ahead is clear and no other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board nose camera looking forward low over the road, fixed to the car, with the car's own purple front wing held still in the frame.
+
+==========================================================================================
+marvok clip 3 -- 03-arco-costa
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from the camera mounted on the roll hoop behind the driver's head, looking forward over the top of the car along the coastal stretch of the circuit.
+
+IN FRAME: the purple nose of the car stretching away below the camera with the purple halo bar across the bottom of the frame, the road running ahead, and the barrier with the flat grey sea beyond it along one side.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT ELECTRIC PURPLE car, which is running second and chasing the car ahead of it. Its own bright electric purple bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright electric purple. The purple paint stays the same shade from the first frame to the last.
+
+THE CARS IN THIS SHOT: two only -- this BRIGHT ELECTRIC PURPLE car, and the BRIGHT LEMON YELLOW car a long way ahead of it down the road, small in the distance and never getting closer. All the colours in frame are different from one another: no two cars share a colour and no colour is repeated anywhere.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board roll-hoop camera looking forward over the nose, fixed to the car, with the car's purple bodywork held still in the frame.
+
+==========================================================================================
+marvok clip 4 -- 04-casco-tribuna
+==========================================================================================
+CAMERA: television race coverage, on-board helmet camera. The shot comes from a small camera on top of the driver's helmet, looking forward out of the cockpit along the stretch of track that runs past the main grandstand.
+
+IN FRAME: the purple halo bar curving across the top of the frame, the driver's gloved hands on the steering wheel below, the purple nose of the car stretching away ahead between the two front wheels, and the grey grandstand with its sparse crowd going by on one side.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT ELECTRIC PURPLE car, which is running second and chasing the car ahead of it. Its own bright electric purple bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright electric purple. The purple paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: the road ahead is clear and no other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board helmet camera looking forward out of the cockpit, fixed to the car, with the car's own purple halo and purple nose held still in the frame.
+
+==========================================================================================
+marvok clip 5 -- 05-ponton-curva-larga
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from a small camera mounted on the sidepod, low down at the side of the car, looking forward along the bodywork through one long open right-hand curve.
+
+IN FRAME: the purple sidepod and the purple nose of the car filling the lower left of the frame with the front right wheel turning beside them, and the road curving away ahead with its painted kerb on the inside.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT ELECTRIC PURPLE car, which is running second and chasing the car ahead of it. Its own bright electric purple bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright electric purple. The purple paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: the road ahead is clear and no other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board sidepod camera looking forward along the car's own purple bodywork, fixed to the car, through one long open curve.
+
+==========================================================================================
+marvok clip 6 -- 06-rueda-piano
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from a camera mounted on the side of the cockpit and looking down and across at the front left wheel, close to the road, as the car runs along a painted kerb.
+
+IN FRAME: the front left wheel turning against the purple bodywork of the car, the purple suspension arms reaching out to it, and the white and red kerb running under the wheel with the grey asphalt beside it.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT ELECTRIC PURPLE car, which is running second and chasing the car ahead of it. Its own bright electric purple bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright electric purple. The purple paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: no other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board cockpit-side camera looking down at the front left wheel and the kerb, fixed to the car, with the car's own purple bodywork held still in the frame.
+
+==========================================================================================
+marvok clip 7 -- 07-aleron-recta
+==========================================================================================
+CAMERA: television race coverage, on-board camera looking forward from the back of the car. The shot comes from a camera mounted on the rear wing and looking forward along the whole length of the car, down the main straight.
+
+IN FRAME: the purple rear wing framing the top of the frame, the purple engine cover, the driver's purple helmet and the purple halo below it, the purple nose stretching away ahead between the front wheels, and the road running out in front of the car.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT ELECTRIC PURPLE car, which is running second and chasing the car ahead of it. Its own bright electric purple bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright electric purple. The purple paint stays the same shade from the first frame to the last.
+
+THE CARS IN THIS SHOT: two only -- this BRIGHT ELECTRIC PURPLE car, and the BRIGHT LEMON YELLOW car a long way ahead of it down the road, small in the distance and never getting closer. All the colours in frame are different from one another: no two cars share a colour and no colour is repeated anywhere.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board camera on the rear wing looking forward over the whole car, fixed to the car, with the car's own purple bodywork held still in the frame.
+
+==========================================================================================
+marvok clip 8 -- 08-arco-dunas
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from the camera mounted on the roll hoop behind the driver's head, looking forward over the top of the car down a fast open stretch with the coastal scrub alongside.
+
+IN FRAME: the purple nose of the car stretching away below the camera with the purple halo bar across the bottom of the frame and the top of the driver's purple helmet just under it, the road ahead, and the low green coastal scrub beyond the barrier on one side.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT ELECTRIC PURPLE car, which is running second and chasing the car ahead of it. Its own bright electric purple bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright electric purple. The purple paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: the road ahead is clear and no other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board roll-hoop camera looking forward over the nose, fixed to the car, with the car's purple bodywork held still in the frame.
+
+##########################################################################################
+# PENTAV -- BRIGHT LIME GREEN -- bordo
+##########################################################################################
+
+==========================================================================================
+pentav clip 1 -- 01-morro-recta
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from a camera mounted on the nose of the car, low and close to the road, looking forward down the main straight.
+
+IN FRAME: the green nose and the green front wing of the car across the bottom of the frame with the two front wheels turning on either side, the grey road running straight ahead between its white edge lines, and the barrier wall on one side.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT LIME GREEN car, which is running in the middle of the field. Its own bright lime green bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright lime green. The green paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: the road ahead is clear and no other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board nose camera looking forward low over the road, fixed to the car, with the car's own green front wing held still in the frame.
+
+==========================================================================================
+pentav clip 2 -- 02-arco-curva-larga
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from the camera mounted on the roll hoop behind the driver's head, looking forward over the top of the car through one long open right-hand curve.
+
+IN FRAME: the green nose of the car stretching away below the camera with the green halo bar across the bottom of the frame, and the road curving away ahead with its white and red kerb on the inside.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT LIME GREEN car, which is running in the middle of the field. Its own bright lime green bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright lime green. The green paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: the road ahead is clear and no other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board roll-hoop camera looking forward over the nose, fixed to the car, through one long open curve, with the car's green bodywork held still in the frame.
+
+==========================================================================================
+pentav clip 3 -- 03-ponton-costa
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from a small camera mounted on the sidepod, low down at the side of the car, looking forward along the bodywork on the coastal stretch of the circuit.
+
+IN FRAME: the green sidepod and the green nose of the car filling the lower left of the frame with the front right wheel turning beside them, and the barrier with the flat grey sea beyond it running along one side.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT LIME GREEN car, which is running in the middle of the field. Its own bright lime green bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright lime green. The green paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: the road ahead is clear and no other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board sidepod camera looking forward along the car's own green bodywork, fixed to the car.
+
+==========================================================================================
+pentav clip 4 -- 04-arco-tribuna
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from the camera mounted on the roll hoop behind the driver's head, looking forward over the top of the car along the stretch of track that runs past the main grandstand.
+
+IN FRAME: the green nose of the car stretching away below the camera with the green halo bar across the bottom of the frame and the top of the driver's green helmet just under it, the road ahead, and the grey grandstand with its sparse crowd going by on one side.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT LIME GREEN car, which is running in the middle of the field. Its own bright lime green bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright lime green. The green paint stays the same shade from the first frame to the last.
+
+THE CARS IN THIS SHOT: two only -- this BRIGHT LIME GREEN car, and the DEEP PLUM MAGENTA car a long way ahead of it down the road, small in the distance and never getting closer. All the colours in frame are different from one another: no two cars share a colour and no colour is repeated anywhere.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board roll-hoop camera looking forward over the nose, fixed to the car, with the car's green bodywork held still in the frame.
+
+==========================================================================================
+pentav clip 5 -- 05-casco-curvon
+==========================================================================================
+CAMERA: television race coverage, on-board helmet camera. The shot comes from a small camera on top of the driver's helmet, looking forward out of the cockpit through one long open left-hand curve.
+
+IN FRAME: the green halo bar curving across the top of the frame, the driver's gloved hands on the steering wheel below, the green nose of the car stretching away ahead between the two front wheels, and the road curving away with its painted kerb on the inside.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT LIME GREEN car, which is running in the middle of the field. Its own bright lime green bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright lime green. The green paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: the road ahead is clear and no other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board helmet camera looking forward out of the cockpit, fixed to the car, with the car's own green halo and green nose held still in the frame.
+
+==========================================================================================
+pentav clip 6 -- 06-aleron-dunas
+==========================================================================================
+CAMERA: television race coverage, on-board camera looking forward from the back of the car. The shot comes from a camera mounted on the rear wing and looking forward along the whole length of the car, down a fast open stretch with the coastal scrub alongside.
+
+IN FRAME: the green rear wing framing the top of the frame, the green engine cover, the driver's green helmet and the green halo below it, the green nose stretching away ahead between the front wheels, and the road running out in front of the car with the low green coastal scrub beyond the barrier.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT LIME GREEN car, which is running in the middle of the field. Its own bright lime green bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright lime green. The green paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: the road ahead is clear and no other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board camera on the rear wing looking forward over the whole car, fixed to the car, with the car's own green bodywork held still in the frame.
+
+==========================================================================================
+pentav clip 7 -- 07-rueda-piano
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from a camera mounted on the side of the cockpit and looking down and across at the front left wheel, close to the road, as the car runs along a painted kerb.
+
+IN FRAME: the front left wheel turning against the green bodywork of the car, the green suspension arms reaching out to it, and the white and red kerb running under the wheel with the grey asphalt beside it.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT LIME GREEN car, which is running in the middle of the field. Its own bright lime green bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright lime green. The green paint stays the same shade from the first frame to the last.
+
+THE OTHER CARS: no other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board cockpit-side camera looking down at the front left wheel and the kerb, fixed to the car, with the car's own green bodywork held still in the frame.
+
+==========================================================================================
+pentav clip 8 -- 08-morro-costa
+==========================================================================================
+CAMERA: television race coverage, on-board camera. The shot comes from a camera mounted on the nose of the car, low and close to the road, looking forward along the coastal stretch of the circuit.
+
+IN FRAME: the green nose and the green front wing of the car across the bottom of the frame with the two front wheels turning on either side, the road running ahead, and the barrier with the flat grey sea beyond it along one side.
+
+THE CAR THIS CAMERA IS ON: the camera is bolted to the BRIGHT LIME GREEN car, which is running in the middle of the field. Its own bright lime green bodywork is in the frame for the whole eight seconds, painted that one flat colour, and the driver's helmet is the same bright lime green. The green paint stays the same shade from the first frame to the last.
+
+THE CARS IN THIS SHOT: two only -- this BRIGHT LIME GREEN car, and the DEEP PLUM MAGENTA car a long way ahead of it down the road, small in the distance and never getting closer. All the colours in frame are different from one another: no two cars share a colour and no colour is repeated anywhere.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera is fixed to the car and moves with it, so the car's own bodywork stays in exactly the same place in the frame from the first frame to the last, and what streams past is the road, the kerb, the barrier and everything beyond them. The camera holds one heading all the way through, the same heading the car holds, and it never turns round to look back down the road unless this shot says it faces backwards from the start.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from on board -- the car's own engine close and loud, gearshifts, rushing air over the car, tyres scrubbing on asphalt and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: an on-board nose camera looking forward low over the road, fixed to the car, with the car's own green front wing held still in the frame.
+
+##########################################################################################
+# NOCTEV -- BRIGHT AQUAMARINE -- seguimiento
+##########################################################################################
+
+==========================================================================================
+noctev clip 1 -- 01-recta-principal
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed, down the main straight, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone at full speed, seen from the side, the whole car from its front wing to its rear wing filling the middle of the frame, with the road under it and the barrier and the grandstand streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the BRIGHT AQUAMARINE car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+noctev clip 2 -- 02-curvon-piano   [camara quieta]
+==========================================================================================
+CAMERA: television race coverage, trackside camera position with a long lens. A broadcast camera stands on the ground at the outside of one long open curve and pans with a single car as it runs round the curve in front of it, keeping the car in the middle of the frame the whole time.
+
+IN FRAME: one car alone through a long open curve, seen from the side of the track, filling the middle of the frame, with the white and red kerb running under its inside wheels.
+
+THE CARS IN THIS SHOT: one only, the BRIGHT AQUAMARINE car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself. The camera keeps its place on the ground beside the track, so whatever stands behind the road at the start of the shot is still behind it at the end.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens trackside broadcast camera on the ground at the edge of the circuit, panning with the car through the curve and staying where it is.
+
+==========================================================================================
+noctev clip 3 -- 03-costa
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed, along the coastal stretch of the circuit, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone at full speed, seen from the side, the whole car filling the middle of the frame, with the barrier and the flat grey sea streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the BRIGHT AQUAMARINE car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+noctev clip 4 -- 04-tribuna-cerrado
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed along the stretch of track in front of the main grandstand, close in on the car so that its flank fills the frame.
+
+IN FRAME: the flank of one car close up, seen from the side -- the sidepod, the rear wheel and the rear wing filling the frame -- with the grey grandstand and its sparse crowd streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the BRIGHT AQUAMARINE car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and close in on its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+noctev clip 5 -- 05-dunas-alto
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed down a fast open stretch with the coastal scrub alongside, raised a little above the car and looking slightly down at it.
+
+IN FRAME: one car alone at full speed, seen from the side and a little above, the whole car in the middle of the frame with its painted engine cover and rear wing showing, and the low green coastal scrub streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the BRIGHT AQUAMARINE car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, a little above it and looking down across at it. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+noctev clip 6 -- 06-recta-bajo   [camara quieta]
+==========================================================================================
+CAMERA: television race coverage, trackside camera position with a long lens. A broadcast camera stands low on the ground beside a straight, at the height of the wheels, and pans with a single car running down the road in front of it, keeping the car in the middle of the frame the whole time.
+
+IN FRAME: one car alone seen low from the side, at wheel height, the whole car filling the middle of the frame with the grey asphalt and the white edge line running under it.
+
+THE CARS IN THIS SHOT: one only, the BRIGHT AQUAMARINE car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself. The camera keeps its place on the ground beside the track, so whatever stands behind the road at the start of the shot is still behind it at the end.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens trackside broadcast camera low on the ground at the edge of the circuit, panning with the car and staying where it is.
+
+==========================================================================================
+noctev clip 7 -- 07-curva-larga
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed through one long open right-hand curve, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone through a long open curve, seen from the side, the whole car filling the middle of the frame, with the painted kerb on the inside of the curve and the barrier beyond it streaming past.
+
+THE CARS IN THIS SHOT: one only, the BRIGHT AQUAMARINE car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+noctev clip 8 -- 08-muro-diagonales
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed down a stretch of track with the concrete barrier wall close behind it, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone at full speed, seen from the side, the whole car filling the middle of the frame, with the bare grey concrete wall and its wide diagonal bands of white and slate grey streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the BRIGHT AQUAMARINE car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.
+
+##########################################################################################
+# RUNTAK -- DEEP PLUM MAGENTA -- seguimiento
+##########################################################################################
+
+==========================================================================================
+runtak clip 1 -- 01-costa
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed, along the coastal stretch of the circuit, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone at full speed, seen from the side, the whole car from its front wing to its rear wing filling the middle of the frame, with the barrier and the flat grey sea streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the DEEP PLUM MAGENTA car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+runtak clip 2 -- 02-tribuna
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed along the stretch of track in front of the main grandstand, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone at full speed, seen from the side, the whole car filling the middle of the frame, with the grey grandstand and its sparse crowd streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the DEEP PLUM MAGENTA car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+runtak clip 3 -- 03-curvon-alto
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed through one long open left-hand curve, raised a little above the car and looking slightly down at it.
+
+IN FRAME: one car alone through a long open curve, seen from the side and a little above, the whole car in the middle of the frame with its painted engine cover and rear wing showing, and the white and red kerb running under its inside wheels.
+
+THE CARS IN THIS SHOT: one only, the DEEP PLUM MAGENTA car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, a little above it and looking down across at it. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+runtak clip 4 -- 04-recta-piano   [camara quieta]
+==========================================================================================
+CAMERA: television race coverage, trackside camera position with a long lens. A broadcast camera stands on the ground beside a straight, level with a painted kerb, and pans with a single car running along the kerb in front of it, keeping the car in the middle of the frame the whole time.
+
+IN FRAME: one car alone seen from the side of the track, the whole car filling the middle of the frame, with the white and red kerb running under its wheels and the grey asphalt beside it.
+
+THE CARS IN THIS SHOT: one only, the DEEP PLUM MAGENTA car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself. The camera keeps its place on the ground beside the track, so whatever stands behind the road at the start of the shot is still behind it at the end.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens trackside broadcast camera on the ground at the edge of the circuit, panning with the car and staying where it is.
+
+==========================================================================================
+runtak clip 5 -- 05-dunas
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed down a fast open stretch with the coastal scrub alongside, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone at full speed, seen from the side, the whole car filling the middle of the frame, with the low green coastal scrub streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the DEEP PLUM MAGENTA car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+runtak clip 6 -- 06-muro-cerrado
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed with the concrete barrier wall close behind it, close in on the car so that its flank fills the frame.
+
+IN FRAME: the flank of one car close up, seen from the side -- the sidepod, the rear wheel and the rear wing filling the frame -- with the bare grey concrete wall and its wide diagonal bands of white and slate grey streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the DEEP PLUM MAGENTA car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and close in on its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+runtak clip 7 -- 07-curva-larga-bajo   [camara quieta]
+==========================================================================================
+CAMERA: television race coverage, trackside camera position with a long lens. A broadcast camera stands low on the ground at the outside of one long open curve, at the height of the wheels, and pans with a single car as it runs round the curve in front of it, keeping the car in the middle of the frame the whole time.
+
+IN FRAME: one car alone through a long open curve, seen low from the side at wheel height, the whole car filling the middle of the frame with the painted kerb running under its inside wheels.
+
+THE CARS IN THIS SHOT: one only, the DEEP PLUM MAGENTA car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself. The camera keeps its place on the ground beside the track, so whatever stands behind the road at the start of the shot is still behind it at the end.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens trackside broadcast camera low on the ground at the edge of the circuit, panning with the car through the curve and staying where it is.
+
+==========================================================================================
+runtak clip 8 -- 08-recta-principal
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed, down the main straight, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone at full speed, seen from the side, the whole car filling the middle of the frame, with the road under it and the barrier wall streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the DEEP PLUM MAGENTA car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.
+
+##########################################################################################
+# QUENTRA -- DARK BRONZE GOLD -- seguimiento
+##########################################################################################
+
+==========================================================================================
+quentra clip 1 -- 01-tribuna
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed along the stretch of track in front of the main grandstand, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone at full speed, seen from the side, the whole car from its front wing to its rear wing filling the middle of the frame, with the grey grandstand and its sparse crowd streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the DARK BRONZE GOLD car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+quentra clip 2 -- 02-curvon
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed through one long open right-hand curve, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone through a long open curve, seen from the side, the whole car filling the middle of the frame, with the white and red kerb on the inside of the curve and the barrier beyond it streaming past.
+
+THE CARS IN THIS SHOT: one only, the DARK BRONZE GOLD car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+quentra clip 3 -- 03-costa-alto
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed along the coastal stretch of the circuit, raised a little above the car and looking slightly down at it.
+
+IN FRAME: one car alone at full speed, seen from the side and a little above, the whole car in the middle of the frame with its painted engine cover and rear wing showing, and the barrier with the flat grey sea beyond it streaming past behind.
+
+THE CARS IN THIS SHOT: one only, the DARK BRONZE GOLD car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, a little above it and looking down across at it. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+quentra clip 4 -- 04-dunas-cerrado
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed down a fast open stretch with the coastal scrub alongside, close in on the car so that its flank fills the frame.
+
+IN FRAME: the flank of one car close up, seen from the side -- the sidepod, the rear wheel and the rear wing filling the frame -- with the low green coastal scrub streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the DARK BRONZE GOLD car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and close in on its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+quentra clip 5 -- 05-muro   [camara quieta]
+==========================================================================================
+CAMERA: television race coverage, trackside camera position with a long lens. A broadcast camera stands on the ground beside a stretch of track with the concrete barrier wall behind the road, and pans with a single car running down the road in front of it, keeping the car in the middle of the frame the whole time.
+
+IN FRAME: one car alone seen from the side of the track, the whole car filling the middle of the frame, with the bare grey concrete wall and its wide diagonal bands of white and slate grey behind the road.
+
+THE CARS IN THIS SHOT: one only, the DARK BRONZE GOLD car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself. The camera keeps its place on the ground beside the track, so whatever stands behind the road at the start of the shot is still behind it at the end.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens trackside broadcast camera on the ground at the edge of the circuit, panning with the car and staying where it is.
+
+==========================================================================================
+quentra clip 6 -- 06-recta-principal
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed, down the main straight, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone at full speed, seen from the side, the whole car filling the middle of the frame, with the road under it and the barrier and the grandstand streaming past behind it.
+
+THE CARS IN THIS SHOT: one only, the DARK BRONZE GOLD car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.
+
+==========================================================================================
+quentra clip 7 -- 07-piano-bajo   [camara quieta]
+==========================================================================================
+CAMERA: television race coverage, trackside camera position with a long lens. A broadcast camera stands low on the ground beside a painted kerb, at the height of the wheels, and pans with a single car running along the kerb in front of it, keeping the car in the middle of the frame the whole time.
+
+IN FRAME: one car alone seen low from the side at wheel height, the whole car filling the middle of the frame, with the white and red kerb running under its wheels and the grey asphalt beside it.
+
+THE CARS IN THIS SHOT: one only, the DARK BRONZE GOLD car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself. The camera keeps its place on the ground beside the track, so whatever stands behind the road at the start of the shot is still behind it at the end.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens trackside broadcast camera low on the ground at the edge of the circuit, panning with the car and staying where it is.
+
+==========================================================================================
+quentra clip 8 -- 08-curva-larga
+==========================================================================================
+CAMERA: television race coverage, with a long lens. The camera runs alongside one car at its own speed through one long open left-hand curve, and holds the whole car in the frame, seen from the side.
+
+IN FRAME: one car alone through a long open curve, seen from the side, the whole car filling the middle of the frame, with the painted kerb on the inside of the curve and the low green coastal scrub beyond the barrier streaming past.
+
+THE CARS IN THIS SHOT: one only, the DARK BRONZE GOLD car. No other car is in frame.
+
+THE TRACK IN THIS SHOT: one single road, and the whole shot happens on it. One strip of grey asphalt runs through the frame, bounded on one side by a painted kerb with grass beyond it and on the other by the barrier wall, and those two edges run along it unbroken from the first frame to the last. Every car in the shot runs the same way down that road for the whole eight seconds, moving forward all the time and holding one heading: no car ever turns back on itself.
+
+THE CAMERA IN THIS SHOT: the camera travels along the track alongside the car or cars it is following, at their speed and level with them, looking across at them from the side. They keep the same place and the same size in the frame from the first frame to the last, and the distance between them and the camera never changes, so the road, the kerb, the barrier and everything behind them stream past for the whole eight seconds. The camera holds one heading all the way through, the same heading they hold, and it never turns round to look back down the road.
+
+THE PLACE -- the same circuit, the same weather and the same hour in every shot of this race. A fictional single-seater championship on a wide, flat coastal circuit. Late afternoon under a high, even overcast: soft flat light, no sun, no hard shadows, no lens flare. Dry mid-grey asphalt, plain white edge lines, wide kerbs painted in alternating white and red blocks at the corners. Along the track: low green coastal scrub, bare grey concrete walls painted in wide diagonal bands of white and slate grey, a grey grandstand with a sparse crowd, a flat grey sea and a pale sky. Daylight throughout: no rain, no night, no floodlights.
+
+THE CARS -- contemporary open-cockpit single-seaters with exposed wheels, matt black tyres on plain dark grey rims. Six cars run in this championship and they are told apart by their paint alone: BRIGHT LEMON YELLOW, BRIGHT ELECTRIC PURPLE, BRIGHT AQUAMARINE, DEEP PLUM MAGENTA, BRIGHT LIME GREEN and DARK BRONZE GOLD. Each car is that one flat colour over its whole body, with a single accent stripe running from the nose to the tail, and the driver's helmet is painted the same colour as its car. The paint is the whole livery: clean, smooth, unbroken bodywork, straight out of the paint shop.
+
+SOUND: heard from the side of the track -- the car's engine rising and falling as it runs, tyres on asphalt, wind across the microphone and a distant crowd. No speech, no commentary, no music.
+
+CAMERA, AGAIN: a long-lens broadcast camera travelling alongside the car at its own speed, level with it and looking across at its flank. It keeps the same distance from the car for the whole shot.

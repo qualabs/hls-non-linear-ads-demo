@@ -1,0 +1,71 @@
+Los seis colores de race.json, que son los que la T-03 midio sobre el programa:
+
+  CALDRIX        #CCB21F  CALDRIX, on-board
+  MARVOK         #381A6A  MARVOK, on-board
+  NOCTEV         #24ACC8  NOCTEV, trackside
+  RUNTAK         #661955  RUNTAK, trackside
+  PENTAV         #2D6E24  PENTAV, on-board
+  QUENTRA        #876E46  QUENTRA, trackside
+
+======================================================================================
+1. LAS SEIS FILAS ENTRE SI -- dE00 de los quince pares
+======================================================================================
+
+  marvok     runtak       13.7
+  pentav     quentra      25.5
+  caldrix    quentra      26.6
+  caldrix    pentav       37.6
+  noctev     quentra      39.1
+  noctev     pentav       42.8
+  runtak     quentra      43.1
+  caldrix    noctev       46.3
+  marvok     quentra      49.2
+  marvok     pentav       51.1
+  marvok     noctev       53.4
+  noctev     runtak       62.1
+  runtak     pentav       65.7
+  caldrix    runtak       75.6
+  caldrix    marvok       81.4
+
+  el par mas parecido: marvok / runtak, dE00 13.7
+  CONTROL -- seis grises separados de a cuatro puntos de luminancia: dE00 de 1.5 a 7.9
+
+======================================================================================
+2. CADA FILA CONTRA EL FONDO DEL PANEL
+======================================================================================
+
+  El panel es rgba(12, 16, 24, 0.82), asi que su color depende de lo que tenga atras. Se
+  miden los dos extremos: sobre negro y sobre un gris claro, que es lo mas claro que el
+  video puede poner atras.
+
+  sobre negro              el panel queda en #0A0D14
+      caldrix    #CCB21F   dE00   67.3
+      marvok     #381A6A   dE00   21.7
+      noctev     #24ACC8   dE00   54.6
+      runtak     #661955   dE00   26.1
+      pentav     #2D6E24   dE00   38.5
+      quentra    #876E46   dE00   38.6
+      (control)  #0A0D14   dE00    0.0   <-- CONTROL: un gris casi igual al fondo
+      (control)  #14171E   dE00    2.7   <-- CONTROL: el fondo + 10 por canal
+
+  sobre un cuadro claro    el panel queda en #2E3138
+      caldrix    #CCB21F   dE00   60.4
+      marvok     #381A6A   dE00   18.6
+      noctev     #24ACC8   dE00   46.1
+      runtak     #661955   dE00   22.5
+      pentav     #2D6E24   dE00   32.9
+      quentra    #876E46   dE00   30.9
+      (control)  #2E3138   dE00    0.0   <-- CONTROL: un gris casi igual al fondo
+      (control)  #383B42   dE00    3.2   <-- CONTROL: el fondo + 10 por canal
+
+======================================================================================
+3. QUE PASARIA SI SE CORRIERA EL DE CALDRIX
+======================================================================================
+
+  La T-05 midio el amarillo de la camara de a bordo en #F6F252 y dejo dos salidas: dejarlo,
+  o correrlo hacia el promedio de los dos. Aca se calculan las dos, contra la unica vara que
+  importa -- la separacion de las seis filas -- y no contra el cuadro.
+
+  como esta (el programa)      #CCB21F   al auto mas cercano (quentra):  26.6   al fondo:  67.3 /  60.4
+  el promedio de los dos       #E1D238   al auto mas cercano (quentra):  33.6   al fondo:  80.8 /  71.3
+  el de la camara de a bordo   #F6F252   al auto mas cercano (quentra):  39.7   al fondo:  95.3 /  75.9

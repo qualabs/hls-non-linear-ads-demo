@@ -1,0 +1,79 @@
+################################################################
+# 1. PRIMER OYENTE -- whisper.cpp (medium, en)
+################################################################
+
+01-recta-principal                             (engine revving)
+02-costa-quieta                                (engine revving)
+03-costa                                       (crowd cheering)
+04-tribuna-cerrado                             (engine revving)
+05-dunas-alto                                  (tires squealing)
+06-recta-bajo                                  (engine revving)
+07-curva-larga                                 (engine revving)
+08-muro-diagonales                             (engine revving)
+CONTROL-POSITIVO-linea-mezclada                Norvik are still in front here, 1-0, and we are just past the half hour.
+CONTROL-PARADA-01                              Yeah, we needed this break, I'm shattered. Drink up, only five minutes left.
+CONTROL-PARADA-02                              need this break. How are you holding up? Yeah, I'm shattered. Good game though.
+CONTROL-PARADA-03                              That was a good run, finally getting some space. How much longer till the break ends?
+CONTROL-PARADA-04                              How's the hamstring feeling? Better now, thanks. Coach said five more minutes.
+CONTROL-PARADA-05                              How are your legs feeling? A bit tight, need more stretching.
+CONTROL-PARADA-06                              I'm just glad for this break, I'm shattered. Yeah, need this water.
+CONTROL-PARADA-07                              We need to press higher up the pitch. Yeah, but conserve energy for the second half.
+CONTROL-PARADA-08                              (crunching)
+
+################################################################
+# 2. SEGUNDO OYENTE -- gemini-2.5-flash escuchando el archivo
+################################################################
+
+--- 01-recta-principal ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, whoosh.
+--- 02-costa-quieta ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Car engine, tires on road
+--- 03-costa ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Car engine, tire squeal
+--- 04-tribuna-cerrado ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, vehicle passing, high-speed movement
+--- 05-dunas-alto ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Racing car engine, tires
+--- 06-recta-bajo ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Engine, Vehicle (race car), Gear shift, Acceleration, Deceleration
+--- 07-curva-larga ---
+    SPEECH: No.
+    TRANSCRIPT: NONE.
+    SOUNDS: Race car engine, vehicle pass-by.
+--- 08-muro-diagonales ---
+    SPEECH: NO
+    TRANSCRIPT: NONE
+    SOUNDS: Race car engine, acceleration, pass-by
+--- CONTROL-POSITIVO-linea-mezclada ---
+    SPEECH: YES
+    TRANSCRIPT: Norwich are still in front here, 1-0, and we are just past the half hour.
+    SOUNDS: Speech, Race car
+--- CONTROL-PARADA-01 ---
+    SPEECH: YES
+    TRANSCRIPT: Good half, everyone. Yeah, we needed this break. I'm shattered. Drink up, only five minutes left.
+    SOUNDS: Speech, Whistle, Footsteps, Rustling
+
+################################################################
+# 3. EL NIVEL DE CADA CLIP -- insumo del montaje, no del porton
+################################################################
+
+  01-recta-principal                              I: -21.6 LUFS LRA: 0.9 LU Peak: -10.5 dBFS 
+  02-costa-quieta                                 I: -22.3 LUFS LRA: 2.0 LU Peak: -12.5 dBFS 
+  03-costa                                        I: -21.6 LUFS LRA: 3.0 LU Peak: -11.6 dBFS 
+  04-tribuna-cerrado                              I: -22.5 LUFS LRA: 4.3 LU Peak: -11.7 dBFS 
+  05-dunas-alto                                   I: -22.0 LUFS LRA: 0.7 LU Peak: -13.4 dBFS 
+  06-recta-bajo                                   I: -21.2 LUFS LRA: 1.6 LU Peak: -11.0 dBFS 
+  07-curva-larga                                  I: -22.9 LUFS LRA: 2.8 LU Peak: -11.8 dBFS 
+  08-muro-diagonales                              I: -21.5 LUFS LRA: 5.7 LU Peak: -9.1 dBFS 
