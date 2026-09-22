@@ -1,0 +1,46 @@
+# La línea de base, comparada por nombres y no por totales — 2026-09-22
+
+Base: el commit 28999e2 extraído con `git archive` a un árbol limpio (193 pruebas, la
+misma cifra que PHASE.md declaró el 2026-09-21). Ahora: el árbol de trabajo (216).
+El instrumento es `node --test --test-reporter=tap`, y lo que se compara son los nombres.
+
+## Pruebas DESAPARECIDAS (base y no ahora)
+   (ninguna: 0)
+
+## CONTROL DEL COMPARADOR — se le saca una prueba real a la lista de ahora
+   víctima: a block this client cannot draw plays the asset own URI, and the ads around it do not move
+   el comparador la ve faltar:
+     a block this client cannot draw plays the asset own URI, and the ads around it do not move
+
+## Pruebas NUEVAS (23), todas de demo/stage-pair/test/signalled-run.test.js
+   cada aviso de la carrera es la pieza de su campaña, en la forma que stage.json declara
+   cada break trae SU lineal, con la duración de SU break: es donde muere el tramo invertido
+   cada playlist apunta a SU juego de asset-lists, y es todo lo que las separa
+   cada playlist sale con los dos tags por break, y las clases son las dos del ADR 0007
+   el asset de cada break es la pieza de su campaña, en los dos medios
+   el catálogo son las cámaras EMPAQUETADAS, con el nombre que stage.json les da
+   el chequeo de equivalencia ve un viewport movido en una sola de las dos
+   el chequeo del escalón magro sabe encontrar un asset de video
+   el chequeo del orden ve un aviso corrido adentro de la ventana
+   el control del tramo invertido se puede encender, y desempareja los dos panes
+   el layout de cada break es el que stage.json declara, con sus cajas
+   el lineal de cada break es el creativo 16:9 de su campaña
+   EL ORDEN ES EL ARGUMENTO: los cuatro avisos terminan antes de que la ventana abra
+   el tag de la ventana no lleva X-RESTRICT y los de los avisos sí
+   el tag lineal va en la forma de reemplazo, o sea SIN X-RESUME-OFFSET
+   entre la rica y la magra de un break cambian EXACTAMENTE el type y el uri del asset
+   la carrera sale con un tag por aviso más el de la ventana, y las dos clases son hermanas
+   la hoja de la carrera sale de los archivos y no de sí misma
+   la hoja que el script imprime sale de los archivos y no de sí misma
+   la oferta anuncia un catálogo y no un layout
+   la ventana abre en carrera.ofertaEn y dura lo que su asset-list declara
+   los dos tags de un break comparten el START-DATE, y el segundo es el que stage.json declara
+   ningún asset-list magro declara un asset de video
+
+## Los totales, para que el que lee no tenga que sumar
+   base  # tests 193
+   base  # pass 193
+   base  # fail 0
+   ahora # tests 216
+   ahora # pass 216
+   ahora # fail 0

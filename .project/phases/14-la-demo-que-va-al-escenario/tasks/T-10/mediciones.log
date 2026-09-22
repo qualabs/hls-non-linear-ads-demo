@@ -1,0 +1,71 @@
+server PID 2925976 en el puerto 8099
+
+== 1. EL ORDEN: LOS AVISOS PRIMERO, LA VENTANA DESPUÉS ==
+
+  los rangos que el player resolvió de la playlist
+      RACE-R1-CONCURRENT       concurrent     6.0 s ->   12.0 s
+      RACE-R2-CONCURRENT       concurrent    18.0 s ->   24.0 s
+      RACE-R3-CONCURRENT       concurrent    30.0 s ->   36.0 s
+      RACE-R4-CONCURRENT       concurrent    42.0 s ->   48.0 s
+      RACE-MULTIVIEW           multiview     56.0 s ->  120.0 s
+    son los cuatro avisos más la ventana                     VERDE   4 concurrent + 1 multiview
+    ningún aviso se solapa con la ventana                    VERDE   hueco 8.0 s entre el último aviso y la ventana
+
+  EL CONTROL — CONTROL_AVISO_EN_VENTANA=1 corre el último aviso adentro
+      RACE-R1-CONCURRENT       concurrent     6.0 s ->   12.0 s
+      RACE-R2-CONCURRENT       concurrent    18.0 s ->   24.0 s
+      RACE-R3-CONCURRENT       concurrent    30.0 s ->   36.0 s
+      RACE-MULTIVIEW           multiview     56.0 s ->  120.0 s
+      RACE-R4-CONCURRENT       concurrent    66.0 s ->   72.0 s
+    CONTROL: la misma lectura ve el solapamiento             VERDE   hueco -16.0 s, o sea el aviso cae DENTRO de la ventana
+
+server 2925976 bajado
+
+VERDE: las mediciones dieron lo esperado y los controles también.
+server PID 2927102 en el puerto 8099
+
+== 2. LA VENTANA ABRE DONDE stage.json DICE, Y OFRECE LO QUE HAY EMPAQUETADO ==
+
+      contrato   56.0 s -> 120.0 s
+      stage.json 56 s -> 120 s
+    la ventana abre en carrera.ofertaEn                      VERDE   
+    y dura carrera.ofertaDura                                VERDE   
+
+      cámaras empaquetadas en disco   6
+      caldrix    CALDRIX, car cam     /content/race/caldrix/index.m3u8
+      marvok     MARVOK, car cam      /content/race/marvok/index.m3u8
+      noctev     NOCTEV, car cam      /content/race/noctev/index.m3u8
+      runtak     RUNTAK, car cam      /content/race/runtak/index.m3u8
+      pentav     PENTAV, car cam      /content/race/pentav/index.m3u8
+      quentra    QUENTRA, car cam     /content/race/quentra/index.m3u8
+    el catálogo tiene una entrada por cámara empaquetada     VERDE   6 de 6
+    con el id y el nombre que stage.json les da              VERDE   
+    y las filas del selector son el programa más las cámaras VERDE   
+    el catálogo es más largo que el tope de 4 de la grilla   VERDE   
+
+  EL CONTROL — la misma lectura fuera de la ventana
+    CONTROL: no hay oferta un segundo antes de abrir         VERDE   t=55 s
+    CONTROL: no hay oferta dentro del primer aviso           VERDE   t=7 s
+
+server 2927102 bajado
+
+VERDE: las mediciones dieron lo esperado y los controles también.
+server PID 2927354 en el puerto 8099
+
+== 3. ELEGIR CÁMARAS Y AGRANDAR UNA, POR LA CHROME DE LA LIBRERÍA ==
+    CONTROL: con nada tildado hay un solo elemento de video  VERDE   1
+    tildada CALDRIX, car cam                                 VERDE   2 elementos de video (el programa y 1 cámara/s)
+    tildada MARVOK, car cam                                  VERDE   3 elementos de video (el programa y 2 cámara/s)
+    tildada NOCTEV, car cam                                  VERDE   4 elementos de video (el programa y 3 cámara/s)
+    con la grilla llena, la fila de RUNTAK, car cam queda bloqueada VERDE   el tope es de la grilla (4 cajas, ADR 0066)
+    y el catálogo sigue ofreciendo todas                     VERDE   el tope nunca es de la oferta
+
+      cajas en pantalla   ['primaryContent', 'caldrix', 'marvok', 'noctev']
+    las cajas son el programa y las cámaras tildadas         VERDE   
+      la línea dice      t=63.9s · multi view · 4 boxes · CALDRIX, car cam at full frame · 4 video elements in the player, 4 decoding
+    agrandada, la línea la nombra a cuadro entero            VERDE   
+    y desagrandada vuelve la grilla                          VERDE   t=66.1s · multi view · 4 boxes · 4 video elements in the player, 4 decoding
+
+server 2927354 bajado
+
+VERDE: las mediciones dieron lo esperado y los controles también.

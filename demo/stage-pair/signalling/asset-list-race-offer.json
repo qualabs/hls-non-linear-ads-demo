@@ -1,0 +1,58 @@
+{
+  "ASSETS": [
+    {
+      "URI": "/content/race/caldrix/index.m3u8",
+      "DURATION": 64,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "offer",
+        "payload": [
+          {
+            "type": "multiViewOffer",
+            "start": 0,
+            "duration": 64,
+            "primaryName": "World feed",
+            "views": [
+              {
+                "id": "caldrix",
+                "name": "CALDRIX, car cam",
+                "type": "application/vnd.apple.mpegurl",
+                "uri": "/content/race/caldrix/index.m3u8"
+              },
+              {
+                "id": "marvok",
+                "name": "MARVOK, car cam",
+                "type": "application/vnd.apple.mpegurl",
+                "uri": "/content/race/marvok/index.m3u8"
+              },
+              {
+                "id": "noctev",
+                "name": "NOCTEV, car cam",
+                "type": "application/vnd.apple.mpegurl",
+                "uri": "/content/race/noctev/index.m3u8"
+              },
+              {
+                "id": "runtak",
+                "name": "RUNTAK, car cam",
+                "type": "application/vnd.apple.mpegurl",
+                "uri": "/content/race/runtak/index.m3u8"
+              },
+              {
+                "id": "pentav",
+                "name": "PENTAV, car cam",
+                "type": "application/vnd.apple.mpegurl",
+                "uri": "/content/race/pentav/index.m3u8"
+              },
+              {
+                "id": "quentra",
+                "name": "QUENTRA, car cam",
+                "type": "application/vnd.apple.mpegurl",
+                "uri": "/content/race/quentra/index.m3u8"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

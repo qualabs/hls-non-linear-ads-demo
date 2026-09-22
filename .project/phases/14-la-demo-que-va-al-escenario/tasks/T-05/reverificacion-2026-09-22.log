@@ -1,0 +1,233 @@
+# Re-verificación de los nueve creativos, 2026-09-22, con la aserción de fase corregida
+# (verificar-creativo.sh: el cuadro 0 se saca SIN -ss, y la fase se decide por mínimo sobre siete candidatos)
+
+=== A) EL DEFECTO, MEDIDO SOBRE UNA PIEZA DE LA T-05 (zumbra-16x9) ===
+$ ffprobe -v error -select_streams v:0 -show_entries packet=pts_time -of csv=p=0 content/creatives/zumbra-16x9/index.m3u8 | head -3
+1.466667,
+1.500000,
+1.566667,
+  pxdif (cuadro con -ss 0)      vs (navegador f00000)  5%   19922 px
+  pxdif (primer cuadro SIN -ss) vs (navegador f00000)  5%    2882 px
+  pxdif (cuadro con -ss 0)      vs (primer cuadro SIN -ss)  18829 px
+
+=== B) CONTROL --desfasar 10 sobre zumbra-16x9: el minimo tiene que correrse al 10 ===
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video   13437 px (1.4580 %)   SVG   29094 px (1.4031 %)   ok
+        cuadros  15-> 30  video   25244 px (2.7391 %)   SVG   55261 px (2.6650 %)   ok
+        cuadros  30-> 45  video   26351 px (2.8593 %)   SVG   58699 px (2.8308 %)   ok
+        cuadros  45-> 60  video   25743 px (2.7933 %)   SVG   57557 px (2.7757 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 10 del video vs cuadro  0 del navegador     10788 px
+        cuadro 10 del video vs cuadro  5 del navegador     10487 px
+        cuadro 10 del video vs cuadro 10 del navegador      2949 px
+        cuadro 10 del video vs cuadro 15 del navegador     15501 px
+        cuadro 10 del video vs cuadro 20 del navegador     19093 px
+        cuadro 10 del video vs cuadro 25 del navegador     23315 px
+        cuadro 10 del video vs cuadro 30 del navegador     26452 px
+  VERDE el mínimo cae en el cuadro 10 del navegador, que es donde el cuadro 10 del video tiene que caer
+  => content/creatives/zumbra-16x9/index.m3u8 en verde
+
+=== C) CONTROL EN ROJO: un video que arranca 15 cuadros tarde (zumbra-16x9 desde t=0,5 s),
+===    verificado contra la referencia que arranca en 0. LA ASERCION NUEVA: ===
+  VERDE cuadros decodificados: 61 (declarado 61)
+  VERDE duración por suma de #EXTINF: 2.033 s (declarado 2.0333 s, delta 0.000 s)
+        cuadros   0-> 15  video   24928 px (2.7049 %)   SVG   29094 px (1.4031 %)   ok
+        cuadros  15-> 30  video   26581 px (2.8842 %)   SVG   55261 px (2.6650 %)   ok
+        cuadros  30-> 45  video   25804 px (2.7999 %)   SVG   58699 px (2.8308 %)   ok
+        cuadros  45-> 60  video   22060 px (2.3937 %)   SVG   57557 px (2.7757 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro  0 del navegador     15942 px
+        cuadro 0 del video vs cuadro  5 del navegador     15799 px
+        cuadro 0 del video vs cuadro 10 del navegador     15334 px
+        cuadro 0 del video vs cuadro 15 del navegador      2910 px
+        cuadro 0 del video vs cuadro 20 del navegador     17074 px
+        cuadro 0 del video vs cuadro 25 del navegador     22489 px
+        cuadro 0 del video vs cuadro 30 del navegador     27676 px
+  ROJO  el mínimo cae en el cuadro 15 del navegador y el cuadro del video es el 0
+  => 1 aserción(es) en rojo para content/.work/T-05-reverify/hls-desfasado/index.m3u8
+
+=== D) EL MISMO CONTROL, CON LA ASERCION VIEJA: lo daba VERDE ===
+  VERDE cuadros decodificados: 61 (declarado 61)
+  VERDE duración por suma de #EXTINF: 2.033 s (declarado 2.0333 s, delta 0.000 s)
+        cuadros   0-> 15  video   25616 px (2.7795 %)   SVG   29094 px (1.4031 %)   ok
+        cuadros  15-> 30  video   26581 px (2.8842 %)   SVG   55261 px (2.6650 %)   ok
+        cuadros  30-> 45  video   25804 px (2.7999 %)   SVG   58699 px (2.8308 %)   ok
+        cuadros  45-> 60  video   22060 px (2.3937 %)   SVG   57557 px (2.7757 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 11629 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 22582 px
+  VERDE el video está en fase con el SVG (11629 < 22582)
+  => content/.work/T-05-reverify/hls-desfasado/index.m3u8 en verde
+
+=== E) LOS NUEVE, RE-VERIFICADOS ===
+  OK    negro vs verde                         20000
+  OK    negro vs negro                         0
+  OK    negro vs 10 columnas de 100            1000
+  OK    GRIS vs verde (el caso que fallaba)    20000
+  OK    ruido de +-3/255, umbral 0             20000
+  OK    ruido de +-3/255, umbral 5%            0
+  OK    verde vs negro, umbral 5%              20000
+pxdif: instrumento validado contra 7 casos de respuesta conocida.
+
+== zumbra-16x9 ==
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video   13437 px (1.4580 %)   SVG   29094 px (1.4031 %)   ok
+        cuadros  15-> 30  video   25244 px (2.7391 %)   SVG   55261 px (2.6650 %)   ok
+        cuadros  30-> 45  video   26351 px (2.8593 %)   SVG   58699 px (2.8308 %)   ok
+        cuadros  45-> 60  video   25743 px (2.7933 %)   SVG   57557 px (2.7757 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro  0 del navegador      2882 px
+        cuadro 0 del video vs cuadro  5 del navegador      5478 px
+        cuadro 0 del video vs cuadro 10 del navegador     10921 px
+        cuadro 0 del video vs cuadro 15 del navegador     16093 px
+        cuadro 0 del video vs cuadro 20 del navegador     20248 px
+        cuadro 0 del video vs cuadro 25 del navegador     22044 px
+        cuadro 0 del video vs cuadro 30 del navegador     20700 px
+  VERDE el mínimo cae en el cuadro 0 del navegador, que es donde el cuadro 0 del video tiene que caer
+  => content/creatives/zumbra-16x9/index.m3u8 en verde
+
+== zumbra-banner ==
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video    1698 px (1.2032 %)   SVG    3004 px (0.9461 %)   ok
+        cuadros  15-> 30  video    2035 px (1.4420 %)   SVG    4458 px (1.4040 %)   ok
+        cuadros  30-> 45  video    2107 px (1.4931 %)   SVG    4703 px (1.4812 %)   ok
+        cuadros  45-> 60  video    1943 px (1.3768 %)   SVG    4319 px (1.3602 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro  0 del navegador      1162 px
+        cuadro 0 del video vs cuadro  5 del navegador      1747 px
+        cuadro 0 del video vs cuadro 10 del navegador      2182 px
+        cuadro 0 del video vs cuadro 15 del navegador      2455 px
+        cuadro 0 del video vs cuadro 20 del navegador      2702 px
+        cuadro 0 del video vs cuadro 25 del navegador      2793 px
+        cuadro 0 del video vs cuadro 30 del navegador      2726 px
+  VERDE el mínimo cae en el cuadro 0 del navegador, que es donde el cuadro 0 del video tiene que caer
+  => content/creatives/zumbra-banner/index.m3u8 en verde
+
+== zumbra-backplate ==
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video    7612 px (0.8260 %)   SVG   16568 px (0.7990 %)   ok
+        cuadros  15-> 30  video   13479 px (1.4626 %)   SVG   29668 px (1.4307 %)   ok
+        cuadros  30-> 45  video   13678 px (1.4842 %)   SVG   30453 px (1.4686 %)   ok
+        cuadros  45-> 60  video   13457 px (1.4602 %)   SVG   30073 px (1.4503 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro  0 del navegador      4630 px
+        cuadro 0 del video vs cuadro  5 del navegador      6442 px
+        cuadro 0 del video vs cuadro 10 del navegador      9397 px
+        cuadro 0 del video vs cuadro 15 del navegador     12142 px
+        cuadro 0 del video vs cuadro 20 del navegador     14121 px
+        cuadro 0 del video vs cuadro 25 del navegador     14888 px
+        cuadro 0 del video vs cuadro 30 del navegador     14104 px
+  VERDE el mínimo cae en el cuadro 0 del navegador, que es donde el cuadro 0 del video tiene que caer
+  => content/creatives/zumbra-backplate/index.m3u8 en verde
+
+== ketrava-16x9 ==
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video   32721 px (3.5505 %)   SVG   72459 px (3.4944 %)   ok
+        cuadros  15-> 30  video   33005 px (3.5813 %)   SVG   72923 px (3.5167 %)   ok
+        cuadros  30-> 45  video   32770 px (3.5558 %)   SVG   72527 px (3.4976 %)   ok
+        cuadros  45-> 60  video   32687 px (3.5468 %)   SVG   72413 px (3.4921 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro  0 del navegador      1005 px
+        cuadro 0 del video vs cuadro  5 del navegador     13259 px
+        cuadro 0 del video vs cuadro 10 del navegador     24342 px
+        cuadro 0 del video vs cuadro 15 del navegador     34134 px
+        cuadro 0 del video vs cuadro 20 del navegador     42912 px
+        cuadro 0 del video vs cuadro 25 del navegador     51207 px
+        cuadro 0 del video vs cuadro 30 del navegador     59056 px
+  VERDE el mínimo cae en el cuadro 0 del navegador, que es donde el cuadro 0 del video tiene que caer
+  => content/creatives/ketrava-16x9/index.m3u8 en verde
+
+== ketrava-banner ==
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video   10561 px (7.4837 %)   SVG   21392 px (6.7372 %)   ok
+        cuadros  15-> 30  video   10366 px (7.3455 %)   SVG   21686 px (6.8298 %)   ok
+        cuadros  30-> 45  video   10347 px (7.3321 %)   SVG   21454 px (6.7567 %)   ok
+        cuadros  45-> 60  video    9646 px (6.8353 %)   SVG   19927 px (6.2758 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro  0 del navegador      1024 px
+        cuadro 0 del video vs cuadro  5 del navegador      5471 px
+        cuadro 0 del video vs cuadro 10 del navegador      8529 px
+        cuadro 0 del video vs cuadro 15 del navegador     10965 px
+        cuadro 0 del video vs cuadro 20 del navegador     13164 px
+        cuadro 0 del video vs cuadro 25 del navegador     15202 px
+        cuadro 0 del video vs cuadro 30 del navegador     16981 px
+  VERDE el mínimo cae en el cuadro 0 del navegador, que es donde el cuadro 0 del video tiene que caer
+  => content/creatives/ketrava-banner/index.m3u8 en verde
+
+== ketrava-backplate ==
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video   18067 px (1.9604 %)   SVG   38799 px (1.8711 %)   ok
+        cuadros  15-> 30  video   19810 px (2.1495 %)   SVG   41717 px (2.0118 %)   ok
+        cuadros  30-> 45  video   19633 px (2.1303 %)   SVG   41982 px (2.0246 %)   ok
+        cuadros  45-> 60  video   17083 px (1.8536 %)   SVG   36697 px (1.7697 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro  0 del navegador      5717 px
+        cuadro 0 del video vs cuadro  5 del navegador     13398 px
+        cuadro 0 del video vs cuadro 10 del navegador     19002 px
+        cuadro 0 del video vs cuadro 15 del navegador     23870 px
+        cuadro 0 del video vs cuadro 20 del navegador     28351 px
+        cuadro 0 del video vs cuadro 25 del navegador     33032 px
+        cuadro 0 del video vs cuadro 30 del navegador     37528 px
+  VERDE el mínimo cae en el cuadro 0 del navegador, que es donde el cuadro 0 del video tiene que caer
+  => content/creatives/ketrava-backplate/index.m3u8 en verde
+
+== kovrin-16x9 ==
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video    2989 px (0.3243 %)   SVG    7775 px (0.3750 %)   ok
+        cuadros  15-> 30  video    3617 px (0.3925 %)   SVG    7906 px (0.3813 %)   ok
+        cuadros  30-> 45  video    3495 px (0.3792 %)   SVG    7994 px (0.3855 %)   ok
+        cuadros  45-> 60  video    3522 px (0.3822 %)   SVG    8089 px (0.3901 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro  0 del navegador      3150 px
+        cuadro 0 del video vs cuadro  5 del navegador      4481 px
+        cuadro 0 del video vs cuadro 10 del navegador      5731 px
+        cuadro 0 del video vs cuadro 15 del navegador      6347 px
+        cuadro 0 del video vs cuadro 20 del navegador      6250 px
+        cuadro 0 del video vs cuadro 25 del navegador      6666 px
+        cuadro 0 del video vs cuadro 30 del navegador      6282 px
+  VERDE el mínimo cae en el cuadro 0 del navegador, que es donde el cuadro 0 del video tiene que caer
+  => content/creatives/kovrin-16x9/index.m3u8 en verde
+
+== kovrin-banner ==
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video    2942 px (2.0848 %)   SVG    6915 px (2.1778 %)   ok
+        cuadros  15-> 30  video    2687 px (1.9041 %)   SVG    6983 px (2.1992 %)   ok
+        cuadros  30-> 45  video    2762 px (1.9572 %)   SVG    6919 px (2.1791 %)   ok
+        cuadros  45-> 60  video    2755 px (1.9522 %)   SVG    6835 px (2.1526 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro  0 del navegador      1881 px
+        cuadro 0 del video vs cuadro  5 del navegador      2860 px
+        cuadro 0 del video vs cuadro 10 del navegador      3939 px
+        cuadro 0 del video vs cuadro 15 del navegador      4323 px
+        cuadro 0 del video vs cuadro 20 del navegador      3978 px
+        cuadro 0 del video vs cuadro 25 del navegador      3237 px
+        cuadro 0 del video vs cuadro 30 del navegador      2416 px
+  VERDE el mínimo cae en el cuadro 0 del navegador, que es donde el cuadro 0 del video tiene que caer
+  => content/creatives/kovrin-banner/index.m3u8 en verde
+
+== kovrin-backplate ==
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video    5634 px (0.6113 %)   SVG   15638 px (0.7541 %)   ok
+        cuadros  15-> 30  video    6371 px (0.6913 %)   SVG   15841 px (0.7639 %)   ok
+        cuadros  30-> 45  video    6776 px (0.7352 %)   SVG   15868 px (0.7652 %)   ok
+        cuadros  45-> 60  video    6780 px (0.7357 %)   SVG   16012 px (0.7722 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro  0 del navegador      5394 px
+        cuadro 0 del video vs cuadro  5 del navegador      7615 px
+        cuadro 0 del video vs cuadro 10 del navegador     10165 px
+        cuadro 0 del video vs cuadro 15 del navegador     11382 px
+        cuadro 0 del video vs cuadro 20 del navegador     10633 px
+        cuadro 0 del video vs cuadro 25 del navegador      8760 px
+        cuadro 0 del video vs cuadro 30 del navegador      7269 px
+  VERDE el mínimo cae en el cuadro 0 del navegador, que es donde el cuadro 0 del video tiene que caer
+  => content/creatives/kovrin-backplate/index.m3u8 en verde

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  KOVRIN — la forma BANNER, 1680 x 189 (8,889:1). Es la misma campaña que
+  kovrin-16x9.svg autorada para otra caja (ADR 0081).
+
+  ES LA FORMA QUE ESTA CAMPAÑA PIDE, y por eso KOVRIN cayó en el break C: una
+  zapatilla de perfil es la única de las tres siluetas de la fase que llena una
+  tira de 8,889:1 sin quedar perdida en el medio (T-01). Acá el objeto ocupa
+  434 px de los 1680 y el resto es texto, que es la proporción que un banner
+  aguanta.
+
+  EL OBJETO NO ES UNO PARECIDO: ES EL MISMO. El bloque del zapato está copiado
+  literalmente del archivo 16:9, entre sus marcas INICIO OBJETO y FIN OBJETO, y
+  lo único que cambia acá es el `transform` que lo reencuadra.
+
+  POR QUÉ LA BARRA ES OPACA Y OCUPA EL RECTÁNGULO ENTERO. El archivo no tiene
+  un solo píxel transparente: la barra llena los 1680 x 189 y las esquinas son
+  vivas. La razón es el ADR 0084: entre la variante rica de este banner (video)
+  y la magra (imagen) cambia UNA sola cosa, y H.264 no transporta alfa, así que
+  todo lo que acá fuera transparente saldría NEGRO en el video y las dos
+  variantes dejarían de ser la misma pieza. El texto además se lee mejor sobre
+  fondo opaco; lo único que se pierde es ver un poco del programa detrás, que
+  era un efecto y no un requisito.
+
+  EL MOVIMIENTO SIGUE SIENDO EL SUELO. Es la misma decisión del 16:9 y acá pesa
+  más: en 189 px de alto, mover el zapato lo sacaría de cuadro. El patrón corre
+  90 px en 3 s sobre una celda de 90 px de período, así que el ciclo cierra
+  idéntico a su inicio y no hay momento feo, que es lo que el adelanto de 3,25 s
+  medido en la T-02 obliga.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="189"
+     viewBox="0 0 1680 189" role="img" aria-label="KOVRIN — Built for the long way.">
+
+  <style>
+    .t { font-family: 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif; }
+    .b { font-weight: 700; }
+  </style>
+
+  <defs>
+
+    <linearGradient id="fondo" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0"    stop-color="#12151c"/>
+      <stop offset="0.55" stop-color="#0c0f15"/>
+      <stop offset="1"    stop-color="#080a0f"/>
+    </linearGradient>
+
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0"    stop-color="#ff7a3c" stop-opacity="0.26"/>
+      <stop offset="0.55" stop-color="#ff7a3c" stop-opacity="0.08"/>
+      <stop offset="1"    stop-color="#ff7a3c" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- La capellada: tela, así que el gradiente es corto y sin brillo duro. -->
+    <linearGradient id="capellada" x1="0" y1="0" x2="0.25" y2="1">
+      <stop offset="0"    stop-color="#5a657a"/>
+      <stop offset="0.35" stop-color="#3c4454"/>
+      <stop offset="1"    stop-color="#22262f"/>
+    </linearGradient>
+
+    <!-- La mediasuela: espuma, la única superficie clara del zapato. -->
+    <linearGradient id="mediasuela" x1="0" y1="0" x2="0.1" y2="1">
+      <stop offset="0"    stop-color="#f6f1ec"/>
+      <stop offset="0.45" stop-color="#dcd6d2"/>
+      <stop offset="1"    stop-color="#a8b0bd"/>
+    </linearGradient>
+
+    <linearGradient id="suela" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#242a34"/>
+      <stop offset="1"    stop-color="#12151c"/>
+    </linearGradient>
+
+    <linearGradient id="contrafuerte" x1="0" y1="0" x2="1" y2="0.6">
+      <stop offset="0"    stop-color="#ff9a63"/>
+      <stop offset="1"    stop-color="#e05a1e"/>
+    </linearGradient>
+
+    <!-- La celda del suelo: 90 px de período, repetida catorce veces. -->
+    <g id="celdaSuelo">
+      <path d="M2,10 L20,0 L28,3 L10,13 Z"   fill="#8b8f98" opacity="0.34"/>
+      <path d="M32,10 L50,0 L58,3 L40,13 Z"  fill="#8b8f98" opacity="0.26"/>
+      <path d="M62,10 L80,0 L88,3 L70,13 Z"  fill="#ff7a3c" opacity="0.28"/>
+      <path d="M16,30 L34,20 L42,23 L24,33 Z" fill="#8b8f98" opacity="0.2"/>
+      <path d="M50,32 L68,22 L76,25 L58,35 Z" fill="#8b8f98" opacity="0.14"/>
+      <circle cx="46" cy="16" r="3" fill="#b9c2d0" opacity="0.22"/>
+      <circle cx="84" cy="28" r="2" fill="#b9c2d0" opacity="0.16"/>
+    </g>
+
+    <clipPath id="ventanaSuelo">
+      <rect x="1000" y="774" width="720" height="58"/>
+    </clipPath>
+  
+
+    <!-- La barra: el rectángulo entero, opaco y sin esquinas redondeadas. -->
+    <clipPath id="barra">
+      <rect x="0" y="0" width="1680" height="189"/>
+    </clipPath>
+    <!-- La ventana del suelo, acostada sobre el piso de la barra. -->
+    <clipPath id="ventanaSueloBanner">
+      <rect x="760" y="150" width="916" height="35"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#barra)">
+    <rect x="0" y="0" width="1680" height="189" fill="url(#fondo)"/>
+    <rect x="0" y="0" width="12" height="189" fill="#ff7a3c"/>
+
+    <ellipse cx="1420" cy="96" rx="290" ry="150" fill="url(#halo)"/>
+
+    <!-- ===================== tipografía ===================== -->
+    <text class="t b" x="56" y="94" font-size="56" letter-spacing="6"
+          fill="#f5f3f0">KOVRIN</text>
+    <text class="t" x="58" y="136" font-size="24" letter-spacing="8"
+          fill="#ff7a3c">BUILT FOR THE LONG WAY</text>
+
+    <rect x="620" y="44" width="2" height="102" fill="#ff7a3c" opacity="0.28"/>
+
+    <text class="t" x="672" y="88" font-size="32" letter-spacing="0.5"
+          fill="#c9ccd3">Trail cushioning. 240 grams.</text>
+    <text class="t" x="672" y="134" font-size="19" letter-spacing="4"
+          fill="#8b8f98">THREE TERRAINS, ONE OUTSOLE</text>
+
+    <!-- ===================== el suelo que corre ===================== -->
+    <g clip-path="url(#ventanaSueloBanner)" opacity="0.55">
+      <g transform="translate(760,152)">
+        <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                          values="0,0; -90,0" dur="3s" repeatCount="indefinite"
+                          additive="sum"/>
+        <use href="#celdaSuelo" x="0"/>
+        <use href="#celdaSuelo" x="90"/>
+        <use href="#celdaSuelo" x="180"/>
+        <use href="#celdaSuelo" x="270"/>
+        <use href="#celdaSuelo" x="360"/>
+        <use href="#celdaSuelo" x="450"/>
+        <use href="#celdaSuelo" x="540"/>
+        <use href="#celdaSuelo" x="630"/>
+        <use href="#celdaSuelo" x="720"/>
+        <use href="#celdaSuelo" x="810"/>
+        <use href="#celdaSuelo" x="900"/>
+        <use href="#celdaSuelo" x="990"/>
+        <use href="#celdaSuelo" x="1080"/>
+      </g>
+    </g>
+
+    <!-- sombra de apoyo -->
+    <ellipse cx="1400" cy="166" rx="230" ry="12" fill="#000000" opacity="0.5"/>
+
+    <!-- ===================== el objeto ===================== -->
+    <!-- El zapato del 16:9, a 0,625. La escala sale de la altura: 240 px de
+         zapato por 0,625 son 150, que es lo que entra en 189 dejando aire. -->
+    <g transform="translate(545,-313) scale(0.625)">
+
+  <!-- ===================== el zapato ===================== -->
+  <!-- Espacio local: origen en el talón, suelo en y 206, punta en x 514. -->
+  <g transform="translate(1000,482) scale(1.35)">
+
+    <!-- capellada: la silueta entera, de la boca a la mediasuela -->
+    <path fill="url(#capellada)"
+          d="M28,66
+             C14,90 8,126 16,158
+             C22,188 42,204 72,206
+             L392,206
+             C450,205 492,186 514,150
+             C521,138 513,126 499,130
+             C464,141 430,139 400,129
+             C362,116 332,100 302,86
+             C300,68 294,54 282,46
+             L258,54
+             C230,96 132,96 92,58
+             L58,50
+             C40,52 32,56 28,66 Z"/>
+
+    <!-- la boca: una lente oscura, no un borde recto -->
+    <path fill="#0f1218" opacity="0.92"
+          d="M258,54 C230,96 132,96 92,58 C118,132 232,126 258,54 Z"/>
+
+    <path fill="none" stroke="#7b8699" stroke-width="3" opacity="0.7"
+          d="M258,54 C230,96 132,96 92,58"/>
+
+    <!-- la lengüeta, que asoma por delante de la boca -->
+    <path fill="#39414f"
+          d="M258,54 C272,50 278,48 282,46 C292,58 300,74 302,90 L282,100
+             C278,84 270,68 258,54 Z"/>
+
+    <!-- contrafuerte del talón: el acento entra por acá y no por un emblema -->
+    <path fill="url(#contrafuerte)"
+          d="M28,66 C14,90 8,126 16,158 L44,160 C38,126 42,96 56,72 Z"/>
+
+    <!-- las dos cintas del cerco lateral: refuerzo, no logotipo -->
+    <path fill="#ff7a3c" opacity="0.95" d="M150,172 L180,88 L208,84 L184,174 Z"/>
+    <path fill="#ff7a3c" opacity="0.8"  d="M226,166 L258,80 L284,76 L258,166 Z"/>
+
+    <!-- el empeine: primero el panel oscuro del cierre, después los cordones
+         encima. Sin el panel los cordones flotan sobre la tela y se leen como
+         rayas y no como un cierre. -->
+    <path fill="#1b2029" opacity="0.85"
+          d="M300,90 C330,102 362,116 398,130 L386,160
+             C350,146 318,132 292,118 Z"/>
+    <g stroke="#f2ece6" stroke-width="6" stroke-linecap="round" opacity="0.9">
+      <path d="M302,98 L318,124"/>
+      <path d="M326,108 L342,134"/>
+      <path d="M350,118 L366,144"/>
+      <path d="M374,128 L390,154"/>
+    </g>
+    <g fill="#b9c2d0" opacity="0.85">
+      <circle cx="304" cy="96"  r="3.5"/>
+      <circle cx="328" cy="106" r="3.5"/>
+      <circle cx="352" cy="116" r="3.5"/>
+      <circle cx="376" cy="126" r="3.5"/>
+    </g>
+
+    <!-- la puntera, en la misma tela pero más clara -->
+    <path fill="#4c5566" opacity="0.85"
+          d="M430,140 C462,144 486,140 508,130 C516,127 521,138 514,150
+             C496,180 462,198 420,203 C428,182 430,160 430,140 Z"/>
+
+    <!-- mediasuela: la cuña. 50 px en el talón, 31 en el antepié -->
+    <path fill="url(#mediasuela)"
+          d="M16,156
+             C22,188 42,204 72,206
+             L392,206
+             C450,205 492,186 514,150
+             C519,142 514,132 506,134
+             C476,160 436,174 390,175
+             L94,175
+             C56,174 28,170 16,156 Z"/>
+    <!-- la línea de compresión de la espuma -->
+    <path fill="none" stroke="#8b8f98" stroke-width="2" opacity="0.5"
+          d="M24,180 C60,192 120,196 200,196 L392,195 C440,194 478,182 504,160"/>
+
+    <!-- suela: la banda más oscura, y los tacos colgando -->
+    <path fill="url(#suela)"
+          d="M18,178
+             C24,192 44,204 72,206
+             L392,206
+             C450,205 492,186 514,150
+             C518,144 514,138 507,141
+             C480,168 438,190 390,191
+             L92,191
+             C58,190 32,186 18,178 Z"/>
+    <g fill="#12151c">
+      <rect x="74"  y="203" width="22" height="14" rx="5"/>
+      <rect x="110" y="203" width="22" height="14" rx="5"/>
+      <rect x="146" y="203" width="22" height="14" rx="5"/>
+      <rect x="182" y="203" width="22" height="14" rx="5"/>
+      <rect x="218" y="203" width="22" height="14" rx="5"/>
+      <rect x="254" y="203" width="22" height="14" rx="5"/>
+      <rect x="290" y="203" width="22" height="14" rx="5"/>
+      <rect x="326" y="203" width="22" height="14" rx="5"/>
+      <rect x="362" y="203" width="22" height="14" rx="5"/>
+      <rect x="398" y="200" width="22" height="14" rx="5" transform="rotate(-6 409 207)"/>
+      <rect x="434" y="192" width="22" height="14" rx="5" transform="rotate(-16 445 199)"/>
+      <rect x="468" y="178" width="20" height="13" rx="5" transform="rotate(-28 478 184)"/>
+    </g>
+  </g>
+    </g>
+
+    <rect x="0" y="0" width="1680" height="3" fill="#ff7a3c" opacity="0.55"/>
+  </g>
+</svg>
