@@ -522,3 +522,24 @@ T-09, que dice que las dos correcciones que esa task dejó pendientes ya están 
 queda desactualizado y sin nota es el `publicar.sh` de la T-12**, cuyo paso 7 no verifica y cuya
 suposición sobre los `.svg` el propio documento de la task desmiente; las dos cosas están en §4,
 que es el documento vivo donde alguien las va a buscar.
+
+---
+
+## 2026-09-22 — feedback aplicado: las dos barras del par, atadas
+
+Pedido de David sobre la página ya publicada, después del cierre de la fase: que un scrub en
+cualquiera de las dos barras deje a los dos panes en el mismo momento del programa, en las dos
+direcciones. Restricción de Nicolás: sólo código de la página, sin tocar `lib/` ni el estilo.
+
+Se aplicó como **corrección post-ejecución de la T-07** —está anotada en su bloque de `TASKS.md`—
+y la fase no se reabrió. Cambió `demo/stage-pair/js/app.js` y nada más; se agregó
+`demo/stage-pair/test/medir-enlace-de-barras.py`, la medición con su control. `npm test` sigue en
+216/216 y `npm run check` en `EXIT=0`.
+
+Lo que hace falta saber de esto y no se deduce mirando: **una búsqueda sobre el pane de fábrica no
+entra mientras ese pane está adentro de un break** —la escritura se acepta y no pasa nada— y ésa es
+la razón por la que un gesto hecho en ese estado rearma los dos players en lugar de escribir el
+reloj. La medición, su control con el enlace apagado, la reproducción de la trampa y las capturas
+están en [`tasks/T-07/ENLACE-DE-BARRAS.md`](tasks/T-07/ENLACE-DE-BARRAS.md).
+
+**La demo publicada en GCS sigue siendo la de antes de este cambio**: republicar lo decide Nicolás.

@@ -491,6 +491,11 @@ abajo es lo que esta fase agrega, no lo que ese archivo ya dice.
 - **nivel de verificación:** alto, y lo fija el chequeo del parámetro. El resto de la task es
   interfaz y sería `bajo`, pero la verificación de que `qa-decoder-count` viaja y de que no viaja
   cuando no se declara es exactamente la clase de chequeo que pasa por la razón equivocada.
+- **post-ejecución:** 2026-09-22, pedido de David: las dos barras de desplazamiento no estaban
+  atadas, así que un scrub movía un pane solo; se ataron en `js/app.js` —el gesto abre la
+  ventana, la escritura da el segundo, y un gesto hecho con el pane de fábrica adentro de un
+  break rearma, que es lo único que ahí entra—, con la medición y su control en
+  [`tasks/T-07/ENLACE-DE-BARRAS.md`](tasks/T-07/ENLACE-DE-BARRAS.md).
 
 ## T-08 — `inspect.html`: el player solo, con lo que hay que leer en cámara
 
