@@ -1,0 +1,587 @@
+/* The look of the three pages of this demo, adapted from the sheet of
+ * demo/compatibility-pair/ and vendored off the Qualabs kit in ./brand/.
+ *
+ * ONE SHEET FOR THE THREE PAGES, which is what the task of index.html was told
+ * to do and what keeps the pair, the single player of inspect.html and the
+ * race from drifting into three looks of the same demo. What is page-specific
+ * lives at the bottom, under the heading that names the page.
+ *
+ * There is one rule here that is not decoration: the two panes get their
+ * identity from a colour and their live state from a data attribute, so that
+ * somebody watching a recording with the sound off can tell which player is
+ * which and what each one is doing at that instant, without anybody explaining
+ * it.
+ *
+ * Nothing here styles the composition drawn over the picture, and nothing here
+ * styles the controls of either player. Both are drawn and styled by the
+ * library, inside the container the page gives it, because the way that layer
+ * stacks and the way the controls sit above it are invariants of the renderer
+ * and not choices of whoever writes the page (ADR 0015). What `.player` keeps
+ * is the frame around them: the aspect ratio, the black bed and the rounded
+ * corners.
+ *
+ * What this page DOES hand the chrome is one value, `--qa-accent`, and a value
+ * is not a rule: the library asks for the colour of whoever integrates it
+ * rather than shipping one, so the knob of each bar comes out in the colour of
+ * its own pane without a line of the library naming it. */
+
+:root {
+  --q-teal-500: #37b4a7;
+  --q-ink-900: #1a1f2e;
+  --q-ink-800: #232a3d;
+  --q-ink-700: #2e3650;
+  --q-paper-50: #f8f9fa;
+  /* The off-the-shelf pane reads as neutral, our pane as ours. */
+  --q-slate-400: #7f8aa3;
+  /* What "the content got replaced" looks like at a glance. */
+  --q-amber-400: #f0a24b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--q-ink-900);
+  color: var(--q-paper-50);
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+.stage {
+  width: min(1520px, 96vw);
+  margin: 0 auto;
+  padding: 18px 0 28px;
+}
+
+/* THE MARK IS THE ON-DARK FILE AND NOT A PLATE UNDER THE FULL-COLOUR ONE.
+ * The wordmark of the full-colour logo is ink, so on this background half of it
+ * disappears; the answer is the variant whose wordmark is white, which is a
+ * logo, and not a white rectangle behind it, which is a surface. */
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin: 0 0 14px;
+}
+.masthead img { display: block; height: 40px; width: auto; }
+
+.headline {
+  margin: 0;
+  flex: 1 1 320px;
+  font-size: 15px;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em; }
+
+/* ---------------------------------------------------------------------------
+ * THE STEP SWITCH
+ * -------------------------------------------------------------------------*/
+
+/* One strip above the pair: what the device says it has, what comes back, and
+ * the sentence that keeps the page from claiming a server it does not have.
+ * It is above and not beside, because at 400 px there is no beside. */
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--q-ink-700);
+  border-radius: 10px;
+  background: var(--q-ink-800);
+}
+.switch-label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.steps { display: flex; gap: 8px; flex-wrap: wrap; }
+.step {
+  font: inherit;
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--q-slate-400);
+  background: transparent;
+  color: var(--q-paper-50);
+  cursor: pointer;
+}
+.step:hover { border-color: var(--q-teal-500); }
+.step[aria-pressed='true'] {
+  background: var(--q-teal-500);
+  border-color: var(--q-teal-500);
+  color: var(--q-ink-900);
+  font-weight: 600;
+}
+.step-out {
+  margin: 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--q-teal-500);
+  word-break: break-all;
+}
+
+/* The jumps, on the right of the same strip: three breaks and the top of the
+ * programme. David has about two minutes for everything, and the first break is
+ * at twenty seconds. */
+.jumps { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+.jump {
+  font: inherit;
+  font-size: 12px;
+  padding: 6px 11px;
+  border-radius: 6px;
+  border: 1px solid var(--q-ink-700);
+  background: transparent;
+  color: color-mix(in srgb, var(--q-paper-50) 75%, transparent);
+  cursor: pointer;
+}
+.jump:hover { border-color: var(--q-slate-400); color: var(--q-paper-50); }
+
+/* The sentence about the server. It is a full-width row of the strip and it is
+ * not small print: a demo that let anybody believe the response is being
+ * adapted on the fly would be claiming something it never read. */
+.no-server {
+  flex: 1 0 100%;
+  margin: 2px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--q-paper-50) 62%, transparent);
+  border-top: 1px solid var(--q-ink-700);
+  padding-top: 10px;
+}
+
+/* ---------------------------------------------------------------------------
+ * THE PAIR
+ * -------------------------------------------------------------------------*/
+
+/* Side by side, same size: the claim is that one playlist serves both, so
+ * neither pane is the small one. */
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .pair { grid-template-columns: 1fr; }
+  .jumps { margin-left: 0; }
+}
+
+.pane {
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 10px;
+  background: var(--q-ink-800);
+  padding: 14px 16px 16px;
+}
+.pane-stock { --accent: var(--q-slate-400); --hot: var(--q-amber-400); }
+.pane-demo  { --accent: var(--q-teal-500); --hot: var(--q-teal-500); }
+
+.role {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+}
+.role-sub { margin: 4px 0 0; font-size: 13px; line-height: 1.45; opacity: 0.7; }
+.role-reads {
+  margin: 6px 0 12px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  opacity: 0.6;
+}
+
+.player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  outline: 3px solid transparent;
+  outline-offset: 2px;
+}
+
+.video { width: 100%; height: 100%; display: block; object-fit: contain; }
+
+/* The one value this page hands to the chrome the library draws, on the
+ * container and not on anything inside it, because what is inside is the
+ * library's. One rule for both panes and each takes its own identity colour:
+ * the knob of the left bar comes out slate and the right one teal, which is the
+ * colour that says which player you are looking at. */
+.pane .player { --qa-accent: var(--accent); }
+
+/* The live state of each pane, which is what makes a single frame of the
+ * recording legible: while an ad is on, the pane's picture gets a ring and its
+ * line of text turns hot -- amber on the left, where the content was replaced,
+ * and ours on the right, where it was not. */
+.state {
+  margin: 10px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--q-paper-50) 65%, transparent);
+}
+.pane[data-state='ad'] .player { outline-color: var(--hot); }
+.pane[data-state='ad'] .state { color: var(--hot); font-weight: 600; }
+
+.hud {
+  margin: 8px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--accent);
+  word-break: break-all;
+}
+
+/* ---------------------------------------------------------------------------
+ * WHAT WENT OUT ON THE NETWORK
+ * -------------------------------------------------------------------------*/
+
+/* The requests the browser actually made, read off the performance timeline and
+ * not written by the page. It is here so the point can be made without the
+ * network tab open -- and with it open, the same lines are there to check
+ * against. */
+.wire {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border: 1px solid var(--q-ink-700);
+  border-radius: 10px;
+  background: var(--q-ink-800);
+}
+.wire h2 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--q-slate-400);
+}
+.wire ol {
+  margin: 0;
+  padding: 0 0 0 20px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  line-height: 1.75;
+  word-break: break-all;
+}
+.wire li::marker { color: var(--q-slate-400); }
+/* The parameter, picked out of the line it is in, because it is the one thing
+ * on this page that the whole switch exists to make visible. */
+.wire b { color: var(--q-teal-500); }
+.wire .none { color: color-mix(in srgb, var(--q-paper-50) 55%, transparent); }
+
+.credit {
+  margin: 16px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  opacity: 0.55;
+}
+.credit a { color: inherit; }
+
+/* ---------------------------------------------------------------------------
+ * INSPECT.HTML — ONE PLAYER, AND THE EXCHANGE BESIDE IT
+ * -------------------------------------------------------------------------*/
+
+/* THIS BLOCK IS SIZED FOR A ROOM AND NOT FOR A DESK, which is the one thing
+ * that separates it from everything above. What is on this page is going to be
+ * pointed at from a stage while a projector shows it and a camera records it,
+ * so the type of the three cards is a step or two larger than the type of the
+ * pair, the contrast is taken to the top of the palette, and the accent is
+ * spent on exactly one thing per card: the class on the first, the parameter on
+ * the second, the body on the third. A second accent in the same card would
+ * take the pointing away from the first.
+ *
+ * The order of the column is the order of the exchange, top to bottom, because
+ * that is the direction a hand moves down a projected page. */
+
+.inspect {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+@media (max-width: 1100px) {
+  .inspect { grid-template-columns: 1fr; }
+}
+
+/* THE PICTURE STAYS WHILE THE COLUMN SCROLLS. The third card is the longest
+ * thing on the page and somebody is going to scroll it while talking; without
+ * this the player leaves the top of the screen and the audience is reading a
+ * list with nothing to attach it to. It only applies where there are two
+ * columns: stuck to the top of a single column it would cover what is under
+ * it. */
+@media (min-width: 1101px) {
+  .inspect > .pane { position: sticky; top: 10px; }
+}
+
+/* The ring the pane grows while an ad is on screen is drawn OUTSIDE the picture,
+ * so the line above it has to leave room for it or the ring cuts through the
+ * text the first time a break starts. On `index.html` the third line of the
+ * label already leaves that room; here there is no third line. */
+.inspect .role-sub { margin-bottom: 14px; }
+
+/* The three cards, in one column, each numbered so that "the second one" means
+ * something said out loud. */
+.exchange {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* Which break the three cards are describing. It is the heading of the column
+ * and not a caption of one card, because the three have to be about the same
+ * break or the column stops being one exchange. */
+.exchange__which {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--q-teal-500);
+}
+
+.move {
+  border: 1px solid var(--q-ink-700);
+  border-radius: 10px;
+  background: var(--q-ink-800);
+  padding: 12px 14px 14px;
+  min-width: 0;
+}
+.move__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+/* The number is a disc and not a prefix of the text: from the back of a room a
+ * digit inside a ring is still a digit, and "1." in front of a sentence is not. */
+.move__n {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--q-teal-500);
+  color: var(--q-ink-900);
+  font-size: 15px;
+  font-weight: 700;
+}
+.move__lede {
+  margin: 7px 0 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--q-paper-50) 70%, transparent);
+}
+
+/* ONE RANGE OF THE PLAYLIST. The two of a break are drawn the same and told
+ * apart by one thing: whether this client asked for what it points at. The one
+ * it kept is at full contrast with its accent bar; the one it ignored is held
+ * back, which is what "ignored" looks like without a word. */
+.range {
+  margin: 0 0 8px;
+  padding: 8px 10px 9px 12px;
+  border-left: 4px solid var(--q-slate-400);
+  border-radius: 0 6px 6px 0;
+  background: color-mix(in srgb, var(--q-ink-900) 60%, transparent);
+  opacity: 0.55;
+}
+.range:last-child { margin-bottom: 0; }
+.range[data-kept='true'] { border-left-color: var(--q-teal-500); opacity: 1; }
+.range__class {
+  margin: 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--q-paper-50);
+  word-break: break-all;
+}
+.range[data-kept='true'] .range__class { color: var(--q-teal-500); }
+.range__mark {
+  margin: 3px 0 6px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--q-paper-50) 60%, transparent);
+}
+.range[data-kept='true'] .range__mark { color: var(--q-teal-500); font-weight: 600; }
+.range__line {
+  margin: 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12.5px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: color-mix(in srgb, var(--q-paper-50) 82%, transparent);
+}
+
+/* THE URL THAT WENT OUT, and the largest type on the page after the headings:
+ * it is the one line somebody is going to read out while pointing at the
+ * network tab, and the parameter inside it is the whole subject of the switch
+ * above. */
+.request {
+  margin: 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 17px;
+  line-height: 1.5;
+  word-break: break-all;
+  color: var(--q-paper-50);
+}
+.request b { color: var(--q-teal-500); }
+.request .none,
+.exchange .none { color: color-mix(in srgb, var(--q-paper-50) 55%, transparent); font-weight: 400; }
+
+/* THE BODY THAT CAME BACK. It is capped and scrolls rather than pushing the
+ * page: the first screen of it carries the fields that are being talked about,
+ * and a card that grew with its content would move the two above it off the
+ * projector every time a longer list came back. */
+.answer {
+  margin: 0;
+  max-height: 340px;
+  overflow: auto;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--q-ink-900) 60%, transparent);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: color-mix(in srgb, var(--q-paper-50) 88%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+ * RACE.HTML — THE ADS, AND THEN THE WINDOW
+ * -------------------------------------------------------------------------*/
+
+/* WHAT THIS BLOCK ADDS IS ONE IDEA: the run beside the picture, and the fact
+ * that the two classes never share the screen made visible without a caption.
+ * Everything else on the page is what the two sheets above already resolved --
+ * the masthead, the strip, `.pane`, `.player`, `.state`, `.hud`, `.credit` --
+ * and it is reused rather than restyled, which is why this file is one sheet
+ * for three pages.
+ *
+ * The picture is the wide column because the argument here is what is ON it:
+ * an ad drawn over a race that did not stop, and a grid of cameras. The run is
+ * the narrow one, and it is read left to right: what the player resolved, in
+ * the order it will reach it. */
+
+.race {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+@media (max-width: 1100px) {
+  .race { grid-template-columns: 1fr; }
+}
+@media (min-width: 1101px) {
+  /* THE PICTURE STAYS WHILE THE RUN SCROLLS. The catalogue is six names long
+   * and somebody is going to scroll past it while talking; without this the
+   * player leaves the top of the screen and the audience is reading a list with
+   * nothing to attach it to. Only where there are two columns: stuck to the top
+   * of a single column it would cover what is under it. */
+  .race > .pane { position: sticky; top: 10px; }
+}
+
+/* WHAT IS ON THE PICTURE RIGHT NOW, AS A RING, and it is the one rule here that
+ * is not decoration. The pair uses one hot colour because it has one thing to
+ * say -- an ad is on -- and this page has two, so the ring is amber while an ad
+ * is on and teal while the window is open. Somebody watching a recording with
+ * the sound off can tell the two classes apart in a single frame, which is the
+ * separation this page exists to show. `--qa-accent` is not touched: the knob of
+ * the bar stays the colour of the player and not of whatever is signalled. */
+.stage--race .player[data-state='ad'] { outline-color: var(--q-amber-400); }
+.stage--race .player[data-state='multiview'] { outline-color: var(--q-teal-500); }
+
+/* The run, and it is a card like the three of inspect.html so the three pages
+ * read as one demo. */
+.chapter {
+  border: 1px solid var(--q-ink-700);
+  border-radius: 10px;
+  background: var(--q-ink-800);
+  padding: 14px 16px 16px;
+  min-width: 0;
+}
+.kicker {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--q-teal-500);
+}
+.chapter h2 {
+  margin: 6px 0 0;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.lede {
+  margin: 8px 0 12px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--q-paper-50) 72%, transparent);
+}
+
+.run { margin: 0; padding: 0; list-style: none; }
+
+/* ONE ROW, ONE RANGE OF THE PLAYLIST. Held back by default, lit while its window
+ * is open and faded once it has passed, so the column is a progress bar of the
+ * run without being drawn as one. */
+.run__row {
+  margin: 0 0 8px;
+  padding: 9px 11px 10px 12px;
+  border-left: 4px solid var(--q-slate-400);
+  border-radius: 0 6px 6px 0;
+  background: color-mix(in srgb, var(--q-ink-900) 60%, transparent);
+  opacity: 0.62;
+}
+.run__row:last-child { margin-bottom: 0; }
+.run__row--open { opacity: 1; border-left-color: var(--q-teal-500); }
+.run__row--past { opacity: 0.38; }
+
+.run__when {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--q-paper-50);
+}
+/* THE KIND, WHICH IS THE CLASS THE TAG CARRIED, and the one accent of the row:
+ * it is the word that says whether this is advertising or the extension, and it
+ * is read off the contract and never typed into the markup. */
+.run__kind {
+  margin-left: 8px;
+  padding: 1px 7px 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--q-teal-500) 22%, transparent);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--q-teal-500);
+}
+.run__what {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--q-paper-50) 74%, transparent);
+}
+.run__what p { margin: 0; }
+.run__names {
+  margin: 7px 0 0;
+  padding: 0 0 0 16px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--q-paper-50);
+}
+.run__more { margin-top: 7px !important; opacity: 0.78; }

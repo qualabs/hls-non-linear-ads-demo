@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  KETRAVA — la forma BACKPLATE, 1920 x 1080. Es la misma campaña que
+  ketrava-16x9.svg autorada para otra caja (ADR 0081). Es la pieza que se ve en
+  el break B del recorrido del par.
+
+  QUÉ ES ESTA FORMA. El layout es `squeezebackLShape` (ADR 0047): el aviso es UN
+  solo elemento a cuadro entero, en zDepth 0, y el contenido primario va ENCIMA,
+  encogido y anclado contra dos bordes. Este archivo mide 1920 x 1080 pero NO se
+  ve entero: la película tapa una parte y lo que queda a la vista es una L.
+
+  LA GUARDA, QUE ES EL NÚMERO QUE GOBIERNA ESTE ARCHIVO. La T-01 eligió los dos
+  bordes —arriba y derecha— y el inset —25 % en los dos ejes, que mantiene el
+  16:9 del primario en 1440 x 810—. De ahí sale, en coordenadas de este viewBox:
+
+  · la guarda, que el primario tapa      x 480, y 0, ancho 1440, alto 810
+  · lo que se ve, y es la L              la columna izquierda x 0..480 a alto
+                                         entero, y la banda inferior y 810..1080
+                                         a ancho entero
+
+  TODO EL DIBUJO ESTÁ RECORTADO A LA L, con un `clipPath` de dos rectángulos,
+  que se UNEN. La unión de la columna y la banda ES la L, y que el recorte sea
+  una guarda de construcción y no un cuidado al dibujar es lo que hace que la
+  guarda quede en alfa cero aunque alguien agregue un elemento después.
+
+  POR QUÉ ESTA CAMPAÑA ES LA QUE VA EN LA L. Lo eligió la T-01 y acá se ve por
+  qué: la guarda cae sobre cielo y mar, que es donde no hay nada que perder.
+  Cualquiera de las otras dos habría perdido su objeto, porque un objeto tiene
+  un centro y un paisaje no.
+
+  LA BANDA ES EL HORIZONTE, y eso resuelve la forma sin forzarla. El mar corre a
+  lo ancho de los 1920 px de la banda, el faro se para en su extremo derecho, y
+  el haz barre HACIA LA IZQUIERDA, o sea a lo largo de la banda: el movimiento
+  va exactamente por donde hay lugar. La columna izquierda lleva la marca y la
+  ruta: nueve escalas sobre una línea vertical, que son los nueve puertos que
+  dice el pie.
+
+  EL OBJETO NO ES UNO PARECIDO: ES EL MISMO. El bloque del faro está copiado
+  literalmente del archivo 16:9, entre sus marcas INICIO OBJETO y FIN OBJETO, y
+  lo único que cambia acá es el `transform` que lo reencuadra, a 0,72. El mar,
+  como en el banner, se rehace a la escala de la banda: se conserva la regla
+  —cada plano recorre exactamente un período de su onda en 3 s, y los períodos
+  SON las velocidades— y no los números, que están calculados contra un cuadro
+  de 1080 px de alto y acá hay 270.
+
+  LA ANIMACIÓN ES DECLARATIVA (SMIL) porque adentro de un <img> el JavaScript no
+  corre, y los bucles cierran idénticos a su inicio porque el creativo se ve por
+  primera vez a 3,25 s de su propia animación: las dos cosas están medidas en la
+  T-02.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080"
+     viewBox="0 0 1920 1080" role="img" aria-label="KETRAVA — The slow coast.">
+
+  <style>
+    .t { font-family: 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif; }
+    .b { font-weight: 700; }
+  </style>
+
+  <defs>
+
+    <linearGradient id="fondo" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0"    stop-color="#071822"/>
+      <stop offset="0.55" stop-color="#051119"/>
+      <stop offset="1"    stop-color="#03080d"/>
+    </linearGradient>
+
+    <!-- El resplandor del horizonte: el sol ya se fue, queda el calor. -->
+    <radialGradient id="horizonte" cx="0.5" cy="1" r="0.75">
+      <stop offset="0"    stop-color="#ffcf8a" stop-opacity="0.30"/>
+      <stop offset="0.45" stop-color="#ff9e6a" stop-opacity="0.10"/>
+      <stop offset="1"    stop-color="#ffcf8a" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- El desvanecido de la escena. Fuera del rango el gradiente repite su
+         último stop, así que a la derecha de 1180 queda blanco entero. -->
+    <linearGradient id="desvanece" gradientUnits="userSpaceOnUse"
+                    x1="470" y1="0" x2="1180" y2="0">
+      <stop offset="0" stop-color="#000000"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <mask id="escena">
+      <rect x="0" y="0" width="1920" height="1080" fill="url(#desvanece)"/>
+    </mask>
+
+    <linearGradient id="marLejos" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14525c"/>
+      <stop offset="1" stop-color="#0e3a44"/>
+    </linearGradient>
+    <linearGradient id="marMedio" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d6f74"/>
+      <stop offset="1" stop-color="#103a44"/>
+    </linearGradient>
+    <linearGradient id="marCerca" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e8f8a"/>
+      <stop offset="1" stop-color="#0b2b36"/>
+    </linearGradient>
+
+    <linearGradient id="cabo" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#0f3341"/>
+      <stop offset="1" stop-color="#061620"/>
+    </linearGradient>
+
+    <linearGradient id="torre" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#8fa6ad"/>
+      <stop offset="0.35" stop-color="#eef6f7"/>
+      <stop offset="0.75" stop-color="#b9cbcf"/>
+      <stop offset="1"    stop-color="#6d8188"/>
+    </linearGradient>
+
+    <linearGradient id="haz" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="-880" y2="0">
+      <stop offset="0"    stop-color="#ffcf8a" stop-opacity="0.34"/>
+      <stop offset="0.45" stop-color="#ffcf8a" stop-opacity="0.12"/>
+      <stop offset="1"    stop-color="#ffcf8a" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hazCorto" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="0">
+      <stop offset="0" stop-color="#ffcf8a" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/>
+    </linearGradient>
+
+    <radialGradient id="lampara" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0"    stop-color="#fff3de" stop-opacity="0.95"/>
+      <stop offset="0.35" stop-color="#ffcf8a" stop-opacity="0.55"/>
+      <stop offset="1"    stop-color="#ffcf8a" stop-opacity="0"/>
+    </radialGradient>
+  
+
+    <!-- La L: la unión de la columna izquierda y la banda inferior. -->
+    <clipPath id="ele">
+      <rect x="0" y="0"   width="480"  height="1080"/>
+      <rect x="0" y="810" width="1920" height="270"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#ele)">
+    <rect x="0" y="0" width="1920" height="1080" fill="url(#fondo)"/>
+
+    <!-- el calor que queda sobre el horizonte, sobre la banda -->
+    <ellipse cx="1360" cy="1080" rx="900" ry="300" fill="url(#horizonte)"/>
+
+    <!-- ===================== la marca, arriba de la columna ============= -->
+    <text class="t b" x="40" y="120" font-size="64" letter-spacing="4"
+          fill="#eef6f7">KETRAVA</text>
+    <text class="t" x="42" y="164" font-size="19" letter-spacing="5"
+          fill="#ffcf8a">THE SLOW COAST</text>
+    <rect x="40" y="196" width="190" height="4" fill="#ffcf8a" opacity="0.9"/>
+
+    <!-- ===================== la ruta: nueve escalas ===================== -->
+    <!-- Nueve, que son los del pie. Que el número del dibujo y el del texto
+         sean el mismo es lo único que hace que el dibujo diga algo. -->
+    <g>
+      <path d="M72,300 L72,740" stroke="#ffcf8a" stroke-width="2" opacity="0.28"/>
+      <g fill="#ffcf8a">
+        <circle cx="72" cy="300" r="7"   opacity="0.95"/>
+        <circle cx="72" cy="355" r="4.5" opacity="0.5"/>
+        <circle cx="72" cy="410" r="4.5" opacity="0.5"/>
+        <circle cx="72" cy="465" r="4.5" opacity="0.5"/>
+        <circle cx="72" cy="520" r="4.5" opacity="0.5"/>
+        <circle cx="72" cy="575" r="4.5" opacity="0.5"/>
+        <circle cx="72" cy="630" r="4.5" opacity="0.5"/>
+        <circle cx="72" cy="685" r="4.5" opacity="0.5"/>
+        <circle cx="72" cy="740" r="7"   opacity="0.95"/>
+      </g>
+      <text class="t" x="104" y="307" font-size="20" letter-spacing="3"
+            fill="#c3d3d6">NINE PORTS</text>
+      <text class="t" x="104" y="747" font-size="20" letter-spacing="3"
+            fill="#7d949b">ONE COAST</text>
+    </g>
+
+    <!-- las primeras estrellas, sobre la columna -->
+    <g fill="#eef6f7">
+      <circle cx="330" cy="284" r="2.4" opacity="0.45"/>
+      <circle cx="412" cy="372" r="1.8" opacity="0.32"/>
+      <circle cx="286" cy="470" r="2.0" opacity="0.38"/>
+      <circle cx="392" cy="592" r="1.6" opacity="0.28"/>
+      <circle cx="336" cy="694" r="2.2" opacity="0.4"/>
+    </g>
+
+    <!-- ===================== el texto, en la banda ====================== -->
+    <text class="t" x="540" y="898" font-size="42" letter-spacing="0.5"
+          fill="#c3d3d6">Island routes, small boats.</text>
+    <text class="t" x="540" y="956" font-size="25" letter-spacing="4"
+          fill="#7d949b">DEPARTURES FROM NINE PORTS</text>
+
+    <!-- ===================== el mar, plano de atrás ===================== -->
+    <!-- período 220, amplitud 7 -->
+    <g>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="0,0; -220,0" dur="3s" repeatCount="indefinite"/>
+      <path fill="url(#marLejos)"
+            d="M-220,992
+               q55,-7 110,0 q55,7 110,0 q55,-7 110,0 q55,7 110,0 q55,-7 110,0 q55,7 110,0
+               q55,-7 110,0 q55,7 110,0 q55,-7 110,0 q55,7 110,0 q55,-7 110,0 q55,7 110,0
+               q55,-7 110,0 q55,7 110,0 q55,-7 110,0 q55,7 110,0 q55,-7 110,0 q55,7 110,0
+               L2200,1080 L-220,1080 Z"/>
+    </g>
+
+    <!-- el cabo, apoyado sobre el mar lejano -->
+    <path fill="url(#cabo)"
+          d="M1480,1010 C1560,992 1620,972 1690,952 C1760,932 1840,924 1920,912
+             L1920,1080 L1480,1080 Z"/>
+
+    <!-- ===================== el objeto ===================== -->
+    <!-- El faro del 16:9, a 0,72: 320 px de torre por 0,72 son 230, que es lo
+         que entra en los 270 de la banda. El haz viene con él: 880 por 0,72 son
+         634, o sea que la luz cruza un tercio de la banda hacia la izquierda,
+         que es por donde hay lugar. -->
+    <g transform="translate(483,585) scale(0.72)">
+
+    <g transform="translate(1690,0)">
+      <!-- el fuste: troncocónico, 62 de base y 38 de cuello -->
+      <path fill="url(#torre)" d="M-33,646 L-19,424 L19,424 L33,646 Z"/>
+      <!-- las bandas: lo que hace que una torre blanca sea un faro -->
+      <path fill="#ffcf8a" opacity="0.85" d="M-26.6,536 L26.6,536 L28.4,562 L-28.4,562 Z"/>
+      <path fill="#ffcf8a" opacity="0.85" d="M-21.6,464 L21.6,464 L23.4,490 L-23.4,490 Z"/>
+      <!-- la galería: VUELA por fuera del fuste, y sin eso es un poste -->
+      <rect x="-34" y="410" width="68" height="14" fill="#c8d8dc"/>
+      <g stroke="#8fa6ad" stroke-width="2.5" opacity="0.9">
+        <path d="M-30,410 L-30,392"/>
+        <path d="M-15,410 L-15,392"/>
+        <path d="M0,410 L0,392"/>
+        <path d="M15,410 L15,392"/>
+        <path d="M30,410 L30,392"/>
+        <path d="M-32,394 L32,394"/>
+      </g>
+      <!-- la linterna, más angosta que la galería -->
+      <rect x="-22" y="366" width="44" height="44" fill="#173a44"/>
+      <rect x="-22" y="366" width="44" height="44" fill="#ffcf8a" opacity="0.28"/>
+      <!-- el techo -->
+      <path fill="#c8d8dc" d="M-26,366 L0,336 L26,366 Z"/>
+      <circle cx="0" cy="330" r="4" fill="#c8d8dc"/>
+
+      <!-- el haz: dos conos, un pivote, un barrido de 6 s que cierra igual -->
+      <g transform="translate(0,388)">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                          values="-16;16;-16" keyTimes="0;0.5;1"
+                          dur="6s" repeatCount="indefinite" additive="sum"/>
+        <path fill="url(#haz)"      d="M0,0 L-880,-118 L-880,118 Z"/>
+        <path fill="url(#hazCorto)" d="M0,0 L300,-44 L300,44 Z"/>
+      </g>
+      <!-- la lámpara, encima del haz para que la fuente sea el punto más claro -->
+      <ellipse cx="0" cy="388" rx="46" ry="34" fill="url(#lampara)"/>
+    </g>
+    </g>
+
+    <!-- el barco, redibujado a la escala de la banda -->
+    <g transform="translate(980,1006)">
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                        values="-4;4;-4" keyTimes="0;0.5;1"
+                        dur="3s" repeatCount="indefinite" additive="sum"/>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="0,3; 0,-4; 0,3" keyTimes="0;0.5;1"
+                        dur="3s" repeatCount="indefinite" additive="sum"/>
+      <path fill="#ffcf8a" opacity="0.95" d="M-10,-44 L-9,-4 L-32,-4 Z"/>
+      <path fill="#eef6f7" opacity="0.8"  d="M-5,-43 L17,-5 L-4,-5 Z"/>
+      <rect x="-10.5" y="-47" width="2" height="43" fill="#eef6f7" opacity="0.75"/>
+      <path fill="#0b2b36" d="M-37,-4 L27,-4 C22,9 -18,11 -37,-4 Z"/>
+      <path fill="#2e8f8a" opacity="0.9" d="M-37,-4 L27,-4 L26,0 L-35,0 Z"/>
+    </g>
+
+    <!-- ===================== el mar, plano de adelante ================== -->
+    <!-- período 340, amplitud 13: recorre más en el mismo tiempo, y eso es el
+         paralaje -->
+    <g>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="0,0; -340,0" dur="3s" repeatCount="indefinite"/>
+      <path fill="url(#marCerca)"
+            d="M-340,1026
+               q85,-13 170,0 q85,13 170,0 q85,-13 170,0 q85,13 170,0 q85,-13 170,0 q85,13 170,0
+               q85,-13 170,0 q85,13 170,0 q85,-13 170,0 q85,13 170,0 q85,-13 170,0 q85,13 170,0
+               q85,-13 170,0 q85,13 170,0
+               L2380,1080 L-340,1080 Z"/>
+      <path fill="#7fe3d6" opacity="0.3"
+            d="M-340,1026
+               q85,-13 170,0 q85,13 170,0 q85,-13 170,0 q85,13 170,0 q85,-13 170,0 q85,13 170,0
+               q85,-13 170,0 q85,13 170,0 q85,-13 170,0 q85,13 170,0 q85,-13 170,0 q85,13 170,0
+               q85,-13 170,0 q85,13 170,0
+               L2380,1031
+               q-85,13 -170,0 q-85,-13 -170,0 q-85,13 -170,0 q-85,-13 -170,0 q-85,13 -170,0 q-85,-13 -170,0
+               q-85,13 -170,0 q-85,-13 -170,0 q-85,13 -170,0 q-85,-13 -170,0 q-85,13 -170,0 q-85,-13 -170,0
+               q-85,13 -170,0 q-85,-13 -170,0
+               Z"/>
+    </g>
+
+    <!-- ===================== el filo interno de la L ==================== -->
+    <rect x="474" y="0"   width="6"    height="816" fill="#ffcf8a"/>
+    <rect x="480" y="810" width="1440" height="6"   fill="#ffcf8a"/>
+  </g>
+</svg>

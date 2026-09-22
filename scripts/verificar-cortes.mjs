@@ -69,10 +69,29 @@ const SEAMS = [
     // That is also why the library is assembled by a build step instead of being
     // written by hand (scripts/construir-libreria.sh).
     //
-    // Two of them are inside a demo, and they are named one by one for the
+    // Three of them are inside a demo, and they are named one by one for the
     // same reason: they are the proof that the contract is enough to draw with,
     // which is the argument of ADR 0003. What must not depend on any demo is the
     // completeness check below, and that one is only over `lib/`.
+    //
+    // AND NAMING THEM ONE BY ONE IS WHAT MAKES A NEW DEMO EASY TO MISS: a demo
+    // that copies `contract-trace.js` gets a consumer of the contract that
+    // nothing looks at, and nothing says so -- the list does not know the copy
+    // exists. `demo/stage-pair/js/contract-trace.js` is that copy, added by the
+    // T-06 of phase 14. The next demo that copies it has to be added here too,
+    // and the way to know this line works is the one that was used: plant a
+    // term of the transport in the copy and watch this go red.
+    //
+    // A STYLESHEET IS AUDITED FOR THE SAME REASON AND IT IS EASIER TO FORGET,
+    // because it is not code and nobody thinks of it as a consumer of the
+    // contract. It is one: a rule named after a tag, a class called
+    // `.daterange`, a comment explaining a colour by where the break came from
+    // -- each of them puts the transport back inside the layer that is supposed
+    // not to know it, and it would arrive through the page's own vocabulary
+    // rather than through an import. `demo/stage-pair/css/player.css` is the
+    // sheet of the three pages of that demo and it is on the list from the T-08
+    // of phase 14; a term planted in it was watched go red before this line was
+    // left in.
     //
     // `lib/multiview.js` is on this side and it is worth saying why, because it
     // is the one file that sits between the two: it decorates the provider, so
@@ -85,7 +104,9 @@ const SEAMS = [
       'lib/controls.js',
       'lib/multiview.js',
       'demo/compatibility-pair/js/contract-trace.js',
-      'demo/compatibility-pair/css/player.css'
+      'demo/compatibility-pair/css/player.css',
+      'demo/stage-pair/js/contract-trace.js',
+      'demo/stage-pair/css/player.css'
     ],
     accepted: [
       {

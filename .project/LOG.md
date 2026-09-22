@@ -5460,3 +5460,465 @@ entra en la grabación del 28 al 30 o si se graba sólo el player**, que es lo q
 la T-04 sobra. Y queda un hilo chico que ninguna task registró: la galería y el pliegue
 **nombran al aviso 3 de dos maneras distintas** —`linear` contra *"no layout block, played
 full frame"*—, las dos leídas del contrato a profundidades distintas.
+
+## 2026-09-21 — Fase 13 cerrada: la carrera producida entera, y el cierre de gobernanza que faltaba
+
+Diez tasks en `done`, `REPORT.md` escrito, `status` a `closed`, y la fase en el índice de
+`PROJECT.md`. **El trabajo había terminado el 2026-09-14** —el commit `28999e2` deja las tres
+etapas entregadas y `demo/race-multiview/` publicada—, así que lo que se cierra hoy es la
+gobernanza: la fase venía en `planning` con las diez tasks hechas, sin informe, sin línea en el
+índice y **sin una sola entrada en este log**. Es el primer hueco que este cierre encontró y la
+razón por la que el que lea el proyecto de arriba abajo no veía la cuarta demo.
+
+**Lo que la fase entregó** es una carrera de 112,000000 s con dos relatores y catorce cortes
+entre seis autos, y una ventana de 64 s que abre en el segundo 28 ofreciendo **seis cámaras**
+de 64,000000 s exactos cuando la grilla sostiene cuatro. No fue una fase de software: el
+mecanismo estaba construido y verificado desde la 11, y lo que había que probar es que aguanta
+el caso de uso por el que existe. Lo aguanta **sin una línea de `lib/`** y sin pedirle un campo
+al contrato entre las dos capas.
+
+**Lo auditable no son los números sino de dónde salen.** El segundo en que abre la oferta se
+declara una sola vez en `race.json` y lo leen los tres lados —el que coloca la línea de voz, el
+que la mide y el que escribe el `EXT-X-DATERANGE`—: la voz se calla en **27,640 s** y el tag
+abre en **28,000 s**, medidos por instrumentos distintos sobre artefactos distintos, y se vio
+despegarse moviendo el número. Y el catálogo del asset-list son las cámaras que están
+empaquetadas: **pasó de una a seis sin que nadie editara un script**, medido entre dos corridas
+de la misma página sin un archivo tocado en el medio.
+
+**El riesgo que se materializó es el peor que la fase tenía escrito.** Veo pintó **`Apple`**
+—con su tipografía y media manzana roja— en la carrocería y en los carteles de la valla de una
+casilla, en la demo que David Hassoun presenta en el evento de Apple. La causa no era el modelo
+inventando una librea real: era **el nombre del color**, `BRIGHT APPLE GREEN`, que está en las
+catorce casillas y que en ésa además aparecía en el bloque que dice qué hay en cuadro. El
+arreglo es la regla de la fase 08 en su segunda mitad: **se saca la palabra, no se prohíbe** —el
+renombre a `BRIGHT LIME GREEN` sin agregar una sola negación, US$0,80, con el instrumento visto
+leer `apple` sobre el clip rechazado antes de usarlo. En cambio el **R1** —que las seis cámaras
+no se lean como la misma carrera, el que podía hacer que el gasto entero no sirviera— **no se
+materializó**: los cielos de los seis feeds quedan a 0,9–7,9 de dE00 entre sí contra tres
+controles que se mueven de 10,8 a 17,0, así que el repliegue a carrera nocturna no hizo falta.
+
+**La no-regresión.** 193 pruebas en verde contra 184 de línea de base y **cero desaparecidas**,
+medido comparando nombres y con el comparador probado sobre una copia con una prueba borrada y
+otra renombrada, que es el par que un conteo igual esconde. Las dos costuras y la campaña de
+mutaciones salen **byte por byte iguales** a la línea de base de la T-01. `git diff --stat --
+lib/` vacío contra los tres commits que importan, con el control de que contra uno anterior sí
+muestra una línea. Y la demo publicada: 324 objetos con md5 idéntico al local, acceso probado
+con `env -i curl` —la raíz en 403, un objeto inexistente en 404, los crudos en 404—, y el
+player avanzando 3,020 s en 4 s de reloj contra un control de 0,000 con los segmentos abortados.
+
+**El gasto: US$74,40 en 93 generaciones**, US$18,40 por debajo del techo de la fase. Las
+compuertas se usaron de verdad: la etapa 1 volvió **tres veces** con feedback de Nicolás sobre
+las casillas del programa antes de que la etapa 2 arrancara, y **el techo lo levantó él dos
+veces mirando el material** —a US$26,00 y después a US$30,00—, con el corte del generador
+recalculado antes de cada gasto. La etapa 1 cerró en US$26,40, por debajo del vigente.
+
+**Cero ADR, y está argumentado de antemano** en `DESIGN.md` §10: ninguna decisión de la fase
+toca el formato ni la librería, así que viven en el diseño y en las cabeceras de los scripts,
+que es donde el ADR 0061 manda. El proyecto sigue en 79 ADR. Pero **tres decisiones se tomaron
+ejecutando y no están en `decisions/`**, y las tres gobiernan trabajo futuro: el criterio de
+rechazo de la tipografía (legible se rechaza, garabato no), que el hexadecimal de `race.json` se
+mide sobre el clip y no sobre la ficha, y que el panel recortado a ancho de teléfono no es un
+defecto porque la demo es 16:9 — esta última anotada al pie del informe de la T-09 y en ningún
+otro lado del proyecto.
+
+**Lo que el cierre encontró y no estaba junto en ningún lado son dos cosas.** La primera es que
+**el feedback sobre trabajo entregado entró cuatro veces por una forma que el esquema no tiene**:
+subcarpetas de la task original en lugar de líneas `post-ejecución:` o de tasks nuevas. Como
+registro es mejor que una línea —las cuatro traían mediciones y controles propios—, pero tuvo un
+costo medido: sus registros de gasto no los suma el informe principal de la task, y **los dos
+totales de la fase escritos antes del cierre salieron mal por eso**, los dos con el mismo hueco
+de doce generaciones y US$9,60. La segunda es una contradicción entre el contrato de la fase y
+el repo padre: el bloque de constraints de la T-01 manda los temporales a `/dev/shm` y
+`knowledge/reglas-para-workers.md` lo prohíbe con su razón escrita. No se reescribió el
+`TASKS.md`, que es registro; la decisión de qué lado cambia es de Nicolás.
+
+Y queda una superficie desalineada que el cierre reporta y no toca por estar fuera de
+`.project/`: **el `README.md` de la raíz lista tres demos y ahora son cuatro** — `grep -c
+"race-multiview" README.md` da 0, con `hydration-break` en 1 como control.
+
+Validador en verde: `exit 0`, 79 ADR, 13 fases, 2 hallazgos aceptados con su razón.
+
+## 2026-09-21 — Fase 14 abierta: lo que la reunión con David le dejó a las dos demos que se muestran
+
+Abierta con su diseño, su contrato y sus diez tasks escritos en la misma pasada, porque el
+alcance no se exploró acá: lo eligió Nicolás sobre ocho puntos que se le presentaron después del
+sync con David Hassoun de hoy. **La fase es esos tres puntos, exactamente, ni más ni menos.**
+
+**Lo que la reunión cambió y ordena todo lo demás** es que el par de compatibilidad dejó de ser
+una demo entre cuatro: David la eligió como la principal por el argumento *"así es hoy / así
+podría ser"* en un cuadro, y es la que muestra con el network tab abierto. La carrera pasó a ser
+el cierre, y `multiview-offer` se cae del escenario.
+
+**Los tres puntos.** Regenerar con Veo los creativos del par, con el pedido `T-12` de la fase 01
+como criterio de aceptación —el cuadrante oscuro del Quad, que hoy mide 24,9 de luminancia media
+contra los 100 que pide, y las dos barras del L, que hoy se cubren recortando el 60 % de un
+16:9—; meter un ad break de tres avisos en `race-multiview` antes de la ventana de multi view; y
+exponer el control de cantidad de decoders sobre el par, que es una capacidad que la librería
+tiene desde hace fases y que la interfaz no muestra.
+
+**El diseño encontró un problema de geometría que cambia el alcance del primer punto.** Cada uno
+de los tres videos del par se usa en varias cajas a la vez y todas menos las barras del L son
+16:9, así que un creativo dirigido a una barra de 4,44:1 no puede ser al mismo tiempo el que se
+ve a cuadro entero en el aviso lineal. **Las barras reciben sus propios assets**, que es la
+estructura que el LBox con imagen ya tiene: `adImageA` y `adImageB` no aparecen en ningún otro
+layout. El inventario pasa de cinco creativos a siete, y cambia **un solo** archivo de
+señalización, `asset-list-squeezebackLShape.json`, en dos `uri`.
+
+**No lleva compuertas de gasto, y es la diferencia grande con la 13.** Aquella tenía tres etapas
+porque el gasto era de dos dígitos altos; acá el esperado son **US$8,00** en diez generaciones
+—dos eslabones encadenados por cada uno de los cinco videos— más dos cuadros fijos generados como
+imágenes con `agy`, que cuestan cero. Se quedan de aquella forma las dos cosas que no eran por
+plata: se mira una antes de encadenar el resto, y el gasto se reporta sumado de los registros de
+lanzamiento y no de la prosa.
+
+**Lo que la fase declara que no hace** está escrito en `PHASE.md` para que al cerrar no quede como
+un supuesto: el tramo invertido del par se queda como está —Nicolás lo decidió hoy, textual *"ok,
+no hagamos nada"*, y no hay task de verificación—, y quedan fuera los creativos que parezcan
+publicidad, el guion de la demo y la pregunta de si se graba.
+
+**Deja una sola decisión abierta y va con su recomendación puesta:** si el control de decoders lo
+resuelve un ad presentation server que adapte la respuesta —la versión ideal que describió
+David— o la página eligiendo a qué superficie se llama, que es lo que él mismo dijo que alcanza
+para la demo. La fase está escrita entera sobre un tercer camino que combina los dos: el control
+declara `decoderCount`, así que `qa-decoder-count` **viaja de verdad** en la petición y se ve en
+el network tab, y la página apunta a un asset-list estático distinto por valor. Es el único de
+los tres que sobrevive a la publicación, porque las cuatro demos se sirven como archivos
+estáticos en GCS y no hay servidor que pueda leer el parámetro. Si Nicolás elige el camino del
+servidor, entra `server.mjs` al alcance y esa decisión pasa a merecer un ADR.
+
+**Cero ADR, con la misma razón de la fase 13:** ninguna de las decisiones toca el formato de
+señalización ni la librería, así que la receta vive con el generador, que es lo que manda el
+ADR 0061. La excepción es la condicional de arriba.
+
+**Y dos superficies de documentación que la fase deja falsas si no las toca son tasks**: el
+`README.md` de la raíz, que lista tres demos y son cuatro —el hueco que el cierre de la 13
+reportó sin tocar— y la cabecera de `senalizar-contenido.sh` de la carrera, que dice que es la
+única demo puramente editorial.
+
+## 2026-09-21 — Fase 14 abandonada el mismo día que se abrió: Apple no admite contenido generado por IA
+
+La fase se abrió por la mañana y se abandonó por la tarde. No se ejecutó ninguna de sus diez
+tasks, y su carpeta `phases/14-las-dos-demos-que-se-muestran/` se borró por instrucción de
+Nicolás. La entrada de apertura queda arriba en pie, porque lo que este archivo registra es lo
+que pasó y no lo que quedó.
+
+**Lo que la tumbó llegó de afuera**: Apple comunicó que no se puede mostrar contenido de video
+o de imagen generado por modelos de IA. La fase estaba escrita para hacer exactamente lo
+contrario — sacar el metraje de la Blender Foundation del par de compatibilidad y reemplazarlo
+por creativos generados con Veo— así que no era una fase a la que se le pudiera recortar un
+punto: su primer punto era su premisa.
+
+**Dónde deja a las cuatro demos publicadas**, leído de la procedencia declarada en cada
+`README.md`:
+
+| demo | primario | creativos | estado |
+| --- | --- | --- | --- |
+| `compatibility-pair` | *Tears of Steel*, Blender | tres películas de Blender | limpia |
+| `multiview-offer` | Blender | Blender | limpia |
+| `hydration-break` | metraje amateur, licencia Pexels | imágenes generadas | creativos afectados |
+| `race-multiview` | Veo, imagen y sonido, más locución por TTS | — | afectada entera |
+
+La que más cuesta es `race-multiview`: es la producción entera de la fase 13, US$74,40 en 93
+generaciones, y era el cierre de la presentación.
+
+**Y da vuelta una premisa que venía de antes.** La decisión del 2026-09-15 fue generar con Veo
+**para que no aparecieran marcas reales en el evento**. Esa salida se cerró y el problema que
+resolvía vuelve: hacen falta creativos que parezcan publicidad, sin marcas reales y sin
+generación por IA.
+
+**Lo que sigue, por instrucción de Nicolás**: las demos publicadas **no se tocan** y quedan como
+demos internas; la presentación para Apple se planifica de cero, en una carpeta de demo nueva,
+como una fase nueva.
+
+La conversación que produjo todo esto —los cinco layouts medidos caja por caja, la biblioteca de
+tres formas, el recorrido y sus tiempos— está en el hilo `#hls-demo` del 2026-09-21 y no se
+pierde con la fase: es material de entrada para la que viene.
+
+## 2026-09-21 — Fase 14 abierta de nuevo: la demo que va al escenario, y los creativos como SVG
+
+Se planificó de cero, con su diseño, su contrato y sus diez tasks escritos en la misma
+pasada. La 14 anterior se borró esta tarde y el número queda libre: es el mismo número y no
+la misma fase.
+
+**El entregable es una demo nueva en su propia carpeta bajo `demo/`**, `stage-pair`, y **las
+cuatro que existen no se tocan**: quedan como demos internas, por instrucción de Nicolás.
+Sostiene las tres cosas que salieron del sync con David: el par "así es hoy / así podría ser"
+en un cuadro, que se pueda inspeccionar con el network tab abierto, y el control de cantidad
+de decodificadores.
+
+**La decisión que la gobierna, y la tomó Nicolás:** los creativos son **SVG animado**.
+Textual: *"esto sí está permitido porque lo que no permite es usar modelos de imágenes o
+modelos de vídeo para generar publicidad. Pero esto es generar SVG que básicamente es
+código"*. La restricción de Apple es sobre la salida de un modelo generativo de imagen o de
+video; un SVG es marcado que el navegador dibuja.
+
+**Y es la primera vez que la restricción compra algo en lugar de costar**, porque el SVG
+disuelve el problema de geometría que esta demo arrastraba. Un vector no tiene relación de
+aspecto que respetar: se autora con el `viewBox` de la caja. Todo el recorte que el pedido
+`T-12` de la fase 01 reclamaba —la tira vertical de 0,71:1, la horizontal de 4,44:1, el
+banner de 8,89:1, el ADR 0013 comiéndose el 60 % del cuadro— deja de ser un problema y pasa a
+ser el argumento a favor de la decisión. La consecuencia práctica es que la biblioteca de
+tres formas es **una identidad con tres `viewBox`** y no tres piezas, lo que además hace que
+las tres se lean como la misma campaña.
+
+**Las dos cosas que el SVG obliga a resolver, y las dos son tasks:**
+
+- **El lineal tiene que ser un video de verdad.** Lo reproducen los dos panes, y el de
+  fábrica es un hls.js sin modificar que recibe una `URI` a un `.m3u8`: no sabe qué es un SVG.
+  Si el lineal no se ve de ese lado se cae el argumento de la demo. Va un paso de pipeline —
+  navegador headless, cuadros, `ffmpeg`, HLS— que además sirve dos veces, porque produce el
+  creativo 16:9 y el backplate de la L en su forma de video.
+- **Puede que el banner y la L no cuesten nada de SDK.** `lib/renderer.js:209` define
+  `isImage` como `/^image\//i`, que matchea `image/svg+xml`, y `lib/media.js` le hace
+  `node.src = uri` al `<img>` que `createNode` crea. Si las animaciones declarativas corren
+  ahí, no hace falta tocar la librería. **Está escrito como hipótesis y no como hecho**, con
+  una task temprana que la confirma o la tira **con tres controles**: un SVG sin animación
+  tiene que dar capturas idénticas, uno animado por JavaScript también, y sólo el de SMIL/CSS
+  distintas. Y la escalera de salida no entra a `lib/` en ninguna rama, porque el peor caso es
+  capturar esa forma a video con el puente que existe igual.
+
+**Lo demás que la fase decide**: el contenido principal sale de **Netflix Open Content** bajo
+Creative Commons —Nicolás manda el link, todavía no está, así que la fase **no nombra un
+título ni promete una duración** y eso queda declarado como dependencia—; **un asset-list
+lineal por break con la duración de su break**, que elimina el tramo invertido del par sin
+tocar el `START-DATE` compartido del ADR 0007, que es la salida que la fase 03 buscó y no
+encontró; el control de decodificadores con **tres posiciones** —sin declarar, 1 y 2— donde
+`qa-decoder-count` viaja de verdad y la respuesta está horneada por valor, **sin servidor**;
+y **dos páginas**, el par y una de inspección, que es lo que contesta cuál es la "demo simple
+para el network tab" que el transcript del sync no permitía determinar.
+
+**No lleva timeline**, y es explícito: Nicolás sacó la fecha del alcance —*"sobre la fecha
+olvidate porque eso lo tengo control yo y no pasa nada"*—. Lo que ordena las diez tasks es la
+dependencia técnica entre ellas.
+
+**Cero ADR al abrir.** Las ocho decisiones están enumeradas en la sección 11 del `DESIGN.md`
+para que se puedan levantar una por una, y cuatro dependen de cosas que todavía no pasaron:
+el verdicto de la hipótesis del SVG, la duración que fije la T-01, y que Nicolás mire el
+primer creativo. Las que queden en pie al cerrar se escriben entonces.
+
+**Dos hallazgos de gobierno que la planificación encontró y que son tasks**: el `README.md`
+de la raíz sigue listando tres demos y son cuatro —el hueco que el cierre de la 13 reportó
+sin tocar—, y `scripts/verificar-cortes.mjs` nombra los archivos que audita uno por uno, así
+que la copia de `contract-trace.js` de una demo nueva queda fuera del chequeo de costuras sin
+que nada avise.
+
+Línea de base medida al abrir, sobre el commit `28999e2`: **193 pruebas, 193 pasan, 0 fallan**
+y las dos costuras verdes con salida 0.
+
+## 2026-09-21 — Fase 14 refinada: tres campañas, tres páginas, SPARKS, y cuatro ADR escritos
+
+Nicolás cerró las cinco decisiones que la apertura había dejado abiertas y agregó alcance. La
+fase pasa a `in-progress`, porque su primera pieza ya está hecha y aprobada.
+
+**Tres campañas, no una.** Textual: *"es que son una campaña PARA CADA MARCA"*. Tres marcas de
+fantasía —bebida, calzado y turismo— y cada una con sus tres formas: **nueve piezas**. La
+primera, **`ZUMBRA`**, gaseosa cítrica con el claim *"CITRUS, OUT LOUD"*, ya está autorada en su
+forma 16:9 y **aprobada**, con un ajuste de la tapa de la lata pedido, aplicado y aprobado. Queda
+como **referencia de estructura** de las otras dos, no como dibujo a copiar. Está anotado como
+`post-ejecución` en la T-04, que pasa a `in-progress`.
+
+**El contenido primario es SPARKS**, de Netflix Open Content, CC BY 4.0:
+`Sparks_4096x2160_5994fps_SDR.mp4`, 419.744.507 B, 229,9 s con **~195 s antes de los créditos**,
+H.264 Main L5.1 yuv420p a 59,94, **SDR** —así que no hay que tone-mapear— y audio AAC-HE 2.0 a
+48 k. Con eso la dependencia externa que la apertura declaró queda cerrada y los offsets de los
+breaks dejan de estar pendientes.
+
+Dos cosas de licencia quedaron escritas en la fase porque no se deducen del material:
+**la forma de la atribución no está especificada en ningún lado**, ni en el sitio ni en el
+bucket, así que se redacta contra el default de CC BY 4.0 y su pieza olvidable —**indicar que se
+modificó**— acá es segura, porque la demo recorta, recodifica y reempaqueta. Y **Meridian queda
+descartado**: su propio `meridian_license.txt` declara CC BY-**NC-ND**, que contradice el CC BY
+4.0 que el sitio anuncia para el conjunto. Se escribe el porqué para que nadie lo reconsidere sin
+saberlo.
+
+**La carpeta es `stage-pair` y el bucket es `qualabs-hls-demo-stage-pair`.** Confirmados los dos.
+
+**Y son tres páginas, no dos.** Las dos primeras ya estaban —el par y la de inspección—, con una
+precisión nueva que ahora es contrato y no implícito: del lado nuestro **el recorrido pasa por
+las tres formas no lineales, una por break**, side by side, L-shape y banner, contra el
+interstitial común que tapa la pantalla del lado de fábrica. El argumento, textual: *"estás
+monetizando sin ocupar toda la pantalla"*. Con eso los tres breaks y las tres formas de la
+biblioteca se mapean uno a uno.
+
+**La tercera página es la carrera, rehecha en SVG**, con los mismos creativos no lineales
+**antes** de que se abra la ventana de multi view: *"de esta forma tenemos una 3ra demo súper
+potente con todo lo que creamos junto"*. Va después de las dos primeras, dentro de la misma fase,
+y entró como dos tasks nuevas, la T-09 y la T-10.
+
+**No revive lo que David bajó.** Él descartó `multiview-offer` con el argumento de que la de la
+carrera la superaba; lo que esta página hace es **reconstruir la de la carrera**, que es la que
+él eligió como cierre y que la restricción destruyó entera. Y la separación que pidió entre
+señalización de publicidad y extensión de Qualabs sigue visible, mejor que antes: el par no lleva
+multi view, y esta página muestra primero la publicidad y después la ventana.
+
+**Dos decisiones de diseño sobre esa página, y las dos van escritas con su razón.** Las cámaras
+**no son la misma animación recoloreada** sino **la misma escena enmarcada distinto, siguiendo a
+su auto**: recolorear se lee como seis copias y no como seis cámaras, y en SVG enmarcar cuesta
+cambiar un rectángulo. Es el R1 de la fase 13 —que las cámaras no se lean como la misma carrera—
+resuelto por construcción en lugar de por prompt; si al implementarlo resulta más caro, es un
+hallazgo y se reporta. Y **las cámaras van a video y no como imagen**, porque el ADR 0027 deja
+fuera del foco de audio a todo lo que no sea una caja de video, así que con feeds de imagen se
+perdería el beat de agrandar una cámara y quedarse adentro de ese auto; el puente a video ya
+corre para el programa, que es el primario y tiene que ser un medio de todos modos.
+
+**Cuatro ADR escritos al abrir y no al cerrar**, que era lo que la apertura había dejado en
+suspenso:
+
+| id | título | scope |
+| --- | --- | --- |
+| **0080** | El creativo se escribe como SVG animado y no se genera | `project` |
+| **0081** | Una identidad por campaña, autorada tres veces con tres `viewBox` | `project` |
+| **0082** | Un asset-list lineal por break, con la duración de su break | `project` |
+| **0083** | El parámetro de decodificadores viaja de verdad y la respuesta está horneada por valor | `phase-14` |
+
+**El 0080 supersede al ADR 0045.** Aquel repartía la producción de un creativo en tres caminos y
+el primero era *"lo pictórico se genera"*, que es exactamente lo que la restricción de Apple
+cerró; lo que tenía de acertado y nunca falló —escribir la geometría y la tipografía como SVG y
+rasterizarlas con Chrome headless, *"que da alfa real y dimensiones exactas"*— es lo que el 0080
+conserva y extiende a la pieza entera. El 0045 queda `superseded` con su nota fechada. **El ADR
+0062 no se toca**: dice dónde puede ir el movimiento generado, lo que sigue siendo cierto como
+condicional aunque se quede sin instancias.
+
+**Ninguno de los cuatro cambia los dos documentos de `docs/`**, y la respuesta es una por
+decisión: el 0080 y el 0081 son de autoría de creativos y no tocan la librería ni el contrato; el
+0082 es cómo una demo autora su señalización, y el contrato ya lo permitía; y el 0083 usa
+`decoderCount` y `qa-decoder-count` exactamente como `docs/integrating-the-library.md` ya los
+documenta.
+
+**Dos lecciones de la producción de `ZUMBRA` entraron como constraints de toda la fase**, y las
+dos salieron midiendo. **Una tabla markdown adentro de un comentario XML rompe el SVG entero, en
+silencio**: el separador `| --- |` contiene `--`, ilegal dentro de `<!-- -->`, Chrome no dibuja
+nada y la captura sale negra **sin ningún error**; la mitigación probada es parsear el XML antes
+de capturar, y no es un caso raro porque este proyecto usa cabeceras largas como documentación.
+Y **capturar al tamaño del viewport no mide una animación**: a 800 px un creativo de 1920 se
+reduce 2,4× y las burbujas mueven entre 0,5 y 3 píxeles de 383.200 comparados, con lo que dos
+capturas seguidas dan el mismo hash por casualidad y el positivo sale "2 de 3", mientras que a
+1920×1080 el mismo par mueve 14.620. De ahí sale la regla de que toda verificación de animación
+captura a resolución nativa, que le pega directo al puente a video y a la verificación de la
+hipótesis del SVG, que tienen el mismo modo de fallar.
+
+**Lo que queda abierto es uno solo: qué se oye en la carrera.** Un SVG no tiene audio, así que
+cualquier sonido hay que producirlo en la captura, y la restricción que llegó habla de imagen y
+de video y no de audio. La fase está escrita sobre la recomendación —cámaras mudas y la página
+sin prometer audio por cámara, con el foco de audio funcionando igual porque los feeds son
+video—, así que no bloquea nada; lo que cambia si Nicolás quiere el beat sonoro es con qué se
+produce ese audio.
+
+## 2026-09-21 — El resolution document por variante de medio, y el alcance real de la restricción
+
+Tres cierres y una corrección de encuadre. Con esto la fase 14 queda con su diseño cerrado.
+
+**La grande: la escalera de decodificadores dejó de degradar de forma desigual.** El reparto que
+la fase traía tenía un defecto reportado —el break del banner devolvía lo mismo en los dos
+escalones, porque un banner ya era una imagen, y el break del side by side bajaba al aviso
+lineal, o sea que el dispositivo de un decodificador terminaba viendo la pantalla tapada—.
+Nicolás lo leyó y propuso la salida, textual: *"está bueno agregar un resolution document que lo
+que haga sea devolver sólo los formatos imagen para los dispositivos que tengan sólo 1 decoder y
+queramos mostrar ads no lineales de todos modos"*.
+
+La regla que sale es más limpia que el mapeo que reemplaza: **cada una de las tres formas existe
+en video y en imagen, y el resolution document elige la variante según los decodificadores
+declarados**. Con dos, las de video; con uno, las de imagen. El layout, la campaña y la duración
+del break no cambian: cambia el medio. Los tres breaks responden distinto y ninguno finge.
+
+**Y sube de nivel lo que la demo afirma**: la capacidad del dispositivo **degrada el formato del
+aviso, no el aviso**. El publisher sigue monetizando y el espectador sigue viendo publicidad no
+lineal sobre el programa. Para la cola larga de dispositivos eso vale mucho más que un recorrido
+donde el device pobre pierde la experiencia.
+
+**No inventa mecanismo**: el renderizador distingue por `mediaType` (`lib/renderer.js:209`) y el
+ADR 0012 ya decía que LBox video y LBox image son el mismo layout con distinto tipo de asset. Lo
+que la decisión hace es convertir esa nota sobre dos nombres en la regla que gobierna la escalera
+entera.
+
+**Entró como ADR 0084 nuevo y no como ampliación del 0083**, y la razón es que son dos preguntas
+distintas: el 0083 dice **cómo** viaja el dato y cómo se sirve la respuesta sin servidor, y el
+0084 dice **qué** contiene cada respuesta. Separados, el día que exista un ad presentation server
+de verdad el 0083 queda superseded y el 0084 sigue en pie tal cual, porque la política de
+degradar el formato es del ad stack y no del transporte. El 0083 no necesitó una sola edición.
+
+**Con una premisa que se verifica y no se asume**: que un elemento de imagen no consume un
+decodificador de video. Es casi seguro —para un `image/*` el renderizador crea un `<img>` y
+`attachAsset` le pone un `src` sin instanciar ningún player— pero es la pata sobre la que se
+apoya todo, así que entró como séptima pregunta de la T-02 con su control —el escalón rico tiene
+que dar más elementos de video, el magro exactamente uno— y se vuelve a medir por escalón sobre
+la página real en la T-07. Si resultara falsa, la task para: lo que se cae ahí es la afirmación
+de la demo y no su implementación. Es el riesgo R1b.
+
+**Consecuencia que conviene no perder de vista**: nuestro cliente **ya no baja nunca a la
+experiencia del otro lado**, que es como David había descrito el control —*"where the fallback to
+the other side's experience is visible"*—. Lo que se ve en su lugar está a la vista en los dos
+escalones y no en uno: el pane de fábrica reemplaza el programa en los tres breaks, siempre.
+
+**El audio queda decidido: por ahora va todo sin audio.** Era lo único que quedaba abierto.
+Cámaras mudas y ninguna página promete audio por cámara; el foco de audio sigue funcionando
+porque los feeds son video, sencillamente no suena nada.
+
+**El superseder del ADR 0045 quedó confirmado, y con el criterio que lo reemplaza escrito**, que
+es más ancho que el caso del SVG. Textual de Nicolás: *"la decisión ahora es que cada contenido se
+resuelve en su propia demo"*. El ADR 0080 se reescribió para decir eso primero y el SVG después,
+porque el 0045 fallaba en algo anterior a la restricción: **era una receta única para todo el
+proyecto**, y eso sólo funciona mientras todas las demos tengan las mismas ataduras.
+
+**Y la corrección de encuadre, que es la que más lejos llega en el tiempo: la restricción de
+Apple es sólo para la presentación que se hace en sus oficinas.** No es una restricción sobre
+todo lo que el proyecto produce ni sobre lo que la marca publica. `race-multiview` **se queda
+publicada** y sigue siendo una demo válida en cualquier otro lado; lo que pasa es que no puede
+mostrarse ahí. Las entradas anteriores de este archivo la describen sin ese matiz porque así se
+entendía ese día: **se dejan como están, que es lo que un registro tiene que hacer, y el matiz
+queda acá con su fecha**. Los documentos vivos —el ADR 0080, el `DESIGN.md`, el `PHASE.md` y el
+índice de `PROJECT.md`— sí se corrigieron, porque son los que alguien va a leer dentro de seis
+meses para decidir algo. Con esto queda cerrado el hallazgo de que `race-multiview` seguía
+pública: no hay nada que bajar.
+
+## 2026-09-22 — Fase 14 cerrada: la demo que va al escenario, publicada y verificada sin credenciales
+
+Doce tasks, las doce ejecutadas, y `demo/stage-pair/` respondiendo en
+`https://qualabs-hls-demo-stage-pair.storage.googleapis.com/`. Es la quinta demo del repositorio y
+la única cuyo contenido visual está **escrito y no generado**: tres campañas de fantasía autoradas
+como SVG animado en tres formas cada una, y una carrera de seis autos que sale de un generador de
+primitivas vectoriales. Informe en `phases/14-la-demo-que-va-al-escenario/REPORT.md`.
+
+**Lo que la fase terminó siendo.** Tres páginas: el par con el switch de decodificadores, la de
+inspección con un solo player para el network tab, y la carrera con los avisos antes de la ventana
+de multi view. Cinco ADR nuevos —0080 a 0084, con el 0045 `superseded`— y ninguno de ellos le pidió
+un campo al contrato entre las dos capas. **`lib/` no se tocó**, medido con `git diff --stat`
+vacío y con su control, y las cuatro demos que ya estaban publicadas tampoco.
+
+**El 0084 salió de una idea de Nicolás a mitad de camino y terminó siendo la afirmación central**:
+la capacidad del dispositivo degrada el **formato** del aviso y no el aviso. El publisher sigue
+monetizando y el espectador sigue viendo publicidad no lineal sobre el programa; lo único que
+cambia es con qué está dibujada. Está medido: `qa-decoder-count` viaja de verdad con su control
+negativo en rojo, y la composición pasa de dos elementos `<video>` a uno sin cambiar el layout, la
+campaña ni la duración.
+
+**Y murió el tramo invertido, que estaba abierto desde la fase 03.** Con un asset-list lineal por
+break (ADR 0082), los dos panes entran y salen de los tres breaks con menos de 0,06 s de
+diferencia, contra los 12 s del control puesto a propósito, que es exactamente el defecto que
+`compatibility-pair` tiene.
+
+**La publicación se corrió hoy, con el OK de Nicolás, y su verificación encontró un verde vacío
+nuestro.** El paso 7 de `publicar.sh` —la comparación de los objetos por md5— devolvió `0 objetos
+comparados por md5, 0 distintos` y salió 0: su bucle hace `continue` cuando no puede mapear un
+objeto a un archivo local y su código de salida depende sólo del contador de distintos, así que un
+cero de cero no se distingue de un éxito. La comparación se rehizo a mano sobre cuatro archivos,
+con el control de comparar uno local contra otro remoto, que da distinto. El acceso público sí está
+verificado con `curl` sin ningún token, con el 404 de una ruta inventada como control.
+
+**Dos cosas del mecanismo de trabajo, para el registro.** La fase arrancó con una sesión paralela
+de ejecución y falló dos veces; la segunda quedó cinco horas y veinte minutos sin escribir un
+archivo mientras consumía CPU, sin causa determinada, y se la bajó por su PID. Las doce tasks las
+entregaron **subagentes**. Y hubo un incidente de infraestructura que la bitácora de la fase no
+registró: la máquina se quedó sin espacio en `/run/user/1000` —es RAM y son 1,6 G, y el pipeline
+escribe ahí cuadros PNG a 1920×1080—, y se cayó la sesión que ejecutaba. **El trabajo no se perdió;
+lo que se perdió fue el contexto de una sesión.**
+
+**Lo que queda abierto**, además de lo que estaba declarado de antemano —ningún dato de red,
+ninguna conclusión sobre iOS, ninguna medición de rendimiento con varios SVG animados a la vez—:
+**`lib/` no tiene teardown**, y está medido (dos bucles de `requestAnimationFrame` que se
+re-agendan solos y treinta y un `addEventListener`, contra cero `removeEventListener` y cero
+`cancelAnimationFrame`), así que cada rearmado del player deja lo anterior corriendo. El
+`CLAUDE.md` del proyecto sigue diciendo que las demos publicadas son cuatro y son cinco, y le falta
+que los `.svg` **no** necesitan el tipo de contenido a mano, al revés de lo que el contrato de la
+T-12 suponía. Y el guion de la demo —qué se muestra, en qué orden y en cuántos segundos— sigue sin
+dueño: es de la presentación y no de este repositorio.

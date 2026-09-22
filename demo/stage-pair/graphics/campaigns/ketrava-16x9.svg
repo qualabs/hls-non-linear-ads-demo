@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  KETRAVA — el creativo 16:9 de la campaña de turismo. Primera forma de la
+  identidad que la fase 14 autora tres veces con tres viewBox (ADR 0081).
+
+  POR QUÉ ES UN SVG Y NO UNA IMAGEN. Apple no admite contenido de imagen o de
+  video salido de un modelo generativo. Acá no hay ninguno: todo lo que se ve
+  son primitivas vectoriales —paths, elipses, gradientes y texto— escritas a
+  mano y dibujadas por el navegador. No hay un solo pixel rasterizado ni una
+  referencia a un archivo de afuera. Es la campaña donde más tienta poner una
+  fotografía, y es exactamente la que no se puede poner.
+
+  LA ANIMACIÓN ES DECLARATIVA A PROPÓSITO. El creativo se muestra dentro de un
+  <img src="...svg">, y ahí el JavaScript NO corre; SMIL y CSS sí (medido en la
+  T-02). Por eso todo el movimiento está en <animate> y <animateTransform>.
+
+  EL BUCLE NO TIENE MOMENTO FEO. `bringAhead` construye el nodo hasta 3 s antes
+  de que se vea, así que el creativo se mira por primera vez a 3,25 s de su
+  propia animación (T-02, tres corridas de tres). Las tres animaciones de este
+  archivo cierran idénticas a su inicio por construcción:
+
+  · cada plano de mar se desplaza EXACTAMENTE un período de su propia onda en
+    3 s, así que al cerrar el ciclo el dibujo coincide consigo mismo;
+  · el haz del faro barre de -16° a +16° y vuelve, en 6 s, con el mismo valor
+    en 0 y en 1;
+  · el barco cabecea y vuelve, en 3 s, con el mismo valor en 0 y en 1.
+
+  EL MOVIMIENTO ES EL PARALAJE, y no el barco. Tres planos de mar con tres
+  períodos distintos recorren distancias distintas en el mismo tiempo: el de
+  adelante 520 px, el del medio 360 y el del fondo 240. Eso es lo que da
+  profundidad sin dibujar ni una sombra, y es la razón por la que los períodos
+  no son tres números elegidos al azar: SON las tres velocidades.
+
+  LA FAMILIA TIPOGRÁFICA ES UNA PILA DEL SISTEMA, sin @font-face, por lo que la
+  T-02 midió: un @font-face a un archivo externo da 0 píxeles de diferencia
+  contra la base monospace, o sea que no resuelve. El cuerpo de la marca baja de
+  176 a 152 y el interletrado de 14 a 10 respecto de ZUMBRA y de KOVRIN porque
+  KETRAVA tiene siete letras y las otras dos tienen seis: lo que se mantiene
+  igual entre las tres campañas es el BORDE DERECHO del bloque de texto, no el
+  cuerpo, porque es el borde el que decide si el texto choca con el objeto.
+
+  LA MARCA ES DE FANTASÍA. "KETRAVA" se contrastó contra una búsqueda y no
+  contra la memoria (T-01): no hay ninguna marca de viajes con ese nombre. Las
+  candidatas descartadas —SOLVANE, MIRALTA, ORVANTE— están en RECORRIDO.md.
+
+  ========================================================================
+  LA ESCENA, Y POR QUÉ SE DESVANECE EN VEZ DE CORTARSE
+  ========================================================================
+
+  El objeto de esta campaña no es un producto que se pueda recortar contra el
+  fondo: es un paisaje, y un paisaje ocupa todo el ancho. Si se lo dibuja
+  entero choca con el texto, y si se lo corta contra un borde recto se lee como
+  una ventana pegada encima y no como el fondo de la pieza.
+
+  Por eso la escena entera va bajo una máscara con un gradiente que la lleva de
+  invisible en x 470 a visible en x 1180. El texto queda sobre campo limpio, el
+  paisaje aparece sin borde, y no hay una sola línea recta que denuncie el
+  recorte. La máscara es un gradiente en coordenadas de usuario, así que el
+  desvanecido cae siempre en el mismo lugar del cuadro y no depende del
+  contenido.
+
+  LA GEOMETRÍA DEL FARO. Un faro se lee por tres cosas y las tres están acá:
+  la torre es TRONCOCÓNICA y no un rectángulo (62 px de base, 38 de cuello),
+  la galería VUELA por fuera del fuste, y la linterna es más angosta que la
+  galería. Sin el vuelo de la galería, una torre con una luz arriba es un poste.
+
+  EL HAZ NO ES UN TRIÁNGULO PLANO. Son dos: uno largo hacia el mar, que es
+  donde hay espacio para que se lea, y uno corto hacia el otro lado, para que
+  la luz se lea como que SALE de la linterna y no como que la linterna tiene un
+  triángulo pegado. Los dos comparten el mismo pivote y el mismo barrido, que
+  es lo que los hace una sola luz.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080"
+     viewBox="0 0 1920 1080" role="img" aria-label="KETRAVA — The slow coast.">
+
+  <style>
+    .t { font-family: 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif; }
+    .b { font-weight: 700; }
+  </style>
+
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0"    stop-color="#071822"/>
+      <stop offset="0.55" stop-color="#051119"/>
+      <stop offset="1"    stop-color="#03080d"/>
+    </linearGradient>
+
+    <!-- El resplandor del horizonte: el sol ya se fue, queda el calor. -->
+    <radialGradient id="horizonte" cx="0.5" cy="1" r="0.75">
+      <stop offset="0"    stop-color="#ffcf8a" stop-opacity="0.30"/>
+      <stop offset="0.45" stop-color="#ff9e6a" stop-opacity="0.10"/>
+      <stop offset="1"    stop-color="#ffcf8a" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- El desvanecido de la escena. Fuera del rango el gradiente repite su
+         último stop, así que a la derecha de 1180 queda blanco entero. -->
+    <linearGradient id="desvanece" gradientUnits="userSpaceOnUse"
+                    x1="470" y1="0" x2="1180" y2="0">
+      <stop offset="0" stop-color="#000000"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <mask id="escena">
+      <rect x="0" y="0" width="1920" height="1080" fill="url(#desvanece)"/>
+    </mask>
+
+    <linearGradient id="marLejos" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14525c"/>
+      <stop offset="1" stop-color="#0e3a44"/>
+    </linearGradient>
+    <linearGradient id="marMedio" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d6f74"/>
+      <stop offset="1" stop-color="#103a44"/>
+    </linearGradient>
+    <linearGradient id="marCerca" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e8f8a"/>
+      <stop offset="1" stop-color="#0b2b36"/>
+    </linearGradient>
+
+    <linearGradient id="cabo" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#0f3341"/>
+      <stop offset="1" stop-color="#061620"/>
+    </linearGradient>
+
+    <linearGradient id="torre" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#8fa6ad"/>
+      <stop offset="0.35" stop-color="#eef6f7"/>
+      <stop offset="0.75" stop-color="#b9cbcf"/>
+      <stop offset="1"    stop-color="#6d8188"/>
+    </linearGradient>
+
+    <linearGradient id="haz" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="-880" y2="0">
+      <stop offset="0"    stop-color="#ffcf8a" stop-opacity="0.34"/>
+      <stop offset="0.45" stop-color="#ffcf8a" stop-opacity="0.12"/>
+      <stop offset="1"    stop-color="#ffcf8a" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hazCorto" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="0">
+      <stop offset="0" stop-color="#ffcf8a" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/>
+    </linearGradient>
+
+    <radialGradient id="lampara" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0"    stop-color="#fff3de" stop-opacity="0.95"/>
+      <stop offset="0.35" stop-color="#ffcf8a" stop-opacity="0.55"/>
+      <stop offset="1"    stop-color="#ffcf8a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ===================== fondo ===================== -->
+  <rect x="0" y="0" width="1920" height="1080" fill="url(#fondo)"/>
+  <rect x="0" y="0" width="1920" height="6" fill="#ffcf8a"/>
+
+  <!-- ===================== la escena, desvanecida a la izquierda ========= -->
+  <g mask="url(#escena)">
+
+    <!-- cielo: el calor que queda sobre el horizonte, y las primeras estrellas -->
+    <ellipse cx="1480" cy="640" rx="760" ry="330" fill="url(#horizonte)"/>
+    <g fill="#eef6f7">
+      <circle cx="1180" cy="168" r="2.4" opacity="0.5"/>
+      <circle cx="1352" cy="120" r="1.8" opacity="0.38"/>
+      <circle cx="1498" cy="214" r="2.2" opacity="0.45"/>
+      <circle cx="1660" cy="132" r="1.6" opacity="0.32"/>
+      <circle cx="1790" cy="236" r="2.6" opacity="0.5"/>
+      <circle cx="1268" cy="286" r="1.6" opacity="0.3"/>
+      <circle cx="1596" cy="318" r="1.8" opacity="0.28"/>
+      <circle cx="1876" cy="96"  r="2"   opacity="0.36"/>
+    </g>
+
+    <!-- ===================== los tres planos de mar ===================== -->
+    <!-- Cada uno recorre EXACTAMENTE su propio período en 3 s. Los períodos
+         son las velocidades: 240 el del fondo, 360 el del medio, 520 el de
+         adelante. Cada onda está dibujada un período antes y varios después
+         del borde visible, así que el desplazamiento nunca destapa su final. -->
+
+    <!-- fondo: período 240, amplitud 12 -->
+    <g transform="translate(700,0)">
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="0,0; -240,0" dur="3s" repeatCount="indefinite"
+                        additive="sum"/>
+      <path fill="url(#marLejos)"
+            d="M-240,642
+               q60,-12 120,0 q60,12 120,0 q60,-12 120,0 q60,12 120,0
+               q60,-12 120,0 q60,12 120,0 q60,-12 120,0 q60,12 120,0
+               q60,-12 120,0 q60,12 120,0 q60,-12 120,0 q60,12 120,0
+               q60,-12 120,0 q60,12 120,0 q60,-12 120,0 q60,12 120,0
+               q60,-12 120,0 q60,12 120,0 q60,-12 120,0 q60,12 120,0
+               L2400,1080 L-240,1080 Z"/>
+    </g>
+
+    <!-- ===================== el cabo y su faro ===================== -->
+    <!-- Va DESPUÉS del mar del fondo y ANTES de los otros dos: apoyado sobre el
+         agua lejana, y con el mar del medio y el de adelante pasándole por
+         encima a la base. Dibujado antes del mar del fondo, el faro queda
+         parado sobre el agua; dibujado después de todos, el cabo flota. -->
+    <path fill="url(#cabo)"
+          d="M1330,742 C1440,712 1526,678 1600,652
+             C1680,624 1780,600 1920,570 L1920,900 L1330,900 Z"/>
+    <path fill="#0b2b36" opacity="0.8"
+          d="M1600,652 C1680,624 1780,600 1920,570 L1920,600
+             C1782,628 1684,652 1610,676 Z"/>
+
+    <!-- INICIO OBJETO: el faro es EL objeto de la campaña, y las otras dos formas
+         lo reusan tal cual, transformado. Que sea el mismo dibujo y no uno
+         parecido es lo que hace que las tres se lean como la misma campaña
+         (ADR 0081). El cabo y los planos de mar NO entran acá: son del encuadre
+         16:9 y cada forma resuelve el suyo. -->
+    <g transform="translate(1690,0)">
+      <!-- el fuste: troncocónico, 62 de base y 38 de cuello -->
+      <path fill="url(#torre)" d="M-33,646 L-19,424 L19,424 L33,646 Z"/>
+      <!-- las bandas: lo que hace que una torre blanca sea un faro -->
+      <path fill="#ffcf8a" opacity="0.85" d="M-26.6,536 L26.6,536 L28.4,562 L-28.4,562 Z"/>
+      <path fill="#ffcf8a" opacity="0.85" d="M-21.6,464 L21.6,464 L23.4,490 L-23.4,490 Z"/>
+      <!-- la galería: VUELA por fuera del fuste, y sin eso es un poste -->
+      <rect x="-34" y="410" width="68" height="14" fill="#c8d8dc"/>
+      <g stroke="#8fa6ad" stroke-width="2.5" opacity="0.9">
+        <path d="M-30,410 L-30,392"/>
+        <path d="M-15,410 L-15,392"/>
+        <path d="M0,410 L0,392"/>
+        <path d="M15,410 L15,392"/>
+        <path d="M30,410 L30,392"/>
+        <path d="M-32,394 L32,394"/>
+      </g>
+      <!-- la linterna, más angosta que la galería -->
+      <rect x="-22" y="366" width="44" height="44" fill="#173a44"/>
+      <rect x="-22" y="366" width="44" height="44" fill="#ffcf8a" opacity="0.28"/>
+      <!-- el techo -->
+      <path fill="#c8d8dc" d="M-26,366 L0,336 L26,366 Z"/>
+      <circle cx="0" cy="330" r="4" fill="#c8d8dc"/>
+
+      <!-- el haz: dos conos, un pivote, un barrido de 6 s que cierra igual -->
+      <g transform="translate(0,388)">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                          values="-16;16;-16" keyTimes="0;0.5;1"
+                          dur="6s" repeatCount="indefinite" additive="sum"/>
+        <path fill="url(#haz)"      d="M0,0 L-880,-118 L-880,118 Z"/>
+        <path fill="url(#hazCorto)" d="M0,0 L300,-44 L300,44 Z"/>
+      </g>
+      <!-- la lámpara, encima del haz para que la fuente sea el punto más claro -->
+      <ellipse cx="0" cy="388" rx="46" ry="34" fill="url(#lampara)"/>
+    </g>
+
+    <!-- FIN OBJETO -->
+
+    <!-- medio: período 360, amplitud 20 -->
+    <g transform="translate(700,0)">
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="0,0; -360,0" dur="3s" repeatCount="indefinite"
+                        additive="sum"/>
+      <path fill="url(#marMedio)"
+            d="M-360,714
+               q90,-20 180,0 q90,20 180,0 q90,-20 180,0 q90,20 180,0
+               q90,-20 180,0 q90,20 180,0 q90,-20 180,0 q90,20 180,0
+               q90,-20 180,0 q90,20 180,0 q90,-20 180,0 q90,20 180,0
+               q90,-20 180,0 q90,20 180,0 q90,-20 180,0 q90,20 180,0
+               L2520,1080 L-360,1080 Z"/>
+    </g>
+
+    <!-- el barco, entre el plano del medio y el de adelante: es lo que lo
+         pone EN el agua. Cabecea en 3 s y vuelve al mismo lugar. -->
+    <g transform="translate(1214,742)">
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                        values="-3.5;3.5;-3.5" keyTimes="0;0.5;1"
+                        dur="3s" repeatCount="indefinite" additive="sum"/>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="0,4; 0,-6; 0,4" keyTimes="0;0.5;1"
+                        dur="3s" repeatCount="indefinite" additive="sum"/>
+      <path fill="#ffcf8a" opacity="0.95" d="M-16,-72 L-14,-6 L-52,-6 Z"/>
+      <path fill="#eef6f7" opacity="0.8"  d="M-8,-70 L28,-8 L-6,-8 Z"/>
+      <rect x="-17" y="-76" width="3" height="70" fill="#eef6f7" opacity="0.75"/>
+      <path fill="#0b2b36" d="M-60,-6 L44,-6 C36,16 -30,20 -60,-6 Z"/>
+      <path fill="#2e8f8a" opacity="0.9" d="M-60,-6 L44,-6 L42,1 L-56,1 Z"/>
+    </g>
+
+    <!-- adelante: período 520, amplitud 34 -->
+    <g transform="translate(700,0)">
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="0,0; -520,0" dur="3s" repeatCount="indefinite"
+                        additive="sum"/>
+      <path fill="url(#marCerca)"
+            d="M-520,806
+               q130,-34 260,0 q130,34 260,0 q130,-34 260,0 q130,34 260,0
+               q130,-34 260,0 q130,34 260,0 q130,-34 260,0 q130,34 260,0
+               q130,-34 260,0 q130,34 260,0 q130,-34 260,0 q130,34 260,0
+               L2600,1080 L-520,1080 Z"/>
+      <path fill="#7fe3d6" opacity="0.28"
+            d="M-520,806
+               q130,-34 260,0 q130,34 260,0 q130,-34 260,0 q130,34 260,0
+               q130,-34 260,0 q130,34 260,0 q130,-34 260,0 q130,34 260,0
+               q130,-34 260,0 q130,34 260,0 q130,-34 260,0 q130,34 260,0
+               L2600,818 q-130,34 -260,0 q-130,-34 -260,0 q-130,34 -260,0 q-130,-34 -260,0
+               q-130,34 -260,0 q-130,-34 -260,0 q-130,34 -260,0 q-130,-34 -260,0
+               q-130,34 -260,0 q-130,-34 -260,0 q-130,34 -260,0 q-130,-34 -260,0 Z"/>
+    </g>
+  </g>
+
+  <!-- ===================== tipografía ===================== -->
+  <text class="t b" x="170" y="520" font-size="152" letter-spacing="10"
+        fill="#eef6f7">KETRAVA</text>
+  <text class="t" x="176" y="596" font-size="40" letter-spacing="11"
+        fill="#ffcf8a">THE SLOW COAST</text>
+
+  <rect x="170" y="652" width="300" height="5" fill="#ffcf8a" opacity="0.9"/>
+
+  <text class="t" x="170" y="742" font-size="46" letter-spacing="0.5"
+        fill="#c3d3d6">Island routes, small boats.</text>
+  <text class="t" x="170" y="836" font-size="27" letter-spacing="4.5"
+        fill="#7d949b">DEPARTURES FROM NINE PORTS</text>
+</svg>

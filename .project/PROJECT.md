@@ -15,7 +15,7 @@ status: ongoing
 type: desarrollo
 owner: nicolas-levy
 started: 2026-09-02
-last_update: 2026-09-11
+last_update: 2026-09-22
 tags: [hls, hls-interstitials, non-linear-ads, svta, apple, hlsjs, avfoundation, demo]
 repo: https://github.com/qualabs/hls-non-linear-ads-demo
 output_pointers:
@@ -710,3 +710,59 @@ semanal, y el sync de una hora del 21 de septiembre ya agendado.
   Nicolás sobre la página ya construida. Su ADR 0076 es de proyecto y no de fase porque
   es el encuadre que también gobierna lo que David dice en escenario. Informe en
   `phases/12-el-scroll-que-explica-el-minuto/REPORT.md`.
+
+- **13-la-carrera-donde-cada-uno-mira-su-auto**: cerrada con `demo/race-multiview/`, la cuarta
+  demo y la única cuyo contenido se produjo entero — una carrera de 112 s con dos relatores y
+  catorce cortes entre seis autos, y una ventana de 64 s que abre en el segundo 28 ofreciendo
+  **seis cámaras** cuando la grilla sostiene cuatro. **No fue una fase de software**: el
+  mecanismo estaba construido desde la 11 y lo que había que probar es que aguanta el caso de
+  uso por el que existe, y lo aguanta **sin una línea de `lib/`** y sin pedirle un campo al
+  contrato. Lo que la hace auditable es de dónde sale cada número: el segundo en que abre la
+  oferta se declara una sola vez en `race.json` y lo leen los tres lados —quien coloca la voz,
+  quien la mide y quien escribe el tag—, así que la voz se calla en 27,640 s y el tag abre en
+  28,000 s medidos por instrumentos distintos; y el catálogo del asset-list son las cámaras
+  que están empaquetadas, que **pasó de una a seis sin que nadie editara un script**. **Su
+  riesgo materializado es el peor que tenía**: Veo pintó `Apple` en la carrocería y en las
+  vallas de una casilla, en la demo que David presenta en el evento de Apple, y la causa no
+  era el modelo inventando una librea real sino **el nombre del color**, `BRIGHT APPLE GREEN`;
+  el arreglo fue sacar la palabra y no prohibirla, por US$0,80. El R1 —que las seis cámaras no
+  se lean como la misma carrera— **no** se materializó, medido con tres controles. Cerró con
+  193 pruebas en verde y cero desaparecidas comparando nombres, las dos costuras byte por byte
+  iguales a la línea de base, `git diff --stat -- lib/` vacío con su control, y la demo
+  publicada en su bucket con los 324 objetos verificados por md5 y el acceso probado sin
+  credenciales. **Gastó US$74,40 en 93 generaciones** contra un techo de US$92,80, con la
+  etapa 1 pasada de su techo original porque Nicolás lo levantó dos veces mirando el material.
+  Dejó abierto lo que estaba escrito de antemano —ningún dato de red— más la tipografía
+  ilegible de la carrocería, medida y no resuelta, y el panel del selector recortado a ancho de
+  teléfono, que Nicolás cerró sin cambio porque la demo es 16:9. Informe en
+  `phases/13-la-carrera-donde-cada-uno-mira-su-auto/REPORT.md`.
+
+- **14-la-demo-que-va-al-escenario**: cerrada con `demo/stage-pair/`, la quinta demo y la única
+  cuyo contenido visual está **escrito y no generado**. Se planificó de cero después de que Apple
+  comunicara que **en la presentación que se hace en sus oficinas** no se puede mostrar contenido
+  de video ni de imagen generado por modelos de IA — lo que tumbó la fase 14 anterior el mismo día
+  que se abrió y sacó del guion a `race-multiview`, que era el cierre. La restricción es de esa
+  presentación y no de todo lo que la marca publica: las cuatro demos que existen siguen publicadas
+  y esta fase **no tocó ninguna**, ni `lib/`, ni el contrato entre las dos capas. Entrega **tres
+  páginas**: el par "así es hoy / así podría ser" con el recorrido pasando por las tres formas no
+  lineales y un switch de tres posiciones encima; `inspect.html`, un solo player con el tag, la
+  petición y la respuesta **leídos** de la playlist en curso y del *performance timeline*, medido
+  moviendo la fuente y viendo moverse la pantalla; y `race.html`, la carrera rehecha en SVG con
+  cuatro avisos antes de que abra la ventana de multi view, sin que las dos clases hermanas se
+  solapen. **Sus cinco ADR** —0080 a 0084, con el 0045 `superseded`— fijan que cada demo resuelve
+  su propio contenido y el de ésta se escribe como SVG animado, una identidad por campaña autorada
+  con tres `viewBox`, un asset-list lineal por break, y la afirmación que salió de una idea de
+  Nicolás a mitad de camino y terminó siendo la central: **la capacidad del dispositivo degrada el
+  formato del aviso y no el aviso**, con `qa-decoder-count` viajando de verdad y la composición
+  pasando de dos elementos `<video>` a uno sin cambiar layout, campaña ni duración. **Mató el tramo
+  invertido, abierto desde la fase 03**: los dos panes entran y salen de los tres breaks con menos
+  de 0,06 s de diferencia, contra los 12 s del control, que es exactamente el defecto que
+  `compatibility-pair` tiene. Cerró con 216 pruebas en verde —193 al abrir, cero desaparecidas
+  comparando nombres—, las dos costuras en 0 con dos archivos más adentro de su lista, los dos
+  `git diff --stat` vacíos vistos no vacíos con su control, y **la demo publicada en
+  `qualabs-hls-demo-stage-pair` y verificada sin credenciales**. Su hallazgo de método es un verde
+  vacío propio: el paso de verificación por md5 de `publicar.sh` comparó cero objetos y salió 0.
+  Dejó abierto que **`lib/` no tiene teardown** —dos bucles de cuadro y treinta y un listeners
+  contra cero formas de soltarlos—, más lo que estaba declarado de antemano: ningún dato de red,
+  ninguna conclusión sobre iOS, y el guion de la demo, que es de la presentación y no del
+  repositorio. Informe en `phases/14-la-demo-que-va-al-escenario/REPORT.md`.

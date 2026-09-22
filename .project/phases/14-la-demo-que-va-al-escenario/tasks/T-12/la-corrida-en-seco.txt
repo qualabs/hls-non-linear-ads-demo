@@ -1,0 +1,28 @@
+== 0. en seco: el patrón de exclusión, contra rutas plantadas y contra el árbol real ==
+   scripts/__pycache__/x.pyc                -> EXCLUIDO
+   content/.fuentes/Sparks.mp4              -> EXCLUIDO
+   content/primary/seg000.ts                -> sube
+   sube 493 de 494 archivos, 252.9 MB;  .ts=405  .svg=18
+== 1. en seco: toda referencia absoluta de las páginas y los asset-lists existe en disco ==
+   35 referencias, 0 sin archivo
+
+== EN SECO: hasta acá llega sin tocar GCS. Lo que falta, con el OK de Nicolás: ==
+   gcloud storage buckets create gs://qualabs-hls-demo-stage-pair --project=cto-assistant-501315 --location=US-CENTRAL1 --default-storage-class=STANDARD --uniform-bucket-level-access
+   gcloud storage buckets add-iam-policy-binding gs://qualabs-hls-demo-stage-pair --member=allUsers --role=roles/storage.legacyObjectReader
+   ./scripts/construir-libreria.sh
+   gcloud storage rsync -r -x '.*__pycache__/|^content/\.fuentes/' demo/stage-pair gs://qualabs-hls-demo-stage-pair
+   gcloud storage cp -r dist vendor gs://qualabs-hls-demo-stage-pair/
+   gcloud storage objects update "gs://qualabs-hls-demo-stage-pair/content/**/*.ts" --content-type=video/mp2t
+   ./.project/phases/14-la-demo-que-va-al-escenario/tasks/T-12/publicar.sh --publicar   # los corre todos y después verifica
+
+=== CONTROL: el mismo script con --control, dos referencias plantadas ===
+== 0. en seco: el patrón de exclusión, contra rutas plantadas y contra el árbol real ==
+   scripts/__pycache__/x.pyc                -> EXCLUIDO
+   content/.fuentes/Sparks.mp4              -> EXCLUIDO
+   content/primary/seg000.ts                -> sube
+   sube 493 de 494 archivos, 252.9 MB;  .ts=405  .svg=18
+== 1. en seco: toda referencia absoluta de las páginas y los asset-lists existe en disco ==
+   37 referencias, 2 sin archivo
+   FALTA /dist/no-existe.js
+   FALTA /content/no-existe.m3u8
+exit=1 (rojo, que es lo que el control tiene que dar)

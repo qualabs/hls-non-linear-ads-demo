@@ -1,0 +1,30 @@
+{
+  "ASSETS": [
+    {
+      "URI": "/content/creatives/kovrin-16x9/index.m3u8",
+      "DURATION": 12,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "slot",
+        "payload": [
+          {
+            "type": "lowerThirdOverlay",
+            "start": 0,
+            "duration": 12,
+            "layout": {
+              "assets": [
+                {
+                  "id": "banner",
+                  "type": "image/svg+xml",
+                  "uri": "/graphics/campaigns/kovrin-banner.svg",
+                  "viewport": "70 6.25 12.5 6.25",
+                  "zDepth": 1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

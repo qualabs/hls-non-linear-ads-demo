@@ -1,0 +1,233 @@
+{
+  "_": "La única fuente de los números de la demo stage-pair. Lo leen la señalización (T-06), la captura a video (T-05) y las tres páginas (T-07, T-08, T-10). Ningún número de esta demo se escribe dos veces: si hay que cambiar uno, se cambia acá. Es el criterio del ADR 0044 aplicado a esta demo, y la forma es la de demo/race-multiview/race.json.",
+
+  "programa": {
+    "fuente": "SPARKS — Netflix Open Content, CC BY 4.0",
+    "fps": 29.97,
+    "_fps": "La mitad exacta de los 59,94 de la fuente, que es lo que el ADR 0059 permite: se descartan cuadros enteros y no se remuestrea a otra cadencia. Se elige la mitad y no los 59,94 porque el sobre medido del proyecto es de cinco elementos a 30 fps (T-01 de la fase 01) y race.html llega a cuatro; 59,94 lo duplicaría sin que nada de la demo lo pida.",
+    "largo": 197.998,
+    "_largo": "Medido sumando los #EXTINF de content/primary/index.m3u8, que es la única medición que vale: ni el contenedor de origen ni el -t del ffmpeg. El corte sale de dónde empiezan los créditos, medido y no asumido: la luminancia media del cuadro arranca el fundido a negro en 193,0 s, toca negro pleno en 198,0 s y sube a un valor constante en 199,0 s, que es la placa fija SPARKS. El programa se corta en 198,0 s, entero y con su fundido. El número está por encima del largoMinimo, así que los offsets de los breaks valen tal cual.",
+    "largoMinimo": 135,
+    "_largoMinimo": "El invariante que los offsets de abajo necesitan: el último break termina en 122 s y hay que dejar cola de programa después. Si el largo que mida la T-03 queda por debajo de 135 s, los offsets se re-espacian manteniendo los huecos iguales y esta task se corrige; si queda por encima, los offsets valen tal cual."
+  },
+
+  "carrera": {
+    "_": "Los números de la tercera página: la carrera en SVG (T-09) y la ventana de multi view que T-10 abre sobre ella. Es el mismo papel que race.json cumple en demo/race-multiview/, y está acá y no en un archivo aparte porque esta demo ya tiene su única fuente de números.",
+    "fps": 30,
+    "_fps": "La misma razón que la de los creativos: una escena SVG no tiene cadencia de origen que respetar, y 30 es el fps del sobre que la fase 01 midió para cinco elementos de video a la vez, y race.html queda por debajo: tres cámaras más el primario, porque el tope de cuatro cajas del ADR 0066 cuenta al programa como una.",
+    "largo": 120,
+    "_largo": "La escena entera dura 120 s y el programa la captura completa. Alcanza para los avisos no lineales adelante y la ventana después, que es el orden que el DESIGN pide, y queda del orden de los 112 s de demo/race-multiview.",
+    "ofertaEn": 56,
+    "ofertaDura": 64,
+    "_oferta": "La ventana abre a los 56 s del programa y dura 64 s, o sea hasta el final. LAS CÁMARAS ESTÁN CAPTURADAS DESDE ESE MISMO INSTANTE de la escena: el cuadro 0 de cada cámara es el segundo 56 de la carrera, así que cuando quien mira abre la ventana, las seis cámaras muestran el momento de la carrera que el programa está mostrando y no otro. Es lo que hace que sean cámaras de la MISMA carrera y no seis clips sueltos. Consecuencia: si este número se mueve, las cámaras hay que volver a capturarlas (./scripts/puente-carrera.sh).",
+    "salida": { "ancho": 1280, "alto": 720, "bitrate": "2500k" },
+    "_salida": "1280x720 es el tamaño del contenido primario del proyecto y el del sobre medido. La escena se autora directamente a ese tamaño, así que la captura es a resolución nativa y el empaquetado no escala nada.",
+    "programa": {
+      "id": "program",
+      "nombre": "World feed",
+      "svg": "content/race/svg/program.svg",
+      "video": "content/race/program/index.m3u8"
+    },
+    "camaras": [
+      { "id": "caldrix", "nombre": "CALDRIX, car cam", "color": "#e63946", "svg": "content/race/svg/caldrix.svg", "video": "content/race/caldrix/index.m3u8" },
+      { "id": "marvok",  "nombre": "MARVOK, car cam",  "color": "#ffb703", "svg": "content/race/svg/marvok.svg",  "video": "content/race/marvok/index.m3u8" },
+      { "id": "noctev",  "nombre": "NOCTEV, car cam",  "color": "#00b4d8", "svg": "content/race/svg/noctev.svg",  "video": "content/race/noctev/index.m3u8" },
+      { "id": "runtak",  "nombre": "RUNTAK, car cam",  "color": "#7b2cbf", "svg": "content/race/svg/runtak.svg",  "video": "content/race/runtak/index.m3u8" },
+      { "id": "pentav",  "nombre": "PENTAV, car cam",  "color": "#06d6a0", "svg": "content/race/svg/pentav.svg",  "video": "content/race/pentav/index.m3u8" },
+      { "id": "quentra", "nombre": "QUENTRA, car cam", "color": "#f1faee", "svg": "content/race/svg/quentra.svg", "video": "content/race/quentra/index.m3u8" }
+    ],
+    "_camaras": "SEIS, y el número tiene un criterio: la oferta tiene que superar el tope de cuatro cajas de la grilla (ADR 0066), porque si todo lo ofrecido entra en pantalla a la vez, elegir no significa nada. Seis es además lo que demo/race-multiview ofrecía, así que el catálogo de la demo que reemplaza al cierre caído tiene el mismo tamaño. Los nombres son los de aquella demo, ya verificados como de fantasía; los colores son nuevos, elegidos con separación de tono y de luminancia para que se distingan en una caja de media pantalla. Ningún nombre ni color evoca un equipo ni un piloto real. El SVG de la escena y los siete encuadres se GENERAN con scripts/escribir-carrera.mjs y por eso viven en content/, que es lo que un clone reconstruye con un comando: lo autorado acá es el generador, no su salida.",
+    "_sinAudio": "Todo mudo, por decisión de Nicolás. Un SVG no tiene sonido y acá no se le agrega ninguno. El foco de audio del ADR 0027 sigue funcionando porque los feeds son cajas de video; sencillamente no suena nada.",
+
+    "playlist": "content/race/program/con-daterange.m3u8",
+    "_playlist": "La playlist señalizada de la tercera página: los mismos segmentos que content/race/program/index.m3u8 más los tags. Va al lado del contenido empaquetado y no en signalling/ por la misma razón que las dos del par: lleva un START-DATE resuelto contra el EXT-X-PROGRAM-DATE-TIME del propio empaquetado (ADR 0005), que es hora de pared, y sus segmentos son relativos.",
+
+    "oferta": "asset-list-race-offer.json",
+    "_ofertaLista": "El asset-list de la ventana, en la forma del ADR 0064: un catálogo con id, nombre, type y uri por cámara, y SIN viewport, zDepth ni volume, que son los tres campos que quien publica no puede decidir en una oferta. La grilla la calcula la librería (ADR 0065) con su tope de cuatro (ADR 0066). Las views son las cámaras DECLARADAS que además están EMPAQUETADAS, en el orden de `camaras`: es el molde de demo/race-multiview, y es lo que hace que agregar una cámara al catálogo sea empaquetarla y no editar una lista.",
+
+    "breaks": [
+      { "id": "r1", "offset": 6,  "duracion": 6, "campana": "zumbra",  "forma": "banner",    "layout": "lowerThirdOverlay",  "lista": "asset-list-race-1.json" },
+      { "id": "r2", "offset": 18, "duracion": 6, "campana": "kovrin",  "forma": "backplate", "layout": "squeezebackLShape",  "lista": "asset-list-race-2.json" },
+      { "id": "r3", "offset": 30, "duracion": 6, "campana": "ketrava", "forma": "banner",    "layout": "lowerThirdOverlay",  "lista": "asset-list-race-3.json" },
+      { "id": "r4", "offset": 42, "duracion": 6, "campana": "zumbra",  "forma": "backplate", "layout": "squeezebackLShape",  "lista": "asset-list-race-4.json" }
+    ],
+    "_breaks": "LOS CUATRO AVISOS VAN ANTES DE `ofertaEn`, y ése es el argumento de la página: primero la publicidad no lineal sobre la carrera, después la ventana de multi view. El último termina en 48 s y la ventana abre en 56, así que hay 8 s de carrera limpia entre una cosa y la otra y las dos clases hermanas (ADR 0063) nunca se pisan en pantalla. LAS CUATRO PIEZAS SON EXACTAMENTE LAS CUATRO QUE `assets.piezas` marca con uso `race`: el par usa las tres 16:9 como lineal, la L de KETRAVA y el banner de KOVRIN, y las cuatro que sobran son las de acá. Así las nueve piezas autoradas se ven en la demo y ninguna queda sin usar. EL ORDEN ALTERNA LA FORMA —banner, L, banner, L— y no repite campaña en breaks contiguos: tres avisos seguidos de la misma marca se leen como un defecto y no como publicidad. DURAN 6 s Y NO 12, que es lo que dura un break del par, y el número sale del creativo y no del reloj: los nueve están autorados con un bucle de 3 s y un anillo de 6 s, así que 6 s son dos bucles exactos y una vuelta entera del anillo, y el aviso abre y cierra idéntico. Con 12 s los cuatro se comerían 48 de los 56 segundos previos a la ventana y la carrera dejaría de verse, que es lo contrario de lo que un aviso no lineal afirma. Los huecos de carrera entre avisos son iguales, 6 s. EL MEDIO ES VIDEO EN LOS CUATRO: esta página no lleva el control de decodificadores —es de la página del par, y un segundo lugar donde mantener el mismo `if` es el defecto que se evita— así que no hay escalón magro que servir acá."
+  },
+
+  "creativos": {
+    "fps": 30,
+    "_fps": "Los creativos no tienen cadencia de origen que respetar: son SVG sintetizados, no video filmado ni generado. El ADR 0059 manda seguir la cadencia de la fuente cuando la hay, y deja en 30 lo que nace de una pieza fija por la misma razón que acá: no hay cuadros que duplicar ni que descartar. 30 es además el fps del sobre medido en la fase 01.",
+    "duracion": 12.0,
+    "_duracion": "Igual a la duración de un break, porque el creativo 16:9 de cada campaña es también el aviso lineal de su break (ADR 0082) y ahí ocupa el break entero. 12 s son además cuatro vueltas exactas del bucle de 3 s con que está autorada ZUMBRA."
+  },
+
+  "formas": {
+    "16x9": {
+      "viewBox": "0 0 1920 1080",
+      "relacion": "16:9",
+      "layout": "squeezebackDoubleBox",
+      "viewportAviso": "25 0 25 50",
+      "zDepthAviso": 1,
+      "viewportPrimario": "25 50 25 0",
+      "zDepthPrimario": 0,
+      "_viewportPrimario": "El complemento exacto del viewport del aviso sobre el mismo cuadro —el aviso ocupa la mitad derecha y el primario la izquierda, los dos con 25 % arriba y abajo—, y no se elige acá: es verbatim el squeezebackDoubleBox de demo/compatibility-pair/signalling/, que es el que ya se midió en pantalla. Vive en este archivo y no adentro del script de señalización por el ADR 0044: es un número que gobierna la corrida.",
+      "_": "La caja del aviso del squeezebackDoubleBox es 50 % x 50 % sobre un cuadro 16:9, o sea 16:9 otra vez. Se autora a 1920x1080 y se dibuja en 960x540: es vector, así que escalar no cuesta nitidez. Es también la forma que viaja como aviso lineal."
+    },
+    "banner": {
+      "viewBox": "0 0 1680 189",
+      "relacion": "8.889:1",
+      "layout": "lowerThirdOverlay",
+      "viewportAviso": "70 6.25 12.5 6.25",
+      "zDepthAviso": 1,
+      "_sinPrimario": "El lowerThirdOverlay NO declara bloque primaryContent, y es una ausencia deliberada: la herramienta de SVTA no lo emite en los dos overlays y la capa asume su preset —zDepth 0, volume 100, viewport \"0 0 0 0\"—, que es lo que docs/contrato-senalizacion-renderizado.md tiene medido. Es además lo que demo/hydration-break/signalling/ ya hace para este mismo layout. Escribirlo a mano sería divergir del asset-list que la herramienta emite, que es lo que el ADR 0004 prohíbe.",
+      "_": "87,5 % x 17,5 % de un cuadro de 1920x1080 son 1680x189 px exactos. El viewport es el mismo que demo/hydration-break ya usa, medido y no elegido de nuevo."
+    },
+    "backplate": {
+      "viewBox": "0 0 1920 1080",
+      "relacion": "16:9",
+      "layout": "squeezebackLShape",
+      "viewportAviso": "0 0 0 0",
+      "zDepthAviso": 0,
+      "viewportPrimario": "0 0 25 25",
+      "zDepthPrimario": 1,
+      "guarda": { "x": 480, "y": 0, "ancho": 1440, "alto": 810 },
+      "_": "El ADR 0047 manda: el aviso es UN elemento a cuadro entero en zDepth 0 y el primario va encima, encogido y anclado contra dos bordes. Los bordes elegidos son ARRIBA y DERECHA, que es lo que el propio ADR ejemplifica y lo que hace que la L se lea abajo-izquierda, que es donde la industria la pone. El inset elegido es 25 % en los dos ejes: escala los dos por igual, así que el primario mantiene su 16:9 (1440x810), y cae en números redondos sobre la grilla de autoría. demo/hydration-break usa 26 % y funciona en pantalla; 25 % es el mismo orden con la aritmética limpia y es el número que el squeezebackDoubleBox ya usa en sus insets.",
+      "_guarda": "La región que el primario tapa, en coordenadas del viewBox del creativo. El dibujo del backplate TIENE QUE DEJARLA VACÍA: lo que se ve es la columna izquierda (x 0..480, alto entero) y la banda inferior (y 810..1080, ancho entero). Eso es la L."
+    }
+  },
+
+  "campanas": {
+    "zumbra": {
+      "marca": "ZUMBRA",
+      "rubro": "bebida",
+      "producto": "gaseosa cítrica sin azúcar, 330 ml, cuatro botánicos",
+      "claim": "CITRUS, OUT LOUD",
+      "apoyo": "Sparkling citrus. Zero sugar.",
+      "pie": "NOW IN FOUR BOTANICALS",
+      "paleta": {
+        "fondo": ["#0c1a14", "#07100d", "#04070a"],
+        "acento": "#8ef06a",
+        "objeto": ["#1d4a2e", "#2f7a3f", "#8fdc5c", "#e4fbc2"],
+        "texto": "#f2f8ee",
+        "apagado": "#78897c"
+      },
+      "objeto": "la lata, construida en cuatro cuerpos de radio distinto",
+      "movimiento": "carbonatación: burbujas en bucle de 3 s con begin negativo y fases repartidas, más un anillo de doce rayos que gira 30° en 6 s y cierra idéntico al inicio",
+      "estado": "aprobada por Nicolás en su forma 16:9",
+      "_": "NO se redefine acá. Transcripta de la cabecera de .project/phases/14-la-demo-que-va-al-escenario/tasks/T-04/zumbra-16x9.svg, que es donde vive."
+    },
+    "kovrin": {
+      "marca": "KOVRIN",
+      "rubro": "calzado",
+      "producto": "zapatilla de trail, 240 g, tres terrenos",
+      "claim": "BUILT FOR THE LONG WAY",
+      "apoyo": "Trail cushioning. 240 grams.",
+      "pie": "THREE TERRAINS, ONE OUTSOLE",
+      "paleta": {
+        "fondo": ["#12151c", "#0c0f15", "#080a0f"],
+        "acento": "#ff7a3c",
+        "objeto": ["#2a2f3a", "#4c5566", "#b9c2d0", "#f2ece6"],
+        "texto": "#f5f3f0",
+        "apagado": "#8b8f98"
+      },
+      "objeto": "la zapatilla de perfil: suela con tacos, cuña de mediasuela, capellada y cordones",
+      "movimiento": "el suelo y no el zapato: el patrón de tacos corre por debajo en bucle de 3 s, y un arco de polvo pulsa en 6 s cerrando idéntico al inicio",
+      "estado": "por autorar (T-04), con la compuerta de Nicolás sobre su 16:9 antes de las otras dos formas"
+    },
+    "ketrava": {
+      "marca": "KETRAVA",
+      "rubro": "turismo",
+      "producto": "rutas de costa en barco chico, salidas de nueve puertos",
+      "claim": "THE SLOW COAST",
+      "apoyo": "Island routes, small boats.",
+      "pie": "DEPARTURES FROM NINE PORTS",
+      "paleta": {
+        "fondo": ["#071822", "#051119", "#03080d"],
+        "acento": "#ffcf8a",
+        "objeto": ["#0b2b36", "#5fd2c4", "#2e8f8a", "#0e3a44"],
+        "texto": "#eef6f7",
+        "apagado": "#7d949b"
+      },
+      "objeto": "un cabo con su faro y planos de mar en capas, con un barco chico",
+      "movimiento": "paralaje: los planos de mar corren a velocidades distintas en bucle de 3 s, y el haz del faro barre en 6 s cerrando idéntico al inicio",
+      "estado": "por autorar (T-04), con la compuerta de Nicolás sobre su 16:9 antes de las otras dos formas"
+    }
+  },
+
+  "breaks": [
+    {
+      "id": "a",
+      "offset": 20,
+      "duracion": 12.0,
+      "forma": "16x9",
+      "layout": "squeezebackDoubleBox",
+      "campana": "zumbra",
+      "rica": "asset-list-break-a-rica.json",
+      "magra": "asset-list-break-a-magra.json",
+      "lineal": "asset-list-linear-a.json",
+      "_": "Va primero porque su creativo es el único que ya está autorado y aprobado, así que el primer break que se ve en cámara es la pieza terminada."
+    },
+    {
+      "id": "b",
+      "offset": 65,
+      "duracion": 12.0,
+      "forma": "backplate",
+      "layout": "squeezebackLShape",
+      "campana": "ketrava",
+      "rica": "asset-list-break-b-rica.json",
+      "magra": "asset-list-break-b-magra.json",
+      "lineal": "asset-list-linear-b.json",
+      "_": "Turismo en la L porque un paisaje es lo que mejor tolera que le tapen el centro: la guarda del backplate cae sobre cielo y mar, donde no hay nada que perder."
+    },
+    {
+      "id": "c",
+      "offset": 110,
+      "duracion": 12.0,
+      "forma": "banner",
+      "layout": "lowerThirdOverlay",
+      "campana": "kovrin",
+      "rica": "asset-list-break-c-rica.json",
+      "magra": "asset-list-break-c-magra.json",
+      "lineal": "asset-list-linear-c.json",
+      "_": "Calzado en el banner porque una zapatilla de perfil es la única de las tres siluetas que llena una tira de 8,89:1 sin quedar perdida en el medio."
+    }
+  ],
+  "_breaks": "Los tres duran lo mismo para que el creativo 16:9 de cada campaña sirva de lineal en su break sin recortarse. Los huecos de programa entre breaks son iguales, 33 s, y el primero entra a los 20 s para que la demo lo alcance rápido. El último termina en 122 s, bastante antes del corte del programa en 198,0 s (los créditos arrancan en 199,0 s: la medición está en programa._largo).",
+
+  "playlists": {
+    "rica": "content/primary/con-daterange-rica.m3u8",
+    "magra": "content/primary/con-daterange-magra.m3u8",
+    "_ubicacion": "Las dos van al lado del contenido empaquetado y NO en signalling/, y la razón es que llevan un START-DATE resuelto contra el EXT-X-PROGRAM-DATE-TIME del propio empaquetado (ADR 0005): es hora de pared, se mueve cada vez que alguien reempaqueta, y un archivo así en git sólo puede estar viejo. content/ está gitignoreado justamente para eso, y es donde las otras cuatro demos ponen su con-daterange.m3u8. Los nueve asset-lists sí van a signalling/ y sí van a git: no contienen ni un instante, son función pura de este archivo.",
+    "_": "Una playlist por escalón de respuesta (ADR 0083). El control de la página elige cuál carga y qué valor le pasa a attach(), y rearma el player. No hay servidor: la respuesta está horneada por valor."
+  },
+
+  "decodificadores": {
+    "posiciones": [
+      { "valor": null, "parametro": false, "respuesta": "rica", "_": "La URI sale byte por byte como saldría para un integrador que nunca oyó de la opción. Es el control negativo de la medición de la T-07." },
+      { "valor": 1, "parametro": true, "respuesta": "magra" },
+      { "valor": 2, "parametro": true, "respuesta": "rica" }
+    ],
+    "parametro": "qa-decoder-count",
+    "_": "Definido en lib/signalling.js. No hay posición 3 ni 4: ningún layout de esta demo pide más de dos decodificadores de video, que son el primario y un elemento de aviso."
+  },
+
+  "assets": {
+    "_": "Nueve piezas de autoría, dieciocho assets: cada forma viaja en los dos medios (ADR 0084). Entre la respuesta rica y la magra de un break cambia UNA sola cosa, el type y el uri; el layout, el viewport, el zDepth, la campaña y la duración son idénticos, y que sean idénticos es lo que la demo afirma. Los dos juegos de asset-lists se generan de esta tabla y no se editan a mano por separado.",
+    "_autoria": "El SVG autorado vive en graphics/campaigns/ y va a git. NO vive en content/, que está gitignoreado por ser lo que un clone reconstruye con un comando: nueve SVG escritos a mano no son eso, y perderlos de git contradice la tesis misma de la fase. La variante de imagen se sirve desde el archivo autorado; la variante de video es salida del puente de la T-05 y sí vive en content/.",
+    "piezas": [
+      { "campana": "zumbra",  "forma": "16x9",      "svg": "graphics/campaigns/zumbra-16x9.svg",      "video": "content/creatives/zumbra-16x9/index.m3u8",      "usos": ["break-a-rica", "break-a-lineal"] },
+      { "campana": "zumbra",  "forma": "banner",    "svg": "graphics/campaigns/zumbra-banner.svg",    "video": "content/creatives/zumbra-banner/index.m3u8",    "usos": ["race"] },
+      { "campana": "zumbra",  "forma": "backplate", "svg": "graphics/campaigns/zumbra-backplate.svg", "video": "content/creatives/zumbra-backplate/index.m3u8", "usos": ["race"] },
+      { "campana": "ketrava", "forma": "16x9",      "svg": "graphics/campaigns/ketrava-16x9.svg",      "video": "content/creatives/ketrava-16x9/index.m3u8",      "usos": ["break-b-lineal"] },
+      { "campana": "ketrava", "forma": "banner",    "svg": "graphics/campaigns/ketrava-banner.svg",    "video": "content/creatives/ketrava-banner/index.m3u8",    "usos": ["race"] },
+      { "campana": "ketrava", "forma": "backplate", "svg": "graphics/campaigns/ketrava-backplate.svg", "video": "content/creatives/ketrava-backplate/index.m3u8", "usos": ["break-b-rica"] },
+      { "campana": "kovrin",  "forma": "16x9",      "svg": "graphics/campaigns/kovrin-16x9.svg",      "video": "content/creatives/kovrin-16x9/index.m3u8",      "usos": ["break-c-lineal"] },
+      { "campana": "kovrin",  "forma": "banner",    "svg": "graphics/campaigns/kovrin-banner.svg",    "video": "content/creatives/kovrin-banner/index.m3u8",    "usos": ["break-c-rica"] },
+      { "campana": "kovrin",  "forma": "backplate", "svg": "graphics/campaigns/kovrin-backplate.svg", "video": "content/creatives/kovrin-backplate/index.m3u8", "usos": ["race"] }
+    ],
+    "tipos": {
+      "video": "application/vnd.apple.mpegurl",
+      "imagen": "image/svg+xml"
+    }
+  }
+}

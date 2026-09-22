@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Non-linear HLS ads — one player, and the whole exchange in the open</title>
+<!--
+  The fonts and the favicon are copies of the Qualabs brand kit on disk, not
+  links to it: a demo that reads a file out of another project on this laptop
+  fails the day it is recorded from anywhere else. Provenance in brand/README.md.
+-->
+<link rel="stylesheet" href="./brand/fonts-embedded.css">
+<link rel="stylesheet" href="./css/player.css">
+<link rel="icon" href="./brand/favicon.svg">
+</head>
+<body>
+
+<!--
+  THE SECOND PAGE OF THIS DEMO, AND IT EXISTS FOR ONE MOMENT OF THE
+  PRESENTATION: the one where the network tab is open on screen and somebody has
+  to be able to follow what the client and the signalling said to each other.
+
+  ITS WHOLE DESIGN IS THE SUBTRACTION. `index.html` argues with two players
+  because the argument there is the comparison; here the comparison is not the
+  subject, so the second player is noise over the thing that is. One player --
+  ours -- and next to it the three moves of the exchange, in the order they
+  happen, each one showing the bytes that actually crossed.
+
+  AND IT IS BUILT FOR A ROOM AND NOT FOR A DESK. Type that survives a projector,
+  one accent doing the pointing, and the three moves stacked so that the finger
+  goes down the column. What is on screen is what somebody is going to read out
+  loud from eight metres away.
+
+  ============================================================================
+  WHAT THE THREE MOVES ARE
+  ============================================================================
+  ONE, WHAT THE PLAYLIST SAID. The two ranges this break carries on the same
+  START-DATE: the one of Apple's class, which this client ignores, and the one
+  of the sibling class of ADR 0009, which it keeps. Both are on screen at once
+  because that is the claim of ADR 0007 -- one playlist serving two clients --
+  and it is not visible in a single line.
+
+  TWO, WHAT THE CLIENT ASKED FOR. The URL that went out, read off the
+  performance timeline, with `qa-decoder-count` picked out of it. The switch
+  above moves it, and in the step that declares nothing the URL comes out
+  without the parameter, byte for byte as it would for an integrator who never
+  heard of the option.
+
+  THREE, WHAT CAME BACK. The body of that same URL, verbatim.
+
+  NOT ONE OF THE THREE IS TYPED INTO THIS FILE, and that is the rule of the page
+  and not a detail of it: the ranges are read out of the playlist the player is
+  playing, the URL is read off the network, and the body is fetched from that
+  URL. A page that pasted a tag would be showing an illustration, and an
+  illustration of a playlist is worth nothing to a room that reads playlists for
+  a living -- besides which the START-DATE moves every time the content is
+  packaged, so a pasted one is wrong by tomorrow. `js/inspect.js` has the
+  mechanism and `test/verificar-inspect.py` checks it by moving the source and
+  watching the screen move.
+
+  WHAT EACH ELEMENT IS FOR
+  ------------------------
+  #slot       the box the player is built into. EMPTY here and filled by
+              js/inspect.js, because changing the step REBUILDS the player:
+              `decoderCount` is read once, when the signalling is created, so a
+              value changed in flight would never be read again
+              (lib/signalling.js).
+  #ranges     the two ranges of the break on screen, read off the playlist.
+  #request    the URL that went out, with the parameter picked out of it.
+  #answer     the body that came back.
+  #contract   the contract of ADR 0003 in one line: what the signalling layer
+              says is active right now. The console carries the same thing with
+              the boxes and the order of every element.
+
+  THE CONTROLS of the player are not in this file, which is the point of
+  ADR 0015: the library draws them inside the container, over the picture. The
+  <video> carries no `controls` attribute.
+
+  No bundler and no framework. The library is one classic <script src> that
+  defines a global, assembled from lib/ on every start (ADR 0015); this page's
+  own files are native ES modules. hls.js is vendored in ./vendor/ at 1.7.2
+  rather than pulled from a CDN, because it is the version the code was read
+  against and the version the measurements ran on (ADR 0002).
+-->
+
+<div class="stage stage--inspect">
+
+  <header class="masthead">
+    <img src="./brand/logo-qualabs-on-dark.svg" alt="Qualabs">
+    <p class="headline">
+      One player, and the whole exchange in the open: what the playlist said, what the
+      client asked for, and what came back. Open the network tab &mdash; every line below is
+      on it.
+    </p>
+  </header>
+
+  <section class="switch" aria-label="Device capability">
+    <p class="switch-label">Video decoders this device declares</p>
+    <div class="steps" id="steps" role="group" aria-label="Declared video decoders"></div>
+    <p class="step-out" id="step-out"></p>
+    <div class="jumps" id="jumps" role="group" aria-label="Jump to"></div>
+    <p class="no-server">
+      There is no ad presentation server behind this page. <code>qa-decoder-count</code> is the
+      parameter such a server would read; here the answer is baked by value, one static playlist
+      per step, and the switch above picks which one is loaded. What is real is the request: the
+      parameter is on it, or absent from it, exactly as the library builds it.
+    </p>
+  </section>
+
+  <div class="inspect">
+
+    <section class="pane pane-demo" id="pane" data-state="primary">
+      <h2 class="role">This demo&rsquo;s player</h2>
+      <p class="role-sub">The library, unmodified, with its interstitials machinery off. The programme is never replaced.</p>
+      <div id="slot"></div>
+      <p class="state" id="state"></p>
+      <p class="hud" id="contract"></p>
+      <p class="hud" id="hud"></p>
+    </section>
+
+    <section class="exchange" aria-label="The exchange">
+
+      <p class="exchange__which" id="which"></p>
+
+      <article class="move">
+        <h2 class="move__title"><span class="move__n">1</span> What the playlist said</h2>
+        <p class="move__lede">
+          Two ranges, same <code>START-DATE</code>, one playlist. The class is compared as an
+          exact string and there is no inheritance, so each client keeps one and ignores the
+          other.
+        </p>
+        <div id="ranges"></div>
+      </article>
+
+      <article class="move">
+        <h2 class="move__title"><span class="move__n">2</span> What the client asked for</h2>
+        <p class="move__lede">The URL that went out, read off the network and not written by this page.</p>
+        <p class="request" id="request"></p>
+      </article>
+
+      <article class="move">
+        <h2 class="move__title"><span class="move__n">3</span> What came back</h2>
+        <p class="move__lede" id="answer-lede"></p>
+        <pre class="answer" id="answer"></pre>
+      </article>
+
+    </section>
+
+  </div>
+
+  <p class="credit">
+    Programme: <em>Sparks</em> &copy; Netflix, Inc., Netflix Open Content, CC BY 4.0 &mdash;
+    <a href="https://creativecommons.org/licenses/by/4.0/legalcode">creativecommons.org/licenses/by/4.0</a>.
+    Cut, re-encoded and repackaged for this demo &middot;
+    Advertising creatives: <em>ZUMBRA</em>, <em>KETRAVA</em> and <em>KOVRIN</em> are invented brands,
+    written as SVG for this demo. Nothing on this page was generated by an image or video model.
+    Full provenance in <code>CREDITS.md</code>.
+  </p>
+</div>
+
+<script src="/vendor/hls.min.js"></script>
+<script src="/dist/qualabs-concurrent-hls.js"></script>
+<script type="module" src="./js/inspect.js"></script>
+
+</body>
+</html>

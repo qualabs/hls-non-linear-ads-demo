@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Non-linear HLS ads — the pair, and what the device can decode</title>
+<!--
+  The fonts and the favicon are copies of the Qualabs brand kit on disk, not
+  links to it: a demo that reads a file out of another project on this laptop
+  fails the day it is recorded from anywhere else. Provenance in brand/README.md.
+-->
+<link rel="stylesheet" href="./brand/fonts-embedded.css">
+<link rel="stylesheet" href="./css/player.css">
+<link rel="icon" href="./brand/favicon.svg">
+</head>
+<body>
+
+<!--
+  THE MAIN PAGE OF THIS DEMO, and it makes three claims at once.
+
+  ONE. THE COMPATIBILITY PAIR (ADR 0007). One media playlist carries two
+  EXT-X-DATERANGE per break on the same START-DATE, one of Apple's interstitial
+  class and one of the sibling class of ADR 0009, and each client keeps the one
+  it understands. Backwards compatibility does not come from one class extending
+  the other -- in HLS the class is compared by exact string equality and there is
+  no inheritance -- it comes from the playlist serving both things at once.
+
+    Left pane, an OFF-THE-SHELF client: hls.js at its factory configuration, with
+    nothing of this demo wired INTO it. It schedules the linear ad and replaces
+    the content with it, exactly as it does today in production. What it takes
+    from the library is the chrome AROUND it, through a call that receives no
+    instance and turns nothing on (ADR 0015).
+
+    Right pane, THIS DEMO'S client: the same library, same version, unmodified,
+    with its interstitials machinery off (ADR 0002) and the two layers of
+    ADR 0003 on top. It keeps the programme on screen and draws the ad over it.
+
+  Both read the SAME URL, and it is printed under each player on purpose.
+
+  TWO. THE SAME SPACE IS MONETISED WITHOUT TAKING THE SCREEN. Three breaks, one
+  per non-linear form: side by side, L-shape and banner (ADR 0081 for the
+  campaigns, `stage.json` for which goes where). On the left the programme is
+  gone for twelve seconds; on the right it never stops.
+
+  THREE. THE DEVICE'S CAPACITY DEGRADES THE FORMAT OF THE AD, NOT THE AD
+  (ADR 0084). The switch above the pair declares how many video decoders the
+  device has, that number TRAVELS on the asset-list request as
+  `qa-decoder-count` (ADR 0083), and what comes back is the same layout, the
+  same campaign and the same duration with the creative in another medium: video
+  with two decoders, `image/svg+xml` with one. The publisher goes on monetising
+  and the viewer goes on seeing a non-linear ad over the programme.
+
+  AND THERE IS NO SERVER ON THE OTHER SIDE, which the page says in words a few
+  lines below. These demos are published as static files in a bucket, so nothing
+  can read a query at request time: the response is baked by value, one playlist
+  per step, and the switch is the `if`. The parameter is the one an ad
+  presentation server would read, and the day there is one this page does not
+  change.
+
+  WHAT EACH ELEMENT IS FOR
+  ------------------------
+  #stock-slot / #demo-slot  the boxes the panes are built into. They are EMPTY
+           in this file and filled by js/app.js, because changing the step
+           REBUILDS both players -- `decoderCount` is read once, when the
+           signalling is created, so a value that changed in flight would not be
+           read again (lib/signalling.js). The two are rebuilt by one call, at
+           one instant, with one target time: a pair whose halves were rebuilt
+           separately would be two players on two timelines, and then the pair
+           stops arguing anything. See `armar()` in js/app.js.
+
+  #wire    the asset-list requests THE BROWSER ACTUALLY MADE, read off the
+           performance timeline. Not a transcript: the page prints the URL that
+           went out, which is the same string the network tab shows, and the
+           parameter is picked out of it.
+
+  #contract  the contract of ADR 0003 in one line of text: what the signalling
+           layer says is active right now. The console carries the same thing
+           with the boxes and the order of every element.
+
+  THE CONTROLS of both players are not in this file, and that is the point of
+           ADR 0015: the library draws them inside each container, over the
+           picture. Neither <video> carries a `controls` attribute.
+
+  No bundler and no framework. The library is one classic <script src> that
+  defines a global, assembled from lib/ on every start (ADR 0015); this page's
+  own two files are native ES modules. hls.js is vendored in ./vendor/ at 1.7.2
+  rather than pulled from a CDN, because it is the version the code was read
+  against and the version the measurements ran on (ADR 0002).
+-->
+
+<div class="stage">
+
+  <header class="masthead">
+    <img src="./brand/logo-qualabs-on-dark.svg" alt="Qualabs">
+    <p class="headline">
+      One media playlist. Two <code>EXT-X-DATERANGE</code> per break on the same
+      <code>START-DATE</code>. Two clients, neither of which knows about the other &mdash;
+      and the same ad space sold on both, one of them without taking the screen.
+    </p>
+  </header>
+
+  <section class="switch" aria-label="Device capability">
+    <p class="switch-label">Video decoders this device declares</p>
+    <div class="steps" id="steps" role="group" aria-label="Declared video decoders"></div>
+    <p class="step-out" id="step-out"></p>
+    <div class="jumps" id="jumps" role="group" aria-label="Jump to"></div>
+    <p class="no-server">
+      There is no ad presentation server behind this page. <code>qa-decoder-count</code> is the
+      parameter such a server would read; here the answer is baked by value, one static playlist
+      per step, and the switch above picks which one is loaded. What is real is the request: the
+      parameter is on it, or absent from it, exactly as the library builds it.
+    </p>
+  </section>
+
+  <div class="pair">
+
+    <section class="pane pane-stock" id="pane-stock" data-state="primary">
+      <h2 class="role">Off-the-shelf player</h2>
+      <p class="role-sub">A client that is already in the market. Nothing of this demo in it.</p>
+      <p class="role-reads">
+        keeps <code>com.apple.hls.interstitial</code> &middot;
+        ignores <code>com.qualabs.hls.concurrentInterstitial</code>
+      </p>
+      <div id="stock-slot"></div>
+      <p class="state" id="stock-state"></p>
+      <p class="hud" id="stock-hud"></p>
+    </section>
+
+    <section class="pane pane-demo" id="pane-demo" data-state="primary">
+      <h2 class="role">This demo&rsquo;s player</h2>
+      <p class="role-sub">The same library, same version, unmodified. Its interstitials machinery off.</p>
+      <p class="role-reads">
+        keeps <code>com.qualabs.hls.concurrentInterstitial</code> &middot;
+        ignores <code>com.apple.hls.interstitial</code>
+      </p>
+      <div id="demo-slot"></div>
+      <p class="state" id="demo-state"></p>
+      <p class="hud" id="hud"></p>
+      <p class="hud" id="contract"></p>
+    </section>
+
+  </div>
+
+  <section class="wire" aria-label="Asset-list requests">
+    <h2>Asset-list requests this page made</h2>
+    <ol id="wire-list"></ol>
+  </section>
+
+  <p class="credit">
+    Programme: <em>Sparks</em> &copy; Netflix, Inc., Netflix Open Content, CC BY 4.0 &mdash;
+    <a href="https://creativecommons.org/licenses/by/4.0/legalcode">creativecommons.org/licenses/by/4.0</a>.
+    Cut, re-encoded and repackaged for this demo &middot;
+    Advertising creatives: <em>ZUMBRA</em>, <em>KETRAVA</em> and <em>KOVRIN</em> are invented brands,
+    written as SVG for this demo. Nothing on this page was generated by an image or video model.
+    Full provenance in <code>CREDITS.md</code>.
+  </p>
+</div>
+
+<script src="/vendor/hls.min.js"></script>
+<script src="/dist/qualabs-concurrent-hls.js"></script>
+<script type="module" src="./js/app.js"></script>
+
+</body>
+</html>

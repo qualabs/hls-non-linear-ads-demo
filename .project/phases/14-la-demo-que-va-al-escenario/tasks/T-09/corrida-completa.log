@@ -1,0 +1,116 @@
+puente-carrera: 7 piezas, 30 fps, escena de 120 s, ventana en 56 s por 64 s
+escribir-carrera: circuito de 7576 unidades, 6 autos, 120 s
+  program.svg	200 KB
+  caldrix.svg	190 KB
+  marvok.svg	190 KB
+  noctev.svg	190 KB
+  runtak.svg	190 KB
+  pentav.svg	190 KB
+  quentra.svg	190 KB
+  en content/race/svg
+  OK    negro vs verde                         20000
+  OK    negro vs negro                         0
+  OK    negro vs 10 columnas de 100            1000
+  OK    GRIS vs verde (el caso que fallaba)    20000
+  OK    ruido de +-3/255, umbral 0             20000
+  OK    ruido de +-3/255, umbral 5%            0
+  OK    verde vs negro, umbral 5%              20000
+pxdif: instrumento validado contra 7 casos de respuesta conocida.
+== marvok  (content/race/svg/marvok.svg desde 56s por 64s -> 1280x720 @ 2500k) ==
+marvok.svg: 1920 cuadros 1280x720 a 30.0 fps (64.0 s) en content/.work/T-09/marvok
+content/race/marvok/index.m3u8  (1280x720, 1920 cuadros a 30 fps, gop=60, 32 segmentos, 64.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 1920 (declarado 1920)
+  VERDE duración por suma de #EXTINF: 64.000 s (declarado 64 s, delta 0.000 s)
+        cuadros   0-> 15  video  759742 px (82.4373 %)   SVG  269031 px (29.1917 %)   ok
+        cuadros  15-> 30  video  389670 px (42.2819 %)   SVG  389098 px (42.2198 %)   ok
+        cuadros  30-> 45  video  407211 px (44.1852 %)   SVG  406535 px (44.1119 %)   ok
+        cuadros  45-> 60  video  286941 px (31.1351 %)   SVG  286125 px (31.0465 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 755439 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 759457 px
+  VERDE el video está en fase con el SVG (755439 < 759457)
+  => content/race/marvok/index.m3u8 en verde
+== caldrix  (content/race/svg/caldrix.svg desde 56s por 64s -> 1280x720 @ 2500k) ==
+caldrix.svg: 1920 cuadros 1280x720 a 30.0 fps (64.0 s) en content/.work/T-09/caldrix
+content/race/caldrix/index.m3u8  (1280x720, 1920 cuadros a 30 fps, gop=60, 32 segmentos, 64.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 1920 (declarado 1920)
+  VERDE duración por suma de #EXTINF: 64.000 s (declarado 64 s, delta 0.000 s)
+        cuadros   0-> 15  video  574225 px (62.3074 %)   SVG  332451 px (36.0732 %)   ok
+        cuadros  15-> 30  video  354592 px (38.4757 %)   SVG  354375 px (38.4521 %)   ok
+        cuadros  30-> 45  video  334414 px (36.2862 %)   SVG  334215 px (36.2646 %)   ok
+        cuadros  45-> 60  video  320330 px (34.7580 %)   SVG  319898 px (34.7112 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 537653 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 578293 px
+  VERDE el video está en fase con el SVG (537653 < 578293)
+  => content/race/caldrix/index.m3u8 en verde
+== program  (content/race/svg/program.svg desde 0s por 120s -> 1280x720 @ 2500k) ==
+program.svg: 3600 cuadros 1280x720 a 30.0 fps (120.0 s) en content/.work/T-09/program
+content/race/program/index.m3u8  (1280x720, 3600 cuadros a 30 fps, gop=60, 60 segmentos, 120.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 3600 (declarado 3600)
+  VERDE duración por suma de #EXTINF: 120.000 s (declarado 120 s, delta 0.000 s)
+[h264 @ 0x5626b9d86dc0] co located POCs unavailable
+        cuadros   0-> 15  video    9816 px (1.0651 %)   SVG    8994 px (0.9759 %)   ok
+        cuadros  15-> 30  video    9839 px (1.0676 %)   SVG    8978 px (0.9742 %)   ok
+        cuadros  30-> 45  video    9324 px (1.0117 %)   SVG    8999 px (0.9765 %)   ok
+        cuadros  45-> 60  video    9317 px (1.0110 %)   SVG    8986 px (0.9750 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 10156 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 10113 px
+  ROJO  el video NO está en fase con el SVG (10156 >= 10113)
+  => 1 aserción(es) en rojo para content/race/program/index.m3u8
+== noctev  (content/race/svg/noctev.svg desde 56s por 64s -> 1280x720 @ 2500k) ==
+noctev.svg: 1920 cuadros 1280x720 a 30.0 fps (64.0 s) en content/.work/T-09/noctev
+content/race/noctev/index.m3u8  (1280x720, 1920 cuadros a 30 fps, gop=60, 32 segmentos, 64.000 s por suma de #EXTINF)
+== runtak  (content/race/svg/runtak.svg desde 56s por 64s -> 1280x720 @ 2500k) ==
+runtak.svg: 1920 cuadros 1280x720 a 30.0 fps (64.0 s) en content/.work/T-09/runtak
+content/race/runtak/index.m3u8  (1280x720, 1920 cuadros a 30 fps, gop=60, 32 segmentos, 64.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 1920 (declarado 1920)
+  VERDE duración por suma de #EXTINF: 64.000 s (declarado 64 s, delta 0.000 s)
+        cuadros   0-> 15  video  395759 px (42.9426 %)   SVG  309244 px (33.5551 %)   ok
+        cuadros  15-> 30  video  279252 px (30.3008 %)   SVG  277853 px (30.1490 %)   ok
+        cuadros  30-> 45  video  222503 px (24.1431 %)   SVG  221541 px (24.0387 %)   ok
+        cuadros  45-> 60  video  192296 px (20.8655 %)   SVG  191404 px (20.7687 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 495083 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 395547 px
+  ROJO  el video NO está en fase con el SVG (495083 >= 395547)
+  => 1 aserción(es) en rojo para content/race/runtak/index.m3u8
+== quentra  (content/race/svg/quentra.svg desde 56s por 64s -> 1280x720 @ 2500k) ==
+quentra.svg: 1920 cuadros 1280x720 a 30.0 fps (64.0 s) en content/.work/T-09/quentra
+content/race/quentra/index.m3u8  (1280x720, 1920 cuadros a 30 fps, gop=60, 32 segmentos, 64.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 1920 (declarado 1920)
+  VERDE duración por suma de #EXTINF: 64.000 s (declarado 64 s, delta 0.000 s)
+[h264 @ 0x563a99896680] co located POCs unavailable
+        cuadros   0-> 15  video  277730 px (30.1356 %)   SVG  104545 px (11.3439 %)   ok
+        cuadros  15-> 30  video  140271 px (15.2204 %)   SVG  140019 px (15.1930 %)   ok
+        cuadros  30-> 45  video  153372 px (16.6419 %)   SVG  153052 px (16.6072 %)   ok
+        cuadros  45-> 60  video  211432 px (22.9418 %)   SVG  210450 px (22.8353 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 284128 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 274887 px
+  ROJO  el video NO está en fase con el SVG (284128 >= 274887)
+  => 1 aserción(es) en rojo para content/race/quentra/index.m3u8
+== pentav  (content/race/svg/pentav.svg desde 56s por 64s -> 1280x720 @ 2500k) ==
+pentav.svg: 1920 cuadros 1280x720 a 30.0 fps (64.0 s) en content/.work/T-09/pentav
+content/race/pentav/index.m3u8  (1280x720, 1920 cuadros a 30 fps, gop=60, 32 segmentos, 64.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 1920 (declarado 1920)
+  VERDE duración por suma de #EXTINF: 64.000 s (declarado 64 s, delta 0.000 s)
+        cuadros   0-> 15  video  300390 px (32.5944 %)   SVG  127013 px (13.7818 %)   ok
+        cuadros  15-> 30  video  125780 px (13.6480 %)   SVG  125605 px (13.6290 %)   ok
+        cuadros  30-> 45  video  164144 px (17.8108 %)   SVG  163524 px (17.7435 %)   ok
+        cuadros  45-> 60  video  172090 px (18.6730 %)   SVG  171154 px (18.5714 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 375604 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 339530 px
+  ROJO  el video NO está en fase con el SVG (375604 >= 339530)
+  => 1 aserción(es) en rojo para content/race/pentav/index.m3u8
+ROJO   program  (ver content/.work/T-09/program.log)
+VERDE  caldrix
+VERDE  marvok
+ROJO   noctev  (ver content/.work/T-09/noctev.log)
+ROJO   runtak  (ver content/.work/T-09/runtak.log)
+ROJO   pentav  (ver content/.work/T-09/pentav.log)
+ROJO   quentra  (ver content/.work/T-09/quentra.log)
+
+puente-carrera: 5 pieza(s) en rojo

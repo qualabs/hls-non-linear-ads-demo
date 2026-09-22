@@ -1,14 +1,20 @@
 ---
 id: "0045"
 title: Lo pictórico se genera, la tipografía se compone, y el movimiento se genera sólo donde la tipografía puede irse de cuadro
-status: accepted
+status: superseded
 scope: project
 date: 2026-09-09
 supersedes: null
-superseded_by: null
+superseded_by: "0080"
 generalizes: null
 generalized_by: "0062"
 ---
+
+> **2026-09-21 — superseded por el ADR 0080.** Apple comunicó que no se puede mostrar
+> contenido de video ni de imagen generado por modelos de IA, así que el primero de los
+> tres caminos de acá —*"lo pictórico se genera"*— dejó de estar disponible. El segundo,
+> escribir la geometría y la tipografía como SVG y rasterizarlas con Chrome headless,
+> es lo que el ADR 0080 conserva y extiende a toda la pieza.
 
 ## Contexto
 

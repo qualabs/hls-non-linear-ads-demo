@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Non-linear HLS ads — the race: the ads first, then the multi view window</title>
+<!--
+  The fonts and the favicon are copies of the Qualabs brand kit on disk, not
+  links to it: a demo that reads a file out of another project on this laptop
+  fails the day it is recorded from anywhere else. Provenance in brand/README.md.
+-->
+<link rel="stylesheet" href="./brand/fonts-embedded.css">
+<link rel="stylesheet" href="./css/player.css">
+<link rel="icon" href="./brand/favicon.svg">
+</head>
+<body>
+
+<!--
+  THE THIRD PAGE OF THIS DEMO, AND IT IS THE CLOSE: everything this project
+  built, on one screen, in the order that makes it an argument.
+
+  ============================================================================
+  THE ORDER IS THE ARGUMENT
+  ============================================================================
+  A race that never stops. Over it, four NON-LINEAR ADS, of the concurrent class
+  of ADR 0009 -- the same library, the same creatives and the same signalling as
+  `index.html`. Then, at fifty-six seconds and not before, a MULTI VIEW WINDOW
+  of the sibling class of ADR 0063, announcing a catalogue of the six cameras
+  that were packaged for this race, one per car.
+
+  THE TWO NEVER SHARE THE SCREEN, and that is deliberate. David asked that the
+  viewer's own interaction be kept apart from the signalling of advertising and
+  that the separation be visible in the code and in the libraries. In the tree
+  it is two classes and two pages -- the pair carries no multi view at all -- and
+  on this page it is two stretches of one timeline, ads and then window, with
+  eight seconds of clean race between them. Anybody watching can see where one
+  thing ends and the other begins without being told.
+
+  ============================================================================
+  WHAT THE WINDOW IS, AND WHY IT IS NOT A LAYOUT
+  ============================================================================
+  An ad break is composed by whoever sells it: the payload declares a box per
+  asset, in percentages of the picture, and the client draws what it was told.
+  A MULTI VIEW IS COMPOSED BY NOBODY WHEN IT IS SIGNALLED. The playlist announces
+  what else can be watched and what each one is called, and nothing about where
+  any of it goes -- because where it goes depends on how many cameras whoever is
+  watching raised, and that is decided on the other side of the network, after
+  the playlist was written, and it changes several times while the window is
+  open. So the offer carries `id`, `name`, `type` and `uri` per camera and no
+  `viewport` (ADR 0064); the grid is worked out by the library (ADR 0065), and it
+  tops out at four boxes (ADR 0066).
+
+  THE CATALOGUE IS LONGER THAN THE GRID ON PURPOSE. Six cameras against four
+  boxes: if everything on offer fitted at once, choosing would not mean anything.
+
+  ============================================================================
+  THE CAMERAS ARE ONE SCENE FRAMED SIX WAYS, AND NONE OF IT WAS GENERATED
+  ============================================================================
+  The race is drawn: a single SVG scene, animated, captured to video and packaged
+  to HLS. Each camera is that same scene framed differently, following its own
+  car, so every one of them sees the others come into frame and leave it at
+  different moments. That is what makes them read as six cameras of one race
+  rather than six copies of one clip, and it is settled by construction rather
+  than by a prompt. Nothing on this page came out of an image or a video model.
+
+  AND THE CAMERAS START AT THE SECOND THE WINDOW OPENS. Frame 0 of each one is
+  second fifty-six of the race, which is the second the programme is showing when
+  the window appears: the same overtakes from another angle, and not six other
+  races.
+
+  EVERYTHING HERE IS MUTE, by decision. An SVG has no sound and none was added in
+  the capture. The focus of audio still works -- the feeds are boxes of video,
+  which is what can take it -- so the mechanism is there; there is simply nothing
+  to hear, and nothing on this page says otherwise.
+
+  ============================================================================
+  WHAT EACH ELEMENT IS FOR
+  ============================================================================
+  #player  the container the page hands the library, and the only thing it hands
+           over besides the hls.js instance. Everything lives inside it: the
+           layer the boxes are drawn into, the race moving within it, the bar,
+           the selector, and the button on each box.
+  #jumps   one button per moment, because the event gives about two minutes for
+           everything and the window opens at fifty-six seconds.
+  #state   the contract at the playhead, plus the one reading the contract cannot
+           make: how many <video> elements are alive inside the container.
+  #run     the run of the programme, EMPTY in this file and filled off
+           `programRanges()`. A camera added to the catalogue -- which in this
+           demo is a camera whose footage got packaged -- appears in it without
+           anybody editing a file.
+
+  THIS PAGE CARRIES NO DECODER SWITCH. That control belongs to `index.html`, and
+  a second copy of it here would be a second place to maintain the same `if`.
+
+  THE CONTROLS are not in this file, which is the point of ADR 0015: the library
+  draws the bar, the selector and the button on each box inside the container.
+  The <video> carries no `controls` attribute and this page adds none of its own.
+
+  No bundler and no framework. The library is one classic <script src> that
+  defines a global, assembled from lib/ on every start (ADR 0015); this page's
+  own file is a native ES module. hls.js is vendored in ./vendor/ at 1.7.2
+  rather than pulled from a CDN, because it is the version the code was read
+  against and the version the measurements ran on (ADR 0002).
+-->
+
+<div class="stage stage--race">
+
+  <header class="masthead">
+    <img src="./brand/logo-qualabs-on-dark.svg" alt="Qualabs">
+    <p class="headline">
+      One race that never stops. Four non-linear ads over it &mdash; and then, on the same
+      playlist and in a sibling class, a window offering a camera per car. The advertising
+      and the viewer&rsquo;s own choice, one after the other and never on top of each other.
+    </p>
+  </header>
+
+  <section class="switch" aria-label="Jump to">
+    <p class="switch-label">Jump to</p>
+    <div class="jumps" id="jumps" role="group" aria-label="Jump to"></div>
+    <p class="no-server">
+      Everything on this page is mute. The race and the six cameras are an SVG scene animated,
+      captured to video and packaged to HLS, and an SVG has no sound. The focus of audio works
+      &mdash; the feeds are boxes of video, which is what can take it &mdash; so enlarging a
+      camera still moves it; there is simply nothing to hear.
+    </p>
+  </section>
+
+  <div class="race">
+
+    <section class="pane pane-demo">
+      <h2 class="role">The race, and everything signalled over it</h2>
+      <p class="role-sub">
+        One player, one library, unmodified. The ads come first; the window opens after them.
+      </p>
+      <div class="player" id="player" data-state="primary">
+        <video class="video" id="video" playsinline muted></video>
+      </div>
+      <p class="state" id="state"></p>
+      <p class="hud" id="hud"></p>
+    </section>
+
+    <section class="chapter" aria-label="The run of this race">
+      <p class="kicker">The run, read off the playlist at the playhead</p>
+      <h2>Four ads, then a catalogue.</h2>
+      <p class="lede">
+        Not a table somebody typed: every row below is a range the player resolved out of this
+        race&rsquo;s own playlist, in the order it will reach them, and each one says which
+        class it is. The four ads are the concurrent class; the window is the multi view class.
+        They are siblings and neither extends the other &mdash; in HLS a class is compared as an
+        exact string &mdash; and the kinds do not interleave, which is the separation stated in
+        one picture.
+      </p>
+      <ol class="run" id="run"></ol>
+    </section>
+
+  </div>
+
+  <p class="credit">
+    The race, the cars and the six cameras were drawn for this demo as a single animated SVG
+    scene, captured to video and packaged to HLS &middot;
+    Advertising creatives: <em>ZUMBRA</em>, <em>KETRAVA</em> and <em>KOVRIN</em> are invented
+    brands, written as SVG for this demo. No livery, number, sponsor or driver of any real
+    series is drawn anywhere, and nothing on this page was generated by an image or video
+    model. Full provenance in <code>CREDITS.md</code>.
+  </p>
+</div>
+
+<script src="/vendor/hls.min.js"></script>
+<script src="/dist/qualabs-concurrent-hls.js"></script>
+<script type="module" src="./js/race.js"></script>
+
+</body>
+</html>

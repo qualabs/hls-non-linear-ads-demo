@@ -1,0 +1,34 @@
+{
+  "ASSETS": [
+    {
+      "URI": "/content/creatives/zumbra-16x9/index.m3u8",
+      "DURATION": 12,
+      "X-AD-CREATIVE-SIGNALING": {
+        "version": 2,
+        "type": "slot",
+        "payload": [
+          {
+            "type": "squeezebackDoubleBox",
+            "start": 0,
+            "duration": 12,
+            "layout": {
+              "primaryContent": {
+                "zDepth": 0,
+                "viewport": "25 50 25 0"
+              },
+              "assets": [
+                {
+                  "id": "adSideBySide",
+                  "type": "image/svg+xml",
+                  "uri": "/graphics/campaigns/zumbra-16x9.svg",
+                  "viewport": "25 0 25 50",
+                  "zDepth": 1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

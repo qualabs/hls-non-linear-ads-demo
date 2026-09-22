@@ -1,0 +1,188 @@
+puente-a-video: 9 piezas, 30 fps, 12 s
+  OK    negro vs verde                         20000
+  OK    negro vs negro                         0
+  OK    negro vs 10 columnas de 100            1000
+  OK    GRIS vs verde (el caso que fallaba)    20000
+  OK    ruido de +-3/255, umbral 0             20000
+  OK    ruido de +-3/255, umbral 5%            0
+  OK    verde vs negro, umbral 5%              20000
+pxdif: instrumento validado contra 7 casos de respuesta conocida.
+zumbra-16x9.svg: 180 cuadros 1920x1080 a 30.0 fps (6.0 s) en content/.work/T-05/control/real
+
+== CONTROL a) la captura cortada a la mitad: tiene que dar ROJO ==
+content/.work/T-05/control/hls-cortado/index.m3u8  (1280x720, 180 cuadros a 30 fps, gop=60, 3 segmentos, 6.000 s por suma de #EXTINF)
+  ROJO  cuadros decodificados: 180, declarado 360
+  ROJO  duración por suma de #EXTINF: 6.000 s, declarado 12 s (delta 6.000 s)
+        cuadros   0-> 15  video   29754 px (3.2285 %)   SVG   29094 px (1.4031 %)   ok
+        cuadros  15-> 30  video   25244 px (2.7391 %)   SVG   55261 px (2.6650 %)   ok
+        cuadros  30-> 45  video   26351 px (2.8593 %)   SVG   58699 px (2.8308 %)   ok
+        cuadros  45-> 60  video   25743 px (2.7933 %)   SVG   57557 px (2.7757 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 19922 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 31123 px
+  VERDE el video está en fase con el SVG (19922 < 31123)
+  => 2 aserción(es) en rojo para content/.work/T-05/control/hls-cortado/index.m3u8
+  (rojo, como tenía que dar: 180 cuadros contra 360 declarados,
+   y el movimiento en VERDE, que es lo que prueba que lo rojo es la duración)
+
+== CONTROL b) el video congelado: tiene que dar ROJO ==
+content/.work/T-05/control/hls-congelado/index.m3u8  (1280x720, 360 cuadros a 30 fps, gop=60, 6 segmentos, 12.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video     563 px (0.0611 %)   SVG   29094 px (1.4031 %)   FALLA
+        cuadros  15-> 30  video     528 px (0.0573 %)   SVG   55261 px (2.6650 %)   FALLA
+        cuadros  30-> 45  video       0 px (0.0000 %)   SVG   58699 px (2.8308 %)   FALLA
+        cuadros  45-> 60  video       0 px (0.0000 %)   SVG   57557 px (2.7757 %)   FALLA
+  ROJO  el video PIERDE el movimiento del SVG en los pares: 0->15 15->30 30->45 45->60
+        cuadro 0 del video vs cuadro 0 del navegador   : 2038 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 15399 px
+  VERDE el video está en fase con el SVG (2038 < 15399)
+  => 1 aserción(es) en rojo para content/.work/T-05/control/hls-congelado/index.m3u8
+  (rojo, como tenía que dar: la duración correcta y el movimiento perdido)
+puente-a-video: 9 piezas, 30 fps, 12 s
+  OK    negro vs verde                         20000
+  OK    negro vs negro                         0
+  OK    negro vs 10 columnas de 100            1000
+  OK    GRIS vs verde (el caso que fallaba)    20000
+  OK    ruido de +-3/255, umbral 0             20000
+  OK    ruido de +-3/255, umbral 5%            0
+  OK    verde vs negro, umbral 5%              20000
+pxdif: instrumento validado contra 7 casos de respuesta conocida.
+
+== zumbra-16x9  (graphics/campaigns/zumbra-16x9.svg -> 1280x720 @ 2500k) ==
+zumbra-16x9.svg: 360 cuadros 1920x1080 a 30.0 fps (12.0 s) en content/.work/T-05/zumbra-16x9
+content/creatives/zumbra-16x9/index.m3u8  (1280x720, 360 cuadros a 30 fps, gop=60, 6 segmentos, 12.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video   29754 px (3.2285 %)   SVG   29094 px (1.4031 %)   ok
+        cuadros  15-> 30  video   25244 px (2.7391 %)   SVG   55261 px (2.6650 %)   ok
+        cuadros  30-> 45  video   26351 px (2.8593 %)   SVG   58699 px (2.8308 %)   ok
+        cuadros  45-> 60  video   25743 px (2.7933 %)   SVG   57557 px (2.7757 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 19922 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 31123 px
+  VERDE el video está en fase con el SVG (19922 < 31123)
+  => content/creatives/zumbra-16x9/index.m3u8 en verde
+
+== zumbra-banner  (graphics/campaigns/zumbra-banner.svg -> 1120x126 @ 800k) ==
+zumbra-banner.svg: 360 cuadros 1680x189 a 30.0 fps (12.0 s) en content/.work/T-05/zumbra-banner
+content/creatives/zumbra-banner/index.m3u8  (1120x126, 360 cuadros a 30 fps, gop=60, 6 segmentos, 12.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video    2162 px (1.5320 %)   SVG    2969 px (0.9351 %)   ok
+        cuadros  15-> 30  video    2025 px (1.4349 %)   SVG    4453 px (1.4024 %)   ok
+        cuadros  30-> 45  video    2087 px (1.4789 %)   SVG    4699 px (1.4799 %)   ok
+        cuadros  45-> 60  video    1935 px (1.3712 %)   SVG    4309 px (1.3571 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 5408 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 6063 px
+  VERDE el video está en fase con el SVG (5408 < 6063)
+  => content/creatives/zumbra-banner/index.m3u8 en verde
+
+== zumbra-backplate  (graphics/campaigns/zumbra-backplate.svg -> 1280x720 @ 2500k) ==
+zumbra-backplate.svg: 360 cuadros 1920x1080 a 30.0 fps (12.0 s) en content/.work/T-05/zumbra-backplate
+content/creatives/zumbra-backplate/index.m3u8  (1280x720, 360 cuadros a 30 fps, gop=60, 6 segmentos, 12.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video   15689 px (1.7024 %)   SVG   16568 px (0.7990 %)   ok
+        cuadros  15-> 30  video   13479 px (1.4626 %)   SVG   29668 px (1.4307 %)   ok
+        cuadros  30-> 45  video   13678 px (1.4842 %)   SVG   30453 px (1.4686 %)   ok
+        cuadros  45-> 60  video   13457 px (1.4602 %)   SVG   30073 px (1.4503 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 13635 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 19204 px
+  VERDE el video está en fase con el SVG (13635 < 19204)
+  => content/creatives/zumbra-backplate/index.m3u8 en verde
+
+== ketrava-16x9  (graphics/campaigns/ketrava-16x9.svg -> 1280x720 @ 2500k) ==
+ketrava-16x9.svg: 360 cuadros 1920x1080 a 30.0 fps (12.0 s) en content/.work/T-05/ketrava-16x9
+content/creatives/ketrava-16x9/index.m3u8  (1280x720, 360 cuadros a 30 fps, gop=60, 6 segmentos, 12.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video   74883 px (8.1253 %)   SVG   72459 px (3.4944 %)   ok
+        cuadros  15-> 30  video   33005 px (3.5813 %)   SVG   72923 px (3.5167 %)   ok
+        cuadros  30-> 45  video   32770 px (3.5558 %)   SVG   72527 px (3.4976 %)   ok
+        cuadros  45-> 60  video   32687 px (3.5468 %)   SVG   72413 px (3.4921 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 73760 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 76219 px
+  VERDE el video está en fase con el SVG (73760 < 76219)
+  => content/creatives/ketrava-16x9/index.m3u8 en verde
+
+== ketrava-banner  (graphics/campaigns/ketrava-banner.svg -> 1120x126 @ 800k) ==
+ketrava-banner.svg: 360 cuadros 1680x189 a 30.0 fps (12.0 s) en content/.work/T-05/ketrava-banner
+content/creatives/ketrava-banner/index.m3u8  (1120x126, 360 cuadros a 30 fps, gop=60, 6 segmentos, 12.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video   19599 px (13.8882 %)   SVG   21719 px (6.8402 %)   ok
+        cuadros  15-> 30  video   10491 px (7.4341 %)   SVG   22069 px (6.9504 %)   ok
+        cuadros  30-> 45  video   10276 px (7.2817 %)   SVG   21774 px (6.8575 %)   ok
+        cuadros  45-> 60  video    9456 px (6.7007 %)   SVG   19815 px (6.2406 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 23124 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 24182 px
+  VERDE el video está en fase con el SVG (23124 < 24182)
+  => content/creatives/ketrava-banner/index.m3u8 en verde
+
+== ketrava-backplate  (graphics/campaigns/ketrava-backplate.svg -> 1280x720 @ 2500k) ==
+ketrava-backplate.svg: 360 cuadros 1920x1080 a 30.0 fps (12.0 s) en content/.work/T-05/ketrava-backplate
+content/creatives/ketrava-backplate/index.m3u8  (1280x720, 360 cuadros a 30 fps, gop=60, 6 segmentos, 12.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video   40575 px (4.4027 %)   SVG   38799 px (1.8711 %)   ok
+        cuadros  15-> 30  video   19810 px (2.1495 %)   SVG   41717 px (2.0118 %)   ok
+        cuadros  30-> 45  video   19633 px (2.1303 %)   SVG   41982 px (2.0246 %)   ok
+        cuadros  45-> 60  video   17083 px (1.8536 %)   SVG   36697 px (1.7697 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 42096 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 44893 px
+  VERDE el video está en fase con el SVG (42096 < 44893)
+  => content/creatives/ketrava-backplate/index.m3u8 en verde
+
+== kovrin-16x9  (graphics/campaigns/kovrin-16x9.svg -> 1280x720 @ 2500k) ==
+kovrin-16x9.svg: 360 cuadros 1920x1080 a 30.0 fps (12.0 s) en content/.work/T-05/kovrin-16x9
+content/creatives/kovrin-16x9/index.m3u8  (1280x720, 360 cuadros a 30 fps, gop=60, 6 segmentos, 12.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video    5440 px (0.5903 %)   SVG    7775 px (0.3750 %)   ok
+        cuadros  15-> 30  video    3617 px (0.3925 %)   SVG    7906 px (0.3813 %)   ok
+        cuadros  30-> 45  video    3495 px (0.3792 %)   SVG    7994 px (0.3855 %)   ok
+        cuadros  45-> 60  video    3522 px (0.3822 %)   SVG    8089 px (0.3901 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 6512 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 8109 px
+  VERDE el video está en fase con el SVG (6512 < 8109)
+  => content/creatives/kovrin-16x9/index.m3u8 en verde
+
+== kovrin-banner  (graphics/campaigns/kovrin-banner.svg -> 1120x126 @ 800k) ==
+kovrin-banner.svg: 360 cuadros 1680x189 a 30.0 fps (12.0 s) en content/.work/T-05/kovrin-banner
+content/creatives/kovrin-banner/index.m3u8  (1120x126, 360 cuadros a 30 fps, gop=60, 6 segmentos, 12.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video    2357 px (1.6702 %)   SVG    6828 px (2.1504 %)   ok
+        cuadros  15-> 30  video    2565 px (1.8176 %)   SVG    6905 px (2.1747 %)   ok
+        cuadros  30-> 45  video    2646 px (1.8750 %)   SVG    6875 px (2.1652 %)   ok
+        cuadros  45-> 60  video    2687 px (1.9041 %)   SVG    6788 px (2.1378 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 7550 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 9395 px
+  VERDE el video está en fase con el SVG (7550 < 9395)
+  => content/creatives/kovrin-banner/index.m3u8 en verde
+
+== kovrin-backplate  (graphics/campaigns/kovrin-backplate.svg -> 1280x720 @ 2500k) ==
+kovrin-backplate.svg: 360 cuadros 1920x1080 a 30.0 fps (12.0 s) en content/.work/T-05/kovrin-backplate
+content/creatives/kovrin-backplate/index.m3u8  (1280x720, 360 cuadros a 30 fps, gop=60, 6 segmentos, 12.000 s por suma de #EXTINF)
+  VERDE cuadros decodificados: 360 (declarado 360)
+  VERDE duración por suma de #EXTINF: 12.000 s (declarado 12 s, delta 0.000 s)
+        cuadros   0-> 15  video    7614 px (0.8262 %)   SVG   15638 px (0.7541 %)   ok
+        cuadros  15-> 30  video    6371 px (0.6913 %)   SVG   15841 px (0.7639 %)   ok
+        cuadros  30-> 45  video    6776 px (0.7352 %)   SVG   15868 px (0.7652 %)   ok
+        cuadros  45-> 60  video    6780 px (0.7357 %)   SVG   16012 px (0.7722 %)   ok
+  VERDE el video conserva el movimiento del SVG en los cuatro pares (holgura 1/4)
+        cuadro 0 del video vs cuadro 0 del navegador   : 7598 px
+        cuadro 0 del video vs cuadro 15 del navegador  : 11695 px
+  VERDE el video está en fase con el SVG (7598 < 11695)
+  => content/creatives/kovrin-backplate/index.m3u8 en verde
+
+puente-a-video: las nueve piezas en content/creatives/
+EXIT=0

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>stage-pair — banco de medición</title>
+<!--
+  EL INSTRUMENTO DE LA T-06, Y NO UNA PÁGINA DE LA DEMO.
+
+  Las tres páginas de esta demo son index.html, inspect.html y race.html, y las
+  escriben las T-07, T-08 y T-10. Ésta no se le muestra a nadie: es el banco
+  contra el que se mide EL TRAMO INVERTIDO, o sea si los dos panes entran y salen
+  de cada break en el mismo segundo del programa.
+
+  Vive acá y no en $XDG_RUNTIME_DIR porque tiene que ser servida desde la raíz de
+  documentos de la demo: lo que se mide son URIs absolutas -- /content/,
+  /signalling/, /dist/, /vendor/ -- y una página afuera del árbol mediría otra
+  cosa.
+
+  ---------------------------------------------------------------------------
+  QUÉ MIDE, Y POR QUÉ LEYENDO EL ESTADO DEL NAVEGADOR Y NO MIRANDO CAPTURAS
+  ---------------------------------------------------------------------------
+  Es el instrumento que la fase 03 eligió y argumentó. Una captura dice qué se ve
+  y no en qué segundo DEL PROGRAMA se ve, que es la magnitud de la que se trata:
+  el reloj de la pared, el del elemento y el del programa son tres cosas
+  distintas durante un break.
+
+  De cada pane se lee su propio reporte del programa:
+
+    de fábrica   `hls.interstitialsManager.playingItem` dice si hay un aviso en
+                 pantalla, y `interstitialsManager.primary.currentTime` es el
+                 reloj DEL PROGRAMA. El del elemento no sirve: durante un break
+                 hls.js elige entre dos estrategias de append y el elemento
+                 reporta una cosa distinta en cada una -- está medido en la
+                 cabecera de demo/compatibility-pair/js/stock-player.js.
+
+    el nuestro   `provider.activeAt(t)` es EL CONTRATO, y lo mismo que lee el
+                 renderizador. Su reloj es el del elemento sin más, porque acá el
+                 programa nunca se detuvo (ADR 0016).
+
+  ---------------------------------------------------------------------------
+  CÓMO SE TOMA CADA NÚMERO
+  ---------------------------------------------------------------------------
+  Se muestrea cada 100 ms. La ENTRADA de un pane es el reloj del programa en el
+  ÚLTIMO muestreo en que todavía no había aviso; la SALIDA es el reloj en el
+  PRIMER muestreo en que ya no lo hay. Esa asimetría es deliberada y es lo que
+  hace que el número valga para las dos estrategias de append del pane de
+  fábrica: en la que congela el reloj del programa durante el break, el muestreo
+  de antes de entrar y el de después de salir son los dos momentos en que ese
+  reloj está corriendo.
+
+  El recorrido se reproduce ENTERO y de corrido, sin buscar entre break y break y
+  sin acelerar. Buscar ahorraría un minuto y medio y costaría lo único que esta
+  medición tiene para dar: escribir un `currentTime` es intervenir sobre el mismo
+  reloj que se está midiendo, y los dos panes no quedan buscados en el mismo
+  instante. Acelerar es lo mismo con otra cara.
+-->
+<style>
+  body { margin: 0; background: #111; color: #eee; font: 13px system-ui, sans-serif; }
+  .par { display: flex; gap: 8px; padding: 8px; }
+  .pane { flex: 1; }
+  video { width: 100%; background: #000; }
+</style>
+</head>
+<body>
+
+<div class="par">
+  <section class="pane">
+    <h2>stock</h2>
+    <div id="stock-player"><video id="stock-video" playsinline muted></video></div>
+  </section>
+  <section class="pane">
+    <h2>demo</h2>
+    <div id="player"><video id="video" playsinline muted></video></div>
+  </section>
+</div>
+<pre id="salida"></pre>
+
+<script src="/vendor/hls.min.js"></script>
+<script src="/dist/qualabs-concurrent-hls.js"></script>
+<script type="module">
+// La playlist y los decodificadores llegan por query, que es lo que permite
+// correr el mismo banco sobre la rica, sobre la magra y sobre la señalización
+// del control sin tocar este archivo.
+const params = new URLSearchParams(location.search);
+const SRC = params.get('src');
+const DECODERS = params.has('decoders') ? Number(params.get('decoders')) : undefined;
+
+const stage = await (await fetch('/stage.json')).json();
+
+const video = document.getElementById('video');
+const stockVideo = document.getElementById('stock-video');
+
+// El nuestro, atado exactamente como lo ata un integrador (ADR 0015).
+const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+const concurrent = QualabsConcurrentHls.attach(hls, {
+  container: document.getElementById('player'),
+  ...(DECODERS === undefined ? {} : { decoderCount: DECODERS })
+});
+hls.loadSource(SRC);
+hls.attachMedia(video);
+
+// El de fábrica: `new Hls()` y ni una opción, que es lo que lo hace un cliente de
+// mercado. No se usa createStockPlayer porque eso trae la cromo de la librería, y
+// acá no se mira nada: se leen dos propiedades.
+const stock = new Hls();
+stock.loadSource(SRC);
+stock.attachMedia(stockVideo);
+
+// EL IDENTIFICADOR DEL ITEM AGENDADO, Y NO `playingItem` A SECAS: `playingItem`
+// también existe mientras corre el contenido primario, y leído así el pane de
+// fábrica reporta "en aviso" de punta a punta. Está medido en esta misma task, y
+// es la misma propiedad que lee demo/compatibility-pair/js/stock-player.js.
+const enAdStock = () => (stock.interstitialsManager?.playingItem?.event?.identifier ?? null) !== null;
+const relojStock = () => {
+  const t = stock.interstitialsManager?.primary?.currentTime;
+  return Number.isFinite(t) ? t : stockVideo.currentTime;
+};
+const enAdDemo = () => concurrent.provider.activeAt(video.currentTime).length > 0;
+const relojDemo = () => video.currentTime;
+
+const dormir = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * UNA SOLA PASADA POR EL PROGRAMA, sin buscar ni acelerar.
+ *
+ * Se reproduce de corrido hasta pasar el último break y se muestrea cada 100 ms.
+ * Buscar entre break y break ahorraría un minuto y medio y costaría lo único que
+ * esta medición tiene para dar: un `currentTime` escrito a mano es una
+ * intervención sobre el mismo reloj que se está midiendo, y los dos panes no
+ * quedan buscados en el mismo instante. Acelerar es lo mismo con otra cara.
+ *
+ * La ENTRADA de un pane a un break es el reloj del programa en el ÚLTIMO muestreo
+ * en que todavía no había aviso; la SALIDA, el reloj en el PRIMER muestreo en que
+ * ya no lo hay. Esa asimetría es la que hace que el número valga para las dos
+ * estrategias de append del pane de fábrica: en la que congela el reloj del
+ * programa durante el break, esos dos muestreos son los momentos en que ese reloj
+ * está corriendo.
+ */
+async function medirTodo(breaks, limite) {
+  const panes = {
+    stock: { enAd: enAdStock, reloj: relojStock },
+    demo: { enAd: enAdDemo, reloj: relojDemo }
+  };
+  const filas = breaks.map((b) => ({ break: b.id, stock: {}, demo: {} }));
+  const previo = { stock: null, demo: null };
+  const dentro = { stock: false, demo: false };
+  // Cuál break está mirando cada pane: el índice del primero que todavía no
+  // cerró. Los breaks no se solapan, así que el que abre es siempre ése.
+  const cursor = { stock: 0, demo: 0 };
+
+  const arranque = Date.now();
+  while (Date.now() - arranque < limite) {
+    for (const [nombre, pane] of Object.entries(panes)) {
+      const ahora = pane.enAd();
+      const reloj = pane.reloj();
+      const fila = filas[cursor[nombre]]?.[nombre];
+      if (fila) {
+        if (!dentro[nombre] && ahora && fila.entra === undefined) fila.entra = previo[nombre] ?? reloj;
+        if (dentro[nombre] && !ahora && fila.entra !== undefined && fila.sale === undefined) {
+          fila.sale = reloj;
+          cursor[nombre] += 1;
+        }
+      }
+      dentro[nombre] = ahora;
+      if (!ahora) previo[nombre] = reloj;
+    }
+    if (cursor.stock >= breaks.length && cursor.demo >= breaks.length) return filas;
+    await dormir(100);
+  }
+  return filas.map((f) => ({ ...f, timeout: true }));
+}
+
+async function esperarListo() {
+  for (let i = 0; i < 300; i++) {
+    if (stock.interstitialsManager?.primary && video.readyState >= 2) return;
+    await dormir(100);
+  }
+  throw new Error('los dos players no arrancaron');
+}
+
+window.medir = async () => {
+  stockVideo.muted = video.muted = true;
+  await stockVideo.play().catch(() => {});
+  await video.play().catch(() => {});
+  await esperarListo();
+  // El límite cubre el recorrido entero con holgura: el último break cierra a los
+  // 122 s del programa. Si vence, las filas vuelven marcadas y el que lee se
+  // entera, en lugar de recibir una tabla incompleta que parece completa.
+  const ultimo = stage.breaks[stage.breaks.length - 1];
+  const limite = (ultimo.offset + ultimo.duracion + 45) * 1000;
+  const filas = await medirTodo(stage.breaks, limite);
+  document.getElementById('salida').textContent = JSON.stringify(filas, null, 2);
+  return filas;
+};
+</script>
+</body>
+</html>

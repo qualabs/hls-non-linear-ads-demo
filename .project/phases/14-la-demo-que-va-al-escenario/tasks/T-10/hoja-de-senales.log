@@ -1,0 +1,45 @@
+content/race/program/con-daterange.m3u8  (5 Date Ranges)
+signalling/  (4 avisos + la ventana, 6 de 6 cámaras empaquetadas)
+
+El recorrido de la carrera, sobre un programa de 120 s:
+  aviso R1  t=  6s a  12s  (6s)  lowerThirdOverlay      ZUMBRA
+  aviso R2  t= 18s a  24s  (6s)  squeezebackLShape      KOVRIN
+  aviso R3  t= 30s a  36s  (6s)  lowerThirdOverlay      KETRAVA
+  aviso R4  t= 42s a  48s  (6s)  squeezebackLShape      ZUMBRA
+  la ventana   t=56s a 120s  (64s)  multi view   signalling/asset-list-race-offer.json
+      World feed               el contenido principal
+      CALDRIX, car cam         /content/race/caldrix/index.m3u8
+      MARVOK, car cam          /content/race/marvok/index.m3u8
+      NOCTEV, car cam          /content/race/noctev/index.m3u8
+      RUNTAK, car cam          /content/race/runtak/index.m3u8
+      PENTAV, car cam          /content/race/pentav/index.m3u8
+      QUENTRA, car cam         /content/race/quentra/index.m3u8
+
+Qué mirar, y en qué segundo:
+
+  t=0          arranca la carrera, y no suena nada: todo este contenido es mudo
+               por decisión de Nicolás. El foco de audio del ADR 0027 sigue
+               funcionando porque los feeds son cajas de video; sencillamente no
+               hay qué oír, y la página no promete audio por cámara.
+
+  t=6..48      LOS CUATRO AVISOS NO LINEALES, sobre una carrera que no se
+               detiene: banner, L, banner, L. Es la misma librería, los mismos
+               creativos y la misma clase que en la página del par.
+
+  t=56         ABRE LA VENTANA DE MULTI VIEW, y acá empieza la otra clase. El
+               cuadro 0 de cada cámara es ESTE segundo de la carrera, así que las
+               seis muestran el momento que el programa está mostrando.
+
+  t=…          abrir la lista en la barra y tildar una cámara. La grilla pasa a
+               dos cajas y el programa se corre a la suya: es una vista más y no
+               un fondo. Hasta TRES cámaras y no cuatro: el tope del ADR 0066
+               es de cuatro CAJAS y el programa es una de ellas, así que con la
+               tercera la grilla se llena y la fila siguiente se pone gris. El
+               tope es de la grilla y nunca de la oferta, que sigue ofreciendo
+               las seis.
+
+  t=…          agrandar una caja: se va a cuadro entero y quedás adentro de ese
+               auto. Desagrandar devuelve la grilla.
+
+  t=120        cierra la ventana. Si quedaba algo arriba, se baja solo y el
+               programa vuelve como venía.

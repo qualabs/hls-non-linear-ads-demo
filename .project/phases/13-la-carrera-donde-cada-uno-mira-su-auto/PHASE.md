@@ -1,9 +1,9 @@
 ---
 phase: 13-la-carrera-donde-cada-uno-mira-su-auto
 title: "La carrera donde cada uno mira su auto: el contenido que el multi view estaba esperando"
-status: planning
+status: closed
 started: 2026-09-12
-closed: null
+closed: 2026-09-21
 ---
 
 # Fase 13: la carrera donde cada uno mira su auto
