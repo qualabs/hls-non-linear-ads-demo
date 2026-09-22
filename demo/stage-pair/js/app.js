@@ -19,6 +19,13 @@
 // THE THIRD IS THE SWITCH, and it is the only piece of this demo that does not
 // exist in the four that came before.
 //
+// Under all three there is one invariant, and the second half of this file is
+// about holding it: THE TWO PANES ARE ALWAYS AT THE SAME SECOND OF THE
+// PROGRAMME. The switch and the jump buttons move them together because they
+// rebuild; the two scrub bars move them together because they are tied -- see
+// "THE TWO BARS ARE ONE BAR" below, which is also where what makes that hard is
+// written down.
+//
 // ============================================================================
 // WHY CHANGING THE STEP REBUILDS BOTH PLAYERS, AND WHY BOTH
 // ============================================================================
@@ -177,6 +184,15 @@ let posicionActual = 0;
  */
 const ENTRADA = 5;
 
+/**
+ * HOW FAR APART THE TWO CLOCKS MAY BE AND STILL BE THE SAME SECOND. It is the
+ * tolerance of every read-back on this page -- the one after a write and the one
+ * after a scrub -- because both ask the same question: did the other pane take
+ * the second we asked for. The programme keeps running between the write and the
+ * read, so the answer is never an equality.
+ */
+const TOLERANCIA = 1.5;
+
 function objetivoSeguro(segundo) {
   for (const brk of stage.breaks) {
     if (segundo >= brk.offset && segundo < brk.offset + brk.duracion) {
@@ -218,18 +234,26 @@ function derribar() {
  * written is the property that matters, and it is the same on both sides.
  *
  * The write is asynchronous, so the read-back is a quarter of a second later,
- * and the tolerance is 1.5 s because the programme keeps running between the
- * write and the read. It gives up after twenty attempts rather than for ever:
- * a target INSIDE a break is one the other pane's programme clock legitimately
- * cannot reach -- it holds at the second the break began -- and a seek that
- * cannot land must not turn into a loop.
+ * and the tolerance is `TOLERANCIA` because the programme keeps running between
+ * the write and the read. It gives up after twenty attempts rather than for
+ * ever: a target INSIDE a break is one the other pane's programme clock
+ * legitimately cannot reach -- it holds at the second the break began -- and a
+ * seek that cannot land must not turn into a loop. Giving up CALLS BACK, and
+ * that is not bookkeeping: a seek that never landed is the pair silently an
+ * unknown distance apart, which is the one state this page must not be in
+ * without saying so.
  */
-function buscar(listo, leer, escribir, objetivo, intentos = 20) {
-  if (intentos <= 0) return;
-  if (!listo()) { setTimeout(() => buscar(listo, leer, escribir, objetivo, intentos - 1), 50); return; }
+function buscar(listo, leer, escribir, objetivo, intentos = 20, alAgotar = null) {
+  if (intentos <= 0) { alAgotar?.(); return; }
+  if (!listo()) {
+    setTimeout(() => buscar(listo, leer, escribir, objetivo, intentos - 1, alAgotar), 50);
+    return;
+  }
   escribir(objetivo);
   setTimeout(() => {
-    if (Math.abs(leer() - objetivo) > 1.5) buscar(listo, leer, escribir, objetivo, intentos - 1);
+    if (Math.abs(leer() - objetivo) > TOLERANCIA) {
+      buscar(listo, leer, escribir, objetivo, intentos - 1, alAgotar);
+    }
   }, 250);
 }
 
@@ -246,19 +270,179 @@ function buscar(listo, leer, escribir, objetivo, intentos = 20) {
  */
 function irA(segundo) {
   if (!vivo || segundo <= 0) return;
-  const { video, stock, stockVideo } = vivo;
+  const { video, stock, stockVideo, crudo } = vivo;
   buscar(
     () => video.readyState >= 1,
     () => video.currentTime,
-    (s) => { video.currentTime = s; video.play().catch(() => {}); },
+    (s) => { crudo.nuestro(s); video.play().catch(() => {}); },
     segundo
   );
   buscar(
     () => stock.hls.interstitialsManager?.primary != null && stockVideo.readyState >= 1,
     () => stock.programme.currentTime,
-    (s) => { stock.programme.currentTime = s; },
-    segundo
+    (s) => { crudo.otro(s); },
+    segundo,
+    20,
+    () => console.warn(`[app] the off-the-shelf pane never took ${segundo.toFixed(2)}s: ` +
+      `it is at ${stock.programme.currentTime.toFixed(2)}s and the pair is NOT at the same second`)
   );
+}
+
+// ===========================================================================
+// THE TWO BARS ARE ONE BAR, AND WHICHEVER ONE IS DRAGGED MOVES BOTH PANES
+// ===========================================================================
+// Asked for after the page was already published: a scrub on either bar has to
+// leave both panes showing the same moment of the programme, so that what one
+// format of the break does and what the other does can be compared at any
+// second and not only at the four the jump buttons offer.
+//
+// WHERE IT IS TIED, AND WHY THERE. The chrome commits a scrub by writing ONE
+// property, on release: `video.currentTime` for our pane -- the media element
+// itself -- and `programme.currentTime` for the off-the-shelf pane, the facade
+// `stock-player.js` hands to `attachControls`. So the two writes are the whole
+// of the surface, and the tie is an accessor put over each of them for the life
+// of one arming. Nothing in `lib/` is touched, no event is invented, and the
+// bar goes on being the only thing that decides what a press on it means.
+//
+// IT IS THE RELEASE AND NOT THE DRAG, and that falls out of the same place: the
+// chrome writes on `pointerup` and paints the knob off its own pointer until
+// then (ADR 0033). So the other pane is not dragged along frame by frame, which
+// would be a second player seeking twenty times in one gesture.
+//
+// THE PART THAT IS NOT PLUMBING: A SEEK OF THE OFF-THE-SHELF PANE ONLY LANDS
+// WHILE THAT PANE IS OUTSIDE A BREAK. The measurement is in the header of
+// `buscar()` above and in T-07: inside a break the write to
+// `interstitialsManager.primary.currentTime` is accepted, throws nothing, and
+// does nothing -- hls.js is playing the linear ad and the tag carries
+// `X-RESTRICT="SKIP"`. Ours has no such restriction (ADR 0016), so a naive tie
+// would move one pane and leave the other, and T-07 measured that state at
+// 90.79 s apart. Three things answer it, and each one answers a different half:
+//
+//   A TARGET INSIDE A BREAK becomes the head of that break, `objetivoSeguro`,
+//   which is what the switch and the jump buttons already do with one. It is a
+//   second the other pane's programme clock cannot sit at, so it is not a
+//   target for a PAIR.
+//
+//   A SCRUB WHILE THE OFF-THE-SHELF PANE IS IN A BREAK rebuilds both, which is
+//   T-07's mechanism and the only one that is known to land: after a rebuild
+//   both panes are at the head of the programme and outside every break. It is
+//   asked of the pane itself -- `playingAd`, its own interstitials manager --
+//   and not worked out from the clock. This is the expensive path and it is
+//   taken on one gesture in fifteen: the three breaks are 36 s of a 180 s
+//   programme.
+//
+//   AND EVERY CHEAP SEEK IS READ BACK, because the two above are reasons to
+//   expect a landing and not proof of one. If the off-the-shelf pane is not
+//   within `TOLERANCIA` of the target a beat later, the page rebuilds anyway
+//   rather than leave a pair that looks tied and is not. A failure that gets as
+//   far as the rebuild not working says so in the console, from `irA`.
+//
+// WHAT IS LEFT OVER, said rather than hidden: a scrub to a second inside a
+// break lands at the head of that break instead, and a scrub taken during a
+// break costs a rebuild, which is visibly a rebuild. Both are on screen.
+
+/** Off, the two bars move their own pane and nothing else: the page as it was. */
+let enlaceActivo = true;
+
+/** The last tie, for the console and for the measurement: what was asked, what
+ *  was aimed at, which path was taken, and how far apart the two ended up. */
+let ultimoEnlace = null;
+
+/**
+ * Put an accessor over the one property each bar writes, and hand back the two
+ * RAW writers.
+ *
+ * TWO THINGS SAY THAT A WRITE IS A SCRUB, AND THE WRITE IS ONLY ONE OF THEM.
+ * The accessor gives the SECOND being asked for, which is the library's own
+ * number and must not be worked out a second time on this side; the pointer
+ * gives the fact that a person asked for it. Both are needed, and the second one
+ * is not caution: measured here, hls.js writes `currentTime` on the media
+ * element by itself -- on a rebuild, at the position it starts a level at -- and
+ * an accessor on its own takes those writes for a gesture. The first version of
+ * this did, and the trace showed the tie firing a second time, with no bar
+ * touched, right after a rebuild.
+ *
+ * So the window is opened by a `pointerup` ON THE BAR, in the capture phase so
+ * it is open before the chrome's own handler runs, and the write that follows
+ * within `VENTANA_DEL_GESTO` is that gesture's. The listener is on the container
+ * and asks `closest()`, which is what makes it independent of WHEN the chrome
+ * is built -- our pane's is built on `MEDIA_ATTACHED`, which has not happened
+ * yet when this runs.
+ *
+ * Everything on this page that moves the pair on purpose -- `irA`, and so the
+ * switch, the jump buttons and the tie itself -- writes through the raw writers
+ * and never through the accessors, so no gesture window can be open around it.
+ */
+const VENTANA_DEL_GESTO = 250;
+
+function instalarEnlace(video, programme, cajas, alSoltar) {
+  const delElemento = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'currentTime');
+  const delPrograma = Object.getOwnPropertyDescriptor(programme, 'currentTime');
+  const crudo = {
+    nuestro: (s) => delElemento.set.call(video, s),
+    otro: (s) => delPrograma.set.call(programme, s)
+  };
+  const soltado = { demo: 0, stock: 0 };
+
+  for (const [lado, caja] of Object.entries(cajas)) {
+    caja.addEventListener('pointerup', (evento) => {
+      if (evento.target?.closest?.('.qa-track')) soltado[lado] = performance.now();
+    }, true);
+    // A bar that is not there is a tie that quietly does nothing, and a demo
+    // whose two halves drift apart on stage with no warning is the thing this
+    // whole file is against. `.qa-track` is the chrome's, so the day it is
+    // renamed this line is what says so.
+    setTimeout(() => {
+      if (!caja.querySelector('.qa-track')) {
+        console.warn(`[app] no bar found in the ${lado} pane: the two bars are NOT tied`);
+      }
+    }, 5000);
+  }
+
+  const escribe = (lado, crudoDelLado) => (s) => {
+    const esGesto = enlaceActivo && performance.now() - soltado[lado] < VENTANA_DEL_GESTO;
+    if (esGesto) alSoltar(lado, s);
+    else crudoDelLado(s);
+  };
+
+  Object.defineProperty(video, 'currentTime', {
+    configurable: true,
+    get: () => delElemento.get.call(video),
+    set: escribe('demo', crudo.nuestro)
+  });
+  Object.defineProperty(programme, 'currentTime', {
+    configurable: true,
+    get: () => delPrograma.get.call(programme),
+    set: escribe('stock', crudo.otro)
+  });
+  return crudo;
+}
+
+/** A scrub, from whichever bar: one target, both panes, and the path recorded. */
+function enlazar(origen, pedido) {
+  if (!vivo) return;
+  const objetivo = objetivoSeguro(pedido);
+  const enBreak = vivo.stock.playingAd != null;
+  ultimoEnlace = { origen, pedido, objetivo, camino: enBreak ? 'rearmado' : 'directo', delta: null };
+  if (enBreak) {
+    console.log(`[app] scrub from the ${origen} bar to ${objetivo.toFixed(2)}s while the ` +
+      'off-the-shelf pane is inside a break: it cannot take a seek there, so both are rebuilt');
+    armar(posicionActual, objetivo);
+    return;
+  }
+  vivo.crudo.nuestro(objetivo);
+  vivo.video.play().catch(() => {});
+  vivo.crudo.otro(objetivo);
+  const registro = ultimoEnlace;
+  setTimeout(() => {
+    if (!vivo || ultimoEnlace !== registro) return;
+    registro.delta = Math.abs(vivo.stock.programme.currentTime - objetivo);
+    if (registro.delta <= TOLERANCIA) return;
+    registro.camino = 'directo, no entró → rearmado';
+    console.log(`[app] the off-the-shelf pane did not take ${objetivo.toFixed(2)}s ` +
+      `(it is at ${vivo.stock.programme.currentTime.toFixed(2)}s): both are rebuilt`);
+    armar(posicionActual, objetivo);
+  }, 400);
 }
 
 /**
@@ -389,7 +573,16 @@ function armar(indice, retomarEn = 0) {
   video.addEventListener('timeupdate', pintarDemo);
   pintarDemo();
 
-  vivo = { hls, concurrent, consumer, video, stock, stockVideo: otro.video, posicion, src: SRC };
+  // The tie of the two bars, over the two properties the chrome writes, and the
+  // raw writers everything else on this page moves the pair with. It goes on the
+  // objects of THIS arming, so a rebuild takes the old pair's accessors down
+  // with the old pair.
+  const crudo = instalarEnlace(
+    video, stock.programme, { demo: nuestro.player, stock: otro.player }, enlazar);
+
+  vivo = {
+    hls, concurrent, consumer, video, stock, stockVideo: otro.video, posicion, src: SRC, crudo
+  };
   irA(objetivoSeguro(retomarEn));
   pintarPasos();
 
@@ -408,7 +601,14 @@ function armar(indice, retomarEn = 0) {
     get pedidos() { return [...pedidos]; },
     stage,
     armar: (indice, retomarEn) => armar(indice, retomarEn),
-    irA
+    irA,
+    // The tie of the two bars: what the last scrub did, and the switch that
+    // turns the tie off. The switch is what a measurement of the tie needs and
+    // could not build from outside -- a number that is small with the tie on
+    // means nothing until the same measurement comes out big with it off.
+    get ultimoEnlace() { return ultimoEnlace; },
+    get enlace() { return enlaceActivo; },
+    set enlace(valor) { enlaceActivo = !!valor; }
   };
 }
 
