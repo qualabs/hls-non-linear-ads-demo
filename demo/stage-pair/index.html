@@ -43,25 +43,25 @@
   gone for twelve seconds; on the right it never stops.
 
   THREE. THE DEVICE'S CAPACITY DEGRADES THE FORMAT OF THE AD, NOT THE AD
-  (ADR 0084). The switch above the pair declares how many video decoders the
-  device has, that number TRAVELS on the asset-list request as
-  `qa-decoder-count` (ADR 0083), and what comes back is the same layout, the
-  same campaign and the same duration with the creative in another medium: video
-  with two decoders, `image/svg+xml` with one. The publisher goes on monetising
-  and the viewer goes on seeing a non-linear ad over the programme.
+  (ADR 0084). The switch above the pair declares what the device can draw, one
+  axis at a time -- video decoders and images over video (ADR 0086) -- and both
+  TRAVEL on the asset-list request. What comes back is the same for every
+  device: the ad with its two options, video and image. The library keeps the
+  first one the device can show (ADR 0085): video with two decoders, the same
+  creative as `image/svg+xml` with one, and with neither, the break's linear
+  default, or nothing when the break has none (ADR 0087).
 
   AND THERE IS NO SERVER ON THE OTHER SIDE, which the page says in words a few
   lines below. These demos are published as static files in a bucket, so nothing
-  can read a query at request time: the response is baked by value, one playlist
-  per step, and the switch is the `if`. The parameter is the one an ad
-  presentation server would read, and the day there is one this page does not
-  change.
+  can read a query at request time -- and nothing has to: the answer is the same
+  file for every device and the choice is made by the Player, which is where the
+  specification puts it (R5.6).
 
   WHAT EACH ELEMENT IS FOR
   ------------------------
   #stock-slot / #demo-slot  the boxes the panes are built into. They are EMPTY
-           in this file and filled by js/app.js, because changing the step
-           REBUILDS both players -- `decoderCount` is read once, when the
+           in this file and filled by js/app.js, because changing the switch
+           REBUILDS both players -- `capabilities` is read once, when the
            signalling is created, so a value that changed in flight would not be
            read again (lib/signalling.js). The two are rebuilt by one call, at
            one instant, with one target time: a pair whose halves were rebuilt
@@ -70,8 +70,8 @@
 
   #wire    the asset-list requests THE BROWSER ACTUALLY MADE, read off the
            performance timeline. Not a transcript: the page prints the URL that
-           went out, which is the same string the network tab shows, and the
-           parameter is picked out of it.
+           went out, which is the same string the network tab shows, with the
+           parameters picked out of it and what the library kept of the answer.
 
   #contract  the contract of ADR 0003 in one line of text: what the signalling
            layer says is active right now. The console carries the same thing
@@ -94,21 +94,22 @@
     <img src="./brand/logo-qualabs-on-dark.svg" alt="Qualabs">
     <p class="headline">
       One media playlist. Two <code>EXT-X-DATERANGE</code> per break on the same
-      <code>START-DATE</code>. Two clients, neither of which knows about the other &mdash;
+      <code>START-DATE</code>, and one where the break has no linear default. Two clients, neither of which knows about the other &mdash;
       and the same ad space sold on both, one of them without taking the screen.
     </p>
   </header>
 
   <section class="switch" aria-label="Device capability">
-    <p class="switch-label">Video decoders this device declares</p>
-    <div class="steps" id="steps" role="group" aria-label="Declared video decoders"></div>
+    <p class="switch-label">What this device declares</p>
+    <div class="steps" id="steps"></div>
     <p class="step-out" id="step-out"></p>
     <div class="jumps" id="jumps" role="group" aria-label="Jump to"></div>
     <p class="no-server">
-      There is no ad presentation server behind this page. <code>qa-decoder-count</code> is the
-      parameter such a server would read; here the answer is baked by value, one static playlist
-      per step, and the switch above picks which one is loaded. What is real is the request: the
-      parameter is on it, or absent from it, exactly as the library builds it.
+      There is no ad presentation server behind this page. The two capabilities travel on every
+      asset-list request, as such a server would read them, and the answer is one static file per
+      break that always carries every option of the ad. What decides what is drawn is the library:
+      it keeps the first option this device can show and, when none fits, plays the break&rsquo;s
+      linear default or skips it.
     </p>
   </section>
 

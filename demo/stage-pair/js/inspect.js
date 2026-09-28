@@ -33,10 +33,17 @@
 // claim a client behaviour it did not observe. Before the requests are in, the
 // ranges are drawn unmarked rather than guessed at.
 //
+// And it adds a fourth move, WHAT THE LIBRARY KEPT, which is the intermediate
+// step of ADR 0085 on screen: the answer carries every option of the ad, the
+// same for every device, and the library keeps the first one the declared
+// capability satisfies. What is drawn in that card is the report the library
+// hands `onResolved`, so the page shows what the library did and not what this
+// file thinks it should have done.
+//
 // ============================================================================
-// WHY THE STEP REBUILDS AND THE JUMP DOES NOT
+// WHY THE SWITCH REBUILDS AND THE JUMP DOES NOT
 // ============================================================================
-// `decoderCount` is read ONCE, when the signalling is created (`createSignalling`
+// `capabilities` is read ONCE, when the signalling is created (`createSignalling`
 // in lib/signalling.js), with the argument written where it is read: what that
 // value can be wrong about is a statement of the integrator, and that is one
 // statement and not one per break. So there is no in-flight way to change it and
@@ -54,18 +61,16 @@
 // what it wrote a quarter of a second later, and tries again if it did not land.
 
 import { traceContract } from './contract-trace.js';
+import {
+  PARAMETROS, breakDelReporte, crearControl, desenlace, describirOpcion
+} from './capabilities.js';
 
-// The one source of the numbers of this demo (ADR 0044). The steps, the
-// playlists, the name of the parameter and the three breaks all come from here;
-// not one of them is typed in this file.
+// The one source of the numbers of this demo (ADR 0044). The axes of the
+// switch, the playlist and the three breaks all come from here; not one of them
+// is typed in this file.
 const stage = await (await fetch('/stage.json')).json();
 
-const PARAMETRO = stage.decodificadores.parametro;
-const POSICIONES = stage.decodificadores.posiciones;
-const PLAYLIST = {
-  rica: `/${stage.playlists.rica}`,
-  magra: `/${stage.playlists.magra}`
-};
+const SRC = `/${stage.playlists.par}`;
 
 /** Five seconds of programme before a break: the transition in is what is worth seeing. */
 const ENTRADA = 5;
@@ -78,6 +83,9 @@ const dom = {
   contract: document.getElementById('contract'),
   which: document.getElementById('which'),
   ranges: document.getElementById('ranges'),
+  rangesLede: document.getElementById('ranges-lede'),
+  filter: document.getElementById('filter'),
+  outcome: document.getElementById('outcome'),
   request: document.getElementById('request'),
   answerLede: document.getElementById('answer-lede'),
   answer: document.getElementById('answer')
@@ -161,7 +169,10 @@ function dibujarRango(linea, pedida) {
 /** break id -> { url, cuerpo }, the request this client made and its answer. */
 const intercambio = new Map();
 
-const breakDeLaUrl = (url) => url.match(/asset-list-break-([a-z0-9]+)-/)?.[1] ?? null;
+const breakDeLaUrl = (url) => url.match(/asset-list-break-([a-z0-9]+)\.json/)?.[1] ?? null;
+
+/** break id -> what the library kept of the answer, as `onResolved` reported it. */
+const selecciones = new Map();
 
 const vistas = new Set();
 
@@ -205,9 +216,12 @@ function resumenDeLaRespuesta(cuerpo) {
   }
   const assets = Array.isArray(lista?.ASSETS) ? lista.ASSETS : [];
   const items = assets.flatMap((a) => a?.['X-AD-CREATIVE-SIGNALING']?.payload ?? []);
-  const cajas = items.flatMap((i) => i?.layout?.assets ?? []);
+  const opciones = items.flatMap((i) => (Array.isArray(i?.options) ? i.options : [i]));
+  const cajas = opciones.flatMap((o) => o?.layout?.assets ?? []);
   const partes = [`${assets.length} asset${assets.length === 1 ? '' : 's'}`];
-  const layouts = [...new Set(items.map((i) => i?.type).filter(Boolean))];
+  partes.push(`${opciones.length} option${opciones.length === 1 ? '' : 's'}`);
+  partes.push(assets.some((a) => typeof a?.URI === 'string' && a.URI.trim()) ? 'linear default' : 'no default');
+  const layouts = [...new Set(opciones.map((o) => o?.type).filter(Boolean))];
   if (layouts.length) partes.push(layouts.join(', '));
   const medios = [...new Set(cajas.map((c) => c?.type).filter(Boolean))];
   if (medios.length) partes.push(medios.join(', '));
@@ -242,17 +256,51 @@ function pintarIntercambio() {
     return dibujarRango(linea, traza.url.pathname === listaDelRango(linea));
   }));
   if (!rangos.length) dom.ranges.replaceChildren(el('p', 'none', 'no range for this break in the playlist'));
+  dom.rangesLede.textContent = rangos.length > 1
+    ? 'Two ranges, same START-DATE, one playlist. The class is compared as an exact string and ' +
+      'there is no inheritance, so each client keeps one and ignores the other.'
+    : 'One range. This break has no linear default: there is nothing for an off-the-shelf client ' +
+      'to play, so for it the programme is simply not interrupted.';
 
   // Move 2: the URL that went out, with the parameter picked out of it.
   dom.request.replaceChildren();
   if (!traza) {
     dom.request.append(el('span', 'none', 'no request for this break has gone out yet'));
   } else {
-    const valor = traza.url.searchParams.get(PARAMETRO);
     dom.request.append(el('span', 'request__path', traza.url.pathname));
-    dom.request.append(valor === null
-      ? el('span', 'none', `  — no ${PARAMETRO} on this request`)
-      : el('b', null, `?${PARAMETRO}=${valor}`));
+    const pares = Object.values(PARAMETROS)
+      .filter((nombre) => traza.url.searchParams.has(nombre))
+      .map((nombre) => `${nombre}=${traza.url.searchParams.get(nombre)}`);
+    dom.request.append(pares.length
+      ? el('b', null, `?${pares.join('&')}`)
+      : el('span', 'none', '  — no capability on this request'));
+  }
+
+  // Move 4: what the library kept, off its own report.
+  const seleccion = selecciones.get(mostrado.id);
+  const asset = seleccion?.assets[0];
+  if (!asset) {
+    dom.filter.replaceChildren(el('li', 'none', 'the library has not resolved this break yet'));
+    dom.outcome.textContent = '';
+  } else {
+    const item = asset.items[0];
+    dom.filter.replaceChildren(...(item?.offered ?? []).map((opcion, i) => {
+      const descarte = item.discarded.find((d) => d.index === i);
+      const veredicto = descarte ? 'discarded' : i === item.chosen ? 'kept' : 'not-reached';
+      const li = el('li', 'filter__option');
+      li.dataset.verdict = veredicto;
+      li.append(
+        el('p', 'filter__what', describirOpcion(opcion, i)),
+        el('p', 'filter__why', descarte
+          ? `Discarded: it ${descarte.reason}.`
+          : veredicto === 'kept'
+            ? 'Kept: this device can show it, and it is the first that fits.'
+            : 'Not checked: an earlier option was kept.')
+      );
+      return li;
+    }));
+    dom.outcome.dataset.outcome = asset.outcome;
+    dom.outcome.textContent = desenlace(asset);
   }
 
   // Move 3: the body of that same URL, verbatim.
@@ -270,7 +318,8 @@ function mostrarBreak(brk) {
   mostrado = brk;
   dom.which.textContent =
     `Break ${brk.id.toUpperCase()} of ${stage.breaks.length} · t = ${brk.offset}s to ` +
-    `${brk.offset + brk.duracion}s · ${stage.campanas[brk.campana].marca}`;
+    `${brk.offset + brk.duracion}s · ${stage.campanas[brk.campana].marca} · ` +
+    (brk.lineal ? 'with a linear default' : 'no default: content that is not interrupted');
   pintarIntercambio();
 }
 
@@ -280,7 +329,6 @@ function mostrarBreak(brk) {
 
 /** What is alive right now, or null. */
 let vivo = null;
-let posicionActual = 0;
 
 function construirCaja() {
   const player = document.createElement('div');
@@ -324,13 +372,10 @@ function buscar(objetivo, intentos = 20) {
   }, 250);
 }
 
-function armar(indice, retomarEn = 0) {
-  const posicion = POSICIONES[indice];
-  const SRC = PLAYLIST[posicion.respuesta];
-  posicionActual = indice;
-
+function armar(capacidades, retomarEn = 0) {
   derribar();
   intercambio.clear();
+  selecciones.clear();
   vistas.clear();
   mostrado = null;
   leerRangos(SRC).then(pintarIntercambio);
@@ -345,17 +390,17 @@ function armar(indice, retomarEn = 0) {
   const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
   const concurrent = QualabsConcurrentHls.attach(hls, {
     container: player,
-    onResolved: (experiences) => {
+    // What the device can draw, one axis at a time (ADR 0086). It travels on
+    // the request AND the library filters the options of every ad against it.
+    capabilities: capacidades,
+    onResolved: (experiences, seleccion) => {
       for (const e of experiences) {
         console.log(`[page] resolved ${e.type}#${e.itemId}: ${e.elements.length} elements,` +
           ` window ${e.startTime.toFixed(2)}s -> ${(e.startTime + e.duration).toFixed(2)}s`);
       }
-    },
-    // A `null` is not "zero decoders" and it is not a placeholder: it is the
-    // supported state in which nothing is added to the request and it goes out
-    // exactly as it goes out for an integrator who never heard of the option
-    // (`usableDecoderCount`, in lib/signalling.js).
-    decoderCount: posicion.valor
+      selecciones.set(breakDelReporte(seleccion), seleccion);
+      pintarIntercambio();
+    }
   });
   hls.loadSource(SRC);
   hls.attachMedia(video);
@@ -371,10 +416,9 @@ function armar(indice, retomarEn = 0) {
 
   hls.on(Hls.Events.MANIFEST_PARSED, () => {
     const off = hls.interstitialsManager == null;
-    const declarado = posicion.valor == null ? 'not declared' : String(posicion.valor);
     dom.hud.textContent =
       `hls.js ${Hls.version} · interstitials manager: ${off ? 'none' : 'PRESENT'} · ` +
-      `decoderCount: ${declarado} · playing ${SRC}`;
+      `capabilities: ${JSON.stringify(capacidades)} · playing ${SRC}`;
   });
 
   video.muted = true;
@@ -384,10 +428,12 @@ function armar(indice, retomarEn = 0) {
   function pintar() {
     const activas = concurrent.provider.activeAt(video.currentTime);
     dom.pane.dataset.state = activas.length ? 'ad' : 'primary';
+    // A linear default declares no medium of its own: it is the asset's `URI`
+    // played full frame (ADR 0019), so it is named for what it is.
     const medios = [...new Set(activas
-      .flatMap((e) => e.elements)
-      .filter((caja) => !caja.primary)
-      .map((caja) => caja.mediaType || 'unknown'))].join(', ');
+      .flatMap((e) => e.elements.map((caja) => ({ caja, lineal: e.type === 'linear' })))
+      .filter(({ caja }) => !caja.primary)
+      .map(({ caja, lineal }) => caja.mediaType || (lineal ? 'the linear default, full frame' : 'unknown')))].join(', ');
     dom.state.textContent = activas.length
       ? `primary content + NON-LINEAR AD (${activas.map((e) => e.type).join(', ')})` +
         ` · ${video.currentTime.toFixed(1)}s · nothing was replaced · ad media: ${medios}`
@@ -403,9 +449,8 @@ function armar(indice, retomarEn = 0) {
   video.addEventListener('seeked', pintar);
   pintar();
 
-  vivo = { hls, concurrent, consumer, video, posicion, src: SRC };
+  vivo = { hls, concurrent, consumer, video, capacidades, src: SRC };
   if (retomarEn > 0) buscar(retomarEn);
-  pintarPasos();
 
   // For the console, for the measurements of this task, and for whoever comes
   // next. It is replaced on every arming, so it always points at what is alive.
@@ -414,14 +459,15 @@ function armar(indice, retomarEn = 0) {
     get video() { return vivo.video; },
     get concurrent() { return vivo.concurrent; },
     get provider() { return vivo.concurrent.provider; },
-    get posicion() { return vivo.posicion; },
+    get capacidades() { return vivo.capacidades; },
     get src() { return vivo.src; },
     get mostrado() { return mostrado?.id ?? null; },
     get intercambio() {
       return Object.fromEntries([...intercambio].map(([id, t]) => [id, { url: t.url.href, cuerpo: t.cuerpo }]));
     },
     stage,
-    armar: (indice, retomarEn) => armar(indice, retomarEn),
+    get selecciones() { return Object.fromEntries(selecciones); },
+    armar: (capacidades, retomarEn) => armar(capacidades, retomarEn),
     irA: (segundo) => buscar(segundo)
   };
 }
@@ -430,29 +476,12 @@ function armar(indice, retomarEn = 0) {
 // THE SWITCH AND THE JUMPS
 // ===========================================================================
 
-const pasos = document.getElementById('steps');
-const salida = document.getElementById('step-out');
-
-const etiqueta = (p) => (p.valor == null ? 'not declared' : `${p.valor}`);
-
-const botones = POSICIONES.map((posicion, indice) => {
-  const boton = document.createElement('button');
-  boton.type = 'button';
-  boton.className = 'step';
-  boton.textContent = etiqueta(posicion);
-  boton.addEventListener('click', () => armar(indice, vivo ? vivo.video.currentTime : 0));
-  return boton;
+const control = crearControl({
+  contenedor: document.getElementById('steps'),
+  salida: document.getElementById('step-out'),
+  stage,
+  alCambiar: (capacidades) => armar(capacidades, vivo ? vivo.video.currentTime : 0)
 });
-pasos.replaceChildren(...botones);
-
-function pintarPasos() {
-  const posicion = POSICIONES[posicionActual];
-  botones.forEach((b, i) => b.setAttribute('aria-pressed', String(i === posicionActual)));
-  salida.textContent = posicion.valor == null
-    ? `request goes out without ${PARAMETRO} → the rich answer: the ad in video`
-    : `request carries ${PARAMETRO}=${posicion.valor} → the ` +
-      (posicion.respuesta === 'rica' ? 'rich answer: the ad in video' : 'lean answer: the same ad as image/svg+xml');
-}
 
 // A jump is a seek and not a rebuild, which is the one thing this page does
 // differently from `index.html`: there the rebuild existed for the other pane,
@@ -473,4 +502,4 @@ jumps.replaceChildren(...[
   return boton;
 }));
 
-armar(0);
+armar(control.actual());

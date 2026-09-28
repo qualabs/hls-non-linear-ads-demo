@@ -4,7 +4,7 @@
 | --- | --- | --- | --- | --- |
 | T-01 | `lib/`: `capabilities`, los parámetros de R29.1 y el paso `selectOption`, con sus tests | done | — | `lib/{signalling,concurrent-hls}.js` · `test/capability-options.test.js` (12 pruebas; suite 216 → 228) · campaña de 8 mutaciones, las 8 en rojo |
 | T-02 | La señalización: un asset-list estático por break con todas las opciones, una playlist, A sin default | done | — | `demo/stage-pair/{stage.json,scripts/escribir-asset-lists.mjs,scripts/senalizar-contenido.sh,signalling/}` · `test/signalled-run.test.js` (sección del par reescrita; suite 228 → 229) |
-| T-03 | Las páginas: el control de dos ejes, y el panel del filtro en `inspect.html` | pending | — | — |
+| T-03 | Las páginas: el control de dos ejes, y el panel del filtro en `inspect.html` | done | — | `demo/stage-pair/{index.html,inspect.html,js/app.js,js/inspect.js,js/capabilities.js,css/player.css}` · capturas en `tasks/T-04/` |
 | T-04 | La verificación: capturas de las cuatro combinaciones, los pedidos, y los scripts de medición al día | pending | — | — |
 | T-05 | El README de la demo con el ejemplo de API, y el documento del integrador | pending | — | — |
 

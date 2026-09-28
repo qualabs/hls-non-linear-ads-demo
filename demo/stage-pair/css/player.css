@@ -118,6 +118,15 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
   color: var(--q-ink-900);
   font-weight: 600;
 }
+/* THE TWO AXES of the declaration (ADR 0086), each one a label and its values.
+ * Two groups and not one row of four, because each axis is said on its own:
+ * that is the whole difference from a device class. */
+.axis { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.axis + .axis { margin-left: 10px; }
+.axis-label {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--q-paper-50) 70%, transparent);
+}
 .step-out {
   margin: 0;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -318,7 +327,7 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
  * columns: stuck to the top of a single column it would cover what is under
  * it. */
 @media (min-width: 1101px) {
-  .inspect > .pane { position: sticky; top: 10px; }
+  .inspect > .inspect__left { position: sticky; top: 10px; }
 }
 
 /* The ring the pane grows while an ad is on screen is drawn OUTSIDE the picture,
@@ -326,6 +335,9 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
  * text the first time a break starts. On `index.html` the third line of the
  * label already leaves that room; here there is no third line. */
 .inspect .role-sub { margin-bottom: 14px; }
+
+/* The player and, under it, what the library kept of the answer (ADR 0085). */
+.inspect__left { display: grid; gap: 14px; min-width: 0; }
 
 /* The three cards, in one column, each numbered so that "the second one" means
  * something said out loud. */
@@ -438,7 +450,8 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
 }
 .request b { color: var(--q-teal-500); }
 .request .none,
-.exchange .none { color: color-mix(in srgb, var(--q-paper-50) 55%, transparent); font-weight: 400; }
+.exchange .none,
+.inspect__left .none { color: color-mix(in srgb, var(--q-paper-50) 55%, transparent); font-weight: 400; }
 
 /* THE BODY THAT CAME BACK. It is capped and scrolls rather than pushing the
  * page: the first screen of it carries the fields that are being talked about,
@@ -458,6 +471,35 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
   word-break: break-word;
   color: color-mix(in srgb, var(--q-paper-50) 88%, transparent);
 }
+
+/* WHAT THE LIBRARY KEPT (ADR 0085). One row per option of the answer, in the
+ * order the library walked them: the kept one in the accent, a discarded one
+ * struck and dimmed, with the reason under it in a sentence meant to be read out
+ * loud. The outcome of the break closes the card. */
+.filter { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.filter__option {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--q-ink-700);
+}
+.filter__what {
+  margin: 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+.filter__why { margin: 4px 0 0; font-size: 15px; line-height: 1.45; }
+.filter__option[data-verdict='kept'] { border-color: var(--q-teal-500); }
+.filter__option[data-verdict='kept'] .filter__why { color: var(--q-teal-500); font-weight: 600; }
+.filter__option[data-verdict='discarded'] .filter__what {
+  text-decoration: line-through;
+  color: color-mix(in srgb, var(--q-paper-50) 55%, transparent);
+}
+.filter__option[data-verdict='not-reached'] { opacity: 0.6; }
+.outcome { margin: 10px 0 0; font-size: 16px; font-weight: 600; line-height: 1.45; }
+.outcome[data-outcome='default'] { color: var(--q-amber-400); }
+.outcome[data-outcome='skipped'] { color: var(--q-amber-400); }
 
 /* ---------------------------------------------------------------------------
  * RACE.HTML — THE ADS, AND THEN THE WINDOW
