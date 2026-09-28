@@ -8,7 +8,7 @@
 | T-04 | La verificación: capturas de las cuatro combinaciones, los pedidos, y los scripts de medición al día | done | — | [`tasks/T-04/README.md`](tasks/T-04/README.md) · `demo/stage-pair/test/{verificar-capacidades.py,medir-tramo-en-el-par.py (ex medir-escalera.py),verificar-inspect.py,medir-tramo-invertido.py,medir-enlace-de-barras.py,banco-de-medicion.html}` |
 | T-05 | El README de la demo con el ejemplo de API, y el documento del integrador | done | — | `demo/stage-pair/README.md` ("The API, as it goes on a slide") · `docs/integrating-the-library.md` §6 · `docs/contrato-senalizacion-renderizado.md` (qué cuenta como no dibujable) · `README.md` de la raíz |
 | T-06 | `npm run check` construye la librería, y un build roto da rojo | done | — | `scripts/verificar-build.sh` · `package.json` · [`tasks/T-06/`](tasks/T-06/) (verde, y rojo con el import partido) |
-| T-07 | La publicación en `qualabs-hls-demo-stage-pair`, verificada sin credenciales | in-progress | — | — |
+| T-07 | La publicación en `qualabs-hls-demo-stage-pair`, verificada sin credenciales | done | — | [`tasks/T-07/README.md`](tasks/T-07/README.md) · publicada el 2026-09-28 |
 
 ---
 

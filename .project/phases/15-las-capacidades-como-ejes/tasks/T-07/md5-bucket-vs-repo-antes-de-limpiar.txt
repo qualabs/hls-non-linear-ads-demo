@@ -1,0 +1,6 @@
+objetos en el bucket: 497
+archivos locales a publicar: 494; comparados por md5: 494; distintos: 0; faltan en el bucket: 0
+objetos del bucket sin archivo local: ['content/primary/con-daterange-magra.m3u8', 'content/primary/con-daterange-rica.m3u8', 'test/medir-escalera.py']
+.fuentes o __pycache__ publicado: []
+control: el md5 remoto de index.html contra el stage.json local -> DISTINTO (el comparador distingue)
+VERDE

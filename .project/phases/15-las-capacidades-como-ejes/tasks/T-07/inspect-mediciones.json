@@ -1,0 +1,208 @@
+{
+  "filas": [
+    {
+      "combinacion": "dec2-imgsi",
+      "break": "a",
+      "t": 23.52,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0
+      },
+      "ok": true,
+      "descartes": []
+    },
+    {
+      "combinacion": "dec2-imgsi",
+      "break": "b",
+      "t": 68.53,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0
+      },
+      "ok": true,
+      "descartes": [],
+      "pedidos": [
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=1",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=1",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=1",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=1",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=1",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=1"
+      ]
+    },
+    {
+      "combinacion": "dec2-imgno",
+      "break": "a",
+      "t": 23.51,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0
+      },
+      "ok": true,
+      "descartes": []
+    },
+    {
+      "combinacion": "dec2-imgno",
+      "break": "b",
+      "t": 68.51,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0
+      },
+      "ok": true,
+      "descartes": [],
+      "pedidos": [
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=0"
+      ]
+    },
+    {
+      "combinacion": "dec1-imgsi",
+      "break": "a",
+      "t": 23.51,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 1,
+        "video": 1,
+        "img": 1
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 1,
+        "video": 1,
+        "img": 1
+      },
+      "ok": true,
+      "descartes": [
+        "needs 2 video decoders and the device declares 1"
+      ]
+    },
+    {
+      "combinacion": "dec1-imgsi",
+      "break": "b",
+      "t": 68.51,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 1,
+        "video": 1,
+        "img": 1
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 1,
+        "video": 1,
+        "img": 1
+      },
+      "ok": true,
+      "descartes": [
+        "needs 2 video decoders and the device declares 1"
+      ],
+      "pedidos": [
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=1",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=1",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=1",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=1",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=1",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=1"
+      ]
+    },
+    {
+      "combinacion": "dec1-imgno",
+      "break": "a",
+      "t": 23.51,
+      "esperado": {
+        "outcome": "skipped",
+        "chosen": null,
+        "video": 1,
+        "img": 0
+      },
+      "obtenido": {
+        "outcome": "skipped",
+        "chosen": null,
+        "video": 1,
+        "img": 0
+      },
+      "ok": true,
+      "descartes": [
+        "needs 2 video decoders and the device declares 1",
+        "needs an image over the video and the device declares it cannot draw one"
+      ]
+    },
+    {
+      "combinacion": "dec1-imgno",
+      "break": "b",
+      "t": 68.54,
+      "esperado": {
+        "outcome": "default",
+        "chosen": null,
+        "video": 2,
+        "img": 0
+      },
+      "obtenido": {
+        "outcome": "default",
+        "chosen": null,
+        "video": 2,
+        "img": 0
+      },
+      "ok": true,
+      "descartes": [
+        "needs 2 video decoders and the device declares 1",
+        "needs an image over the video and the device declares it cannot draw one"
+      ],
+      "pedidos": [
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=0",
+        "https://qualabs-hls-demo-stage-pair.storage.googleapis.com/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=0"
+      ]
+    }
+  ],
+  "queries": {
+    "sgai-video-decoders=2&sgai-image-over-video=1": 6,
+    "sgai-video-decoders=2&sgai-image-over-video=0": 6,
+    "sgai-video-decoders=1&sgai-image-over-video=0": 12,
+    "sgai-video-decoders=1&sgai-image-over-video=1": 6
+  }
+}
