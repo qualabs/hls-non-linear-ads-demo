@@ -5992,3 +5992,14 @@ las dos barras, que tuvo que mudar los casos de la trampa de A a C. `medir-escal
 escalón) lo mide ahora `verificar-capacidades.py`. `objetivoSeguro` de `app.js` ya no retrocede
 en A, porque para el pane de fábrica A es programa. Quedan en disco, sin git, las dos playlists
 viejas `content/primary/con-daterange-{rica,magra}.m3u8`, que ya no lee nadie.
+
+## 2026-09-28 — T-06 y T-07: el build en `npm run check`, y la demo publicada
+
+Con la aprobación de Nicolás vía el coordinador. `npm run check` ahora construye la librería en una
+carpeta descartable (`scripts/verificar-build.sh`). Su control: con un `import` partido, check da 1
+por el `SyntaxError` del build y con las costuras en verde. `stage-pair` quedó publicada en
+`qualabs-hls-demo-stage-pair`. El bucket es byte a byte el árbol probado: 494 objetos contra 494
+archivos, sin distintos ni sobrantes. Los asset-lists viejos dan 404, el bucket no se lista y las
+cuatro combinaciones dan verde en la URL pública con un navegador sin credenciales. El comparador
+de md5 dio primero un cero, igual que en la fase 14, y esta vez lo atajó el conteo obligatorio.
+Se borraron además tres objetos viejos que ya no están en el repo.

@@ -1,0 +1,38 @@
+== curl anónimo (sin -H Authorization, sin token), 2026-09-28T20:06:19-03:00 ==
+  /index.html                                  200 text/html
+  /inspect.html                                200 text/html
+  /race.html                                   200 text/html
+  /js/capabilities.js                          200 text/javascript
+  /dist/qualabs-concurrent-hls.js              200 text/javascript
+  /vendor/hls.min.js                           200 text/javascript
+  /stage.json                                  200 application/json
+  /content/primary/con-daterange.m3u8          200 application/vnd.apple.mpegurl
+  /content/primary/seg000.ts                   200 video/mp2t
+  /graphics/campaigns/zumbra-16x9.svg          200 image/svg+xml
+  /signalling/asset-list-break-a.json          200 application/json
+  /signalling/asset-list-break-b.json          200 application/json
+  /signalling/asset-list-break-c.json          200 application/json
+  /signalling/asset-list-linear-b.json         200 application/json
+  /signalling/asset-list-linear-c.json         200 application/json
+== los asset-lists viejos tienen que dar 404 ==
+  /signalling/asset-list-break-a-rica.json     404
+  /signalling/asset-list-break-a-magra.json    404
+  /signalling/asset-list-break-b-rica.json     404
+  /signalling/asset-list-break-b-magra.json    404
+  /signalling/asset-list-break-c-rica.json     404
+  /signalling/asset-list-break-c-magra.json    404
+  /signalling/asset-list-linear-a.json         404
+== control del 404: una ruta inventada, y una que sí existe ==
+  /no-existe.json                              404
+  /signalling/asset-list-break-a.json          200
+== el bucket no se puede listar ==
+  / (raíz del host)                            403
+  JSON API: /storage/v1/b/<bucket>/o           401
+== los asset-lists servidos, byte a byte contra el repo ==
+  signalling/asset-list-break-a.json           IGUAL
+  signalling/asset-list-break-b.json           IGUAL
+  signalling/asset-list-break-c.json           IGUAL
+  signalling/asset-list-linear-b.json          IGUAL
+  signalling/asset-list-linear-c.json          IGUAL
+  js/capabilities.js                           IGUAL
+  control: break-a servido vs break-b local    DISTINTO

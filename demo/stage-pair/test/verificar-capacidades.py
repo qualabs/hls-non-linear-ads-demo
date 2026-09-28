@@ -32,8 +32,11 @@ las de la combinación que se saltea también a 400x780.
 
 USO
     verificar-capacidades.py --puerto 8093 --salida <dir> [--pagina inspect|index]
+    verificar-capacidades.py --base https://<bucket>.storage.googleapis.com --salida <dir>
 
-NO levanta servidor: mide el que está en ese puerto. El puerto se pasa a
+NO levanta servidor: mide el que está en ese puerto, o la demo publicada con
+`--base`. El navegador no lleva credenciales, así que contra el bucket mide lo
+que ve cualquiera. El puerto se pasa a
 propósito: en esta máquina corren demos de Nicolás en 8080, 8081 y 8082.
 """
 
@@ -84,13 +87,16 @@ def nombre(capacidad):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--puerto", type=int, required=True)
+    ap.add_argument("--puerto", type=int)
+    ap.add_argument("--base")
     ap.add_argument("--salida", required=True)
     ap.add_argument("--pagina", default="inspect", choices=["inspect", "index"])
     args = ap.parse_args()
     salida = Path(args.salida)
     salida.mkdir(parents=True, exist_ok=True)
-    base = f"http://localhost:{args.puerto}"
+    if not (args.puerto or args.base):
+        sys.exit("hace falta --puerto o --base")
+    base = args.base.rstrip("/") if args.base else f"http://localhost:{args.puerto}"
     contenedor = "#slot" if args.pagina == "inspect" else "#demo-slot"
 
     filas, rojo = [], 0
