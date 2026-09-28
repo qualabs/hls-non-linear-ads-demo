@@ -31,7 +31,10 @@ instrumento.
 ────────────────────────────────────────────────────────────────────────────────
 USO
 ────────────────────────────────────────────────────────────────────────────────
-    medir-tramo-invertido.py --puerto 8097 [--escalon rica|magra]
+    medir-tramo-invertido.py --puerto 8097 [--decoders 1|2] [--images 1|0]
+
+Mide sólo los breaks con default lineal: en el que no tiene (ADR 0087) el pane
+de fábrica no reproduce nada y no hay tramo que comparar.
 
 El intérprete es **el del skill playwright**, que es el que tiene el paquete y el
 Chrome real del sistema configurado; es el mismo que resuelve
@@ -84,13 +87,13 @@ def senalizar(control=None):
     )
 
 
-def medir(puerto, escalon):
+def medir(puerto, decoders, images):
     from playwright.sync_api import sync_playwright
 
     stage = json.loads((DEMO / "stage.json").read_text())
-    src = "/" + stage["playlists"][escalon]
-    decoders = 1 if escalon == "magra" else 2
-    url = f"http://localhost:{puerto}/test/banco-de-medicion.html?src={src}&decoders={decoders}"
+    src = "/" + stage["playlists"]["par"]
+    url = (f"http://localhost:{puerto}/test/banco-de-medicion.html"
+           f"?src={src}&decoders={decoders}&images={images}")
 
     with sync_playwright() as pw:
         navegador = pw.chromium.launch(
@@ -113,7 +116,7 @@ def medir(puerto, escalon):
 def informe(titulo, filas, stage, esperado_igual):
     print(f"\n== {titulo} ==")
     rojo = 0
-    for fila, brk in zip(filas, stage["breaks"]):
+    for fila, brk in zip(filas, [b for b in stage["breaks"] if b["lineal"]]):
         s, d = fila["stock"], fila["demo"]
         falta = any(k not in x for x in (s, d) for k in ("entra", "sale"))
         if falta:
@@ -137,7 +140,8 @@ def informe(titulo, filas, stage, esperado_igual):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--puerto", type=int, required=True)
-    ap.add_argument("--escalon", default="rica", choices=["rica", "magra"])
+    ap.add_argument("--decoders", type=int, default=2, choices=[1, 2])
+    ap.add_argument("--images", type=int, default=1, choices=[0, 1])
     ap.add_argument("--control-duracion", type=float, default=24.0)
     args = ap.parse_args()
 
@@ -154,13 +158,13 @@ def main():
     try:
         senalizar()
         rojo += informe(
-            f"LA MEDICIÓN — señalización tal cual, escalón {args.escalon}",
-            medir(args.puerto, args.escalon), stage, esperado_igual=True
+            f"LA MEDICIÓN — señalización tal cual, {args.decoders} decodificadores, imágenes {args.images}",
+            medir(args.puerto, args.decoders, args.images), stage, esperado_igual=True
         )
         senalizar(control=args.control_duracion)
         rojo += informe(
             f"EL CONTROL — el break concurrente dura {args.control_duracion} s y su lineal no",
-            medir(args.puerto, args.escalon), stage, esperado_igual=False
+            medir(args.puerto, args.decoders, args.images), stage, esperado_igual=False
         )
     finally:
         # Por el PID que se guardó, nunca por patrón: en esta máquina hay otras

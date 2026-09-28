@@ -1,0 +1,22 @@
+server PID 1285340 en el puerto 8095
+
+== 1. LO QUE LA PÁGINA MUESTRA ESTÁ LEÍDO, NO TRANSCRIPTO ==
+
+  break A, capacidad inicial
+    los rangos de la pantalla == los del archivo         VERDE   1 rango(s)
+      #EXT-X-DATERANGE:ID="AD-A-CONCURRENT",CLASS="com.qualabs.hls.concurrentInterstitial",START-DATE="2026-09-22T04:40:47.8
+    el pedido dibujado nombra el asset-list del break    VERDE   /signalling/asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=1
+    la respuesta dibujada == los bytes del archivo       VERDE   1510 car.
+    CONTROL del comparador: contra el asset-list de otro break VERDE   tiene que dar DISTINTO
+
+  EL CONTROL — CONTROL_DURACION_CONCURRENTE=24 reescribe la fuente
+      PLANNED-DURATION en pantalla, antes  ['12']
+      PLANNED-DURATION en pantalla, ahora  ['24']
+    el tag de la pantalla cambió                         VERDE   
+    y es el de la playlist nueva, línea por línea        VERDE   
+    el JSON de la pantalla cambió                        VERDE   
+    y es el archivo nuevo, byte por byte                 VERDE   duration: 24
+
+server 1285340 bajado
+
+VERDE: las mediciones dieron lo esperado y los controles también.
