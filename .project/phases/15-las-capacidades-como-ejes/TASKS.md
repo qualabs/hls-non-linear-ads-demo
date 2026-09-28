@@ -7,6 +7,8 @@
 | T-03 | Las páginas: el control de dos ejes, y el panel del filtro en `inspect.html` | done | — | `demo/stage-pair/{index.html,inspect.html,js/app.js,js/inspect.js,js/capabilities.js,css/player.css}` · capturas en `tasks/T-04/` |
 | T-04 | La verificación: capturas de las cuatro combinaciones, los pedidos, y los scripts de medición al día | done | — | [`tasks/T-04/README.md`](tasks/T-04/README.md) · `demo/stage-pair/test/{verificar-capacidades.py,medir-tramo-en-el-par.py (ex medir-escalera.py),verificar-inspect.py,medir-tramo-invertido.py,medir-enlace-de-barras.py,banco-de-medicion.html}` |
 | T-05 | El README de la demo con el ejemplo de API, y el documento del integrador | done | — | `demo/stage-pair/README.md` ("The API, as it goes on a slide") · `docs/integrating-the-library.md` §6 · `docs/contrato-senalizacion-renderizado.md` (qué cuenta como no dibujable) · `README.md` de la raíz |
+| T-06 | `npm run check` construye la librería, y un build roto da rojo | done | — | `scripts/verificar-build.sh` · `package.json` · [`tasks/T-06/`](tasks/T-06/) (verde, y rojo con el import partido) |
+| T-07 | La publicación en `qualabs-hls-demo-stage-pair`, verificada sin credenciales | in-progress | — | — |
 
 ---
 
@@ -63,3 +65,20 @@
 - **Definition of done:** ningún `decoderCount` ni `qa-decoder-count` vivo fuera de `.project/`,
   buscado con grep y con el control de que el grep encuentra algo que sí está.
 - **nivel de verificación:** mínimo.
+
+## T-06 — El build de la librería en `npm run check`
+- **Objective:** un cambio que rompe el armado de `lib/` en el global pone rojo `npm run check`.
+- **What it must cover:** `scripts/verificar-build.sh` construye en una carpeta descartable y no en
+  `dist/`, que es lo que sirven las demos corriendo. `construir-libreria.sh` acepta `SALIDA`.
+- **Definition of done:** check verde en el árbol; rojo con un `import` partido en tres líneas, por
+  el `SyntaxError` del build y con las costuras en verde; verde de nuevo al restaurar; `dist/` sin tocar.
+- **nivel de verificación:** bajo. Es un chequeo, y su control es verlo fallar.
+
+## T-07 — La publicación
+- **Objective:** el bucket sirve byte a byte lo que se probó, y se verifica sin credenciales.
+- **What it must cover:** el camino del `CLAUDE.md` del proyecto: `dist/` reconstruido, `signalling/`
+  y `dist/` nuevos, los asset-lists `*-rica`, `*-magra` y `linear-a` borrados, `.ts` con su
+  content type, `-x` anclado, sin `content/.fuentes/`. Autorizado por Nicolás el 2026-09-28.
+- **Definition of done:** las cuatro combinaciones en la URL pública, los asset-lists viejos en 404,
+  el bucket sin listar, y los md5 comparados con un conteo que no puede ser cero.
+- **nivel de verificación:** bajo.
