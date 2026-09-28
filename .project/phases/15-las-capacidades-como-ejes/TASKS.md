@@ -2,7 +2,7 @@
 
 | id | brief | status | plan | evidence |
 | --- | --- | --- | --- | --- |
-| T-01 | `lib/`: `capabilities`, los parámetros de R29.1 y el paso `selectOption`, con sus tests | pending | — | — |
+| T-01 | `lib/`: `capabilities`, los parámetros de R29.1 y el paso `selectOption`, con sus tests | done | — | `lib/{signalling,concurrent-hls}.js` · `test/capability-options.test.js` (12 pruebas; suite 216 → 228) · campaña de 8 mutaciones, las 8 en rojo |
 | T-02 | La señalización: un asset-list estático por break con todas las opciones, una playlist, C sin default | pending | — | — |
 | T-03 | Las páginas: el control de dos ejes, y el panel del filtro en `inspect.html` | pending | — | — |
 | T-04 | La verificación: capturas de las cuatro combinaciones, los pedidos, y los scripts de medición al día | pending | — | — |

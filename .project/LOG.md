@@ -5932,3 +5932,14 @@ a `lib/`, que la fase 14 no tocaba. Sin opción satisfacible, lineal si el break
 salteo si no. Plan aprobado por el coordinador; diseño en `phases/15-las-capacidades-como-ejes/DESIGN.md`.
 ADR 0085 (supersede al 0083), 0086 y 0087, y una nota fechada en el 0084. Línea de base: 216/216
 y las costuras en verde. Compromiso: 2026-09-29.
+
+## 2026-09-28 — T-01: el filtro de capacidades en `lib/`
+
+`attach(hls, { capabilities: { videoDecoders, imageOverVideo } })` reemplaza a `decoderCount`.
+En el pedido viajan `sgai-video-decoders` y `sgai-image-over-video`; `qa-decoder-count` se fue.
+`selectOption` / `narrowBlock` en `lib/signalling.js` recorren las opciones en orden y se quedan
+con la primera satisfacible; sin ninguna, el asset va al `URI` (default) o se saltea. El reporte
+de cada break llega como segundo argumento de `onResolved`. Suite 216 → 228, costuras en verde.
+Campaña de mutaciones acotada al archivo nuevo: 8 roturas, 8 rojas; la de "un ítem sin opción no
+invalida el asset" quedó verde al principio (equivalente con un solo ítem) y se agregó el caso de
+dos ítems, que la pone roja.
