@@ -451,7 +451,7 @@ aviso a cuadro entero sin sonido es una falla que nada en pantalla reporta.
 
 ### Qué cuenta como "no lo puedo dibujar", y qué no
 
-Se detectan tres formas, y las tres son sobre la forma del dato:
+Se detectan tres formas sobre la forma del dato, y una sobre el dispositivo:
 
 - **No hay bloque.** No es una falla: es un aviso lineal.
 - **El bloque no tiene payload usable**: no hay `payload`, está vacío, o alguno
@@ -464,6 +464,17 @@ Se detectan tres formas, y las tres son sobre la forma del dato:
   ventanas de los demás quedan donde estaban. Saltear un asset moviendo a los
   otros sería el break fallando de a un aviso por vez, que es justo lo que el
   Apéndice D.5 separa.
+- **Ninguna opción entra en la capacidad declarada** (ADR 0085). Un item del
+  payload puede traer `options`, una lista de `{ type, layout }` en orden de
+  preferencia (R5.5); un item sin `options` es una sola opción. Antes de juzgar el
+  bloque, `narrowBlock` se queda, por item, con la primera opción que la
+  capacidad declarada en `attach` satisface: una opción pide un decodificador por
+  el primario más uno por cada elemento que no es `image/*`, y pide imágenes si
+  tiene algún elemento `image/*`. Si a un item no le queda ninguna, el bloque no
+  se puede dibujar y el asset cae por los mismos dos caminos de siempre: su `URI`
+  como lineal, o se saltea si no tiene. Sin capacidad declarada no se descarta
+  nada y gana la primera opción. Una oferta de varias vistas no pasa por este
+  filtro.
 
 Y dos que **no** se detectan, cada una por una razón distinta:
 
@@ -473,10 +484,9 @@ Y dos que **no** se detectan, cada una por una razón distinta:
   contenedor y no lo que importa, rechazando nada de lo que realmente falla. Una
   respuesta honesta llega recién cuando el elemento intenta reproducir, que es
   otro mecanismo y otro momento.
-- **Un layout que pide más elementos que los decodificadores declarados.** El
-  número todavía no existe. Cuando exista, la comparación es una línea en el
-  mismo lugar donde el bloque inutilizable ya cae al repliegue, y no necesita
-  mecanismo nuevo.
+- **Un layout que pide más decodificadores de los que el dispositivo tiene, sin
+  que el integrador lo haya declarado.** La librería no detecta la capacidad: la
+  recibe (ADR 0086). Lo que no se declara no se filtra.
 
 **Un `uri` vacío en un elemento no cuenta como bloque ilegible.** La herramienta
 de SVTA emite `"uri": ""` en los seis payloads, con `"URI": "[PATH TO ASSET]"`

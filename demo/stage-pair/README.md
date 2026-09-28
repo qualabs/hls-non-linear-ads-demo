@@ -1,4 +1,4 @@
-# stage-pair — the same stream on two clients, and what the device can decode
+# stage-pair — the same stream on two clients, and what the device can draw
 
 One media playlist. Two `EXT-X-DATERANGE` per break on the same `START-DATE`. Two players
 side by side that know nothing about each other: an off-the-shelf hls.js, which schedules the
@@ -7,11 +7,13 @@ driven by this library, which **keeps the content on screen and draws the ad ove
 same ad space is sold on both, and only one of them takes the screen away.
 
 On top of that, the thing this demo adds to the four that came before it: **the capability of
-the device degrades the format of the ad, not the ad**. A control on the page declares how
-many video decoders it has, that number travels on the asset-list request as
-`qa-decoder-count`, and what comes back is the same campaign, the same layout, the same box
-and the same duration — **in a different medium**. Two decoders and the ad is video; one, and
-it is the same drawing as `image/svg+xml`, which costs no decoder at all.
+the device degrades the format of the ad, not the ad**. A control on the page declares what
+the device can draw, in two axes — video decoders, and images over video — and both travel on
+the asset-list request. What comes back is **the same for every device**: the ad with every
+option it was sold in, video first and the same drawing as `image/svg+xml` second. The library
+keeps the first option the device can show. Two decoders and the ad is video; one, and it is
+the image, which costs no decoder at all; neither, and the break plays its linear default, or
+nothing if it has none.
 
 **Everything on screen that is not the programme was written by hand as vector.** The nine
 advertising creatives and the race are SVG; nothing here came out of an image or a video
@@ -42,7 +44,7 @@ Both drive the system's real Chrome through Playwright and both need `ffmpeg`. E
 verifies what it produced and goes red if a capture lost frames or came out frozen; what that
 assertion measures, and its two controls, are in the header of `scripts/verificar-creativo.sh`.
 
-Without the first, the two pages of the pair still run: what is missing is the rich step of
+Without the first, the two pages of the pair still run: what is missing is the video option of
 each break, not the demo. Without the second, `race.html` has nothing to play, and the
 signalling script says exactly that and carries on.
 
@@ -50,8 +52,8 @@ signalling script says exactly that and carries on.
 
 | page | what it is for |
 | --- | --- |
-| [`index.html`](index.html) | **the pair.** The two players over the same playlist, the walk through the three non-linear shapes — side by side, L-shape and banner, one per break — and the decoder switch |
-| [`inspect.html`](inspect.html) | **one player, and the whole exchange in the open.** The two Date Ranges the playlist carried, the asset-list URL the client asked for with the parameter on it, and the body that came back, verbatim. Made to be read out loud in a room with the network tab open |
+| [`index.html`](index.html) | **the pair.** The two players over the same playlist, the walk through the three non-linear shapes — side by side, L-shape and banner, one per break — and the capability switch |
+| [`inspect.html`](inspect.html) | **one player, and the whole exchange in the open.** The Date Ranges the playlist carried, the asset-list URL the client asked for with the capability on it, the body that came back, verbatim, and **what the library kept of it**: each option, why it was discarded, and how the break ended. Made to be read out loud in a room with the network tab open |
 | [`race.html`](race.html) | **the ads first, then the multi view window.** Four non-linear ads over a race, eight seconds of clean race, and then a window that offers a catalogue of six on-board cameras for whoever is watching to compose |
 
 The three are served from the same root, so they are one demo and not three: same library
@@ -64,22 +66,58 @@ grid holds four boxes, the programme being one of them, so the most that is ever
 **three cameras plus the primary content**. The catalogue is deliberately longer than the
 grid: an offer where everything fits at once is not a choice.
 
-## The switch, and the fact that there is no server
+## The switch, the filter, and the fact that there is no server
 
-`qa-decoder-count` is the parameter an ad presentation server would read. **There is no such
-server here**, and the page says so on screen: these demos are published as static files, so
-the answer is baked by value — one static playlist per step, each pointing at its own set of
-asset-lists, and the switch picks which one is loaded.
+The switch has two axes, **video decoders `1` | `2`** and **images over video `yes` | `no`**,
+and each is sent on the asset-list request on its own, as the specification asks (R29.1):
+`sgai-video-decoders` and `sgai-image-over-video`. They are the parameters an ad presentation
+server would read. **There is no such server here** — these demos are published as static
+files — and nothing needs one: the answer of each break is one static file that always
+carries every option of the ad, whatever the device declared.
 
-**What is real is the request.** The parameter is on it, or absent from it, exactly as the
-library builds it, and that is what `inspect.html` puts on the screen and what the network tab
-shows. Between the rich answer and the lean one a single thing changes per break: the `type`
-and the `uri` of the ad asset.
+**The choice is the library's, and it is an explicit step.** Before drawing, it walks the
+options in order and keeps the first one the declared capability satisfies (R5.6). An option
+needs one decoder for the programme plus one per video element, and needs images if it has an
+image element. So even when the server answers a video to a device that said it has one
+decoder, the device does not try to play it. `inspect.html` shows that step on screen, and the
+console logs every discarded option with its reason.
 
-Moving the switch **rebuilds both players** at the same target second, because hls.js
-instantiates its interstitials machinery in the constructor and the library reads
-`decoderCount` once, when the signalling is created. The run keeps its position instead of
-going back to zero.
+| declared | break with a linear default (B, C) | break without one (A) |
+| --- | --- | --- |
+| 2 decoders, images or not | the ad in video | the ad in video |
+| 1 decoder, images | the same ad as an image | the same ad as an image |
+| 1 decoder, no images | the linear default, full frame | nothing: the programme goes on |
+
+**Break A has no default on purpose** (ADR 0087): its asset carries no `URI` and the playlist
+carries no Apple-class tag for it, so the off-the-shelf pane does not interrupt either. It is
+content that is not interrupted.
+
+Moving the switch **rebuilds both players** at the same target second, because the library
+reads `capabilities` once, when the signalling is created, and hls.js instantiates its
+interstitials machinery in the constructor. The run keeps its position instead of going back
+to zero.
+
+### The API, as it goes on a slide
+
+```js
+const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+
+QualabsConcurrentHls.attach(hls, {
+  container: document.querySelector('.player'),
+  capabilities: {
+    videoDecoders: 1,       // sgai-video-decoders: streams decoded and composed at once, programme included
+    imageOverVideo: true    // sgai-image-over-video: can draw an image over the video
+  }
+});
+
+hls.loadSource('https://example.com/programme.m3u8');
+hls.attachMedia(document.querySelector('.player video'));
+```
+
+The names are the axes of the specification in camelCase, and they travel with the
+specification's own names. `htmlOverVideo`, the third axis of R29.1, is not there because this
+library does not draw HTML: declaring it would be a claim about the player that is not true.
+Each axis is optional, and one that is left out is neither sent nor filtered on.
 
 ## What is on screen and whose it is
 
@@ -118,8 +156,9 @@ npm test                              # this demo's suite runs with the library'
 The suite of this demo runs the signalling scripts for real over a minimal playlist and counts
 what came out, without ffmpeg and without a byte of video, which is what makes it a test of the
 playlist rather than of a `printf`. The measurements that need a browser are separate scripts,
-each one carrying its own control: `test/medir-escalera.py` for the step down of the decoder
-switch, `test/medir-tramo-invertido.py` for the two panes entering and leaving each break on
-the same second, `test/verificar-inspect.py` and `test/verificar-carrera.py` for the other two
-pages. Each prints what it compared against what, and each has a control that it can be seen
+each one carrying its own control: `test/verificar-capacidades.py` for the four positions of
+the switch — the request, the answer that does not change, and the composition that does —,
+`test/medir-tramo-invertido.py` and `test/medir-tramo-en-el-par.py` for the two panes entering
+and leaving each break on the same second, `test/verificar-inspect.py` for what `inspect.html`
+reads, and `test/verificar-carrera.py` for the race. Each prints what it compared against what, and each has a control that it can be seen
 to fail.

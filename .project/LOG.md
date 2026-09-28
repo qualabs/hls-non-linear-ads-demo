@@ -5968,3 +5968,14 @@ junta los módulos sacando los `import` de una sola línea y yo había partido u
 `npm test` ni `npm run check` construyen la librería, así que las dos cosas dieron verde con el
 build roto. Arreglado acá (el import volvió a una línea). No se agregó el build a la suite: queda
 reportado.
+
+## 2026-09-28 — T-05: la documentación, y el ejemplo de API para David
+
+El README de la demo explica el control, el filtro y la tabla de desenlaces por break, y trae el
+snippet para la presentación (`attach(hls, { container, capabilities: { videoDecoders,
+imageOverVideo } })`). `docs/integrating-the-library.md` documenta `capabilities` en lugar de
+`decoderCount`, y el contrato suma el filtro a "qué cuenta como no lo puedo dibujar": ese mismo
+documento decía que cuando el número existiera, la comparación iría en ese lugar. Grep de
+`qa-decoder|decoderCount|DECODER_COUNT` fuera de `.project/`: queda una mención en
+`lib/signalling.js`, que explica el reemplazo. Control: el mismo grep sobre `VIDEO_DECODERS_PARAM`
+encuentra 11.
