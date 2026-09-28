@@ -3,7 +3,7 @@
 | id | brief | status | plan | evidence |
 | --- | --- | --- | --- | --- |
 | T-01 | `lib/`: `capabilities`, los parámetros de R29.1 y el paso `selectOption`, con sus tests | done | — | `lib/{signalling,concurrent-hls}.js` · `test/capability-options.test.js` (12 pruebas; suite 216 → 228) · campaña de 8 mutaciones, las 8 en rojo |
-| T-02 | La señalización: un asset-list estático por break con todas las opciones, una playlist, C sin default | pending | — | — |
+| T-02 | La señalización: un asset-list estático por break con todas las opciones, una playlist, A sin default | done | — | `demo/stage-pair/{stage.json,scripts/escribir-asset-lists.mjs,scripts/senalizar-contenido.sh,signalling/}` · `test/signalled-run.test.js` (sección del par reescrita; suite 228 → 229) |
 | T-03 | Las páginas: el control de dos ejes, y el panel del filtro en `inspect.html` | pending | — | — |
 | T-04 | La verificación: capturas de las cuatro combinaciones, los pedidos, y los scripts de medición al día | pending | — | — |
 | T-05 | El README de la demo con el ejemplo de API, y el documento del integrador | pending | — | — |
@@ -27,13 +27,13 @@
 
 ## T-02 — La señalización estática
 - **Objective:** cada break tiene **un** asset-list concurrente con `options: [video, imagen]`,
-  igual para cualquier capacidad, y hay una sola playlist señalizada. A y B tienen default
-  lineal; C no tiene `URI` ni tag lineal.
+  igual para cualquier capacidad, y hay una sola playlist señalizada. B y C tienen default
+  lineal; A no tiene `URI` ni tag lineal.
 - **What it must cover:** `demo/stage-pair/scripts/escribir-asset-lists.mjs`,
   `scripts/senalizar-contenido.sh`, `stage.json` (`breaks`, `playlists`, `decodificadores`),
   `test/signalled-run.test.js`. ADR 0087. Depende de T-01 para el formato.
 - **Definition of done:** los asset-lists escritos pasan los tests de la demo; la playlist tiene
-  dos tags en A y B y uno en C.
+  un tag en A y dos en B y en C.
 - **nivel de verificación:** bajo. Lo que produce se ve en pantalla y en el network tab.
 
 ## T-03 — Las páginas
@@ -48,8 +48,8 @@
 ## T-04 — La verificación
 - **Objective:** está probado, con el pedido y el JSON leídos del navegador, que el APS devuelve
   lo mismo en las cuatro combinaciones y que la composición cambia: video, imagen, lineal o salteo.
-- **What it must cover:** capturas reales de las cuatro combinaciones en A (con default) y en C
-  (sin default); el pedido con sus parámetros; el cuerpo idéntico; los `<video>` vivos contados.
+- **What it must cover:** capturas reales de las cuatro combinaciones en A (sin default) y en B
+  (con default); el pedido con sus parámetros; el cuerpo idéntico; los `<video>` vivos contados.
   Actualizar `test/medir-escalera.py`, `test/verificar-inspect.py`, `test/medir-tramo-invertido.py`
   y `test/banco-de-medicion.html` al modelo nuevo. Puerto propio, bajado por PID.
 - **Definition of done:** evidencia en `tasks/T-04/` con las capturas y la salida verbatim.

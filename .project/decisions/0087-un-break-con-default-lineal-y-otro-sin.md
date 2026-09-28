@@ -19,15 +19,18 @@ nada reproducible se saltea (D.5).
 
 ## Decisión
 
-- Los breaks A y B llevan default: el asset concurrente tiene `URI` (el lineal de su break) y la
-  playlist tiene su tag lineal de Apple.
-- **El break C no tiene default**: el asset concurrente no lleva `URI` y la playlist no lleva tag
+- **El break A no tiene default**: el asset concurrente no lleva `URI` y la playlist no lleva tag
   lineal. Es contenido que no se interrumpe: el pane de fábrica no pone nada y el nuestro dibuja
-  el banner si puede, y si no, lo saltea.
+  el aviso si puede, y si no, lo saltea.
+- Los breaks B y C llevan default: el asset concurrente tiene `URI` (el lineal de su break) y la
+  playlist tiene su tag lineal de Apple.
+- Es A y no otro porque es el único cuyo creativo lineal (ZUMBRA 16:9) es también su aviso
+  concurrente. Sacarle el lineal a B o a C dejaría una de las nueve piezas autoradas sin usar en
+  la demo; sacárselo a A no deja ninguna.
 
 ## Consecuencias
 
-- En C el pane de fábrica ya no interrumpe. Se descartó dejarle el tag lineal: en cámara se
+- En A el pane de fábrica ya no interrumpe. Se descartó dejarle el tag lineal: en cámara se
   contradice con "esto no se interrumpe".
 - D.2 hace obligatorio el `URI` de cada Asset-Description. Un asset sin `URI` es lo que D.5 manda
   saltear, y es la forma más chica de decir "sin default" en esta capa. En la spec el default es

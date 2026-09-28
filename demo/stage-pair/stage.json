@@ -51,7 +51,7 @@
       { "id": "r3", "offset": 30, "duracion": 6, "campana": "ketrava", "forma": "banner",    "layout": "lowerThirdOverlay",  "lista": "asset-list-race-3.json" },
       { "id": "r4", "offset": 42, "duracion": 6, "campana": "zumbra",  "forma": "backplate", "layout": "squeezebackLShape",  "lista": "asset-list-race-4.json" }
     ],
-    "_breaks": "LOS CUATRO AVISOS VAN ANTES DE `ofertaEn`, y ése es el argumento de la página: primero la publicidad no lineal sobre la carrera, después la ventana de multi view. El último termina en 48 s y la ventana abre en 56, así que hay 8 s de carrera limpia entre una cosa y la otra y las dos clases hermanas (ADR 0063) nunca se pisan en pantalla. LAS CUATRO PIEZAS SON EXACTAMENTE LAS CUATRO QUE `assets.piezas` marca con uso `race`: el par usa las tres 16:9 como lineal, la L de KETRAVA y el banner de KOVRIN, y las cuatro que sobran son las de acá. Así las nueve piezas autoradas se ven en la demo y ninguna queda sin usar. EL ORDEN ALTERNA LA FORMA —banner, L, banner, L— y no repite campaña en breaks contiguos: tres avisos seguidos de la misma marca se leen como un defecto y no como publicidad. DURAN 6 s Y NO 12, que es lo que dura un break del par, y el número sale del creativo y no del reloj: los nueve están autorados con un bucle de 3 s y un anillo de 6 s, así que 6 s son dos bucles exactos y una vuelta entera del anillo, y el aviso abre y cierra idéntico. Con 12 s los cuatro se comerían 48 de los 56 segundos previos a la ventana y la carrera dejaría de verse, que es lo contrario de lo que un aviso no lineal afirma. Los huecos de carrera entre avisos son iguales, 6 s. EL MEDIO ES VIDEO EN LOS CUATRO: esta página no lleva el control de decodificadores —es de la página del par, y un segundo lugar donde mantener el mismo `if` es el defecto que se evita— así que no hay escalón magro que servir acá."
+    "_breaks": "LOS CUATRO AVISOS VAN ANTES DE `ofertaEn`, y ése es el argumento de la página: primero la publicidad no lineal sobre la carrera, después la ventana de multi view. El último termina en 48 s y la ventana abre en 56, así que hay 8 s de carrera limpia entre una cosa y la otra y las dos clases hermanas (ADR 0063) nunca se pisan en pantalla. LAS CUATRO PIEZAS SON EXACTAMENTE LAS CUATRO QUE `assets.piezas` marca con uso `race`: el par usa las tres 16:9 —la de ZUMBRA como aviso del break A, las otras dos como lineal de B y C—, la L de KETRAVA y el banner de KOVRIN, y las cuatro que sobran son las de acá. Así las nueve piezas autoradas se ven en la demo y ninguna queda sin usar. EL ORDEN ALTERNA LA FORMA —banner, L, banner, L— y no repite campaña en breaks contiguos: tres avisos seguidos de la misma marca se leen como un defecto y no como publicidad. DURAN 6 s Y NO 12, que es lo que dura un break del par, y el número sale del creativo y no del reloj: los nueve están autorados con un bucle de 3 s y un anillo de 6 s, así que 6 s son dos bucles exactos y una vuelta entera del anillo, y el aviso abre y cierra idéntico. Con 12 s los cuatro se comerían 48 de los 56 segundos previos a la ventana y la carrera dejaría de verse, que es lo contrario de lo que un aviso no lineal afirma. Los huecos de carrera entre avisos son iguales, 6 s. EL MEDIO ES VIDEO EN LOS CUATRO: esta página no lleva el control de capacidades —es de la página del par— y sus asset-lists traen una sola opción, así que no hay nada que filtrar acá."
   },
 
   "creativos": {
@@ -162,9 +162,9 @@
       "forma": "16x9",
       "layout": "squeezebackDoubleBox",
       "campana": "zumbra",
-      "rica": "asset-list-break-a-rica.json",
-      "magra": "asset-list-break-a-magra.json",
-      "lineal": "asset-list-linear-a.json",
+      "concurrente": "asset-list-break-a.json",
+      "lineal": null,
+      "_lineal": "EL BREAK SIN DEFAULT (ADR 0087): contenido que no se interrumpe. El asset concurrente no lleva URI y la playlist no lleva tag lineal, así que el pane de fábrica no pone nada, y el nuestro dibuja el aviso si alguna opción entra en la capacidad declarada y si no, lo saltea. Es A porque su lineal sería ZUMBRA 16:9, que ya es su aviso concurrente: sacárselo no deja ninguna de las nueve piezas sin usar.",
       "_": "Va primero porque su creativo es el único que ya está autorado y aprobado, así que el primer break que se ve en cámara es la pieza terminada."
     },
     {
@@ -174,8 +174,7 @@
       "forma": "backplate",
       "layout": "squeezebackLShape",
       "campana": "ketrava",
-      "rica": "asset-list-break-b-rica.json",
-      "magra": "asset-list-break-b-magra.json",
+      "concurrente": "asset-list-break-b.json",
       "lineal": "asset-list-linear-b.json",
       "_": "Turismo en la L porque un paisaje es lo que mejor tolera que le tapen el centro: la guarda del backplate cae sobre cielo y mar, donde no hay nada que perder."
     },
@@ -186,8 +185,7 @@
       "forma": "banner",
       "layout": "lowerThirdOverlay",
       "campana": "kovrin",
-      "rica": "asset-list-break-c-rica.json",
-      "magra": "asset-list-break-c-magra.json",
+      "concurrente": "asset-list-break-c.json",
       "lineal": "asset-list-linear-c.json",
       "_": "Calzado en el banner porque una zapatilla de perfil es la única de las tres siluetas que llena una tira de 8,89:1 sin quedar perdida en el medio."
     }
@@ -195,34 +193,30 @@
   "_breaks": "Los tres duran lo mismo para que el creativo 16:9 de cada campaña sirva de lineal en su break sin recortarse. Los huecos de programa entre breaks son iguales, 33 s, y el primero entra a los 20 s para que la demo lo alcance rápido. El último termina en 122 s, bastante antes del corte del programa en 198,0 s (los créditos arrancan en 199,0 s: la medición está en programa._largo).",
 
   "playlists": {
-    "rica": "content/primary/con-daterange-rica.m3u8",
-    "magra": "content/primary/con-daterange-magra.m3u8",
-    "_ubicacion": "Las dos van al lado del contenido empaquetado y NO en signalling/, y la razón es que llevan un START-DATE resuelto contra el EXT-X-PROGRAM-DATE-TIME del propio empaquetado (ADR 0005): es hora de pared, se mueve cada vez que alguien reempaqueta, y un archivo así en git sólo puede estar viejo. content/ está gitignoreado justamente para eso, y es donde las otras cuatro demos ponen su con-daterange.m3u8. Los nueve asset-lists sí van a signalling/ y sí van a git: no contienen ni un instante, son función pura de este archivo.",
-    "_": "Una playlist por escalón de respuesta (ADR 0083). El control de la página elige cuál carga y qué valor le pasa a attach(), y rearma el player. No hay servidor: la respuesta está horneada por valor."
+    "par": "content/primary/con-daterange.m3u8",
+    "_ubicacion": "Va al lado del contenido empaquetado y NO en signalling/, porque lleva un START-DATE resuelto contra el EXT-X-PROGRAM-DATE-TIME del propio empaquetado (ADR 0005): es hora de pared y se mueve con cada empaquetado, así que en git sólo podría estar vieja.",
+    "_": "UNA sola playlist, cualquiera sea la capacidad (ADR 0085). El asset-list de cada break trae todas las opciones del aviso y la librería filtra; el control de la página sólo cambia lo que se le pasa a attach()."
   },
 
-  "decodificadores": {
-    "posiciones": [
-      { "valor": null, "parametro": false, "respuesta": "rica", "_": "La URI sale byte por byte como saldría para un integrador que nunca oyó de la opción. Es el control negativo de la medición de la T-07." },
-      { "valor": 1, "parametro": true, "respuesta": "magra" },
-      { "valor": 2, "parametro": true, "respuesta": "rica" }
-    ],
-    "parametro": "qa-decoder-count",
-    "_": "Definido en lib/signalling.js. No hay posición 3 ni 4: ningún layout de esta demo pide más de dos decodificadores de video, que son el primario y un elemento de aviso."
+  "capacidades": {
+    "videoDecoders": [1, 2],
+    "imageOverVideo": [true, false],
+    "inicial": { "videoDecoders": 2, "imageOverVideo": true },
+    "_": "Los dos ejes que el control de index.html y de inspect.html ofrece, con sus valores, en el orden en que se muestran (ADR 0086). Los nombres son los de la opción `capabilities` de attach(); los parámetros del pedido los define lib/signalling.js y no se repiten acá. No hay 3 decodificadores porque ningún layout de esta demo pide más de dos: el primario y un elemento de aviso. No hay eje HTML porque la librería no dibuja HTML."
   },
 
   "assets": {
-    "_": "Nueve piezas de autoría, dieciocho assets: cada forma viaja en los dos medios (ADR 0084). Entre la respuesta rica y la magra de un break cambia UNA sola cosa, el type y el uri; el layout, el viewport, el zDepth, la campaña y la duración son idénticos, y que sean idénticos es lo que la demo afirma. Los dos juegos de asset-lists se generan de esta tabla y no se editan a mano por separado.",
+    "_": "Nueve piezas de autoría, dieciocho assets: cada forma viaja en los dos medios (ADR 0084). El asset-list de cada break trae las dos como opciones del mismo aviso, y entre una opción y la otra cambia UNA sola cosa, el type y el uri; el layout, el viewport, el zDepth, la campaña y la duración son idénticos, y que sean idénticos es lo que la demo afirma. Las dos opciones se generan de esta tabla y no se editan a mano por separado.",
     "_autoria": "El SVG autorado vive en graphics/campaigns/ y va a git. NO vive en content/, que está gitignoreado por ser lo que un clone reconstruye con un comando: nueve SVG escritos a mano no son eso, y perderlos de git contradice la tesis misma de la fase. La variante de imagen se sirve desde el archivo autorado; la variante de video es salida del puente de la T-05 y sí vive en content/.",
     "piezas": [
-      { "campana": "zumbra",  "forma": "16x9",      "svg": "graphics/campaigns/zumbra-16x9.svg",      "video": "content/creatives/zumbra-16x9/index.m3u8",      "usos": ["break-a-rica", "break-a-lineal"] },
+      { "campana": "zumbra",  "forma": "16x9",      "svg": "graphics/campaigns/zumbra-16x9.svg",      "video": "content/creatives/zumbra-16x9/index.m3u8",      "usos": ["break-a"] },
       { "campana": "zumbra",  "forma": "banner",    "svg": "graphics/campaigns/zumbra-banner.svg",    "video": "content/creatives/zumbra-banner/index.m3u8",    "usos": ["race"] },
       { "campana": "zumbra",  "forma": "backplate", "svg": "graphics/campaigns/zumbra-backplate.svg", "video": "content/creatives/zumbra-backplate/index.m3u8", "usos": ["race"] },
       { "campana": "ketrava", "forma": "16x9",      "svg": "graphics/campaigns/ketrava-16x9.svg",      "video": "content/creatives/ketrava-16x9/index.m3u8",      "usos": ["break-b-lineal"] },
       { "campana": "ketrava", "forma": "banner",    "svg": "graphics/campaigns/ketrava-banner.svg",    "video": "content/creatives/ketrava-banner/index.m3u8",    "usos": ["race"] },
-      { "campana": "ketrava", "forma": "backplate", "svg": "graphics/campaigns/ketrava-backplate.svg", "video": "content/creatives/ketrava-backplate/index.m3u8", "usos": ["break-b-rica"] },
+      { "campana": "ketrava", "forma": "backplate", "svg": "graphics/campaigns/ketrava-backplate.svg", "video": "content/creatives/ketrava-backplate/index.m3u8", "usos": ["break-b"] },
       { "campana": "kovrin",  "forma": "16x9",      "svg": "graphics/campaigns/kovrin-16x9.svg",      "video": "content/creatives/kovrin-16x9/index.m3u8",      "usos": ["break-c-lineal"] },
-      { "campana": "kovrin",  "forma": "banner",    "svg": "graphics/campaigns/kovrin-banner.svg",    "video": "content/creatives/kovrin-banner/index.m3u8",    "usos": ["break-c-rica"] },
+      { "campana": "kovrin",  "forma": "banner",    "svg": "graphics/campaigns/kovrin-banner.svg",    "video": "content/creatives/kovrin-banner/index.m3u8",    "usos": ["break-c"] },
       { "campana": "kovrin",  "forma": "backplate", "svg": "graphics/campaigns/kovrin-backplate.svg", "video": "content/creatives/kovrin-backplate/index.m3u8", "usos": ["race"] }
     ],
     "tipos": {

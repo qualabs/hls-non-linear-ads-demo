@@ -91,3 +91,11 @@ imágenes, y deja de serlo cuando el dispositivo declara que no las tiene.
 | el filtro no filtra y la pantalla igual "se ve bien" | se mide sobre el pedido, el JSON y los `<video>` vivos: el JSON idéntico en las cuatro combinaciones y la composición distinta (T-05) |
 | los scripts de medición de la fase 14 leen `posiciones`, `rica` y `magra` | se actualizan en la T-05, no se dejan rotos |
 | menos de un día | sin rediseño de página: se cambian el control y un panel |
+
+## 2026-09-28 — el break sin default es A y no C
+
+Al escribir la señalización apareció que el lineal de C (KOVRIN 16:9) no se usa en ninguna otra
+parte de la demo: sacarle el default a C dejaba una de las nueve piezas autoradas sin aparecer.
+A es el único break cuyo lineal es también su aviso concurrente, así que el sin default pasa a
+ser A. El ADR 0087 se escribió hoy y se corrigió en el mismo día, antes de que nada se apoyara
+en él.
