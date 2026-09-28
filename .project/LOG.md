@@ -5943,3 +5943,13 @@ de cada break llega como segundo argumento de `onResolved`. Suite 216 → 228, c
 Campaña de mutaciones acotada al archivo nuevo: 8 roturas, 8 rojas; la de "un ítem sin opción no
 invalida el asset" quedó verde al principio (equivalente con un solo ítem) y se agregó el caso de
 dos ítems, que la pone roja.
+
+## 2026-09-28 — T-02: una respuesta por break, con todas las opciones
+
+El par sirve un solo asset-list concurrente por break, con `options: [video, imagen]`, y una sola
+playlist (`content/primary/con-daterange.m3u8`). Se fueron los juegos rico y magro. El break sin
+default es **A** y no C como decía el plan: el lineal de C (KOVRIN 16:9) no se usa en otra parte y
+sacárselo dejaba una de las nueve piezas sin aparecer; A es el único cuyo lineal es también su
+aviso. El ADR 0087 se corrigió en el mismo día. Test nuevo de punta a punta: la librería, sobre
+los archivos escritos, dibuja video, video, imagen y lineal/nada en las cuatro combinaciones. Sus
+controles: invertir el orden de las opciones pone 4 tests en rojo, y darle `URI` a A pone 2.

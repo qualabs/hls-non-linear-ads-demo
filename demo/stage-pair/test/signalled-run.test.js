@@ -6,28 +6,23 @@
 // forma.
 //
 // LO QUE SE ASSERTA SALE DE LO QUE EL SCRIPT ESCRIBIÓ DE VERDAD, y no del texto
-// del script. La diferencia es todo el punto: leer el fuente y encontrar un
-// printf que menciona una clase prueba que alguien la tipeó, no que la playlist
-// salga con un tag de esa clase apuntando a un asset-list con el layout de este
-// recorrido adentro. Así que el test le pasa al señalizador una media playlist de
-// nueve líneas por `SRC` y recoge sus tres salidas por `OUT_RICA`, `OUT_MAGRA` y
-// `SIGNALLING`. No necesita ffmpeg ni un solo byte de video, que es lo que le
-// permite correr en `npm test` sobre un clone limpio.
+// del script. Así que el test le pasa al señalizador una media playlist de nueve
+// líneas por `SRC` y recoge sus salidas por `OUT` y `SIGNALLING`. No necesita
+// ffmpeg ni un solo byte de video, que es lo que le permite correr en `npm test`
+// sobre un clone limpio.
 //
 // ---------------------------------------------------------------------------
-// LA AFIRMACIÓN QUE ESTE ARCHIVO EXISTE PARA PROTEGER
+// LAS DOS AFIRMACIONES QUE ESTE ARCHIVO EXISTE PARA PROTEGER
 // ---------------------------------------------------------------------------
-// El ADR 0084 dice que la capacidad del dispositivo degrada EL FORMATO del aviso
-// y no el aviso: entre la respuesta rica y la magra de un mismo break cambian el
-// `type` y el `uri` del asset, y NADA MÁS. Ese "nada más" no es una prolijidad de
-// implementación, es lo que la demo afirma en cámara, así que acá se asserta
-// campo por campo y con su control: un `viewport` movido en una sola de las dos
-// tiene que poner el test rojo.
+// El ADR 0084: la capacidad del dispositivo degrada EL FORMATO del aviso y no el
+// aviso. Entre las dos opciones de un break cambian el `type` y el `uri` del
+// asset, y NADA MÁS, y se asserta campo por campo con su control.
 //
-// La librería se importa para las dos clases -- la clase que esta demo señaliza
-// es la que la librería traduce, que es lo que hace que el tag llegue a alguna
-// parte -- y una demo sí puede nombrar al sdk: lo que el ADR 0015 prohíbe es la
-// dirección contraria.
+// El ADR 0085: la respuesta es UNA, la misma para cualquier capacidad, y quien
+// elige es la librería. Por eso el último test de esta sección le pasa los
+// archivos escritos a `resolveAssetList` bajo las cuatro combinaciones del
+// control y mira qué sale: es la única forma de saber que lo que la demo sirve y
+// lo que la librería filtra encajan.
 //
 // Correr: npm test   (node --test desde la raíz, sin argumentos, que descubre
 // esta carpeta junto con las otras cuatro)
@@ -42,10 +37,10 @@ import { fileURLToPath } from 'node:url';
 
 // `MULTIVIEW_CLASS` y `MAX_BOXES` los agrega la tercera página: la clase que
 // esta demo señaliza es la que la librería traduce, y el tope de cajas se lee de
-// donde está declarado en lugar de copiarse de un ADR a un test, que es la clase
-// de copia que queda vieja sin que nada avise.
+// donde está declarado en lugar de copiarse de un ADR a un test.
 import {
-  CONCURRENT_CLASS, INTERSTITIAL_CLASS, MAX_BOXES, MULTIVIEW_CLASS
+  CONCURRENT_CLASS, INTERSTITIAL_CLASS, LINEAR_TYPE, MAX_BOXES, MULTIVIEW_CLASS,
+  resolveAssetList, usableCapabilities
 } from '../../../lib/signalling.js';
 
 const DEMO = fileURLToPath(new URL('..', import.meta.url));
@@ -66,8 +61,7 @@ const PDT = '2026-09-14T10:00:00.000+0000';
 function run(env = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'stage-pair-'));
   const src = join(dir, 'index.m3u8');
-  const rica = join(dir, 'rica.m3u8');
-  const magra = join(dir, 'magra.m3u8');
+  const out = join(dir, 'con-daterange.m3u8');
   const signalling = join(dir, 'signalling');
   mkdirSync(signalling);
   writeFileSync(
@@ -88,13 +82,12 @@ function run(env = {}) {
   try {
     const hoja = execFileSync(join(DEMO, 'scripts/senalizar-contenido.sh'), {
       cwd: DEMO,
-      env: { ...process.env, SRC: src, OUT_RICA: rica, OUT_MAGRA: magra, SIGNALLING: signalling, ...env },
+      env: { ...process.env, SRC: src, OUT: out, SIGNALLING: signalling, ...env },
       encoding: 'utf8'
     });
-    // Los nueve se leen ACÁ, antes de que el `finally` borre el temporal: un
-    // lector perezoso devolvería una función que abre un archivo que ya no está.
-    // Y se lee el DIRECTORIO y no la lista de nombres de stage.json, que es lo que
-    // permite assertar cuántos archivos salieron.
+    // Se leen ACÁ, antes de que el `finally` borre el temporal. Y se lee el
+    // DIRECTORIO y no la lista de nombres de stage.json, que es lo que permite
+    // assertar cuántos archivos salieron.
     const escritos = Object.fromEntries(
       readdirSync(signalling).sort().map((name) => [name, JSON.parse(readFileSync(join(signalling, name), 'utf8'))])
     );
@@ -102,13 +95,7 @@ function run(env = {}) {
       if (!(name in escritos)) throw new Error(`el señalizador no escribió ${name}`);
       return structuredClone(escritos[name]);
     };
-    return {
-      rica: readFileSync(rica, 'utf8'),
-      magra: readFileSync(magra, 'utf8'),
-      escritos: Object.keys(escritos),
-      lista,
-      hoja
-    };
+    return { playlist: readFileSync(out, 'utf8'), escritos: Object.keys(escritos), lista, hoja };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -129,16 +116,18 @@ const dateRanges = (playlist) =>
       resumeOffset: /X-RESUME-OFFSET=/.test(line)
     }));
 
-/** El bloque de layout de un asset-list concurrente. */
+/** El primer ítem del bloque de layout de un asset-list concurrente. */
 const bloque = (lista) => lista.ASSETS[0]['X-AD-CREATIVE-SIGNALING'].payload[0];
+
+/** Las opciones de presentación del aviso de un break, en orden. */
+const opciones = (lista) => bloque(lista).options;
 
 /**
  * DÓNDE difieren dos objetos, como rutas de campo ordenadas.
  *
  * Es el instrumento de la aserción central, así que devuelve las rutas y no un
- * booleano: un booleano diría que difieren y no en qué, y lo que hay que poder
- * leer cuando esto se ponga rojo es exactamente cuál campo se movió. Su control
- * está más abajo, y sin él esta función sería un chequeo que no puede fallar.
+ * booleano: lo que hay que poder leer cuando esto se ponga rojo es cuál campo se
+ * movió. Su control está más abajo.
  */
 function diferencias(a, b, ruta = '') {
   if (a === b) return [];
@@ -150,100 +139,94 @@ function diferencias(a, b, ruta = '') {
 
 /** Los tres breaks, con su fila de stage.json al lado. */
 const BREAKS = STAGE.breaks;
+const CON_DEFAULT = BREAKS.filter((b) => b.lineal);
+const SIN_DEFAULT = BREAKS.filter((b) => !b.lineal);
 
-test('cada playlist sale con los dos tags por break, y las clases son las dos del ADR 0007', () => {
-  // EL CONTEO Y LAS CLASES, LEÍDOS DE LA SALIDA. Un tag que no se escribe es un
-  // break que no pasa, y la playlist es el único lugar donde eso se ve. Dos por
-  // break y no uno: el de clase Apple es lo que el pane de fábrica reproduce y el
-  // concurrente lo que reproduce el nuestro, y la compatibilidad no sale de que
-  // una clase extienda a la otra -- en HLS se comparan por igualdad exacta de
-  // string -- sino de que la playlist sirva las dos cosas a la vez.
-  const { rica, magra, escritos } = run();
-  // Y los nueve asset-lists, contados sobre el directorio: tres por break -- el
-  // lineal, el rico y el magro --, que es lo que las dos playlists apuntan entre
-  // las dos. Un archivo de menos sería un break que carga un 404 en cámara.
+/** Los tags de un break en la playlist, por su ID. */
+const tagsDe = (playlist, brk) => {
+  const tags = dateRanges(playlist);
+  return {
+    lineal: tags.find((t) => t.id === `AD-${brk.id.toUpperCase()}-LINEAR`),
+    concurrente: tags.find((t) => t.id === `AD-${brk.id.toUpperCase()}-CONCURRENT`)
+  };
+};
+
+test('hay un break sin default y los otros dos con, que es lo que David pidió mostrar', () => {
+  // ADR 0087. Sin un break de cada tipo, la corrida no muestra las dos salidas de
+  // un aviso que no se puede dibujar.
+  assert.equal(SIN_DEFAULT.length, 1, 'un break sin default');
+  assert.equal(CON_DEFAULT.length, 2, 'dos con default');
+});
+
+test('la playlist sale con un tag por break sin default y dos por break con, y las clases son las del ADR 0007', () => {
+  const { playlist, escritos } = run();
+  // Los asset-lists, contados sobre el directorio: un concurrente por break y un
+  // lineal por break con default. Un archivo de menos es un 404 en cámara.
   assert.deepEqual(
     escritos,
-    BREAKS.flatMap((b) => [b.lineal, b.rica, b.magra]).sort(),
-    'los nueve asset-lists, y ninguno de más'
+    BREAKS.flatMap((b) => [b.concurrente, b.lineal].filter(Boolean)).sort(),
+    'los asset-lists, y ninguno de más'
   );
-  for (const [nombre, playlist] of [['rica', rica], ['magra', magra]]) {
-    const tags = dateRanges(playlist);
-    assert.equal(tags.length, BREAKS.length * 2, `${nombre}: dos tags por break`);
-    assert.deepEqual(
-      tags.map((t) => t.hlsClass),
-      BREAKS.flatMap(() => [INTERSTITIAL_CLASS, CONCURRENT_CLASS]),
-      `${nombre}: las clases, en el orden en que se escriben`
-    );
-  }
+  const tags = dateRanges(playlist);
+  assert.deepEqual(
+    tags.map((t) => t.hlsClass),
+    BREAKS.flatMap((b) => (b.lineal ? [INTERSTITIAL_CLASS, CONCURRENT_CLASS] : [CONCURRENT_CLASS])),
+    'las clases, en el orden en que se escriben'
+  );
 });
 
-test('los dos tags de un break comparten el START-DATE, y el segundo es el que stage.json declara', () => {
-  // ADR 0007: el mismo instante en los dos, que es lo que hace que los dos panes
-  // estén mostrando el mismo segundo del programa. Y el instante se compara como
-  // instante y no como string, porque el script lo escribe en hora local.
+test('los tags de un break comparten el START-DATE, y el instante es el que stage.json declara', () => {
   const origen = new Date(PDT).getTime();
-  const corrida = run();
-  for (const playlist of [corrida.rica, corrida.magra]) {
-    const tags = dateRanges(playlist);
-    BREAKS.forEach((brk, i) => {
-      const [lineal, concurrente] = [tags[i * 2], tags[i * 2 + 1]];
-      assert.equal(lineal.startDate, concurrente.startDate, `break ${brk.id}: un solo START-DATE`);
-      assert.equal((new Date(lineal.startDate).getTime() - origen) / 1000, brk.offset);
-    });
-  }
-});
-
-test('cada break trae SU lineal, con la duración de SU break: es donde muere el tramo invertido', () => {
-  // ADR 0082, y es la aserción cuyo error es el más caro de la task. En
-  // compatibility-pair los cinco breaks comparten un asset-list lineal de 12 s
-  // contra un break concurrente de 48, y de ahí sale que durante 12 de esos 48
-  // segundos la comparación queda al revés. Acá cada lineal es propio y dura lo
-  // que su break, así que los dos PLANNED-DURATION de un break coinciden.
-  //
-  // El largo NO se lee del script: se lee del asset-list que el script escribió y
-  // se compara contra stage.json, que son las dos puntas entre las que el número
-  // podría despegarse.
-  const { rica, magra, lista } = run();
-  const nombres = new Set(BREAKS.map((b) => b.lineal));
-  assert.equal(nombres.size, BREAKS.length, 'un asset-list lineal por break y no uno compartido');
-
-  for (const playlist of [rica, magra]) {
-    const tags = dateRanges(playlist);
-    BREAKS.forEach((brk, i) => {
-      const [lineal, concurrente] = [tags[i * 2], tags[i * 2 + 1]];
-      assert.equal(lineal.assetList, `/signalling/${brk.lineal}`);
-      assert.equal(lista(brk.lineal).ASSETS[0].DURATION, brk.duracion);
-      assert.equal(lineal.plannedDuration, brk.duracion);
-      assert.equal(concurrente.plannedDuration, brk.duracion);
-      assert.equal(
-        lineal.plannedDuration,
-        concurrente.plannedDuration,
-        `break ${brk.id}: los dos panes duran lo mismo`
-      );
-    });
-  }
-});
-
-test('el lineal de cada break es el creativo 16:9 de su campaña', () => {
-  // ADR 0082: la misma pieza que el aviso concurrente del break A usa como aviso,
-  // y la que ocupa el break entero del pane de fábrica en los tres. Por eso los
-  // tres breaks duran lo mismo -- 12 s son el largo del creativo -- y por eso no
-  // hay que recortar nada.
-  const { lista } = run();
+  const { playlist } = run();
   for (const brk of BREAKS) {
+    const { lineal, concurrente } = tagsDe(playlist, brk);
+    assert.equal((new Date(concurrente.startDate).getTime() - origen) / 1000, brk.offset);
+    if (brk.lineal) assert.equal(lineal.startDate, concurrente.startDate, `break ${brk.id}: un solo START-DATE`);
+  }
+});
+
+test('el break sin default no lleva tag lineal ni URI, y los que tienen default llevan los dos', () => {
+  // ADR 0087. Las dos ausencias van juntas: sin tag el pane de fábrica no
+  // interrumpe, y sin `URI` la librería saltea el asset cuando no queda opción.
+  // Los breaks con default son el control de la misma lectura: si la lectura no
+  // supiera encontrar un tag lineal o un `URI`, los daría ausentes también ahí.
+  const { playlist, lista } = run();
+  for (const brk of SIN_DEFAULT) {
+    assert.equal(tagsDe(playlist, brk).lineal, undefined, `break ${brk.id}: sin tag lineal`);
+    assert.equal('URI' in lista(brk.concurrente).ASSETS[0], false, `break ${brk.id}: sin URI`);
+  }
+  for (const brk of CON_DEFAULT) {
+    const pieza = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === '16x9');
+    assert.ok(tagsDe(playlist, brk).lineal, `break ${brk.id}: con tag lineal`);
+    assert.equal(lista(brk.concurrente).ASSETS[0].URI, `/${pieza.video}`, `break ${brk.id}: el default es su lineal`);
+  }
+});
+
+test('cada break con default trae SU lineal, con la duración de SU break: es donde muere el tramo invertido', () => {
+  // ADR 0082. Los dos PLANNED-DURATION de un break coinciden, leídos de lo que el
+  // script escribió y comparados contra stage.json.
+  const { playlist, lista } = run();
+  assert.equal(new Set(CON_DEFAULT.map((b) => b.lineal)).size, CON_DEFAULT.length, 'un lineal por break');
+  for (const brk of CON_DEFAULT) {
+    const { lineal, concurrente } = tagsDe(playlist, brk);
+    assert.equal(lineal.assetList, `/signalling/${brk.lineal}`);
+    assert.equal(lista(brk.lineal).ASSETS[0].DURATION, brk.duracion);
+    assert.equal(lineal.plannedDuration, brk.duracion);
+    assert.equal(concurrente.plannedDuration, brk.duracion, `break ${brk.id}: los dos panes duran lo mismo`);
+  }
+});
+
+test('el lineal de cada break con default es el creativo 16:9 de su campaña', () => {
+  const { lista } = run();
+  for (const brk of CON_DEFAULT) {
     const pieza = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === '16x9');
     assert.equal(lista(brk.lineal).ASSETS[0].URI, `/${pieza.video}`);
   }
 });
 
 test('el tag lineal va en la forma de reemplazo, o sea SIN X-RESUME-OFFSET', () => {
-  // ADR 0017, y es la otra mitad de por qué los dos panes se quedan en el mismo
-  // segundo del programa: sin el atributo el primario retoma donde el aviso
-  // terminó. Escrito en 0 pediría lo contrario, y el pane de fábrica se atrasaría
-  // la duración del aviso en cada break. El del tag concurrente sí se escribe y es
-  // inerte (ADR 0016).
-  const tags = dateRanges(run().rica);
+  // ADR 0017. El del tag concurrente sí se escribe y es inerte (ADR 0016).
+  const tags = dateRanges(run().playlist);
   for (const tag of tags.filter((t) => t.hlsClass === INTERSTITIAL_CLASS)) {
     assert.equal(tag.resumeOffset, false, `${tag.id} no declara X-RESUME-OFFSET`);
   }
@@ -252,127 +235,70 @@ test('el tag lineal va en la forma de reemplazo, o sea SIN X-RESUME-OFFSET', () 
   }
 });
 
-test('cada playlist apunta a SU juego de asset-lists, y es todo lo que las separa', () => {
-  // ADR 0083: la respuesta está horneada por valor, y la forma de hornearla es una
-  // playlist por escalón. Los tags de clase Apple son los mismos en las dos -- el
-  // pane de fábrica reproduce el mismo aviso lineal declare lo que declare el
-  // dispositivo -- y lo único que cambia es a qué asset-list concurrente apunta
-  // cada break.
-  const { rica, magra } = run();
-  const deRica = dateRanges(rica);
-  const deMagra = dateRanges(magra);
-  BREAKS.forEach((brk, i) => {
-    assert.equal(deRica[i * 2 + 1].assetList, `/signalling/${brk.rica}`);
-    assert.equal(deMagra[i * 2 + 1].assetList, `/signalling/${brk.magra}`);
-    assert.equal(deRica[i * 2].line, deMagra[i * 2].line, `break ${brk.id}: el tag lineal es el mismo`);
-  });
-});
-
-test('ningún asset-list magro declara un asset de video', () => {
-  // La premisa sobre la que se apoya la escalera entera del ADR 0084: con un
-  // decodificador el aviso se dibuja con un elemento de imagen, que no instancia
-  // ningún player. Un `type` de video en el escalón magro pediría el segundo
-  // decodificador que ese escalón no tiene, y no se vería hasta estar en cámara.
-  const { lista } = run();
+test('cada break trae las dos opciones del aviso, primero el video y después la imagen', () => {
+  // ADR 0085 y R5.5: el orden de las opciones es la preferencia, y la librería se
+  // queda con la primera que la capacidad satisface. Con la imagen primero, un
+  // dispositivo de dos decodificadores vería la imagen.
+  const { playlist, lista } = run();
   for (const brk of BREAKS) {
-    for (const asset of bloque(lista(brk.magra)).layout.assets) {
-      assert.equal(asset.type, STAGE.assets.tipos.imagen, `${brk.magra}: ${asset.id}`);
-    }
+    assert.equal(tagsDe(playlist, brk).concurrente.assetList, `/signalling/${brk.concurrente}`);
+    const medios = opciones(lista(brk.concurrente)).map((o) => o.layout.assets.map((a) => a.type));
+    assert.deepEqual(medios, [[STAGE.assets.tipos.video], [STAGE.assets.tipos.imagen]], `break ${brk.id}`);
   }
 });
 
-test('el chequeo del escalón magro sabe encontrar un asset de video', () => {
-  // EL CONTROL del test de arriba: un cero lo produce igual una búsqueda rota que
-  // un juego de asset-lists correcto. Se le planta el `type` de video a una copia
-  // y la misma lectura tiene que cazarlo.
-  const { lista } = run();
-  const magra = lista(BREAKS[0].magra);
-  magra.ASSETS[0]['X-AD-CREATIVE-SIGNALING'].payload[0].layout.assets[0].type =
-    STAGE.assets.tipos.video;
-  const tipos = bloque(magra).layout.assets.map((a) => a.type);
-  assert.deepEqual(tipos, [STAGE.assets.tipos.video], 'la lectura ve el type plantado');
-});
-
-test('entre la rica y la magra de un break cambian EXACTAMENTE el type y el uri del asset', () => {
-  // ESTA ES LA AFIRMACIÓN QUE LA DEMO HACE (ADR 0084). El layout, el `viewport`, el
-  // `zDepth`, el `id`, la campaña, la duración, el repliegue del ADR 0019 y hasta
-  // el bloque `primaryContent` son idénticos: lo que la capacidad del dispositivo
-  // degrada es el FORMATO del aviso y no el aviso.
-  //
-  // Se asserta como IGUALDAD DE TODO MENOS DOS CAMPOS y no como "los campos que me
-  // acordé de mirar coinciden": una lista de campos a comparar deja afuera el
-  // campo que alguien agregue mañana, que es justo el que rompería la afirmación.
+test('entre las dos opciones de un break cambian EXACTAMENTE el type y el uri del asset', () => {
+  // ESTA ES LA AFIRMACIÓN DEL ADR 0084. Se asserta como IGUALDAD DE TODO MENOS DOS
+  // CAMPOS y no como "los campos que me acordé de mirar coinciden": una lista de
+  // campos deja afuera el campo que alguien agregue mañana.
   const { lista } = run();
   for (const brk of BREAKS) {
-    const rutas = diferencias(lista(brk.rica), lista(brk.magra));
+    const [video, imagen] = opciones(lista(brk.concurrente));
     assert.deepEqual(
-      rutas,
-      [
-        'ASSETS.0.X-AD-CREATIVE-SIGNALING.payload.0.layout.assets.0.type',
-        'ASSETS.0.X-AD-CREATIVE-SIGNALING.payload.0.layout.assets.0.uri'
-      ],
-      `break ${brk.id}: la rica y la magra difieren en algo más que el medio del asset`
+      diferencias(video, imagen),
+      ['layout.assets.0.type', 'layout.assets.0.uri'],
+      `break ${brk.id}: las dos opciones difieren en algo más que el medio del asset`
     );
-    // Y difieren de verdad en esos dos: si fueran iguales también, la lista de
-    // rutas saldría vacía y la aserción de arriba pasaría por el motivo contrario.
-    const [r, m] = [bloque(lista(brk.rica)), bloque(lista(brk.magra))];
-    assert.notEqual(r.layout.assets[0].type, m.layout.assets[0].type);
-    assert.notEqual(r.layout.assets[0].uri, m.layout.assets[0].uri);
+    // Y difieren de verdad en esos dos, o la lista de arriba saldría vacía y la
+    // aserción pasaría por el motivo contrario.
+    assert.notEqual(video.layout.assets[0].type, imagen.layout.assets[0].type);
+    assert.notEqual(video.layout.assets[0].uri, imagen.layout.assets[0].uri);
   }
 });
 
-test('el chequeo de equivalencia ve un viewport movido en una sola de las dos', () => {
-  // EL CONTROL, y es el que le da sentido al test de arriba. Si alguien mañana
-  // mueve el `viewport` de la magra y no el de la rica, esto tiene que gritar: se
-  // planta esa edición exacta sobre una copia y la lista de diferencias tiene que
-  // traer tres rutas en lugar de dos.
+test('el chequeo de equivalencia ve un viewport movido en una sola de las dos opciones', () => {
+  // EL CONTROL del test de arriba.
   const { lista } = run();
-  const brk = BREAKS[0];
-  const magra = lista(brk.magra);
-  bloque(magra).layout.assets[0].viewport = '0 0 0 0';
-  const rutas = diferencias(lista(brk.rica), magra);
-  assert.deepEqual(rutas, [
-    'ASSETS.0.X-AD-CREATIVE-SIGNALING.payload.0.layout.assets.0.type',
-    'ASSETS.0.X-AD-CREATIVE-SIGNALING.payload.0.layout.assets.0.uri',
-    'ASSETS.0.X-AD-CREATIVE-SIGNALING.payload.0.layout.assets.0.viewport'
+  const [video, imagen] = opciones(lista(BREAKS[0].concurrente));
+  imagen.layout.assets[0].viewport = '0 0 0 0';
+  assert.deepEqual(diferencias(video, imagen), [
+    'layout.assets.0.type', 'layout.assets.0.uri', 'layout.assets.0.viewport'
   ]);
-  // Y la misma función tiene que ver un campo que sólo existe de un lado, que es
-  // el otro modo de falla: uno agrega `volume` a la rica y nadie se entera.
-  const otra = lista(brk.magra);
-  bloque(otra).layout.assets[0].volume = 100;
-  assert.ok(
-    diferencias(lista(brk.rica), otra).includes(
-      'ASSETS.0.X-AD-CREATIVE-SIGNALING.payload.0.layout.assets.0.volume'
-    ),
-    'un campo que está de un solo lado también es una diferencia'
-  );
+  const otra = opciones(lista(BREAKS[0].concurrente))[1];
+  otra.layout.assets[0].volume = 100;
+  assert.ok(diferencias(video, otra).includes('layout.assets.0.volume'),
+    'un campo que está de un solo lado también es una diferencia');
 });
 
-test('el layout de cada break es el que stage.json declara, con sus cajas', () => {
-  // Que el tipo de layout y las cajas salgan de stage.json y no del script es el
-  // ADR 0044 acá: el `viewport` de la caja del aviso lo leen la señalización, la
-  // captura a video -- que saca cada creativo al tamaño exacto de su caja -- y las
-  // páginas. Tipeado dos veces, un día el creativo sale a un tamaño y se dibuja en
-  // otro, y eso se ve recién en cámara.
+test('el layout de cada break es el que stage.json declara, con sus cajas, en las dos opciones', () => {
+  // ADR 0044: el `viewport` de la caja del aviso lo leen la señalización, la
+  // captura a video y las páginas, así que sale de stage.json y no del script.
   const { lista } = run();
   for (const brk of BREAKS) {
     const forma = STAGE.formas[brk.forma];
-    for (const nombre of [brk.rica, brk.magra]) {
-      const item = bloque(lista(nombre));
-      assert.equal(item.type, forma.layout);
-      assert.equal(item.type, brk.layout);
-      assert.equal(item.start, 0);
-      assert.equal(item.duration, brk.duracion);
-      assert.equal(item.layout.assets[0].viewport, forma.viewportAviso);
-      assert.equal(item.layout.assets[0].zDepth, forma.zDepthAviso);
+    const item = bloque(lista(brk.concurrente));
+    assert.equal(item.start, 0);
+    assert.equal(item.duration, brk.duracion);
+    for (const opcion of item.options) {
+      assert.equal(opcion.type, forma.layout);
+      assert.equal(opcion.type, brk.layout);
+      assert.equal(opcion.layout.assets[0].viewport, forma.viewportAviso);
+      assert.equal(opcion.layout.assets[0].zDepth, forma.zDepthAviso);
       if (forma.viewportPrimario === undefined) {
-        // El lowerThirdOverlay no declara primaryContent, y es deliberado: la
-        // herramienta de SVTA no lo emite en los dos overlays y la capa asume su
-        // preset. Escribirlo sería divergir de lo que la herramienta emite, que es
-        // lo que el ADR 0004 prohíbe.
-        assert.ok(!('primaryContent' in item.layout), `${nombre}: un overlay no declara primario`);
+        // El lowerThirdOverlay no declara primaryContent, a propósito (ADR 0004).
+        assert.ok(!('primaryContent' in opcion.layout), `${brk.id}: un overlay no declara primario`);
       } else {
-        assert.deepEqual(item.layout.primaryContent, {
+        assert.deepEqual(opcion.layout.primaryContent, {
           zDepth: forma.zDepthPrimario,
           viewport: forma.viewportPrimario
         });
@@ -382,43 +308,66 @@ test('el layout de cada break es el que stage.json declara, con sus cajas', () =
 });
 
 test('el asset de cada break es la pieza de su campaña, en los dos medios', () => {
-  // El inventario del ADR 0081: nueve piezas de autoría, dieciocho assets. La
-  // variante de imagen es el SVG autorado que vive en graphics/campaigns/ y va a
-  // git; la de video es la salida del puente de la T-05, que vive en content/ y no
-  // va. Que el `uri` de cada una salga de la misma fila de stage.json es lo que
-  // hace que no puedan ser piezas distintas.
+  // El inventario del ADR 0081: que el `uri` de cada opción salga de la misma fila
+  // de stage.json es lo que hace que no puedan ser piezas distintas.
   const { lista } = run();
   for (const brk of BREAKS) {
     const pieza = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.forma);
-    assert.equal(bloque(lista(brk.rica)).layout.assets[0].uri, `/${pieza.video}`);
-    assert.equal(bloque(lista(brk.magra)).layout.assets[0].uri, `/${pieza.svg}`);
+    const [video, imagen] = opciones(lista(brk.concurrente));
+    assert.equal(video.layout.assets[0].uri, `/${pieza.video}`);
+    assert.equal(imagen.layout.assets[0].uri, `/${pieza.svg}`);
+  }
+});
+
+test('la librería, sobre la misma respuesta, dibuja video, imagen, el lineal o nada según la capacidad', () => {
+  // ADR 0085, de punta a punta sobre los archivos que la demo sirve: la respuesta
+  // es una y la pantalla no. Se leen los medios que la composición tendría
+  // encima del programa, que es lo que se ve en cámara.
+  const { lista } = run();
+  const dibuja = (brk, capacidad) => {
+    const { warn, log } = console;
+    console.warn = console.log = () => {};
+    try {
+      return resolveAssetList(lista(brk.concurrente), {
+        id: brk.id, slotStart: brk.offset, capabilities: usableCapabilities(capacidad)
+      }).map((e) => (e.type === LINEAR_TYPE ? 'lineal' : e.elements.find((x) => !x.primary).mediaType));
+    } finally { console.warn = warn; console.log = log; }
+  };
+  const { video, imagen } = STAGE.assets.tipos;
+  for (const brk of BREAKS) {
+    assert.deepEqual(dibuja(brk, { videoDecoders: 2, imageOverVideo: true }), [video], `${brk.id}: 2 y con imágenes`);
+    assert.deepEqual(dibuja(brk, { videoDecoders: 2, imageOverVideo: false }), [video], `${brk.id}: 2 y sin imágenes`);
+    assert.deepEqual(dibuja(brk, { videoDecoders: 1, imageOverVideo: true }), [imagen], `${brk.id}: 1 y con imágenes`);
+    assert.deepEqual(
+      dibuja(brk, { videoDecoders: 1, imageOverVideo: false }),
+      brk.lineal ? ['lineal'] : [],
+      `${brk.id}: 1 y sin imágenes, ${brk.lineal ? 'cae al lineal' : 'se saltea'}`
+    );
   }
 });
 
 test('el control del tramo invertido se puede encender, y desempareja los dos panes', () => {
-  // El instrumento de la medición del navegador vive afuera de acá
-  // (test/medir-tramo-invertido.py), pero SU PALANCA es de este script y se prueba
-  // donde se puede probar sin navegador: con CONTROL_DURACION_CONCURRENTE el break
-  // concurrente pasa a durar otra cosa que su lineal, que es exactamente lo que
-  // compatibility-pair tiene. Si esta palanca no hiciera nada, la medición en
-  // verde de al lado no probaría nada.
-  const { rica } = run({ CONTROL_DURACION_CONCURRENTE: '24' });
-  const tags = dateRanges(rica);
-  BREAKS.forEach((brk, i) => {
-    assert.equal(tags[i * 2].plannedDuration, brk.duracion, 'el lineal se queda con la suya');
-    assert.equal(tags[i * 2 + 1].plannedDuration, 24, 'el concurrente se desempareja');
-  });
+  // La palanca de test/medir-tramo-invertido.py, probada donde se puede probar sin
+  // navegador. Si no hiciera nada, la medición en verde de al lado no probaría nada.
+  const { playlist } = run({ CONTROL_DURACION_CONCURRENTE: '24' });
+  for (const brk of CON_DEFAULT) {
+    const { lineal, concurrente } = tagsDe(playlist, brk);
+    assert.equal(lineal.plannedDuration, brk.duracion, 'el lineal se queda con la suya');
+    assert.equal(concurrente.plannedDuration, 24, 'el concurrente se desempareja');
+  }
 });
 
 test('la hoja que el script imprime sale de los archivos y no de sí misma', () => {
-  // La tabla con la que se graba. Los segundos se calculan sobre lo que el
-  // asset-list declara, y la columna del medio se lee del archivo escrito: escrita
-  // a mano diría "image/svg+xml" aunque el archivo trajera un video.
+  // La tabla con la que se graba: los segundos salen de lo que el asset-list
+  // declara y los medios se leen del archivo escrito.
   const { hoja } = run();
+  const esc = (t) => t.replace(/[./+]/g, '\\$&');
   for (const brk of BREAKS) {
     assert.match(hoja, new RegExp(`t=\\s*${brk.offset}s a\\s*${brk.offset + brk.duracion}s`));
-    assert.match(hoja, new RegExp(`${brk.rica}\\s+${STAGE.assets.tipos.video.replace(/[./+]/g, '\\$&')}`));
-    assert.match(hoja, new RegExp(`${brk.magra}\\s+${STAGE.assets.tipos.imagen.replace(/[./+]/g, '\\$&')}`));
+    assert.match(hoja, new RegExp(
+      `${esc(brk.concurrente)}\\s+${esc(STAGE.assets.tipos.video)}, luego ${esc(STAGE.assets.tipos.imagen)}; ` +
+      (brk.lineal ? 'sin opción que entre, el lineal' : 'sin opción que entre, se saltea')
+    ));
   }
 });
 
