@@ -86,3 +86,7 @@ servidor; éste dice qué hay adentro de cada respuesta. Se separan a propósito
 un ad presentation server de verdad, el 0083 queda superseded y esta decisión sigue en pie tal
 cual, porque la política de degradar el formato y no el aviso es del ad stack y no del
 transporte.
+
+---
+
+**2026-09-28 — nota.** Desde el ADR 0085 quien elige el medio es la librería y no la respuesta: el asset-list trae las dos variantes y el Player se queda con la primera que su capacidad satisface (ADR 0086). Esta decisión sigue en pie con un decodificador e imágenes: el aviso sale en imagen. Lo que se agrega es el escalón de abajo, cuando el dispositivo declara que tampoco dibuja imágenes: sin opción satisfacible el break cae al lineal si tiene default, y si no, se saltea (ADR 0087).

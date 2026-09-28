@@ -5922,3 +5922,13 @@ re-agendan solos y treinta y un `addEventListener`, contra cero `removeEventList
 que los `.svg` **no** necesitan el tipo de contenido a mano, al revés de lo que el contrato de la
 T-12 suponía. Y el guion de la demo —qué se muestra, en qué orden y en cuántos segundos— sigue sin
 dueño: es de la presentación y no de este repositorio.
+
+## 2026-09-28 — Fase 15 abierta: las capacidades como ejes
+
+Sale de la reunión de Nicolás con David de hoy. El Player declara su capacidad en dos ejes
+(decodificadores 1|2, imágenes sí|no), el APS estático de `stage-pair` devuelve siempre todas las
+opciones, y la librería las filtra con un paso explícito antes de dibujar (R5.6). El filtro entra
+a `lib/`, que la fase 14 no tocaba. Sin opción satisfacible, lineal si el break tiene default y
+salteo si no. Plan aprobado por el coordinador; diseño en `phases/15-las-capacidades-como-ejes/DESIGN.md`.
+ADR 0085 (supersede al 0083), 0086 y 0087, y una nota fechada en el 0084. Línea de base: 216/216
+y las costuras en verde. Compromiso: 2026-09-29.

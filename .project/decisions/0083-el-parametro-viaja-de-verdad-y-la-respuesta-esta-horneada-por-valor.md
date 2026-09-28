@@ -1,11 +1,11 @@
 ---
 id: "0083"
 title: El parámetro de decodificadores viaja de verdad y la respuesta está horneada por valor
-status: accepted
+status: superseded
 scope: phase-14
 date: 2026-09-21
 supersedes: null
-superseded_by: null
+superseded_by: "0085"
 generalizes: null
 generalized_by: null
 ---
@@ -69,3 +69,7 @@ estorba: el parámetro que ya viaja es el que ese servidor leería.
 **El costo es un juego de asset-lists por escalón.** Son archivos que el script de
 señalización escribe, así que el costo es de archivos y no de mantenimiento; lo que hay que
 cuidar es que los dos juegos se generen del mismo lugar y no se editen a mano por separado.
+
+---
+
+**2026-09-28 — superseded por el ADR 0085.** La respuesta ya no está horneada por valor: el asset-list es uno solo, trae todas las opciones, y la librería filtra. Lo que sigue en pie de acá está listado en las consecuencias del 0085.
