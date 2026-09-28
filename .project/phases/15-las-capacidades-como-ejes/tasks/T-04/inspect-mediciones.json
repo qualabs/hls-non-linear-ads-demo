@@ -22,7 +22,7 @@
     {
       "combinacion": "dec2-imgsi",
       "break": "b",
-      "t": 68.55,
+      "t": 68.54,
       "esperado": {
         "outcome": "drawn",
         "chosen": 0,
@@ -41,7 +41,7 @@
     {
       "combinacion": "dec2-imgno",
       "break": "a",
-      "t": 23.51,
+      "t": 23.53,
       "esperado": {
         "outcome": "drawn",
         "chosen": 0,
@@ -60,7 +60,7 @@
     {
       "combinacion": "dec2-imgno",
       "break": "b",
-      "t": 68.54,
+      "t": 68.52,
       "esperado": {
         "outcome": "drawn",
         "chosen": 0,
@@ -74,7 +74,15 @@
         "img": 0
       },
       "ok": true,
-      "descartes": []
+      "descartes": [],
+      "pedidos": [
+        "http://localhost:8093/signalling/asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "http://localhost:8093/signalling/asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "http://localhost:8093/signalling/asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "http://localhost:8093/signalling/asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "http://localhost:8093/signalling/asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "http://localhost:8093/signalling/asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=0"
+      ]
     },
     {
       "combinacion": "dec1-imgsi",
@@ -100,7 +108,7 @@
     {
       "combinacion": "dec1-imgsi",
       "break": "b",
-      "t": 68.51,
+      "t": 68.52,
       "esperado": {
         "outcome": "drawn",
         "chosen": 1,
@@ -119,6 +127,8 @@
       ],
       "pedidos": [
         "http://localhost:8093/signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=1",
+        "http://localhost:8093/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=1",
+        "http://localhost:8093/signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=1",
         "http://localhost:8093/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=1",
         "http://localhost:8093/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=1",
         "http://localhost:8093/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=1"
@@ -127,7 +137,7 @@
     {
       "combinacion": "dec1-imgno",
       "break": "a",
-      "t": 23.51,
+      "t": 23.52,
       "esperado": {
         "outcome": "skipped",
         "chosen": null,
@@ -149,7 +159,7 @@
     {
       "combinacion": "dec1-imgno",
       "break": "b",
-      "t": 68.52,
+      "t": 68.53,
       "esperado": {
         "outcome": "default",
         "chosen": null,
@@ -168,6 +178,7 @@
         "needs an image over the video and the device declares it cannot draw one"
       ],
       "pedidos": [
+        "http://localhost:8093/signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=0",
         "http://localhost:8093/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=0",
         "http://localhost:8093/signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=0",
         "http://localhost:8093/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=0",

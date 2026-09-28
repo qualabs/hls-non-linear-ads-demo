@@ -78,14 +78,24 @@
 <script src="/vendor/hls.min.js"></script>
 <script src="/dist/qualabs-concurrent-hls.js"></script>
 <script type="module">
-// La playlist y los decodificadores llegan por query, que es lo que permite
-// correr el mismo banco sobre la rica, sobre la magra y sobre la señalización
-// del control sin tocar este archivo.
+// La playlist y la capacidad llegan por query, que es lo que permite correr el
+// mismo banco con cualquier capacidad y sobre la señalización del control sin
+// tocar este archivo.
 const params = new URLSearchParams(location.search);
 const SRC = params.get('src');
-const DECODERS = params.has('decoders') ? Number(params.get('decoders')) : undefined;
+const CAPACIDAD = {
+  ...(params.has('decoders') ? { videoDecoders: Number(params.get('decoders')) } : {}),
+  ...(params.has('images') ? { imageOverVideo: params.get('images') === '1' } : {})
+};
 
 const stage = await (await fetch('/stage.json')).json();
+
+// SÓLO LOS BREAKS CON DEFAULT LINEAL (ADR 0087): el tramo invertido es una
+// comparación entre los dos panes, y en el break sin default el de fábrica no
+// tiene nada que reproducir. El nuestro se mide sobre esos mismos breaks, por el
+// ID del rango, para que los dos cursores recorran la misma secuencia.
+const MEDIDOS = stage.breaks.filter((b) => b.lineal);
+const IDS_MEDIDOS = new Set(MEDIDOS.map((b) => `AD-${b.id.toUpperCase()}-CONCURRENT`));
 
 const video = document.getElementById('video');
 const stockVideo = document.getElementById('stock-video');
@@ -94,7 +104,7 @@ const stockVideo = document.getElementById('stock-video');
 const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
 const concurrent = QualabsConcurrentHls.attach(hls, {
   container: document.getElementById('player'),
-  ...(DECODERS === undefined ? {} : { decoderCount: DECODERS })
+  capabilities: CAPACIDAD
 });
 hls.loadSource(SRC);
 hls.attachMedia(video);
@@ -115,7 +125,7 @@ const relojStock = () => {
   const t = stock.interstitialsManager?.primary?.currentTime;
   return Number.isFinite(t) ? t : stockVideo.currentTime;
 };
-const enAdDemo = () => concurrent.provider.activeAt(video.currentTime).length > 0;
+const enAdDemo = () => concurrent.provider.activeAt(video.currentTime).some((e) => IDS_MEDIDOS.has(e.id));
 const relojDemo = () => video.currentTime;
 
 const dormir = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -188,7 +198,7 @@ window.medir = async () => {
   // entera, en lugar de recibir una tabla incompleta que parece completa.
   const ultimo = stage.breaks[stage.breaks.length - 1];
   const limite = (ultimo.offset + ultimo.duracion + 45) * 1000;
-  const filas = await medirTodo(stage.breaks, limite);
+  const filas = await medirTodo(MEDIDOS, limite);
   document.getElementById('salida').textContent = JSON.stringify(filas, null, 2);
   return filas;
 };

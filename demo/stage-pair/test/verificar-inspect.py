@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
-"""Lo que `inspect.html` muestra está LEÍDO, y las capturas con que se mira.
+"""Lo que `inspect.html` muestra está LEÍDO y no transcripto.
 
-La verificación principal de esta página es mirarla: es interfaz, y lo que decide
-si cumple es si un dato que David tiene que señalar se distingue en un proyector.
-Eso lo hace `--que capturas`, y lo mira una persona.
-
-Lo que sí es medible es la otra mitad del contrato de la T-08: que **lo que la
+La verificación principal de esta página es mirarla: es interfaz. Lo que sí es
+medible es la otra mitad del contrato de la T-08: que **lo que la
 página muestra lo leyó y no lo transcribió**. Eso no se ve en una captura —una
 transcripción y una lectura se dibujan igual—, así que se mide moviendo la fuente
 y mirando moverse la pantalla.
 
 ════════════════════════════════════════════════════════════════════════════════
-LAS DOS MEDICIONES, Y EL CONTROL DE CADA UNA
+LA MEDICIÓN, Y SU CONTROL
 ════════════════════════════════════════════════════════════════════════════════
 
-1. LO QUE MUESTRA ESTÁ LEÍDO  (`--que lectura`)
+LO QUE MUESTRA ESTÁ LEÍDO
 
    Tres comparaciones contra el disco, leído por este script y no por la página:
 
@@ -42,33 +39,21 @@ LAS DOS MEDICIONES, Y EL CONTROL DE CADA UNA
    comparación contra el asset-list de OTRO break tiene que dar DISTINTO. Sin
    eso, tres verdes sólo prueban que el comparador dice verde.
 
-2. EL PARÁMETRO ESTÁ EN LA PANTALLA Y EN LA RED  (`--que parametro`)
-
-   La T-07 ya midió que `qa-decoder-count` viaja. Lo que esta página agrega es
-   que **se lee en cámara**, así que se compara lo que la tarjeta 2 dibuja contra
-   lo que el navegador pidió de verdad, en las tres posiciones del switch.
-
-   **El control negativo es la posición "sin declarar"**: ahí la pantalla y la
-   red tienen que salir las dos SIN el parámetro. Si apareciera, lo que la página
-   está dibujando no es la petición.
-
-3. LAS CAPTURAS  (`--que capturas`)
-
-   A 1907 de ancho y a 400x780, que son los dos anchos contra los que este
-   proyecto ya mide, con el aviso EN PANTALLA. Se guardan donde diga `--salida`.
+Lo que este archivo medía además hasta la fase 14 —el parámetro en la pantalla y
+en la red, y las capturas— lo mide ahora `test/verificar-capacidades.py`, en las
+cuatro combinaciones del control y con el panel del filtro incluido.
 
 ════════════════════════════════════════════════════════════════════════════════
 USO
 ════════════════════════════════════════════════════════════════════════════════
-    verificar-inspect.py --puerto 8097 [--que todo|lectura|parametro|capturas]
-                         [--salida <dir>]
+    verificar-inspect.py --puerto 8097
 
 Levanta su propio `server.mjs` en ese puerto y lo baja **por el PID que guardó**.
 El puerto se pasa a propósito y no se adivina: en esta máquina corren demos de
 Nicolás en 8080, 8081 y 8082.
 
 El intérprete es el del skill playwright, resuelto por el mismo camino que
-`test/medir-escalera.py`. Se puede pisar con `PY=<ruta>`.
+`test/medir-tramo-en-el-par.py`. Se puede pisar con `PY=<ruta>`.
 """
 
 import argparse
@@ -92,17 +77,8 @@ except ModuleNotFoundError:
 DEMO = Path(__file__).resolve().parent.parent
 SDK = DEMO.parent.parent
 STAGE = json.loads((DEMO / "stage.json").read_text())
-PARAMETRO = STAGE["decodificadores"]["parametro"]
-POSICIONES = STAGE["decodificadores"]["posiciones"]
 BREAKS = STAGE["breaks"]
-RICA = DEMO / STAGE["playlists"]["rica"]
-
-ETIQUETA = {None: "not declared"}
-
-
-def etiqueta(posicion):
-    return ETIQUETA.get(posicion["valor"], str(posicion["valor"]))
-
+PLAYLIST = DEMO / STAGE["playlists"]["par"]
 
 def senalizar(control=None):
     entorno = dict(os.environ)
@@ -116,13 +92,13 @@ def senalizar(control=None):
 
 def rangos_del_disco(break_id):
     prefijo = f'ID="AD-{break_id.upper()}-'
-    return [l for l in RICA.read_text().split("\n")
+    return [l for l in PLAYLIST.read_text().split("\n")
             if l.startswith("#EXT-X-DATERANGE:") and prefijo in l]
 
 
-def asset_list_del_disco(break_id, respuesta="rica"):
+def asset_list_del_disco(break_id):
     brk = next(b for b in BREAKS if b["id"] == break_id)
-    return (DEMO / "signalling" / brk[respuesta]).read_text()
+    return (DEMO / "signalling" / brk["concurrente"]).read_text()
 
 
 def start_date(linea):
@@ -148,15 +124,6 @@ class Pagina:
         self.page.goto(self.url)
         self.page.wait_for_function("() => window.demo && window.demo.video")
         return self
-
-    def elegir(self, indice):
-        """El switch, tocado como lo toca una persona: el botón."""
-        self.pedidos.clear()
-        self.page.get_by_role("button", name=etiqueta(POSICIONES[indice]), exact=True).click()
-        self.page.wait_for_function(
-            "(v) => window.demo && window.demo.posicion && window.demo.posicion.valor === v",
-            arg=POSICIONES[indice]["valor"],
-        )
 
     def ir_al_break(self, brk, adentro=True):
         """Al break, y opcionalmente hasta que el aviso esté EN PANTALLA."""
@@ -229,7 +196,7 @@ def medir_lectura(puerto):
             pagina.ir_al_break(brk, adentro=False)
             pagina.esperar_respuesta(brk["id"])
 
-            print(f"\n  break {brk['id'].upper()}, escalón «not declared» (playlist rica)")
+            print(f"\n  break {brk['id'].upper()}, capacidad inicial")
             disco_rangos = rangos_del_disco(brk["id"])
             pantalla_rangos = pagina.rangos_en_pantalla()
             rojo += fila("los rangos de la pantalla == los del archivo",
@@ -239,7 +206,7 @@ def medir_lectura(puerto):
                 print(f"      {l[:118]}")
 
             pedido = pagina.pedido_en_pantalla()
-            esperado_uri = f"/signalling/{brk['rica']}"
+            esperado_uri = f"/signalling/{brk['concurrente']}"
             rojo += fila("el pedido dibujado nombra el asset-list del break",
                          pedido.startswith(esperado_uri), pedido)
 
@@ -296,77 +263,9 @@ def medir_lectura(puerto):
     return rojo
 
 
-# ── 2. el parámetro, en la pantalla y en la red ──────────────────────────────
-
-def medir_parametro(puerto):
-    from playwright.sync_api import sync_playwright
-    print("\n== 2. EL PARÁMETRO SE LEE EN CÁMARA, Y ES EL QUE SALIÓ POR LA RED ==")
-    rojo = 0
-    with sync_playwright() as pw:
-        pagina = Pagina(pw, puerto)
-        try:
-            pagina.abrir()
-            brk = BREAKS[0]
-            for indice, posicion in enumerate(POSICIONES):
-                pagina.elegir(indice)
-                pagina.esperar_respuesta(brk["id"])
-                pantalla = pagina.pedido_en_pantalla()
-                red = [u for u in pagina.asset_lists_de_la_red() if f"break-{brk['id']}-" in u]
-                print(f"\n  posición «{etiqueta(posicion)}»  ->  playlist {posicion['respuesta']}")
-                print(f"      pantalla  {pantalla}")
-                for u in red:
-                    print(f"      red       {u.split(f'localhost:{puerto}')[-1]}")
-                esperado = posicion["valor"]
-                if esperado is None:
-                    ok_p = PARAMETRO not in pantalla.split("—")[0]
-                    ok_r = bool(red) and all(f"{PARAMETRO}=" not in u for u in red)
-                    rojo += fila("CONTROL NEGATIVO: la pantalla no lleva el parámetro", ok_p)
-                    rojo += fila("CONTROL NEGATIVO: la red tampoco", ok_r)
-                else:
-                    ok_p = f"?{PARAMETRO}={esperado}" in pantalla
-                    ok_r = bool(red) and all(f"{PARAMETRO}={esperado}" in u for u in red)
-                    rojo += fila(f"la pantalla dibuja {PARAMETRO}={esperado}", ok_p)
-                    rojo += fila("y la red llevó lo mismo", ok_r)
-        finally:
-            pagina.cerrar()
-    return rojo
-
-
-# ── 3. las capturas ──────────────────────────────────────────────────────────
-
-def capturar(puerto, salida):
-    from playwright.sync_api import sync_playwright
-    salida = Path(salida)
-    salida.mkdir(parents=True, exist_ok=True)
-    print(f"\n== 3. LAS CAPTURAS -> {salida} ==")
-    hechas = []
-    with sync_playwright() as pw:
-        for ancho, alto in ((1907, 1000), (400, 780)):
-            pagina = Pagina(pw, puerto, ancho, alto)
-            try:
-                pagina.abrir()
-                for indice, posicion in enumerate(POSICIONES):
-                    pagina.elegir(indice)
-                    breaks = BREAKS if ancho == 1907 else BREAKS[:1]
-                    for brk in breaks:
-                        pagina.ir_al_break(brk, adentro=True)
-                        pagina.esperar_respuesta(brk["id"])
-                        nombre = (f"inspect-{ancho}-paso-"
-                                  f"{etiqueta(posicion).replace(' ', '-')}-break-{brk['id']}.png")
-                        pagina.page.screenshot(path=str(salida / nombre), full_page=True)
-                        hechas.append(nombre)
-                        print(f"    {nombre}")
-            finally:
-                pagina.cerrar()
-    return hechas
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--puerto", type=int, required=True)
-    ap.add_argument("--que", default="todo", choices=["todo", "lectura", "parametro", "capturas"])
-    ap.add_argument("--salida", default=str(
-        SDK / ".project/phases/14-la-demo-que-va-al-escenario/tasks/T-08"))
     args = ap.parse_args()
 
     server = subprocess.Popen(
@@ -378,12 +277,7 @@ def main():
     time.sleep(1.0)
     rojo = 0
     try:
-        if args.que in ("todo", "lectura"):
-            rojo += medir_lectura(args.puerto)
-        if args.que in ("todo", "parametro"):
-            rojo += medir_parametro(args.puerto)
-        if args.que in ("todo", "capturas"):
-            capturar(args.puerto, args.salida)
+        rojo += medir_lectura(args.puerto)
     finally:
         # Por el PID que se guardó, nunca por patrón: en esta máquina hay otras
         # demos corriendo y un patrón que parece propio alcanza a las de al lado.

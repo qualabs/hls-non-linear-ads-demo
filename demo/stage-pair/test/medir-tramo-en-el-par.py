@@ -1,74 +1,34 @@
 #!/usr/bin/env python3
-"""Las tres mediciones de `index.html`, sobre la página real y con sus controles.
+"""Los dos panes de `index.html` entran y salen juntos de cada break con default.
 
-No hay banco acá: lo que se mide es **la página que se le muestra a Apple**, con
-su switch, sus dos players y su bloque de integrador. Un banco mediría otra cosa,
-y la T-02 ya midió en aislamiento; el contrato de la T-07 pide medir *el recorrido
-real*.
+Es la medición del tramo invertido (ADR 0082) sobre la página que se le muestra a
+Apple, con sus dos players y su bloque de integrador, y no sobre un banco. El
+instrumento es el que eligió la fase 03 —se lee el estado del navegador y no una
+captura— y la mecánica está en la cabecera de `banco-de-medicion.html`.
 
-════════════════════════════════════════════════════════════════════════════════
-LAS TRES MEDICIONES, Y EL CONTROL DE CADA UNA
-════════════════════════════════════════════════════════════════════════════════
+**Sólo los breaks con default lineal** (ADR 0087): en el que no tiene, el pane de
+fábrica no reproduce nada y no hay tramo que comparar. El nuestro se mide sobre
+esos mismos breaks, por el ID del rango, para que los dos recorran la misma
+secuencia.
 
-1. EL PARÁMETRO VIAJA  (`--que parametro`)
+**El control**: `CONTROL_DURACION_CONCURRENTE` escribe los asset-lists
+concurrentes con una duración distinta a la de su break, que es exactamente el
+defecto de `compatibility-pair`, y tiene que dar DISTINTO.
 
-   Se lee **de la red**, interceptando los pedidos que el navegador hizo de
-   verdad, y no del código de la página ni de lo que la página imprime. Por cada
-   posición del switch:
+Acá **no** se busca: escribir un `currentTime` es intervenir sobre el mismo reloj
+que se está midiendo.
 
-       sin declarar  ->  la URI del asset-list sale SIN `qa-decoder-count`
-       1             ->  `?qa-decoder-count=1`
-       2             ->  `?qa-decoder-count=2`
+Lo que medía este archivo hasta la fase 14 además del tramo —que el parámetro
+viaja y cuántos `<video>` hay por escalón— lo mide ahora
+`test/verificar-capacidades.py`, en las cuatro combinaciones del control.
 
-   **El control negativo es la posición "sin declarar".** Si ahí también
-   apareciera el parámetro, lo que el instrumento está leyendo no es la petición.
-   Y el contra-control es que en las otras dos SÍ aparece, con el valor exacto:
-   un lector roto que no encuentra nunca nada daría verde en la primera fila y
-   rojo en las otras dos.
-
-2. LA CUENTA DE DECODIFICADORES POR ESCALÓN  (`--que decodificadores`)
-
-   Es la premisa del ADR 0084 medida donde importa. Se cuentan los elementos
-   `<video>` vivos **adentro del contenedor de nuestro pane** mientras el aviso
-   está en pantalla, en los tres breaks:
-
-       escalón magro (1)  ->  1 elemento: el contenido primario, y el aviso es un `<img>`
-       escalón rico  (2)  ->  2 elementos: el primario y el aviso
-
-   **El escalón rico es el control.** Si los dos dieran lo mismo, lo medido sería
-   el instrumento y no la composición; si el magro diera dos, la premisa del
-   ADR 0084 es falsa y la escalera no tiene escalones. Se toma además la cuenta
-   FUERA del break, que tiene que ser 1 en los dos escalones: es la referencia
-   contra la que el 2 del escalón rico significa algo.
-
-   Acá sí se busca entre break y break, y es legítimo: lo que se mide es la
-   composición del DOM y no un instante del reloj.
-
-3. LOS DOS PANES SIGUEN ENTRANDO Y SALIENDO JUNTOS  (`--que tramo`)
-
-   Es la medición que la T-06 dejó verde sobre su banco, repetida **sobre
-   index.html**, que es donde el par termina argumentando. El instrumento es el
-   mismo que la fase 03 eligió —se lee el estado del navegador y no una captura—
-   y la mecánica está en la cabecera de `banco-de-medicion.html`.
-
-   **El control es el mismo**: `CONTROL_DURACION_CONCURRENTE` escribe los tres
-   asset-lists concurrentes con una duración distinta a la de su break, que es
-   exactamente el defecto de `compatibility-pair`, y tiene que dar DISTINTO.
-
-   Acá **no** se busca: escribir un `currentTime` es intervenir sobre el mismo
-   reloj que se está midiendo.
-
-════════════════════════════════════════════════════════════════════════════════
 USO
-════════════════════════════════════════════════════════════════════════════════
-    medir-escalera.py --puerto 8097 [--que todo|parametro|decodificadores|tramo]
+    medir-tramo-en-el-par.py --puerto 8097
 
 Levanta su propio `server.mjs` en ese puerto y lo baja **por el PID que guardó**.
 El puerto se pasa a propósito y no se adivina: en esta máquina corren demos de
-Nicolás en 8080, 8081 y 8082.
-
-El intérprete es el del skill playwright, resuelto por el mismo camino que
-`test/medir-tramo-invertido.py`. Se puede pisar con `PY=<ruta>`.
+Nicolás en 8080, 8081 y 8082. El intérprete es el del skill playwright; se puede
+pisar con `PY=<ruta>`.
 """
 
 import argparse
@@ -91,20 +51,12 @@ except ModuleNotFoundError:
 DEMO = Path(__file__).resolve().parent.parent
 SDK = DEMO.parent.parent
 STAGE = json.loads((DEMO / "stage.json").read_text())
-PARAMETRO = STAGE["decodificadores"]["parametro"]
-POSICIONES = STAGE["decodificadores"]["posiciones"]
+MEDIDOS = [b for b in STAGE["breaks"] if b["lineal"]]
 
 # La misma holgura que la medición de la T-06, y por la misma razón: se muestrea
 # cada 100 ms y los dos panes son dos players que no comparten reloj de muestreo.
 # El defecto que se busca vale DOCE segundos.
 HOLGURA = 0.5
-
-ETIQUETA = {None: "not declared"}
-
-
-def etiqueta(posicion):
-    return ETIQUETA.get(posicion["valor"], str(posicion["valor"]))
-
 
 # ── el sampler del tramo invertido, corriendo ADENTRO de la página ───────────
 # Va adentro y no en Python porque un muestreo hecho de a un `evaluate` por
@@ -120,7 +72,8 @@ async (breaks) => {
     const t = d.stock.hls.interstitialsManager?.primary?.currentTime;
     return Number.isFinite(t) ? t : d.stock.programme.currentTime;
   };
-  const enAdDemo = () => d.provider.activeAt(d.video.currentTime).length > 0;
+  const ids = new Set(breaks.map((b) => `AD-${b.id.toUpperCase()}-CONCURRENT`));
+  const enAdDemo = () => d.provider.activeAt(d.video.currentTime).some((e) => ids.has(e.id));
   const relojDemo = () => d.video.currentTime;
 
   for (let i = 0; i < 300; i++) {
@@ -160,27 +113,6 @@ async (breaks) => {
 }
 """
 
-# La composición, contada ADENTRO del contenedor de nuestro pane. Se cuenta ahí y
-# no en el documento entero porque el documento tiene además el `<video>` del pane
-# de fábrica, que no es parte de la composición que la librería arma.
-COMPOSICION = """
-() => {
-  const d = window.demo;
-  const caja = d.concurrent.container;
-  const activas = d.provider.activeAt(d.video.currentTime);
-  return {
-    enAd: activas.length > 0,
-    t: d.video.currentTime,
-    videos: caja.querySelectorAll('video').length,
-    imagenes: caja.querySelectorAll('img').length,
-    medios: [...new Set(activas.flatMap((e) => e.elements)
-      .filter((el) => !el.primary).map((el) => el.mediaType || 'null'))],
-    tipos: activas.map((e) => e.type)
-  };
-}
-"""
-
-
 def senalizar(control=None):
     entorno = dict(os.environ)
     if control:
@@ -190,7 +122,7 @@ def senalizar(control=None):
 
 
 class Pagina:
-    """index.html abierta, con los pedidos del asset-list capturados de la red."""
+    """index.html abierta."""
 
     def __init__(self, pw, puerto):
         self.navegador = pw.chromium.launch(
@@ -198,9 +130,6 @@ class Pagina:
             args=["--autoplay-policy=no-user-gesture-required", "--mute-audio"],
         )
         self.page = self.navegador.new_page(viewport={"width": 1907, "height": 1000})
-        self.pedidos = []
-        # De la RED y no del DOM: es la petición que el navegador emitió.
-        self.page.on("request", lambda r: self.pedidos.append(r.url))
         self.url = f"http://localhost:{puerto}/index.html"
 
     def abrir(self):
@@ -208,147 +137,11 @@ class Pagina:
         self.page.wait_for_function("() => window.demo && window.demo.video")
         return self
 
-    def elegir(self, indice):
-        """El switch, tocado como lo toca una persona: el botón."""
-        self.pedidos.clear()
-        self.page.get_by_role("button", name=etiqueta(POSICIONES[indice]), exact=True).click()
-        self.page.wait_for_function(
-            "(v) => window.demo && window.demo.posicion && window.demo.posicion.valor === v",
-            arg=POSICIONES[indice]["valor"],
-        )
-
-    def asset_lists(self):
-        return [u for u in self.pedidos if "/signalling/asset-list-break-" in u]
-
     def cerrar(self):
         self.navegador.close()
 
 
-# ── 1. el parámetro ──────────────────────────────────────────────────────────
-
-def medir_parametro(puerto):
-    from playwright.sync_api import sync_playwright
-    print("\n== 1. EL PARÁMETRO VIAJA — leído de la red, no del código ==")
-    rojo = 0
-    with sync_playwright() as pw:
-        pagina = Pagina(pw, puerto)
-        try:
-            pagina.abrir()
-            for indice, posicion in enumerate(POSICIONES):
-                pagina.elegir(indice)
-                pagina.page.wait_for_function(
-                    "(n) => window.demo.pedidos.length >= n", arg=len(STAGE["breaks"])
-                )
-                # DISTINTAS, y no la lista cruda: el pedido del último break de
-                # la corrida anterior puede llegar después del click que rearma,
-                # así que la lista cruda trae una repetición que no es un pedido
-                # de más. Lo que la medición afirma es de QUÉ archivos se pidieron
-                # y con qué parámetro, y eso no cambia. Un pedido del escalón
-                # equivocado sí rompería la fila: llevaría otro valor del
-                # parámetro, o ninguno, y las dos ramas de abajo lo cazan.
-                urls = sorted(set(pagina.asset_lists()))
-                esperado = posicion["valor"]
-                print(f"\n  posición «{etiqueta(posicion)}»  ->  playlist {posicion['respuesta']}")
-                for u in urls:
-                    print(f"    {u.split('localhost:' + str(puerto))[-1]}")
-                con = [u for u in urls if f"{PARAMETRO}=" in u]
-                if esperado is None:
-                    ok = len(urls) == len(STAGE["breaks"]) and not con
-                    print(f"    -> {len(urls)} pedidos, {len(con)} con {PARAMETRO}."
-                          f"  {'VERDE: el control negativo no lleva el parámetro' if ok else 'ROJO'}")
-                else:
-                    ok = (len(urls) == len(STAGE["breaks"])
-                          and all(f"{PARAMETRO}={esperado}" in u for u in urls))
-                    print(f"    -> {len(urls)} pedidos, todos con {PARAMETRO}={esperado}."
-                          f"  {'VERDE' if ok else 'ROJO'}")
-                rojo += 0 if ok else 1
-        finally:
-            pagina.cerrar()
-    return rojo
-
-
-# ── 2. los decodificadores ───────────────────────────────────────────────────
-
-def medir_decodificadores(puerto):
-    from playwright.sync_api import sync_playwright
-    print("\n== 2. LA CUENTA DE ELEMENTOS <video> POR ESCALÓN, SOBRE LA PÁGINA REAL ==")
-    print("   (adentro del contenedor de nuestro pane; el escalón rico es el control)")
-    rojo = 0
-    esperado = {1: 1, 2: 2, None: 2}
-    with sync_playwright() as pw:
-        pagina = Pagina(pw, puerto)
-        try:
-            pagina.abrir()
-            for indice, posicion in enumerate(POSICIONES):
-                pagina.elegir(indice)
-                print(f"\n  posición «{etiqueta(posicion)}»  ->  playlist {posicion['respuesta']}")
-                for brk in STAGE["breaks"]:
-                    fuera, dentro = muestrear_break(pagina.page, brk)
-                    quiere = esperado[posicion["valor"]]
-                    ok = dentro["videos"] == quiere and fuera["videos"] == 1
-                    print(
-                        f"    break {brk['id'].upper()}  "
-                        f"fuera del break (t={fuera['t']:6.2f}): {fuera['videos']} video / {fuera['imagenes']} img   "
-                        f"DENTRO: {dentro['videos']} video / {dentro['imagenes']} img   "
-                        f"medio del aviso: {', '.join(dentro['medios']) or '(ninguno)'}   "
-                        f"layout: {', '.join(dentro['tipos'])}   "
-                        f"{'OK' if ok else 'ROJO'}"
-                    )
-                    rojo += 0 if ok else 1
-        finally:
-            pagina.cerrar()
-    return rojo
-
-
-def muestrear_break(page, brk):
-    """La composición justo antes del break y la más poblada de adentro.
-
-    Adentro se toma el MÁXIMO y no una muestra: lo que la premisa afirma es
-    cuántos decodificadores la composición llega a tener vivos a la vez.
-
-    **Y la referencia de "fuera del break" se toma a más de tres segundos del
-    break**, que no es un margen de comodidad: `bringAhead` construye el nodo del
-    aviso hasta 3 s antes de que se vea (medido en la T-02), así que una muestra
-    tomada a dos segundos del break cuenta un elemento que todavía no está en
-    pantalla y la referencia deja de ser la referencia. Se vio: con el escalón
-    rico, el break C daba 2 elementos `<video>` FUERA del break.
-    """
-    page.evaluate("(t) => window.demo.irA(t)", max(0.5, brk["offset"] - 9))
-    esperar(page, lambda m: not m["enAd"] and m["t"] >= brk["offset"] - 9, 40)
-    fuera = esperar(page, lambda m: not m["enAd"] and m["t"] <= brk["offset"] - 4, 40)
-    # Dos muestras seguidas y no una: el renderizador limpia en su propio bucle de
-    # cuadro, así que la muestra inmediatamente posterior a una búsqueda puede
-    # todavía contar el nodo del break del que se acaba de salir. Es el
-    # instrumento y no la página: medido aparte, una salida natural de un break
-    # deja UN elemento en el cuadro siguiente.
-    time.sleep(0.4)
-    segunda = page.evaluate(COMPOSICION)
-    if not segunda["enAd"] and segunda["t"] <= brk["offset"] - 3.5:
-        fuera = segunda
-    esperar(page, lambda m: m["enAd"], 30)
-    dentro = page.evaluate(COMPOSICION)
-    fin = time.time() + brk["duracion"] - 1
-    while time.time() < fin:
-        m = page.evaluate(COMPOSICION)
-        if not m["enAd"]:
-            break
-        if m["videos"] > dentro["videos"] or m["imagenes"] > dentro["imagenes"]:
-            dentro = m
-        time.sleep(0.2)
-    return fuera, dentro
-
-
-def esperar(page, condicion, segundos):
-    fin = time.time() + segundos
-    while time.time() < fin:
-        m = page.evaluate(COMPOSICION)
-        if condicion(m):
-            return m
-        time.sleep(0.1)
-    raise TimeoutError("la página no llegó al estado esperado")
-
-
-# ── 3. el tramo invertido ────────────────────────────────────────────────────
+# ── el tramo invertido ────────────────────────────────────────────────────
 
 def medir_tramo(puerto, control_duracion):
     from playwright.sync_api import sync_playwright
@@ -358,13 +151,13 @@ def medir_tramo(puerto, control_duracion):
             pagina = Pagina(pw, puerto)
             try:
                 pagina.abrir()
-                filas = pagina.page.evaluate(SAMPLER, STAGE["breaks"])
+                filas = pagina.page.evaluate(SAMPLER, MEDIDOS)
             finally:
                 pagina.cerrar()
             return informe_tramo(titulo, filas, esperado_igual)
 
         senalizar()
-        rojo += una_pasada("3. LOS DOS PANES ENTRAN Y SALEN JUNTOS — index.html, escalón rico", True)
+        rojo += una_pasada("LOS DOS PANES ENTRAN Y SALEN JUNTOS — index.html, capacidad inicial", True)
         senalizar(control=control_duracion)
         rojo += una_pasada(
             f"   EL CONTROL — el break concurrente dura {control_duracion} s y su lineal no", False)
@@ -396,8 +189,6 @@ def informe_tramo(titulo, filas, esperado_igual):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--puerto", type=int, required=True)
-    ap.add_argument("--que", default="todo",
-                    choices=["todo", "parametro", "decodificadores", "tramo"])
     ap.add_argument("--control-duracion", type=float, default=24.0)
     args = ap.parse_args()
 
@@ -410,13 +201,7 @@ def main():
     time.sleep(1.0)
     rojo = 0
     try:
-        senalizar()
-        if args.que in ("todo", "parametro"):
-            rojo += medir_parametro(args.puerto)
-        if args.que in ("todo", "decodificadores"):
-            rojo += medir_decodificadores(args.puerto)
-        if args.que in ("todo", "tramo"):
-            rojo += medir_tramo(args.puerto, args.control_duracion)
+        rojo += medir_tramo(args.puerto, args.control_duracion)
     finally:
         # Por el PID que se guardó, nunca por patrón: en esta máquina hay otras
         # demos corriendo y un patrón que parece propio alcanza a las de al lado.

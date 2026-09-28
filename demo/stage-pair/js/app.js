@@ -195,7 +195,9 @@ const ENTRADA = 5;
 const TOLERANCIA = 1.5;
 
 function objetivoSeguro(segundo) {
-  for (const brk of stage.breaks) {
+  // Only the breaks the off-the-shelf pane plays: the one with no linear default
+  // (ADR 0087) has no Apple-class tag, so for that pane it is plain programme.
+  for (const brk of stage.breaks.filter((b) => b.lineal)) {
     if (segundo >= brk.offset && segundo < brk.offset + brk.duracion) {
       return Math.max(0.05, brk.offset - ENTRADA);
     }

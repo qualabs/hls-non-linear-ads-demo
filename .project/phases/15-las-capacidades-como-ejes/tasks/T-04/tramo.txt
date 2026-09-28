@@ -1,0 +1,13 @@
+server PID 1260993 en el puerto 8094
+
+== LA MEDICIÓN — señalización tal cual, 2 decodificadores, imágenes 1 ==
+  break B  fábrica  64.951 ->  77.075   nuestro  64.976 ->  77.099   delta entrada  0.025 s  salida  0.024 s   IGUAL   
+  break C  fábrica 109.970 -> 122.077   nuestro 109.969 -> 122.096   delta entrada  0.001 s  salida  0.019 s   IGUAL   
+
+== EL CONTROL — el break concurrente dura 24.0 s y su lineal no ==
+  break B  fábrica  64.868 ->  77.075   nuestro  64.952 ->  89.036   delta entrada  0.084 s  salida 11.961 s   DISTINTO
+  break C  fábrica 109.967 -> 122.077   nuestro 109.997 -> 134.052   delta entrada  0.030 s  salida 11.975 s   DISTINTO
+
+server 1260993 bajado
+
+VERDE: la medición dio igual y el control dio distinto.

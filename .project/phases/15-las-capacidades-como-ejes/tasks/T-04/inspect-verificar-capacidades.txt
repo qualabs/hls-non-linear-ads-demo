@@ -1,0 +1,28 @@
+1. LO QUE VIAJA -- las queries distintas que salieron:
+     ?sgai-video-decoders=1&sgai-image-over-video=0   (12 pedidos)
+     ?sgai-video-decoders=1&sgai-image-over-video=1   (6 pedidos)
+     ?sgai-video-decoders=2&sgai-image-over-video=0   (6 pedidos)
+     ?sgai-video-decoders=2&sgai-image-over-video=1   (6 pedidos)
+2. LO QUE VUELVE -- el sha256 del cuerpo, por break:
+     break a: 1 cuerpo(s) distinto(s) ['e8a5c1e41cf4c240']
+     break b: 1 cuerpo(s) distinto(s) ['f07a673b4d267957']
+     break c: 1 cuerpo(s) distinto(s) ['ee513937992719c2']
+   control: los cuerpos de breaks distintos son distintos entre sí -> sí
+3. LO QUE SE DIBUJA:
+   ok   dec2-imgsi   break a  t= 23.52  obtenido {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0}  esperado {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0}
+   ok   dec2-imgsi   break b  t= 68.54  obtenido {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0}  esperado {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0}
+   ok   dec2-imgno   break a  t= 23.53  obtenido {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0}  esperado {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0}
+   ok   dec2-imgno   break b  t= 68.52  obtenido {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0}  esperado {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0}
+   ok   dec1-imgsi   break a  t= 23.51  obtenido {'outcome': 'drawn', 'chosen': 1, 'video': 1, 'img': 1}  esperado {'outcome': 'drawn', 'chosen': 1, 'video': 1, 'img': 1}
+          descartada: needs 2 video decoders and the device declares 1
+   ok   dec1-imgsi   break b  t= 68.52  obtenido {'outcome': 'drawn', 'chosen': 1, 'video': 1, 'img': 1}  esperado {'outcome': 'drawn', 'chosen': 1, 'video': 1, 'img': 1}
+          descartada: needs 2 video decoders and the device declares 1
+   ok   dec1-imgno   break a  t= 23.52  obtenido {'outcome': 'skipped', 'chosen': None, 'video': 1, 'img': 0}  esperado {'outcome': 'skipped', 'chosen': None, 'video': 1, 'img': 0}
+          descartada: needs 2 video decoders and the device declares 1
+          descartada: needs an image over the video and the device declares it cannot draw one
+   ok   dec1-imgno   break b  t= 68.53  obtenido {'outcome': 'default', 'chosen': None, 'video': 2, 'img': 0}  esperado {'outcome': 'default', 'chosen': None, 'video': 2, 'img': 0}
+          descartada: needs 2 video decoders and the device declares 1
+          descartada: needs an image over the video and the device declares it cannot draw one
+   control: composiciones distintas en el break b sobre 4 combinaciones -> 3
+
+VERDE

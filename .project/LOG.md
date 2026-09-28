@@ -5979,3 +5979,16 @@ documento decía que cuando el número existiera, la comparación iría en ese l
 `qa-decoder|decoderCount|DECODER_COUNT` fuera de `.project/`: queda una mención en
 `lib/signalling.js`, que explica el reemplazo. Control: el mismo grep sobre `VIDEO_DECODERS_PARAM`
 encuentra 11.
+
+## 2026-09-28 — T-04: las cuatro combinaciones, verificadas en el navegador
+
+`test/verificar-capacidades.py` (nuevo) mide en `index.html` y en `inspect.html` que el pedido
+lleva la capacidad del control, que el cuerpo de cada break es idéntico byte a byte en las cuatro
+combinaciones, y que la composición cambia como manda el ADR 0085. Las dos páginas dieron VERDE, con
+sus controles. Las mediciones de la fase 14 quedaron al día y en verde: el tramo invertido en el
+banco y en el par (sólo sobre B y C, que tienen lineal), la lectura de `inspect.html` y el enlace de
+las dos barras, que tuvo que mudar los casos de la trampa de A a C. `medir-escalera.py` pasó a ser
+`medir-tramo-en-el-par.py`: lo que medía además del tramo (el parámetro y los `<video>` por
+escalón) lo mide ahora `verificar-capacidades.py`. `objetivoSeguro` de `app.js` ya no retrocede
+en A, porque para el pane de fábrica A es programa. Quedan en disco, sin git, las dos playlists
+viejas `content/primary/con-daterange-{rica,magra}.m3u8`, que ya no lee nadie.

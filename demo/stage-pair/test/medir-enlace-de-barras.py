@@ -41,7 +41,7 @@ USO
 Levanta su propio `server.mjs` en ese puerto y lo baja por el PID que guardó.
 En esta máquina corren demos de Nicolás en 8080, 8081 y 8082: el puerto se pasa.
 
-El intérprete es el del skill playwright, como en `medir-escalera.py`.
+El intérprete es el del skill playwright, como en `medir-tramo-en-el-par.py`.
 """
 
 import argparse
@@ -65,6 +65,9 @@ DEMO = Path(__file__).resolve().parent.parent
 SDK = DEMO.parent.parent
 STAGE = json.loads((DEMO / "stage.json").read_text())
 BREAKS = STAGE["breaks"]
+# Los breaks que el pane de fábrica reproduce: el que no tiene default lineal
+# (ADR 0087) no lleva tag de Apple, y para ese pane es programa.
+CON_LINEAL = [b for b in BREAKS if b["lineal"]]
 
 # La separación que cuenta como "el mismo segundo". Los dos panes son dos
 # players que no comparten reloj de muestreo y el programa sigue corriendo entre
@@ -98,12 +101,12 @@ RELOJES = """
 
 
 def en_break(segundo):
-    return any(b["offset"] <= segundo < b["offset"] + b["duracion"] for b in BREAKS)
+    return any(b["offset"] <= segundo < b["offset"] + b["duracion"] for b in CON_LINEAL)
 
 
 def cabeza_segura(segundo):
     """Lo mismo que `objetivoSeguro` de la página, para saber qué esperar."""
-    for b in BREAKS:
+    for b in CON_LINEAL:
         if b["offset"] <= segundo < b["offset"] + b["duracion"]:
             return max(0.05, b["offset"] - 5)
     return segundo
@@ -225,10 +228,10 @@ CASOS = [
     ("2. desde la barra de FÁBRICA, destino fuera de un break", "stock", 140.0, 8.0),
     ("3. desde NUESTRA barra, destino ADENTRO del break B", "demo", 70.0, 8.0),
     ("4. desde la barra de FÁBRICA, destino ADENTRO del break B", "stock", 70.0, 8.0),
-    ("5. LA TRAMPA: gesto desde NUESTRA barra con el par ADENTRO del break A",
-     "demo", 140.0, "break-a"),
-    ("6. LA TRAMPA: gesto desde la barra de FÁBRICA con el par ADENTRO del break A",
-     "stock", 140.0, "break-a"),
+    ("5. LA TRAMPA: gesto desde NUESTRA barra con el par ADENTRO del break C",
+     "demo", 150.0, "break-c"),
+    ("6. LA TRAMPA: gesto desde la barra de FÁBRICA con el par ADENTRO del break C",
+     "stock", 150.0, "break-c"),
 ]
 
 
@@ -270,8 +273,8 @@ def una_corrida(pw, puerto, enlace, capturas=None, solo=None):
                 continue
             pagina.page.evaluate("(v) => { window.demo.enlace = v; }", enlace)
             # Dejar el par donde el caso lo pide, sin tocar ninguna barra.
-            if desde == "break-a":
-                partida = dejar_el_par_en(pagina, BREAKS[0]["offset"] - 3)
+            if desde == "break-c":
+                partida = dejar_el_par_en(pagina, next(b for b in BREAKS if b["id"] == "c")["offset"] - 3)
                 if partida is None:
                     print(f"\n  {nombre}\n      ROJO: el par no llegó al punto de partida")
                     rojo += 1
