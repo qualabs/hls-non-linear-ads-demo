@@ -5953,3 +5953,18 @@ sacárselo dejaba una de las nueve piezas sin aparecer; A es el único cuyo line
 aviso. El ADR 0087 se corrigió en el mismo día. Test nuevo de punta a punta: la librería, sobre
 los archivos escritos, dibuja video, video, imagen y lineal/nada en las cuatro combinaciones. Sus
 controles: invertir el orden de las opciones pone 4 tests en rojo, y darle `URI` a A pone 2.
+
+## 2026-09-28 — T-03: el control de dos ejes y el panel "What the library kept"
+
+`index.html` e `inspect.html` declaran la capacidad con dos grupos de botones (decodificadores
+1|2, imágenes yes|no), que salen de `js/capabilities.js`, compartido. En `inspect.html` hay un
+cuarto panel, debajo del player para que esté en pantalla durante el break: cada opción con su
+veredicto y el motivo del descarte en una frase que se puede decir en voz alta, más el desenlace
+(dibujada, lineal o salteo). Lo que dibuja es el reporte que la librería pasa a `onResolved`. En
+`index.html` la lista de pedidos suma el desenlace de cada uno.
+
+**Hallazgo:** el commit de la T-01 rompía `./scripts/construir-libreria.sh`, porque el script
+junta los módulos sacando los `import` de una sola línea y yo había partido uno en tres. Ni
+`npm test` ni `npm run check` construyen la librería, así que las dos cosas dieron verde con el
+build roto. Arreglado acá (el import volvió a una línea). No se agregó el build a la suite: queda
+reportado.

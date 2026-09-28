@@ -41,12 +41,18 @@
   and it is not visible in a single line.
 
   TWO, WHAT THE CLIENT ASKED FOR. The URL that went out, read off the
-  performance timeline, with `qa-decoder-count` picked out of it. The switch
-  above moves it, and in the step that declares nothing the URL comes out
-  without the parameter, byte for byte as it would for an integrator who never
-  heard of the option.
+  performance timeline, with the two capability parameters picked out of it
+  (ADR 0086). The switch above moves them.
 
-  THREE, WHAT CAME BACK. The body of that same URL, verbatim.
+  THREE, WHAT CAME BACK. The body of that same URL, verbatim -- and it is THE
+  SAME for every position of the switch, because the answer carries every
+  option of the ad (ADR 0085).
+
+  FOUR, WHAT THE LIBRARY KEPT. The intermediate step: each option of the answer
+  checked against what the device declared, in order, with the reason for every
+  one discarded in a sentence that can be said out loud, and how the break
+  ended -- drawn, its linear default, or skipped. It is the report the library
+  hands `onResolved`, not a second opinion computed by this page.
 
   NOT ONE OF THE THREE IS TYPED INTO THIS FILE, and that is the rule of the page
   and not a detail of it: the ranges are read out of the playlist the player is
@@ -61,13 +67,14 @@
   WHAT EACH ELEMENT IS FOR
   ------------------------
   #slot       the box the player is built into. EMPTY here and filled by
-              js/inspect.js, because changing the step REBUILDS the player:
-              `decoderCount` is read once, when the signalling is created, so a
+              js/inspect.js, because changing the switch REBUILDS the player:
+              `capabilities` is read once, when the signalling is created, so a
               value changed in flight would never be read again
               (lib/signalling.js).
   #ranges     the two ranges of the break on screen, read off the playlist.
   #request    the URL that went out, with the parameter picked out of it.
   #answer     the body that came back.
+  #filter     what the library kept of it, and why.
   #contract   the contract of ADR 0003 in one line: what the signalling layer
               says is active right now. The console carries the same thing with
               the boxes and the order of every element.
@@ -95,20 +102,21 @@
   </header>
 
   <section class="switch" aria-label="Device capability">
-    <p class="switch-label">Video decoders this device declares</p>
-    <div class="steps" id="steps" role="group" aria-label="Declared video decoders"></div>
+    <p class="switch-label">What this device declares</p>
+    <div class="steps" id="steps"></div>
     <p class="step-out" id="step-out"></p>
     <div class="jumps" id="jumps" role="group" aria-label="Jump to"></div>
     <p class="no-server">
-      There is no ad presentation server behind this page. <code>qa-decoder-count</code> is the
-      parameter such a server would read; here the answer is baked by value, one static playlist
-      per step, and the switch above picks which one is loaded. What is real is the request: the
-      parameter is on it, or absent from it, exactly as the library builds it.
+      There is no ad presentation server behind this page. The two capabilities travel on every
+      asset-list request, as such a server would read them, and the answer is one static file per
+      break that always carries every option of the ad: video first, then the same ad as an image.
+      What decides what is drawn is the library, in panel 4.
     </p>
   </section>
 
   <div class="inspect">
 
+    <div class="inspect__left">
     <section class="pane pane-demo" id="pane" data-state="primary">
       <h2 class="role">This demo&rsquo;s player</h2>
       <p class="role-sub">The library, unmodified, with its interstitials machinery off. The programme is never replaced.</p>
@@ -118,17 +126,26 @@
       <p class="hud" id="hud"></p>
     </section>
 
+      <!-- Under the player and not at the bottom of the column: it is the card
+           that explains the picture, so it is on screen while the break is. -->
+      <article class="move move--kept">
+        <h2 class="move__title"><span class="move__n">4</span> What the library kept</h2>
+        <p class="move__lede">
+          The same answer reaches every device. Here each option is checked against what this
+          device declared, in order, and the first one it can show is the one drawn.
+        </p>
+        <ol class="filter" id="filter"></ol>
+        <p class="outcome" id="outcome"></p>
+      </article>
+    </div>
+
     <section class="exchange" aria-label="The exchange">
 
       <p class="exchange__which" id="which"></p>
 
       <article class="move">
         <h2 class="move__title"><span class="move__n">1</span> What the playlist said</h2>
-        <p class="move__lede">
-          Two ranges, same <code>START-DATE</code>, one playlist. The class is compared as an
-          exact string and there is no inheritance, so each client keeps one and ignores the
-          other.
-        </p>
+        <p class="move__lede" id="ranges-lede"></p>
         <div id="ranges"></div>
       </article>
 

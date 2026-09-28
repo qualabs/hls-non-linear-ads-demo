@@ -1,5 +1,5 @@
-// app.js -- the pair of players of index.html, and the switch that says how many
-// video decoders the device has.
+// app.js -- the pair of players of index.html, and the switch that says what
+// the device can draw.
 //
 // This file is three things, and it marks which is which.
 //
@@ -9,7 +9,7 @@
 // hands over, and turns the concurrent experience on over a container. That is
 // the surface of ADR 0015, and the fence is there so it can be counted. The only
 // thing this page adds to it that `demo/compatibility-pair/` does not is one
-// option, `decoderCount`, which is already documented in
+// option, `capabilities` (ADR 0086), documented in
 // `docs/integrating-the-library.md`.
 //
 // THE SECOND IS THE ARGUMENT OF THE PAGE: the off-the-shelf player of the
@@ -27,9 +27,9 @@
 // written down.
 //
 // ============================================================================
-// WHY CHANGING THE STEP REBUILDS BOTH PLAYERS, AND WHY BOTH
+// WHY CHANGING THE SWITCH REBUILDS BOTH PLAYERS, AND WHY BOTH
 // ============================================================================
-// `decoderCount` is read ONCE, when the signalling is created, and the reason is
+// `capabilities` is read ONCE, when the signalling is created, and the reason is
 // written where it is read (`createSignalling`, in lib/signalling.js): what the
 // value can be wrong about is a statement of the integrator, and that is one
 // statement and not one per break. So there is no in-flight way to change it,
@@ -48,33 +48,27 @@
 // zero would cost twenty seconds to reach the first break every time it is
 // touched.
 //
-// WHAT THE STEP CHOOSES is two things at once and they are the two halves of
-// ADR 0083: the VALUE handed to `attach()`, which is what puts
-// `qa-decoder-count` on the asset-list request -- or leaves it off, in the step
-// that declares nothing -- and the PLAYLIST that is loaded, which is how a demo
-// served as static files out of a bucket answers a parameter with no server
-// behind it. The response is baked by value, one playlist per step, and the
-// switch is the `if`.
+// WHAT THE SWITCH CHOOSES is one thing: the `capabilities` handed to
+// `attach()`. They travel on the asset-list request, and the library filters the
+// options of every ad against them (ADR 0085). The playlist is ONE and the
+// answer of each break is the same file for every position of the switch, which
+// is how a demo served as static files out of a bucket shows a Player choosing
+// with no server behind it.
 //
-// One thing the page does NOT do is tell the two panes apart by the step. Both
-// load the same playlist, always, which is the whole claim of the pair; the
-// Apple-class tag is byte for byte the same in the rich playlist and in the lean
-// one, so the off-the-shelf pane plays the same twelve seconds in every step.
+// Both panes load that one playlist, always, which is the whole claim of the
+// pair. The break with no linear default (ADR 0087) carries no Apple-class tag,
+// so the off-the-shelf pane plays nothing there in every position.
 
 import { traceContract } from './contract-trace.js';
 import { createStockPlayer } from './stock-player.js';
+import { PARAMETROS, breakDelReporte, crearControl, desenlaceCorto } from './capabilities.js';
 
-// The one source of the numbers of this demo (ADR 0044). The steps, the
-// playlists, the name of the parameter and the three breaks all come from here;
-// not one of them is typed in this file.
+// The one source of the numbers of this demo (ADR 0044). The axes of the
+// switch, the playlist and the three breaks all come from here; not one of them
+// is typed in this file.
 const stage = await (await fetch('/stage.json')).json();
 
-const PARAMETRO = stage.decodificadores.parametro;
-const POSICIONES = stage.decodificadores.posiciones;
-const PLAYLIST = {
-  rica: `/${stage.playlists.rica}`,
-  magra: `/${stage.playlists.magra}`
-};
+const SRC = `/${stage.playlists.par}`;
 
 const panes = {
   stock: {
@@ -110,11 +104,14 @@ function construirCaja(slot) {
 // ===========================================================================
 // The asset-list requests are READ and not written. What the list below prints
 // is the URL the browser actually fetched, out of the performance timeline, so
-// the parameter shown is on the request or it is not on the page. A page that
-// printed the step it had just been handed would be reporting its own intention,
-// which is the one thing on this page that nobody needs told.
+// the parameters shown are on the request or they are not on the page. Next to
+// each one, what the library kept of its answer, off the report `onResolved`
+// hands over.
 const listaPedidos = document.getElementById('wire-list');
 let pedidos = [];
+
+/** break id -> what the library kept of the answer, as `onResolved` reported it. */
+const selecciones = new Map();
 
 function pintarPedidos() {
   if (!pedidos.length) {
@@ -126,18 +123,22 @@ function pintarPedidos() {
   }
   listaPedidos.replaceChildren(...pedidos.map((href) => {
     const url = new URL(href);
-    const valor = url.searchParams.get(PARAMETRO);
+    const pares = Object.values(PARAMETROS)
+      .filter((nombre) => url.searchParams.has(nombre))
+      .map((nombre) => `${nombre}=${url.searchParams.get(nombre)}`);
     const li = document.createElement('li');
     li.append(url.pathname);
-    if (valor === null) {
+    const marca = document.createElement(pares.length ? 'b' : 'span');
+    if (!pares.length) marca.className = 'none';
+    marca.textContent = pares.length ? `?${pares.join('&')}` : '  — no capability on this request';
+    li.append(marca);
+    const id = url.pathname.match(/asset-list-break-([a-z0-9]+)\.json/)?.[1];
+    const asset = selecciones.get(id)?.assets[0];
+    if (asset) {
       const nota = document.createElement('span');
-      nota.className = 'none';
-      nota.textContent = `  — no ${PARAMETRO} on this request`;
+      nota.className = 'wire__outcome';
+      nota.textContent = `  ${desenlaceCorto(asset)}`;
       li.append(nota);
-    } else {
-      const marca = document.createElement('b');
-      marca.textContent = `?${PARAMETRO}=${valor}`;
-      li.append(marca);
     }
     return li;
   }));
@@ -162,7 +163,7 @@ new PerformanceObserver((list) => {
 
 /** What is alive right now: the two players of one arming, or null. */
 let vivo = null;
-let posicionActual = 0;
+let capacidadesActuales = stage.capacidades.inicial;
 
 /**
  * A TARGET BOTH PANES CAN ACTUALLY REACH, and it exists because one of them
@@ -427,7 +428,7 @@ function enlazar(origen, pedido) {
   if (enBreak) {
     console.log(`[app] scrub from the ${origen} bar to ${objetivo.toFixed(2)}s while the ` +
       'off-the-shelf pane is inside a break: it cannot take a seek there, so both are rebuilt');
-    armar(posicionActual, objetivo);
+    armar(capacidadesActuales, objetivo);
     return;
   }
   vivo.crudo.nuestro(objetivo);
@@ -441,7 +442,7 @@ function enlazar(origen, pedido) {
     registro.camino = 'directo, no entró → rearmado';
     console.log(`[app] the off-the-shelf pane did not take ${objetivo.toFixed(2)}s ` +
       `(it is at ${vivo.stock.programme.currentTime.toFixed(2)}s): both are rebuilt`);
-    armar(posicionActual, objetivo);
+    armar(capacidadesActuales, objetivo);
   }, 400);
 }
 
@@ -464,20 +465,21 @@ function unSoloAudio(elementos) {
 
 /** The media of the ad, off the contract: the field the step actually moves. */
 function medios(activas) {
+  // A linear default declares no medium of its own: it is the asset's `URI`
+  // played full frame (ADR 0019), so it is named for what it is.
   const tipos = activas
-    .flatMap((e) => e.elements)
-    .filter((el) => !el.primary)
-    .map((el) => el.mediaType || 'unknown');
+    .flatMap((e) => e.elements.map((el) => ({ el, lineal: e.type === 'linear' })))
+    .filter(({ el }) => !el.primary)
+    .map(({ el, lineal }) => el.mediaType || (lineal ? 'the linear default, full frame' : 'unknown'));
   return [...new Set(tipos)].join(', ');
 }
 
-function armar(indice, retomarEn = 0) {
-  const posicion = POSICIONES[indice];
-  const SRC = PLAYLIST[posicion.respuesta];
-  posicionActual = indice;
+function armar(capacidades, retomarEn = 0) {
+  capacidadesActuales = capacidades;
 
   derribar();
   pedidos = [];
+  selecciones.clear();
   pintarPedidos();
 
   const nuestro = construirCaja(panes.demo.caja);
@@ -492,18 +494,17 @@ function armar(indice, retomarEn = 0) {
   const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
   const concurrent = QualabsConcurrentHls.attach(hls, {
     container: nuestro.player,
-    onResolved: (experiences) => {
+    // The one option of this block that the four earlier demos do not have:
+    // what the device can draw, one axis at a time (ADR 0086).
+    capabilities: capacidades,
+    onResolved: (experiences, seleccion) => {
       for (const e of experiences) {
         console.log(`[app] resolved ${e.type}#${e.itemId}: ${e.elements.length} elements,` +
           ` window ${e.startTime.toFixed(2)}s -> ${(e.startTime + e.duration).toFixed(2)}s`);
       }
-    },
-    // The one line of this block that the four earlier demos do not have. A
-    // `null` is not "zero decoders" and it is not a placeholder: it is the
-    // supported state in which nothing is added to the request and it goes out
-    // exactly as it goes out for an integrator who never heard of the option
-    // (`usableDecoderCount`, in lib/signalling.js).
-    decoderCount: posicion.valor
+      selecciones.set(breakDelReporte(seleccion), seleccion);
+      pintarPedidos();
+    }
   });
   hls.loadSource(SRC);
   hls.attachMedia(video);
@@ -525,10 +526,9 @@ function armar(indice, retomarEn = 0) {
     // The check is cheap and it is the whole point of the configuration above,
     // so it is on the page rather than in a comment.
     const off = hls.interstitialsManager == null;
-    const declarado = posicion.valor == null ? 'not declared' : String(posicion.valor);
     panes.demo.hud.textContent =
       `hls.js ${Hls.version} · interstitials manager: ${off ? 'none' : 'PRESENT'} · ` +
-      `decoderCount: ${declarado} · playing ${SRC}`;
+      `capabilities: ${JSON.stringify(capacidades)} · playing ${SRC}`;
   });
 
   video.muted = true;
@@ -554,8 +554,8 @@ function armar(indice, retomarEn = 0) {
    * thing every consumer of the seam gets.
    *
    * IT NAMES THE MEDIUM OF THE AD because that is the one field the switch
-   * moves, and it reads it rather than deriving it from the step: with two
-   * decoders the elements come back as media playlists, with one as
+   * moves, and it reads it rather than deriving it from the switch: with two
+   * decoders the library keeps the option in video, with one the option as
    * `image/svg+xml`, and the layout, the campaign and the duration are the same
    * in both (ADR 0084). If the line ever says the medium the step asked for
    * while the composition is drawing another, that is the page lying and it
@@ -581,10 +581,9 @@ function armar(indice, retomarEn = 0) {
     video, stock.programme, { demo: nuestro.player, stock: otro.player }, enlazar);
 
   vivo = {
-    hls, concurrent, consumer, video, stock, stockVideo: otro.video, posicion, src: SRC, crudo
+    hls, concurrent, consumer, video, stock, stockVideo: otro.video, capacidades, src: SRC, crudo
   };
   irA(objetivoSeguro(retomarEn));
-  pintarPasos();
 
   // For the console, for the measurements of this task, and for whoever comes
   // next. It is replaced on every arming, so it always points at what is alive.
@@ -596,11 +595,12 @@ function armar(indice, retomarEn = 0) {
     get renderer() { return vivo.concurrent.renderer; },
     get layer() { return vivo.concurrent.layer; },
     get stock() { return vivo.stock; },
-    get posicion() { return vivo.posicion; },
+    get capacidades() { return vivo.capacidades; },
+    get selecciones() { return Object.fromEntries(selecciones); },
     get src() { return vivo.src; },
     get pedidos() { return [...pedidos]; },
     stage,
-    armar: (indice, retomarEn) => armar(indice, retomarEn),
+    armar: (capacidades, retomarEn) => armar(capacidades, retomarEn),
     irA,
     // The tie of the two bars: what the last scrub did, and the switch that
     // turns the tie off. The switch is what a measurement of the tie needs and
@@ -616,36 +616,19 @@ function armar(indice, retomarEn = 0) {
 // THE SWITCH AND THE JUMPS
 // ===========================================================================
 
-const pasos = document.getElementById('steps');
-const salida = document.getElementById('step-out');
-
-const etiqueta = (p) => (p.valor == null ? 'not declared' : `${p.valor}`);
-
-const botones = POSICIONES.map((posicion, indice) => {
-  const boton = document.createElement('button');
-  boton.type = 'button';
-  boton.className = 'step';
-  boton.textContent = etiqueta(posicion);
-  boton.addEventListener('click', () => armar(indice, segundoDelPrograma()));
-  return boton;
+const control = crearControl({
+  contenedor: document.getElementById('steps'),
+  salida: document.getElementById('step-out'),
+  stage,
+  alCambiar: (capacidades) => armar(capacidades, segundoDelPrograma())
 });
-pasos.replaceChildren(...botones);
-
-function pintarPasos() {
-  const posicion = POSICIONES[posicionActual];
-  botones.forEach((b, i) => b.setAttribute('aria-pressed', String(i === posicionActual)));
-  salida.textContent = posicion.valor == null
-    ? `request goes out without ${PARAMETRO} → the rich answer: the ad in video`
-    : `request carries ${PARAMETRO}=${posicion.valor} → the ` +
-      (posicion.respuesta === 'rica' ? 'rich answer: the ad in video' : 'lean answer: the same ad as image/svg+xml');
-}
 
 // The jumps, so a break can be reached without waiting for it: the event gives
 // about two minutes for everything and the first break is at twenty seconds.
 // Five seconds of programme before each one, because what is worth seeing is the
 // transition INTO the break and not the break already on screen.
 //
-// A JUMP REBUILDS, exactly like a change of step, and it is the same reason: a
+// A JUMP REBUILDS, exactly like a change of the switch, and it is the same reason: a
 // seek of the off-the-shelf pane only lands while that pane is outside a break,
 // and after a rebuild both panes are at the head of the programme and outside
 // every one of them. One mechanism for every movement of the pair is what makes
@@ -662,8 +645,8 @@ jumps.replaceChildren(...[
   boton.type = 'button';
   boton.className = 'jump';
   boton.textContent = texto;
-  boton.addEventListener('click', () => armar(posicionActual, segundo));
+  boton.addEventListener('click', () => armar(capacidadesActuales, segundo));
   return boton;
 }));
 
-armar(0);
+armar(control.actual());

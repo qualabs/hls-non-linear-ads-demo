@@ -11,7 +11,7 @@
 // signals it, and a playlist that signals no offer comes out of these same five
 // lines as an ordinary player. That is the whole of ADR 0072 seen from the
 // outside, and it is why this page's block is SHORTER than `js/app.js`'s: this
-// one has no `decoderCount`, because the switch belongs to the pair.
+// one has no `capabilities`, because the switch belongs to the pair.
 //
 // THE SECOND IS THE ARGUMENT OF THE PAGE, and none of it is plumbing the library
 // needs: the line under the picture, the run beside it, and the jumps.
@@ -250,7 +250,7 @@ requestAnimationFrame(paint);
 //
 // A JUMP IS A SEEK AND NOT A REBUILD, which is the one place this page is
 // simpler than the pair. There the switch had to tear both players down because
-// `decoderCount` is read once when the signalling is created; here there is one
+// `capabilities` is read once when the signalling is created; here there is one
 // player, nothing to re-declare, and the experiences are already resolved.
 const ENTRADA = 4;
 
