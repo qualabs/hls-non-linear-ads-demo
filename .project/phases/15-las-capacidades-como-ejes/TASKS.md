@@ -6,7 +6,7 @@
 | T-02 | La señalización: un asset-list estático por break con todas las opciones, una playlist, A sin default | done | — | `demo/stage-pair/{stage.json,scripts/escribir-asset-lists.mjs,scripts/senalizar-contenido.sh,signalling/}` · `test/signalled-run.test.js` (sección del par reescrita; suite 228 → 229) |
 | T-03 | Las páginas: el control de dos ejes, y el panel del filtro en `inspect.html` | done | — | `demo/stage-pair/{index.html,inspect.html,js/app.js,js/inspect.js,js/capabilities.js,css/player.css}` · capturas en `tasks/T-04/` |
 | T-04 | La verificación: capturas de las cuatro combinaciones, los pedidos, y los scripts de medición al día | pending | — | — |
-| T-05 | El README de la demo con el ejemplo de API, y el documento del integrador | pending | — | — |
+| T-05 | El README de la demo con el ejemplo de API, y el documento del integrador | done | — | `demo/stage-pair/README.md` ("The API, as it goes on a slide") · `docs/integrating-the-library.md` §6 · `docs/contrato-senalizacion-renderizado.md` (qué cuenta como no dibujable) · `README.md` de la raíz |
 
 ---
 

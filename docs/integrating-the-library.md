@@ -331,10 +331,10 @@ derived from it rather than written beside it — `MAX_BOXES` in
 `lib/signalling.js`.
 
 **A full grid is that many video decoders playing at once**, which is exactly the
-number `decoderCount` exists to tell your ad server before it picks what to send
-(§6). Nothing here reads that option back or refuses a catalogue over it: what to
-offer a device is the server's decision, and this is the seam the input arrives
-on.
+number `capabilities.videoDecoders` exists to tell your ad server before it picks
+what to send (§6). The filter of §6 applies to the options of an ad and not to a
+catalogue: nothing here refuses an offer over it, and what to offer a device is
+the server's decision.
 
 **What is not known, and it is not an omission that measuring here would close:
 how much bandwidth a full grid asks of a real connection, and what an adaptive
@@ -353,7 +353,8 @@ The global is `QualabsConcurrentHls`, and this is all of it:
 | --- | --- |
 | `VERSION` | the library's version, a string |
 | `CONCURRENT_CLASS` | `'com.qualabs.hls.concurrentInterstitial'`, the Date Range class of a concurrent ad |
-| `DECODER_COUNT_PARAM` | `'qa-decoder-count'`, the query parameter `decoderCount` travels in |
+| `VIDEO_DECODERS_PARAM` | `'sgai-video-decoders'`, the query parameter `capabilities.videoDecoders` travels in |
+| `IMAGE_OVER_VIDEO_PARAM` | `'sgai-image-over-video'`, the query parameter `capabilities.imageOverVideo` travels in |
 | `hlsConfig` | the configuration your instance has to be built with (§2.1) |
 | `attach(hls, options)` | turns the concurrent experience on, and returns a handle |
 | `attachControls(video, options)` | draws the chrome on a player, with nothing else turned on |
@@ -372,58 +373,67 @@ out, with no name to check itself against.
 | --- | --- | --- |
 | `container` | **required** | the box the composition lives in, and the element that goes fullscreen. The media element has to be inside it |
 | `video` | optional | only if the media element is not the one the instance is attached to |
-| `onResolved` | optional | called with the experiences of each asset-list as they resolve. A hook for your own logging; nothing depends on it |
+| `onResolved` | optional | called with the experiences of each asset-list as they resolve, and with what the capability filter did with that break. A hook for your own logging; nothing depends on it |
 | `logo` | optional | `{ src, alt }` — your own mark, drawn inside the container (§7) |
-| `decoderCount` | optional | how many video decoders the device has. It travels to your ad server on the asset-list request, and nothing else happens to it here |
+| `capabilities` | optional | `{ videoDecoders, imageOverVideo }`: what the device can draw. It travels to your ad server on the asset-list request, and the options of every ad are filtered against it before anything is drawn |
 
 Anything else you pass is ignored. `attach` throws a `TypeError` on a missing
 instance or a missing container, and those are the only two things it throws
 for.
 
-### `decoderCount`, and the parameter it becomes
-
-A concurrent break is more than one video on screen at once, so how many the
-device can decode at the same time is something the ad server would like to know
-before it picks what to send. This option is how it finds out, and that is the
-whole of it: **the number is passed on, not interpreted.** The library does not
-read it back, does not refuse a layout over it, and measures nothing with it.
+### `capabilities`, the parameters it becomes, and the filter
 
 ```js
-QualabsConcurrentHls.attach(hls, { container, decoderCount: 3 });
+QualabsConcurrentHls.attach(hls, {
+  container,
+  capabilities: { videoDecoders: 1, imageOverVideo: true }
+});
 ```
 
-Every asset-list request then carries it:
+Two axes, each on its own, because device capability has more than one and a
+single number would have to name a class of device instead (R29.1 of the
+specification):
+
+| axis | value | what it says |
+| --- | --- | --- |
+| `videoDecoders` | a whole number above zero | how many video streams the device decodes and composes at the same time, **the programme included**: a device that can show one ad video beside the programme declares 2 |
+| `imageOverVideo` | `true` / `false` | whether it can draw an image over the video |
+
+**It is used twice.** Every asset-list request carries it, one parameter per
+axis:
 
 ```
-GET /signalling/asset-list-cornerOverlay.json?qa-decoder-count=3
+GET /signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=1
 ```
 
-**Leave it out and nothing is added to the request.** That is the supported
-state, not an oversight: the URI is asked for character for character the way it
-is asked for by an integrator who never heard of this option, and your ad server
-answers what it answers today. A value that is not a whole number of decoders
-above zero is not sent either, and the library says so on `console.warn` rather
-than putting it on the wire, where it would be ignored without anybody noticing.
+and your ad server SHOULD use it to answer only what the device can show. Then,
+whatever the server answered, **the library checks again before drawing**. An
+item of the payload may carry `options`, an ordered list of `{ type, layout }`,
+and the library keeps the first one the capability satisfies (R5.6): an option
+needs one decoder for the programme plus one per element that is not an image,
+and needs images if it has an image element. When no option is left, the break
+plays the asset's own `URI` full frame as its linear default, or is skipped when
+the asset has none. The report of that step — what was offered, what was
+discarded and why, and how the break ended — is the second argument of
+`onResolved`.
 
-**You give the number; the library does not find it out.** What else on your page
-is decoding at the same moment is something only your application knows, so
-detection is yours and this is the seam where it arrives.
+**Leave it out, or leave out an axis, and nothing is sent or filtered for it.**
+That is the supported state: the URI is asked for character for character the
+way it is asked for by an integrator who never heard of this option, and the
+first option of every ad wins. A value that is not one of its axis is not sent
+either, and the library says so on `console.warn`.
 
-Two things about the name, because it ends up in your server's logs and in
-somebody's parser:
+**You give the capability; the library does not find it out.** What else on your
+page is decoding at the same moment is something only your application knows.
 
-- **It does not begin with `_HLS_`.** The HLS draft reserves that prefix for the
-  query parameters it defines itself and asks that nobody else define parameters
-  with it. It is also in live use next to this one: the interstitials machinery
-  of hls.js puts `_HLS_primary_id` on the asset-list requests it makes.
-- **It carries this library's namespace**, like the Date Range class it reads and
-  the global it defines. The asset-list URI is yours and may already carry query
-  of its own, so a bare `decoderCount` would be claiming a name in shared space.
-  The day the specification names this capability, that name is the one that
-  travels and it replaces this one.
+**There is no HTML axis.** The specification has one, and this library does not
+draw HTML, so there is no value of it the library could declare about itself and
+have it be true.
 
-The name is `QualabsConcurrentHls.DECODER_COUNT_PARAM`, so a server-side check
-and a client-side one can be written against the same string.
+The names are the specification's and they do not begin with `_HLS_`, which the
+base reserves for its own parameters. They are published as
+`QualabsConcurrentHls.VIDEO_DECODERS_PARAM` and `IMAGE_OVER_VIDEO_PARAM`, so a
+server-side check and a client-side one can be written against the same string.
 
 ### The handle it returns
 
