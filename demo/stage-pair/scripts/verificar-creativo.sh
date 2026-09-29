@@ -132,6 +132,15 @@ awk -v d="$DIF" 'BEGIN{exit !(d <= 0.034)}' \
   && bien "duración por suma de #EXTINF: $LARGO s (declarado $DUR s, delta $DIF s)" \
   || malo "duración por suma de #EXTINF: $LARGO s, declarado $DUR s (delta $DIF s)"
 
+# ── 1b. los segmentos son los de siempre: dos segundos, salvo el último ────────
+# Fase 15: con movimiento grande, x264 metió keyframes por corte de escena, el GOP
+# se reinició y los cortes de -hls_time 2 se corrieron (un segmento de 3,87 s y
+# uno de 0,13 s). La duración total no lo ve; esto sí.
+IRREGULARES=$(awk -F'[:,]' '/^#EXTINF:/ {n++; d[n]=$2} END {for (i = 1; i < n; i++) if (d[i] + 0 != 2) c++; print c + 0}' "$HLS")
+[ "$IRREGULARES" = 0 ] \
+  && bien "todos los segmentos duran 2 s salvo el último" \
+  || malo "$IRREGULARES segmento(s) que no duran 2 s antes del último: el GOP no cayó sobre los cortes"
+
 # ── 2. el video se mueve lo que el SVG se mueve ──────────────────────────────
 # Cinco instantes repartidos, de a pares consecutivos. Un solo par no distingue
 # "no anima" de "cayeron en la misma fase del bucle".
@@ -152,6 +161,11 @@ else
     dv=$($PXDIF "$(v "${CUADROS_REF[$i]}")" "$(v "${CUADROS_REF[$j]}")" "$UMBRAL")
     ds=$($PXDIF "$REF/$(printf 'f%05d.png' "${CUADROS_REF[$i]}")" \
                 "$REF/$(printf 'f%05d.png' "${CUADROS_REF[$j]}")" "$UMBRAL")
+    # A partir del millón de píxeles `compare` escribe la cuenta en notación
+    # científica (2.03803e+06) y el `%d` de abajo la rechaza: se vio en la fase
+    # 15, con un creativo que cambia casi el cuadro entero. Se pasa a entero acá.
+    dv=$(awk -v x="$dv" 'BEGIN{printf "%d", x}')
+    ds=$(awk -v x="$ds" 'BEGIN{printf "%d", x}')
     lectura=$(awk -v dv="$dv" -v av="$AREA_V" -v ds="$ds" -v ar="$AREA_R" -v k="$HOLGURA" \
       'BEGIN{fv=dv/av; fs=ds/ar;
              printf "%.4f %.4f %d", fv*100, fs*100, (ds>0 && fv >= fs/k) ? 1 : 0}')

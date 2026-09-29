@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  EL MOVIMIENTO GRANDE, Y POR QUÉ (fase 15). Esta pieza es la OPCIÓN DE VIDEO de
+  su break, y al lado de la opción de imagen, que es quieta, tiene que notarse video
+  de lejos. Por eso, además del bucle de siempre, lleva un recorrido de 12 s, que
+  es lo que dura el break (el fondo cambia de color cada segundo y los paneles
+  entran y salen dos veces): el zapato entra desde la derecha, pisa dos veces, se hunde fuera de cuadro, vuelve a caer, se balancea y sale; los dos paneles de texto entran, salen y vuelven; la franja del acento barre la barra entera a mitad del aviso; y el fondo pasa por cuatro colores. Todo con <animateTransform> y <animate>, igual
+  que el resto; el objeto entre INICIO OBJETO y FIN OBJETO no se toca, lo que se
+  mueve es un grupo que lo envuelve.
+
   KOVRIN — la forma BANNER, 1680 x 189 (8,889:1). Es la misma campaña que
   kovrin-16x9.svg autorada para otra caja (ADR 0081).
 
@@ -102,22 +110,44 @@
 
   <g clip-path="url(#barra)">
     <rect x="0" y="0" width="1680" height="189" fill="url(#fondo)"/>
-    <rect x="0" y="0" width="12" height="189" fill="#ff7a3c"/>
+    <!-- fase 15: el color de fondo cambia a lo largo de los 12 s -->
+    <rect x="0" y="0" width="1680" height="189" fill="#12151c" opacity="0.85">
+    <animate attributeName="fill" values="#12151c;#5a2008;#0d2a40;#3a4212;#12151c"
+             keyTimes="0;0.25;0.5;0.75;1" dur="4s" repeatCount="indefinite"/>
+  </rect>
+    <!-- fase 15: la franja del acento barre la barra entera a mitad del aviso -->
+    <rect x="0" y="0" width="12" height="189" fill="#ff7a3c">
+      <animate attributeName="width" values="12;12;1680;12;12" keyTimes="0;0.44;0.5;0.56;1"
+               dur="12s" repeatCount="indefinite"/>
+    </rect>
 
     <ellipse cx="1420" cy="96" rx="290" ry="150" fill="url(#halo)"/>
 
     <!-- ===================== tipografía ===================== -->
+    <!-- fase 15: el panel de la marca entra desde la izquierda, sale y vuelve -->
+    <g>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="-700,0; 0,0; 0,0; -700,0; -700,0; 0,0; 0,0"
+                        keyTimes="0;0.07;0.42;0.5;0.55;0.62;1" dur="6s" repeatCount="indefinite"/>
     <text class="t b" x="56" y="94" font-size="56" letter-spacing="6"
           fill="#f5f3f0">KOVRIN</text>
     <text class="t" x="58" y="136" font-size="24" letter-spacing="8"
           fill="#ff7a3c">BUILT FOR THE LONG WAY</text>
+    </g>
 
     <rect x="620" y="44" width="2" height="102" fill="#ff7a3c" opacity="0.28"/>
+
+    <!-- fase 15: el panel del apoyo sube desde abajo, baja y vuelve -->
+    <g>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="0,200; 0,0; 0,0; 0,200; 0,200; 0,0; 0,0"
+                        keyTimes="0;0.1;0.44;0.5;0.56;0.66;1" dur="6s" repeatCount="indefinite"/>
 
     <text class="t" x="672" y="88" font-size="32" letter-spacing="0.5"
           fill="#c9ccd3">Trail cushioning. 240 grams.</text>
     <text class="t" x="672" y="134" font-size="19" letter-spacing="4"
           fill="#8b8f98">THREE TERRAINS, ONE OUTSOLE</text>
+    </g>
 
     <!-- ===================== el suelo que corre ===================== -->
     <g clip-path="url(#ventanaSueloBanner)" opacity="0.55">
@@ -141,6 +171,12 @@
       </g>
     </g>
 
+    <!-- fase 15: el zapato entra desde la derecha, pisa dos veces, se hunde fuera
+         de cuadro, cae de nuevo, se balancea y sale por la derecha -->
+    <g>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="700,0; 0,0; 0,-34; 0,0; 0,-34; 0,0; 0,260; 0,-260; 0,0; -90,0; 0,0; 700,0"
+                        keyTimes="0;0.08;0.15;0.22;0.29;0.36;0.46;0.4601;0.56;0.7;0.84;1" dur="12s" repeatCount="indefinite"/>
     <!-- sombra de apoyo -->
     <ellipse cx="1400" cy="166" rx="230" ry="12" fill="#000000" opacity="0.5"/>
 
@@ -252,6 +288,7 @@
       <rect x="468" y="178" width="20" height="13" rx="5" transform="rotate(-28 478 184)"/>
     </g>
   </g>
+    </g>
     </g>
 
     <rect x="0" y="0" width="1680" height="3" fill="#ff7a3c" opacity="0.55"/>

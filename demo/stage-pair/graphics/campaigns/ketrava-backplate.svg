@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  EL MOVIMIENTO GRANDE, Y POR QUÉ (fase 15). Esta pieza es la OPCIÓN DE VIDEO de
+  su break, y al lado de la opción de imagen, que es quieta, tiene que notarse video
+  de lejos. Por eso, además del bucle de siempre, lleva un recorrido de 12 s, que
+  es lo que dura el break (el fondo cambia de color cada segundo y los paneles
+  entran y salen dos veces): la marca baja desde arriba, la ruta entra desde la
+  izquierda, el texto de la banda entra desde la derecha, y los tres salen y
+  vuelven a mitad del aviso; el faro sube desde abajo de cuadro, se hunde y vuelve;
+  el barco cruza la banda de punta a punta dos veces; y el fondo pasa por cuatro
+  colores. Todo con <animateTransform> y <animate>, igual que el resto; el objeto
+  entre INICIO OBJETO y FIN OBJETO no se toca, lo que se mueve es un grupo que lo
+  envuelve.
+
   KETRAVA — la forma BACKPLATE, 1920 x 1080. Es la misma campaña que
   ketrava-16x9.svg autorada para otra caja (ADR 0081). Es la pieza que se ve en
   el break B del recorrido del par.
@@ -133,20 +145,36 @@
 
   <g clip-path="url(#ele)">
     <rect x="0" y="0" width="1920" height="1080" fill="url(#fondo)"/>
+    <!-- fase 15: el color de fondo cambia a lo largo de los 12 s -->
+    <rect x="0" y="0" width="1920" height="1080" fill="#071822" opacity="0.8">
+      <animate attributeName="fill" values="#071822;#0e4a5e;#5a3a12;#123a5a;#071822"
+               keyTimes="0;0.25;0.5;0.75;1" dur="4s" repeatCount="indefinite"/>
+    </rect>
 
     <!-- el calor que queda sobre el horizonte, sobre la banda -->
     <ellipse cx="1360" cy="1080" rx="900" ry="300" fill="url(#horizonte)"/>
 
     <!-- ===================== la marca, arriba de la columna ============= -->
+    <!-- fase 15: el panel de la marca baja desde arriba, sale a mitad y vuelve -->
+    <g>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="0,-320; 0,0; 0,0; -520,0; -520,0; 0,0; 0,0"
+                        keyTimes="0;0.07;0.42;0.5;0.55;0.62;1" dur="6s" repeatCount="indefinite"/>
     <text class="t b" x="40" y="120" font-size="64" letter-spacing="4"
           fill="#eef6f7">KETRAVA</text>
     <text class="t" x="42" y="164" font-size="19" letter-spacing="5"
           fill="#ffcf8a">THE SLOW COAST</text>
     <rect x="40" y="196" width="190" height="4" fill="#ffcf8a" opacity="0.9"/>
+    </g>
 
     <!-- ===================== la ruta: nueve escalas ===================== -->
     <!-- Nueve, que son los del pie. Que el número del dibujo y el del texto
          sean el mismo es lo único que hace que el dibujo diga algo. -->
+    <!-- fase 15: la ruta entra desde la izquierda, sale y vuelve, a destiempo de la marca -->
+    <g>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="-480,0; -480,0; 0,0; 0,0; -480,0; -480,0; 0,0; 0,0"
+                        keyTimes="0;0.05;0.14;0.44;0.52;0.6;0.7;1" dur="6s" repeatCount="indefinite"/>
     <g>
       <path d="M72,300 L72,740" stroke="#ffcf8a" stroke-width="2" opacity="0.28"/>
       <g fill="#ffcf8a">
@@ -165,6 +193,7 @@
       <text class="t" x="104" y="747" font-size="20" letter-spacing="3"
             fill="#7d949b">ONE COAST</text>
     </g>
+    </g>
 
     <!-- las primeras estrellas, sobre la columna -->
     <g fill="#eef6f7">
@@ -176,10 +205,16 @@
     </g>
 
     <!-- ===================== el texto, en la banda ====================== -->
+    <!-- fase 15: el panel del texto entra desde la derecha, sale y vuelve -->
+    <g>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="1500,0; 0,0; 0,0; 1500,0; 1500,0; 0,0; 0,0"
+                        keyTimes="0;0.1;0.44;0.5;0.56;0.66;1" dur="6s" repeatCount="indefinite"/>
     <text class="t" x="540" y="898" font-size="42" letter-spacing="0.5"
           fill="#c3d3d6">Island routes, small boats.</text>
     <text class="t" x="540" y="956" font-size="25" letter-spacing="4"
           fill="#7d949b">DEPARTURES FROM NINE PORTS</text>
+    </g>
 
     <!-- ===================== el mar, plano de atrás ===================== -->
     <!-- período 220, amplitud 7 -->
@@ -204,6 +239,11 @@
          que entra en los 270 de la banda. El haz viene con él: 880 por 0,72 son
          634, o sea que la luz cruza un tercio de la banda hacia la izquierda,
          que es por donde hay lugar. -->
+    <!-- fase 15: el faro sube desde abajo de cuadro, se hunde a mitad y vuelve a subir -->
+    <g>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="0,360; 0,0; 0,0; 0,360; 0,360; 0,0; 0,0"
+                        keyTimes="0;0.12;0.4;0.48;0.58;0.68;1" dur="12s" repeatCount="indefinite"/>
     <g transform="translate(483,585) scale(0.72)">
 
     <g transform="translate(1690,0)">
@@ -241,8 +281,14 @@
       <ellipse cx="0" cy="388" rx="46" ry="34" fill="url(#lampara)"/>
     </g>
     </g>
+    </g>
 
     <!-- el barco, redibujado a la escala de la banda -->
+    <!-- fase 15: y cruza la banda de punta a punta, dos veces en los 12 s -->
+    <g>
+      <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="-1000,0; 1000,0"
+                        dur="6s" repeatCount="indefinite"/>
     <g transform="translate(980,1006)">
       <animateTransform attributeName="transform" attributeType="XML" type="rotate"
                         values="-4;4;-4" keyTimes="0;0.5;1"
@@ -255,6 +301,7 @@
       <rect x="-10.5" y="-47" width="2" height="43" fill="#eef6f7" opacity="0.75"/>
       <path fill="#0b2b36" d="M-37,-4 L27,-4 C22,9 -18,11 -37,-4 Z"/>
       <path fill="#2e8f8a" opacity="0.9" d="M-37,-4 L27,-4 L26,0 L-35,0 Z"/>
+    </g>
     </g>
 
     <!-- ===================== el mar, plano de adelante ================== -->
