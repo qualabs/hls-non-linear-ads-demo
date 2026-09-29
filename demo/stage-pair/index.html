@@ -60,23 +60,18 @@
 
   WHAT EACH ELEMENT IS FOR
   ------------------------
-  #stock-slot / #demo-slot  the boxes the panes are built into. They are EMPTY
-           in this file and filled by js/app.js, because changing the switch
-           REBUILDS both players -- `capabilities` is read once, when the
-           signalling is created, so a value that changed in flight would not be
-           read again (lib/signalling.js). The two are rebuilt by one call, at
-           one instant, with one target time: a pair whose halves were rebuilt
-           separately would be two players on two timelines, and then the pair
-           stops arguing anything. See `armar()` in js/app.js.
+  #pane-izq / #pane-der  one pane each, and each one is configured on its own
+           (fase 15): #control-* chooses the mode -- the native HLS interstitials
+           client, or our library with the two capability axes -- and the labels,
+           the picture and #wire-* (the asset-list requests THAT player made)
+           follow it. The slots are EMPTY in this file and filled by js/app.js,
+           because any change REBUILDS both players at the same second: the
+           capabilities are read once, when the signalling is created
+           (lib/signalling.js), and a pair rebuilt one half at a time would be on
+           two timelines. See `armar()` in js/app.js.
 
-  #wire    the asset-list requests THE BROWSER ACTUALLY MADE, read off the
-           performance timeline. Not a transcript: the page prints the URL that
-           went out, which is the same string the network tab shows, with the
-           parameters picked out of it and what the library kept of the answer.
-
-  #contract  the contract of ADR 0003 in one line of text: what the signalling
-           layer says is active right now. The console carries the same thing
-           with the boxes and the order of every element.
+  #contract-*  the contract of ADR 0003 in one line of text, for a pane with our
+           library: what the signalling layer says is active right now.
 
   THE CONTROLS of both players are not in this file, and that is the point of
            ADR 0015: the library draws them inside each container, over the
@@ -100,53 +95,51 @@
     </p>
   </header>
 
-  <section class="switch" aria-label="Device capability">
-    <p class="switch-label">What this device declares</p>
-    <div class="steps" id="steps"></div>
-    <p class="step-out" id="step-out"></p>
+  <section class="switch" aria-label="Jumps">
     <div class="jumps" id="jumps" role="group" aria-label="Jump to"></div>
     <p class="no-server">
-      There is no ad presentation server behind this page. The two capabilities travel on every
-      asset-list request, as such a server would read them, and the answer is one static file per
-      break that always carries every option of the ad. What decides what is drawn is the library:
-      it keeps the first option this device can show and, when none fits, plays the break&rsquo;s
-      linear default or skips it.
+      Each player has its own control: the native HLS interstitials client, or this demo&rsquo;s
+      library with the capabilities it declares. There is no ad presentation server behind this
+      page. The capabilities travel on every asset-list request, as such a server would read them,
+      and the answer is one static file per break that always carries every option of the ad. What
+      decides what is drawn is the library: it keeps the first option the device can show and, when
+      none fits, plays the break&rsquo;s linear default or skips it. The combination is in the URL.
     </p>
   </section>
 
   <div class="pair">
 
-    <section class="pane pane-stock" id="pane-stock" data-state="primary">
-      <h2 class="role">Off-the-shelf player</h2>
-      <p class="role-sub">A client that is already in the market. Nothing of this demo in it.</p>
-      <p class="role-reads">
-        keeps <code>com.apple.hls.interstitial</code> &middot;
-        ignores <code>com.qualabs.hls.concurrentInterstitial</code>
-      </p>
-      <div id="stock-slot"></div>
-      <p class="state" id="stock-state"></p>
-      <p class="hud" id="stock-hud"></p>
+    <section class="pane" id="pane-izq" data-state="primary">
+      <div class="pane-control" id="control-izq"></div>
+      <h2 class="role" id="rol-izq"></h2>
+      <p class="role-sub" id="sub-izq"></p>
+      <p class="role-reads" id="lee-izq"></p>
+      <div id="slot-izq"></div>
+      <p class="state" id="state-izq"></p>
+      <p class="hud" id="hud-izq"></p>
+      <p class="hud" id="contract-izq"></p>
+      <div class="wire wire--pane">
+        <h3>Asset-list requests this player made</h3>
+        <ol id="wire-izq"></ol>
+      </div>
     </section>
 
-    <section class="pane pane-demo" id="pane-demo" data-state="primary">
-      <h2 class="role">This demo&rsquo;s player</h2>
-      <p class="role-sub">The same library, same version, unmodified. Its interstitials machinery off.</p>
-      <p class="role-reads">
-        keeps <code>com.qualabs.hls.concurrentInterstitial</code> &middot;
-        ignores <code>com.apple.hls.interstitial</code>
-      </p>
-      <div id="demo-slot"></div>
-      <p class="state" id="demo-state"></p>
-      <p class="hud" id="hud"></p>
-      <p class="hud" id="contract"></p>
+    <section class="pane" id="pane-der" data-state="primary">
+      <div class="pane-control" id="control-der"></div>
+      <h2 class="role" id="rol-der"></h2>
+      <p class="role-sub" id="sub-der"></p>
+      <p class="role-reads" id="lee-der"></p>
+      <div id="slot-der"></div>
+      <p class="state" id="state-der"></p>
+      <p class="hud" id="hud-der"></p>
+      <p class="hud" id="contract-der"></p>
+      <div class="wire wire--pane">
+        <h3>Asset-list requests this player made</h3>
+        <ol id="wire-der"></ol>
+      </div>
     </section>
 
   </div>
-
-  <section class="wire" aria-label="Asset-list requests">
-    <h2>Asset-list requests this page made</h2>
-    <ol id="wire-list"></ol>
-  </section>
 
   <p class="credit">
     Programme: <em>Sparks</em> &copy; Netflix, Inc., Netflix Open Content, CC BY 4.0 &mdash;

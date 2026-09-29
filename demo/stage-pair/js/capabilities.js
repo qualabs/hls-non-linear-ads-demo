@@ -113,3 +113,120 @@ export function desenlaceCorto(asset) {
 
 /** The break a report of `onResolved` belongs to: `AD-A-CONCURRENT` is break `a`. */
 export const breakDelReporte = (seleccion) => seleccion.id.match(/^AD-([A-Z0-9]+)-/i)?.[1].toLowerCase() ?? null;
+
+// ===========================================================================
+// index.html: ONE CONTROL PER PANE (fase 15)
+// ===========================================================================
+// Each pane of the pair chooses its mode -- the native HLS interstitials client
+// or our library -- and, only with our library, the two axes. The configuration
+// of the page is `{ izq: {modo, capacidades}, der: {...} }` and it travels in the
+// URL, so a link opens a precise combination:
+//
+//     ?izq=nativo&der=ours-2dec-img        the default: the pair as published
+//     ?izq=ours-1dec-img&der=ours-1dec-noimg
+
+const MODOS = { nativo: 'HLS interstitials, native', ours: 'With our library' };
+
+/** The default of each pane: the pair as it was published. */
+const POR_DEFECTO = (stage) => ({
+  izq: { modo: 'nativo', capacidades: null },
+  der: { modo: 'ours', capacidades: { ...stage.capacidades.inicial } }
+});
+
+/** One pane's configuration as it goes in the URL. */
+export function aTexto(c) {
+  if (c.modo === 'nativo') return 'nativo';
+  return `ours-${c.capacidades.videoDecoders}dec-${c.capacidades.imageOverVideo ? 'img' : 'noimg'}`;
+}
+
+/** One pane's configuration out of the URL, or null when the text is not one. */
+function deTexto(texto, stage) {
+  if (texto === 'nativo') return { modo: 'nativo', capacidades: null };
+  const m = /^ours-(\d+)dec-(img|noimg)$/.exec(texto || '');
+  if (!m) return null;
+  const videoDecoders = Number(m[1]);
+  if (!stage.capacidades.videoDecoders.includes(videoDecoders)) return null;
+  return { modo: 'ours', capacidades: { videoDecoders, imageOverVideo: m[2] === 'img' } };
+}
+
+/** The page's configuration from the query string, pane by pane, with the default for what is missing or wrong. */
+export function leerConfig(search, stage) {
+  const q = new URLSearchParams(search);
+  const d = POR_DEFECTO(stage);
+  return { izq: deTexto(q.get('izq'), stage) ?? d.izq, der: deTexto(q.get('der'), stage) ?? d.der };
+}
+
+/** The configuration written back into the URL, without adding a history entry per click. */
+export function escribirConfig(config) {
+  const q = new URLSearchParams(location.search);
+  q.set('izq', aTexto(config.izq));
+  q.set('der', aTexto(config.der));
+  history.replaceState(null, '', `${location.pathname}?${q}`);
+}
+
+/**
+ * The control of one pane: the two modes, and the two axes under the second.
+ * `alCambiar(config)` receives the pane's whole configuration.
+ */
+export function crearControlDePane({ contenedor, stage, lado, inicial, alCambiar }) {
+  let actual = structuredClone(inicial);
+  const ultimaCapacidad = { ...(inicial.capacidades ?? stage.capacidades.inicial) };
+
+  const boton = (texto, datos, alClic) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'step';
+    b.textContent = texto;
+    Object.assign(b.dataset, datos);
+    b.addEventListener('click', alClic);
+    return b;
+  };
+  const grupo = (titulo, botones) => {
+    const g = document.createElement('div');
+    g.className = 'axis';
+    g.setAttribute('role', 'group');
+    g.setAttribute('aria-label', `${titulo} (${lado})`);
+    const t = document.createElement('span');
+    t.className = 'axis-label';
+    t.textContent = titulo;
+    g.append(t, ...botones);
+    return g;
+  };
+
+  const modos = Object.entries(MODOS).map(([modo, texto]) => boton(texto, { lado, modo }, () => {
+    if (actual.modo === modo) return;
+    actual = modo === 'nativo'
+      ? { modo, capacidades: null }
+      : { modo, capacidades: { ...ultimaCapacidad } };
+    alCambiar(structuredClone(actual));
+  }));
+  const ejes = Object.entries(EJES).map(([clave, eje]) => grupo(eje.titulo,
+    stage.capacidades[clave].map((valor) => boton(eje.valor(valor), { lado, eje: clave, valor: String(valor) }, () => {
+      if (actual.modo !== 'ours' || actual.capacidades[clave] === valor) return;
+      actual = { modo: 'ours', capacidades: { ...actual.capacidades, [clave]: valor } };
+      Object.assign(ultimaCapacidad, actual.capacidades);
+      alCambiar(structuredClone(actual));
+    }))));
+  const cajaEjes = document.createElement('div');
+  cajaEjes.className = 'pane-axes';
+  cajaEjes.append(...ejes);
+  const salida = document.createElement('p');
+  salida.className = 'step-out';
+  contenedor.replaceChildren(grupo('Mode', modos), cajaEjes, salida);
+
+  function pintar(config) {
+    actual = structuredClone(config);
+    modos.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.modo === actual.modo)));
+    cajaEjes.hidden = actual.modo !== 'ours';
+    for (const b of cajaEjes.querySelectorAll('button')) {
+      b.setAttribute('aria-pressed', String(actual.modo === 'ours'
+        && String(actual.capacidades[b.dataset.eje]) === b.dataset.valor));
+    }
+    salida.textContent = actual.modo === 'ours'
+      ? `asks with ?${Object.entries(PARAMETROS).map(([clave, nombre]) =>
+          `${nombre}=${clave === 'imageOverVideo' ? (actual.capacidades[clave] ? 1 : 0) : actual.capacidades[clave]}`).join('&')}`
+      : 'plays the Apple-class interstitial and replaces the programme with it';
+  }
+  pintar(actual);
+  return { pintar, actual: () => structuredClone(actual) };
+}

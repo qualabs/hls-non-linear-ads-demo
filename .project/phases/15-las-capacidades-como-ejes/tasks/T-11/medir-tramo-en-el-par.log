@@ -1,0 +1,13 @@
+server PID 2149677 en el puerto 8095
+
+== LOS DOS PANES ENTRAN Y SALEN JUNTOS — index.html, capacidad inicial ==
+  break B  fábrica  64.960 ->  77.084   nuestro  64.959 ->  77.022   delta entrada  0.002 s  salida  0.063 s   IGUAL   
+  break C  fábrica 109.967 -> 122.077   nuestro 109.969 -> 122.009   delta entrada  0.002 s  salida  0.068 s   IGUAL   
+
+==    EL CONTROL — el break concurrente dura 24.0 s y su lineal no ==
+  break B  fábrica  64.952 ->  77.077   nuestro  64.978 ->  89.051   delta entrada  0.027 s  salida 11.974 s   DISTINTO
+  break C  fábrica 109.961 -> 122.077   nuestro 109.929 -> 134.009   delta entrada  0.032 s  salida 11.932 s   DISTINTO
+
+server 2149677 bajado
+
+VERDE: las mediciones dieron lo esperado y los controles también.

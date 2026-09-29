@@ -143,7 +143,7 @@ class Pagina:
         búsqueda al SOLTAR (ADR 0032/0033), así que un instrumento que sólo
         apretara mediría un estado que la página nunca muestra.
         """
-        slot = "#demo-slot" if pane == "demo" else "#stock-slot"
+        slot = "#slot-der" if pane == "demo" else "#slot-izq"
         # Primero el puntero sobre el player, que es lo que levanta el chrome.
         caja = self.page.locator(f"{slot} .player").bounding_box()
         self.page.mouse.move(caja["x"] + caja["width"] / 2, caja["y"] + caja["height"] / 2)

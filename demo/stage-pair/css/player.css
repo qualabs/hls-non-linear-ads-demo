@@ -285,6 +285,30 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
 .wire b { color: var(--q-teal-500); }
 .wire .none { color: color-mix(in srgb, var(--q-paper-50) 55%, transparent); }
 
+/* THE CONTROL OF EACH PANE (fase 15): the mode first, and the two axes under it
+ * only with our library. It sits at the top of its pane, above the label, so
+ * which control drives which picture is never a question. */
+.pane-control {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--q-ink-700);
+  border-radius: 8px;
+  background: var(--q-ink-900);
+}
+.pane-axes { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+.pane-axes[hidden] { display: none; }
+.pane-control .axis + .axis { margin-left: 0; }
+.wire--pane { margin: 12px 0 0; padding: 8px 10px; background: var(--q-ink-900); }
+.wire--pane h3 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--q-slate-400);
+}
+
 .credit {
   margin: 16px 0 0;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
