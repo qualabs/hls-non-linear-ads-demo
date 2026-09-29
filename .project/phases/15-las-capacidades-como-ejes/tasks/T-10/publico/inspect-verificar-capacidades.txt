@@ -1,0 +1,39 @@
+1. LO QUE VIAJA -- las queries distintas que salieron:
+     ?sgai-video-decoders=1&sgai-image-over-video=0   (13 pedidos)
+     ?sgai-video-decoders=1&sgai-image-over-video=1   (6 pedidos)
+     ?sgai-video-decoders=2&sgai-image-over-video=0   (6 pedidos)
+     ?sgai-video-decoders=2&sgai-image-over-video=1   (6 pedidos)
+2. LO QUE VUELVE -- el sha256 del cuerpo, por break:
+     break a: 1 cuerpo(s) distinto(s) ['13825de7f3f30589']
+     break b: 1 cuerpo(s) distinto(s) ['c67f7083e32d8200']
+     break c: 1 cuerpo(s) distinto(s) ['34e5a02280207034']
+   control: los cuerpos de breaks distintos son distintos entre sí -> sí
+3. LO QUE SE DIBUJA:
+   ok   dec2-imgsi   break a  t= 23.51  obtenido {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'squeezebackDoubleBox'}  esperado {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'squeezebackDoubleBox'}
+   ok   dec2-imgsi   break b  t= 68.51  obtenido {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'squeezebackLShape'}  esperado {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'squeezebackLShape'}
+   ok   dec2-imgsi   break c  t=113.52  obtenido {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'lowerThirdOverlay'}  esperado {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'lowerThirdOverlay'}
+   ok   dec2-imgno   break a  t= 23.52  obtenido {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'squeezebackDoubleBox'}  esperado {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'squeezebackDoubleBox'}
+   ok   dec2-imgno   break b  t= 68.52  obtenido {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'squeezebackLShape'}  esperado {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'squeezebackLShape'}
+   ok   dec2-imgno   break c  t= 113.5  obtenido {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'lowerThirdOverlay'}  esperado {'outcome': 'drawn', 'chosen': 0, 'video': 2, 'img': 0, 'layout': 'lowerThirdOverlay'}
+   ok   dec1-imgsi   break a  t= 23.52  obtenido {'outcome': 'drawn', 'chosen': 1, 'video': 1, 'img': 1, 'layout': 'squeezebackLShape'}  esperado {'outcome': 'drawn', 'chosen': 1, 'video': 1, 'img': 1, 'layout': 'squeezebackLShape'}
+          descartada: needs 2 video decoders and the device declares 1
+   ok   dec1-imgsi   break b  t= 68.52  obtenido {'outcome': 'drawn', 'chosen': 1, 'video': 1, 'img': 1, 'layout': 'squeezebackDoubleBox'}  esperado {'outcome': 'drawn', 'chosen': 1, 'video': 1, 'img': 1, 'layout': 'squeezebackDoubleBox'}
+          descartada: needs 2 video decoders and the device declares 1
+   ok   dec1-imgsi   break c  t= 113.5  obtenido {'outcome': 'drawn', 'chosen': 1, 'video': 1, 'img': 1, 'layout': 'squeezebackLShape'}  esperado {'outcome': 'drawn', 'chosen': 1, 'video': 1, 'img': 1, 'layout': 'squeezebackLShape'}
+          descartada: needs 2 video decoders and the device declares 1
+   ok   dec1-imgno   break a  t=119.39  obtenido {'outcome': 'skipped', 'chosen': None, 'video': 1, 'img': 0, 'layout': None}  esperado {'outcome': 'skipped', 'chosen': None, 'video': 1, 'img': 0, 'layout': None}
+          descartada: needs 2 video decoders and the device declares 1
+          descartada: needs an image over the video and the device declares it cannot draw one
+   ok   dec1-imgno   break b  t=119.39  obtenido {'outcome': 'default', 'chosen': None, 'video': 2, 'img': 0, 'layout': 'linear'}  esperado {'outcome': 'default', 'chosen': None, 'video': 2, 'img': 0, 'layout': 'linear'}
+          descartada: needs 2 video decoders and the device declares 1
+          descartada: needs an image over the video and the device declares it cannot draw one
+   ok   dec1-imgno   break c  t=119.39  obtenido {'outcome': 'default', 'chosen': None, 'video': 2, 'img': 0, 'layout': 'linear'}  esperado {'outcome': 'default', 'chosen': None, 'video': 2, 'img': 0, 'layout': 'linear'}
+          descartada: needs 2 video decoders and the device declares 1
+          descartada: needs an image over the video and the device declares it cannot draw one
+4. LA IMAGEN ESTÁ QUIETA -- la caja del aviso, dos capturas separadas por 2.0 s, con el programa oculto:
+   ok   dec1-imgsi   break a  imagen servida: IGUAL (/graphics/campaigns/zumbra-backplate-fijo.svg)   control, el SVG animado en la misma caja: DISTINTA
+   ok   dec1-imgsi   break b  imagen servida: IGUAL (/graphics/campaigns/ketrava-16x9-fijo.svg)   control, el SVG animado en la misma caja: DISTINTA
+   ok   dec1-imgsi   break c  imagen servida: IGUAL (/graphics/campaigns/kovrin-backplate-fijo.svg)   control, el SVG animado en la misma caja: DISTINTA
+   control: composiciones distintas en el break b sobre 4 combinaciones -> 3
+
+VERDE

@@ -1,0 +1,5 @@
+== 1. la señalización se reescribe de stage.json, y tiene que estar commiteada ==
+la señalización reescrita difiere de la commiteada: commitear antes de publicar
+ demo/stage-pair/signalling/asset-list-race-1.json | 2 +-
+ demo/stage-pair/signalling/asset-list-race-4.json | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)

@@ -1,0 +1,11 @@
+== 2026-09-29T11:01:00-03:00 nombres viejos, sin credenciales y sin ?v= ==
+  /content/creatives/zumbra-16x9/index.m3u8      404
+  /content/creatives/zumbra-16x9/seg000.ts       404
+  /content/creatives/ketrava-backplate/index.m3u8 404
+  /content/creatives/ketrava-backplate/seg000.ts 404
+  /content/creatives/kovrin-banner/index.m3u8    404
+  /content/creatives/kovrin-banner/seg000.ts     404
+== el movimiento, sobre lo publicado sin ?v= ==
+https://qualabs-hls-demo-stage-pair.storage.googleapis.com/content/creatives/ketrava-backplate/8d140e0f2b/index.m3u8: 24 cuadros cada 0.5 s  media  13.07 %  mínimo   1.18 %  máximo  34.79 %
+https://qualabs-hls-demo-stage-pair.storage.googleapis.com/content/creatives/kovrin-banner/8e5914d854/index.m3u8: 24 cuadros cada 0.5 s  media  34.96 %  mínimo   5.31 %  máximo  96.08 %
+https://qualabs-hls-demo-stage-pair.storage.googleapis.com/content/creatives/zumbra-16x9/d8eabbdae4/index.m3u8: 24 cuadros cada 0.5 s  media  41.14 %  mínimo   1.64 %  máximo  97.19 %
