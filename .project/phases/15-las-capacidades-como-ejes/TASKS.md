@@ -11,6 +11,7 @@
 | T-07 | La publicación en `qualabs-hls-demo-stage-pair`, verificada sin credenciales | done | — | [`tasks/T-07/README.md`](tasks/T-07/README.md) · publicada el 2026-09-28 |
 | T-08 | La opción de imagen, quieta y en otro layout (feedback de Nicolás sobre la publicación) | done | — | [`tasks/T-08/`](tasks/T-08/) · `scripts/congelar-svg.py` · tres `graphics/campaigns/*-fijo.svg` · ADR 0088 |
 | T-09 | Las opciones de video, con movimiento grande (feedback de Nicolás) | done | — | [`tasks/T-09/`](tasks/T-09/) · los tres SVG · `test/medir-movimiento.py` · `scripts/{puente-a-video.sh (SOLO),empaquetar-creativo.sh (-sc_threshold 0),verificar-creativo.sh}` |
+| T-10 | La caché: videos con el contenido en el nombre, lo de nombre fijo sin caché, y un script de publicación | done | — | [`tasks/T-10/`](tasks/T-10/) · `scripts/{versionar-creativo.sh,publicar.sh}` · `CLAUDE.md` |
 
 ---
 
@@ -101,4 +102,12 @@
   video del par), la misma campaña, layout y duración; el mismo puente a video; `CREDITS.md`.
 - **Definition of done:** el % de píxeles que cambian cada 0,5 s sube mucho contra el mismo
   número del video anterior; el formato del HLS (códec, resolución, fps, segmentos) es idéntico.
+- **nivel de verificación:** bajo.
+
+## T-10 — La caché, resuelta de forma sistemática
+- **Objective:** lo publicado se sirve igual al repo apenas termina de subirse, sin cache-busting.
+- **What it must cover:** los videos llevan un hash de su contenido en la ruta y lo anota el
+  pipeline; lo de nombre fijo va con `no-cache`; el bucket borra lo que ya no está en el árbol.
+- **Definition of done:** `publicar.sh` sale 0 con la comparación md5 y la de curl anónimo sin
+  `?v=`, y los nombres viejos dan 404.
 - **nivel de verificación:** bajo.

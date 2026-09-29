@@ -1,0 +1,18 @@
+== curl anónimo, 2026-09-29T10:23:57-03:00 ==
+  content/creatives/zumbra-16x9/index.m3u8       200 application/vnd.apple.mpegurl  DISTINTO
+  content/creatives/zumbra-16x9/seg000.ts        200 video/mp2t  DISTINTO
+  content/creatives/zumbra-16x9/seg003.ts        200 video/mp2t  DISTINTO
+  content/creatives/ketrava-backplate/index.m3u8 200 application/vnd.apple.mpegurl  DISTINTO
+  content/creatives/ketrava-backplate/seg000.ts  200 video/mp2t  DISTINTO
+  content/creatives/ketrava-backplate/seg003.ts  200 video/mp2t  byte a byte IGUAL
+  content/creatives/kovrin-banner/index.m3u8     200 application/vnd.apple.mpegurl  DISTINTO
+  content/creatives/kovrin-banner/seg000.ts      200 video/mp2t  DISTINTO
+  content/creatives/kovrin-banner/seg003.ts      200 video/mp2t  byte a byte IGUAL
+  control: seg000 de zumbra servido vs el de kovrin local DISTINTO
+  /signalling/asset-list-break-a-magra.json      404
+  / (raíz)                                       403
+== el movimiento, medido sobre lo publicado ==
+https://qualabs-hls-demo-stage-pair.storage.googleapis.com/content/creatives/zumbra-16x9/index.m3u8: 24 cuadros cada 0.5 s  media   2.26 %  mínimo   0.26 %  máximo   3.03 %
+https://qualabs-hls-demo-stage-pair.storage.googleapis.com/content/creatives/ketrava-backplate/index.m3u8: 24 cuadros cada 0.5 s  media  11.90 %  mínimo   0.97 %  máximo  34.79 %
+https://qualabs-hls-demo-stage-pair.storage.googleapis.com/content/creatives/kovrin-banner/index.m3u8: 24 cuadros cada 0.5 s  media   5.36 %  mínimo   0.58 %  máximo  80.21 %
+https://qualabs-hls-demo-stage-pair.storage.googleapis.com/content/creatives/ketrava-backplate/index.m3u8 (sólo la L visible): 24 cuadros cada 0.5 s  media  27.19 %  mínimo   2.23 %  máximo  79.51 %
