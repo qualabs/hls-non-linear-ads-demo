@@ -18,12 +18,12 @@
 // juego de asset-lists por escalón y la respuesta estaba horneada por valor
 // (ADR 0083); eso se fue.
 //
-// Entre una opción y la otra cambian el `type` y el `uri` del asset, y NADA MÁS
-// -- ni el layout, ni el `viewport`, ni el `zDepth`, ni la duración. Es la
-// afirmación del ADR 0084, que ahora vive adentro de un solo archivo, y por eso
-// las dos opciones salen de la misma función con un solo argumento distinto. El
-// test de la demo la asserta sobre los archivos ESCRITOS, que es la única forma
-// en que puede ponerse rojo.
+// Las dos opciones son DE LA MISMA CAMPAÑA y duran lo mismo, y la de imagen va en
+// OTRA FORMA que la de video (`formaImagen`, ADR 0088): el side by side pasa a la
+// L, la L al side by side, el banner a la L. Con dos navegadores lado a lado, dos
+// decodificadores contra uno con imágenes, se tienen que ver como experiencias
+// distintas. Las dos salen de la misma función, con el medio y la forma como
+// únicos argumentos, y el resto de stage.json.
 //
 // Los archivos van a git: no contienen ni un instante, así que son función pura
 // de stage.json y un cambio de señalización se ve en un diff. Las playlists no,
@@ -40,9 +40,11 @@
 //       asset (D.5). D.2 hace obligatorio el `URI`; el ADR 0087 dice por qué acá
 //       la ausencia es la forma de decir "sin default".
 //
-//   options[n].layout.assets[0].type / .uri    LOS DOS ÚNICOS CAMPOS QUE CAMBIAN
-//       entre opciones: el HLS que produjo el puente de la T-05, o el SVG
-//       autorado de graphics/campaigns/.
+//   options[n]                el layout de la forma de esa opción (`forma` para el
+//       video, `formaImagen` para la imagen) con su caja de stage.json, y el
+//       asset: el HLS que produjo el puente de la T-05, o el SVG CONGELADO de la
+//       pieza de esa forma (`svgFijo`), sin animación, para que la imagen se lea
+//       como imagen.
 //
 //   primaryContent            lo declaran los dos squeezeback y NO el
 //       lowerThirdOverlay, que es una ausencia deliberada y argumentada en
@@ -94,6 +96,12 @@ const ID_DEL_AVISO = {
   banner: 'banner'
 };
 
+/** La variante de imagen de una pieza: su SVG congelado, que stage.json declara. */
+function fijo(p) {
+  if (!p.svgFijo) throw new Error(`stage.json no declara svgFijo para ${p.campana}/${p.forma}`);
+  return p.svgFijo;
+}
+
 /** El asset-list lineal de un break: un aviso a cuadro entero y nada más. */
 function lineal(brk) {
   return {
@@ -104,17 +112,21 @@ function lineal(brk) {
 /**
  * Una opción de presentación del aviso de un break, en el medio que se le pida.
  *
- * `medio` es 'video' o 'imagen', y es LO ÚNICO que distingue una opción de la
- * otra: todo lo demás sale de stage.json, que es lo que hace que las dos no se
- * puedan despegar.
+ * `medio` es 'video' o 'imagen', y decide la forma: la del break para el video,
+ * `formaImagen` para la imagen (ADR 0088). La campaña es la del break en las dos.
  */
 function opcion(brk, medio) {
-  const forma = stage.formas[brk.forma];
-  const p = pieza(brk.campana, brk.forma);
+  const nombreForma = medio === 'video' ? brk.forma : brk.formaImagen;
+  if (!nombreForma) throw new Error(`stage.json no declara formaImagen para el break ${brk.id}`);
+  const forma = stage.formas[nombreForma];
+  const p = pieza(brk.campana, nombreForma);
   const aviso = {
-    id: ID_DEL_AVISO[brk.forma],
+    id: ID_DEL_AVISO[nombreForma],
     type: medio === 'video' ? stage.assets.tipos.video : stage.assets.tipos.imagen,
-    uri: url(medio === 'video' ? p.video : p.svg),
+    // La imagen es el SVG CONGELADO (fase 15): con movimiento, una imagen se lee
+    // como un video. Sin `svgFijo` declarado el break no tiene opción de imagen
+    // que servir, y se dice en lugar de servir la animada.
+    uri: url(medio === 'video' ? p.video : fijo(p)),
     viewport: forma.viewportAviso,
     zDepth: forma.zDepthAviso
   };

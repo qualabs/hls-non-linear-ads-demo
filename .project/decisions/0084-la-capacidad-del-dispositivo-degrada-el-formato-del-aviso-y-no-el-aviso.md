@@ -1,11 +1,11 @@
 ---
 id: "0084"
 title: La capacidad del dispositivo degrada el formato del aviso y no el aviso
-status: accepted
+status: superseded
 scope: project
 date: 2026-09-21
 supersedes: null
-superseded_by: null
+superseded_by: "0088"
 generalizes: null
 generalized_by: null
 ---
@@ -89,4 +89,4 @@ transporte.
 
 ---
 
-**2026-09-28 — nota.** Desde el ADR 0085 quien elige el medio es la librería y no la respuesta: el asset-list trae las dos variantes y el Player se queda con la primera que su capacidad satisface (ADR 0086). Esta decisión sigue en pie con un decodificador e imágenes: el aviso sale en imagen. Lo que se agrega es el escalón de abajo, cuando el dispositivo declara que tampoco dibuja imágenes: sin opción satisfacible el break cae al lineal si tiene default, y si no, se saltea (ADR 0087).
+**2026-09-28 — nota.** Desde el ADR 0085 quien elige el medio es la librería y no la respuesta: el asset-list trae las dos variantes y el Player se queda con la primera que su capacidad satisface (ADR 0086). Esta decisión sigue en pie con un decodificador e imágenes: el aviso sale en imagen. Lo que se agrega es el escalón de abajo, cuando el dispositivo declara que tampoco dibuja imágenes: sin opción satisfacible el break cae al lineal si tiene default, y si no, se saltea (ADR 0087). Y en el mismo día, el ADR 0088 lo supersede en "mismo layout, misma caja": la opción de imagen es quieta y va en otra forma de la misma campaña, para que se vea distinta de la de video. Lo que sigue en pie es el título de este ADR.

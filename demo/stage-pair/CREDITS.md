@@ -78,6 +78,19 @@ brand, and none of the three drawings imitates an existing logotype: the object 
 is the product — a can, a shoe in profile, a headland with a lighthouse — and no campaign
 carries a brand symbol separate from its name.
 
+**Three of them also travel frozen, as the image option of their break** (phase 15): the
+same SVG with every animation written down at one instant and removed, so that an image reads
+as an image and not as a video. No new artwork: `scripts/congelar-svg.py` opens the authored
+file, stops its SMIL clock at t = 1.5 s, writes each animated value as a plain attribute and
+drops the animation elements. The result is pixel-identical to the authored piece at that
+instant, and its provenance is exactly that of the file it comes from.
+
+| path | from |
+| --- | --- |
+| `graphics/campaigns/zumbra-backplate-fijo.svg` | `graphics/campaigns/zumbra-backplate.svg`, frame at t = 1.5 s |
+| `graphics/campaigns/ketrava-16x9-fijo.svg` | `graphics/campaigns/ketrava-16x9.svg`, frame at t = 1.5 s |
+| `graphics/campaigns/kovrin-backplate-fijo.svg` | `graphics/campaigns/kovrin-backplate.svg`, frame at t = 1.5 s |
+
 **The typography is a system font stack**, metrically compatible and declared inline
 (`Helvetica Neue`, Helvetica, Arial, Liberation Sans). There is no `@font-face` and no font
 file of a third party inside these creatives.

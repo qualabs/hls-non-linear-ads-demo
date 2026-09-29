@@ -51,7 +51,8 @@
       { "id": "r3", "offset": 30, "duracion": 6, "campana": "ketrava", "forma": "banner",    "layout": "lowerThirdOverlay",  "lista": "asset-list-race-3.json" },
       { "id": "r4", "offset": 42, "duracion": 6, "campana": "zumbra",  "forma": "backplate", "layout": "squeezebackLShape",  "lista": "asset-list-race-4.json" }
     ],
-    "_breaks": "LOS CUATRO AVISOS VAN ANTES DE `ofertaEn`, y ése es el argumento de la página: primero la publicidad no lineal sobre la carrera, después la ventana de multi view. El último termina en 48 s y la ventana abre en 56, así que hay 8 s de carrera limpia entre una cosa y la otra y las dos clases hermanas (ADR 0063) nunca se pisan en pantalla. LAS CUATRO PIEZAS SON EXACTAMENTE LAS CUATRO QUE `assets.piezas` marca con uso `race`: el par usa las tres 16:9 —la de ZUMBRA como aviso del break A, las otras dos como lineal de B y C—, la L de KETRAVA y el banner de KOVRIN, y las cuatro que sobran son las de acá. Así las nueve piezas autoradas se ven en la demo y ninguna queda sin usar. EL ORDEN ALTERNA LA FORMA —banner, L, banner, L— y no repite campaña en breaks contiguos: tres avisos seguidos de la misma marca se leen como un defecto y no como publicidad. DURAN 6 s Y NO 12, que es lo que dura un break del par, y el número sale del creativo y no del reloj: los nueve están autorados con un bucle de 3 s y un anillo de 6 s, así que 6 s son dos bucles exactos y una vuelta entera del anillo, y el aviso abre y cierra idéntico. Con 12 s los cuatro se comerían 48 de los 56 segundos previos a la ventana y la carrera dejaría de verse, que es lo contrario de lo que un aviso no lineal afirma. Los huecos de carrera entre avisos son iguales, 6 s. EL MEDIO ES VIDEO EN LOS CUATRO: esta página no lleva el control de capacidades —es de la página del par— y sus asset-lists traen una sola opción, así que no hay nada que filtrar acá."
+    "_formaImagen": "La forma de la opción de imagen de cada break, DISTINTA de la del video (ADR 0088): A pasa del side by side a la L, B de la L al side by side, y C del banner a la L. Misma campaña; otro layout.",
+  "_breaks": "LOS CUATRO AVISOS VAN ANTES DE `ofertaEn`, y ése es el argumento de la página: primero la publicidad no lineal sobre la carrera, después la ventana de multi view. El último termina en 48 s y la ventana abre en 56, así que hay 8 s de carrera limpia entre una cosa y la otra y las dos clases hermanas (ADR 0063) nunca se pisan en pantalla. LAS CUATRO PIEZAS SON EXACTAMENTE LAS CUATRO QUE `assets.piezas` marca con uso `race`: el par usa las tres 16:9 —la de ZUMBRA como aviso del break A, las otras dos como lineal de B y C—, la L de KETRAVA y el banner de KOVRIN, y las cuatro que sobran son las de acá. Así las nueve piezas autoradas se ven en la demo y ninguna queda sin usar. EL ORDEN ALTERNA LA FORMA —banner, L, banner, L— y no repite campaña en breaks contiguos: tres avisos seguidos de la misma marca se leen como un defecto y no como publicidad. DURAN 6 s Y NO 12, que es lo que dura un break del par, y el número sale del creativo y no del reloj: los nueve están autorados con un bucle de 3 s y un anillo de 6 s, así que 6 s son dos bucles exactos y una vuelta entera del anillo, y el aviso abre y cierra idéntico. Con 12 s los cuatro se comerían 48 de los 56 segundos previos a la ventana y la carrera dejaría de verse, que es lo contrario de lo que un aviso no lineal afirma. Los huecos de carrera entre avisos son iguales, 6 s. EL MEDIO ES VIDEO EN LOS CUATRO: esta página no lleva el control de capacidades —es de la página del par— y sus asset-lists traen una sola opción, así que no hay nada que filtrar acá."
   },
 
   "creativos": {
@@ -163,6 +164,7 @@
       "layout": "squeezebackDoubleBox",
       "campana": "zumbra",
       "concurrente": "asset-list-break-a.json",
+      "formaImagen": "backplate",
       "lineal": null,
       "_lineal": "EL BREAK SIN DEFAULT (ADR 0087): contenido que no se interrumpe. El asset concurrente no lleva URI y la playlist no lleva tag lineal, así que el pane de fábrica no pone nada, y el nuestro dibuja el aviso si alguna opción entra en la capacidad declarada y si no, lo saltea. Es A porque su lineal sería ZUMBRA 16:9, que ya es su aviso concurrente: sacárselo no deja ninguna de las nueve piezas sin usar.",
       "_": "Va primero porque su creativo es el único que ya está autorado y aprobado, así que el primer break que se ve en cámara es la pieza terminada."
@@ -175,6 +177,7 @@
       "layout": "squeezebackLShape",
       "campana": "ketrava",
       "concurrente": "asset-list-break-b.json",
+      "formaImagen": "16x9",
       "lineal": "asset-list-linear-b.json",
       "_": "Turismo en la L porque un paisaje es lo que mejor tolera que le tapen el centro: la guarda del backplate cae sobre cielo y mar, donde no hay nada que perder."
     },
@@ -186,6 +189,7 @@
       "layout": "lowerThirdOverlay",
       "campana": "kovrin",
       "concurrente": "asset-list-break-c.json",
+      "formaImagen": "backplate",
       "lineal": "asset-list-linear-c.json",
       "_": "Calzado en el banner porque una zapatilla de perfil es la única de las tres siluetas que llena una tira de 8,89:1 sin quedar perdida en el medio."
     }
@@ -211,14 +215,15 @@
     "piezas": [
       { "campana": "zumbra",  "forma": "16x9",      "svg": "graphics/campaigns/zumbra-16x9.svg",      "video": "content/creatives/zumbra-16x9/index.m3u8",      "usos": ["break-a"] },
       { "campana": "zumbra",  "forma": "banner",    "svg": "graphics/campaigns/zumbra-banner.svg",    "video": "content/creatives/zumbra-banner/index.m3u8",    "usos": ["race"] },
-      { "campana": "zumbra",  "forma": "backplate", "svg": "graphics/campaigns/zumbra-backplate.svg", "video": "content/creatives/zumbra-backplate/index.m3u8", "usos": ["race"] },
-      { "campana": "ketrava", "forma": "16x9",      "svg": "graphics/campaigns/ketrava-16x9.svg",      "video": "content/creatives/ketrava-16x9/index.m3u8",      "usos": ["break-b-lineal"] },
+      { "campana": "zumbra",  "forma": "backplate", "svg": "graphics/campaigns/zumbra-backplate.svg", "svgFijo": "graphics/campaigns/zumbra-backplate-fijo.svg", "video": "content/creatives/zumbra-backplate/index.m3u8", "usos": ["race"] },
+      { "campana": "ketrava", "forma": "16x9",      "svg": "graphics/campaigns/ketrava-16x9.svg", "svgFijo": "graphics/campaigns/ketrava-16x9-fijo.svg",      "video": "content/creatives/ketrava-16x9/index.m3u8",      "usos": ["break-b-lineal"] },
       { "campana": "ketrava", "forma": "banner",    "svg": "graphics/campaigns/ketrava-banner.svg",    "video": "content/creatives/ketrava-banner/index.m3u8",    "usos": ["race"] },
       { "campana": "ketrava", "forma": "backplate", "svg": "graphics/campaigns/ketrava-backplate.svg", "video": "content/creatives/ketrava-backplate/index.m3u8", "usos": ["break-b"] },
       { "campana": "kovrin",  "forma": "16x9",      "svg": "graphics/campaigns/kovrin-16x9.svg",      "video": "content/creatives/kovrin-16x9/index.m3u8",      "usos": ["break-c-lineal"] },
       { "campana": "kovrin",  "forma": "banner",    "svg": "graphics/campaigns/kovrin-banner.svg",    "video": "content/creatives/kovrin-banner/index.m3u8",    "usos": ["break-c"] },
-      { "campana": "kovrin",  "forma": "backplate", "svg": "graphics/campaigns/kovrin-backplate.svg", "video": "content/creatives/kovrin-backplate/index.m3u8", "usos": ["race"] }
+      { "campana": "kovrin",  "forma": "backplate", "svg": "graphics/campaigns/kovrin-backplate.svg", "svgFijo": "graphics/campaigns/kovrin-backplate-fijo.svg", "video": "content/creatives/kovrin-backplate/index.m3u8", "usos": ["race"] }
     ],
+    "_svgFijo": "La variante de imagen de las tres piezas que son opción de imagen de un break del par (fase 15): el mismo SVG congelado en t = 1.5 s por scripts/congelar-svg.py, sin ninguna animación, para que una imagen se lea como imagen y no como video. Se genera del SVG autorado y no se edita a mano. Son de la misma campaña que el video del break y de OTRA forma (`breaks[].formaImagen`, ADR 0088): con dos navegadores lado a lado, la opción de video y la de imagen tienen que verse como experiencias distintas.",
     "tipos": {
       "video": "application/vnd.apple.mpegurl",
       "imagen": "image/svg+xml"
