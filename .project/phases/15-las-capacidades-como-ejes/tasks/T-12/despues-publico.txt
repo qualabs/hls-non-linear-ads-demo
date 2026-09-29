@@ -1,0 +1,20 @@
+== despues-publico, entrada
+   t= 19.865  z primario auto  z aviso auto  arriba: ?
+   t= 20.104  z primario    3  z aviso    2  arriba: PRIMARIO
+   t= 20.271  z primario    3  z aviso    2  arriba: PRIMARIO
+   t= 20.546  z primario    3  z aviso    2  arriba: PRIMARIO
+   t= 20.792  z primario    3  z aviso    2  arriba: PRIMARIO
+   t= 21.023  z primario    3  z aviso    2  arriba: PRIMARIO
+   t= 21.267  z primario    3  z aviso    2  arriba: PRIMARIO
+   t=  21.48  z primario    3  z aviso    2  arriba: PRIMARIO
+   t=  21.73  z primario    3  z aviso    2  arriba: PRIMARIO
+== despues-publico, salida
+   t= 31.519  z primario    3  z aviso    2  arriba: PRIMARIO
+   t= 31.865  z primario    3  z aviso    2  arriba: PRIMARIO
+   t= 32.255  z primario auto  z aviso None  arriba: ?
+   t= 32.428  z primario auto  z aviso None  arriba: ?
+   t= 32.589  z primario auto  z aviso None  arriba: ?
+   t= 32.774  z primario auto  z aviso None  arriba: ?
+   t= 32.949  z primario auto  z aviso None  arriba: ?
+   t= 33.128  z primario auto  z aviso None  arriba: ?
+   t= 33.293  z primario auto  z aviso None  arriba: ?

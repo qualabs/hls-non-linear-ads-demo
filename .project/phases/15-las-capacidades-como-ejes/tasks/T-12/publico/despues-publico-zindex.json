@@ -1,0 +1,114 @@
+{
+  "entrada": [
+    {
+      "t": 19.865,
+      "zPrimario": "auto",
+      "zAviso": "auto",
+      "transformPrimario": "none"
+    },
+    {
+      "t": 20.104,
+      "zPrimario": "3",
+      "zAviso": "2",
+      "transformPrimario": "matrix(0.963571, 0, 0, 0.963571, 0, 7.42212)"
+    },
+    {
+      "t": 20.271,
+      "zPrimario": "3",
+      "zAviso": "2",
+      "transformPrimario": "matrix(0.909722, 0, 0, 0.909722, 0, 18.3934)"
+    },
+    {
+      "t": 20.546,
+      "zPrimario": "3",
+      "zAviso": "2",
+      "transformPrimario": "matrix(0.820119, 0, 0, 0.820119, 0, 36.6494)"
+    },
+    {
+      "t": 20.792,
+      "zPrimario": "3",
+      "zAviso": "2",
+      "transformPrimario": "matrix(0.743281, 0, 0, 0.743281, 0, 52.3046)"
+    },
+    {
+      "t": 21.023,
+      "zPrimario": "3",
+      "zAviso": "2",
+      "transformPrimario": "matrix(0.688344, 0, 0, 0.688344, 0, 63.4975)"
+    },
+    {
+      "t": 21.267,
+      "zPrimario": "3",
+      "zAviso": "2",
+      "transformPrimario": "matrix(0.644102, 0, 0, 0.644102, 0, 72.5114)"
+    },
+    {
+      "t": 21.48,
+      "zPrimario": "3",
+      "zAviso": "2",
+      "transformPrimario": "matrix(0.613497, 0, 0, 0.613497, 0, 78.747)"
+    },
+    {
+      "t": 21.73,
+      "zPrimario": "3",
+      "zAviso": "2",
+      "transformPrimario": "matrix(0.581189, 0, 0, 0.581189, 0, 85.3295)"
+    }
+  ],
+  "salida": [
+    {
+      "t": 31.519,
+      "zPrimario": "3",
+      "zAviso": "2",
+      "transformPrimario": "matrix(0.5, 0, 0, 0.5, 0, 101.871)"
+    },
+    {
+      "t": 31.865,
+      "zPrimario": "3",
+      "zAviso": "2",
+      "transformPrimario": "matrix(0.572464, 0, 0, 0.572464, 0, 87.1071)"
+    },
+    {
+      "t": 32.255,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    },
+    {
+      "t": 32.428,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    },
+    {
+      "t": 32.589,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    },
+    {
+      "t": 32.774,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    },
+    {
+      "t": 32.949,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    },
+    {
+      "t": 33.128,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    },
+    {
+      "t": 33.293,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    }
+  ]
+}
