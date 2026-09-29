@@ -1,0 +1,22 @@
+== curl anónimo con cache-busting (?v=1790688283): lo que el bucket tiene hoy, sin la caché del borde ==
+  content/creatives/zumbra-16x9/index.m3u8       IGUAL
+  content/creatives/zumbra-16x9/seg000.ts        IGUAL
+  content/creatives/zumbra-16x9/seg001.ts        IGUAL
+  content/creatives/zumbra-16x9/seg002.ts        IGUAL
+  content/creatives/zumbra-16x9/seg003.ts        IGUAL
+  content/creatives/zumbra-16x9/seg004.ts        IGUAL
+  content/creatives/zumbra-16x9/seg005.ts        IGUAL
+  content/creatives/ketrava-backplate/index.m3u8 IGUAL
+  content/creatives/ketrava-backplate/seg000.ts  IGUAL
+  content/creatives/ketrava-backplate/seg001.ts  IGUAL
+  content/creatives/ketrava-backplate/seg002.ts  IGUAL
+  content/creatives/ketrava-backplate/seg003.ts  IGUAL
+  content/creatives/ketrava-backplate/seg004.ts  IGUAL
+  content/creatives/ketrava-backplate/seg005.ts  IGUAL
+  content/creatives/kovrin-banner/index.m3u8     IGUAL
+  content/creatives/kovrin-banner/seg000.ts      IGUAL
+  content/creatives/kovrin-banner/seg001.ts      IGUAL
+  content/creatives/kovrin-banner/seg002.ts      IGUAL
+  content/creatives/kovrin-banner/seg003.ts      IGUAL
+  content/creatives/kovrin-banner/seg004.ts      IGUAL
+  content/creatives/kovrin-banner/seg005.ts      IGUAL

@@ -14,7 +14,7 @@
 #        -> scripts/capturar-svg.py        navegador headless, reloj controlado
 #        -> content/.work/T-05/<pieza>/    cuadros PNG a resolución NATIVA
 #        -> scripts/empaquetar-creativo.sh ffmpeg -> H.264 -> HLS
-#        -> content/creatives/<pieza>/index.m3u8
+#        -> content/creatives/<pieza>/<hash>/index.m3u8  (versionar-creativo.sh)
 #        -> scripts/verificar-creativo.sh  la aserción, con sus controles
 #
 # LOS NÚMEROS SALEN DE stage.json Y NO DE ACÁ (ADR 0044): el fps y la duración de
@@ -59,7 +59,9 @@ eval "$(node -e '
     let H = Math.round(720 * (100 - top - bottom) / 100);
     if (p.forma === "16x9") { W = 1280; H = 720; }   // es tambien el lineal
     const bv = (W * H >= 1280 * 720) ? "2500k" : "800k";
-    const nombre = p.video.replace(/^content\/creatives\//, "").replace(/\/index\.m3u8$/, "");
+    // El nombre es el del SVG y no el de la ruta del video, que desde la fase 15
+    // lleva la versión adentro (scripts/versionar-creativo.sh).
+    const nombre = p.svg.replace(/^.*\//, "").replace(/\.svg$/, "");
     return [nombre, p.svg, W, H, bv].join(":");
   });
   console.log(`FPS=${s.creativos.fps}; DUR=${s.creativos.duracion}; PIEZAS=(${piezas.map((p) => `"${p}"`).join(" ")})`);
@@ -132,6 +134,7 @@ for p in "${PIEZAS[@]}"; do
   "$PY" scripts/capturar-svg.py "$SVG" "$CUADROS" --fps "$FPS" --duracion "$DUR"
   ./scripts/empaquetar-creativo.sh "$CUADROS" "content/creatives/$NOMBRE" "$W" "$H" "$FPS" "$BV"
   ./scripts/verificar-creativo.sh "content/creatives/$NOMBRE/index.m3u8" "$FPS" "$DUR" "$CUADROS"
+  ./scripts/versionar-creativo.sh "$NOMBRE"
   # Los cuadros se borran acá y no al final: el pico en disco es de una pieza.
   rm -rf "$CUADROS"
 done

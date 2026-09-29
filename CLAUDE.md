@@ -40,6 +40,15 @@ listable**.
 
 ### What you need to know to publish again, and cannot work out by looking
 
+**`stage-pair` is published with `demo/stage-pair/scripts/publicar.sh`**, which does every step
+below and verifies the result without credentials. Two things it adds that the other buckets
+do not have: **anything with a fixed name is uploaded with `Cache-Control: no-cache`**, because
+the default is a public hour and the Google edge keeps serving the old file for that hour; and
+**the creative videos carry a hash of their content in the path**
+(`content/creatives/<piece>/<hash>/`, written by `scripts/versionar-creativo.sh` and recorded in
+`stage.json`), so a new video is a URL no cache has seen. The script also deletes from the bucket
+whatever is no longer in the published tree.
+
 **One bucket per demo, and the bucket goes in the HOST.** The pages and the signalling
 ask for everything from the root: `/dist/`, `/vendor/`, `"URI": "/content/…"`,
 `X-ASSET-LIST="/signalling/…"`. With the path-style URL
