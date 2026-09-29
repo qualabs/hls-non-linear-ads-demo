@@ -1,0 +1,19 @@
+== compatibility-pair: 5 rangos
+   AD-1-CONCURRENT        concurrent  t=  24.89  ['cornerOverlay']  z primario 0  z avisos ['2']
+   AD-2-CONCURRENT        concurrent  t=  49.93  ['squeezebackLShape']  z primario 5  z avisos ['2', '4']
+   AD-3-CONCURRENT        concurrent  t=  74.95  ['squeezebackLShape']  z primario 5  z avisos ['2', '4']
+   AD-4-CONCURRENT        concurrent  t=  99.91  ['multiView']  z primario 7  z avisos ['2', '4', '6']
+   AD-5-CONCURRENT        concurrent  t= 124.94  ['cornerOverlay']  z primario 0  z avisos ['2']
+   errores de página: 0 []
+== hydration-break: 1 rangos
+   HYDRATION-BREAK        concurrent  t=  18.91  ['lowerThirdOverlay']  z primario 0  z avisos ['2']
+   errores de página: 0 []
+== multiview-offer: 3 rangos
+   BREAK-1-CONCURRENT     concurrent  t=  24.91  ['cornerOverlay']  z primario 0  z avisos ['2']
+   BREAK-2-MULTIVIEW      multiview   t=  49.92  ['multiViewOffer']  z primario auto  z avisos []
+   BREAK-3-MULTIVIEW      multiview   t= 124.92  ['multiViewOffer']  z primario auto  z avisos []
+   errores de página: 0 []
+== race-multiview: 1 rangos
+   BREAK-1-MULTIVIEW      multiview   t=  32.93  ['multiViewOffer']  z primario auto  z avisos []
+   errores de página: 0 []
+VERDE: ninguna demo tiró errores
