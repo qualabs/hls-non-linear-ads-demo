@@ -6046,3 +6046,18 @@ así que los asset-lists no hace falta versionarlos. `scripts/publicar.sh` reesc
 verifica por md5 y con curl anónimo sin `?v=`. Encontró en su primera corrida que dos asset-lists
 de la carrera apuntaban a la ruta vieja de un video. Publicado y verde: 501 = 501, lo servido
 igual al repo, las rutas viejas en 404.
+
+## 2026-09-29 — T-11: un control por player en la página del par
+
+Pedido de Nicolás para poder comparar todas las combinaciones. Cada pane de `index.html` tiene su
+control: "HLS interstitials, native" o "With our library", y sólo en el segundo, decodificadores e
+imágenes. La combinación viaja en la URL (`?izq=nativo&der=ours-2dec-img`, que es el default: el
+par publicado). `app.js` se generalizó a dos lados de cualquier modo: los dos se rearman juntos en
+el mismo segundo, las barras siguen atadas, y el "blanco alcanzable" y el rearmado por barra
+durante un break se aplican cuando hay algún lado nativo. Cada pane lista los pedidos de asset-list
+que hizo: los nuestros desde `onResolved`, los nativos desde el evento de asset-list de su propia
+instancia de hls.js (dos nativos piden los mismos archivos, y sólo la instancia sabe cuáles fueron
+suyos). `test/verificar-pares.py` (nuevo) da verde en cuatro combinaciones, en A y B y en los dos
+lados, con los pedidos de cada lado; sus controles: 1 dec con imágenes contra sin imágenes da
+composiciones distintas, y nativo contra nativo, iguales. `verificar-capacidades` en index,
+`medir-tramo-en-el-par` y `medir-enlace-de-barras` siguen en verde.

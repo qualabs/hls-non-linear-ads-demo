@@ -161,7 +161,7 @@ def main():
     if not (args.puerto or args.base):
         sys.exit("hace falta --puerto o --base")
     base = args.base.rstrip("/") if args.base else f"http://localhost:{args.puerto}"
-    contenedor = "#slot" if args.pagina == "inspect" else "#demo-slot"
+    contenedor = "#slot" if args.pagina == "inspect" else "#slot-der"
 
     filas, rojo = [], 0
     quietud = []
@@ -189,7 +189,10 @@ def main():
             # se espera al rearmado del último.
             for eje, valor in capacidad.items():
                 txt = str(valor).lower() if isinstance(valor, bool) else str(valor)
-                boton = pagina.locator(f'button[data-eje="{eje}"][data-valor="{txt}"]')
+                # En index.html cada pane tiene su control (fase 15): el que se mide
+                # es el de la derecha, que es el de nuestra librería por defecto.
+                alcance = "#control-der " if args.pagina == "index" else ""
+                boton = pagina.locator(f'{alcance}button[data-eje="{eje}"][data-valor="{txt}"]')
                 if boton.get_attribute("aria-pressed") != "true":
                     boton.click()
                     time.sleep(0.8)

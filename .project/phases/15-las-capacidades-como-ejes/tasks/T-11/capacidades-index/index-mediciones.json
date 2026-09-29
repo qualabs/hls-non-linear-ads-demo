@@ -1,0 +1,313 @@
+{
+  "filas": [
+    {
+      "combinacion": "dec2-imgsi",
+      "break": "a",
+      "t": 23.52,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "squeezebackDoubleBox"
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "squeezebackDoubleBox"
+      },
+      "ok": true,
+      "descartes": []
+    },
+    {
+      "combinacion": "dec2-imgsi",
+      "break": "b",
+      "t": 68.53,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "squeezebackLShape"
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "squeezebackLShape"
+      },
+      "ok": true,
+      "descartes": []
+    },
+    {
+      "combinacion": "dec2-imgsi",
+      "break": "c",
+      "t": 113.53,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "lowerThirdOverlay"
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "lowerThirdOverlay"
+      },
+      "ok": true,
+      "descartes": []
+    },
+    {
+      "combinacion": "dec2-imgno",
+      "break": "a",
+      "t": 23.53,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "squeezebackDoubleBox"
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "squeezebackDoubleBox"
+      },
+      "ok": true,
+      "descartes": []
+    },
+    {
+      "combinacion": "dec2-imgno",
+      "break": "b",
+      "t": 68.53,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "squeezebackLShape"
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "squeezebackLShape"
+      },
+      "ok": true,
+      "descartes": []
+    },
+    {
+      "combinacion": "dec2-imgno",
+      "break": "c",
+      "t": 113.52,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "lowerThirdOverlay"
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 0,
+        "video": 2,
+        "img": 0,
+        "layout": "lowerThirdOverlay"
+      },
+      "ok": true,
+      "descartes": [],
+      "pedidos": [
+        "http://localhost:8093/signalling/asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "http://localhost:8093/signalling/asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=0",
+        "http://localhost:8093/signalling/asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=0"
+      ]
+    },
+    {
+      "combinacion": "dec1-imgsi",
+      "break": "a",
+      "t": 23.53,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 1,
+        "video": 1,
+        "img": 1,
+        "layout": "squeezebackLShape"
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 1,
+        "video": 1,
+        "img": 1,
+        "layout": "squeezebackLShape"
+      },
+      "ok": true,
+      "descartes": [
+        "needs 2 video decoders and the device declares 1"
+      ]
+    },
+    {
+      "combinacion": "dec1-imgsi",
+      "break": "b",
+      "t": 68.51,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 1,
+        "video": 1,
+        "img": 1,
+        "layout": "squeezebackDoubleBox"
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 1,
+        "video": 1,
+        "img": 1,
+        "layout": "squeezebackDoubleBox"
+      },
+      "ok": true,
+      "descartes": [
+        "needs 2 video decoders and the device declares 1"
+      ]
+    },
+    {
+      "combinacion": "dec1-imgsi",
+      "break": "c",
+      "t": 113.52,
+      "esperado": {
+        "outcome": "drawn",
+        "chosen": 1,
+        "video": 1,
+        "img": 1,
+        "layout": "squeezebackLShape"
+      },
+      "obtenido": {
+        "outcome": "drawn",
+        "chosen": 1,
+        "video": 1,
+        "img": 1,
+        "layout": "squeezebackLShape"
+      },
+      "ok": true,
+      "descartes": [
+        "needs 2 video decoders and the device declares 1"
+      ],
+      "pedidos": [
+        "http://localhost:8093/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=1",
+        "http://localhost:8093/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=1"
+      ]
+    },
+    {
+      "combinacion": "dec1-imgno",
+      "break": "a",
+      "t": 23.52,
+      "esperado": {
+        "outcome": "skipped",
+        "chosen": null,
+        "video": 1,
+        "img": 0,
+        "layout": null
+      },
+      "obtenido": {
+        "outcome": "skipped",
+        "chosen": null,
+        "video": 1,
+        "img": 0,
+        "layout": null
+      },
+      "ok": true,
+      "descartes": [
+        "needs 2 video decoders and the device declares 1",
+        "needs an image over the video and the device declares it cannot draw one"
+      ]
+    },
+    {
+      "combinacion": "dec1-imgno",
+      "break": "b",
+      "t": 68.51,
+      "esperado": {
+        "outcome": "default",
+        "chosen": null,
+        "video": 2,
+        "img": 0,
+        "layout": "linear"
+      },
+      "obtenido": {
+        "outcome": "default",
+        "chosen": null,
+        "video": 2,
+        "img": 0,
+        "layout": "linear"
+      },
+      "ok": true,
+      "descartes": [
+        "needs 2 video decoders and the device declares 1",
+        "needs an image over the video and the device declares it cannot draw one"
+      ]
+    },
+    {
+      "combinacion": "dec1-imgno",
+      "break": "c",
+      "t": 113.54,
+      "esperado": {
+        "outcome": "default",
+        "chosen": null,
+        "video": 2,
+        "img": 0,
+        "layout": "linear"
+      },
+      "obtenido": {
+        "outcome": "default",
+        "chosen": null,
+        "video": 2,
+        "img": 0,
+        "layout": "linear"
+      },
+      "ok": true,
+      "descartes": [
+        "needs 2 video decoders and the device declares 1",
+        "needs an image over the video and the device declares it cannot draw one"
+      ],
+      "pedidos": [
+        "http://localhost:8093/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=0",
+        "http://localhost:8093/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=0"
+      ]
+    }
+  ],
+  "queries": {
+    "sgai-video-decoders=2&sgai-image-over-video=1": 3,
+    "sgai-video-decoders=2&sgai-image-over-video=0": 3,
+    "sgai-video-decoders=1&sgai-image-over-video=0": 6,
+    "sgai-video-decoders=1&sgai-image-over-video=1": 3
+  },
+  "quietud": [
+    {
+      "combinacion": "dec1-imgsi",
+      "break": "a",
+      "src": "/graphics/campaigns/zumbra-backplate-fijo.svg",
+      "imagen_igual": true,
+      "control_igual": false
+    },
+    {
+      "combinacion": "dec1-imgsi",
+      "break": "b",
+      "src": "/graphics/campaigns/ketrava-16x9-fijo.svg",
+      "imagen_igual": true,
+      "control_igual": false
+    },
+    {
+      "combinacion": "dec1-imgsi",
+      "break": "c",
+      "src": "/graphics/campaigns/kovrin-backplate-fijo.svg",
+      "imagen_igual": true,
+      "control_igual": false
+    }
+  ]
+}

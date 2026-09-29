@@ -12,6 +12,7 @@
 | T-08 | La opción de imagen, quieta y en otro layout (feedback de Nicolás sobre la publicación) | done | — | [`tasks/T-08/`](tasks/T-08/) · `scripts/congelar-svg.py` · tres `graphics/campaigns/*-fijo.svg` · ADR 0088 |
 | T-09 | Las opciones de video, con movimiento grande (feedback de Nicolás) | done | — | [`tasks/T-09/`](tasks/T-09/) · los tres SVG · `test/medir-movimiento.py` · `scripts/{puente-a-video.sh (SOLO),empaquetar-creativo.sh (-sc_threshold 0),verificar-creativo.sh}` |
 | T-10 | La caché: videos con el contenido en el nombre, lo de nombre fijo sin caché, y un script de publicación | done | — | [`tasks/T-10/`](tasks/T-10/) · `scripts/{versionar-creativo.sh,publicar.sh}` · `CLAUDE.md` |
+| T-11 | `index.html`: un control por player, con el modo nativo o el nuestro, y la combinación en la URL | done | — | [`tasks/T-11/`](tasks/T-11/) · `js/{app,capabilities}.js` · `index.html` · `test/verificar-pares.py` |
 
 ---
 
@@ -110,4 +111,15 @@
   pipeline; lo de nombre fijo va con `no-cache`; el bucket borra lo que ya no está en el árbol.
 - **Definition of done:** `publicar.sh` sale 0 con la comparación md5 y la de curl anónimo sin
   `?v=`, y los nombres viejos dan 404.
+- **nivel de verificación:** bajo.
+
+## T-11 — Un control por player en `index.html`
+- **Objective:** cada pane del par se configura solo --nativo o con nuestra librería, y en el
+  segundo las dos capacidades--, pide con lo suyo, y la combinación se comparte con un link.
+- **What it must cover:** `js/app.js` generalizado a dos lados de cualquier modo (sincronización,
+  barras atadas, rearmado), el control por pane en `js/capabilities.js`, la URL, los pedidos por
+  lado. El default es el par publicado. `inspect.html` no cambia.
+- **Definition of done:** `test/verificar-pares.py` en verde en al menos nativo/nuestro-2dec,
+  nuestro-1dec-img/nuestro-1dec-noimg y nativo/nativo, en A y B; las mediciones de la página del
+  par que ya existían, en verde.
 - **nivel de verificación:** bajo.
