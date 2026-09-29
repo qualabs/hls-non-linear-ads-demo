@@ -6061,3 +6061,11 @@ suyos). `test/verificar-pares.py` (nuevo) da verde en cuatro combinaciones, en A
 lados, con los pedidos de cada lado; sus controles: 1 dec con imágenes contra sin imágenes da
 composiciones distintas, y nativo contra nativo, iguales. `verificar-capacidades` en index,
 `medir-tramo-en-el-par` y `medir-enlace-de-barras` siguen en verde.
+
+**2026-09-29 — hallazgo al verificar la T-11 contra el bucket:** los saltos ("break A") no andaban
+en la página publicada. El seek esperaba que el player estuviera listo contando esas esperas contra
+los mismos veinte intentos que las escrituras (un segundo en total); servido desde esta máquina el
+player está listo antes, servido desde el bucket tarda segundos, y el salto se rendía antes de
+escribir y el par arrancaba de cero. Se separaron los dos contadores en `app.js` y en `inspect.js`
+(la espera de estar listo tiene hasta veinte segundos). El defecto venía de la fase 14 y ninguna
+verificación local podía verlo.

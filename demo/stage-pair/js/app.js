@@ -180,16 +180,26 @@ function derribar() {
  * stays there). It gives up after twenty attempts and SAYS SO, because a seek
  * that never landed is the pair an unknown distance apart.
  */
-function buscar(listo, leer, escribir, objetivo, intentos = 20, alAgotar = null) {
+//
+// WAITING FOR THE PLAYER TO BE READY IS NOT A FAILED ATTEMPT, and they are
+// counted apart: served from this machine a player is ready in a few tenths of a
+// second, served from the bucket it takes seconds, and with one shared counter
+// of twenty the jump gave up before the first write and the pair played from
+// zero (seen on the published page, fase 15). Readiness gets up to
+// `ESPERA_LISTO` of patience; the writes keep their twenty attempts.
+const ESPERA_LISTO = 20000;
+
+function buscar(listo, leer, escribir, objetivo, intentos = 20, alAgotar = null, desde = performance.now()) {
   if (intentos <= 0) { alAgotar?.(); return; }
   if (!listo()) {
-    setTimeout(() => buscar(listo, leer, escribir, objetivo, intentos - 1, alAgotar), 50);
+    if (performance.now() - desde > ESPERA_LISTO) { alAgotar?.(); return; }
+    setTimeout(() => buscar(listo, leer, escribir, objetivo, intentos, alAgotar, desde), 50);
     return;
   }
   escribir(objetivo);
   setTimeout(() => {
     if (Math.abs(leer() - objetivo) > TOLERANCIA) {
-      buscar(listo, leer, escribir, objetivo, intentos - 1, alAgotar);
+      buscar(listo, leer, escribir, objetivo, intentos - 1, alAgotar, desde);
     }
   }, 250);
 }

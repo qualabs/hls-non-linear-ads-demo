@@ -358,16 +358,23 @@ function derribar() {
  * after a rebuild the element takes the write, reports the old second and stays
  * there. Waiting for one more readiness flag would be guessing at which one;
  * reading back what was written is the property that matters.
+ *
+ * Waiting for readiness is not a failed attempt: served from the bucket the
+ * player takes seconds to be ready, and a shared counter gave up before the
+ * first write (fase 15). Readiness gets up to twenty seconds.
  */
-function buscar(objetivo, intentos = 20) {
+function buscar(objetivo, intentos = 20, desde = performance.now()) {
   if (!vivo || intentos <= 0) return;
   const { video } = vivo;
-  if (video.readyState < 1) { setTimeout(() => buscar(objetivo, intentos - 1), 50); return; }
+  if (video.readyState < 1) {
+    if (performance.now() - desde < 20000) setTimeout(() => buscar(objetivo, intentos, desde), 50);
+    return;
+  }
   video.currentTime = objetivo;
   video.play().catch(() => {});
   setTimeout(() => {
     if (vivo?.video === video && Math.abs(video.currentTime - objetivo) > 1.5) {
-      buscar(objetivo, intentos - 1);
+      buscar(objetivo, intentos - 1, desde);
     }
   }, 250);
 }
