@@ -31,7 +31,18 @@ HOST=https://qualabs-hls-demo-stage-pair.storage.googleapis.com
 EXCLUIR='.*__pycache__/|^content/\.fuentes/|^content/\.work/|^content/primary/con-daterange-(rica|magra)\.m3u8$|^dist/|^vendor/'
 MUTABLES=("**.html" "**.js" "**.css" "**.json" "**.m3u8" "**.svg")
 
-echo "== 1. dist/ se reconstruye =="
+echo "== 1. la señalización se reescribe de stage.json, y tiene que estar commiteada =="
+# Se vio (fase 15): al versionar un video, los asset-lists de la carrera siguieron
+# apuntando a la ruta vieja, porque sólo se había reescrito la señalización del
+# par. Se reescribe entera acá, y si cambió algo que está en git, no se publica:
+# lo publicado tiene que ser lo commiteado.
+demo/stage-pair/scripts/senalizar-contenido.sh > /dev/null
+git diff --quiet -- demo/stage-pair/signalling demo/stage-pair/stage.json || {
+  echo "la señalización reescrita difiere de la commiteada: commitear antes de publicar" >&2
+  git diff --stat -- demo/stage-pair/signalling demo/stage-pair/stage.json >&2; exit 1; }
+echo "   señalización al día y commiteada"
+
+echo "== 1b. dist/ se reconstruye =="
 ./scripts/construir-libreria.sh
 
 echo "== 2. el árbol de la demo, sin caché, y lo que sobra en el bucket se borra =="
@@ -77,7 +88,8 @@ PY
 echo "== 5. SIN credenciales y SIN cache-busting: lo servido contra el repo =="
 rojo=0
 for p in index.html inspect.html race.html stage.json js/app.js js/inspect.js js/capabilities.js \
-         dist/qualabs-concurrent-hls.js content/primary/con-daterange.m3u8 signalling/*.json; do
+         dist/qualabs-concurrent-hls.js content/primary/con-daterange.m3u8 \
+         $(cd demo/stage-pair && ls signalling/*.json); do
   f=demo/stage-pair/$p; [ -f "$f" ] || f=$p
   if [ "$(curl -s "$HOST/$p" | sha256sum)" = "$(sha256sum < "$f")" ]; then r=IGUAL; else r=DISTINTO; rojo=1; fi
   printf '   %-46s %s\n' "$p" "$r"
@@ -85,11 +97,13 @@ done
 # Cada video que un asset-list apunta, con su playlist y todos sus segmentos.
 for v in $(grep -ho '"/content/creatives/[^"]*index.m3u8"' demo/stage-pair/signalling/*.json | tr -d '"' | sort -u); do
   d=$(dirname "$v")
+  [ -f "demo/stage-pair$v" ] || { printf '   %-46s NO EXISTE EN EL ÁRBOL\n' "$v"; rojo=1; continue; }
+  malos=0
   for f in index.m3u8 $(grep -v '^#' "demo/stage-pair$v"); do
-    if [ "$(curl -s "$HOST$d/$f" | sha256sum)" = "$(sha256sum < "demo/stage-pair$d/$f")" ]; then :; else
-      printf '   %-46s DISTINTO\n' "$d/$f"; rojo=1; fi
+    if [ "$(curl -s "$HOST$d/$f" | sha256sum)" != "$(sha256sum < "demo/stage-pair$d/$f")" ]; then
+      printf '   %-46s DISTINTO\n' "$d/$f"; malos=1; rojo=1; fi
   done
-  printf '   %-46s IGUAL (playlist y segmentos)\n' "$d/"
+  [ "$malos" = 0 ] && printf '   %-46s IGUAL (playlist y segmentos)\n' "$d/"
 done
 printf '   %-46s %s  (403: listar está denegado)\n' "/" "$(curl -s -o /dev/null -w '%{http_code}' "$HOST/")"
 printf '   %-46s %s  (control del 404)\n' "/no-existe.json" "$(curl -s -o /dev/null -w '%{http_code}' "$HOST/no-existe.json")"
