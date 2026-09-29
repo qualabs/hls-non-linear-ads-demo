@@ -1,0 +1,53 @@
+
+== izq=nativo  der=ours-2dec-img   la página leyó la URL: ok
+   ok   break a izq (nativo         ) t=  24.5  {'aviso_lineal': False}
+   ok   break a der (ours-2dec-img  ) t=  24.7  {'layout': 'squeezebackDoubleBox', 'video': 2, 'img': 0}
+   ok   break b izq (nativo         ) t=  65.0  {'aviso_lineal': True}
+   ok   break b der (ours-2dec-img  ) t=  69.5  {'layout': 'squeezebackLShape', 'video': 2, 'img': 0}
+   ok   pedidos izq (nativo): 1
+          asset-list-linear-b.json?_HLS_primary_id=e91ada23-c316-430d-95b1-92a6283784ae
+   ok   pedidos der (ours-2dec-img): 3
+          asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=1
+          asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=1
+          asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=1
+
+== izq=ours-1dec-img  der=ours-1dec-noimg   la página leyó la URL: ok
+   ok   break a izq (ours-1dec-img  ) t=  24.5  {'layout': 'squeezebackLShape', 'video': 1, 'img': 1}
+   ok   break a der (ours-1dec-noimg) t=  24.5  {'layout': None, 'video': 1, 'img': 0}
+   ok   break b izq (ours-1dec-img  ) t=  70.3  {'layout': 'squeezebackDoubleBox', 'video': 1, 'img': 1}
+   ok   break b der (ours-1dec-noimg) t=  69.5  {'layout': 'linear', 'video': 2, 'img': 0}
+   ok   pedidos izq (ours-1dec-img): 3
+          asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=1
+          asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=1
+          asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=1
+   ok   pedidos der (ours-1dec-noimg): 3
+          asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=0
+          asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=0
+          asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=0
+
+== izq=nativo  der=nativo   la página leyó la URL: ok
+   ok   break a izq (nativo         ) t=  24.5  {'aviso_lineal': False}
+   ok   break a der (nativo         ) t=  24.5  {'aviso_lineal': False}
+   ok   break b izq (nativo         ) t=  65.0  {'aviso_lineal': True}
+   ok   break b der (nativo         ) t=  65.0  {'aviso_lineal': True}
+   ok   pedidos izq (nativo): 1
+          asset-list-linear-b.json?_HLS_primary_id=745f82a0-b53e-450c-a6d2-b98c3a672a89
+   ok   pedidos der (nativo): 1
+          asset-list-linear-b.json?_HLS_primary_id=b33a5f2c-10c1-4734-94d4-be990c3643f3
+
+== izq=ours-2dec-noimg  der=nativo   la página leyó la URL: ok
+   ok   break a izq (ours-2dec-noimg) t=  24.7  {'layout': 'squeezebackDoubleBox', 'video': 2, 'img': 0}
+   ok   break a der (nativo         ) t=  24.5  {'aviso_lineal': False}
+   ok   break b izq (ours-2dec-noimg) t=  69.5  {'layout': 'squeezebackLShape', 'video': 2, 'img': 0}
+   ok   break b der (nativo         ) t=  65.0  {'aviso_lineal': True}
+   ok   pedidos izq (ours-2dec-noimg): 3
+          asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=0
+          asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=0
+          asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=0
+   ok   pedidos der (nativo): 1
+          asset-list-linear-b.json?_HLS_primary_id=04bda136-cbba-4b53-923d-5be70030d6eb
+
+control: en B, 1 dec con imágenes contra sin imágenes -> distintos
+control: en B, nativo contra nativo -> iguales
+
+VERDE
