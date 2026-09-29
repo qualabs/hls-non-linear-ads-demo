@@ -6034,3 +6034,15 @@ por corte de escena y corrió los cortes de segmento (salió uno de 3,87 s): aho
 millón de píxeles porque `compare` las escribe en notación científica. `puente-a-video.sh` acepta
 `SOLO=` para rehacer sólo algunas piezas. Las imágenes congeladas salen de otras piezas, que no
 cambiaron.
+
+## 2026-09-29 — T-10: la caché, resuelta de forma sistemática
+
+Pedido de Nicolás: que lo publicado se sirva igual al repo apenas se sube. Dos reglas y un
+script. Los videos llevan un hash de su contenido en la ruta (`content/creatives/<pieza>/<hash>/`):
+lo pone `scripts/versionar-creativo.sh`, que el puente llama después de verificar, y lo anota en
+`stage.json`. Lo de nombre fijo (páginas, JS, CSS, JSON, playlists, SVG) se publica con `no-cache`,
+así que los asset-lists no hace falta versionarlos. `scripts/publicar.sh` reescribe la señalización
+(y no publica si difiere de la commiteada), sincroniza borrando lo que sobra, fija los metadatos y
+verifica por md5 y con curl anónimo sin `?v=`. Encontró en su primera corrida que dos asset-lists
+de la carrera apuntaban a la ruta vieja de un video. Publicado y verde: 501 = 501, lo servido
+igual al repo, las rutas viejas en 404.
