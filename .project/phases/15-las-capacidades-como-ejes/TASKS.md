@@ -13,6 +13,7 @@
 | T-09 | Las opciones de video, con movimiento grande (feedback de Nicolás) | done | — | [`tasks/T-09/`](tasks/T-09/) · los tres SVG · `test/medir-movimiento.py` · `scripts/{puente-a-video.sh (SOLO),empaquetar-creativo.sh (-sc_threshold 0),verificar-creativo.sh}` |
 | T-10 | La caché: videos con el contenido en el nombre, lo de nombre fijo sin caché, y un script de publicación | done | — | [`tasks/T-10/`](tasks/T-10/) · `scripts/{versionar-creativo.sh,publicar.sh}` · `CLAUDE.md` |
 | T-11 | `index.html`: un control por player, con el modo nativo o el nuestro, y la combinación en la URL | done | — | [`tasks/T-11/`](tasks/T-11/) · `js/{app,capabilities}.js` · `index.html` · `test/verificar-pares.py` |
+| T-12 | En las transiciones, el primario por encima de lo que no se le superpone (lib/) | done | — | [`tasks/T-12/`](tasks/T-12/) · `lib/renderer.js` (`stackingOf`) · `test/stacking-order.test.js` · ADR 0089 |
 
 ---
 
@@ -123,3 +124,11 @@
   nuestro-1dec-img/nuestro-1dec-noimg y nativo/nativo, en A y B; las mediciones de la página del
   par que ya existían, en verde.
 - **nivel de verificación:** bajo.
+
+## T-12 — El primario por encima en las transiciones
+- **Objective:** en la entrada y la salida de un side by side el primario va arriba del aviso, y
+  en los layouts donde se superponen manda el `zDepth` declarado. En la librería.
+- **What it must cover:** `lib/renderer.js`, el contrato, las cinco demos.
+- **Definition of done:** test de la función pura con controles en rojo; `z-index` y cuadros
+  intermedios antes y después; las otras demos cargan sin errores.
+- **nivel de verificación:** alto. Corre en todas las demos sin nadie mirando.

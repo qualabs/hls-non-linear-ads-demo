@@ -6069,3 +6069,17 @@ player está listo antes, servido desde el bucket tarda segundos, y el salto se 
 escribir y el par arrancaba de cero. Se separaron los dos contadores en `app.js` y en `inspect.js`
 (la espera de estar listo tiene hasta veinte segundos). El defecto venía de la fase 14 y ninguna
 verificación local podía verlo.
+
+## 2026-09-29 — T-12: el primario por encima de lo que no se le superpone
+
+Pedido de Nicolás: en las transiciones de un side by side, el contenido principal tiene que ir
+arriba del aviso. En `lib/renderer.js`, `stackingOf` (pura) calcula el `z-index`: el primario va por
+encima de todo elemento con el que su caja no se superpone, y donde se superponen manda el
+`zDepth` (ADR 0089). Medido en la entrada y la salida del break A, cuadro a cuadro con las
+transiciones CSS a un décimo de velocidad: antes, primario 0 y aviso 1 (el aviso arriba, tapando
+al programa que se achicaba); después, primario 3 y aviso 2. `test/stacking-order.test.js`: 7
+pruebas; sacar el ascenso pone 3 en rojo y no subir el overlay por encima pone 1. La tercera
+mutación, ascender sobre todo sin mirar la superposición, quedó verde, y es equivalente: el paso
+que sube los elementos superpuestos por encima restablece el mismo orden. El filtro se deja porque
+evita tocar los índices cuando no hace falta. Las otras cuatro demos, recorridas break por break,
+cargan sin errores y se ven igual.

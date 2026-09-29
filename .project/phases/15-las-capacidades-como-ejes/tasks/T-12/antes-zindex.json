@@ -1,0 +1,114 @@
+{
+  "entrada": [
+    {
+      "t": 19.859,
+      "zPrimario": "auto",
+      "zAviso": "auto",
+      "transformPrimario": "none"
+    },
+    {
+      "t": 20.083,
+      "zPrimario": "0",
+      "zAviso": "1",
+      "transformPrimario": "matrix(0.987853, 0, 0, 0.987853, 0, 2.47491)"
+    },
+    {
+      "t": 20.272,
+      "zPrimario": "0",
+      "zAviso": "1",
+      "transformPrimario": "matrix(0.909758, 0, 0, 0.909758, 0, 18.3862)"
+    },
+    {
+      "t": 20.539,
+      "zPrimario": "0",
+      "zAviso": "1",
+      "transformPrimario": "matrix(0.820087, 0, 0, 0.820087, 0, 36.6558)"
+    },
+    {
+      "t": 20.788,
+      "zPrimario": "0",
+      "zAviso": "1",
+      "transformPrimario": "matrix(0.752061, 0, 0, 0.752061, 0, 50.5157)"
+    },
+    {
+      "t": 21.076,
+      "zPrimario": "0",
+      "zAviso": "1",
+      "transformPrimario": "matrix(0.68141, 0, 0, 0.68141, 0, 64.9102)"
+    },
+    {
+      "t": 21.405,
+      "zPrimario": "0",
+      "zAviso": "1",
+      "transformPrimario": "matrix(0.628044, 0, 0, 0.628044, 0, 75.7831)"
+    },
+    {
+      "t": 21.724,
+      "zPrimario": "0",
+      "zAviso": "1",
+      "transformPrimario": "matrix(0.584751, 0, 0, 0.584751, 0, 84.6038)"
+    },
+    {
+      "t": 21.957,
+      "zPrimario": "0",
+      "zAviso": "1",
+      "transformPrimario": "matrix(0.562118, 0, 0, 0.562118, 0, 89.2151)"
+    }
+  ],
+  "salida": [
+    {
+      "t": 31.508,
+      "zPrimario": "0",
+      "zAviso": "1",
+      "transformPrimario": "matrix(0.5, 0, 0, 0.5, 0, 101.871)"
+    },
+    {
+      "t": 31.755,
+      "zPrimario": "0",
+      "zAviso": "1",
+      "transformPrimario": "matrix(0.536465, 0, 0, 0.536465, 0, 94.4416)"
+    },
+    {
+      "t": 31.985,
+      "zPrimario": "0",
+      "zAviso": "1",
+      "transformPrimario": "matrix(0.61934, 0, 0, 0.61934, 0, 77.5566)"
+    },
+    {
+      "t": 32.219,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    },
+    {
+      "t": 32.415,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    },
+    {
+      "t": 32.673,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    },
+    {
+      "t": 32.848,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    },
+    {
+      "t": 33.048,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    },
+    {
+      "t": 33.248,
+      "zPrimario": "auto",
+      "zAviso": null,
+      "transformPrimario": "none"
+    }
+  ]
+}

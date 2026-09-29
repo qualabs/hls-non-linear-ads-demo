@@ -1,0 +1,20 @@
+== antes, entrada
+   t= 19.859  z primario auto  z aviso auto  arriba: ?
+   t= 20.083  z primario    0  z aviso    1  arriba: aviso
+   t= 20.272  z primario    0  z aviso    1  arriba: aviso
+   t= 20.539  z primario    0  z aviso    1  arriba: aviso
+   t= 20.788  z primario    0  z aviso    1  arriba: aviso
+   t= 21.076  z primario    0  z aviso    1  arriba: aviso
+   t= 21.405  z primario    0  z aviso    1  arriba: aviso
+   t= 21.724  z primario    0  z aviso    1  arriba: aviso
+   t= 21.957  z primario    0  z aviso    1  arriba: aviso
+== antes, salida
+   t= 31.508  z primario    0  z aviso    1  arriba: aviso
+   t= 31.755  z primario    0  z aviso    1  arriba: aviso
+   t= 31.985  z primario    0  z aviso    1  arriba: aviso
+   t= 32.219  z primario auto  z aviso None  arriba: ?
+   t= 32.415  z primario auto  z aviso None  arriba: ?
+   t= 32.673  z primario auto  z aviso None  arriba: ?
+   t= 32.848  z primario auto  z aviso None  arriba: ?
+   t= 33.048  z primario auto  z aviso None  arriba: ?
+   t= 33.248  z primario auto  z aviso None  arriba: ?

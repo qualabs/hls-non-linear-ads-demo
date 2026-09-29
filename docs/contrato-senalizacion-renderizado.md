@@ -91,6 +91,13 @@ nuevo. Lo único que se sumó son los dos campos que sólo trae una oferta.
    orden y el último queda arriba. No hay que reordenar. El orden importa de
    verdad: en `squeezebackFrame` el aviso está en `zDepth` 0 y el contenido
    primario en 1, o sea que el aviso es el fondo.
+   El renderizado le agrega una sola cosa (ADR 0089): **el contenido primario
+   se dibuja por encima de todo elemento con el que su `box` no se superpone**.
+   Terminada la transición no cambia nada, porque esas cajas no se tocan; lo
+   que cambia es la entrada y la salida de un side by side, donde el primario
+   se achica destapando el aviso y al salir lo vuelve a tapar. Donde las cajas
+   se superponen —un overlay sobre el programa, el fondo de la L— manda el
+   `zDepth` declarado.
 
 3. **El contenido primario es un elemento del layout como cualquier otro**, con
    su `box`, su `zDepth` y su `volume`, y se distingue por `primary: true`. No
