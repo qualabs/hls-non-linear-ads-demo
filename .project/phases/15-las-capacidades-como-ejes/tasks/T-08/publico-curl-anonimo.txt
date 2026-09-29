@@ -1,0 +1,28 @@
+== curl anónimo, 2026-09-28T22:35:35-03:00 ==
+  /index.html                                    200 text/html
+  /inspect.html                                  200 text/html
+  /js/app.js                                     200 text/javascript
+  /stage.json                                    200 application/json
+  /graphics/campaigns/zumbra-backplate-fijo.svg  200 image/svg+xml
+  /graphics/campaigns/ketrava-16x9-fijo.svg      200 image/svg+xml
+  /graphics/campaigns/kovrin-backplate-fijo.svg  200 image/svg+xml
+  /signalling/asset-list-break-a.json            200 application/json
+== servido byte a byte contra el repo (por si la caché sirve lo viejo) ==
+  index.html                                     IGUAL
+  inspect.html                                   IGUAL
+  js/app.js                                      IGUAL
+  stage.json                                     IGUAL
+  signalling/asset-list-break-a.json             IGUAL
+  signalling/asset-list-break-b.json             IGUAL
+  signalling/asset-list-break-c.json             IGUAL
+  graphics/campaigns/zumbra-backplate-fijo.svg   IGUAL
+  graphics/campaigns/ketrava-16x9-fijo.svg       IGUAL
+  graphics/campaigns/kovrin-backplate-fijo.svg   IGUAL
+  control: break-a servido vs break-b local      DISTINTO
+== las imágenes publicadas no tienen animación ==
+  zumbra-backplate-fijo.svg                      0 animaciones (el original animado: 30)
+  ketrava-16x9-fijo.svg                          0 animaciones (el original animado: 6)
+  kovrin-backplate-fijo.svg                      0 animaciones (el original animado: 4)
+== viejos 404, bucket sin listar ==
+  /signalling/asset-list-break-a-magra.json      404
+  / (raíz)                                       403

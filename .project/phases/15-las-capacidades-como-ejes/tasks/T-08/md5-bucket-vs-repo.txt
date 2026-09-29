@@ -1,0 +1,4 @@
+objetos en el bucket: 498; archivos del árbol probado: 498
+comparados por md5: 498; distintos: 0; faltan: 0; sobran: 0
+control: md5 remoto de index.html contra stage.json local -> DISTINTO
+VERDE
