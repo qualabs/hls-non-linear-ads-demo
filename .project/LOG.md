@@ -6016,3 +6016,21 @@ En el navegador, en las dos páginas, la caja de la imagen da igual en dos captu
 layout esperado. Suite 230 → 229: se fueron el test de "sólo cambian type y uri" y su control, y
 entraron el de "otra forma, misma campaña" y el de "la imagen no tiene animaciones", cada uno visto
 en rojo con su control.
+
+## 2026-09-29 — T-09: las opciones de video, con movimiento grande
+
+Feedback de Nicolás: con la imagen quieta, el video tiene que notarse video de lejos. Los tres
+SVG de video del par llevan ahora un recorrido de 12 s escrito a mano en SMIL: el producto entra,
+rebota, sale de cuadro y vuelve; los paneles de texto entran y salen dos veces; el fondo cambia de
+color cada segundo. El objeto entre INICIO y FIN OBJETO no se tocó: se mueve el grupo que lo
+envuelve. El % de píxeles que cambian cada 0,5 s (`test/medir-movimiento.py`, sobre el HLS
+empaquetado) quedó así: A 2,26 → 41,14; B 1,40 → 13,07 (3,19 → 29,88 en la L visible); C 0,66 → 34,96.
+El formato del HLS es idéntico: códec, perfil, resolución, fps y 6 segmentos de 2 s.
+
+**Dos defectos del puente, encontrados y arreglados.** Con movimiento grande, x264 metió keyframes
+por corte de escena y corrió los cortes de segmento (salió uno de 3,87 s): ahora se empaqueta con
+`-sc_threshold 0`, y `verificar-creativo.sh` asserta que todos los segmentos duran 2 s salvo el
+último (lo vi en rojo sobre el empaquetado malo). Y el verificador rechazaba cuentas de más de un
+millón de píxeles porque `compare` las escribe en notación científica. `puente-a-video.sh` acepta
+`SOLO=` para rehacer sólo algunas piezas. Las imágenes congeladas salen de otras piezas, que no
+cambiaron.

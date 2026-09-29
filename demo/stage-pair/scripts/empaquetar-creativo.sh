@@ -54,7 +54,9 @@ BV=${6:-2500k}
 
 # El GOP son dos segundos de cuadros, redondeado al entero: 60 a 30 fps. Con un
 # GOP que no cae en dos segundos, los cortes de -hls_time 2 no caen sobre un
-# keyframe (ADR 0059).
+# keyframe (ADR 0059). Y `-sc_threshold 0`, porque un corte de escena mete un
+# keyframe fuera de lugar, reinicia la cuenta del GOP y corre todos los cortes que
+# siguen: se vio en la fase 15, con los creativos reanimados.
 GOP=$(awk -v f="$FPS" 'BEGIN{split(f,a,"/"); v=(a[2]?a[1]/a[2]:a[1]); printf "%d", int(v*2+0.5)}')
 
 N=$(ls "$CUADROS"/f*.png 2>/dev/null | wc -l)
@@ -74,7 +76,7 @@ ffmpeg -hide_banner -loglevel error -y \
 [0:v]scale=${W}:${H}:flags=lanczos,setsar=1[fg];\
 [bg][fg]overlay=shortest=1:format=auto,format=yuv420p[v]" \
   -map "[v]" -an \
-  -c:v libx264 -preset veryfast -g "$GOP" -b:v "$BV" \
+  -c:v libx264 -preset veryfast -g "$GOP" -sc_threshold 0 -b:v "$BV" \
   -f hls -hls_time 2 -hls_playlist_type vod -hls_segment_type mpegts \
   -hls_flags program_date_time+independent_segments \
   -hls_segment_filename "$OUT/seg%03d.ts" "$OUT/index.m3u8"

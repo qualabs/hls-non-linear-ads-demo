@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  EL MOVIMIENTO GRANDE, Y POR QUÉ (fase 15). Esta pieza es la OPCIÓN DE VIDEO de
+  su break, y al lado de la opción de imagen, que es quieta, tiene que notarse video
+  de lejos. Por eso, además del bucle de siempre, lleva un recorrido de 12 s, que
+  es lo que dura el break (el fondo cambia de color cada segundo y los paneles
+  entran y salen dos veces): la lata cae desde arriba de cuadro, rebota, se va por abajo, vuelve a caer y sale por la derecha; el panel del texto entra, sale y vuelve; y el fondo pasa por cuatro colores. Todo con <animateTransform> y <animate>, igual
+  que el resto; el objeto entre INICIO OBJETO y FIN OBJETO no se toca, lo que se
+  mueve es un grupo que lo envuelve.
+
   ZUMBRA — el creativo 16:9 de la campaña de bebida. Primera pieza de la identidad
   que la fase 14 autora tres veces con tres viewBox (DESIGN.md, sección 3).
 
@@ -194,6 +202,11 @@
 
   <!-- ===================== fondo ===================== -->
   <rect x="0" y="0" width="1920" height="1080" fill="url(#fondo)"/>
+  <!-- fase 15: el color de fondo cambia a lo largo de los 12 s -->
+  <rect x="0" y="0" width="1920" height="1080" fill="#0c1a14" opacity="0.8">
+    <animate attributeName="fill" values="#0c1a14;#2c6a14;#0b3b48;#5a6a0a;#0c1a14"
+             keyTimes="0;0.25;0.5;0.75;1" dur="4s" repeatCount="indefinite"/>
+  </rect>
   <rect x="0" y="0" width="1920" height="6" fill="#8ef06a"/>
 
   <!-- Anillo de rayos: 12 rayos, gira 30° en 6 s y vuelve a ser el mismo dibujo. -->
@@ -222,6 +235,11 @@
   <ellipse cx="1320" cy="566" rx="520" ry="520" fill="url(#halo)"/>
 
   <!-- ===================== tipografía ===================== -->
+  <!-- fase 15: el panel del texto entra desde la izquierda, sale a mitad y vuelve -->
+  <g>
+    <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="-1300,0; 0,0; 0,0; -1300,0; -1300,0; 0,0; 0,0"
+                        keyTimes="0;0.07;0.42;0.5;0.55;0.62;1" dur="6s" repeatCount="indefinite"/>
   <text class="t b" x="170" y="520" font-size="176" letter-spacing="14"
         fill="#f2f8ee">ZUMBRA</text>
   <text class="t" x="176" y="596" font-size="40" letter-spacing="11"
@@ -234,6 +252,14 @@
   <text class="t" x="170" y="836" font-size="27" letter-spacing="4.5"
         fill="#78897c">NOW IN FOUR BOTANICALS</text>
 
+  </g>
+
+  <!-- fase 15: la lata cae desde arriba, rebota, se va por abajo, vuelve a caer
+       y al final sale de cuadro por la derecha -->
+  <g>
+    <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                        values="0,-1100; 0,0; 0,-70; 0,0; 0,-70; 0,0; 0,1100; 0,-1100; 0,0; 0,-45; 0,0; 1000,0"
+                        keyTimes="0;0.08;0.15;0.22;0.29;0.36;0.47;0.4701;0.57;0.66;0.8;1" dur="12s" repeatCount="indefinite"/>
   <!-- INICIO OBJETO: este bloque es EL objeto de la campaña, y las otras dos
        formas lo reusan tal cual, transformado. Que sea el mismo dibujo y no uno
        parecido es lo que hace que las tres se lean como la misma campaña (ADR 0081). -->
@@ -358,6 +384,7 @@
   </g>
 
   <!-- FIN OBJETO -->
+  </g>
 
   <!-- burbujas sueltas en el halo, fuera de la lata -->
   <g fill="#8ef06a" opacity="0.5">

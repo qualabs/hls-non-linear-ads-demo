@@ -1,0 +1,5 @@
+autotest: iguales 0 %, medio cuadro distinto 50 %; con --ele, lo tapado 0 % y la columna > 0 %
+content/creatives/zumbra-16x9/index.m3u8: 24 cuadros cada 0.5 s  media  41.14 %  mínimo   1.64 %  máximo  97.19 %
+content/creatives/ketrava-backplate/index.m3u8: 24 cuadros cada 0.5 s  media  13.07 %  mínimo   1.18 %  máximo  34.79 %
+content/creatives/kovrin-banner/index.m3u8: 24 cuadros cada 0.5 s  media  34.96 %  mínimo   5.31 %  máximo  96.08 %
+content/creatives/ketrava-backplate/index.m3u8 (sólo la L visible): 24 cuadros cada 0.5 s  media  29.88 %  mínimo   2.70 %  máximo  79.51 %

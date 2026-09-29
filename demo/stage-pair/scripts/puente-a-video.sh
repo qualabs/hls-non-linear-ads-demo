@@ -65,6 +65,18 @@ eval "$(node -e '
   console.log(`FPS=${s.creativos.fps}; DUR=${s.creativos.duracion}; PIEZAS=(${piezas.map((p) => `"${p}"`).join(" ")})`);
 ')"
 [ "${#PIEZAS[@]}" = 9 ] || { echo "stage.json no declara nueve piezas" >&2; exit 1; }
+# SOLO=<nombre>,<nombre> rehace sólo esas piezas, con el mismo camino que las
+# nueve (fase 15: se reanimaron las tres opciones de video del par y las otras
+# seis no cambiaron). Un nombre que no es una pieza es un error y no un cero.
+if [ -n "${SOLO:-}" ]; then
+  ELEGIDAS=()
+  for nombre in ${SOLO//,/ }; do
+    hallada=""
+    for p in "${PIEZAS[@]}"; do [ "${p%%:*}" = "$nombre" ] && { ELEGIDAS+=("$p"); hallada=1; }; done
+    [ -n "$hallada" ] || { echo "SOLO nombra '$nombre', que no es una pieza de stage.json" >&2; exit 1; }
+  done
+  PIEZAS=("${ELEGIDAS[@]}")
+fi
 echo "puente-a-video: ${#PIEZAS[@]} piezas, $FPS fps, $DUR s"
 
 PY=/home/nicolas/Skills/playwright/.venv/bin/python
@@ -124,4 +136,4 @@ for p in "${PIEZAS[@]}"; do
   rm -rf "$CUADROS"
 done
 rmdir "$TRABAJO" 2>/dev/null || true
-echo; echo "puente-a-video: las nueve piezas en content/creatives/"
+echo; echo "puente-a-video: ${#PIEZAS[@]} pieza(s) en content/creatives/"

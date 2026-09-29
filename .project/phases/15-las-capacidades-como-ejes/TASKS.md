@@ -10,6 +10,7 @@
 | T-06 | `npm run check` construye la librería, y un build roto da rojo | done | — | `scripts/verificar-build.sh` · `package.json` · [`tasks/T-06/`](tasks/T-06/) (verde, y rojo con el import partido) |
 | T-07 | La publicación en `qualabs-hls-demo-stage-pair`, verificada sin credenciales | done | — | [`tasks/T-07/README.md`](tasks/T-07/README.md) · publicada el 2026-09-28 |
 | T-08 | La opción de imagen, quieta y en otro layout (feedback de Nicolás sobre la publicación) | done | — | [`tasks/T-08/`](tasks/T-08/) · `scripts/congelar-svg.py` · tres `graphics/campaigns/*-fijo.svg` · ADR 0088 |
+| T-09 | Las opciones de video, con movimiento grande (feedback de Nicolás) | done | — | [`tasks/T-09/`](tasks/T-09/) · los tres SVG · `test/medir-movimiento.py` · `scripts/{puente-a-video.sh (SOLO),empaquetar-creativo.sh (-sc_threshold 0),verificar-creativo.sh}` |
 
 ---
 
@@ -91,4 +92,13 @@
   generador, `CREDITS.md`, los tests de la demo y `verificar-capacidades.py`. ADR 0088.
 - **Definition of done:** la caja del `<img>` da igual en dos capturas separadas por 2 s, y el SVG
   animado en la misma caja da distinta; el layout de la experiencia es el de `formaImagen`.
+- **nivel de verificación:** bajo.
+
+## T-09 — Las opciones de video, con movimiento grande
+- **Objective:** el video de cada break se nota video de lejos: el producto entra y sale de
+  cuadro, los paneles entran y salen, el fondo cambia de color, todo el aviso.
+- **What it must cover:** `zumbra-16x9`, `ketrava-backplate` y `kovrin-banner` (las opciones de
+  video del par), la misma campaña, layout y duración; el mismo puente a video; `CREDITS.md`.
+- **Definition of done:** el % de píxeles que cambian cada 0,5 s sube mucho contra el mismo
+  número del video anterior; el formato del HLS (códec, resolución, fps, segmentos) es idéntico.
 - **nivel de verificación:** bajo.
