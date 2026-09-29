@@ -6083,3 +6083,14 @@ mutación, ascender sobre todo sin mirar la superposición, quedó verde, y es e
 que sube los elementos superpuestos por encima restablece el mismo orden. El filtro se deja porque
 evita tocar los índices cuando no hace falta. Las otras cuatro demos, recorridas break por break,
 cargan sin errores y se ven igual.
+
+## 2026-09-29 — T-13: inspect.html con el mismo control que el par
+
+`inspect.html` usa el mismo `crearControlDePane` que cada pane de `index.html`, con la misma
+gramática en la URL (`?modo=nativo`, `?modo=ours-1dec-img`); default, nuestra librería con dos
+decodificadores e imágenes. En modo nativo el player es `stock-player.js`: la tarjeta 1 marca el
+rango de Apple como el que el cliente guardó, la 2 muestra el pedido del asset-list lineal leído
+de la red, la 3 lo que volvió, y la 4 dice que no hay capacidades ni opciones que filtrar (en A,
+que no tiene lineal, que hls.js no reproduce nada). `test/verificar-inspect-modos.py`: los cinco
+modos en A y B, en verde; `verificar-pares` (index), `verificar-capacidades` e `verificar-inspect`
+siguen en verde.

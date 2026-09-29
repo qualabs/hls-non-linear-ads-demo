@@ -140,7 +140,7 @@ export function aTexto(c) {
 }
 
 /** One pane's configuration out of the URL, or null when the text is not one. */
-function deTexto(texto, stage) {
+export function deTexto(texto, stage) {
   if (texto === 'nativo') return { modo: 'nativo', capacidades: null };
   const m = /^ours-(\d+)dec-(img|noimg)$/.exec(texto || '');
   if (!m) return null;
@@ -229,4 +229,23 @@ export function crearControlDePane({ contenedor, stage, lado, inicial, alCambiar
   }
   pintar(actual);
   return { pintar, actual: () => structuredClone(actual) };
+}
+
+// ===========================================================================
+// inspect.html: THE SAME CONTROL, ONE PLAYER (fase 15)
+// ===========================================================================
+// The single player of inspect.html takes the same control and the same grammar
+// as a pane of index.html, in one key: `?modo=nativo`, `?modo=ours-1dec-img`.
+// The default is the page as it was: our library, two decoders, images.
+
+/** The configuration of inspect.html from the query string. */
+export function leerModo(search, stage) {
+  return deTexto(new URLSearchParams(search).get('modo'), stage) ?? POR_DEFECTO(stage).der;
+}
+
+/** The configuration of inspect.html written back into the URL. */
+export function escribirModo(config) {
+  const q = new URLSearchParams(location.search);
+  q.set('modo', aTexto(config));
+  history.replaceState(null, '', `${location.pathname}?${q}`);
 }
