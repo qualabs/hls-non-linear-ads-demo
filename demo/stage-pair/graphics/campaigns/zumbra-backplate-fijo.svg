@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- GENERADO por scripts/congelar-svg.py desde zumbra-backplate.svg, cuadro t=1.5 s. No se edita: se edita el original y se vuelve a correr. Es la variante de imagen del aviso (fase 15) y no tiene ninguna animación. -->
+<!--
+  ZUMBRA — la forma BACKPLATE, 1920 x 1080. Es la misma campaña que
+  zumbra-16x9.svg autorada para otra caja (ADR 0081).
+
+  QUÉ ES ESTA FORMA. El layout es `squeezebackLShape` (ADR 0047): el aviso es UN
+  solo elemento a cuadro entero, en zDepth 0, y el contenido primario va ENCIMA,
+  encogido y anclado contra dos bordes. O sea que este archivo mide 1920 x 1080
+  pero NO se ve entero: la película tapa una parte, y lo que queda a la vista es
+  una L.
+
+  LA GUARDA, QUE ES EL NÚMERO QUE GOBIERNA ESTE ARCHIVO. La T-01 eligió los dos
+  bordes —arriba y derecha— y el inset —25 % en los dos ejes, que mantiene el
+  16:9 del primario en 1440 x 810—. De ahí sale, en coordenadas de este viewBox:
+
+  · la guarda, que el primario tapa      x 480, y 0, ancho 1440, alto 810
+  · lo que se ve, y es la L              la columna izquierda x 0..480 a alto
+                                         entero, y la banda inferior y 810..1080
+                                         a ancho entero
+
+  TODO EL DIBUJO ESTÁ RECORTADO A LA L, con un `clipPath` de dos rectángulos.
+  Dos hijos de un `clipPath` se UNEN —no se restan, que es lo que haría falta
+  para un agujero—, y acá unir es exactamente lo que se quiere: la unión de la
+  columna y la banda ES la L. Que el recorte sea una guarda de construcción y no
+  un cuidado al dibujar es lo que hace que la región de la guarda quede en alfa
+  cero aunque alguien agregue un elemento después sin acordarse.
+
+  Y POR QUÉ SE LEE COMO UNA L Y NO COMO UN FONDO CON UN AGUJERO. Porque el
+  contenido está compuesto PARA la L y no recortado por ella: la marca vive
+  arriba de la columna, la lata ocupa la columna entera —que es la forma que una
+  lata pide, vertical—, el texto de apoyo corre por la banda, y el filo de acento
+  dibuja el borde interno de la L, que es justo el que toca a la película. Sin
+  ese filo, la L y el video se tocan sin que nada diga dónde termina una y
+  empieza el otro.
+
+  EL OBJETO NO ES UNO PARECIDO: ES EL MISMO. El bloque de la lata está copiado
+  literalmente del archivo 16:9, entre sus marcas INICIO OBJETO y FIN OBJETO, y
+  lo único que cambia acá es el `transform` que lo reencuadra, a 0,7.
+
+  LA ANIMACIÓN ES DECLARATIVA (SMIL) porque adentro de un <img> el JavaScript no
+  corre, y el bucle no tiene momento feo porque el creativo se ve por primera vez
+  a 3,25 s de su propia animación: las dos cosas están medidas en la T-02.
+--><svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="ZUMBRA — Citrus, out loud.">
+
+  <style>
+    .t { font-family: 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif; }
+    .b { font-weight: 700; }
+  </style>
+
+  <defs>
+
+    <linearGradient id="fondo" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#0c1a14"/>
+      <stop offset="0.55" stop-color="#07100d"/>
+      <stop offset="1" stop-color="#04070a"/>
+    </linearGradient>
+
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8ef06a" stop-opacity="0.22"/>
+      <stop offset="0.55" stop-color="#8ef06a" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#8ef06a" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- El cuerpo de la lata: un cilindro se lee por el gradiente y no por el contorno. -->
+    <linearGradient id="lata" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1d4a2e"/>
+      <stop offset="0.12" stop-color="#2f7a3f"/>
+      <stop offset="0.34" stop-color="#8fdc5c"/>
+      <stop offset="0.46" stop-color="#e4fbc2"/>
+      <stop offset="0.62" stop-color="#8fdc5c"/>
+      <stop offset="0.86" stop-color="#2a6a3a"/>
+      <stop offset="1" stop-color="#1a3f2a"/>
+    </linearGradient>
+
+    <!-- El hombro: el mismo gradiente, con menos luz. -->
+    <linearGradient id="hombro" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#173c26"/>
+      <stop offset="0.12" stop-color="#276a36"/>
+      <stop offset="0.34" stop-color="#7cc351"/>
+      <stop offset="0.46" stop-color="#c6e5a6"/>
+      <stop offset="0.62" stop-color="#7cc351"/>
+      <stop offset="0.86" stop-color="#245b31"/>
+      <stop offset="1" stop-color="#153524"/>
+    </linearGradient>
+
+    <linearGradient id="aroMetal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#68737a"/>
+      <stop offset="0.18" stop-color="#d4dde3"/>
+      <stop offset="0.36" stop-color="#f3f7fa"/>
+      <stop offset="0.55" stop-color="#b6c1c8"/>
+      <stop offset="0.78" stop-color="#7c868d"/>
+      <stop offset="1" stop-color="#565f66"/>
+    </linearGradient>
+
+    <!-- Las dos luces del filo: aclara arriba, oscurece abajo. -->
+    <linearGradient id="aroFilo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="0.42" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.58" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.5"/>
+    </linearGradient>
+
+    <linearGradient id="tapaHundida" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#39434a"/>
+      <stop offset="0.2" stop-color="#889298"/>
+      <stop offset="0.42" stop-color="#a7b1b8"/>
+      <stop offset="0.64" stop-color="#757f86"/>
+      <stop offset="1" stop-color="#3d474e"/>
+    </linearGradient>
+
+    <!-- La tapa está POR DENTRO del aro, así que el aro le tira sombra encima. -->
+    <linearGradient id="tapaSombra" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.45"/>
+      <stop offset="0.5" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.12"/>
+    </linearGradient>
+
+    <linearGradient id="anilla" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7f8990"/>
+      <stop offset="0.38" stop-color="#dde4e9"/>
+      <stop offset="0.72" stop-color="#99a3aa"/>
+      <stop offset="1" stop-color="#68727a"/>
+    </linearGradient>
+
+    <linearGradient id="banda" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#04120c" stop-opacity="0.92"/>
+      <stop offset="0.5" stop-color="#06180f" stop-opacity="0.82"/>
+      <stop offset="1" stop-color="#04120c" stop-opacity="0.92"/>
+    </linearGradient>
+
+    <linearGradient id="brillo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- El cuerpo, una sola vez: recorta las burbujas, el brillo y la condensación.
+         Su borde de arriba es el arco A140,32 que comparte con el hombro. -->
+    <clipPath id="recorteCuerpo">
+      <path d="M1180,370 L1180,878 A140,34 0 0 0 1460,878 L1460,370 A140,30 0 0 1 1180,370 Z"/>
+    </clipPath>
+
+    <!-- El anillo del aro = elipse de afuera MENOS elipse de adentro. Va como
+         máscara y no como clipPath, porque dos hijos de un clipPath se suman. -->
+    <mask id="aroAnillo">
+      <ellipse cx="1320" cy="322" rx="118" ry="27" fill="#ffffff"/>
+      <ellipse cx="1320" cy="327" rx="104" ry="22" fill="#000000"/>
+    </mask>
+
+    <clipPath id="recorteTapa">
+      <ellipse cx="1320" cy="327" rx="104" ry="22"/>
+    </clipPath>
+  
+
+    <!-- La L: la unión de la columna izquierda y la banda inferior. Todo lo que
+         cae fuera de estos dos rectángulos queda en alfa cero, que es lo que la
+         guarda del ADR 0047 necesita. -->
+    <clipPath id="ele">
+      <rect x="0" y="0" width="480" height="1080"/>
+      <rect x="0" y="810" width="1920" height="270"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#ele)">
+    <rect x="0" y="0" width="1920" height="1080" fill="url(#fondo)"/>
+
+    <!-- el halo, centrado en la lata, y un segundo sobre la banda: sin él la
+         banda queda como un pie de página y no como parte del mismo aviso -->
+    <ellipse cx="240" cy="520" rx="300" ry="330" fill="url(#halo)"/>
+    <ellipse cx="1500" cy="950" rx="540" ry="250" fill="url(#halo)"/>
+
+    <!-- ===================== la marca, arriba de la columna ============= -->
+    <text class="t b" x="40" y="120" font-size="64" letter-spacing="4" fill="#f2f8ee">ZUMBRA</text>
+    <text class="t" x="42" y="164" font-size="19" letter-spacing="5" fill="#8ef06a">CITRUS, OUT LOUD</text>
+    <rect x="40" y="196" width="190" height="4" fill="#8ef06a" opacity="0.9"/>
+
+    <!-- ===================== el objeto, en la columna =================== -->
+    <!-- La lata del 16:9, a 0,7: 645 px de lata por 0,7 son 451, y la columna
+         mide 480 de ancho, que es la caja que una lata pide. -->
+    <g transform="translate(-684,86) scale(0.7)">
+
+  <!-- ===================== la lata ===================== -->
+  <!-- sombra de apoyo -->
+  <ellipse cx="1320" cy="905" rx="196" ry="30" fill="#000000" opacity="0.5"/>
+
+  <!-- la silueta entera, para que el borde del hombro no deje ver el fondo -->
+  <path fill="url(#lata)" d="M1180,370 L1180,878 A140,34 0 0 0 1460,878 L1460,370            C1460,350 1455,333 1438,322 A118,27 0 0 0 1202,322            C1185,333 1180,350 1180,370 Z"/>
+
+  <!-- el cuerpo: su borde de arriba es la elipse A140,32 -->
+  <path fill="url(#lata)" d="M1180,370 L1180,878 A140,34 0 0 0 1460,878 L1460,370            A140,30 0 0 1 1180,370 Z"/>
+
+  <!-- el hombro: de rx 140 en y=384 a rx 118 en y=322 -->
+  <path fill="url(#hombro)" d="M1180,370 C1180,350 1185,333 1202,322            A118,27 0 0 0 1438,322            C1455,333 1460,350 1460,370            A140,30 0 0 1 1180,370 Z"/>
+
+  <!-- banda de etiqueta -->
+  <g clip-path="url(#recorteCuerpo)">
+    <rect x="1170" y="500" width="300" height="196" fill="url(#banda)"/>
+    <rect x="1170" y="500" width="300" height="4" fill="#8ef06a" opacity="0.85"/>
+    <rect x="1170" y="692" width="300" height="4" fill="#8ef06a" opacity="0.85"/>
+  </g>
+  <text class="t b" x="1320" y="588" font-size="42" letter-spacing="5" text-anchor="middle" fill="#f2f8ee">ZUMBRA</text>
+  <text class="t" x="1320" y="644" font-size="18" letter-spacing="3" text-anchor="middle" fill="#8ef06a">SPARKLING · 330 ML</text>
+
+  <!-- burbujas dentro de la lata: el bucle de 3 s, con fases repartidas -->
+  <g clip-path="url(#recorteCuerpo)" fill="#eafce0">
+    <circle cx="1222" r="10" opacity="0.75" cy="633.4667">
+      
+      
+    </circle>
+    <circle cx="1268" r="6" opacity="0.6" cy="546.2667">
+      
+      
+    </circle>
+    <circle cx="1310" r="13" opacity="0.121212" cy="444.5334">
+      
+      
+    </circle>
+    <circle cx="1352" r="7" opacity="0.65" cy="778.8">
+      
+      
+    </circle>
+    <circle cx="1398" r="11" opacity="0.7" cy="706.1333">
+      
+      
+    </circle>
+    <circle cx="1432" r="5" opacity="0.55" cy="597.1333">
+      
+      
+    </circle>
+    <circle cx="1246" r="5" opacity="0.458333" cy="815.1333">
+      
+      
+    </circle>
+    <circle cx="1376" r="8" opacity="0.375758" cy="488.1333">
+      
+      
+    </circle>
+  </g>
+
+  <!-- gotas de condensación: quietas, sólo dan materia -->
+  <g clip-path="url(#recorteCuerpo)" fill="#eafce0" opacity="0.28">
+    <ellipse cx="1206" cy="742" rx="4" ry="6"/>
+    <ellipse cx="1238" cy="800" rx="3" ry="4.5"/>
+    <ellipse cx="1418" cy="726" rx="3.5" ry="5"/>
+    <ellipse cx="1394" cy="818" rx="4.5" ry="6.5"/>
+    <ellipse cx="1274" cy="474" rx="3" ry="4.5"/>
+    <ellipse cx="1420" cy="482" rx="3.5" ry="5"/>
+  </g>
+
+  <!-- brillo que cruza la lata: el mismo bucle de 3 s -->
+  <g clip-path="url(#recorteCuerpo)">
+    <polygon points="-46,296 40,296 -6,892 -92,892" fill="url(#brillo)" opacity="0.5" transform="matrix(1 0 0 1 1355 0)">
+      
+      
+    </polygon>
+  </g>
+
+  <!-- ===================== el aro y la tapa ===================== -->
+  <!-- el aro: el punto más ancho del metal, y más angosto que el cuerpo -->
+  <ellipse cx="1320" cy="322" rx="118" ry="27" fill="url(#aroMetal)"/>
+  <!-- su espesor: filo claro arriba, sombra abajo, sólo sobre el anillo -->
+  <rect x="1195" y="290" width="250" height="64" fill="url(#aroFilo)" mask="url(#aroAnillo)"/>
+
+  <!-- la tapa, por dentro del aro y más oscura -->
+  <ellipse cx="1320" cy="327" rx="104" ry="22" fill="url(#tapaHundida)"/>
+  <rect x="1210" y="303" width="220" height="48" fill="url(#tapaSombra)" clip-path="url(#recorteTapa)"/>
+
+  <!-- la línea de apertura, por donde la tapa cede -->
+  <ellipse cx="1350" cy="332" rx="29" ry="6.5" fill="#5d666d" opacity="0.35"/>
+  <ellipse cx="1350" cy="331" rx="29" ry="6.5" fill="none" stroke="#cfd8de" stroke-width="0.9" opacity="0.4"/>
+
+  <!-- la anilla: dibujada en planta y achatada a la perspectiva de la tapa -->
+  <g transform="translate(1316,329) scale(1,0.26)">
+    <path fill="#161c20" opacity="0.4" fill-rule="evenodd" d="M-28,-21 A27,27 0 0 0 -28,33 L38,33 A23,23 0 0 0 38,-21 Z              M4,-7 A13,13 0 0 0 4,19 L28,19 A13,13 0 0 0 28,-7 Z"/>
+    <path fill="url(#anilla)" fill-rule="evenodd" d="M-28,-27 A27,27 0 0 0 -28,27 L38,27 A23,23 0 0 0 38,-27 Z              M4,-13 A13,13 0 0 0 4,13 L28,13 A13,13 0 0 0 28,-13 Z"/>
+    <path fill="#ffffff" opacity="0.5" d="M-28,-27 A27,27 0 0 0 -33,-12 L-24,-9 A21,21 0 0 1 -20,-21 Z"/>
+    <ellipse cx="-16" cy="3" rx="14" ry="14" fill="#4e575e"/>
+    <ellipse cx="-16" cy="-1" rx="10" ry="10" fill="#cad3da"/>
+    <ellipse cx="-16" cy="-2" rx="4.5" ry="4.5" fill="#69727a"/>
+  </g>
+    </g>
+
+    <!-- ===================== el texto, en la banda ====================== -->
+    <text class="t" x="540" y="908" font-size="42" letter-spacing="0.5" fill="#c6d5c6">Sparkling citrus. Zero sugar.</text>
+    <text class="t" x="540" y="966" font-size="25" letter-spacing="4" fill="#78897c">NOW IN FOUR BOTANICALS</text>
+
+    <!-- la carbonatación cruzando la banda: el mismo bucle de 3 s con fases
+         repartidas que el 16:9 -->
+    <g fill="#8ef06a" opacity="0.5">
+      <circle cx="1240" r="10" opacity="0.5" cy="942.6666">
+        
+        
+      </circle>
+      <circle cx="1352" r="6" opacity="0.336" cy="876">
+        
+        
+      </circle>
+      <circle cx="1470" r="13" opacity="0.115556" cy="1067.6666">
+        
+        
+      </circle>
+      <circle cx="1608" r="7" opacity="0.45" cy="1017.6667">
+        
+        
+      </circle>
+      <circle cx="1730" r="9" opacity="0.48" cy="976">
+        
+        
+      </circle>
+      <circle cx="1848" r="5" opacity="0.106667" cy="842.6667">
+        
+        
+      </circle>
+    </g>
+
+    <!-- ===================== el filo interno de la L ==================== -->
+    <!-- Es el borde que toca a la película. Sin él, la L y el video se tocan
+         sin que nada diga dónde termina una y empieza el otro. -->
+    <rect x="474" y="0" width="6" height="816" fill="#8ef06a"/>
+    <rect x="480" y="810" width="1440" height="6" fill="#8ef06a"/>
+  </g>
+</svg>

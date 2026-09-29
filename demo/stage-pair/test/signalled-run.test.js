@@ -15,8 +15,8 @@
 // LAS DOS AFIRMACIONES QUE ESTE ARCHIVO EXISTE PARA PROTEGER
 // ---------------------------------------------------------------------------
 // El ADR 0084: la capacidad del dispositivo degrada EL FORMATO del aviso y no el
-// aviso. Entre las dos opciones de un break cambian el `type` y el `uri` del
-// asset, y NADA MÁS, y se asserta campo por campo con su control.
+// aviso. Las dos opciones de un break son de la misma campaña, y desde el ADR
+// 0088 la de imagen va en otra forma, para que se vean distintas.
 //
 // El ADR 0085: la respuesta es UNA, la misma para cualquier capacidad, y quien
 // elige es la librería. Por eso el último test de esta sección le pasa los
@@ -121,21 +121,6 @@ const bloque = (lista) => lista.ASSETS[0]['X-AD-CREATIVE-SIGNALING'].payload[0];
 
 /** Las opciones de presentación del aviso de un break, en orden. */
 const opciones = (lista) => bloque(lista).options;
-
-/**
- * DÓNDE difieren dos objetos, como rutas de campo ordenadas.
- *
- * Es el instrumento de la aserción central, así que devuelve las rutas y no un
- * booleano: lo que hay que poder leer cuando esto se ponga rojo es cuál campo se
- * movió. Su control está más abajo.
- */
-function diferencias(a, b, ruta = '') {
-  if (a === b) return [];
-  const objeto = (v) => v !== null && typeof v === 'object';
-  if (!objeto(a) || !objeto(b)) return [ruta];
-  const claves = [...new Set([...Object.keys(a), ...Object.keys(b)])].sort();
-  return claves.flatMap((k) => diferencias(a?.[k], b?.[k], ruta ? `${ruta}.${k}` : k));
-}
 
 /** Los tres breaks, con su fila de stage.json al lado. */
 const BREAKS = STAGE.breaks;
@@ -247,37 +232,21 @@ test('cada break trae las dos opciones del aviso, primero el video y después la
   }
 });
 
-test('entre las dos opciones de un break cambian EXACTAMENTE el type y el uri del asset', () => {
-  // ESTA ES LA AFIRMACIÓN DEL ADR 0084. Se asserta como IGUALDAD DE TODO MENOS DOS
-  // CAMPOS y no como "los campos que me acordé de mirar coinciden": una lista de
-  // campos deja afuera el campo que alguien agregue mañana.
+test('la opción de imagen va en OTRA forma que la de video, y es de la misma campaña', () => {
+  // ADR 0088: con dos navegadores lado a lado -- dos decodificadores contra uno
+  // con imágenes -- las dos opciones se tienen que ver como experiencias
+  // distintas, así que el layout cambia. Lo que no cambia es el aviso: la
+  // campaña y la duración (ADR 0084).
   const { lista } = run();
   for (const brk of BREAKS) {
     const [video, imagen] = opciones(lista(brk.concurrente));
-    assert.deepEqual(
-      diferencias(video, imagen),
-      ['layout.assets.0.type', 'layout.assets.0.uri'],
-      `break ${brk.id}: las dos opciones difieren en algo más que el medio del asset`
-    );
-    // Y difieren de verdad en esos dos, o la lista de arriba saldría vacía y la
-    // aserción pasaría por el motivo contrario.
-    assert.notEqual(video.layout.assets[0].type, imagen.layout.assets[0].type);
-    assert.notEqual(video.layout.assets[0].uri, imagen.layout.assets[0].uri);
+    assert.notEqual(brk.formaImagen, brk.forma, `${brk.id}: stage.json declara la misma forma`);
+    assert.notEqual(imagen.type, video.type, `${brk.id}: los dos layouts son el mismo`);
+    const campana = (o) => STAGE.assets.piezas.find((p) =>
+      [`/${p.video}`, `/${p.svgFijo}`].includes(o.layout.assets[0].uri))?.campana;
+    assert.equal(campana(video), brk.campana, `${brk.id}: el video no es de la campaña del break`);
+    assert.equal(campana(imagen), brk.campana, `${brk.id}: la imagen no es de la campaña del break`);
   }
-});
-
-test('el chequeo de equivalencia ve un viewport movido en una sola de las dos opciones', () => {
-  // EL CONTROL del test de arriba.
-  const { lista } = run();
-  const [video, imagen] = opciones(lista(BREAKS[0].concurrente));
-  imagen.layout.assets[0].viewport = '0 0 0 0';
-  assert.deepEqual(diferencias(video, imagen), [
-    'layout.assets.0.type', 'layout.assets.0.uri', 'layout.assets.0.viewport'
-  ]);
-  const otra = opciones(lista(BREAKS[0].concurrente))[1];
-  otra.layout.assets[0].volume = 100;
-  assert.ok(diferencias(video, otra).includes('layout.assets.0.volume'),
-    'un campo que está de un solo lado también es una diferencia');
 });
 
 test('el layout de cada break es el que stage.json declara, con sus cajas, en las dos opciones', () => {
@@ -285,13 +254,13 @@ test('el layout de cada break es el que stage.json declara, con sus cajas, en la
   // captura a video y las páginas, así que sale de stage.json y no del script.
   const { lista } = run();
   for (const brk of BREAKS) {
-    const forma = STAGE.formas[brk.forma];
     const item = bloque(lista(brk.concurrente));
     assert.equal(item.start, 0);
     assert.equal(item.duration, brk.duracion);
-    for (const opcion of item.options) {
+    assert.equal(item.options[0].type, brk.layout, `${brk.id}: la opción de video es el layout del break`);
+    for (const [opcion, nombreForma] of [[item.options[0], brk.forma], [item.options[1], brk.formaImagen]]) {
+      const forma = STAGE.formas[nombreForma];
       assert.equal(opcion.type, forma.layout);
-      assert.equal(opcion.type, brk.layout);
       assert.equal(opcion.layout.assets[0].viewport, forma.viewportAviso);
       assert.equal(opcion.layout.assets[0].zDepth, forma.zDepthAviso);
       if (forma.viewportPrimario === undefined) {
@@ -312,10 +281,31 @@ test('el asset de cada break es la pieza de su campaña, en los dos medios', () 
   // de stage.json es lo que hace que no puedan ser piezas distintas.
   const { lista } = run();
   for (const brk of BREAKS) {
-    const pieza = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.forma);
+    const deVideo = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.forma);
+    const deImagen = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.formaImagen);
     const [video, imagen] = opciones(lista(brk.concurrente));
-    assert.equal(video.layout.assets[0].uri, `/${pieza.video}`);
-    assert.equal(imagen.layout.assets[0].uri, `/${pieza.svg}`);
+    assert.equal(video.layout.assets[0].uri, `/${deVideo.video}`);
+    assert.equal(imagen.layout.assets[0].uri, `/${deImagen.svgFijo}`);
+  }
+});
+
+/** Las etiquetas de animación de un SVG, sin contar las que nombra un comentario. */
+const animaciones = (svg) =>
+  svg.replace(/<!--[\s\S]*?-->/g, '').match(/<(animate|animateTransform|animateMotion|set)\b/g) ?? [];
+
+test('la opción de imagen de cada break es una imagen QUIETA: su SVG no tiene ninguna animación', () => {
+  // Fase 15: con movimiento, una imagen se lee como un video. El archivo que la
+  // opción de imagen sirve no puede traer ni un <animate>, y tampoco CSS.
+  // EL CONTROL es el SVG autorado del que sale: la misma lectura tiene que
+  // encontrarle animaciones, o lo que se midió es el lector.
+  const { lista } = run();
+  for (const brk of BREAKS) {
+    const [, imagen] = opciones(lista(brk.concurrente));
+    const svg = read(imagen.layout.assets[0].uri.replace(/^\//, ''));
+    assert.deepEqual(animaciones(svg), [], `${brk.id}: la imagen trae animaciones`);
+    assert.doesNotMatch(svg, /@keyframes|animation\s*:/, `${brk.id}: la imagen trae animación CSS`);
+    const pieza = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.formaImagen);
+    assert.ok(animaciones(read(pieza.svg)).length > 0, `${brk.id}: el control no encuentra las animaciones del original`);
   }
 });
 

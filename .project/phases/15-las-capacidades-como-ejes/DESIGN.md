@@ -99,3 +99,13 @@ parte de la demo: sacarle el default a C dejaba una de las nueve piezas autorada
 A es el único break cuyo lineal es también su aviso concurrente, así que el sin default pasa a
 ser A. El ADR 0087 se escribió hoy y se corrigió en el mismo día, antes de que nada se apoyara
 en él.
+
+## 2026-09-28 — feedback de Nicolás sobre la demo publicada: la imagen, quieta y en otro layout
+
+Probando la publicación, Nicolás no distinguía la opción de imagen de la de video sin
+inspeccionar el elemento: la imagen era el mismo SVG animado, en la misma caja. Pidió que sea una
+imagen estática y, después, que vaya en otro layout de la misma campaña. La imagen pasa a ser el
+SVG congelado en t = 1,5 s (`scripts/congelar-svg.py`: escribe cada valor animado como atributo y
+saca las animaciones; da 0 píxeles de diferencia contra el original congelado en ese instante), y
+la forma de la imagen es otra: A a la L, B al side by side, C a la L. Es el ADR 0088, que supersede
+al 0084 en "mismo layout, misma caja".

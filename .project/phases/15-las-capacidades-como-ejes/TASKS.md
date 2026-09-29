@@ -9,6 +9,7 @@
 | T-05 | El README de la demo con el ejemplo de API, y el documento del integrador | done | — | `demo/stage-pair/README.md` ("The API, as it goes on a slide") · `docs/integrating-the-library.md` §6 · `docs/contrato-senalizacion-renderizado.md` (qué cuenta como no dibujable) · `README.md` de la raíz |
 | T-06 | `npm run check` construye la librería, y un build roto da rojo | done | — | `scripts/verificar-build.sh` · `package.json` · [`tasks/T-06/`](tasks/T-06/) (verde, y rojo con el import partido) |
 | T-07 | La publicación en `qualabs-hls-demo-stage-pair`, verificada sin credenciales | done | — | [`tasks/T-07/README.md`](tasks/T-07/README.md) · publicada el 2026-09-28 |
+| T-08 | La opción de imagen, quieta y en otro layout (feedback de Nicolás sobre la publicación) | done | — | [`tasks/T-08/`](tasks/T-08/) · `scripts/congelar-svg.py` · tres `graphics/campaigns/*-fijo.svg` · ADR 0088 |
 
 ---
 
@@ -81,4 +82,13 @@
   content type, `-x` anclado, sin `content/.fuentes/`. Autorizado por Nicolás el 2026-09-28.
 - **Definition of done:** las cuatro combinaciones en la URL pública, los asset-lists viejos en 404,
   el bucket sin listar, y los md5 comparados con un conteo que no puede ser cero.
+- **nivel de verificación:** bajo.
+
+## T-08 — La opción de imagen, quieta y en otro layout
+- **Objective:** en las combinaciones con imagen se ve al toque que es una imagen y que es otra
+  experiencia: nada se mueve en el aviso, y el layout es otro que el del video, de la misma campaña.
+- **What it must cover:** `scripts/congelar-svg.py`, `stage.json` (`formaImagen`, `svgFijo`), el
+  generador, `CREDITS.md`, los tests de la demo y `verificar-capacidades.py`. ADR 0088.
+- **Definition of done:** la caja del `<img>` da igual en dos capturas separadas por 2 s, y el SVG
+  animado en la misma caja da distinta; el layout de la experiencia es el de `formaImagen`.
 - **nivel de verificación:** bajo.

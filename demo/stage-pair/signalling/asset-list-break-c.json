@@ -26,15 +26,19 @@
                 }
               },
               {
-                "type": "lowerThirdOverlay",
+                "type": "squeezebackLShape",
                 "layout": {
+                  "primaryContent": {
+                    "zDepth": 1,
+                    "viewport": "0 0 25 25"
+                  },
                   "assets": [
                     {
-                      "id": "banner",
+                      "id": "lBackplate",
                       "type": "image/svg+xml",
-                      "uri": "/graphics/campaigns/kovrin-banner.svg",
-                      "viewport": "70 6.25 12.5 6.25",
-                      "zDepth": 1
+                      "uri": "/graphics/campaigns/kovrin-backplate-fijo.svg",
+                      "viewport": "0 0 0 0",
+                      "zDepth": 0
                     }
                   ]
                 }

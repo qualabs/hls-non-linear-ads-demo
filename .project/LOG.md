@@ -6003,3 +6003,16 @@ archivos, sin distintos ni sobrantes. Los asset-lists viejos dan 404, el bucket 
 cuatro combinaciones dan verde en la URL pública con un navegador sin credenciales. El comparador
 de md5 dio primero un cero, igual que en la fase 14, y esta vez lo atajó el conteo obligatorio.
 Se borraron además tres objetos viejos que ya no están en el repo.
+
+## 2026-09-28 — T-08: la opción de imagen, quieta y en otro layout
+
+Viene de un feedback de Nicolás sobre la publicación: no distinguía la imagen del video sin
+inspeccionar el elemento. La imagen es ahora el SVG autorado congelado en t = 1,5 s
+(`scripts/congelar-svg.py`, que da 0 píxeles de diferencia contra el original en ese instante;
+el control entre t = 0,4 y 1,5 da miles de píxeles) y va en otra forma de la misma campaña: A a la
+L, B al side by side, C a la L (ADR 0088, que supersede al 0084 en "mismo layout, misma caja").
+En el navegador, en las dos páginas, la caja de la imagen da igual en dos capturas separadas por
+2 s, y el SVG animado en la misma caja da distinta (control). Las 12 composiciones tienen el
+layout esperado. Suite 230 → 229: se fueron el test de "sólo cambian type y uri" y su control, y
+entraron el de "otra forma, misma campaña" y el de "la imagen no tiene animaciones", cada uno visto
+en rojo con su control.

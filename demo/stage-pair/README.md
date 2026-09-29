@@ -10,10 +10,11 @@ On top of that, the thing this demo adds to the four that came before it: **the 
 the device degrades the format of the ad, not the ad**. A control on the page declares what
 the device can draw, in two axes — video decoders, and images over video — and both travel on
 the asset-list request. What comes back is **the same for every device**: the ad with every
-option it was sold in, video first and the same drawing as `image/svg+xml` second. The library
-keeps the first option the device can show. Two decoders and the ad is video; one, and it is
-the image, which costs no decoder at all; neither, and the break plays its linear default, or
-nothing if it has none.
+option it was sold in: video first, and then the same campaign as a still `image/svg+xml` in
+**another layout**, so that two browsers side by side show two experiences that cannot be
+mistaken for each other (ADR 0088). The library keeps the first option the device can show.
+Two decoders and the ad is video; one, and it is the still image, which costs no decoder at
+all; neither, and the break plays its linear default, or nothing if it has none.
 
 **Everything on screen that is not the programme was written by hand as vector.** The nine
 advertising creatives and the race are SVG; nothing here came out of an image or a video
@@ -85,8 +86,15 @@ console logs every discarded option with its reason.
 | declared | break with a linear default (B, C) | break without one (A) |
 | --- | --- | --- |
 | 2 decoders, images or not | the ad in video | the ad in video |
-| 1 decoder, images | the same ad as an image | the same ad as an image |
+| 1 decoder, images | the same campaign as a still image, in another layout | the same campaign as a still image, in another layout |
 | 1 decoder, no images | the linear default, full frame | nothing: the programme goes on |
+
+**The image is still and in another shape** (ADR 0088): break A goes from side by side to the
+L-shape, B from the L-shape to side by side, C from the banner to the L-shape, each in the
+same campaign. A moving picture inside an `<img>` looks like a video, and the same box in the
+same place looks like the same experience; either way the difference had to be found by
+inspecting the element. The still image is the authored SVG frozen at one instant by
+`scripts/congelar-svg.py`, with no animation left in it.
 
 **Break A has no default on purpose** (ADR 0087): its asset carries no `URI` and the playlist
 carries no Apple-class tag for it, so the off-the-shelf pane does not interrupt either. It is

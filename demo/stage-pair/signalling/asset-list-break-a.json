@@ -29,19 +29,19 @@
                 }
               },
               {
-                "type": "squeezebackDoubleBox",
+                "type": "squeezebackLShape",
                 "layout": {
                   "primaryContent": {
-                    "zDepth": 0,
-                    "viewport": "25 50 25 0"
+                    "zDepth": 1,
+                    "viewport": "0 0 25 25"
                   },
                   "assets": [
                     {
-                      "id": "adSideBySide",
+                      "id": "lBackplate",
                       "type": "image/svg+xml",
-                      "uri": "/graphics/campaigns/zumbra-16x9.svg",
-                      "viewport": "25 0 25 50",
-                      "zDepth": 1
+                      "uri": "/graphics/campaigns/zumbra-backplate-fijo.svg",
+                      "viewport": "0 0 0 0",
+                      "zDepth": 0
                     }
                   ]
                 }

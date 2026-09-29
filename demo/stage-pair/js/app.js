@@ -558,8 +558,7 @@ function armar(capacidades, retomarEn = 0) {
    * IT NAMES THE MEDIUM OF THE AD because that is the one field the switch
    * moves, and it reads it rather than deriving it from the switch: with two
    * decoders the library keeps the option in video, with one the option as
-   * `image/svg+xml`, and the layout, the campaign and the duration are the same
-   * in both (ADR 0084). If the line ever says the medium the step asked for
+   * `image/svg+xml`, in another layout and of the same campaign (ADR 0088). If the line ever says the medium the step asked for
    * while the composition is drawing another, that is the page lying and it
    * would not show any other way.
    */

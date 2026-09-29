@@ -30,19 +30,19 @@
                 }
               },
               {
-                "type": "squeezebackLShape",
+                "type": "squeezebackDoubleBox",
                 "layout": {
                   "primaryContent": {
-                    "zDepth": 1,
-                    "viewport": "0 0 25 25"
+                    "zDepth": 0,
+                    "viewport": "25 50 25 0"
                   },
                   "assets": [
                     {
-                      "id": "lBackplate",
+                      "id": "adSideBySide",
                       "type": "image/svg+xml",
-                      "uri": "/graphics/campaigns/ketrava-backplate.svg",
-                      "viewport": "0 0 0 0",
-                      "zDepth": 0
+                      "uri": "/graphics/campaigns/ketrava-16x9-fijo.svg",
+                      "viewport": "25 0 25 50",
+                      "zDepth": 1
                     }
                   ]
                 }

@@ -19,13 +19,21 @@ navegador, con la página de verdad y el control apretado como lo aprieta David:
    pasa a la página (`window.demo.selecciones`). Lo esperado sale de las reglas
    del ADR 0085 y no de la página:
 
-       2 decodificadores, con o sin imágenes   la opción de video: 2 <video>
-       1 decodificador, con imágenes           la de imagen: 1 <video> y 1 <img>
+       2 decodificadores, con o sin imágenes   la opción de video: 2 <video>,
+                                               en el layout del break
+       1 decodificador, con imágenes           la de imagen: 1 <video> y 1 <img>,
+                                               en OTRO layout (ADR 0088)
        1 decodificador, sin imágenes           con default, el lineal: 2 <video>
                                                sin default, nada: 1 <video>
 
    Y ése es el control de la medición: las cuatro combinaciones no pueden dar la
    misma composición, y si la dieran, el filtro no está filtrando.
+
+4. LA IMAGEN ESTÁ QUIETA (fase 15). En cada combinación que dibuja la opción de
+   imagen, la caja del `<img>` se captura dos veces separadas por dos segundos,
+   con el programa oculto, y tiene que dar IGUAL byte por byte. El control es la
+   misma caja con el SVG animado del que la imagen sale, que tiene que dar
+   DISTINTA.
 
 Y deja una captura por combinación y por break en `--salida`, a 1907 de ancho, y
 las de la combinación que se saltea también a 400x780.
@@ -71,14 +79,70 @@ COMBINACIONES = [
 
 
 def esperado(capacidad, brk):
-    """Lo que el ADR 0085 manda dibujar, escrito acá y no leído de la página."""
+    """Lo que los ADR 0085 y 0088 mandan dibujar, escrito acá y no leído de la página.
+
+    `layout` es el tipo de la experiencia activa: el del break para el video, el
+    de `formaImagen` para la imagen (ADR 0088), `linear` para el default.
+    """
     if capacidad["videoDecoders"] >= 2:
-        return {"outcome": "drawn", "chosen": 0, "video": 2, "img": 0}
+        return {"outcome": "drawn", "chosen": 0, "video": 2, "img": 0, "layout": brk["layout"]}
     if capacidad["imageOverVideo"]:
-        return {"outcome": "drawn", "chosen": 1, "video": 1, "img": 1}
+        return {"outcome": "drawn", "chosen": 1, "video": 1, "img": 1,
+                "layout": STAGE["formas"][brk["formaImagen"]]["layout"]}
     if brk["lineal"]:
-        return {"outcome": "default", "chosen": None, "video": 2, "img": 0}
-    return {"outcome": "skipped", "chosen": None, "video": 1, "img": 0}
+        return {"outcome": "default", "chosen": None, "video": 2, "img": 0, "layout": "linear"}
+    return {"outcome": "skipped", "chosen": None, "video": 1, "img": 0, "layout": None}
+
+
+PAUSA_QUIETUD = 2.0
+
+QUIETUD_PREPARAR = """
+sel => {
+  const c = document.querySelector(sel);
+  // El programa se oculta durante la medición: en la L la imagen está DEBAJO del
+  // primario, y lo que se mide es la caja del aviso y no el video que la tapa.
+  for (const v of c.querySelectorAll('video')) v.style.visibility = 'hidden';
+  const img = [...c.querySelectorAll('img')].find((i) => i.getAttribute('src') && !/logo/i.test(i.getAttribute('src')));
+  img.dataset.medida = '1';
+  return img.getAttribute('src');
+}
+"""
+QUIETUD_RESTAURAR = """
+sel => {
+  const c = document.querySelector(sel);
+  for (const v of c.querySelectorAll('video')) v.style.visibility = '';
+  delete c.querySelector('img[data-medida]').dataset.medida;
+}
+"""
+
+
+def medir_quietud(pagina, contenedor, capacidad, brk_id, salida, nombre_pagina):
+    """Dos capturas de la caja de la imagen separadas por PAUSA_QUIETUD segundos.
+
+    La imagen servida tiene que dar las dos IGUALES byte por byte. EL CONTROL es
+    la misma caja con el SVG animado del que la imagen sale -- se le cambia el
+    `src` al mismo `<img>` --, que tiene que dar DISTINTAS: si también diera
+    iguales, lo que se midió es el instrumento y no la imagen.
+    """
+    src = pagina.evaluate(QUIETUD_PREPARAR, contenedor)
+    caja = pagina.locator("img[data-medida]")
+    time.sleep(0.3)
+    a = caja.screenshot()
+    time.sleep(PAUSA_QUIETUD)
+    b = caja.screenshot()
+    animado = src.replace("-fijo.svg", ".svg")
+    pagina.evaluate("s => { document.querySelector('img[data-medida]').src = s }", animado)
+    time.sleep(0.8)
+    c1 = caja.screenshot()
+    time.sleep(PAUSA_QUIETUD)
+    c2 = caja.screenshot()
+    base = f"{nombre_pagina}-{nombre(capacidad)}-break-{brk_id}-quietud"
+    (salida / f"{base}-1.png").write_bytes(a)
+    (salida / f"{base}-2.png").write_bytes(b)
+    pagina.evaluate("s => { document.querySelector('img[data-medida]').src = s }", src)
+    pagina.evaluate(QUIETUD_RESTAURAR, contenedor)
+    return {"combinacion": nombre(capacidad), "break": brk_id, "src": src,
+            "imagen_igual": a == b, "control_igual": c1 == c2}
 
 
 def nombre(capacidad):
@@ -100,6 +164,7 @@ def main():
     contenedor = "#slot" if args.pagina == "inspect" else "#demo-slot"
 
     filas, rojo = [], 0
+    quietud = []
     pedidos = []  # (url, cuerpo)
 
     with sync_playwright() as pw:
@@ -132,7 +197,7 @@ def main():
                 "c => JSON.stringify(window.demo.capacidades) === JSON.stringify(c)", arg=capacidad)
             desde = len(pedidos)
 
-            for brk_id in ("a", "b"):
+            for brk_id in ("a", "b", "c"):
                 brk = BREAKS[brk_id]
                 if args.pagina == "inspect":
                     pagina.evaluate("t => window.demo.irA(t)", brk["offset"] - 2)
@@ -149,7 +214,9 @@ def main():
                           video: vivos.length,
                           img: [...c.querySelectorAll('img')].filter((i) => i.getAttribute('src')
                                && !/logo/i.test(i.getAttribute('src'))).length,
-                          t: window.demo.video.currentTime
+                          t: window.demo.video.currentTime,
+                          layout: window.demo.provider.activeAt(window.demo.video.currentTime)
+                                    .map((e) => e.type)[0] ?? null
                         };
                     }""", contenedor)
                 seleccion = pagina.evaluate(
@@ -163,12 +230,16 @@ def main():
                                       full_page=True)
                     pagina.set_viewport_size({"width": 1907, "height": 1100})
 
+                if composicion["img"]:
+                    quietud.append(medir_quietud(pagina, contenedor, capacidad, brk_id, salida, args.pagina))
+
                 esp = esperado(capacidad, brk)
                 obtenido = {
                     "outcome": seleccion and seleccion["outcome"],
                     "chosen": seleccion and seleccion["items"][0]["chosen"],
                     "video": composicion["video"],
                     "img": composicion["img"],
+                    "layout": composicion["layout"],
                 }
                 ok = obtenido == esp
                 rojo += 0 if ok else 1
@@ -218,13 +289,24 @@ def main():
               f"obtenido {f['obtenido']}  esperado {f['esperado']}")
         for d in f["descartes"] or []:
             print(f"          descartada: {d}")
+    print("4. LA IMAGEN ESTÁ QUIETA -- la caja del aviso, dos capturas separadas por "
+          f"{PAUSA_QUIETUD} s, con el programa oculto:")
+    for q in quietud:
+        ok = q["imagen_igual"] and not q["control_igual"]
+        rojo += 0 if ok else 1
+        print(f"   {'ok  ' if ok else 'ROJO'} {q['combinacion']:<12} break {q['break']}  "
+              f"imagen servida: {'IGUAL' if q['imagen_igual'] else 'DISTINTA'} ({q['src']})   "
+              f"control, el SVG animado en la misma caja: {'IGUAL' if q['control_igual'] else 'DISTINTA'}")
+    if not quietud:
+        print("   ROJO: ninguna combinación dibujó una imagen, no hubo nada que medir")
+        rojo += 1
     distintas = {json.dumps(f["obtenido"], sort_keys=True) for f in filas if f["break"] == "b"}
     print(f"   control: composiciones distintas en el break b sobre 4 combinaciones -> {len(distintas)}")
     if len(distintas) < 3:
         rojo += 1
 
     (salida / f"{args.pagina}-mediciones.json").write_text(
-        json.dumps({"filas": filas, "queries": queries}, indent=2, ensure_ascii=False))
+        json.dumps({"filas": filas, "queries": queries, "quietud": quietud}, indent=2, ensure_ascii=False))
     print(f"\n{'VERDE' if rojo == 0 else f'ROJO ({rojo})'}")
     sys.exit(1 if rojo else 0)
 
