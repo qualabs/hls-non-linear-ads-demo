@@ -14,6 +14,7 @@
 | T-10 | La caché: videos con el contenido en el nombre, lo de nombre fijo sin caché, y un script de publicación | done | — | [`tasks/T-10/`](tasks/T-10/) · `scripts/{versionar-creativo.sh,publicar.sh}` · `CLAUDE.md` |
 | T-11 | `index.html`: un control por player, con el modo nativo o el nuestro, y la combinación en la URL | done | — | [`tasks/T-11/`](tasks/T-11/) · `js/{app,capabilities}.js` · `index.html` · `test/verificar-pares.py` |
 | T-12 | En las transiciones, el primario por encima de lo que no se le superpone (lib/) | done | — | [`tasks/T-12/`](tasks/T-12/) · `lib/renderer.js` (`stackingOf`) · `test/stacking-order.test.js` · ADR 0089 |
+| T-13 | `inspect.html` con el mismo control que cada player del par, nativo incluido | done | — | [`tasks/T-13/`](tasks/T-13/) · `js/{inspect,capabilities}.js` · `inspect.html` · `test/verificar-inspect-modos.py` |
 
 ---
 
@@ -132,3 +133,12 @@
 - **Definition of done:** test de la función pura con controles en rojo; `z-index` y cuadros
   intermedios antes y después; las otras demos cargan sin errores.
 - **nivel de verificación:** alto. Corre en todas las demos sin nadie mirando.
+
+## T-13 — `inspect.html` con el mismo control
+- **Objective:** el player solo se configura igual que un pane del par, con la misma gramática en
+  la URL (`?modo=`), y en modo nativo las tarjetas dicen lo que hizo hls.js sin inventar nada.
+- **What it must cover:** el componente de control compartido (`crearControlDePane`), el modo
+  nativo en `inspect.js`, las tarjetas 2, 3 y 4. Default: nuestra librería, 2 decodificadores, imágenes.
+- **Definition of done:** `test/verificar-inspect-modos.py` en verde en los cinco modos, en A y B,
+  local y en la URL pública; `index.html` sin cambios de comportamiento.
+- **nivel de verificación:** bajo.

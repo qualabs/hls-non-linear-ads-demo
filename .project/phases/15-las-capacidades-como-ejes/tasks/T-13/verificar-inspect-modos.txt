@@ -1,0 +1,42 @@
+
+== modo=nativo   URL: ok   control: ['HLS interstitials, native']
+   ok   break a  dibuja {'aviso_lineal': False}
+          tarjeta 2: no request for this break has gone out yet   (en la red)
+          tarjeta 4: This break has no Apple-class interstitial, so hls.js plays nothing and the programme goes on.
+   ok   break b  dibuja {'aviso_lineal': True}
+          tarjeta 2: /signalling/asset-list-linear-b.json?_HLS_primary_id=290a157a-e1a9-4b69-b39e-cf2e3d0216b6   (en la red)
+          tarjeta 4: hls.js plays the Apple-class interstitial of this break as it is, full frame, replacing the programme.
+
+== modo=ours-2dec-img   URL: ok   control: ['With our library', '2', 'yes']
+   ok   break a  dibuja {'layout': 'squeezebackDoubleBox', 'video': 2, 'img': 0}
+          tarjeta 2: /signalling/asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=1   (en la red)
+          tarjeta 4: Drawn: option 1, the ad in video, over the programme.
+   ok   break b  dibuja {'layout': 'squeezebackLShape', 'video': 2, 'img': 0}
+          tarjeta 2: /signalling/asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=1   (en la red)
+          tarjeta 4: Drawn: option 1, the ad in video, over the programme.
+
+== modo=ours-2dec-noimg   URL: ok   control: ['With our library', '2', 'no']
+   ok   break a  dibuja {'layout': 'squeezebackDoubleBox', 'video': 2, 'img': 0}
+          tarjeta 2: /signalling/asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=0   (en la red)
+          tarjeta 4: Drawn: option 1, the ad in video, over the programme.
+   ok   break b  dibuja {'layout': 'squeezebackLShape', 'video': 2, 'img': 0}
+          tarjeta 2: /signalling/asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=0   (en la red)
+          tarjeta 4: Drawn: option 1, the ad in video, over the programme.
+
+== modo=ours-1dec-img   URL: ok   control: ['With our library', '1', 'yes']
+   ok   break a  dibuja {'layout': 'squeezebackLShape', 'video': 1, 'img': 1}
+          tarjeta 2: /signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=1   (en la red)
+          tarjeta 4: Drawn: option 2, the ad as an image, over the programme.
+   ok   break b  dibuja {'layout': 'squeezebackDoubleBox', 'video': 1, 'img': 1}
+          tarjeta 2: /signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=1   (en la red)
+          tarjeta 4: Drawn: option 2, the ad as an image, over the programme.
+
+== modo=ours-1dec-noimg   URL: ok   control: ['With our library', '1', 'no']
+   ok   break a  dibuja {'layout': None, 'video': 1, 'img': 0}
+          tarjeta 2: /signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=0   (en la red)
+          tarjeta 4: No option fits this device and this break has no default, so the ad is skipped and the programme goes on.
+   ok   break b  dibuja {'layout': 'linear', 'video': 2, 'img': 0}
+          tarjeta 2: /signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=0   (en la red)
+          tarjeta 4: No option fits this device, so the break plays its default: the linear ad, full frame.
+
+VERDE

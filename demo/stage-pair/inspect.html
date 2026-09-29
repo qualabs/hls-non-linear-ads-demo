@@ -101,17 +101,16 @@
     </p>
   </header>
 
-  <section class="switch" aria-label="Device capability">
-    <p class="switch-label">What this device declares</p>
-    <div class="steps" id="steps"></div>
-    <p class="step-out" id="step-out"></p>
+  <section class="switch" aria-label="Player">
+    <div class="pane-control" id="steps"></div>
     <div class="jumps" id="jumps" role="group" aria-label="Jump to"></div>
     <p class="no-server">
       There is no ad presentation server behind this page. The two capabilities travel on every
       asset-list request, as such a server would read them, and the answer is one static file per
       break that always carries every option of the ad: video first, then the same campaign as a
       still image in another layout.
-      What decides what is drawn is the library, in panel 4.
+      What decides what is drawn is the library, in panel 4. The control above has the same modes
+      as each player of the pair, and the combination is in the URL.
     </p>
   </section>
 
@@ -119,8 +118,8 @@
 
     <div class="inspect__left">
     <section class="pane pane-demo" id="pane" data-state="primary">
-      <h2 class="role">This demo&rsquo;s player</h2>
-      <p class="role-sub">The library, unmodified, with its interstitials machinery off. The programme is never replaced.</p>
+      <h2 class="role" id="rol"></h2>
+      <p class="role-sub" id="sub"></p>
       <div id="slot"></div>
       <p class="state" id="state"></p>
       <p class="hud" id="contract"></p>

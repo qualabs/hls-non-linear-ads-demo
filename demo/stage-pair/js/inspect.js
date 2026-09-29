@@ -61,8 +61,9 @@
 // what it wrote a quarter of a second later, and tries again if it did not land.
 
 import { traceContract } from './contract-trace.js';
+import { createStockPlayer } from './stock-player.js';
 import {
-  PARAMETROS, breakDelReporte, crearControl, desenlace, describirOpcion
+  PARAMETROS, breakDelReporte, crearControlDePane, desenlace, describirOpcion, leerModo, escribirModo
 } from './capabilities.js';
 
 // The one source of the numbers of this demo (ADR 0044). The axes of the
@@ -86,6 +87,8 @@ const dom = {
   rangesLede: document.getElementById('ranges-lede'),
   filter: document.getElementById('filter'),
   outcome: document.getElementById('outcome'),
+  rol: document.getElementById('rol'),
+  sub: document.getElementById('sub'),
   request: document.getElementById('request'),
   answerLede: document.getElementById('answer-lede'),
   answer: document.getElementById('answer')
@@ -169,7 +172,9 @@ function dibujarRango(linea, pedida) {
 /** break id -> { url, cuerpo }, the request this client made and its answer. */
 const intercambio = new Map();
 
-const breakDeLaUrl = (url) => url.match(/asset-list-break-([a-z0-9]+)\.json/)?.[1] ?? null;
+// The concurrent list of a break (our library) or its linear one (the native
+// client): the break is in the name either way.
+const breakDeLaUrl = (url) => url.match(/asset-list-(?:break|linear)-([a-z0-9]+)\.json/)?.[1] ?? null;
 
 /** break id -> what the library kept of the answer, as `onResolved` reported it. */
 const selecciones = new Map();
@@ -195,7 +200,7 @@ async function anotarPedido(href) {
 
 new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
-    if (entry.name.includes('/signalling/asset-list-break-')) anotarPedido(entry.name);
+    if (/\/signalling\/asset-list-(break|linear)-/.test(entry.name)) anotarPedido(entry.name);
   }
 }).observe({ type: 'resource' });
 
@@ -268,18 +273,31 @@ function pintarIntercambio() {
     dom.request.append(el('span', 'none', 'no request for this break has gone out yet'));
   } else {
     dom.request.append(el('span', 'request__path', traza.url.pathname));
-    const pares = Object.values(PARAMETROS)
+    const nombres = vivo?.modo === 'nativo' ? [...traza.url.searchParams.keys()] : Object.values(PARAMETROS);
+    const pares = nombres
       .filter((nombre) => traza.url.searchParams.has(nombre))
       .map((nombre) => `${nombre}=${traza.url.searchParams.get(nombre)}`);
     dom.request.append(pares.length
       ? el('b', null, `?${pares.join('&')}`)
-      : el('span', 'none', '  — no capability on this request'));
+      : el('span', 'none', vivo?.modo === 'nativo' ? '  — no query' : '  — no capability on this request'));
   }
 
-  // Move 4: what the library kept, off its own report.
-  const seleccion = selecciones.get(mostrado.id);
+  // Move 4: what the library kept, off its own report. The native client has
+  // no library and no capabilities, so there is nothing kept and nothing is
+  // made up: the card says what that client does instead.
+  if (vivo?.modo === 'nativo') {
+    dom.filter.replaceChildren(el('li', 'none',
+      'Native HLS interstitials: no capabilities are declared and there are no options to filter.'));
+    dom.outcome.dataset.outcome = 'native';
+    dom.outcome.textContent = mostrado.lineal
+      ? 'hls.js plays the Apple-class interstitial of this break as it is, full frame, replacing the programme.'
+      : 'This break has no Apple-class interstitial, so hls.js plays nothing and the programme goes on.';
+  }
+  const seleccion = vivo?.modo === 'nativo' ? null : selecciones.get(mostrado.id);
   const asset = seleccion?.assets[0];
-  if (!asset) {
+  if (vivo?.modo === 'nativo') {
+    // already said above
+  } else if (!asset) {
     dom.filter.replaceChildren(el('li', 'none', 'the library has not resolved this break yet'));
     dom.outcome.textContent = '';
   } else {
@@ -365,21 +383,42 @@ function derribar() {
  */
 function buscar(objetivo, intentos = 20, desde = performance.now()) {
   if (!vivo || intentos <= 0) return;
-  const { video } = vivo;
-  if (video.readyState < 1) {
+  const { video, programa, listo } = vivo;
+  if (!listo()) {
     if (performance.now() - desde < 20000) setTimeout(() => buscar(objetivo, intentos, desde), 50);
     return;
   }
-  video.currentTime = objetivo;
+  // The programme clock: the element for our library, whose programme is never
+  // stopped; the interstitials manager's primary for the native client.
+  programa.currentTime = objetivo;
   video.play().catch(() => {});
   setTimeout(() => {
-    if (vivo?.video === video && Math.abs(video.currentTime - objetivo) > 1.5) {
+    if (vivo?.video === video && Math.abs(programa.currentTime - objetivo) > 1.5) {
       buscar(objetivo, intentos - 1, desde);
     }
   }, 250);
 }
 
-function armar(capacidades, retomarEn = 0) {
+const ROTULOS = {
+  nativo: {
+    rol: 'HLS interstitials, native',
+    sub: 'A client that is already in the market: hls.js with nothing of this demo in it. It replaces the programme with the ad.'
+  },
+  ours: {
+    rol: 'This demo\u2019s player',
+    sub: 'The library, unmodified, with its interstitials machinery off. The programme is never replaced.'
+  }
+};
+
+function armar(config, retomarEn = 0) {
+  escribirModo(config);
+  dom.rol.textContent = ROTULOS[config.modo].rol;
+  dom.sub.textContent = ROTULOS[config.modo].sub;
+  dom.pane.classList.toggle('pane-demo', config.modo === 'ours');
+  dom.pane.classList.toggle('pane-stock', config.modo === 'nativo');
+  control?.pintar(config);
+  if (config.modo === 'nativo') { armarNativo(retomarEn); return; }
+  const capacidades = config.capacidades;
   derribar();
   intercambio.clear();
   selecciones.clear();
@@ -456,7 +495,10 @@ function armar(capacidades, retomarEn = 0) {
   video.addEventListener('seeked', pintar);
   pintar();
 
-  vivo = { hls, concurrent, consumer, video, capacidades, src: SRC };
+  vivo = {
+    modo: 'ours', hls, concurrent, consumer, video, capacidades, src: SRC,
+    programa: video, listo: () => video.readyState >= 1
+  };
   if (retomarEn > 0) buscar(retomarEn);
 
   // For the console, for the measurements of this task, and for whoever comes
@@ -474,7 +516,53 @@ function armar(capacidades, retomarEn = 0) {
     },
     stage,
     get selecciones() { return Object.fromEntries(selecciones); },
-    armar: (capacidades, retomarEn) => armar(capacidades, retomarEn),
+    get modo() { return vivo.modo; },
+    armar: (config, retomarEn) => armar(config, retomarEn),
+    irA: (segundo) => buscar(segundo)
+  };
+}
+
+/**
+ * The native client, in the same box and with the same three moves: what the
+ * playlist said, what hls.js asked for -- the Apple-class list, read off the
+ * network like ours -- and what came back. Card 4 says there is no filter.
+ */
+function armarNativo(retomarEn = 0) {
+  derribar();
+  intercambio.clear();
+  selecciones.clear();
+  vistas.clear();
+  mostrado = null;
+  leerRangos(SRC).then(pintarIntercambio);
+  const { player, video } = construirCaja();
+  dom.contract.textContent = '';
+  const stock = createStockPlayer({
+    video, container: player, src: SRC, pane: dom.pane, state: dom.state, hud: dom.hud
+  });
+  const alTiempo = () => mostrarBreak(breakDelSegundo(stock.programme.currentTime));
+  video.addEventListener('timeupdate', alTiempo);
+  video.addEventListener('seeked', alTiempo);
+  vivo = {
+    modo: 'nativo', hls: stock.hls, stock, video, capacidades: null, src: SRC,
+    programa: stock.programme,
+    listo: () => stock.hls.interstitialsManager?.primary != null && video.readyState >= 1
+  };
+  alTiempo();
+  if (retomarEn > 0) buscar(retomarEn);
+  window.demo = {
+    get hls() { return vivo.hls; },
+    get video() { return vivo.video; },
+    get stock() { return vivo.stock; },
+    get modo() { return vivo.modo; },
+    get capacidades() { return null; },
+    get src() { return vivo.src; },
+    get mostrado() { return mostrado?.id ?? null; },
+    get intercambio() {
+      return Object.fromEntries([...intercambio].map(([id, t]) => [id, { url: t.url.href, cuerpo: t.cuerpo }]));
+    },
+    stage,
+    get selecciones() { return {}; },
+    armar: (config, t) => armar(config, t),
     irA: (segundo) => buscar(segundo)
   };
 }
@@ -483,11 +571,15 @@ function armar(capacidades, retomarEn = 0) {
 // THE SWITCH AND THE JUMPS
 // ===========================================================================
 
-const control = crearControl({
+// The same control as each pane of index.html: the mode, and the two axes
+// under "With our library".
+let control = null;
+control = crearControlDePane({
   contenedor: document.getElementById('steps'),
-  salida: document.getElementById('step-out'),
   stage,
-  alCambiar: (capacidades) => armar(capacidades, vivo ? vivo.video.currentTime : 0)
+  lado: 'inspect',
+  inicial: leerModo(location.search, stage),
+  alCambiar: (config) => armar(config, vivo ? vivo.programa.currentTime : 0)
 });
 
 // A jump is a seek and not a rebuild, which is the one thing this page does
@@ -509,4 +601,4 @@ jumps.replaceChildren(...[
   return boton;
 }));
 
-armar(control.actual());
+armar(leerModo(location.search, stage));
