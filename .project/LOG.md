@@ -6137,3 +6137,12 @@ Pedido de David, sólo CSS. Los dos panes de `index.html` comparten sus nueve fi
 los dos ejes y la descripción ocupa siempre dos líneas. Medido a 1920×960: el top de los dos
 players es 451 px en las cuatro combinaciones de modos; antes era 404/407, 404/432, 429/407 y
 429/432 (la medición contra lo publicado es el control, en rojo).
+
+## 2026-09-30 — T-18: la barra de progreso siempre visible
+
+Pedido de David, sólo CSS de la demo y no de la librería (race.html no cambia). En `index.html` e
+`inspect.html` la capa del cromo queda visible y sus piezas se ocultan una por una cuando el cromo
+está abajo, salvo la barra con las marcas de los breaks; el play/pause, el audio, los relojes y
+fullscreen siguen apareciendo sólo con el mouse encima. Medido con la opacidad efectiva: con el
+mouse afuera, barra 1 y play 0 en los tres players; con el mouse encima, los dos en 1; race.html
+con la barra en 0 afuera, como antes. Control: lo publicado antes daba la barra en 0 afuera.

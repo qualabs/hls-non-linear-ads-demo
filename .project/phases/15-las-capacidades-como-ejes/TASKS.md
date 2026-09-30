@@ -19,6 +19,7 @@
 | T-15 | Layout para la grabación a 1920×1080: inspect sin scroll, los saltos del par en el player derecho | done | — | [`tasks/T-15/`](tasks/T-15/) · `inspect.html` · `index.html` · `css/player.css` |
 | T-16 | Inspect: la tarjeta 3 alineada con la 4 y la URL de la tarjeta 2 en una línea | done | — | [`tasks/T-16/`](tasks/T-16/) · `css/player.css` |
 | T-17 | Index: los dos players alineados con cualquier combinación de modos | done | — | [`tasks/T-17/`](tasks/T-17/) · `css/player.css` |
+| T-18 | La barra de progreso siempre visible en index e inspect; el play/pause sólo con el mouse encima | done | — | [`tasks/T-18/`](tasks/T-18/) · `css/player.css` |
 
 ---
 

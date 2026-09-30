@@ -736,3 +736,18 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
   .pair > .pane > .pane-control { box-sizing: border-box; min-height: 129px; }
   .pair > .pane > .role-sub { min-height: 2lh; }
 }
+
+/* THE PROGRESS BAR IS ALWAYS ON SCREEN on the pair and on inspect (fase 15,
+ * asked for by David): it is where the breaks are marked, and a recording has
+ * to show them without anybody hovering. Everything else of the chrome -- the
+ * play/pause toggle, the audio, the clocks, fullscreen -- keeps the library's
+ * behaviour and shows only while the controls are up. The library hides the
+ * chrome by taking the opacity of the whole layer to zero; here the layer stays
+ * visible and its pieces are hidden one by one instead, except the track. Not on
+ * race.html, which keeps the chrome as the library draws it. */
+.stage:not(.stage--race) .qa-controls { opacity: 1; }
+.stage:not(.stage--race) .qa-controls > *,
+.stage:not(.stage--race) .qa-controls__row > * { transition: opacity 180ms ease; }
+.stage:not(.stage--race) .qa-controls:not(.qa-controls--on) > :not(.qa-controls__bar),
+.stage:not(.stage--race) .qa-controls:not(.qa-controls--on) .qa-controls__bar > :not(.qa-controls__row),
+.stage:not(.stage--race) .qa-controls:not(.qa-controls--on) .qa-controls__row > :not(.qa-track) { opacity: 0; }
