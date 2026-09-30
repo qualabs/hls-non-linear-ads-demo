@@ -1,10 +1,20 @@
 # stage-pair — the same stream on two clients, and what the device can draw
 
-One media playlist. Two `EXT-X-DATERANGE` per break on the same `START-DATE`. Two players
-side by side that know nothing about each other: an off-the-shelf hls.js, which schedules the
-linear Date Range and **replaces the content with the ad**, and the same version of hls.js
-driven by this library, which **keeps the content on screen and draws the ad over it**. The
-same ad space is sold on both, and only one of them takes the screen away.
+Two players side by side that know nothing about each other, over the same programme: an
+off-the-shelf hls.js, which **replaces the content with the ad**, and the same version of
+hls.js driven by this library, which **keeps the content on screen and draws the ad over
+it**. Each one loads the manifest of its own class -- `con-daterange-interstitial.m3u8`
+carries only the `com.apple.hls.interstitial` tags, `con-daterange-concurrente.m3u8` only the
+`com.qualabs.hls.concurrentInterstitial` ones -- and **the two tags of a break name the same
+asset-list**: its standard part (`URI`, `DURATION`) is what the off-the-shelf player plays,
+and the block on top is what the library reads, falling back to that standard part when it
+cannot draw (ADR 0090). One asset-list, two clients: the same ad space is sold on both, and
+only one of them takes the screen away.
+
+A Date Range of a class a player does not know is ignored, not degraded: a manifest with only
+the concurrent tag gets NO ad on an off-the-shelf player -- break A of this demo, which has no
+linear default, is exactly that case, measured. The fallback to a normal interstitial needs
+the Apple-class tag.
 
 On top of that, the thing this demo adds to the four that came before it: **the capability of
 the device degrades the format of the ad, not the ad**. A control on the page declares what
@@ -53,8 +63,8 @@ signalling script says exactly that and carries on.
 
 | page | what it is for |
 | --- | --- |
-| [`index.html`](index.html) | **the pair.** The two players over the same playlist, the walk through the three non-linear shapes — side by side, L-shape and banner, one per break — and the capability switch |
-| [`inspect.html`](inspect.html) | **one player, and the whole exchange in the open.** The Date Ranges the playlist carried, the asset-list URL the client asked for with the capability on it, the body that came back, verbatim, and **what the library kept of it**: each option, why it was discarded, and how the break ended. Made to be read out loud in a room with the network tab open |
+| [`index.html`](index.html) | **the pair.** Two players, each with its own control and the manifest of its mode, over the same programme, the walk through the three non-linear shapes — side by side, L-shape and banner, one per break — and the capability switch |
+| [`inspect.html`](inspect.html) | **one player, and the whole exchange in the open**, with the same control as each player of the pair. The Date Range the manifest of its mode carried, the asset-list URL the client asked for with the capability on it, the body that came back, verbatim, and **what the library kept of it**: each option, why it was discarded, and how the break ended. Made to be read out loud in a room with the network tab open |
 | [`race.html`](race.html) | **the ads first, then the multi view window.** Four non-linear ads over a race, eight seconds of clean race, and then a window that offers a catalogue of six on-board cameras for whoever is watching to compose |
 
 The three are served from the same root, so they are one demo and not three: same library

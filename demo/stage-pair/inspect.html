@@ -34,11 +34,11 @@
   ============================================================================
   WHAT THE THREE MOVES ARE
   ============================================================================
-  ONE, WHAT THE PLAYLIST SAID. The two ranges this break carries on the same
-  START-DATE: the one of Apple's class, which this client ignores, and the one
-  of the sibling class of ADR 0009, which it keeps. Both are on screen at once
-  because that is the claim of ADR 0007 -- one playlist serving two clients --
-  and it is not visible in a single line.
+  ONE, WHAT THE PLAYLIST SAID. The range this break carries in the manifest this
+  client loads (ADR 0090): with our library, the concurrent manifest, which has
+  only our class; in native mode, the interstitials manifest, which has only
+  Apple's -- and none for the break with no linear default. Both name the same
+  asset-list.
 
   TWO, WHAT THE CLIENT ASKED FOR. The URL that went out, read off the
   performance timeline, with the two capability parameters picked out of it
@@ -71,7 +71,7 @@
               `capabilities` is read once, when the signalling is created, so a
               value changed in flight would never be read again
               (lib/signalling.js).
-  #ranges     the two ranges of the break on screen, read off the playlist.
+  #ranges     the range of the break in this client's manifest, read off it.
   #request    the URL that went out, with the parameter picked out of it.
   #answer     the body that came back.
   #filter     what the library kept of it, and why.
@@ -109,8 +109,9 @@
       asset-list request, as such a server would read them, and the answer is one static file per
       break that always carries every option of the ad: video first, then the same campaign as a
       still image in another layout.
-      What decides what is drawn is the library, in panel 4. The control above has the same modes
-      as each player of the pair, and the combination is in the URL.
+      What decides what is drawn is the library, in panel 4. With our library the player loads
+      the concurrent manifest; in native mode, the interstitials manifest, and hls.js plays the
+      standard part of the same asset-list. The combination is in the URL.
     </p>
   </section>
 

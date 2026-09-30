@@ -13,9 +13,9 @@ página, y mide por lado:
   tiene activo el layout que sus capacidades mandan (ADR 0085 y 0088), leído del
   contrato de ESA instancia, y la cuenta de <video> y <img> de SU caja.
 
-  LO QUE PIDE. La lista de pedidos de asset-list de ESE lado: nuestra librería
-  pide los asset-lists concurrentes con SUS sgai-*; el nativo pide los lineales,
-  sin sgai-*. Dos lados del mismo modo con capacidades distintas tienen que dar
+  LO QUE PIDE. La lista de pedidos de asset-list de ESE lado: los dos piden el
+  MISMO asset-list por break (ADR 0090), nuestra librería con SUS sgai-* y el
+  nativo sin ellos, y sólo para los breaks con default. Dos lados del mismo modo con capacidades distintas tienen que dar
   queries distintas.
 
 EL CONTROL es que la medición distingue: la combinación "nuestro 1 dec con
@@ -72,7 +72,13 @@ LEER_LADO = """
 lado => {
   const l = window.demo.lados[lado];
   const caja = document.getElementById('slot-' + lado);
-  if (l.modo === 'nativo') return { aviso_lineal: l.stock.playingAd != null, t: l.programa.currentTime };
+  if (l.modo === 'nativo') {
+    // Qué asset reproduce el hls.js de fábrica, leído de su propio manager: es la
+    // medición de que ignora el bloque enriquecido y toma la parte estándar.
+    const a = l.stock.hls.interstitialsManager?.playingAsset;
+    return { aviso_lineal: l.stock.playingAd != null, t: l.programa.currentTime,
+             asset: a ? { uri: new URL(a.uri, location.href).pathname, duracion: a.duration } : null };
+  }
   const t = l.video.currentTime;
   return {
     layout: l.concurrent.provider.activeAt(t).map((e) => e.type)[0] ?? null,
@@ -109,7 +115,7 @@ def main():
             ok_url = leido == {"izq": izq, "der": der}
             rojo += 0 if ok_url else 1
             print(f"\n== izq={izq}  der={der}   la página leyó la URL: {'ok' if ok_url else 'ROJO ' + str(leido)}")
-            for brk_id in ("a", "b"):
+            for brk_id in ("a", "b", "c"):
                 brk = BREAKS[brk_id]
                 pagina.get_by_role("button", name=f"break {brk_id.upper()}", exact=True).click()
                 # Un lado nativo congela su reloj de programa durante el aviso lineal:
@@ -127,6 +133,22 @@ def main():
                 for lado, cfg in (("izq", izq), ("der", der)):
                     obtenido = pagina.evaluate(LEER_LADO, lado)
                     t = round(obtenido.pop("t"), 1)
+                    asset = obtenido.pop("asset", None)
+                    if cfg == "nativo":
+                        # LA PARTE ESTÁNDAR DEL ASSET-LIST ENRIQUECIDO (ADR 0090): en un break
+                        # con default, el hls.js de fábrica reproduce su URI y su DURATION.
+                        pieza = next(p for p in STAGE["assets"]["piezas"]
+                                     if p["campana"] == brk["campana"] and p["forma"] == "16x9")
+                        # La duración es la que hls.js MIDIÓ del asset (medido: 12,067 s para un
+                        # creativo de 360 cuadros declarado en 12), así que se compara con una
+                        # tolerancia de dos cuadros y no por igualdad.
+                        esp_asset = {"uri": "/" + pieza["video"], "duracion": brk["duracion"]} if brk["lineal"] else None
+                        ok_asset = (asset is None and esp_asset is None) or (
+                            asset is not None and esp_asset is not None and asset["uri"] == esp_asset["uri"]
+                            and abs(asset["duracion"] - esp_asset["duracion"]) <= 2 / 30)
+                        rojo += 0 if ok_asset else 1
+                        print(f"   {'ok  ' if ok_asset else 'ROJO'} break {brk_id} {lado} asset que reproduce hls.js: {asset}"
+                              + ("" if ok_asset else f"   esperado {esp_asset}"))
                     esp = esperado(cfg, brk)
                     ok = obtenido == esp
                     rojo += 0 if ok else 1
@@ -139,7 +161,8 @@ def main():
             for lado, cfg in (("izq", izq), ("der", der)):
                 pedidos = [p["url"] for p in pagina.evaluate("l => window.demo.pedidos(l)", lado)]
                 if cfg == "nativo":
-                    ok = bool(pedidos) and all("asset-list-linear-" in u and "sgai-" not in u for u in pedidos)
+                    # El mismo asset-list que pide nuestra librería (ADR 0090), sin sgai-*.
+                    ok = bool(pedidos) and all("asset-list-break-" in u and "sgai-" not in u for u in pedidos)
                 else:
                     dec, img = cfg.split("-")[1:]
                     q = f"sgai-video-decoders={dec[0]}&sgai-image-over-video={1 if img == 'img' else 0}"

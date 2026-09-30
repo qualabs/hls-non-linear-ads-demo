@@ -91,9 +91,10 @@ def medir(puerto, decoders, images):
     from playwright.sync_api import sync_playwright
 
     stage = json.loads((DEMO / "stage.json").read_text())
-    src = "/" + stage["playlists"]["par"]
+    src = "/" + stage["playlists"]["concurrente"]
+    fabrica = "/" + stage["playlists"]["interstitial"]
     url = (f"http://localhost:{puerto}/test/banco-de-medicion.html"
-           f"?src={src}&decoders={decoders}&images={images}")
+           f"?src={src}&srcFabrica={fabrica}&decoders={decoders}&images={images}")
 
     with sync_playwright() as pw:
         navegador = pw.chromium.launch(

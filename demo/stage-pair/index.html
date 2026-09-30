@@ -18,12 +18,15 @@
 <!--
   THE MAIN PAGE OF THIS DEMO, and it makes three claims at once.
 
-  ONE. THE COMPATIBILITY PAIR (ADR 0007). One media playlist carries two
-  EXT-X-DATERANGE per break on the same START-DATE, one of Apple's interstitial
-  class and one of the sibling class of ADR 0009, and each client keeps the one
-  it understands. Backwards compatibility does not come from one class extending
-  the other -- in HLS the class is compared by exact string equality and there is
-  no inheritance -- it comes from the playlist serving both things at once.
+  ONE. ONE ASSET-LIST, TWO CLIENTS (ADR 0090, which supersedes ADR 0007). Each
+  pane loads the manifest of its own class over the same segments: the native
+  one carries only the `com.apple.hls.interstitial` tags, ours only the
+  `com.qualabs.hls.concurrentInterstitial` ones (the sibling class of ADR 0009:
+  in HLS the class is compared by exact string equality, so a player that does
+  not know ours ignores it). The two tags of a break name the SAME asset-list:
+  its standard part -- the `URI` and `DURATION` of Appendix D.2 -- is what the
+  off-the-shelf player plays, and the block on top is what our library reads,
+  falling back to that same standard part when it cannot draw (ADR 0019).
 
     Left pane, an OFF-THE-SHELF client: hls.js at its factory configuration, with
     nothing of this demo wired INTO it. It schedules the linear ad and replaces
@@ -35,7 +38,8 @@
     with its interstitials machinery off (ADR 0002) and the two layers of
     ADR 0003 on top. It keeps the programme on screen and draws the ad over it.
 
-  Both read the SAME URL, and it is printed under each player on purpose.
+  Each pane prints the manifest it loads, and lists the asset-lists it asked
+  for: for a break with a default, both panes ask for the same one.
 
   TWO. THE SAME SPACE IS MONETISED WITHOUT TAKING THE SCREEN. Three breaks, one
   per non-linear form: side by side, L-shape and banner (ADR 0081 for the
@@ -89,9 +93,9 @@
   <header class="masthead">
     <img src="./brand/logo-qualabs-on-dark.svg" alt="Qualabs">
     <p class="headline">
-      One media playlist. Two <code>EXT-X-DATERANGE</code> per break on the same
-      <code>START-DATE</code>, and one where the break has no linear default. Two clients, neither of which knows about the other &mdash;
-      and the same ad space sold on both, one of them without taking the screen.
+      Two manifests over the same programme, one per class, and one asset-list per break that
+      both clients read: an off-the-shelf player plays its standard part and replaces the
+      programme; this demo&rsquo;s library reads the part on top and draws the ad over it.
     </p>
   </header>
 

@@ -78,7 +78,7 @@ DEMO = Path(__file__).resolve().parent.parent
 SDK = DEMO.parent.parent
 STAGE = json.loads((DEMO / "stage.json").read_text())
 BREAKS = STAGE["breaks"]
-PLAYLIST = DEMO / STAGE["playlists"]["par"]
+PLAYLIST = DEMO / STAGE["playlists"]["concurrente"]  # la que carga inspect con nuestra librería
 
 def senalizar(control=None):
     entorno = dict(os.environ)

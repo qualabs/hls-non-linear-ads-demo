@@ -1,0 +1,88 @@
+server PID 3435775 en el puerto 8095
+
+══════════════════════════════════════════════════════════════════════════════
+CON EL ENLACE PRENDIDO
+══════════════════════════════════════════════════════════════════════════════
+
+  1. desde NUESTRA barra, destino fuera de un break
+      antes del gesto   nuestro    8.00   fábrica    8.00   
+      la barra pidió     140.00 s  (fracción 0.707 de 198.00 s)   → objetivo seguro 140.00 s
+      después           nuestro  140.42   fábrica  140.24   SEPARACIÓN    0.17 s   camino: directo   (en aviso: nuestro False, fábrica False)
+      -> VERDE   (juntos: True, llegaron a lo pedido: True)
+
+  2. desde la barra de FÁBRICA, destino fuera de un break
+      antes del gesto   nuestro    8.00   fábrica    8.00   
+      la barra pidió     140.00 s  (fracción 0.707 de 198.02 s)   → objetivo seguro 140.00 s
+      después           nuestro  140.50   fábrica  140.46   SEPARACIÓN    0.04 s   camino: directo   (en aviso: nuestro False, fábrica False)
+      -> VERDE   (juntos: True, llegaron a lo pedido: True)
+
+  3. desde NUESTRA barra, destino ADENTRO del break B
+      antes del gesto   nuestro    8.00   fábrica    8.00   
+      la barra pidió      70.00 s  (fracción 0.354 de 198.00 s)   → objetivo seguro 60.00 s   [el destino cae adentro de un break]
+      después           nuestro   60.36   fábrica   60.22   SEPARACIÓN    0.14 s   camino: directo   (en aviso: nuestro False, fábrica False)
+      -> VERDE   (juntos: True, llegaron a lo pedido: True)
+
+  4. desde la barra de FÁBRICA, destino ADENTRO del break B
+      antes del gesto   nuestro    8.00   fábrica    8.00   
+      la barra pidió      70.00 s  (fracción 0.354 de 198.02 s)   → objetivo seguro 60.00 s   [el destino cae adentro de un break]
+      después           nuestro   60.47   fábrica   60.22   SEPARACIÓN    0.25 s   camino: directo   (en aviso: nuestro False, fábrica False)
+      -> VERDE   (juntos: True, llegaron a lo pedido: True)
+
+  5. LA TRAMPA: gesto desde NUESTRA barra con el par ADENTRO del break C
+      antes del gesto   nuestro  110.30   fábrica  110.01   (los dos adentro del break)
+      la barra pidió     150.00 s  (fracción 0.758 de 198.00 s)   → objetivo seguro 150.00 s
+      después           nuestro  150.47   fábrica  150.21   SEPARACIÓN    0.25 s   camino: rearmado   (en aviso: nuestro False, fábrica False)
+      consola: [app] scrub from the der bar to 150.00s while a native pane is inside a break: it cannot take a seek there, so both are rebuilt
+      -> VERDE   (juntos: True, llegaron a lo pedido: True)
+
+  6. LA TRAMPA: gesto desde la barra de FÁBRICA con el par ADENTRO del break C
+      antes del gesto   nuestro  110.31   fábrica  110.01   (los dos adentro del break)
+      la barra pidió     150.00 s  (fracción 0.758 de 198.01 s)   → objetivo seguro 150.00 s
+      después           nuestro  150.54   fábrica  150.49   SEPARACIÓN    0.06 s   camino: rearmado   (en aviso: nuestro False, fábrica False)
+      consola: [app] scrub from the izq bar to 150.00s while a native pane is inside a break: it cannot take a seek there, so both are rebuilt
+      -> VERDE   (juntos: True, llegaron a lo pedido: True)
+
+══════════════════════════════════════════════════════════════════════════════
+EL CONTROL — EL ENLACE APAGADO, cada barra mueve su pane
+══════════════════════════════════════════════════════════════════════════════
+
+  1. desde NUESTRA barra, destino fuera de un break
+      antes del gesto   nuestro    8.00   fábrica    8.00   
+      la barra pidió     140.00 s  (fracción 0.707 de 198.00 s)   → objetivo seguro 140.00 s
+      después           nuestro  142.39   fábrica   10.86   SEPARACIÓN  131.54 s   camino: —   (en aviso: nuestro False, fábrica False)
+      -> VERDE   (juntos: False, llegaron a lo pedido: True; el control exige que NO se den las dos)
+
+  2. desde la barra de FÁBRICA, destino fuera de un break
+      antes del gesto   nuestro    8.00   fábrica    8.00   
+      la barra pidió     140.00 s  (fracción 0.707 de 198.00 s)   → objetivo seguro 140.00 s
+      después           nuestro   10.90   fábrica  142.31   SEPARACIÓN  131.41 s   camino: —   (en aviso: nuestro False, fábrica False)
+      -> VERDE   (juntos: False, llegaron a lo pedido: True; el control exige que NO se den las dos)
+
+  3. desde NUESTRA barra, destino ADENTRO del break B
+      antes del gesto   nuestro    8.00   fábrica    8.00   
+      la barra pidió      70.00 s  (fracción 0.354 de 198.00 s)   → objetivo seguro 60.00 s   [el destino cae adentro de un break]
+      después           nuestro   72.27   fábrica   10.88   SEPARACIÓN   61.39 s   camino: —   (en aviso: nuestro True, fábrica False)
+      -> VERDE   (juntos: False, llegaron a lo pedido: True; el control exige que NO se den las dos)
+
+  4. desde la barra de FÁBRICA, destino ADENTRO del break B
+      antes del gesto   nuestro    8.00   fábrica    8.00   
+      la barra pidió      70.00 s  (fracción 0.354 de 198.02 s)   → objetivo seguro 60.00 s   [el destino cae adentro de un break]
+      después           nuestro   10.91   fábrica   65.00   SEPARACIÓN   54.10 s   camino: —   (en aviso: nuestro False, fábrica True)
+      -> VERDE   (juntos: False, llegaron a lo pedido: True; el control exige que NO se den las dos)
+
+  5. LA TRAMPA: gesto desde NUESTRA barra con el par ADENTRO del break C
+      antes del gesto   nuestro  110.29   fábrica  110.01   (los dos adentro del break)
+      la barra pidió     150.00 s  (fracción 0.758 de 198.00 s)   → objetivo seguro 150.00 s
+      después           nuestro  152.39   fábrica  110.01   SEPARACIÓN   42.38 s   camino: —   (en aviso: nuestro False, fábrica True)
+      -> VERDE   (juntos: False, llegaron a lo pedido: True; el control exige que NO se den las dos)
+
+  6. LA TRAMPA: gesto desde la barra de FÁBRICA con el par ADENTRO del break C
+      antes del gesto   nuestro  110.19   fábrica  110.01   (los dos adentro del break)
+      la barra pidió     150.00 s  (fracción 0.758 de 198.02 s)   → objetivo seguro 150.00 s
+      después           nuestro  113.23   fábrica  110.01   SEPARACIÓN    3.22 s   camino: —   (en aviso: nuestro True, fábrica True)
+      consola: [app] the izq pane never took 107.00s: it is at 110.01s and the pair is NOT at the same second
+      -> VERDE   (juntos: False, llegaron a lo pedido: False; el control exige que NO se den las dos)
+
+server 3435775 bajado
+
+VERDE: el enlace deja los dos panes en el mismo segundo, y el control sin enlace los deja separados.

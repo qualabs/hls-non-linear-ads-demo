@@ -78,11 +78,13 @@
 <script src="/vendor/hls.min.js"></script>
 <script src="/dist/qualabs-concurrent-hls.js"></script>
 <script type="module">
-// La playlist y la capacidad llegan por query, que es lo que permite correr el
-// mismo banco con cualquier capacidad y sobre la señalización del control sin
-// tocar este archivo.
+// Los dos manifests y la capacidad llegan por query, que es lo que permite correr
+// el mismo banco con cualquier capacidad y sobre la señalización del control sin
+// tocar este archivo. `src` es el concurrente, que carga el nuestro, y
+// `srcFabrica` el de interstitials, que carga el de fábrica (ADR 0090).
 const params = new URLSearchParams(location.search);
 const SRC = params.get('src');
+const SRC_FABRICA = params.get('srcFabrica') ?? SRC;
 const CAPACIDAD = {
   ...(params.has('decoders') ? { videoDecoders: Number(params.get('decoders')) } : {}),
   ...(params.has('images') ? { imageOverVideo: params.get('images') === '1' } : {})
@@ -113,7 +115,7 @@ hls.attachMedia(video);
 // mercado. No se usa createStockPlayer porque eso trae la cromo de la librería, y
 // acá no se mira nada: se leen dos propiedades.
 const stock = new Hls();
-stock.loadSource(SRC);
+stock.loadSource(SRC_FABRICA);
 stock.attachMedia(stockVideo);
 
 // EL IDENTIFICADOR DEL ITEM AGENDADO, Y NO `playingItem` A SECAS: `playingItem`

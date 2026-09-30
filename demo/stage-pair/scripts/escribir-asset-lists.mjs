@@ -2,10 +2,14 @@
 // escribir-asset-lists.mjs -- los asset-lists del par, derivados de stage.json y
 // de nada más.
 //
-// Por break: el CONCURRENTE, que es lo que pide el pane de la librería, y el
-// LINEAL, que es lo que reproduce el pane de fábrica, sólo en los breaks que
-// tienen default. Tres concurrentes y dos lineales: el break A no tiene default
-// (ADR 0087).
+// UNO POR BREAK, Y LO LEEN LOS DOS CLIENTES (ADR 0090). El manifest de
+// interstitials y el concurrente apuntan, para el mismo break, a este mismo
+// archivo: su parte ESTÁNDAR -- `URI` y `DURATION` de cada asset, el Apéndice D.2
+// -- es lo que reproduce el player de fábrica, y el bloque
+// `X-AD-CREATIVE-SIGNALING` que va encima es lo que lee nuestra librería, que cae
+// a esa misma parte estándar cuando no puede dibujar (ADR 0019). El break A no
+// tiene default (ADR 0087): su asset no lleva `URI` y el manifest de interstitials
+// no lo nombra.
 //
 // ---------------------------------------------------------------------------
 // UNA SOLA RESPUESTA POR BREAK, CON TODAS LAS OPCIONES
@@ -32,11 +36,10 @@
 // ---------------------------------------------------------------------------
 // LO QUE CADA CAMPO ES, Y DE DÓNDE SALE
 // ---------------------------------------------------------------------------
-//   URI de nivel superior     EL DEFAULT del break: lo que la librería reproduce
-//       a cuadro entero cuando no queda ninguna opción que se pueda dibujar
-//       (ADR 0019), y lo que reproduce un cliente que no lee el bloque. Es el
-//       creativo 16:9 de la campaña, o sea el mismo aviso lineal del pane de
-//       fábrica. EL BREAK SIN DEFAULT NO LO LLEVA, y sin él la librería saltea el
+//   URI de nivel superior     EL DEFAULT del break y LA PARTE ESTÁNDAR: lo que el
+//       player de fábrica reproduce, y lo que la librería reproduce a cuadro
+//       entero cuando no queda ninguna opción que se pueda dibujar (ADR 0019). Es
+//       el creativo 16:9 de la campaña. EL BREAK SIN DEFAULT NO LO LLEVA, y sin él la librería saltea el
 //       asset (D.5). D.2 hace obligatorio el `URI`; el ADR 0087 dice por qué acá
 //       la ausencia es la forma de decir "sin default".
 //
@@ -53,11 +56,12 @@
 // ---------------------------------------------------------------------------
 // EL CONTROL DEL TRAMO INVERTIDO
 // ---------------------------------------------------------------------------
-// `CONTROL_DURACION_CONCURRENTE=<segundos>` escribe los concurrentes con esa
-// duración en lugar de la del break, dejando los lineales con la suya. Reproduce
-// a propósito el defecto de demo/compatibility-pair/, y es contra lo que se corre
-// el control de test/medir-tramo-invertido.py. No se usa en ninguna corrida
-// normal.
+// `CONTROL_DURACION_CONCURRENTE=<segundos>` escribe la `DURATION` de cada
+// asset-list con esa duración en lugar de la del break. El player de fábrica
+// reproduce el creativo hasta que termina (12 s) y la librería ubica la ventana
+// con la `DURATION` declarada, así que los dos panes salen del break en segundos
+// distintos: es el control de test/medir-tramo-invertido.py. No se usa en ninguna
+// corrida normal.
 //
 // Uso:  escribir-asset-lists.mjs <stage.json> <carpeta-de-salida>
 
@@ -102,13 +106,6 @@ function fijo(p) {
   return p.svgFijo;
 }
 
-/** El asset-list lineal de un break: un aviso a cuadro entero y nada más. */
-function lineal(brk) {
-  return {
-    ASSETS: [{ URI: url(pieza(brk.campana, '16x9').video), DURATION: brk.duracion }]
-  };
-}
-
 /**
  * Una opción de presentación del aviso de un break, en el medio que se le pida.
  *
@@ -141,7 +138,7 @@ function opcion(brk, medio) {
   return { type: forma.layout, layout };
 }
 
-/** El asset-list concurrente de un break: el aviso con sus dos opciones, y su default si tiene. */
+/** El asset-list de un break: la parte estándar (su default, si tiene) y el aviso con sus dos opciones. */
 function concurrente(brk) {
   const duracion = control ?? brk.duracion;
   const asset = {};
@@ -164,11 +161,7 @@ function concurrente(brk) {
 mkdirSync(outDir, { recursive: true });
 const escritos = [];
 for (const brk of stage.breaks) {
-  const archivos = [[brk.concurrente, concurrente(brk)]];
-  if (brk.lineal) archivos.push([brk.lineal, lineal(brk)]);
-  for (const [nombre, contenido] of archivos) {
-    writeFileSync(join(outDir, nombre), JSON.stringify(contenido, null, 2) + '\n');
-    escritos.push(nombre);
-  }
+  writeFileSync(join(outDir, brk.concurrente), JSON.stringify(concurrente(brk), null, 2) + '\n');
+  escritos.push(brk.concurrente);
 }
 process.stdout.write(escritos.join('\n') + '\n');

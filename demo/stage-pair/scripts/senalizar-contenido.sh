@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Escribe la señalización de esta demo: los asset-lists y LA PLAYLIST, con los
-# mismos segmentos del programa más los EXT-X-DATERANGE de cada break.
+# Escribe la señalización de esta demo: los asset-lists y LOS DOS MANIFESTS,
+# cada uno con los mismos segmentos del programa más los EXT-X-DATERANGE de su
+# clase.
 #
 # Corre en cada arranque, y no es una comodidad: el START-DATE de cada tag se
 # resuelve contra el EXT-X-PROGRAM-DATE-TIME de la propia playlist (ADR 0005), y
@@ -8,47 +9,44 @@
 # git apunta al pasado la próxima vez que alguien empaqueta el contenido.
 #
 # ---------------------------------------------------------------------------
-# UNA PLAYLIST, CUALQUIERA SEA LA CAPACIDAD
+# DOS MANIFESTS, UNO POR CLASE, Y UN ASSET-LIST POR BREAK PARA LOS DOS
 # ---------------------------------------------------------------------------
-# Es el ADR 0085. El control de la página declara la capacidad en dos ejes, los
-# dos VIAJAN DE VERDAD en la petición del asset-list, y del otro lado no hay
-# servidor: las demos se publican como archivos estáticos en un bucket. El
-# asset-list de cada break contesta lo mismo siempre -- el aviso con sus dos
-# opciones, video e imagen -- y quien elige es la librería. Hasta la fase 14
-# había una playlist por escalón con la respuesta horneada por valor (ADR 0083).
+# Es el ADR 0090, que supersede al 0007. El manifest de INTERSTITIALS lleva sólo
+# los tags `com.apple.hls.interstitial` y lo carga el player de fábrica; el
+# CONCURRENTE lleva sólo los `com.qualabs.hls.concurrentInterstitial` y lo carga
+# el nuestro. Los dos tags de un break apuntan al MISMO asset-list: su parte
+# estándar la reproduce hls.js, y el bloque de encima lo lee nuestra librería,
+# que cae a esa parte estándar cuando no puede dibujar. La capacidad viaja en el
+# pedido y la librería filtra (ADR 0085).
 #
-# UN BREAK NO TIENE DEFAULT (ADR 0087): el A. No lleva tag lineal, así que el
-# pane de fábrica no pone nada, y su asset concurrente no lleva `URI`, así que
-# cuando ninguna opción entra en la capacidad la librería lo saltea.
+# UN BREAK NO TIENE DEFAULT (ADR 0087): el A. El manifest de interstitials no lo
+# nombra, así que el player de fábrica no pone nada, y su asset-list no lleva
+# `URI`, así que cuando ninguna opción entra en la capacidad la librería lo
+# saltea.
 #
-# ---------------------------------------------------------------------------
-# UN ASSET-LIST LINEAL POR BREAK, Y ES DONDE MUERE EL TRAMO INVERTIDO
-# ---------------------------------------------------------------------------
-# Es el ADR 0082. demo/compatibility-pair/ señaliza sus cinco breaks contra UN
-# único asset-list lineal de 12 s, con un quinto break concurrente de 48: de ahí
-# sale que durante 12 de esos 48 segundos el pane de fábrica ya volvió al
-# programa y el nuestro sigue tapado, o sea la comparación al revés. Acá cada
-# break trae su propio lineal, con la duración de SU break y con el creativo 16:9
-# de SU campaña, así que los dos panes entran y salen del break en el mismo
-# segundo -- y el START-DATE compartido del ADR 0007 no hubo que tocarlo.
+# Y NO HAY TRAMO INVERTIDO POR CONSTRUCCIÓN (ADR 0082): los dos clientes leen el
+# MISMO asset-list, con la duración de su break, así que entran y salen del break
+# en el mismo segundo. `demo/stage-pair/test/medir-tramo-invertido.py` lo mide.
 #
 # ---------------------------------------------------------------------------
 # LAS VARIABLES DE ENTORNO, Y PARA QUÉ EXISTEN
 # ---------------------------------------------------------------------------
-#   SRC          la playlist de entrada     (default content/primary/index.m3u8)
-#   OUT          la playlist señalizada     (default, de stage.json)
-#   SIGNALLING   dónde van los asset-lists  (default signalling)
+#   SRC                la playlist de entrada        (default content/primary/index.m3u8)
+#   OUT_INTERSTITIAL   el manifest de interstitials  (default, de stage.json)
+#   OUT_CONCURRENTE    el manifest concurrente       (default, de stage.json)
+#   SIGNALLING         dónde van los asset-lists     (default signalling)
 #
-# Las tres existen para que el test pueda correr ESTE script sobre una playlist
+# Las cuatro existen para que el test pueda correr ESTE script sobre una playlist
 # mínima y contar lo que salió DE VERDAD, sin ffmpeg y sin los 30 MB de video.
 # Leer el texto de este archivo y encontrar un printf que menciona una clase
 # prueba que alguien la tipeó, no que la playlist salga con ella.
 #
-#   CONTROL_DURACION_CONCURRENTE=<s>   EL CONTROL, y sólo eso. Escribe los
-#       asset-lists concurrentes con esa duración en lugar de la de su break,
-#       dejando los lineales con la suya: reproduce a propósito el defecto de
-#       compatibility-pair para que la medición del tramo invertido tenga contra
-#       qué ponerse roja. No se usa en ninguna corrida normal.
+#   CONTROL_DURACION_CONCURRENTE=<s>   EL CONTROL, y sólo eso. Escribe la
+#       DURATION de los asset-lists con esa duración en lugar de la de su break:
+#       el player de fábrica reproduce el creativo hasta que termina y la
+#       librería ubica la ventana con lo declarado, así que la medición del
+#       tramo invertido tiene contra qué ponerse roja. No se usa en ninguna
+#       corrida normal.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -58,7 +56,8 @@ SIGNALLING=${SIGNALLING:-signalling}
 
 leer() { node -e 'const s=require(process.argv[1]);let v=s;for(const k of process.argv[2].split("."))v=v[k];process.stdout.write(String(v))' "$DEMO/stage.json" "$1"; }
 
-OUT=${OUT:-$(leer playlists.par)}
+OUT_INTERSTITIAL=${OUT_INTERSTITIAL:-$(leer playlists.interstitial)}
+OUT_CONCURRENTE=${OUT_CONCURRENTE:-$(leer playlists.concurrente)}
 
 # Las dos clases del ADR 0007, escritas una sola vez. La de Apple es la que el
 # pane de fábrica reproduce; la concurrente es la que reproduce el nuestro. En
@@ -119,58 +118,49 @@ medios() { # $1 ruta del asset-list concurrente
 
 suma() { awk -v a="$1" -v b="$2" 'BEGIN { printf "%s", a + b }'; }
 
-# Un break son dos tags con el MISMO START-DATE (ADR 0007), cada uno con su ID y
-# su asset-list.
+# El tag de cada clase, para un break, apuntando al asset-list de ESE break.
 #
-# EL TAG LINEAL VA EN LA FORMA DE REEMPLAZO, y la forma es la AUSENCIA de
-# X-RESUME-OFFSET: sin el atributo el primario retoma donde el aviso terminó, así
-# que un pedazo del programa no se ve y los dos panes se quedan en el mismo
-# segundo del programa (ADR 0017). Escrito en 0 pide la otra cosa -- el primario
-# retoma donde lo interrumpieron -- y el pane de fábrica se atrasa la duración del
-# aviso en cada break. Entre las dos formas decidió una medición: con el atributo
-# ausente hls.js 1.7.2 resuelve el punto de retorno contra el largo que MIDIÓ del
-# aviso, que es lo que sigue siendo cierto si el aviso cambia de largo.
+# EL TAG DE INTERSTITIALS VA EN LA FORMA DE REEMPLAZO, y la forma es la AUSENCIA
+# de X-RESUME-OFFSET: sin el atributo el primario retoma donde el aviso terminó,
+# así que los dos panes se quedan en el mismo segundo del programa (ADR 0017).
+# Entre las dos formas decidió una medición: con el atributo ausente hls.js 1.7.2
+# resuelve el punto de retorno contra el largo que MIDIÓ del aviso.
 #
 # El X-RESUME-OFFSET del tag concurrente no significa nada, porque no hay nada
 # interrumpido que reanudar (ADR 0016), y se escribe como en las demás demos.
 #
-# CADA TAG DECLARA EL LARGO DE SU PROPIO ASSET-LIST. Acá los dos coinciden en los
-# breaks que tienen los dos, y ésa es toda la diferencia con compatibility-pair.
-#
-# UN BREAK SIN DEFAULT NO LLEVA EL TAG LINEAL (ADR 0087): `$4` llega vacío y sale
-# sólo el concurrente.
-par_de_tags() { # $1 id del break, $2 offset, $3 lista concurrente, $4 lista lineal o vacío
-  local id=$1 offset=$2 lista=$3 lineal=$4 start largo_c largo_l
+# LOS DOS DECLARAN EL LARGO DEL MISMO ASSET-LIST, leído del archivo.
+tag_de() { # $1 clase (interstitial|concurrente), $2 id del break, $3 offset, $4 asset-list
+  local clase=$1 id=$2 offset=$3 lista=$4 start largo
   start=$(date -d "$PDT + $offset seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
-  largo_c=$(declaracion "$SIGNALLING/$lista" | head -1)
-  if [ -n "$lineal" ]; then
-    largo_l=$(declaracion "$SIGNALLING/$lineal" | head -1)
+  largo=$(declaracion "$SIGNALLING/$lista" | head -1)
+  if [ "$clase" = interstitial ]; then
     printf '#EXT-X-DATERANGE:ID="AD-%s-LINEAR",CLASS="%s",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
-      "${id^^}" "$CLASE_LINEAL" "$start" "$lineal" "$largo_l"
+      "${id^^}" "$CLASE_LINEAL" "$start" "$lista" "$largo"
+  else
+    printf '#EXT-X-DATERANGE:ID="AD-%s-CONCURRENT",CLASS="%s",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
+      "${id^^}" "$CLASE_CONCURRENTE" "$start" "$lista" "$largo"
   fi
-  printf '#EXT-X-DATERANGE:ID="AD-%s-CONCURRENT",CLASS="%s",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
-    "${id^^}" "$CLASE_CONCURRENTE" "$start" "$lista" "$largo_c"
 }
 
-# El recorrido sale de stage.json: id, offset, duración, campaña, forma y los
-# nombres de los tres asset-lists del break. Ni un segundo tipeado acá.
+# El recorrido sale de stage.json: id, offset, duración, campaña, forma, el
+# asset-list del break y si tiene default lineal. Ni un segundo tipeado acá.
 RECORRIDO=$(node -e '
   const s = require(process.argv[1]);
   process.stdout.write(s.breaks.map((b) =>
-    [b.id, b.offset, b.duracion, b.campana, b.forma, b.concurrente, b.lineal ?? ""].join("|")
+    [b.id, b.offset, b.duracion, b.campana, b.forma, b.concurrente, b.lineal ? "si" : ""].join("|")
   ).join("\n") + "\n");
 ' "$DEMO/stage.json")
 
-# Una playlist por escalón: los mismos segmentos, los mismos START-DATE, y lo
-# único que cambia es a qué asset-list concurrente apunta cada break.
-escribir_playlist() { # $1 salida
-  local salida=$1 tags=""
+# Un manifest por clase: los mismos segmentos y los mismos START-DATE. El de
+# interstitials nombra sólo los breaks con default lineal.
+escribir_playlist() { # $1 salida, $2 clase (interstitial|concurrente)
+  local salida=$1 clase=$2 tags=""
   while IFS='|' read -r id offset duracion campana forma lista lineal; do
     [ -n "$id" ] || continue
-    for f in "$lista" $lineal; do
-      [ -f "$SIGNALLING/$f" ] || { echo "falta $SIGNALLING/$f" >&2; exit 1; }
-    done
-    tags="$tags$(par_de_tags "$id" "$offset" "$lista" "$lineal")
+    [ -f "$SIGNALLING/$lista" ] || { echo "falta $SIGNALLING/$lista" >&2; exit 1; }
+    [ "$clase" = interstitial ] && [ -z "$lineal" ] && continue
+    tags="$tags$(tag_de "$clase" "$id" "$offset" "$lista")
 "
   done <<< "$RECORRIDO"
   mkdir -p "$(dirname "$salida")"
@@ -183,8 +173,9 @@ escribir_playlist() { # $1 salida
   echo "$salida  ($(/usr/bin/grep -c '^#EXT-X-DATERANGE:' "$salida") Date Ranges)"
 }
 
-escribir_playlist "$OUT"
-echo "$SIGNALLING/  ($(ls "$SIGNALLING" | /usr/bin/grep -c '^asset-list-\(break\|linear\)-') asset-lists del par)"
+escribir_playlist "$OUT_INTERSTITIAL" interstitial
+escribir_playlist "$OUT_CONCURRENTE" concurrente
+echo "$SIGNALLING/  ($(ls "$SIGNALLING" | /usr/bin/grep -c '^asset-list-break-') asset-lists del par)"
 
 # ---------------------------------------------------------------------------
 # EL RECORRIDO, que es la tabla con la que se graba y se mira.
@@ -197,10 +188,10 @@ while IFS='|' read -r id offset duracion campana forma lista lineal; do
   printf '  break %s  t=%3ss a %3ss  (%ss)  %-22s %s\n' \
     "${id^^}" "$offset" "$(suma "$offset" "$largo")" "$largo" "$(leer "formas.$forma.layout")" "$(leer "campanas.$campana.marca")"
   if [ -n "$lineal" ]; then
-    printf '      de fábrica   %-26s aviso lineal, el programa se reemplaza\n' "$lineal"
+    printf '      de fábrica   %-26s la parte estándar, a cuadro entero: el programa se reemplaza\n' "$lista"
     printf '      librería     %-26s %s; sin opción que entre, el lineal\n' "$lista" "$(medios "$SIGNALLING/$lista")"
   else
-    printf '      de fábrica   %-26s sin tag lineal: no hay default y el programa sigue\n' "-"
+    printf '      de fábrica   %-26s sin tag en su manifest: no hay default y el programa sigue\n' "-"
     printf '      librería     %-26s %s; sin opción que entre, se saltea\n' "$lista" "$(medios "$SIGNALLING/$lista")"
   fi
 done <<< "$RECORRIDO"
@@ -208,16 +199,14 @@ done <<< "$RECORRIDO"
 cat <<'TEXTO'
 
 Los dos panes entran y salen de cada break con default EN EL MISMO SEGUNDO,
-porque el lineal de cada break dura lo que ese break (ADR 0082). No hay tramo
-invertido: es lo único que esta demo hace distinto de compatibility-pair en
-este punto, y es medible -- demo/stage-pair/test/medir-tramo-invertido.py lo mide leyendo el
+porque los dos leen el MISMO asset-list, con la duración de su break (ADR 0082,
+ADR 0090). Lo mide demo/stage-pair/test/medir-tramo-invertido.py leyendo el
 estado de los dos players, y su control es este mismo script corrido con
 CONTROL_DURACION_CONCURRENTE.
 
-El asset-list de cada break es el mismo para cualquier capacidad, y entre sus
-dos opciones cambia UNA sola cosa: el `type` y el `uri` del asset del aviso.
-Mismo layout, mismo viewport, mismo zDepth, misma campaña, misma duración
-(ADR 0084). Quien elige es la librería (ADR 0085).
+El asset-list de cada break es el mismo para cualquier capacidad y para los dos
+clientes: el player de fábrica lee su parte estándar y la librería el bloque de
+encima, con sus dos opciones, video e imagen, y elige (ADR 0085).
 TEXTO
 
 # ---------------------------------------------------------------------------

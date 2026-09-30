@@ -55,3 +55,7 @@ aceptado y explicado: es una demo interna y reescribirle la señalización es re
 un script escribe, así que el costo real es que el que los lee tiene que mirar cuál
 corresponde a cuál break; a cambio, la duración de cada uno se lee al lado del break que la
 usa en lugar de deducirse.
+
+---
+
+**2026-09-30 — nota.** Desde el ADR 0090 el asset-list lineal de cada break es el mismo archivo que lee nuestra librería: su parte estándar es el lineal, con la duración de su break. Lo que decide este ADR sigue en pie, y el tramo invertido ahora no puede aparecer por construcción.

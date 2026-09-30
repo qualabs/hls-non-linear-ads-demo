@@ -1,0 +1,73 @@
+
+== izq=nativo  der=ours-2dec-img   la página leyó la URL: ok
+   ok   break a izq asset que reproduce hls.js: None
+   ok   break a izq (nativo         ) t=  24.5  {'aviso_lineal': False}
+   ok   break a der (ours-2dec-img  ) t=  24.8  {'layout': 'squeezebackDoubleBox', 'video': 2, 'img': 0}
+   ok   break b izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b izq (nativo         ) t=  65.0  {'aviso_lineal': True}
+   ok   break b der (ours-2dec-img  ) t=  69.5  {'layout': 'squeezebackLShape', 'video': 2, 'img': 0}
+   ok   break c izq asset que reproduce hls.js: {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break c izq (nativo         ) t= 110.0  {'aviso_lineal': True}
+   ok   break c der (ours-2dec-img  ) t= 114.5  {'layout': 'lowerThirdOverlay', 'video': 2, 'img': 0}
+   ok   pedidos izq (nativo): 1
+          asset-list-break-c.json?_HLS_primary_id=7debdf7b-a2ea-446f-8a91-76425e17b864
+   ok   pedidos der (ours-2dec-img): 3
+          asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=1
+          asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=1
+          asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=1
+
+== izq=ours-1dec-img  der=ours-1dec-noimg   la página leyó la URL: ok
+   ok   break a izq (ours-1dec-img  ) t=  24.6  {'layout': 'squeezebackLShape', 'video': 1, 'img': 1}
+   ok   break a der (ours-1dec-noimg) t=  24.5  {'layout': None, 'video': 1, 'img': 0}
+   ok   break b izq (ours-1dec-img  ) t=  69.5  {'layout': 'squeezebackDoubleBox', 'video': 1, 'img': 1}
+   ok   break b der (ours-1dec-noimg) t=  69.5  {'layout': 'linear', 'video': 2, 'img': 0}
+   ok   break c izq (ours-1dec-img  ) t= 114.5  {'layout': 'squeezebackLShape', 'video': 1, 'img': 1}
+   ok   break c der (ours-1dec-noimg) t= 114.6  {'layout': 'linear', 'video': 2, 'img': 0}
+   ok   pedidos izq (ours-1dec-img): 3
+          asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=1
+          asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=1
+          asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=1
+   ok   pedidos der (ours-1dec-noimg): 3
+          asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=0
+          asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=0
+          asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=0
+
+== izq=nativo  der=nativo   la página leyó la URL: ok
+   ok   break a izq asset que reproduce hls.js: None
+   ok   break a izq (nativo         ) t=  24.5  {'aviso_lineal': False}
+   ok   break a der asset que reproduce hls.js: None
+   ok   break a der (nativo         ) t=  24.5  {'aviso_lineal': False}
+   ok   break b izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b izq (nativo         ) t=  65.0  {'aviso_lineal': True}
+   ok   break b der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b der (nativo         ) t=  65.0  {'aviso_lineal': True}
+   ok   break c izq asset que reproduce hls.js: {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break c izq (nativo         ) t= 110.0  {'aviso_lineal': True}
+   ok   break c der asset que reproduce hls.js: {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break c der (nativo         ) t= 110.0  {'aviso_lineal': True}
+   ok   pedidos izq (nativo): 1
+          asset-list-break-c.json?_HLS_primary_id=1e4fbad4-0252-4042-982e-a2c1e6eee05d
+   ok   pedidos der (nativo): 1
+          asset-list-break-c.json?_HLS_primary_id=99e6cd09-4205-4ffc-9904-26888c543a09
+
+== izq=ours-2dec-noimg  der=nativo   la página leyó la URL: ok
+   ok   break a izq (ours-2dec-noimg) t=  24.8  {'layout': 'squeezebackDoubleBox', 'video': 2, 'img': 0}
+   ok   break a der asset que reproduce hls.js: None
+   ok   break a der (nativo         ) t=  24.5  {'aviso_lineal': False}
+   ok   break b izq (ours-2dec-noimg) t=  69.5  {'layout': 'squeezebackLShape', 'video': 2, 'img': 0}
+   ok   break b der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b der (nativo         ) t=  65.0  {'aviso_lineal': True}
+   ok   break c izq (ours-2dec-noimg) t= 114.5  {'layout': 'lowerThirdOverlay', 'video': 2, 'img': 0}
+   ok   break c der asset que reproduce hls.js: {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break c der (nativo         ) t= 110.0  {'aviso_lineal': True}
+   ok   pedidos izq (ours-2dec-noimg): 3
+          asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=0
+          asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=0
+          asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=0
+   ok   pedidos der (nativo): 1
+          asset-list-break-c.json?_HLS_primary_id=943b0849-2c5b-49f0-88cd-0bb73d905204
+
+control: en B, 1 dec con imágenes contra sin imágenes -> distintos
+control: en B, nativo contra nativo -> iguales
+
+VERDE

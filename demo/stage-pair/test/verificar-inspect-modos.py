@@ -11,8 +11,8 @@ modo y en los breaks A y B mide:
 
   LO QUE LA PÁGINA DICE QUE SE PIDIÓ. La tarjeta 2 muestra la URL que el
   navegador pidió de verdad (se compara con la red): nuestra librería, el
-  asset-list concurrente con SUS sgai-*; el nativo, el lineal, sin sgai-*, y en
-  A, que no tiene lineal, ningún pedido.
+  asset-list del break con SUS sgai-*; el nativo, el MISMO asset-list (ADR 0090)
+  sin sgai-*, y en A, que no tiene lineal, ningún pedido.
 
   LA TARJETA 4. Con nuestra librería, el desenlace del filtro; en nativo, que no
   hay filtro -- sin opciones inventadas.
@@ -82,7 +82,7 @@ def main():
             ok = leido == modo
             rojo += 0 if ok else 1
             print(f"\n== modo={modo}   URL: {'ok' if ok else 'ROJO ' + str(leido)}   control: {pulsado}")
-            for brk_id in ("a", "b"):
+            for brk_id in ("a", "b", "c"):
                 brk = BREAKS[brk_id]
                 pagina.get_by_role("button", name=f"break {brk_id.upper()}", exact=True).click()
                 pagina.wait_for_function("""t => { const d = window.demo;
@@ -95,7 +95,7 @@ def main():
                 ok_dibujo = obtenido == esp
                 pedido = pagina.locator("#request").inner_text().strip()
                 if modo == "nativo":
-                    ok_pedido = (pedido.startswith(f"/signalling/asset-list-linear-{brk_id}.json") and "sgai-" not in pedido) \
+                    ok_pedido = (pedido.startswith(f"/signalling/asset-list-break-{brk_id}.json") and "sgai-" not in pedido) \
                         if brk["lineal"] else "no request" in pedido
                 else:
                     dec, img = modo.split("-")[1:]

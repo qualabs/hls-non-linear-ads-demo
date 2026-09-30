@@ -258,7 +258,10 @@ def main():
 
     # ── 1. lo que viaja ─────────────────────────────────────────────────────
     queries = {}
-    for url, _ in pedidos:
+    # Sólo los pedidos de nuestra librería, los que llevan sgai-*: desde el ADR
+    # 0090 el player de fábrica de index.html pide el MISMO asset-list, con su
+    # propio _HLS_primary_id, y ése no es el control de las capacidades.
+    for url, _ in [(u, c) for u, c in pedidos if "sgai-" in u]:
         q = url.split("?", 1)[1] if "?" in url else ""
         queries.setdefault(q, 0)
         queries[q] += 1

@@ -1,11 +1,11 @@
 ---
 id: "0007"
 title: Mostrar la compatibilidad hacia atrás con dos players sobre el mismo manifiesto
-status: accepted
+status: superseded
 scope: phase-01
 date: 2026-09-03
 supersedes: null
-superseded_by: null
+superseded_by: "0090"
 ---
 
 ## Contexto
@@ -76,3 +76,7 @@ sobre la fusión de tags con identificador repetido.
 > (nota del 2026-09-04 del ADR 0015). Y el argumento de este ADR deja de apoyarse
 > en el atraso del cliente de mercado, porque desde el ADR 0017 ese pane reemplaza
 > en lugar de insertar y el atraso no existe.
+
+---
+
+**2026-09-30 — superseded por el ADR 0090** en `demo/stage-pair/`: cada player carga el manifest de su clase y los dos tags de un break nombran el mismo asset-list. `demo/compatibility-pair/` sigue mostrando esta decisión tal cual.
