@@ -1,0 +1,4 @@
+ok   index.html    mouse fuera: [{'barra': 1, 'play': 0, 'marcas': 2}, {'barra': 1, 'play': 0, 'marcas': 3}]   mouse encima (1er player): {'barra': 1, 'play': 1, 'marcas': 2}   errores 0
+ok   inspect.html  mouse fuera: [{'barra': 1, 'play': 0, 'marcas': 3}]   mouse encima (1er player): {'barra': 1, 'play': 1, 'marcas': 3}   errores 0
+ok   race.html     mouse fuera: [{'barra': 0, 'play': 0, 'marcas': 5}]   mouse encima (1er player): {'barra': 1, 'play': 1, 'marcas': 5}   errores 0
+VERDE
