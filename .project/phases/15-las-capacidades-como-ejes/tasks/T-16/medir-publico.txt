@@ -1,0 +1,17 @@
+ok   ours-2dec-img    A  player 774  t1 516 t2 629 t3 947 t4 947  líneas URL 1  scrollY 0  (/signalling/asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=1)
+ok   ours-2dec-img    B  player 774  t1 516 t2 629 t3 947 t4 947  líneas URL 1  scrollY 0  (/signalling/asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=1)
+ok   ours-2dec-img    C  player 774  t1 516 t2 629 t3 947 t4 947  líneas URL 1  scrollY 0  (/signalling/asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=1)
+     errores de consola: 0
+ok   ours-1dec-img    A  player 774  t1 516 t2 629 t3 947 t4 947  líneas URL 1  scrollY 0  (/signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=1)
+ok   ours-1dec-img    B  player 774  t1 516 t2 629 t3 947 t4 947  líneas URL 1  scrollY 0  (/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=1)
+ok   ours-1dec-img    C  player 774  t1 516 t2 629 t3 947 t4 947  líneas URL 1  scrollY 0  (/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=1)
+     errores de consola: 0
+ok   ours-1dec-noimg  A  player 756  t1 516 t2 629 t3 947 t4 947  líneas URL 1  scrollY 0  (/signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=0)
+ok   ours-1dec-noimg  B  player 774  t1 516 t2 629 t3 947 t4 947  líneas URL 1  scrollY 0  (/signalling/asset-list-break-b.json?sgai-video-decoders=1&sgai-image-over-video=0)
+ok   ours-1dec-noimg  C  player 774  t1 516 t2 629 t3 947 t4 947  líneas URL 1  scrollY 0  (/signalling/asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=0)
+     errores de consola: 0
+ok   nativo           A  player 734  t1 348 t2 461 t3 947 t4 947  líneas URL 1  scrollY 0  (no request for this break has gone out yet)
+ok   nativo           B  player 734  t1 477 t2 591 t3 947 t4 947  líneas URL 1  scrollY 0  (/signalling/asset-list-break-b.json?_HLS_primary_id=a13e9af3-8d47-4ebd-b055-91157464c9d8)
+ok   nativo           C  player 734  t1 477 t2 591 t3 947 t4 947  líneas URL 1  scrollY 0  (/signalling/asset-list-break-c.json?_HLS_primary_id=4af1ddb3-ec2b-4a18-924a-0b8f7fcec12f)
+     errores de consola: 0
+VERDE
