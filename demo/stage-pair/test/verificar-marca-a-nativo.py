@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""La barra del player nativo de index deja de marcar el break que saltea, y no lo vuelve a marcar.
+"""La barra del player nativo deja de marcar el break que saltea, y no lo vuelve a marcar.
 
 Fase 15, T-21, pedido de David: el break A no tiene default (ADR 0087, 0091) y el
 hls.js de fábrica lo saltea, así que su barra no lo marca desde que se sabe --
@@ -17,7 +17,9 @@ del programa por su `left`, y no una propiedad de la página.
   3. después de cada salto: start, break A, break B, break C;
   4. un seek con la barra, un clic en el riel, a un punto antes de A, y el programa
      corriendo hasta pasar A; hls.js tiene que haber vuelto a pedir la lista de A
-     (se lee en la red), que es el caso de volver a programar el interstitial.
+     (se lee en la red), que es el caso de volver a programar el interstitial;
+  5. sólo inspect: a nuestra librería y de vuelta al nativo, y otro seek con la
+     barra antes de A después del cambio.
 
 EL CONTROL es la misma medición contra la página publicada antes de este cambio:
 ahí A sigue marcado después de cargar.
@@ -73,78 +75,100 @@ def main():
     salida = Path(args.salida)
     salida.mkdir(parents=True, exist_ok=True)
     rojo, filas = 0, []
-    nat = ("#slot-izq", "window.demo.lados.izq.programa")
-    nuestro = ("#slot-der", "window.demo.lados.der.programa")
 
-    def fila(pagina, paso, esperado_nat, nombre_captura, nuestro_completo=True):
+    def fila(pagina, pag, paso, caja, reloj, esperado, extra=None):
+        """Una fila: lo que marca la barra de `caja`, y en index también el pane nuestro."""
         nonlocal rojo
-        m_nat = breaks_marcados(pagina, *nat)
-        m_nuestro = breaks_marcados(pagina, *nuestro)
-        # El nuestro resuelve sus listas al arrancar (ADR 0039): en los dos primeros
-        # pasos puede estar a medio resolver, y ahí sólo se informa.
-        ok = (esperado_nat is None or m_nat == esperado_nat) and (not nuestro_completo or m_nuestro == ["a", "b", "c"])
+        marcados = breaks_marcados(pagina, caja, reloj)
+        ok = esperado is None or marcados == esperado
+        texto_extra = ""
+        if extra:
+            m_extra = breaks_marcados(pagina, *extra["barra"])
+            ok = ok and (not extra["exigir"] or m_extra == ["a", "b", "c"])
+            texto_extra = f"   nuestro {m_extra}"
         rojo += 0 if ok else 1
-        t = pagina.evaluate(f"() => {nat[1]}.currentTime")
-        print(f"   {'ok  ' if ok else 'ROJO'} {paso:<44} t={t:6.1f}  nativo marca {m_nat}"
-              f"{'' if esperado_nat is None or m_nat == esperado_nat else ' (esperado ' + str(esperado_nat) + ')'}"
-              f"   nuestro {m_nuestro}")
-        pagina.locator("#pane-izq .player").first.screenshot(path=str(salida / f"{nombre_captura}.png"))
-        filas.append({"paso": paso, "t": t, "nativo": m_nat, "nuestro": m_nuestro, "ok": ok})
+        t = pagina.evaluate(f"() => {reloj}.currentTime")
+        print(f"   {'ok  ' if ok else 'ROJO'} {paso:<44} t={t:6.1f}  marca {marcados}"
+              f"{'' if esperado is None or marcados == esperado else ' (esperado ' + str(esperado) + ')'}{texto_extra}")
+        nombre = pag + "-" + paso.split(" (")[0].replace(".", "").replace("'", "").replace(" ", "-").lower()
+        pagina.locator(f"{caja} .player").first.screenshot(path=str(salida / f"{nombre}.png"))
+        filas.append({"pagina": pag, "paso": paso, "t": t, "marca": marcados, "ok": ok})
 
-    with sync_playwright() as pw:
-        nav = pw.chromium.launch(channel="chrome",
-                                 args=["--autoplay-policy=no-user-gesture-required", "--mute-audio"])
-        pagina = nav.new_page(viewport={"width": 1920, "height": 960})
-        pedidos_a = []
-        pagina.on("request", lambda r: "asset-list-break-a.json?_HLS_primary_id" in r.url and pedidos_a.append(time.monotonic()))
-        pagina.goto(f"{base}/index.html?izq=nativo&der=ours-2dec-img")
-        pagina.wait_for_function(f"window.demo && window.demo.lados && {nat[1]}.duration > 0 "
-                                 "&& document.querySelectorAll('#slot-izq .qa-mark').length > 0", timeout=30000)
-        print("== index, player nativo a la izquierda")
-        # 1. Antes de que llegue la lista de A: se informa lo que haya, sin esperado.
-        fila(pagina, "1. apenas carga (lista de A sin llegar)", None, "1-apenas-carga", nuestro_completo=False)
-        # 2. Cargada: la lista de A llegó.
-        pagina.wait_for_function("() => window.demo.lados.izq.stock.hls.interstitialsManager.events"
-                                 ".some((e) => e.identifier === 'AD-A-LINEAR' && e.assetListLoaded)", timeout=30000)
-        time.sleep(0.5)
-        fila(pagina, "2. cargada (lista de A llegó)", ["b", "c"], "2-cargada", nuestro_completo=False)
-        # 3. Los saltos, que reconstruyen los dos players.
-        for texto, destino in (("start", 0.05), ("break A", None), ("break B", None), ("break C", None)):
-            pagina.get_by_role("button", name=texto, exact=True).click()
-            time.sleep(4)
-            fila(pagina, f"3. salto '{texto}'", ["b", "c"], f"3-salto-{texto.replace(' ', '-').lower()}")
-        # 4. Un seek con la barra a un punto antes de A, con el cromo arriba (ADR 0028).
-        antes = len(pedidos_a)
-        track = pagina.locator("#slot-izq .qa-track")
-        pagina.locator("#slot-izq").hover()
+    def seek_con_barra(pagina, caja, reloj, segundo):
+        """Un clic en el riel, con el cromo arriba (ADR 0028)."""
+        pagina.locator(caja).hover()
         time.sleep(0.4)
-        caja = track.bounding_box()
-        largo = pagina.evaluate(f"() => {nat[1]}.duration")
-        pagina.mouse.click(caja["x"] + caja["width"] * (8 / largo), caja["y"] + caja["height"] / 2)
-        pagina.wait_for_function(f"() => {nat[1]}.currentTime < 15", timeout=15000)
+        riel = pagina.locator(f"{caja} .qa-track").bounding_box()
+        largo = pagina.evaluate(f"() => {reloj}.duration")
+        pagina.mouse.click(riel["x"] + riel["width"] * (segundo / largo), riel["y"] + riel["height"] / 2)
+        pagina.wait_for_function(f"() => {reloj}.currentTime < {segundo + 6}", timeout=15000)
         pagina.mouse.move(5, 5)
         time.sleep(1.5)
-        fila(pagina, "4. seek con la barra antes de A", ["b", "c"], "4-seek-barra-antes-de-a")
-        pagina.wait_for_function(f"() => {nat[1]}.currentTime > 34", timeout=60000, polling=250)
-        fila(pagina, "4. y el programa pasó por A", ["b", "c"], "4-paso-por-a")
+
+    def recorrido(pagina, pag, caja, reloj, stock, extra=None):
+        """Los pasos 1 a 4, iguales en las dos páginas."""
+        nonlocal rojo
+        pedidos_a = []
+        pagina.on("request", lambda r: "asset-list-break-a.json?_HLS_primary_id" in r.url and pedidos_a.append(1))
+        pagina.wait_for_function(f"() => window.demo && {reloj} && {reloj}.duration > 0 "
+                                 f"&& document.querySelectorAll('{caja} .qa-mark').length > 0", timeout=30000)
+        temprano = dict(extra, exigir=False) if extra else None
+        fila(pagina, pag, "1. apenas carga (lista de A sin llegar)", caja, reloj, None, temprano)
+        pagina.wait_for_function(f"() => {stock}.hls.interstitialsManager.events"
+                                 ".some((e) => e.identifier === 'AD-A-LINEAR' && e.assetListLoaded)", timeout=30000)
+        time.sleep(0.5)
+        fila(pagina, pag, "2. cargada (lista de A llegó)", caja, reloj, ["b", "c"], temprano)
+        for texto in ("start", "break A", "break B", "break C"):
+            pagina.get_by_role("button", name=texto, exact=True).click()
+            time.sleep(4)
+            fila(pagina, pag, f"3. salto '{texto}'", caja, reloj, ["b", "c"], extra)
+        antes = len(pedidos_a)
+        seek_con_barra(pagina, caja, reloj, 8)
+        fila(pagina, pag, "4. seek con la barra antes de A", caja, reloj, ["b", "c"], extra)
+        pagina.wait_for_function(f"() => {reloj}.currentTime > 34", timeout=60000, polling=250)
+        fila(pagina, pag, "4. y el programa pasó por A", caja, reloj, ["b", "c"], extra)
         repedida = len(pedidos_a) > antes
         rojo += 0 if repedida else 1
         print(f"   {'ok  ' if repedida else 'ROJO'} hls.js volvió a pedir la lista de A después del seek: "
               f"{len(pedidos_a) - antes} pedido(s)")
+        return pedidos_a
+
+    with sync_playwright() as pw:
+        nav = pw.chromium.launch(channel="chrome",
+                                 args=["--autoplay-policy=no-user-gesture-required", "--mute-audio"])
+
+        print("== index, player nativo a la izquierda")
+        pagina = nav.new_page(viewport={"width": 1920, "height": 960})
+        pagina.goto(f"{base}/index.html?izq=nativo&der=ours-2dec-img")
+        recorrido(pagina, "index", "#slot-izq", "window.demo.lados.izq.programa", "window.demo.lados.izq.stock",
+                  extra={"barra": ("#slot-der", "window.demo.lados.der.programa"), "exigir": True})
         pagina.close()
 
-        # inspect.html, modo nativo: sin cambios, marca los tres.
+        print("\n== inspect.html?modo=nativo")
         pagina = nav.new_page(viewport={"width": 1920, "height": 960})
         pagina.goto(f"{base}/inspect.html?modo=nativo")
-        pagina.wait_for_function("() => window.demo?.stock?.hls.interstitialsManager?.events"
-                                 ".some((e) => e.identifier === 'AD-A-LINEAR' && e.assetListLoaded)", timeout=40000)
-        time.sleep(0.5)
-        m = breaks_marcados(pagina, "#slot", "window.demo.stock.programme")
-        ok = m == ["a", "b", "c"]
-        rojo += 0 if ok else 1
-        print(f"\n== inspect.html?modo=nativo\n   {'ok  ' if ok else 'ROJO'} con la lista de A llegada marca {m} (sin cambios)")
-        pagina.locator("#slot .player").first.screenshot(path=str(salida / "inspect-nativo.png"))
-        filas.append({"paso": "inspect nativo", "nativo": m, "ok": ok})
+        nativo = ("#slot", "window.demo.stock.programme")
+        pedidos_a = recorrido(pagina, "inspect", *nativo, "window.demo.stock")
+        # 5. A nuestra librería, que marca los tres, y de vuelta al nativo, que reconstruye.
+        pagina.get_by_role("button", name="With our library", exact=True).click()
+        pagina.wait_for_function("() => window.demo.modo === 'ours' && document.querySelectorAll('#slot .qa-mark').length === 3",
+                                 timeout=30000)
+        fila(pagina, "inspect", "5. cambio a nuestra librería", "#slot", "window.demo.video", ["a", "b", "c"])
+        pagina.get_by_role("button", name="HLS interstitials, native", exact=True).click()
+        pagina.wait_for_function("() => window.demo.modo === 'nativo' && document.querySelectorAll('#slot .qa-mark').length > 0",
+                                 timeout=30000)
+        time.sleep(1.5)
+        fila(pagina, "inspect", "5. de vuelta al nativo", *nativo, ["b", "c"])
+        antes = len(pedidos_a)
+        seek_con_barra(pagina, *nativo, 8)
+        fila(pagina, "inspect", "5. seek con la barra antes de A, tras el cambio", *nativo, ["b", "c"])
+        pagina.wait_for_function(f"() => {nativo[1]}.currentTime > 34", timeout=60000, polling=250)
+        fila(pagina, "inspect", "5. y el programa pasó por A, tras el cambio", *nativo, ["b", "c"])
+        repedida = len(pedidos_a) > antes
+        rojo += 0 if repedida else 1
+        print(f"   {'ok  ' if repedida else 'ROJO'} hls.js volvió a pedir la lista de A tras el cambio y el seek: "
+              f"{len(pedidos_a) - antes} pedido(s)")
+        pagina.close()
         nav.close()
     (salida / "verificar-marca-a-nativo.json").write_text(json.dumps(filas, indent=2))
     print("\nVERDE" if rojo == 0 else f"\nROJO ({rojo})")

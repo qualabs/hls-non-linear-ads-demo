@@ -44,7 +44,7 @@
  *                   skip, owned by the PAGE so that it outlives this instance.
  *                   With it, the bar stops marking those breaks; see
  *                   `programRanges`. Without it the bar marks every scheduled
- *                   break, which is what inspect.html keeps.
+ *                   break. Both pages pass one (ADR 0092).
  */
 export function createStockPlayer({ video, container, src, pane, state, hud, skipped = null }) {
   // Factory configuration: not one option is passed. This is the difference

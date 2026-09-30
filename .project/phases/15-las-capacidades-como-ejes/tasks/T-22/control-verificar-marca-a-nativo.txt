@@ -1,0 +1,28 @@
+== index, player nativo a la izquierda
+   ok   1. apenas carga (lista de A sin llegar)      t=   0.0  marca ['a', 'b', 'c']   nuestro []
+   ok   2. cargada (lista de A llegó)                t=   6.5  marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   3. salto 'start'                             t=   2.9  marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   3. salto 'break A'                           t=  17.3  marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   3. salto 'break B'                           t=  62.6  marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   3. salto 'break C'                           t= 108.1  marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   4. seek con la barra antes de A              t=   9.2  marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   4. y el programa pasó por A                  t=  34.2  marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   hls.js volvió a pedir la lista de A después del seek: 1 pedido(s)
+
+== inspect.html?modo=nativo
+   ok   1. apenas carga (lista de A sin llegar)      t=   0.0  marca ['a', 'b', 'c']
+   ROJO 2. cargada (lista de A llegó)                t=   3.1  marca ['a', 'b', 'c'] (esperado ['b', 'c'])
+   ROJO 3. salto 'start'                             t=   2.4  marca ['a', 'b', 'c'] (esperado ['b', 'c'])
+   ROJO 3. salto 'break A'                           t=  17.6  marca ['a', 'b', 'c'] (esperado ['b', 'c'])
+   ROJO 3. salto 'break B'                           t=  62.6  marca ['a', 'b', 'c'] (esperado ['b', 'c'])
+   ROJO 3. salto 'break C'                           t= 107.6  marca ['a', 'b', 'c'] (esperado ['b', 'c'])
+   ROJO 4. seek con la barra antes de A              t=   9.3  marca ['a', 'b', 'c'] (esperado ['b', 'c'])
+   ROJO 4. y el programa pasó por A                  t=  34.2  marca ['a', 'b', 'c'] (esperado ['b', 'c'])
+   ok   hls.js volvió a pedir la lista de A después del seek: 2 pedido(s)
+   ok   5. cambio a nuestra librería                 t=  35.8  marca ['a', 'b', 'c']
+   ROJO 5. de vuelta al nativo                       t=  37.2  marca ['a', 'b', 'c'] (esperado ['b', 'c'])
+   ROJO 5. seek con la barra antes de A, tras el cambio t=   9.2  marca ['a', 'b', 'c'] (esperado ['b', 'c'])
+   ok   5. y el programa pasó por A, tras el cambio  t=  34.2  marca ['b', 'c']
+   ok   hls.js volvió a pedir la lista de A tras el cambio y el seek: 2 pedido(s)
+
+ROJO (9)

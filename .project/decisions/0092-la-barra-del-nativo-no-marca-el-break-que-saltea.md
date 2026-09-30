@@ -38,3 +38,7 @@ esa marca se vaya en cuanto se sabe que el break se saltea y no vuelva nunca.
   cargado" después de reproducirse, así que nunca cumple la condición. Si una versión futura de
   hls.js cambiara eso, `test/verificar-marca-a-nativo.py` lo detecta: B y C tienen que seguir
   marcados.
+
+> **Nota del 2026-09-30.** David pidió lo mismo para el modo nativo de `inspect.html` (T-22), así
+> que el punto que decía que `inspect.html` no pasa el `Set` ya no vale: también tiene el suyo, de
+> la página, porque ahí un cambio de modo y un salto en modo nativo reconstruyen el player.

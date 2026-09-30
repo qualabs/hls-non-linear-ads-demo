@@ -544,6 +544,13 @@ function armar(config, retomarEn = 0) {
  * playlist said, what hls.js asked for -- the Apple-class list, read off the
  * network like ours -- and what came back. Card 4 says there is no filter.
  */
+/**
+ * The breaks the native client is known to skip, for the whole life of the page:
+ * a jump in native mode and a change of mode both rebuild the player, and a mark
+ * that went away must not come back with the new one (ADR 0092, T-22).
+ */
+const salteadosPorElNativo = new Set();
+
 function armarNativo(retomarEn = 0) {
   derribar();
   intercambio.clear();
@@ -554,7 +561,8 @@ function armarNativo(retomarEn = 0) {
   const { player, video } = construirCaja();
   dom.contract.textContent = '';
   const stock = createStockPlayer({
-    video, container: player, src: SRC.nativo, pane: dom.pane, state: dom.state, hud: dom.hud
+    video, container: player, src: SRC.nativo, pane: dom.pane, state: dom.state, hud: dom.hud,
+    skipped: salteadosPorElNativo
   });
   const alTiempo = () => mostrarBreak(breakDelSegundo(stock.programme.currentTime));
   video.addEventListener('timeupdate', alTiempo);

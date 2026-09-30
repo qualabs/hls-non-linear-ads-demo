@@ -23,6 +23,7 @@
 | T-19 | El break sin default también en el manifest de interstitials; el player de fábrica lo saltea | done | — | [`tasks/T-19/`](tasks/T-19/) · ADR 0091 |
 | T-20 | El panel de pedidos del player nativo muestra el pedido de A y lo que hizo con cada break | done | — | [`tasks/T-20/`](tasks/T-20/) · `js/app.js` |
 | T-21 | La barra del player nativo de index deja de marcar el break que saltea | done | — | [`tasks/T-21/`](tasks/T-21/) · ADR 0092 |
+| T-22 | Lo mismo en el modo nativo de inspect | done | — | [`tasks/T-22/`](tasks/T-22/) · ADR 0092 |
 
 ---
 
@@ -206,4 +207,13 @@ de cada hls.js, y el desenlace sale de sus eventos de interstitial.
   siguen marcados; el pane de nuestra librería e inspect no cambian.
 - **Definition of done:** `test/verificar-marca-a-nativo.py` en verde, local y en la URL pública,
   con capturas de cada paso; control en rojo contra lo publicado antes.
+- **nivel de verificación:** bajo.
+
+## T-22 — La barra nativa de inspect sin la marca del break que saltea
+- **Objective:** en `inspect.html?modo=nativo` la barra deja de marcar A como en index (T-21), y
+  no lo vuelve a marcar.
+- **What it must cover:** lo de T-21 más el cambio de modo, que reconstruye el player. El resto de
+  inspect no cambia; con nuestra librería la barra sigue marcando los tres.
+- **Definition of done:** `test/verificar-marca-a-nativo.py` en verde en las dos páginas, local y
+  en la URL pública; control en rojo contra lo publicado antes.
 - **nivel de verificación:** bajo.

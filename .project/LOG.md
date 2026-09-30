@@ -6180,3 +6180,12 @@ cinco segundos antes del break y queda cargada sin ningún asset; un break con d
 así. Lo guarda la página y no la instancia, porque un salto reconstruye el player y un seek hace que
 hls.js vuelva a pedir la lista. inspect no cambia. ADR 0092. Control: lo publicado antes marca A en
 todos los pasos.
+
+## 2026-09-30 — T-22: la barra nativa de inspect sin la marca de A
+
+David aprobó llevar T-21 al modo nativo de `inspect.html`. Mismo mecanismo, con el `Set` de la
+página en `inspect.js`, porque ahí también reconstruyen el player un cambio de modo y un salto en
+modo nativo. El instrumento de T-21 corre ahora en las dos páginas y en inspect agrega el cambio a
+nuestra librería (que sigue marcando los tres) y la vuelta al nativo. Control contra lo publicado
+antes: nueve filas en rojo en inspect. La única que pasa igual es la del segundo paso por A después
+del cambio, porque ahí el mismo hls.js ya había sacado A de su schedule.
