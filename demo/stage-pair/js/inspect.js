@@ -471,7 +471,9 @@ function armar(config, retomarEn = 0) {
   });
 
   hls.on(Hls.Events.ERROR, (_e, d) => {
-    console.error('[hls] error', d.type, d.details, 'fatal:', d.fatal);
+    // A non-fatal error is one hls.js recovers from -- the usual one is a load
+    // aborted because a rebuild destroyed the instance -- so it is a warning.
+    (d.fatal ? console.error : console.warn)('[hls] error', d.type, d.details, 'fatal:', d.fatal);
   });
 
   hls.on(Hls.Events.MANIFEST_PARSED, () => {
