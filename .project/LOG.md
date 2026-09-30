@@ -6119,3 +6119,13 @@ scroll propio). A 1920×960 el player termina en 774 px y la tarjeta 3 en 946, s
 tarjeta 3 empezaba en 865 y el documento medía 1394. `index.html`: los saltos pasan al lado del
 título del player derecho. Sin cambios de comportamiento: los saltos siguen moviendo los players y
 la consola queda limpia.
+
+## 2026-09-30 — T-16: la tarjeta 3 hasta el pie de la 4, y la URL en una línea
+
+Pedido de David, sólo CSS. En pantallas de 1500×850 o más, la grilla de `inspect.html` ocupa lo
+que queda de la ventana bajo la barra: el player y la tarjeta 4 comparten la columna izquierda
+(la 4 con scroll propio si no entra) y la tarjeta 3 toma lo que queda de la derecha, así que su
+borde inferior coincide con el de la 4 (947 px las dos a 1920×960) y el JSON tiene más lugar. La URL
+de la tarjeta 2 pasa a 12,5 px y entra en una línea en los tres breaks y en los cuatro modos,
+incluido el nativo con su `_HLS_primary_id`. Sin scroll de página para el player y las cuatro
+tarjetas; el pie con los créditos queda debajo.

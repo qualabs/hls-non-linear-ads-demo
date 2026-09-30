@@ -17,6 +17,7 @@
 | T-13 | `inspect.html` con el mismo control que cada player del par, nativo incluido | done | — | [`tasks/T-13/`](tasks/T-13/) · `js/{inspect,capabilities}.js` · `inspect.html` · `test/verificar-inspect-modos.py` |
 | T-14 | Un asset-list, dos clientes: un manifest por clase y la lista enriquecida para los dos (pedido de David) | done | — | [`tasks/T-14/`](tasks/T-14/) · `scripts/{senalizar-contenido.sh,escribir-asset-lists.mjs}` · `js/{app,inspect}.js` · ADR 0090 |
 | T-15 | Layout para la grabación a 1920×1080: inspect sin scroll, los saltos del par en el player derecho | done | — | [`tasks/T-15/`](tasks/T-15/) · `inspect.html` · `index.html` · `css/player.css` |
+| T-16 | Inspect: la tarjeta 3 alineada con la 4 y la URL de la tarjeta 2 en una línea | done | — | [`tasks/T-16/`](tasks/T-16/) · `css/player.css` |
 
 ---
 
