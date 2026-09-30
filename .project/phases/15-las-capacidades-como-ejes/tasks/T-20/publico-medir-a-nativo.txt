@@ -1,0 +1,27 @@
+
+== index (nativo)
+   ok   A: el programa avanzó 20.98 s en 21.0 s de pared, hueco más largo 0.22 s, muestras con aviso 0, waiting 0
+        línea de estado: 78 textos, todos 'primary content · …'
+   ok   control B: hueco más largo 12.07 s, muestras con aviso 59
+        línea de estado: ['LINEAR AD "AD-B-LINEAR" · 0.0s of 12.1s · the content is off the screen'] …
+   ok   consola (4 avisos, ningún error):
+        warning: [stock] error mediaError bufferSeekOverHole fatal: false
+        warning: [stock] error otherError internalException fatal: false
+        warning: [stock] error networkError aborted fatal: false
+        warning: [stock] error networkError aborted fatal: false
+        pedidos: ['asset-list-break-a.json?_HLS_primary_id=299f2295-93ec-4298-8d8e-ce020d23cfdf', 'asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=1', 'asset-list-break-b.json?_HLS_primary_id=299f2295-93ec-4298-8d8e-ce020d23cfdf', 'asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=1', 'asset-list-break-c.json?_HLS_primary_id=299f2295-93ec-4298-8d8e-ce020d23cfdf', 'asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=1']
+   ok   panel de pedidos tras A: 'Asset-list requests this player made\n/signalling/asset-list-break-a.json?_HLS_primary_id=299f2295-93ec-4298-8d8e-ce020d23cfdf → skipped: no default content\n/signalling/asset-list-break-b.json?_HLS_primary_id=299f2295-93ec-4298-8d8e-ce020d23cfdf'
+        tras B: 'Asset-list requests this player made\n/signalling/asset-list-break-a.json?_HLS_primary_id=299f2295-93ec-4298-8d8e-ce020d23cfdf → skipped: no default content\n/signalling/asset-list-break-b.json?_HLS_primary_id=299f2295-93ec-4298-8d8e-ce020d23cfdf → plays its default: the linear ad\n/signalling/asset-list-break-c.json?_HLS_primary_id=299f2295-93ec-4298-8d8e-ce020d23cfdf'
+
+== inspect (nativo)
+   ok   A: el programa avanzó 20.98 s en 21.14 s de pared, hueco más largo 0.21 s, muestras con aviso 0, waiting 0
+        línea de estado: 79 textos, todos 'primary content · …'
+   ok   control B: hueco más largo 12.28 s, muestras con aviso 60
+        línea de estado: ['LINEAR AD "AD-B-LINEAR" · 0.0s of 12.1s · the content is off the screen'] …
+   ok   consola (3 avisos, ningún error):
+        warning: [stock] error otherError internalException fatal: false
+        warning: [stock] error networkError aborted fatal: false
+        warning: [stock] error networkError aborted fatal: false
+        pedidos: ['asset-list-break-a.json?_HLS_primary_id=816e9b1c-38a5-46c5-91fb-3ad1e1c36223', 'asset-list-break-b.json?_HLS_primary_id=816e9b1c-38a5-46c5-91fb-3ad1e1c36223', 'asset-list-break-c.json?_HLS_primary_id=816e9b1c-38a5-46c5-91fb-3ad1e1c36223']
+
+VERDE
