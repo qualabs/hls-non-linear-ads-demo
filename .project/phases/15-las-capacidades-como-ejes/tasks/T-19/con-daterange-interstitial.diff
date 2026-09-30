@@ -1,0 +1,10 @@
+--- publicado (antes)
++++ nuevo
+@@ -4,6 +4,7 @@
+ #EXT-X-MEDIA-SEQUENCE:0
+ #EXT-X-PLAYLIST-TYPE:VOD
+ #EXT-X-INDEPENDENT-SEGMENTS
++#EXT-X-DATERANGE:ID="AD-A-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="2026-09-22T04:40:47.832-0300",X-ASSET-LIST="/signalling/asset-list-break-a.json",X-RESUME-OFFSET=0,X-RESTRICT="SKIP",PLANNED-DURATION=12
+ #EXT-X-DATERANGE:ID="AD-B-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="2026-09-22T04:41:32.832-0300",X-ASSET-LIST="/signalling/asset-list-break-b.json",X-RESTRICT="SKIP",PLANNED-DURATION=12
+ #EXT-X-DATERANGE:ID="AD-C-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="2026-09-22T04:42:17.832-0300",X-ASSET-LIST="/signalling/asset-list-break-c.json",X-RESTRICT="SKIP",PLANNED-DURATION=12
+ #EXTINF:3.036367,

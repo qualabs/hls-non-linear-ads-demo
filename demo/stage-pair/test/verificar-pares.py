@@ -15,7 +15,8 @@ página, y mide por lado:
 
   LO QUE PIDE. La lista de pedidos de asset-list de ESE lado: los dos piden el
   MISMO asset-list por break (ADR 0090), nuestra librería con SUS sgai-* y el
-  nativo sin ellos, y sólo para los breaks con default. Dos lados del mismo modo con capacidades distintas tienen que dar
+  nativo sin ellos, también A, que no tiene default y el nativo saltea (ADR 0091).
+  Dos lados del mismo modo con capacidades distintas tienen que dar
   queries distintas.
 
 EL CONTROL es que la medición distingue: la combinación "nuestro 1 dec con
