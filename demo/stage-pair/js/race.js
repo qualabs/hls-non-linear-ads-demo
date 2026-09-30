@@ -80,7 +80,8 @@ video.muted = true;
 video.play().catch(() => {});
 
 hls.on(Hls.Events.ERROR, (_e, d) => {
-  console.error('[hls] error', d.type, d.details, 'fatal:', d.fatal);
+  // Non-fatal: hls.js recovers, so it is a warning and not an error.
+  (d.fatal ? console.error : console.warn)('[hls] error', d.type, d.details, 'fatal:', d.fatal);
   if (d.fatal) hud.textContent = `error: ${d.details}`;
 });
 hls.on(Hls.Events.MANIFEST_PARSED, () => {

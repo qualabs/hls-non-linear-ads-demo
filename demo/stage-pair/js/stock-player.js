@@ -206,7 +206,8 @@ export function createStockPlayer({ video, container, src, pane, state, hud }) {
   }
 
   hls.on(Hls.Events.ERROR, (_event, d) => {
-    console.error('[stock] error', d.type, d.details, 'fatal:', d.fatal);
+    // Non-fatal: hls.js recovers (typically a load aborted by a rebuild).
+    (d.fatal ? console.error : console.warn)('[stock] error', d.type, d.details, 'fatal:', d.fatal);
   });
 
   video.addEventListener('timeupdate', paint);

@@ -360,7 +360,10 @@ function construirNuestro(lado, capacidades, caja, registro) {
   // =========================================================================
 
   const consumer = traceContract({ provider: concurrent.provider, video: caja.video, hud: p.contract });
-  hls.on(Hls.Events.ERROR, (_e, d) => console.error(`[hls:${lado}] error`, d.type, d.details, 'fatal:', d.fatal));
+  // A non-fatal error is one hls.js recovers from -- the usual one is a load
+  // aborted because a rebuild destroyed the instance -- so it is a warning.
+  hls.on(Hls.Events.ERROR, (_e, d) =>
+    (d.fatal ? console.error : console.warn)(`[hls:${lado}] error`, d.type, d.details, 'fatal:', d.fatal));
   hls.on(Hls.Events.MANIFEST_PARSED, () => {
     const off = hls.interstitialsManager == null;
     p.hud.textContent = `hls.js ${Hls.version} · interstitials manager: ${off ? 'none' : 'PRESENT'} · ` +
