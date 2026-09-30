@@ -1,0 +1,24 @@
+
+== index (nativo)
+   ok   A: el programa avanzó 20.98 s en 20.98 s de pared, hueco más largo 0.21 s, muestras con aviso 0, waiting 0
+        línea de estado: 77 textos, todos 'primary content · …'
+   ok   control B: hueco más largo 12.19 s, muestras con aviso 60
+        línea de estado: ['LINEAR AD "AD-B-LINEAR" · 0.0s of 12.1s · the content is off the screen'] …
+   ok   consola (3 avisos, ningún error):
+        warning: [stock] error otherError internalException fatal: false
+        warning: [stock] error networkError aborted fatal: false
+        warning: [stock] error networkError aborted fatal: false
+        pedidos: ['asset-list-break-a.json?_HLS_primary_id=fae0b25d-f399-4e11-95a1-37a5cf7af48d', 'asset-list-break-a.json?sgai-video-decoders=2&sgai-image-over-video=1', 'asset-list-break-b.json?_HLS_primary_id=fae0b25d-f399-4e11-95a1-37a5cf7af48d', 'asset-list-break-b.json?sgai-video-decoders=2&sgai-image-over-video=1', 'asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=1']
+
+== inspect (nativo)
+   ok   A: el programa avanzó 20.98 s en 21.14 s de pared, hueco más largo 0.21 s, muestras con aviso 0, waiting 0
+        línea de estado: 79 textos, todos 'primary content · …'
+   ok   control B: hueco más largo 12.25 s, muestras con aviso 60
+        línea de estado: ['LINEAR AD "AD-B-LINEAR" · 0.0s of 12.1s · the content is off the screen'] …
+   ok   consola (3 avisos, ningún error):
+        warning: [stock] error otherError internalException fatal: false
+        warning: [stock] error networkError aborted fatal: false
+        warning: [stock] error networkError aborted fatal: false
+        pedidos: ['asset-list-break-a.json?_HLS_primary_id=950b7e7a-80dc-48fc-aaf1-861189b2c1d0', 'asset-list-break-b.json?_HLS_primary_id=950b7e7a-80dc-48fc-aaf1-861189b2c1d0']
+
+VERDE
