@@ -284,6 +284,9 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
  * on this page that the whole switch exists to make visible. */
 .wire b { color: var(--q-teal-500); }
 .wire .none { color: color-mix(in srgb, var(--q-paper-50) 55%, transparent); }
+/* What the player did with the list is a sentence read out, not a URL: it wraps
+ * between words, while the URL before it still breaks anywhere. */
+.wire .wire__outcome { word-break: normal; }
 
 /* THE CONTROL OF EACH PANE (fase 15): the mode first, and the two axes under it
  * only with our library. It sits at the top of its pane, above the label, so

@@ -16,6 +16,10 @@ del programa se muestrea cada 200 ms:
 
   LA CONSOLA Y LOS EVENTOS `waiting`, que no se ven pero se informan.
 
+  EL PANEL DE PEDIDOS del lado nativo en index ("Asset-list requests this player
+  made"): después de A tiene que listar el pedido de A con "skipped: no default
+  content" (T-20), y después de B, el de B con "plays its default".
+
 Medido así se encontró la traba que obliga a `X-RESUME-OFFSET=0` en ese tag (ADR
 0091): sin el atributo, el reloj del programa salta al fin del break y el video queda
 congelado en el borde de lo que bajó, más de 40 s.
@@ -45,9 +49,9 @@ from playwright.sync_api import sync_playwright  # noqa: E402
 
 PAGINAS = {
     "index": ("index.html?izq=nativo&der=ours-2dec-img", "window.demo.lados.izq.programa",
-              "window.demo.lados.izq.stock", "#state-izq", "#slot-izq"),
+              "window.demo.lados.izq.stock", "#state-izq", "#slot-izq", "#pane-izq .wire--pane"),
     "inspect": ("inspect.html?modo=nativo", "window.demo.stock.programme",
-                "window.demo.stock", "#state", "#slot"),
+                "window.demo.stock", "#state", "#slot", None),
 }
 
 ESPIAR = """
@@ -102,7 +106,7 @@ def main():
     with sync_playwright() as pw:
         nav = pw.chromium.launch(channel="chrome",
                                  args=["--autoplay-policy=no-user-gesture-required", "--mute-audio"])
-        for nombre, (ruta, reloj, stock, estado, caja) in PAGINAS.items():
+        for nombre, (ruta, reloj, stock, estado, caja, panel) in PAGINAS.items():
             pagina = nav.new_page(viewport={"width": 1920, "height": 960})
             consola = []
             pagina.on("console", lambda m: m.type in ("warning", "error") and consola.append(f"{m.type}: {m.text[:200]}"))
@@ -114,15 +118,27 @@ def main():
             pagina.evaluate(ESPIAR, caja)
             a = resumen(tramo(pagina, reloj, stock, estado, 15, 36))
             pagina.screenshot(path=str(salida / f"{nombre}-nativo-tras-a.png"))
+            panel_a = None
+            if panel:
+                time.sleep(0.5)
+                panel_a = pagina.locator(panel).inner_text()
+                pagina.locator(panel).screenshot(path=str(salida / f"{nombre}-panel-tras-a.png"))
             # El control: B, con lineal, congela el reloj del programa mientras suena el aviso.
             pagina.evaluate(f"() => {{ {reloj}.currentTime = 60; }}")
-            b = resumen(tramo(pagina, reloj, stock, estado, 61, 70))
+            b = resumen(tramo(pagina, reloj, stock, estado, 61, 80))
+            panel_b = None
+            if panel:
+                panel_b = pagina.locator(panel).inner_text()
+                pagina.locator(panel).screenshot(path=str(salida / f"{nombre}-panel-tras-b.png"))
             pagina.close()
             ok_a = a["hueco_mas_largo_s"] <= 0.5 and a["muestras_con_aviso"] == 0 and a["programa_avanzo_s"] >= 20 \
                 and all(e.startswith("primary content") for e in a["estados"])
             ok_b = b["hueco_mas_largo_s"] >= 8 and b["muestras_con_aviso"] > 0
             ok_consola = not any(c.startswith(("error", "pageerror")) for c in consola)
-            rojo += (0 if ok_a else 1) + (0 if ok_b else 1) + (0 if ok_consola else 1)
+            ok_panel = panel is None or (
+                "asset-list-break-a.json" in panel_a and "skipped: no default content" in panel_a
+                and "asset-list-break-b.json" in panel_b and "plays its default" in panel_b)
+            rojo += (0 if ok_a else 1) + (0 if ok_b else 1) + (0 if ok_consola else 1) + (0 if ok_panel else 1)
             informe[nombre] = {"a": a, "control_b": b, "consola": consola, "pedidos": sorted(set(pedidos))}
             print(f"\n== {nombre} (nativo)")
             print(f"   {'ok  ' if ok_a else 'ROJO'} A: el programa avanzó {a['programa_avanzo_s']} s en {a['pared_s']} s de pared,"
@@ -136,6 +152,9 @@ def main():
             for c in consola:
                 print(f"        {c}")
             print(f"        pedidos: {sorted(set(pedidos))}")
+            if panel:
+                print(f"   {'ok  ' if ok_panel else 'ROJO'} panel de pedidos tras A: {panel_a!r}")
+                print(f"        tras B: {panel_b!r}")
         nav.close()
     (salida / "medir-a-nativo.json").write_text(json.dumps(informe, indent=2, ensure_ascii=False))
     print("\nVERDE" if rojo == 0 else f"\nROJO ({rojo})")
