@@ -99,12 +99,22 @@ function construirCaja(slot) {
 // Each pane lists the asset-list requests IT made, which is the point of having
 // two controls: each side asks with its own capabilities. They are read, not
 // written: ours from the URL the library reports in `onResolved` (the request it
-// made, with the parameters on it), the native one from hls.js's own asset-list
-// events. Two panes of the same mode ask for the same files, so the network tab
-// alone could not tell them apart; each instance can.
+// made, with the parameters on it), the native one from the browser's own record
+// of the network, told apart by the session id hls.js puts on it -- see
+// `construirNativo`. Two panes of the same mode ask for the same files, so the
+// network tab alone could not tell them apart; each instance can.
+
+/** What the native client did with a break, as one line of the list. */
+const DESENLACE_NATIVO = {
+  default: '→ plays its default: the linear ad',
+  skipped: '→ skipped: no default content'
+};
+
+/** The break an asset-list belongs to, from its name: `asset-list-break-a.json` is break `a`. */
+const breakDeLaLista = (ruta) => ruta.match(/asset-list-break-([a-z0-9]+)\.json/)?.[1] ?? null;
 
 function pintarPedidos(lado) {
-  const { pedidos } = vivo?.lados[lado] ?? { pedidos: [] };
+  const { pedidos, desenlaces } = vivo?.lados[lado] ?? { pedidos: [], desenlaces: {} };
   const lista = panes[lado].pedidos;
   if (!pedidos.length) {
     const li = document.createElement('li');
@@ -122,10 +132,11 @@ function pintarPedidos(lado) {
     if (!query) marca.className = 'none';
     marca.textContent = query ? `?${query}` : '  — no query';
     li.append(marca);
-    if (asset) {
+    const nativo = asset ? null : DESENLACE_NATIVO[desenlaces[breakDeLaLista(u.pathname)]];
+    if (asset || nativo) {
       const nota = document.createElement('span');
       nota.className = 'wire__outcome';
-      nota.textContent = `  ${desenlaceCorto(asset)}`;
+      nota.textContent = `  ${asset ? desenlaceCorto(asset) : nativo}`;
       li.append(nota);
     }
     return li;
@@ -179,6 +190,7 @@ function derribar() {
   // `destroy()` is what hls.js offers; the library has no teardown of its own,
   // so what is left of an arming is cleared by replacing the DOM it drew into.
   for (const lado of LADOS) {
+    vivo.lados[lado].desconectar?.();
     vivo.lados[lado].hls.destroy();
     panes[lado].caja.replaceChildren();
   }
@@ -399,19 +411,44 @@ function construirNativo(lado, caja, registro) {
   const stock = createStockPlayer({
     video: caja.video, container: caja.player, src: SRC.nativo, pane: p.pane, state: p.state, hud: p.hud
   });
-  // The requests THIS instance made, from its own asset-list events: two native
-  // panes ask for the same files, and only the instance knows which were its own.
-  stock.hls.on(Hls.Events.ASSET_LIST_LOADED, (_e, data) => {
-    const url = data.networkDetails?.responseURL || data.networkDetails?.url || data.event?.assetListUrl?.href ||
-      String(data.event?.assetListUrl ?? '');
-    registro.pedidos.push({ url, asset: null });
+  // The requests THIS instance made, read off the browser's record of the
+  // network. hls.js writes its session id on every asset-list request
+  // (`_HLS_primary_id`), and that is what tells two native panes apart when they
+  // ask for the same file. NOT from ASSET_LIST_LOADED: hls.js fires it only when
+  // the list parses, and the list of the break without a default has no URI,
+  // which it fails on (a non-fatal internalException). The request goes out and
+  // is answered with a 200, and the event never comes (measured, fase 15, T-20).
+  const propios = new PerformanceObserver((lista) => {
+    for (const entrada of lista.getEntries()) {
+      if (!entrada.name.includes('/signalling/asset-list-')) continue;
+      if (new URL(entrada.name).searchParams.get('_HLS_primary_id') !== stock.hls.sessionId) continue;
+      registro.pedidos.push({ url: entrada.name, asset: null });
+      pintarPedidos(lado);
+    }
+  });
+  propios.observe({ type: 'resource' });
+  // And what it did with each break, from its interstitial events: an asset that
+  // started is the default playing; a break that ended with none started was
+  // skipped, which is what the break without a default is for (ADR 0091).
+  const empezados = new Set();
+  stock.hls.on(Hls.Events.INTERSTITIAL_ASSET_STARTED, (_e, data) => {
+    const id = breakDelReporte({ id: data.event.identifier });
+    empezados.add(id);
+    registro.desenlaces[id] = 'default';
+    pintarPedidos(lado);
+  });
+  stock.hls.on(Hls.Events.INTERSTITIAL_ENDED, (_e, data) => {
+    const id = breakDelReporte({ id: data.event.identifier });
+    if (!empezados.has(id)) registro.desenlaces[id] = 'skipped';
+    empezados.delete(id);
     pintarPedidos(lado);
   });
   return {
     modo: 'nativo', capacidades: null, hls: stock.hls, stock, video: caja.video,
     programa: stock.programme,
     listo: () => stock.hls.interstitialsManager?.primary != null && caja.video.readyState >= 1,
-    enAviso: () => stock.playingAd != null
+    enAviso: () => stock.playingAd != null,
+    desconectar: () => propios.disconnect()
   };
 }
 
@@ -433,7 +470,7 @@ function armar(config, retomarEn = 0) {
 
   const lados = {};
   for (const lado of LADOS) {
-    const registro = { pedidos: [], selecciones: {} };
+    const registro = { pedidos: [], selecciones: {}, desenlaces: {} };
     const caja = construirCaja(panes[lado].caja);
     pintarRotulos(lado, config[lado]);
     const l = config[lado].modo === 'nativo'

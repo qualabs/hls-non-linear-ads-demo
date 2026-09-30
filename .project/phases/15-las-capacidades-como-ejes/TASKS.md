@@ -21,6 +21,7 @@
 | T-17 | Index: los dos players alineados con cualquier combinación de modos | done | — | [`tasks/T-17/`](tasks/T-17/) · `css/player.css` |
 | T-18 | La barra de progreso siempre visible en index e inspect; el play/pause sólo con el mouse encima | done | — | [`tasks/T-18/`](tasks/T-18/) · `css/player.css` |
 | T-19 | El break sin default también en el manifest de interstitials; el player de fábrica lo saltea | done | — | [`tasks/T-19/`](tasks/T-19/) · ADR 0091 |
+| T-20 | El panel de pedidos del player nativo muestra el pedido de A y lo que hizo con cada break | done | — | [`tasks/T-20/`](tasks/T-20/) · `js/app.js` |
 
 ---
 
@@ -181,3 +182,17 @@
 Pedido de David (opción 2). La medición encontró que el tag tal cual deja el video congelado más de
 40 s: hls.js retoma en el fin del break, que no bajó. El tag de A lleva `X-RESUME-OFFSET=0` y
 retoma donde empezó el break (ADR 0091).
+
+## T-20 — El panel de pedidos del player nativo, con el pedido de A
+- **Objective:** en `index.html`, "Asset-list requests this player made" del player nativo lista el
+  pedido del asset-list de A y dice que lo salteó por no tener default.
+- **What it must cover:** cómo se captura el pedido en el lado nativo y el desenlace de cada break.
+- **Definition of done:** medido en la red que hls.js pide la lista de A; el panel lo muestra con
+  "skipped: no default content" después de A y con "plays its default" después de B; local y público.
+- **nivel de verificación:** bajo.
+
+Pedido de David. hls.js sí pide la lista de A (XHR con `_HLS_primary_id`, 200) y dispara
+`ASSET_LIST_LOADING`, pero falla al parsearla (el asset no tiene `URI`, internalException no fatal) y
+nunca dispara `ASSET_LIST_LOADED`, que era lo único que escuchaba el panel. El panel ahora lee el
+registro de red del navegador (performance timeline), separado por instancia con el `_HLS_primary_id`
+de cada hls.js, y el desenlace sale de sus eventos de interstitial.

@@ -6155,3 +6155,12 @@ del pane de fábrica más de 40 s: hls.js retomaba el programa en el fin del bre
 que no había bajado. Con `X-RESUME-OFFSET=0` en ese tag retoma donde empezó el break: el hueco más
 largo del reloj es de 0,21 s (el muestreo), igual que lo publicado sin el tag. Control: en B el
 reloj queda congelado doce segundos mientras suena el aviso. ADR 0091, que reemplaza al 0087.
+
+## 2026-09-30 — T-20: el panel de pedidos del player nativo, con el pedido de A
+
+Pedido de David: bajo el player nativo de `index.html` el panel decía "no asset-list requested yet"
+después de A. Medido en el registro de red: hls.js pide la lista de A y le responden 200, pero falla
+al parsearla y no dispara `ASSET_LIST_LOADED`, el único evento que escuchaba el panel. El panel lee
+ahora la performance timeline, separada por instancia con el `_HLS_primary_id`, y agrega lo que hizo
+el player con cada break: "skipped: no default content" en A y "plays its default: the linear ad" en
+B y C. Control: lo publicado antes daba "no asset-list requested yet" después de A.
