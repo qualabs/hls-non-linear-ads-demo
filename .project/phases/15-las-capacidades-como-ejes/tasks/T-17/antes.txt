@@ -1,0 +1,5 @@
+ROJO izq=nativo         der=nativo         top player izq 404 der 407   alto control izq 85 der 85   errores 0
+ROJO izq=nativo         der=ours-2dec-img  top player izq 404 der 432   alto control izq 85 der 129   errores 0
+ROJO izq=ours-2dec-img  der=nativo         top player izq 429 der 407   alto control izq 129 der 85   errores 0
+ROJO izq=ours-2dec-img  der=ours-2dec-img  top player izq 429 der 432   alto control izq 129 der 129   errores 0
+ROJO (4)

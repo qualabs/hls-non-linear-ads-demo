@@ -6129,3 +6129,11 @@ borde inferior coincide con el de la 4 (947 px las dos a 1920×960) y el JSON ti
 de la tarjeta 2 pasa a 12,5 px y entra en una línea en los tres breaks y en los cuatro modos,
 incluido el nativo con su `_HLS_primary_id`. Sin scroll de página para el player y las cuatro
 tarjetas; el pie con los créditos queda debajo.
+
+## 2026-09-30 — T-17: los dos players del par siempre alineados
+
+Pedido de David, sólo CSS. Los dos panes de `index.html` comparten sus nueve filas por un subgrid
+(cada fila tan alta como la más alta de las dos), el control tiene siempre la altura del que lleva
+los dos ejes y la descripción ocupa siempre dos líneas. Medido a 1920×960: el top de los dos
+players es 451 px en las cuatro combinaciones de modos; antes era 404/407, 404/432, 429/407 y
+429/432 (la medición contra lo publicado es el control, en rojo).

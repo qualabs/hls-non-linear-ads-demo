@@ -718,3 +718,21 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
 .pane-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .pane-head .role { margin-right: auto; }
 .pane-head .jumps { margin-left: 0; }
+
+/* THE TWO PLAYERS OF THE PAIR START ON THE SAME LINE, WHATEVER THE MODES (fase
+ * 15, asked for by David). Each pane is nine rows -- the control, the title, the
+ * two lines under it, the player, the state, two huds and the list of requests --
+ * and the two panes share those rows through a subgrid, so each row is as tall as
+ * the taller of the two: a native control, which has no axes, keeps the height of
+ * ours, and so does a description that wraps on one side only. Only where there
+ * are two columns. */
+@media (min-width: 961px) {
+  .pair { grid-template-rows: repeat(9, auto); row-gap: 0; }
+  .pair > .pane { display: grid; grid-row: span 9; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
+  .pair > .pane > .pane-control { align-self: stretch; }
+  /* And the same line across combinations too: the control is always as tall as
+   * the one with the two axes, and the description always takes two lines, so
+   * switching a mode never moves a player. */
+  .pair > .pane > .pane-control { box-sizing: border-box; min-height: 129px; }
+  .pair > .pane > .role-sub { min-height: 2lh; }
+}
