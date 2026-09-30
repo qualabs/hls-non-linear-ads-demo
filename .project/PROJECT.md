@@ -15,7 +15,7 @@ status: ongoing
 type: desarrollo
 owner: nicolas-levy
 started: 2026-09-02
-last_update: 2026-09-28
+last_update: 2026-09-30
 tags: [hls, hls-interstitials, non-linear-ads, svta, apple, hlsjs, avfoundation, demo]
 repo: https://github.com/qualabs/hls-non-linear-ads-demo
 output_pointers:
@@ -386,6 +386,61 @@ condicionan qué muestra la demo.
    el que Nicolás sostiene que el encuadre está equivocado, más arriba.
 2. **Qué hacer cuando el ad break no se puede llenar con un ad no
    lineal**, es decir si se cae el break entero o no.
+
+## Preguntas abiertas para la solución real
+
+Decisiones que la demo resolvió de una forma que alcanza para grabar y que la
+implementación real tiene que volver a abrir. No se cambian en este proyecto.
+
+### Eager vs lazy asset-list resolution
+
+Planteada por David el 2026-09-30: en `index.html` el panel de nuestra librería muestra
+los tres asset-lists pedidos al arrancar, y el del player nativo los pide de a uno, a
+medida que se acerca cada break.
+
+**Hoy es eager, y a propósito.** `createSignalling` (`lib/signalling.js`) se suscribe a
+`LEVEL_UPDATED` y pide el `X-ASSET-LIST` de cada Date Range de nuestra clase apenas lo
+ve. Como los Date Ranges van en la media playlist VOD (ADR 0005), eso son todos al
+cargar. Hay cuatro razones:
+
+- **El contrato entre capas (ADR 0003).** La señalización le entrega al renderizado la
+  lista de experiencias ya resuelta: `activeAt(time)` es una consulta sincrónica y
+  `programRanges()` devuelve todos los rangos y un `settled`.
+- **ADR 0039**, que descartó explícitamente resolver cada break cuando el programa se le
+  acerca, porque es más código para un caso que la placa de apertura ya eliminaba. Se
+  decidió para el guion y no para `stage-pair`, que hereda el comportamiento de la
+  librería.
+- **Las marcas de la barra** (ADR 0018 y 0073) salen de `programRanges()`. La ventana de
+  un break resuelto se calcula con el payload de su lista (`rangeOfExperiences`), y por
+  eso están todas desde el segundo cero.
+- **El renderizado arma el aviso 3 s antes** (`PRELOAD_LEAD_SECONDS`, `bringAhead` en
+  `lib/renderer.js`), y eso supone la experiencia ya resuelta cuando se abre esa ventana.
+
+La capacidad y el fallback **no** lo necesitan: la capacidad se lee una vez al crear la
+señalización, y el filtro de opciones y la caída al `URI` corren por lista cuando llega.
+Andarían igual con una lista que llega tarde. El nativo pide cerca del break porque así
+funciona el scheduler de interstitials de hls.js, que nuestra librería apaga (ADR 0002).
+
+**Qué costaría lazy.** Es un cambio de la librería (la capa de señalización y sus tests),
+no de la demo:
+
+- Un scheduler atado al reloj de reproducción, que la señalización hoy no mira. El
+  adelanto mínimo son los 3 s del bring-ahead más la latencia del pedido. Un seek cerca de
+  un break tiene que pedir en el momento, y el aviso entra tarde, con la caja negra o
+  vacía, si la lista no llega a tiempo.
+- Las marcas de un break sin resolver tendrían que salir del `PLANNED-DURATION` del tag
+  (ya existe la función para los rangos no resueltos) y moverse cuando llega la lista.
+  Un break que termina salteado mostraría una marca que después desaparece.
+- `settled` quedaría en `false` hasta acercarse al último break, y lo que espera por él
+  (el guion del ADR 0039) tendría que rehacerse.
+- Rehacer la lógica de contar todos los pendientes antes del primer `await`.
+
+**Qué compra lazy en producción.** La decisión del aviso se toma cerca del break: el
+servidor de avisos puede segmentar con datos frescos y contar el pedido como una
+oportunidad real, en lugar de responder por adelantado por breaks que quizás nunca se
+ven. Esto es la lectura de cómo trabaja un ad server, no algo medido en el proyecto.
+Además son menos pedidos al arrancar. Para esta demo, VOD y con listas estáticas, la
+única diferencia visible es el momento en que aparecen las líneas del panel.
 
 ## Riesgos que cruzan fases
 

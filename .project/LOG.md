@@ -6164,3 +6164,10 @@ al parsearla y no dispara `ASSET_LIST_LOADED`, el único evento que escuchaba el
 ahora la performance timeline, separada por instancia con el `_HLS_primary_id`, y agrega lo que hizo
 el player con cada break: "skipped: no default content" en A y "plays its default: the linear ad" en
 B y C. Control: lo publicado antes daba "no asset-list requested yet" después de A.
+
+## 2026-09-30 — Pregunta abierta: eager vs lazy asset-list resolution
+
+David preguntó por qué nuestra librería pide los tres asset-lists al arrancar y el player nativo
+de a uno. Es a propósito (ADR 0003 y 0039, las marcas de la barra, el bring-ahead), sin cambios
+ahora. Queda en `PROJECT.md`, en "Preguntas abiertas para la solución real", con lo que costaría
+resolver tarde y lo que compra en producción.
