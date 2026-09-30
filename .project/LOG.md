@@ -6171,3 +6171,12 @@ David preguntó por qué nuestra librería pide los tres asset-lists al arrancar
 de a uno. Es a propósito (ADR 0003 y 0039, las marcas de la barra, el bring-ahead), sin cambios
 ahora. Queda en `PROJECT.md`, en "Preguntas abiertas para la solución real", con lo que costaría
 resolver tarde y lo que compra en producción.
+
+## 2026-09-30 — T-21: la barra del player nativo sin la marca de A
+
+Pedido de David: la barra del player nativo de `index.html` deja de marcar A cuando se sabe que
+lo saltea, y no lo vuelve a marcar. Se detecta en el schedule de hls.js: la lista de A llega unos
+cinco segundos antes del break y queda cargada sin ningún asset; un break con default nunca queda
+así. Lo guarda la página y no la instancia, porque un salto reconstruye el player y un seek hace que
+hls.js vuelva a pedir la lista. inspect no cambia. ADR 0092. Control: lo publicado antes marca A en
+todos los pasos.

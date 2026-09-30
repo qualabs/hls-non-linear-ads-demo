@@ -404,12 +404,21 @@ function construirNuestro(lado, capacidades, caja, registro) {
   };
 }
 
+/**
+ * The breaks a native pane is known to skip, for the whole life of the page and
+ * not of one instance: a jump rebuilds the pane, and a mark that went away must
+ * not come back with the new one (T-21). Shared by both panes, because what is
+ * skipped is a property of the list and not of the pane.
+ */
+const salteadosPorElNativo = new Set();
+
 /** A native pane: hls.js at its factory configuration, through stock-player.js. */
 function construirNativo(lado, caja, registro) {
   const p = panes[lado];
   p.contract.textContent = '';
   const stock = createStockPlayer({
-    video: caja.video, container: caja.player, src: SRC.nativo, pane: p.pane, state: p.state, hud: p.hud
+    video: caja.video, container: caja.player, src: SRC.nativo, pane: p.pane, state: p.state, hud: p.hud,
+    skipped: salteadosPorElNativo
   });
   // The requests THIS instance made, read off the browser's record of the
   // network. hls.js writes its session id on every asset-list request

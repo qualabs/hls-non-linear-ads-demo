@@ -40,8 +40,13 @@
  * @param state      one line of text under the player, for the recording
  * @param hud        one line with the version and the configuration, to sit next
  *                   to the demo player's identical line
+ * @param skipped    optional: a Set of break identifiers this client is known to
+ *                   skip, owned by the PAGE so that it outlives this instance.
+ *                   With it, the bar stops marking those breaks; see
+ *                   `programRanges`. Without it the bar marks every scheduled
+ *                   break, which is what inspect.html keeps.
  */
-export function createStockPlayer({ video, container, src, pane, state, hud }) {
+export function createStockPlayer({ video, container, src, pane, state, hud, skipped = null }) {
   // Factory configuration: not one option is passed. This is the difference
   // with the demo's instance, and it is the only difference.
   const hls = new Hls();
@@ -151,10 +156,27 @@ export function createStockPlayer({ video, container, src, pane, state, hud }) {
    * the day they stop being the same it is the programme's rail that this mark
    * is drawn on.
    */
+  //
+  // A BREAK THIS CLIENT SKIPS IS NOT MARKED, when the page asks for it (fase 15,
+  // T-21, asked for by David): the bar marks what the pane plays (ADR 0018), and
+  // the break without a default plays nothing (ADR 0091). It is known off the
+  // schedule itself: the list has loaded and it gave hls.js no asset to play.
+  // Measured on hls.js 1.7.2: the break without a default reads
+  // `assetListLoaded` true with an empty `assetList` from the moment its list
+  // arrives -- several seconds before the break -- while a break with a default
+  // reads one asset once loaded and goes back to not loaded after it has
+  // played, so it never matches. The identifier goes into the page's set and
+  // stays there: hls.js asks for the list again after a seek and the page
+  // rebuilds this instance on a jump, and neither brings the mark back.
   function programRanges() {
     const events = manager()?.events || [];
+    if (skipped) {
+      for (const event of events) {
+        if (event.assetListLoaded && event.assetList?.length === 0) skipped.add(event.identifier);
+      }
+    }
     return {
-      ranges: events.map((event) => {
+      ranges: events.filter((event) => !skipped?.has(event.identifier)).map((event) => {
         const span = event.resumeTime - event.startTime;
         return {
           id: event.identifier,

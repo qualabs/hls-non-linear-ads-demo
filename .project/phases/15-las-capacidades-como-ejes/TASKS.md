@@ -22,6 +22,7 @@
 | T-18 | La barra de progreso siempre visible en index e inspect; el play/pause sólo con el mouse encima | done | — | [`tasks/T-18/`](tasks/T-18/) · `css/player.css` |
 | T-19 | El break sin default también en el manifest de interstitials; el player de fábrica lo saltea | done | — | [`tasks/T-19/`](tasks/T-19/) · ADR 0091 |
 | T-20 | El panel de pedidos del player nativo muestra el pedido de A y lo que hizo con cada break | done | — | [`tasks/T-20/`](tasks/T-20/) · `js/app.js` |
+| T-21 | La barra del player nativo de index deja de marcar el break que saltea | done | — | [`tasks/T-21/`](tasks/T-21/) · ADR 0092 |
 
 ---
 
@@ -196,3 +197,13 @@ Pedido de David. hls.js sí pide la lista de A (XHR con `_HLS_primary_id`, 200) 
 nunca dispara `ASSET_LIST_LOADED`, que era lo único que escuchaba el panel. El panel ahora lee el
 registro de red del navegador (performance timeline), separado por instancia con el `_HLS_primary_id`
 de cada hls.js, y el desenlace sale de sus eventos de interstitial.
+
+## T-21 — La barra del player nativo sin la marca del break que saltea
+- **Objective:** en `index.html` la barra del player nativo deja de marcar A en cuanto su lista
+  llegó y se sabe que lo saltea, y no lo vuelve a marcar.
+- **What it must cover:** el seek en la barra, los saltos de la página (que reconstruyen los
+  players), el paso por A y el nuevo pedido de la lista que hace hls.js después de un seek. B y C
+  siguen marcados; el pane de nuestra librería e inspect no cambian.
+- **Definition of done:** `test/verificar-marca-a-nativo.py` en verde, local y en la URL pública,
+  con capturas de cada paso; control en rojo contra lo publicado antes.
+- **nivel de verificación:** bajo.
