@@ -1,0 +1,24 @@
+== index.html
+   break A: {'izq': ['nativo', 24.5, None], 'der': ['ours', 23.8, 'squeezebackDoubleBox']}
+   break B: {'izq': ['nativo', 65, 'AD-B-LINEAR'], 'der': ['ours', 68.8, 'squeezebackLShape']}
+   break C: {'izq': ['nativo', 110, 'AD-C-LINEAR'], 'der': ['ours', 113.8, 'lowerThirdOverlay']}
+   errores: 0 []   advertencias: 3
+== inspect.html
+   break A: ['ours', 24.9, 'squeezebackDoubleBox']
+   break B: ['ours', 69.8, 'squeezebackLShape']
+   break C: ['ours', 114.7, 'lowerThirdOverlay']
+   errores: 0 []   advertencias: 2
+== inspect.html?modo=nativo
+   break A: ['nativo', 24.3, None]
+   break B: ['nativo', 65, 'AD-B-LINEAR']
+   break C: ['nativo', 110, 'AD-C-LINEAR']
+   errores: 0 []   advertencias: 3
+== race.html
+   t: None
+   t: None
+   t: None
+   t: None
+   t: None
+   t: None
+   errores: 0 []   advertencias: 4
+VERDE: sin errores de consola ni HTTP
