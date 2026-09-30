@@ -99,8 +99,7 @@
     </p>
   </header>
 
-  <section class="switch" aria-label="Jumps">
-    <div class="jumps" id="jumps" role="group" aria-label="Jump to"></div>
+  <section class="switch" aria-label="About this page">
     <p class="no-server">
       Each player has its own control: the native HLS interstitials client, or this demo&rsquo;s
       library with the capabilities it declares. There is no ad presentation server behind this
@@ -130,7 +129,11 @@
 
     <section class="pane" id="pane-der" data-state="primary">
       <div class="pane-control" id="control-der"></div>
-      <h2 class="role" id="rol-der"></h2>
+      <!-- The jumps sit next to the title of the right pane: they move BOTH panes. -->
+      <div class="pane-head">
+        <h2 class="role" id="rol-der"></h2>
+        <div class="jumps" id="jumps" role="group" aria-label="Jump to"></div>
+      </div>
       <p class="role-sub" id="sub-der"></p>
       <p class="role-reads" id="lee-der"></p>
       <div id="slot-der"></div>

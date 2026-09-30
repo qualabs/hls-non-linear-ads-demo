@@ -16,6 +16,7 @@
 | T-12 | En las transiciones, el primario por encima de lo que no se le superpone (lib/) | done | — | [`tasks/T-12/`](tasks/T-12/) · `lib/renderer.js` (`stackingOf`) · `test/stacking-order.test.js` · ADR 0089 |
 | T-13 | `inspect.html` con el mismo control que cada player del par, nativo incluido | done | — | [`tasks/T-13/`](tasks/T-13/) · `js/{inspect,capabilities}.js` · `inspect.html` · `test/verificar-inspect-modos.py` |
 | T-14 | Un asset-list, dos clientes: un manifest por clase y la lista enriquecida para los dos (pedido de David) | done | — | [`tasks/T-14/`](tasks/T-14/) · `scripts/{senalizar-contenido.sh,escribir-asset-lists.mjs}` · `js/{app,inspect}.js` · ADR 0090 |
+| T-15 | Layout para la grabación a 1920×1080: inspect sin scroll, los saltos del par en el player derecho | done | — | [`tasks/T-15/`](tasks/T-15/) · `inspect.html` · `index.html` · `css/player.css` |
 
 ---
 
@@ -152,4 +153,13 @@
 - **Definition of done:** medido en el navegador que hls.js reproduce la parte estándar (URI y
   duración) del asset-list enriquecido; las verificaciones de las dos páginas en verde en A, B y C,
   local y en la URL pública.
+- **nivel de verificación:** bajo.
+
+## T-15 — Layout para la grabación a 1920×1080
+- **Objective:** a 1920×1080 (viewport útil 1920×960) `inspect.html` muestra el player y las
+  tarjetas 1 a 3 sin scroll; en `index.html` los saltos están al lado del título del player derecho.
+- **What it must cover:** sólo layout: una barra compacta con el control y los saltos, la nota del
+  servidor plegada en un `<details>`, tarjetas más ajustadas; sin cambio de comportamiento.
+- **Definition of done:** medido a 1920×960 que los bordes inferiores del player y de las tarjetas
+  1 a 3 quedan en ≤ 960 sin scroll; los saltos mueven el player; consola limpia; local y público.
 - **nivel de verificación:** bajo.

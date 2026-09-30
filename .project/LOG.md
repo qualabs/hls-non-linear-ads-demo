@@ -6110,3 +6110,12 @@ rearman, porque un seek durante un interstitial con `X-RESTRICT="SKIP"` no entra
 `verificar-capacidades` cuenta sólo los pedidos de nuestra librería, porque el player de fábrica
 ahora pide el mismo asset-list. Una corrida de `npm test` dio una falla que no se reprodujo en
 cuatro corridas más; queda anotado sin causa determinada.
+
+## 2026-09-30 — T-15: layout para la grabación a 1920×1080
+
+Pedido de David. `inspect.html`: el control y los saltos en una sola barra, la nota del servidor
+plegada en un `<details>`, las tarjetas más ajustadas (la respuesta en un cuadro de 170 px con
+scroll propio). A 1920×960 el player termina en 774 px y la tarjeta 3 en 946, sin scroll; antes la
+tarjeta 3 empezaba en 865 y el documento medía 1394. `index.html`: los saltos pasan al lado del
+título del player derecho. Sin cambios de comportamiento: los saltos siguen moviendo los players y
+la consola queda limpia.

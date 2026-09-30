@@ -101,9 +101,14 @@
     </p>
   </header>
 
-  <section class="switch" aria-label="Player">
+  <!-- ONE COMPACT BAR: the control and the jumps on a single row, and the note
+       about the server folded under a <details>. At 1920x1080 the player and
+       cards 1 to 3 have to fit without scrolling (it is recorded at that size). -->
+  <section class="switch switch--compact" aria-label="Player">
     <div class="pane-control" id="steps"></div>
     <div class="jumps" id="jumps" role="group" aria-label="Jump to"></div>
+    <details class="about">
+    <summary>About this page: there is no ad server, and which manifest each mode loads</summary>
     <p class="no-server">
       There is no ad presentation server behind this page. The two capabilities travel on every
       asset-list request, as such a server would read them, and the answer is one static file per
@@ -113,6 +118,7 @@
       the concurrent manifest; in native mode, the interstitials manifest, and hls.js plays the
       standard part of the same asset-list. The combination is in the URL.
     </p>
+    </details>
   </section>
 
   <div class="inspect">
