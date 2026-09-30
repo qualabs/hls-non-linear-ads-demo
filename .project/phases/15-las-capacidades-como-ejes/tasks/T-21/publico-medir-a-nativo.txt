@@ -1,0 +1,8 @@
+   ok   A: el programa avanzó 21.0 s en 21.11 s de pared, hueco más largo 0.22 s, muestras con aviso 0, waiting 0
+   ok   control B: hueco más largo 12.08 s, muestras con aviso 59
+   ok   consola (3 avisos, ningún error):
+   ok   panel de pedidos tras A: 'Asset-list requests this player made\n/signalling/asset-list-break-a.json?_HLS_primary_id=d2517ac2-8102-4ee0-8083-cdb9597eab67 → skipped: no default content\n/signalling/asset-list-break-b.json?_HLS_primary_id=d2517ac2-8102-4ee0-8083-cdb9597eab67'
+   ok   A: el programa avanzó 20.98 s en 21.09 s de pared, hueco más largo 0.21 s, muestras con aviso 0, waiting 0
+   ok   control B: hueco más largo 12.07 s, muestras con aviso 59
+   ok   consola (3 avisos, ningún error):
+VERDE
