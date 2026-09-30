@@ -88,7 +88,8 @@ PY
 echo "== 5. SIN credenciales y SIN cache-busting: lo servido contra el repo =="
 rojo=0
 for p in index.html inspect.html race.html stage.json js/app.js js/inspect.js js/capabilities.js \
-         dist/qualabs-concurrent-hls.js content/primary/con-daterange.m3u8 \
+         dist/qualabs-concurrent-hls.js content/primary/con-daterange-interstitial.m3u8 \
+         content/primary/con-daterange-concurrente.m3u8 \
          $(cd demo/stage-pair && ls signalling/*.json); do
   f=demo/stage-pair/$p; [ -f "$f" ] || f=$p
   if [ "$(curl -s "$HOST/$p" | sha256sum)" = "$(sha256sum < "$f")" ]; then r=IGUAL; else r=DISTINTO; rojo=1; fi

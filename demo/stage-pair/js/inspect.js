@@ -71,7 +71,13 @@ import {
 // is typed in this file.
 const stage = await (await fetch('/stage.json')).json();
 
-const SRC = `/${stage.playlists.par}`;
+// One manifest per class (ADR 0090): our library loads the one with only the
+// concurrent tags, the native client the one with only Apple's interstitials.
+// Both name the same asset-list per break.
+const SRC = {
+  nativo: `/${stage.playlists.interstitial}`,
+  ours: `/${stage.playlists.concurrente}`
+};
 
 /** Five seconds of programme before a break: the transition in is what is worth seeing. */
 const ENTRADA = 5;
@@ -261,11 +267,16 @@ function pintarIntercambio() {
     return dibujarRango(linea, traza.url.pathname === listaDelRango(linea));
   }));
   if (!rangos.length) dom.ranges.replaceChildren(el('p', 'none', 'no range for this break in the playlist'));
-  dom.rangesLede.textContent = rangos.length > 1
-    ? 'Two ranges, same START-DATE, one playlist. The class is compared as an exact string and ' +
-      'there is no inheritance, so each client keeps one and ignores the other.'
-    : 'One range. This break has no linear default: there is nothing for an off-the-shelf client ' +
-      'to play, so for it the programme is simply not interrupted.';
+  // One manifest per class (ADR 0090): the range this client's manifest carries
+  // for the break, and it names the same asset-list the other class names.
+  dom.rangesLede.textContent = vivo?.modo === 'nativo'
+    ? (rangos.length
+      ? 'The interstitials manifest: only the Apple-class range. It names the same asset-list as the ' +
+        'concurrent one, and hls.js plays its standard part.'
+      : 'The interstitials manifest has no range for this break: it has no linear default, so an ' +
+        'off-the-shelf client plays nothing and the programme is not interrupted.')
+    : 'The concurrent manifest: only the range of our class. It names the same asset-list the ' +
+      'interstitials manifest names, and the library reads the part on top of the standard one.';
 
   // Move 2: the URL that went out, with the parameter picked out of it.
   dom.request.replaceChildren();
@@ -410,7 +421,10 @@ const ROTULOS = {
   }
 };
 
+let configActual = null;
+
 function armar(config, retomarEn = 0) {
+  configActual = config;
   escribirModo(config);
   dom.rol.textContent = ROTULOS[config.modo].rol;
   dom.sub.textContent = ROTULOS[config.modo].sub;
@@ -424,7 +438,7 @@ function armar(config, retomarEn = 0) {
   selecciones.clear();
   vistas.clear();
   mostrado = null;
-  leerRangos(SRC).then(pintarIntercambio);
+  leerRangos(SRC.ours).then(pintarIntercambio);
 
   const { player, video } = construirCaja();
 
@@ -448,7 +462,7 @@ function armar(config, retomarEn = 0) {
       pintarIntercambio();
     }
   });
-  hls.loadSource(SRC);
+  hls.loadSource(SRC.ours);
   hls.attachMedia(video);
   // =========================================================================
 
@@ -464,7 +478,7 @@ function armar(config, retomarEn = 0) {
     const off = hls.interstitialsManager == null;
     dom.hud.textContent =
       `hls.js ${Hls.version} · interstitials manager: ${off ? 'none' : 'PRESENT'} · ` +
-      `capabilities: ${JSON.stringify(capacidades)} · playing ${SRC}`;
+      `capabilities: ${JSON.stringify(capacidades)} · playing ${SRC.ours}`;
   });
 
   video.muted = true;
@@ -496,7 +510,7 @@ function armar(config, retomarEn = 0) {
   pintar();
 
   vivo = {
-    modo: 'ours', hls, concurrent, consumer, video, capacidades, src: SRC,
+    modo: 'ours', hls, concurrent, consumer, video, capacidades, src: SRC.ours,
     programa: video, listo: () => video.readyState >= 1
   };
   if (retomarEn > 0) buscar(retomarEn);
@@ -533,17 +547,17 @@ function armarNativo(retomarEn = 0) {
   selecciones.clear();
   vistas.clear();
   mostrado = null;
-  leerRangos(SRC).then(pintarIntercambio);
+  leerRangos(SRC.nativo).then(pintarIntercambio);
   const { player, video } = construirCaja();
   dom.contract.textContent = '';
   const stock = createStockPlayer({
-    video, container: player, src: SRC, pane: dom.pane, state: dom.state, hud: dom.hud
+    video, container: player, src: SRC.nativo, pane: dom.pane, state: dom.state, hud: dom.hud
   });
   const alTiempo = () => mostrarBreak(breakDelSegundo(stock.programme.currentTime));
   video.addEventListener('timeupdate', alTiempo);
   video.addEventListener('seeked', alTiempo);
   vivo = {
-    modo: 'nativo', hls: stock.hls, stock, video, capacidades: null, src: SRC,
+    modo: 'nativo', hls: stock.hls, stock, video, capacidades: null, src: SRC.nativo,
     programa: stock.programme,
     listo: () => stock.hls.interstitialsManager?.primary != null && video.readyState >= 1
   };
@@ -582,9 +596,8 @@ control = crearControlDePane({
   alCambiar: (config) => armar(config, vivo ? vivo.programa.currentTime : 0)
 });
 
-// A jump is a seek and not a rebuild, which is the one thing this page does
-// differently from `index.html`: there the rebuild existed for the other pane,
-// and there is no other pane here.
+// With our library a jump is a seek and not a rebuild: the programme is never
+// stopped, so the seek lands. In native mode it rebuilds, as index.html does.
 const jumps = document.getElementById('jumps');
 jumps.replaceChildren(...[
   { texto: 'start', segundo: 0.05 },
@@ -597,7 +610,10 @@ jumps.replaceChildren(...[
   boton.type = 'button';
   boton.className = 'jump';
   boton.textContent = texto;
-  boton.addEventListener('click', () => buscar(segundo));
+  // In native mode a jump REBUILDS, as on index.html: while hls.js is playing an
+  // interstitial with `X-RESTRICT="SKIP"` a seek of the programme is accepted and
+  // dropped, so the jump would not land (measured on this page, fase 15).
+  boton.addEventListener('click', () => (vivo?.modo === 'nativo' ? armar(configActual, segundo) : buscar(segundo)));
   return boton;
 }));
 

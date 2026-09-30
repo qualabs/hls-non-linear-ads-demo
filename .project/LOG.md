@@ -6094,3 +6094,19 @@ de la red, la 3 lo que volvió, y la 4 dice que no hay capacidades ni opciones q
 que no tiene lineal, que hls.js no reproduce nada). `test/verificar-inspect-modos.py`: los cinco
 modos en A y B, en verde; `verificar-pares` (index), `verificar-capacidades` e `verificar-inspect`
 siguen en verde.
+
+## 2026-09-30 — T-14: un asset-list, dos clientes (ADR 0090, supersede al 0007)
+
+Pedido de David Hassoun, aprobado por Nicolás: no tener los dos tags en un mismo manifest. Ahora
+hay dos, uno por clase, sobre los mismos segmentos: `con-daterange-interstitial.m3u8` (sólo Apple,
+sin tag en A) lo carga el player de fábrica y `con-daterange-concurrente.m3u8` (sólo los nuestros)
+lo carga el nuestro, en `index.html` y en `inspect.html` según el modo. Los dos tags de un break
+nombran el mismo `asset-list-break-X.json`; se fueron los `linear-*.json`. Medido en el navegador:
+el hls.js de fábrica reproduce la parte estándar de esa lista (su `playingAsset` es el 16:9 de la
+campaña, 12,067 s medidos para 12 declarados) e ignora el bloque de encima. Las verificaciones de las
+dos páginas pasan en A, B y C; el tramo invertido sigue en verde con su control (se desempareja
+declarando 24 s). Dos ajustes que salieron al medir: en modo nativo, los saltos de `inspect.html`
+rearman, porque un seek durante un interstitial con `X-RESTRICT="SKIP"` no entra; y
+`verificar-capacidades` cuenta sólo los pedidos de nuestra librería, porque el player de fábrica
+ahora pide el mismo asset-list. Una corrida de `npm test` dio una falla que no se reprodujo en
+cuatro corridas más; queda anotado sin causa determinada.

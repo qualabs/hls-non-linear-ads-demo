@@ -7,7 +7,7 @@
 //
 // LO QUE SE ASSERTA SALE DE LO QUE EL SCRIPT ESCRIBIÓ DE VERDAD, y no del texto
 // del script. Así que el test le pasa al señalizador una media playlist de nueve
-// líneas por `SRC` y recoge sus salidas por `OUT` y `SIGNALLING`. No necesita
+// líneas por `SRC` y recoge sus salidas por `OUT_INTERSTITIAL`, `OUT_CONCURRENTE` y `SIGNALLING`. No necesita
 // ffmpeg ni un solo byte de video, que es lo que le permite correr en `npm test`
 // sobre un clone limpio.
 //
@@ -61,7 +61,8 @@ const PDT = '2026-09-14T10:00:00.000+0000';
 function run(env = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'stage-pair-'));
   const src = join(dir, 'index.m3u8');
-  const out = join(dir, 'con-daterange.m3u8');
+  const outInterstitial = join(dir, 'con-daterange-interstitial.m3u8');
+  const outConcurrente = join(dir, 'con-daterange-concurrente.m3u8');
   const signalling = join(dir, 'signalling');
   mkdirSync(signalling);
   writeFileSync(
@@ -82,7 +83,10 @@ function run(env = {}) {
   try {
     const hoja = execFileSync(join(DEMO, 'scripts/senalizar-contenido.sh'), {
       cwd: DEMO,
-      env: { ...process.env, SRC: src, OUT: out, SIGNALLING: signalling, ...env },
+      env: {
+        ...process.env, SRC: src, OUT_INTERSTITIAL: outInterstitial, OUT_CONCURRENTE: outConcurrente,
+        SIGNALLING: signalling, ...env
+      },
       encoding: 'utf8'
     });
     // Se leen ACÁ, antes de que el `finally` borre el temporal. Y se lee el
@@ -95,7 +99,13 @@ function run(env = {}) {
       if (!(name in escritos)) throw new Error(`el señalizador no escribió ${name}`);
       return structuredClone(escritos[name]);
     };
-    return { playlist: readFileSync(out, 'utf8'), escritos: Object.keys(escritos), lista, hoja };
+    return {
+      interstitial: readFileSync(outInterstitial, 'utf8'),
+      concurrente: readFileSync(outConcurrente, 'utf8'),
+      escritos: Object.keys(escritos),
+      lista,
+      hoja
+    };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -127,14 +137,11 @@ const BREAKS = STAGE.breaks;
 const CON_DEFAULT = BREAKS.filter((b) => b.lineal);
 const SIN_DEFAULT = BREAKS.filter((b) => !b.lineal);
 
-/** Los tags de un break en la playlist, por su ID. */
-const tagsDe = (playlist, brk) => {
-  const tags = dateRanges(playlist);
-  return {
-    lineal: tags.find((t) => t.id === `AD-${brk.id.toUpperCase()}-LINEAR`),
-    concurrente: tags.find((t) => t.id === `AD-${brk.id.toUpperCase()}-CONCURRENT`)
-  };
-};
+/** Los tags de un break en los dos manifests, por su ID. */
+const tagsDe = (corrida, brk) => ({
+  lineal: dateRanges(corrida.interstitial).find((t) => t.id === `AD-${brk.id.toUpperCase()}-LINEAR`),
+  concurrente: dateRanges(corrida.concurrente).find((t) => t.id === `AD-${brk.id.toUpperCase()}-CONCURRENT`)
+});
 
 test('hay un break sin default y los otros dos con, que es lo que David pidió mostrar', () => {
   // ADR 0087. Sin un break de cada tipo, la corrida no muestra las dos salidas de
@@ -143,75 +150,69 @@ test('hay un break sin default y los otros dos con, que es lo que David pidió m
   assert.equal(CON_DEFAULT.length, 2, 'dos con default');
 });
 
-test('la playlist sale con un tag por break sin default y dos por break con, y las clases son las del ADR 0007', () => {
-  const { playlist, escritos } = run();
-  // Los asset-lists, contados sobre el directorio: un concurrente por break y un
-  // lineal por break con default. Un archivo de menos es un 404 en cámara.
-  assert.deepEqual(
-    escritos,
-    BREAKS.flatMap((b) => [b.concurrente, b.lineal].filter(Boolean)).sort(),
-    'los asset-lists, y ninguno de más'
-  );
-  const tags = dateRanges(playlist);
-  assert.deepEqual(
-    tags.map((t) => t.hlsClass),
-    BREAKS.flatMap((b) => (b.lineal ? [INTERSTITIAL_CLASS, CONCURRENT_CLASS] : [CONCURRENT_CLASS])),
-    'las clases, en el orden en que se escriben'
-  );
+test('dos manifests, uno por clase: el de interstitials sólo con los de Apple, el concurrente sólo con los nuestros', () => {
+  // ADR 0090. Y los asset-lists, contados sobre el directorio: UNO por break,
+  // que leen los dos clientes. Un archivo de menos es un 404 en cámara.
+  const corrida = run();
+  assert.deepEqual(corrida.escritos, BREAKS.map((b) => b.concurrente).sort(), 'un asset-list por break, y ninguno de más');
+  assert.deepEqual(dateRanges(corrida.interstitial).map((t) => t.hlsClass), CON_DEFAULT.map(() => INTERSTITIAL_CLASS),
+    'el de interstitials: un tag de Apple por break con default, y nada más');
+  assert.deepEqual(dateRanges(corrida.concurrente).map((t) => t.hlsClass), BREAKS.map(() => CONCURRENT_CLASS),
+    'el concurrente: un tag nuestro por break, y nada más');
 });
 
-test('los tags de un break comparten el START-DATE, y el instante es el que stage.json declara', () => {
-  const origen = new Date(PDT).getTime();
-  const { playlist } = run();
+test('los dos tags de un break nombran el MISMO asset-list', () => {
+  // La mitad del ADR 0090 que hace que haya un solo lugar donde vive el aviso.
+  const corrida = run();
   for (const brk of BREAKS) {
-    const { lineal, concurrente } = tagsDe(playlist, brk);
+    const { lineal, concurrente } = tagsDe(corrida, brk);
+    assert.equal(concurrente.assetList, `/signalling/${brk.concurrente}`);
+    if (brk.lineal) assert.equal(lineal.assetList, concurrente.assetList, `break ${brk.id}: el mismo asset-list`);
+  }
+});
+
+test('los tags de un break comparten el START-DATE en los dos manifests, y el instante es el de stage.json', () => {
+  const origen = new Date(PDT).getTime();
+  const corrida = run();
+  for (const brk of BREAKS) {
+    const { lineal, concurrente } = tagsDe(corrida, brk);
     assert.equal((new Date(concurrente.startDate).getTime() - origen) / 1000, brk.offset);
     if (brk.lineal) assert.equal(lineal.startDate, concurrente.startDate, `break ${brk.id}: un solo START-DATE`);
   }
 });
 
-test('el break sin default no lleva tag lineal ni URI, y los que tienen default llevan los dos', () => {
-  // ADR 0087. Las dos ausencias van juntas: sin tag el pane de fábrica no
+test('el break sin default no tiene tag en el manifest de interstitials ni URI, y los que tienen default tienen los dos', () => {
+  // ADR 0087. Las dos ausencias van juntas: sin tag el player de fábrica no
   // interrumpe, y sin `URI` la librería saltea el asset cuando no queda opción.
-  // Los breaks con default son el control de la misma lectura: si la lectura no
-  // supiera encontrar un tag lineal o un `URI`, los daría ausentes también ahí.
-  const { playlist, lista } = run();
+  // Los breaks con default son el control de la misma lectura.
+  const corrida = run();
   for (const brk of SIN_DEFAULT) {
-    assert.equal(tagsDe(playlist, brk).lineal, undefined, `break ${brk.id}: sin tag lineal`);
-    assert.equal('URI' in lista(brk.concurrente).ASSETS[0], false, `break ${brk.id}: sin URI`);
+    assert.equal(tagsDe(corrida, brk).lineal, undefined, `break ${brk.id}: sin tag de interstitial`);
+    assert.equal('URI' in corrida.lista(brk.concurrente).ASSETS[0], false, `break ${brk.id}: sin URI`);
   }
   for (const brk of CON_DEFAULT) {
     const pieza = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === '16x9');
-    assert.ok(tagsDe(playlist, brk).lineal, `break ${brk.id}: con tag lineal`);
-    assert.equal(lista(brk.concurrente).ASSETS[0].URI, `/${pieza.video}`, `break ${brk.id}: el default es su lineal`);
+    assert.ok(tagsDe(corrida, brk).lineal, `break ${brk.id}: con tag de interstitial`);
+    assert.equal(corrida.lista(brk.concurrente).ASSETS[0].URI, `/${pieza.video}`,
+      `break ${brk.id}: la parte estándar es el creativo 16:9 de su campaña`);
   }
 });
 
-test('cada break con default trae SU lineal, con la duración de SU break: es donde muere el tramo invertido', () => {
-  // ADR 0082. Los dos PLANNED-DURATION de un break coinciden, leídos de lo que el
-  // script escribió y comparados contra stage.json.
-  const { playlist, lista } = run();
-  assert.equal(new Set(CON_DEFAULT.map((b) => b.lineal)).size, CON_DEFAULT.length, 'un lineal por break');
+test('la parte estándar dura lo que su break, y los dos tags lo declaran: no hay tramo invertido', () => {
+  // ADR 0082, ahora por construcción: los dos clientes leen el mismo archivo.
+  const corrida = run();
   for (const brk of CON_DEFAULT) {
-    const { lineal, concurrente } = tagsDe(playlist, brk);
-    assert.equal(lineal.assetList, `/signalling/${brk.lineal}`);
-    assert.equal(lista(brk.lineal).ASSETS[0].DURATION, brk.duracion);
+    const { lineal, concurrente } = tagsDe(corrida, brk);
+    assert.equal(corrida.lista(brk.concurrente).ASSETS[0].DURATION, brk.duracion);
     assert.equal(lineal.plannedDuration, brk.duracion);
     assert.equal(concurrente.plannedDuration, brk.duracion, `break ${brk.id}: los dos panes duran lo mismo`);
   }
 });
 
-test('el lineal de cada break con default es el creativo 16:9 de su campaña', () => {
-  const { lista } = run();
-  for (const brk of CON_DEFAULT) {
-    const pieza = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === '16x9');
-    assert.equal(lista(brk.lineal).ASSETS[0].URI, `/${pieza.video}`);
-  }
-});
-
 test('el tag lineal va en la forma de reemplazo, o sea SIN X-RESUME-OFFSET', () => {
   // ADR 0017. El del tag concurrente sí se escribe y es inerte (ADR 0016).
-  const tags = dateRanges(run().playlist);
+  const corrida = run();
+  const tags = [...dateRanges(corrida.interstitial), ...dateRanges(corrida.concurrente)];
   for (const tag of tags.filter((t) => t.hlsClass === INTERSTITIAL_CLASS)) {
     assert.equal(tag.resumeOffset, false, `${tag.id} no declara X-RESUME-OFFSET`);
   }
@@ -224,9 +225,10 @@ test('cada break trae las dos opciones del aviso, primero el video y después la
   // ADR 0085 y R5.5: el orden de las opciones es la preferencia, y la librería se
   // queda con la primera que la capacidad satisface. Con la imagen primero, un
   // dispositivo de dos decodificadores vería la imagen.
-  const { playlist, lista } = run();
+  const corrida = run();
+  const { lista } = corrida;
   for (const brk of BREAKS) {
-    assert.equal(tagsDe(playlist, brk).concurrente.assetList, `/signalling/${brk.concurrente}`);
+    assert.equal(tagsDe(corrida, brk).concurrente.assetList, `/signalling/${brk.concurrente}`);
     const medios = opciones(lista(brk.concurrente)).map((o) => o.layout.assets.map((a) => a.type));
     assert.deepEqual(medios, [[STAGE.assets.tipos.video], [STAGE.assets.tipos.imagen]], `break ${brk.id}`);
   }
@@ -336,14 +338,17 @@ test('la librería, sobre la misma respuesta, dibuja video, imagen, el lineal o 
   }
 });
 
-test('el control del tramo invertido se puede encender, y desempareja los dos panes', () => {
+test('el control del tramo invertido se puede encender, y declara una duración que no es la del creativo', () => {
   // La palanca de test/medir-tramo-invertido.py, probada donde se puede probar sin
-  // navegador. Si no hiciera nada, la medición en verde de al lado no probaría nada.
-  const { playlist } = run({ CONTROL_DURACION_CONCURRENTE: '24' });
+  // navegador: el asset-list declara 24 s para un creativo de 12. El player de
+  // fábrica reproduce el creativo hasta que termina y la librería ubica la
+  // ventana con los 24 declarados, así que los panes se desemparejan. Si esta
+  // palanca no hiciera nada, la medición en verde no probaría nada.
+  const corrida = run({ CONTROL_DURACION_CONCURRENTE: '24' });
   for (const brk of CON_DEFAULT) {
-    const { lineal, concurrente } = tagsDe(playlist, brk);
-    assert.equal(lineal.plannedDuration, brk.duracion, 'el lineal se queda con la suya');
-    assert.equal(concurrente.plannedDuration, 24, 'el concurrente se desempareja');
+    assert.equal(corrida.lista(brk.concurrente).ASSETS[0].DURATION, 24);
+    assert.equal(bloque(corrida.lista(brk.concurrente)).duration, 24);
+    assert.equal(tagsDe(corrida, brk).concurrente.plannedDuration, 24);
   }
 });
 

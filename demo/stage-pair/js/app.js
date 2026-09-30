@@ -1,5 +1,11 @@
 // app.js -- the pair of players of index.html, each one with its own control.
 //
+// Each pane loads the manifest of its own class -- the native one only the
+// Apple-class interstitials, ours only the concurrent tags -- and the two tags of
+// a break name the SAME asset-list: its standard part is what hls.js plays, and
+// the block on top is what our library reads (ADR 0090, which supersedes the one
+// manifest for two clients of ADR 0007).
+//
 // Each pane is configured on its own (fase 15, asked for by Nicolás to be able to
 // compare every combination): first a MODE, the off-the-shelf "HLS interstitials"
 // client -- hls.js with nothing of ours, which replaces the programme with the
@@ -36,7 +42,13 @@ import {
 // The one source of the numbers of this demo (ADR 0044).
 const stage = await (await fetch('/stage.json')).json();
 
-const SRC = `/${stage.playlists.par}`;
+// ONE MANIFEST PER CLASS (ADR 0090): the native pane loads the one with only the
+// Apple-class interstitials, ours the one with only the concurrent tags. The
+// segments are the same, and the two tags of a break name the same asset-list.
+const SRC = {
+  nativo: `/${stage.playlists.interstitial}`,
+  ours: `/${stage.playlists.concurrente}`
+};
 
 const LADOS = ['izq', 'der'];
 
@@ -59,12 +71,12 @@ const ROTULOS = {
   nativo: {
     rol: 'HLS interstitials, native',
     sub: 'A client that is already in the market: hls.js with nothing of this demo in it. It replaces the programme with the ad.',
-    lee: 'keeps com.apple.hls.interstitial · ignores com.qualabs.hls.concurrentInterstitial'
+    lee: `loads ${stage.playlists.interstitial.split('/').pop()}: only com.apple.hls.interstitial`
   },
   ours: {
     rol: 'With our library',
     sub: 'The same hls.js, unmodified, with its interstitials machinery off. The programme is never replaced.',
-    lee: 'keeps com.qualabs.hls.concurrentInterstitial · ignores com.apple.hls.interstitial'
+    lee: `loads ${stage.playlists.concurrente.split('/').pop()}: only com.qualabs.hls.concurrentInterstitial`
   }
 };
 
@@ -343,7 +355,7 @@ function construirNuestro(lado, capacidades, caja, registro) {
       pintarPedidos(lado);
     }
   });
-  hls.loadSource(SRC);
+  hls.loadSource(SRC.ours);
   hls.attachMedia(caja.video);
   // =========================================================================
 
@@ -352,7 +364,7 @@ function construirNuestro(lado, capacidades, caja, registro) {
   hls.on(Hls.Events.MANIFEST_PARSED, () => {
     const off = hls.interstitialsManager == null;
     p.hud.textContent = `hls.js ${Hls.version} · interstitials manager: ${off ? 'none' : 'PRESENT'} · ` +
-      `capabilities: ${JSON.stringify(capacidades)} · playing ${SRC}`;
+      `capabilities: ${JSON.stringify(capacidades)} · playing ${SRC.ours}`;
   });
   caja.video.muted = true;
   caja.video.play().catch(() => {});
@@ -382,7 +394,7 @@ function construirNativo(lado, caja, registro) {
   const p = panes[lado];
   p.contract.textContent = '';
   const stock = createStockPlayer({
-    video: caja.video, container: caja.player, src: SRC, pane: p.pane, state: p.state, hud: p.hud
+    video: caja.video, container: caja.player, src: SRC.nativo, pane: p.pane, state: p.state, hud: p.hud
   });
   // The requests THIS instance made, from its own asset-list events: two native
   // panes ask for the same files, and only the instance knows which were its own.

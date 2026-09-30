@@ -15,6 +15,7 @@
 | T-11 | `index.html`: un control por player, con el modo nativo o el nuestro, y la combinación en la URL | done | — | [`tasks/T-11/`](tasks/T-11/) · `js/{app,capabilities}.js` · `index.html` · `test/verificar-pares.py` |
 | T-12 | En las transiciones, el primario por encima de lo que no se le superpone (lib/) | done | — | [`tasks/T-12/`](tasks/T-12/) · `lib/renderer.js` (`stackingOf`) · `test/stacking-order.test.js` · ADR 0089 |
 | T-13 | `inspect.html` con el mismo control que cada player del par, nativo incluido | done | — | [`tasks/T-13/`](tasks/T-13/) · `js/{inspect,capabilities}.js` · `inspect.html` · `test/verificar-inspect-modos.py` |
+| T-14 | Un asset-list, dos clientes: un manifest por clase y la lista enriquecida para los dos (pedido de David) | done | — | [`tasks/T-14/`](tasks/T-14/) · `scripts/{senalizar-contenido.sh,escribir-asset-lists.mjs}` · `js/{app,inspect}.js` · ADR 0090 |
 
 ---
 
@@ -141,4 +142,14 @@
   nativo en `inspect.js`, las tarjetas 2, 3 y 4. Default: nuestra librería, 2 decodificadores, imágenes.
 - **Definition of done:** `test/verificar-inspect-modos.py` en verde en los cinco modos, en A y B,
   local y en la URL pública; `index.html` sin cambios de comportamiento.
+- **nivel de verificación:** bajo.
+
+## T-14 — Un asset-list, dos clientes
+- **Objective:** el player de fábrica carga un manifest sólo con los tags de Apple y el nuestro
+  uno sólo con los concurrentes; los dos tags de un break nombran el mismo asset-list, cuya parte
+  estándar reproduce hls.js y cuya parte enriquecida lee la librería.
+- **What it must cover:** la señalización, las dos páginas, los tests y las mediciones, ADR 0090.
+- **Definition of done:** medido en el navegador que hls.js reproduce la parte estándar (URI y
+  duración) del asset-list enriquecido; las verificaciones de las dos páginas en verde en A, B y C,
+  local y en la URL pública.
 - **nivel de verificación:** bajo.

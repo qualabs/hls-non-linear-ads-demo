@@ -165,8 +165,8 @@
       "campana": "zumbra",
       "concurrente": "asset-list-break-a.json",
       "formaImagen": "backplate",
-      "lineal": null,
-      "_lineal": "EL BREAK SIN DEFAULT (ADR 0087): contenido que no se interrumpe. El asset concurrente no lleva URI y la playlist no lleva tag lineal, así que el pane de fábrica no pone nada, y el nuestro dibuja el aviso si alguna opción entra en la capacidad declarada y si no, lo saltea. Es A porque su lineal sería ZUMBRA 16:9, que ya es su aviso concurrente: sacárselo no deja ninguna de las nueve piezas sin usar.",
+      "lineal": false,
+      "_lineal": "`lineal` dice si el break tiene DEFAULT LINEAL. A no lo tiene (ADR 0087): contenido que no se interrumpe. Su asset-list no lleva URI y el manifest de interstitials no lleva tag para él, así que el player de fábrica no pone nada, y el nuestro dibuja el aviso si alguna opción entra en la capacidad declarada y si no, lo saltea. Es A porque su lineal sería ZUMBRA 16:9, que ya es su aviso concurrente: sacárselo no deja ninguna de las nueve piezas sin usar.",
       "_": "Va primero porque su creativo es el único que ya está autorado y aprobado, así que el primer break que se ve en cámara es la pieza terminada."
     },
     {
@@ -178,7 +178,7 @@
       "campana": "ketrava",
       "concurrente": "asset-list-break-b.json",
       "formaImagen": "16x9",
-      "lineal": "asset-list-linear-b.json",
+      "lineal": true,
       "_": "Turismo en la L porque un paisaje es lo que mejor tolera que le tapen el centro: la guarda del backplate cae sobre cielo y mar, donde no hay nada que perder."
     },
     {
@@ -190,16 +190,17 @@
       "campana": "kovrin",
       "concurrente": "asset-list-break-c.json",
       "formaImagen": "backplate",
-      "lineal": "asset-list-linear-c.json",
+      "lineal": true,
       "_": "Calzado en el banner porque una zapatilla de perfil es la única de las tres siluetas que llena una tira de 8,89:1 sin quedar perdida en el medio."
     }
   ],
   "_breaks": "Los tres duran lo mismo para que el creativo 16:9 de cada campaña sirva de lineal en su break sin recortarse. Los huecos de programa entre breaks son iguales, 33 s, y el primero entra a los 20 s para que la demo lo alcance rápido. El último termina en 122 s, bastante antes del corte del programa en 198,0 s (los créditos arrancan en 199,0 s: la medición está en programa._largo).",
 
   "playlists": {
-    "par": "content/primary/con-daterange.m3u8",
-    "_ubicacion": "Va al lado del contenido empaquetado y NO en signalling/, porque lleva un START-DATE resuelto contra el EXT-X-PROGRAM-DATE-TIME del propio empaquetado (ADR 0005): es hora de pared y se mueve con cada empaquetado, así que en git sólo podría estar vieja.",
-    "_": "UNA sola playlist, cualquiera sea la capacidad (ADR 0085). El asset-list de cada break trae todas las opciones del aviso y la librería filtra; el control de la página sólo cambia lo que se le pasa a attach()."
+    "interstitial": "content/primary/con-daterange-interstitial.m3u8",
+    "concurrente": "content/primary/con-daterange-concurrente.m3u8",
+    "_ubicacion": "Van al lado del contenido empaquetado y NO en signalling/, porque llevan un START-DATE resuelto contra el EXT-X-PROGRAM-DATE-TIME del propio empaquetado (ADR 0005): es hora de pared y se mueve con cada empaquetado, así que en git sólo podrían estar viejas.",
+    "_": "DOS manifests, uno por clase, sobre los mismos segmentos (ADR 0090): el de interstitials lleva SÓLO los tags com.apple.hls.interstitial y lo carga el player de fábrica; el concurrente lleva SÓLO los com.qualabs.hls.concurrentInterstitial y lo carga el nuestro. Los dos tags de un break apuntan al MISMO asset-list: su parte estándar la lee hls.js y la enriquecida, nuestra librería."
   },
 
   "capacidades": {
