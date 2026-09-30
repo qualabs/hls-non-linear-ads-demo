@@ -19,10 +19,10 @@
 # que cae a esa parte estándar cuando no puede dibujar. La capacidad viaja en el
 # pedido y la librería filtra (ADR 0085).
 #
-# UN BREAK NO TIENE DEFAULT (ADR 0087): el A. El manifest de interstitials no lo
-# nombra, así que el player de fábrica no pone nada, y su asset-list no lleva
-# `URI`, así que cuando ninguna opción entra en la capacidad la librería lo
-# saltea.
+# UN BREAK NO TIENE DEFAULT (ADR 0087): el A. Su asset-list no lleva `URI`, así
+# que no tiene parte estándar: el player de fábrica, que igual lo pide porque el
+# manifest de interstitials lo nombra (ADR 0091), no tiene nada que reproducir y
+# lo saltea, y la librería lo saltea cuando ninguna opción entra en la capacidad.
 #
 # Y NO HAY TRAMO INVERTIDO POR CONSTRUCCIÓN (ADR 0082): los dos clientes leen el
 # MISMO asset-list, con la duración de su break, así que entran y salen del break
@@ -126,17 +126,25 @@ suma() { awk -v a="$1" -v b="$2" 'BEGIN { printf "%s", a + b }'; }
 # Entre las dos formas decidió una medición: con el atributo ausente hls.js 1.7.2
 # resuelve el punto de retorno contra el largo que MIDIÓ del aviso.
 #
+# SALVO EL BREAK SIN DEFAULT, que lleva X-RESUME-OFFSET=0 (ADR 0091). Su
+# asset-list no tiene nada que reproducir, así que no hay aviso y el programa
+# tiene que seguir desde donde estaba. Sin el atributo, hls.js 1.7.2 retoma en el
+# fin del break --el inicio más el DURATION declarado--, un punto que no bajó
+# porque paró de bufferear en el borde del break, y el video queda congelado en
+# el último cuadro (medido: más de 40 s, sin evento fatal).
+#
 # El X-RESUME-OFFSET del tag concurrente no significa nada, porque no hay nada
 # interrumpido que reanudar (ADR 0016), y se escribe como en las demás demos.
 #
 # LOS DOS DECLARAN EL LARGO DEL MISMO ASSET-LIST, leído del archivo.
-tag_de() { # $1 clase (interstitial|concurrente), $2 id del break, $3 offset, $4 asset-list
-  local clase=$1 id=$2 offset=$3 lista=$4 start largo
+tag_de() { # $1 clase (interstitial|concurrente), $2 id del break, $3 offset, $4 asset-list, $5 lineal ("si" o "")
+  local clase=$1 id=$2 offset=$3 lista=$4 lineal=$5 start largo retorno=""
   start=$(date -d "$PDT + $offset seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
   largo=$(declaracion "$SIGNALLING/$lista" | head -1)
   if [ "$clase" = interstitial ]; then
-    printf '#EXT-X-DATERANGE:ID="AD-%s-LINEAR",CLASS="%s",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
-      "${id^^}" "$CLASE_LINEAL" "$start" "$lista" "$largo"
+    [ -n "$lineal" ] || retorno=',X-RESUME-OFFSET=0'
+    printf '#EXT-X-DATERANGE:ID="AD-%s-LINEAR",CLASS="%s",START-DATE="%s",X-ASSET-LIST="/signalling/%s"%s,X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
+      "${id^^}" "$CLASE_LINEAL" "$start" "$lista" "$retorno" "$largo"
   else
     printf '#EXT-X-DATERANGE:ID="AD-%s-CONCURRENT",CLASS="%s",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
       "${id^^}" "$CLASE_CONCURRENTE" "$start" "$lista" "$largo"
@@ -152,15 +160,15 @@ RECORRIDO=$(node -e '
   ).join("\n") + "\n");
 ' "$DEMO/stage.json")
 
-# Un manifest por clase: los mismos segmentos y los mismos START-DATE. El de
-# interstitials nombra sólo los breaks con default lineal.
+# Un manifest por clase: los mismos segmentos y los mismos START-DATE, y cada
+# break en los dos. El break sin default también tiene su tag de Apple (ADR 0091):
+# nombra el mismo asset-list, que no tiene parte estándar, y hls.js lo saltea.
 escribir_playlist() { # $1 salida, $2 clase (interstitial|concurrente)
   local salida=$1 clase=$2 tags=""
   while IFS='|' read -r id offset duracion campana forma lista lineal; do
     [ -n "$id" ] || continue
     [ -f "$SIGNALLING/$lista" ] || { echo "falta $SIGNALLING/$lista" >&2; exit 1; }
-    [ "$clase" = interstitial ] && [ -z "$lineal" ] && continue
-    tags="$tags$(tag_de "$clase" "$id" "$offset" "$lista")
+    tags="$tags$(tag_de "$clase" "$id" "$offset" "$lista" "$lineal")
 "
   done <<< "$RECORRIDO"
   mkdir -p "$(dirname "$salida")"
@@ -191,7 +199,7 @@ while IFS='|' read -r id offset duracion campana forma lista lineal; do
     printf '      de fábrica   %-26s la parte estándar, a cuadro entero: el programa se reemplaza\n' "$lista"
     printf '      librería     %-26s %s; sin opción que entre, el lineal\n' "$lista" "$(medios "$SIGNALLING/$lista")"
   else
-    printf '      de fábrica   %-26s sin tag en su manifest: no hay default y el programa sigue\n' "-"
+    printf '      de fábrica   %-26s sin parte estándar: hls.js lo saltea y el programa sigue\n' "$lista"
     printf '      librería     %-26s %s; sin opción que entre, se saltea\n' "$lista" "$(medios "$SIGNALLING/$lista")"
   fi
 done <<< "$RECORRIDO"

@@ -1,11 +1,11 @@
 ---
 id: "0087"
 title: Un break con default lineal y otro sin, y el de sin default no lleva tag lineal
-status: accepted
+status: superseded
 scope: phase-15
 date: 2026-09-28
 supersedes: null
-superseded_by: null
+superseded_by: "0091"
 generalizes: null
 generalized_by: null
 ---

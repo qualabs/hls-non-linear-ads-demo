@@ -20,6 +20,7 @@
 | T-16 | Inspect: la tarjeta 3 alineada con la 4 y la URL de la tarjeta 2 en una línea | done | — | [`tasks/T-16/`](tasks/T-16/) · `css/player.css` |
 | T-17 | Index: los dos players alineados con cualquier combinación de modos | done | — | [`tasks/T-17/`](tasks/T-17/) · `css/player.css` |
 | T-18 | La barra de progreso siempre visible en index e inspect; el play/pause sólo con el mouse encima | done | — | [`tasks/T-18/`](tasks/T-18/) · `css/player.css` |
+| T-19 | El break sin default también en el manifest de interstitials; el player de fábrica lo saltea | done | — | [`tasks/T-19/`](tasks/T-19/) · ADR 0091 |
 
 ---
 
@@ -166,3 +167,17 @@
 - **Definition of done:** medido a 1920×960 que los bordes inferiores del player y de las tarjetas
   1 a 3 quedan en ≤ 960 sin scroll; los saltos mueven el player; consola limpia; local y público.
 - **nivel de verificación:** bajo.
+
+## T-19 — El break sin default, salteado por el player de fábrica
+- **Objective:** `con-daterange-interstitial.m3u8` nombra también el break A con su tag de Apple y
+  el mismo asset-list, que sigue sin `URI`; hls.js lo saltea y el programa sigue.
+- **What it must cover:** la señalización, los textos del modo nativo de `inspect.html`, los
+  tests y las mediciones que suponían A fuera del manifest, ADR 0091.
+- **Definition of done:** medido dejando correr la página desde cero, en index e inspect, que en A
+  el reloj del programa no se traba y la línea de estado no muestra nada alarmante; nuestro lado
+  sin cambios; local y en la URL pública.
+- **nivel de verificación:** bajo.
+
+Pedido de David (opción 2). La medición encontró que el tag tal cual deja el video congelado más de
+40 s: hls.js retoma en el fin del break, que no bajó. El tag de A lleva `X-RESUME-OFFSET=0` y
+retoma donde empezó el break (ADR 0091).

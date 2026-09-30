@@ -6146,3 +6146,12 @@ está abajo, salvo la barra con las marcas de los breaks; el play/pause, el audi
 fullscreen siguen apareciendo sólo con el mouse encima. Medido con la opacidad efectiva: con el
 mouse afuera, barra 1 y play 0 en los tres players; con el mouse encima, los dos en 1; race.html
 con la barra en 0 afuera, como antes. Control: lo publicado antes daba la barra en 0 afuera.
+
+## 2026-09-30 — T-19: el break sin default, salteado por el player de fábrica
+
+Pedido de David: el manifest de interstitials nombra también el break A, con su tag de Apple y el
+mismo asset-list sin `URI`. Dejando correr la página desde cero, el tag tal cual congelaba el video
+del pane de fábrica más de 40 s: hls.js retomaba el programa en el fin del break (32 s), un punto
+que no había bajado. Con `X-RESUME-OFFSET=0` en ese tag retoma donde empezó el break: el hueco más
+largo del reloj es de 0,21 s (el muestreo), igual que lo publicado sin el tag. Control: en B el
+reloj queda congelado doce segundos mientras suena el aviso. ADR 0091, que reemplaza al 0087.

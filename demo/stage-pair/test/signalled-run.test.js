@@ -155,8 +155,8 @@ test('dos manifests, uno por clase: el de interstitials sólo con los de Apple, 
   // que leen los dos clientes. Un archivo de menos es un 404 en cámara.
   const corrida = run();
   assert.deepEqual(corrida.escritos, BREAKS.map((b) => b.concurrente).sort(), 'un asset-list por break, y ninguno de más');
-  assert.deepEqual(dateRanges(corrida.interstitial).map((t) => t.hlsClass), CON_DEFAULT.map(() => INTERSTITIAL_CLASS),
-    'el de interstitials: un tag de Apple por break con default, y nada más');
+  assert.deepEqual(dateRanges(corrida.interstitial).map((t) => t.hlsClass), BREAKS.map(() => INTERSTITIAL_CLASS),
+    'el de interstitials: un tag de Apple por break, también el sin default (ADR 0091), y nada más');
   assert.deepEqual(dateRanges(corrida.concurrente).map((t) => t.hlsClass), BREAKS.map(() => CONCURRENT_CLASS),
     'el concurrente: un tag nuestro por break, y nada más');
 });
@@ -167,7 +167,7 @@ test('los dos tags de un break nombran el MISMO asset-list', () => {
   for (const brk of BREAKS) {
     const { lineal, concurrente } = tagsDe(corrida, brk);
     assert.equal(concurrente.assetList, `/signalling/${brk.concurrente}`);
-    if (brk.lineal) assert.equal(lineal.assetList, concurrente.assetList, `break ${brk.id}: el mismo asset-list`);
+    assert.equal(lineal.assetList, concurrente.assetList, `break ${brk.id}: el mismo asset-list`);
   }
 });
 
@@ -177,17 +177,18 @@ test('los tags de un break comparten el START-DATE en los dos manifests, y el in
   for (const brk of BREAKS) {
     const { lineal, concurrente } = tagsDe(corrida, brk);
     assert.equal((new Date(concurrente.startDate).getTime() - origen) / 1000, brk.offset);
-    if (brk.lineal) assert.equal(lineal.startDate, concurrente.startDate, `break ${brk.id}: un solo START-DATE`);
+    assert.equal(lineal.startDate, concurrente.startDate, `break ${brk.id}: un solo START-DATE`);
   }
 });
 
-test('el break sin default no tiene tag en el manifest de interstitials ni URI, y los que tienen default tienen los dos', () => {
-  // ADR 0087. Las dos ausencias van juntas: sin tag el player de fábrica no
-  // interrumpe, y sin `URI` la librería saltea el asset cuando no queda opción.
-  // Los breaks con default son el control de la misma lectura.
+test('el break sin default tiene su tag de Apple pero su asset-list no tiene URI; los que tienen default, los dos', () => {
+  // ADR 0087 y 0091. Sin `URI` el asset-list no tiene parte estándar: el player de
+  // fábrica pide la lista, no tiene nada que reproducir y lo saltea, y la librería
+  // lo saltea cuando no queda opción. Los breaks con default son el control de la
+  // misma lectura.
   const corrida = run();
   for (const brk of SIN_DEFAULT) {
-    assert.equal(tagsDe(corrida, brk).lineal, undefined, `break ${brk.id}: sin tag de interstitial`);
+    assert.ok(tagsDe(corrida, brk).lineal, `break ${brk.id}: con tag de interstitial (ADR 0091)`);
     assert.equal('URI' in corrida.lista(brk.concurrente).ASSETS[0], false, `break ${brk.id}: sin URI`);
   }
   for (const brk of CON_DEFAULT) {
@@ -209,13 +210,18 @@ test('la parte estándar dura lo que su break, y los dos tags lo declaran: no ha
   }
 });
 
-test('el tag lineal va en la forma de reemplazo, o sea SIN X-RESUME-OFFSET', () => {
-  // ADR 0017. El del tag concurrente sí se escribe y es inerte (ADR 0016).
+test('el tag lineal va en la forma de reemplazo, SIN X-RESUME-OFFSET, salvo el del break sin default, con 0', () => {
+  // ADR 0017. El del tag concurrente sí se escribe y es inerte (ADR 0016). El
+  // break sin default no tiene aviso que reemplace nada: retoma donde empezó,
+  // porque retomar en su fin deja al hls.js de fábrica congelado (ADR 0091).
   const corrida = run();
   const tags = [...dateRanges(corrida.interstitial), ...dateRanges(corrida.concurrente)];
+  const sinDefault = new Set(SIN_DEFAULT.map((b) => `AD-${b.id.toUpperCase()}-LINEAR`));
   for (const tag of tags.filter((t) => t.hlsClass === INTERSTITIAL_CLASS)) {
-    assert.equal(tag.resumeOffset, false, `${tag.id} no declara X-RESUME-OFFSET`);
+    if (sinDefault.has(tag.id)) assert.match(tag.line, /X-RESUME-OFFSET=0,/, `${tag.id} retoma donde empezó`);
+    else assert.equal(tag.resumeOffset, false, `${tag.id} no declara X-RESUME-OFFSET`);
   }
+  assert.equal(tags.filter((t) => sinDefault.has(t.id)).length, SIN_DEFAULT.length, 'el tag del break sin default está');
   for (const tag of tags.filter((t) => t.hlsClass === CONCURRENT_CLASS)) {
     assert.equal(tag.resumeOffset, true, `${tag.id} sí lo declara, y no significa nada`);
   }

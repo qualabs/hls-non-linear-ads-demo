@@ -270,11 +270,11 @@ function pintarIntercambio() {
   // One manifest per class (ADR 0090): the range this client's manifest carries
   // for the break, and it names the same asset-list the other class names.
   dom.rangesLede.textContent = vivo?.modo === 'nativo'
-    ? (rangos.length
+    ? (mostrado?.lineal
       ? 'The interstitials manifest: only the Apple-class range. It names the same asset-list as the ' +
         'concurrent one, and hls.js plays its standard part.'
-      : 'The interstitials manifest has no range for this break: it has no linear default, so an ' +
-        'off-the-shelf client plays nothing and the programme is not interrupted.')
+      : 'The interstitials manifest: only the Apple-class range. It names the same asset-list as the ' +
+        'concurrent one, which has no standard part for this break, so hls.js skips it (ADR 0091).')
     : 'The concurrent manifest: only the range of our class. It names the same asset-list the ' +
       'interstitials manifest names, and the library reads the part on top of the standard one.';
 
@@ -302,7 +302,8 @@ function pintarIntercambio() {
     dom.outcome.dataset.outcome = 'native';
     dom.outcome.textContent = mostrado.lineal
       ? 'hls.js plays the Apple-class interstitial of this break as it is, full frame, replacing the programme.'
-      : 'This break has no Apple-class interstitial, so hls.js plays nothing and the programme goes on.';
+      : 'The asset-list of this break has no standard part (no default), so hls.js skips the ' +
+        'interstitial and the programme goes on.';
   }
   const seleccion = vivo?.modo === 'nativo' ? null : selecciones.get(mostrado.id);
   const asset = seleccion?.assets[0];

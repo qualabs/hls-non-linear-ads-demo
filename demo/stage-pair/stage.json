@@ -166,7 +166,7 @@
       "concurrente": "asset-list-break-a.json",
       "formaImagen": "backplate",
       "lineal": false,
-      "_lineal": "`lineal` dice si el break tiene DEFAULT LINEAL. A no lo tiene (ADR 0087): contenido que no se interrumpe. Su asset-list no lleva URI y el manifest de interstitials no lleva tag para él, así que el player de fábrica no pone nada, y el nuestro dibuja el aviso si alguna opción entra en la capacidad declarada y si no, lo saltea. Es A porque su lineal sería ZUMBRA 16:9, que ya es su aviso concurrente: sacárselo no deja ninguna de las nueve piezas sin usar.",
+      "_lineal": "`lineal` dice si el break tiene DEFAULT LINEAL. A no lo tiene (ADR 0087): su asset-list no lleva URI, o sea que no tiene parte estándar. El manifest de interstitials igual lo nombra (ADR 0091): el player de fábrica pide la lista, no tiene nada que reproducir y lo saltea, y el programa sigue; el nuestro dibuja el aviso si alguna opción entra en la capacidad declarada y si no, lo saltea. Es A porque su lineal sería ZUMBRA 16:9, que ya es su aviso concurrente.",
       "_": "Va primero porque su creativo es el único que ya está autorado y aprobado, así que el primer break que se ve en cámara es la pieza terminada."
     },
     {

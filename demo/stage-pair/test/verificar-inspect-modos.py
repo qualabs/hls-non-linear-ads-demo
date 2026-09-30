@@ -12,7 +12,7 @@ modo y en los breaks A y B mide:
   LO QUE LA PÁGINA DICE QUE SE PIDIÓ. La tarjeta 2 muestra la URL que el
   navegador pidió de verdad (se compara con la red): nuestra librería, el
   asset-list del break con SUS sgai-*; el nativo, el MISMO asset-list (ADR 0090)
-  sin sgai-*, y en A, que no tiene lineal, ningún pedido.
+  sin sgai-*, también en A, que no tiene lineal y el nativo saltea (ADR 0091).
 
   LA TARJETA 4. Con nuestra librería, el desenlace del filtro; en nativo, que no
   hay filtro -- sin opciones inventadas.
@@ -95,8 +95,8 @@ def main():
                 ok_dibujo = obtenido == esp
                 pedido = pagina.locator("#request").inner_text().strip()
                 if modo == "nativo":
-                    ok_pedido = (pedido.startswith(f"/signalling/asset-list-break-{brk_id}.json") and "sgai-" not in pedido) \
-                        if brk["lineal"] else "no request" in pedido
+                    # Los tres breaks, también el sin default (ADR 0091), con el mismo asset-list.
+                    ok_pedido = pedido.startswith(f"/signalling/asset-list-break-{brk_id}.json") and "sgai-" not in pedido
                 else:
                     dec, img = modo.split("-")[1:]
                     q = f"sgai-video-decoders={dec[0]}&sgai-image-over-video={1 if img == 'img' else 0}"

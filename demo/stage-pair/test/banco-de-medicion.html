@@ -122,7 +122,10 @@ stock.attachMedia(stockVideo);
 // también existe mientras corre el contenido primario, y leído así el pane de
 // fábrica reporta "en aviso" de punta a punta. Está medido en esta misma task, y
 // es la misma propiedad que lee demo/compatibility-pair/js/stock-player.js.
-const enAdStock = () => (stock.interstitialsManager?.playingItem?.event?.identifier ?? null) !== null;
+// Y SÓLO LOS BREAKS MEDIDOS: el de fábrica también programa el break sin
+// default (ADR 0091) y lo saltea en el acto, y ese instante no es una entrada.
+const IDS_FABRICA = new Set(MEDIDOS.map((b) => `AD-${b.id.toUpperCase()}-LINEAR`));
+const enAdStock = () => IDS_FABRICA.has(stock.interstitialsManager?.playingItem?.event?.identifier);
 const relojStock = () => {
   const t = stock.interstitialsManager?.primary?.currentTime;
   return Number.isFinite(t) ? t : stockVideo.currentTime;

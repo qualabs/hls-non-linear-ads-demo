@@ -102,6 +102,10 @@ sel => {
   // El programa se oculta durante la medición: en la L la imagen está DEBAJO del
   // primario, y lo que se mide es la caja del aviso y no el video que la tapa.
   for (const v of c.querySelectorAll('video')) v.style.visibility = 'hidden';
+  // Y el cromo, por lo mismo: desde la T-18 la barra de progreso está siempre a la
+  // vista, y en la L la imagen cubre todo el cuadro, así que la barra que avanza
+  // cae adentro de la captura.
+  for (const k of c.querySelectorAll('.qa-controls')) k.style.visibility = 'hidden';
   const img = [...c.querySelectorAll('img')].find((i) => i.getAttribute('src') && !/logo/i.test(i.getAttribute('src')));
   img.dataset.medida = '1';
   return img.getAttribute('src');
@@ -111,6 +115,7 @@ QUIETUD_RESTAURAR = """
 sel => {
   const c = document.querySelector(sel);
   for (const v of c.querySelectorAll('video')) v.style.visibility = '';
+  for (const k of c.querySelectorAll('.qa-controls')) k.style.visibility = '';
   delete c.querySelector('img[data-medida]').dataset.medida;
 }
 """

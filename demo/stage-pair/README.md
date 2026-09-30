@@ -106,9 +106,10 @@ same place looks like the same experience; either way the difference had to be f
 inspecting the element. The still image is the authored SVG frozen at one instant by
 `scripts/congelar-svg.py`, with no animation left in it.
 
-**Break A has no default on purpose** (ADR 0087): its asset carries no `URI` and the playlist
-carries no Apple-class tag for it, so the off-the-shelf pane does not interrupt either. It is
-content that is not interrupted.
+**Break A has no default on purpose** (ADR 0087, 0091): its asset carries no `URI`, so the
+asset-list has no standard part. The interstitials manifest still names it with an Apple-class
+tag: the off-the-shelf pane requests the list, finds nothing to play, skips it and the programme
+goes on. It is content that is not interrupted.
 
 Moving the switch **rebuilds both players** at the same target second, because the library
 reads `capabilities` once, when the signalling is created, and hls.js instantiates its
