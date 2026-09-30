@@ -683,6 +683,35 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
   .stage--inspect .move { padding-top: 10px; padding-bottom: 12px; }
   .stage--inspect .move__lede { margin-bottom: 6px; }
   .stage--inspect .answer { max-height: 170px; }
+  /* The URL of card 2 on ONE line, for every break and every capability. */
+  .stage--inspect .request { font-size: 12.5px; }
+}
+
+/* ON A SCREEN TALL ENOUGH, THE TWO COLUMNS END ON THE SAME LINE, AT THE BOTTOM
+ * OF THE WINDOW. The grid takes the height that is left under the bar, the
+ * player and card 4 share the left column (card 4 scrolls inside if it has to),
+ * and card 3 takes whatever the right column has left, so its JSON gets all
+ * the room there is and its bottom edge lines up with card 4's. 170 px is the
+ * header and the bar at 1920 wide, plus a margin under the cards. */
+@media (min-width: 1500px) and (min-height: 850px) {
+  .stage--inspect .inspect {
+    height: calc(100vh - 170px);
+    align-items: stretch;
+  }
+  .stage--inspect .inspect > .inspect__left {
+    position: static;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+  }
+  .stage--inspect .move--kept { min-height: 0; overflow: auto; }
+  .stage--inspect .exchange { min-height: 0; }
+  .stage--inspect .exchange .move:last-child {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .stage--inspect .exchange .move:last-child .answer { flex: 1 1 auto; min-height: 0; max-height: none; }
 }
 
 /* The title of the right pane of the pair, with the jumps beside it. */
