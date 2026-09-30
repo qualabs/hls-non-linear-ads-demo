@@ -1,0 +1,15 @@
+== index, player nativo a la izquierda
+   ok   1. apenas carga (lista de A sin llegar)      t=   0.0  nativo marca ['a', 'b', 'c']   nuestro []
+   ok   2. cargada (lista de A llegó)                t=   6.3  nativo marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   3. salto 'start'                             t=   2.9  nativo marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   3. salto 'break A'                           t=  18.4  nativo marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   3. salto 'break B'                           t=  62.3  nativo marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   3. salto 'break C'                           t= 107.3  nativo marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   4. seek con la barra antes de A              t=   9.2  nativo marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   4. y el programa pasó por A                  t=  34.2  nativo marca ['b', 'c']   nuestro ['a', 'b', 'c']
+   ok   hls.js volvió a pedir la lista de A después del seek: 1 pedido(s)
+
+== inspect.html?modo=nativo
+   ok   con la lista de A llegada marca ['a', 'b', 'c'] (sin cambios)
+
+VERDE

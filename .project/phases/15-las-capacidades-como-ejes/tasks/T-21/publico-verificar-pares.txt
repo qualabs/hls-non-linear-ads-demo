@@ -1,0 +1,3 @@
+control: en B, nativo contra nativo -> iguales
+
+VERDE
