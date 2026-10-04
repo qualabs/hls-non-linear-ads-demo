@@ -47,3 +47,12 @@ librería no tenía tracking.
 - En `stage-pair` el identificador es por campaña, así que dos piezas de la misma campaña (por
   ejemplo los avisos 1 y 4 de la carrera, banner y backplate de ZUMBRA) comparten valor. Si cada
   pieza tiene que tener el suyo, se mueve de la campaña a la pieza en `stage.json`.
+
+> **Nota del 2026-10-04.** El identificador de `stage-pair` pasó de la campaña a la pieza, por
+> decisión del coordinador: la Table 5 dice que `identifiers` *"uniquely identify the ad
+> creative"*, y el banner y el backplate de una campaña son creativos distintos. `stage.json` lo
+> declara en `assets.piezas[].identificador`, y son nueve valores distintos. El de un break del par
+> es el de la pieza de video del break (`breaks[].forma`), y el de un aviso de la carrera, el de su
+> pieza. Con eso deja de valer el último punto de las consecuencias: los avisos 1 y 4 de la carrera
+> llevan ZMBR0002000H y ZMBR0003000H. Las ofertas de multi view siguen sin `identifiers`: no son un
+> aviso.
