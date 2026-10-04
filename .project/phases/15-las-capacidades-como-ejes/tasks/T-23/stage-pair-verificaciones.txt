@@ -1,0 +1,4 @@
+pares: VERDE
+modos: VERDE
+capac: VERDE
+tramo: VERDE: las mediciones dieron lo esperado y los controles también.

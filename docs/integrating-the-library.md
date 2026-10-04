@@ -374,6 +374,7 @@ out, with no name to check itself against.
 | `container` | **required** | the box the composition lives in, and the element that goes fullscreen. The media element has to be inside it |
 | `video` | optional | only if the media element is not the one the instance is attached to |
 | `onResolved` | optional | called with the experiences of each asset-list as they resolve, and with what the capability filter did with that break. A hook for your own logging; nothing depends on it |
+| `onTracking` | optional | called when an ad goes on screen and when it leaves it: `{ type: 'slotStart' \| 'slotEnd', time, id, itemId, experienceType, startTime, duration, identifiers }`. `identifiers` are the AdIdentifiers of the ad's Slot (`{ scheme, value }`, an Ad-ID for instance), so this is where a beacon goes out or an impression is counted. A seek out of an ad ends it and a seek into one starts it, at the second of the seek. A callback that throws is reported and does not stop playback |
 | `logo` | optional | `{ src, alt }` — your own mark, drawn inside the container (§7) |
 | `capabilities` | optional | `{ videoDecoders, imageOverVideo }`: what the device can draw. It travels to your ad server on the asset-list request, and the options of every ad are filtered against it before anything is drawn |
 
@@ -445,8 +446,9 @@ server-side check and a client-side one can be written against the same string.
 | `layer` | the element the ads are drawn into |
 | `video` | the media element the library ended up using |
 | `renderer`, `controls` | the two pieces, once there is a media element |
+| `tracking` | with `onTracking`, once there is a media element: `active`, the experiences on screen at the last reading, and `stop()` |
 
-`provider` is the one to build on. The last three are there to be inspected, not
+`provider` is the one to build on. The last four are there to be inspected, not
 to be driven.
 
 ### The list of breaks is not complete until it says so

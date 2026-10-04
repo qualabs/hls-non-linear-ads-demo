@@ -1,0 +1,4 @@
+ℹ tests 246
+ℹ pass 246
+ℹ fail 0
+las 20 roturas dieron rojo y los 9 chequeos dan verde sin romper nada

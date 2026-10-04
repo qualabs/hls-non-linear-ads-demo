@@ -160,6 +160,10 @@ const BLOCK_GLOSS = [
   { level: 'item', name: 'layout', must: 'required', says:
     'Where the boxes go. A layout with no assets in it cannot become a box on a screen, so its ' +
     'asset falls back to a linear Ad.' },
+  { level: 'item', name: 'identifiers', must: 'optional', says:
+    'Who this Ad is: one or more scheme and value pairs, here an Ad-ID. Mandatory in the spec, ' +
+    'not needed to draw: this client passes it on untouched to the tracking events of the Ad, ' +
+    'and a list without it still draws.' },
 
   { level: 'layout', name: 'primaryContent', must: 'optional', says:
     'The programme, as a box of the layout like any other. Its default is the half worth knowing: ' +

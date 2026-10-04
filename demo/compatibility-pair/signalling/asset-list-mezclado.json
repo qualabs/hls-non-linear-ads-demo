@@ -11,6 +11,12 @@
             "type": "cornerOverlay",
             "start": 0,
             "duration": 12.0,
+            "identifiers": [
+              {
+                "scheme": "ad-id.org",
+                "value": "QDMB0001000H"
+              }
+            ],
             "layout": {
               "assets": [
                 {
@@ -37,6 +43,12 @@
             "type": "squeezebackDoubleBox",
             "start": 0,
             "duration": 12.0,
+            "identifiers": [
+              {
+                "scheme": "ad-id.org",
+                "value": "QDMC0001000H"
+              }
+            ],
             "layout": {
               "primaryContent": {
                 "zDepth": 0,
@@ -71,6 +83,12 @@
             "type": "cornerOverlay",
             "start": 0,
             "duration": 12.0,
+            "identifiers": [
+              {
+                "scheme": "ad-id.org",
+                "value": "QDMC0001000H"
+              }
+            ],
             "layout": {
               "assets": [
                 {

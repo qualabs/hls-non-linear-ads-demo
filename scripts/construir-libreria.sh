@@ -37,7 +37,7 @@ GLOBAL=QualabsConcurrentHls
 # must not rewrite the dist/ that the running servers are serving.
 SALIDA=${SALIDA:-dist/qualabs-concurrent-hls.js}
 # In dependency order. The entry point goes last.
-FUENTES=(lib/signalling.js lib/multiview.js lib/renderer.js lib/controls.js lib/media.js lib/concurrent-hls.js)
+FUENTES=(lib/signalling.js lib/multiview.js lib/renderer.js lib/controls.js lib/media.js lib/tracking.js lib/concurrent-hls.js)
 
 mkdir -p "$(dirname "$SALIDA")"
 {

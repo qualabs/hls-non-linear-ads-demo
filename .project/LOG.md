@@ -6189,3 +6189,12 @@ modo nativo. El instrumento de T-21 corre ahora en las dos páginas y en inspect
 nuestra librería (que sigue marcando los tres) y la vuelta al nativo. Control contra lo publicado
 antes: nueve filas en rojo en inspect. La única que pasa igual es la del segundo paso por A después
 del cambio, porque ahí el mismo hls.js ya había sacado A de su schedule.
+
+## 2026-10-04 — T-23: el AdIdentifier del Slot, hasta el tracking
+
+Pedido de David por el coordinador. Las listas de las demos traen `identifiers` (Ad-ID de ejemplo,
+`ad-id.org`) en cada ítem de `payload`, que es el Slot según el Code 7 del borrador. La librería lo
+lleva al contrato (`Experience.identifiers`) y lo entrega en `slotStart`/`slotEnd` por
+`attach({ onTracking })`, desde `lib/tracking.js`. ADR 0093. Arrancaron dos sesiones con el mismo
+pedido. El coordinador dejó seguir a una, que tomó los datos de la otra y movió el campo del sobre
+al ítem. Sin push ni publicación.

@@ -98,8 +98,10 @@
   },
 
   "campanas": {
+    "_identificador": "El AdIdentifier de cada campaña (SVTA2053, Table 7), que los dos escritores de asset-lists copian tal cual en el `identifiers` del Slot, obligatorio ahí (Table 5). El esquema es el registro de Ad-ID (`ad-id.org`, el mismo idRegistry del UniversalAdId de VAST). Los valores son ILUSTRATIVOS, con la forma de un Ad-ID (cuatro letras de prefijo, siete caracteres, H de HD), y no están registrados. ADR 0093.",
     "zumbra": {
       "marca": "ZUMBRA",
+      "identificador": { "scheme": "ad-id.org", "value": "ZMBR0001000H" },
       "rubro": "bebida",
       "producto": "gaseosa cítrica sin azúcar, 330 ml, cuatro botánicos",
       "claim": "CITRUS, OUT LOUD",
@@ -119,6 +121,7 @@
     },
     "kovrin": {
       "marca": "KOVRIN",
+      "identificador": { "scheme": "ad-id.org", "value": "KVRN0001000H" },
       "rubro": "calzado",
       "producto": "zapatilla de trail, 240 g, tres terrenos",
       "claim": "BUILT FOR THE LONG WAY",
@@ -137,6 +140,7 @@
     },
     "ketrava": {
       "marca": "KETRAVA",
+      "identificador": { "scheme": "ad-id.org", "value": "KTRV0001000H" },
       "rubro": "turismo",
       "producto": "rutas de costa en barco chico, salidas de nueve puertos",
       "claim": "THE SLOW COAST",

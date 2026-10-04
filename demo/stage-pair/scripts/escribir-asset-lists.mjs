@@ -138,6 +138,13 @@ function opcion(brk, medio) {
   return { type: forma.layout, layout };
 }
 
+/** El `identifiers` del Slot: el AdIdentifier que stage.json declara para la campaña. */
+function identificadores(campana) {
+  const id = stage.campanas[campana]?.identificador;
+  if (!id?.scheme || !id?.value) throw new Error(`stage.json no declara el identificador de la campaña ${campana}`);
+  return [{ scheme: id.scheme, value: id.value }];
+}
+
 /** El asset-list de un break: la parte estándar (su default, si tiene) y el aviso con sus dos opciones. */
 function concurrente(brk) {
   const duracion = control ?? brk.duracion;
@@ -151,6 +158,9 @@ function concurrente(brk) {
     payload: [{
       start: 0,
       duration: duracion,
+      // El AdIdentifier de la campaña, obligatorio en el Slot, que es cada ítem
+      // del payload y no el sobre (SVTA2053, Code 7; ADR 0093).
+      identifiers: identificadores(brk.campana),
       // En orden de preferencia (R5.5): primero el video, después la imagen.
       options: [opcion(brk, 'video'), opcion(brk, 'imagen')]
     }]

@@ -10,6 +10,12 @@
           {
             "start": 0,
             "duration": 12,
+            "identifiers": [
+              {
+                "scheme": "ad-id.org",
+                "value": "KVRN0001000H"
+              }
+            ],
             "options": [
               {
                 "type": "lowerThirdOverlay",

@@ -24,6 +24,7 @@
 | T-20 | El panel de pedidos del player nativo muestra el pedido de A y lo que hizo con cada break | done | — | [`tasks/T-20/`](tasks/T-20/) · `js/app.js` |
 | T-21 | La barra del player nativo de index deja de marcar el break que saltea | done | — | [`tasks/T-21/`](tasks/T-21/) · ADR 0092 |
 | T-22 | Lo mismo en el modo nativo de inspect | done | — | [`tasks/T-22/`](tasks/T-22/) · ADR 0092 |
+| T-23 | El AdIdentifier del Slot en las listas, en el contrato y en dos eventos de tracking | done | — | [`tasks/T-23/`](tasks/T-23/) · ADR 0093 |
 
 ---
 
@@ -216,4 +217,15 @@ de cada hls.js, y el desenlace sale de sus eventos de interstitial.
   inspect no cambia; con nuestra librería la barra sigue marcando los tres.
 - **Definition of done:** `test/verificar-marca-a-nativo.py` en verde en las dos páginas, local y
   en la URL pública; control en rojo contra lo publicado antes.
+- **nivel de verificación:** bajo.
+
+## T-23 — El AdIdentifier del Slot, hasta el tracking
+- **Objective:** cada asset-list de las demos trae `identifiers` (un Ad-ID de ejemplo) en el Slot, y
+  la librería lo entrega en eventos de tracking.
+- **What it must cover:** las listas a mano y los generadores de `stage-pair`, la capa de
+  señalización, `lib/tracking.js` y `onTracking`, la glosa de `hydration-break`, ADR 0093. Sin
+  tocar el Layout Controller de SVTA.
+- **Definition of done:** `npm test` y `npm run check` en verde; en el navegador, con el `dist/` real,
+  el identifier de la lista servida llega a `slotStart` y `slotEnd`, con control de listas sin el
+  campo; las verificaciones de `stage-pair` en verde. Commit local, sin push ni publicación.
 - **nivel de verificación:** bajo.

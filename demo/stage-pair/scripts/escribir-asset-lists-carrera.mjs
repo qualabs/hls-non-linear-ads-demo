@@ -98,6 +98,13 @@ function pieza(campana, forma) {
   return p;
 }
 
+/** El `identifiers` del Slot: el AdIdentifier que stage.json declara para la campaña. */
+function identificadores(campana) {
+  const id = stage.campanas[campana]?.identificador;
+  if (!id?.scheme || !id?.value) throw new Error(`stage.json no declara el identificador de la campaña ${campana}`);
+  return [{ scheme: id.scheme, value: id.value }];
+}
+
 /**
  * El identificador del elemento de aviso, por forma. Los mismos nombres que usa
  * el generador del par, porque es el mismo elemento en el mismo layout.
@@ -135,7 +142,13 @@ function aviso(brk) {
       'X-AD-CREATIVE-SIGNALING': {
         version: 2,
         type: 'slot',
-        payload: [{ type: forma.layout, start: 0, duration: brk.duracion, layout }]
+        // El AdIdentifier de la campaña, obligatorio en el Slot, que es cada ítem
+        // del payload y no el sobre (SVTA2053, Code 7; ADR 0093).
+        payload: [{
+          type: forma.layout, start: 0, duration: brk.duracion,
+          identifiers: identificadores(brk.campana),
+          layout
+        }]
       }
     }]
   };

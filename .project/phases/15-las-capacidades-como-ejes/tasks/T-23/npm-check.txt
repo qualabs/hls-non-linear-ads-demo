@@ -1,0 +1,3 @@
+
+verificar-cortes: both seams hold.
+construir-libreria: /run/user/1000/verificar-build-K80CHU/qualabs-concurrent-hls.js (5795 lines, global QualabsConcurrentHls)
