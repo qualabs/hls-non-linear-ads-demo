@@ -11,6 +11,12 @@
             "type": "multiView",
             "start": 0,
             "duration": 12.0,
+            "identifiers": [
+              {
+                "scheme": "ad-id.org",
+                "value": "QDMA0001000H"
+              }
+            ],
             "layout": {
               "primaryContent": {
                 "zDepth": 0,

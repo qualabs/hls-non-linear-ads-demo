@@ -11,6 +11,12 @@
             "type": "lowerThirdOverlay",
             "start": 0,
             "duration": 16,
+            "identifiers": [
+              {
+                "scheme": "ad-id.org",
+                "value": "QDML0001000H"
+              }
+            ],
             "layout": {
               "assets": [
                 {
@@ -37,6 +43,12 @@
             "type": "squeezebackLShape",
             "start": 0,
             "duration": 16,
+            "identifiers": [
+              {
+                "scheme": "ad-id.org",
+                "value": "QDML0001000H"
+              }
+            ],
             "layout": {
               "primaryContent": {
                 "zDepth": 1,
@@ -72,6 +84,12 @@
             "type": "cornerOverlay",
             "start": 0,
             "duration": 24,
+            "identifiers": [
+              {
+                "scheme": "ad-id.org",
+                "value": "QDMO0001000H"
+              }
+            ],
             "layout": {
               "assets": [
                 {

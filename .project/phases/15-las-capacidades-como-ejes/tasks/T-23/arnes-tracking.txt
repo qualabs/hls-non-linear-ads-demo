@@ -1,0 +1,35 @@
+   console: [tracking] slotStart AD-A-CONCURRENT.0 [{"scheme":"ad-id.org","value":"ZMBR0001000H"}]
+   console: [tracking] slotEnd AD-A-CONCURRENT.0 [{"scheme":"ad-id.org","value":"ZMBR0001000H"}]
+   console: [tracking] slotStart AD-B-CONCURRENT.0 [{"scheme":"ad-id.org","value":"KTRV0001000H"}]
+   console: [tracking] slotEnd AD-B-CONCURRENT.0 [{"scheme":"ad-id.org","value":"KTRV0001000H"}]
+== modo 2dec
+   identifiers servidos por lista: {"a": [{"scheme": "ad-id.org", "value": "ZMBR0001000H"}], "b": [{"scheme": "ad-id.org", "value": "KTRV0001000H"}], "c": [{"scheme": "ad-id.org", "value": "KVRN0001000H"}]}
+   ok   slotStart t= 20.20 AD-A-CONCURRENT.0    squeezebackDoubleBox identifiers=[{"scheme": "ad-id.org", "value": "ZMBR0001000H"}]
+   ok   slotEnd   t= 32.15 AD-A-CONCURRENT.0    squeezebackDoubleBox identifiers=[{"scheme": "ad-id.org", "value": "ZMBR0001000H"}]
+   ok   slotStart t= 65.19 AD-B-CONCURRENT.0    squeezebackLShape    identifiers=[{"scheme": "ad-id.org", "value": "KTRV0001000H"}]
+   ok   slotEnd   t= 77.15 AD-B-CONCURRENT.0    squeezebackLShape    identifiers=[{"scheme": "ad-id.org", "value": "KTRV0001000H"}]
+   ok   secuencia [('slotStart', 'AD-A-CONCURRENT'), ('slotEnd', 'AD-A-CONCURRENT'), ('slotStart', 'AD-B-CONCURRENT'), ('slotEnd', 'AD-B-CONCURRENT')]
+   todos los eventos sin identifiers: False
+VERDE
+   console: [tracking] slotStart AD-B-CONCURRENT.0 [{"scheme":"ad-id.org","value":"KTRV0001000H"}]
+   console: [tracking] slotEnd AD-B-CONCURRENT.0 [{"scheme":"ad-id.org","value":"KTRV0001000H"}]
+== modo 1dec-noimg
+   identifiers servidos por lista: {"a": [{"scheme": "ad-id.org", "value": "ZMBR0001000H"}], "b": [{"scheme": "ad-id.org", "value": "KTRV0001000H"}], "c": [{"scheme": "ad-id.org", "value": "KVRN0001000H"}]}
+   ok   slotStart t= 65.19 AD-B-CONCURRENT.0    linear               identifiers=[{"scheme": "ad-id.org", "value": "KTRV0001000H"}]
+   ok   slotEnd   t= 77.15 AD-B-CONCURRENT.0    linear               identifiers=[{"scheme": "ad-id.org", "value": "KTRV0001000H"}]
+   ok   secuencia [('slotStart', 'AD-B-CONCURRENT'), ('slotEnd', 'AD-B-CONCURRENT')]
+   todos los eventos sin identifiers: False
+VERDE
+   console: [tracking] slotStart AD-A-CONCURRENT.0 []
+   console: [tracking] slotEnd AD-A-CONCURRENT.0 []
+   console: [tracking] slotStart AD-B-CONCURRENT.0 []
+   console: [tracking] slotEnd AD-B-CONCURRENT.0 []
+== modo 2dec (CONTROL: listas servidas sin identifiers)
+   identifiers servidos por lista: {"a": [], "b": [], "c": []}
+   ok   slotStart t= 20.20 AD-A-CONCURRENT.0    squeezebackDoubleBox identifiers=[]
+   ok   slotEnd   t= 32.15 AD-A-CONCURRENT.0    squeezebackDoubleBox identifiers=[]
+   ok   slotStart t= 65.20 AD-B-CONCURRENT.0    squeezebackLShape    identifiers=[]
+   ok   slotEnd   t= 77.16 AD-B-CONCURRENT.0    squeezebackLShape    identifiers=[]
+   ok   secuencia [('slotStart', 'AD-A-CONCURRENT'), ('slotEnd', 'AD-A-CONCURRENT'), ('slotStart', 'AD-B-CONCURRENT'), ('slotEnd', 'AD-B-CONCURRENT')]
+   todos los eventos sin identifiers: True
+VERDE

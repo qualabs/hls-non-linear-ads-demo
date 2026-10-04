@@ -11,6 +11,12 @@
             "type": "lowerThirdOverlay",
             "start": 0,
             "duration": 6,
+            "identifiers": [
+              {
+                "scheme": "ad-id.org",
+                "value": "ZMBR0001000H"
+              }
+            ],
             "layout": {
               "assets": [
                 {

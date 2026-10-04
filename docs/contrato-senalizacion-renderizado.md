@@ -41,6 +41,7 @@ Experience {
                       // 'multiViewOffer' es el de una oferta, que trae catálogo y no layout
   startTime: number   // segundos de reproducción en que arranca
   duration: number    // segundos que dura
+  identifiers: AdIdentifier[] // los del Slot del que salió; vacío si el asset no trae bloque
   elements: Element[] // ordenados por zDepth ascendente; vacío cuando no hay composición
   views: View[]       // SÓLO en una oferta: el catálogo que se ofrece
   primaryName: string // SÓLO en una oferta: cómo se llama el contenido primario en la lista
@@ -54,6 +55,11 @@ Element {
   volume: number      // 0..100
   uri: string|null    // el asset a reproducir; null en el primario, que ya está en pantalla
   mediaType: string|null  // el MIME del asset; null en el primario
+}
+
+AdIdentifier {
+  scheme: string      // la autoridad del valor: 'ad-id.org' para un Ad-ID
+  value: string       // el código, tal como lo declaró la lista; esta capa no lo interpreta
 }
 
 View {
