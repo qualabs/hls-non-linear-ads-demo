@@ -6198,3 +6198,9 @@ lleva al contrato (`Experience.identifiers`) y lo entrega en `slotStart`/`slotEn
 `attach({ onTracking })`, desde `lib/tracking.js`. ADR 0093. Arrancaron dos sesiones con el mismo
 pedido. El coordinador dejó seguir a una, que tomó los datos de la otra y movió el campo del sobre
 al ítem. Sin push ni publicación.
+
+## 2026-10-04 — T-23: el Ad-ID por pieza
+
+El coordinador decidió que el Ad-ID de `stage-pair` es de la pieza y no de la campaña (Table 5:
+identifica al creativo). Nueve valores en `stage.json`, `assets.piezas[].identificador`; los dos
+generadores lo toman de la pieza del Slot. Nota en el ADR 0093.

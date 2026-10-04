@@ -98,10 +98,10 @@ function pieza(campana, forma) {
   return p;
 }
 
-/** El `identifiers` del Slot: el AdIdentifier que stage.json declara para la campaña. */
-function identificadores(campana) {
-  const id = stage.campanas[campana]?.identificador;
-  if (!id?.scheme || !id?.value) throw new Error(`stage.json no declara el identificador de la campaña ${campana}`);
+/** El `identifiers` del Slot: el AdIdentifier que stage.json declara para la pieza (ADR 0093). */
+function identificadores(campana, forma) {
+  const id = pieza(campana, forma).identificador;
+  if (!id?.scheme || !id?.value) throw new Error(`stage.json no declara el identificador de la pieza ${campana}/${forma}`);
   return [{ scheme: id.scheme, value: id.value }];
 }
 
@@ -142,11 +142,11 @@ function aviso(brk) {
       'X-AD-CREATIVE-SIGNALING': {
         version: 2,
         type: 'slot',
-        // El AdIdentifier de la campaña, obligatorio en el Slot, que es cada ítem
+        // El AdIdentifier de la pieza, obligatorio en el Slot, que es cada ítem
         // del payload y no el sobre (SVTA2053, Code 7; ADR 0093).
         payload: [{
           type: forma.layout, start: 0, duration: brk.duracion,
-          identifiers: identificadores(brk.campana),
+          identifiers: identificadores(brk.campana, brk.forma),
           layout
         }]
       }
