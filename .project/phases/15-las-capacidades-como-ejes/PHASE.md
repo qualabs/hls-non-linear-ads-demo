@@ -1,6 +1,7 @@
 ---
 phase: 15-las-capacidades-como-ejes
 title: "Las capacidades como ejes: el APS devuelve todo y el SDK filtra"
+description: "abierta para que `stage-pair` declare la capacidad en dos ejes, el APS estático devuelva todas las opciones y la librería las filtre (R5.6), con un break que cae al lineal y otro que se saltea cuando no queda opción"
 status: in-progress
 started: 2026-09-28
 closed: null

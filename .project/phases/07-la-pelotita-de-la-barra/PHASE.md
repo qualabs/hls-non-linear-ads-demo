@@ -1,6 +1,7 @@
 ---
 phase: 07-la-pelotita-de-la-barra
 title: "La pelotita de la barra se agarra y se arrastra"
+description: "cerrada con la barra arrastrable, que es lo que Nicolás pidió probando la demo: un press en cualquier parte de ella pone la pelotita ahí, la pelotita sigue al puntero, y al soltar es el seek."
 status: closed
 started: 2026-09-09
 closed: 2026-09-09

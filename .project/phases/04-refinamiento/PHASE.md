@@ -1,6 +1,7 @@
 ---
 phase: 04-refinamiento
 title: "El refinamiento: una sola diferencia entre los dos players"
+description: "cerrada con los seis puntos que Nicolás dio probando la demo desde el celular cerrados, y se ejecutó antes que la 03."
 status: closed
 started: 2026-09-07
 closed: 2026-09-07

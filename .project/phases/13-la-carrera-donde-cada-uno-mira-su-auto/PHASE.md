@@ -1,6 +1,7 @@
 ---
 phase: 13-la-carrera-donde-cada-uno-mira-su-auto
 title: "La carrera donde cada uno mira su auto: el contenido que el multi view estaba esperando"
+description: "cerrada con `demo/race-multiview/`, la cuarta demo y la única cuyo contenido se produjo entero — una carrera de 112 s con dos relatores y catorce cortes entre seis autos, y una ventana de 64 s que abre en el segundo 28 ofreciendo seis cámaras cuando la grilla sostiene cuatro."
 status: closed
 started: 2026-09-12
 closed: 2026-09-21

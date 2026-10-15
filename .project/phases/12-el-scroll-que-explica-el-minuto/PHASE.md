@@ -1,6 +1,7 @@
 ---
 phase: 12-el-scroll-que-explica-el-minuto
 title: "El scroll que explica el minuto: la página de abajo deja de recapitular y pasa a explicar"
+description: "cerrada con la página del break de hidratación explicando el mecanismo en lugar de recapitular el minuto, en cuatro secciones y en inglés."
 status: closed
 started: 2026-09-11
 closed: 2026-09-11

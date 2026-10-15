@@ -1,6 +1,7 @@
 ---
 phase: 14-la-demo-que-va-al-escenario
 title: "La demo que va al escenario: tres páginas, y los creativos escritos en SVG"
+description: "cerrada con `demo/stage-pair/`, la quinta demo y la única cuyo contenido visual está escrito y no generado."
 status: closed
 started: 2026-09-21
 closed: 2026-09-22

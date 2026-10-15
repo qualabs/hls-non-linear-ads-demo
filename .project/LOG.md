@@ -6204,3 +6204,7 @@ al ítem. Sin push ni publicación.
 El coordinador decidió que el Ad-ID de `stage-pair` es de la pieza y no de la campaña (Table 5:
 identifica al creativo). Nueve valores en `stage.json`, `assets.piezas[].identificador`; los dos
 generadores lo toman de la pieza del Slot. Nota en el ADR 0093.
+
+## 2026-10-15 — Migración a structure 2
+
+El proyecto pasó a `structure: 2` con `migrate.sh --to 2`: cada fase tiene su `description` en `PHASE.md` (sacada del índice de fases de `PROJECT.md`, o del título si no tenía línea), y el índice de fases salió de `PROJECT.md`. Ninguna fase se movió a `roadmap/`.
