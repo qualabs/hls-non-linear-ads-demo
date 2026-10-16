@@ -6217,3 +6217,13 @@ El validador da verde. `CLAUDE.md` corregido: las demos publicadas son cinco, co
 `stage-pair`. Abierto: lo publicado no incluye la T-23 (el asset-list servido no tiene
 `identifiers`), `lib/` sin teardown, y la pregunta de eager vs lazy. Informe en
 `phases/15-las-capacidades-como-ejes/REPORT.md`.
+
+## 2026-10-16 — stage-pair republicada con la T-23
+
+Con el OK de Nicolás, `demo/stage-pair/scripts/publicar.sh` desde `main` en `9ca4b62`, igual a
+`origin/main` y limpio; antes, `npm test` 246/246 y `test/verificar-creditos.py` en verde. El
+script salió 0: 505 objetos contra 505 archivos por md5, ninguno distinto, faltante ni sobrante.
+Desde afuera, sin credenciales: los siete asset-lists que tienen `identifiers` en el repo lo tienen
+servido (`asset-list-break-a.json` no lo tenía antes de publicar), `index.html` da 200, y los 505
+archivos publicados son iguales al repo por sha256. Queda cerrado el pendiente de la fase 15 sobre
+la T-23 publicada.
