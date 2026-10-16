@@ -24,7 +24,7 @@ Nicolás and rewriting it would break its traceability.
 
 ## Where the demos are published
 
-All four are **public on the internet**, on Google Cloud Storage, project
+All five are **public on the internet**, on Google Cloud Storage, project
 `cto-assistant-501315`, served as static files with no server:
 
 | demo | URL |
@@ -33,6 +33,7 @@ All four are **public on the internet**, on Google Cloud Storage, project
 | `demo/multiview-offer/` | https://qualabs-hls-demo-multiview-offer.storage.googleapis.com/index.html |
 | `demo/compatibility-pair/` | https://qualabs-hls-demo-compatibility-pair.storage.googleapis.com/index.html |
 | `demo/race-multiview/` | https://qualabs-hls-demo-race-multiview.storage.googleapis.com/index.html |
+| `demo/stage-pair/` | https://qualabs-hls-demo-stage-pair.storage.googleapis.com/index.html |
 
 One bucket per demo, `US-CENTRAL1`, uniform access, `allUsers` holding
 `roles/storage.legacyObjectReader`: **objects are readable and the bucket is not

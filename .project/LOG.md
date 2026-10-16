@@ -6208,3 +6208,12 @@ generadores lo toman de la pieza del Slot. Nota en el ADR 0093.
 ## 2026-10-15 — Migración a structure 2
 
 El proyecto pasó a `structure: 2` con `migrate.sh --to 2`: cada fase tiene su `description` en `PHASE.md` (sacada del índice de fases de `PROJECT.md`, o del título si no tenía línea), y el índice de fases salió de `PROJECT.md`. Ninguna fase se movió a `roadmap/`.
+
+## 2026-10-16 — Fase 15 cerrada: las capacidades como ejes
+
+Las 23 tasks `done`: las siete del plan del 2026-09-28 y dieciséis pedidos de Nicolás y David sobre
+la demo publicada. Al cerrar, `npm test` 246/246 (216 en la línea de base) y `npm run check` sale 0.
+El validador da verde. `CLAUDE.md` corregido: las demos publicadas son cinco, con la fila de
+`stage-pair`. Abierto: lo publicado no incluye la T-23 (el asset-list servido no tiene
+`identifiers`), `lib/` sin teardown, y la pregunta de eager vs lazy. Informe en
+`phases/15-las-capacidades-como-ejes/REPORT.md`.
