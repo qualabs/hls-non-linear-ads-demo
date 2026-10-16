@@ -1,10 +1,10 @@
 ---
 phase: 15-las-capacidades-como-ejes
 title: "Las capacidades como ejes: el APS devuelve todo y el SDK filtra"
-description: "abierta para que `stage-pair` declare la capacidad en dos ejes, el APS estático devuelva todas las opciones y la librería las filtre (R5.6), con un break que cae al lineal y otro que se saltea cuando no queda opción"
-status: in-progress
+description: "`stage-pair` declara la capacidad en dos ejes, el APS devuelve todas las opciones y `lib/` las filtra (R5.6); además, los pedidos de la grabación: imagen quieta, video con movimiento, caché por contenido, un manifest por clase, el break sin default salteado por los dos players y el AdIdentifier hasta el tracking"
+status: closed
 started: 2026-09-28
-closed: null
+closed: 2026-10-16
 ---
 
 # Fase 15: las capacidades como ejes
