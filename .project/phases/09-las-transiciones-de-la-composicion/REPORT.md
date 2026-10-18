@@ -1,3 +1,6 @@
+---
+closed: 2026-09-10
+---
 # Informe de cierre — fase 09: las transiciones de la composición
 
 Cerrada el 2026-09-10, el mismo día que se abrió.

@@ -1,10 +1,7 @@
 ---
-phase: 11-el-multi-view-que-elige-quien-mira
 title: "El multi view que elige quien mira: el que publica ofrece un catálogo y quien mira arma la composición"
 description: "cerrada con un segundo tag hermano del concurrente donde el que publica ofrece un catálogo y quien mira arma la composición — una lista de casilleros en la barra, tres formas de grilla calculadas por la librería, agrandar con foco completo, y una salida que devuelve el contenido principal como venía —, más la demo `demo/multiview-offer/` con los dos tags en una sola playlist."
-status: closed
 started: 2026-09-11
-closed: 2026-09-11
 ---
 
 # Fase 11: el multi view que elige quien mira

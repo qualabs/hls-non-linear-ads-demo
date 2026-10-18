@@ -1,3 +1,6 @@
+---
+closed: 2026-09-07
+---
 # Informe de cierre — fase 03: breaks múltiples y repliegue
 
 **Fase cerrada el 2026-09-07 con las cinco tasks en `done`.** Se diseñó y se

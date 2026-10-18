@@ -1,3 +1,6 @@
+---
+closed: 2026-09-11
+---
 # Informe de cierre — fase 11: el multi view que elige quien mira
 
 Cerrada el 2026-09-11, el mismo día que se abrió y se generó.

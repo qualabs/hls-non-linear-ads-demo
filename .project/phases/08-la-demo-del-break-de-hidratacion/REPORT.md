@@ -1,3 +1,6 @@
+---
+closed: 2026-09-09
+---
 # Informe de cierre — fase 08: la demo del break de hidratación
 
 ## 1. Resumen

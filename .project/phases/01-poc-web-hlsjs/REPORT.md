@@ -1,3 +1,6 @@
+---
+closed: 2026-09-04
+---
 # Informe de cierre — fase 01: POC funcional en web con hls.js
 
 Fase abierta el 2026-09-03 y cerrada el 2026-09-04. Doce tasks, las doce

@@ -11,11 +11,9 @@ description: >
   camino crítico. Alcance, fechas y reparto salen de la reunión del
   2026-09-02 con el chair del WG y del documento de requerimientos que el chair del WG
   mantiene para la gente del evento.
-status: ongoing
 type: desarrollo
 owner: qualabs
 started: 2026-09-02
-last_update: 2026-10-16
 tags: [research, svta, video]
 repo: https://github.com/qualabs/hls-non-linear-ads-demo
 output_pointers:
@@ -30,7 +28,7 @@ output_pointers:
     url: https://www.svta.org/wp-content/nlag/v4/
 related_processes: []
 related_wgs: [svta-ads]
-structure: 2
+structure: 3
 ---
 
 # Demo de publicidad no lineal en HLS (HLS Interest Day)

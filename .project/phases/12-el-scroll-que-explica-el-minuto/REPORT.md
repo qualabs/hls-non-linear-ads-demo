@@ -1,3 +1,6 @@
+---
+closed: 2026-09-11
+---
 # Informe de cierre — fase 12: el scroll que explica el minuto
 
 Cerrada el 2026-09-11, el mismo día que se abrió, se diseñó y se generó.
