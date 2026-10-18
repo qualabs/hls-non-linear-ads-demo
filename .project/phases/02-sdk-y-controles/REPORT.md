@@ -1,3 +1,6 @@
+---
+closed: 2026-09-05
+---
 # Informe de cierre — fase 02: el SDK y sus controles
 
 Fase `02-sdk-y-controles`. Abierta el 2026-09-04, cerrada el 2026-09-05.

@@ -1,10 +1,7 @@
 ---
-phase: 03-breaks-multiples-y-repliegue
 title: "Breaks con varios avisos, el asset sin bloque y el decoderCount"
 description: "cerrada con las tres capacidades que pidió David adentro de la corrida que se graba, y con el modelo del ADR 0019 construido y verificado: un asset sin bloque se reproduce solo, y el aviso lineal y el repliegue resultaron el mismo camino de código."
-status: closed
 started: 2026-09-04
-closed: 2026-09-07
 ---
 
 # Fase 03: breaks con varios avisos, el asset sin bloque y el `decoderCount`

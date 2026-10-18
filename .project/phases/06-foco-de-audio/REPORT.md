@@ -1,3 +1,6 @@
+---
+closed: 2026-09-09
+---
 # Informe de cierre — fase 06: el foco de audio
 
 **Fase abierta, diseñada y generada el 2026-09-08; ejecutada y cerrada el

@@ -1,3 +1,6 @@
+---
+closed: 2026-09-22
+---
 # Informe de cierre — fase 14: la demo que va al escenario
 
 Abierta el 2026-09-21 y cerrada el 2026-09-22. **Doce tasks, las doce ejecutadas, y la demo

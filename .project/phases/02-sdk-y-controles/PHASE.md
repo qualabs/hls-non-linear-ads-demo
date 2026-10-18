@@ -1,10 +1,7 @@
 ---
-phase: 02-sdk-y-controles
 title: El SDK y sus controles
 description: "cerrada con una librería y no con una demo de código ordenado: el corte del ADR 0015 lo chequea `scripts/verificar-cortes.mjs`, la página del integrador son 12 líneas comparadas línea por línea contra el documento que las describe, y ese documento existe en `docs/` junto con el contrato entre las dos capas, que es el documento de arquitectura del producto."
-status: closed
 started: 2026-09-04
-closed: 2026-09-05
 ---
 
 # Fase 02: el SDK y sus controles

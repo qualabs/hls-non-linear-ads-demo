@@ -1,3 +1,6 @@
+---
+closed: 2026-09-07
+---
 # Informe de cierre — fase 04: el refinamiento
 
 **Fase cerrada el 2026-09-07 con las siete tasks en `done`.** Se abrió y se

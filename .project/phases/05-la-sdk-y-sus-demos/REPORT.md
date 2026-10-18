@@ -1,3 +1,6 @@
+---
+closed: 2026-09-09
+---
 # Informe de cierre — fase 05: la sdk y sus demos
 
 **Fase abierta, diseñada y ejecutada el 2026-09-08; cerrada el 2026-09-09 con las

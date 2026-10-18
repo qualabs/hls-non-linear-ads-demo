@@ -1,3 +1,6 @@
+---
+closed: 2026-09-09
+---
 # Informe de cierre — fase 07: la pelotita de la barra
 
 **Fase abierta, diseñada, generada, ejecutada y cerrada el 2026-09-09, con las dos

@@ -1,10 +1,7 @@
 ---
-phase: 09-las-transiciones-de-la-composicion
 title: "Las transiciones de la composición"
 description: "cerrada con la composición dejando de cambiar de golpe, y toda en `lib/`: el contenido primario se mueve con tiempo entre las cajas que los layouts le dan, los elementos de un aviso entran y salen con opacidad, y el aviso a cuadro entero no lleva ninguna de las dos porque un corte es lo que tiene que parecer."
-status: closed
 started: 2026-09-10
-closed: 2026-09-10
 ---
 
 # Fase 09: las transiciones de la composición

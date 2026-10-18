@@ -1,3 +1,6 @@
+---
+closed: 2026-09-21
+---
 # Informe de cierre — fase 13: la carrera donde cada uno mira su auto
 
 Abierta el 2026-09-12. **El trabajo terminó el 2026-09-14** —el commit `28999e2` deja las

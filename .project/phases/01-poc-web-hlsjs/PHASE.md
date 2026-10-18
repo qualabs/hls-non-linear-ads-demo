@@ -1,10 +1,7 @@
 ---
-phase: 01-poc-web-hlsjs
 title: POC funcional en web con hls.js
 description: "el POC funcional en web, cerrado con los cinco layouts del documento de requerimientos andando en una sola corrida de punta a punta sobre hls.js sin modificar, y con una instancia de fábrica al lado sobre la misma playlist mostrando que un cliente de mercado sigue funcionando."
-status: closed
 started: 2026-09-03
-closed: 2026-09-04
 ---
 
 # Fase 01: POC funcional en web con hls.js

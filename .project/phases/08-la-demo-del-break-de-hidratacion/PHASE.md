@@ -1,10 +1,7 @@
 ---
-phase: 08-la-demo-del-break-de-hidratacion
 title: "La demo del break de hidratación"
 description: "cerrada con la segunda demo del repositorio, y es la primera fase cuyo entregable es lo que se ve en escenario y no lo que lo hace posible: un minuto de juego detenido con cuatro avisos encima de la imagen en vivo, con el lineal tercero para que la comparación entre las dos formas de poner publicidad entre adentro de un solo minuto y un solo player — y con eso esta demo no necesita el par de compatibilidad."
-status: closed
 started: 2026-09-09
-closed: 2026-09-09
 ---
 
 # Fase 08: la demo del break de hidratación

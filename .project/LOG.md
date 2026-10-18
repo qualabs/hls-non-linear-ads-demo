@@ -6227,3 +6227,9 @@ Desde afuera, sin credenciales: los siete asset-lists que tienen `identifiers` e
 servido (`asset-list-break-a.json` no lo tenía antes de publicar), `index.html` da 200, y los 505
 archivos publicados son iguales al repo por sha256. Queda cerrado el pendiente de la fase 15 sobre
 la T-23 publicada.
+
+## 2026-10-18 — El proyecto pasa a structure 3
+
+La pasada de create-project (fase 04 de ai-toolkit), con el OK de Nicolás: `migrate.sh --to 3 --apply` (los estados salen de la evidencia, el cierre vive en el REPORT, el front matter en un archivo por carpeta), las decisiones de la tabla de la pasada, y la prioridad, la categoría y el impacto de lo abierto.
+
+- mechanical changes: 31; left for a person: 0

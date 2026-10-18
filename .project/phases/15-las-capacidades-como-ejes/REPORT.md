@@ -1,3 +1,6 @@
+---
+closed: 2026-10-16
+---
 # Informe de cierre — fase 15: las capacidades como ejes
 
 Abierta el 2026-09-28 y cerrada el 2026-10-16. **Veintitrés tasks, las veintitrés `done`.** Las

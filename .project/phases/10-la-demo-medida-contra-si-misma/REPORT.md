@@ -1,3 +1,6 @@
+---
+closed: 2026-09-10
+---
 # Informe de cierre — fase 10: la demo medida contra sí misma
 
 Abierta y cerrada el 2026-09-10, después del trabajo que documenta.

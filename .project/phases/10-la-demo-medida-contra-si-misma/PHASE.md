@@ -1,10 +1,7 @@
 ---
-phase: 10-la-demo-medida-contra-si-misma
 title: "La demo medida contra sí misma"
 description: "el registro de gobierno de once commits que no pertenecían a ninguna fase, hechos el 2026-09-10 después de que la 08 cerrara, más ocho archivos que la sesión `hls-f08` dejó sin commitear al quedarse colgada y que Nicolás autorizó adoptar."
-status: closed
 started: 2026-09-10
-closed: 2026-09-10
 ---
 
 # Fase 10: la demo medida contra sí misma
