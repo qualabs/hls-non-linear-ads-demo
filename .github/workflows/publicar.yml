@@ -1,0 +1,75 @@
+# Every push to main republishes the demos it changed, with scripts/publicar.sh.
+#
+# Build, checks and tests run first, and publicar.sh checks every demo before it
+# publishes any: a red step anywhere and nothing is written. Which demos is
+# scripts/demos-cambiadas.sh against the last run of this workflow that went
+# green, so a failed or skipped run leaves its demos for the next one.
+#
+# Auth is Workload Identity Federation, without keys: the provider only accepts
+# this repository on refs/heads/main (scripts/configurar-wif.sh), and the service
+# account can only write the five demo buckets.
+name: publicar
+
+on:
+  push:
+    branches: [main]
+
+# One publication at a time; a push that arrives meanwhile waits, it is not cancelled.
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write # the OIDC token that WIF exchanges
+  actions: read # gh run list: the last green publication
+
+jobs:
+  publicar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # demos-cambiadas.sh diffs against an older commit
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 25
+
+      - name: Build
+        run: ./scripts/construir-libreria.sh
+
+      - name: Check
+        run: npm run check
+
+      - name: Test
+        run: npm test
+
+      - name: Which demos changed
+        id: demos
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          base=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow publicar.yml --branch main \
+            --status success --limit 1 --json headSha --jq '.[0].headSha // ""')
+          demos=$(scripts/demos-cambiadas.sh "$base" "$GITHUB_SHA" | tr '\n' ' ')
+          echo "last green publication: ${base:-none}; demos: ${demos:-none}"
+          echo "demos=$demos" >> "$GITHUB_OUTPUT"
+
+      - if: steps.demos.outputs.demos != ''
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
+        with:
+          workload_identity_provider: projects/238909009692/locations/global/workloadIdentityPools/github/providers/hls-non-linear-ads-demo
+          service_account: hls-demo-publisher@cto-assistant-501315.iam.gserviceaccount.com
+
+      - if: steps.demos.outputs.demos != ''
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
+
+      - name: Publish and verify
+        if: steps.demos.outputs.demos != ''
+        env:
+          DEMOS: ${{ steps.demos.outputs.demos }}
+        run: |
+          # shellcheck disable=SC2086 # one word per demo
+          ./scripts/publicar.sh --publicar $DEMOS
