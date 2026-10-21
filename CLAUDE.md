@@ -41,14 +41,24 @@ listable**.
 
 ### What you need to know to publish again, and cannot work out by looking
 
-**`stage-pair` is published with `demo/stage-pair/scripts/publicar.sh`**, which does every step
-below and verifies the result without credentials. Two things it adds that the other buckets
-do not have: **anything with a fixed name is uploaded with `Cache-Control: no-cache`**, because
-the default is a public hour and the Google edge keeps serving the old file for that hour; and
-**the creative videos carry a hash of their content in the path**
+**Every push to `main` publishes the demos it changed** (`.github/workflows/publicar.yml`),
+with `scripts/publicar.sh <demo>... | --all`, which also runs by hand: a dry run without
+`--publicar`, and the checks it runs are described in its header. It publishes HEAD, never the
+working tree, and it does every step below and verifies the result without credentials. The
+workflow authenticates through Workload Identity Federation, set up by
+`scripts/configurar-wif.sh`; there is no key anywhere.
+
+**`content/` is not in git, so CI never uploads it.** The bucket's `content/` stays as it is,
+except for the signalled playlists that `senalizar-contenido.sh` writes there. After
+re-packaging a demo, its content goes up by hand: `scripts/publicar.sh --publicar
+--con-contenido <demo>`, from a checkout that has it.
+
+**Anything with a fixed name is served with `Cache-Control: no-cache`**, because the default
+is a public hour and the Google edge keeps serving the old file for that hour; and in
+`stage-pair` **the creative videos carry a hash of their content in the path**
 (`content/creatives/<piece>/<hash>/`, written by `scripts/versionar-creativo.sh` and recorded in
-`stage.json`), so a new video is a URL no cache has seen. The script also deletes from the bucket
-whatever is no longer in the published tree.
+`stage.json`), so a new video is a URL no cache has seen. The bucket is the tree: what is no
+longer in the published tree is deleted from it.
 
 **One bucket per demo, and the bucket goes in the HOST.** The pages and the signalling
 ask for everything from the root: `/dist/`, `/vendor/`, `"URI": "/content/…"`,
