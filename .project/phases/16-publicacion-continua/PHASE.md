@@ -25,7 +25,10 @@ sin que nadie corra nada a mano ni exista una clave.
 
 1. `scripts/publicar.sh` y `scripts/publicar.py`, que reemplazan a `demo/stage-pair/scripts/publicar.sh`.
 2. `scripts/demos-cambiadas.sh` y `.github/workflows/publicar.yml`.
-3. `scripts/configurar-wif.sh`: pool, proveedor, cuenta, permisos por bucket, y su verificación.
+3. `scripts/configurar-wif.sh`: pool, proveedor, cuenta, y su verificación. La cuenta lleva dos
+   roles en cada bucket: `roles/storage.objectAdmin` y `roles/storage.legacyBucketReader`, porque
+   `gcloud storage rsync` necesita `storage.buckets.get` y objectAdmin no lo trae. A nivel de proyecto,
+   nada.
 
 ## Fuera de alcance
 

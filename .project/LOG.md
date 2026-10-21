@@ -6242,3 +6242,18 @@ video del bucket como está (ADR 0094); la autenticación es el ADR 0095. Hecho 
 `ci-publicar` (`.worktrees/ci-publicar/`), sin push: falta correr `scripts/configurar-wif.sh` con
 permiso de IAM (T-03) y el OK para el push (T-04). Los otros cuatro buckets están atrasados respecto
 de `main`, y la primera corrida los pone al día.
+
+## 2026-10-21 — Fase 16: el primer run de Actions, y un permiso que faltaba
+
+El run 39624308222 pasó build, `npm run check`, `npm test` y la autenticación por WIF. Falló en
+"Publish and verify": `gcloud storage rsync` pide `storage.buckets.get` sobre
+`qualabs-hls-demo-stage-pair`, y `roles/storage.objectAdmin` no lo trae. No escribió nada, porque
+la falla fue antes de la primera escritura. Antes, `configurar-wif.sh` se había cortado porque el
+display name del proveedor pasaba los 32 caracteres (af3cf66). Arreglo: `roles/storage.legacyBucketReader`
+en cada bucket, además de objectAdmin (9d1aa2b, nota del 2026-10-21 en el ADR 0095).
+
+Por qué la verificación de T-01 no lo vio: todas las corridas en seco se hicieron con la cuenta
+Owner del gcloud de esta máquina, nunca con los permisos de `hls-demo-publisher`, así que un permiso
+de menos en la cuenta no podía aparecer. Lo que las corridas en seco prueban es la lógica de la
+publicación. Que la cuenta alcance lo prueba recién un run real, o una corrida en seco con
+`--impersonate-service-account`.
