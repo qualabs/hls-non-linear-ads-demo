@@ -1,0 +1,34 @@
+$ actionlint -shellcheck shellcheck .github/workflows/publicar.yml
+exit=0
+
+$ (mutación: steps.demoz) actionlint bad.yml
+bad.yml:60:13: property "demoz" is not defined in object type {demos: {conclusion: string; outcome: string; outputs: {string => string}}} [expression]
+bad.yml:66:13: property "demoz" is not defined in object type {demos: {conclusion: string; outcome: string; outputs: {string => string}}} [expression]
+bad.yml:70:13: property "demoz" is not defined in object type {demos: {conclusion: string; outcome: string; outputs: {string => string}}} [expression]
+bad.yml:72:22: property "demoz" is not defined in object type {demos: {conclusion: string; outcome: string; outputs: {string => string}}} [expression]
+exit=1
+
+$ scripts/demos-cambiadas.sh 42d6fa7~1 42d6fa7   # T-23: el Ad-ID de stage-pair es de la pieza y no de la campaña
+stage-pair
+$ scripts/demos-cambiadas.sh 7afe6e8~1 7afe6e8   # T-23: el AdIdentifier del Slot en las listas, en el contrato y en dos eventos de tracking
+stage-pair
+race-multiview
+multiview-offer
+hydration-break
+compatibility-pair
+$ scripts/demos-cambiadas.sh 4a91e26~1 4a91e26   # T-22: evidencia pública
+$ scripts/demos-cambiadas.sh 2af54b8~1 2af54b8   # LOG: stage-pair republicada con la T-23 (identifiers en los asset-lists)
+$ scripts/demos-cambiadas.sh e9330a1~1 e9330a1   # T-22: la barra nativa de inspect deja de marcar el break que saltea
+stage-pair
+$ scripts/demos-cambiadas.sh "" HEAD   # sin corrida verde previa
+stage-pair
+race-multiview
+multiview-offer
+hydration-break
+compatibility-pair
+$ scripts/demos-cambiadas.sh HEAD 42d6fa7   # base que no es ancestro
+stage-pair
+race-multiview
+multiview-offer
+hydration-break
+compatibility-pair
