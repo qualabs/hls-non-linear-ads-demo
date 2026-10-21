@@ -6233,3 +6233,12 @@ la T-23 publicada.
 La pasada de create-project (fase 04 de ai-toolkit), con el OK de Nicolás: `migrate.sh --to 3 --apply` (los estados salen de la evidencia, el cierre vive en el REPORT, el front matter en un archivo por carpeta), las decisiones de la tabla de la pasada, y la prioridad, la categoría y el impacto de lo abierto.
 
 - mechanical changes: 31; left for a person: 0
+
+## 2026-10-20 — Fase 16 abierta: la publicación continua
+
+Pedido aprobado por Nicolás: cada push a `main` republica las demos que cambió, con WIF y sin
+claves. Al mirar: `content/` no está en git, así que el CI publica lo que está en git y deja el
+video del bucket como está (ADR 0094); la autenticación es el ADR 0095. Hecho en la rama
+`ci-publicar` (`.worktrees/ci-publicar/`), sin push: falta correr `scripts/configurar-wif.sh` con
+permiso de IAM (T-03) y el OK para el push (T-04). Los otros cuatro buckets están atrasados respecto
+de `main`, y la primera corrida los pone al día.
