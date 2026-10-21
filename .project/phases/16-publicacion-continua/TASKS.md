@@ -4,8 +4,8 @@
 | --- | --- | --- | --- | --- | --- |
 | T-01 | `scripts/publicar.sh`: un publicador para las cinco, en seco por defecto | done | agent | — | rama `ci-publicar` · [`tasks/T-01/`](tasks/T-01/) |
 | T-02 | El workflow y `scripts/demos-cambiadas.sh` | done | agent | — | rama `ci-publicar` · [`tasks/T-02/`](tasks/T-02/) |
-| T-03 | El lado GCP: WIF, la cuenta y sus permisos por bucket | blocked | both | — | `scripts/configurar-wif.sh` en la rama `ci-publicar` |
-| T-04 | El push y la primera corrida, verificada | planned | human | — | — |
+| T-03 | El lado GCP: WIF, la cuenta y sus permisos por bucket | done | both | — | `scripts/configurar-wif.sh` (af3cf66, 9d1aa2b), corrido por Nicolás |
+| T-04 | El push y la primera corrida, verificada | done | human | — | [`tasks/T-04/primer-run-verde.txt`](tasks/T-04/primer-run-verde.txt) · run 39627734040 |
 
 ---
 

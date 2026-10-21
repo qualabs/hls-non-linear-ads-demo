@@ -1,6 +1,6 @@
 ---
 title: "La publicación continua: cada push a main republica sus demos"
-description: "Un publicador para las cinco demos, un workflow que publica en cada push a main sólo lo que cambió, y WIF sin claves; content/ queda fuera del CI porque no está en git"
+description: "Las cinco demos se publican solas en cada push a main: un publicador que publica HEAD y deja content/ del bucket (que no está en git), un workflow que elige las demos contra la última corrida verde, y WIF sin claves; el primer run verde puso al día los cuatro buckets atrasados"
 started: 2026-10-20
 origin: "Nicolás, 2026-10-20, despacho de agent-nicolas-laptop-865daf a hls-demo-ci"
 category: chore

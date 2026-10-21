@@ -6257,3 +6257,10 @@ Owner del gcloud de esta máquina, nunca con los permisos de `hls-demo-publisher
 de menos en la cuenta no podía aparecer. Lo que las corridas en seco prueban es la lógica de la
 publicación. Que la cuenta alcance lo prueba recién un run real, o una corrida en seco con
 `--impersonate-service-account`.
+
+## 2026-10-21 — Fase 16 cerrada: la publicación continua
+
+Con el OK de Nicolás. Las cuatro tasks `done`. El run 39627734040 publicó las cinco demos y las
+verificó contra HEAD por md5 y sin credenciales, en verde. El README lista las cinco URLs. Queda sin
+probar en un run real `--con-contenido`, el camino manual después de re-empaquetar. Informe en
+`phases/16-publicacion-continua/REPORT.md`.
