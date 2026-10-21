@@ -33,6 +33,19 @@ yet, writes its signalled playlist, builds the library, and serves the demo's
 folder as the document root (ADR 0022). What a demo needs before that, what it
 puts on screen and what to expect while it runs is in its own README.
 
+### Published demos
+
+All five are public, and every push to `main` republishes the ones it changed:
+
+- [compatibility-pair](https://qualabs-hls-demo-compatibility-pair.storage.googleapis.com/index.html)
+- [hydration-break](https://qualabs-hls-demo-hydration-break.storage.googleapis.com/index.html)
+- [multiview-offer](https://qualabs-hls-demo-multiview-offer.storage.googleapis.com/index.html)
+- [race-multiview](https://qualabs-hls-demo-race-multiview.storage.googleapis.com/index.html)
+- [stage-pair](https://qualabs-hls-demo-stage-pair.storage.googleapis.com/index.html)
+
+How they are published, and what you need to know to publish one by hand, is in
+[`CLAUDE.md`](CLAUDE.md#where-the-demos-are-published).
+
 ## Test it
 
 ```bash
