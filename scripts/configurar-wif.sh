@@ -33,7 +33,7 @@ g iam workload-identity-pools describe "$POOL" --location=global >/dev/null 2>&1
   g iam workload-identity-pools create "$POOL" --location=global --display-name="GitHub Actions"
 g iam workload-identity-pools providers describe "$PROVIDER" --location=global --workload-identity-pool="$POOL" >/dev/null 2>&1 ||
   g iam workload-identity-pools providers create-oidc "$PROVIDER" --location=global --workload-identity-pool="$POOL" \
-    --display-name="$REPO main" --issuer-uri=https://token.actions.githubusercontent.com \
+    --display-name="${REPO#*/} main" --issuer-uri=https://token.actions.githubusercontent.com \
     --attribute-mapping="google.subject=assertion.sub,attribute.repository=assertion.repository,attribute.repository_id=assertion.repository_id,attribute.ref=assertion.ref" \
     --attribute-condition="$CONDITION"
 g iam service-accounts describe "$SA" >/dev/null 2>&1 ||
