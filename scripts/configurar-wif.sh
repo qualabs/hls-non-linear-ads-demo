@@ -8,8 +8,10 @@
 #   - Pool `github` and OIDC provider `hls-non-linear-ads-demo`, accepting only
 #     this repository (by name AND by id, so a deleted and recreated repo with the
 #     same name does not inherit the access) on refs/heads/main.
-#   - Service account `hls-demo-publisher`, with roles/storage.objectAdmin on the
-#     five demo buckets only, at bucket level. Nothing at project level, and never
+#   - Service account `hls-demo-publisher`, with roles/storage.objectAdmin and
+#     roles/storage.legacyBucketReader on the five demo buckets only, at bucket
+#     level (rsync needs storage.buckets.get, which objectAdmin does not carry).
+#     Nothing at project level, and never
 #     a JSON key: the verification fails if one exists.
 #   - The principals of that repository may impersonate it.
 #
@@ -42,6 +44,8 @@ g iam service-accounts describe "$SA" >/dev/null 2>&1 ||
 for d in "${DEMOS[@]}"; do
   g storage buckets add-iam-policy-binding "gs://qualabs-hls-demo-$d" --member="serviceAccount:$SA" \
     --role=roles/storage.objectAdmin >/dev/null
+  g storage buckets add-iam-policy-binding "gs://qualabs-hls-demo-$d" --member="serviceAccount:$SA" \
+    --role=roles/storage.legacyBucketReader >/dev/null
 done
 g iam service-accounts add-iam-policy-binding "$SA" --role=roles/iam.workloadIdentityUser --member="$MEMBER" >/dev/null
 
@@ -61,9 +65,9 @@ sys.exit(0 if b == [{"role": "roles/iam.workloadIdentityUser", "members": [sys.a
 echo "-- the SA on each bucket:"
 for d in "${DEMOS[@]}"; do
   roles=$(g storage buckets get-iam-policy "gs://qualabs-hls-demo-$d" --format=json | python3 -c '
-import json, sys; print(" ".join(x["role"] for x in json.load(sys.stdin)["bindings"] if "serviceAccount:'"$SA"'" in x["members"]))')
+import json, sys; print(" ".join(sorted(x["role"] for x in json.load(sys.stdin)["bindings"] if "serviceAccount:'"$SA"'" in x["members"])))')
   printf '   %-40s %s\n' "qualabs-hls-demo-$d" "${roles:-NONE}"
-  [ "$roles" = roles/storage.objectAdmin ] || red=1
+  [ "$roles" = "roles/storage.legacyBucketReader roles/storage.objectAdmin" ] || red=1
 done
 proj=$(g projects get-iam-policy "$PROJECT" --flatten=bindings --filter="bindings.members:serviceAccount:$SA" --format='value(bindings.role)')
 echo "-- the SA at project level: ${proj:-nothing}"
