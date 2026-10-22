@@ -6406,3 +6406,27 @@ standard interstitial, or skip if only non-linear is defined, for VOD"; en live,
 - Docs: `docs/integrating-the-library.md`, `docs/contrato-senalizacion-renderizado.md`, README,
   README de `stage-pair`.
 - Tests: `test/post-roll.test.js` (16) y un test nuevo en `demo/stage-pair/test/signalled-run.test.js`.
+
+## 2026-10-22 — `CUE="ONCE"`, como hls.js
+
+Pedido de David por el coordinador (3 de 3): una vez presentada su ventana, un break `ONCE` sale de
+las experiencias y de la barra, con el disparador exacto de hls.js. ADR 0102; el Abierto del ADR
+0100 marca POST y ONCE como decididos.
+
+- **hls.js 1.7.2:** `hasPlayed = true` y "Remove interstitial with CUE attribute value of ONCE
+  after it has played" al SALIR del ítem del interstitial (`setSchedulePosition`), al terminar o por
+  un seek fuera; `parseSchedule` lo filtra para siempre. "Reproducido" es empezado y dejado, no
+  completo; un seek por encima no lo gasta.
+- **Librería:** `onceProgress` (pura); `createSignalling` saca el break gastado de `experiences` y
+  de los rangos en `timeupdate`/`seeking`/`seeked`, y no agrega una lista que llega después.
+  `lib/postroll.js` no repite un postroll `ONCE` que ya arrancó.
+- **`stage-pair`:** el break B lleva `CUE="ONCE"` en sus dos tags (`stage.json`,
+  `senalizar-contenido.sh`), y `inspect.html` lo dice en su tarjeta.
+- Docs: `docs/integrating-the-library.md`, `docs/contrato-senalizacion-renderizado.md`, README,
+  README de `stage-pair`.
+- Tests: `test/once.test.js` (9) y uno nuevo en `signalled-run.test.js`.
+- Smoke en Chrome headless en el 8091 (detenido por PID; el 8090 no se tocó), `inspect.html` con
+  nuestra librería: el postroll pide su lista al bufferear hasta el fin y, al terminar el programa,
+  intenta el lineal ZUMBRA 16:9 (404 en esta máquina, sin creativos empaquetados: se saltea y se
+  reporta); en modo nativo hls.js pide la misma lista. B: una caja adentro, ninguna después, ninguna
+  tras el seek de vuelta.

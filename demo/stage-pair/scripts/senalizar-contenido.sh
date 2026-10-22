@@ -146,6 +146,9 @@ suma() { awk -v a="$1" -v b="$2" 'BEGIN { printf "%s", a + b }'; }
 # forma de reemplazo, así que hls.js reproduce el lineal y retoma el programa en
 # el segundo en que el preroll termina, que es donde está el pane nuestro.
 #
+# Y UN BREAK CON `CUE="ONCE"` (ADR 0102), el B: el atributo va igual en los dos
+# tags, y cada cliente lo saca después de reproducirlo.
+#
 # EL POSTROLL TAMBIÉN (ADR 0101): `CUE="POST"` en los dos tags, y cada cliente lo
 # pone después del fin del programa y pide su lista cuando el programa está
 # bufereado hasta el fin. El START-DATE se escribe en los últimos segundos del
@@ -214,6 +217,7 @@ while IFS='|' read -r id offset duracion campana forma lista lineal cue; do
     "$(case "$cue" in
          PRE) echo '  CUE=PRE: los dos clientes piden su lista al cargar' ;;
          POST) echo '  CUE=POST: después del fin del programa, sólo como lineal; la lista se pide al bufferear hasta el fin' ;;
+         ONCE) echo '  CUE=ONCE: después de reproducido, los dos clientes lo sacan; un seek de vuelta no lo repite' ;;
        esac)"
   if [ "$cue" = POST ]; then
     printf '      de fábrica   %-26s la parte estándar, a cuadro entero, cuando el programa termina\n' "$lista"

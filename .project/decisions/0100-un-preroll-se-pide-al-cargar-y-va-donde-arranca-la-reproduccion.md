@@ -135,12 +135,12 @@ una demo tenga un preroll. `POST` y `ONCE` quedan como propuesta (ver Abierto).
   nombre ("antes de lo que se mire"). En live hls.js lo ubica en el punto de unión
   (`livePrerollResumption`); acá el -1 de `startPosition` se lee como 0, que en live estaría mal. No
   hay primarios live en el proyecto, así que queda anotado y no resuelto.
-- **`CUE="POST"`.** Opción 1: ubicarlo sobre los últimos segundos del programa, `[fin - largo,
+- **`CUE="POST"`.** *Decidido el 2026-10-22 por David, con otra forma: ADR 0101.* Opción 1: ubicarlo sobre los últimos segundos del programa, `[fin - largo,
   fin)`, y pedir su lista cuando el buffer llega al fin, como `BUFFERED_TO_END` en hls.js. Opción 2:
   no soportarlo: descartar el rango con un aviso en consola, en lugar de dibujarlo en su START-DATE
   como hoy. Recomendación: la 2 hasta que haya un caso, porque un aviso no lineal necesita programa
   abajo y después del fin no hay; y un multi view al final no tiene sentido.
-- **`CUE="ONCE"`.** Opción 1: como hls.js, una vez que su ventana se presentó entera se saca de las
+- **`CUE="ONCE"`.** *Decidido el 2026-10-22: la opción 1, ADR 0102.* Opción 1: como hls.js, una vez que su ventana se presentó entera se saca de las
   experiencias y de los rangos, así que un seek de vuelta no lo redibuja ni vuelve a contar la
   impresión. Opción 2: ignorarlo, porque `ONCE` existe para no repetir una interrupción y un aviso no
   lineal no interrumpe. Recomendación: la 1, que es la de hls.js y evita impresiones dobles.
