@@ -45,6 +45,15 @@ Experience {
   elements: Element[] // ordenados por zDepth ascendente; vacío cuando no hay composición
   views: View[]       // SÓLO en una oferta: el catálogo que se ofrece
   primaryName: string // SÓLO en una oferta: cómo se llama el contenido primario en la lista
+  options: Option[]   // SÓLO en un aviso: las opciones a intentar, EN ORDEN (ADR 0097)
+  fallback: Experience|null // SÓLO en un aviso: el default lineal de su asset, el último recurso
+  assetId: string     // SÓLO en un aviso: de qué asset de la lista salió
+}
+
+Option {
+  index: number|null  // su lugar en las layoutOptions del item; null en un aviso lineal
+  type: string        // la etiqueta del layout de esa opción
+  elements: Element[] // sus elementos, con la misma forma y el mismo orden que los de arriba
 }
 
 Element {
@@ -69,6 +78,18 @@ View {
   mediaType: string|null  // el MIME del asset
 }
 ```
+
+**El aviso trae una lista ordenada y no una sola opción** (ADR 0097). `options[0]`
+es la que se intenta primero, y es la que ya describen `type` y `elements`: quien
+no sabe de fallover dibuja eso y está bien. Las siguientes son las demás
+`layoutOptions` que entran en las capacidades y que la pre-validación, si corrió,
+no descartó; todavía no se pidieron. `fallback` es el default lineal del asset
+como una experiencia propia, a cuadro entero y con la ventana del asset entero, o
+`null` si el asset no tiene, o si esta experiencia ya es el default. Cuando a un
+item se le acaban las opciones, cae al default **todo su asset**, porque la unidad
+del repliegue es el asset; `assetId` es lo que dice cuáles van juntos. Qué se
+presenta finalmente lo decide el renderizado, con la regla de "El reproductor de
+assets", y nada de eso vuelve a la señalización.
 
 **Las formas de `Element` y de `Range` no cambiaron para agregar la oferta, y eso
 es el dato y no una tranquilidad.** Una vista que sube se entrega como un
@@ -187,7 +208,8 @@ siga donde lo puso.
 
 **Lo que decide si un elemento "sigue estando" es la identidad de la regla 6**,
 `itemId` más la identidad del elemento, y nunca el `id` ni la posición de la
-caja. Dos experiencias solapadas sin `id` propio comparten ese campo, y comparar
+caja. Una opción posterior del mismo aviso, montada por el fallover (ADR 0097),
+es otra composición aunque repita un `id` de elemento: se construye de cero. Dos experiencias solapadas sin `id` propio comparten ese campo, y comparar
 por ahí le entrega a un anunciante el nodo —y el audio— de otro, en silencio y
 por una coincidencia de layout.
 
@@ -250,9 +272,14 @@ el que no conviene cablear (ADR 0016).
 La lista se puede pedir en cualquier momento, incluido el segundo cero. Lo que
 promete es esto:
 
-1. **Es monótona.** Un rango que ya salió no cambia ni desaparece: conserva su
-   `id`, su `kind`, su `startTime` y su `duration`. Lo único que puede pasar
-   entre dos consultas es que aparezcan rangos nuevos.
+1. **Es monótona, salvo un rango provisional.** Un rango que ya salió no cambia
+   ni desaparece: conserva su `id`, su `kind`, su `startTime` y su `duration`. Lo
+   único que puede pasar entre dos consultas es que aparezcan rangos nuevos, con
+   una excepción que se marca: un rango con `provisional: true` es el de un break
+   cuyo asset-list todavía no se pidió (ADR 0098), armado con el largo que
+   declara su tag. Cuando la lista llega se reemplaza por el rango de lo que
+   resolvió —con el mismo `id`, y el largo que la lista dice— o desaparece si
+   resolvió en nada.
 2. **`settled` en `true` significa que la lista está completa**: la
    señalización ya entregó todos los rangos que va a entregar y ninguno quedó a
    medio resolver. Con `settled` en `false` la lista es parcial y hay que volver
@@ -267,9 +294,17 @@ nunca y la barra se repinta a medida que los rangos llegan.
 Que en este POC la lista esté completa antes de que empiece el primer break es
 una propiedad del ADR 0005 y no del contrato: el primario es un VOD con los
 Date Ranges escritos en la media playlist, así que llegan todos en la primera
-actualización de nivel y ahí mismo se piden sus asset-list. El día que la
-señalización sea live, o una agenda que se resuelve por partes, la promesa sigue
-valiendo y la coincidencia no.
+actualización de nivel. Sus asset-list, en cambio, se piden **on demand**
+(ADR 0098), cuando hls.js los pediría: cuando el programa está bufereado
+hasta el break, o cuando se lo reproduce o se busca adentro. Hasta entonces el
+break está en la lista como rango provisional, y por eso `settled` no espera al
+último break; lo que sí crece a medida que llegan las listas es
+`provider.experiences`. Un **preroll** (`CUE="PRE"`, ADR 0100) es la excepción
+de cuándo y de dónde: su asset-list se pide al cargar, como hls.js pide el de un
+preroll, y su rango y sus experiencias empiezan donde arranca la reproducción
+(el `startPosition` del player, o 0) y no en su START-DATE. Para quien pinta no
+cambia nada de la forma: es un rango más, con el `kind` de su clase. No hay opción para pedirlas todas de entrada (ADR 0099). El día que la señalización sea live, o una agenda que
+se resuelve por partes, la promesa sigue valiendo y la coincidencia no.
 
 Un rango cuyo asset-list falla no entra en la lista, y el error queda en la
 consola. La lista dice lo que la capa sabe, y no promete lo que no pudo leer.
@@ -285,7 +320,7 @@ hacer sin cruzar la costura.
 Se resuelve con una función que el renderizado **recibe**, y no con un import:
 
 ```js
-attachAsset(node, { uri, mediaType, startAt }) -> detach()
+attachAsset(node, { uri, mediaType, startAt, onLoaded, onFailed }) -> detach()
 ```
 
 `node` es el elemento de video que el renderizado creó para ese asset,
@@ -293,6 +328,21 @@ attachAsset(node, { uri, mediaType, startAt }) -> detach()
 experiencia recién empieza, y el desplazamiento correspondiente cuando se cae
 en el medio de la ventana—, y lo que devuelve es la manera de desconectarlo
 cuando la experiencia termina.
+
+`onLoaded()` y `onFailed(motivo)` dicen cómo fue **la primera carga** del asset,
+una sola vez, y son lo único que vuelve por esta costura (ADR 0097). Cuenta sólo
+la primera carga (SVTA2053 5.3.3): el pedido de la playlist que referencia el
+`uri`, la imagen, o los metadatos de un archivo progresivo, o ninguna respuesta
+en 10 s. Lo que falla después —un segmento, una variante— no llama a nada. El
+`motivo` es una frase que el renderizado no lee y le pasa al integrador tal cual;
+el renderizado no ve status, playlists ni errores del player.
+
+Con eso el renderizado hace el fallover solo, siempre: cuando un asset de la
+opción montada falla, saca **la opción entera** y monta la siguiente de
+`options`, después el `fallback`, después nada. Lo construye 3 s antes de la
+ventana, así que un 404 se resuelve antes de que nadie lo vea; un fallo que llega
+con la ventana abierta monta la siguiente tarde, en el segundo de la ventana en
+que va el programa y sin fundido. Qué se presentó lo reporta `onPresented`.
 
 Del lado del renderizado esa función es opaca: la llama y guarda el `detach`.
 Quien la implementa es `lib/media.js`, que es el archivo de la librería que
@@ -477,17 +527,31 @@ Se detectan tres formas sobre la forma del dato, y una sobre el dispositivo:
   ventanas de los demás quedan donde estaban. Saltear un asset moviendo a los
   otros sería el break fallando de a un aviso por vez, que es justo lo que el
   Apéndice D.5 separa.
-- **Ninguna opción entra en la capacidad declarada** (ADR 0085). Un item del
-  payload puede traer `options`, una lista de `{ type, layout }` en orden de
-  preferencia (R5.5); un item sin `options` es una sola opción. Antes de juzgar el
-  bloque, `narrowBlock` se queda, por item, con la primera opción que la
-  capacidad declarada en `attach` satisface: una opción pide un decodificador por
-  el primario más uno por cada elemento que no es `image/*`, y pide imágenes si
-  tiene algún elemento `image/*`. Si a un item no le queda ninguna, el bloque no
-  se puede dibujar y el asset cae por los mismos dos caminos de siempre: su `URI`
-  como lineal, o se saltea si no tiene. Sin capacidad declarada no se descarta
-  nada y gana la primera opción. Una oferta de varias vistas no pasa por este
-  filtro.
+- **Ninguna opción entra en las capacidades configuradas** (ADR 0085, ADR 0094).
+  Un item del payload trae `layoutOptions`, una lista de `{ type, layout }` en
+  orden de preferencia (SVTA2053 5.3.3); un item sin `layoutOptions`, con el
+  layout directo en el slot, es una sola opción. Antes de juzgar el bloque,
+  `narrowBlock` se queda, por item, con la primera opción que entra en las
+  capacidades configuradas en `attach` (`concurrentVideo`, `concurrentImage`):
+  una opción pide un decodificador por el primario más uno por cada elemento que
+  no es `image/*`, que no puede pasar de `concurrentVideo`, y si tiene algún
+  elemento `image/*` pide `concurrentImage` en `true`. Si a un item no le queda
+  ninguna, el bloque no se puede dibujar y el asset cae por los mismos dos
+  caminos de siempre: su `URI` como lineal, o se saltea si no tiene. Una
+  capacidad que no se configuró no descarta nada, y sin ninguna gana la primera
+  opción. Una oferta de varias vistas no pasa por este filtro.
+- **Un asset de la opción no carga** (ADR 0097, SVTA2053 5.3.3 "Asset load
+  failure"). Esto ya no lo decide la señalización sola: entrega todas las opciones
+  que entran, en orden, y el default atrás, y es el renderizado el que, cuando la
+  primera carga de un asset de la opción montada falla (un status de error, un
+  error de red o ninguna respuesta en 10 s), pasa a la siguiente, al default, o a
+  nada. **Cuenta sólo la primera carga**: lo que falla después (un segmento, una
+  variante) es un error de reproducción del aviso ya presentado y no cambia de
+  opción ni repliega. Un elemento con `uri` vacío no se pide y no es un fallo.
+  Con `preValidateAssets` (apagado por default), la señalización además hace el
+  primer pedido de cada asset al resolver la lista y saca de `options` las
+  opciones cuyo pedido falló; si no queda ninguna pide el default, y si ese
+  también falla el asset se saltea. Es su único efecto.
 
 Y dos que **no** se detectan, cada una por una razón distinta:
 

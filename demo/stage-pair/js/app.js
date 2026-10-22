@@ -19,7 +19,7 @@
 // THE BLOCK AN INTEGRATOR WRITES is fenced inside `construirNuestro()`: the
 // library arrives as a <script src> that defines a global, the page builds its
 // own hls.js with the one configuration the library hands over, and turns the
-// concurrent experience on over a container, with `capabilities` (ADR 0086). The
+// concurrent experience on over a container, with `capabilities` (ADR 0094). The
 // native pane is `stock-player.js`, which takes the chrome from the library and
 // nothing else.
 //
@@ -36,7 +36,7 @@
 import { traceContract } from './contract-trace.js';
 import { createStockPlayer } from './stock-player.js';
 import {
-  breakDelReporte, crearControlDePane, desenlaceCorto, leerConfig, escribirConfig
+  breakDelReporte, crearControlDePane, desenlaceCorto, leerConfig, escribirConfig, presentadoCorto
 } from './capabilities.js';
 
 // The one source of the numbers of this demo (ADR 0044).
@@ -114,7 +114,7 @@ const DESENLACE_NATIVO = {
 const breakDeLaLista = (ruta) => ruta.match(/asset-list-break-([a-z0-9]+)\.json/)?.[1] ?? null;
 
 function pintarPedidos(lado) {
-  const { pedidos, desenlaces } = vivo?.lados[lado] ?? { pedidos: [], desenlaces: {} };
+  const { pedidos, desenlaces, presentados = {} } = vivo?.lados[lado] ?? { pedidos: [], desenlaces: {} };
   const lista = panes[lado].pedidos;
   if (!pedidos.length) {
     const li = document.createElement('li');
@@ -137,6 +137,14 @@ function pintarPedidos(lado) {
       const nota = document.createElement('span');
       nota.className = 'wire__outcome';
       nota.textContent = `  ${asset ? desenlaceCorto(asset) : nativo}`;
+      li.append(nota);
+    }
+    // What the renderer actually put on screen, once it is known (ADR 0097).
+    const mostrado = asset ? presentados[breakDeLaLista(u.pathname)] : null;
+    if (mostrado) {
+      const nota = document.createElement('span');
+      nota.className = 'wire__outcome';
+      nota.textContent = `  ${presentadoCorto(mostrado)}`;
       li.append(nota);
     }
     return li;
@@ -355,8 +363,20 @@ function construirNuestro(lado, capacidades, caja, registro) {
   const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
   const concurrent = QualabsConcurrentHls.attach(hls, {
     container: caja.player,
-    // What the device can draw, one axis at a time (ADR 0086).
+    // What the device can draw, `{ concurrentVideo, concurrentImage }` (ADR 0094).
     capabilities: capacidades,
+    // And they travel on the asset-list request too. Sending them is optional in
+    // SVTA2053 5.3.3, and this demo sends them because the request is what it
+    // shows; a page whose privacy policies do not allow it passes `false`.
+    sendCapabilities: true,
+    // `preValidateAssets` is left at its default, `false` (ADR 0097): no asset is
+    // requested up front, and an option whose asset does not load is caught by
+    // the renderer's failover, which is always on. `onPresented` says which
+    // option ended up on screen.
+    onPresented: (reporte) => {
+      registro.presentados[breakDelReporte(reporte)] = reporte;
+      pintarPedidos(lado);
+    },
     onResolved: (experiences, seleccion) => {
       for (const e of experiences) {
         console.log(`[app:${lado}] resolved ${e.type}#${e.itemId}: ${e.elements.length} elements,` +
@@ -386,7 +406,9 @@ function construirNuestro(lado, capacidades, caja, registro) {
 
   /** The pane's label, read off the contract -- `activeAt` and nothing else. */
   function pintar() {
-    const activas = concurrent.provider.activeAt(caja.video.currentTime);
+    // What is ON SCREEN, after the renderer's failover (ADR 0097), and not what
+    // the signalling handed over.
+    const activas = concurrent.presentedAt(caja.video.currentTime);
     p.pane.dataset.state = activas.length ? 'ad' : 'primary';
     p.state.textContent = activas.length
       ? `primary content + NON-LINEAR AD (${activas.map((e) => e.type).join(', ')})` +
@@ -479,7 +501,7 @@ function armar(config, retomarEn = 0) {
 
   const lados = {};
   for (const lado of LADOS) {
-    const registro = { pedidos: [], selecciones: {}, desenlaces: {} };
+    const registro = { pedidos: [], selecciones: {}, desenlaces: {}, presentados: {} };
     const caja = construirCaja(panes[lado].caja);
     pintarRotulos(lado, config[lado]);
     const l = config[lado].modo === 'nativo'

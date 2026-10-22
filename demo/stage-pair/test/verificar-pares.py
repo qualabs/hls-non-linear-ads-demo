@@ -111,7 +111,7 @@ def main():
             pagina.wait_for_function("window.demo && window.demo.lados")
             config = pagina.evaluate("() => window.demo.config")
             leido = {lado: (c["modo"] if c["modo"] == "nativo" else
-                            f"ours-{c['capacidades']['videoDecoders']}dec-{'img' if c['capacidades']['imageOverVideo'] else 'noimg'}")
+                            f"ours-{c['capacidades']['concurrentVideo']}dec-{'img' if c['capacidades']['concurrentImage'] else 'noimg'}")
                      for lado, c in config.items()}
             ok_url = leido == {"izq": izq, "der": der}
             rojo += 0 if ok_url else 1

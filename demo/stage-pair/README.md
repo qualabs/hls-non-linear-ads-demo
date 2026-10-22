@@ -17,9 +17,10 @@ linear default, is exactly that case, measured. The fallback to a normal interst
 the Apple-class tag.
 
 On top of that, the thing this demo adds to the four that came before it: **the capability of
-the device degrades the format of the ad, not the ad**. A control on the page declares what
-the device can draw, in two axes — video decoders, and images over video — and both travel on
-the asset-list request. What comes back is **the same for every device**: the ad with every
+the device degrades the format of the ad, not the ad**. A control on the page sets what the
+device can draw, the two capabilities of the specification — `concurrentVideo`, the video
+decoders, and `concurrentImage`, images over video — and both travel on the asset-list
+request. What comes back is **the same for every device**: the ad with every
 option it was sold in: video first, and then the same campaign as a still `image/svg+xml` in
 **another layout**, so that two browsers side by side show two experiences that cannot be
 mistaken for each other (ADR 0088). The library keeps the first option the device can show.
@@ -63,7 +64,7 @@ signalling script says exactly that and carries on.
 
 | page | what it is for |
 | --- | --- |
-| [`index.html`](index.html) | **the pair.** Two players, each with its own control and the manifest of its mode, over the same programme, the walk through the three non-linear shapes — side by side, L-shape and banner, one per break — and the capability switch |
+| [`index.html`](index.html) | **the pair.** Two players, each with its own control and the manifest of its mode, over the same programme, the walk through the three non-linear shapes — side by side, L-shape and banner — over a preroll and three breaks, and the capability switch |
 | [`inspect.html`](inspect.html) | **one player, and the whole exchange in the open**, with the same control as each player of the pair. The Date Range the manifest of its mode carried, the asset-list URL the client asked for with the capability on it, the body that came back, verbatim, and **what the library kept of it**: each option, why it was discarded, and how the break ended. Made to be read out loud in a room with the network tab open |
 | [`race.html`](race.html) | **the ads first, then the multi view window.** Four non-linear ads over a race, eight seconds of clean race, and then a window that offers a catalogue of six on-board cameras for whoever is watching to compose |
 
@@ -79,28 +80,61 @@ grid: an offer where everything fits at once is not a choice.
 
 ## The switch, the filter, and the fact that there is no server
 
-The switch has two axes, **video decoders `1` | `2`** and **images over video `yes` | `no`**,
-and each is sent on the asset-list request on its own, as the specification asks (R29.1):
-`sgai-video-decoders` and `sgai-image-over-video`. They are the parameters an ad presentation
-server would read. **There is no such server here** — these demos are published as static
+The switch has two axes, **video decoders `1` | `2`** (`concurrentVideo`) and **images over
+video `yes` | `no`** (`concurrentImage`), the capabilities SVTA2053 5.3.3 says the application
+sets on the library. Each is sent on the asset-list request on its own, with the names of the
+specification: `sgai-video-decoders` and `sgai-image-over-video`. They are the parameters an
+ad presentation server would read. Sending them is optional in the specification, because
+they add to what can fingerprint a device; this demo sends them (`sendCapabilities: true`)
+because the request is what it shows. **There is no such server here** — these demos are published as static
 files — and nothing needs one: the answer of each break is one static file that always
 carries every option of the ad, whatever the device declared.
 
 **The choice is the library's, and it is an explicit step.** Before drawing, it walks the
-options in order and keeps the first one the declared capability satisfies (R5.6). An option
+`layoutOptions` of the ad in order and keeps the first one the configured capabilities fit
+(SVTA2053 5.3.3). An option
 needs one decoder for the programme plus one per video element, and needs images if it has an
 image element. So even when the server answers a video to a device that said it has one
-decoder, the device does not try to play it. `inspect.html` shows that step on screen, and the
-console logs every discarded option with its reason.
+decoder, the device does not try to play it. Every option the device can show is handed to
+the renderer in that order, with the linear default behind them, and the one mounted also has
+to load: when the first load of one of its assets fails (a 404, a network error, no answer),
+the renderer takes it down and mounts the next, then the default, then nothing (ADR 0097).
+Checking the assets up front, before the renderer is handed the list, is optional and off by
+default (`preValidateAssets`); both pages use the default, and `inspect.html` has a "Pre-validate
+assets" switch, off when the page opens, to compare. `inspect.html` shows what was handed over
+and what was actually on screen, a failed load included, and the console logs every discarded
+option and every failover with its reason.
 
-| declared | break with a linear default (B, C) | break without one (A) |
+**The asset-lists are requested one break at a time** (ADR 0098), when the programme is
+buffered up to the break, or played or sought into it, which is when hls.js asks for an
+interstitial's list. So the request panel of `index.html` and card 2 of `inspect.html` fill in as
+the programme approaches each break, like the native pane does, and the bar marks every break
+from the start anyway. `race.html` follows the same rule (ADR 0099): its run lists every break
+from the start, off the tags, and each row fills in with what it carries when its list arrives.
+
+**The first break is a preroll** (ADR 0100): its two tags carry `CUE="PRE"`, and both clients
+ask for its list **at load, before play**, which is when hls.js asks for a preroll's list
+(`checkStart`). The off-the-shelf pane plays the linear default, KETRAVA 16:9 full frame, before
+the programme and resumes the programme at 12 s, because its tag is in the replacement form; ours
+draws the KETRAVA banner over the first 12 s of the programme. At 12 s both panes are on the same
+second of the programme. `inspect.html` opens on it: card 1 shows the range with `CUE="PRE"` and
+card 2 the request that already went out. The banner video and the still are pieces the demo
+already had: the race's banner and the frozen 16:9.
+
+**On a machine where the video creatives are not packaged** (`content/creatives/` missing), every
+video option answers 404, and that is the failover on display: each break shows its still image
+instead, and with one decoder and no images break B's linear default 404s too and the ad is
+skipped.
+
+| configured | break with a linear default (PRE, B, C) | break without one (A) |
 | --- | --- | --- |
 | 2 decoders, images or not | the ad in video | the ad in video |
 | 1 decoder, images | the same campaign as a still image, in another layout | the same campaign as a still image, in another layout |
 | 1 decoder, no images | the linear default, full frame | nothing: the programme goes on |
 
-**The image is still and in another shape** (ADR 0088): break A goes from side by side to the
-L-shape, B from the L-shape to side by side, C from the banner to the L-shape, each in the
+**The image is still and in another shape** (ADR 0088): the preroll goes from the banner to side
+by side, break A from side by side to the L-shape, B from the L-shape to side by side, C from the
+banner to the L-shape, each in the
 same campaign. A moving picture inside an `<img>` looks like a video, and the same box in the
 same place looks like the same experience; either way the difference had to be found by
 inspecting the element. The still image is the authored SVG frozen at one instant by
@@ -124,19 +158,22 @@ const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
 QualabsConcurrentHls.attach(hls, {
   container: document.querySelector('.player'),
   capabilities: {
-    videoDecoders: 1,       // sgai-video-decoders: streams decoded and composed at once, programme included
-    imageOverVideo: true    // sgai-image-over-video: can draw an image over the video
-  }
+    concurrentVideo: 1,     // sgai-video-decoders: video decoded and composed at once, programme included
+    concurrentImage: true   // sgai-image-over-video: can composite an image over the video
+  },
+  sendCapabilities: true,   // also send them on the asset-list request, where privacy policy allows it
+  onPresented: (report) => console.log(report)  // which option was actually on screen, after any failover
 });
 
 hls.loadSource('https://example.com/programme.m3u8');
 hls.attachMedia(document.querySelector('.player video'));
 ```
 
-The names are the axes of the specification in camelCase, and they travel with the
-specification's own names. `htmlOverVideo`, the third axis of R29.1, is not there because this
-library does not draw HTML: declaring it would be a claim about the player that is not true.
-Each axis is optional, and one that is left out is neither sent nor filtered on.
+The names are the two properties SVTA2053 5.3.3 requires the configuration of the library to
+hold, and they travel with the specification's own parameter names (ADR 0094). There is no
+HTML capability because this library does not draw HTML: declaring it would be a claim about
+the player that is not true. Each capability is optional, and one that is left out is neither
+sent nor filtered on.
 
 ## What is on screen and whose it is
 

@@ -86,8 +86,8 @@ const params = new URLSearchParams(location.search);
 const SRC = params.get('src');
 const SRC_FABRICA = params.get('srcFabrica') ?? SRC;
 const CAPACIDAD = {
-  ...(params.has('decoders') ? { videoDecoders: Number(params.get('decoders')) } : {}),
-  ...(params.has('images') ? { imageOverVideo: params.get('images') === '1' } : {})
+  ...(params.has('decoders') ? { concurrentVideo: Number(params.get('decoders')) } : {}),
+  ...(params.has('images') ? { concurrentImage: params.get('images') === '1' } : {})
 };
 
 const stage = await (await fetch('/stage.json')).json();

@@ -96,7 +96,7 @@ declaracion() { # $1 ruta del asset-list
     const filas = [num(assets.reduce((s, a) => s + largo(a), 0))];
     for (const a of assets) {
       const item = a["X-AD-CREATIVE-SIGNALING"]?.payload?.[0];
-      const tipo = item?.options?.[0]?.type ?? item?.type ?? "linear";
+      const tipo = item?.layoutOptions?.[0]?.type ?? item?.type ?? "linear";
       filas.push(num(largo(a)) + "|" + tipo);
     }
     process.stdout.write(filas.join("\n") + "\n");
@@ -111,7 +111,7 @@ medios() { # $1 ruta del asset-list concurrente
     const fs = require("fs"), path = require("path");
     const l = JSON.parse(fs.readFileSync(path.resolve(process.argv[1]), "utf8"));
     const item = l.ASSETS[0]["X-AD-CREATIVE-SIGNALING"].payload[0];
-    const opciones = item.options ?? [item];
+    const opciones = item.layoutOptions ?? [item];
     process.stdout.write(opciones.map((o) => o.layout.assets.map((a) => a.type).join("+")).join(", luego "));
   ' "$1"
 }
@@ -137,26 +137,35 @@ suma() { awk -v a="$1" -v b="$2" 'BEGIN { printf "%s", a + b }'; }
 # interrumpido que reanudar (ADR 0016), y se escribe como en las demás demos.
 #
 # LOS DOS DECLARAN EL LARGO DEL MISMO ASSET-LIST, leído del archivo.
-tag_de() { # $1 clase (interstitial|concurrente), $2 id del break, $3 offset, $4 asset-list, $5 lineal ("si" o "")
-  local clase=$1 id=$2 offset=$3 lista=$4 lineal=$5 start largo retorno=""
+#
+# EL PREROLL LLEVA CUE EN LOS DOS TAGS (ADR 0100), y es lo único que cambia: con
+# `CUE="PRE"` cada cliente lo pone antes del programa, sea cual sea su
+# START-DATE, y pide su asset-list al cargar. El START-DATE se escribe igual
+# (offset 0, el instante del EXT-X-PROGRAM-DATE-TIME) porque la spec lo exige en
+# todo Date Range. Su tag de Apple sigue la regla de arriba: con default, la
+# forma de reemplazo, así que hls.js reproduce el lineal y retoma el programa en
+# el segundo en que el preroll termina, que es donde está el pane nuestro.
+tag_de() { # $1 clase (interstitial|concurrente), $2 id del break, $3 offset, $4 asset-list, $5 lineal ("si" o ""), $6 cue ("PRE" o "")
+  local clase=$1 id=$2 offset=$3 lista=$4 lineal=$5 cue=${6:-} start largo retorno="" marca=""
   start=$(date -d "$PDT + $offset seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
   largo=$(declaracion "$SIGNALLING/$lista" | head -1)
+  [ -z "$cue" ] || marca=",CUE=\"$cue\""
   if [ "$clase" = interstitial ]; then
     [ -n "$lineal" ] || retorno=',X-RESUME-OFFSET=0'
-    printf '#EXT-X-DATERANGE:ID="AD-%s-LINEAR",CLASS="%s",START-DATE="%s",X-ASSET-LIST="/signalling/%s"%s,X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
-      "${id^^}" "$CLASE_LINEAL" "$start" "$lista" "$retorno" "$largo"
+    printf '#EXT-X-DATERANGE:ID="AD-%s-LINEAR",CLASS="%s",START-DATE="%s"%s,X-ASSET-LIST="/signalling/%s"%s,X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
+      "${id^^}" "$CLASE_LINEAL" "$start" "$marca" "$lista" "$retorno" "$largo"
   else
-    printf '#EXT-X-DATERANGE:ID="AD-%s-CONCURRENT",CLASS="%s",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
-      "${id^^}" "$CLASE_CONCURRENTE" "$start" "$lista" "$largo"
+    printf '#EXT-X-DATERANGE:ID="AD-%s-CONCURRENT",CLASS="%s",START-DATE="%s"%s,X-ASSET-LIST="/signalling/%s",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
+      "${id^^}" "$CLASE_CONCURRENTE" "$start" "$marca" "$lista" "$largo"
   fi
 }
 
 # El recorrido sale de stage.json: id, offset, duración, campaña, forma, el
-# asset-list del break y si tiene default lineal. Ni un segundo tipeado acá.
+# asset-list del break, si tiene default lineal y su CUE. Ni un segundo tipeado acá.
 RECORRIDO=$(node -e '
   const s = require(process.argv[1]);
   process.stdout.write(s.breaks.map((b) =>
-    [b.id, b.offset, b.duracion, b.campana, b.forma, b.concurrente, b.lineal ? "si" : ""].join("|")
+    [b.id, b.offset, b.duracion, b.campana, b.forma, b.concurrente, b.lineal ? "si" : "", b.cue ?? ""].join("|")
   ).join("\n") + "\n");
 ' "$DEMO/stage.json")
 
@@ -165,10 +174,10 @@ RECORRIDO=$(node -e '
 # nombra el mismo asset-list, que no tiene parte estándar, y hls.js lo saltea.
 escribir_playlist() { # $1 salida, $2 clase (interstitial|concurrente)
   local salida=$1 clase=$2 tags=""
-  while IFS='|' read -r id offset duracion campana forma lista lineal; do
+  while IFS='|' read -r id offset duracion campana forma lista lineal cue; do
     [ -n "$id" ] || continue
     [ -f "$SIGNALLING/$lista" ] || { echo "falta $SIGNALLING/$lista" >&2; exit 1; }
-    tags="$tags$(tag_de "$clase" "$id" "$offset" "$lista" "$lineal")
+    tags="$tags$(tag_de "$clase" "$id" "$offset" "$lista" "$lineal" "$cue")
 "
   done <<< "$RECORRIDO"
   mkdir -p "$(dirname "$salida")"
@@ -190,11 +199,12 @@ echo "$SIGNALLING/  ($(ls "$SIGNALLING" | /usr/bin/grep -c '^asset-list-break-')
 # ---------------------------------------------------------------------------
 echo
 echo "El recorrido del par, sobre un programa de $(leer programa.largo) s:"
-while IFS='|' read -r id offset duracion campana forma lista lineal; do
+while IFS='|' read -r id offset duracion campana forma lista lineal cue; do
   [ -n "$id" ] || continue
   largo=$(declaracion "$SIGNALLING/$lista" | head -1)
-  printf '  break %s  t=%3ss a %3ss  (%ss)  %-22s %s\n' \
-    "${id^^}" "$offset" "$(suma "$offset" "$largo")" "$largo" "$(leer "formas.$forma.layout")" "$(leer "campanas.$campana.marca")"
+  printf '  break %s  t=%3ss a %3ss  (%ss)  %-22s %s%s\n' \
+    "${id^^}" "$offset" "$(suma "$offset" "$largo")" "$largo" "$(leer "formas.$forma.layout")" "$(leer "campanas.$campana.marca")" \
+    "${cue:+  CUE=$cue: los dos clientes piden su lista al cargar}"
   if [ -n "$lineal" ]; then
     printf '      de fábrica   %-26s la parte estándar, a cuadro entero: el programa se reemplaza\n' "$lista"
     printf '      librería     %-26s %s; sin opción que entre, el lineal\n' "$lista" "$(medios "$SIGNALLING/$lista")"

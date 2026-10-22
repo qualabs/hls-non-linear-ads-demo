@@ -19,9 +19,11 @@
 // WHAT IT READS IS THE CONTRACT AND NOTHING ELSE -- `programRanges()` for where
 // the breaks are, `activeAt(t)` for what is on at an instant. `activeAt` answers
 // for instants that have not been played yet, because it filters the whole
-// resolved array; that is the premise this section rests on, and it was measured
-// in flight before any of this was written: with the programme at 0 s, the
-// fourth Ad of the break came back with its boxes already resolved.
+// resolved array; that is the premise this section rests on. What it needs is
+// the break's asset-list, which arrives when the programme is buffered up to the
+// break (ADR 0098): this break is fourteen seconds in, inside the first forward
+// buffer, so its four Ads are there a moment after the page loads, before the
+// programme plays a frame.
 //
 // THE WALK IS NOT A FIXED STEP, and that is the only piece of cleverness here.
 // Sampling every half second would ask a hundred questions for four answers and
@@ -277,13 +279,16 @@ function paintFact(facts, provider, ads) {
 
 /**
  * Draws the three derived parts of the section, and re-reads until the signalling
- * has finished handing over its ranges.
+ * has handed over the ads of every break.
  *
- * The re-reading is the contract's own rule and not a workaround: with `settled`
- * false the list of ranges is partial, and whoever paints re-reads. It gives up
- * after fifteen seconds rather than asking for the life of the page -- an empty
- * box is honest about a break that never resolved, and a page that keeps asking
- * for ever is not more honest than one that stopped.
+ * TWO WAITS, AND ONLY ONE OF THEM HAS A LIMIT. A break whose asset-list has not
+ * been asked for yet is on the contract off its tag, `provisional`, and its list is
+ * asked for when the programme is buffered up to it, as hls.js does (ADR 0098,
+ * ADR 0099): that wait is the programme's and the section waits it out, however
+ * long, with the boxes empty. A list in flight is the other one -- `settled`
+ * false -- and that one gives up after fifteen seconds rather than asking for the
+ * life of the page: an empty box is honest about a break that never resolved, and
+ * a page that keeps asking for ever is not more honest than one that stopped.
  *
  * THE THREE ARE DRAWN TOGETHER AND FROM ONE WALK, which is not a saving: they are
  * three readings of the same four Ads, and drawn apart they could disagree -- a
@@ -298,7 +303,9 @@ export function showTypes({ provider, shapes, media, facts }) {
       media.replaceChildren(...mediaCards(ads));
       paintFact(facts, provider, ads);
     }
-    return provider.programRanges().settled || --left <= 0;
+    const { ranges, settled } = provider.programRanges();
+    if (ranges.some((range) => range.kind === 'concurrent' && range.provisional)) return false;
+    return settled || --left <= 0;
   };
   const tick = () => {
     try {
