@@ -182,7 +182,7 @@ default (`preValidateAssets`, `preValidateMethod`), because with a real ad
 decisioning service an extra request per asset has a cost. And each break's
 asset-list is requested when hls.js would request it — when the programme is
 buffered up to the break, or played or sought into it; a preroll's (`CUE="PRE"`), at
-load, placed where playback begins (ADR 0100) — and there is no option to
+load, placed where playback begins, the live join point on a live playlist (ADR 0100) — and there is no option to
 request them all up front (ADR 0099). The options are in
 [`docs/integrating-the-library.md`](docs/integrating-the-library.md) §6.
 
