@@ -175,7 +175,8 @@ const TOLERANCIA = 1.5;
 
 function objetivoSeguro(segundo) {
   if (!Object.values(configActual).some((c) => c.modo === 'nativo')) return segundo;
-  for (const brk of stage.breaks.filter((b) => b.lineal)) {
+  // A post-roll (ADR 0101) is after the programme: no second of the programme is inside it.
+  for (const brk of stage.breaks.filter((b) => b.lineal && b.cue !== 'POST')) {
     if (segundo >= brk.offset && segundo < brk.offset + brk.duracion) {
       return Math.max(0.05, brk.offset - ENTRADA);
     }
@@ -564,7 +565,12 @@ for (const lado of LADOS) {
 const jumps = document.getElementById('jumps');
 jumps.replaceChildren(...[
   { texto: 'start', segundo: 0.05 },
-  ...stage.breaks.map((b) => ({ texto: `break ${b.id.toUpperCase()}`, segundo: Math.max(0.05, b.offset - ENTRADA) }))
+  // The post-roll's jump lands a few seconds before the END of the programme,
+  // which is where it plays (ADR 0101), and not before its START-DATE.
+  ...stage.breaks.map((b) => ({
+    texto: `break ${b.id.toUpperCase()}`,
+    segundo: Math.max(0.05, (b.cue === 'POST' ? stage.programa.largo : b.offset) - ENTRADA)
+  }))
 ].map(({ texto, segundo }) => {
   const boton = document.createElement('button');
   boton.type = 'button';

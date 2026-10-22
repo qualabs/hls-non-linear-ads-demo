@@ -333,8 +333,20 @@ function pintarIntercambio() {
   if (vivo?.modo === 'nativo') {
     // already said above
   } else if (!asset) {
-    dom.filter.replaceChildren(el('li', 'none', 'the library has not resolved this break yet: its list is requested when the programme is buffered up to it'));
+    dom.filter.replaceChildren(el('li', 'none', mostrado.cue === 'POST'
+      ? 'the library has not resolved this post-roll yet: its list is requested when the programme is buffered to its end'
+      : 'the library has not resolved this break yet: its list is requested when the programme is buffered up to it'));
     dom.outcome.textContent = '';
+  } else if (seleccion.postroll) {
+    // A post-roll (ADR 0101): no option is weighed, because none of them is
+    // ever presented after the end. What plays is the linear default, or nothing.
+    const reporte = presentados.get(mostrado.id);
+    dom.filter.replaceChildren(el('li', 'none',
+      'Post-roll: the layout options are not considered, because a non-linear ad is never presented after the programme ends.'));
+    dom.outcome.dataset.outcome = reporte
+      ? (reporte.outcome === 'skipped' ? 'skipped' : 'default')
+      : (asset.outcome === 'skipped' ? 'skipped' : 'default');
+    dom.outcome.textContent = `${desenlace(asset)}${reporte ? ` ${presentado(reporte)}` : ' It plays when the programme ends.'}`;
   } else {
     const item = asset.items[0];
     // Two reports and two moments: what the signalling HANDED OVER, in order
@@ -396,10 +408,18 @@ function mostrarBreak(brk) {
   mostrado = brk;
   // A preroll (ADR 0100) is said as one: both clients ask for its list at load,
   // before play, which is what move 2 shows the moment the page opens.
+  // A post-roll (ADR 0101) too: it goes after the programme, whatever its
+  // START-DATE, and only as a linear ad.
+  const cuando = brk.cue === 'POST'
+    ? `after the programme ends (t = ${stage.programa.largo}s), for ${brk.duracion}s`
+    : `t = ${brk.offset}s to ${brk.offset + brk.duracion}s`;
   dom.which.textContent =
-    `Break ${brk.id.toUpperCase()} of ${stage.breaks.length} · t = ${brk.offset}s to ` +
-    `${brk.offset + brk.duracion}s · ${stage.campanas[brk.campana].marca} · ` +
+    `Break ${brk.id.toUpperCase()} of ${stage.breaks.length} · ${cuando} · ${stage.campanas[brk.campana].marca} · ` +
     (brk.cue === 'PRE' ? 'preroll, CUE="PRE": its list is asked for at load · ' : '') +
+    (brk.cue === 'POST'
+      ? 'post-roll, CUE="POST": its list is asked for when the programme is buffered to its end, and a ' +
+        'non-linear ad is never presented after the end · '
+      : '') +
     (brk.lineal ? 'with a linear default' : 'no default: content that is not interrupted');
   pintarIntercambio();
 }
@@ -707,7 +727,8 @@ jumps.replaceChildren(...[
   { texto: 'start', segundo: 0.05 },
   ...stage.breaks.map((b) => ({
     texto: `break ${b.id.toUpperCase()}`,
-    segundo: Math.max(0.05, b.offset - ENTRADA)
+    // A post-roll plays when the programme ends (ADR 0101): its jump lands near the end.
+    segundo: Math.max(0.05, (b.cue === 'POST' ? stage.programa.largo : b.offset) - ENTRADA)
   }))
 ].map(({ texto, segundo }) => {
   const boton = document.createElement('button');

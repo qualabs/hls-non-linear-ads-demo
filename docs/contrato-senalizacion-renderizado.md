@@ -304,7 +304,11 @@ de cuándo y de dónde: su asset-list se pide al cargar, como hls.js pide el de 
 preroll, y su rango y sus experiencias empiezan donde arranca la reproducción
 (el `startPosition` del player, o 0; en live, el punto de unión que calcula hls.js) y no en su
 START-DATE. Para quien pinta no
-cambia nada de la forma: es un rango más, con el `kind` de su clase. No hay opción para pedirlas todas de entrada (ADR 0099). El día que la señalización sea live, o una agenda que
+cambia nada de la forma: es un rango más, con el `kind` de su clase. Un **postroll** (`CUE="POST"`,
+ADR 0101) no es un rango del programa: va después de su fin y sólo como lineal, así que no está en
+`programRanges()` ni en `activeAt`; está en `postRolls()`, `{ id, kind, state, startTime,
+experiences }`, con experiencias lineales solamente, y lo reproduce `lib/postroll.js` por su propio
+reloj cuando el programa termina. No hay opción para pedirlas todas de entrada (ADR 0099). El día que la señalización sea live, o una agenda que
 se resuelve por partes, la promesa sigue valiendo y la coincidencia no.
 
 Un rango cuyo asset-list falla no entra en la lista, y el error queda en la
