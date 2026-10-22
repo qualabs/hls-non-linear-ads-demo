@@ -206,9 +206,23 @@
       "formaImagen": "backplate",
       "lineal": true,
       "_": "Calzado en el banner porque una zapatilla de perfil es la única de las tres siluetas que llena una tira de 8,89:1 sin quedar perdida en el medio."
+    },
+    {
+      "id": "post",
+      "cue": "POST",
+      "offset": 186,
+      "duracion": 12.0,
+      "forma": "banner",
+      "layout": "lowerThirdOverlay",
+      "campana": "zumbra",
+      "concurrente": "asset-list-break-post.json",
+      "formaImagen": "backplate",
+      "lineal": true,
+      "_cue": "EL POSTROLL (ADR 0101): sus dos tags llevan CUE=\"POST\", y con eso cada cliente lo pone DESPUÉS del programa, sea cual sea su START-DATE, que se escribe en los últimos 12 s del programa porque la spec lo exige en todo Date Range y ninguno de los dos lo usa. Los dos piden su asset-list cuando el programa está bufereado hasta el fin (BUFFERED_TO_END en hls.js; la librería lo imita). Un aviso no lineal nunca se presenta después del fin del programa (David, 2026-10-22: \"auto fail to the linear ad if defined as a standard interstitial, or skip if only non-linear is defined\"), así que el nuestro reproduce el default lineal ZUMBRA 16:9 a cuadro entero cuando el programa termina, que es exactamente lo que el de fábrica reproduce del tag de Apple. El banner y la imagen del asset-list están para mostrar que se ignoran.",
+      "_": "ZUMBRA porque el break anterior es KOVRIN, y porque su 16:9 es la pieza aprobada. Sin media nueva: el banner y el backplate congelado son piezas de la carrera, y el lineal es el aviso concurrente del break A."
     }
   ],
-  "_breaks": "Los cuatro duran lo mismo para que el creativo 16:9 de cada campaña sirva de lineal en su break sin recortarse. El primero es el preroll (CUE=\"PRE\", ADR 0100), de 0 a 12 s. Entre los tres de mitad de programa los huecos son iguales, 33 s, y A entra a los 20 s para que la demo lo alcance rápido, 8 s después de que termina el preroll. El último termina en 122 s, bastante antes del corte del programa en 198,0 s (los créditos arrancan en 199,0 s: la medición está en programa._largo).",
+  "_breaks": "Los cuatro duran lo mismo para que el creativo 16:9 de cada campaña sirva de lineal en su break sin recortarse. El primero es el preroll (CUE=\"PRE\", ADR 0100), de 0 a 12 s. Entre los tres de mitad de programa los huecos son iguales, 33 s, y A entra a los 20 s para que la demo lo alcance rápido, 8 s después de que termina el preroll. El último de mitad de programa termina en 122 s, bastante antes del corte del programa en 198,0 s (los créditos arrancan en 199,0 s: la medición está en programa._largo). El quinto es el postroll (CUE=\"POST\", ADR 0101): va después del fin del programa y sólo como lineal.",
 
   "playlists": {
     "interstitial": "content/primary/con-daterange-interstitial.m3u8",
@@ -229,9 +243,9 @@
     "_autoria": "El SVG autorado vive en graphics/campaigns/ y va a git. NO vive en content/, que está gitignoreado por ser lo que un clone reconstruye con un comando: nueve SVG escritos a mano no son eso, y perderlos de git contradice la tesis misma de la fase. La variante de imagen se sirve desde el archivo autorado; la variante de video es salida del puente de la T-05 y sí vive en content/.",
     "_identificador": "El AdIdentifier de cada pieza (SVTA2053, Table 7): `identifiers` identifica al creativo (Table 5), así que cada pieza lleva el suyo y no la campaña. Los dos escritores de asset-lists lo copian tal cual en el `identifiers` del Slot: el de un break del par es el de la pieza de video del break (`breaks[].forma`), y el de un aviso de la carrera, el de su pieza. El esquema es el registro de Ad-ID (`ad-id.org`, el idRegistry del UniversalAdId de VAST). Los valores son ILUSTRATIVOS, con la forma de un Ad-ID (cuatro letras de prefijo, siete caracteres, H de HD), y no están registrados. ADR 0093.",
     "piezas": [
-      { "campana": "zumbra",  "forma": "16x9", "identificador": { "scheme": "ad-id.org", "value": "ZMBR0001000H" },      "svg": "graphics/campaigns/zumbra-16x9.svg",      "video": "content/creatives/zumbra-16x9/d8eabbdae4/index.m3u8",      "usos": ["break-a"] },
-      { "campana": "zumbra",  "forma": "banner", "identificador": { "scheme": "ad-id.org", "value": "ZMBR0002000H" },    "svg": "graphics/campaigns/zumbra-banner.svg",    "video": "content/creatives/zumbra-banner/index.m3u8",    "usos": ["race"] },
-      { "campana": "zumbra",  "forma": "backplate", "identificador": { "scheme": "ad-id.org", "value": "ZMBR0003000H" }, "svg": "graphics/campaigns/zumbra-backplate.svg", "svgFijo": "graphics/campaigns/zumbra-backplate-fijo.svg", "video": "content/creatives/zumbra-backplate/index.m3u8", "usos": ["race"] },
+      { "campana": "zumbra",  "forma": "16x9", "identificador": { "scheme": "ad-id.org", "value": "ZMBR0001000H" },      "svg": "graphics/campaigns/zumbra-16x9.svg",      "video": "content/creatives/zumbra-16x9/d8eabbdae4/index.m3u8",      "usos": ["break-a", "break-post-lineal"] },
+      { "campana": "zumbra",  "forma": "banner", "identificador": { "scheme": "ad-id.org", "value": "ZMBR0002000H" },    "svg": "graphics/campaigns/zumbra-banner.svg",    "video": "content/creatives/zumbra-banner/index.m3u8",    "usos": ["race", "break-post"] },
+      { "campana": "zumbra",  "forma": "backplate", "identificador": { "scheme": "ad-id.org", "value": "ZMBR0003000H" }, "svg": "graphics/campaigns/zumbra-backplate.svg", "svgFijo": "graphics/campaigns/zumbra-backplate-fijo.svg", "video": "content/creatives/zumbra-backplate/index.m3u8", "usos": ["race", "break-post-imagen"] },
       { "campana": "ketrava", "forma": "16x9", "identificador": { "scheme": "ad-id.org", "value": "KTRV0001000H" },      "svg": "graphics/campaigns/ketrava-16x9.svg", "svgFijo": "graphics/campaigns/ketrava-16x9-fijo.svg",      "video": "content/creatives/ketrava-16x9/index.m3u8",      "usos": ["break-b-lineal", "break-pre-lineal"] },
       { "campana": "ketrava", "forma": "banner", "identificador": { "scheme": "ad-id.org", "value": "KTRV0002000H" },    "svg": "graphics/campaigns/ketrava-banner.svg",    "video": "content/creatives/ketrava-banner/index.m3u8",    "usos": ["race", "break-pre"] },
       { "campana": "ketrava", "forma": "backplate", "identificador": { "scheme": "ad-id.org", "value": "KTRV0003000H" }, "svg": "graphics/campaigns/ketrava-backplate.svg", "video": "content/creatives/ketrava-backplate/8d140e0f2b/index.m3u8", "usos": ["break-b"] },

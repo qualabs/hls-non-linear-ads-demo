@@ -6381,3 +6381,28 @@ paquete npm, en un temporal privado.
 - Docs: `docs/integrating-the-library.md`, `docs/contrato-senalizacion-renderizado.md`, README.
 - Tests: 12 nuevos en `test/asset-list-timing.test.js`, con entradas live simuladas. **Sin probar
   contra un live real**: no hay primarios live en el proyecto.
+
+## 2026-10-22 — `CUE="POST"`: nunca no lineal; el lineal después del programa, o nada
+
+Pedido de David por el coordinador (2 de 3): "it should auto fail to the linear ad if defined as a
+standard interstitial, or skip if only non-linear is defined, for VOD"; en live, como hls.js. ADR
+0101.
+
+- **hls.js 1.7.2:** el postroll va en `primaryDuration` (`details.edge`, Infinity en live), su lista
+  se pide en `onBufferedToEnd` y se reproduce en `onMediaEnded`. `BUFFERED_TO_END` sólo sale con la
+  playlist terminada, así que en live no existe hasta el ENDLIST.
+- **"Lineal definido":** en el pane nuestro el interstitials controller está apagado, así que el tag
+  de Apple apareado nunca se reproduce ahí; el lineal es el `URI` del asset-list del tag
+  concurrente, que por el ADR 0090 es la misma lista. Queda como Abierto del ADR 0101 la opción de
+  usar la lista del tag de Apple apareado cuando difiera.
+- **Librería:** `programEnd`, `postRollDue`, `resolvePostRoll` (puras) en `lib/signalling.js`;
+  `provider.postRolls()`; `lib/postroll.js` (nuevo, del lado del renderizado) reproduce los lineales
+  a cuadro entero en el `ended` del primario y reporta con `postroll: true`. El build y
+  `verificar-cortes.mjs` lo incluyen.
+- **`stage-pair`:** break `post` (ZUMBRA, banner, default lineal ZUMBRA 16:9, START-DATE a 186 s)
+  por `stage.json`, `senalizar-contenido.sh` y `escribir-asset-lists.mjs`; playlists y
+  `asset-list-break-post.json` regenerados. `inspect.html` y `index.html` lo nombran como postroll y
+  su salto cae 5 s antes del fin.
+- Docs: `docs/integrating-the-library.md`, `docs/contrato-senalizacion-renderizado.md`, README,
+  README de `stage-pair`.
+- Tests: `test/post-roll.test.js` (16) y un test nuevo en `demo/stage-pair/test/signalled-run.test.js`.

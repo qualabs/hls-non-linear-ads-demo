@@ -145,9 +145,31 @@ const tagsDe = (corrida, brk) => ({
 
 test('hay un break sin default y los otros con, que es lo que David pidió mostrar', () => {
   // ADR 0087. Sin un break de cada tipo, la corrida no muestra las dos salidas de
-  // un aviso que no se puede dibujar. Con el preroll (ADR 0100) son tres con.
+  // un aviso que no se puede dibujar. Con el preroll (ADR 0100) y el postroll
+  // (ADR 0101) son cuatro con.
   assert.equal(SIN_DEFAULT.length, 1, 'un break sin default');
-  assert.equal(CON_DEFAULT.length, 3, 'tres con default');
+  assert.equal(CON_DEFAULT.length, 4, 'cuatro con default');
+});
+
+test('el postroll: CUE="POST" en sus dos tags y en ningún otro, con default, último, y la librería sólo toma su lineal', async () => {
+  // ADR 0101. Los dos clientes lo ponen después del fin del programa; el nuestro
+  // nunca presenta su aviso no lineal ahí, así que sin default no habría nada que
+  // ver y el par dejaría de mostrar lo mismo en los dos panes.
+  const posts = BREAKS.filter((b) => b.cue === 'POST');
+  assert.equal(posts.length, 1, 'un postroll');
+  assert.equal(BREAKS[BREAKS.length - 1], posts[0], 'va último en stage.json');
+  assert.equal(posts[0].lineal, true, 'con default: el lineal es lo único que se presenta');
+  const corrida = run();
+  for (const playlist of [corrida.interstitial, corrida.concurrente]) {
+    const conCue = dateRanges(playlist).filter((t) => /,CUE="POST",/.test(t.line));
+    assert.deepEqual(conCue.map((t) => t.id.split('-')[1]), ['POST'], 'el CUE va sólo en el postroll');
+  }
+  assert.match(corrida.hoja, /break POST .*CUE=POST/);
+  const { resolvePostRoll } = await import('../../../lib/signalling.js');
+  const [lineal, ...resto] = resolvePostRoll(corrida.lista(posts[0].concurrente), { id: 'AD-POST-CONCURRENT', slotStart: 198 });
+  assert.deepEqual(resto, []);
+  assert.equal(lineal.type, 'linear');
+  assert.equal(lineal.elements.find((e) => !e.primary).uri, `/${STAGE.assets.piezas.find((p) => p.campana === posts[0].campana && p.forma === '16x9').video}`);
 });
 
 test('el preroll: CUE="PRE" en sus dos tags y en ningún otro, START-DATE en el origen, con default y antes que todo', () => {
@@ -396,6 +418,11 @@ test('la hoja que el script imprime sale de los archivos y no de sí misma', () 
   const esc = (t) => t.replace(/[./+]/g, '\\$&');
   for (const brk of BREAKS) {
     assert.match(hoja, new RegExp(`t=\\s*${brk.offset}s a\\s*${brk.offset + brk.duracion}s`));
+    // El postroll no ofrece sus opciones: nunca se presentan después del fin (ADR 0101).
+    if (brk.cue === 'POST') {
+      assert.match(hoja, new RegExp(`${esc(brk.concurrente)}\\s+nunca el aviso no lineal`));
+      continue;
+    }
     assert.match(hoja, new RegExp(
       `${esc(brk.concurrente)}\\s+${esc(STAGE.assets.tipos.video)}, luego ${esc(STAGE.assets.tipos.imagen)}; ` +
       (brk.lineal ? 'sin opción que entre, el lineal' : 'sin opción que entre, se saltea')

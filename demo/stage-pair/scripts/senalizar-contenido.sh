@@ -145,6 +145,13 @@ suma() { awk -v a="$1" -v b="$2" 'BEGIN { printf "%s", a + b }'; }
 # todo Date Range. Su tag de Apple sigue la regla de arriba: con default, la
 # forma de reemplazo, así que hls.js reproduce el lineal y retoma el programa en
 # el segundo en que el preroll termina, que es donde está el pane nuestro.
+#
+# EL POSTROLL TAMBIÉN (ADR 0101): `CUE="POST"` en los dos tags, y cada cliente lo
+# pone después del fin del programa y pide su lista cuando el programa está
+# bufereado hasta el fin. El START-DATE se escribe en los últimos segundos del
+# programa porque la spec lo exige y ninguno de los dos lo usa. Su tag de Apple
+# sigue la regla de arriba (con default, sin X-RESUME-OFFSET); después del fin
+# no hay programa que retomar.
 tag_de() { # $1 clase (interstitial|concurrente), $2 id del break, $3 offset, $4 asset-list, $5 lineal ("si" o ""), $6 cue ("PRE" o "")
   local clase=$1 id=$2 offset=$3 lista=$4 lineal=$5 cue=${6:-} start largo retorno="" marca=""
   start=$(date -d "$PDT + $offset seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
@@ -204,8 +211,14 @@ while IFS='|' read -r id offset duracion campana forma lista lineal cue; do
   largo=$(declaracion "$SIGNALLING/$lista" | head -1)
   printf '  break %s  t=%3ss a %3ss  (%ss)  %-22s %s%s\n' \
     "${id^^}" "$offset" "$(suma "$offset" "$largo")" "$largo" "$(leer "formas.$forma.layout")" "$(leer "campanas.$campana.marca")" \
-    "${cue:+  CUE=$cue: los dos clientes piden su lista al cargar}"
-  if [ -n "$lineal" ]; then
+    "$(case "$cue" in
+         PRE) echo '  CUE=PRE: los dos clientes piden su lista al cargar' ;;
+         POST) echo '  CUE=POST: después del fin del programa, sólo como lineal; la lista se pide al bufferear hasta el fin' ;;
+       esac)"
+  if [ "$cue" = POST ]; then
+    printf '      de fábrica   %-26s la parte estándar, a cuadro entero, cuando el programa termina\n' "$lista"
+    printf '      librería     %-26s nunca el aviso no lineal: el lineal cuando el programa termina, o nada\n' "$lista"
+  elif [ -n "$lineal" ]; then
     printf '      de fábrica   %-26s la parte estándar, a cuadro entero: el programa se reemplaza\n' "$lista"
     printf '      librería     %-26s %s; sin opción que entre, el lineal\n' "$lista" "$(medios "$SIGNALLING/$lista")"
   else

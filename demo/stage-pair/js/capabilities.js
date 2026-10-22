@@ -90,6 +90,15 @@ export function describirOpcion(opcion, indice) {
  * to a later option, to the default or to nothing, and `presentado` says that.
  */
 export function desenlace(asset) {
+  // A post-roll (ADR 0101) never presents its non-linear ad: there is no
+  // programme under it after the end. Its options are not even considered.
+  if (asset.postroll) {
+    return asset.outcome === 'skipped'
+      ? 'A post-roll (CUE="POST") with no linear default: a non-linear ad is never presented after the ' +
+        'programme ends, so it is skipped.'
+      : 'A post-roll (CUE="POST"): a non-linear ad is never presented after the programme ends, so it ' +
+        'plays its linear default, full frame, when the programme ends.';
+  }
   const item = asset.items[0];
   const fallaron = item?.discarded.filter((d) => d.failed).length ?? 0;
   const ninguna = fallaron ? 'No option this device can show passed pre-validation' : 'No option fits this device';
@@ -115,6 +124,9 @@ export function desenlace(asset) {
 
 /** A short form of `desenlace`, for a list of requests. */
 export function desenlaceCorto(asset) {
+  if (asset.postroll) {
+    return asset.outcome === 'skipped' ? '→ post-roll, no linear default: skipped' : '→ post-roll: the linear default, after the programme';
+  }
   const item = asset.items[0];
   const fallo = item?.discarded.some((d) => d.failed) ? ' (pre-validation discarded some)' : '';
   if (asset.outcome === 'drawn') {

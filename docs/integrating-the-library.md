@@ -498,10 +498,23 @@ waits for the next playlist update. A preroll is never asked for twice on the
 reloads of a live playlist, and one that first shows up after playback joined
 is not presented, as hls.js never steps back into one. The live path is tested
 on simulated inputs only: there is no live primary in this repository. Both
-concurrent and multi-view Date Ranges can carry it. `CUE="POST"` and
-`CUE="ONCE"` are not acted on: a POST is placed at its START-DATE like any other
-break, and every break, a ONCE one too, is drawn again when the programme is
-sought back into it.
+concurrent and multi-view Date Ranges can carry it.
+
+**A post-roll, `CUE="POST"`, is never drawn as a non-linear ad** (ADR 0101):
+after the programme ends there is nothing to draw over. Its asset-list is asked
+for when hls.js asks for a post-roll's, once the playlist has ended (ENDLIST) and
+the programme is buffered to its end (`BUFFERED_TO_END`, or the media element
+ending); what plays, when the programme ends, is every asset's linear default
+(its `URI` with its `DURATION`), full frame, one after the other, each to the end
+of its asset. An asset without one is skipped, so a post-roll that only carries a
+non-linear ad plays nothing. On a live playlist a post-roll has no place until
+the playlist ends. It takes no time of the programme, so it is not in
+`programRanges()`; it is in `provider.postRolls()`, and `onPresented` and
+`onTracking` report its ads with `postroll: true`. Pressing play or seeking on
+the ended programme takes it off.
+
+`CUE="ONCE"` is not acted on: every break, a ONCE one too, is drawn again when
+the programme is sought back into it.
 
 **And it can also travel to your ad server.** With `sendCapabilities` (the
 default), every asset-list request carries the configured capabilities, one

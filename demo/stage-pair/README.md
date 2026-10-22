@@ -64,7 +64,7 @@ signalling script says exactly that and carries on.
 
 | page | what it is for |
 | --- | --- |
-| [`index.html`](index.html) | **the pair.** Two players, each with its own control and the manifest of its mode, over the same programme, the walk through the three non-linear shapes — side by side, L-shape and banner — over a preroll and three breaks, and the capability switch |
+| [`index.html`](index.html) | **the pair.** Two players, each with its own control and the manifest of its mode, over the same programme, the walk through the three non-linear shapes — side by side, L-shape and banner — over a preroll, three breaks and a post-roll, and the capability switch |
 | [`inspect.html`](inspect.html) | **one player, and the whole exchange in the open**, with the same control as each player of the pair. The Date Range the manifest of its mode carried, the asset-list URL the client asked for with the capability on it, the body that came back, verbatim, and **what the library kept of it**: each option, why it was discarded, and how the break ended. Made to be read out loud in a room with the network tab open |
 | [`race.html`](race.html) | **the ads first, then the multi view window.** Four non-linear ads over a race, eight seconds of clean race, and then a window that offers a catalogue of six on-board cameras for whoever is watching to compose |
 
@@ -120,6 +120,15 @@ draws the KETRAVA banner over the first 12 s of the programme. At 12 s both pane
 second of the programme. `inspect.html` opens on it: card 1 shows the range with `CUE="PRE"` and
 card 2 the request that already went out. The banner video and the still are pieces the demo
 already had: the race's banner and the frozen 16:9.
+
+**The last break is a post-roll** (ADR 0101): its two tags carry `CUE="POST"`, so both clients
+put it after the end of the programme, whatever its START-DATE (186 s, written because the spec
+requires one), and ask for its list when the programme is buffered to its end (hls.js:
+`BUFFERED_TO_END`). A non-linear ad is never presented after the end, so ours ignores the ZUMBRA
+banner the list offers and plays its linear default, ZUMBRA 16:9 full frame, when the programme
+ends: the same thing the off-the-shelf pane plays from the Apple tag. The "break POST" jump lands
+5 s before the end. No new media: the banner and the frozen backplate are race pieces, and the
+linear is break A's ad.
 
 **On a machine where the video creatives are not packaged** (`content/creatives/` missing), every
 video option answers 404, and that is the failover on display: each break shows its still image
