@@ -47,8 +47,8 @@
   gone for twelve seconds; on the right it never stops.
 
   THREE. THE DEVICE'S CAPACITY DEGRADES THE FORMAT OF THE AD, NOT THE AD
-  (ADR 0084). The switch above the pair declares what the device can draw, one
-  axis at a time -- video decoders and images over video (ADR 0086) -- and both
+  (ADR 0084). The switch above the pair sets what the device can draw, the two
+  capabilities `concurrentVideo` and `concurrentImage` (ADR 0094) -- and both
   TRAVEL on the asset-list request. What comes back is the same for every
   device: the ad with its two options, video and image. The library keeps the
   first one the device can show (ADR 0085): video with two decoders, the same
@@ -60,7 +60,7 @@
   lines below. These demos are published as static files in a bucket, so nothing
   can read a query at request time -- and nothing has to: the answer is the same
   file for every device and the choice is made by the Player, which is where the
-  specification puts it (R5.6).
+  specification puts it (SVTA2053 5.3.3).
 
   WHAT EACH ELEMENT IS FOR
   ------------------------
@@ -102,7 +102,7 @@
   <section class="switch" aria-label="About this page">
     <p class="no-server">
       Each player has its own control: the native HLS interstitials client, or this demo&rsquo;s
-      library with the capabilities it declares. There is no ad presentation server behind this
+      library with the capabilities it is configured with. There is no ad presentation server behind this
       page. The capabilities travel on every asset-list request, as such a server would read them,
       and the answer is one static file per break that always carries every option of the ad. What
       decides what is drawn is the library: it keeps the first option the device can show and, when

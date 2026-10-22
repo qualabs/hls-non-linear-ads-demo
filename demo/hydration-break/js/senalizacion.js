@@ -13,6 +13,14 @@
 // is fetched over the network here and the asset-list is fetched from the URL
 // the tag itself carries.
 //
+// AND THE ASSET-LIST IS FETCHED ONLY ONCE THE PLAYER HAS ASKED FOR IT. The
+// player asks when the programme is buffered up to the break, as hls.js does for
+// an interstitial (ADR 0098, ADR 0099), and a page that went and read the list
+// before that would be the request the player does not make. So the tag is
+// printed at once, and the folds wait for the contract to say the break is no
+// longer known only off its tag. Here that is a moment after the page loads,
+// because the break is inside the first forward buffer.
+//
 // WHAT CHANGED IS THAT THE REDUCTION STOPPED BEING A LOSS (ADR 0075). This
 // section used to print a summary of each Ad -- URI, DURATION, type and the list
 // of boxes -- and the hundred lines of the file were nowhere on the page. Now
@@ -379,7 +387,7 @@ function fold(asset, ordinal) {
 function identitiesOf(provider, folds) {
   const ads = adsOfTheMinute(provider);
   if (ads.length === folds) return ads.map((experience) => experience.itemId);
-  if (!provider.programRanges().settled) return null;
+  if (!listsAreIn(provider)) return null;
   console.warn(`[page] the asset-list declares ${folds} assets and the break resolved into ` +
     `${ads.length} Ads, so no fold can be told from another by order alone: the one on screen` +
     ' is not marked.');
@@ -407,6 +415,20 @@ function markTheOneOnScreen({ folds, provider, video }) {
 }
 
 /**
+ * Whether every break's asset-list has been asked for and answered: the
+ * signalling is settled and no range is still the provisional one off its tag.
+ */
+function listsAreIn(provider) {
+  const { ranges, settled } = provider.programRanges();
+  return settled && !ranges.some((range) => range.provisional);
+}
+
+/** Resolves when `listsAreIn`, re-reading the contract, which has no event for it. */
+async function untilTheListsAreIn(provider) {
+  while (!listsAreIn(provider)) await new Promise((r) => setTimeout(r, 200));
+}
+
+/**
  * Draws the section: the tag, its gloss, and one fold per Ad of the asset-list.
  *
  * The gloss of the tag is built here and not left as an empty box in the markup
@@ -425,6 +447,12 @@ export async function showSignalling({ src, tag, mount, payload, provider, video
     if (line) tag.insertAdjacentElement('afterend', glossOfTag(line));
 
     const url = line?.match(/X-ASSET-LIST="([^"]+)"/)?.[1];
+    if (url) {
+      mount.replaceChildren(el('p', 'note', 'The asset-list is requested when the programme is ' +
+        'buffered up to the break, as hls.js does for an interstitial. It appears here once the ' +
+        'player has asked for it.'));
+      await untilTheListsAreIn(provider);
+    }
     const assetList = url ? await fetch(url).then((r) => r.json()) : null;
     const assets = assetList?.ASSETS;
     if (!Array.isArray(assets) || assets.length === 0) {

@@ -38,7 +38,11 @@
 // same for every device, and the library keeps the first one the declared
 // capability satisfies. What is drawn in that card is the report the library
 // hands `onResolved`, so the page shows what the library did and not what this
-// file thinks it should have done.
+// file thinks it should have done. Since ADR 0097 it is two reports: what the
+// signalling HANDED the renderer, in order (`onResolved`), and what the
+// renderer actually PRESENTED after any option failed to load on screen
+// (`onPresented`). The "Pre-validate assets" switch (off, the library's default)
+// adds the up-front check, and its requests appear in the same card.
 //
 // ============================================================================
 // WHY THE SWITCH REBUILDS AND THE JUMP DOES NOT
@@ -63,11 +67,12 @@
 import { traceContract } from './contract-trace.js';
 import { createStockPlayer } from './stock-player.js';
 import {
-  PARAMETROS, breakDelReporte, crearControlDePane, desenlace, describirOpcion, leerModo, escribirModo
+  PARAMETROS, breakDelReporte, crearControlDePane, desenlace, describirOpcion, leerModo, escribirModo,
+  presentado
 } from './capabilities.js';
 
 // The one source of the numbers of this demo (ADR 0044). The axes of the
-// switch, the playlist and the three breaks all come from here; not one of them
+// switch, the playlist and the breaks all come from here; not one of them
 // is typed in this file.
 const stage = await (await fetch('/stage.json')).json();
 
@@ -185,6 +190,19 @@ const breakDeLaUrl = (url) => url.match(/asset-list-(?:break|linear)-([a-z0-9]+)
 /** break id -> what the library kept of the answer, as `onResolved` reported it. */
 const selecciones = new Map();
 
+/** break id -> what the renderer actually presented, as `onPresented` reported it (ADR 0097). */
+const presentados = new Map();
+
+/**
+ * PRE-VALIDATION, THE ONE TOGGLE THIS PAGE ADDS, and it starts OFF because that
+ * is the library's default (ADR 0097): with it off nothing is requested up
+ * front and the renderer's failover, which is always on, is what keeps a dead
+ * option off the screen. With it on, the first request for the assets of each
+ * break's options goes out when its list arrives, and card 4 shows the ones it
+ * discarded. It travels in the URL as `?prevalidar=1`, like the mode.
+ */
+let prevalidar = new URLSearchParams(location.search).get('prevalidar') === '1';
+
 const vistas = new Set();
 
 async function anotarPedido(href) {
@@ -227,7 +245,7 @@ function resumenDeLaRespuesta(cuerpo) {
   }
   const assets = Array.isArray(lista?.ASSETS) ? lista.ASSETS : [];
   const items = assets.flatMap((a) => a?.['X-AD-CREATIVE-SIGNALING']?.payload ?? []);
-  const opciones = items.flatMap((i) => (Array.isArray(i?.options) ? i.options : [i]));
+  const opciones = items.flatMap((i) => (Array.isArray(i?.layoutOptions) ? i.layoutOptions : [i]));
   const cajas = opciones.flatMap((o) => o?.layout?.assets ?? []);
   const partes = [`${assets.length} asset${assets.length === 1 ? '' : 's'}`];
   partes.push(`${opciones.length} option${opciones.length === 1 ? '' : 's'}`);
@@ -281,7 +299,12 @@ function pintarIntercambio() {
   // Move 2: the URL that went out, with the parameter picked out of it.
   dom.request.replaceChildren();
   if (!traza) {
-    dom.request.append(el('span', 'none', 'no request for this break has gone out yet'));
+    // On demand (ADR 0098): the list goes out when the programme is buffered up
+    // to the break, or played or sought into it, so a break ahead is not asked
+    // for yet. That is the rule of hls.js, and not this page being slow.
+    dom.request.append(el('span', 'none', vivo?.modo === 'nativo'
+      ? 'no request for this break has gone out yet'
+      : 'no request for this break yet: the list goes out when the programme is buffered up to it, as hls.js does'));
   } else {
     dom.request.append(el('span', 'request__path', traza.url.pathname));
     const nombres = vivo?.modo === 'nativo' ? [...traza.url.searchParams.keys()] : Object.values(PARAMETROS);
@@ -298,7 +321,7 @@ function pintarIntercambio() {
   // made up: the card says what that client does instead.
   if (vivo?.modo === 'nativo') {
     dom.filter.replaceChildren(el('li', 'none',
-      'Native HLS interstitials: no capabilities are declared and there are no options to filter.'));
+      'Native HLS interstitials: no capabilities are configured and there are no layoutOptions to filter.'));
     dom.outcome.dataset.outcome = 'native';
     dom.outcome.textContent = mostrado.lineal
       ? 'hls.js plays the Apple-class interstitial of this break as it is, full frame, replacing the programme.'
@@ -310,27 +333,52 @@ function pintarIntercambio() {
   if (vivo?.modo === 'nativo') {
     // already said above
   } else if (!asset) {
-    dom.filter.replaceChildren(el('li', 'none', 'the library has not resolved this break yet'));
+    dom.filter.replaceChildren(el('li', 'none', 'the library has not resolved this break yet: its list is requested when the programme is buffered up to it'));
     dom.outcome.textContent = '';
   } else {
     const item = asset.items[0];
+    // Two reports and two moments: what the signalling HANDED OVER, in order
+    // (`onResolved`), and what the renderer PRESENTED after any option failed
+    // to load on screen (`onPresented`, ADR 0097).
+    const reporte = presentados.get(mostrado.id);
+    const enPantalla = new Map((reporte?.attempts ?? []).filter((a) => !a.linear).map((a) => [a.index, a]));
+    const mostrada = reporte?.presented && !reporte.presented.linear ? reporte.presented.index : null;
+    const orden = item?.order ?? (item?.chosen != null ? [item.chosen] : []);
     dom.filter.replaceChildren(...(item?.offered ?? []).map((opcion, i) => {
       const descarte = item.discarded.find((d) => d.index === i);
-      const veredicto = descarte ? 'discarded' : i === item.chosen ? 'kept' : 'not-reached';
+      const fallo = enPantalla.get(i);
+      let veredicto = 'not-reached';
+      let porque = 'Not handed over: it does not fit this device, or it is not needed.';
+      if (descarte) {
+        veredicto = 'discarded';
+        porque = descarte.failed ? `Discarded by pre-validation: it ${descarte.reason}.` : `Discarded: it ${descarte.reason}.`;
+      } else if (fallo) {
+        veredicto = 'discarded';
+        porque = `Failed on screen: it ${fallo.reason}${fallo.late ? ', after its window had opened' : ''}. The renderer took it down and mounted the next.`;
+      } else if (i === mostrada) {
+        veredicto = 'kept';
+        porque = `On screen: its assets loaded${reporte.attempts.length ? ' after the ones before it failed' : ''}.`;
+      } else if (orden[0] === i) {
+        veredicto = 'kept';
+        porque = reporte
+          ? 'Handed first.'
+          : 'Handed first: this device can show it. Whether its assets load is known when the renderer mounts it.';
+      } else if (orden.includes(i)) {
+        veredicto = 'queued';
+        porque = 'Handed next: the renderer mounts it if the ones before it fail to load.';
+      }
       const li = el('li', 'filter__option');
       li.dataset.verdict = veredicto;
-      li.append(
-        el('p', 'filter__what', describirOpcion(opcion, i)),
-        el('p', 'filter__why', descarte
-          ? `Discarded: it ${descarte.reason}.`
-          : veredicto === 'kept'
-            ? 'Kept: this device can show it, and it is the first that fits.'
-            : 'Not checked: an earlier option was kept.')
-      );
+      li.append(el('p', 'filter__what', describirOpcion(opcion, i)), el('p', 'filter__why', porque));
       return li;
     }));
-    dom.outcome.dataset.outcome = asset.outcome;
-    dom.outcome.textContent = desenlace(asset);
+    const pre = seleccion.preValidation?.enabled
+      ? `Pre-validation ON (${seleccion.preValidation.method}): ${seleccion.requests.length} first request${seleccion.requests.length === 1 ? '' : 's'} made. `
+      : 'Pre-validation OFF: nothing requested up front. ';
+    dom.outcome.dataset.outcome = reporte
+      ? (reporte.outcome === 'skipped' ? 'skipped' : reporte.presented.linear ? 'default' : 'drawn')
+      : asset.outcome;
+    dom.outcome.textContent = `${pre}${desenlace(asset)}${reporte ? ` ${presentado(reporte)}` : ''}`;
   }
 
   // Move 3: the body of that same URL, verbatim.
@@ -346,9 +394,12 @@ function pintarIntercambio() {
 function mostrarBreak(brk) {
   if (mostrado?.id === brk.id) return;
   mostrado = brk;
+  // A preroll (ADR 0100) is said as one: both clients ask for its list at load,
+  // before play, which is what move 2 shows the moment the page opens.
   dom.which.textContent =
     `Break ${brk.id.toUpperCase()} of ${stage.breaks.length} · t = ${brk.offset}s to ` +
     `${brk.offset + brk.duracion}s · ${stage.campanas[brk.campana].marca} · ` +
+    (brk.cue === 'PRE' ? 'preroll, CUE="PRE": its list is asked for at load · ' : '') +
     (brk.lineal ? 'with a linear default' : 'no default: content that is not interrupted');
   pintarIntercambio();
 }
@@ -432,11 +483,14 @@ function armar(config, retomarEn = 0) {
   dom.pane.classList.toggle('pane-demo', config.modo === 'ours');
   dom.pane.classList.toggle('pane-stock', config.modo === 'nativo');
   control?.pintar(config);
+  // Pre-validation is a setting of our library; the native client has none.
+  grupoPre.hidden = config.modo !== 'ours';
   if (config.modo === 'nativo') { armarNativo(retomarEn); return; }
   const capacidades = config.capacidades;
   derribar();
   intercambio.clear();
   selecciones.clear();
+  presentados.clear();
   vistas.clear();
   mostrado = null;
   leerRangos(SRC.ours).then(pintarIntercambio);
@@ -451,9 +505,20 @@ function armar(config, retomarEn = 0) {
   const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
   const concurrent = QualabsConcurrentHls.attach(hls, {
     container: player,
-    // What the device can draw, one axis at a time (ADR 0086). It travels on
-    // the request AND the library filters the options of every ad against it.
+    // What the device can draw, `{ concurrentVideo, concurrentImage }` (ADR
+    // 0094). The library filters the layoutOptions of every ad against it, and
+    // with `sendCapabilities` it also travels on the request, which is the
+    // exchange this page shows.
     capabilities: capacidades,
+    sendCapabilities: true,
+    // Off by default, and this page starts with the default (ADR 0097); the
+    // toggle above the player turns it on.
+    preValidateAssets: prevalidar,
+    // Which option the renderer actually put on screen, after any failover.
+    onPresented: (reporte) => {
+      presentados.set(breakDelReporte(reporte), reporte);
+      pintarIntercambio();
+    },
     onResolved: (experiences, seleccion) => {
       for (const e of experiences) {
         console.log(`[page] resolved ${e.type}#${e.itemId}: ${e.elements.length} elements,` +
@@ -481,7 +546,7 @@ function armar(config, retomarEn = 0) {
     const off = hls.interstitialsManager == null;
     dom.hud.textContent =
       `hls.js ${Hls.version} · interstitials manager: ${off ? 'none' : 'PRESENT'} · ` +
-      `capabilities: ${JSON.stringify(capacidades)} · playing ${SRC.ours}`;
+      `capabilities: ${JSON.stringify(capacidades)} · pre-validation ${prevalidar ? 'on' : 'off'} · playing ${SRC.ours}`;
   });
 
   video.muted = true;
@@ -489,7 +554,8 @@ function armar(config, retomarEn = 0) {
 
   /** The live line under the picture, read off the contract and nothing else. */
   function pintar() {
-    const activas = concurrent.provider.activeAt(video.currentTime);
+    // What is ON SCREEN, after the renderer's failover (ADR 0097).
+    const activas = concurrent.presentedAt(video.currentTime);
     dom.pane.dataset.state = activas.length ? 'ad' : 'primary';
     // A linear default declares no medium of its own: it is the asset's `URI`
     // played full frame (ADR 0019), so it is named for what it is.
@@ -533,6 +599,8 @@ function armar(config, retomarEn = 0) {
     },
     stage,
     get selecciones() { return Object.fromEntries(selecciones); },
+    get presentados() { return Object.fromEntries(presentados); },
+    get prevalidar() { return prevalidar; },
     get modo() { return vivo.modo; },
     armar: (config, retomarEn) => armar(config, retomarEn),
     irA: (segundo) => buscar(segundo)
@@ -555,6 +623,7 @@ function armarNativo(retomarEn = 0) {
   derribar();
   intercambio.clear();
   selecciones.clear();
+  presentados.clear();
   vistas.clear();
   mostrado = null;
   leerRangos(SRC.nativo).then(pintarIntercambio);
@@ -606,6 +675,30 @@ control = crearControlDePane({
   inicial: leerModo(location.search, stage),
   alCambiar: (config) => armar(config, vivo ? vivo.programa.currentTime : 0)
 });
+
+// The pre-validation toggle, in the same row and with the same buttons as the
+// axes. Like the axes, it rebuilds the player: the library reads it once.
+const grupoPre = el('div', 'axis');
+grupoPre.setAttribute('role', 'group');
+grupoPre.setAttribute('aria-label', 'Pre-validation of assets');
+const botonesPre = [false, true].map((valor) => {
+  const b = el('button', 'step', valor ? 'on' : 'off');
+  b.type = 'button';
+  b.addEventListener('click', () => {
+    if (prevalidar === valor) return;
+    prevalidar = valor;
+    const q = new URLSearchParams(location.search);
+    if (valor) q.set('prevalidar', '1'); else q.delete('prevalidar');
+    history.replaceState(null, '', `${location.pathname}?${q}`);
+    pintarPre();
+    if (configActual?.modo === 'ours') armar(configActual, vivo ? vivo.programa.currentTime : 0);
+  });
+  return b;
+});
+const pintarPre = () => botonesPre.forEach((b, i) => b.setAttribute('aria-pressed', String(prevalidar === (i === 1))));
+grupoPre.append(el('span', 'axis-label', 'Pre-validate assets'), ...botonesPre);
+document.getElementById('steps').append(grupoPre);
+pintarPre();
 
 // With our library a jump is a seek and not a rebuild: the programme is never
 // stopped, so the seek lands. In native mode it rebuilds, as index.html does.

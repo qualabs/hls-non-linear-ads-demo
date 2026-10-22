@@ -7,8 +7,8 @@
 // illustration of a playlist, which is worth nothing to an audience that reads playlists for
 // a living.
 //
-// AND IT IS FETCHED A SECOND TIME ON PURPOSE, rather than asking the library for what it
-// already has. What the library hands over is the contract -- resolved experiences, with the
+// AND IT IS FETCHED A SECOND TIME ON PURPOSE, after the player has fetched it, rather than
+// asking the library for what it already has. What the library hands over is the contract -- resolved experiences, with the
 // two defaults of the tool already applied -- and the point of this section is the document
 // BEFORE that happened. Asking the provider would show the reading and call it the source.
 //
@@ -84,66 +84,99 @@ function tagNode(line) {
   return node;
 }
 
+/**
+ * Resolves when the player has asked for the asset-list of the break `id` and the
+ * answer is in: its range on the contract is no longer the provisional one off its
+ * tag, or it left the contract because the list resolved into nothing or could not
+ * be read. The contract has no event for it, so it is re-read.
+ */
+function untilAskedFor(provider, id) {
+  let seen = false;
+  return new Promise((resolve) => {
+    const check = () => {
+      const range = provider.programRanges().ranges.find((r) => r.id === id);
+      if (range) seen = true;
+      if ((range && !range.provisional) || (seen && !range)) return resolve();
+      setTimeout(check, 200);
+    };
+    check();
+  });
+}
+
 export function showSignalling({ src, provider, video, tags, payload, assets }) {
   let folds = [];
 
+  // The gloss is drawn off the offer of this run, at its four levels. If no asset-list of
+  // this playlist announces a catalogue there is nothing to explain, and the container
+  // stays empty rather than explaining a shape the reader cannot see.
+  // Drawn as the lists arrive, off the first one that carries a catalogue, which is
+  // the first in the run; `true` once drawn.
+  function gloss(list) {
+    const offer = list?.ASSETS?.[0];
+    if (!Array.isArray(offer?.['X-AD-CREATIVE-SIGNALING']?.payload?.[0]?.views)) return false;
+    const block = offer['X-AD-CREATIVE-SIGNALING'];
+    const item = block.payload[0];
+    payload.replaceChildren(
+      el('p', 'payload__lede',
+        'The block of the offer, field by field, read off the asset-list this player ' +
+        'fetched — the same document that is open in the fold below. What is worth looking ' +
+        'for is what is NOT in it: a camera carries no viewport, no zDepth and no volume. ' +
+        'Where a box goes depends on how many cars somebody is watching at once, and nobody ' +
+        'knew that when the race was packaged.'),
+      levelOf('the asset', offer, GLOSS.asset),
+      levelOf('the block', block, GLOSS.block),
+      levelOf('the item', item, GLOSS.item),
+      levelOf('one camera of the catalogue', item.views[0], GLOSS.view)
+    );
+    return true;
+  }
+
   fetch(src)
     .then((response) => response.text())
-    .then(async (playlist) => {
+    .then((playlist) => {
       const lines = playlist.split('\n').filter((line) => line.startsWith('#EXT-X-DATERANGE:'));
       if (!lines.length) throw new Error('the playlist carries no Date Range');
       tags.replaceChildren(...lines.map(tagNode));
 
-      // One fold per tag, in the order of the playlist, each one carrying the document that
-      // tag points at. The fetch is what the library does, at the URL the tag declares,
-      // resolved against the playlist so a relative X-ASSET-LIST works the same way here as
+      // One fold per tag, in the order of the playlist, each one carrying the
+      // document that tag points at, fetched at the URL the tag declares, resolved
+      // against the playlist so a relative X-ASSET-LIST works the same way here as
       // it does there.
-      const documents = await Promise.all(lines.map(async (line) => {
+      //
+      // AND FETCHED ONLY ONCE THE PLAYER HAS ASKED FOR IT. The player asks for a
+      // break's list when the programme is buffered up to the break, as hls.js does
+      // for an interstitial (ADR 0098, ADR 0099); a page that read every list at load
+      // would be making the request the player does not make. So each fold is there
+      // from the start and fills in when its break's list is in.
+      let glossed = false;
+      folds = lines.map((line) => {
         const id = line.match(/ID="([^"]+)"/)?.[1] ?? '(no ID)';
         const url = line.match(/X-ASSET-LIST="([^"]+)"/)?.[1];
-        if (!url) return { id, url: null, list: null };
-        const absolute = new URL(url, new URL(src, location.href)).href;
-        try {
-          return { id, url: absolute, list: await fetch(absolute).then((r) => r.json()) };
-        } catch (error) {
-          console.error('[page] the asset-list of', id, 'could not be read', absolute, error);
-          return { id, url: absolute, list: null };
-        }
-      }));
-
-      folds = documents.map(({ id, url, list }) => {
+        const absolute = url ? new URL(url, new URL(src, location.href)).href : null;
         const fold = el('details', 'asset');
         const summary = el('summary', null, id);
-        summary.append(el('span', 'asset__url', url ?? 'no X-ASSET-LIST'));
+        summary.append(el('span', 'asset__url', absolute ?? 'no X-ASSET-LIST'));
         summary.append(el('span', 'asset__live', 'open now'));
-        fold.append(summary);
-        fold.append(el('pre', 'code',
-          list ? JSON.stringify(list, null, 2) : 'the asset-list could not be read'));
+        const code = el('pre', 'code', absolute
+          ? 'Not requested yet: the player asks for this asset-list when the programme is ' +
+            'buffered up to its break, as hls.js does for an interstitial.'
+          : 'no X-ASSET-LIST on the tag');
+        fold.append(summary, code);
+        if (absolute) {
+          untilAskedFor(provider, id).then(async () => {
+            let list = null;
+            try {
+              list = await fetch(absolute).then((r) => r.json());
+            } catch (error) {
+              console.error('[page] the asset-list of', id, 'could not be read', absolute, error);
+            }
+            code.textContent = list ? JSON.stringify(list, null, 2) : 'the asset-list could not be read';
+            if (!glossed) glossed = gloss(list);
+          });
+        }
         return { id, node: fold };
       });
       assets.replaceChildren(...folds.map((fold) => fold.node));
-
-      // The gloss is drawn off the offer of this run, at its four levels. If no asset-list of
-      // this playlist announces a catalogue there is nothing to explain, and the container
-      // stays empty rather than explaining a shape the reader cannot see.
-      const offer = documents
-        .map(({ list }) => list?.ASSETS?.[0])
-        .find((asset) => Array.isArray(asset?.['X-AD-CREATIVE-SIGNALING']?.payload?.[0]?.views));
-      if (!offer) return;
-      const block = offer['X-AD-CREATIVE-SIGNALING'];
-      const item = block.payload[0];
-      payload.replaceChildren(
-        el('p', 'payload__lede',
-          'The block of the offer, field by field, read off the asset-list this player ' +
-          'fetched — the same document that is open in the fold below. What is worth looking ' +
-          'for is what is NOT in it: a camera carries no viewport, no zDepth and no volume. ' +
-          'Where a box goes depends on how many cars somebody is watching at once, and nobody ' +
-          'knew that when the race was packaged.'),
-        levelOf('the asset', offer, GLOSS.asset),
-        levelOf('the block', block, GLOSS.block),
-        levelOf('the item', item, GLOSS.item),
-        levelOf('one camera of the catalogue', item.views[0], GLOSS.view)
-      );
     })
     .catch((error) => {
       // A section that cannot load is not a reason to lose the demo, and an empty container is

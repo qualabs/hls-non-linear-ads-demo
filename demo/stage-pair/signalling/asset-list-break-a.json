@@ -15,7 +15,7 @@
                 "value": "ZMBR0001000H"
               }
             ],
-            "options": [
+            "layoutOptions": [
               {
                 "type": "squeezebackDoubleBox",
                 "layout": {

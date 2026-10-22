@@ -331,8 +331,8 @@ derived from it rather than written beside it — `MAX_BOXES` in
 `lib/signalling.js`.
 
 **A full grid is that many video decoders playing at once**, which is exactly the
-number `capabilities.videoDecoders` exists to tell your ad server before it picks
-what to send (§6). The filter of §6 applies to the options of an ad and not to a
+number `capabilities.concurrentVideo` exists to tell your ad server before it picks
+what to send (§6). The filter of §6 applies to the layoutOptions of an ad and not to a
 catalogue: nothing here refuses an offer over it, and what to offer a device is
 the server's decision.
 
@@ -353,8 +353,8 @@ The global is `QualabsConcurrentHls`, and this is all of it:
 | --- | --- |
 | `VERSION` | the library's version, a string |
 | `CONCURRENT_CLASS` | `'com.qualabs.hls.concurrentInterstitial'`, the Date Range class of a concurrent ad |
-| `VIDEO_DECODERS_PARAM` | `'sgai-video-decoders'`, the query parameter `capabilities.videoDecoders` travels in |
-| `IMAGE_OVER_VIDEO_PARAM` | `'sgai-image-over-video'`, the query parameter `capabilities.imageOverVideo` travels in |
+| `VIDEO_DECODERS_PARAM` | `'sgai-video-decoders'`, the query parameter `capabilities.concurrentVideo` travels in |
+| `IMAGE_OVER_VIDEO_PARAM` | `'sgai-image-over-video'`, the query parameter `capabilities.concurrentImage` travels in, as 1 or 0 |
 | `hlsConfig` | the configuration your instance has to be built with (§2.1) |
 | `attach(hls, options)` | turns the concurrent experience on, and returns a handle |
 | `attachControls(video, options)` | draws the chrome on a player, with nothing else turned on |
@@ -373,66 +373,162 @@ out, with no name to check itself against.
 | --- | --- | --- |
 | `container` | **required** | the box the composition lives in, and the element that goes fullscreen. The media element has to be inside it |
 | `video` | optional | only if the media element is not the one the instance is attached to |
-| `onResolved` | optional | called with the experiences of each asset-list as they resolve, and with what the capability filter did with that break. A hook for your own logging; nothing depends on it |
-| `onTracking` | optional | called when an ad goes on screen and when it leaves it: `{ type: 'slotStart' \| 'slotEnd', time, id, itemId, experienceType, startTime, duration, identifiers }`. `identifiers` are the AdIdentifiers of the ad's Slot (`{ scheme, value }`, an Ad-ID for instance), so this is where a beacon goes out or an impression is counted. A seek out of an ad ends it and a seek into one starts it, at the second of the seek. A callback that throws is reported and does not stop playback |
+| `onResolved` | optional | called with the experiences of each asset-list as they resolve, and with what the capability filter and pre-validation did with that break: per item, what was discarded and why and the `order` the rest were handed to the renderer in; the `fallback` handed as last resort; every first request made (`requests`, with its `method`); and `preValidation: { enabled, method }`. It says what was HANDED OVER, not what was shown. A hook for your own logging; nothing depends on it |
+| `onPresented` | optional | called once per ad when it is known which option was actually on screen, after the renderer's failover (ADR 0097): `{ id, itemId, outcome: 'presented' \| 'skipped', presented: { index, type, linear } \| null, attempts, late, lateBy }`. `index` is the option's place in the ad's `layoutOptions` (`null` for the linear default); `attempts` are the presentations that failed to load before it, each `{ index, type, linear, uri, reason, late }`, with `reason` a readable sentence such as `failed to load /ad.m3u8 (HTTP 404)`; `late` says the one presented was mounted after its window had opened, by `lateBy` seconds. A callback that throws is reported and does not stop playback |
+| `onTracking` | optional | called when an ad goes on screen and when it leaves it: `{ type: 'slotStart' \| 'slotEnd', time, id, itemId, experienceType, startTime, duration, identifiers }`. `identifiers` are the AdIdentifiers of the ad's Slot (`{ scheme, value }`, an Ad-ID for instance), so this is where a beacon goes out or an impression is counted. A seek out of an ad ends it and a seek into one starts it, at the second of the seek. It counts what is on screen: an ad skipped because nothing of it loaded fires nothing, and an ad whose linear default played fires with `experienceType: 'linear'`. A callback that throws is reported and does not stop playback |
 | `logo` | optional | `{ src, alt }` — your own mark, drawn inside the container (§7) |
-| `capabilities` | optional | `{ videoDecoders, imageOverVideo }`: what the device can draw. It travels to your ad server on the asset-list request, and the options of every ad are filtered against it before anything is drawn |
+| `capabilities` | optional | `{ concurrentVideo, concurrentImage }`: what the device can draw. The layoutOptions of every ad are filtered against it before anything is drawn |
+| `sendCapabilities` | optional, default `true` | whether `capabilities` also travels to your ad server on the asset-list request. Set it to `false` where your privacy policies do not allow sending it |
+| `preValidateAssets` | optional, default `false` | whether the first request for the assets of each ad's options is also made up front, when the break's asset-list is resolved, so that an option whose asset does not answer never reaches the renderer. It only discards: the failover is the renderer's, always on. Off by default because with a real ad decisioning service an extra request per asset can be time-sensitive and costly |
+| `preValidateMethod` | optional, `'GET'` (default) or `'HEAD'` | the method of that request for a playlist or a file; an image is always checked by loading it as an image. In `'HEAD'`, a 405 or 501 is retried with GET, and a 403 is not — see the signed-URL trap below. Any other value is warned about and is `'GET'` |
 
 Anything else you pass is ignored. `attach` throws a `TypeError` on a missing
 instance or a missing container, and those are the only two things it throws
 for.
 
-### `capabilities`, the parameters it becomes, and the filter
+### `capabilities`, the filter, and the parameters it can become
 
 ```js
 QualabsConcurrentHls.attach(hls, {
   container,
-  capabilities: { videoDecoders: 1, imageOverVideo: true }
+  capabilities: { concurrentVideo: 1, concurrentImage: true },
+  sendCapabilities: true,      // default
+  preValidateAssets: false,    // default: no up-front request per asset
+  preValidateMethod: 'GET',    // default, used only when preValidateAssets is true
+  onResolved: (experiences, selection) => {},  // what was handed to the renderer
+  onPresented: (report) => {}                  // what was actually on screen
 });
 ```
 
-Two axes, each on its own, because device capability has more than one and a
-single number would have to name a class of device instead (R29.1 of the
-specification):
+The two properties are the ones SVTA2053 (5.3.3, "Device capabilities") requires
+the configuration of the library to hold, and each one is on its own:
 
-| axis | value | what it says |
+| capability | value | what it says |
 | --- | --- | --- |
-| `videoDecoders` | a whole number above zero | how many video streams the device decodes and composes at the same time, **the programme included**: a device that can show one ad video beside the programme declares 2 |
-| `imageOverVideo` | `true` / `false` | whether it can draw an image over the video |
+| `concurrentVideo` | a whole number above zero | how many video decoders are available to decode and compose video at the same time, **the one of the programme included**: a device that can show one ad video beside the programme sets 2 |
+| `concurrentImage` | `true` / `false` | whether the device can composite an image over video |
 
-**It is used twice.** Every asset-list request carries it, one parameter per
-axis:
+**The library always filters with it.** An item of the payload carries
+`layoutOptions`, an ordered list of `{ type, layout }`, and the library keeps the
+first one the capabilities fit: an option needs one decoder for the programme
+plus one per element that is not an image, which may not exceed
+`concurrentVideo`, and if it has an image element it needs `concurrentImage` to
+be true. An item with no `layoutOptions` and its layout directly in the slot, the
+form the SVTA Layout Controller emits, is one option.
+
+**Fitting also means loading, and the renderer makes sure of it.** Every option
+that fits is handed to the renderer, in order, with the asset's `URI` behind them
+as the linear default. The renderer mounts the first one a few seconds before its
+window; if the first load of one of its assets fails — an HTTP error status such
+as 404 on the playlist its `uri` references, the image not loading, a network
+error, or no answer in 10 s — it takes the whole option down and mounts the next
+one, then the linear default, then nothing, and the programme goes on alone
+(SVTA2053 5.3.3, "Asset load failure"). This failover is always on. Only the
+first load counts: a segment that fails later, while the ad is on screen, is a
+playback error of that ad and does not change the option. A 404 is answered in
+milliseconds, so the switch happens inside the preload and nobody sees it; a
+failure that only arrives after the window has opened (a server that never
+answers, or a seek into the ad) mounts the next option late, at the second of
+its window the programme is at, with no fade. `onPresented` tells you which
+option ended up on screen, and why the ones before it did not.
+
+**Pre-validation is optional, and off by default.** With `preValidateAssets:
+true`, the library also makes the first request for the assets of the first
+option that fits when the break's asset-list is resolved, and leaves out of the
+list any option whose request failed, asking for the next one; with no option
+left, it asks for the linear default, and skips the asset if that fails too.
+That is its only effect: the renderer's failover still runs. It costs one
+request per asset before the break, which with a real ad decisioning service can
+be time-sensitive and costly, and that is why the library makes none unless you
+ask. Your asset hosts then have to answer those requests the way they answer the
+player library: a playlist is fetched with CORS, an image is loaded the way an
+`<img>` loads it.
+
+**`preValidateMethod` and the signed-URL trap.** A playlist or a file is
+requested with GET by default, the request the player itself makes; the body is
+dropped as soon as the status arrives. With `'HEAD'`, a 405 or 501 answer (a
+server that does not implement HEAD) is retried with GET. **A 403 is not
+retried**, and that is the trap: S3 and CloudFront presigned URLs are signed for
+one method, so a HEAD on a URL signed for GET is answered 403 although the asset
+is there — with HEAD, every option would be discarded. If your assets are served
+from signed URLs, keep GET.
+
+> **To revisit (open point of ADR 0097).** GET vs HEAD is not settled. Other
+> implementations may point at very large files — a progressive MP4 of the whole
+> ad — where a GET pre-validation is costly. This library cancels the body once
+> the status arrives, which limits the bytes but still opens the transfer, and an
+> implementation outside a browser may not cancel it at all. The alternatives to
+> evaluate are HEAD, with the trap above, and a GET with `Range: bytes=0-0`.
+
+The report of the filter — what was offered, what was discarded and why (a
+failed first request names its URI and error), the order the rest were handed
+over in, how the asset was handed over, and every first request made, in
+`requests` — is the second argument of `onResolved`.
+
+**When the asset-list is requested.** On demand, with the rule hls.js
+applies to an interstitial's `X-ASSET-LIST` (ADR 0098): when the programme is
+buffered up to the start of the break — about the length of the forward buffer
+ahead — or when it is played or sought into it. A seek into a break asks for its
+list right there, and the ad is drawn when it arrives; the programme does not
+stop. Until then the break is on `programRanges()` already, marked
+`provisional`, with the length its tag declares, and it is replaced by the range
+of what the list resolved into. There is no option to request them all up front
+(ADR 0099): the library stays with hls.js. A page that wants every break on a
+timeline of its own before the lists arrive reads it where hls.js leaves it, in
+the Date Ranges of the level details (`details.dateRanges`, each with its
+`startTime` and its `plannedDuration` or `duration`), or off `programRanges()`,
+where those breaks already are, `provisional`.
+
+"Buffered up to the break" steps over a hole smaller than 0.1 s, hls.js's own
+default `maxBufferHole`, between the playhead and the buffer ahead (ADR 0099).
+The first buffered range of a packaged programme rarely starts at exactly 0 —
+0.067 s here — so without it a page paused at 0 would not ask for a break that
+is already inside its buffer until the viewer pressed play.
+
+**A preroll, `CUE="PRE"`, is asked for at load** (ADR 0100), as hls.js does
+with an interstitial preroll: as soon as the playlist and the media element are
+there, paused or not and with nothing buffered. Its START-DATE is not where it
+goes: it sits where playback begins, the `startPosition` the player was given
+or 0, for the length its asset-list declares, over the programme. Both
+concurrent and multi-view Date Ranges can carry it. `CUE="POST"` and
+`CUE="ONCE"` are not acted on: a POST is placed at its START-DATE like any other
+break, and every break, a ONCE one too, is drawn again when the programme is
+sought back into it.
+
+**And it can also travel to your ad server.** With `sendCapabilities` (the
+default), every asset-list request carries the configured capabilities, one
+parameter per capability:
 
 ```
 GET /signalling/asset-list-break-a.json?sgai-video-decoders=1&sgai-image-over-video=1
 ```
 
-and your ad server SHOULD use it to answer only what the device can show. Then,
-whatever the server answered, **the library checks again before drawing**. An
-item of the payload may carry `options`, an ordered list of `{ type, layout }`,
-and the library keeps the first one the capability satisfies (R5.6): an option
-needs one decoder for the programme plus one per element that is not an image,
-and needs images if it has an image element. When no option is left, the break
-plays the asset's own `URI` full frame as its linear default, or is skipped when
-the asset has none. The report of that step — what was offered, what was
-discarded and why, and how the break ended — is the second argument of
-`onResolved`.
+`sgai-video-decoders` carries `concurrentVideo`, and `sgai-image-over-video`
+carries 1 when `concurrentImage` is true and 0 when it is false. Your ad server
+SHOULD use them to answer only what the device can show; whatever it answers, the
+library filters again. **Sending them is optional in the specification**, because
+capability values add to what can fingerprint a device or a viewer: send them
+only where the security and personal data policies that apply to you allow it,
+and pass `sendCapabilities: false` where they do not. The filter keeps working
+on what you configured; only the request changes.
 
-**Leave it out, or leave out an axis, and nothing is sent or filtered for it.**
-That is the supported state: the URI is asked for character for character the
-way it is asked for by an integrator who never heard of this option, and the
-first option of every ad wins. A value that is not one of its axis is not sent
-either, and the library says so on `console.warn`.
+**Leave a capability out and nothing is sent or filtered for it.** That is the
+supported state: a capability that is not configured discards nothing, the URI
+is asked for character for character the way it is asked for by an integrator
+who never heard of this option, and the first option of every ad wins. A value
+that is not one of its kind is neither used nor sent, and neither is a key the
+library does not read (`videoDecoders` and `imageOverVideo`, the names before
+SVTA2053 v3, among them); the library says so on `console.warn`.
 
-**You give the capability; the library does not find it out.** What else on your
-page is decoding at the same moment is something only your application knows.
+**You set the capabilities; the library does not find them out.** What else on
+your page is decoding at the same moment is something only your application
+knows.
 
-**There is no HTML axis.** The specification has one, and this library does not
-draw HTML, so there is no value of it the library could declare about itself and
-have it be true.
+**There is no HTML capability.** This library does not draw HTML, so there is no
+value of it the library could declare about itself and have it be true.
 
-The names are the specification's and they do not begin with `_HLS_`, which the
-base reserves for its own parameters. They are published as
+The parameter names are the specification's and they do not begin with `_HLS_`,
+which the base reserves for its own parameters. They are published as
 `QualabsConcurrentHls.VIDEO_DECODERS_PARAM` and `IMAGE_OVER_VIDEO_PARAM`, so a
 server-side check and a client-side one can be written against the same string.
 
@@ -441,7 +537,8 @@ server-side check and a client-side one can be written against the same string.
 | | |
 | --- | --- |
 | `container` | the one you passed |
-| `provider` | the contract: `activeAt(time)` and `programRanges()`. This is the seam of the other document, and the supported way to know what is on screen |
+| `provider` | the contract: `activeAt(time)` and `programRanges()`. This is the seam of the other document: what the signalling handed over |
+| `presentedAt(time)` | what is ON SCREEN at that second: `provider.activeAt(time)` with the renderer's failover applied — the option mounted after the ones that failed to load, the linear default, or nothing |
 | `diagnostics` | the reading of your instance's configuration (§2.1) |
 | `layer` | the element the ads are drawn into |
 | `video` | the media element the library ended up using |
@@ -457,7 +554,11 @@ to be driven.
 the one that gets missed.
 
 The ranges resolve **one at a time**, as each asset-list comes back off the
-network, and nothing announces the last one. So a page that draws the moment it
+network, and nothing announces the last one. (A break whose list is not due yet
+is already on the list, `provisional`, so `settled` does not wait for the end of
+the programme; `provider.experiences` does grow as lists arrive, so a page that
+shows the ads of every break fills each one in when its range stops being
+provisional.) So a page that draws the moment it
 has something draws whatever had arrived by then. Measured on the multi view demo
 of this repository: drawn on the first frame that had enough, the section under
 the player showed **two of the three breaks** of a playlist that signals three —

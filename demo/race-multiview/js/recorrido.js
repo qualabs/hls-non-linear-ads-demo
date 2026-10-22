@@ -76,6 +76,29 @@ function decoders(container) {
 }
 
 /**
+ * The row of a window whose asset-list has not been asked for yet. The window is
+ * on the contract off its tag -- the class says which kind it is, PLANNED-DURATION
+ * how long -- and what it carries is in the list, which the player asks for when
+ * the programme is buffered up to it, as hls.js does for an interstitial
+ * (ADR 0098, ADR 0099). So the row says that, and fills in when the list arrives.
+ */
+function waitingRow(range) {
+  const node = el('li', 'run__row');
+  node.dataset.id = range.id;
+  node.append(
+    el('span', 'run__when', windowOf(range)),
+    el('span', 'run__kind', range.kind)
+  );
+  const what = el('div', 'run__what');
+  what.append(el('p', null,
+    `${range.kind === 'multiview' ? 'A catalogue of feeds' : 'An ad'}, announced by its tag. ` +
+    'What it carries is in its asset-list, which the player asks for when the programme is ' +
+    'buffered up to it, as hls.js does: it is described here when it arrives.'));
+  node.append(what);
+  return node;
+}
+
+/**
  * One row of the run: when the window is, what class it is, and what it offers.
  *
  * THE CAMERAS ARE LISTED BY NAME AND THE COUNT IS COUNTED, because that is the rule this
@@ -134,14 +157,17 @@ export function showTheRun({ provider, container, video, state, run }) {
 
   function drawRun() {
     const { ranges } = provider.programRanges();
-    // Rebuilt only when the set of ranges changes. They arrive as the asset-list resolves,
-    // so the row appears during the first seconds and then stops; comparing the key is what
-    // keeps this out of the frame loop's way.
-    const key = ranges.map((range) => range.id).join('|');
+    // Rebuilt only when the set of ranges changes, or the range stops being the provisional
+    // one off its tag. The window is there from the start and fills in when its asset-list
+    // arrives, which is when the programme is buffered up to it (ADR 0098) -- here, at load,
+    // because it opens inside the first forward buffer. Comparing the key is what keeps this
+    // out of the frame loop's way.
+    const key = ranges.map((range) => `${range.id}${range.provisional ? '?' : ''}`).join('|');
     if (key === drawnKey) return ranges;
     drawnKey = key;
     const byId = new Map(provider.experiences.map((experience) => [experience.id, experience]));
-    run.replaceChildren(...ranges.map((range) => rowOf(range, byId.get(range.id))));
+    run.replaceChildren(...ranges.map((range) =>
+      (range.provisional ? waitingRow(range) : rowOf(range, byId.get(range.id)))));
     return ranges;
   }
 

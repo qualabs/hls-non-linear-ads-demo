@@ -201,18 +201,45 @@ function rowOf(range, experience, names) {
   return node;
 }
 
+/**
+ * The row of a range whose asset-list has not been asked for yet: on the contract
+ * off its tag, the class saying which kind it is and PLANNED-DURATION how long. What
+ * it carries is in the list, which the player asks for when the programme is
+ * buffered up to it, as hls.js does for an interstitial (ADR 0098, ADR 0099), so the
+ * row says that and fills in when the list arrives.
+ */
+function waitingRow(range) {
+  const node = el('li', 'run__row');
+  node.dataset.id = range.id;
+  node.append(
+    el('span', 'run__when', `${secs(range.startTime)} – ${secs(range.startTime + range.duration)}`),
+    el('span', 'run__kind', range.kind)
+  );
+  const what = el('div', 'run__what');
+  what.append(el('p', null,
+    `${range.kind === 'multiview' ? 'A catalogue of cameras' : 'An ad'}, announced by its tag. ` +
+    'What it carries is in its asset-list, which the player asks for when the race is ' +
+    'buffered up to it, as hls.js does: it is described here when it arrives.'));
+  node.append(what);
+  return node;
+}
+
 let drawnKey = null;
 
 function drawRun(names) {
   const { ranges } = concurrent.provider.programRanges();
-  // Rebuilt only when the SET of ranges changes. They arrive as each asset-list
-  // resolves, so the list fills during the first seconds and then stops;
-  // comparing the key is what keeps this out of the frame loop's way.
-  const key = ranges.map((range) => range.id).join('|');
+  // Rebuilt only when the SET of ranges changes, or one stops being the
+  // provisional one off its tag. Every row is there from the start and each fills
+  // in when its asset-list arrives, which is when the race is buffered up to it
+  // (ADR 0098): the first three at load, the fourth and the window about thirty
+  // seconds before they open. Comparing the key is what keeps this out of the
+  // frame loop's way.
+  const key = ranges.map((range) => `${range.id}${range.provisional ? '?' : ''}`).join('|');
   if (key !== drawnKey) {
     drawnKey = key;
     const byId = new Map(concurrent.provider.experiences.map((e) => [e.id, e]));
-    run.replaceChildren(...ranges.map((range) => rowOf(range, byId.get(range.id), names)));
+    run.replaceChildren(...ranges.map((range) =>
+      (range.provisional ? waitingRow(range) : rowOf(range, byId.get(range.id), names))));
   }
   return ranges;
 }
@@ -252,7 +279,9 @@ requestAnimationFrame(paint);
 // A JUMP IS A SEEK AND NOT A REBUILD, which is the one place this page is
 // simpler than the pair. There the switch had to tear both players down because
 // `capabilities` is read once when the signalling is created; here there is one
-// player, nothing to re-declare, and the experiences are already resolved.
+// player and nothing to re-declare. A jump lands four seconds before a break, so
+// the buffer reaches the break at once and its asset-list is asked for then, if
+// it had not been already (ADR 0098).
 const ENTRADA = 4;
 
 function irA(segundo) {

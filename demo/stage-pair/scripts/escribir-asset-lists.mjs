@@ -43,7 +43,7 @@
 //       asset (D.5). D.2 hace obligatorio el `URI`; el ADR 0087 dice por qué acá
 //       la ausencia es la forma de decir "sin default".
 //
-//   options[n]                el layout de la forma de esa opción (`forma` para el
+//   layoutOptions[n]          el layout de la forma de esa opción (`forma` para el
 //       video, `formaImagen` para la imagen) con su caja de stage.json, y el
 //       asset: el HLS que produjo el puente de la T-05, o el SVG CONGELADO de la
 //       pieza de esa forma (`svgFijo`), sin animación, para que la imagen se lea
@@ -162,7 +162,7 @@ function concurrente(brk) {
       // del payload y no el sobre (SVTA2053, Code 7; ADR 0093).
       identifiers: identificadores(brk.campana, brk.forma),
       // En orden de preferencia (R5.5): primero el video, después la imagen.
-      options: [opcion(brk, 'video'), opcion(brk, 'imagen')]
+      layoutOptions: [opcion(brk, 'video'), opcion(brk, 'imagen')]
     }]
   };
   return { ASSETS: [asset] };

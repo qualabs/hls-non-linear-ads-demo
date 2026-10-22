@@ -15,11 +15,16 @@
 //    anything. `resolveAnchor` below is the whole of that, and it is the only
 //    place in this demo that turns signalling into a second.
 //
-// 2  IT ARMS ON `settled`, AND THE FIRST BEAT IS A CARD WITH THE PLAYER PAUSED
-//    (ADR 0039). The asset-lists come over the network, so at t=0 there are no
-//    ranges to resolve against. Opening on a card with the programme stopped
-//    makes that race disappear instead of mitigating it: by the time the card
-//    goes, the signalling has long since settled.
+// 2  IT ARMS AT ONCE, AND THE FIRST BEAT IS A CARD WITH THE PLAYER PAUSED
+//    (ADR 0039). The break is on the contract from the moment the playlist is
+//    read, with its window off the tag, but its ADS are not: the asset-list is
+//    requested when the programme is buffered up to the break, as hls.js does
+//    for an interstitial (ADR 0098, ADR 0099). So a beat is not resolved once,
+//    at arming: every beat still waiting is resolved again on every frame until
+//    its anchor answers, and one anchored to an ad answers when that break's
+//    list has arrived. Here that is during the opening card: the break is well
+//    inside the forward buffer of a paused player, so the list arrives seconds
+//    before the first beat that names an ad is due.
 //
 // 3  THE FREEZE IS `video.pause()` AND NOTHING ELSE (ADR 0040). The renderer
 //    applies the playback state of the primary to every ad node that has a
@@ -76,6 +81,26 @@ export function resolveAnchor(anchor, provider) {
 }
 
 /**
+ * Whether an anchor that does not resolve yet MAY still resolve, which is the
+ * difference between waiting for an asset-list and naming something that is not
+ * there. It waits while the signalling is still handing over ranges, and while
+ * the break it names is on the contract only off its tag (`provisional`): its
+ * list has not been asked for yet, so its ads are not known yet. Once the list
+ * is in, an anchor that still answers `null` is the fourth ad of a break that
+ * has three, and that is a mistake in story/story.json and not a wait.
+ */
+export function anchorWaits(anchor, provider) {
+  const spec = anchor?.before ?? anchor?.at;
+  if (!spec || typeof spec !== 'object') return false;
+  const { ranges, settled } = provider.programRanges();
+  if (!settled) return true;
+  const breaks = ranges
+    .filter((r) => r.kind === 'concurrent')
+    .sort((a, b) => a.startTime - b.startTime);
+  return Boolean(breaks[spec.break - 1]?.provisional);
+}
+
+/**
  * @param provider   the contract, `programRanges()` and `experiences`
  * @param video      the element playing the primary content
  * @param card       the element the line of type is written into
@@ -86,27 +111,30 @@ export async function runStory({ provider, video, card, skip, url = './story/sto
   const story = await fetch(url).then((r) => r.json());
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
-  // `settled` is true when the source can hand over no more ranges and none is
-  // half resolved. Polling it is the whole of arming: there is no event for it,
-  // and the card in front of the player is what pays for the wait.
-  while (!provider.programRanges().settled) await wait(120);
+  // NOTHING IS WAITED FOR HERE. Every beat starts unresolved and `settle()`
+  // resolves the ones still waiting on every frame of the loop below (see 2 at
+  // the top of this file).
+  const beats = (story.beats || []).map((beat) => ({ ...beat, at: null, fired: false, dropped: false }));
 
-  const beats = (story.beats || []).map((beat) => ({
-    ...beat,
-    at: resolveAnchor(beat.anchor, provider)
-  }));
-
-  // An anchor that does not resolve is said out loud and skipped, and the beat
-  // is not invented at another second: a card over the wrong thing is the one
-  // way this demo can look wrong without anything failing.
-  for (const beat of beats) {
-    if (beat.at === null) {
+  // An anchor that does not resolve once its break's list is in is said out loud
+  // and skipped, and the beat is not invented at another second: a card over the
+  // wrong thing is the one way this demo can look wrong without anything failing.
+  function settle() {
+    for (const beat of beats) {
+      if (beat.fired || beat.dropped || beat.at !== null) continue;
+      beat.at = resolveAnchor(beat.anchor, provider);
+      if (beat.at !== null || anchorWaits(beat.anchor, provider)) continue;
+      beat.dropped = true;
       console.error(`[story] the beat "${beat.id}" anchors to something the signalling does not` +
         ' have, so it is skipped. Check story/story.json against the asset-list.', beat.anchor);
     }
   }
 
-  const queue = beats.filter((b) => b.at !== null).sort((a, b) => a.at - b.at);
+  /** The beats that will still be said, resolved ones first and in the order they play. */
+  const remaining = () => beats
+    .filter((b) => !b.fired && !b.dropped)
+    .sort((a, b) => (a.at ?? Infinity) - (b.at ?? Infinity));
+
   if (story.skip) skip.textContent = story.skip;
 
   let running = true;
@@ -187,14 +215,18 @@ export async function runStory({ provider, video, card, skip, url = './story/sto
   // crossed up to 250 ms late -- and 250 ms late on a beat anchored to an ad
   // change means the new ad has already been seen, which is exactly the thing
   // the beat exists to get ahead of.
-  let next = 0;
   async function tick() {
     if (!running) return;
-    if (!speaking && next < queue.length && video.currentTime >= queue[next].at) {
-      const beat = queue[next];
-      next += 1;
-      await say(beat);
-      if (next >= queue.length) return end();
+    if (!speaking) {
+      settle();
+      const queue = remaining();
+      if (!queue.length) return end();
+      const beat = queue[0];
+      if (beat.at !== null && video.currentTime >= beat.at) {
+        beat.fired = true;
+        await say(beat);
+        if (!remaining().length) return end();
+      }
     }
     requestAnimationFrame(tick);
   }
@@ -203,5 +235,9 @@ export async function runStory({ provider, video, card, skip, url = './story/sto
   // currentTime to arrive: it is already due at 0.
   requestAnimationFrame(tick);
 
-  return { get running() { return running; }, end, beats: queue };
+  return {
+    get running() { return running; },
+    end,
+    get beats() { return beats.filter((b) => !b.dropped && b.at !== null).sort((a, b) => a.at - b.at); }
+  };
 }

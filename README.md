@@ -22,7 +22,7 @@ folder per demo, and each demo tells its own run.
 | [`hydration-break`](demo/hydration-break/README.md) | why anybody would want this. A minute of stopped play in a football match, with four ads over the live picture instead of a commercial break — and the traditional linear ad third, so the comparison happens inside one minute and one player. What it argues is the business case: the viewer stays watching, so the advertising is seen. The page walks you through it by itself and stops the composition to explain each step, which the library allows without a line of it changing |
 | [`multiview-offer`](demo/multiview-offer/README.md) | the break where the publisher offers and the viewer composes. One playlist carrying both classes: a concurrent ad of the class this repository started with, and two windows in which a catalogue of feeds is on offer and the grid takes its shape from how many of them somebody raised. What it argues is that the same signalling covers a relationship where the payload cannot declare a layout, because where a box goes is not known when the playlist is written |
 | [`race-multiview`](demo/race-multiview/README.md) | the offer put to work on the case that asks for it. A race programme that never stops, and part way through it a window that announces a catalogue of on-board cameras, each one named after its driver: whoever is watching raises the car they care about, enlarges it and hears that engine instead of the commentary. What it argues is that the mechanism of `multiview-offer` is not a demo of itself — it is what a racing channel needs, because the programme is a single picture and the story is several of them at once |
-| [`stage-pair`](demo/stage-pair/README.md) | the pair again, and on top of it the capability of the device. The same three non-linear shapes one per break, an `inspect.html` where the Date Ranges, the asset-list request and its answer are read out of the running player for anybody with a network tab open, and a race page where the four ads end before the multi view window opens. What it argues is that the capability of the device degrades the **format** of the ad and not the ad: the device declares its capability in two axes, the answer carries every option of the ad, and the library keeps the first one the device can show — video with two decoders, the same campaign as a still `image/svg+xml` in another layout with one, and the break's linear default or nothing when neither fits. Everything on screen that is not the programme is vector written by hand, with the provenance of every file in its `CREDITS.md` |
+| [`stage-pair`](demo/stage-pair/README.md) | the pair again, and on top of it the capability of the device. The same three non-linear shapes one per break, an `inspect.html` where the Date Ranges, the asset-list request and its answer are read out of the running player for anybody with a network tab open, and a race page where the four ads end before the multi view window opens. What it argues is that the capability of the device degrades the **format** of the ad and not the ad: the page sets the two capabilities of the device, `concurrentVideo` and `concurrentImage`, the answer carries every `layoutOption` of the ad, and the library keeps the first one the device can show and whose assets load — video with two decoders, the same campaign as a still `image/svg+xml` in another layout with one, and the break's linear default or nothing when neither fits. Everything on screen that is not the programme is vector written by hand, with the provenance of every file in its `CREDITS.md` |
 
 ```bash
 ./run.sh <demo>   # with no argument, and through npm start, it is compatibility-pair
@@ -49,7 +49,12 @@ one file per subject. The layout resolution: the parsing of `viewport`, the two
 defaults the tool omits, the order by `zDepth`, the activation window, and the
 conversion of insets into a box in pixels. The sequence of a break: where each
 of its ads lands on the timeline of the programme, which ad is which, and the
-rungs the layer falls back to when an asset cannot be drawn. And what the
+rungs the layer falls back to when an asset cannot be drawn, the ordered list of
+options handed to the renderer with the linear default behind them, what optional
+pre-validation leaves out of that list (GET or HEAD, and when HEAD falls back to
+GET), the renderer's own failover from an option whose asset fails to load to the
+next one, to the default and to nothing, and when each break's asset-list is
+requested, which is hls.js's own rule for an interstitial. And what the
 controls stand on: where the breaks of the programme are, which kind each one
 is, where that lands as a fraction of the whole programme, and the volume every
 element starts at, which is the one place where a single character turns the
@@ -165,6 +170,21 @@ const concurrent = QualabsConcurrentHls.attach(hls, {
 hls.loadSource(src);
 hls.attachMedia(video);
 ```
+
+**An option whose asset does not load is never left on screen.** Every ad hands the
+renderer its layoutOptions in order, with its linear default behind them, and when
+the first load of an asset of the option mounted fails (a 404 on its playlist, an
+image that does not load, no answer), the renderer takes the whole option down and
+mounts the next one, then the default, then nothing. That is always on, and
+`onPresented` reports which option ended up on screen. Checking the assets up
+front as well, before the renderer is handed the list, is optional and off by
+default (`preValidateAssets`, `preValidateMethod`), because with a real ad
+decisioning service an extra request per asset has a cost. And each break's
+asset-list is requested when hls.js would request it — when the programme is
+buffered up to the break, or played or sought into it; a preroll's (`CUE="PRE"`), at
+load, placed where playback begins (ADR 0100) — and there is no option to
+request them all up front (ADR 0099). The options are in
+[`docs/integrating-the-library.md`](docs/integrating-the-library.md) §6.
 
 The container is the box the composition lives in, and the media element has to
 be inside it: the library creates its own layer there, draws the boxes of the

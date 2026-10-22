@@ -130,9 +130,9 @@ const dateRanges = (playlist) =>
 const bloque = (lista) => lista.ASSETS[0]['X-AD-CREATIVE-SIGNALING'].payload[0];
 
 /** Las opciones de presentación del aviso de un break, en orden. */
-const opciones = (lista) => bloque(lista).options;
+const opciones = (lista) => bloque(lista).layoutOptions;
 
-/** Los tres breaks, con su fila de stage.json al lado. */
+/** Los cuatro breaks, el preroll primero, con su fila de stage.json al lado. */
 const BREAKS = STAGE.breaks;
 const CON_DEFAULT = BREAKS.filter((b) => b.lineal);
 const SIN_DEFAULT = BREAKS.filter((b) => !b.lineal);
@@ -143,11 +143,42 @@ const tagsDe = (corrida, brk) => ({
   concurrente: dateRanges(corrida.concurrente).find((t) => t.id === `AD-${brk.id.toUpperCase()}-CONCURRENT`)
 });
 
-test('hay un break sin default y los otros dos con, que es lo que David pidió mostrar', () => {
+test('hay un break sin default y los otros con, que es lo que David pidió mostrar', () => {
   // ADR 0087. Sin un break de cada tipo, la corrida no muestra las dos salidas de
-  // un aviso que no se puede dibujar.
+  // un aviso que no se puede dibujar. Con el preroll (ADR 0100) son tres con.
   assert.equal(SIN_DEFAULT.length, 1, 'un break sin default');
-  assert.equal(CON_DEFAULT.length, 2, 'dos con default');
+  assert.equal(CON_DEFAULT.length, 3, 'tres con default');
+});
+
+test('el preroll: CUE="PRE" en sus dos tags y en ningún otro, START-DATE en el origen, con default y antes que todo', () => {
+  // ADR 0100. Lo que cada cliente lee para ubicarlo antes del programa y pedir su
+  // lista al cargar es el CUE; el START-DATE se escribe igual porque la spec lo
+  // exige, en el instante del EXT-X-PROGRAM-DATE-TIME.
+  const prerolls = BREAKS.filter((b) => b.cue === 'PRE');
+  assert.equal(prerolls.length, 1, 'un preroll');
+  assert.equal(BREAKS[0], prerolls[0], 'va primero en stage.json');
+  assert.equal(prerolls[0].offset, 0);
+  assert.equal(prerolls[0].lineal, true, 'con default: el pane de fábrica reproduce un preroll lineal');
+  const corrida = run();
+  const origen = new Date(PDT).getTime();
+  for (const playlist of [corrida.interstitial, corrida.concurrente]) {
+    const tags = dateRanges(playlist);
+    const conCue = tags.filter((t) => /,CUE="PRE",/.test(t.line));
+    assert.deepEqual(conCue.map((t) => t.id.split('-')[1]), ['PRE'], 'el CUE va sólo en el preroll');
+    assert.equal(new Date(conCue[0].startDate).getTime(), origen);
+  }
+  // La forma de reemplazo en el tag de Apple: hls.js retoma el programa en el
+  // segundo en que el preroll termina, que es donde está el pane nuestro.
+  assert.equal(tagsDe(corrida, prerolls[0]).lineal.resumeOffset, false);
+  assert.match(corrida.hoja, /break PRE .*CUE=PRE/);
+});
+
+test('la librería lee el CUE de los tags que este script escribe', async () => {
+  const { cueOf } = await import('../../../lib/signalling.js');
+  const corrida = run();
+  const attr = (line) => ({ CUE: line.match(/CUE="([^"]+)"/)?.[1] });
+  const pre = dateRanges(corrida.concurrente).map((t) => [t.id, cueOf({ attr: attr(t.line) }).pre]);
+  assert.deepEqual(pre, BREAKS.map((b) => [`AD-${b.id.toUpperCase()}-CONCURRENT`, b.cue === 'PRE']));
 });
 
 test('dos manifests, uno por clase: el de interstitials sólo con los de Apple, el concurrente sólo con los nuestros', () => {
@@ -265,8 +296,8 @@ test('el layout de cada break es el que stage.json declara, con sus cajas, en la
     const item = bloque(lista(brk.concurrente));
     assert.equal(item.start, 0);
     assert.equal(item.duration, brk.duracion);
-    assert.equal(item.options[0].type, brk.layout, `${brk.id}: la opción de video es el layout del break`);
-    for (const [opcion, nombreForma] of [[item.options[0], brk.forma], [item.options[1], brk.formaImagen]]) {
+    assert.equal(item.layoutOptions[0].type, brk.layout, `${brk.id}: la opción de video es el layout del break`);
+    for (const [opcion, nombreForma] of [[item.layoutOptions[0], brk.forma], [item.layoutOptions[1], brk.formaImagen]]) {
       const forma = STAGE.formas[nombreForma];
       assert.equal(opcion.type, forma.layout);
       assert.equal(opcion.layout.assets[0].viewport, forma.viewportAviso);
@@ -333,11 +364,11 @@ test('la librería, sobre la misma respuesta, dibuja video, imagen, el lineal o 
   };
   const { video, imagen } = STAGE.assets.tipos;
   for (const brk of BREAKS) {
-    assert.deepEqual(dibuja(brk, { videoDecoders: 2, imageOverVideo: true }), [video], `${brk.id}: 2 y con imágenes`);
-    assert.deepEqual(dibuja(brk, { videoDecoders: 2, imageOverVideo: false }), [video], `${brk.id}: 2 y sin imágenes`);
-    assert.deepEqual(dibuja(brk, { videoDecoders: 1, imageOverVideo: true }), [imagen], `${brk.id}: 1 y con imágenes`);
+    assert.deepEqual(dibuja(brk, { concurrentVideo: 2, concurrentImage: true }), [video], `${brk.id}: 2 y con imágenes`);
+    assert.deepEqual(dibuja(brk, { concurrentVideo: 2, concurrentImage: false }), [video], `${brk.id}: 2 y sin imágenes`);
+    assert.deepEqual(dibuja(brk, { concurrentVideo: 1, concurrentImage: true }), [imagen], `${brk.id}: 1 y con imágenes`);
     assert.deepEqual(
-      dibuja(brk, { videoDecoders: 1, imageOverVideo: false }),
+      dibuja(brk, { concurrentVideo: 1, concurrentImage: false }),
       brk.lineal ? ['lineal'] : [],
       `${brk.id}: 1 y sin imágenes, ${brk.lineal ? 'cae al lineal' : 'se saltea'}`
     );

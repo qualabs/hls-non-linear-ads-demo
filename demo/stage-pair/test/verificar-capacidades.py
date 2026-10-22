@@ -71,10 +71,10 @@ STAGE = json.loads((DEMO / "stage.json").read_text())
 BREAKS = {b["id"]: b for b in STAGE["breaks"]}
 
 COMBINACIONES = [
-    {"videoDecoders": 2, "imageOverVideo": True},
-    {"videoDecoders": 2, "imageOverVideo": False},
-    {"videoDecoders": 1, "imageOverVideo": True},
-    {"videoDecoders": 1, "imageOverVideo": False},
+    {"concurrentVideo": 2, "concurrentImage": True},
+    {"concurrentVideo": 2, "concurrentImage": False},
+    {"concurrentVideo": 1, "concurrentImage": True},
+    {"concurrentVideo": 1, "concurrentImage": False},
 ]
 
 
@@ -84,9 +84,9 @@ def esperado(capacidad, brk):
     `layout` es el tipo de la experiencia activa: el del break para el video, el
     de `formaImagen` para la imagen (ADR 0088), `linear` para el default.
     """
-    if capacidad["videoDecoders"] >= 2:
+    if capacidad["concurrentVideo"] >= 2:
         return {"outcome": "drawn", "chosen": 0, "video": 2, "img": 0, "layout": brk["layout"]}
-    if capacidad["imageOverVideo"]:
+    if capacidad["concurrentImage"]:
         return {"outcome": "drawn", "chosen": 1, "video": 1, "img": 1,
                 "layout": STAGE["formas"][brk["formaImagen"]]["layout"]}
     if brk["lineal"]:
@@ -151,7 +151,7 @@ def medir_quietud(pagina, contenedor, capacidad, brk_id, salida, nombre_pagina):
 
 
 def nombre(capacidad):
-    return f"dec{capacidad['videoDecoders']}-img{'si' if capacidad['imageOverVideo'] else 'no'}"
+    return f"dec{capacidad['concurrentVideo']}-img{'si' if capacidad['concurrentImage'] else 'no'}"
 
 
 def main():
