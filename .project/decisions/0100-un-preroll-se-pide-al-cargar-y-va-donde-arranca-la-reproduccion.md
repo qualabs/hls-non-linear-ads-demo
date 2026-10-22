@@ -10,6 +10,48 @@ generalizes: null
 generalized_by: null
 ---
 
+## 2026-10-22 — nota: el preroll en live, como hls.js
+
+**David Hassoun eligió la opción 1 del primer Abierto** ("Arranque más allá de 0, y live"): en un VOD
+el preroll sigue yendo donde arranca la reproducción (`startPosition`), y pidió hacer también el
+trabajo para live aunque acá no se pueda probar de punta a punta. Lo que hace hls.js 1.7.2, leído
+en su fuente (`src/controller/interstitials-controller.ts`):
+
+- **Dónde se une al live:** `getLiveStartPos` es `startPosition === -1 || (liveSync && liveSync -
+  startPosition < behindLive) ? liveSync || 0 : startPosition`, con `behindLive =
+  (targetduration || 10) * 3` y `liveSync = hls.liveSyncPosition` (el borde live menos la latencia
+  objetivo, `latency-controller.ts`). Un preroll live sin `X-RESUME-OFFSET` retoma el primario ahí
+  (`livePrerollResumption`), así que el -1 de `startPosition` en live **no** es 0: es el punto de
+  unión.
+- **Un preroll no vuelve a dispararse en los reloads:** `checkStart` entra al preroll sólo en la
+  primera pasada (`timelinePos === -1`). El schedule se vuelve a armar en cada `LEVEL_UPDATED`, pero
+  un evento ya conocido conserva su estado ("Update InterstitialEvent already parsed and mapped",
+  `interstitials-schedule.ts`). Y un preroll que aparece en un reload posterior queda primero en el
+  schedule, en 0, detrás de un playhead que ya pasó: no se alcanza nunca.
+
+**Lo que hace la librería, con funciones puras en `lib/signalling.js`:**
+
+- `liveStartPosition({ startPosition, liveSyncPosition, targetDuration })` es `getLiveStartPos`
+  línea por línea, con una diferencia dicha: sin `liveSyncPosition` todavía, responde `null` ("no se
+  sabe") en vez de 0, porque hls.js lo pregunta después de reproducir el preroll y esta capa tiene
+  que ubicar la ventana antes. Un `liveSyncPosition` de 0 exacto es un 0 conocido.
+- `preRollStart(startPosition, { live, liveSyncPosition, targetDuration })`: en VOD lo de siempre;
+  en live, el punto de unión.
+- `preRollPlacement(...)` decide al ver el Date Range: `{ start }`, `{ wait: true }` (live sin
+  punto de unión: se ubica y se pide su lista en el update siguiente) o `{ late: true }` (visto por
+  primera vez después de que la reproducción se unió: no se presenta). "Se unió" es el primer update
+  leído con elemento de media, que es la condición de `checkStart`.
+- El mismo Date Range en los reloads no se vuelve a pedir ni se mueve (ya lo garantizaba `done`).
+  Un tag de Apple con `CUE="PRE"` en live, que la librería sólo reporta, se ubica igual.
+
+**Sin probar contra un live real.** No hay primarios live en el proyecto; los tests de
+`test/asset-list-timing.test.js` simulan las entradas (`live: true`, `liveSyncPosition`,
+`targetduration`, reloads) sobre una instancia falsa. Lo que no simulan: el orden real entre el
+`LEVEL_UPDATED` del latency controller y el nuestro (si el primero no tuviera todavía
+`liveSyncPosition`, el preroll espera un update), y la ventana DVR que se corre con el tiempo.
+
+El resto de este ADR sigue en pie.
+
 ## Contexto
 
 El atributo `CUE` de `EXT-X-DATERANGE` (HLS, una enumerated-string-list con `PRE`, `POST` y
@@ -85,7 +127,8 @@ una demo tenga un preroll. `POST` y `ONCE` quedan como propuesta (ver Abierto).
 
 ## Abierto
 
-- **Arranque más allá de 0, y live.** Implementado como hls.js: el preroll va donde arranca la
+- **Arranque más allá de 0, y live.** *Cerrado en la nota del 2026-10-22 de arriba: opción 1, y
+  live con el punto de unión de hls.js.* Implementado como hls.js: el preroll va donde arranca la
   reproducción. Opción 1 (la implementada): en `startPosition`, así que quien entra a los 30 s ve el
   preroll de 30 a 42 s, y un seek a 0 no lo muestra. Opción 2: siempre en 0 del programa, así que
   quien entra más allá de su largo no lo ve nunca. Recomendación: la 1, que es la de hls.js y la del

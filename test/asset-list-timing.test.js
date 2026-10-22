@@ -8,6 +8,12 @@
 // at its window; asked for a break already behind, it is a request for an ad
 // nobody will see; and either one fails without anything on screen saying so.
 //
+// The last addition, also of 2026-10-22: a preroll on a LIVE playlist sits at
+// the live join point, as hls.js's `getLiveStartPos` computes it, and one first
+// seen after playback joined is not presented (ADR 0100, dated note). No live
+// primary exists in this repository, so the live inputs are simulated: a fake
+// instance with `liveSyncPosition` and playlist updates with `live: true`.
+//
 // Two additions of 2026-10-22: the forward buffer steps over a hole smaller
 // than hls.js's maxBufferHole, so a page paused at 0 over a buffer that starts
 // at 0.067 s still asks for the first break (ADR 0099, dated note); and a
@@ -31,6 +37,8 @@ import {
   bufferedEndAt,
   createSignalling,
   cueOf,
+  liveStartPosition,
+  preRollPlacement,
   preRollStart,
   provisionalRange
 } from '../lib/signalling.js';
@@ -273,5 +281,150 @@ test('a multiview preroll is asked for at load too', async () => {
   try {
     assert.deepEqual(asked, ['https://example.test/offer.json']);
     assert.equal(provider.programRanges().ranges[0].startTime, 0);
+  } finally { restore(); }
+});
+
+// ---------------------------------------------------------------------------
+// CUE="PRE" on a LIVE playlist (ADR 0100, note of 2026-10-22). Simulated: there
+// is no live primary in this repository.
+// ---------------------------------------------------------------------------
+
+test('the live join point is hls.js\'s getLiveStartPos: the sync position when startPosition is unset', () => {
+  assert.equal(liveStartPosition({ startPosition: -1, liveSyncPosition: 3600, targetDuration: 6 }), 3600);
+  assert.equal(liveStartPosition({ startPosition: undefined, liveSyncPosition: 3600, targetDuration: 6 }), 3600);
+});
+
+test('the live join point: a startPosition within three target durations of the sync position is the sync position', () => {
+  // 3600 - 3590 = 10 < 18: joined at the sync position, as hls.js does.
+  assert.equal(liveStartPosition({ startPosition: 3590, liveSyncPosition: 3600, targetDuration: 6 }), 3600);
+  // A startPosition AHEAD of the sync position is too (a negative distance is below the limit).
+  assert.equal(liveStartPosition({ startPosition: 3700, liveSyncPosition: 3600, targetDuration: 6 }), 3600);
+});
+
+test('the live join point: a startPosition further behind than that is kept (DVR start)', () => {
+  assert.equal(liveStartPosition({ startPosition: 3500, liveSyncPosition: 3600, targetDuration: 6 }), 3500);
+  // Without a target duration hls.js takes 10 s, so the limit is 30 s.
+  assert.equal(liveStartPosition({ startPosition: 3575, liveSyncPosition: 3600 }), 3600);
+  assert.equal(liveStartPosition({ startPosition: 3565, liveSyncPosition: 3600 }), 3565);
+});
+
+test('the live join point is unknown (null) while there is no sync position and no startPosition', () => {
+  assert.equal(liveStartPosition({ startPosition: -1, liveSyncPosition: null, targetDuration: 6 }), null);
+  // A sync position of exactly 0 is a known 0: a stream that has just begun.
+  assert.equal(liveStartPosition({ startPosition: -1, liveSyncPosition: 0, targetDuration: 6 }), 0);
+  // A startPosition given explicitly is usable without a sync position.
+  assert.equal(liveStartPosition({ startPosition: 120, liveSyncPosition: null, targetDuration: 6 }), 120);
+});
+
+test('-1 is 0 on a VOD and the join point on a live playlist', () => {
+  assert.equal(preRollStart(-1), 0);
+  assert.equal(preRollStart(-1, { live: false, liveSyncPosition: 3600 }), 0);
+  assert.equal(preRollStart(-1, { live: true, liveSyncPosition: 3600, targetDuration: 6 }), 3600);
+});
+
+test('a preroll is placed, waits for the join point, or is late', () => {
+  assert.deepEqual(preRollPlacement({ startPosition: -1 }), { start: 0 });
+  assert.deepEqual(preRollPlacement({ startPosition: 30 }), { start: 30 });
+  assert.deepEqual(preRollPlacement({ startPosition: -1, live: true, liveSyncPosition: 3600, targetDuration: 6 }), { start: 3600 });
+  assert.deepEqual(preRollPlacement({ startPosition: -1, live: true, liveSyncPosition: null }), { wait: true });
+  assert.deepEqual(preRollPlacement({ startPosition: -1, live: true, liveSyncPosition: 3600, joined: true }), { late: true });
+  assert.deepEqual(preRollPlacement({ startPosition: -1, joined: true }), { late: true });
+});
+
+/** The signalling layer over a fake LIVE instance: playlist updates are handed in one by one. */
+function onLive({ liveSyncPosition = 3600, startPosition = -1 } = {}) {
+  const handlers = {};
+  globalThis.Hls = { Events: { LEVEL_UPDATED: 'levelUpdated', MEDIA_ATTACHED: 'mediaAttached', BUFFER_APPENDED: 'bufferAppended' } };
+  const media = fakeMedia();
+  media.ranges = [];
+  const hls = { on: (event, fn) => { handlers[event] = fn; }, media, startPosition, liveSyncPosition };
+  const asked = [];
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => {
+    asked.push(String(url));
+    return { json: async () => ({ ASSETS: [{ URI: '/linear.m3u8', DURATION: 10 }] }) };
+  };
+  const { log } = console;
+  console.log = () => {};
+  const provider = createSignalling(hls, {});
+  // A live playlist: no ENDLIST, its first fragment at 3580 s of the stream's clock.
+  const update = (dateRanges) => handlers.levelUpdated(null, { details: {
+    url: 'https://example.test/live.m3u8', live: true, targetduration: 6,
+    fragments: [{ start: 3580, programDateTime: 3580000 }], dateRanges
+  } });
+  const restore = () => { globalThis.fetch = realFetch; console.log = log; };
+  return { hls, provider, asked, update, restore };
+}
+
+const LIVE_PRE = { 'AD-PRE-CONCURRENT': { class: 'com.qualabs.hls.concurrentInterstitial', startDate: new Date(3580000), duration: 10, attr: { CUE: 'PRE', 'X-ASSET-LIST': '/pre.json' } } };
+
+test('live: a preroll is placed at the live join point, not at 0, and its list is asked for at load', async () => {
+  const { provider, asked, update, restore } = onLive();
+  try {
+    update(LIVE_PRE);
+    assert.deepEqual(asked, ['https://example.test/pre.json']);
+    await flush();
+    const pre = provider.programRanges().ranges.find((r) => r.id === 'AD-PRE-CONCURRENT');
+    assert.equal(pre.startTime, 3600);
+    assert.equal(provider.programRanges().settled, false, 'a live source is never closed');
+    assert.deepEqual(provider.activeAt(3605).map((e) => e.id.split('.')[0]), ['AD-PRE-CONCURRENT']);
+    assert.deepEqual(provider.activeAt(5), []);
+  } finally { restore(); }
+});
+
+test('live: a startPosition far behind the edge (DVR) places the preroll there', async () => {
+  const { provider, update, restore } = onLive({ startPosition: 3500 });
+  try {
+    update(LIVE_PRE);
+    await flush();
+    assert.equal(provider.programRanges().ranges[0].startTime, 3500);
+  } finally { restore(); }
+});
+
+test('live: the reloads of the playlist do not ask for the preroll again, nor move it', async () => {
+  const { hls, provider, asked, update, restore } = onLive();
+  try {
+    update(LIVE_PRE);
+    await flush();
+    hls.liveSyncPosition = 3606;
+    update(LIVE_PRE);
+    update(LIVE_PRE);
+    await flush();
+    assert.deepEqual(asked, ['https://example.test/pre.json']);
+    assert.equal(provider.programRanges().ranges.length, 1);
+    assert.equal(provider.programRanges().ranges[0].startTime, 3600);
+  } finally { restore(); }
+});
+
+test('live: a preroll first seen on a reload after the join is not presented, as hls.js never steps back into one', async () => {
+  const { provider, asked, update, restore } = onLive();
+  try {
+    update({});
+    update(LIVE_PRE);
+    await flush();
+    assert.deepEqual(asked, []);
+    assert.deepEqual(provider.programRanges().ranges, []);
+  } finally { restore(); }
+});
+
+test('live: with no join point yet the preroll waits, and is placed and asked for on the next update', async () => {
+  const { hls, provider, asked, update, restore } = onLive({ liveSyncPosition: null });
+  try {
+    update(LIVE_PRE);
+    assert.deepEqual(asked, []);
+    assert.deepEqual(provider.programRanges().ranges, []);
+    hls.liveSyncPosition = 3600;
+    update(LIVE_PRE);
+    assert.deepEqual(asked, ['https://example.test/pre.json']);
+    await flush();
+    assert.equal(provider.programRanges().ranges[0].startTime, 3600);
+  } finally { restore(); }
+});
+
+test('live: an Apple-class preroll, reported off its tag, is placed at the join point too', async () => {
+  const { provider, update, restore } = onLive();
+  try {
+    update({ 'AD-PRE-LINEAR': { class: 'com.apple.hls.interstitial', startDate: new Date(3580000), duration: 10, attr: { CUE: 'PRE' } } });
+    assert.deepEqual(provider.programRanges().ranges, [{ id: 'AD-PRE-LINEAR', kind: 'interstitial', startTime: 3600, duration: 10 }]);
   } finally { restore(); }
 });

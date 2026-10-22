@@ -489,7 +489,15 @@ is already inside its buffer until the viewer pressed play.
 with an interstitial preroll: as soon as the playlist and the media element are
 there, paused or not and with nothing buffered. Its START-DATE is not where it
 goes: it sits where playback begins, the `startPosition` the player was given
-or 0, for the length its asset-list declares, over the programme. Both
+or 0, for the length its asset-list declares, over the programme. On a live
+playlist "where playback begins" is the live join point, computed as hls.js's
+`getLiveStartPos` does: `hls.liveSyncPosition` when no `startPosition` was given
+or the one given is within three target durations of it, and that
+`startPosition` otherwise; until the player knows its sync position, the preroll
+waits for the next playlist update. A preroll is never asked for twice on the
+reloads of a live playlist, and one that first shows up after playback joined
+is not presented, as hls.js never steps back into one. The live path is tested
+on simulated inputs only: there is no live primary in this repository. Both
 concurrent and multi-view Date Ranges can carry it. `CUE="POST"` and
 `CUE="ONCE"` are not acted on: a POST is placed at its START-DATE like any other
 break, and every break, a ONCE one too, is drawn again when the programme is

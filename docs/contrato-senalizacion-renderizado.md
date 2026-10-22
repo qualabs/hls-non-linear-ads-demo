@@ -302,7 +302,8 @@ break está en la lista como rango provisional, y por eso `settled` no espera al
 `provider.experiences`. Un **preroll** (`CUE="PRE"`, ADR 0100) es la excepción
 de cuándo y de dónde: su asset-list se pide al cargar, como hls.js pide el de un
 preroll, y su rango y sus experiencias empiezan donde arranca la reproducción
-(el `startPosition` del player, o 0) y no en su START-DATE. Para quien pinta no
+(el `startPosition` del player, o 0; en live, el punto de unión que calcula hls.js) y no en su
+START-DATE. Para quien pinta no
 cambia nada de la forma: es un rango más, con el `kind` de su clase. No hay opción para pedirlas todas de entrada (ADR 0099). El día que la señalización sea live, o una agenda que
 se resuelve por partes, la promesa sigue valiendo y la coincidencia no.
 

@@ -6362,3 +6362,22 @@ nota en `.project/PROJECT.md`. Fuente de hls.js leída del paquete npm 1.7.2 (el
   pasa a la imagen), y el de fábrica arranca el interstitial, su lineal da 404 y retoma el programa.
 - Quedan abiertos para David: arranque más allá de 0 y live con preroll, `POST` y `ONCE` (ADR 0100).
 
+
+## 2026-10-22 — El preroll en live, como hls.js
+
+Pedido de David por el coordinador (1 de 3, un commit cada uno): el preroll sigue la lectura de
+hls.js en VOD (la ventana arranca en `startPosition`) y se hace también el trabajo para live, aunque
+no se pueda probar de punta a punta. Nota fechada en el ADR 0100. Fuente de hls.js 1.7.2 leída del
+paquete npm, en un temporal privado.
+
+- **hls.js en live:** el preroll retoma el primario en el punto de unión, `getLiveStartPos`:
+  `hls.liveSyncPosition` si `startPosition` es -1 o está a menos de tres target durations de él, y
+  `startPosition` si no. `checkStart` entra al preroll sólo en la primera pasada, así que los reloads
+  no lo vuelven a disparar, y uno que aparece después de la unión no se alcanza.
+- **Librería:** `liveStartPosition`, `preRollStart(startPosition, live)` y `preRollPlacement`
+  (`start` / `wait` / `late`), puras; `createSignalling` las usa con `details.live`,
+  `details.targetduration`, `hls.startPosition` y `hls.liveSyncPosition`. Sin punto de unión todavía,
+  el preroll espera al update siguiente; visto después de la unión, no se presenta.
+- Docs: `docs/integrating-the-library.md`, `docs/contrato-senalizacion-renderizado.md`, README.
+- Tests: 12 nuevos en `test/asset-list-timing.test.js`, con entradas live simuladas. **Sin probar
+  contra un live real**: no hay primarios live en el proyecto.
