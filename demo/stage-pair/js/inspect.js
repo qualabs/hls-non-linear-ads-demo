@@ -416,6 +416,9 @@ function mostrarBreak(brk) {
   dom.which.textContent =
     `Break ${brk.id.toUpperCase()} of ${stage.breaks.length} · ${cuando} · ${stage.campanas[brk.campana].marca} · ` +
     (brk.cue === 'PRE' ? 'preroll, CUE="PRE": its list is asked for at load · ' : '') +
+    (brk.cue === 'ONCE'
+      ? 'CUE="ONCE": once it has played, both clients take it out, so a seek back does not show it again · '
+      : '') +
     (brk.cue === 'POST'
       ? 'post-roll, CUE="POST": its list is asked for when the programme is buffered to its end, and a ' +
         'non-linear ad is never presented after the end · '

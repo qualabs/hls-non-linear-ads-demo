@@ -513,8 +513,13 @@ the playlist ends. It takes no time of the programme, so it is not in
 `onTracking` report its ads with `postroll: true`. Pressing play or seeking on
 the ended programme takes it off.
 
-`CUE="ONCE"` is not acted on: every break, a ONCE one too, is drawn again when
-the programme is sought back into it.
+**A break with `CUE="ONCE"` is presented once** (ADR 0102), as hls.js does:
+once it has played -- the programme entered its window and then left it, at its
+end or by a seek out of it -- it leaves the experiences and the ranges for good,
+so a seek back neither draws it again nor reports it again to `onTracking`, and
+the bar stops marking it. A seek that jumps over it never entered it, and it
+stays. Every other break is drawn again when the programme is sought back into
+it.
 
 **And it can also travel to your ad server.** With `sendCapabilities` (the
 default), every asset-list request carries the configured capabilities, one

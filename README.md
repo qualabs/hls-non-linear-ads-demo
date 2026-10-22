@@ -184,7 +184,8 @@ asset-list is requested when hls.js would request it — when the programme is
 buffered up to the break, or played or sought into it; a preroll's (`CUE="PRE"`), at
 load, placed where playback begins, the live join point on a live playlist (ADR 0100); a
 post-roll's (`CUE="POST"`), when the programme is buffered to its end, and only its linear
-default plays, after the programme (ADR 0101) — and there is no option to
+default plays, after the programme (ADR 0101); and a `CUE="ONCE"` break leaves for good once it
+has played (ADR 0102) — and there is no option to
 request them all up front (ADR 0099). The options are in
 [`docs/integrating-the-library.md`](docs/integrating-the-library.md) §6.
 

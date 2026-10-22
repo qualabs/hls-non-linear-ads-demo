@@ -121,6 +121,12 @@ second of the programme. `inspect.html` opens on it: card 1 shows the range with
 card 2 the request that already went out. The banner video and the still are pieces the demo
 already had: the race's banner and the frozen 16:9.
 
+**Break B carries `CUE="ONCE"`** (ADR 0102): once it has played (entered, then left at its end
+or by a seek out of it), both clients take it out — hls.js from its schedule, the library from
+its experiences and the ranges of its bar — so a seek back into it shows the programme, and its
+tracking does not fire again. In `inspect.html` with our library, the second "break B" jump lands
+on the programme alone.
+
 **The last break is a post-roll** (ADR 0101): its two tags carry `CUE="POST"`, so both clients
 put it after the end of the programme, whatever its START-DATE (186 s, written because the spec
 requires one), and ask for its list when the programme is buffered to its end (hls.js:

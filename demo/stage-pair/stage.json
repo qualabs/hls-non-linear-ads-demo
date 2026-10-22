@@ -185,6 +185,7 @@
     },
     {
       "id": "b",
+      "cue": "ONCE",
       "offset": 65,
       "duracion": 12.0,
       "forma": "backplate",
@@ -193,6 +194,7 @@
       "concurrente": "asset-list-break-b.json",
       "formaImagen": "16x9",
       "lineal": true,
+      "_cue": "CUE=\"ONCE\" (ADR 0102): una vez que se reprodujo -- se entró y se salió, al terminar o por un seek -- cada cliente lo saca: hls.js de su schedule, la librería de sus experiencias y de los rangos de la barra. Un seek de vuelta a B ya no lo dibuja ni vuelve a disparar su tracking. Va en B y no en otro porque es un break de mitad de programa con default, que es el caso en que los dos panes muestran algo y la diferencia se ve.",
       "_": "Turismo en la L porque un paisaje es lo que mejor tolera que le tapen el centro: la guarda del backplate cae sobre cielo y mar, donde no hay nada que perder."
     },
     {

@@ -308,7 +308,9 @@ cambia nada de la forma: es un rango más, con el `kind` de su clase. Un **postr
 ADR 0101) no es un rango del programa: va después de su fin y sólo como lineal, así que no está en
 `programRanges()` ni en `activeAt`; está en `postRolls()`, `{ id, kind, state, startTime,
 experiences }`, con experiencias lineales solamente, y lo reproduce `lib/postroll.js` por su propio
-reloj cuando el programa termina. No hay opción para pedirlas todas de entrada (ADR 0099). El día que la señalización sea live, o una agenda que
+reloj cuando el programa termina. Un break con **`CUE="ONCE"`** (ADR 0102) sale de la lista y de
+`activeAt` después de reproducido (entró y salió), como hls.js lo saca de su schedule: para quien
+pinta, es un rango que deja de estar. No hay opción para pedirlas todas de entrada (ADR 0099). El día que la señalización sea live, o una agenda que
 se resuelve por partes, la promesa sigue valiendo y la coincidencia no.
 
 Un rango cuyo asset-list falla no entra en la lista, y el error queda en la

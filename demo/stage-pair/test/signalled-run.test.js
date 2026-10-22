@@ -195,6 +195,17 @@ test('el preroll: CUE="PRE" en sus dos tags y en ningún otro, START-DATE en el 
   assert.match(corrida.hoja, /break PRE .*CUE=PRE/);
 });
 
+test('el break B lleva CUE="ONCE" en sus dos tags, y ningún otro break lo lleva', () => {
+  // ADR 0102. Los dos clientes lo sacan después de reproducirlo.
+  assert.deepEqual(BREAKS.filter((b) => b.cue === 'ONCE').map((b) => b.id), ['b']);
+  const corrida = run();
+  for (const playlist of [corrida.interstitial, corrida.concurrente]) {
+    const conCue = dateRanges(playlist).filter((t) => /,CUE="ONCE",/.test(t.line));
+    assert.deepEqual(conCue.map((t) => t.id.split('-')[1]), ['B']);
+  }
+  assert.match(corrida.hoja, /break B .*CUE=ONCE/);
+});
+
 test('la librería lee el CUE de los tags que este script escribe', async () => {
   const { cueOf } = await import('../../../lib/signalling.js');
   const corrida = run();

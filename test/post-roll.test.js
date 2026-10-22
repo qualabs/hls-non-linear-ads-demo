@@ -150,7 +150,7 @@ test('VOD: a post-roll is not asked for at load, is not on the bar, and is never
     assert.deepEqual(provider.programRanges().ranges, []);
     assert.deepEqual(provider.activeAt(190), [], 'not at its START-DATE');
     assert.deepEqual(provider.postRolls(), [
-      { id: 'AD-POST-CONCURRENT', kind: 'concurrent', state: 'waiting', startTime: 198, experiences: [] }
+      { id: 'AD-POST-CONCURRENT', kind: 'concurrent', once: false, state: 'waiting', startTime: 198, experiences: [] }
     ]);
   } finally { restore(); }
 });
