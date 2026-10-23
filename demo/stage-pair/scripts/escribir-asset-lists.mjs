@@ -169,7 +169,7 @@ function concurrente(brk) {
 }
 
 /**
- * El asset-list del break lineal tradicional (ADR 0105): SÓLO la parte estándar,
+ * El asset-list del break lineal tradicional (ADR 0107): SÓLO la parte estándar,
  * el `URI` y la `DURATION` del Apéndice D.2, porque su tag es de la clase de
  * Apple y lo reproduce hls.js en los dos panes. Sin bloque: no hay nada que
  * dibujar. La pieza es el 16:9 de su campaña, que ya existe.

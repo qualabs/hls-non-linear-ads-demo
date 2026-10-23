@@ -15,7 +15,7 @@
 //
 // AND THE ASSET-LIST IS FETCHED ONLY ONCE THE PLAYER HAS ASKED FOR IT. The
 // player asks when the programme is buffered up to the break, as hls.js does for
-// an interstitial (ADR 0098, ADR 0099), and a page that went and read the list
+// an interstitial (ADR 0100, ADR 0101), and a page that went and read the list
 // before that would be the request the player does not make. So the tag is
 // printed at once, and the folds wait for the contract to say the break is no
 // longer known only off its tag. Here that is a moment after the page loads,

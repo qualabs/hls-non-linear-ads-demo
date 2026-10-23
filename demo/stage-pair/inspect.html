@@ -42,7 +42,7 @@
 
   TWO, WHAT THE CLIENT ASKED FOR. The URL that went out, read off the
   performance timeline, with the two capability parameters picked out of it
-  (ADR 0086, ADR 0094). The switch above moves them.
+  (ADR 0086, ADR 0096). The switch above moves them.
 
   THREE, WHAT CAME BACK. The body of that same URL, verbatim -- and it is THE
   SAME for every position of the switch, because the answer carries every
@@ -52,13 +52,13 @@
   checked against what the device declared, in order, with the reason for every
   one discarded in a sentence that can be said out loud, the order the rest
   were handed to the renderer in, and -- once it is known -- WHAT WAS ACTUALLY
-  ON SCREEN: the renderer's failover (ADR 0097) takes an option whose asset
+  ON SCREEN: the renderer's failover (ADR 0099) takes an option whose asset
   fails to load down and mounts the next, then the linear default, then
   nothing. Two reports of the library, `onResolved` and `onPresented`, not a
   second opinion computed by this page. The toggle "Pre-validate assets"
-  (off, the library's default) adds the up-front check of ADR 0096.
+  (off, the library's default) adds the up-front check of ADR 0098.
 
-  AND THE REQUESTS ARRIVE ONE BREAK AT A TIME (ADR 0098): the library asks for
+  AND THE REQUESTS ARRIVE ONE BREAK AT A TIME (ADR 0100): the library asks for
   a break's asset-list when the programme is buffered up to it, or when it is
   played or sought into, as hls.js does for an interstitial -- so card 2 says
   "no request for this break yet" for a break the programme has not reached.

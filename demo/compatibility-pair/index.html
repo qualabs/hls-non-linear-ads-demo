@@ -20,7 +20,7 @@
   can make and the reason the page is two players and not one: the new
   experience deploys without breaking the clients that are already in the
   market. Both clients load THE SAME media playlist file, and each asks for it
-  with the class it takes (ADR 0103): the playlist declares
+  with the class it takes (ADR 0105): the playlist declares
   EXT-X-DEFINE:QUERYPARAM="adclass" and every break is one EXT-X-DATERANGE with
   CLASS="{$adclass}", which hls.js substitutes while parsing. Backwards
   compatibility does not come from one class extending the other -- in HLS the
@@ -37,7 +37,7 @@
   of ADR 0007).
 
   Right pane, THIS DEMO'S client: the same library, same version, unmodified,
-  with its interstitials machinery on (ADR 0104) and the two layers of
+  with its interstitials machinery on (ADR 0106) and the two layers of
   ADR 0003 on top. It keeps the primary content on screen and draws the
   concurrent experience over it.
 

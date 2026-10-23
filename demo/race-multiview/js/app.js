@@ -2,7 +2,7 @@
 //
 // It is two things and it marks which is which. The first is WHAT AN INTEGRATOR WRITES, and
 // it is the block fenced below: the library arrives as a <script src> that defines a global,
-// the page builds its own hls.js instance with its default configuration (ADR 0104),
+// the page builds its own hls.js instance with its default configuration (ADR 0106),
 // and turns the concurrent experience on over a container. Six lines, and the multi view is
 // in none of them -- it is on because the playlist signals it, and a playlist that signals no
 // offer comes out exactly as it did before any of this existed.

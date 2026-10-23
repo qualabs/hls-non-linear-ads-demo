@@ -12,7 +12,7 @@
 # dos clientes leyendo la misma playlist. Acá el argumento es otro y el par no
 # aporta: lo que se muestra es que las dos clases nuestras conviven.
 #
-# LA CLASE DEL AVISO LA ELIGE EL CLIENTE POR LA URL (ADR 0103): la playlist
+# LA CLASE DEL AVISO LA ELIGE EL CLIENTE POR LA URL (ADR 0105): la playlist
 # declara `#EXT-X-DEFINE:QUERYPARAM="adclass"` y el tag del aviso lleva
 # `CLASS="{$adclass}"`. La página corre sólo nuestro player y pide la playlist con
 # la clase concurrente; hls.js sustituye la referencia al parsear. Las ventanas de
@@ -45,7 +45,7 @@ OUT=${OUT:-content/primary/con-daterange.m3u8}
 # ADR 0063: hermanas, y no una extensión de la otra, porque en HLS la clase se
 # compara por igualdad exacta de string y el formato no tiene herencia.
 CLASE_MULTIVIEW=com.qualabs.hls.multiViewInterstitial
-# La del aviso no se escribe: es la variable del ADR 0103. Su nombre es a la vez
+# La del aviso no se escribe: es la variable del ADR 0105. Su nombre es a la vez
 # el del parámetro de la URL; js/app.js lo repite y el test compara los dos.
 PARAMETRO=adclass
 

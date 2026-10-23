@@ -393,18 +393,18 @@ implementación real tiene que volver a abrir. No se cambian en este proyecto.
 
 ### Eager vs lazy asset-list resolution
 
-> **2026-10-20 — nota.** Resuelta por el ADR 0098: el default pasa a ser on demand, con la regla
+> **2026-10-20 — nota.** Resuelta por el ADR 0100: el default pasa a ser on demand, con la regla
 > de hls.js (el asset-list se pide cuando el programa está bufereado hasta el break, o cuando se
 > reproduce o se busca adentro), y `assetListTiming: 'eager'` queda para las páginas que necesitan
 > el programa entero de entrada. Lo que sigue es el análisis de antes de esa decisión.
 >
-> **2026-10-22 — nota.** `assetListTiming` se quitó (ADR 0099): no hay modo eager. Las cuatro
+> **2026-10-22 — nota.** `assetListTiming` se quitó (ADR 0101): no hay modo eager. Las cuatro
 > páginas que lo usaban llenan lo que muestran a medida que llega cada lista, y lo que una página
 > quiera saber de un break antes lo lee de los Date Ranges de hls.js.
 >
 > **2026-10-22 — nota.** Un preroll (`CUE="PRE"`) es la excepción, como en hls.js: su asset-list
-> se pide al cargar (ADR 0100). Y una página en pausa en t=0 ya pide los breaks que su buffer
-> alcanza, con la tolerancia de 0,1 s de hls.js (nota del ADR 0099).
+> se pide al cargar (ADR 0102). Y una página en pausa en t=0 ya pide los breaks que su buffer
+> alcanza, con la tolerancia de 0,1 s de hls.js (nota del ADR 0101).
 
 Planteada por David el 2026-09-30: en `index.html` el panel de nuestra librería muestra
 los tres asset-lists pedidos al arrancar, y el del player nativo los pide de a uno, a

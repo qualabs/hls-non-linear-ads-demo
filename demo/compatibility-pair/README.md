@@ -48,7 +48,7 @@ asset-lists and every relative path of the page untouched (ADR 0022).
 The page is two players, not one, and that is the demo's strongest argument:
 this deploys without breaking the clients that are already in the market. **Both
 load the same file, and they differ only in the query parameter they ask for it
-with** (ADR 0103). The media playlist declares `#EXT-X-DEFINE:QUERYPARAM="adclass"`
+with** (ADR 0105). The media playlist declares `#EXT-X-DEFINE:QUERYPARAM="adclass"`
 and carries ONE `EXT-X-DATERANGE` per break, with `CLASS="{$adclass}"`: the left
 pane loads `con-daterange.m3u8?adclass=com.apple.hls.interstitial`, the right one
 `con-daterange.m3u8?adclass=com.qualabs.hls.concurrentInterstitial`, and hls.js
@@ -156,10 +156,10 @@ programme is gone. When the break ends they are on the same second again, which
 is what makes the two panes comparable frame by frame.
 
 **At 5 s, before the first concurrent break, both panes play the same traditional linear
-ad** (ADR 0105): one tag whose class is written, `CLASS="com.apple.hls.interstitial"`, and
+ad** (ADR 0107): one tag whose class is written, `CLASS="com.apple.hls.interstitial"`, and
 not chosen by the query, naming the twelve-second `asset-list-linear.json`. The left pane plays
 it as it plays everything; the right one too, because hls.js runs inside our player with its
-interstitials machinery on and plays Apple's class, while the library draws its own (ADR 0104).
+interstitials machinery on and plays Apple's class, while the library draws its own (ADR 0106).
 It ends at 17 s, three seconds before break 1.
 
 **In break 5 both panes are inside the same forty-eight seconds**, because they
@@ -167,7 +167,7 @@ read the same tag and the same asset-list. The left one plays the standard part
 of its four ads back to back, full frame; the right one draws three of them over
 the programme and plays the third, which is linear, full frame. From 144 s to
 156 s the two panes show the same thing, the linear ad, and that is right: it is
-the one ad of the break with no concurrent form. Before ADR 0103 the Apple tag of
+the one ad of the break with no concurrent form. Before ADR 0105 the Apple tag of
 this break named a twelve-second list of its own and the comparison inverted for
 twelve seconds; with one tag per break that cannot happen.
 

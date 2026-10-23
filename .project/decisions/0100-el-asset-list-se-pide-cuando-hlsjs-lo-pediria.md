@@ -1,5 +1,5 @@
 ---
-id: "0098"
+id: "0100"
 title: El asset-list de cada break se pide cuando hls.js lo pediría, y eager queda como opción
 status: accepted
 scope: project
@@ -10,13 +10,13 @@ generalizes: null
 generalized_by: null
 ---
 
-## 2026-10-22 — nota: `'eager'` quitado por el ADR 0099
+## 2026-10-22 — nota: `'eager'` quitado por el ADR 0101
 
 **La opción `assetListTiming` ya no existe.** David Hassoun eligió la opción 2 del Abierto de abajo
 ("¿Quitar `'eager'`?"): la librería pide cada asset-list sólo con la regla de hls.js, y las cuatro
 páginas que pasaban `'eager'` llenan lo que muestran a medida que llega cada lista. Lo que una
 página quiera saber de un break antes de su lista lo lee de los Date Ranges que hls.js ya parseó
-(ADR 0099).
+(ADR 0101).
 
 El resto de este ADR sigue en pie tal como está escrito: la regla, `assetListDue`, los rangos
 provisionales en `programRanges()`, la pre-validación en el momento de la lista y el seek adentro
@@ -33,7 +33,7 @@ abierta en `.project/PROJECT.md` ("Eager vs lazy asset-list resolution", plantea
 
 El 2026-10-20 David Hassoun aprobó cambiarlo para seguir el momento en que hls.js pide el
 asset-list de un interstitial, y quedar alineados con la spec de HLS. No depende de
-`preValidateAssets` (ADR 0097).
+`preValidateAssets` (ADR 0099).
 
 ## La regla de hls.js, leída en el 1.7.2 que este repositorio vendoriza
 

@@ -19,7 +19,7 @@
 //   and once a break has answered it never changes: an ad announces boxes, an
 //   offer announces a catalogue, and neither depends on anybody watching. It is
 //   drawn from `experiences`. A list arrives when the programme is buffered up to
-//   its break, as hls.js asks for an interstitial's (ADR 0098, ADR 0099), so a
+//   its break, as hls.js asks for an interstitial's (ADR 0100, ADR 0101), so a
 //   break further on has a card that says so until its list is in.
 //
 //   WHAT WAS COMPOSED cannot be answered in advance AT ALL, and that is not a
@@ -225,7 +225,7 @@ export function showWhatIsAnnounced({ provider, video, cards, fields, shapes, wa
     // ONE CARD PER BREAK FROM THE START, AND EACH ONE FILLS IN WHEN ITS LIST
     // ARRIVES. The breaks are on the contract as soon as the playlist is read, off
     // their tags (`provisional`), and their asset-lists are asked for when the
-    // programme is buffered up to each one (ADR 0098). Redrawn only when the set
+    // programme is buffered up to each one (ADR 0100). Redrawn only when the set
     // of ranges changes or one of them is resolved, which is what the key says.
     const { ranges } = provider.programRanges();
     const key = ranges.map((range) => `${range.id}${range.provisional ? '?' : ''}`).join('|');

@@ -1,5 +1,5 @@
 // variable-substitution.js -- what a client makes of a playlist that chooses the
-// class of its ad breaks with a query parameter (ADR 0103), so that the tests of
+// class of its ad breaks with a query parameter (ADR 0105), so that the tests of
 // every demo can read a generated playlist the way each of its two clients reads
 // it.
 //

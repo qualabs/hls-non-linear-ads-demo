@@ -3,7 +3,7 @@
 // What they are for: the intermediate step of ADR 0085. The ad presentation
 // server answers every layoutOption of an ad, whatever the device said, and the
 // library keeps the first one the configured capabilities fit (SVTA2053 5.3.3,
-// `{ concurrentVideo, concurrentImage }` since ADR 0094). When
+// `{ concurrentVideo, concurrentImage }` since ADR 0096). When
 // none is left, the asset falls to its default linear ad or is skipped. Every
 // branch of that fails in silence on a screen -- an option that should have
 // been discarded is drawn anyway, and looks like the demo working -- so each
@@ -215,7 +215,7 @@ test('one item with no option left takes the whole asset to its default, and not
   });
 });
 
-test('the names before ADR 0094 are not read, and that is said instead of filtering on nothing', () => {
+test('the names before ADR 0096 are not read, and that is said instead of filtering on nothing', () => {
   const warned = [];
   const { warn } = console;
   console.warn = (m) => warned.push(m);
@@ -230,7 +230,7 @@ test('the names before ADR 0094 are not read, and that is said instead of filter
 
 test('an asset-list with the key `options` of the drafts before v3 is not read as layoutOptions', () => {
   // SVTA2053 v3 renamed `options` to `layoutOptions` and says nothing about the
-  // old name, so the library reads only the new one (ADR 0095): an item that
+  // old name, so the library reads only the new one (ADR 0097): an item that
   // carries `options` is an item with no layout of its own, which cannot be
   // drawn, and the asset goes to its default.
   quiet(() => {

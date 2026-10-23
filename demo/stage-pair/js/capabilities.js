@@ -1,6 +1,6 @@
 // capabilities.js -- the switch of index.html and inspect.html: what the application
 // configures on the library, `concurrentVideo` and `concurrentImage` (SVTA2053 5.3.3,
-// ADR 0094), and the sentences both pages print about what the library did with it
+// ADR 0096), and the sentences both pages print about what the library did with it
 // (ADR 0085).
 //
 // ONE FILE FOR THE TWO PAGES because the two switches are the same statement,
@@ -86,11 +86,11 @@ export function describirOpcion(opcion, indice) {
 /**
  * What the library HANDED THE RENDERER for an asset of a break, as one sentence,
  * from the report of `onResolved` (`resolveAssetList` in lib/signalling.js).
- * Since ADR 0097 that is not yet what is on screen: the renderer can still fall
+ * Since ADR 0099 that is not yet what is on screen: the renderer can still fall
  * to a later option, to the default or to nothing, and `presentado` says that.
  */
 export function desenlace(asset) {
-  // A post-roll (ADR 0101) never presents its non-linear ad: there is no
+  // A post-roll (ADR 0103) never presents its non-linear ad: there is no
   // programme under it after the end. Its options are not even considered.
   if (asset.postroll) {
     return asset.outcome === 'skipped'
@@ -140,7 +140,7 @@ export function desenlaceCorto(asset) {
 }
 
 /**
- * WHAT WAS ACTUALLY PRESENTED, from the report of `onPresented` (ADR 0097): the
+ * WHAT WAS ACTUALLY PRESENTED, from the report of `onPresented` (ADR 0099): the
  * renderer's failover, which is always on, after every attempt that failed to
  * load on screen.
  */
@@ -164,7 +164,7 @@ export function presentadoCorto(reporte) {
   return `· shown: ${p.linear ? 'the linear default' : `option ${p.index + 1}`}${fallos}${reporte.late ? ', late' : ''}`;
 }
 
-/** The break a report of `onResolved` belongs to: `AD-A` is break `a` (one tag per break, ADR 0103). */
+/** The break a report of `onResolved` belongs to: `AD-A` is break `a` (one tag per break, ADR 0105). */
 export const breakDelReporte = (seleccion) => seleccion.id.match(/^AD-([A-Z0-9]+)(?:-|$)/i)?.[1].toLowerCase() ?? null;
 
 // ===========================================================================

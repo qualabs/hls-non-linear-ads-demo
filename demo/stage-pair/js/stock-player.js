@@ -6,7 +6,7 @@
 // which is what a deployed player looks like today. It does not import the
 // signalling layer, it does not import the renderer, and it has no idea the
 // sibling class exists. The page hands it the same playlist file the demo
-// player loads, asked for with Apple's class in the query (ADR 0103): hls.js
+// player loads, asked for with Apple's class in the query (ADR 0105): hls.js
 // substitutes `CLASS="{$adclass}"` while parsing, so every break reaches it as
 // an Apple interstitial, and it plays the standard part of the asset-list --
 // the `URI` and `DURATION` of each asset -- and ignores the block on top. In HLS
@@ -37,7 +37,7 @@
  * @param container  the box around that element, which is what the chrome is
  *                   drawn into and what goes fullscreen
  * @param src        the media playlist. The SAME file the demo player loads,
- *                   with Apple's class in its query (ADR 0103)
+ *                   with Apple's class in its query (ADR 0105)
  * @param pane       the labelled box around it; its `data-state` is what the
  *                   stylesheet paints, `primary` or `ad`
  * @param state      one line of text under the player, for the recording

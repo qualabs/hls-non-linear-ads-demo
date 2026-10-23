@@ -1,5 +1,5 @@
 ---
-id: "0104"
+id: "0106"
 title: Las dos clases en un player; hls.js reproduce el interstitial tradicional con su maquinaria encendida y la librería dibuja las suyas
 status: accepted
 scope: project
@@ -15,7 +15,7 @@ generalized_by: null
 El ADR 0002 apagó la maquinaria de interstitials de hls.js (`hlsConfig = {
 interstitialsController: undefined }`) y la librería avisaba con `console.error` si estaba
 encendida, porque la misma playlist llevaba un tag de Apple por break (ADR 0007) y con la
-maquinaria encendida nuestro pane reemplazaba el contenido. El ADR 0103 deja un juego de tags por
+maquinaria encendida nuestro pane reemplazaba el contenido. El ADR 0105 deja un juego de tags por
 stream y la clase la elige el cliente, así que ese motivo desaparece. Y el 2026-10-22 David
 Hassoun decidió **(c)**: nuestro player tiene que soportar las dos clases en una sola
 implementación, con un break lineal tradicional `CLASS="com.apple.hls.interstitial"` escrito en
@@ -33,7 +33,7 @@ la playlist (no sustituido) en un momento que no se solape con ningún otro.
 - **Mientras hls.js reproduce uno de sus interstitials no se dibuja nada nuestro.** Se detecta con
   `interstitialsManager.playingItem.event` (`linearOnScreen`). Durante ese tiempo el renderer
   recibe `activeAt` vacío, y el tracking (que lee lo presentado) tampoco ve nada. No es una
-  resolución de solapamiento —el ADR 0103 dice que no se solapan y que si se solapan "se
+  resolución de solapamiento —el ADR 0105 dice que no se solapan y que si se solapan "se
   resuelven como siempre"—: sólo evita dibujar cajas sobre el aviso de hls.js, que puede estar
   usando el mismo `<video>` con su propio MediaSource.
 - **El reloj del programa** (`createProgramme`, en `lib/signalling.js`): el elemento, salvo
@@ -43,7 +43,7 @@ la playlist (no sustituido) en un momento que no se solape con ningún otro.
   agrega `linearOnScreen()`. Un seek escrito durante el aviso va por hls.js, que aplica su
   `X-RESTRICT`.
 - **La señalización ignora lo que el elemento dice durante el aviso:** `due` y `spend` (pedido a
-  demanda, ADR 0098; ONCE, ADR 0102) no corren mientras hay un interstitial de hls.js en
+  demanda, ADR 0100; ONCE, ADR 0104) no corren mientras hay un interstitial de hls.js en
   pantalla, y el `ended` del elemento cuenta como fin del programa sólo si el reloj del programa
   está en el fin (`programmeAtEnd`): el `ended` también llega al terminar el asset del aviso.
   `lib/postroll.js` recibe la misma condición (`programmeEnded`).
@@ -57,7 +57,7 @@ la playlist (no sustituido) en un momento que no se solape con ningún otro.
 ## Si un break nuestro y uno de Apple se solapan: gana el lineal
 
 Decidido por David el 2026-10-23, con la regla de arriba tal como está. Ante un solapamiento (que
-el ADR 0103 prohíbe, pero que un stream puede traer por error) el lineal de hls.js tiene
+el ADR 0105 prohíbe, pero que un stream puede traer por error) el lineal de hls.js tiene
 prioridad: mientras está en pantalla no se dibuja ni se cuenta nada nuestro, y si al volver el
 programa la ventana nuestra sigue abierta, se retoma.
 
@@ -70,14 +70,14 @@ tiempo del programa y no se puede correr, así que el equivalente nuestro es ced
 (rfc8216bis) sólo define el caso de mismo `START-DATE` (orden de tags, `X-RESUME-OFFSET`
 acumulativo); el solapamiento parcial no está definido.
 
-## El postroll (ADR 0101) y su Abierto
+## El postroll (ADR 0103) y su Abierto
 
 - Un tag de Apple con `CUE="POST"` en el stream lo reproduce hls.js, después del programa, como
   cualquier player de mercado. Nuestra regla para nuestras clases no cambia: un postroll
   concurrente o de multi view nunca es no lineal; cae a su default lineal o se saltea.
-- **El Abierto del ADR 0101 se cierra en la opción 1, y la opción 2 queda sin objeto.** La opción
+- **El Abierto del ADR 0103 se cierra en la opción 1, y la opción 2 queda sin objeto.** La opción
   2 era usar la lista del tag de Apple "apareado" cuando un postroll concurrente no tiene lineal.
-  Con un juego de tags por stream (ADR 0103) ya no hay tag apareado: un break es de una clase o de
+  Con un juego de tags por stream (ADR 0105) ya no hay tag apareado: un break es de una clase o de
   la otra según el cliente, y si un stream quiere un postroll lineal real lo escribe como Apple y
   lo reproduce hls.js.
 
@@ -86,8 +86,8 @@ acumulativo); el solapamiento parcial no está definido.
 - Supersede al ADR 0002. El argumento del ADR 0007 de que el pane nuestro corre "con su maquinaria
   apagada" ya no vale: los dos panes de los pares son `new Hls()` y difieren en la librería y en el
   parámetro de la URL.
-- En las playlists de hoy (después del ADR 0103) nuestro pane no recibe ningún tag de Apple hasta
-  que el ADR 0105 agrega el break lineal escrito; el comportamiento visible no cambia con este
+- En las playlists de hoy (después del ADR 0105) nuestro pane no recibe ningún tag de Apple hasta
+  que el ADR 0107 agrega el break lineal escrito; el comportamiento visible no cambia con este
   ADR solo.
 - Tests: `test/both-classes.test.js` (las funciones puras, la fachada, la señalización y el
   postroll con un `ended` que no es del programa).

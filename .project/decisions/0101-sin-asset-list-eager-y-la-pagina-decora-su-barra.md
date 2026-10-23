@@ -1,5 +1,5 @@
 ---
-id: "0099"
+id: "0101"
 title: Se quita assetListTiming, y la página que quiere los breaks por adelantado los lee de hls.js
 status: accepted
 scope: project
@@ -53,7 +53,7 @@ El resto de este ADR sigue en pie.
 
 ## Contexto
 
-El ADR 0098 hizo que el asset-list de cada break se pida cuando hls.js lo pediría, y dejó
+El ADR 0100 hizo que el asset-list de cada break se pida cuando hls.js lo pediría, y dejó
 `assetListTiming: 'eager'` como opción para las cuatro páginas que contaban algo sobre la línea de
 tiempo (`hydration-break`, `multiview-offer`, `race-multiview` y `race.html` de `stage-pair`). Su
 "Abierto" preguntaba si quitarla.
@@ -67,7 +67,7 @@ the rest should stay true to the hls.js functionality."
 ## Decisión
 
 - **`assetListTiming` no existe más.** La librería pide cada asset-list con la regla de hls.js
-  (`assetListDue`, ADR 0098) y no tiene otro camino. Una opción desconocida se ignora, como
+  (`assetListDue`, ADR 0100) y no tiene otro camino. Una opción desconocida se ignora, como
   cualquier otra que `attach` no lee. La razón es la de David: quedarse fiel a hls.js, que no tiene
   un modo de pedir todos los asset-lists de entrada.
 - **Lo que una página quiere saber de un break antes de su lista lo lee de lo que hls.js ya
@@ -80,7 +80,7 @@ the rest should stay true to the hls.js functionality."
   monta sobre una barra propia). Vive en `demo/` y no en `lib/` por el ADR 0015.
 - **No se monta en ninguna página todavía.** Las cuatro páginas dibujan su barra con los controles
   de la librería, y esa barra ya marca cada break desde el segundo cero con los mismos datos del
-  tag (`programRanges()`, `provisional`, ADR 0098). Montar el helper además dibujaría cada break dos
+  tag (`programRanges()`, `provisional`, ADR 0100). Montar el helper además dibujaría cada break dos
   veces. Ver Abierto.
 - **Lo que las páginas mostraban de todos los breaks por adelantado ahora se llena a medida que
   llega cada lista.** La fila, la tarjeta o el pliegue de un break cuyo rango sigue `provisional`

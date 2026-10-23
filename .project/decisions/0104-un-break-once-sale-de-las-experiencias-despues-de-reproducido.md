@@ -1,5 +1,5 @@
 ---
-id: "0102"
+id: "0104"
 title: Un break con CUE="ONCE" sale de las experiencias y de la barra después de reproducido, como en hls.js
 status: accepted
 scope: project
@@ -12,7 +12,7 @@ generalized_by: null
 
 ## Contexto
 
-El ADR 0100 leyó `CUE="ONCE"` y no lo aplicó: un break `ONCE` se volvía a dibujar en un seek de
+El ADR 0102 leyó `CUE="ONCE"` y no lo aplicó: un break `ONCE` se volvía a dibujar en un seek de
 vuelta, con su tracking. Su Abierto recomendaba la opción de hls.js. El 2026-10-22 David Hassoun
 la eligió: una vez que su ventana se presentó, sacarlo de las experiencias y de los rangos de la
 barra, para que un seek de vuelta no lo redibuje ni vuelva a disparar tracking, con el disparador
@@ -43,7 +43,7 @@ exacto de hls.js.
   librería resuelve y para el tag de Apple que sólo reporta.
 - **Efectos:** el renderer deja de dibujarlo, el tracking (que lee lo presentado) no vuelve a dar
   `slotStart`, y la barra deja de marcarlo.
-- **Un postroll con `ONCE`** (ADR 0101): `lib/postroll.js` lo da por reproducido cuando su lineal
+- **Un postroll con `ONCE`** (ADR 0103): `lib/postroll.js` lo da por reproducido cuando su lineal
   arrancó, y no lo vuelve a reproducir en un fin posterior (por ejemplo, después de volver a
   empezar el programa).
 - **`stage-pair`:** el break B lleva `CUE="ONCE"` en sus dos tags, por `stage.json` y

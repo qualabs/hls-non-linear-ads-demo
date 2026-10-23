@@ -101,7 +101,7 @@ const hls = new Hls(myOwnConfig);   // nothing of ours goes into it
 ```
 
 **One stream can carry both kinds of break**, as long as they never overlap in
-time (ADR 0103): ours, which this library draws over the programme, and Apple's
+time (ADR 0105): ours, which this library draws over the programme, and Apple's
 traditional interstitial (`CLASS="com.apple.hls.interstitial"`), which replaces
 the programme with the ad. The second is hls.js's to play, and it plays it with
 its own interstitials machinery, which is on by default. The two do not compete
@@ -109,7 +109,7 @@ for a break: that machinery is closed over Apple's class, so a Date Range of
 ours never reaches it, and the library never asks for the list of an Apple one.
 
 While hls.js plays one of its interstitials, the library keeps out of the way
-(ADR 0104): nothing of ours is drawn over the ad, the chrome reads the
+(ADR 0106): nothing of ours is drawn over the ad, the chrome reads the
 programme's clock from hls.js (`interstitialsManager.primary`) instead of the
 element, which may be playing the ad, and the bar marks the breaks hls.js
 scheduled, in their own colour, next to ours. The handle says when it is
@@ -136,7 +136,7 @@ that are sold both ways, and each player loads the same URL with its class in th
 query (`?adclass=com.apple.hls.interstitial`, or
 `?adclass=` + `QualabsConcurrentHls.CONCURRENT_CLASS`). hls.js substitutes the
 reference while parsing, before the library or its own machinery sees the tag
-(HLS variable substitution, draft-pantos-hls-rfc8216bis-22, 4.3; ADR 0103). A
+(HLS variable substitution, draft-pantos-hls-rfc8216bis-22, 4.3; ADR 0105). A
 playlist with that definition loaded without the parameter does not parse.
 
 ### 2.2 No native controls on the primary content
@@ -373,7 +373,7 @@ out, with no name to check itself against.
 | `container` | **required** | the box the composition lives in, and the element that goes fullscreen. The media element has to be inside it |
 | `video` | optional | only if the media element is not the one the instance is attached to |
 | `onResolved` | optional | called with the experiences of each asset-list as they resolve, and with what the capability filter and pre-validation did with that break: per item, what was discarded and why and the `order` the rest were handed to the renderer in; the `fallback` handed as last resort; every first request made (`requests`, with its `method`); and `preValidation: { enabled, method }`. It says what was HANDED OVER, not what was shown. A hook for your own logging; nothing depends on it |
-| `onPresented` | optional | called once per ad when it is known which option was actually on screen, after the renderer's failover (ADR 0097): `{ id, itemId, outcome: 'presented' \| 'skipped', presented: { index, type, linear } \| null, attempts, late, lateBy }`. `index` is the option's place in the ad's `layoutOptions` (`null` for the linear default); `attempts` are the presentations that failed to load before it, each `{ index, type, linear, uri, reason, late }`, with `reason` a readable sentence such as `failed to load /ad.m3u8 (HTTP 404)`; `late` says the one presented was mounted after its window had opened, by `lateBy` seconds. A callback that throws is reported and does not stop playback |
+| `onPresented` | optional | called once per ad when it is known which option was actually on screen, after the renderer's failover (ADR 0099): `{ id, itemId, outcome: 'presented' \| 'skipped', presented: { index, type, linear } \| null, attempts, late, lateBy }`. `index` is the option's place in the ad's `layoutOptions` (`null` for the linear default); `attempts` are the presentations that failed to load before it, each `{ index, type, linear, uri, reason, late }`, with `reason` a readable sentence such as `failed to load /ad.m3u8 (HTTP 404)`; `late` says the one presented was mounted after its window had opened, by `lateBy` seconds. A callback that throws is reported and does not stop playback |
 | `onTracking` | optional | called when an ad goes on screen and when it leaves it: `{ type: 'slotStart' \| 'slotEnd', time, id, itemId, experienceType, startTime, duration, identifiers }`. `identifiers` are the AdIdentifiers of the ad's Slot (`{ scheme, value }`, an Ad-ID for instance), so this is where a beacon goes out or an impression is counted. A seek out of an ad ends it and a seek into one starts it, at the second of the seek. It counts what is on screen: an ad skipped because nothing of it loaded fires nothing, and an ad whose linear default played fires with `experienceType: 'linear'`. A callback that throws is reported and does not stop playback |
 | `logo` | optional | `{ src, alt }` — your own mark, drawn inside the container (§7) |
 | `capabilities` | optional | `{ concurrentVideo, concurrentImage }`: what the device can draw. The layoutOptions of every ad are filtered against it before anything is drawn |
@@ -452,7 +452,7 @@ one method, so a HEAD on a URL signed for GET is answered 403 although the asset
 is there — with HEAD, every option would be discarded. If your assets are served
 from signed URLs, keep GET.
 
-> **To revisit (open point of ADR 0097).** GET vs HEAD is not settled. Other
+> **To revisit (open point of ADR 0099).** GET vs HEAD is not settled. Other
 > implementations may point at very large files — a progressive MP4 of the whole
 > ad — where a GET pre-validation is costly. This library cancels the body once
 > the status arrives, which limits the bytes but still opens the transfer, and an
@@ -465,26 +465,26 @@ over in, how the asset was handed over, and every first request made, in
 `requests` — is the second argument of `onResolved`.
 
 **When the asset-list is requested.** On demand, with the rule hls.js
-applies to an interstitial's `X-ASSET-LIST` (ADR 0098): when the programme is
+applies to an interstitial's `X-ASSET-LIST` (ADR 0100): when the programme is
 buffered up to the start of the break — about the length of the forward buffer
 ahead — or when it is played or sought into it. A seek into a break asks for its
 list right there, and the ad is drawn when it arrives; the programme does not
 stop. Until then the break is on `programRanges()` already, marked
 `provisional`, with the length its tag declares, and it is replaced by the range
 of what the list resolved into. There is no option to request them all up front
-(ADR 0099): the library stays with hls.js. A page that wants every break on a
+(ADR 0101): the library stays with hls.js. A page that wants every break on a
 timeline of its own before the lists arrive reads it where hls.js leaves it, in
 the Date Ranges of the level details (`details.dateRanges`, each with its
 `startTime` and its `plannedDuration` or `duration`), or off `programRanges()`,
 where those breaks already are, `provisional`.
 
 "Buffered up to the break" steps over a hole smaller than 0.1 s, hls.js's own
-default `maxBufferHole`, between the playhead and the buffer ahead (ADR 0099).
+default `maxBufferHole`, between the playhead and the buffer ahead (ADR 0101).
 The first buffered range of a packaged programme rarely starts at exactly 0 —
 0.067 s here — so without it a page paused at 0 would not ask for a break that
 is already inside its buffer until the viewer pressed play.
 
-**A preroll, `CUE="PRE"`, is asked for at load** (ADR 0100), as hls.js does
+**A preroll, `CUE="PRE"`, is asked for at load** (ADR 0102), as hls.js does
 with an interstitial preroll: as soon as the playlist and the media element are
 there, paused or not and with nothing buffered. Its START-DATE is not where it
 goes: it sits where playback begins, the `startPosition` the player was given
@@ -499,7 +499,7 @@ is not presented, as hls.js never steps back into one. The live path is tested
 on simulated inputs only: there is no live primary in this repository. Both
 concurrent and multi-view Date Ranges can carry it.
 
-**A post-roll, `CUE="POST"`, is never drawn as a non-linear ad** (ADR 0101):
+**A post-roll, `CUE="POST"`, is never drawn as a non-linear ad** (ADR 0103):
 after the programme ends there is nothing to draw over. Its asset-list is asked
 for when hls.js asks for a post-roll's, once the playlist has ended (ENDLIST) and
 the programme is buffered to its end (`BUFFERED_TO_END`, or the media element
@@ -512,7 +512,7 @@ the playlist ends. It takes no time of the programme, so it is not in
 `onTracking` report its ads with `postroll: true`. Pressing play or seeking on
 the ended programme takes it off.
 
-**A break with `CUE="ONCE"` is presented once** (ADR 0102), as hls.js does:
+**A break with `CUE="ONCE"` is presented once** (ADR 0104), as hls.js does:
 once it has played -- the programme entered its window and then left it, at its
 end or by a seek out of it -- it leaves the experiences and the ranges for good,
 so a seek back neither draws it again nor reports it again to `onTracking`, and

@@ -3,7 +3,7 @@
 // It is two things and it marks which is which. The first is WHAT AN INTEGRATOR
 // WRITES, and it is the block fenced below: the library arrives as a
 // <script src> that defines a global, the page builds its own hls.js instance
-// with its default configuration (ADR 0104), and turns the concurrent
+// with its default configuration (ADR 0106), and turns the concurrent
 // experience on over a container. Everything else on this page exists because
 // this page is making an argument, and none of it is plumbing the library needs.
 //
@@ -21,7 +21,7 @@ import { showSignalling } from './senalizacion.js';
 // file in git: the clock moves every time the content is packaged.
 //
 // The class of that Date Range is the playlist's variable `{$adclass}` (ADR
-// 0103), and this page runs only our player, so it asks with OUR class and
+// 0105), and this page runs only our player, so it asks with OUR class and
 // hls.js substitutes it while parsing. The name is the one
 // scripts/senalizar-contenido.sh writes (`PARAMETRO`); the test holds them
 // together.

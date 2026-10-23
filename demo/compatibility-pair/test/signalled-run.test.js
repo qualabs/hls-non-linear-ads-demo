@@ -73,7 +73,7 @@ function run() {
 }
 
 const allTags = (playlist) => playlist.split('\n').filter((l) => l.startsWith('#EXT-X-DATERANGE:'));
-/** The tags of the five breaks of the table, without the linear one written with Apple's class (ADR 0105). */
+/** The tags of the five breaks of the table, without the linear one written with Apple's class (ADR 0107). */
 const tags = (playlist) => allTags(playlist).filter((l) => !l.includes('ID="AD-LINEAR"'));
 const classOf = (line) => line.match(/CLASS="([^"]+)"/)?.[1];
 const readAs = (playlist, hlsClass) =>
@@ -101,7 +101,7 @@ test('the length a break declares is computed from its asset-list and not typed 
   assert.doesNotMatch(SIGNALLER, /PLANNED-DURATION=\d/);
 });
 
-test('one tag per break, its class the variable the page fills with each pane\'s class (ADR 0103)', () => {
+test('one tag per break, its class the variable the page fills with each pane\'s class (ADR 0105)', () => {
   // The script and the page spell the parameter once each, and they agree.
   assert.ok(PARAM, 'the script declares PARAMETRO');
   assert.equal(PAGE_PARAM, PARAM, 'js/app.js asks with the parameter the playlist defines');
@@ -132,7 +132,7 @@ test('read with each class, the same file is all Apple or all ours, and the same
     'with no parameter the playlist must fail to parse');
 });
 
-test('one traditional linear break, its class written and not chosen, overlapping no other (ADR 0105)', () => {
+test('one traditional linear break, its class written and not chosen, overlapping no other (ADR 0107)', () => {
   const playlist = run();
   const linear = allTags(playlist).filter((l) => l.includes('ID="AD-LINEAR"'));
   assert.equal(linear.length, 1);

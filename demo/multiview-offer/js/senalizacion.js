@@ -142,7 +142,7 @@ export function showSignalling({ src, provider, video, tags, payload, assets }) 
       //
       // AND FETCHED ONLY ONCE THE PLAYER HAS ASKED FOR IT. The player asks for a
       // break's list when the programme is buffered up to the break, as hls.js does
-      // for an interstitial (ADR 0098, ADR 0099); a page that read every list at load
+      // for an interstitial (ADR 0100, ADR 0101); a page that read every list at load
       // would be making the request the player does not make. So each fold is there
       // from the start and fills in when its break's list is in.
       let glossed = false;
