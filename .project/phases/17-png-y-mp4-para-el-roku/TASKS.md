@@ -120,7 +120,8 @@
 - **nivel de verificación:** alto. Escribe en demos públicas.
 - **Needs from a person:** Nicolás da el OK para las dos salidas a internet (la subida de
   `content/` y el push a `main`), con la evidencia de T-04, T-05 y T-06 delante.
-- **bloqueo (2026-10-22):** en la TV, la gemela MP4 de la L de hydration-break tapa el programa. El
-  MP4 es opaco a cuadro entero (la caja del programa es negra) y en el Roku AnimatedImage va en el
-  plano gráfico, encima del video; en la web el programa va encima por `zDepth`. Lo investiga
-  `roku-ads-02`. No se publica hasta resolverlo.
+- **post-ejecución:** 2026-10-22, la L de hydration-break tapaba el programa en la TV. No era el
+  formato: en el canal el MP4 iba después del Video en el árbol. `roku-ads-02` midió que el Video abre
+  su ventana en el plano gráfico sobre lo dibujado antes, lo corrigió de su lado, y Nicolás vio la L
+  bien. El formato queda como está.
+- **bloqueo:** espera el OK de Nicolás para las dos salidas a internet.
