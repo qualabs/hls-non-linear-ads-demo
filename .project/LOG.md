@@ -6480,3 +6480,10 @@ Decisión (c) de David, la parte de las playlists. ADR 0105.
 - Smoke en Chrome headless en el 8091 (detenido por PID; 8090 no se reinició): los dos panes de
   `compatibility-pair` reproducen el lineal; en `stage-pair` cada pane ve su clase en el mismo
   archivo y los dos agendan el lineal (el creativo da 404 en esta máquina).
+
+## 2026-10-23 — Solapamiento de un break nuestro con uno de Apple: gana el lineal
+
+- David confirma la regla del ADR 0104 tal como está: mientras hls.js reproduce su lineal no se
+  dibuja ni se cuenta nada nuestro. Queda escrita en el ADR 0104 con el porqué: hls.js 1.7.2
+  encola sus propios interstitials solapados (nunca dos a la vez) y un no lineal no se puede
+  correr, así que cede. Sin cambios de código.

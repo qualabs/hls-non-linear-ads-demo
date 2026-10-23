@@ -54,6 +54,22 @@ la playlist (no sustituido) en un momento que no se solape con ningún otro.
   rango que la señalización reporta del tag de Apple no se usa para la barra: es la palabra de la
   playlist, no la del player (ADR 0018).
 
+## Si un break nuestro y uno de Apple se solapan: gana el lineal
+
+Decidido por David el 2026-10-23, con la regla de arriba tal como está. Ante un solapamiento (que
+el ADR 0103 prohíbe, pero que un stream puede traer por error) el lineal de hls.js tiene
+prioridad: mientras está en pantalla no se dibuja ni se cuenta nada nuestro, y si al volver el
+programa la ventana nuestra sigue abierta, se retoma.
+
+Es el mismo criterio que hls.js 1.7.2 aplica entre sus propios interstitials: nunca dos avisos a la
+vez. `parseSchedule` (`interstitials-schedule.ts`) los ordena por inicio y no chequea el
+solapamiento: si B empieza antes de que termine A, el hueco de programa entre los dos da negativo
+y B se pone entero a continuación (A 100–112 y B 105–117 se ven como A, B, y el programa vuelve en
+117). hls.js puede encolarlos porque un lineal detiene el programa; un no lineal está atado al
+tiempo del programa y no se puede correr, así que el equivalente nuestro es ceder. La spec
+(rfc8216bis) sólo define el caso de mismo `START-DATE` (orden de tags, `X-RESUME-OFFSET`
+acumulativo); el solapamiento parcial no está definido.
+
 ## El postroll (ADR 0101) y su Abierto
 
 - Un tag de Apple con `CUE="POST"` en el stream lo reproduce hls.js, después del programa, como
