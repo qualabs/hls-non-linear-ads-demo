@@ -28,6 +28,7 @@ DEST="$DEST" G="$G" node -e '
   const lista = require("./signalling/asset-list-hydration-break.json");
   const capa = lista.ASSETS
     .map((a) => a["X-AD-CREATIVE-SIGNALING"]?.payload?.[0])
+    .map((p) => (p?.layoutOptions?.length ? { ...p, ...p.layoutOptions[0] } : p))   // la primera opción (ADR 0102)
     .find((p) => p?.type === "squeezebackLShape")?.layout;
   if (!capa) { console.error("el asset list no declara la L"); process.exit(1); }
   const [top, right, bottom, left] = capa.primaryContent.viewport.split(/\s+/).map(Number);

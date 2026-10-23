@@ -91,6 +91,17 @@ instant, and its provenance is exactly that of the file it comes from.
 | `graphics/campaigns/ketrava-16x9-fijo.svg` | `graphics/campaigns/ketrava-16x9.svg`, frame at t = 1.5 s |
 | `graphics/campaigns/kovrin-backplate-fijo.svg` | `graphics/campaigns/kovrin-backplate.svg`, frame at t = 1.5 s |
 
+**And each frozen SVG travels as a PNG too** (phase 17), for a device that does not decode SVG:
+the frozen file opened in Chrome as a document of its own and captured at 1920x1080 with its
+transparency, by `scripts/rasterizar-fijo.py`. No new artwork: its provenance is that of the
+frozen SVG.
+
+| path | from |
+| --- | --- |
+| `graphics/campaigns/zumbra-backplate-fijo.png` | `graphics/campaigns/zumbra-backplate-fijo.svg`, rasterized |
+| `graphics/campaigns/ketrava-16x9-fijo.png` | `graphics/campaigns/ketrava-16x9-fijo.svg`, rasterized |
+| `graphics/campaigns/kovrin-backplate-fijo.png` | `graphics/campaigns/kovrin-backplate-fijo.svg`, rasterized |
+
 **The typography is a system font stack**, metrically compatible and declared inline
 (`Helvetica Neue`, Helvetica, Arial, Liberation Sans). There is no `@font-face` and no font
 file of a third party inside these creatives.
@@ -102,7 +113,9 @@ opened in a headless browser whose clock is driven by `pauseAnimations()` and
 `setCurrentTime()`, captured frame by frame at the creative's native resolution, encoded to
 H.264 and packaged as HLS VOD, all of it silent. The pipeline is
 `scripts/puente-a-video.sh`, and its provenance is exactly the provenance of the SVG it
-starts from.
+starts from. The three that are the video option of a break also carry a `progressive.mp4`
+next to their HLS (phase 17): that same HLS transcoded to VP9 by
+`scripts/progresivo-creativos.sh`, with the same provenance.
 
 | path | from |
 | --- | --- |

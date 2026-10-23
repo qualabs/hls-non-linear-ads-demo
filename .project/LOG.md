@@ -6461,6 +6461,15 @@ las experiencias y de la barra, con el disparador exacto de hls.js. ADR 0104; el
   reporta); en modo nativo hls.js pide la misma lista. B: una caja adentro, ninguna después, ninguna
   tras el seek de vuelta.
 
+## 2026-10-22 — Fase 17 abierta y generada: el PNG y el MP4 de cada creativo, para el Roku
+
+Pedido aprobado por Nicolás: que el canal Roku funcione sólo con la URL de las playlists publicadas.
+stage-pair y hydration-break van a ofrecer, como opciones gemelas del asset-list, un PNG por cada SVG
+quieto y un MP4 VP9 sin audio por cada caja HLS, en el formato del diseño del canal (`bab9afe`). La
+librería no se toca y la web elige lo mismo porque cada gemela pide lo mismo que la opción que tiene
+adelante (ADR 0097). El diseño y la generación en la misma pasada, por el despacho: `DESIGN.md`,
+`PHASE.md`, `TASKS.md` (siete tasks) y los ADR 0096 a 0103. Publicar necesita el OK de Nicolás (T-07).
+
 ## 2026-10-22 — Un juego de tags por stream: la clase la elige el cliente por la URL
 
 Decisiones de David por el coordinador (a y b). ADR 0105, que supersede al 0007 y a la parte "un
@@ -6517,3 +6526,17 @@ Decisión (c) de David, la parte de las playlists. ADR 0107.
   dibuja ni se cuenta nada nuestro. Queda escrita en el ADR 0106 con el porqué: hls.js 1.7.2
   encola sus propios interstitials solapados (nunca dos a la vez) y un no lineal no se puede
   correr, así que cede. Sin cambios de código.
+
+## 2026-10-23 — Fase 17 publicada: el PNG y el MP4 de cada creativo, para el Roku
+
+Con el OK de Nicolás. stage-pair y hydration-break ofrecen las gemelas para el Roku: tres MP4 y tres
+PNG en stage-pair, dos MP4 en hydration-break. Primero el contenido (`publicar.sh --publicar
+--con-contenido`, el primer uso real de ese camino), después el push; el run 39892946733 republicó las
+cinco en verde. La web dibuja lo mismo (T-05); `roku-ads-02` probó los árboles en el equipo. Lo que
+pareció un defecto de la L en la TV era la entrada del menú publicada, todavía sin MP4, cayendo a su
+lineal. Las siete tasks `done`; falta cerrar la fase (Mode D).
+
+## 2026-10-23 — Fase 17 cerrada
+
+Las siete tasks `done`; informe en `phases/17-png-y-mp4-para-el-roku/REPORT.md`. Deja una idea en el
+roadmap: `creative-png-del-banner-sin-no-cache`.

@@ -10,5 +10,17 @@
     16,
     8,
     24
-  ]
+  ],
+  "progresivo": {
+    "adL": {
+      "ancho": 960,
+      "alto": 540,
+      "bitrate": "500k"
+    },
+    "adOverlay": {
+      "ancho": 320,
+      "alto": 180,
+      "bitrate": "200k"
+    }
+  }
 }

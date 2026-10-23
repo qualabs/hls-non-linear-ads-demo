@@ -36,6 +36,25 @@
                 }
               },
               {
+                "type": "squeezebackLShape",
+                "layout": {
+                  "primaryContent": {
+                    "zDepth": 1,
+                    "viewport": "0 0 25 25"
+                  },
+                  "assets": [
+                    {
+                      "id": "lBackplate",
+                      "type": "video/mp4",
+                      "codecs": "vp09.00.30.08",
+                      "uri": "/content/creatives/ketrava-backplate/8d140e0f2b/progressive.mp4",
+                      "viewport": "0 0 0 0",
+                      "zDepth": 0
+                    }
+                  ]
+                }
+              },
+              {
                 "type": "squeezebackDoubleBox",
                 "layout": {
                   "primaryContent": {
@@ -47,6 +66,24 @@
                       "id": "adSideBySide",
                       "type": "image/svg+xml",
                       "uri": "/graphics/campaigns/ketrava-16x9-fijo.svg",
+                      "viewport": "25 0 25 50",
+                      "zDepth": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "squeezebackDoubleBox",
+                "layout": {
+                  "primaryContent": {
+                    "zDepth": 0,
+                    "viewport": "25 50 25 0"
+                  },
+                  "assets": [
+                    {
+                      "id": "adSideBySide",
+                      "type": "image/png",
+                      "uri": "/graphics/campaigns/ketrava-16x9-fijo.png",
                       "viewport": "25 0 25 50",
                       "zDepth": 1
                     }
