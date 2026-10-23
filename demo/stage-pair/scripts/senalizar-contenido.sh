@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Escribe la señalización de esta demo: los asset-lists y LOS DOS MANIFESTS,
-# cada uno con los mismos segmentos del programa más los EXT-X-DATERANGE de su
-# clase.
+# Escribe la señalización de esta demo: los asset-lists y LA PLAYLIST, con los
+# mismos segmentos del programa más un EXT-X-DATERANGE por break.
 #
 # Corre en cada arranque, y no es una comodidad: el START-DATE de cada tag se
 # resuelve contra el EXT-X-PROGRAM-DATE-TIME de la propia playlist (ADR 0005), y
@@ -9,20 +8,31 @@
 # git apunta al pasado la próxima vez que alguien empaqueta el contenido.
 #
 # ---------------------------------------------------------------------------
-# DOS MANIFESTS, UNO POR CLASE, Y UN ASSET-LIST POR BREAK PARA LOS DOS
+# UNA PLAYLIST, UN TAG POR BREAK, Y LA CLASE LA ELIGE EL CLIENTE POR LA URL
 # ---------------------------------------------------------------------------
-# Es el ADR 0090, que supersede al 0007. El manifest de INTERSTITIALS lleva sólo
-# los tags `com.apple.hls.interstitial` y lo carga el player de fábrica; el
-# CONCURRENTE lleva sólo los `com.qualabs.hls.concurrentInterstitial` y lo carga
-# el nuestro. Los dos tags de un break apuntan al MISMO asset-list: su parte
-# estándar la reproduce hls.js, y el bloque de encima lo lee nuestra librería,
-# que cae a esa parte estándar cuando no puede dibujar. La capacidad viaja en el
-# pedido y la librería filtra (ADR 0085).
+# Es el ADR 0103, que supersede el manifest por clase del ADR 0090. La playlist
+# declara `#EXT-X-DEFINE:QUERYPARAM="adclass"` y cada break lleva
+# `CLASS="{$adclass}"`: cada player pide la MISMA playlist con otro parámetro
+# (`?adclass=com.apple.hls.interstitial` el de fábrica,
+# `?adclass=com.qualabs.hls.concurrentInterstitial` el nuestro) y hls.js sustituye
+# la referencia al parsear (draft-pantos-hls-rfc8216bis-22, 4.3 y 4.4.2.3). El
+# archivo es uno, byte por byte, así que un bucket estático lo sirve igual. Un
+# QUERYPARAM obliga a EXT-X-VERSION 11 (la spec, 7), y este script la sube.
+#
+# El tag es UNO para las dos clases, así que sus atributos tienen que significar
+# lo correcto en las dos lecturas: va en la forma de Apple, y para la clase
+# concurrente los atributos de reemplazo son inertes (ADR 0016). Por eso no lleva
+# X-SNAP, que hls.js aplicaría a la lectura de Apple.
+#
+# El asset-list de cada break lo leen los dos clientes: su parte estándar la
+# reproduce hls.js, y el bloque de encima lo lee nuestra librería, que cae a esa
+# parte estándar cuando no puede dibujar. La capacidad viaja en el pedido y la
+# librería filtra (ADR 0085).
 #
 # UN BREAK NO TIENE DEFAULT (ADR 0087): el A. Su asset-list no lleva `URI`, así
-# que no tiene parte estándar: el player de fábrica, que igual lo pide porque el
-# manifest de interstitials lo nombra (ADR 0091), no tiene nada que reproducir y
-# lo saltea, y la librería lo saltea cuando ninguna opción entra en la capacidad.
+# que no tiene parte estándar: el player de fábrica, que igual lo pide (ADR 0091),
+# no tiene nada que reproducir y lo saltea, y la librería lo saltea cuando
+# ninguna opción entra en la capacidad.
 #
 # Y NO HAY TRAMO INVERTIDO POR CONSTRUCCIÓN (ADR 0082): los dos clientes leen el
 # MISMO asset-list, con la duración de su break, así que entran y salen del break
@@ -31,12 +41,11 @@
 # ---------------------------------------------------------------------------
 # LAS VARIABLES DE ENTORNO, Y PARA QUÉ EXISTEN
 # ---------------------------------------------------------------------------
-#   SRC                la playlist de entrada        (default content/primary/index.m3u8)
-#   OUT_INTERSTITIAL   el manifest de interstitials  (default, de stage.json)
-#   OUT_CONCURRENTE    el manifest concurrente       (default, de stage.json)
-#   SIGNALLING         dónde van los asset-lists     (default signalling)
+#   SRC          la playlist de entrada        (default content/primary/index.m3u8)
+#   OUT          la playlist señalizada        (default, de stage.json)
+#   SIGNALLING   dónde van los asset-lists     (default signalling)
 #
-# Las cuatro existen para que el test pueda correr ESTE script sobre una playlist
+# Las tres existen para que el test pueda correr ESTE script sobre una playlist
 # mínima y contar lo que salió DE VERDAD, sin ffmpeg y sin los 30 MB de video.
 # Leer el texto de este archivo y encontrar un printf que menciona una clase
 # prueba que alguien la tipeó, no que la playlist salga con ella.
@@ -56,16 +65,11 @@ SIGNALLING=${SIGNALLING:-signalling}
 
 leer() { node -e 'const s=require(process.argv[1]);let v=s;for(const k of process.argv[2].split("."))v=v[k];process.stdout.write(String(v))' "$DEMO/stage.json" "$1"; }
 
-OUT_INTERSTITIAL=${OUT_INTERSTITIAL:-$(leer playlists.interstitial)}
-OUT_CONCURRENTE=${OUT_CONCURRENTE:-$(leer playlists.concurrente)}
+OUT=${OUT:-$(leer playlist)}
 
-# Las dos clases del ADR 0007, escritas una sola vez. La de Apple es la que el
-# pane de fábrica reproduce; la concurrente es la que reproduce el nuestro. En
-# HLS la clase se compara por igualdad exacta de string y no hay herencia
-# (ADR 0009), así que las dos tienen que estar en la misma playlist para que cada
-# cliente se quede con la suya.
-CLASE_LINEAL=com.apple.hls.interstitial
-CLASE_CONCURRENTE=com.qualabs.hls.concurrentInterstitial
+# La variable de la clase (ADR 0103): su nombre es a la vez el del parámetro de
+# la URL, y sale de stage.json, que es donde lo leen también las páginas.
+PARAMETRO=$(leer parametroDeClase)
 
 [ -f "$SRC" ] || { echo "falta $SRC: correr ./scripts/preparar-contenido.sh" >&2; exit 1; }
 
@@ -118,13 +122,15 @@ medios() { # $1 ruta del asset-list concurrente
 
 suma() { awk -v a="$1" -v b="$2" 'BEGIN { printf "%s", a + b }'; }
 
-# El tag de cada clase, para un break, apuntando al asset-list de ESE break.
+# El tag de un break, apuntando al asset-list de ESE break, con la clase que el
+# cliente elige por la URL.
 #
-# EL TAG DE INTERSTITIALS VA EN LA FORMA DE REEMPLAZO, y la forma es la AUSENCIA
-# de X-RESUME-OFFSET: sin el atributo el primario retoma donde el aviso terminó,
-# así que los dos panes se quedan en el mismo segundo del programa (ADR 0017).
-# Entre las dos formas decidió una medición: con el atributo ausente hls.js 1.7.2
-# resuelve el punto de retorno contra el largo que MIDIÓ del aviso.
+# VA EN LA FORMA DE REEMPLAZO, y la forma es la AUSENCIA de X-RESUME-OFFSET: sin
+# el atributo el primario retoma donde el aviso terminó, así que los dos panes se
+# quedan en el mismo segundo del programa (ADR 0017). Entre las dos formas decidió
+# una medición: con el atributo ausente hls.js 1.7.2 resuelve el punto de retorno
+# contra el largo que MIDIÓ del aviso. Leído con la clase concurrente el atributo
+# no significa nada, porque no hay nada interrumpido que reanudar (ADR 0016).
 #
 # SALVO EL BREAK SIN DEFAULT, que lleva X-RESUME-OFFSET=0 (ADR 0091). Su
 # asset-list no tiene nada que reproducir, así que no hay aviso y el programa
@@ -133,41 +139,28 @@ suma() { awk -v a="$1" -v b="$2" 'BEGIN { printf "%s", a + b }'; }
 # porque paró de bufferear en el borde del break, y el video queda congelado en
 # el último cuadro (medido: más de 40 s, sin evento fatal).
 #
-# El X-RESUME-OFFSET del tag concurrente no significa nada, porque no hay nada
-# interrumpido que reanudar (ADR 0016), y se escribe como en las demás demos.
+# DECLARA EL LARGO DEL ASSET-LIST, leído del archivo.
 #
-# LOS DOS DECLARAN EL LARGO DEL MISMO ASSET-LIST, leído del archivo.
+# EL PREROLL LLEVA `CUE="PRE"` (ADR 0100): cada cliente lo pone antes del
+# programa, sea cual sea su START-DATE, y pide su asset-list al cargar. El
+# START-DATE se escribe igual (offset 0, el instante del EXT-X-PROGRAM-DATE-TIME)
+# porque la spec lo exige en todo Date Range.
 #
-# EL PREROLL LLEVA CUE EN LOS DOS TAGS (ADR 0100), y es lo único que cambia: con
-# `CUE="PRE"` cada cliente lo pone antes del programa, sea cual sea su
-# START-DATE, y pide su asset-list al cargar. El START-DATE se escribe igual
-# (offset 0, el instante del EXT-X-PROGRAM-DATE-TIME) porque la spec lo exige en
-# todo Date Range. Su tag de Apple sigue la regla de arriba: con default, la
-# forma de reemplazo, así que hls.js reproduce el lineal y retoma el programa en
-# el segundo en que el preroll termina, que es donde está el pane nuestro.
+# Y UN BREAK CON `CUE="ONCE"` (ADR 0102), el B: cada cliente lo saca después de
+# reproducirlo.
 #
-# Y UN BREAK CON `CUE="ONCE"` (ADR 0102), el B: el atributo va igual en los dos
-# tags, y cada cliente lo saca después de reproducirlo.
-#
-# EL POSTROLL TAMBIÉN (ADR 0101): `CUE="POST"` en los dos tags, y cada cliente lo
-# pone después del fin del programa y pide su lista cuando el programa está
-# bufereado hasta el fin. El START-DATE se escribe en los últimos segundos del
-# programa porque la spec lo exige y ninguno de los dos lo usa. Su tag de Apple
-# sigue la regla de arriba (con default, sin X-RESUME-OFFSET); después del fin
-# no hay programa que retomar.
-tag_de() { # $1 clase (interstitial|concurrente), $2 id del break, $3 offset, $4 asset-list, $5 lineal ("si" o ""), $6 cue ("PRE" o "")
-  local clase=$1 id=$2 offset=$3 lista=$4 lineal=$5 cue=${6:-} start largo retorno="" marca=""
+# EL POSTROLL, `CUE="POST"` (ADR 0101): cada cliente lo pone después del fin del
+# programa y pide su lista cuando el programa está bufereado hasta el fin. El
+# START-DATE se escribe en los últimos segundos del programa porque la spec lo
+# exige y ninguno de los dos lo usa.
+tag() { # $1 id del break, $2 offset, $3 asset-list, $4 lineal ("si" o ""), $5 cue ("PRE" o "")
+  local id=$1 offset=$2 lista=$3 lineal=$4 cue=${5:-} start largo retorno="" marca=""
   start=$(date -d "$PDT + $offset seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
   largo=$(declaracion "$SIGNALLING/$lista" | head -1)
   [ -z "$cue" ] || marca=",CUE=\"$cue\""
-  if [ "$clase" = interstitial ]; then
-    [ -n "$lineal" ] || retorno=',X-RESUME-OFFSET=0'
-    printf '#EXT-X-DATERANGE:ID="AD-%s-LINEAR",CLASS="%s",START-DATE="%s"%s,X-ASSET-LIST="/signalling/%s"%s,X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
-      "${id^^}" "$CLASE_LINEAL" "$start" "$marca" "$lista" "$retorno" "$largo"
-  else
-    printf '#EXT-X-DATERANGE:ID="AD-%s-CONCURRENT",CLASS="%s",START-DATE="%s"%s,X-ASSET-LIST="/signalling/%s",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
-      "${id^^}" "$CLASE_CONCURRENTE" "$start" "$marca" "$lista" "$largo"
-  fi
+  [ -n "$lineal" ] || retorno=',X-RESUME-OFFSET=0'
+  printf '#EXT-X-DATERANGE:ID="AD-%s",CLASS="{$%s}",START-DATE="%s"%s,X-ASSET-LIST="/signalling/%s"%s,X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
+    "${id^^}" "$PARAMETRO" "$start" "$marca" "$lista" "$retorno" "$largo"
 }
 
 # El recorrido sale de stage.json: id, offset, duración, campaña, forma, el
@@ -179,29 +172,25 @@ RECORRIDO=$(node -e '
   ).join("\n") + "\n");
 ' "$DEMO/stage.json")
 
-# Un manifest por clase: los mismos segmentos y los mismos START-DATE, y cada
-# break en los dos. El break sin default también tiene su tag de Apple (ADR 0091):
-# nombra el mismo asset-list, que no tiene parte estándar, y hls.js lo saltea.
-escribir_playlist() { # $1 salida, $2 clase (interstitial|concurrente)
-  local salida=$1 clase=$2 tags=""
-  while IFS='|' read -r id offset duracion campana forma lista lineal cue; do
-    [ -n "$id" ] || continue
-    [ -f "$SIGNALLING/$lista" ] || { echo "falta $SIGNALLING/$lista" >&2; exit 1; }
-    tags="$tags$(tag_de "$clase" "$id" "$offset" "$lista" "$lineal" "$cue")
+# La playlist: la definición de la variable y un tag por break, después de las
+# cabeceras y antes del primer segmento, que es donde la especificación los
+# admite. La definición va ANTES de los tags porque una referencia sólo se
+# sustituye con una variable definida antes que ella (la spec, 6.3.1).
+tags="#EXT-X-DEFINE:QUERYPARAM=\"$PARAMETRO\"
 "
-  done <<< "$RECORRIDO"
-  mkdir -p "$(dirname "$salida")"
-  # Los tags van después de las cabeceras y antes del primer segmento, que es
-  # donde la especificación los admite.
-  awk -v tags="$tags" '
-    /^#EXTINF:/ && !hecho { printf "%s", tags; hecho = 1 }
-    { print }
-  ' "$SRC" > "$salida"
-  echo "$salida  ($(/usr/bin/grep -c '^#EXT-X-DATERANGE:' "$salida") Date Ranges)"
-}
-
-escribir_playlist "$OUT_INTERSTITIAL" interstitial
-escribir_playlist "$OUT_CONCURRENTE" concurrente
+while IFS='|' read -r id offset duracion campana forma lista lineal cue; do
+  [ -n "$id" ] || continue
+  [ -f "$SIGNALLING/$lista" ] || { echo "falta $SIGNALLING/$lista" >&2; exit 1; }
+  tags="$tags$(tag "$id" "$offset" "$lista" "$lineal" "$cue")
+"
+done <<< "$RECORRIDO"
+mkdir -p "$(dirname "$OUT")"
+awk -v tags="$tags" '
+  /^#EXT-X-VERSION:/ { if (substr($0, 16) + 0 < 11) $0 = "#EXT-X-VERSION:11" }
+  /^#EXTINF:/ && !hecho { printf "%s", tags; hecho = 1 }
+  { print }
+' "$SRC" > "$OUT"
+echo "$OUT  ($(/usr/bin/grep -c '^#EXT-X-DATERANGE:' "$OUT") Date Ranges, CLASS=\"{\$$PARAMETRO}\")"
 echo "$SIGNALLING/  ($(ls "$SIGNALLING" | /usr/bin/grep -c '^asset-list-break-') asset-lists del par)"
 
 # ---------------------------------------------------------------------------

@@ -45,16 +45,24 @@ asset-lists and every relative path of the page untouched (ADR 0022).
 
 ## The compatibility pair
 
-The page is two players, not one, and that is the demo's strongest argument
-(ADR 0007): this deploys without breaking the clients that are already in the
-market. Both load the **same URL**. The media playlist carries two
-`EXT-X-DATERANGE` on the same `START-DATE`, one of Apple's interstitial class
-with a linear ad and one of the sibling class of ADR 0009 with the concurrent
-experience, each with its own `ID` and its own asset-list.
+The page is two players, not one, and that is the demo's strongest argument:
+this deploys without breaking the clients that are already in the market. **Both
+load the same file, and they differ only in the query parameter they ask for it
+with** (ADR 0103). The media playlist declares `#EXT-X-DEFINE:QUERYPARAM="adclass"`
+and carries ONE `EXT-X-DATERANGE` per break, with `CLASS="{$adclass}"`: the left
+pane loads `con-daterange.m3u8?adclass=com.apple.hls.interstitial`, the right one
+`con-daterange.m3u8?adclass=com.qualabs.hls.concurrentInterstitial`, and hls.js
+substitutes the class while parsing (HLS variable substitution,
+draft-pantos-hls-rfc8216bis-22, 4.3). Each break names one asset-list, and both
+clients read it: its standard part (`URI`, `DURATION` of each asset) is what the
+left one plays, the block on top is what the right one draws (ADR 0090). Until
+2026-10-22 each break was two tags of the two classes on the same `START-DATE`
+(ADR 0007); a stream now carries one set of tags.
 
 The left player is hls.js at its **factory configuration**, with nothing of this
-demo wired into the instance: it schedules the Apple-class tag and replaces the
-content with the linear ad, exactly as a deployed player does today. The right
+demo wired into the instance: it reads every break as an Apple interstitial and
+replaces the content with the standard part of its asset-list, exactly as a
+deployed player does today. The right
 one is the same library, same version, unmodified, and keeps the content on
 screen with the concurrent experience drawn over it.
 
@@ -71,7 +79,7 @@ furniture at once, and nobody watching would know which of the two is the point.
 **Each bar marks what its own player plays** (ADR 0018): the concurrent ranges in
 violet on the right, and on the left the twelve seconds of the programme each
 break replaces, in yellow, read out of that client's own schedule. Same
-positions, because the two tags share their `START-DATE`; different colour,
+positions, because both read the same tag; different colour,
 because they are different behaviours. **And the left bar shows the clock of the
 programme**, which during a break is the second the programme is stopped at
 inside that break, and not the clock of the ad -- that one is on the line of text
@@ -137,10 +145,9 @@ right-hand picture says so -- which is not the same thing as no ad being on
 screen, and on camera the two look alike.
 
 **Both panes stay on the same second of the programme, and that is the second
-argument of the demo.** Every break carries its linear Date Range as well, and
-that tag is in replacement form: the off-the-shelf client takes the twelve
-seconds of that tag out of the programme and comes back where the ad ended and
-not where it began. So the five breaks land on both clients at the same instant,
+argument of the demo.** The tag of every break is in replacement form when it is
+read as Apple's: the off-the-shelf client takes the length of the break out of
+the programme and comes back where the ad ended and not where it began. So the five breaks land on both clients at the same instant,
 and outside a break the two panes are showing the same frame of the same film.
 Inside one they are on the same second of the programme and each does something
 different with it: on the right the ad is drawn over the picture and nothing is
@@ -148,18 +155,14 @@ replaced, on the left the ad **is** the picture and that stretch of the
 programme is gone. When the break ends they are on the same second again, which
 is what makes the two panes comparable frame by frame.
 
-**In break 5 that comparison inverts for twelve of its forty-eight seconds, and
-it is better said before it happens than explained afterwards.** Both tags of a
-break share their `START-DATE`, which is what makes the pair a pair (ADR 0018),
-and what they do not share is their length: theirs is twelve seconds and ours is
-forty-eight. From 132 s the off-the-shelf client is already back on the
-programme while the right-hand pane is still inside the break, and from 144 s to
-156 s -- the full-frame ad -- the left pane shows the programme and the right
-one shows a covered screen, which is the reverse of the frame the demo is built
-on. It costs the argument nothing: both players are doing the same thing at
-different moments, because they were handed breaks of different lengths, and the
-argument lives in the other thirty-six seconds, where the right-hand pane keeps
-the programme on screen and the left one does not.
+**In break 5 both panes are inside the same forty-eight seconds**, because they
+read the same tag and the same asset-list. The left one plays the standard part
+of its four ads back to back, full frame; the right one draws three of them over
+the programme and plays the third, which is linear, full frame. From 144 s to
+156 s the two panes show the same thing, the linear ad, and that is right: it is
+the one ad of the break with no concurrent form. Before ADR 0103 the Apple tag of
+this break named a twelve-second list of its own and the comparison inverted for
+twelve seconds; with one tag per break that cannot happen.
 
 **The left pane can end the run a fraction of a second behind**, and that is the
 whole of the offset. hls.js resumes three of the five breaks by appending the ad

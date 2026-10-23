@@ -164,8 +164,8 @@ export function presentadoCorto(reporte) {
   return `· shown: ${p.linear ? 'the linear default' : `option ${p.index + 1}`}${fallos}${reporte.late ? ', late' : ''}`;
 }
 
-/** The break a report of `onResolved` belongs to: `AD-A-CONCURRENT` is break `a`. */
-export const breakDelReporte = (seleccion) => seleccion.id.match(/^AD-([A-Z0-9]+)-/i)?.[1].toLowerCase() ?? null;
+/** The break a report of `onResolved` belongs to: `AD-A` is break `a` (one tag per break, ADR 0103). */
+export const breakDelReporte = (seleccion) => seleccion.id.match(/^AD-([A-Z0-9]+)(?:-|$)/i)?.[1].toLowerCase() ?? null;
 
 // ===========================================================================
 // index.html: ONE CONTROL PER PANE (fase 15)

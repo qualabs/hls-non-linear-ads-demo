@@ -19,7 +19,15 @@ import { showSignalling } from './senalizacion.js';
 // written by scripts/senalizar-contenido.sh on every start. Its START-DATE is
 // computed from the playlist's own EXT-X-PROGRAM-DATE-TIME, so it cannot be a
 // file in git: the clock moves every time the content is packaged.
-const SRC = './content/primary/con-daterange.m3u8';
+//
+// The class of that Date Range is the playlist's variable `{$adclass}` (ADR
+// 0103), and this page runs only our player, so it asks with OUR class and
+// hls.js substitutes it while parsing. The name is the one
+// scripts/senalizar-contenido.sh writes (`PARAMETRO`); the test holds them
+// together.
+const CLASS_PARAM = 'adclass';
+const SRC = `./content/primary/con-daterange.m3u8?${CLASS_PARAM}=` +
+  encodeURIComponent(QualabsConcurrentHls.CONCURRENT_CLASS);
 
 const video = document.getElementById('video');
 const state = document.getElementById('state');

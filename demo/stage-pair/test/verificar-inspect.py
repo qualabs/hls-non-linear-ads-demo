@@ -78,7 +78,7 @@ DEMO = Path(__file__).resolve().parent.parent
 SDK = DEMO.parent.parent
 STAGE = json.loads((DEMO / "stage.json").read_text())
 BREAKS = STAGE["breaks"]
-PLAYLIST = DEMO / STAGE["playlists"]["concurrente"]  # la que carga inspect con nuestra librería
+PLAYLIST = DEMO / STAGE["playlist"]  # la única (ADR 0103); inspect la pide con la clase de su modo
 
 def senalizar(control=None):
     entorno = dict(os.environ)
@@ -91,7 +91,7 @@ def senalizar(control=None):
 # ── el disco, leído por este script y no por la página ───────────────────────
 
 def rangos_del_disco(break_id):
-    prefijo = f'ID="AD-{break_id.upper()}-'
+    prefijo = f'ID="AD-{break_id.upper()}"'
     return [l for l in PLAYLIST.read_text().split("\n")
             if l.startswith("#EXT-X-DATERANGE:") and prefijo in l]
 
