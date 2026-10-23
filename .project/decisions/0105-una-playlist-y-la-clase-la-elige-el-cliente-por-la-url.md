@@ -4,7 +4,7 @@ title: Un juego de tags por stream, y la clase de cada break la elige el cliente
 status: accepted
 scope: project
 date: 2026-10-22
-supersedes: "0007"
+supersedes: null
 superseded_by: null
 generalizes: null
 generalized_by: null
