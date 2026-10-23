@@ -1,10 +1,14 @@
 // app.js -- the pair of players of index.html, each one with its own control.
 //
-// Each pane loads the manifest of its own class -- the native one only the
-// Apple-class interstitials, ours only the concurrent tags -- and the two tags of
-// a break name the SAME asset-list: its standard part is what hls.js plays, and
-// the block on top is what our library reads (ADR 0090, which supersedes the one
-// manifest for two clients of ADR 0007).
+// Both panes load THE SAME PLAYLIST, and each one asks for it with the class it
+// takes (ADR 0103, which supersedes the manifest per class of ADR 0090): the
+// playlist declares `#EXT-X-DEFINE:QUERYPARAM="adclass"` and every break carries
+// `CLASS="{$adclass}"`, so the native pane loads it with
+// `?adclass=com.apple.hls.interstitial` and ours with
+// `?adclass=com.qualabs.hls.concurrentInterstitial`, and hls.js substitutes the
+// class while parsing. The file is the same byte for byte -- which is what lets a
+// static bucket serve it -- and each break names ONE asset-list: its standard
+// part is what hls.js plays, and the block on top is what our library reads.
 //
 // Each pane is configured on its own (fase 15, asked for by Nicolás to be able to
 // compare every combination): first a MODE, the off-the-shelf "HLS interstitials"
@@ -18,10 +22,9 @@
 //
 // THE BLOCK AN INTEGRATOR WRITES is fenced inside `construirNuestro()`: the
 // library arrives as a <script src> that defines a global, the page builds its
-// own hls.js with the one configuration the library hands over, and turns the
-// concurrent experience on over a container, with `capabilities` (ADR 0094). The
-// native pane is `stock-player.js`, which takes the chrome from the library and
-// nothing else.
+// own hls.js, and turns the concurrent experience on over a container, with
+// `capabilities` (ADR 0094). The native pane is `stock-player.js`, which takes
+// the chrome from the library and nothing else.
 //
 // Under everything there is one invariant, and most of this file is about
 // holding it: THE TWO PANES ARE ALWAYS AT THE SAME SECOND OF THE PROGRAMME.
@@ -42,13 +45,16 @@ import {
 // The one source of the numbers of this demo (ADR 0044).
 const stage = await (await fetch('/stage.json')).json();
 
-// ONE MANIFEST PER CLASS (ADR 0090): the native pane loads the one with only the
-// Apple-class interstitials, ours the one with only the concurrent tags. The
-// segments are the same, and the two tags of a break name the same asset-list.
-const SRC = {
-  nativo: `/${stage.playlists.interstitial}`,
-  ours: `/${stage.playlists.concurrente}`
+// ONE PLAYLIST, AND THE CLASS TRAVELS IN ITS URL (ADR 0103). The class each
+// client takes is the value of the query parameter the playlist defines; the
+// names are the library's, so that nobody spells them by hand.
+const CLASE = {
+  nativo: 'com.apple.hls.interstitial',
+  ours: QualabsConcurrentHls.CONCURRENT_CLASS
 };
+const SRC = Object.fromEntries(Object.entries(CLASE).map(([modo, clase]) =>
+  [modo, `/${stage.playlist}?${stage.parametroDeClase}=${encodeURIComponent(clase)}`]));
+const PLAYLIST = stage.playlist.split('/').pop();
 
 const LADOS = ['izq', 'der'];
 
@@ -71,12 +77,12 @@ const ROTULOS = {
   nativo: {
     rol: 'HLS interstitials, native',
     sub: 'A client that is already in the market: hls.js with nothing of this demo in it. It replaces the programme with the ad.',
-    lee: `loads ${stage.playlists.interstitial.split('/').pop()}: only com.apple.hls.interstitial`
+    lee: `loads ${PLAYLIST}?${stage.parametroDeClase}=${CLASE.nativo}: its breaks read as Apple interstitials`
   },
   ours: {
     rol: 'With our library',
     sub: 'The same hls.js, unmodified, with its interstitials machinery off. The programme is never replaced.',
-    lee: `loads ${stage.playlists.concurrente.split('/').pop()}: only com.qualabs.hls.concurrentInterstitial`
+    lee: `loads ${PLAYLIST}?${stage.parametroDeClase}=${CLASE.ours}: the same file, its breaks read as ours`
   }
 };
 

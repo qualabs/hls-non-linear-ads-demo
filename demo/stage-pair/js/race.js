@@ -49,8 +49,11 @@ const carrera = stage.carrera;
 // the five Date Ranges, written by scripts/senalizar-carrera.sh on every start.
 // Its START-DATE is resolved against the playlist's own
 // EXT-X-PROGRAM-DATE-TIME, so it cannot be a file in git: that clock moves every
-// time the content is packaged (ADR 0005).
-const SRC = `/${carrera.playlist}`;
+// time the content is packaged (ADR 0005). The class of the four ads is the
+// playlist's variable `{$adclass}` (ADR 0103), and this page runs only our
+// player, so it asks for the playlist with OUR class: hls.js substitutes it
+// while parsing. The window of multi view carries its own class, written out.
+const SRC = `/${carrera.playlist}?${stage.parametroDeClase}=${encodeURIComponent(QualabsConcurrentHls.CONCURRENT_CLASS)}`;
 
 const video = document.getElementById('video');
 const player = document.getElementById('player');

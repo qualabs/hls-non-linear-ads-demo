@@ -20,7 +20,11 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import {
   proveedorDeclarado,
@@ -35,6 +39,8 @@ import {
   elRitmoDelGuion
 } from './comprobaciones.js';
 import { labelsOfAssetList, blockGlossOf } from '../js/senalizacion.js';
+import { CONCURRENT_CLASS } from '../../../lib/signalling.js';
+import { substitute, withClass } from '../../shared/test/variable-substitution.js';
 
 /** Los archivos que dibujan rótulos de la página leyendo el asset list. La lista se
  * amplía cuando aparece otro que los derive: un identificador o un MIME escrito a mano es
@@ -142,4 +148,38 @@ test('cada creativo del asset list tiene una carpeta de contenido nombrada', () 
   for (const uri of uris) {
     assert.match(uri, /^\/content\/[A-Za-z0-9._-]+\//, `${uri} apunta adentro de /content/`);
   }
+});
+
+// ---------------------------------------------------------------------------
+// LA CLASE, ELEGIDA POR LA URL (ADR 0103)
+// ---------------------------------------------------------------------------
+// Se corre el señalizador DE VERDAD sobre una playlist mínima pasada por `SRC`,
+// y se lee la salida como la lee hls.js con el parámetro que pide la página.
+
+function señalizar() {
+  const dir = mkdtempSync(join(tmpdir(), 'hydration-break-'));
+  const src = join(dir, 'index.m3u8');
+  const out = join(dir, 'con-daterange.m3u8');
+  writeFileSync(src, ['#EXTM3U', '#EXT-X-VERSION:6', '#EXT-X-TARGETDURATION:8', '#EXTINF:8.0,',
+    '#EXT-X-PROGRAM-DATE-TIME:2026-09-14T10:00:00.000+0000', 'seg000.ts', '#EXT-X-ENDLIST', ''].join('\n'));
+  try {
+    execFileSync(fileURLToPath(new URL('../scripts/senalizar-contenido.sh', import.meta.url)),
+      { env: { ...process.env, SRC: src, OUT: out }, encoding: 'utf8' });
+    return readFileSync(out, 'utf8');
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+test('la clase del break es la variable de la playlist, y la página la pide con la nuestra', () => {
+  const parametro = senalizador.match(/^PARAMETRO=(\S+)$/m)?.[1];
+  assert.ok(parametro, 'el señalizador declara PARAMETRO');
+  assert.equal(leer('../js/app.js').match(/const CLASS_PARAM = '([^']+)'/)?.[1], parametro,
+    'js/app.js pide la playlist con el parámetro que la playlist define');
+  const playlist = señalizar();
+  assert.match(playlist, new RegExp(`^#EXT-X-DEFINE:QUERYPARAM="${parametro}"$`, 'm'));
+  assert.match(playlist, /^#EXT-X-VERSION:11$/m);
+  assert.match(playlist, new RegExp(`CLASS="\\{\\$${parametro}\\}"`));
+  const leida = substitute(playlist, withClass('/content/primary/con-daterange.m3u8', parametro, CONCURRENT_CLASS)).text;
+  assert.match(leida, new RegExp(`ID="HYDRATION-BREAK",CLASS="${CONCURRENT_CLASS.replace(/\./g, '\\.')}"`));
 });

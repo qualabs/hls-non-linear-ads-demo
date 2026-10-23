@@ -7,9 +7,14 @@
 //
 // LO QUE SE ASSERTA SALE DE LO QUE EL SCRIPT ESCRIBIÓ DE VERDAD, y no del texto
 // del script. Así que el test le pasa al señalizador una media playlist de nueve
-// líneas por `SRC` y recoge sus salidas por `OUT_INTERSTITIAL`, `OUT_CONCURRENTE` y `SIGNALLING`. No necesita
+// líneas por `SRC` y recoge sus salidas por `OUT` y `SIGNALLING`. No necesita
 // ffmpeg ni un solo byte de video, que es lo que le permite correr en `npm test`
 // sobre un clone limpio.
+//
+// LA PLAYLIST ES UNA Y SE LEE DOS VECES (ADR 0103): cada break lleva
+// `CLASS="{$adclass}"`, y lo que cada cliente lee es la sustitución que hace
+// hls.js con el parámetro de su URL. El test la lee igual, con el helper de
+// demo/shared/test/variable-substitution.js, que aplica las reglas de la spec.
 //
 // ---------------------------------------------------------------------------
 // LAS DOS AFIRMACIONES QUE ESTE ARCHIVO EXISTE PARA PROTEGER
@@ -42,6 +47,7 @@ import {
   CONCURRENT_CLASS, INTERSTITIAL_CLASS, LINEAR_TYPE, MAX_BOXES, MULTIVIEW_CLASS,
   resolveAssetList, usableCapabilities
 } from '../../../lib/signalling.js';
+import { substitute, withClass } from '../../shared/test/variable-substitution.js';
 
 const DEMO = fileURLToPath(new URL('..', import.meta.url));
 const read = (path) => readFileSync(join(DEMO, path), 'utf8');
@@ -61,8 +67,7 @@ const PDT = '2026-09-14T10:00:00.000+0000';
 function run(env = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'stage-pair-'));
   const src = join(dir, 'index.m3u8');
-  const outInterstitial = join(dir, 'con-daterange-interstitial.m3u8');
-  const outConcurrente = join(dir, 'con-daterange-concurrente.m3u8');
+  const out = join(dir, 'con-daterange.m3u8');
   const signalling = join(dir, 'signalling');
   mkdirSync(signalling);
   writeFileSync(
@@ -84,8 +89,7 @@ function run(env = {}) {
     const hoja = execFileSync(join(DEMO, 'scripts/senalizar-contenido.sh'), {
       cwd: DEMO,
       env: {
-        ...process.env, SRC: src, OUT_INTERSTITIAL: outInterstitial, OUT_CONCURRENTE: outConcurrente,
-        SIGNALLING: signalling, ...env
+        ...process.env, SRC: src, OUT: out, SIGNALLING: signalling, ...env
       },
       encoding: 'utf8'
     });
@@ -99,9 +103,13 @@ function run(env = {}) {
       if (!(name in escritos)) throw new Error(`el señalizador no escribió ${name}`);
       return structuredClone(escritos[name]);
     };
+    const playlist = readFileSync(out, 'utf8');
+    // Las dos lecturas del mismo archivo: la del player de fábrica y la nuestra.
+    const leida = (clase) => substitute(playlist, withClass('/' + STAGE.playlist, STAGE.parametroDeClase, clase)).text;
     return {
-      interstitial: readFileSync(outInterstitial, 'utf8'),
-      concurrente: readFileSync(outConcurrente, 'utf8'),
+      playlist,
+      interstitial: leida(INTERSTITIAL_CLASS),
+      concurrente: leida(CONCURRENT_CLASS),
       escritos: Object.keys(escritos),
       lista,
       hoja
@@ -137,10 +145,10 @@ const BREAKS = STAGE.breaks;
 const CON_DEFAULT = BREAKS.filter((b) => b.lineal);
 const SIN_DEFAULT = BREAKS.filter((b) => !b.lineal);
 
-/** Los tags de un break en los dos manifests, por su ID. */
+/** El tag de un break en las dos lecturas de la playlist, por su ID, que es uno. */
 const tagsDe = (corrida, brk) => ({
-  lineal: dateRanges(corrida.interstitial).find((t) => t.id === `AD-${brk.id.toUpperCase()}-LINEAR`),
-  concurrente: dateRanges(corrida.concurrente).find((t) => t.id === `AD-${brk.id.toUpperCase()}-CONCURRENT`)
+  lineal: dateRanges(corrida.interstitial).find((t) => t.id === `AD-${brk.id.toUpperCase()}`),
+  concurrente: dateRanges(corrida.concurrente).find((t) => t.id === `AD-${brk.id.toUpperCase()}`)
 });
 
 test('hay un break sin default y los otros con, que es lo que David pidió mostrar', () => {
@@ -151,7 +159,7 @@ test('hay un break sin default y los otros con, que es lo que David pidió mostr
   assert.equal(CON_DEFAULT.length, 4, 'cuatro con default');
 });
 
-test('el postroll: CUE="POST" en sus dos tags y en ningún otro, con default, último, y la librería sólo toma su lineal', async () => {
+test('el postroll: CUE="POST" en su tag y en ningún otro, con default, último, y la librería sólo toma su lineal', async () => {
   // ADR 0101. Los dos clientes lo ponen después del fin del programa; el nuestro
   // nunca presenta su aviso no lineal ahí, así que sin default no habría nada que
   // ver y el par dejaría de mostrar lo mismo en los dos panes.
@@ -166,13 +174,13 @@ test('el postroll: CUE="POST" en sus dos tags y en ningún otro, con default, ú
   }
   assert.match(corrida.hoja, /break POST .*CUE=POST/);
   const { resolvePostRoll } = await import('../../../lib/signalling.js');
-  const [lineal, ...resto] = resolvePostRoll(corrida.lista(posts[0].concurrente), { id: 'AD-POST-CONCURRENT', slotStart: 198 });
+  const [lineal, ...resto] = resolvePostRoll(corrida.lista(posts[0].concurrente), { id: 'AD-POST', slotStart: 198 });
   assert.deepEqual(resto, []);
   assert.equal(lineal.type, 'linear');
   assert.equal(lineal.elements.find((e) => !e.primary).uri, `/${STAGE.assets.piezas.find((p) => p.campana === posts[0].campana && p.forma === '16x9').video}`);
 });
 
-test('el preroll: CUE="PRE" en sus dos tags y en ningún otro, START-DATE en el origen, con default y antes que todo', () => {
+test('el preroll: CUE="PRE" en su tag y en ningún otro, START-DATE en el origen, con default y antes que todo', () => {
   // ADR 0100. Lo que cada cliente lee para ubicarlo antes del programa y pedir su
   // lista al cargar es el CUE; el START-DATE se escribe igual porque la spec lo
   // exige, en el instante del EXT-X-PROGRAM-DATE-TIME.
@@ -195,7 +203,7 @@ test('el preroll: CUE="PRE" en sus dos tags y en ningún otro, START-DATE en el 
   assert.match(corrida.hoja, /break PRE .*CUE=PRE/);
 });
 
-test('el break B lleva CUE="ONCE" en sus dos tags, y ningún otro break lo lleva', () => {
+test('el break B lleva CUE="ONCE" en su tag, y ningún otro break lo lleva', () => {
   // ADR 0102. Los dos clientes lo sacan después de reproducirlo.
   assert.deepEqual(BREAKS.filter((b) => b.cue === 'ONCE').map((b) => b.id), ['b']);
   const corrida = run();
@@ -211,22 +219,39 @@ test('la librería lee el CUE de los tags que este script escribe', async () => 
   const corrida = run();
   const attr = (line) => ({ CUE: line.match(/CUE="([^"]+)"/)?.[1] });
   const pre = dateRanges(corrida.concurrente).map((t) => [t.id, cueOf({ attr: attr(t.line) }).pre]);
-  assert.deepEqual(pre, BREAKS.map((b) => [`AD-${b.id.toUpperCase()}-CONCURRENT`, b.cue === 'PRE']));
+  assert.deepEqual(pre, BREAKS.map((b) => [`AD-${b.id.toUpperCase()}`, b.cue === 'PRE']));
 });
 
-test('dos manifests, uno por clase: el de interstitials sólo con los de Apple, el concurrente sólo con los nuestros', () => {
-  // ADR 0090. Y los asset-lists, contados sobre el directorio: UNO por break,
+test('una playlist: un tag por break, con la clase en la variable y la definición antes de los tags', () => {
+  // ADR 0103. Y los asset-lists, contados sobre el directorio: UNO por break,
   // que leen los dos clientes. Un archivo de menos es un 404 en cámara.
   const corrida = run();
   assert.deepEqual(corrida.escritos, BREAKS.map((b) => b.concurrente).sort(), 'un asset-list por break, y ninguno de más');
-  assert.deepEqual(dateRanges(corrida.interstitial).map((t) => t.hlsClass), BREAKS.map(() => INTERSTITIAL_CLASS),
-    'el de interstitials: un tag de Apple por break, también el sin default (ADR 0091), y nada más');
-  assert.deepEqual(dateRanges(corrida.concurrente).map((t) => t.hlsClass), BREAKS.map(() => CONCURRENT_CLASS),
-    'el concurrente: un tag nuestro por break, y nada más');
+  const lineas = corrida.playlist.split('\n');
+  const definicion = lineas.indexOf(`#EXT-X-DEFINE:QUERYPARAM="${STAGE.parametroDeClase}"`);
+  assert.ok(definicion >= 0, 'la playlist define la variable por QUERYPARAM');
+  assert.ok(definicion < lineas.findIndex((l) => l.startsWith('#EXT-X-DATERANGE:')), 'y la define antes del primer tag');
+  assert.ok(lineas.includes('#EXT-X-VERSION:11'), 'QUERYPARAM obliga a EXT-X-VERSION 11');
+  assert.deepEqual(dateRanges(corrida.playlist).map((t) => t.hlsClass), BREAKS.map(() => `{$${STAGE.parametroDeClase}}`),
+    'un tag por break, cada uno con la clase que elige el cliente');
+  assert.deepEqual(dateRanges(corrida.playlist).map((t) => t.id), BREAKS.map((b) => `AD-${b.id.toUpperCase()}`));
 });
 
-test('los dos tags de un break nombran el MISMO asset-list', () => {
-  // La mitad del ADR 0090 que hace que haya un solo lugar donde vive el aviso.
+test('leída con cada parámetro, la misma playlist es toda de Apple o toda nuestra, y sin parámetro no se puede leer', () => {
+  // La sustitución es la del cliente (hls.js 1.7.2, utils/variable-substitution.ts),
+  // y la regla de la falta es la de la spec: el cliente DEBE fallar al parsear.
+  const corrida = run();
+  assert.deepEqual(dateRanges(corrida.interstitial).map((t) => t.hlsClass), BREAKS.map(() => INTERSTITIAL_CLASS),
+    'el de fábrica: un interstitial de Apple por break, también el sin default (ADR 0091)');
+  assert.deepEqual(dateRanges(corrida.concurrente).map((t) => t.hlsClass), BREAKS.map(() => CONCURRENT_CLASS),
+    'el nuestro: un tag nuestro por break');
+  assert.throws(() => substitute(corrida.playlist, '/' + STAGE.playlist), /QUERYPARAM/);
+});
+
+test('las dos lecturas de un break nombran el MISMO asset-list', () => {
+  // Lo que queda del ADR 0090: un solo lugar donde vive el aviso. Con un tag por
+  // break es así por construcción, y el test es el control de que la sustitución
+  // no toca nada más que la clase.
   const corrida = run();
   for (const brk of BREAKS) {
     const { lineal, concurrente } = tagsDe(corrida, brk);
@@ -235,7 +260,7 @@ test('los dos tags de un break nombran el MISMO asset-list', () => {
   }
 });
 
-test('los tags de un break comparten el START-DATE en los dos manifests, y el instante es el de stage.json', () => {
+test('las dos lecturas de un break tienen el mismo START-DATE, y el instante es el de stage.json', () => {
   const origen = new Date(PDT).getTime();
   const corrida = run();
   for (const brk of BREAKS) {
@@ -263,7 +288,7 @@ test('el break sin default tiene su tag de Apple pero su asset-list no tiene URI
   }
 });
 
-test('la parte estándar dura lo que su break, y los dos tags lo declaran: no hay tramo invertido', () => {
+test('la parte estándar dura lo que su break, y su tag lo declara: no hay tramo invertido', () => {
   // ADR 0082, ahora por construcción: los dos clientes leen el mismo archivo.
   const corrida = run();
   for (const brk of CON_DEFAULT) {
@@ -274,21 +299,21 @@ test('la parte estándar dura lo que su break, y los dos tags lo declaran: no ha
   }
 });
 
-test('el tag lineal va en la forma de reemplazo, SIN X-RESUME-OFFSET, salvo el del break sin default, con 0', () => {
-  // ADR 0017. El del tag concurrente sí se escribe y es inerte (ADR 0016). El
-  // break sin default no tiene aviso que reemplace nada: retoma donde empezó,
-  // porque retomar en su fin deja al hls.js de fábrica congelado (ADR 0091).
+test('el tag va en la forma de reemplazo, SIN X-RESUME-OFFSET, salvo el del break sin default, con 0, y sin X-SNAP', () => {
+  // ADR 0017. Con un tag para las dos clases, los atributos son los de la lectura
+  // de Apple: leídos con la clase concurrente son inertes (ADR 0016), y X-SNAP
+  // no va porque hls.js lo aplicaría a la lectura de Apple (ADR 0103). El break
+  // sin default no tiene aviso que reemplace nada: retoma donde empezó, porque
+  // retomar en su fin deja al hls.js de fábrica congelado (ADR 0091).
   const corrida = run();
-  const tags = [...dateRanges(corrida.interstitial), ...dateRanges(corrida.concurrente)];
-  const sinDefault = new Set(SIN_DEFAULT.map((b) => `AD-${b.id.toUpperCase()}-LINEAR`));
-  for (const tag of tags.filter((t) => t.hlsClass === INTERSTITIAL_CLASS)) {
+  const tags = dateRanges(corrida.playlist);
+  const sinDefault = new Set(SIN_DEFAULT.map((b) => `AD-${b.id.toUpperCase()}`));
+  for (const tag of tags) {
     if (sinDefault.has(tag.id)) assert.match(tag.line, /X-RESUME-OFFSET=0,/, `${tag.id} retoma donde empezó`);
     else assert.equal(tag.resumeOffset, false, `${tag.id} no declara X-RESUME-OFFSET`);
+    assert.doesNotMatch(tag.line, /X-SNAP=/, `${tag.id} no lleva X-SNAP`);
   }
   assert.equal(tags.filter((t) => sinDefault.has(t.id)).length, SIN_DEFAULT.length, 'el tag del break sin default está');
-  for (const tag of tags.filter((t) => t.hlsClass === CONCURRENT_CLASS)) {
-    assert.equal(tag.resumeOffset, true, `${tag.id} sí lo declara, y no significa nada`);
-  }
 });
 
 test('cada break trae las dos opciones del aviso, primero el video y después la imagen', () => {
@@ -501,7 +526,11 @@ function correrCarrera(camaras = CAMARAS.map((c) => c.id), env = {}) {
       if (!(name in escritos)) throw new Error(`el señalizador no escribió ${name}`);
       return structuredClone(escritos[name]);
     };
-    return { playlist: readFileSync(out, 'utf8'), escritos: Object.keys(escritos), lista, hoja };
+    // `playlist` es la lectura de la única página que la carga, race.html, que la
+    // pide con nuestra clase (ADR 0103); `cruda` es el archivo tal cual.
+    const cruda = readFileSync(out, 'utf8');
+    const playlist = substitute(cruda, withClass('/' + CARRERA.playlist, STAGE.parametroDeClase, CONCURRENT_CLASS)).text;
+    return { playlist, cruda, escritos: Object.keys(escritos), lista, hoja };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -533,6 +562,17 @@ test('la carrera sale con un tag por aviso más el de la ventana, y las dos clas
     [...RACE_BREAKS.map(() => CONCURRENT_CLASS), MULTIVIEW_CLASS]
   );
   assert.ok(!tags.some((t) => t.hlsClass === INTERSTITIAL_CLASS), 'ningún tag de reemplazo');
+});
+
+test('en la carrera la clase de los avisos es la variable, y la de la ventana va escrita', () => {
+  // ADR 0103: la misma regla que la playlist del par para los avisos. La ventana
+  // es una oferta, no un aviso, y no tiene lectura de Apple.
+  const { cruda } = correrCarrera();
+  assert.ok(cruda.includes(`#EXT-X-DEFINE:QUERYPARAM="${STAGE.parametroDeClase}"`));
+  assert.deepEqual(
+    dateRanges(cruda).map((t) => t.hlsClass),
+    [...RACE_BREAKS.map(() => `{$${STAGE.parametroDeClase}}`), MULTIVIEW_CLASS]
+  );
 });
 
 test('EL ORDEN ES EL ARGUMENTO: los cuatro avisos terminan antes de que la ventana abra', () => {

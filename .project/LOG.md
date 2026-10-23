@@ -6430,3 +6430,23 @@ las experiencias y de la barra, con el disparador exacto de hls.js. ADR 0102; el
   intenta el lineal ZUMBRA 16:9 (404 en esta máquina, sin creativos empaquetados: se saltea y se
   reporta); en modo nativo hls.js pide la misma lista. B: una caja adentro, ninguna después, ninguna
   tras el seek de vuelta.
+
+## 2026-10-22 — Un juego de tags por stream: la clase la elige el cliente por la URL
+
+Decisiones de David por el coordinador (a y b). ADR 0103, que supersede al 0007 y a la parte "un
+manifest por clase" del 0090.
+
+- **Verificado antes:** draft-pantos-hls-rfc8216bis-22 (4.3, 4.4.2.3, 6.3.1, 7) y hls.js 1.7.2
+  (`utils/variable-substitution.ts`, `loader/m3u8-parser.ts:569`, `utils/attr-list.ts:136`): la
+  sustitución alcanza a CLASS y X-ASSET-LIST de EXT-X-DATERANGE antes de `dateRanges` y del
+  interstitials controller, sin flag; sin parámetro, `LEVEL_PARSING_ERROR`. GCS sirve igual con un
+  parámetro desconocido.
+- **Playlists:** `#EXT-X-DEFINE:QUERYPARAM="adclass"`, un tag por break con `CLASS="{$adclass}"`
+  (forma de Apple, sin X-SNAP), `EXT-X-VERSION:11`. `stage-pair` pasa a una playlist
+  (`stage.json`: `playlist`, `parametroDeClase`), también la de la carrera; `compatibility-pair`
+  un tag por break con el asset-list concurrente; `hydration-break` y `multiview-offer` el aviso
+  con la variable; `race-multiview` sin cambios (no tiene avisos).
+- **Páginas:** el pane de fábrica pide `?adclass=com.apple.hls.interstitial`, el nuestro la clase
+  concurrente. `inspect.html` muestra la línea como está escrita y la clase que leyó su hls.js.
+- Tests: `demo/shared/test/variable-substitution.js` (helper con las reglas de la spec, y su test)
+  y los `signalled-run.test.js` de las cuatro demos tocadas leen la salida real con cada parámetro.

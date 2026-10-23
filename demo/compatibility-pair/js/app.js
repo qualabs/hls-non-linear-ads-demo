@@ -21,11 +21,21 @@ import { traceContract } from './contract-trace.js';
 import { createStockPlayer } from './stock-player.js';
 
 // The signalled playlist: the same segments as ./content/primary/index.m3u8
-// plus the two Date Ranges, written by scripts/senalizar-contenido.sh on every
-// start. Its START-DATE is computed from the playlist's own
+// plus one Date Range per break, written by scripts/senalizar-contenido.sh on
+// every start. Its START-DATE is computed from the playlist's own
 // EXT-X-PROGRAM-DATE-TIME, so it cannot be a file in git: the clock moves every
 // time the content is packaged.
-const SRC = './content/primary/con-daterange.m3u8';
+const PLAYLIST = './content/primary/con-daterange.m3u8';
+
+// ONE FILE, AND EACH CLIENT ASKS FOR IT WITH THE CLASS IT TAKES (ADR 0103). The
+// playlist declares `#EXT-X-DEFINE:QUERYPARAM="adclass"` and every break carries
+// `CLASS="{$adclass}"`; hls.js substitutes the reference while parsing. The name
+// is the one scripts/senalizar-contenido.sh writes (`PARAMETRO`), and the test of
+// this demo holds the two together.
+const CLASS_PARAM = 'adclass';
+const withClass = (hlsClass) => `${PLAYLIST}?${CLASS_PARAM}=${encodeURIComponent(hlsClass)}`;
+const SRC = withClass(QualabsConcurrentHls.CONCURRENT_CLASS);
+const STOCK_SRC = withClass('com.apple.hls.interstitial');
 
 const video = document.getElementById('video');
 const hud = document.getElementById('hud');
@@ -84,17 +94,18 @@ function say(text) { hud.textContent = text; }
 video.muted = true;
 video.play().catch(() => {});
 
-// The other half of the compatibility pair (ADR 0007): a client that is already
-// in the market, on the SAME playlist -- `SRC`, the same constant, which is the
-// whole argument -- and with none of the above wired into it. It schedules the
-// linear ad of the Apple-class Date Range and replaces the content with it,
-// while the player above keeps the content and draws the concurrent experience
-// over it. Neither instance knows the other exists.
+// The other half of the compatibility pair: a client that is already in the
+// market, on the SAME playlist file -- `PLAYLIST`, the same constant, which is
+// the whole argument -- asked for with Apple's class (ADR 0103), and with none of
+// the above wired into it. It reads every break as an Apple interstitial and
+// replaces the content with the standard part of its asset-list, while the
+// player above keeps the content and draws the concurrent experience over it.
+// Neither instance knows the other exists.
 const stockVideo = document.getElementById('stock-video');
 const stock = createStockPlayer({
   video: stockVideo,
   container: document.getElementById('stock-player'),
-  src: SRC,
+  src: STOCK_SRC,
   pane: document.getElementById('pane-stock'),
   state: document.getElementById('stock-state'),
   hud: document.getElementById('stock-hud')

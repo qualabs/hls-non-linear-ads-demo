@@ -76,13 +76,16 @@ import {
 // is typed in this file.
 const stage = await (await fetch('/stage.json')).json();
 
-// One manifest per class (ADR 0090): our library loads the one with only the
-// concurrent tags, the native client the one with only Apple's interstitials.
-// Both name the same asset-list per break.
-const SRC = {
-  nativo: `/${stage.playlists.interstitial}`,
-  ours: `/${stage.playlists.concurrente}`
+// ONE PLAYLIST FOR BOTH CLIENTS, AND THE CLASS IN ITS URL (ADR 0103): the
+// playlist declares `#EXT-X-DEFINE:QUERYPARAM="adclass"` and each break carries
+// `CLASS="{$adclass}"`, so our library asks for it with our class and the native
+// client with Apple's, and hls.js substitutes the reference while parsing.
+const CLASE = {
+  nativo: 'com.apple.hls.interstitial',
+  ours: QualabsConcurrentHls.CONCURRENT_CLASS
 };
+const SRC = Object.fromEntries(Object.entries(CLASE).map(([modo, clase]) =>
+  [modo, `/${stage.playlist}?${stage.parametroDeClase}=${encodeURIComponent(clase)}`]));
 
 /** Five seconds of programme before a break: the transition in is what is worth seeing. */
 const ENTRADA = 5;
@@ -118,23 +121,39 @@ const el = (tag, className, text) => {
 
 /**
  * The Date Range lines of the playlist being played, by the break they belong
- * to.
+ * to, and the definition of the variable its class is read from.
  *
- * The pairing is by the ID the line carries -- `AD-A-LINEAR` and
- * `AD-A-CONCURRENT` for the break whose id is `a` in `stage.json` -- and not by
- * the order the lines appear in, because order is an accident of how the file
- * was written and the id is what the signalling declares.
+ * The pairing is by the ID the line carries -- `AD-A` for the break whose id is
+ * `a` in `stage.json` -- and not by the order the lines appear in, because order
+ * is an accident of how the file was written and the id is what the signalling
+ * declares.
+ *
+ * THE LINE IS SHOWN AS IT IS IN THE FILE, `CLASS="{$adclass}"` and all, because
+ * that is what the file says and the file is the same for both clients. What
+ * THIS client made of it is a second reading, and it is not this page's: it is
+ * the class hls.js parsed into its own Date Range (`dateRangeDelPlayer`), which
+ * is the substitution done by the client and not a guess of this file.
  */
 let rangosPorBreak = new Map();
+let definicion = null;
 
 async function leerRangos(src) {
   rangosPorBreak = new Map();
   const playlist = await (await fetch(src)).text();
-  const lineas = playlist.split('\n').filter((l) => l.startsWith('#EXT-X-DATERANGE:'));
+  const lineas = playlist.split('\n');
+  definicion = lineas.find((l) => l.startsWith('#EXT-X-DEFINE:')) ?? null;
+  const rangos = lineas.filter((l) => l.startsWith('#EXT-X-DATERANGE:'));
   for (const brk of stage.breaks) {
-    const prefijo = `ID="AD-${brk.id.toUpperCase()}-`;
-    rangosPorBreak.set(brk.id, lineas.filter((l) => l.includes(prefijo)));
+    const id = `ID="AD-${brk.id.toUpperCase()}"`;
+    rangosPorBreak.set(brk.id, rangos.filter((l) => l.includes(id)));
   }
+}
+
+/** The class this client's hls.js parsed for a Date Range, after substitution, or null. */
+function claseDelPlayer(linea) {
+  const id = linea.match(/ID="([^"]+)"/)?.[1];
+  const level = vivo?.hls?.levels?.[vivo.hls.currentLevel >= 0 ? vivo.hls.currentLevel : 0];
+  return level?.details?.dateRanges?.[id]?.class ?? null;
 }
 
 /** The URL a range points at, which is what pairs it with a request on the network. */
@@ -152,7 +171,9 @@ const listaDelRango = (linea) => linea.match(/X-ASSET-LIST="([^"]+)"/)?.[1] ?? n
 function dibujarRango(linea, pedida) {
   const caja = el('div', 'range');
   caja.dataset.kept = String(pedida === true);
-  const clase = linea.match(/CLASS="([^"]+)"/)?.[1] ?? '(no class)';
+  const escrita = linea.match(/CLASS="([^"]+)"/)?.[1] ?? '(no class)';
+  const leida = claseDelPlayer(linea);
+  const clase = leida && leida !== escrita ? `${escrita}  →  ${leida}  (as this client's hls.js read it)` : escrita;
   const marca = pedida === null
     ? 'waiting for this client to ask'
     : pedida
@@ -285,16 +306,18 @@ function pintarIntercambio() {
     return dibujarRango(linea, traza.url.pathname === listaDelRango(linea));
   }));
   if (!rangos.length) dom.ranges.replaceChildren(el('p', 'none', 'no range for this break in the playlist'));
-  // One manifest per class (ADR 0090): the range this client's manifest carries
-  // for the break, and it names the same asset-list the other class names.
+  if (definicion && rangos.length) dom.ranges.prepend(el('pre', 'range__line', definicion));
+  // One playlist for both clients (ADR 0103): the class is the query parameter
+  // this client asked with, substituted by hls.js.
+  const pedidoCon = `?${stage.parametroDeClase}=${CLASE[vivo?.modo] ?? ''}`;
   dom.rangesLede.textContent = vivo?.modo === 'nativo'
     ? (mostrado?.lineal
-      ? 'The interstitials manifest: only the Apple-class range. It names the same asset-list as the ' +
-        'concurrent one, and hls.js plays its standard part.'
-      : 'The interstitials manifest: only the Apple-class range. It names the same asset-list as the ' +
-        'concurrent one, which has no standard part for this break, so hls.js skips it (ADR 0091).')
-    : 'The concurrent manifest: only the range of our class. It names the same asset-list the ' +
-      'interstitials manifest names, and the library reads the part on top of the standard one.';
+      ? `The same playlist both clients load, asked for with ${pedidoCon}: hls.js reads this break as an ` +
+        'Apple interstitial and plays the standard part of its asset-list.'
+      : `The same playlist both clients load, asked for with ${pedidoCon}: hls.js reads this break as an ` +
+        'Apple interstitial, but its asset-list has no standard part, so hls.js skips it (ADR 0091).')
+    : `The same playlist both clients load, asked for with ${pedidoCon}: hls.js reads this break as our ` +
+      'class, and the library reads the part of its asset-list on top of the standard one.';
 
   // Move 2: the URL that went out, with the parameter picked out of it.
   dom.request.replaceChildren();
@@ -565,6 +588,8 @@ function armar(config, retomarEn = 0) {
     (d.fatal ? console.error : console.warn)('[hls] error', d.type, d.details, 'fatal:', d.fatal);
   });
 
+  // Card 1 shows the class this client parsed, which is there once the playlist is.
+  hls.on(Hls.Events.LEVEL_UPDATED, () => pintarIntercambio());
   hls.on(Hls.Events.MANIFEST_PARSED, () => {
     const off = hls.interstitialsManager == null;
     dom.hud.textContent =
@@ -656,6 +681,7 @@ function armarNativo(retomarEn = 0) {
     video, container: player, src: SRC.nativo, pane: dom.pane, state: dom.state, hud: dom.hud,
     skipped: salteadosPorElNativo
   });
+  stock.hls.on(Hls.Events.LEVEL_UPDATED, () => pintarIntercambio());
   const alTiempo = () => mostrarBreak(breakDelSegundo(stock.programme.currentTime));
   video.addEventListener('timeupdate', alTiempo);
   video.addEventListener('seeked', alTiempo);

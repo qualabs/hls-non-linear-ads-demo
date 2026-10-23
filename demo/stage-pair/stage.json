@@ -167,7 +167,7 @@
       "concurrente": "asset-list-break-pre.json",
       "formaImagen": "16x9",
       "lineal": true,
-      "_cue": "EL PREROLL (ADR 0100): sus dos tags llevan CUE=\"PRE\", y con eso cada cliente lo ubica antes del programa sin importar su START-DATE, que se escribe igual en el instante del EXT-X-PROGRAM-DATE-TIME (offset 0) porque la spec lo exige. Los dos piden su asset-list AL CARGAR, antes del play: hls.js en `checkStart`, la librería porque lo imita. El de fábrica reproduce el lineal KETRAVA 16:9 a cuadro entero antes del programa y, como su tag va en la forma de reemplazo (sin X-RESUME-OFFSET), retoma el programa en 12 s; el nuestro dibuja el banner sobre los primeros 12 s del programa. Los dos panes quedan en el mismo segundo del programa a los 12 s, que es lo que el par afirma (ADR 0082).",
+      "_cue": "EL PREROLL (ADR 0100): su tag lleva CUE=\"PRE\", y con eso cada cliente lo ubica antes del programa sin importar su START-DATE, que se escribe igual en el instante del EXT-X-PROGRAM-DATE-TIME (offset 0) porque la spec lo exige. Los dos piden su asset-list AL CARGAR, antes del play: hls.js en `checkStart`, la librería porque lo imita. El de fábrica reproduce el lineal KETRAVA 16:9 a cuadro entero antes del programa y, como su tag va en la forma de reemplazo (sin X-RESUME-OFFSET), retoma el programa en 12 s; el nuestro dibuja el banner sobre los primeros 12 s del programa. Los dos panes quedan en el mismo segundo del programa a los 12 s, que es lo que el par afirma (ADR 0082).",
       "_": "Un banner porque es lo que menos tapa la apertura del programa, y KETRAVA porque el break siguiente es ZUMBRA y no se repite campaña en breaks contiguos. No pide media nueva: el banner de KETRAVA es la pieza de la carrera, el lineal es el de B y la imagen es el 16:9 congelado de KETRAVA."
     },
     {
@@ -180,7 +180,7 @@
       "concurrente": "asset-list-break-a.json",
       "formaImagen": "backplate",
       "lineal": false,
-      "_lineal": "`lineal` dice si el break tiene DEFAULT LINEAL. A no lo tiene (ADR 0087): su asset-list no lleva URI, o sea que no tiene parte estándar. El manifest de interstitials igual lo nombra (ADR 0091): el player de fábrica pide la lista, no tiene nada que reproducir y lo saltea, y el programa sigue; el nuestro dibuja el aviso si alguna opción entra en la capacidad declarada y si no, lo saltea. Es A porque su lineal sería ZUMBRA 16:9, que ya es su aviso concurrente.",
+      "_lineal": "`lineal` dice si el break tiene DEFAULT LINEAL. A no lo tiene (ADR 0087): su asset-list no lleva URI, o sea que no tiene parte estándar. La lectura de Apple de su tag igual lo nombra (ADR 0091): el player de fábrica pide la lista, no tiene nada que reproducir y lo saltea, y el programa sigue; el nuestro dibuja el aviso si alguna opción entra en la capacidad declarada y si no, lo saltea. Es A porque su lineal sería ZUMBRA 16:9, que ya es su aviso concurrente.",
       "_": "Va primero porque su creativo es el único que ya está autorado y aprobado, así que el primer break que se ve en cámara es la pieza terminada."
     },
     {
@@ -220,18 +220,16 @@
       "concurrente": "asset-list-break-post.json",
       "formaImagen": "backplate",
       "lineal": true,
-      "_cue": "EL POSTROLL (ADR 0101): sus dos tags llevan CUE=\"POST\", y con eso cada cliente lo pone DESPUÉS del programa, sea cual sea su START-DATE, que se escribe en los últimos 12 s del programa porque la spec lo exige en todo Date Range y ninguno de los dos lo usa. Los dos piden su asset-list cuando el programa está bufereado hasta el fin (BUFFERED_TO_END en hls.js; la librería lo imita). Un aviso no lineal nunca se presenta después del fin del programa (David, 2026-10-22: \"auto fail to the linear ad if defined as a standard interstitial, or skip if only non-linear is defined\"), así que el nuestro reproduce el default lineal ZUMBRA 16:9 a cuadro entero cuando el programa termina, que es exactamente lo que el de fábrica reproduce del tag de Apple. El banner y la imagen del asset-list están para mostrar que se ignoran.",
+      "_cue": "EL POSTROLL (ADR 0101): su tag lleva CUE=\"POST\", y con eso cada cliente lo pone DESPUÉS del programa, sea cual sea su START-DATE, que se escribe en los últimos 12 s del programa porque la spec lo exige en todo Date Range y ninguno de los dos lo usa. Los dos piden su asset-list cuando el programa está bufereado hasta el fin (BUFFERED_TO_END en hls.js; la librería lo imita). Un aviso no lineal nunca se presenta después del fin del programa (David, 2026-10-22: \"auto fail to the linear ad if defined as a standard interstitial, or skip if only non-linear is defined\"), así que el nuestro reproduce el default lineal ZUMBRA 16:9 a cuadro entero cuando el programa termina, que es exactamente lo que el de fábrica reproduce del tag de Apple. El banner y la imagen del asset-list están para mostrar que se ignoran.",
       "_": "ZUMBRA porque el break anterior es KOVRIN, y porque su 16:9 es la pieza aprobada. Sin media nueva: el banner y el backplate congelado son piezas de la carrera, y el lineal es el aviso concurrente del break A."
     }
   ],
   "_breaks": "Los cuatro duran lo mismo para que el creativo 16:9 de cada campaña sirva de lineal en su break sin recortarse. El primero es el preroll (CUE=\"PRE\", ADR 0100), de 0 a 12 s. Entre los tres de mitad de programa los huecos son iguales, 33 s, y A entra a los 20 s para que la demo lo alcance rápido, 8 s después de que termina el preroll. El último de mitad de programa termina en 122 s, bastante antes del corte del programa en 198,0 s (los créditos arrancan en 199,0 s: la medición está en programa._largo). El quinto es el postroll (CUE=\"POST\", ADR 0101): va después del fin del programa y sólo como lineal.",
 
-  "playlists": {
-    "interstitial": "content/primary/con-daterange-interstitial.m3u8",
-    "concurrente": "content/primary/con-daterange-concurrente.m3u8",
-    "_ubicacion": "Van al lado del contenido empaquetado y NO en signalling/, porque llevan un START-DATE resuelto contra el EXT-X-PROGRAM-DATE-TIME del propio empaquetado (ADR 0005): es hora de pared y se mueve con cada empaquetado, así que en git sólo podrían estar viejas.",
-    "_": "DOS manifests, uno por clase, sobre los mismos segmentos (ADR 0090): el de interstitials lleva SÓLO los tags com.apple.hls.interstitial y lo carga el player de fábrica; el concurrente lleva SÓLO los com.qualabs.hls.concurrentInterstitial y lo carga el nuestro. Los dos tags de un break apuntan al MISMO asset-list: su parte estándar la lee hls.js y la enriquecida, nuestra librería."
-  },
+  "playlist": "content/primary/con-daterange.m3u8",
+  "_playlist": "UNA playlist para los dos clientes (ADR 0103, que supersede el manifest por clase del ADR 0090). Cada break lleva UN tag, con `CLASS=\"{$adclass}\"`, y la playlist declara `#EXT-X-DEFINE:QUERYPARAM=\"adclass\"`: cada player la pide con otro parámetro y hls.js sustituye la clase al parsear (draft-pantos-hls-rfc8216bis-22, 4.3 y 4.4.2.3). El de fábrica la pide con `?adclass=com.apple.hls.interstitial`, el nuestro con `?adclass=com.qualabs.hls.concurrentInterstitial`. El archivo es el mismo byte por byte, así que sirve igual desde un bucket estático. Va al lado del contenido empaquetado y NO en signalling/, porque lleva un START-DATE resuelto contra el EXT-X-PROGRAM-DATE-TIME del propio empaquetado (ADR 0005): es hora de pared y se mueve con cada empaquetado, así que en git sólo podría estar vieja.",
+  "parametroDeClase": "adclass",
+  "_parametroDeClase": "El nombre de la variable y del parámetro de la URL, que son el mismo por la spec: QUERYPARAM nombra a la vez la variable y el parámetro. Lo leen el señalizador, las tres páginas y los tests; no se escribe en ningún otro lado.",
 
   "capacidades": {
     "concurrentVideo": [1, 2],

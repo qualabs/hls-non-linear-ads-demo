@@ -3,18 +3,23 @@
 Two players side by side that know nothing about each other, over the same programme: an
 off-the-shelf hls.js, which **replaces the content with the ad**, and the same version of
 hls.js driven by this library, which **keeps the content on screen and draws the ad over
-it**. Each one loads the manifest of its own class -- `con-daterange-interstitial.m3u8`
-carries only the `com.apple.hls.interstitial` tags, `con-daterange-concurrente.m3u8` only the
-`com.qualabs.hls.concurrentInterstitial` ones -- and **the two tags of a break name the same
-asset-list**: its standard part (`URI`, `DURATION`) is what the off-the-shelf player plays,
-and the block on top is what the library reads, falling back to that standard part when it
-cannot draw (ADR 0090). One asset-list, two clients: the same ad space is sold on both, and
+it**. **Both load the same file**, `content/primary/con-daterange.m3u8`, and each one asks
+for it with the class it takes (ADR 0103): the playlist declares
+`#EXT-X-DEFINE:QUERYPARAM="adclass"` and every break is ONE tag with `CLASS="{$adclass}"`, so
+the off-the-shelf pane loads `con-daterange.m3u8?adclass=com.apple.hls.interstitial` and ours
+`con-daterange.m3u8?adclass=com.qualabs.hls.concurrentInterstitial`, and hls.js substitutes the
+class while parsing (HLS variable substitution, draft-pantos-hls-rfc8216bis-22, 4.3). The file
+is byte for byte the same, which is why a static bucket serves it as it is. Each break names
+**one asset-list**: its standard part (`URI`, `DURATION`) is what the off-the-shelf player
+plays, and the block on top is what the library reads, falling back to that standard part when
+it cannot draw (ADR 0090). One asset-list, two clients: the same ad space is sold on both, and
 only one of them takes the screen away.
 
-A Date Range of a class a player does not know is ignored, not degraded: a manifest with only
-the concurrent tag gets NO ad on an off-the-shelf player -- break A of this demo, which has no
-linear default, is exactly that case, measured. The fallback to a normal interstitial needs
-the Apple-class tag.
+A Date Range of a class a player does not know is ignored, not degraded: a playlist read with
+only the concurrent class gets NO ad on an off-the-shelf player. The fallback to a normal
+interstitial needs the Apple class, which is what the query parameter of the off-the-shelf pane
+asks for. A playlist loaded with no `adclass` at all does not parse: the spec says the client
+MUST fail, and hls.js reports a `LEVEL_PARSING_ERROR`.
 
 On top of that, the thing this demo adds to the four that came before it: **the capability of
 the device degrades the format of the ad, not the ad**. A control on the page sets what the
@@ -64,8 +69,8 @@ signalling script says exactly that and carries on.
 
 | page | what it is for |
 | --- | --- |
-| [`index.html`](index.html) | **the pair.** Two players, each with its own control and the manifest of its mode, over the same programme, the walk through the three non-linear shapes — side by side, L-shape and banner — over a preroll, three breaks and a post-roll, and the capability switch |
-| [`inspect.html`](inspect.html) | **one player, and the whole exchange in the open**, with the same control as each player of the pair. The Date Range the manifest of its mode carried, the asset-list URL the client asked for with the capability on it, the body that came back, verbatim, and **what the library kept of it**: each option, why it was discarded, and how the break ended. Made to be read out loud in a room with the network tab open |
+| [`index.html`](index.html) | **the pair.** Two players, each with its own control, loading the same playlist with the class of its mode, over the same programme, the walk through the three non-linear shapes — side by side, L-shape and banner — over a preroll, three breaks and a post-roll, and the capability switch |
+| [`inspect.html`](inspect.html) | **one player, and the whole exchange in the open**, with the same control as each player of the pair. The Date Range the playlist carries, as written (`CLASS="{$adclass}"`) and as this client's hls.js read it, the asset-list URL the client asked for with the capability on it, the body that came back, verbatim, and **what the library kept of it**: each option, why it was discarded, and how the break ended. Made to be read out loud in a room with the network tab open |
 | [`race.html`](race.html) | **the ads first, then the multi view window.** Four non-linear ads over a race, eight seconds of clean race, and then a window that offers a catalogue of six on-board cameras for whoever is watching to compose |
 
 The three are served from the same root, so they are one demo and not three: same library
@@ -112,7 +117,7 @@ the programme approaches each break, like the native pane does, and the bar mark
 from the start anyway. `race.html` follows the same rule (ADR 0099): its run lists every break
 from the start, off the tags, and each row fills in with what it carries when its list arrives.
 
-**The first break is a preroll** (ADR 0100): its two tags carry `CUE="PRE"`, and both clients
+**The first break is a preroll** (ADR 0100): its tag carries `CUE="PRE"`, and both clients
 ask for its list **at load, before play**, which is when hls.js asks for a preroll's list
 (`checkStart`). The off-the-shelf pane plays the linear default, KETRAVA 16:9 full frame, before
 the programme and resumes the programme at 12 s, because its tag is in the replacement form; ours
@@ -127,12 +132,12 @@ its experiences and the ranges of its bar — so a seek back into it shows the p
 tracking does not fire again. In `inspect.html` with our library, the second "break B" jump lands
 on the programme alone.
 
-**The last break is a post-roll** (ADR 0101): its two tags carry `CUE="POST"`, so both clients
+**The last break is a post-roll** (ADR 0101): its tag carries `CUE="POST"`, so both clients
 put it after the end of the programme, whatever its START-DATE (186 s, written because the spec
 requires one), and ask for its list when the programme is buffered to its end (hls.js:
 `BUFFERED_TO_END`). A non-linear ad is never presented after the end, so ours ignores the ZUMBRA
 banner the list offers and plays its linear default, ZUMBRA 16:9 full frame, when the programme
-ends: the same thing the off-the-shelf pane plays from the Apple tag. The "break POST" jump lands
+ends: the same thing the off-the-shelf pane plays from the Apple reading of the same tag. The "break POST" jump lands
 5 s before the end. No new media: the banner and the frozen backplate are race pieces, and the
 linear is break A's ad.
 
@@ -156,8 +161,8 @@ inspecting the element. The still image is the authored SVG frozen at one instan
 `scripts/congelar-svg.py`, with no animation left in it.
 
 **Break A has no default on purpose** (ADR 0087, 0091): its asset carries no `URI`, so the
-asset-list has no standard part. The interstitials manifest still names it with an Apple-class
-tag: the off-the-shelf pane requests the list, finds nothing to play, skips it and the programme
+asset-list has no standard part. Read with the Apple class its tag is still an interstitial:
+the off-the-shelf pane requests the list, finds nothing to play, skips it and the programme
 goes on. It is content that is not interrupted.
 
 Moving the switch **rebuilds both players** at the same target second, because the library

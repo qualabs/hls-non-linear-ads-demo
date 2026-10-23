@@ -88,12 +88,19 @@ PY
 echo "== 5. SIN credenciales y SIN cache-busting: lo servido contra el repo =="
 rojo=0
 for p in index.html inspect.html race.html stage.json js/app.js js/inspect.js js/capabilities.js \
-         dist/qualabs-concurrent-hls.js content/primary/con-daterange-interstitial.m3u8 \
-         content/primary/con-daterange-concurrente.m3u8 \
+         dist/qualabs-concurrent-hls.js content/primary/con-daterange.m3u8 \
          $(cd demo/stage-pair && ls signalling/*.json); do
   f=demo/stage-pair/$p; [ -f "$f" ] || f=$p
   if [ "$(curl -s "$HOST/$p" | sha256sum)" = "$(sha256sum < "$f")" ]; then r=IGUAL; else r=DISTINTO; rojo=1; fi
   printf '   %-46s %s\n' "$p" "$r"
+done
+# La playlist como la piden las páginas, con la clase en la query (ADR 0103): el
+# bucket la tiene que servir igual, byte por byte, con cualquier parámetro.
+PARAM=$(node -p 'require("./demo/stage-pair/stage.json").parametroDeClase')
+for clase in com.apple.hls.interstitial com.qualabs.hls.concurrentInterstitial; do
+  p="content/primary/con-daterange.m3u8?$PARAM=$clase"
+  if [ "$(curl -s "$HOST/$p" | sha256sum)" = "$(sha256sum < demo/stage-pair/content/primary/con-daterange.m3u8)" ]; then r=IGUAL; else r=DISTINTO; rojo=1; fi
+  printf '   %-46s %s\n' "…m3u8?$PARAM=$clase" "$r"
 done
 # Cada video que un asset-list apunta, con su playlist y todos sus segmentos.
 for v in $(grep -ho '"/content/creatives/[^"]*index.m3u8"' demo/stage-pair/signalling/*.json | tr -d '"' | sort -u); do
