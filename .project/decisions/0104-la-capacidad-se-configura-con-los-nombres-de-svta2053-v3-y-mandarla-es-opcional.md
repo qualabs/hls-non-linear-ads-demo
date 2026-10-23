@@ -1,5 +1,5 @@
 ---
-id: "0096"
+id: "0104"
 title: La capacidad se configura como concurrentVideo y concurrentImage, y mandarla en el pedido es opcional
 status: accepted
 scope: project

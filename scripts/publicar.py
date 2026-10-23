@@ -56,7 +56,7 @@ def no_cache(name):
 REF = re.compile(r'["\'(`]\s*(/?(?:content|dist|vendor|signalling|graphics|brand|audio|css|js)/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)')
 SCANNED = ('.html', '.js', '.json', '.css', '.m3u8')
 # A playlist with EXT-X-DEFINE:QUERYPARAM is one file for both break classes, and
-# each client asks for it with its class in the query (ADR 0105).
+# each client asks for it with its class in the query (ADR 0113).
 QUERYPARAM = re.compile(r'^#EXT-X-DEFINE:QUERYPARAM="([^"]+)"', re.M)
 CLASSES = ('com.apple.hls.interstitial', 'com.qualabs.hls.concurrentInterstitial')
 
@@ -261,7 +261,7 @@ def cmd_http(stage, host, derived_list):
                 print(f'     {code} DIFFERENT {r}')
     print(f'   {len(set(pick))} URLs against the repo, {bad} different')
     # A playlist that declares EXT-X-DEFINE:QUERYPARAM is asked for with the break
-    # class in its query (ADR 0105): the bucket has to serve the same bytes with it.
+    # class in its query (ADR 0113): the bucket has to serve the same bytes with it.
     ask = []
     for r, p in tree(os.path.join(stage, 'content'), skip_content=False).items():
         if r.endswith('.m3u8'):

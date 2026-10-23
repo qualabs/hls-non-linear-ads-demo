@@ -1,4 +1,4 @@
-// both-classes.test.js -- one stream, both kinds of break, one player (ADR 0106).
+// both-classes.test.js -- one stream, both kinds of break, one player (ADR 0114).
 //
 // Our player runs hls.js with its interstitials machinery ON: hls.js plays the
 // traditional interstitial (Apple's class) and this library draws its own two

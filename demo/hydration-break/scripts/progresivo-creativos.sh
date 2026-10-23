@@ -9,7 +9,7 @@
 # has one video decoder and the programme holds it. What it animates there is a short
 # progressive VP9 MP4. So the L and the corner of signalling/asset-list-hydration-break.json
 # are two options each, the HLS and then the same option with this file (ADR 0102). The
-# web picks the second one only when the HLS fails to load (ADR 0099): to the library it
+# web picks the second one only when the HLS fails to load (ADR 0107): to the library it
 # asks for what the HLS asks for, and the HLS comes first (ADR 0097). The banner is already a PNG and has no twin.
 #
 # WHAT IT DOES. Runs ../../scripts/progresivo.sh on content/<box>/index.m3u8 into

@@ -5,7 +5,7 @@ status: superseded
 scope: project
 date: 2026-09-28
 supersedes: "0083"
-superseded_by: "0097"
+superseded_by: "0105"
 generalizes: null
 generalized_by: null
 ---
@@ -48,4 +48,4 @@ admiten.
 
 ---
 
-**2026-10-20 — nota.** Superseded por el ADR 0097: SVTA2053 v3 renombra `options` a `layoutOptions`. Lo demás de esta decisión sigue en pie allí.
+**2026-10-20 — nota.** Superseded por el ADR 0105: SVTA2053 v3 renombra `options` a `layoutOptions`. Lo demás de esta decisión sigue en pie allí.

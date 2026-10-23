@@ -1,5 +1,5 @@
 ---
-id: "0105"
+id: "0113"
 title: Un juego de tags por stream, y la clase de cada break la elige el cliente con un parámetro de la URL (EXT-X-DEFINE QUERYPARAM)
 status: accepted
 scope: project

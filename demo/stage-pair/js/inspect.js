@@ -38,7 +38,7 @@
 // same for every device, and the library keeps the first one the declared
 // capability satisfies. What is drawn in that card is the report the library
 // hands `onResolved`, so the page shows what the library did and not what this
-// file thinks it should have done. Since ADR 0099 it is two reports: what the
+// file thinks it should have done. Since ADR 0107 it is two reports: what the
 // signalling HANDED the renderer, in order (`onResolved`), and what the
 // renderer actually PRESENTED after any option failed to load on screen
 // (`onPresented`). The "Pre-validate assets" switch (off, the library's default)
@@ -76,7 +76,7 @@ import {
 // is typed in this file.
 const stage = await (await fetch('/stage.json')).json();
 
-// ONE PLAYLIST FOR BOTH CLIENTS, AND THE CLASS IN ITS URL (ADR 0105): the
+// ONE PLAYLIST FOR BOTH CLIENTS, AND THE CLASS IN ITS URL (ADR 0113): the
 // playlist declares `#EXT-X-DEFINE:QUERYPARAM="adclass"` and each break carries
 // `CLASS="{$adclass}"`, so our library asks for it with our class and the native
 // client with Apple's, and hls.js substitutes the reference while parsing.
@@ -90,7 +90,7 @@ const SRC = Object.fromEntries(Object.entries(CLASE).map(([modo, clase]) =>
 /**
  * Every break this page walks through, in the order of the programme: the ones
  * of `breaks`, and the traditional linear break the playlist writes with Apple's
- * class (ADR 0107), which hls.js plays in both modes (ADR 0106).
+ * class (ADR 0115), which hls.js plays in both modes (ADR 0114).
  */
 const TODOS = [...stage.breaks, ...(stage.breakLineal ? [{ ...stage.breakLineal, tradicional: true, lineal: true }] : [])]
   .sort((a, b) => (a.cue === 'POST' ? Infinity : a.offset) - (b.cue === 'POST' ? Infinity : b.offset));
@@ -219,12 +219,12 @@ const breakDeLaUrl = (url) => url.match(/asset-list-(?:break|linear)-([a-z0-9]+)
 /** break id -> what the library kept of the answer, as `onResolved` reported it. */
 const selecciones = new Map();
 
-/** break id -> what the renderer actually presented, as `onPresented` reported it (ADR 0099). */
+/** break id -> what the renderer actually presented, as `onPresented` reported it (ADR 0107). */
 const presentados = new Map();
 
 /**
  * PRE-VALIDATION, THE ONE TOGGLE THIS PAGE ADDS, and it starts OFF because that
- * is the library's default (ADR 0099): with it off nothing is requested up
+ * is the library's default (ADR 0107): with it off nothing is requested up
  * front and the renderer's failover, which is always on, is what keeps a dead
  * option off the screen. With it on, the first request for the assets of each
  * break's options goes out when its list arrives, and card 4 shows the ones it
@@ -315,12 +315,12 @@ function pintarIntercambio() {
   }));
   if (!rangos.length) dom.ranges.replaceChildren(el('p', 'none', 'no range for this break in the playlist'));
   if (definicion && rangos.length) dom.ranges.prepend(el('pre', 'range__line', definicion));
-  // One playlist for both clients (ADR 0105): the class is the query parameter
+  // One playlist for both clients (ADR 0113): the class is the query parameter
   // this client asked with, substituted by hls.js.
   const pedidoCon = `?${stage.parametroDeClase}=${CLASE[vivo?.modo] ?? ''}`;
   dom.rangesLede.textContent = mostrado?.tradicional
     ? 'The same playlist both clients load, and this tag is the one whose class is WRITTEN, not chosen: ' +
-      'com.apple.hls.interstitial for every client. hls.js plays it full frame in both modes (ADR 0106, ADR 0107).'
+      'com.apple.hls.interstitial for every client. hls.js plays it full frame in both modes (ADR 0114, ADR 0115).'
     : vivo?.modo === 'nativo'
     ? (mostrado?.lineal
       ? `The same playlist both clients load, asked for with ${pedidoCon}: hls.js reads this break as an ` +
@@ -333,7 +333,7 @@ function pintarIntercambio() {
   // Move 2: the URL that went out, with the parameter picked out of it.
   dom.request.replaceChildren();
   if (!traza) {
-    // On demand (ADR 0100): the list goes out when the programme is buffered up
+    // On demand (ADR 0108): the list goes out when the programme is buffered up
     // to the break, or played or sought into it, so a break ahead is not asked
     // for yet. That is the rule of hls.js, and not this page being slow.
     dom.request.append(el('span', 'none', vivo?.modo === 'nativo'
@@ -355,11 +355,11 @@ function pintarIntercambio() {
   // no library and no capabilities, so there is nothing kept and nothing is
   // made up: the card says what that client does instead.
   if (mostrado.tradicional) {
-    // ADR 0107: not a break of ours in either mode. hls.js plays it.
+    // ADR 0115: not a break of ours in either mode. hls.js plays it.
     dom.filter.replaceChildren(el('li', 'none', vivo?.modo === 'nativo'
       ? 'Native HLS interstitials: no capabilities are configured and there are no layoutOptions to filter.'
       : 'Not a break of ours: its class is Apple\'s, written out, so the library does not resolve it. ' +
-        'hls.js, which runs inside this player with its interstitials machinery on, plays it (ADR 0106).'));
+        'hls.js, which runs inside this player with its interstitials machinery on, plays it (ADR 0114).'));
     dom.outcome.dataset.outcome = 'default';
     dom.outcome.textContent = 'hls.js plays this traditional interstitial as it is, full frame, replacing the programme, ' +
       (vivo?.modo === 'nativo' ? 'as it does every break in this mode.' : 'in our player too.');
@@ -382,7 +382,7 @@ function pintarIntercambio() {
       : 'the library has not resolved this break yet: its list is requested when the programme is buffered up to it'));
     dom.outcome.textContent = '';
   } else if (seleccion.postroll) {
-    // A post-roll (ADR 0103): no option is weighed, because none of them is
+    // A post-roll (ADR 0111): no option is weighed, because none of them is
     // ever presented after the end. What plays is the linear default, or nothing.
     const reporte = presentados.get(mostrado.id);
     dom.filter.replaceChildren(el('li', 'none',
@@ -395,7 +395,7 @@ function pintarIntercambio() {
     const item = asset.items[0];
     // Two reports and two moments: what the signalling HANDED OVER, in order
     // (`onResolved`), and what the renderer PRESENTED after any option failed
-    // to load on screen (`onPresented`, ADR 0099).
+    // to load on screen (`onPresented`, ADR 0107).
     const reporte = presentados.get(mostrado.id);
     const enPantalla = new Map((reporte?.attempts ?? []).filter((a) => !a.linear).map((a) => [a.index, a]));
     const mostrada = reporte?.presented && !reporte.presented.linear ? reporte.presented.index : null;
@@ -450,9 +450,9 @@ function pintarIntercambio() {
 function mostrarBreak(brk) {
   if (mostrado?.id === brk.id) return;
   mostrado = brk;
-  // A preroll (ADR 0102) is said as one: both clients ask for its list at load,
+  // A preroll (ADR 0110) is said as one: both clients ask for its list at load,
   // before play, which is what move 2 shows the moment the page opens.
-  // A post-roll (ADR 0103) too: it goes after the programme, whatever its
+  // A post-roll (ADR 0111) too: it goes after the programme, whatever its
   // START-DATE, and only as a linear ad.
   const cuando = brk.cue === 'POST'
     ? `after the programme ends (t = ${stage.programa.largo}s), for ${brk.duracion}s`
@@ -582,12 +582,12 @@ function armar(config, retomarEn = 0) {
     // Handed now, so the programme's clock exists from the first line below.
     video,
     // What the device can draw, `{ concurrentVideo, concurrentImage }` (ADR
-    // 0096). The library filters the layoutOptions of every ad against it, and
+    // 0104). The library filters the layoutOptions of every ad against it, and
     // with `sendCapabilities` it also travels on the request, which is the
     // exchange this page shows.
     capabilities: capacidades,
     sendCapabilities: true,
-    // Off by default, and this page starts with the default (ADR 0099); the
+    // Off by default, and this page starts with the default (ADR 0107); the
     // toggle above the player turns it on.
     preValidateAssets: prevalidar,
     // Which option the renderer actually put on screen, after any failover.
@@ -632,8 +632,8 @@ function armar(config, retomarEn = 0) {
 
   /** The live line under the picture, read off the contract and nothing else. */
   function pintar() {
-    // What is ON SCREEN, after the renderer's failover (ADR 0099).
-    // A traditional interstitial of the stream, played by hls.js (ADR 0106).
+    // What is ON SCREEN, after the renderer's failover (ADR 0107).
+    // A traditional interstitial of the stream, played by hls.js (ADR 0114).
     if (concurrent.linearOnScreen()) {
       const t = concurrent.programme.currentTime;
       dom.pane.dataset.state = 'ad';
@@ -794,7 +794,7 @@ jumps.replaceChildren(...[
   { texto: 'start', segundo: 0.05 },
   ...TODOS.map((b) => ({
     texto: `break ${b.id.toUpperCase()}${b.tradicional ? ' (traditional)' : ''}`,
-    // A post-roll plays when the programme ends (ADR 0103): its jump lands near the end.
+    // A post-roll plays when the programme ends (ADR 0111): its jump lands near the end.
     segundo: Math.max(0.05, (b.cue === 'POST' ? stage.programa.largo : b.offset) - ENTRADA)
   }))
 ].map(({ texto, segundo }) => {
@@ -806,7 +806,7 @@ jumps.replaceChildren(...[
   // interstitial with `X-RESTRICT="SKIP"` a seek of the programme is accepted and
   // dropped, so the jump would not land (measured on this page, fase 15).
   // With our library it rebuilds too while hls.js is playing the traditional
-  // break (ADR 0107), for the same reason.
+  // break (ADR 0115), for the same reason.
   boton.addEventListener('click', () => (vivo?.modo === 'nativo' || vivo?.concurrent?.linearOnScreen()
     ? armar(configActual, segundo) : buscar(segundo)));
   return boton;

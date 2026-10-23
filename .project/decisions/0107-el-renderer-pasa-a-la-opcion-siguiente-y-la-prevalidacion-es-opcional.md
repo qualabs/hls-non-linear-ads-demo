@@ -1,10 +1,10 @@
 ---
-id: "0099"
+id: "0107"
 title: El renderer pasa a la opción siguiente cuando un asset no carga, y la pre-validación es opcional
 status: accepted
 scope: project
 date: 2026-10-20
-supersedes: "0098"
+supersedes: "0106"
 superseded_by: null
 generalizes: null
 generalized_by: null
@@ -12,7 +12,7 @@ generalized_by: null
 
 ## Contexto
 
-El ADR 0098 hizo el primer pedido de cada asset en la señalización, al resolver la lista ("opción
+El ADR 0106 hizo el primer pedido de cada asset en la señalización, al resolver la lista ("opción
 A"): si fallaba, la señalización pasaba a la opción siguiente que entra, después al default lineal,
 y si no quedaba nada salteaba el asset. El renderer recibía una sola opción resuelta por
 experiencia.
@@ -64,7 +64,7 @@ paso opcional), y ese mismo día pidió que la pre-validación quede apagada por
 
 **La pre-validación es opcional y sólo descarta.**
 
-- `preValidateAssets: boolean`, **default `false`**. Con `true`, el chequeo del ADR 0098 corre al
+- `preValidateAssets: boolean`, **default `false`**. Con `true`, el chequeo del ADR 0106 corre al
   resolver la lista, y su único efecto es sacar de `options` las opciones cuyo primer pedido falló
   (y reportarlo en `onResolved`, como antes). No tiene fallover propio: el del renderer es el único
   camino en ejecución. Con `false` no se pide nada por adelantado.
@@ -82,7 +82,7 @@ paso opcional), y ese mismo día pidió que la pre-validación quede apagada por
 
 ## Alternativas descartadas
 
-- **Dejar sólo la pre-validación (ADR 0098).** No ve el pedido que dibuja y obliga a pedir cada
+- **Dejar sólo la pre-validación (ADR 0106).** No ve el pedido que dibuja y obliga a pedir cada
   asset dos veces.
 - **Que el renderer le pida la opción siguiente a la señalización.** Haría cruzar algo del
   renderizado a la señalización, contra el ADR 0003. La lista ordenada viaja de una vez y el

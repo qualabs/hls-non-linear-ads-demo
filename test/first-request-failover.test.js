@@ -1,8 +1,8 @@
-// first-request-failover.test.js -- the tests of ADR 0098 and of the signalling
-// half of ADR 0099.
+// first-request-failover.test.js -- the tests of ADR 0106 and of the signalling
+// half of ADR 0107.
 //
 // What they are for: the "Asset load failure" of SVTA2053 5.3.3 as
-// PRE-VALIDATION, which since ADR 0099 is optional (`preValidateAssets`, off by
+// PRE-VALIDATION, which since ADR 0107 is optional (`preValidateAssets`, off by
 // default) and only shapes the ordered list the renderer is handed. When it
 // runs, the first request for each asset of the first fitting option is made;
 // when one fails, the option is left out and the next one that fits is asked
@@ -261,7 +261,7 @@ test('without load results nothing is asked for and every asset counts as loaded
 });
 
 // ---------------------------------------------------------------------------
-// The ordered list the renderer is handed (ADR 0099)
+// The ordered list the renderer is handed (ADR 0107)
 // ---------------------------------------------------------------------------
 
 test('without pre-validation every option that fits is handed over in order, and the default last', () => {
@@ -316,7 +316,7 @@ test('a break without a default hands over its options and no fallback', () => {
 });
 
 // ---------------------------------------------------------------------------
-// The configuration: preValidateAssets and preValidateMethod (ADR 0099)
+// The configuration: preValidateAssets and preValidateMethod (ADR 0107)
 // ---------------------------------------------------------------------------
 
 test('the defaults: pre-validation off, and GET', () => {
@@ -343,7 +343,7 @@ async function signal(options) {
   const handlers = {};
   globalThis.Hls = { Events: { LEVEL_UPDATED: 'levelUpdated', MEDIA_ATTACHED: 'mediaAttached', BUFFER_APPENDED: 'bufferAppended' } };
   // The programme is playing inside the break, so its list is due the moment
-  // the playlist names it (ADR 0100) and the test does not have to drive a clock.
+  // the playlist names it (ADR 0108) and the test does not have to drive a clock.
   const media = { currentTime: 25, buffered: { length: 0 }, addEventListener: () => {} };
   const hls = { on: (event, fn) => { handlers[event] = fn; }, media };
   const listUrls = [];

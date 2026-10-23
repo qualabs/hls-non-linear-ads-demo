@@ -1,18 +1,18 @@
 ---
-id: "0098"
+id: "0106"
 title: El primer pedido de cada asset decide si la opción se presenta, y se hace al resolver la lista
 status: superseded
 scope: project
 date: 2026-10-20
 supersedes: null
-superseded_by: "0099"
+superseded_by: "0107"
 generalizes: null
 generalized_by: null
 ---
 
 ## Contexto
 
-El ADR 0097 deja que la librería se quede con la primera `layoutOption` que entra en las
+El ADR 0105 deja que la librería se quede con la primera `layoutOption` que entra en las
 capacidades configuradas. Si el asset de esa opción no existe (un 404 en su playlist), la
 librería la dibuja igual: una caja negra, o un `<img>` roto, durante toda la ventana.
 
@@ -95,7 +95,7 @@ de entregarla, y una opción con un primer pedido fallido se descarta como una q
 - Si "the first request" es el pedido antes de la ventana o el de la presentación misma. Se tomó
   el primero, que es el que la frase "Before it presents an option" describe.
 
-**2026-10-20 — nota.** Superseded por el ADR 0099: el fallover pasa al renderer y está siempre
+**2026-10-20 — nota.** Superseded por el ADR 0107: el fallover pasa al renderer y está siempre
 prendido; el primer pedido al resolver la lista queda como paso opcional (`preValidateAssets`,
 apagado por default) cuyo único efecto es sacar opciones de la lista que recibe el renderer. Lo que
 sigue en pie de esta decisión: la regla (cuenta sólo el primer pedido), `firstRequest` en

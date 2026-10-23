@@ -19,7 +19,7 @@
 //    (ADR 0039). The break is on the contract from the moment the playlist is
 //    read, with its window off the tag, but its ADS are not: the asset-list is
 //    requested when the programme is buffered up to the break, as hls.js does
-//    for an interstitial (ADR 0100, ADR 0101). So a beat is not resolved once,
+//    for an interstitial (ADR 0108, ADR 0109). So a beat is not resolved once,
 //    at arming: every beat still waiting is resolved again on every frame until
 //    its anchor answers, and one anchored to an ad answers when that break's
 //    list has arrived. Here that is during the opening card: the break is well

@@ -6,7 +6,7 @@ WHY (phase 17, ADR 0101). The image option of a break is a frozen SVG (phase 15)
 Roku does not decode SVG: its Poster draws PNG, JPEG and WebP. So right after the SVG
 option each asset-list offers the same option with this PNG. The web reaches it only when
 the SVG fails to load: to the library both ask for the same thing, and the SVG comes first
-(ADR 0097); the PNG is the next option that fits (ADR 0099).
+(ADR 0097); the PNG is the next option that fits (ADR 0107).
 
 HOW. The SVG is opened in Chrome AS A DOCUMENT OF ITS OWN, which is how an <img> draws
 it, at its viewBox size (1920x1080) and a device scale factor of 1, and captured with

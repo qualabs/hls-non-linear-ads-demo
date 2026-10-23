@@ -1,4 +1,4 @@
-// once.test.js -- the tests of ADR 0104: a Date Range with CUE="ONCE".
+// once.test.js -- the tests of ADR 0112: a Date Range with CUE="ONCE".
 //
 // What they are for: hls.js 1.7.2 takes a ONCE interstitial out of its schedule
 // after it has played -- started, then left, at its end or by a seek out of

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Escribe la playlist señalizada: los mismos segmentos que el primario, más UN
-# EXT-X-DATERANGE por break cuya clase elige el cliente por la URL (ADR 0105).
+# EXT-X-DATERANGE por break cuya clase elige el cliente por la URL (ADR 0113).
 #
 # La playlist declara `#EXT-X-DEFINE:QUERYPARAM="adclass"` y cada break lleva
 # `CLASS="{$adclass}"`. Los dos panes cargan ESTE archivo: el de fábrica con
@@ -68,12 +68,12 @@ RECORRIDO=(
   "120|asset-list-mezclado.json|Break mezclado"
 )
 
-# EL BREAK LINEAL TRADICIONAL, ESCRITO (ADR 0107): un tag con
+# EL BREAK LINEAL TRADICIONAL, ESCRITO (ADR 0115): un tag con
 # `CLASS="com.apple.hls.interstitial"` literal, sin variable, que los DOS panes
 # reproducen como interstitial lineal: el de fábrica porque es de Apple, y el
-# nuestro porque hls.js corre con su maquinaria encendida (ADR 0106). Va a los
+# nuestro porque hls.js corre con su maquinaria encendida (ADR 0114). Va a los
 # 5 s, donde no se solapa con ningún otro break (el primero arranca en el 20):
-# un stream lleva un juego de tags y sus clases no se solapan (ADR 0105). Su
+# un stream lleva un juego de tags y sus clases no se solapan (ADR 0113). Su
 # asset-list es el lineal de 12 s de siempre, `asset-list-linear.json`, sin
 # media nueva.
 LINEAL_EN=5

@@ -14,7 +14,7 @@
 # atrás y lo que el ADR 0019 ya reproduce por el camino único: su propio URI a
 # cuadro entero, con el programa corriendo detrás.
 #
-# LA CLASE LA ELIGE EL CLIENTE POR LA URL (ADR 0105): la playlist declara
+# LA CLASE LA ELIGE EL CLIENTE POR LA URL (ADR 0113): la playlist declara
 # `#EXT-X-DEFINE:QUERYPARAM="adclass"` y el tag lleva `CLASS="{$adclass}"`. La
 # página corre sólo nuestro player y pide la playlist con la clase concurrente;
 # hls.js sustituye la referencia al parsear. QUERYPARAM obliga a EXT-X-VERSION

@@ -35,7 +35,7 @@
     instance and turns nothing on (ADR 0015).
 
     Right pane, THIS DEMO'S client: the same library, same version, unmodified,
-    with its interstitials machinery on (ADR 0106) and the two layers of
+    with its interstitials machinery on (ADR 0114) and the two layers of
     ADR 0003 on top. It keeps the programme on screen and draws the ad over it.
 
   Each pane prints the manifest it loads, and lists the asset-lists it asked
@@ -48,7 +48,7 @@
 
   THREE. THE DEVICE'S CAPACITY DEGRADES THE FORMAT OF THE AD, NOT THE AD
   (ADR 0084). The switch above the pair sets what the device can draw, the two
-  capabilities `concurrentVideo` and `concurrentImage` (ADR 0096) -- and both
+  capabilities `concurrentVideo` and `concurrentImage` (ADR 0104) -- and both
   TRAVEL on the asset-list request. What comes back is the same for every
   device: the ad with its two options, video and image. The library keeps the
   first one the device can show (ADR 0085): video with two decoders, the same

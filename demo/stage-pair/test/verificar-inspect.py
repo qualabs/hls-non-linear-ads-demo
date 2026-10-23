@@ -78,7 +78,7 @@ DEMO = Path(__file__).resolve().parent.parent
 SDK = DEMO.parent.parent
 STAGE = json.loads((DEMO / "stage.json").read_text())
 BREAKS = STAGE["breaks"]
-PLAYLIST = DEMO / STAGE["playlist"]  # la única (ADR 0105); inspect la pide con la clase de su modo
+PLAYLIST = DEMO / STAGE["playlist"]  # la única (ADR 0113); inspect la pide con la clase de su modo
 
 def senalizar(control=None):
     entorno = dict(os.environ)
