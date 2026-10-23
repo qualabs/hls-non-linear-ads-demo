@@ -6264,3 +6264,12 @@ Con el OK de Nicolás. Las cuatro tasks `done`. El run 39627734040 publicó las 
 verificó contra HEAD por md5 y sin credenciales, en verde. El README lista las cinco URLs. Queda sin
 probar en un run real `--con-contenido`, el camino manual después de re-empaquetar. Informe en
 `phases/16-publicacion-continua/REPORT.md`.
+
+## 2026-10-22 — Fase 17 abierta y generada: el PNG y el MP4 de cada creativo, para el Roku
+
+Pedido aprobado por Nicolás: que el canal Roku funcione sólo con la URL de las playlists publicadas.
+stage-pair y hydration-break van a ofrecer, como opciones gemelas del asset-list, un PNG por cada SVG
+quieto y un MP4 VP9 sin audio por cada caja HLS, en el formato del diseño del canal (`bab9afe`). La
+librería no se toca y la web elige lo mismo porque cada gemela pide lo mismo que la opción que tiene
+adelante (ADR 0097). El diseño y la generación en la misma pasada, por el despacho: `DESIGN.md`,
+`PHASE.md`, `TASKS.md` (siete tasks) y los ADR 0096 a 0103. Publicar necesita el OK de Nicolás (T-07).
