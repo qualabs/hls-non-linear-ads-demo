@@ -33,8 +33,8 @@
 # type, the anchored -x, content/.fuentes/) is in the CLAUDE.md of the project;
 # how each one is handled is in scripts/publicar.py, which does the analysis.
 #
-# The cache: everything outside content/, and every playlist, JSON, page and SVG
-# inside it, is served with `Cache-Control: no-cache`. The default is a public hour,
+# The cache: everything outside content/, and every playlist, JSON, page, SVG and
+# progressive MP4 inside it, is served with `Cache-Control: no-cache`. The default is a public hour,
 # and the Google edge was seen serving an old file for that hour (phase 15).
 set -euo pipefail
 cd "$(dirname "$0")/.."
