@@ -173,7 +173,7 @@ to zero.
 ### The API, as it goes on a slide
 
 ```js
-const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+const hls = new Hls();
 
 QualabsConcurrentHls.attach(hls, {
   container: document.querySelector('.player'),

@@ -104,7 +104,7 @@ const video = document.getElementById('video');
 const stockVideo = document.getElementById('stock-video');
 
 // El nuestro, atado exactamente como lo ata un integrador (ADR 0015).
-const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+const hls = new Hls();
 const concurrent = QualabsConcurrentHls.attach(hls, {
   container: document.getElementById('player'),
   capabilities: CAPACIDAD

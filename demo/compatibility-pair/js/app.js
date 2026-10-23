@@ -3,7 +3,7 @@
 //
 // The first is WHAT AN INTEGRATOR WRITES, and it is the block fenced below: the
 // library arrives as a <script src> that defines a global, the page builds its
-// own hls.js instance with the one configuration the library hands over, and
+// own hls.js instance with its default configuration (ADR 0104), and
 // turns the concurrent experience on over a container. That is the surface of
 // ADR 0015, and the fence is there so it can be counted.
 //
@@ -58,7 +58,7 @@ function logResolved(experiences) {
 // container of index.html:119). Everything between the two fences exists because
 // the library exists; the rest of this file exists because this page is a
 // compatibility demo.
-const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+const hls = new Hls();
 const concurrent = QualabsConcurrentHls.attach(hls, {
   container: document.getElementById('player'),
   onResolved: logResolved

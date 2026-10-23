@@ -2,7 +2,7 @@
 //
 // It is two things and it marks which is which. The first is WHAT AN INTEGRATOR WRITES, and
 // it is the block fenced below: the library arrives as a <script src> that defines a global,
-// the page builds its own hls.js instance with the one configuration the library hands over,
+// the page builds its own hls.js instance with its default configuration (ADR 0104),
 // and turns the concurrent experience on over a container. Six lines, and the multi view is
 // in none of them -- it is on because the playlist signals it, and a playlist that signals no
 // offer comes out exactly as it did before any of this existed.
@@ -32,7 +32,7 @@ const hud = document.getElementById('hud');
 
 // ===========================================================================
 // WHAT AN INTEGRATOR WRITES  (with the <script src> and the container of index.html).
-const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+const hls = new Hls();
 const concurrent = QualabsConcurrentHls.attach(hls, {
   container: document.getElementById('player')
 });

@@ -99,12 +99,12 @@ serves it, and everything below `demo/` is a page that uses it.
 | `lib/controls.js` | the composition's own controls: one progress bar over the whole programme, pause, audio, fullscreen, the list of feeds whoever is watching picks from, and the marks on its rail that say where the breaks this player plays are |
 | `lib/multiview.js` | the state of whoever is watching: which feeds are up, in what order, and which one is enlarged. It decorates the provider, so the rendering side never learns that somebody is choosing |
 | `lib/media.js` | how a `uri` becomes pixels: one instance of hls.js per ad asset |
-| `lib/concurrent-hls.js` | the entry point and the public surface: `attach` for the concurrent experience, `attachControls` for the chrome on its own, and the configuration the instance has to be built with |
+| `lib/concurrent-hls.js` | the entry point and the public surface: `attach` for the concurrent experience, `attachControls` for the chrome on its own |
 | `dist/` | the built library: one classic script that defines a global. Generated, gitignored |
 | `demo/` | **the demos**, one folder each, indexed above |
 | `test/` | the tests of what fails in silence: the layout resolution, the sequence of a break and its fallback, the ranges of the programme, and the volume of an element |
 | `docs/` | the product's own documents: [the contract between the two layers](docs/contrato-senalizacion-renderizado.md), and [how to integrate the library](docs/integrating-the-library.md) into a page that is not a demo |
-| `vendor/hls.min.js` | hls.js **1.7.2, unmodified** (ADR 0002) |
+| `vendor/hls.min.js` | hls.js **1.7.2, unmodified**, with its interstitials machinery on (ADR 0104) |
 | `server.mjs` | a static file server, and nothing else: no ad server, no APS. It takes the folder to serve as its argument, and mounts `/dist/` and `/vendor/` from here (ADR 0022) |
 | `run.sh` | the one command of a demo, with the demo as its argument |
 | `scripts/` | the two scripts of the library: `scripts/construir-libreria.sh`, the build, and `scripts/verificar-cortes.mjs`, the check of the two seams |
@@ -163,7 +163,7 @@ What a page writes to use it is a script tag,
 and six lines:
 
 ```js
-const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+const hls = new Hls();
 const concurrent = QualabsConcurrentHls.attach(hls, {
   container: document.getElementById('player')
 });
@@ -204,16 +204,14 @@ player that passes none of them comes out in white, with no mark, which is what
 a player with no brand looks like. The colours the bar marks the breaks with are
 not part of this: those are functional and stay where they are.
 
-**`hlsConfig` is the one thing the library cannot fix afterwards.** hls.js
-instantiates its interstitials machinery in the constructor (ADR 0002), so the
-instance has to be built with that configuration or it arrives with the
-machinery already on; the library verifies and warns, because with it on the
-player schedules a traditional interstitial the playlist may also carry and
-replaces the content with it, which looks exactly like an ordinary player
-working correctly. Why that is the right answer, what the warning leaves on the
-handle, and why it is neither thrown nor left at documentation, is
-[`docs/integrating-the-library.md`](docs/integrating-the-library.md) §2.1, which
-owns it.
+**hls.js keeps its interstitials machinery on, and nothing of ours goes into
+the instance.** One stream can carry both kinds of break, never overlapping: ours,
+which the library draws over the programme, and Apple's traditional interstitial,
+which hls.js plays by replacing the programme (ADR 0104). While hls.js plays one,
+the library draws nothing over it, the chrome follows the programme's clock, and the
+bar marks both kinds. Which class a break is can be chosen per client with a query
+parameter on the same playlist (`EXT-X-DEFINE:QUERYPARAM`, ADR 0103). The details
+are [`docs/integrating-the-library.md`](docs/integrating-the-library.md) §2.1.
 
 The public surface is deliberately not frozen yet. ADR 0015 fixes it with the
 controls of the composition built and not before, because the controls are most

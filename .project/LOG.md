@@ -6450,3 +6450,19 @@ manifest por clase" del 0090.
   concurrente. `inspect.html` muestra la línea como está escrita y la clase que leyó su hls.js.
 - Tests: `demo/shared/test/variable-substitution.js` (helper con las reglas de la spec, y su test)
   y los `signalled-run.test.js` de las cuatro demos tocadas leen la salida real con cada parámetro.
+
+## 2026-10-22 — Las dos clases en nuestro player: hls.js con su maquinaria encendida
+
+Decisión (c) de David. ADR 0104, que supersede al 0002 y cierra el Abierto del 0101 (opción 1).
+
+- **Librería:** se va `hlsConfig`; `checkConfig` avisa (`console.warn`) cuando la maquinaria está
+  APAGADA. `lib/signalling.js` suma `linearOnScreen`, `programmeAtEnd`, `scheduledRanges` y
+  `createProgramme`; `due`/`spend` no corren mientras hls.js reproduce un interstitial, y el
+  `ended` del elemento cuenta sólo si el programa está en su fin. `attach` no dibuja nada durante
+  el aviso de hls.js, da a los controles el reloj del programa, marca en la barra lo que hls.js
+  agendó, y el handle expone `programme` y `linearOnScreen()`. `lib/postroll.js` toma
+  `programmeEnded`.
+- **Páginas:** `new Hls()` en todas; `stage-pair` pasa `video` a `attach`, usa
+  `concurrent.programme` como reloj del pane nuestro y dice cuando hls.js reproduce un lineal.
+- Docs: README, `docs/integrating-the-library.md` §2.1, contrato.
+- Tests: `test/both-classes.test.js` (7).
