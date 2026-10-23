@@ -134,6 +134,13 @@ const dateRanges = (playlist) =>
       resumeOffset: /X-RESUME-OFFSET=/.test(line)
     }));
 
+/** El break lineal tradicional, escrito con la clase de Apple (ADR 0105), y su ID. */
+const LINEAL = STAGE.breakLineal;
+const ID_LINEAL = `AD-${LINEAL.id.toUpperCase()}`;
+
+/** Los tags de los breaks de `breaks`, sin el lineal escrito. */
+const deLosBreaks = (playlist) => dateRanges(playlist).filter((t) => t.id !== ID_LINEAL);
+
 /** El primer ítem del bloque de layout de un asset-list concurrente. */
 const bloque = (lista) => lista.ASSETS[0]['X-AD-CREATIVE-SIGNALING'].payload[0];
 
@@ -218,7 +225,7 @@ test('la librería lee el CUE de los tags que este script escribe', async () => 
   const { cueOf } = await import('../../../lib/signalling.js');
   const corrida = run();
   const attr = (line) => ({ CUE: line.match(/CUE="([^"]+)"/)?.[1] });
-  const pre = dateRanges(corrida.concurrente).map((t) => [t.id, cueOf({ attr: attr(t.line) }).pre]);
+  const pre = deLosBreaks(corrida.concurrente).map((t) => [t.id, cueOf({ attr: attr(t.line) }).pre]);
   assert.deepEqual(pre, BREAKS.map((b) => [`AD-${b.id.toUpperCase()}`, b.cue === 'PRE']));
 });
 
@@ -226,26 +233,50 @@ test('una playlist: un tag por break, con la clase en la variable y la definici�
   // ADR 0103. Y los asset-lists, contados sobre el directorio: UNO por break,
   // que leen los dos clientes. Un archivo de menos es un 404 en cámara.
   const corrida = run();
-  assert.deepEqual(corrida.escritos, BREAKS.map((b) => b.concurrente).sort(), 'un asset-list por break, y ninguno de más');
+  assert.deepEqual(corrida.escritos, [...BREAKS.map((b) => b.concurrente), LINEAL.lista].sort(),
+    'un asset-list por break, el del lineal escrito, y ninguno de más');
   const lineas = corrida.playlist.split('\n');
   const definicion = lineas.indexOf(`#EXT-X-DEFINE:QUERYPARAM="${STAGE.parametroDeClase}"`);
   assert.ok(definicion >= 0, 'la playlist define la variable por QUERYPARAM');
   assert.ok(definicion < lineas.findIndex((l) => l.startsWith('#EXT-X-DATERANGE:')), 'y la define antes del primer tag');
   assert.ok(lineas.includes('#EXT-X-VERSION:11'), 'QUERYPARAM obliga a EXT-X-VERSION 11');
-  assert.deepEqual(dateRanges(corrida.playlist).map((t) => t.hlsClass), BREAKS.map(() => `{$${STAGE.parametroDeClase}}`),
+  assert.deepEqual(deLosBreaks(corrida.playlist).map((t) => t.hlsClass), BREAKS.map(() => `{$${STAGE.parametroDeClase}}`),
     'un tag por break, cada uno con la clase que elige el cliente');
-  assert.deepEqual(dateRanges(corrida.playlist).map((t) => t.id), BREAKS.map((b) => `AD-${b.id.toUpperCase()}`));
+  assert.deepEqual(deLosBreaks(corrida.playlist).map((t) => t.id), BREAKS.map((b) => `AD-${b.id.toUpperCase()}`));
 });
 
 test('leída con cada parámetro, la misma playlist es toda de Apple o toda nuestra, y sin parámetro no se puede leer', () => {
   // La sustitución es la del cliente (hls.js 1.7.2, utils/variable-substitution.ts),
   // y la regla de la falta es la de la spec: el cliente DEBE fallar al parsear.
   const corrida = run();
-  assert.deepEqual(dateRanges(corrida.interstitial).map((t) => t.hlsClass), BREAKS.map(() => INTERSTITIAL_CLASS),
+  assert.deepEqual(deLosBreaks(corrida.interstitial).map((t) => t.hlsClass), BREAKS.map(() => INTERSTITIAL_CLASS),
     'el de fábrica: un interstitial de Apple por break, también el sin default (ADR 0091)');
-  assert.deepEqual(dateRanges(corrida.concurrente).map((t) => t.hlsClass), BREAKS.map(() => CONCURRENT_CLASS),
+  assert.deepEqual(deLosBreaks(corrida.concurrente).map((t) => t.hlsClass), BREAKS.map(() => CONCURRENT_CLASS),
     'el nuestro: un tag nuestro por break');
   assert.throws(() => substitute(corrida.playlist, '/' + STAGE.playlist), /QUERYPARAM/);
+});
+
+test('el break lineal tradicional: CLASS de Apple escrita, los dos clientes lo leen igual, sin solaparse con ningún break', () => {
+  // ADR 0105. La decisión (c) de David: un break lineal con la clase literal, no
+  // sustituida, que nuestro player reproduce por hls.js (ADR 0104) y el de fábrica
+  // como siempre. Y la regla del ADR 0103: no se solapa con ningún otro.
+  const corrida = run();
+  for (const playlist of [corrida.playlist, corrida.interstitial, corrida.concurrente]) {
+    const [tag, ...resto] = dateRanges(playlist).filter((t) => t.id === ID_LINEAL);
+    assert.deepEqual(resto, []);
+    assert.equal(tag.hlsClass, INTERSTITIAL_CLASS);
+    assert.equal(tag.assetList, `/signalling/${LINEAL.lista}`);
+    assert.equal(tag.resumeOffset, false, 'la forma de reemplazo');
+  }
+  const lista = corrida.lista(LINEAL.lista);
+  const pieza = STAGE.assets.piezas.find((p) => p.campana === LINEAL.campana && p.forma === '16x9');
+  assert.deepEqual(lista, { ASSETS: [{ URI: `/${pieza.video}`, DURATION: LINEAL.duracion }] },
+    'sólo la parte estándar, con un creativo que ya existe');
+  for (const brk of BREAKS.filter((b) => b.cue !== 'POST' && b.cue !== 'PRE')) {
+    assert.ok(LINEAL.offset + LINEAL.duracion <= brk.offset || LINEAL.offset >= brk.offset + brk.duracion,
+      `el lineal se solapa con el break ${brk.id}`);
+  }
+  assert.ok(LINEAL.offset >= 12 && LINEAL.offset + LINEAL.duracion <= STAGE.programa.largo, 'adentro del programa, después del preroll');
 });
 
 test('las dos lecturas de un break nombran el MISMO asset-list', () => {

@@ -180,6 +180,12 @@ const ENTRADA = 5;
 const TOLERANCIA = 1.5;
 
 function objetivoSeguro(segundo) {
+  // The traditional linear break (ADR 0105) is played by hls.js in BOTH modes
+  // (ADR 0104), so no pane can take a seek inside it.
+  const lineal = stage.breakLineal;
+  if (lineal && segundo >= lineal.offset && segundo < lineal.offset + lineal.duracion) {
+    return Math.max(0.05, lineal.offset - ENTRADA);
+  }
   if (!Object.values(configActual).some((c) => c.modo === 'nativo')) return segundo;
   // A post-roll (ADR 0101) is after the programme: no second of the programme is inside it.
   for (const brk of stage.breaks.filter((b) => b.lineal && b.cue !== 'POST')) {
@@ -434,7 +440,25 @@ function construirNuestro(lado, capacidades, caja, registro) {
   caja.video.addEventListener('timeupdate', pintar);
   pintar();
 
+  // The lists hls.js asks for IN THIS PLAYER: the traditional linear break of
+  // the stream (ADR 0105), which hls.js plays here too (ADR 0104). Read off the
+  // network as the native pane's are, by the session id hls.js puts on them.
+  const propios = new PerformanceObserver((lista) => {
+    for (const entrada of lista.getEntries()) {
+      if (!entrada.name.includes('/signalling/asset-list-')) continue;
+      if (new URL(entrada.name).searchParams.get('_HLS_primary_id') !== hls.sessionId) continue;
+      registro.pedidos.push({ url: entrada.name, asset: null });
+      pintarPedidos(lado);
+    }
+  });
+  propios.observe({ type: 'resource' });
+  hls.on(Hls.Events.INTERSTITIAL_ASSET_STARTED, (_e, data) => {
+    registro.desenlaces[breakDelReporte({ id: data.event.identifier })] = 'default';
+    pintarPedidos(lado);
+  });
+
   return {
+    desconectar: () => propios.disconnect(),
     modo: 'ours', capacidades, hls, concurrent, consumer, video: caja.video,
     // The programme's clock (ADR 0104): the element, except while hls.js plays
     // a traditional interstitial of the stream, when it is hls.js's primary.
@@ -589,7 +613,11 @@ jumps.replaceChildren(...[
     texto: `break ${b.id.toUpperCase()}`,
     segundo: Math.max(0.05, (b.cue === 'POST' ? stage.programa.largo : b.offset) - ENTRADA)
   }))
-].map(({ texto, segundo }) => {
+  // The traditional linear break (ADR 0105), which both panes play.
+].concat(stage.breakLineal ? [{ texto: `break ${stage.breakLineal.id.toUpperCase()} (traditional)`,
+  segundo: Math.max(0.05, stage.breakLineal.offset - ENTRADA) }] : [])
+  .sort((a, b) => a.segundo - b.segundo)
+  .map(({ texto, segundo }) => {
   const boton = document.createElement('button');
   boton.type = 'button';
   boton.className = 'jump';

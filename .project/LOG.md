@@ -6466,3 +6466,17 @@ Decisión (c) de David. ADR 0104, que supersede al 0002 y cierra el Abierto del 
   `concurrent.programme` como reloj del pane nuestro y dice cuando hls.js reproduce un lineal.
 - Docs: README, `docs/integrating-the-library.md` §2.1, contrato.
 - Tests: `test/both-classes.test.js` (7).
+
+## 2026-10-22 — Un break lineal tradicional escrito, que reproducen los dos panes
+
+Decisión (c) de David, la parte de las playlists. ADR 0105.
+
+- **`stage-pair`:** `breakLineal` en `stage.json` (150 s, KETRAVA 16:9, `asset-list-break-linear.json`
+  sólo con la parte estándar); tag `AD-LINEAR` con `CLASS="com.apple.hls.interstitial"` escrita.
+  `index.html` suma el salto y lista los pedidos que hls.js hace en nuestro pane; `inspect.html` le
+  da tarjeta propia.
+- **`compatibility-pair`:** `AD-LINEAR` a los 5 s con `asset-list-linear.json`.
+- Las otras tres demos no lo llevan (guion y relato atados al recorrido; contenido sin empaquetar).
+- Smoke en Chrome headless en el 8091 (detenido por PID; 8090 no se reinició): los dos panes de
+  `compatibility-pair` reproducen el lineal; en `stage-pair` cada pane ve su clase en el mismo
+  archivo y los dos agendan el lineal (el creativo da 404 en esta máquina).
