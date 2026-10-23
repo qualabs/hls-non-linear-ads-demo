@@ -87,7 +87,10 @@ def esperado(capacidad, brk):
     if capacidad["videoDecoders"] >= 2:
         return {"outcome": "drawn", "chosen": 0, "video": 2, "img": 0, "layout": brk["layout"]}
     if capacidad["imageOverVideo"]:
-        return {"outcome": "drawn", "chosen": 1, "video": 1, "img": 1,
+        # The image option is the THIRD: each option is followed by its twin for the
+        # Roku -- HLS, MP4, SVG, PNG (ADR 0096) -- and the MP4 twin is discarded here
+        # for the same reason as the HLS (ADR 0097).
+        return {"outcome": "drawn", "chosen": 2, "video": 1, "img": 1,
                 "layout": STAGE["formas"][brk["formaImagen"]]["layout"]}
     if brk["lineal"]:
         return {"outcome": "default", "chosen": None, "video": 2, "img": 0, "layout": "linear"}
