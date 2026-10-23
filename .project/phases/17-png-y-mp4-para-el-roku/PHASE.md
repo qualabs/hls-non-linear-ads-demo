@@ -1,6 +1,6 @@
 ---
 title: "El PNG y el MP4 de cada creativo, para el Roku"
-description: "stage-pair y hydration-break publican, al lado de lo que la web dibuja, un PNG por cada SVG quieto y un MP4 VP9 sin audio por cada caja de video HLS, declarados como opciones gemelas del asset-list, para que el canal Roku funcione sólo con la URL de la playlist; la web elige y dibuja lo mismo que hoy"
+description: "stage-pair y hydration-break publican, como opciones gemelas del asset-list, cinco MP4 VP9 sin audio (transcodificados de los HLS publicados, con su codecs leído del archivo) y tres PNG de los SVG congelados; la web elige y dibuja lo mismo, medido contra main, y el canal Roku los dibuja en el equipo"
 started: 2026-10-22
 origin: "Nicolás, 2026-10-22, despacho de agent-nicolas-laptop-865daf a hls-demo-17 (fase 17)"
 depends_on: []

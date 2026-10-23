@@ -6282,3 +6282,8 @@ PNG en stage-pair, dos MP4 en hydration-break. Primero el contenido (`publicar.s
 cinco en verde. La web dibuja lo mismo (T-05); `roku-ads-02` probó los árboles en el equipo. Lo que
 pareció un defecto de la L en la TV era la entrada del menú publicada, todavía sin MP4, cayendo a su
 lineal. Las siete tasks `done`; falta cerrar la fase (Mode D).
+
+## 2026-10-23 — Fase 17 cerrada
+
+Las siete tasks `done`; informe en `phases/17-png-y-mp4-para-el-roku/REPORT.md`. Deja una idea en el
+roadmap: `creative-png-del-banner-sin-no-cache`.
