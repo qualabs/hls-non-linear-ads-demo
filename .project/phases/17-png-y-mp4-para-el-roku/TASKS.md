@@ -6,9 +6,9 @@
 | T-02 | stage-pair: MP4, PNG, `stage.json` y cuatro opciones por break | done | agent | — | rama `fase-17` · [`tasks/T-02/`](tasks/T-02/) |
 | T-03 | hydration-break: MP4, `options` y sus lectores | done | agent | — | rama `fase-17` · [`tasks/T-03/`](tasks/T-03/) |
 | T-04 | `publicar.py`: `.mp4` sin caché, y la corrida en seco con contenido | done | agent | — | rama `fase-17` · [`tasks/T-04/`](tasks/T-04/) |
-| T-05 | La web no cambia: la propiedad, la red y las suites | in-progress | agent | — | — |
-| T-06 | El árbol local para `roku-ads-02` | planned | agent | — | — |
-| T-07 | La publicación | planned | both | — | — |
+| T-05 | La web no cambia: la propiedad, la red y las suites | done | agent | — | [`tasks/T-05/`](tasks/T-05/) |
+| T-06 | El árbol local para `roku-ads-02` | done | agent | — | [`tasks/T-06/`](tasks/T-06/) |
+| T-07 | La publicación | blocked | both | — | — |
 
 ---
 
@@ -120,3 +120,7 @@
 - **nivel de verificación:** alto. Escribe en demos públicas.
 - **Needs from a person:** Nicolás da el OK para las dos salidas a internet (la subida de
   `content/` y el push a `main`), con la evidencia de T-04, T-05 y T-06 delante.
+- **bloqueo (2026-10-22):** en la TV, la gemela MP4 de la L de hydration-break tapa el programa. El
+  MP4 es opaco a cuadro entero (la caja del programa es negra) y en el Roku AnimatedImage va en el
+  plano gráfico, encima del video; en la web el programa va encima por `zDepth`. Lo investiga
+  `roku-ads-02`. No se publica hasta resolverlo.
