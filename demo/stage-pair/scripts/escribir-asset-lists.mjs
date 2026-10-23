@@ -55,7 +55,7 @@
 //       its PNG (`pngFijo`). Between an option and its twin only `type`, `uri`
 //       and `codecs` change. They are for a client that draws neither a second
 //       HLS nor an SVG, the Roku. The web picks one only when its original
-//       fails to load, as the next option that fits (ADR 0099): to the library a
+//       fails to load, as the next option that fits (ADR 0107): to the library a
 //       twin asks for exactly what the option before it asks for, and the first
 //       that fits wins (ADR 0097). So the order is not cosmetic: a twin placed
 //       before its original would change what the web draws. A twin goes only
@@ -219,7 +219,7 @@ function concurrente(brk) {
 }
 
 /**
- * El asset-list del break lineal tradicional (ADR 0107): SÓLO la parte estándar,
+ * El asset-list del break lineal tradicional (ADR 0115): SÓLO la parte estándar,
  * el `URI` y la `DURATION` del Apéndice D.2, porque su tag es de la clase de
  * Apple y lo reproduce hls.js en los dos panes. Sin bloque: no hay nada que
  * dibujar. La pieza es el 16:9 de su campaña, que ya existe.

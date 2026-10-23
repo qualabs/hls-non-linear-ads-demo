@@ -11,7 +11,7 @@
 // ffmpeg ni un solo byte de video, que es lo que le permite correr en `npm test`
 // sobre un clone limpio.
 //
-// LA PLAYLIST ES UNA Y SE LEE DOS VECES (ADR 0105): cada break lleva
+// LA PLAYLIST ES UNA Y SE LEE DOS VECES (ADR 0113): cada break lleva
 // `CLASS="{$adclass}"`, y lo que cada cliente lee es la sustitución que hace
 // hls.js con el parámetro de su URL. El test la lee igual, con el helper de
 // demo/shared/test/variable-substitution.js, que aplica las reglas de la spec.
@@ -134,7 +134,7 @@ const dateRanges = (playlist) =>
       resumeOffset: /X-RESUME-OFFSET=/.test(line)
     }));
 
-/** El break lineal tradicional, escrito con la clase de Apple (ADR 0107), y su ID. */
+/** El break lineal tradicional, escrito con la clase de Apple (ADR 0115), y su ID. */
 const LINEAL = STAGE.breakLineal;
 const ID_LINEAL = `AD-${LINEAL.id.toUpperCase()}`;
 
@@ -179,14 +179,14 @@ const tagsDe = (corrida, brk) => ({
 
 test('hay un break sin default y los otros con, que es lo que David pidió mostrar', () => {
   // ADR 0087. Sin un break de cada tipo, la corrida no muestra las dos salidas de
-  // un aviso que no se puede dibujar. Con el preroll (ADR 0102) y el postroll
-  // (ADR 0103) son cuatro con.
+  // un aviso que no se puede dibujar. Con el preroll (ADR 0110) y el postroll
+  // (ADR 0111) son cuatro con.
   assert.equal(SIN_DEFAULT.length, 1, 'un break sin default');
   assert.equal(CON_DEFAULT.length, 4, 'cuatro con default');
 });
 
 test('el postroll: CUE="POST" en su tag y en ningún otro, con default, último, y la librería sólo toma su lineal', async () => {
-  // ADR 0103. Los dos clientes lo ponen después del fin del programa; el nuestro
+  // ADR 0111. Los dos clientes lo ponen después del fin del programa; el nuestro
   // nunca presenta su aviso no lineal ahí, así que sin default no habría nada que
   // ver y el par dejaría de mostrar lo mismo en los dos panes.
   const posts = BREAKS.filter((b) => b.cue === 'POST');
@@ -207,7 +207,7 @@ test('el postroll: CUE="POST" en su tag y en ningún otro, con default, último,
 });
 
 test('el preroll: CUE="PRE" en su tag y en ningún otro, START-DATE en el origen, con default y antes que todo', () => {
-  // ADR 0102. Lo que cada cliente lee para ubicarlo antes del programa y pedir su
+  // ADR 0110. Lo que cada cliente lee para ubicarlo antes del programa y pedir su
   // lista al cargar es el CUE; el START-DATE se escribe igual porque la spec lo
   // exige, en el instante del EXT-X-PROGRAM-DATE-TIME.
   const prerolls = BREAKS.filter((b) => b.cue === 'PRE');
@@ -230,7 +230,7 @@ test('el preroll: CUE="PRE" en su tag y en ningún otro, START-DATE en el origen
 });
 
 test('el break B lleva CUE="ONCE" en su tag, y ningún otro break lo lleva', () => {
-  // ADR 0104. Los dos clientes lo sacan después de reproducirlo.
+  // ADR 0112. Los dos clientes lo sacan después de reproducirlo.
   assert.deepEqual(BREAKS.filter((b) => b.cue === 'ONCE').map((b) => b.id), ['b']);
   const corrida = run();
   for (const playlist of [corrida.interstitial, corrida.concurrente]) {
@@ -249,7 +249,7 @@ test('la librería lee el CUE de los tags que este script escribe', async () => 
 });
 
 test('una playlist: un tag por break, con la clase en la variable y la definición antes de los tags', () => {
-  // ADR 0105. Y los asset-lists, contados sobre el directorio: UNO por break,
+  // ADR 0113. Y los asset-lists, contados sobre el directorio: UNO por break,
   // que leen los dos clientes. Un archivo de menos es un 404 en cámara.
   const corrida = run();
   assert.deepEqual(corrida.escritos, [...BREAKS.map((b) => b.concurrente), LINEAL.lista].sort(),
@@ -276,9 +276,9 @@ test('leída con cada parámetro, la misma playlist es toda de Apple o toda nues
 });
 
 test('el break lineal tradicional: CLASS de Apple escrita, los dos clientes lo leen igual, sin solaparse con ningún break', () => {
-  // ADR 0107. La decisión (c) de David: un break lineal con la clase literal, no
-  // sustituida, que nuestro player reproduce por hls.js (ADR 0106) y el de fábrica
-  // como siempre. Y la regla del ADR 0105: no se solapa con ningún otro.
+  // ADR 0115. La decisión (c) de David: un break lineal con la clase literal, no
+  // sustituida, que nuestro player reproduce por hls.js (ADR 0114) y el de fábrica
+  // como siempre. Y la regla del ADR 0113: no se solapa con ningún otro.
   const corrida = run();
   for (const playlist of [corrida.playlist, corrida.interstitial, corrida.concurrente]) {
     const [tag, ...resto] = dateRanges(playlist).filter((t) => t.id === ID_LINEAL);
@@ -352,7 +352,7 @@ test('la parte estándar dura lo que su break, y su tag lo declara: no hay tramo
 test('el tag va en la forma de reemplazo, SIN X-RESUME-OFFSET, salvo el del break sin default, con 0, y sin X-SNAP', () => {
   // ADR 0017. Con un tag para las dos clases, los atributos son los de la lectura
   // de Apple: leídos con la clase concurrente son inertes (ADR 0016), y X-SNAP
-  // no va porque hls.js lo aplicaría a la lectura de Apple (ADR 0105). El break
+  // no va porque hls.js lo aplicaría a la lectura de Apple (ADR 0113). El break
   // sin default no tiene aviso que reemplace nada: retoma donde empezó, porque
   // retomar en su fin deja al hls.js de fábrica congelado (ADR 0091).
   const corrida = run();
@@ -593,7 +593,7 @@ test('la hoja que el script imprime sale de los archivos y no de sí misma', () 
   const esc = (t) => t.replace(/[./+]/g, '\\$&');
   for (const brk of BREAKS) {
     assert.match(hoja, new RegExp(`t=\\s*${brk.offset}s a\\s*${brk.offset + brk.duracion}s`));
-    // El postroll no ofrece sus opciones: nunca se presentan después del fin (ADR 0103).
+    // El postroll no ofrece sus opciones: nunca se presentan después del fin (ADR 0111).
     if (brk.cue === 'POST') {
       assert.match(hoja, new RegExp(`${esc(brk.concurrente)}\\s+nunca el aviso no lineal`));
       continue;
@@ -666,7 +666,7 @@ function correrCarrera(camaras = CAMARAS.map((c) => c.id), env = {}) {
       return structuredClone(escritos[name]);
     };
     // `playlist` es la lectura de la única página que la carga, race.html, que la
-    // pide con nuestra clase (ADR 0105); `cruda` es el archivo tal cual.
+    // pide con nuestra clase (ADR 0113); `cruda` es el archivo tal cual.
     const cruda = readFileSync(out, 'utf8');
     const playlist = substitute(cruda, withClass('/' + CARRERA.playlist, STAGE.parametroDeClase, CONCURRENT_CLASS)).text;
     return { playlist, cruda, escritos: Object.keys(escritos), lista, hoja };
@@ -704,7 +704,7 @@ test('la carrera sale con un tag por aviso más el de la ventana, y las dos clas
 });
 
 test('en la carrera la clase de los avisos es la variable, y la de la ventana va escrita', () => {
-  // ADR 0105: la misma regla que la playlist del par para los avisos. La ventana
+  // ADR 0113: la misma regla que la playlist del par para los avisos. La ventana
   // es una oferta, no un aviso, y no tiene lectura de Apple.
   const { cruda } = correrCarrera();
   assert.ok(cruda.includes(`#EXT-X-DEFINE:QUERYPARAM="${STAGE.parametroDeClase}"`));

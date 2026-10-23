@@ -524,7 +524,7 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95em
   color: color-mix(in srgb, var(--q-paper-50) 55%, transparent);
 }
 .filter__option[data-verdict='not-reached'] { opacity: 0.6; }
-/* An option handed to the renderer after the first: mounted only if the ones before it fail to load (ADR 0099). */
+/* An option handed to the renderer after the first: mounted only if the ones before it fail to load (ADR 0107). */
 .filter__option[data-verdict='queued'] { border-style: dashed; }
 .outcome { margin: 10px 0 0; font-size: 16px; font-weight: 600; line-height: 1.45; }
 .outcome[data-outcome='default'] { color: var(--q-amber-400); }

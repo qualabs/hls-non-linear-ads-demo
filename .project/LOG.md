@@ -6240,7 +6240,7 @@ Pedido de David por el coordinador: aplicar a la librería y a `stage-pair` los 
 2026-10-20 de SVTA2053 (`v3-DRAFT`, cambios con control de cambios de David Hassoun). La
 configuración de la capacidad pasa a `capabilities: { concurrentVideo, concurrentImage }`, mandarla
 en el pedido pasa a ser opcional (`sendCapabilities`, default `true`), y la clave de las opciones
-pasa de `options` a `layoutOptions`. ADR 0096 (supersede al 0086) y ADR 0097 (supersede al 0085).
+pasa de `options` a `layoutOptions`. ADR 0104 (supersede al 0086) y ADR 0105 (supersede al 0085).
 Los parámetros `sgai-*` no cambian. Sin compatibilidad hacia atrás, porque la spec no la pide; los
 nombres viejos de la capacidad se avisan por consola. No se abrió fase: son dos ADR y su
 implementación, sin commit ni publicación. Quedan abiertos para David el default de
@@ -6256,15 +6256,15 @@ librería hace el primer pedido de cada asset (la playlist o la imagen); si fall
 siguiente opción que entra; sin ninguna, pide el default lineal, y si ese también falla el asset
 se saltea. Los pedidos se hacen en la señalización al resolver la lista (`resolveWithFirstRequests`
 en `lib/signalling.js`, `firstRequest` en `lib/media.js`); el renderer no cambia. El reporte de
-`onResolved` dice qué opción falló y con qué error, y `inspect.html` lo muestra. ADR 0098. Tests en
+`onResolved` dice qué opción falló y con qué error, y `inspect.html` lo muestra. ADR 0106. Tests en
 `test/first-request-failover.test.js`; `npm test` 263/263 y `npm run check` sale 0. Sin commit ni
 publicación. Quedan abiertos para David el valor del timeout (10 s, la spec no lo da) y si el
 "primer pedido" es el de antes de la ventana, que es el que se implementó.
 
 ## 2026-10-20 — El fallover pasa al renderer, la pre-validación es opcional, y los asset-lists se piden on demand
 
-Pedido de David por el coordinador, en tres partes aprobadas el mismo día. ADR 0099 (supersede al
-0098) y ADR 0100.
+Pedido de David por el coordinador, en tres partes aprobadas el mismo día. ADR 0107 (supersede al
+0106) y ADR 0108.
 
 - **El renderer pasa a la opción siguiente cuando un asset no carga, siempre.** La señalización le
   entrega a cada experiencia la lista ordenada de `layoutOptions` que entran (`options`), el
@@ -6329,7 +6329,7 @@ probar en un run real `--con-contenido`, el camino manual después de re-empaque
 ## 2026-10-22 — Se quita `assetListTiming`: la librería pide cada asset-list sólo como hls.js
 
 Pedido de David por el coordinador ("lets remove it ... the rest should stay true to the hls.js
-functionality"). ADR 0101, con nota fechada en el ADR 0100 y en `.project/PROJECT.md`.
+functionality"). ADR 0109, con nota fechada en el ADR 0108 y en `.project/PROJECT.md`.
 
 - **Librería:** fuera `assetListTiming`, `ASSET_LIST_TIMINGS`, `usableAssetListTiming` y el camino
   eager de `createSignalling`; `onResolved` ya no trae `timing`. `attach` no lo acepta. README,
@@ -6360,7 +6360,7 @@ functionality"). ADR 0101, con nota fechada en el ADR 0100 y en `.project/PROJEC
 
 Pedido de David por el coordinador: investigar cómo hls.js 1.7.2 trata el arranque en pausa y el
 atributo `CUE`, arreglar la pausa en t=0 y registrar la decisión de la barra; después, ampliado:
-soportar `CUE="PRE"` y poner un preroll en `stage-pair`. Nota fechada en el ADR 0101, ADR 0102 y
+soportar `CUE="PRE"` y poner un preroll en `stage-pair`. Nota fechada en el ADR 0109, ADR 0110 y
 nota en `.project/PROJECT.md`. Fuente de hls.js leída del paquete npm 1.7.2 (el mismo que
 `vendor/hls.min.js`), en un temporal privado ya borrado.
 
@@ -6368,7 +6368,7 @@ nota en `.project/PROJECT.md`. Fuente de hls.js leída del paquete npm 1.7.2 (el
   desde 0,067 s no pide la lista de un interstitial hasta el play. `checkBuffer` mide con
   `bufferInfo(primaryMedia, timelinePos, 0)`; `seekToStartPos` no corre el playhead porque
   `currentTime < startPosition` es 0 contra 0; el gap controller no hace nada en pausa. El Abierto
-  del ADR 0101 decía lo contrario y quedó corregido en su nota.
+  del ADR 0109 decía lo contrario y quedó corregido en su nota.
 - **Arreglo:** `bufferedEndAt` salta un hueco menor a `BUFFER_HOLE_TOLERANCE` = 0,1 s (el
   `maxBufferHole` por defecto de hls.js, con la regla de `BufferHelper.bufferInfo`), adelante del
   playhead y entre rangos. Es el único punto donde la librería es menos estricta que hls.js, y lo
@@ -6378,7 +6378,7 @@ nota en `.project/PROJECT.md`. Fuente de hls.js leída del paquete npm 1.7.2 (el
 - **`CUE="PRE"`:** `cueOf` y `preRollStart`, puras. Un preroll concurrente o de multi view va donde
   arranca la reproducción (`startPosition` o 0), no en su START-DATE, y su asset-list se pide al
   cargar, como `checkStart` de hls.js. `POST` y `ONCE` se leen y no se aplican; quedan como
-  propuesta en el Abierto del ADR 0102. Docs: `docs/integrating-the-library.md`,
+  propuesta en el Abierto del ADR 0110. Docs: `docs/integrating-the-library.md`,
   `docs/contrato-senalizacion-renderizado.md`, README.
 - **`stage-pair`:** break `pre` en `stage.json` (KETRAVA, banner, 12 s, con default lineal KETRAVA
   16:9, imagen en side by side), escrito por `senalizar-contenido.sh` y `escribir-asset-lists.mjs`;
@@ -6391,13 +6391,13 @@ nota en `.project/PROJECT.md`. Fuente de hls.js leída del paquete npm 1.7.2 (el
   en `inspect.html` y en `index.html` los dos clientes piden `asset-list-break-pre.json` al cargar
   (a ~0,3 s); el nuestro dibuja el preroll de 0 a 12 s (el video del banner da 404 en esta máquina y
   pasa a la imagen), y el de fábrica arranca el interstitial, su lineal da 404 y retoma el programa.
-- Quedan abiertos para David: arranque más allá de 0 y live con preroll, `POST` y `ONCE` (ADR 0102).
+- Quedan abiertos para David: arranque más allá de 0 y live con preroll, `POST` y `ONCE` (ADR 0110).
 
 ## 2026-10-22 — El preroll en live, como hls.js
 
 Pedido de David por el coordinador (1 de 3, un commit cada uno): el preroll sigue la lectura de
 hls.js en VOD (la ventana arranca en `startPosition`) y se hace también el trabajo para live, aunque
-no se pueda probar de punta a punta. Nota fechada en el ADR 0102. Fuente de hls.js 1.7.2 leída del
+no se pueda probar de punta a punta. Nota fechada en el ADR 0110. Fuente de hls.js 1.7.2 leída del
 paquete npm, en un temporal privado.
 
 - **hls.js en live:** el preroll retoma el primario en el punto de unión, `getLiveStartPos`:
@@ -6416,14 +6416,14 @@ paquete npm, en un temporal privado.
 
 Pedido de David por el coordinador (2 de 3): "it should auto fail to the linear ad if defined as a
 standard interstitial, or skip if only non-linear is defined, for VOD"; en live, como hls.js. ADR
-0103.
+0111.
 
 - **hls.js 1.7.2:** el postroll va en `primaryDuration` (`details.edge`, Infinity en live), su lista
   se pide en `onBufferedToEnd` y se reproduce en `onMediaEnded`. `BUFFERED_TO_END` sólo sale con la
   playlist terminada, así que en live no existe hasta el ENDLIST.
 - **"Lineal definido":** en el pane nuestro el interstitials controller está apagado, así que el tag
   de Apple apareado nunca se reproduce ahí; el lineal es el `URI` del asset-list del tag
-  concurrente, que por el ADR 0090 es la misma lista. Queda como Abierto del ADR 0103 la opción de
+  concurrente, que por el ADR 0090 es la misma lista. Queda como Abierto del ADR 0111 la opción de
   usar la lista del tag de Apple apareado cuando difiera.
 - **Librería:** `programEnd`, `postRollDue`, `resolvePostRoll` (puras) en `lib/signalling.js`;
   `provider.postRolls()`; `lib/postroll.js` (nuevo, del lado del renderizado) reproduce los lineales
@@ -6440,8 +6440,8 @@ standard interstitial, or skip if only non-linear is defined, for VOD"; en live,
 ## 2026-10-22 — `CUE="ONCE"`, como hls.js
 
 Pedido de David por el coordinador (3 de 3): una vez presentada su ventana, un break `ONCE` sale de
-las experiencias y de la barra, con el disparador exacto de hls.js. ADR 0104; el Abierto del ADR
-0102 marca POST y ONCE como decididos.
+las experiencias y de la barra, con el disparador exacto de hls.js. ADR 0112; el Abierto del ADR
+0110 marca POST y ONCE como decididos.
 
 - **hls.js 1.7.2:** `hasPlayed = true` y "Remove interstitial with CUE attribute value of ONCE
   after it has played" al SALIR del ítem del interstitial (`setSchedulePosition`), al terminar o por
@@ -6472,7 +6472,7 @@ adelante (ADR 0097). El diseño y la generación en la misma pasada, por el desp
 
 ## 2026-10-22 — Un juego de tags por stream: la clase la elige el cliente por la URL
 
-Decisiones de David por el coordinador (a y b). ADR 0105, que supersede al 0007 y a la parte "un
+Decisiones de David por el coordinador (a y b). ADR 0113, que supersede al 0007 y a la parte "un
 manifest por clase" del 0090.
 
 - **Verificado antes:** draft-pantos-hls-rfc8216bis-22 (4.3, 4.4.2.3, 6.3.1, 7) y hls.js 1.7.2
@@ -6492,7 +6492,7 @@ manifest por clase" del 0090.
 
 ## 2026-10-22 — Las dos clases en nuestro player: hls.js con su maquinaria encendida
 
-Decisión (c) de David. ADR 0106, que supersede al 0002 y cierra el Abierto del 0103 (opción 1).
+Decisión (c) de David. ADR 0114, que supersede al 0002 y cierra el Abierto del 0111 (opción 1).
 
 - **Librería:** se va `hlsConfig`; `checkConfig` avisa (`console.warn`) cuando la maquinaria está
   APAGADA. `lib/signalling.js` suma `linearOnScreen`, `programmeAtEnd`, `scheduledRanges` y
@@ -6508,7 +6508,7 @@ Decisión (c) de David. ADR 0106, que supersede al 0002 y cierra el Abierto del 
 
 ## 2026-10-22 — Un break lineal tradicional escrito, que reproducen los dos panes
 
-Decisión (c) de David, la parte de las playlists. ADR 0107.
+Decisión (c) de David, la parte de las playlists. ADR 0115.
 
 - **`stage-pair`:** `breakLineal` en `stage.json` (150 s, KETRAVA 16:9, `asset-list-break-linear.json`
   sólo con la parte estándar); tag `AD-LINEAR` con `CLASS="com.apple.hls.interstitial"` escrita.
@@ -6522,8 +6522,8 @@ Decisión (c) de David, la parte de las playlists. ADR 0107.
 
 ## 2026-10-23 — Solapamiento de un break nuestro con uno de Apple: gana el lineal
 
-- David confirma la regla del ADR 0106 tal como está: mientras hls.js reproduce su lineal no se
-  dibuja ni se cuenta nada nuestro. Queda escrita en el ADR 0106 con el porqué: hls.js 1.7.2
+- David confirma la regla del ADR 0114 tal como está: mientras hls.js reproduce su lineal no se
+  dibuja ni se cuenta nada nuestro. Queda escrita en el ADR 0114 con el porqué: hls.js 1.7.2
   encola sus propios interstitials solapados (nunca dos a la vez) y un no lineal no se puede
   correr, así que cede. Sin cambios de código.
 

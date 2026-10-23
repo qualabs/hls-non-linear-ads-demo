@@ -5,7 +5,7 @@ status: superseded
 scope: phase-01
 date: 2026-09-03
 supersedes: null
-superseded_by: "0106"
+superseded_by: "0114"
 ---
 
 ## Contexto
@@ -82,4 +82,4 @@ sin la ventaja de ser el camino soportado.
 
 ---
 
-**2026-10-22 — superseded por el ADR 0106**: la maquinaria de hls.js queda encendida; hls.js reproduce el interstitial tradicional del stream y la librería dibuja sus clases.
+**2026-10-22 — superseded por el ADR 0114**: la maquinaria de hls.js queda encendida; hls.js reproduce el interstitial tradicional del stream y la librería dibuja sus clases.

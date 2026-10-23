@@ -1,7 +1,7 @@
-// asset-list-timing.test.js -- the tests of ADR 0100.
+// asset-list-timing.test.js -- the tests of ADR 0108.
 //
 // What they are for: WHEN a break's asset-list is requested. It is on demand,
-// always (ADR 0101 removed the option to ask for every list up front), with the
+// always (ADR 0109 removed the option to ask for every list up front), with the
 // rule hls.js 1.7.2 applies to the X-ASSET-LIST of an
 // interstitial: when the programme is buffered up to the start of the break,
 // or when it is played or sought into it. Asked too late, the ad is not ready
@@ -10,15 +10,15 @@
 //
 // The last addition, also of 2026-10-22: a preroll on a LIVE playlist sits at
 // the live join point, as hls.js's `getLiveStartPos` computes it, and one first
-// seen after playback joined is not presented (ADR 0102, dated note). No live
+// seen after playback joined is not presented (ADR 0110, dated note). No live
 // primary exists in this repository, so the live inputs are simulated: a fake
 // instance with `liveSyncPosition` and playlist updates with `live: true`.
 //
 // Two additions of 2026-10-22: the forward buffer steps over a hole smaller
 // than hls.js's maxBufferHole, so a page paused at 0 over a buffer that starts
-// at 0.067 s still asks for the first break (ADR 0101, dated note); and a
+// at 0.067 s still asks for the first break (ADR 0109, dated note); and a
 // preroll, `CUE="PRE"`, is asked for at load and sits where playback begins,
-// as hls.js does with an interstitial (ADR 0102).
+// as hls.js does with an interstitial (ADR 0110).
 //
 // The rule is a pure function, and so is where the forward buffer ends. The
 // last tests drive the signalling layer over a fake player instance and a fake
@@ -88,7 +88,7 @@ test('the tolerance is hls.js\'s default maxBufferHole, 0.1 s', () => {
 });
 
 test('paused at 0 with the first range starting at 0.067 s, the buffer counts as ahead of the playhead', () => {
-  // The case of ADR 0101: the first presentation timestamp of the programme.
+  // The case of ADR 0109: the first presentation timestamp of the programme.
   assert.equal(bufferedEndAt([[0.067, 31.2]], 0), 31.2);
   // And the break at 14 s is due before anybody presses play.
   assert.equal(assetListDue({ startTime: 14, duration: 12 },
@@ -110,7 +110,7 @@ test('bufferedEndAt reads unsorted ranges and does not touch them', () => {
 });
 
 // ---------------------------------------------------------------------------
-// CUE="PRE" (ADR 0102)
+// CUE="PRE" (ADR 0110)
 // ---------------------------------------------------------------------------
 
 test('the CUE of a Date Range is read as hls.js reads it, parsed or off attr, and X-CUE as a fallback', () => {
@@ -285,7 +285,7 @@ test('a multiview preroll is asked for at load too', async () => {
 });
 
 // ---------------------------------------------------------------------------
-// CUE="PRE" on a LIVE playlist (ADR 0102, note of 2026-10-22). Simulated: there
+// CUE="PRE" on a LIVE playlist (ADR 0110, note of 2026-10-22). Simulated: there
 // is no live primary in this repository.
 // ---------------------------------------------------------------------------
 

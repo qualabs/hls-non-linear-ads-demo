@@ -1,6 +1,6 @@
 // date-range-marks.test.js -- the arithmetic of demo/shared/js/date-range-marks.js:
 // the breaks a page reads off the Date Ranges hls.js parsed, and where they sit on
-// its bar (ADR 0101).
+// its bar (ADR 0109).
 //
 // Run: npm test   (node --test, no dependencies)
 

@@ -81,4 +81,4 @@ sobre la fusión de tags con identificador repetido.
 
 **2026-09-30 — superseded por el ADR 0090** en `demo/stage-pair/`: cada player carga el manifest de su clase y los dos tags de un break nombran el mismo asset-list. `demo/compatibility-pair/` sigue mostrando esta decisión tal cual.
 
-**2026-10-22 — superseded por el ADR 0105** también en `demo/compatibility-pair/`: un tag por break con `CLASS="{$adclass}"`, y cada player pide la misma playlist con su clase en la URL.
+**2026-10-22 — superseded por el ADR 0113** también en `demo/compatibility-pair/`: un tag por break con `CLASS="{$adclass}"`, y cada player pide la misma playlist con su clase en la URL.

@@ -45,7 +45,7 @@ Experience {
   elements: Element[] // ordenados por zDepth ascendente; vacío cuando no hay composición
   views: View[]       // SÓLO en una oferta: el catálogo que se ofrece
   primaryName: string // SÓLO en una oferta: cómo se llama el contenido primario en la lista
-  options: Option[]   // SÓLO en un aviso: las opciones a intentar, EN ORDEN (ADR 0099)
+  options: Option[]   // SÓLO en un aviso: las opciones a intentar, EN ORDEN (ADR 0107)
   fallback: Experience|null // SÓLO en un aviso: el default lineal de su asset, el último recurso
   assetId: string     // SÓLO en un aviso: de qué asset de la lista salió
 }
@@ -79,7 +79,7 @@ View {
 }
 ```
 
-**El aviso trae una lista ordenada y no una sola opción** (ADR 0099). `options[0]`
+**El aviso trae una lista ordenada y no una sola opción** (ADR 0107). `options[0]`
 es la que se intenta primero, y es la que ya describen `type` y `elements`: quien
 no sabe de fallover dibuja eso y está bien. Las siguientes son las demás
 `layoutOptions` que entran en las capacidades y que la pre-validación, si corrió,
@@ -208,7 +208,7 @@ siga donde lo puso.
 
 **Lo que decide si un elemento "sigue estando" es la identidad de la regla 6**,
 `itemId` más la identidad del elemento, y nunca el `id` ni la posición de la
-caja. Una opción posterior del mismo aviso, montada por el fallover (ADR 0099),
+caja. Una opción posterior del mismo aviso, montada por el fallover (ADR 0107),
 es otra composición aunque repita un `id` de elemento: se construye de cero. Dos experiencias solapadas sin `id` propio comparten ese campo, y comparar
 por ahí le entrega a un anunciante el nodo —y el audio— de otro, en silencio y
 por una coincidencia de layout.
@@ -240,8 +240,8 @@ puede llamar en cada pintada.
 programa lleva tres clases de rango encima de la misma línea de tiempo. Dos se
 dibujan sobre el contenido sin detenerlo: la experiencia concurrente, y la oferta
 de varias vistas. La tercera es el interstitial tradicional, que reemplaza el
-contenido: un stream puede llevarlo junto a los nuestros sin solaparse (ADR 0105),
-y en nuestro player lo reproduce hls.js y no esta librería (ADR 0106). La barra de
+contenido: un stream puede llevarlo junto a los nuestros sin solaparse (ADR 0113),
+y en nuestro player lo reproduce hls.js y no esta librería (ADR 0114). La barra de
 nuestro player lo marca con lo que hls.js agendó, no con este rango. Son cosas distintas, se pintan de colores distintos, y
 sin este campo la barra no puede pintar más de un color.
 
@@ -276,7 +276,7 @@ promete es esto:
    ni desaparece: conserva su `id`, su `kind`, su `startTime` y su `duration`. Lo
    único que puede pasar entre dos consultas es que aparezcan rangos nuevos, con
    una excepción que se marca: un rango con `provisional: true` es el de un break
-   cuyo asset-list todavía no se pidió (ADR 0100), armado con el largo que
+   cuyo asset-list todavía no se pidió (ADR 0108), armado con el largo que
    declara su tag. Cuando la lista llega se reemplaza por el rango de lo que
    resolvió —con el mismo `id`, y el largo que la lista dice— o desaparece si
    resolvió en nada.
@@ -295,22 +295,22 @@ Que en este POC la lista esté completa antes de que empiece el primer break es
 una propiedad del ADR 0005 y no del contrato: el primario es un VOD con los
 Date Ranges escritos en la media playlist, así que llegan todos en la primera
 actualización de nivel. Sus asset-list, en cambio, se piden **on demand**
-(ADR 0100), cuando hls.js los pediría: cuando el programa está bufereado
+(ADR 0108), cuando hls.js los pediría: cuando el programa está bufereado
 hasta el break, o cuando se lo reproduce o se busca adentro. Hasta entonces el
 break está en la lista como rango provisional, y por eso `settled` no espera al
 último break; lo que sí crece a medida que llegan las listas es
-`provider.experiences`. Un **preroll** (`CUE="PRE"`, ADR 0102) es la excepción
+`provider.experiences`. Un **preroll** (`CUE="PRE"`, ADR 0110) es la excepción
 de cuándo y de dónde: su asset-list se pide al cargar, como hls.js pide el de un
 preroll, y su rango y sus experiencias empiezan donde arranca la reproducción
 (el `startPosition` del player, o 0; en live, el punto de unión que calcula hls.js) y no en su
 START-DATE. Para quien pinta no
 cambia nada de la forma: es un rango más, con el `kind` de su clase. Un **postroll** (`CUE="POST"`,
-ADR 0103) no es un rango del programa: va después de su fin y sólo como lineal, así que no está en
+ADR 0111) no es un rango del programa: va después de su fin y sólo como lineal, así que no está en
 `programRanges()` ni en `activeAt`; está en `postRolls()`, `{ id, kind, state, startTime,
 experiences }`, con experiencias lineales solamente, y lo reproduce `lib/postroll.js` por su propio
-reloj cuando el programa termina. Un break con **`CUE="ONCE"`** (ADR 0104) sale de la lista y de
+reloj cuando el programa termina. Un break con **`CUE="ONCE"`** (ADR 0112) sale de la lista y de
 `activeAt` después de reproducido (entró y salió), como hls.js lo saca de su schedule: para quien
-pinta, es un rango que deja de estar. No hay opción para pedirlas todas de entrada (ADR 0101). El día que la señalización sea live, o una agenda que
+pinta, es un rango que deja de estar. No hay opción para pedirlas todas de entrada (ADR 0109). El día que la señalización sea live, o una agenda que
 se resuelve por partes, la promesa sigue valiendo y la coincidencia no.
 
 Un rango cuyo asset-list falla no entra en la lista, y el error queda en la
@@ -337,7 +337,7 @@ en el medio de la ventana—, y lo que devuelve es la manera de desconectarlo
 cuando la experiencia termina.
 
 `onLoaded()` y `onFailed(motivo)` dicen cómo fue **la primera carga** del asset,
-una sola vez, y son lo único que vuelve por esta costura (ADR 0099). Cuenta sólo
+una sola vez, y son lo único que vuelve por esta costura (ADR 0107). Cuenta sólo
 la primera carga (SVTA2053 5.3.3): el pedido de la playlist que referencia el
 `uri`, la imagen, o los metadatos de un archivo progresivo, o ninguna respuesta
 en 10 s. Lo que falla después —un segmento, una variante— no llama a nada. El
@@ -534,7 +534,7 @@ Se detectan tres formas sobre la forma del dato, y una sobre el dispositivo:
   ventanas de los demás quedan donde estaban. Saltear un asset moviendo a los
   otros sería el break fallando de a un aviso por vez, que es justo lo que el
   Apéndice D.5 separa.
-- **Ninguna opción entra en las capacidades configuradas** (ADR 0085, ADR 0096).
+- **Ninguna opción entra en las capacidades configuradas** (ADR 0085, ADR 0104).
   Un item del payload trae `layoutOptions`, una lista de `{ type, layout }` en
   orden de preferencia (SVTA2053 5.3.3); un item sin `layoutOptions`, con el
   layout directo en el slot, es una sola opción. Antes de juzgar el bloque,
@@ -547,7 +547,7 @@ Se detectan tres formas sobre la forma del dato, y una sobre el dispositivo:
   caminos de siempre: su `URI` como lineal, o se saltea si no tiene. Una
   capacidad que no se configuró no descarta nada, y sin ninguna gana la primera
   opción. Una oferta de varias vistas no pasa por este filtro.
-- **Un asset de la opción no carga** (ADR 0099, SVTA2053 5.3.3 "Asset load
+- **Un asset de la opción no carga** (ADR 0107, SVTA2053 5.3.3 "Asset load
   failure"). Esto ya no lo decide la señalización sola: entrega todas las opciones
   que entran, en orden, y el default atrás, y es el renderizado el que, cuando la
   primera carga de un asset de la opción montada falla (un status de error, un

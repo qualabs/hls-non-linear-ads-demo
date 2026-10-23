@@ -1,5 +1,5 @@
 // variable-substitution.test.js -- the helper the demo tests read a playlist
-// through (ADR 0105), held to the rules of the spec it imitates.
+// through (ADR 0113), held to the rules of the spec it imitates.
 //
 // Run: npm test   (node --test, no dependencies)
 

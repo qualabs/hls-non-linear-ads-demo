@@ -1,5 +1,5 @@
 ---
-id: "0107"
+id: "0115"
 title: Cada playlist de los pares lleva un break lineal tradicional con la clase de Apple escrita, y lo reproducen los dos panes
 status: accepted
 scope: project
@@ -13,8 +13,8 @@ generalized_by: null
 ## Contexto
 
 Decisión (c) de David Hassoun del 2026-10-22: nuestro player soporta las dos clases en una
-implementación (ADR 0106), y para mostrarlo cada playlist suma un break lineal tradicional
-`CLASS="com.apple.hls.interstitial"` **escrito**, no sustituido por la variable del ADR 0105, en un
+implementación (ADR 0114), y para mostrarlo cada playlist suma un break lineal tradicional
+`CLASS="com.apple.hls.interstitial"` **escrito**, no sustituido por la variable del ADR 0113, en un
 momento que no se solape con ningún otro break; todos los demás siguen con la clase del parámetro.
 
 ## Decisión

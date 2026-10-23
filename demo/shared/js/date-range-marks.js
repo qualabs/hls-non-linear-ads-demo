@@ -1,8 +1,8 @@
 // date-range-marks.js -- the breaks of a programme on a page's own progress bar,
-// read off hls.js and nothing else (ADR 0101).
+// read off hls.js and nothing else (ADR 0109).
 //
 // WHY IT IS A DEMO FILE AND NOT THE LIBRARY'S. The library asks for each break's
-// asset-list when hls.js would (ADR 0100), so what a page knows about a break
+// asset-list when hls.js would (ADR 0108), so what a page knows about a break
 // before its list arrives is what the playlist says: where it starts and how long
 // it is planned to last. hls.js already parsed that, in the Date Ranges of the
 // level details, and leaves it to any page. So a page that draws its own bar
@@ -13,9 +13,9 @@
 // WHERE IT IS MOUNTED: NOWHERE YET, AND THAT IS ON PURPOSE. Every page of this
 // repository draws its bar with the library's controls, and that bar already
 // marks every break from the start, off the same tags (`programRanges()`,
-// `provisional`, ADR 0100). Mounting this as well would draw each break twice.
+// `provisional`, ADR 0108). Mounting this as well would draw each break twice.
 // Whether the library keeps decorating its bar or leaves it to the pages is an
-// open point of ADR 0101; this is what a page mounts the day it is the page's.
+// open point of ADR 0109; this is what a page mounts the day it is the page's.
 // Each bucket publishes one demo folder (CLAUDE.md), so a page that mounts it
 // takes a copy into its own js/ or the server gets a mount for this folder.
 //

@@ -15,7 +15,7 @@
 //
 // AND THE ASSET-LIST IS FETCHED ONLY ONCE THE PLAYER HAS ASKED FOR IT. The
 // player asks when the programme is buffered up to the break, as hls.js does for
-// an interstitial (ADR 0100, ADR 0101), and a page that went and read the list
+// an interstitial (ADR 0108, ADR 0109), and a page that went and read the list
 // before that would be the request the player does not make. So the tag is
 // printed at once, and the folds wait for the contract to say the break is no
 // longer known only off its tag. Here that is a moment after the page loads,
@@ -175,7 +175,7 @@ const BLOCK_GLOSS = [
     'their stream and then the same box as a short progressive file, for a device with one ' +
     'decoder that animates a file over the programme. This library draws the second only if the ' +
     'stream fails to load: it asks for exactly what the first asks for, so the first wins ' +
-    '(ADR 0097), and the second is the next one that fits (ADR 0099).' },
+    '(ADR 0097), and the second is the next one that fits (ADR 0107).' },
   { level: 'item', name: 'identifiers', must: 'optional', says:
     'Who this Ad is: one or more scheme and value pairs, here an Ad-ID. Mandatory in the spec, ' +
     'not needed to draw: this client passes it on untouched to the tracking events of the Ad, ' +

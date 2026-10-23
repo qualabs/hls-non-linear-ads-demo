@@ -1,5 +1,5 @@
 ---
-id: "0103"
+id: "0111"
 title: Un postroll (CUE="POST") nunca se presenta como aviso no lineal; cae a su lineal después del programa, o se saltea
 status: accepted
 scope: project
@@ -12,7 +12,7 @@ generalized_by: null
 
 ## Contexto
 
-El ADR 0102 leyó `CUE` y aplicó sólo `PRE`; un Date Range concurrente o de multi view con
+El ADR 0110 leyó `CUE` y aplicó sólo `PRE`; un Date Range concurrente o de multi view con
 `CUE="POST"` seguía ubicándose en su START-DATE, y su Abierto proponía no soportarlo. El
 2026-10-22 David Hassoun decidió, por el coordinador: *"it should auto fail to the linear ad if
 defined as a standard interstitial, or skip if only non-linear is defined, for VOD."* Y para live,
@@ -100,4 +100,4 @@ Por eso la lectura implementada es la primera: el `URI` del asset-list del tag c
   0090 descarta en estas demos; cuesta aparear tags por break, algo que la señalización no hace hoy.
   Recomendación: la 1.
 
-> **Nota del 2026-10-22.** Cerrado por el ADR 0106: queda la opción 1. Con un juego de tags por stream (ADR 0105) no hay tag de Apple apareado, así que la opción 2 queda sin objeto; un postroll de clase Apple lo reproduce hls.js, también en nuestro pane.
+> **Nota del 2026-10-22.** Cerrado por el ADR 0114: queda la opción 1. Con un juego de tags por stream (ADR 0113) no hay tag de Apple apareado, así que la opción 2 queda sin objeto; un postroll de clase Apple lo reproduce hls.js, también en nuestro pane.

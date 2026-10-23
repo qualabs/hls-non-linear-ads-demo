@@ -18,7 +18,7 @@ folder per demo, and each demo tells its own run.
 
 | demo | what it argues |
 | --- | --- |
-| [`compatibility-pair`](demo/compatibility-pair/README.md) | the same playlist file on two clients at once, which differ only in the class they ask for it with (`?adclass=…`, ADR 0105): an off-the-shelf hls.js, which reads each break as an Apple interstitial and replaces the content with the ad, next to the same version of hls.js driven by this library, which reads it as ours, keeps the content on screen and draws the ad over it. What it argues is that this deploys without breaking the clients already in the market |
+| [`compatibility-pair`](demo/compatibility-pair/README.md) | the same playlist file on two clients at once, which differ only in the class they ask for it with (`?adclass=…`, ADR 0113): an off-the-shelf hls.js, which reads each break as an Apple interstitial and replaces the content with the ad, next to the same version of hls.js driven by this library, which reads it as ours, keeps the content on screen and draws the ad over it. What it argues is that this deploys without breaking the clients already in the market |
 | [`hydration-break`](demo/hydration-break/README.md) | why anybody would want this. A minute of stopped play in a football match, with four ads over the live picture instead of a commercial break — and the traditional linear ad third, so the comparison happens inside one minute and one player. What it argues is the business case: the viewer stays watching, so the advertising is seen. The page walks you through it by itself and stops the composition to explain each step, which the library allows without a line of it changing |
 | [`multiview-offer`](demo/multiview-offer/README.md) | the break where the publisher offers and the viewer composes. One playlist carrying both classes: a concurrent ad of the class this repository started with, and two windows in which a catalogue of feeds is on offer and the grid takes its shape from how many of them somebody raised. What it argues is that the same signalling covers a relationship where the payload cannot declare a layout, because where a box goes is not known when the playlist is written |
 | [`race-multiview`](demo/race-multiview/README.md) | the offer put to work on the case that asks for it. A race programme that never stops, and part way through it a window that announces a catalogue of on-board cameras, each one named after its driver: whoever is watching raises the car they care about, enlarges it and hears that engine instead of the commentary. What it argues is that the mechanism of `multiview-offer` is not a demo of itself — it is what a racing channel needs, because the programme is a single picture and the story is several of them at once |
@@ -117,7 +117,7 @@ serves it, and everything below `demo/` is a page that uses it.
 | `demo/` | **the demos**, one folder each, indexed above |
 | `test/` | the tests of what fails in silence: the layout resolution, the sequence of a break and its fallback, the ranges of the programme, and the volume of an element |
 | `docs/` | the product's own documents: [the contract between the two layers](docs/contrato-senalizacion-renderizado.md), and [how to integrate the library](docs/integrating-the-library.md) into a page that is not a demo |
-| `vendor/hls.min.js` | hls.js **1.7.2, unmodified**, with its interstitials machinery on (ADR 0106) |
+| `vendor/hls.min.js` | hls.js **1.7.2, unmodified**, with its interstitials machinery on (ADR 0114) |
 | `server.mjs` | a static file server, and nothing else: no ad server, no APS. It takes the folder to serve as its argument, and mounts `/dist/` and `/vendor/` from here (ADR 0022) |
 | `run.sh` | the one command of a demo, with the demo as its argument |
 | `scripts/` | the two scripts of the library: `scripts/construir-libreria.sh`, the build, and `scripts/verificar-cortes.mjs`, the check of the two seams |
@@ -195,11 +195,11 @@ default (`preValidateAssets`, `preValidateMethod`), because with a real ad
 decisioning service an extra request per asset has a cost. And each break's
 asset-list is requested when hls.js would request it — when the programme is
 buffered up to the break, or played or sought into it; a preroll's (`CUE="PRE"`), at
-load, placed where playback begins, the live join point on a live playlist (ADR 0102); a
+load, placed where playback begins, the live join point on a live playlist (ADR 0110); a
 post-roll's (`CUE="POST"`), when the programme is buffered to its end, and only its linear
-default plays, after the programme (ADR 0103); and a `CUE="ONCE"` break leaves for good once it
-has played (ADR 0104) — and there is no option to
-request them all up front (ADR 0101). The options are in
+default plays, after the programme (ADR 0111); and a `CUE="ONCE"` break leaves for good once it
+has played (ADR 0112) — and there is no option to
+request them all up front (ADR 0109). The options are in
 [`docs/integrating-the-library.md`](docs/integrating-the-library.md) §6.
 
 The container is the box the composition lives in, and the media element has to
@@ -220,10 +220,10 @@ not part of this: those are functional and stay where they are.
 **hls.js keeps its interstitials machinery on, and nothing of ours goes into
 the instance.** One stream can carry both kinds of break, never overlapping: ours,
 which the library draws over the programme, and Apple's traditional interstitial,
-which hls.js plays by replacing the programme (ADR 0106). While hls.js plays one,
+which hls.js plays by replacing the programme (ADR 0114). While hls.js plays one,
 the library draws nothing over it, the chrome follows the programme's clock, and the
 bar marks both kinds. Which class a break is can be chosen per client with a query
-parameter on the same playlist (`EXT-X-DEFINE:QUERYPARAM`, ADR 0105). The details
+parameter on the same playlist (`EXT-X-DEFINE:QUERYPARAM`, ADR 0113). The details
 are [`docs/integrating-the-library.md`](docs/integrating-the-library.md) §2.1.
 
 The public surface is deliberately not frozen yet. ADR 0015 fixes it with the

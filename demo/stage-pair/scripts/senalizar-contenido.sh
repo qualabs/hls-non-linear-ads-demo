@@ -10,7 +10,7 @@
 # ---------------------------------------------------------------------------
 # UNA PLAYLIST, UN TAG POR BREAK, Y LA CLASE LA ELIGE EL CLIENTE POR LA URL
 # ---------------------------------------------------------------------------
-# Es el ADR 0105, que supersede el manifest por clase del ADR 0090. La playlist
+# Es el ADR 0113, que supersede el manifest por clase del ADR 0090. La playlist
 # declara `#EXT-X-DEFINE:QUERYPARAM="adclass"` y cada break lleva
 # `CLASS="{$adclass}"`: cada player pide la MISMA playlist con otro parámetro
 # (`?adclass=com.apple.hls.interstitial` el de fábrica,
@@ -67,7 +67,7 @@ leer() { node -e 'const s=require(process.argv[1]);let v=s;for(const k of proces
 
 OUT=${OUT:-$(leer playlist)}
 
-# La variable de la clase (ADR 0105): su nombre es a la vez el del parámetro de
+# La variable de la clase (ADR 0113): su nombre es a la vez el del parámetro de
 # la URL, y sale de stage.json, que es donde lo leen también las páginas.
 PARAMETRO=$(leer parametroDeClase)
 
@@ -141,15 +141,15 @@ suma() { awk -v a="$1" -v b="$2" 'BEGIN { printf "%s", a + b }'; }
 #
 # DECLARA EL LARGO DEL ASSET-LIST, leído del archivo.
 #
-# EL PREROLL LLEVA `CUE="PRE"` (ADR 0102): cada cliente lo pone antes del
+# EL PREROLL LLEVA `CUE="PRE"` (ADR 0110): cada cliente lo pone antes del
 # programa, sea cual sea su START-DATE, y pide su asset-list al cargar. El
 # START-DATE se escribe igual (offset 0, el instante del EXT-X-PROGRAM-DATE-TIME)
 # porque la spec lo exige en todo Date Range.
 #
-# Y UN BREAK CON `CUE="ONCE"` (ADR 0104), el B: cada cliente lo saca después de
+# Y UN BREAK CON `CUE="ONCE"` (ADR 0112), el B: cada cliente lo saca después de
 # reproducirlo.
 #
-# EL POSTROLL, `CUE="POST"` (ADR 0103): cada cliente lo pone después del fin del
+# EL POSTROLL, `CUE="POST"` (ADR 0111): cada cliente lo pone después del fin del
 # programa y pide su lista cuando el programa está bufereado hasta el fin. El
 # START-DATE se escribe en los últimos segundos del programa porque la spec lo
 # exige y ninguno de los dos lo usa.
@@ -184,10 +184,10 @@ while IFS='|' read -r id offset duracion campana forma lista lineal cue; do
   tags="$tags$(tag "$id" "$offset" "$lista" "$lineal" "$cue")
 "
 done <<< "$RECORRIDO"
-# EL BREAK LINEAL TRADICIONAL, ESCRITO (ADR 0107): CLASS de Apple literal, sin la
+# EL BREAK LINEAL TRADICIONAL, ESCRITO (ADR 0115): CLASS de Apple literal, sin la
 # variable, así que los dos panes lo leen igual y lo reproduce hls.js en los dos
-# (el nuestro con su maquinaria encendida, ADR 0106). Su hueco no se solapa con
-# ningún break de `breaks` (ADR 0105), y lo verifica el test.
+# (el nuestro con su maquinaria encendida, ADR 0114). Su hueco no se solapa con
+# ningún break de `breaks` (ADR 0113), y lo verifica el test.
 LINEAL=$(node -e '
   const b = require(process.argv[1]).breakLineal;
   if (b) process.stdout.write([b.id, b.offset, b.lista].join("|"));
@@ -240,7 +240,7 @@ if [ -n "$LINEAL" ]; then
   printf '  break %s  t=%3ss a %3ss  (%ss)  CLASS="com.apple.hls.interstitial", escrita\n' \
     "${lin_id^^}" "$lin_offset" "$(suma "$lin_offset" "$(declaracion "$SIGNALLING/$lin_lista" | head -1)")" \
     "$(declaracion "$SIGNALLING/$lin_lista" | head -1)"
-  printf '      los dos      %-26s el lineal a cuadro entero, reproducido por hls.js (ADR 0107)\n' "$lin_lista"
+  printf '      los dos      %-26s el lineal a cuadro entero, reproducido por hls.js (ADR 0115)\n' "$lin_lista"
 fi
 
 cat <<'TEXTO'
@@ -255,7 +255,7 @@ El asset-list de cada break es el mismo para cualquier capacidad y para los dos
 clientes: el player de fábrica lee su parte estándar y la librería el bloque de
 encima, con sus dos opciones, video e imagen, y elige (ADR 0085). Cada una va
 seguida de su gemela para el Roku, MP4 y PNG, cuando la pieza la tiene, que la
-librería sólo alcanza si la original no carga (ADR 0096, 0097 y 0099).
+librería sólo alcanza si la original no carga (ADR 0096, 0097 y 0107).
 TEXTO
 
 # ---------------------------------------------------------------------------

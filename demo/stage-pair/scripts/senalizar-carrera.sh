@@ -23,7 +23,7 @@
 # termina la señalización de publicidad y empieza la extensión de Qualabs.
 #
 # LA CLASE DE LOS AVISOS LA ELIGE EL CLIENTE, como en la playlist del par
-# (ADR 0105): la playlist declara `#EXT-X-DEFINE:QUERYPARAM="adclass"` y cada aviso
+# (ADR 0113): la playlist declara `#EXT-X-DEFINE:QUERYPARAM="adclass"` y cada aviso
 # lleva `CLASS="{$adclass}"`. Esta página corre sólo nuestro player y pide la
 # playlist con la clase concurrente, así que no hay tag de reemplazo que alguien
 # lea: la compatibilidad es la afirmación de `index.html`. LA VENTANA NO: la de
@@ -73,7 +73,7 @@ RACE_CONTENT=${RACE_CONTENT:-content/race}
 RACE_SIGNALLING=${RACE_SIGNALLING:-signalling}
 
 # La clase de la ventana (ADR 0063), escrita una sola vez. La de los avisos no se
-# escribe: es la variable del ADR 0105, con el nombre de stage.json, y la página
+# escribe: es la variable del ADR 0113, con el nombre de stage.json, y la página
 # la pide concurrente.
 CLASE_MULTIVIEW=com.qualabs.hls.multiViewInterstitial
 PARAMETRO=$(leer parametroDeClase)

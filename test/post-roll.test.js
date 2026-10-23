@@ -1,4 +1,4 @@
-// post-roll.test.js -- the tests of ADR 0103: a Date Range with CUE="POST".
+// post-roll.test.js -- the tests of ADR 0111: a Date Range with CUE="POST".
 //
 // What they are for: a post-roll of the concurrent or multi-view class is
 // NEVER drawn as a non-linear ad -- after the end there is no programme to draw

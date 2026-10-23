@@ -91,7 +91,7 @@ def medir(puerto, decoders, images):
     from playwright.sync_api import sync_playwright
 
     stage = json.loads((DEMO / "stage.json").read_text())
-    # Una playlist y la clase en su URL (ADR 0105): cada pane la pide con la suya.
+    # Una playlist y la clase en su URL (ADR 0113): cada pane la pide con la suya.
     from urllib.parse import quote
     base = "/" + stage["playlist"] + "?" + stage["parametroDeClase"] + "="
     src = quote(base + "com.qualabs.hls.concurrentInterstitial", safe="")
