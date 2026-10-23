@@ -35,6 +35,7 @@ import {
   elRitmoDelGuion
 } from './comprobaciones.js';
 import { labelsOfAssetList, blockGlossOf } from '../js/senalizacion.js';
+import { selectOption, usableCapabilities } from '../../../lib/signalling.js';
 
 /** Los archivos que dibujan rótulos de la página leyendo el asset list. La lista se
  * amplía cuando aparece otro que los derive: un identificador o un MIME escrito a mano es
@@ -136,10 +137,90 @@ test('cada creativo del asset list tiene una carpeta de contenido nombrada', () 
   // lo que sí es declarado: que cada `uri` apunte adentro de `/content/`.
   const uris = assetList.ASSETS.flatMap((a) => [
     a.URI,
-    ...(a['X-AD-CREATIVE-SIGNALING']?.payload?.[0]?.layout?.assets ?? []).map((c) => c.uri)
+    ...(a['X-AD-CREATIVE-SIGNALING']?.payload ?? [])
+      .flatMap((item) => [item, ...(item.options ?? [])])
+      .flatMap((opcion) => opcion.layout?.assets ?? [])
+      .map((c) => c.uri)
   ]).filter(Boolean);
   assert.ok(uris.length >= 4);
   for (const uri of uris) {
     assert.match(uri, /^\/content\/[A-Za-z0-9._-]+\//, `${uri} apunta adentro de /content/`);
   }
+});
+
+// ===========================================================================
+// THE TWINS FOR THE ROKU (phase 17, ADR 0096, 0097, 0102)
+// ===========================================================================
+
+/** The items of the list that carry options, each with its index in ASSETS. */
+const conOpciones = (lista) => lista.ASSETS
+  .map((a, i) => ({ i, item: a['X-AD-CREATIVE-SIGNALING']?.payload?.[0] }))
+  .filter(({ item }) => Array.isArray(item?.options));
+
+/** An option with type, uri and codecs taken out of its elements. */
+const sinMedio = (opcion) => JSON.stringify({
+  ...opcion,
+  layout: { ...opcion.layout, assets: opcion.layout.assets.map(({ type, uri, codecs, ...resto }) => resto) }
+});
+
+test('the L and the corner offer their HLS and then its MP4 twin, and nothing else changes', () => {
+  // ADR 0102: the two video boxes, and only those, become [HLS, MP4]; between an
+  // option and its twin only type, uri and codecs change. THE CONTROL is the
+  // comparator: a twin with its viewport moved has to read as different.
+  const items = conOpciones(assetList);
+  assert.deepEqual(items.map(({ i }) => i), [1, 3], 'the L (2nd) and the corner (4th), and no other');
+  for (const { i, item } of items) {
+    assert.equal(item.options.length, 2, `asset ${i + 1}`);
+    const [hls, mp4] = item.options;
+    assert.match(hls.layout.assets[0].type, /mpegurl/i, `asset ${i + 1}: the first option is the HLS`);
+    assert.equal(mp4.layout.assets[0].type, 'video/mp4', `asset ${i + 1}: the second is the MP4`);
+    assert.match(mp4.layout.assets[0].codecs, /^vp09\.\d{2}\.\d{2}\.\d{2}$/);
+    assert.equal(mp4.layout.assets[0].uri, hls.layout.assets[0].uri.replace(/index\.m3u8$/, 'progressive.mp4'));
+    assert.equal(sinMedio(hls), sinMedio(mp4), `asset ${i + 1}: the twin differs in more than its medium`);
+    const movida = structuredClone(mp4);
+    movida.layout.assets[0].viewport = '1 2 3 4';
+    assert.notEqual(sinMedio(hls), sinMedio(movida), 'the control: a moved twin reads as the same');
+    assert.ok(!('type' in item) && !('layout' in item), `asset ${i + 1}: type and layout belong to the options now`);
+  }
+});
+
+test('the twins never change what the library picks, under any capability', () => {
+  // ADR 0097 as a property: each item with its twin and without it picks the same
+  // option by content, with every capability and with none. THE CONTROL puts the
+  // twin first: under some capability the pick has to change.
+  const elegida = (item, c) => {
+    const { option } = selectOption(item, usableCapabilities(c));
+    return option && JSON.stringify({ type: option.type, assets: option.layout.assets });
+  };
+  const capacidades = [null,
+    { videoDecoders: 2, imageOverVideo: true }, { videoDecoders: 2, imageOverVideo: false },
+    { videoDecoders: 1, imageOverVideo: true }, { videoDecoders: 1, imageOverVideo: false }];
+  for (const { i, item } of conOpciones(assetList)) {
+    const { options: [hls, mp4], ...sobre } = item;
+    const solo = { ...sobre, ...hls };
+    for (const c of capacidades) assert.equal(elegida(item, c), elegida(solo, c), `asset ${i + 1}: ${JSON.stringify(c)}`);
+    const alReves = { ...sobre, options: [mp4, hls] };
+    assert.ok(capacidades.some((c) => elegida(alReves, c) !== elegida(solo, c)), 'the control picks the same');
+  }
+});
+
+test('the folds of the page read the same with the twins as without them', () => {
+  // The labels of the folds name the layout and the medium of each Ad (ADR 0102:
+  // the page reads the first option). The reference is the same list in the form
+  // it had before the twins -- each item with its first option laid over it and no
+  // `options` -- through the same function. THE CONTROL: a list whose first option
+  // is the MP4 twin has to change a label, or the comparison cannot see one.
+  const sinGemelas = structuredClone(assetList);
+  for (const a of sinGemelas.ASSETS) {
+    const block = a['X-AD-CREATIVE-SIGNALING'];
+    if (!block) continue;
+    block.payload = block.payload.map(({ options, ...sobre }) => (options ? { ...sobre, ...options[0] } : sobre));
+  }
+  assert.deepEqual(labelsOfAssetList(assetList), labelsOfAssetList(sinGemelas));
+  const alReves = structuredClone(assetList);
+  for (const { i } of conOpciones(alReves)) {
+    const item = alReves.ASSETS[i]['X-AD-CREATIVE-SIGNALING'].payload[0];
+    item.options = [{ type: 'otherLayout', layout: item.options[1].layout }, item.options[0]];
+  }
+  assert.notDeepEqual(labelsOfAssetList(alReves), labelsOfAssetList(sinGemelas), 'the control changes no label');
 });

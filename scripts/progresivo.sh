@@ -51,6 +51,10 @@ def fail(msg):
     print(f"progresivo: {msg}", file=sys.stderr)
     sys.exit(1)
 
+import os
+if not os.path.isfile(mp4):
+    fail(f"{mp4}: does not exist")
+
 probe = json.loads(subprocess.run(
     ["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", mp4],
     check=True, capture_output=True, text=True).stdout)

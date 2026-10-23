@@ -40,7 +40,6 @@
         "type": "slot",
         "payload": [
           {
-            "type": "squeezebackLShape",
             "start": 0,
             "duration": 16,
             "identifiers": [
@@ -49,22 +48,47 @@
                 "value": "QDML0001000H"
               }
             ],
-            "layout": {
-              "primaryContent": {
-                "zDepth": 1,
-                "viewport": "0 0 26 26"
-              },
-              "assets": [
-                {
-                  "id": "lBackplate",
-                  "type": "application/vnd.apple.mpegurl",
-                  "uri": "/content/adL/index.m3u8",
-                  "viewport": "0 0 0 0",
-                  "zDepth": 0,
-                  "volume": 35
+            "options": [
+              {
+                "type": "squeezebackLShape",
+                "layout": {
+                  "primaryContent": {
+                    "zDepth": 1,
+                    "viewport": "0 0 26 26"
+                  },
+                  "assets": [
+                    {
+                      "id": "lBackplate",
+                      "type": "application/vnd.apple.mpegurl",
+                      "uri": "/content/adL/index.m3u8",
+                      "viewport": "0 0 0 0",
+                      "zDepth": 0,
+                      "volume": 35
+                    }
+                  ]
                 }
-              ]
-            }
+              },
+              {
+                "type": "squeezebackLShape",
+                "layout": {
+                  "primaryContent": {
+                    "zDepth": 1,
+                    "viewport": "0 0 26 26"
+                  },
+                  "assets": [
+                    {
+                      "id": "lBackplate",
+                      "type": "video/mp4",
+                      "codecs": "vp09.00.30.08",
+                      "uri": "/content/adL/progressive.mp4",
+                      "viewport": "0 0 0 0",
+                      "zDepth": 0,
+                      "volume": 35
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       }
@@ -81,7 +105,6 @@
         "type": "slot",
         "payload": [
           {
-            "type": "cornerOverlay",
             "start": 0,
             "duration": 24,
             "identifiers": [
@@ -90,18 +113,39 @@
                 "value": "QDMO0001000H"
               }
             ],
-            "layout": {
-              "assets": [
-                {
-                  "id": "overlay",
-                  "type": "application/vnd.apple.mpegurl",
-                  "uri": "/content/adOverlay/index.m3u8",
-                  "viewport": "62.5 6.25 12.5 68.75",
-                  "zDepth": 1,
-                  "volume": 25
+            "options": [
+              {
+                "type": "cornerOverlay",
+                "layout": {
+                  "assets": [
+                    {
+                      "id": "overlay",
+                      "type": "application/vnd.apple.mpegurl",
+                      "uri": "/content/adOverlay/index.m3u8",
+                      "viewport": "62.5 6.25 12.5 68.75",
+                      "zDepth": 1,
+                      "volume": 25
+                    }
+                  ]
                 }
-              ]
-            }
+              },
+              {
+                "type": "cornerOverlay",
+                "layout": {
+                  "assets": [
+                    {
+                      "id": "overlay",
+                      "type": "video/mp4",
+                      "codecs": "vp09.00.11.08",
+                      "uri": "/content/adOverlay/progressive.mp4",
+                      "viewport": "62.5 6.25 12.5 68.75",
+                      "zDepth": 1,
+                      "volume": 25
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       }
