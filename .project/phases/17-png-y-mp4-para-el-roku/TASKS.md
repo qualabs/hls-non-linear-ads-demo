@@ -120,8 +120,8 @@
 - **nivel de verificación:** alto. Escribe en demos públicas.
 - **Needs from a person:** Nicolás da el OK para las dos salidas a internet (la subida de
   `content/` y el push a `main`), con la evidencia de T-04, T-05 y T-06 delante.
-- **post-ejecución:** 2026-10-22, la L de hydration-break tapaba el programa en la TV. No era el
-  formato: en el canal el MP4 iba después del Video en el árbol. `roku-ads-02` midió que el Video abre
-  su ventana en el plano gráfico sobre lo dibujado antes, lo corrigió de su lado, y Nicolás vio la L
-  bien. El formato queda como está.
+- **post-ejecución:** 2026-10-22, se informó que la L de hydration-break tapaba el programa en la TV.
+  `roku-ads-02` midió en el equipo que el Video abre su ventana en el plano gráfico sobre lo
+  dibujado antes, AnimatedImage incluido, así que el MP4 opaco no tapa el programa; Nicolás vio la L
+  bien. La hipótesis del plano (la mía) no se sostuvo, y el formato queda como está.
 - **bloqueo:** espera el OK de Nicolás para las dos salidas a internet.
