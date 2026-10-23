@@ -1,0 +1,67 @@
+# run 39627734040 (ffab867), extracto del paso 'Publish and verify'
+last green publication: none; demos: stage-pair race-multiview multiview-offer hydration-break compatibility-pair
+== 2. stage-pair: checks ==
+   42 references, 19 playlists followed, 564 segments; 0 missing
+== 2. race-multiview: checks ==
+   9 references, 6 playlists followed, 192 segments; 0 missing
+== 2. multiview-offer: checks ==
+   10 references, 6 playlists followed, 153 segments; 0 missing
+== 2. hydration-break: checks ==
+   12 references, 3 playlists followed, 24 segments; 0 missing
+== 2. compatibility-pair: checks ==
+   7 references, 3 playlists followed, 18 segments; 0 missing
+== 3. stage-pair: publish ==
+Patching gs://qualabs-hls-demo-stage-pair/CREDITS.md#1790645706013177...
+   metadata to fix: 0 .ts without video/mp2t, 0 objects without no-cache
+== 4. stage-pair: the bucket against the stage, by md5 ==
+   75 files, 504 objects: 0 differ, 0 absent, 0 extra, 0 cacheable, 0 .ts without video/mp2t
+   control: remote index.html against local dist js -> DIFFERENT
+== 5. stage-pair: WITHOUT credentials and without cache-busting ==
+   16 URLs against the repo, 0 different
+   /                -> 403  (403: listing is denied on purpose)
+   /no-existe.json  -> 404  (control: a 404 has to be seen as one)
+== 3. race-multiview: publish ==
+Patching gs://qualabs-hls-demo-race-multiview/CREDITS.md#1789420254835085...
+   metadata to fix: 0 .ts without video/mp2t, 7 objects without no-cache
+== 4. race-multiview: the bucket against the stage, by md5 ==
+   69 files, 324 objects: 0 differ, 0 absent, 0 extra, 0 cacheable, 0 .ts without video/mp2t
+   control: remote index.html against local dist js -> DIFFERENT
+== 5. race-multiview: WITHOUT credentials and without cache-busting ==
+   6 URLs against the repo, 0 different
+   /                -> 403  (403: listing is denied on purpose)
+   /no-existe.json  -> 404  (control: a 404 has to be seen as one)
+== 3. multiview-offer: publish ==
+Patching gs://qualabs-hls-demo-multiview-offer/CREDITS.md#1789165822339338...
+   metadata to fix: 0 .ts without video/mp2t, 7 objects without no-cache
+== 4. multiview-offer: the bucket against the stage, by md5 ==
+   26 files, 276 objects: 0 differ, 0 absent, 0 extra, 0 cacheable, 0 .ts without video/mp2t
+   control: remote index.html against local dist js -> DIFFERENT
+== 5. multiview-offer: WITHOUT credentials and without cache-busting ==
+   7 URLs against the repo, 0 different
+   /                -> 403  (403: listing is denied on purpose)
+   /no-existe.json  -> 404  (control: a 404 has to be seen as one)
+== 3. hydration-break: publish ==
+Patching gs://qualabs-hls-demo-hydration-break/CREDITS.md#1789165791082700...
+   metadata to fix: 0 .ts without video/mp2t, 4 objects without no-cache
+== 4. hydration-break: the bucket against the stage, by md5 ==
+   61 files, 136 objects: 0 differ, 0 absent, 0 extra, 0 cacheable, 0 .ts without video/mp2t
+   control: remote index.html against local dist js -> DIFFERENT
+== 5. hydration-break: WITHOUT credentials and without cache-busting ==
+   5 URLs against the repo, 0 different
+   /                -> 403  (403: listing is denied on purpose)
+   /no-existe.json  -> 404  (control: a 404 has to be seen as one)
+== 3. compatibility-pair: publish ==
+Patching gs://qualabs-hls-demo-compatibility-pair/CREDITS.md#1789165753356790...
+   metadata to fix: 0 .ts without video/mp2t, 4 objects without no-cache
+== 4. compatibility-pair: the bucket against the stage, by md5 ==
+   32 files, 146 objects: 0 differ, 0 absent, 0 extra, 0 cacheable, 0 .ts without video/mp2t
+   control: remote index.html against local dist js -> DIFFERENT
+== 5. compatibility-pair: WITHOUT credentials and without cache-busting ==
+   17 URLs against the repo, 0 different
+   /                -> 403  (403: listing is denied on purpose)
+   /no-existe.json  -> 404  (control: a 404 has to be seen as one)
+PUBLISHED: https://qualabs-hls-demo-stage-pair.storage.googleapis.com/index.html
+PUBLISHED: https://qualabs-hls-demo-race-multiview.storage.googleapis.com/index.html
+PUBLISHED: https://qualabs-hls-demo-multiview-offer.storage.googleapis.com/index.html
+PUBLISHED: https://qualabs-hls-demo-hydration-break.storage.googleapis.com/index.html
+PUBLISHED: https://qualabs-hls-demo-compatibility-pair.storage.googleapis.com/index.html

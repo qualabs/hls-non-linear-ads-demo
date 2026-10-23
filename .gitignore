@@ -32,3 +32,7 @@ research/
 # un arreglo: ya apareció en dos tasks distintas de la fase 13.
 __pycache__/
 *.pyc
+
+# The git worktrees where code is changed (create-project): each one is a branch
+# checked out inside the repo, so it is visible to whoever follows the project.
+.worktrees/

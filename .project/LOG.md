@@ -6295,6 +6295,37 @@ Pedido de David por el coordinador, en tres partes aprobadas el mismo día. ADR 
   commit ni publicación. Quedan abiertos para David: si un seek adentro de un break debería pausar
   el programa hasta tener la lista (hoy no), si `'eager'` se mantiene, y GET vs HEAD.
 
+## 2026-10-20 — Fase 16 abierta: la publicación continua
+
+Pedido aprobado por Nicolás: cada push a `main` republica las demos que cambió, con WIF y sin
+claves. Al mirar: `content/` no está en git, así que el CI publica lo que está en git y deja el
+video del bucket como está (ADR 0094); la autenticación es el ADR 0095. Hecho en la rama
+`ci-publicar` (`.worktrees/ci-publicar/`), sin push: falta correr `scripts/configurar-wif.sh` con
+permiso de IAM (T-03) y el OK para el push (T-04). Los otros cuatro buckets están atrasados respecto
+de `main`, y la primera corrida los pone al día.
+
+## 2026-10-21 — Fase 16: el primer run de Actions, y un permiso que faltaba
+
+El run 39624308222 pasó build, `npm run check`, `npm test` y la autenticación por WIF. Falló en
+"Publish and verify": `gcloud storage rsync` pide `storage.buckets.get` sobre
+`qualabs-hls-demo-stage-pair`, y `roles/storage.objectAdmin` no lo trae. No escribió nada, porque
+la falla fue antes de la primera escritura. Antes, `configurar-wif.sh` se había cortado porque el
+display name del proveedor pasaba los 32 caracteres (af3cf66). Arreglo: `roles/storage.legacyBucketReader`
+en cada bucket, además de objectAdmin (9d1aa2b, nota del 2026-10-21 en el ADR 0095).
+
+Por qué la verificación de T-01 no lo vio: todas las corridas en seco se hicieron con la cuenta
+Owner del gcloud de esta máquina, nunca con los permisos de `hls-demo-publisher`, así que un permiso
+de menos en la cuenta no podía aparecer. Lo que las corridas en seco prueban es la lógica de la
+publicación. Que la cuenta alcance lo prueba recién un run real, o una corrida en seco con
+`--impersonate-service-account`.
+
+## 2026-10-21 — Fase 16 cerrada: la publicación continua
+
+Con el OK de Nicolás. Las cuatro tasks `done`. El run 39627734040 publicó las cinco demos y las
+verificó contra HEAD por md5 y sin credenciales, en verde. El README lista las cinco URLs. Queda sin
+probar en un run real `--con-contenido`, el camino manual después de re-empaquetar. Informe en
+`phases/16-publicacion-continua/REPORT.md`.
+
 ## 2026-10-22 — Se quita `assetListTiming`: la librería pide cada asset-list sólo como hls.js
 
 Pedido de David por el coordinador ("lets remove it ... the rest should stay true to the hls.js
@@ -6361,7 +6392,6 @@ nota en `.project/PROJECT.md`. Fuente de hls.js leída del paquete npm 1.7.2 (el
   (a ~0,3 s); el nuestro dibuja el preroll de 0 a 12 s (el video del banner da 404 en esta máquina y
   pasa a la imagen), y el de fábrica arranca el interstitial, su lineal da 404 y retoma el programa.
 - Quedan abiertos para David: arranque más allá de 0 y live con preroll, `POST` y `ONCE` (ADR 0100).
-
 
 ## 2026-10-22 — El preroll en live, como hls.js
 

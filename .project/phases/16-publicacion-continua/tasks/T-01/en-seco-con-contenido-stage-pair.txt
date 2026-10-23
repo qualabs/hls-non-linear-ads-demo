@@ -1,0 +1,21 @@
+== 0. the exclusion patterns, against planted paths ==
+   scripts/__pycache__/x.pyc                    excluded
+   test/__pycache__/y.pyc                       excluded
+   content/primary/seg000.ts                    excluded
+   index.html                                   published
+   signalling/asset-list-offer.json             published
+   js/content/x.js                              published
+   .fuentes/Sparks.mp4                          excluded
+   primary/con-daterange-rica.m3u8              excluded
+   primary/seg000.ts                            published
+   primary/con-daterange-concurrente.m3u8       published
+== 1. the stage: HEAD 1d22782, with dist/ built in it ==
+construir-libreria: dist/qualabs-concurrent-hls.js (5795 lines, global QualabsConcurrentHls)
+== 2. stage-pair: checks ==
+   senalizar-contenido.sh leaves the committed files as they are
+   73 files to publish outside content/, 0 signalled files of content/ that change
+   42 references, 19 playlists followed, 564 segments; 0 missing
+   the sync would do (gcloud --dry-run):
+     0 to copy, 0 to remove
+     and content/: 0 objects to copy or remove
+DRY RUN GREEN: nothing was published (--publicar does)
