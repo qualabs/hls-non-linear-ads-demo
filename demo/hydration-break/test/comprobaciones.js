@@ -12,6 +12,14 @@
 import { resolveAnchor } from '../js/story.js';
 
 /**
+ * Un ítem como lo dibuja la librería sin capacidad declarada: su primera opción
+ * mezclada sobre él (R5.6), o el ítem mismo si no tiene opciones. Desde la fase 17 la L
+ * y la esquina traen dos (ADR 0102), y la segunda es la gemela para el Roku.
+ */
+const primeraOpcion = (item) =>
+  (Array.isArray(item?.options) && item.options.length ? { ...item, ...item.options[0] } : item);
+
+/**
  * El proveedor del contrato, armado desde los archivos declarados en lugar de desde un
  * player corriendo.
  *
@@ -33,7 +41,7 @@ export function proveedorDeclarado({ plate, assetList }) {
     return {
       id,
       itemId: `${id}.${i}`,
-      type: a['X-AD-CREATIVE-SIGNALING']?.payload?.[0]?.type ?? 'linear',
+      type: primeraOpcion(a['X-AD-CREATIVE-SIGNALING']?.payload?.[0])?.type ?? 'linear',
       startTime,
       duration: Number(a.DURATION) || 0
     };
@@ -194,7 +202,7 @@ export function lasTresFormasDelMinuto({ assetList }) {
   }
 
   const deImagen = assets.filter((a) => {
-    const cajas = a['X-AD-CREATIVE-SIGNALING']?.payload?.[0]?.layout?.assets ?? [];
+    const cajas = primeraOpcion(a['X-AD-CREATIVE-SIGNALING']?.payload?.[0])?.layout?.assets ?? [];
     return cajas.length > 0 && cajas.every((c) => /^image\//i.test(c.type || ''));
   });
   if (deImagen.length !== 1) {
@@ -346,7 +354,8 @@ export function losMediosSalenDelContrato({ assetList, fuentes }) {
   const hallazgos = [];
   const medios = [...new Set((assetList.ASSETS || [])
     .flatMap((a) => a['X-AD-CREATIVE-SIGNALING']?.payload ?? [])
-    .flatMap((item) => item?.layout?.assets ?? [])
+    .flatMap((item) => [item, ...(Array.isArray(item?.options) ? item.options : [])])
+    .flatMap((opcion) => opcion?.layout?.assets ?? [])
     .map((caja) => caja?.type)
     .filter((tipo) => typeof tipo === 'string' && tipo.length > 0))];
 
@@ -397,11 +406,16 @@ function camposDelAssetList(assetList) {
     sumar('block', bloque);
     for (const item of lista(bloque.payload)) {
       sumar('item', item);
-      const layout = item?.layout;
-      if (layout == null) continue;
-      sumar('layout', layout);
-      if (layout.primaryContent != null) sumar('element', layout.primaryContent);
-      for (const caja of lista(layout.assets)) sumar('element', caja);
+      // Una opción se mezcla sobre su ítem antes de dibujarse (R5.6): sus campos son
+      // campos del ítem.
+      for (const opcion of [item, ...lista(item?.options)]) {
+        if (opcion !== item) sumar('item', opcion);
+        const layout = opcion?.layout;
+        if (layout == null) continue;
+        sumar('layout', layout);
+        if (layout.primaryContent != null) sumar('element', layout.primaryContent);
+        for (const caja of lista(layout.assets)) sumar('element', caja);
+      }
     }
   }
   return encontrados;
