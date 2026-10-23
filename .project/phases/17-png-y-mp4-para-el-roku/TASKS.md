@@ -8,7 +8,7 @@
 | T-04 | `publicar.py`: `.mp4` sin caché, y la corrida en seco con contenido | done | agent | — | rama `fase-17` · [`tasks/T-04/`](tasks/T-04/) |
 | T-05 | La web no cambia: la propiedad, la red y las suites | done | agent | — | [`tasks/T-05/`](tasks/T-05/) |
 | T-06 | El árbol local para `roku-ads-02` | done | agent | — | [`tasks/T-06/`](tasks/T-06/) |
-| T-07 | La publicación | blocked | both | — | — |
+| T-07 | La publicación | done | both | — | [`tasks/T-07/`](tasks/T-07/) · run 39892946733 |
 
 ---
 
@@ -127,4 +127,3 @@
   al principio: la entrada del menú era la demo publicada, sin MP4, que cae a su default, el
   backplate HLS como lineal a pantalla completa (consola del Roku, en
   `hls-non-linear-ads-roku` tasks/T-05/tv-feedback-console-what-ran.txt).
-- **bloqueo:** espera el OK de Nicolás para las dos salidas a internet.

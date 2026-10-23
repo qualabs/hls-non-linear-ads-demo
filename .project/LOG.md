@@ -6273,3 +6273,12 @@ quieto y un MP4 VP9 sin audio por cada caja HLS, en el formato del diseño del c
 librería no se toca y la web elige lo mismo porque cada gemela pide lo mismo que la opción que tiene
 adelante (ADR 0097). El diseño y la generación en la misma pasada, por el despacho: `DESIGN.md`,
 `PHASE.md`, `TASKS.md` (siete tasks) y los ADR 0096 a 0103. Publicar necesita el OK de Nicolás (T-07).
+
+## 2026-10-23 — Fase 17 publicada: el PNG y el MP4 de cada creativo, para el Roku
+
+Con el OK de Nicolás. stage-pair y hydration-break ofrecen las gemelas para el Roku: tres MP4 y tres
+PNG en stage-pair, dos MP4 en hydration-break. Primero el contenido (`publicar.sh --publicar
+--con-contenido`, el primer uso real de ese camino), después el push; el run 39892946733 republicó las
+cinco en verde. La web dibuja lo mismo (T-05); `roku-ads-02` probó los árboles en el equipo. Lo que
+pareció un defecto de la L en la TV era la entrada del menú publicada, todavía sin MP4, cayendo a su
+lineal. Las siete tasks `done`; falta cerrar la fase (Mode D).
