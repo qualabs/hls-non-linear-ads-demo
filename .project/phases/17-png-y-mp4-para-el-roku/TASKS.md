@@ -123,5 +123,8 @@
 - **post-ejecución:** 2026-10-22, se informó que la L de hydration-break tapaba el programa en la TV.
   `roku-ads-02` midió en el equipo que el Video abre su ventana en el plano gráfico sobre lo
   dibujado antes, AnimatedImage incluido, así que el MP4 opaco no tapa el programa; Nicolás vio la L
-  bien. La hipótesis del plano (la mía) no se sostuvo, y el formato queda como está.
+  bien. La hipótesis del plano (la mía) no se sostuvo, y el formato queda como está. Lo que se vio
+  al principio: la entrada del menú era la demo publicada, sin MP4, que cae a su default, el
+  backplate HLS como lineal a pantalla completa (consola del Roku, en
+  `hls-non-linear-ads-roku` tasks/T-05/tv-feedback-console-what-ran.txt).
 - **bloqueo:** espera el OK de Nicolás para las dos salidas a internet.
