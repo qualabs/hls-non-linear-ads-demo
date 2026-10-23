@@ -120,6 +120,7 @@ node -e '
   const lista = require("./signalling/asset-list-hydration-break.json");
   const caja = lista.ASSETS
     .map((a) => a["X-AD-CREATIVE-SIGNALING"]?.payload?.[0])
+    .map((p) => (p?.options?.length ? { ...p, ...p.options[0] } : p))   // la primera opción (ADR 0102)
     .find((p) => p?.type === "lowerThirdOverlay")?.layout.assets[0];
   if (!caja) { console.error("el asset list no declara el banner"); process.exit(1); }
   const [top, right, bottom, left] = caja.viewport.split(/\s+/).map(Number);
