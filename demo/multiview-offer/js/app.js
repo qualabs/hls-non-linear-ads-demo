@@ -3,7 +3,7 @@
 // It is two things and it marks which is which. The first is WHAT AN INTEGRATOR
 // WRITES, and it is the block fenced below: the library arrives as a
 // <script src> that defines a global, the page builds its own hls.js instance
-// with its default configuration (ADR 0104), and turns the concurrent
+// with its default configuration (ADR 0106), and turns the concurrent
 // experience on over a container. Six lines, and the multi view is in none of
 // them -- it is on because the playlist signals it, and a playlist that signals
 // no offer comes out exactly as it did before any of this existed.
@@ -29,7 +29,7 @@ import { showSignalling } from './senalizacion.js';
 // START-DATE is resolved against the playlist's own EXT-X-PROGRAM-DATE-TIME, so
 // it cannot be a file in git: the clock moves every time the content is packaged.
 //
-// The class of the ad is the playlist's variable `{$adclass}` (ADR 0103), and
+// The class of the ad is the playlist's variable `{$adclass}` (ADR 0105), and
 // this page runs only our player, so it asks with OUR class and hls.js
 // substitutes it while parsing; the windows of multi view carry their own class,
 // written out. The name is the one scripts/senalizar-contenido.sh writes

@@ -3,7 +3,7 @@
 //
 // The first is WHAT AN INTEGRATOR WRITES, and it is the block fenced below: the
 // library arrives as a <script src> that defines a global, the page builds its
-// own hls.js instance with its default configuration (ADR 0104), and
+// own hls.js instance with its default configuration (ADR 0106), and
 // turns the concurrent experience on over a container. That is the surface of
 // ADR 0015, and the fence is there so it can be counted.
 //
@@ -27,7 +27,7 @@ import { createStockPlayer } from './stock-player.js';
 // time the content is packaged.
 const PLAYLIST = './content/primary/con-daterange.m3u8';
 
-// ONE FILE, AND EACH CLIENT ASKS FOR IT WITH THE CLASS IT TAKES (ADR 0103). The
+// ONE FILE, AND EACH CLIENT ASKS FOR IT WITH THE CLASS IT TAKES (ADR 0105). The
 // playlist declares `#EXT-X-DEFINE:QUERYPARAM="adclass"` and every break carries
 // `CLASS="{$adclass}"`; hls.js substitutes the reference while parsing. The name
 // is the one scripts/senalizar-contenido.sh writes (`PARAMETRO`), and the test of
@@ -96,7 +96,7 @@ video.play().catch(() => {});
 
 // The other half of the compatibility pair: a client that is already in the
 // market, on the SAME playlist file -- `PLAYLIST`, the same constant, which is
-// the whole argument -- asked for with Apple's class (ADR 0103), and with none of
+// the whole argument -- asked for with Apple's class (ADR 0105), and with none of
 // the above wired into it. It reads every break as an Apple interstitial and
 // replaces the content with the standard part of its asset-list, while the
 // player above keeps the content and draws the concurrent experience over it.
@@ -190,7 +190,7 @@ function covering(active) {
 
 function paintDemoPane() {
   // The traditional linear break the playlist writes with Apple's class (ADR
-  // 0105) is played by hls.js inside this player too (ADR 0104): the content is
+  // 0107) is played by hls.js inside this player too (ADR 0106): the content is
   // replaced, here as on the left.
   if (concurrent.linearOnScreen()) {
     demoPane.dataset.state = 'ad';

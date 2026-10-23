@@ -151,7 +151,7 @@ test('cada creativo del asset list tiene una carpeta de contenido nombrada', () 
 });
 
 // ---------------------------------------------------------------------------
-// LA CLASE, ELEGIDA POR LA URL (ADR 0103)
+// LA CLASE, ELEGIDA POR LA URL (ADR 0105)
 // ---------------------------------------------------------------------------
 // Se corre el señalizador DE VERDAD sobre una playlist mínima pasada por `SRC`,
 // y se lee la salida como la lee hls.js con el parámetro que pide la página.

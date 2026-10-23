@@ -1,4 +1,4 @@
-// renderer-failover.test.js -- the renderer half of ADR 0097.
+// renderer-failover.test.js -- the renderer half of ADR 0099.
 //
 // What they are for: the failover the renderer runs on its own, always on.
 // When an asset of the option it mounted fails its first load, the whole option

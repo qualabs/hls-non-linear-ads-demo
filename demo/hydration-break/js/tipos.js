@@ -21,7 +21,7 @@
 // for instants that have not been played yet, because it filters the whole
 // resolved array; that is the premise this section rests on. What it needs is
 // the break's asset-list, which arrives when the programme is buffered up to the
-// break (ADR 0098): this break is fourteen seconds in, inside the first forward
+// break (ADR 0100): this break is fourteen seconds in, inside the first forward
 // buffer, so its four Ads are there a moment after the page loads, before the
 // programme plays a frame.
 //
@@ -283,8 +283,8 @@ function paintFact(facts, provider, ads) {
  *
  * TWO WAITS, AND ONLY ONE OF THEM HAS A LIMIT. A break whose asset-list has not
  * been asked for yet is on the contract off its tag, `provisional`, and its list is
- * asked for when the programme is buffered up to it, as hls.js does (ADR 0098,
- * ADR 0099): that wait is the programme's and the section waits it out, however
+ * asked for when the programme is buffered up to it, as hls.js does (ADR 0100,
+ * ADR 0101): that wait is the programme's and the section waits it out, however
  * long, with the boxes empty. A list in flight is the other one -- `settled`
  * false -- and that one gives up after fifteen seconds rather than asking for the
  * life of the page: an empty box is honest about a break that never resolved, and

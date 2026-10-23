@@ -5,7 +5,7 @@ status: superseded
 scope: project
 date: 2026-09-28
 supersedes: null
-superseded_by: "0094"
+superseded_by: "0096"
 generalizes: null
 generalized_by: null
 ---
@@ -43,4 +43,4 @@ QualabsConcurrentHls.attach(hls, {
 
 ---
 
-**2026-10-20 — nota.** Superseded por el ADR 0094: SVTA2053 v3 nombra la configuración `concurrentVideo` y `concurrentImage`, y hace opcional mandarla en el pedido.
+**2026-10-20 — nota.** Superseded por el ADR 0096: SVTA2053 v3 nombra la configuración `concurrentVideo` y `concurrentImage`, y hace opcional mandarla en el pedido.

@@ -48,7 +48,7 @@ const read = (path) => readFileSync(join(DEMO, path), 'utf8');
 /** The script that writes the signalled playlist this demo plays. */
 const SIGNALLER = read('scripts/senalizar-contenido.sh');
 
-/** The name of the variable of the ad's class (ADR 0103), as the script writes it. */
+/** The name of the variable of the ad's class (ADR 0105), as the script writes it. */
 const PARAM = SIGNALLER.match(/^PARAMETRO=(\S+)$/m)?.[1];
 
 /** Every row of its RECORRIDO table: second of playback, asset-list, name. */
@@ -96,7 +96,7 @@ function signalledPlaylist() {
       env: { ...process.env, SRC: src, OUT: out },
       encoding: 'utf8'
     });
-    // As the page reads it: with our class in the query (ADR 0103).
+    // As the page reads it: with our class in the query (ADR 0105).
     return substitute(readFileSync(out, 'utf8'), withClass('/content/primary/con-daterange.m3u8', PARAM, CONCURRENT_CLASS)).text;
   } finally {
     rmSync(dir, { recursive: true, force: true });
@@ -260,7 +260,7 @@ test('the content is packaged with the configuration the five decoders were meas
   assert.match(preparer, /compatibility-pair\/content\/\.fuentes/);
 });
 
-test('the class of the ad is the variable of the playlist, and the page asks with ours (ADR 0103)', () => {
+test('the class of the ad is the variable of the playlist, and the page asks with ours (ADR 0105)', () => {
   assert.ok(PARAM, 'the script declares PARAMETRO');
   assert.equal(read('js/app.js').match(/const CLASS_PARAM = '([^']+)'/)?.[1], PARAM,
     'js/app.js asks for the playlist with the parameter the playlist defines');

@@ -5,7 +5,7 @@
 //
 // THE FIRST IS WHAT AN INTEGRATOR WRITES, and it is the block fenced below: the
 // library arrives as a <script src> that defines a global, the page builds its
-// own hls.js instance with its default configuration (ADR 0104), and
+// own hls.js instance with its default configuration (ADR 0106), and
 // turns the concurrent experience on over a container. FIVE LINES, AND THE
 // MULTI VIEW IS IN NONE OF THEM -- the window is on because the playlist
 // signals it, and a playlist that signals no offer comes out of these same five
@@ -50,7 +50,7 @@ const carrera = stage.carrera;
 // Its START-DATE is resolved against the playlist's own
 // EXT-X-PROGRAM-DATE-TIME, so it cannot be a file in git: that clock moves every
 // time the content is packaged (ADR 0005). The class of the four ads is the
-// playlist's variable `{$adclass}` (ADR 0103), and this page runs only our
+// playlist's variable `{$adclass}` (ADR 0105), and this page runs only our
 // player, so it asks for the playlist with OUR class: hls.js substitutes it
 // while parsing. The window of multi view carries its own class, written out.
 const SRC = `/${carrera.playlist}?${stage.parametroDeClase}=${encodeURIComponent(QualabsConcurrentHls.CONCURRENT_CLASS)}`;
@@ -208,7 +208,7 @@ function rowOf(range, experience, names) {
  * The row of a range whose asset-list has not been asked for yet: on the contract
  * off its tag, the class saying which kind it is and PLANNED-DURATION how long. What
  * it carries is in the list, which the player asks for when the programme is
- * buffered up to it, as hls.js does for an interstitial (ADR 0098, ADR 0099), so the
+ * buffered up to it, as hls.js does for an interstitial (ADR 0100, ADR 0101), so the
  * row says that and fills in when the list arrives.
  */
 function waitingRow(range) {
@@ -234,7 +234,7 @@ function drawRun(names) {
   // Rebuilt only when the SET of ranges changes, or one stops being the
   // provisional one off its tag. Every row is there from the start and each fills
   // in when its asset-list arrives, which is when the race is buffered up to it
-  // (ADR 0098): the first three at load, the fourth and the window about thirty
+  // (ADR 0100): the first three at load, the fourth and the window about thirty
   // seconds before they open. Comparing the key is what keeps this out of the
   // frame loop's way.
   const key = ranges.map((range) => `${range.id}${range.provisional ? '?' : ''}`).join('|');
@@ -284,7 +284,7 @@ requestAnimationFrame(paint);
 // `capabilities` is read once when the signalling is created; here there is one
 // player and nothing to re-declare. A jump lands four seconds before a break, so
 // the buffer reaches the break at once and its asset-list is asked for then, if
-// it had not been already (ADR 0098).
+// it had not been already (ADR 0100).
 const ENTRADA = 4;
 
 function irA(segundo) {

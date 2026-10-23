@@ -80,7 +80,7 @@ function decoders(container) {
  * on the contract off its tag -- the class says which kind it is, PLANNED-DURATION
  * how long -- and what it carries is in the list, which the player asks for when
  * the programme is buffered up to it, as hls.js does for an interstitial
- * (ADR 0098, ADR 0099). So the row says that, and fills in when the list arrives.
+ * (ADR 0100, ADR 0101). So the row says that, and fills in when the list arrives.
  */
 function waitingRow(range) {
   const node = el('li', 'run__row');
@@ -159,7 +159,7 @@ export function showTheRun({ provider, container, video, state, run }) {
     const { ranges } = provider.programRanges();
     // Rebuilt only when the set of ranges changes, or the range stops being the provisional
     // one off its tag. The window is there from the start and fills in when its asset-list
-    // arrives, which is when the programme is buffered up to it (ADR 0098) -- here, at load,
+    // arrives, which is when the programme is buffered up to it (ADR 0100) -- here, at load,
     // because it opens inside the first forward buffer. Comparing the key is what keeps this
     // out of the frame loop's way.
     const key = ranges.map((range) => `${range.id}${range.provisional ? '?' : ''}`).join('|');

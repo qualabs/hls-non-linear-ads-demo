@@ -1,5 +1,5 @@
 ---
-id: "0095"
+id: "0097"
 title: Las opciones viajan en layoutOptions; el APS estático devuelve todas y el Player filtra
 status: accepted
 scope: project
@@ -33,7 +33,7 @@ APS answers, the Player selects the option it presents."*
 ## Decisión
 
 **Un ítem del `payload` lleva `layoutOptions`, una lista ordenada de `{ type, layout }`, y la
-librería se queda con la primera que entra en las capacidades configuradas (ADR 0094).**
+librería se queda con la primera que entra en las capacidades configuradas (ADR 0096).**
 
 - `selectOption` y `narrowBlock` leen `layoutOptions` y nada más. Un ítem que trae `options`
   es, para la librería, un ítem sin layout propio: no se puede dibujar y el asset cae a su

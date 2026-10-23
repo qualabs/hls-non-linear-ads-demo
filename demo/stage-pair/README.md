@@ -4,7 +4,7 @@ Two players side by side that know nothing about each other, over the same progr
 off-the-shelf hls.js, which **replaces the content with the ad**, and the same version of
 hls.js driven by this library, which **keeps the content on screen and draws the ad over
 it**. **Both load the same file**, `content/primary/con-daterange.m3u8`, and each one asks
-for it with the class it takes (ADR 0103): the playlist declares
+for it with the class it takes (ADR 0105): the playlist declares
 `#EXT-X-DEFINE:QUERYPARAM="adclass"` and every break is ONE tag with `CLASS="{$adclass}"`, so
 the off-the-shelf pane loads `con-daterange.m3u8?adclass=com.apple.hls.interstitial` and ours
 `con-daterange.m3u8?adclass=com.qualabs.hls.concurrentInterstitial`, and hls.js substitutes the
@@ -103,21 +103,21 @@ image element. So even when the server answers a video to a device that said it 
 decoder, the device does not try to play it. Every option the device can show is handed to
 the renderer in that order, with the linear default behind them, and the one mounted also has
 to load: when the first load of one of its assets fails (a 404, a network error, no answer),
-the renderer takes it down and mounts the next, then the default, then nothing (ADR 0097).
+the renderer takes it down and mounts the next, then the default, then nothing (ADR 0099).
 Checking the assets up front, before the renderer is handed the list, is optional and off by
 default (`preValidateAssets`); both pages use the default, and `inspect.html` has a "Pre-validate
 assets" switch, off when the page opens, to compare. `inspect.html` shows what was handed over
 and what was actually on screen, a failed load included, and the console logs every discarded
 option and every failover with its reason.
 
-**The asset-lists are requested one break at a time** (ADR 0098), when the programme is
+**The asset-lists are requested one break at a time** (ADR 0100), when the programme is
 buffered up to the break, or played or sought into it, which is when hls.js asks for an
 interstitial's list. So the request panel of `index.html` and card 2 of `inspect.html` fill in as
 the programme approaches each break, like the native pane does, and the bar marks every break
-from the start anyway. `race.html` follows the same rule (ADR 0099): its run lists every break
+from the start anyway. `race.html` follows the same rule (ADR 0101): its run lists every break
 from the start, off the tags, and each row fills in with what it carries when its list arrives.
 
-**The first break is a preroll** (ADR 0100): its tag carries `CUE="PRE"`, and both clients
+**The first break is a preroll** (ADR 0102): its tag carries `CUE="PRE"`, and both clients
 ask for its list **at load, before play**, which is when hls.js asks for a preroll's list
 (`checkStart`). The off-the-shelf pane plays the linear default, KETRAVA 16:9 full frame, before
 the programme and resumes the programme at 12 s, because its tag is in the replacement form; ours
@@ -126,13 +126,13 @@ second of the programme. `inspect.html` opens on it: card 1 shows the range with
 card 2 the request that already went out. The banner video and the still are pieces the demo
 already had: the race's banner and the frozen 16:9.
 
-**Break B carries `CUE="ONCE"`** (ADR 0102): once it has played (entered, then left at its end
+**Break B carries `CUE="ONCE"`** (ADR 0104): once it has played (entered, then left at its end
 or by a seek out of it), both clients take it out — hls.js from its schedule, the library from
 its experiences and the ranges of its bar — so a seek back into it shows the programme, and its
 tracking does not fire again. In `inspect.html` with our library, the second "break B" jump lands
 on the programme alone.
 
-**The last break is a post-roll** (ADR 0101): its tag carries `CUE="POST"`, so both clients
+**The last break is a post-roll** (ADR 0103): its tag carries `CUE="POST"`, so both clients
 put it after the end of the programme, whatever its START-DATE (186 s, written because the spec
 requires one), and ask for its list when the programme is buffered to its end (hls.js:
 `BUFFERED_TO_END`). A non-linear ad is never presented after the end, so ours ignores the ZUMBRA
@@ -141,11 +141,11 @@ ends: the same thing the off-the-shelf pane plays from the Apple reading of the 
 5 s before the end. No new media: the banner and the frozen backplate are race pieces, and the
 linear is break A's ad.
 
-**At 150 s there is a traditional linear break, and both panes play it** (ADR 0105). Its tag
+**At 150 s there is a traditional linear break, and both panes play it** (ADR 0107). Its tag
 is the one whose class is written and not chosen, `CLASS="com.apple.hls.interstitial"`, so
 it reads the same with either `adclass`: the off-the-shelf pane plays it as it plays every
 break, and ours plays it too, because hls.js runs inside our player with its interstitials
-machinery on and plays Apple's class while the library draws its own (ADR 0104). It replaces
+machinery on and plays Apple's class while the library draws its own (ADR 0106). It replaces
 the programme for 12 s with KETRAVA 16:9 full frame, the linear of PRE and B, so there is no
 new media, and it overlaps no other break. While it plays, ours draws nothing, its bar follows
 the programme's clock and marks the break in yellow, and its line says the ad is played by
@@ -201,7 +201,7 @@ hls.attachMedia(document.querySelector('.player video'));
 ```
 
 The names are the two properties SVTA2053 5.3.3 requires the configuration of the library to
-hold, and they travel with the specification's own parameter names (ADR 0094). There is no
+hold, and they travel with the specification's own parameter names (ADR 0096). There is no
 HTML capability because this library does not draw HTML: declaring it would be a claim about
 the player that is not true. Each capability is optional, and one that is left out is neither
 sent nor filtered on.
