@@ -106,6 +106,17 @@ same place looks like the same experience; either way the difference had to be f
 inspecting the element. The still image is the authored SVG frozen at one instant by
 `scripts/congelar-svg.py`, with no animation left in it.
 
+**Every option has a twin for the Roku** (phase 17, ADR 0096, 0097). Right after the video
+option goes the same option with a progressive VP9 MP4 of the same creative
+(`content/creatives/<piece>/<hash>/progressive.mp4`, with its `codecs`), and right after the
+image option the same option with a PNG of the frozen SVG (`graphics/campaigns/<piece>-fijo.png`).
+They are for a device that draws neither a second HLS nor an SVG. The library never picks one:
+a twin asks for exactly what the option before it asks for, and the first that fits wins, so the
+table above does not change. What does change is what the page counts: the inspector lists four
+options per break, and the image option is option 3. `scripts/progresivo-creativos.sh` makes the
+MP4s out of the published HLS, and `scripts/rasterizar-fijo.py` the PNGs (`--verificar` checks
+them against their SVG).
+
 **Break A has no default on purpose** (ADR 0087, 0091): its asset carries no `URI`, so the
 asset-list has no standard part. The interstitials manifest still names it with an Apple-class
 tag: the off-the-shelf pane requests the list, finds nothing to play, skips it and the programme

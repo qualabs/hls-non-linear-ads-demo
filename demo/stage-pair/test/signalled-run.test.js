@@ -40,7 +40,7 @@ import { fileURLToPath } from 'node:url';
 // donde está declarado en lugar de copiarse de un ADR a un test.
 import {
   CONCURRENT_CLASS, INTERSTITIAL_CLASS, LINEAR_TYPE, MAX_BOXES, MULTIVIEW_CLASS,
-  resolveAssetList, usableCapabilities
+  resolveAssetList, selectOption, usableCapabilities
 } from '../../../lib/signalling.js';
 
 const DEMO = fileURLToPath(new URL('..', import.meta.url));
@@ -227,16 +227,18 @@ test('el tag lineal va en la forma de reemplazo, SIN X-RESUME-OFFSET, salvo el d
   }
 });
 
-test('cada break trae las dos opciones del aviso, primero el video y después la imagen', () => {
+test('cada break trae las opciones del aviso: el video y su MP4, después la imagen y su PNG', () => {
   // ADR 0085 y R5.5: el orden de las opciones es la preferencia, y la librería se
   // queda con la primera que la capacidad satisface. Con la imagen primero, un
-  // dispositivo de dos decodificadores vería la imagen.
+  // dispositivo de dos decodificadores vería la imagen. Each twin goes right after
+  // its original (ADR 0096 and 0097).
   const corrida = run();
   const { lista } = corrida;
   for (const brk of BREAKS) {
     assert.equal(tagsDe(corrida, brk).concurrente.assetList, `/signalling/${brk.concurrente}`);
     const medios = opciones(lista(brk.concurrente)).map((o) => o.layout.assets.map((a) => a.type));
-    assert.deepEqual(medios, [[STAGE.assets.tipos.video], [STAGE.assets.tipos.imagen]], `break ${brk.id}`);
+    const { video, mp4, imagen, png } = STAGE.assets.tipos;
+    assert.deepEqual(medios, [[video], [mp4], [imagen], [png]], `break ${brk.id}`);
   }
 });
 
@@ -247,7 +249,7 @@ test('la opción de imagen va en OTRA forma que la de video, y es de la misma ca
   // campaña y la duración (ADR 0084).
   const { lista } = run();
   for (const brk of BREAKS) {
-    const [video, imagen] = opciones(lista(brk.concurrente));
+    const [video, , imagen] = opciones(lista(brk.concurrente));
     assert.notEqual(brk.formaImagen, brk.forma, `${brk.id}: stage.json declara la misma forma`);
     assert.notEqual(imagen.type, video.type, `${brk.id}: los dos layouts son el mismo`);
     const campana = (o) => STAGE.assets.piezas.find((p) =>
@@ -266,7 +268,7 @@ test('el layout de cada break es el que stage.json declara, con sus cajas, en la
     assert.equal(item.start, 0);
     assert.equal(item.duration, brk.duracion);
     assert.equal(item.options[0].type, brk.layout, `${brk.id}: la opción de video es el layout del break`);
-    for (const [opcion, nombreForma] of [[item.options[0], brk.forma], [item.options[1], brk.formaImagen]]) {
+    for (const [opcion, nombreForma] of [[item.options[0], brk.forma], [item.options[2], brk.formaImagen]]) {
       const forma = STAGE.formas[nombreForma];
       assert.equal(opcion.type, forma.layout);
       assert.equal(opcion.layout.assets[0].viewport, forma.viewportAviso);
@@ -291,9 +293,85 @@ test('el asset de cada break es la pieza de su campaña, en los dos medios', () 
   for (const brk of BREAKS) {
     const deVideo = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.forma);
     const deImagen = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.formaImagen);
-    const [video, imagen] = opciones(lista(brk.concurrente));
+    const [video, , imagen] = opciones(lista(brk.concurrente));
     assert.equal(video.layout.assets[0].uri, `/${deVideo.video}`);
     assert.equal(imagen.layout.assets[0].uri, `/${deImagen.svgFijo}`);
+  }
+});
+
+/**
+ * An option with its twin's three fields taken out: what has to be identical
+ * between an option and its twin (ADR 0096).
+ */
+const sinMedio = (opcion) => ({
+  ...opcion,
+  layout: {
+    ...opcion.layout,
+    assets: opcion.layout.assets.map(({ type, uri, codecs, ...resto }) => resto)
+  }
+});
+
+/** Whether an option and its twin differ in something besides type, uri and codecs. */
+const gemelas = (original, gemela) =>
+  JSON.stringify(sinMedio(original)) === JSON.stringify(sinMedio(gemela));
+
+test('each twin is its original with another medium, and nothing else changes', () => {
+  // ADR 0096: between an option and its twin only `type`, `uri` and `codecs`
+  // change. THE CONTROL is the comparator itself: the same comparison between the
+  // video option and the image option -- another shape (ADR 0088) -- has to say
+  // they differ, and so does a twin with its viewport moved.
+  const { lista } = run();
+  for (const brk of BREAKS) {
+    const [video, mp4, imagen, png] = opciones(lista(brk.concurrente));
+    const deVideo = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.forma);
+    const deImagen = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.formaImagen);
+    assert.ok(gemelas(video, mp4), `${brk.id}: the MP4 option is not the twin of the video one`);
+    assert.ok(gemelas(imagen, png), `${brk.id}: the PNG option is not the twin of the image one`);
+    assert.equal(mp4.layout.assets[0].uri, `/${deVideo.mp4}`);
+    assert.equal(mp4.layout.assets[0].codecs, deVideo.mp4Codecs);
+    assert.match(mp4.layout.assets[0].codecs, /^vp09\.\d{2}\.\d{2}\.\d{2}$/, `${brk.id}: codecs is not RFC 6381 VP9`);
+    assert.equal(png.layout.assets[0].uri, `/${deImagen.pngFijo}`);
+    assert.ok(readdirSync(join(DEMO, 'graphics/campaigns')).includes(deImagen.pngFijo.split('/').pop()),
+      `${brk.id}: ${deImagen.pngFijo} is not in graphics/campaigns/`);
+    assert.ok(!gemelas(video, imagen), `${brk.id}: the control says the video and the image option are twins`);
+    const movida = structuredClone(mp4);
+    movida.layout.assets[0].viewport = '1 2 3 4';
+    assert.ok(!gemelas(video, movida), `${brk.id}: the control misses a twin with another viewport`);
+  }
+});
+
+test('the twins never change what the library picks, under any capability', () => {
+  // ADR 0097, as a property: the same asset-list without its twins and with them,
+  // under every capability the control of the page offers and under none, picks
+  // the same option by content. THE CONTROL is a list with the twins placed BEFORE
+  // their originals: under some capability it has to pick something else, or the
+  // comparison cannot see a change.
+  const { lista } = run();
+  const elegida = (asset, capacidad) => {
+    const item = asset['X-AD-CREATIVE-SIGNALING'].payload[0];
+    const { option } = selectOption(item, usableCapabilities(capacidad));
+    return option && JSON.stringify({ type: option.type, assets: option.layout.assets });
+  };
+  const capacidades = [null,
+    { videoDecoders: 2, imageOverVideo: true }, { videoDecoders: 2, imageOverVideo: false },
+    { videoDecoders: 1, imageOverVideo: true }, { videoDecoders: 1, imageOverVideo: false }];
+  const conOpciones = (asset, f) => {
+    const copia = structuredClone(asset);
+    const item = copia['X-AD-CREATIVE-SIGNALING'].payload[0];
+    item.options = f(item.options);
+    return copia;
+  };
+  const esGemela = (o) => /^(video\/mp4|image\/png)$/.test(o.layout.assets[0].type);
+  for (const brk of BREAKS) {
+    const asset = lista(brk.concurrente).ASSETS[0];
+    const sinGemelas = conOpciones(asset, (os) => os.filter((o) => !esGemela(o)));
+    assert.equal(sinGemelas['X-AD-CREATIVE-SIGNALING'].payload[0].options.length, 2);
+    for (const c of capacidades) {
+      assert.equal(elegida(asset, c), elegida(sinGemelas, c), `${brk.id}: ${JSON.stringify(c)}`);
+    }
+    const alReves = conOpciones(asset, ([v, m, i, p]) => [m, v, p, i]);
+    assert.ok(capacidades.some((c) => elegida(alReves, c) !== elegida(sinGemelas, c)),
+      `${brk.id}: the control with the twins first picks the same, so the comparison sees nothing`);
   }
 });
 
@@ -308,7 +386,7 @@ test('la opción de imagen de cada break es una imagen QUIETA: su SVG no tiene n
   // encontrarle animaciones, o lo que se midió es el lector.
   const { lista } = run();
   for (const brk of BREAKS) {
-    const [, imagen] = opciones(lista(brk.concurrente));
+    const [, , imagen] = opciones(lista(brk.concurrente));
     const svg = read(imagen.layout.assets[0].uri.replace(/^\//, ''));
     assert.deepEqual(animaciones(svg), [], `${brk.id}: la imagen trae animaciones`);
     assert.doesNotMatch(svg, /@keyframes|animation\s*:/, `${brk.id}: la imagen trae animación CSS`);
@@ -366,7 +444,7 @@ test('la hoja que el script imprime sale de los archivos y no de sí misma', () 
   for (const brk of BREAKS) {
     assert.match(hoja, new RegExp(`t=\\s*${brk.offset}s a\\s*${brk.offset + brk.duracion}s`));
     assert.match(hoja, new RegExp(
-      `${esc(brk.concurrente)}\\s+${esc(STAGE.assets.tipos.video)}, luego ${esc(STAGE.assets.tipos.imagen)}; ` +
+      `${esc(brk.concurrente)}\\s+${['video', 'mp4', 'imagen', 'png'].map((m) => esc(STAGE.assets.tipos[m])).join(', luego ')}; ` +
       (brk.lineal ? 'sin opción que entre, el lineal' : 'sin opción que entre, se saltea')
     ));
   }

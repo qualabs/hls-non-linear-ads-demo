@@ -214,7 +214,9 @@ CONTROL_DURACION_CONCURRENTE.
 
 El asset-list de cada break es el mismo para cualquier capacidad y para los dos
 clientes: el player de fábrica lee su parte estándar y la librería el bloque de
-encima, con sus dos opciones, video e imagen, y elige (ADR 0085).
+encima, con sus dos opciones, video e imagen, y elige (ADR 0085). Cada una va
+seguida de su gemela para el Roku, MP4 y PNG, que la librería nunca alcanza
+(ADR 0096 y 0097).
 TEXTO
 
 # ---------------------------------------------------------------------------
