@@ -5,8 +5,8 @@
 | T-01 | `scripts/progresivo.sh`: el MP4 y su `codecs` | done | agent | — | rama `fase-17` · [`tasks/T-01/`](tasks/T-01/) |
 | T-02 | stage-pair: MP4, PNG, `stage.json` y cuatro opciones por break | done | agent | — | rama `fase-17` · [`tasks/T-02/`](tasks/T-02/) |
 | T-03 | hydration-break: MP4, `options` y sus lectores | done | agent | — | rama `fase-17` · [`tasks/T-03/`](tasks/T-03/) |
-| T-04 | `publicar.py`: `.mp4` sin caché, y la corrida en seco con contenido | in-progress | agent | — | — |
-| T-05 | La web no cambia: la propiedad, la red y las suites | planned | agent | — | — |
+| T-04 | `publicar.py`: `.mp4` sin caché, y la corrida en seco con contenido | done | agent | — | rama `fase-17` · [`tasks/T-04/`](tasks/T-04/) |
+| T-05 | La web no cambia: la propiedad, la red y las suites | in-progress | agent | — | — |
 | T-06 | El árbol local para `roku-ads-02` | planned | agent | — | — |
 | T-07 | La publicación | planned | both | — | — |
 
