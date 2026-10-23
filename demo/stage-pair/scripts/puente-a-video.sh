@@ -140,3 +140,8 @@ for p in "${PIEZAS[@]}"; do
 done
 rmdir "$TRABAJO" 2>/dev/null || true
 echo; echo "puente-a-video: ${#PIEZAS[@]} pieza(s) en content/creatives/"
+
+# The progressive MP4 of every break's video piece (phase 17, ADR 0098). A re-packaged
+# piece lives in a new hashed directory and the old one went with its MP4, so the MP4s
+# are made again after every run, out of the HLS that is now in stage.json.
+echo; ./scripts/progresivo-creativos.sh

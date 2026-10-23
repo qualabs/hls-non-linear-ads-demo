@@ -118,6 +118,13 @@ second of the programme, so moving a break in the signalling moves the story wit
 0037). And `plate.json` is the one place the second of the stoppage lives: the graphic that
 says `PLAY STOPPED` and the break that draws advertising over it both read it.
 
+**The L and the corner are offered twice** (phase 17, ADR 0102): as their HLS, and then the
+same box as a progressive VP9 MP4 (`content/adL/progressive.mp4`, `content/adOverlay/progressive.mp4`,
+with its `codecs`), for a device with one decoder that animates a short file over the programme,
+the Roku. The library draws the second only when the HLS fails to load: it asks for what the first
+asks for, so the first wins (ADR 0097), and the second is the next option that fits (ADR 0099). `scripts/progresivo-creativos.sh` makes them out of the HLS, with the sizes in
+`plate.json`, and `--verificar` checks the hand-written asset-list against the files.
+
 ## Test it
 
 ```bash

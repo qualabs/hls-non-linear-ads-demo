@@ -42,8 +42,15 @@ CONTENT = {
 }
 CONTENT_DEFAULT = r'.*__pycache__/|^\.fuentes/|^\.work/'
 # What has a fixed name and can change is served with no-cache: every object
-# outside content/, and these extensions inside it.
-MUTABLE = ('.html', '.js', '.css', '.json', '.m3u8', '.svg')
+# outside content/, and these extensions inside it. `.mp4` since phase 17 (ADR 0099):
+# the progressive twin of a creative is `progressive.mp4` next to its HLS, and the hash
+# of a stage-pair directory covers the HLS segments, not the parameters of the MP4.
+MUTABLE = ('.html', '.js', '.css', '.json', '.m3u8', '.svg', '.mp4')
+
+
+def no_cache(name):
+    """Whether an object of the bucket is served with Cache-Control: no-cache."""
+    return not name.startswith('content/') or name.endswith(MUTABLE)
 # What a page, a script or an asset-list asks for: absolute from the root of the
 # host (/content/..., /dist/...) or relative to it (content/... in stage.json).
 REF = re.compile(r'["\'(`]\s*(/?(?:content|dist|vendor|signalling|graphics|brand|audio|css|js)/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)')
@@ -133,6 +140,16 @@ def cmd_selftest():
         got = bool(rx.match(p))
         bad += got != want
         print('   %-44s %s%s' % (p, 'excluded' if got else 'published', '' if got == want else '   <-- WRONG'))
+    caching = [  # (object, must be served with no-cache)
+        ('index.html', True), ('graphics/campaigns/zumbra-backplate-fijo.png', True),
+        ('content/creatives/zumbra-16x9/d8eabbdae4/progressive.mp4', True),
+        ('content/adL/progressive.mp4', True), ('content/primary/index.m3u8', True),
+        ('content/primary/seg000.ts', False), ('content/adBanner/creative.png', False),
+    ]
+    for p, want in caching:
+        got = no_cache(p)
+        bad += got != want
+        print('   %-44s %s%s' % (p, 'no-cache' if got else 'cached an hour', '' if got == want else '   <-- WRONG'))
     return 1 if bad else 0
 
 
@@ -184,8 +201,7 @@ def cmd_fixes(stage, path, ts_out, nocache_out):
     remote = listing(path)
     bucket = json.load(open(path))[0]['url'].split('/')[2]
     ts = [n for n, m in remote.items() if n.endswith('.ts') and m.get('contentType') != 'video/mp2t']
-    nc = [n for n, m in remote.items() if (not n.startswith('content/') or n.endswith(MUTABLE))
-          and m.get('cacheControl') != 'no-cache']
+    nc = [n for n, m in remote.items() if no_cache(n) and m.get('cacheControl') != 'no-cache']
     open(ts_out, 'w').write(''.join(f'gs://{bucket}/{n}\n' for n in ts))
     open(nocache_out, 'w').write(''.join(f'gs://{bucket}/{n}\n' for n in nc))
     print(f'   metadata to fix: {len(ts)} .ts without video/mp2t, {len(nc)} objects without no-cache')
@@ -206,8 +222,7 @@ def cmd_verify(stage, path, derived_list, content=None):
     differ = [r for r in local if r in remote and remote_md5(remote[r]) != md5_file(local[r])]
     absent = [r for r in local if r not in remote]
     extra = sorted(n for n in remote if (content or not n.startswith('content/')) and n not in local)
-    cached = [n for n, m in remote.items() if (not n.startswith('content/') or n.endswith(MUTABLE))
-              and m.get('cacheControl') != 'no-cache']
+    cached = [n for n, m in remote.items() if no_cache(n) and m.get('cacheControl') != 'no-cache']
     ts = [n for n, m in remote.items() if n.endswith('.ts') and m.get('contentType') != 'video/mp2t']
     print(f'   {len(local)} files, {len(remote)} objects: {len(differ)} differ, {len(absent)} absent, '
           f'{len(extra)} extra, {len(cached)} cacheable, {len(ts)} .ts without video/mp2t')

@@ -65,7 +65,10 @@ declaracion() { # $1 ruta del asset-list
     const num = (v) => String(Number(v.toFixed(3)));
     const filas = [num(assets.reduce((s, a) => s + largo(a), 0))];
     for (const a of assets) {
-      const bloque = a["X-AD-CREATIVE-SIGNALING"]?.payload?.[0];
+      const item = a["X-AD-CREATIVE-SIGNALING"]?.payload?.[0];
+      // La primera opción, que es la que la web dibuja; la segunda es la gemela para
+      // el Roku (ADR 0102).
+      const bloque = item?.layoutOptions?.length ? { ...item, ...item.layoutOptions[0] } : item;
       const tipo = bloque?.type ?? "linear";
       const cajas = bloque?.layout?.assets ?? [];
       const medios = [...new Set(cajas.map((c) => c.type))].join("+") || "-";

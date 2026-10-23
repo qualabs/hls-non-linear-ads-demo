@@ -49,6 +49,18 @@
 //       pieza de esa forma (`svgFijo`), sin animación, para que la imagen se lea
 //       como imagen.
 //
+//   THE TWINS (phase 17, ADR 0096). Right after the HLS option goes the same
+//       option with the piece's progressive VP9 MP4 (`mp4`, with its `codecs`
+//       from `mp4Codecs`), and right after the SVG option the same option with
+//       its PNG (`pngFijo`). Between an option and its twin only `type`, `uri`
+//       and `codecs` change. They are for a client that draws neither a second
+//       HLS nor an SVG, the Roku. The web picks one only when its original
+//       fails to load, as the next option that fits (ADR 0099): to the library a
+//       twin asks for exactly what the option before it asks for, and the first
+//       that fits wins (ADR 0097). So the order is not cosmetic: a twin placed
+//       before its original would change what the web draws. A twin goes only
+//       where its piece declares it (`mp4`, `pngFijo`).
+//
 //   primaryContent            lo declaran los dos squeezeback y NO el
 //       lowerThirdOverlay, que es una ausencia deliberada y argumentada en
 //       stage.json (`formas.banner._sinPrimario`).
@@ -107,23 +119,44 @@ function fijo(p) {
 }
 
 /**
+ * The element of an option in each medium: its `type`, its `uri`, and the
+ * `codecs` the MP4 carries. 'video' and 'imagen' are the web's; 'mp4' and 'png'
+ * their twins (ADR 0096).
+ */
+function medioDe(p, medio) {
+  const tipos = stage.assets.tipos;
+  const requerido = (campo) => {
+    if (!p[campo]) throw new Error(`stage.json no declara ${campo} para ${p.campana}/${p.forma}`);
+    return p[campo];
+  };
+  switch (medio) {
+    case 'video': return { type: tipos.video, uri: url(p.video) };
+    case 'mp4': return { type: tipos.mp4, codecs: requerido('mp4Codecs'), uri: url(requerido('mp4')) };
+    case 'imagen': return { type: tipos.imagen, uri: url(fijo(p)) };
+    case 'png': return { type: tipos.png, uri: url(requerido('pngFijo')) };
+    default: throw new Error(`medio desconocido: ${medio}`);
+  }
+}
+
+/**
  * Una opción de presentación del aviso de un break, en el medio que se le pida.
  *
- * `medio` es 'video' o 'imagen', y decide la forma: la del break para el video,
- * `formaImagen` para la imagen (ADR 0088). La campaña es la del break en las dos.
+ * `medio` es 'video', 'mp4', 'imagen' o 'png', y decide la forma: la del break
+ * para el video y su gemela, `formaImagen` para la imagen y la suya (ADR 0088).
+ * La campaña es la del break en todas.
  */
 function opcion(brk, medio) {
-  const nombreForma = medio === 'video' ? brk.forma : brk.formaImagen;
+  const enVideo = medio === 'video' || medio === 'mp4';
+  const nombreForma = enVideo ? brk.forma : brk.formaImagen;
   if (!nombreForma) throw new Error(`stage.json no declara formaImagen para el break ${brk.id}`);
   const forma = stage.formas[nombreForma];
   const p = pieza(brk.campana, nombreForma);
   const aviso = {
     id: ID_DEL_AVISO[nombreForma],
-    type: medio === 'video' ? stage.assets.tipos.video : stage.assets.tipos.imagen,
     // La imagen es el SVG CONGELADO (fase 15): con movimiento, una imagen se lee
     // como un video. Sin `svgFijo` declarado el break no tiene opción de imagen
     // que servir, y se dice en lugar de servir la animada.
-    uri: url(medio === 'video' ? p.video : fijo(p)),
+    ...medioDe(p, medio),
     viewport: forma.viewportAviso,
     zDepth: forma.zDepthAviso
   };
@@ -136,6 +169,22 @@ function opcion(brk, medio) {
         assets: [aviso]
       };
   return { type: forma.layout, layout };
+}
+
+/** The media of a break's options, in the order they are offered: each twin right after its original (ADR 0097). */
+const MEDIOS = ['video', 'mp4', 'imagen', 'png'];
+
+/**
+ * Whether the break has an option in that medium. The web's two always (a
+ * missing one is an error `opcion` reports); a twin only when the piece it
+ * would be made from declares it (`mp4`, `pngFijo`). The preroll and the
+ * postroll came after phase 17 and their banners have no MP4 yet: they offer
+ * the twins their pieces have, and the order of the rest does not change.
+ */
+function tieneMedio(brk, medio) {
+  if (medio === 'video' || medio === 'imagen') return true;
+  const p = pieza(brk.campana, medio === 'mp4' ? brk.forma : brk.formaImagen);
+  return Boolean(medio === 'mp4' ? p.mp4 : p.pngFijo);
 }
 
 /** El `identifiers` del Slot: el AdIdentifier que stage.json declara para la pieza (ADR 0093). */
@@ -161,8 +210,9 @@ function concurrente(brk) {
       // El AdIdentifier de la pieza, obligatorio en el Slot, que es cada ítem
       // del payload y no el sobre (SVTA2053, Code 7; ADR 0093).
       identifiers: identificadores(brk.campana, brk.forma),
-      // En orden de preferencia (R5.5): primero el video, después la imagen.
-      layoutOptions: [opcion(brk, 'video'), opcion(brk, 'imagen')]
+      // En orden de preferencia (R5.5): primero el video, después la imagen,
+      // cada una seguida de su gemela cuando la pieza la declara (ADR 0096 y 0097).
+      layoutOptions: MEDIOS.filter((medio) => tieneMedio(brk, medio)).map((medio) => opcion(brk, medio))
     }]
   };
   return { ASSETS: [asset] };

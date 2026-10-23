@@ -168,6 +168,14 @@ const BLOCK_GLOSS = [
   { level: 'item', name: 'layout', must: 'required', says:
     'Where the boxes go. A layout with no assets in it cannot become a box on a screen, so its ' +
     'asset falls back to a linear Ad.' },
+  { level: 'item', name: 'layoutOptions', must: 'optional', says:
+    'The ways this Ad can be drawn, in order of preference, each with its own type and layout. ' +
+    'The library draws the first one the device can, laid over the rest of the item, and with ' +
+    'no layoutOptions the item is its own only option (R5.6). Here the L and the corner offer ' +
+    'their stream and then the same box as a short progressive file, for a device with one ' +
+    'decoder that animates a file over the programme. This library draws the second only if the ' +
+    'stream fails to load: it asks for exactly what the first asks for, so the first wins ' +
+    '(ADR 0097), and the second is the next one that fits (ADR 0099).' },
   { level: 'item', name: 'identifiers', must: 'optional', says:
     'Who this Ad is: one or more scheme and value pairs, here an Ad-ID. Mandatory in the spec, ' +
     'not needed to draw: this client passes it on untouched to the tracking events of the Ad, ' +
@@ -187,6 +195,11 @@ const BLOCK_GLOSS = [
     'The media type, and what decides how the box is filled: a still, another stream, or anything ' +
     'else the browser plays -- the three of them are in the first section. Nothing is checked up ' +
     'front, because a container does not say what is inside it.' },
+  { level: 'element', name: 'codecs', must: 'ignored', says:
+    'The codec inside a progressive file, in the syntax of the CODECS attribute of HLS (RFC 6381). ' +
+    'One media type covers any codec, so this is how a device knows before downloading whether ' +
+    'it can play the file. Written for the device that uses the second option; this client ' +
+    'reads it nowhere.' },
   { level: 'element', name: 'uri', must: 'optional', says:
     'Where the asset of this box is. The programme has none, because it is already on screen. An ' +
     'empty string is not an error: the SVTA tool emits one in every payload it produces, and a ' +
@@ -231,11 +244,16 @@ export function fieldsOfAssetList(assetList) {
     add('block', block);
     for (const item of array(block.payload)) {
       add('item', item);
-      const layout = item?.layout;
-      if (layout == null) continue;
-      add('layout', layout);
-      if (layout.primaryContent != null) add('element', layout.primaryContent);
-      for (const box of array(layout.assets)) add('element', box);
+      // An option is what the library merges over its item before drawing it
+      // (R5.6), so its fields are fields of the item and are listed at that depth.
+      for (const option of [item, ...array(item?.layoutOptions)]) {
+        if (option !== item) add('item', option);
+        const layout = option?.layout;
+        if (layout == null) continue;
+        add('layout', layout);
+        if (layout.primaryContent != null) add('element', layout.primaryContent);
+        for (const box of array(layout.assets)) add('element', box);
+      }
     }
   }
   return found;
@@ -309,11 +327,21 @@ function attributesOfTag(line) {
   return out;
 }
 
+/**
+ * An item as the library draws it with no capability declared: its first option
+ * laid over it (R5.6), or the item itself when it has no options. The labels read
+ * this, so an option added after the first one does not change a fold.
+ */
+function firstOption(item) {
+  const options = Array.isArray(item?.layoutOptions) ? item.layoutOptions : [];
+  return options.length ? { ...item, ...options[0] } : item;
+}
+
 /** The layout identifiers an asset declares: none for an asset with no block. */
 function layoutTypesOf(asset) {
   const payload = asset?.[BLOCK]?.payload;
   return (Array.isArray(payload) ? payload : [])
-    .map((item) => item?.type)
+    .map((item) => firstOption(item)?.type)
     .filter((type) => typeof type === 'string' && type.length > 0);
 }
 
@@ -325,7 +353,7 @@ function layoutTypesOf(asset) {
 function mediumOf(asset) {
   const payload = asset?.[BLOCK]?.payload;
   const declared = (Array.isArray(payload) ? payload : [])
-    .flatMap((item) => item?.layout?.assets ?? [])
+    .flatMap((item) => firstOption(item)?.layout?.assets ?? [])
     .map((box) => box?.type)
     .filter(Boolean);
   if (!declared.length) return null;
