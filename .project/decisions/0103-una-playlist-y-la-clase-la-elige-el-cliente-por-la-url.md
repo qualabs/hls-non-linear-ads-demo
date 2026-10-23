@@ -96,4 +96,4 @@ Un bucket de GCS sirve el objeto igual con un parámetro desconocido (verificado
   lineal. Antes el tag de Apple de cada break apuntaba a un lineal de 12 s propio.
 - Una playlist pedida sin el parámetro no se puede usar (la spec lo exige; hls.js da
   `LEVEL_PARSING_ERROR`). Quien abra la URL a mano sin `?adclass=` no ve nada: es el costo.
-- `publicar.sh` verifica además que el bucket sirva la playlist igual con cada parámetro.
+- La publicación (`scripts/publicar.py http`) verifica además que el bucket sirva la playlist igual con cada parámetro.
