@@ -87,6 +87,14 @@ const CLASE = {
 const SRC = Object.fromEntries(Object.entries(CLASE).map(([modo, clase]) =>
   [modo, `/${stage.playlist}?${stage.parametroDeClase}=${encodeURIComponent(clase)}`]));
 
+/**
+ * Every break this page walks through, in the order of the programme: the ones
+ * of `breaks`, and the traditional linear break the playlist writes with Apple's
+ * class (ADR 0105), which hls.js plays in both modes (ADR 0104).
+ */
+const TODOS = [...stage.breaks, ...(stage.breakLineal ? [{ ...stage.breakLineal, tradicional: true, lineal: true }] : [])]
+  .sort((a, b) => (a.cue === 'POST' ? Infinity : a.offset) - (b.cue === 'POST' ? Infinity : b.offset));
+
 /** Five seconds of programme before a break: the transition in is what is worth seeing. */
 const ENTRADA = 5;
 
@@ -143,7 +151,7 @@ async function leerRangos(src) {
   const lineas = playlist.split('\n');
   definicion = lineas.find((l) => l.startsWith('#EXT-X-DEFINE:')) ?? null;
   const rangos = lineas.filter((l) => l.startsWith('#EXT-X-DATERANGE:'));
-  for (const brk of stage.breaks) {
+  for (const brk of TODOS) {
     const id = `ID="AD-${brk.id.toUpperCase()}"`;
     rangosPorBreak.set(brk.id, rangos.filter((l) => l.includes(id)));
   }
@@ -289,8 +297,8 @@ function resumenDeLaRespuesta(cuerpo) {
 // they are all behind.
 
 function breakDelSegundo(segundo) {
-  for (const brk of stage.breaks) if (segundo < brk.offset + brk.duracion) return brk;
-  return stage.breaks[stage.breaks.length - 1];
+  for (const brk of TODOS) if (brk.cue !== 'POST' && segundo < brk.offset + brk.duracion) return brk;
+  return TODOS[TODOS.length - 1];
 }
 
 let mostrado = null;
@@ -310,7 +318,10 @@ function pintarIntercambio() {
   // One playlist for both clients (ADR 0103): the class is the query parameter
   // this client asked with, substituted by hls.js.
   const pedidoCon = `?${stage.parametroDeClase}=${CLASE[vivo?.modo] ?? ''}`;
-  dom.rangesLede.textContent = vivo?.modo === 'nativo'
+  dom.rangesLede.textContent = mostrado?.tradicional
+    ? 'The same playlist both clients load, and this tag is the one whose class is WRITTEN, not chosen: ' +
+      'com.apple.hls.interstitial for every client. hls.js plays it full frame in both modes (ADR 0104, ADR 0105).'
+    : vivo?.modo === 'nativo'
     ? (mostrado?.lineal
       ? `The same playlist both clients load, asked for with ${pedidoCon}: hls.js reads this break as an ` +
         'Apple interstitial and plays the standard part of its asset-list.'
@@ -330,19 +341,29 @@ function pintarIntercambio() {
       : 'no request for this break yet: the list goes out when the programme is buffered up to it, as hls.js does'));
   } else {
     dom.request.append(el('span', 'request__path', traza.url.pathname));
-    const nombres = vivo?.modo === 'nativo' ? [...traza.url.searchParams.keys()] : Object.values(PARAMETROS);
+    const nombres = vivo?.modo === 'nativo' || mostrado.tradicional
+      ? [...traza.url.searchParams.keys()] : Object.values(PARAMETROS);
     const pares = nombres
       .filter((nombre) => traza.url.searchParams.has(nombre))
       .map((nombre) => `${nombre}=${traza.url.searchParams.get(nombre)}`);
     dom.request.append(pares.length
       ? el('b', null, `?${pares.join('&')}`)
-      : el('span', 'none', vivo?.modo === 'nativo' ? '  — no query' : '  — no capability on this request'));
+      : el('span', 'none', vivo?.modo === 'nativo' || mostrado.tradicional ? '  — no query' : '  — no capability on this request'));
   }
 
   // Move 4: what the library kept, off its own report. The native client has
   // no library and no capabilities, so there is nothing kept and nothing is
   // made up: the card says what that client does instead.
-  if (vivo?.modo === 'nativo') {
+  if (mostrado.tradicional) {
+    // ADR 0105: not a break of ours in either mode. hls.js plays it.
+    dom.filter.replaceChildren(el('li', 'none', vivo?.modo === 'nativo'
+      ? 'Native HLS interstitials: no capabilities are configured and there are no layoutOptions to filter.'
+      : 'Not a break of ours: its class is Apple\'s, written out, so the library does not resolve it. ' +
+        'hls.js, which runs inside this player with its interstitials machinery on, plays it (ADR 0104).'));
+    dom.outcome.dataset.outcome = 'default';
+    dom.outcome.textContent = 'hls.js plays this traditional interstitial as it is, full frame, replacing the programme, ' +
+      (vivo?.modo === 'nativo' ? 'as it does every break in this mode.' : 'in our player too.');
+  } else if (vivo?.modo === 'nativo') {
     dom.filter.replaceChildren(el('li', 'none',
       'Native HLS interstitials: no capabilities are configured and there are no layoutOptions to filter.'));
     dom.outcome.dataset.outcome = 'native';
@@ -353,7 +374,7 @@ function pintarIntercambio() {
   }
   const seleccion = vivo?.modo === 'nativo' ? null : selecciones.get(mostrado.id);
   const asset = seleccion?.assets[0];
-  if (vivo?.modo === 'nativo') {
+  if (vivo?.modo === 'nativo' || mostrado.tradicional) {
     // already said above
   } else if (!asset) {
     dom.filter.replaceChildren(el('li', 'none', mostrado.cue === 'POST'
@@ -436,6 +457,13 @@ function mostrarBreak(brk) {
   const cuando = brk.cue === 'POST'
     ? `after the programme ends (t = ${stage.programa.largo}s), for ${brk.duracion}s`
     : `t = ${brk.offset}s to ${brk.offset + brk.duracion}s`;
+  if (brk.tradicional) {
+    dom.which.textContent = `Break ${brk.id.toUpperCase()} · ${cuando} · ${stage.campanas[brk.campana].marca} · ` +
+      'a TRADITIONAL linear break: CLASS="com.apple.hls.interstitial" written in the playlist, the same for both ' +
+      'clients, played by hls.js in both modes';
+    pintarIntercambio();
+    return;
+  }
   dom.which.textContent =
     `Break ${brk.id.toUpperCase()} of ${stage.breaks.length} · ${cuando} · ${stage.campanas[brk.campana].marca} · ` +
     (brk.cue === 'PRE' ? 'preroll, CUE="PRE": its list is asked for at load · ' : '') +
@@ -764,8 +792,8 @@ pintarPre();
 const jumps = document.getElementById('jumps');
 jumps.replaceChildren(...[
   { texto: 'start', segundo: 0.05 },
-  ...stage.breaks.map((b) => ({
-    texto: `break ${b.id.toUpperCase()}`,
+  ...TODOS.map((b) => ({
+    texto: `break ${b.id.toUpperCase()}${b.tradicional ? ' (traditional)' : ''}`,
     // A post-roll plays when the programme ends (ADR 0101): its jump lands near the end.
     segundo: Math.max(0.05, (b.cue === 'POST' ? stage.programa.largo : b.offset) - ENTRADA)
   }))
@@ -777,7 +805,10 @@ jumps.replaceChildren(...[
   // In native mode a jump REBUILDS, as on index.html: while hls.js is playing an
   // interstitial with `X-RESTRICT="SKIP"` a seek of the programme is accepted and
   // dropped, so the jump would not land (measured on this page, fase 15).
-  boton.addEventListener('click', () => (vivo?.modo === 'nativo' ? armar(configActual, segundo) : buscar(segundo)));
+  // With our library it rebuilds too while hls.js is playing the traditional
+  // break (ADR 0105), for the same reason.
+  boton.addEventListener('click', () => (vivo?.modo === 'nativo' || vivo?.concurrent?.linearOnScreen()
+    ? armar(configActual, segundo) : buscar(segundo)));
   return boton;
 }));
 

@@ -189,6 +189,15 @@ function covering(active) {
 }
 
 function paintDemoPane() {
+  // The traditional linear break the playlist writes with Apple's class (ADR
+  // 0105) is played by hls.js inside this player too (ADR 0104): the content is
+  // replaced, here as on the left.
+  if (concurrent.linearOnScreen()) {
+    demoPane.dataset.state = 'ad';
+    demoState.textContent = `LINEAR AD, played by hls.js (traditional interstitial) · programme at ` +
+      `${concurrent.programme.currentTime.toFixed(1)}s · the content is off the screen`;
+    return;
+  }
   const active = concurrent.provider.activeAt(video.currentTime);
   const covered = active.length ? covering(active) : null;
   demoPane.dataset.state = active.length ? 'ad' : 'primary';

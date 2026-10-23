@@ -155,6 +155,13 @@ replaced, on the left the ad **is** the picture and that stretch of the
 programme is gone. When the break ends they are on the same second again, which
 is what makes the two panes comparable frame by frame.
 
+**At 5 s, before the first concurrent break, both panes play the same traditional linear
+ad** (ADR 0105): one tag whose class is written, `CLASS="com.apple.hls.interstitial"`, and
+not chosen by the query, naming the twelve-second `asset-list-linear.json`. The left pane plays
+it as it plays everything; the right one too, because hls.js runs inside our player with its
+interstitials machinery on and plays Apple's class, while the library draws its own (ADR 0104).
+It ends at 17 s, three seconds before break 1.
+
 **In break 5 both panes are inside the same forty-eight seconds**, because they
 read the same tag and the same asset-list. The left one plays the standard part
 of its four ads back to back, full frame; the right one draws three of them over

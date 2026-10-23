@@ -68,6 +68,17 @@ RECORRIDO=(
   "120|asset-list-mezclado.json|Break mezclado"
 )
 
+# EL BREAK LINEAL TRADICIONAL, ESCRITO (ADR 0105): un tag con
+# `CLASS="com.apple.hls.interstitial"` literal, sin variable, que los DOS panes
+# reproducen como interstitial lineal: el de fábrica porque es de Apple, y el
+# nuestro porque hls.js corre con su maquinaria encendida (ADR 0104). Va a los
+# 5 s, donde no se solapa con ningún otro break (el primero arranca en el 20):
+# un stream lleva un juego de tags y sus clases no se solapan (ADR 0103). Su
+# asset-list es el lineal de 12 s de siempre, `asset-list-linear.json`, sin
+# media nueva.
+LINEAL_EN=5
+LISTA_LINEAL=asset-list-linear.json
+
 # El nombre de la variable de la clase y del parámetro de la URL, que por la spec
 # son el mismo. js/app.js lo repite y el test de esta demo compara los dos.
 PARAMETRO=adclass
@@ -130,10 +141,22 @@ tag() { # $1 numero de break, $2 offset en segundos, $3 asset-list, $4 largo
   printf '#EXT-X-DATERANGE:ID="AD-%s",CLASS="{$%s}",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' "$n" "$PARAMETRO" "$start" "$lista" "$largo"
 }
 
+# El tag del break lineal: la forma de reemplazo, igual que la lectura de Apple
+# de los otros.
+tag_lineal() {
+  local start
+  start=$(date -d "$PDT + $LINEAL_EN seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
+  printf '#EXT-X-DATERANGE:ID="AD-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
+    "$start" "$LISTA_LINEAL" "$(declaracion "signalling/$LISTA_LINEAL" | head -1)"
+}
+
 TAGS=""
 LARGOS=()
 if [ $# -eq 0 ]; then
-  MODO="el recorrido de los cinco breaks"
+  MODO="el recorrido de los cinco breaks, más el lineal escrito"
+  [ -f "signalling/$LISTA_LINEAL" ] || { echo "falta signalling/$LISTA_LINEAL" >&2; exit 1; }
+  TAGS="$(tag_lineal)
+"
   n=0
   for fila in "${RECORRIDO[@]}"; do
     IFS='|' read -r offset lista nombre <<< "$fila"
@@ -170,6 +193,9 @@ echo "$OUT  ($MODO, $(grep -c '^#EXT-X-DATERANGE:' "$OUT") Date Ranges)"
 if [ $# -eq 0 ]; then
   echo
   echo "El recorrido, que es el orden en que hay que grabarlo:"
+  printf '  lineal   t=%3ss a %3ss  (%ss)  %-16s %s  CLASS de Apple, escrita: los dos panes lo reproducen\n' \
+    "$LINEAL_EN" "$(suma "$LINEAL_EN" "$(declaracion "signalling/$LISTA_LINEAL" | head -1)")" \
+    "$(declaracion "signalling/$LISTA_LINEAL" | head -1)" "Lineal" "$LISTA_LINEAL"
   n=0
   for fila in "${RECORRIDO[@]}"; do
     IFS='|' read -r offset lista nombre <<< "$fila"

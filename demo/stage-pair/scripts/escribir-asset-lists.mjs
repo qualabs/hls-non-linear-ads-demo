@@ -168,10 +168,24 @@ function concurrente(brk) {
   return { ASSETS: [asset] };
 }
 
+/**
+ * El asset-list del break lineal tradicional (ADR 0105): SÓLO la parte estándar,
+ * el `URI` y la `DURATION` del Apéndice D.2, porque su tag es de la clase de
+ * Apple y lo reproduce hls.js en los dos panes. Sin bloque: no hay nada que
+ * dibujar. La pieza es el 16:9 de su campaña, que ya existe.
+ */
+function lineal(brk) {
+  return { ASSETS: [{ URI: url(pieza(brk.campana, '16x9').video), DURATION: brk.duracion }] };
+}
+
 mkdirSync(outDir, { recursive: true });
 const escritos = [];
 for (const brk of stage.breaks) {
   writeFileSync(join(outDir, brk.concurrente), JSON.stringify(concurrente(brk), null, 2) + '\n');
   escritos.push(brk.concurrente);
+}
+if (stage.breakLineal) {
+  writeFileSync(join(outDir, stage.breakLineal.lista), JSON.stringify(lineal(stage.breakLineal), null, 2) + '\n');
+  escritos.push(stage.breakLineal.lista);
 }
 process.stdout.write(escritos.join('\n') + '\n');

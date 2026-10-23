@@ -72,7 +72,9 @@ function run() {
   }
 }
 
-const tags = (playlist) => playlist.split('\n').filter((l) => l.startsWith('#EXT-X-DATERANGE:'));
+const allTags = (playlist) => playlist.split('\n').filter((l) => l.startsWith('#EXT-X-DATERANGE:'));
+/** The tags of the five breaks of the table, without the linear one written with Apple's class (ADR 0105). */
+const tags = (playlist) => allTags(playlist).filter((l) => !l.includes('ID="AD-LINEAR"'));
 const classOf = (line) => line.match(/CLASS="([^"]+)"/)?.[1];
 const readAs = (playlist, hlsClass) =>
   substitute(playlist, `/content/primary/con-daterange.m3u8?${PARAM}=${encodeURIComponent(hlsClass)}`).text;
@@ -128,4 +130,24 @@ test('read with each class, the same file is all Apple or all ours, and the same
   assert.deepEqual(lists(ours), lists(apple), 'one asset-list per break, read by both clients');
   assert.throws(() => substitute(playlist, '/content/primary/con-daterange.m3u8'), /QUERYPARAM/,
     'with no parameter the playlist must fail to parse');
+});
+
+test('one traditional linear break, its class written and not chosen, overlapping no other (ADR 0105)', () => {
+  const playlist = run();
+  const linear = allTags(playlist).filter((l) => l.includes('ID="AD-LINEAR"'));
+  assert.equal(linear.length, 1);
+  assert.equal(classOf(linear[0]), INTERSTITIAL_CLASS, 'the literal class');
+  assert.match(linear[0], /X-ASSET-LIST="\/signalling\/asset-list-linear\.json"/, 'the linear list the demo already had');
+  assert.ok(inSignalling('asset-list-linear.json'));
+  // Both clients read it as Apple's, whatever class they asked for.
+  for (const hlsClass of [INTERSTITIAL_CLASS, CONCURRENT_CLASS]) {
+    assert.equal(classOf(allTags(readAs(playlist, hlsClass)).find((l) => l.includes('ID="AD-LINEAR"'))), INTERSTITIAL_CLASS);
+  }
+  // And it overlaps no break of the table: its window ends before the first one starts.
+  const at = SIGNALLER.match(/^LINEAL_EN=(\d+)$/m)?.[1];
+  const length = Number(linear[0].match(/PLANNED-DURATION=([\d.]+)/)[1]);
+  const windows = ROWS.map((r, i) => [r.slotStart, r.slotStart + Number(tags(playlist)[i].match(/PLANNED-DURATION=([\d.]+)/)[1])]);
+  for (const [from, to] of windows) {
+    assert.ok(Number(at) + length <= from || Number(at) >= to, `the linear break overlaps the one at ${from} s`);
+  }
 });

@@ -184,6 +184,22 @@ while IFS='|' read -r id offset duracion campana forma lista lineal cue; do
   tags="$tags$(tag "$id" "$offset" "$lista" "$lineal" "$cue")
 "
 done <<< "$RECORRIDO"
+# EL BREAK LINEAL TRADICIONAL, ESCRITO (ADR 0105): CLASS de Apple literal, sin la
+# variable, así que los dos panes lo leen igual y lo reproduce hls.js en los dos
+# (el nuestro con su maquinaria encendida, ADR 0104). Su hueco no se solapa con
+# ningún break de `breaks` (ADR 0103), y lo verifica el test.
+LINEAL=$(node -e '
+  const b = require(process.argv[1]).breakLineal;
+  if (b) process.stdout.write([b.id, b.offset, b.lista].join("|"));
+' "$DEMO/stage.json")
+if [ -n "$LINEAL" ]; then
+  IFS='|' read -r lin_id lin_offset lin_lista <<< "$LINEAL"
+  [ -f "$SIGNALLING/$lin_lista" ] || { echo "falta $SIGNALLING/$lin_lista" >&2; exit 1; }
+  lin_start=$(date -d "$PDT + $lin_offset seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
+  tags="$tags$(printf '#EXT-X-DATERANGE:ID="AD-%s",CLASS="com.apple.hls.interstitial",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESTRICT="SKIP",PLANNED-DURATION=%s' \
+    "${lin_id^^}" "$lin_start" "$lin_lista" "$(declaracion "$SIGNALLING/$lin_lista" | head -1)")
+"
+fi
 mkdir -p "$(dirname "$OUT")"
 awk -v tags="$tags" '
   /^#EXT-X-VERSION:/ { if (substr($0, 16) + 0 < 11) $0 = "#EXT-X-VERSION:11" }
@@ -219,6 +235,13 @@ while IFS='|' read -r id offset duracion campana forma lista lineal cue; do
     printf '      librería     %-26s %s; sin opción que entre, se saltea\n' "$lista" "$(medios "$SIGNALLING/$lista")"
   fi
 done <<< "$RECORRIDO"
+
+if [ -n "$LINEAL" ]; then
+  printf '  break %s  t=%3ss a %3ss  (%ss)  CLASS="com.apple.hls.interstitial", escrita\n' \
+    "${lin_id^^}" "$lin_offset" "$(suma "$lin_offset" "$(declaracion "$SIGNALLING/$lin_lista" | head -1)")" \
+    "$(declaracion "$SIGNALLING/$lin_lista" | head -1)"
+  printf '      los dos      %-26s el lineal a cuadro entero, reproducido por hls.js (ADR 0105)\n' "$lin_lista"
+fi
 
 cat <<'TEXTO'
 

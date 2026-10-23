@@ -141,6 +141,17 @@ ends: the same thing the off-the-shelf pane plays from the Apple reading of the 
 5 s before the end. No new media: the banner and the frozen backplate are race pieces, and the
 linear is break A's ad.
 
+**At 150 s there is a traditional linear break, and both panes play it** (ADR 0105). Its tag
+is the one whose class is written and not chosen, `CLASS="com.apple.hls.interstitial"`, so
+it reads the same with either `adclass`: the off-the-shelf pane plays it as it plays every
+break, and ours plays it too, because hls.js runs inside our player with its interstitials
+machinery on and plays Apple's class while the library draws its own (ADR 0104). It replaces
+the programme for 12 s with KETRAVA 16:9 full frame, the linear of PRE and B, so there is no
+new media, and it overlaps no other break. While it plays, ours draws nothing, its bar follows
+the programme's clock and marks the break in yellow, and its line says the ad is played by
+hls.js. The "break LINEAR (traditional)" jump lands 5 s before it; `inspect.html` has a card for
+it that says it is not a break of ours.
+
 **On a machine where the video creatives are not packaged** (`content/creatives/` missing), every
 video option answers 404, and that is the failover on display: each break shows its still image
 instead, and with one decoder and no images break B's linear default 404s too and the ad is
