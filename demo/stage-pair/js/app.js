@@ -81,7 +81,7 @@ const ROTULOS = {
   },
   ours: {
     rol: 'With our library',
-    sub: 'The same hls.js, unmodified, with its interstitials machinery off. The programme is never replaced.',
+    sub: 'The same hls.js, unmodified, driven by our library: our breaks are drawn over the programme, which is never replaced; a traditional interstitial, if the stream has one, hls.js plays.',
     lee: `loads ${PLAYLIST}?${stage.parametroDeClase}=${CLASE.ours}: the same file, its breaks read as ours`
   }
 };
@@ -367,9 +367,11 @@ function construirNuestro(lado, capacidades, caja, registro) {
   // =========================================================================
   // WHAT AN INTEGRATOR WRITES  (with the <script src> of index.html and the
   // container this page hands over).
-  const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+  const hls = new Hls();
   const concurrent = QualabsConcurrentHls.attach(hls, {
     container: caja.player,
+    // Handed now, so the programme's clock exists before the bars are tied.
+    video: caja.video,
     // What the device can draw, `{ concurrentVideo, concurrentImage }` (ADR 0094).
     capabilities: capacidades,
     // And they travel on the asset-list request too. Sending them is optional in
@@ -415,6 +417,13 @@ function construirNuestro(lado, capacidades, caja, registro) {
   function pintar() {
     // What is ON SCREEN, after the renderer's failover (ADR 0097), and not what
     // the signalling handed over.
+    const t = concurrent.programme.currentTime;
+    // A traditional interstitial of the stream, played by hls.js (ADR 0104).
+    if (concurrent.linearOnScreen()) {
+      p.pane.dataset.state = 'ad';
+      p.state.textContent = `LINEAR AD, played by hls.js (traditional interstitial) · programme at ${t.toFixed(1)}s · the content is off the screen`;
+      return;
+    }
     const activas = concurrent.presentedAt(caja.video.currentTime);
     p.pane.dataset.state = activas.length ? 'ad' : 'primary';
     p.state.textContent = activas.length
@@ -427,9 +436,12 @@ function construirNuestro(lado, capacidades, caja, registro) {
 
   return {
     modo: 'ours', capacidades, hls, concurrent, consumer, video: caja.video,
-    programa: caja.video,
+    // The programme's clock (ADR 0104): the element, except while hls.js plays
+    // a traditional interstitial of the stream, when it is hls.js's primary.
+    programa: concurrent.programme,
     listo: () => caja.video.readyState >= 1,
-    enAviso: () => false
+    // Inside a traditional interstitial, ours cannot take a seek either.
+    enAviso: () => concurrent.linearOnScreen()
   };
 }
 

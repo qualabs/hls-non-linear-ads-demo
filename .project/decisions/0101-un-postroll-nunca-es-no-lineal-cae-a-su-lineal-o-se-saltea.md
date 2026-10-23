@@ -99,3 +99,5 @@ Por eso la lectura implementada es la primera: el `URI` del asset-list del tag c
   lista y reproduce su lineal. Sólo difiere si los dos tags apuntan a listas distintas, que el ADR
   0090 descarta en estas demos; cuesta aparear tags por break, algo que la señalización no hace hoy.
   Recomendación: la 1.
+
+> **Nota del 2026-10-22.** Cerrado por el ADR 0104: queda la opción 1. Con un juego de tags por stream (ADR 0103) no hay tag de Apple apareado, así que la opción 2 queda sin objeto; un postroll de clase Apple lo reproduce hls.js, también en nuestro pane.

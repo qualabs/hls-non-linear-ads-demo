@@ -37,7 +37,7 @@
   of ADR 0007).
 
   Right pane, THIS DEMO'S client: the same library, same version, unmodified,
-  with its interstitials machinery off (ADR 0002) and the two layers of
+  with its interstitials machinery on (ADR 0104) and the two layers of
   ADR 0003 on top. It keeps the primary content on screen and draws the
   concurrent experience over it.
 
@@ -125,7 +125,7 @@
 
     <section class="pane pane-demo" id="pane-demo" data-state="primary">
       <h2 class="role">This demo&rsquo;s player</h2>
-      <p class="role-sub">The same library, same version, unmodified. Its interstitials machinery off.</p>
+      <p class="role-sub">The same library, same version, unmodified, driven by ours.</p>
       <p class="role-reads">
         keeps <code>com.qualabs.hls.concurrentInterstitial</code> ·
         ignores <code>com.apple.hls.interstitial</code>

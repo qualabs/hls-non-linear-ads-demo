@@ -239,10 +239,10 @@ puede llamar en cada pintada.
 **`kind` dice de qué clase es el rango, y es un dato y no una decoración.** El
 programa lleva tres clases de rango encima de la misma línea de tiempo. Dos se
 dibujan sobre el contenido sin detenerlo: la experiencia concurrente, y la oferta
-de varias vistas. La tercera es el interstitial tradicional que la misma playlist
-señaliza en cada break para los clientes que ya están en el mercado (ADR 0007),
-que este reproductor no reproduce y que igual está ahí: marca dónde un cliente de
-mercado se habría detenido. Son cosas distintas, se pintan de colores distintos, y
+de varias vistas. La tercera es el interstitial tradicional, que reemplaza el
+contenido: un stream puede llevarlo junto a los nuestros sin solaparse (ADR 0103),
+y en nuestro player lo reproduce hls.js y no esta librería (ADR 0104). La barra de
+nuestro player lo marca con lo que hls.js agendó, no con este rango. Son cosas distintas, se pintan de colores distintos, y
 sin este campo la barra no puede pintar más de un color.
 
 **Qué kinds están en la lista y cuáles marca una barra son dos preguntas

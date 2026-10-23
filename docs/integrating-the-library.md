@@ -55,7 +55,7 @@ This is the whole of it. Nothing is elided.
 <script>
   const video = document.getElementById('video');
 
-  const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+  const hls = new Hls();
   const concurrent = QualabsConcurrentHls.attach(hls, {
     container: document.getElementById('player')
   });
@@ -87,57 +87,57 @@ Two things about the shape of it:
 
 ## 2. The two things this library requires and cannot fix for you
 
-Both are about `attach`, and one of them is only about `attach`. §2.1 is a
-requirement of the concurrent experience, so it is not `attachControls`'
-business: that call receives no instance. §2.2 holds for both, for one of its
+Both are about `attach`, and one of them is only about `attach`. §2.1 is about
+the instance, so it is not `attachControls`' business: that call receives no
+instance. §2.2 holds for both, for one of its
 two reasons — with the chrome drawn there are two sets of controls over the same
 element, whichever call drew it. The other reason, the `transform` that scales
 the native ones, is only about `attach`.
 
-### 2.1 The interstitials machinery of hls.js goes off
+### 2.1 The interstitials machinery of hls.js stays on
 
 ```js
-const hls = new Hls({ ...myOwnConfig, ...QualabsConcurrentHls.hlsConfig });
+const hls = new Hls(myOwnConfig);   // nothing of ours goes into it
 ```
 
-`hlsConfig` is one key — `interstitialsController: undefined` — handed over
-rather than described, so that the correct path is one line and you never have
-to know the name of the key.
+**One stream can carry both kinds of break**, as long as they never overlap in
+time (ADR 0103): ours, which this library draws over the programme, and Apple's
+traditional interstitial (`CLASS="com.apple.hls.interstitial"`), which replaces
+the programme with the ad. The second is hls.js's to play, and it plays it with
+its own interstitials machinery, which is on by default. The two do not compete
+for a break: that machinery is closed over Apple's class, so a Date Range of
+ours never reaches it, and the library never asks for the list of an Apple one.
 
-**It cannot be required, in the sense of being fixed.** hls.js instantiates the
-controller in its constructor, gated on nothing but the truthiness of
-`config.interstitialsController`. By the time your instance reaches `attach`
-the machinery either exists or does not, and no call from this side changes it.
-The other way of requiring it — building the instance for you — is not on
-offer: the player is yours.
+While hls.js plays one of its interstitials, the library keeps out of the way
+(ADR 0104): nothing of ours is drawn over the ad, the chrome reads the
+programme's clock from hls.js (`interstitialsManager.primary`) instead of the
+element, which may be playing the ad, and the bar marks the breaks hls.js
+scheduled, in their own colour, next to ours. The handle says when it is
+happening:
 
-**And documenting it is not enough, which is the part worth reading twice.**
-With the machinery on, *your player still works*. The same media playlist
-carries a Date Range of Apple's interstitial class next to ours (that is how
-this deploys without breaking clients already in the market), so hls.js
-schedules the traditional ad and replaces the content with it. No exception, no
-error, nothing on screen to notice: what you are looking at is an ordinary
-player doing an ordinary thing. The only symptom is the absence of the thing you
-integrated this for.
+```js
+concurrent.linearOnScreen()   // true while hls.js plays a traditional interstitial
+concurrent.programme          // the programme's clock and controls, as the chrome gets them
+```
 
-So the library **verifies and warns**. On `attach` it reads the instance and, if
-the machinery is on, writes to `console.error` and leaves the same message on
-the handle:
+**If you turn the machinery off** (`interstitialsController: undefined`), nothing
+of ours breaks, but a traditional interstitial in your stream plays nowhere. The
+library reads the instance on `attach`, writes a `console.warn`, and leaves the
+same message on the handle:
 
 ```js
 concurrent.diagnostics  // { interstitialsControllerOn: boolean, message: string|null }
 ```
 
-It does not throw. Taking somebody's page down over a configuration he can fix
-in one line is a bigger promise than a plugin gets to make.
-
-Why the machinery has to go off at all: it is closed over Apple's class, so a
-Date Range of the concurrent class never reaches it; and it is a machinery of
-*replacement* — it hands one MediaSource back and forth between the primary and
-the asset, which is the opposite of drawing two sources at once. Nothing is
-lost by turning it off: hls.js parses every `EXT-X-DATERANGE` regardless of
-class and hands them over on `LEVEL_UPDATED`, which is where the library picks
-them up.
+**How each client knows which class a break is**, when the same playlist feeds
+your player and one that only knows Apple's: the playlist can declare
+`#EXT-X-DEFINE:QUERYPARAM="adclass"` and write `CLASS="{$adclass}"` on the breaks
+that are sold both ways, and each player loads the same URL with its class in the
+query (`?adclass=com.apple.hls.interstitial`, or
+`?adclass=` + `QualabsConcurrentHls.CONCURRENT_CLASS`). hls.js substitutes the
+reference while parsing, before the library or its own machinery sees the tag
+(HLS variable substitution, draft-pantos-hls-rfc8216bis-22, 4.3; ADR 0103). A
+playlist with that definition loaded without the parameter does not parse.
 
 ### 2.2 No native controls on the primary content
 
@@ -355,7 +355,6 @@ The global is `QualabsConcurrentHls`, and this is all of it:
 | `CONCURRENT_CLASS` | `'com.qualabs.hls.concurrentInterstitial'`, the Date Range class of a concurrent ad |
 | `VIDEO_DECODERS_PARAM` | `'sgai-video-decoders'`, the query parameter `capabilities.concurrentVideo` travels in |
 | `IMAGE_OVER_VIDEO_PARAM` | `'sgai-image-over-video'`, the query parameter `capabilities.concurrentImage` travels in, as 1 or 0 |
-| `hlsConfig` | the configuration your instance has to be built with (§2.1) |
 | `attach(hls, options)` | turns the concurrent experience on, and returns a handle |
 | `attachControls(video, options)` | draws the chrome on a player, with nothing else turned on |
 

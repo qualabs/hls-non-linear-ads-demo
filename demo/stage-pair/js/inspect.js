@@ -515,7 +515,7 @@ const ROTULOS = {
   },
   ours: {
     rol: 'This demo\u2019s player',
-    sub: 'The library, unmodified, with its interstitials machinery off. The programme is never replaced.'
+    sub: 'The library over an unmodified hls.js: our breaks are drawn over the programme, never replacing it; a traditional interstitial, if the stream has one, hls.js plays.'
   }
 };
 
@@ -548,9 +548,11 @@ function armar(config, retomarEn = 0) {
   // container this page hands over). Everything between the two fences exists
   // because the library exists; the rest of this file exists because this page
   // is an inspection of one exchange.
-  const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+  const hls = new Hls();
   const concurrent = QualabsConcurrentHls.attach(hls, {
     container: player,
+    // Handed now, so the programme's clock exists from the first line below.
+    video,
     // What the device can draw, `{ concurrentVideo, concurrentImage }` (ADR
     // 0094). The library filters the layoutOptions of every ad against it, and
     // with `sendCapabilities` it also travels on the request, which is the
@@ -603,6 +605,14 @@ function armar(config, retomarEn = 0) {
   /** The live line under the picture, read off the contract and nothing else. */
   function pintar() {
     // What is ON SCREEN, after the renderer's failover (ADR 0097).
+    // A traditional interstitial of the stream, played by hls.js (ADR 0104).
+    if (concurrent.linearOnScreen()) {
+      const t = concurrent.programme.currentTime;
+      dom.pane.dataset.state = 'ad';
+      dom.state.textContent = `LINEAR AD, played by hls.js (traditional interstitial) · programme at ${t.toFixed(1)}s · the content is off the screen`;
+      mostrarBreak(breakDelSegundo(t));
+      return;
+    }
     const activas = concurrent.presentedAt(video.currentTime);
     dom.pane.dataset.state = activas.length ? 'ad' : 'primary';
     // A linear default declares no medium of its own: it is the asset's `URI`
@@ -628,7 +638,7 @@ function armar(config, retomarEn = 0) {
 
   vivo = {
     modo: 'ours', hls, concurrent, consumer, video, capacidades, src: SRC.ours,
-    programa: video, listo: () => video.readyState >= 1
+    programa: concurrent.programme, listo: () => video.readyState >= 1
   };
   if (retomarEn > 0) buscar(retomarEn);
 
