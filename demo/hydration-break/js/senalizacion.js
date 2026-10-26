@@ -13,6 +13,14 @@
 // is fetched over the network here and the asset-list is fetched from the URL
 // the tag itself carries.
 //
+// AND THE ASSET-LIST IS FETCHED ONLY ONCE THE PLAYER HAS ASKED FOR IT. The
+// player asks when the programme is buffered up to the break, as hls.js does for
+// an interstitial (ADR 0108, ADR 0109), and a page that went and read the list
+// before that would be the request the player does not make. So the tag is
+// printed at once, and the folds wait for the contract to say the break is no
+// longer known only off its tag. Here that is a moment after the page loads,
+// because the break is inside the first forward buffer.
+//
 // WHAT CHANGED IS THAT THE REDUCTION STOPPED BEING A LOSS (ADR 0075). This
 // section used to print a summary of each Ad -- URI, DURATION, type and the list
 // of boxes -- and the hundred lines of the file were nowhere on the page. Now
@@ -160,13 +168,14 @@ const BLOCK_GLOSS = [
   { level: 'item', name: 'layout', must: 'required', says:
     'Where the boxes go. A layout with no assets in it cannot become a box on a screen, so its ' +
     'asset falls back to a linear Ad.' },
-  { level: 'item', name: 'options', must: 'optional', says:
+  { level: 'item', name: 'layoutOptions', must: 'optional', says:
     'The ways this Ad can be drawn, in order of preference, each with its own type and layout. ' +
     'The library draws the first one the device can, laid over the rest of the item, and with ' +
-    'no options the item is its own only option (R5.6). Here the L and the corner offer their ' +
-    'stream and then the same box as a short progressive file, for a device with one decoder ' +
-    'that animates a file over the programme. This library never reaches the second: it asks ' +
-    'for exactly what the first asks for, and the first wins (ADR 0097).' },
+    'no layoutOptions the item is its own only option (R5.6). Here the L and the corner offer ' +
+    'their stream and then the same box as a short progressive file, for a device with one ' +
+    'decoder that animates a file over the programme. This library draws the second only if the ' +
+    'stream fails to load: it asks for exactly what the first asks for, so the first wins ' +
+    '(ADR 0097), and the second is the next one that fits (ADR 0107).' },
   { level: 'item', name: 'identifiers', must: 'optional', says:
     'Who this Ad is: one or more scheme and value pairs, here an Ad-ID. Mandatory in the spec, ' +
     'not needed to draw: this client passes it on untouched to the tracking events of the Ad, ' +
@@ -237,7 +246,7 @@ export function fieldsOfAssetList(assetList) {
       add('item', item);
       // An option is what the library merges over its item before drawing it
       // (R5.6), so its fields are fields of the item and are listed at that depth.
-      for (const option of [item, ...array(item?.options)]) {
+      for (const option of [item, ...array(item?.layoutOptions)]) {
         if (option !== item) add('item', option);
         const layout = option?.layout;
         if (layout == null) continue;
@@ -324,7 +333,7 @@ function attributesOfTag(line) {
  * this, so an option added after the first one does not change a fold.
  */
 function firstOption(item) {
-  const options = Array.isArray(item?.options) ? item.options : [];
+  const options = Array.isArray(item?.layoutOptions) ? item.layoutOptions : [];
   return options.length ? { ...item, ...options[0] } : item;
 }
 
@@ -406,7 +415,7 @@ function fold(asset, ordinal) {
 function identitiesOf(provider, folds) {
   const ads = adsOfTheMinute(provider);
   if (ads.length === folds) return ads.map((experience) => experience.itemId);
-  if (!provider.programRanges().settled) return null;
+  if (!listsAreIn(provider)) return null;
   console.warn(`[page] the asset-list declares ${folds} assets and the break resolved into ` +
     `${ads.length} Ads, so no fold can be told from another by order alone: the one on screen` +
     ' is not marked.');
@@ -434,6 +443,20 @@ function markTheOneOnScreen({ folds, provider, video }) {
 }
 
 /**
+ * Whether every break's asset-list has been asked for and answered: the
+ * signalling is settled and no range is still the provisional one off its tag.
+ */
+function listsAreIn(provider) {
+  const { ranges, settled } = provider.programRanges();
+  return settled && !ranges.some((range) => range.provisional);
+}
+
+/** Resolves when `listsAreIn`, re-reading the contract, which has no event for it. */
+async function untilTheListsAreIn(provider) {
+  while (!listsAreIn(provider)) await new Promise((r) => setTimeout(r, 200));
+}
+
+/**
  * Draws the section: the tag, its gloss, and one fold per Ad of the asset-list.
  *
  * The gloss of the tag is built here and not left as an empty box in the markup
@@ -452,6 +475,12 @@ export async function showSignalling({ src, tag, mount, payload, provider, video
     if (line) tag.insertAdjacentElement('afterend', glossOfTag(line));
 
     const url = line?.match(/X-ASSET-LIST="([^"]+)"/)?.[1];
+    if (url) {
+      mount.replaceChildren(el('p', 'note', 'The asset-list is requested when the programme is ' +
+        'buffered up to the break, as hls.js does for an interstitial. It appears here once the ' +
+        'player has asked for it.'));
+      await untilTheListsAreIn(provider);
+    }
     const assetList = url ? await fetch(url).then((r) => r.json()) : null;
     const assets = assetList?.ASSETS;
     if (!Array.isArray(assets) || assets.length === 0) {

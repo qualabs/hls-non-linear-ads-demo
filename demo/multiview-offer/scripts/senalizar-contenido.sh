@@ -12,6 +12,13 @@
 # dos clientes leyendo la misma playlist. Acá el argumento es otro y el par no
 # aporta: lo que se muestra es que las dos clases nuestras conviven.
 #
+# LA CLASE DEL AVISO LA ELIGE EL CLIENTE POR LA URL (ADR 0113): la playlist
+# declara `#EXT-X-DEFINE:QUERYPARAM="adclass"` y el tag del aviso lleva
+# `CLASS="{$adclass}"`. La página corre sólo nuestro player y pide la playlist con
+# la clase concurrente; hls.js sustituye la referencia al parsear. Las ventanas de
+# multi view no: son ofertas y no avisos, no tienen lectura de Apple, y su clase
+# va escrita. QUERYPARAM obliga a EXT-X-VERSION 11, y este script la sube.
+#
 # Por qué es un paso generado y no un archivo en git: el START-DATE se resuelve
 # contra el EXT-X-PROGRAM-DATE-TIME de la propia playlist (ADR 0005), y ese
 # reloj es la hora de pared del empaquetado. Un START-DATE fijo en git apunta al
@@ -37,8 +44,10 @@ OUT=${OUT:-content/primary/con-daterange.m3u8}
 # Las dos clases. La concurrente es la del ADR 0009 y la de multi view la del
 # ADR 0063: hermanas, y no una extensión de la otra, porque en HLS la clase se
 # compara por igualdad exacta de string y el formato no tiene herencia.
-CLASE_CONCURRENTE=com.qualabs.hls.concurrentInterstitial
 CLASE_MULTIVIEW=com.qualabs.hls.multiViewInterstitial
+# La del aviso no se escribe: es la variable del ADR 0113. Su nombre es a la vez
+# el del parámetro de la URL; js/app.js lo repite y el test compara los dos.
+PARAMETRO=adclass
 
 # El recorrido, sobre un primario de 180 s. Es la tabla que gobierna la corrida:
 # segundo de reproducción, asset-list, y el nombre con que se lo llama en la
@@ -130,7 +139,7 @@ tag() { # $1 numero de break, $2 offset en segundos, $3 asset-list, $4 largo, $5
     clase=$CLASE_MULTIVIEW
     id="BREAK-$n-MULTIVIEW"
   else
-    clase=$CLASE_CONCURRENTE
+    clase="{\$$PARAMETRO}"
     id="BREAK-$n-CONCURRENT"
     restrict=',X-RESTRICT="SKIP"'
   fi
@@ -169,8 +178,12 @@ else
 fi
 
 # Los tags van después de las cabeceras y antes del primer segmento, que es
-# donde la especificación los admite.
+# donde la especificación los admite, con la definición de la variable delante:
+# una referencia sólo se sustituye con una variable definida antes (la spec, 6.3.1).
+TAGS="#EXT-X-DEFINE:QUERYPARAM=\"$PARAMETRO\"
+$TAGS"
 awk -v tags="$TAGS" '
+  /^#EXT-X-VERSION:/ { if (substr($0, 16) + 0 < 11) $0 = "#EXT-X-VERSION:11" }
   /^#EXTINF:/ && !hecho { printf "%s", tags; hecho = 1 }
   { print }
 ' "$SRC" > "$OUT"

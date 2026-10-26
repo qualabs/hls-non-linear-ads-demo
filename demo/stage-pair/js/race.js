@@ -5,7 +5,7 @@
 //
 // THE FIRST IS WHAT AN INTEGRATOR WRITES, and it is the block fenced below: the
 // library arrives as a <script src> that defines a global, the page builds its
-// own hls.js instance with the one configuration the library hands over, and
+// own hls.js instance with its default configuration (ADR 0114), and
 // turns the concurrent experience on over a container. FIVE LINES, AND THE
 // MULTI VIEW IS IN NONE OF THEM -- the window is on because the playlist
 // signals it, and a playlist that signals no offer comes out of these same five
@@ -49,8 +49,11 @@ const carrera = stage.carrera;
 // the five Date Ranges, written by scripts/senalizar-carrera.sh on every start.
 // Its START-DATE is resolved against the playlist's own
 // EXT-X-PROGRAM-DATE-TIME, so it cannot be a file in git: that clock moves every
-// time the content is packaged (ADR 0005).
-const SRC = `/${carrera.playlist}`;
+// time the content is packaged (ADR 0005). The class of the four ads is the
+// playlist's variable `{$adclass}` (ADR 0113), and this page runs only our
+// player, so it asks for the playlist with OUR class: hls.js substitutes it
+// while parsing. The window of multi view carries its own class, written out.
+const SRC = `/${carrera.playlist}?${stage.parametroDeClase}=${encodeURIComponent(QualabsConcurrentHls.CONCURRENT_CLASS)}`;
 
 const video = document.getElementById('video');
 const player = document.getElementById('player');
@@ -60,7 +63,7 @@ const run = document.getElementById('run');
 
 // ===========================================================================
 // WHAT AN INTEGRATOR WRITES  (with the <script src> and the container of race.html).
-const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+const hls = new Hls();
 const concurrent = QualabsConcurrentHls.attach(hls, {
   container: player,
   onResolved: (experiences) => {
@@ -201,18 +204,45 @@ function rowOf(range, experience, names) {
   return node;
 }
 
+/**
+ * The row of a range whose asset-list has not been asked for yet: on the contract
+ * off its tag, the class saying which kind it is and PLANNED-DURATION how long. What
+ * it carries is in the list, which the player asks for when the programme is
+ * buffered up to it, as hls.js does for an interstitial (ADR 0108, ADR 0109), so the
+ * row says that and fills in when the list arrives.
+ */
+function waitingRow(range) {
+  const node = el('li', 'run__row');
+  node.dataset.id = range.id;
+  node.append(
+    el('span', 'run__when', `${secs(range.startTime)} – ${secs(range.startTime + range.duration)}`),
+    el('span', 'run__kind', range.kind)
+  );
+  const what = el('div', 'run__what');
+  what.append(el('p', null,
+    `${range.kind === 'multiview' ? 'A catalogue of cameras' : 'An ad'}, announced by its tag. ` +
+    'What it carries is in its asset-list, which the player asks for when the race is ' +
+    'buffered up to it, as hls.js does: it is described here when it arrives.'));
+  node.append(what);
+  return node;
+}
+
 let drawnKey = null;
 
 function drawRun(names) {
   const { ranges } = concurrent.provider.programRanges();
-  // Rebuilt only when the SET of ranges changes. They arrive as each asset-list
-  // resolves, so the list fills during the first seconds and then stops;
-  // comparing the key is what keeps this out of the frame loop's way.
-  const key = ranges.map((range) => range.id).join('|');
+  // Rebuilt only when the SET of ranges changes, or one stops being the
+  // provisional one off its tag. Every row is there from the start and each fills
+  // in when its asset-list arrives, which is when the race is buffered up to it
+  // (ADR 0108): the first three at load, the fourth and the window about thirty
+  // seconds before they open. Comparing the key is what keeps this out of the
+  // frame loop's way.
+  const key = ranges.map((range) => `${range.id}${range.provisional ? '?' : ''}`).join('|');
   if (key !== drawnKey) {
     drawnKey = key;
     const byId = new Map(concurrent.provider.experiences.map((e) => [e.id, e]));
-    run.replaceChildren(...ranges.map((range) => rowOf(range, byId.get(range.id), names)));
+    run.replaceChildren(...ranges.map((range) =>
+      (range.provisional ? waitingRow(range) : rowOf(range, byId.get(range.id), names))));
   }
   return ranges;
 }
@@ -252,7 +282,9 @@ requestAnimationFrame(paint);
 // A JUMP IS A SEEK AND NOT A REBUILD, which is the one place this page is
 // simpler than the pair. There the switch had to tear both players down because
 // `capabilities` is read once when the signalling is created; here there is one
-// player, nothing to re-declare, and the experiences are already resolved.
+// player and nothing to re-declare. A jump lands four seconds before a break, so
+// the buffer reaches the break at once and its asset-list is asked for then, if
+// it had not been already (ADR 0108).
 const ENTRADA = 4;
 
 function irA(segundo) {

@@ -16,7 +16,7 @@
                 "value": "KVRN0002000H"
               }
             ],
-            "options": [
+            "layoutOptions": [
               {
                 "type": "lowerThirdOverlay",
                 "layout": {

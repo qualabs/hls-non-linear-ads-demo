@@ -1,11 +1,11 @@
 ---
 id: "0085"
 title: El APS devuelve todas las opciones y el Player las filtra por su capacidad
-status: accepted
+status: superseded
 scope: project
 date: 2026-09-28
 supersedes: "0083"
-superseded_by: null
+superseded_by: "0105"
 generalizes: null
 generalized_by: null
 ---
@@ -45,3 +45,7 @@ admiten.
   producen la misma pantalla.
 - La prueba en cámara cambia: ya no es "la respuesta cambia", es **"la respuesta es la misma y
   la pantalla no"**.
+
+---
+
+**2026-10-20 — nota.** Superseded por el ADR 0105: SVTA2053 v3 renombra `options` a `layoutOptions`. Lo demás de esta decisión sigue en pie allí.

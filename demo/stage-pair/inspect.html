@@ -42,7 +42,7 @@
 
   TWO, WHAT THE CLIENT ASKED FOR. The URL that went out, read off the
   performance timeline, with the two capability parameters picked out of it
-  (ADR 0086). The switch above moves them.
+  (ADR 0086, ADR 0104). The switch above moves them.
 
   THREE, WHAT CAME BACK. The body of that same URL, verbatim -- and it is THE
   SAME for every position of the switch, because the answer carries every
@@ -50,9 +50,18 @@
 
   FOUR, WHAT THE LIBRARY KEPT. The intermediate step: each option of the answer
   checked against what the device declared, in order, with the reason for every
-  one discarded in a sentence that can be said out loud, and how the break
-  ended -- drawn, its linear default, or skipped. It is the report the library
-  hands `onResolved`, not a second opinion computed by this page.
+  one discarded in a sentence that can be said out loud, the order the rest
+  were handed to the renderer in, and -- once it is known -- WHAT WAS ACTUALLY
+  ON SCREEN: the renderer's failover (ADR 0107) takes an option whose asset
+  fails to load down and mounts the next, then the linear default, then
+  nothing. Two reports of the library, `onResolved` and `onPresented`, not a
+  second opinion computed by this page. The toggle "Pre-validate assets"
+  (off, the library's default) adds the up-front check of ADR 0106.
+
+  AND THE REQUESTS ARRIVE ONE BREAK AT A TIME (ADR 0108): the library asks for
+  a break's asset-list when the programme is buffered up to it, or when it is
+  played or sought into, as hls.js does for an interstitial -- so card 2 says
+  "no request for this break yet" for a break the programme has not reached.
 
   NOT ONE OF THE THREE IS TYPED INTO THIS FILE, and that is the rule of the page
   and not a detail of it: the ranges are read out of the playlist the player is
@@ -138,8 +147,9 @@
       <article class="move move--kept">
         <h2 class="move__title"><span class="move__n">4</span> What the library kept</h2>
         <p class="move__lede">
-          The same answer reaches every device. Here each option is checked against what this
-          device declared, in order, and the first one it can show is the one drawn.
+          The same answer reaches every device. Each option is checked against what this device
+          declared, and the ones it can show are handed to the renderer in order. If an asset of the
+          one mounted fails to load, the renderer mounts the next, then the linear default.
         </p>
         <ol class="filter" id="filter"></ol>
         <p class="outcome" id="outcome"></p>

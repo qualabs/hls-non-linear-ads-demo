@@ -3,7 +3,7 @@
 //
 // The list below has the shape of Code 7 of the SVTA2053 draft: `identifiers`
 // inside the payload item, which is the Slot, beside `start`, `duration` and
-// `options`. It is written here and not read from a demo, because `test/` only
+// `layoutOptions`. It is written here and not read from a demo, because `test/` only
 // reads `test/` and `lib/` (ADR 0023).
 //
 // Run: npm test
@@ -16,7 +16,7 @@ import { createTracking, slotEvents } from '../lib/tracking.js';
 
 const AD_ID = { scheme: 'ad-id.org', value: 'KTRV0001000H' };
 
-/** A Slot with two options, video first and a still image second, and a linear default. */
+/** A Slot with two layoutOptions, video first and a still image second, and a linear default. */
 function lista({ uri = '/ketrava-16x9.m3u8', identifiers = [AD_ID] } = {}) {
   const asset = {
     DURATION: 12,
@@ -27,7 +27,7 @@ function lista({ uri = '/ketrava-16x9.m3u8', identifiers = [AD_ID] } = {}) {
         start: 0,
         duration: 12,
         identifiers,
-        options: [
+        layoutOptions: [
           { type: 'squeezebackLShape',
             layout: { primaryContent: { zDepth: 1, viewport: '0 0 25 25' },
               assets: [{ id: 'lBackplate', type: 'application/vnd.apple.mpegurl', uri: '/b.m3u8', viewport: '0 0 0 0', zDepth: 0 }] } },
@@ -54,17 +54,17 @@ test('identifiersOf keeps the scheme and value pairs and drops what is not one',
 });
 
 test('the drawn option carries the identifiers of its Slot, whichever option it is', () => {
-  const [video] = resolver(lista(), { videoDecoders: 2, imageOverVideo: true });
+  const [video] = resolver(lista(), { concurrentVideo: 2, concurrentImage: true });
   assert.equal(video.type, 'squeezebackLShape');
   assert.deepEqual(video.identifiers, [AD_ID]);
-  const [imagen] = resolver(lista(), { videoDecoders: 1, imageOverVideo: true });
+  const [imagen] = resolver(lista(), { concurrentVideo: 1, concurrentImage: true });
   assert.equal(imagen.type, 'squeezebackDoubleBox');
   assert.deepEqual(imagen.identifiers, [AD_ID], 'the image is the same ad, so the same identifier');
 });
 
 test('the linear default is the same ad played another way, and it keeps the identifiers', () => {
   const report = [];
-  const [linear] = resolver(lista(), { videoDecoders: 1, imageOverVideo: false }, report);
+  const [linear] = resolver(lista(), { concurrentVideo: 1, concurrentImage: false }, report);
   assert.equal(linear.type, 'linear');
   assert.deepEqual(linear.identifiers, [AD_ID]);
   assert.equal(report[0].outcome, 'default');
@@ -73,7 +73,7 @@ test('the linear default is the same ad played another way, and it keeps the ide
 
 test('a skipped asset plays nothing, and the report still says which ad it was', () => {
   const report = [];
-  const out = resolver(lista({ uri: null }), { videoDecoders: 1, imageOverVideo: false }, report);
+  const out = resolver(lista({ uri: null }), { concurrentVideo: 1, concurrentImage: false }, report);
   assert.equal(out.length, 0);
   assert.equal(report[0].outcome, 'skipped');
   assert.deepEqual(report[0].identifiers, [AD_ID]);

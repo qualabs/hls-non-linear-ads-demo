@@ -115,7 +115,7 @@ def main():
         temprano = dict(extra, exigir=False) if extra else None
         fila(pagina, pag, "1. apenas carga (lista de A sin llegar)", caja, reloj, None, temprano)
         pagina.wait_for_function(f"() => {stock}.hls.interstitialsManager.events"
-                                 ".some((e) => e.identifier === 'AD-A-LINEAR' && e.assetListLoaded)", timeout=30000)
+                                 ".some((e) => e.identifier === 'AD-A' && e.assetListLoaded)", timeout=30000)
         time.sleep(0.5)
         fila(pagina, pag, "2. cargada (lista de A llegó)", caja, reloj, ["b", "c"], temprano)
         for texto in ("start", "break A", "break B", "break C"):

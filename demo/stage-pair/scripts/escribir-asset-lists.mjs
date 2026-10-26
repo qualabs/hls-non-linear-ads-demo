@@ -43,7 +43,7 @@
 //       asset (D.5). D.2 hace obligatorio el `URI`; el ADR 0087 dice por qué acá
 //       la ausencia es la forma de decir "sin default".
 //
-//   options[n]                el layout de la forma de esa opción (`forma` para el
+//   layoutOptions[n]          el layout de la forma de esa opción (`forma` para el
 //       video, `formaImagen` para la imagen) con su caja de stage.json, y el
 //       asset: el HLS que produjo el puente de la T-05, o el SVG CONGELADO de la
 //       pieza de esa forma (`svgFijo`), sin animación, para que la imagen se lea
@@ -54,10 +54,12 @@
 //       from `mp4Codecs`), and right after the SVG option the same option with
 //       its PNG (`pngFijo`). Between an option and its twin only `type`, `uri`
 //       and `codecs` change. They are for a client that draws neither a second
-//       HLS nor an SVG, the Roku. The web never picks one: to the library a twin
-//       asks for exactly what the option before it asks for, and the first that
-//       fits wins (ADR 0097). So the order is not cosmetic: a twin placed before
-//       its original would change what the web draws.
+//       HLS nor an SVG, the Roku. The web picks one only when its original
+//       fails to load, as the next option that fits (ADR 0107): to the library a
+//       twin asks for exactly what the option before it asks for, and the first
+//       that fits wins (ADR 0097). So the order is not cosmetic: a twin placed
+//       before its original would change what the web draws. A twin goes only
+//       where its piece declares it (`mp4`, `pngFijo`).
 //
 //   primaryContent            lo declaran los dos squeezeback y NO el
 //       lowerThirdOverlay, que es una ausencia deliberada y argumentada en
@@ -169,6 +171,22 @@ function opcion(brk, medio) {
   return { type: forma.layout, layout };
 }
 
+/** The media of a break's options, in the order they are offered: each twin right after its original (ADR 0097). */
+const MEDIOS = ['video', 'mp4', 'imagen', 'png'];
+
+/**
+ * Whether the break has an option in that medium. The web's two always (a
+ * missing one is an error `opcion` reports); a twin only when the piece it
+ * would be made from declares it (`mp4`, `pngFijo`). The preroll and the
+ * postroll came after phase 17 and their banners have no MP4 yet: they offer
+ * the twins their pieces have, and the order of the rest does not change.
+ */
+function tieneMedio(brk, medio) {
+  if (medio === 'video' || medio === 'imagen') return true;
+  const p = pieza(brk.campana, medio === 'mp4' ? brk.forma : brk.formaImagen);
+  return Boolean(medio === 'mp4' ? p.mp4 : p.pngFijo);
+}
+
 /** El `identifiers` del Slot: el AdIdentifier que stage.json declara para la pieza (ADR 0093). */
 function identificadores(campana, forma) {
   const id = pieza(campana, forma).identificador;
@@ -193,11 +211,21 @@ function concurrente(brk) {
       // del payload y no el sobre (SVTA2053, Code 7; ADR 0093).
       identifiers: identificadores(brk.campana, brk.forma),
       // En orden de preferencia (R5.5): primero el video, después la imagen,
-      // cada una seguida de su gemela (ADR 0096 y 0097).
-      options: ['video', 'mp4', 'imagen', 'png'].map((medio) => opcion(brk, medio))
+      // cada una seguida de su gemela cuando la pieza la declara (ADR 0096 y 0097).
+      layoutOptions: MEDIOS.filter((medio) => tieneMedio(brk, medio)).map((medio) => opcion(brk, medio))
     }]
   };
   return { ASSETS: [asset] };
+}
+
+/**
+ * El asset-list del break lineal tradicional (ADR 0115): SÓLO la parte estándar,
+ * el `URI` y la `DURATION` del Apéndice D.2, porque su tag es de la clase de
+ * Apple y lo reproduce hls.js en los dos panes. Sin bloque: no hay nada que
+ * dibujar. La pieza es el 16:9 de su campaña, que ya existe.
+ */
+function lineal(brk) {
+  return { ASSETS: [{ URI: url(pieza(brk.campana, '16x9').video), DURATION: brk.duracion }] };
 }
 
 mkdirSync(outDir, { recursive: true });
@@ -205,5 +233,9 @@ const escritos = [];
 for (const brk of stage.breaks) {
   writeFileSync(join(outDir, brk.concurrente), JSON.stringify(concurrente(brk), null, 2) + '\n');
   escritos.push(brk.concurrente);
+}
+if (stage.breakLineal) {
+  writeFileSync(join(outDir, stage.breakLineal.lista), JSON.stringify(lineal(stage.breakLineal), null, 2) + '\n');
+  escritos.push(stage.breakLineal.lista);
 }
 process.stdout.write(escritos.join('\n') + '\n');

@@ -68,13 +68,13 @@ async (breaks) => {
   const dormir = (ms) => new Promise((r) => setTimeout(r, ms));
   // Sólo los breaks medidos: el de fábrica también programa el break sin default
   // (ADR 0091) y lo saltea en el acto, y ese instante no es una entrada.
-  const idsFabrica = new Set(breaks.map((b) => `AD-${b.id.toUpperCase()}-LINEAR`));
+  const idsFabrica = new Set(breaks.map((b) => `AD-${b.id.toUpperCase()}`));
   const enAdStock = () => idsFabrica.has(d.stock.hls.interstitialsManager?.playingItem?.event?.identifier);
   const relojStock = () => {
     const t = d.stock.hls.interstitialsManager?.primary?.currentTime;
     return Number.isFinite(t) ? t : d.stock.programme.currentTime;
   };
-  const ids = new Set(breaks.map((b) => `AD-${b.id.toUpperCase()}-CONCURRENT`));
+  const ids = new Set(breaks.map((b) => `AD-${b.id.toUpperCase()}`));
   const enAdDemo = () => d.provider.activeAt(d.video.currentTime).some((e) => ids.has(e.id));
   const relojDemo = () => d.video.currentTime;
 

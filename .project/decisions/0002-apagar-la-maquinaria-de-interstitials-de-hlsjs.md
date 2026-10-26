@@ -1,11 +1,11 @@
 ---
 id: "0002"
 title: Apagar la maquinaria de interstitials de hls.js y manejar los Date Ranges por cuenta propia
-status: accepted
+status: superseded
 scope: phase-01
 date: 2026-09-03
 supersedes: null
-superseded_by: null
+superseded_by: "0114"
 ---
 
 ## Contexto
@@ -79,3 +79,7 @@ la configuración acepta
 paquete, sino solamente en los tipos (`dist/hls.d.mts:4094`), así que no
 se puede importar para heredar de ella y el hook obliga igual al fork,
 sin la ventaja de ser el camino soportado.
+
+---
+
+**2026-10-22 — superseded por el ADR 0114**: la maquinaria de hls.js queda encendida; hls.js reproduce el interstitial tradicional del stream y la librería dibuja sus clases.

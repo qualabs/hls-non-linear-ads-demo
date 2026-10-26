@@ -7,9 +7,14 @@
 //
 // LO QUE SE ASSERTA SALE DE LO QUE EL SCRIPT ESCRIBIÓ DE VERDAD, y no del texto
 // del script. Así que el test le pasa al señalizador una media playlist de nueve
-// líneas por `SRC` y recoge sus salidas por `OUT_INTERSTITIAL`, `OUT_CONCURRENTE` y `SIGNALLING`. No necesita
+// líneas por `SRC` y recoge sus salidas por `OUT` y `SIGNALLING`. No necesita
 // ffmpeg ni un solo byte de video, que es lo que le permite correr en `npm test`
 // sobre un clone limpio.
+//
+// LA PLAYLIST ES UNA Y SE LEE DOS VECES (ADR 0113): cada break lleva
+// `CLASS="{$adclass}"`, y lo que cada cliente lee es la sustitución que hace
+// hls.js con el parámetro de su URL. El test la lee igual, con el helper de
+// demo/shared/test/variable-substitution.js, que aplica las reglas de la spec.
 //
 // ---------------------------------------------------------------------------
 // LAS DOS AFIRMACIONES QUE ESTE ARCHIVO EXISTE PARA PROTEGER
@@ -42,6 +47,7 @@ import {
   CONCURRENT_CLASS, INTERSTITIAL_CLASS, LINEAR_TYPE, MAX_BOXES, MULTIVIEW_CLASS,
   resolveAssetList, selectOption, usableCapabilities
 } from '../../../lib/signalling.js';
+import { substitute, withClass } from '../../shared/test/variable-substitution.js';
 
 const DEMO = fileURLToPath(new URL('..', import.meta.url));
 const read = (path) => readFileSync(join(DEMO, path), 'utf8');
@@ -61,8 +67,7 @@ const PDT = '2026-09-14T10:00:00.000+0000';
 function run(env = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'stage-pair-'));
   const src = join(dir, 'index.m3u8');
-  const outInterstitial = join(dir, 'con-daterange-interstitial.m3u8');
-  const outConcurrente = join(dir, 'con-daterange-concurrente.m3u8');
+  const out = join(dir, 'con-daterange.m3u8');
   const signalling = join(dir, 'signalling');
   mkdirSync(signalling);
   writeFileSync(
@@ -84,8 +89,7 @@ function run(env = {}) {
     const hoja = execFileSync(join(DEMO, 'scripts/senalizar-contenido.sh'), {
       cwd: DEMO,
       env: {
-        ...process.env, SRC: src, OUT_INTERSTITIAL: outInterstitial, OUT_CONCURRENTE: outConcurrente,
-        SIGNALLING: signalling, ...env
+        ...process.env, SRC: src, OUT: out, SIGNALLING: signalling, ...env
       },
       encoding: 'utf8'
     });
@@ -99,9 +103,13 @@ function run(env = {}) {
       if (!(name in escritos)) throw new Error(`el señalizador no escribió ${name}`);
       return structuredClone(escritos[name]);
     };
+    const playlist = readFileSync(out, 'utf8');
+    // Las dos lecturas del mismo archivo: la del player de fábrica y la nuestra.
+    const leida = (clase) => substitute(playlist, withClass('/' + STAGE.playlist, STAGE.parametroDeClase, clase)).text;
     return {
-      interstitial: readFileSync(outInterstitial, 'utf8'),
-      concurrente: readFileSync(outConcurrente, 'utf8'),
+      playlist,
+      interstitial: leida(INTERSTITIAL_CLASS),
+      concurrente: leida(CONCURRENT_CLASS),
       escritos: Object.keys(escritos),
       lista,
       hoja
@@ -126,43 +134,174 @@ const dateRanges = (playlist) =>
       resumeOffset: /X-RESUME-OFFSET=/.test(line)
     }));
 
+/** El break lineal tradicional, escrito con la clase de Apple (ADR 0115), y su ID. */
+const LINEAL = STAGE.breakLineal;
+const ID_LINEAL = `AD-${LINEAL.id.toUpperCase()}`;
+
+/** Los tags de los breaks de `breaks`, sin el lineal escrito. */
+const deLosBreaks = (playlist) => dateRanges(playlist).filter((t) => t.id !== ID_LINEAL);
+
 /** El primer ítem del bloque de layout de un asset-list concurrente. */
 const bloque = (lista) => lista.ASSETS[0]['X-AD-CREATIVE-SIGNALING'].payload[0];
 
 /** Las opciones de presentación del aviso de un break, en orden. */
-const opciones = (lista) => bloque(lista).options;
+const opciones = (lista) => bloque(lista).layoutOptions;
 
-/** Los tres breaks, con su fila de stage.json al lado. */
+/**
+ * The options of a break by medium: `video` and `imagen`, the web's, and their
+ * twins `mp4` and `png` (ADR 0096) when the break offers them, read from the
+ * `type` of each option's element.
+ */
+const porMedio = (lista) => {
+  const medioDe = Object.fromEntries(Object.entries(STAGE.assets.tipos).map(([medio, tipo]) => [tipo, medio]));
+  return Object.fromEntries(opciones(lista).map((o) => [medioDe[o.layout.assets[0].type], o]));
+};
+
+/** The pieces a break's options are made of: the video's (`forma`) and the image's (`formaImagen`). */
+const piezasDe = (brk) => ({
+  deVideo: STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.forma),
+  deImagen: STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.formaImagen)
+});
+
+/** The breaks of phase 17, whose pieces have both twins (ADR 0096). */
+const CON_GEMELAS = ['a', 'b', 'c'];
+
+/** Los cuatro breaks, el preroll primero, con su fila de stage.json al lado. */
 const BREAKS = STAGE.breaks;
 const CON_DEFAULT = BREAKS.filter((b) => b.lineal);
 const SIN_DEFAULT = BREAKS.filter((b) => !b.lineal);
 
-/** Los tags de un break en los dos manifests, por su ID. */
+/** El tag de un break en las dos lecturas de la playlist, por su ID, que es uno. */
 const tagsDe = (corrida, brk) => ({
-  lineal: dateRanges(corrida.interstitial).find((t) => t.id === `AD-${brk.id.toUpperCase()}-LINEAR`),
-  concurrente: dateRanges(corrida.concurrente).find((t) => t.id === `AD-${brk.id.toUpperCase()}-CONCURRENT`)
+  lineal: dateRanges(corrida.interstitial).find((t) => t.id === `AD-${brk.id.toUpperCase()}`),
+  concurrente: dateRanges(corrida.concurrente).find((t) => t.id === `AD-${brk.id.toUpperCase()}`)
 });
 
-test('hay un break sin default y los otros dos con, que es lo que David pidió mostrar', () => {
+test('hay un break sin default y los otros con, que es lo que David pidió mostrar', () => {
   // ADR 0087. Sin un break de cada tipo, la corrida no muestra las dos salidas de
-  // un aviso que no se puede dibujar.
+  // un aviso que no se puede dibujar. Con el preroll (ADR 0110) y el postroll
+  // (ADR 0111) son cuatro con.
   assert.equal(SIN_DEFAULT.length, 1, 'un break sin default');
-  assert.equal(CON_DEFAULT.length, 2, 'dos con default');
+  assert.equal(CON_DEFAULT.length, 4, 'cuatro con default');
 });
 
-test('dos manifests, uno por clase: el de interstitials sólo con los de Apple, el concurrente sólo con los nuestros', () => {
-  // ADR 0090. Y los asset-lists, contados sobre el directorio: UNO por break,
+test('el postroll: CUE="POST" en su tag y en ningún otro, con default, último, y la librería sólo toma su lineal', async () => {
+  // ADR 0111. Los dos clientes lo ponen después del fin del programa; el nuestro
+  // nunca presenta su aviso no lineal ahí, así que sin default no habría nada que
+  // ver y el par dejaría de mostrar lo mismo en los dos panes.
+  const posts = BREAKS.filter((b) => b.cue === 'POST');
+  assert.equal(posts.length, 1, 'un postroll');
+  assert.equal(BREAKS[BREAKS.length - 1], posts[0], 'va último en stage.json');
+  assert.equal(posts[0].lineal, true, 'con default: el lineal es lo único que se presenta');
+  const corrida = run();
+  for (const playlist of [corrida.interstitial, corrida.concurrente]) {
+    const conCue = dateRanges(playlist).filter((t) => /,CUE="POST",/.test(t.line));
+    assert.deepEqual(conCue.map((t) => t.id.split('-')[1]), ['POST'], 'el CUE va sólo en el postroll');
+  }
+  assert.match(corrida.hoja, /break POST .*CUE=POST/);
+  const { resolvePostRoll } = await import('../../../lib/signalling.js');
+  const [lineal, ...resto] = resolvePostRoll(corrida.lista(posts[0].concurrente), { id: 'AD-POST', slotStart: 198 });
+  assert.deepEqual(resto, []);
+  assert.equal(lineal.type, 'linear');
+  assert.equal(lineal.elements.find((e) => !e.primary).uri, `/${STAGE.assets.piezas.find((p) => p.campana === posts[0].campana && p.forma === '16x9').video}`);
+});
+
+test('el preroll: CUE="PRE" en su tag y en ningún otro, START-DATE en el origen, con default y antes que todo', () => {
+  // ADR 0110. Lo que cada cliente lee para ubicarlo antes del programa y pedir su
+  // lista al cargar es el CUE; el START-DATE se escribe igual porque la spec lo
+  // exige, en el instante del EXT-X-PROGRAM-DATE-TIME.
+  const prerolls = BREAKS.filter((b) => b.cue === 'PRE');
+  assert.equal(prerolls.length, 1, 'un preroll');
+  assert.equal(BREAKS[0], prerolls[0], 'va primero en stage.json');
+  assert.equal(prerolls[0].offset, 0);
+  assert.equal(prerolls[0].lineal, true, 'con default: el pane de fábrica reproduce un preroll lineal');
+  const corrida = run();
+  const origen = new Date(PDT).getTime();
+  for (const playlist of [corrida.interstitial, corrida.concurrente]) {
+    const tags = dateRanges(playlist);
+    const conCue = tags.filter((t) => /,CUE="PRE",/.test(t.line));
+    assert.deepEqual(conCue.map((t) => t.id.split('-')[1]), ['PRE'], 'el CUE va sólo en el preroll');
+    assert.equal(new Date(conCue[0].startDate).getTime(), origen);
+  }
+  // La forma de reemplazo en el tag de Apple: hls.js retoma el programa en el
+  // segundo en que el preroll termina, que es donde está el pane nuestro.
+  assert.equal(tagsDe(corrida, prerolls[0]).lineal.resumeOffset, false);
+  assert.match(corrida.hoja, /break PRE .*CUE=PRE/);
+});
+
+test('el break B lleva CUE="ONCE" en su tag, y ningún otro break lo lleva', () => {
+  // ADR 0112. Los dos clientes lo sacan después de reproducirlo.
+  assert.deepEqual(BREAKS.filter((b) => b.cue === 'ONCE').map((b) => b.id), ['b']);
+  const corrida = run();
+  for (const playlist of [corrida.interstitial, corrida.concurrente]) {
+    const conCue = dateRanges(playlist).filter((t) => /,CUE="ONCE",/.test(t.line));
+    assert.deepEqual(conCue.map((t) => t.id.split('-')[1]), ['B']);
+  }
+  assert.match(corrida.hoja, /break B .*CUE=ONCE/);
+});
+
+test('la librería lee el CUE de los tags que este script escribe', async () => {
+  const { cueOf } = await import('../../../lib/signalling.js');
+  const corrida = run();
+  const attr = (line) => ({ CUE: line.match(/CUE="([^"]+)"/)?.[1] });
+  const pre = deLosBreaks(corrida.concurrente).map((t) => [t.id, cueOf({ attr: attr(t.line) }).pre]);
+  assert.deepEqual(pre, BREAKS.map((b) => [`AD-${b.id.toUpperCase()}`, b.cue === 'PRE']));
+});
+
+test('una playlist: un tag por break, con la clase en la variable y la definición antes de los tags', () => {
+  // ADR 0113. Y los asset-lists, contados sobre el directorio: UNO por break,
   // que leen los dos clientes. Un archivo de menos es un 404 en cámara.
   const corrida = run();
-  assert.deepEqual(corrida.escritos, BREAKS.map((b) => b.concurrente).sort(), 'un asset-list por break, y ninguno de más');
-  assert.deepEqual(dateRanges(corrida.interstitial).map((t) => t.hlsClass), BREAKS.map(() => INTERSTITIAL_CLASS),
-    'el de interstitials: un tag de Apple por break, también el sin default (ADR 0091), y nada más');
-  assert.deepEqual(dateRanges(corrida.concurrente).map((t) => t.hlsClass), BREAKS.map(() => CONCURRENT_CLASS),
-    'el concurrente: un tag nuestro por break, y nada más');
+  assert.deepEqual(corrida.escritos, [...BREAKS.map((b) => b.concurrente), LINEAL.lista].sort(),
+    'un asset-list por break, el del lineal escrito, y ninguno de más');
+  const lineas = corrida.playlist.split('\n');
+  const definicion = lineas.indexOf(`#EXT-X-DEFINE:QUERYPARAM="${STAGE.parametroDeClase}"`);
+  assert.ok(definicion >= 0, 'la playlist define la variable por QUERYPARAM');
+  assert.ok(definicion < lineas.findIndex((l) => l.startsWith('#EXT-X-DATERANGE:')), 'y la define antes del primer tag');
+  assert.ok(lineas.includes('#EXT-X-VERSION:11'), 'QUERYPARAM obliga a EXT-X-VERSION 11');
+  assert.deepEqual(deLosBreaks(corrida.playlist).map((t) => t.hlsClass), BREAKS.map(() => `{$${STAGE.parametroDeClase}}`),
+    'un tag por break, cada uno con la clase que elige el cliente');
+  assert.deepEqual(deLosBreaks(corrida.playlist).map((t) => t.id), BREAKS.map((b) => `AD-${b.id.toUpperCase()}`));
 });
 
-test('los dos tags de un break nombran el MISMO asset-list', () => {
-  // La mitad del ADR 0090 que hace que haya un solo lugar donde vive el aviso.
+test('leída con cada parámetro, la misma playlist es toda de Apple o toda nuestra, y sin parámetro no se puede leer', () => {
+  // La sustitución es la del cliente (hls.js 1.7.2, utils/variable-substitution.ts),
+  // y la regla de la falta es la de la spec: el cliente DEBE fallar al parsear.
+  const corrida = run();
+  assert.deepEqual(deLosBreaks(corrida.interstitial).map((t) => t.hlsClass), BREAKS.map(() => INTERSTITIAL_CLASS),
+    'el de fábrica: un interstitial de Apple por break, también el sin default (ADR 0091)');
+  assert.deepEqual(deLosBreaks(corrida.concurrente).map((t) => t.hlsClass), BREAKS.map(() => CONCURRENT_CLASS),
+    'el nuestro: un tag nuestro por break');
+  assert.throws(() => substitute(corrida.playlist, '/' + STAGE.playlist), /QUERYPARAM/);
+});
+
+test('el break lineal tradicional: CLASS de Apple escrita, los dos clientes lo leen igual, sin solaparse con ningún break', () => {
+  // ADR 0115. La decisión (c) de David: un break lineal con la clase literal, no
+  // sustituida, que nuestro player reproduce por hls.js (ADR 0114) y el de fábrica
+  // como siempre. Y la regla del ADR 0113: no se solapa con ningún otro.
+  const corrida = run();
+  for (const playlist of [corrida.playlist, corrida.interstitial, corrida.concurrente]) {
+    const [tag, ...resto] = dateRanges(playlist).filter((t) => t.id === ID_LINEAL);
+    assert.deepEqual(resto, []);
+    assert.equal(tag.hlsClass, INTERSTITIAL_CLASS);
+    assert.equal(tag.assetList, `/signalling/${LINEAL.lista}`);
+    assert.equal(tag.resumeOffset, false, 'la forma de reemplazo');
+  }
+  const lista = corrida.lista(LINEAL.lista);
+  const pieza = STAGE.assets.piezas.find((p) => p.campana === LINEAL.campana && p.forma === '16x9');
+  assert.deepEqual(lista, { ASSETS: [{ URI: `/${pieza.video}`, DURATION: LINEAL.duracion }] },
+    'sólo la parte estándar, con un creativo que ya existe');
+  for (const brk of BREAKS.filter((b) => b.cue !== 'POST' && b.cue !== 'PRE')) {
+    assert.ok(LINEAL.offset + LINEAL.duracion <= brk.offset || LINEAL.offset >= brk.offset + brk.duracion,
+      `el lineal se solapa con el break ${brk.id}`);
+  }
+  assert.ok(LINEAL.offset >= 12 && LINEAL.offset + LINEAL.duracion <= STAGE.programa.largo, 'adentro del programa, después del preroll');
+});
+
+test('las dos lecturas de un break nombran el MISMO asset-list', () => {
+  // Lo que queda del ADR 0090: un solo lugar donde vive el aviso. Con un tag por
+  // break es así por construcción, y el test es el control de que la sustitución
+  // no toca nada más que la clase.
   const corrida = run();
   for (const brk of BREAKS) {
     const { lineal, concurrente } = tagsDe(corrida, brk);
@@ -171,7 +310,7 @@ test('los dos tags de un break nombran el MISMO asset-list', () => {
   }
 });
 
-test('los tags de un break comparten el START-DATE en los dos manifests, y el instante es el de stage.json', () => {
+test('las dos lecturas de un break tienen el mismo START-DATE, y el instante es el de stage.json', () => {
   const origen = new Date(PDT).getTime();
   const corrida = run();
   for (const brk of BREAKS) {
@@ -199,7 +338,7 @@ test('el break sin default tiene su tag de Apple pero su asset-list no tiene URI
   }
 });
 
-test('la parte estándar dura lo que su break, y los dos tags lo declaran: no hay tramo invertido', () => {
+test('la parte estándar dura lo que su break, y su tag lo declara: no hay tramo invertido', () => {
   // ADR 0082, ahora por construcción: los dos clientes leen el mismo archivo.
   const corrida = run();
   for (const brk of CON_DEFAULT) {
@@ -210,35 +349,40 @@ test('la parte estándar dura lo que su break, y los dos tags lo declaran: no ha
   }
 });
 
-test('el tag lineal va en la forma de reemplazo, SIN X-RESUME-OFFSET, salvo el del break sin default, con 0', () => {
-  // ADR 0017. El del tag concurrente sí se escribe y es inerte (ADR 0016). El
-  // break sin default no tiene aviso que reemplace nada: retoma donde empezó,
-  // porque retomar en su fin deja al hls.js de fábrica congelado (ADR 0091).
+test('el tag va en la forma de reemplazo, SIN X-RESUME-OFFSET, salvo el del break sin default, con 0, y sin X-SNAP', () => {
+  // ADR 0017. Con un tag para las dos clases, los atributos son los de la lectura
+  // de Apple: leídos con la clase concurrente son inertes (ADR 0016), y X-SNAP
+  // no va porque hls.js lo aplicaría a la lectura de Apple (ADR 0113). El break
+  // sin default no tiene aviso que reemplace nada: retoma donde empezó, porque
+  // retomar en su fin deja al hls.js de fábrica congelado (ADR 0091).
   const corrida = run();
-  const tags = [...dateRanges(corrida.interstitial), ...dateRanges(corrida.concurrente)];
-  const sinDefault = new Set(SIN_DEFAULT.map((b) => `AD-${b.id.toUpperCase()}-LINEAR`));
-  for (const tag of tags.filter((t) => t.hlsClass === INTERSTITIAL_CLASS)) {
+  const tags = dateRanges(corrida.playlist);
+  const sinDefault = new Set(SIN_DEFAULT.map((b) => `AD-${b.id.toUpperCase()}`));
+  for (const tag of tags) {
     if (sinDefault.has(tag.id)) assert.match(tag.line, /X-RESUME-OFFSET=0,/, `${tag.id} retoma donde empezó`);
     else assert.equal(tag.resumeOffset, false, `${tag.id} no declara X-RESUME-OFFSET`);
+    assert.doesNotMatch(tag.line, /X-SNAP=/, `${tag.id} no lleva X-SNAP`);
   }
   assert.equal(tags.filter((t) => sinDefault.has(t.id)).length, SIN_DEFAULT.length, 'el tag del break sin default está');
-  for (const tag of tags.filter((t) => t.hlsClass === CONCURRENT_CLASS)) {
-    assert.equal(tag.resumeOffset, true, `${tag.id} sí lo declara, y no significa nada`);
-  }
 });
 
 test('cada break trae las opciones del aviso: el video y su MP4, después la imagen y su PNG', () => {
   // ADR 0085 y R5.5: el orden de las opciones es la preferencia, y la librería se
   // queda con la primera que la capacidad satisface. Con la imagen primero, un
   // dispositivo de dos decodificadores vería la imagen. Each twin goes right after
-  // its original (ADR 0096 and 0097).
+  // its original (ADR 0096 and 0097), when the piece it is made from declares it:
+  // A, B and C have both; the preroll and the postroll, whose banners have no MP4
+  // yet, only the PNG.
   const corrida = run();
   const { lista } = corrida;
+  const { video, mp4, imagen, png } = STAGE.assets.tipos;
   for (const brk of BREAKS) {
     assert.equal(tagsDe(corrida, brk).concurrente.assetList, `/signalling/${brk.concurrente}`);
     const medios = opciones(lista(brk.concurrente)).map((o) => o.layout.assets.map((a) => a.type));
-    const { video, mp4, imagen, png } = STAGE.assets.tipos;
-    assert.deepEqual(medios, [[video], [mp4], [imagen], [png]], `break ${brk.id}`);
+    const { deVideo, deImagen } = piezasDe(brk);
+    const esperados = [[video], ...(deVideo.mp4 ? [[mp4]] : []), [imagen], ...(deImagen.pngFijo ? [[png]] : [])];
+    assert.deepEqual(medios, esperados, `break ${brk.id}`);
+    if (CON_GEMELAS.includes(brk.id)) assert.deepEqual(medios, [[video], [mp4], [imagen], [png]], `break ${brk.id}`);
   }
 });
 
@@ -249,7 +393,7 @@ test('la opción de imagen va en OTRA forma que la de video, y es de la misma ca
   // campaña y la duración (ADR 0084).
   const { lista } = run();
   for (const brk of BREAKS) {
-    const [video, , imagen] = opciones(lista(brk.concurrente));
+    const { video, imagen } = porMedio(lista(brk.concurrente));
     assert.notEqual(brk.formaImagen, brk.forma, `${brk.id}: stage.json declara la misma forma`);
     assert.notEqual(imagen.type, video.type, `${brk.id}: los dos layouts son el mismo`);
     const campana = (o) => STAGE.assets.piezas.find((p) =>
@@ -267,8 +411,9 @@ test('el layout de cada break es el que stage.json declara, con sus cajas, en la
     const item = bloque(lista(brk.concurrente));
     assert.equal(item.start, 0);
     assert.equal(item.duration, brk.duracion);
-    assert.equal(item.options[0].type, brk.layout, `${brk.id}: la opción de video es el layout del break`);
-    for (const [opcion, nombreForma] of [[item.options[0], brk.forma], [item.options[2], brk.formaImagen]]) {
+    const { video, imagen } = porMedio(lista(brk.concurrente));
+    assert.equal(item.layoutOptions[0].type, brk.layout, `${brk.id}: la opción de video es el layout del break`);
+    for (const [opcion, nombreForma] of [[video, brk.forma], [imagen, brk.formaImagen]]) {
       const forma = STAGE.formas[nombreForma];
       assert.equal(opcion.type, forma.layout);
       assert.equal(opcion.layout.assets[0].viewport, forma.viewportAviso);
@@ -291,9 +436,8 @@ test('el asset de cada break es la pieza de su campaña, en los dos medios', () 
   // de stage.json es lo que hace que no puedan ser piezas distintas.
   const { lista } = run();
   for (const brk of BREAKS) {
-    const deVideo = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.forma);
-    const deImagen = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.formaImagen);
-    const [video, , imagen] = opciones(lista(brk.concurrente));
+    const { deVideo, deImagen } = piezasDe(brk);
+    const { video, imagen } = porMedio(lista(brk.concurrente));
     assert.equal(video.layout.assets[0].uri, `/${deVideo.video}`);
     assert.equal(imagen.layout.assets[0].uri, `/${deImagen.svgFijo}`);
   }
@@ -322,21 +466,25 @@ test('each twin is its original with another medium, and nothing else changes', 
   // they differ, and so does a twin with its viewport moved.
   const { lista } = run();
   for (const brk of BREAKS) {
-    const [video, mp4, imagen, png] = opciones(lista(brk.concurrente));
-    const deVideo = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.forma);
-    const deImagen = STAGE.assets.piezas.find((p) => p.campana === brk.campana && p.forma === brk.formaImagen);
-    assert.ok(gemelas(video, mp4), `${brk.id}: the MP4 option is not the twin of the video one`);
-    assert.ok(gemelas(imagen, png), `${brk.id}: the PNG option is not the twin of the image one`);
-    assert.equal(mp4.layout.assets[0].uri, `/${deVideo.mp4}`);
-    assert.equal(mp4.layout.assets[0].codecs, deVideo.mp4Codecs);
-    assert.match(mp4.layout.assets[0].codecs, /^vp09\.\d{2}\.\d{2}\.\d{2}$/, `${brk.id}: codecs is not RFC 6381 VP9`);
-    assert.equal(png.layout.assets[0].uri, `/${deImagen.pngFijo}`);
-    assert.ok(readdirSync(join(DEMO, 'graphics/campaigns')).includes(deImagen.pngFijo.split('/').pop()),
-      `${brk.id}: ${deImagen.pngFijo} is not in graphics/campaigns/`);
+    const { video, mp4, imagen, png } = porMedio(lista(brk.concurrente));
+    const { deVideo, deImagen } = piezasDe(brk);
+    if (CON_GEMELAS.includes(brk.id)) assert.ok(mp4 && png, `${brk.id}: a break of phase 17 without both twins`);
+    if (mp4) {
+      assert.ok(gemelas(video, mp4), `${brk.id}: the MP4 option is not the twin of the video one`);
+      assert.equal(mp4.layout.assets[0].uri, `/${deVideo.mp4}`);
+      assert.equal(mp4.layout.assets[0].codecs, deVideo.mp4Codecs);
+      assert.match(mp4.layout.assets[0].codecs, /^vp09\.\d{2}\.\d{2}\.\d{2}$/, `${brk.id}: codecs is not RFC 6381 VP9`);
+    }
+    if (png) {
+      assert.ok(gemelas(imagen, png), `${brk.id}: the PNG option is not the twin of the image one`);
+      assert.equal(png.layout.assets[0].uri, `/${deImagen.pngFijo}`);
+      assert.ok(readdirSync(join(DEMO, 'graphics/campaigns')).includes(deImagen.pngFijo.split('/').pop()),
+        `${brk.id}: ${deImagen.pngFijo} is not in graphics/campaigns/`);
+    }
     assert.ok(!gemelas(video, imagen), `${brk.id}: the control says the video and the image option are twins`);
-    const movida = structuredClone(mp4);
+    const movida = structuredClone(mp4 ?? png);
     movida.layout.assets[0].viewport = '1 2 3 4';
-    assert.ok(!gemelas(video, movida), `${brk.id}: the control misses a twin with another viewport`);
+    assert.ok(!gemelas(mp4 ? video : imagen, movida), `${brk.id}: the control misses a twin with another viewport`);
   }
 });
 
@@ -353,23 +501,25 @@ test('the twins never change what the library picks, under any capability', () =
     return option && JSON.stringify({ type: option.type, assets: option.layout.assets });
   };
   const capacidades = [null,
-    { videoDecoders: 2, imageOverVideo: true }, { videoDecoders: 2, imageOverVideo: false },
-    { videoDecoders: 1, imageOverVideo: true }, { videoDecoders: 1, imageOverVideo: false }];
+    { concurrentVideo: 2, concurrentImage: true }, { concurrentVideo: 2, concurrentImage: false },
+    { concurrentVideo: 1, concurrentImage: true }, { concurrentVideo: 1, concurrentImage: false }];
   const conOpciones = (asset, f) => {
     const copia = structuredClone(asset);
     const item = copia['X-AD-CREATIVE-SIGNALING'].payload[0];
-    item.options = f(item.options);
+    item.layoutOptions = f(item.layoutOptions);
     return copia;
   };
   const esGemela = (o) => /^(video\/mp4|image\/png)$/.test(o.layout.assets[0].type);
   for (const brk of BREAKS) {
     const asset = lista(brk.concurrente).ASSETS[0];
     const sinGemelas = conOpciones(asset, (os) => os.filter((o) => !esGemela(o)));
-    assert.equal(sinGemelas['X-AD-CREATIVE-SIGNALING'].payload[0].options.length, 2);
+    assert.equal(sinGemelas['X-AD-CREATIVE-SIGNALING'].payload[0].layoutOptions.length, 2);
     for (const c of capacidades) {
       assert.equal(elegida(asset, c), elegida(sinGemelas, c), `${brk.id}: ${JSON.stringify(c)}`);
     }
-    const alReves = conOpciones(asset, ([v, m, i, p]) => [m, v, p, i]);
+    // Each twin swapped with the original it follows.
+    const alReves = conOpciones(asset, (os) => os.reduce((acc, o) => (esGemela(o)
+      ? [...acc.slice(0, -1), o, acc[acc.length - 1]] : [...acc, o]), []));
     assert.ok(capacidades.some((c) => elegida(alReves, c) !== elegida(sinGemelas, c)),
       `${brk.id}: the control with the twins first picks the same, so the comparison sees nothing`);
   }
@@ -386,7 +536,7 @@ test('la opción de imagen de cada break es una imagen QUIETA: su SVG no tiene n
   // encontrarle animaciones, o lo que se midió es el lector.
   const { lista } = run();
   for (const brk of BREAKS) {
-    const [, , imagen] = opciones(lista(brk.concurrente));
+    const { imagen } = porMedio(lista(brk.concurrente));
     const svg = read(imagen.layout.assets[0].uri.replace(/^\//, ''));
     assert.deepEqual(animaciones(svg), [], `${brk.id}: la imagen trae animaciones`);
     assert.doesNotMatch(svg, /@keyframes|animation\s*:/, `${brk.id}: la imagen trae animación CSS`);
@@ -411,11 +561,11 @@ test('la librería, sobre la misma respuesta, dibuja video, imagen, el lineal o 
   };
   const { video, imagen } = STAGE.assets.tipos;
   for (const brk of BREAKS) {
-    assert.deepEqual(dibuja(brk, { videoDecoders: 2, imageOverVideo: true }), [video], `${brk.id}: 2 y con imágenes`);
-    assert.deepEqual(dibuja(brk, { videoDecoders: 2, imageOverVideo: false }), [video], `${brk.id}: 2 y sin imágenes`);
-    assert.deepEqual(dibuja(brk, { videoDecoders: 1, imageOverVideo: true }), [imagen], `${brk.id}: 1 y con imágenes`);
+    assert.deepEqual(dibuja(brk, { concurrentVideo: 2, concurrentImage: true }), [video], `${brk.id}: 2 y con imágenes`);
+    assert.deepEqual(dibuja(brk, { concurrentVideo: 2, concurrentImage: false }), [video], `${brk.id}: 2 y sin imágenes`);
+    assert.deepEqual(dibuja(brk, { concurrentVideo: 1, concurrentImage: true }), [imagen], `${brk.id}: 1 y con imágenes`);
     assert.deepEqual(
-      dibuja(brk, { videoDecoders: 1, imageOverVideo: false }),
+      dibuja(brk, { concurrentVideo: 1, concurrentImage: false }),
       brk.lineal ? ['lineal'] : [],
       `${brk.id}: 1 y sin imágenes, ${brk.lineal ? 'cae al lineal' : 'se saltea'}`
     );
@@ -439,12 +589,17 @@ test('el control del tramo invertido se puede encender, y declara una duración 
 test('la hoja que el script imprime sale de los archivos y no de sí misma', () => {
   // La tabla con la que se graba: los segundos salen de lo que el asset-list
   // declara y los medios se leen del archivo escrito.
-  const { hoja } = run();
+  const { hoja, lista } = run();
   const esc = (t) => t.replace(/[./+]/g, '\\$&');
   for (const brk of BREAKS) {
     assert.match(hoja, new RegExp(`t=\\s*${brk.offset}s a\\s*${brk.offset + brk.duracion}s`));
+    // El postroll no ofrece sus opciones: nunca se presentan después del fin (ADR 0111).
+    if (brk.cue === 'POST') {
+      assert.match(hoja, new RegExp(`${esc(brk.concurrente)}\\s+nunca el aviso no lineal`));
+      continue;
+    }
     assert.match(hoja, new RegExp(
-      `${esc(brk.concurrente)}\\s+${['video', 'mp4', 'imagen', 'png'].map((m) => esc(STAGE.assets.tipos[m])).join(', luego ')}; ` +
+      `${esc(brk.concurrente)}\\s+${opciones(lista(brk.concurrente)).map((o) => esc(o.layout.assets[0].type)).join(', luego ')}; ` +
       (brk.lineal ? 'sin opción que entre, el lineal' : 'sin opción que entre, se saltea')
     ));
   }
@@ -510,7 +665,11 @@ function correrCarrera(camaras = CAMARAS.map((c) => c.id), env = {}) {
       if (!(name in escritos)) throw new Error(`el señalizador no escribió ${name}`);
       return structuredClone(escritos[name]);
     };
-    return { playlist: readFileSync(out, 'utf8'), escritos: Object.keys(escritos), lista, hoja };
+    // `playlist` es la lectura de la única página que la carga, race.html, que la
+    // pide con nuestra clase (ADR 0113); `cruda` es el archivo tal cual.
+    const cruda = readFileSync(out, 'utf8');
+    const playlist = substitute(cruda, withClass('/' + CARRERA.playlist, STAGE.parametroDeClase, CONCURRENT_CLASS)).text;
+    return { playlist, cruda, escritos: Object.keys(escritos), lista, hoja };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -542,6 +701,17 @@ test('la carrera sale con un tag por aviso más el de la ventana, y las dos clas
     [...RACE_BREAKS.map(() => CONCURRENT_CLASS), MULTIVIEW_CLASS]
   );
   assert.ok(!tags.some((t) => t.hlsClass === INTERSTITIAL_CLASS), 'ningún tag de reemplazo');
+});
+
+test('en la carrera la clase de los avisos es la variable, y la de la ventana va escrita', () => {
+  // ADR 0113: la misma regla que la playlist del par para los avisos. La ventana
+  // es una oferta, no un aviso, y no tiene lectura de Apple.
+  const { cruda } = correrCarrera();
+  assert.ok(cruda.includes(`#EXT-X-DEFINE:QUERYPARAM="${STAGE.parametroDeClase}"`));
+  assert.deepEqual(
+    dateRanges(cruda).map((t) => t.hlsClass),
+    [...RACE_BREAKS.map(() => `{$${STAGE.parametroDeClase}}`), MULTIVIEW_CLASS]
+  );
 });
 
 test('EL ORDEN ES EL ARGUMENTO: los cuatro avisos terminan antes de que la ventana abra', () => {

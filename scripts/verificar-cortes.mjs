@@ -104,6 +104,7 @@ const SEAMS = [
       'lib/controls.js',
       'lib/multiview.js',
       'lib/tracking.js',
+      'lib/postroll.js',
       'demo/compatibility-pair/js/contract-trace.js',
       'demo/compatibility-pair/css/player.css',
       'demo/stage-pair/js/contract-trace.js',

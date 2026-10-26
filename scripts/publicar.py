@@ -55,6 +55,10 @@ def no_cache(name):
 # host (/content/..., /dist/...) or relative to it (content/... in stage.json).
 REF = re.compile(r'["\'(`]\s*(/?(?:content|dist|vendor|signalling|graphics|brand|audio|css|js)/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)')
 SCANNED = ('.html', '.js', '.json', '.css', '.m3u8')
+# A playlist with EXT-X-DEFINE:QUERYPARAM is one file for both break classes, and
+# each client asks for it with its class in the query (ADR 0113).
+QUERYPARAM = re.compile(r'^#EXT-X-DEFINE:QUERYPARAM="([^"]+)"', re.M)
+CLASSES = ('com.apple.hls.interstitial', 'com.qualabs.hls.concurrentInterstitial')
 
 
 def md5_file(p):
@@ -129,7 +133,7 @@ def cmd_selftest():
         (nc, 'content/primary/seg000.ts', True), (nc, 'index.html', False),
         (nc, 'signalling/asset-list-offer.json', False), (nc, 'js/content/x.js', False),
         (ct, '.fuentes/Sparks.mp4', True), (ct, 'primary/con-daterange-rica.m3u8', True),
-        (ct, 'primary/seg000.ts', False), (ct, 'primary/con-daterange-concurrente.m3u8', False),
+        (ct, 'primary/seg000.ts', False), (ct, 'primary/con-daterange.m3u8', False),
     ]
     bad = 0
     for rx, p, want in cases:
@@ -256,6 +260,22 @@ def cmd_http(stage, host, derived_list):
             if not ok:
                 print(f'     {code} DIFFERENT {r}')
     print(f'   {len(set(pick))} URLs against the repo, {bad} different')
+    # A playlist that declares EXT-X-DEFINE:QUERYPARAM is asked for with the break
+    # class in its query (ADR 0113): the bucket has to serve the same bytes with it.
+    ask = []
+    for r, p in tree(os.path.join(stage, 'content'), skip_content=False).items():
+        if r.endswith('.m3u8'):
+            m = QUERYPARAM.search(open(p, encoding='utf-8', errors='ignore').read())
+            if m:
+                ask += [('content/' + r, f'{m.group(1)}={c}') for c in CLASSES]
+    qbad = 0
+    for r, q in sorted(ask):
+        code, body = get(f'{r}?{q}')
+        if code != 200 or body != open(os.path.join(stage, r), 'rb').read():
+            qbad += 1
+            print(f'     {code} DIFFERENT {r}?{q}')
+    print(f'   {len(ask)} playlist URLs with the class in the query, {qbad} different')
+    bad += qbad
     root, missing = get('')[0], get('no-existe.json')[0]
     print(f'   /                -> {root}  (403: listing is denied on purpose)')
     print(f'   /no-existe.json  -> {missing}  (control: a 404 has to be seen as one)')

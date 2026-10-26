@@ -1,15 +1,18 @@
 // stock-player.js -- the other half of the compatibility pair (ADR 0007): a
-// client that is already in the market, reading the same playlist as the demo.
+// client that is already in the market, reading the same playlist file as the demo.
 //
 // The whole point of this file is what it does NOT do. It creates an hls.js
 // instance and passes it not one option, so the interstitials machinery is on,
 // which is what a deployed player looks like today. It does not import the
-// signalling layer, it does not import the renderer, it never asks for the
-// concurrent asset-list, and it has no idea the sibling class exists. Given the
-// pair of Date Ranges it schedules the Apple-class one and replaces the content
-// with the linear ad; the other tag reaches it in full and it does nothing with
-// it, because in HLS the class is compared by exact string equality and there is
-// no inheritance to fall back on (ADR 0009).
+// signalling layer, it does not import the renderer, and it has no idea the
+// sibling class exists. The page hands it the same playlist file the demo
+// player loads, asked for with Apple's class in the query (ADR 0113): hls.js
+// substitutes `CLASS="{$adclass}"` while parsing, so every break reaches it as
+// an Apple interstitial, and it plays the standard part of the asset-list --
+// the `URI` and `DURATION` of each asset -- and ignores the block on top. In HLS
+// a class is compared by exact string equality and there is no inheritance to
+// fall back on (ADR 0009), which is why the class is chosen per client and not
+// written twice.
 //
 // T-02 confirmed all of that in execution on this same version. What this file
 // adds is that it happens in the demo's own page, next to the demo's own player
@@ -33,8 +36,8 @@
  * @param video      the element this client plays into
  * @param container  the box around that element, which is what the chrome is
  *                   drawn into and what goes fullscreen
- * @param src        the media playlist. The SAME one the demo player loads:
- *                   app.js passes its own constant, which is the argument
+ * @param src        the media playlist. The SAME file the demo player loads,
+ *                   with Apple's class in its query (ADR 0113)
  * @param pane       the labelled box around it; its `data-state` is what the
  *                   stylesheet paints, `primary` or `ad`
  * @param state      one line of text under the player, for the recording

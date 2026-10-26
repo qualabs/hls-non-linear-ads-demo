@@ -1,10 +1,14 @@
 // app.js -- the pair of players of index.html, each one with its own control.
 //
-// Each pane loads the manifest of its own class -- the native one only the
-// Apple-class interstitials, ours only the concurrent tags -- and the two tags of
-// a break name the SAME asset-list: its standard part is what hls.js plays, and
-// the block on top is what our library reads (ADR 0090, which supersedes the one
-// manifest for two clients of ADR 0007).
+// Both panes load THE SAME PLAYLIST, and each one asks for it with the class it
+// takes (ADR 0113, which supersedes the manifest per class of ADR 0090): the
+// playlist declares `#EXT-X-DEFINE:QUERYPARAM="adclass"` and every break carries
+// `CLASS="{$adclass}"`, so the native pane loads it with
+// `?adclass=com.apple.hls.interstitial` and ours with
+// `?adclass=com.qualabs.hls.concurrentInterstitial`, and hls.js substitutes the
+// class while parsing. The file is the same byte for byte -- which is what lets a
+// static bucket serve it -- and each break names ONE asset-list: its standard
+// part is what hls.js plays, and the block on top is what our library reads.
 //
 // Each pane is configured on its own (fase 15, asked for by Nicolás to be able to
 // compare every combination): first a MODE, the off-the-shelf "HLS interstitials"
@@ -18,10 +22,9 @@
 //
 // THE BLOCK AN INTEGRATOR WRITES is fenced inside `construirNuestro()`: the
 // library arrives as a <script src> that defines a global, the page builds its
-// own hls.js with the one configuration the library hands over, and turns the
-// concurrent experience on over a container, with `capabilities` (ADR 0086). The
-// native pane is `stock-player.js`, which takes the chrome from the library and
-// nothing else.
+// own hls.js, and turns the concurrent experience on over a container, with
+// `capabilities` (ADR 0104). The native pane is `stock-player.js`, which takes
+// the chrome from the library and nothing else.
 //
 // Under everything there is one invariant, and most of this file is about
 // holding it: THE TWO PANES ARE ALWAYS AT THE SAME SECOND OF THE PROGRAMME.
@@ -36,19 +39,22 @@
 import { traceContract } from './contract-trace.js';
 import { createStockPlayer } from './stock-player.js';
 import {
-  breakDelReporte, crearControlDePane, desenlaceCorto, leerConfig, escribirConfig
+  breakDelReporte, crearControlDePane, desenlaceCorto, leerConfig, escribirConfig, presentadoCorto
 } from './capabilities.js';
 
 // The one source of the numbers of this demo (ADR 0044).
 const stage = await (await fetch('/stage.json')).json();
 
-// ONE MANIFEST PER CLASS (ADR 0090): the native pane loads the one with only the
-// Apple-class interstitials, ours the one with only the concurrent tags. The
-// segments are the same, and the two tags of a break name the same asset-list.
-const SRC = {
-  nativo: `/${stage.playlists.interstitial}`,
-  ours: `/${stage.playlists.concurrente}`
+// ONE PLAYLIST, AND THE CLASS TRAVELS IN ITS URL (ADR 0113). The class each
+// client takes is the value of the query parameter the playlist defines; the
+// names are the library's, so that nobody spells them by hand.
+const CLASE = {
+  nativo: 'com.apple.hls.interstitial',
+  ours: QualabsConcurrentHls.CONCURRENT_CLASS
 };
+const SRC = Object.fromEntries(Object.entries(CLASE).map(([modo, clase]) =>
+  [modo, `/${stage.playlist}?${stage.parametroDeClase}=${encodeURIComponent(clase)}`]));
+const PLAYLIST = stage.playlist.split('/').pop();
 
 const LADOS = ['izq', 'der'];
 
@@ -71,12 +77,12 @@ const ROTULOS = {
   nativo: {
     rol: 'HLS interstitials, native',
     sub: 'A client that is already in the market: hls.js with nothing of this demo in it. It replaces the programme with the ad.',
-    lee: `loads ${stage.playlists.interstitial.split('/').pop()}: only com.apple.hls.interstitial`
+    lee: `loads ${PLAYLIST}?${stage.parametroDeClase}=${CLASE.nativo}: its breaks read as Apple interstitials`
   },
   ours: {
     rol: 'With our library',
-    sub: 'The same hls.js, unmodified, with its interstitials machinery off. The programme is never replaced.',
-    lee: `loads ${stage.playlists.concurrente.split('/').pop()}: only com.qualabs.hls.concurrentInterstitial`
+    sub: 'The same hls.js, unmodified, driven by our library: our breaks are drawn over the programme, which is never replaced; a traditional interstitial, if the stream has one, hls.js plays.',
+    lee: `loads ${PLAYLIST}?${stage.parametroDeClase}=${CLASE.ours}: the same file, its breaks read as ours`
   }
 };
 
@@ -114,7 +120,7 @@ const DESENLACE_NATIVO = {
 const breakDeLaLista = (ruta) => ruta.match(/asset-list-break-([a-z0-9]+)\.json/)?.[1] ?? null;
 
 function pintarPedidos(lado) {
-  const { pedidos, desenlaces } = vivo?.lados[lado] ?? { pedidos: [], desenlaces: {} };
+  const { pedidos, desenlaces, presentados = {} } = vivo?.lados[lado] ?? { pedidos: [], desenlaces: {} };
   const lista = panes[lado].pedidos;
   if (!pedidos.length) {
     const li = document.createElement('li');
@@ -137,6 +143,14 @@ function pintarPedidos(lado) {
       const nota = document.createElement('span');
       nota.className = 'wire__outcome';
       nota.textContent = `  ${asset ? desenlaceCorto(asset) : nativo}`;
+      li.append(nota);
+    }
+    // What the renderer actually put on screen, once it is known (ADR 0107).
+    const mostrado = asset ? presentados[breakDeLaLista(u.pathname)] : null;
+    if (mostrado) {
+      const nota = document.createElement('span');
+      nota.className = 'wire__outcome';
+      nota.textContent = `  ${presentadoCorto(mostrado)}`;
       li.append(nota);
     }
     return li;
@@ -166,8 +180,15 @@ const ENTRADA = 5;
 const TOLERANCIA = 1.5;
 
 function objetivoSeguro(segundo) {
+  // The traditional linear break (ADR 0115) is played by hls.js in BOTH modes
+  // (ADR 0114), so no pane can take a seek inside it.
+  const lineal = stage.breakLineal;
+  if (lineal && segundo >= lineal.offset && segundo < lineal.offset + lineal.duracion) {
+    return Math.max(0.05, lineal.offset - ENTRADA);
+  }
   if (!Object.values(configActual).some((c) => c.modo === 'nativo')) return segundo;
-  for (const brk of stage.breaks.filter((b) => b.lineal)) {
+  // A post-roll (ADR 0111) is after the programme: no second of the programme is inside it.
+  for (const brk of stage.breaks.filter((b) => b.lineal && b.cue !== 'POST')) {
     if (segundo >= brk.offset && segundo < brk.offset + brk.duracion) {
       return Math.max(0.05, brk.offset - ENTRADA);
     }
@@ -352,11 +373,25 @@ function construirNuestro(lado, capacidades, caja, registro) {
   // =========================================================================
   // WHAT AN INTEGRATOR WRITES  (with the <script src> of index.html and the
   // container this page hands over).
-  const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+  const hls = new Hls();
   const concurrent = QualabsConcurrentHls.attach(hls, {
     container: caja.player,
-    // What the device can draw, one axis at a time (ADR 0086).
+    // Handed now, so the programme's clock exists before the bars are tied.
+    video: caja.video,
+    // What the device can draw, `{ concurrentVideo, concurrentImage }` (ADR 0104).
     capabilities: capacidades,
+    // And they travel on the asset-list request too. Sending them is optional in
+    // SVTA2053 5.3.3, and this demo sends them because the request is what it
+    // shows; a page whose privacy policies do not allow it passes `false`.
+    sendCapabilities: true,
+    // `preValidateAssets` is left at its default, `false` (ADR 0107): no asset is
+    // requested up front, and an option whose asset does not load is caught by
+    // the renderer's failover, which is always on. `onPresented` says which
+    // option ended up on screen.
+    onPresented: (reporte) => {
+      registro.presentados[breakDelReporte(reporte)] = reporte;
+      pintarPedidos(lado);
+    },
     onResolved: (experiences, seleccion) => {
       for (const e of experiences) {
         console.log(`[app:${lado}] resolved ${e.type}#${e.itemId}: ${e.elements.length} elements,` +
@@ -386,7 +421,16 @@ function construirNuestro(lado, capacidades, caja, registro) {
 
   /** The pane's label, read off the contract -- `activeAt` and nothing else. */
   function pintar() {
-    const activas = concurrent.provider.activeAt(caja.video.currentTime);
+    // What is ON SCREEN, after the renderer's failover (ADR 0107), and not what
+    // the signalling handed over.
+    const t = concurrent.programme.currentTime;
+    // A traditional interstitial of the stream, played by hls.js (ADR 0114).
+    if (concurrent.linearOnScreen()) {
+      p.pane.dataset.state = 'ad';
+      p.state.textContent = `LINEAR AD, played by hls.js (traditional interstitial) · programme at ${t.toFixed(1)}s · the content is off the screen`;
+      return;
+    }
+    const activas = concurrent.presentedAt(caja.video.currentTime);
     p.pane.dataset.state = activas.length ? 'ad' : 'primary';
     p.state.textContent = activas.length
       ? `primary content + NON-LINEAR AD (${activas.map((e) => e.type).join(', ')})` +
@@ -396,11 +440,32 @@ function construirNuestro(lado, capacidades, caja, registro) {
   caja.video.addEventListener('timeupdate', pintar);
   pintar();
 
+  // The lists hls.js asks for IN THIS PLAYER: the traditional linear break of
+  // the stream (ADR 0115), which hls.js plays here too (ADR 0114). Read off the
+  // network as the native pane's are, by the session id hls.js puts on them.
+  const propios = new PerformanceObserver((lista) => {
+    for (const entrada of lista.getEntries()) {
+      if (!entrada.name.includes('/signalling/asset-list-')) continue;
+      if (new URL(entrada.name).searchParams.get('_HLS_primary_id') !== hls.sessionId) continue;
+      registro.pedidos.push({ url: entrada.name, asset: null });
+      pintarPedidos(lado);
+    }
+  });
+  propios.observe({ type: 'resource' });
+  hls.on(Hls.Events.INTERSTITIAL_ASSET_STARTED, (_e, data) => {
+    registro.desenlaces[breakDelReporte({ id: data.event.identifier })] = 'default';
+    pintarPedidos(lado);
+  });
+
   return {
+    desconectar: () => propios.disconnect(),
     modo: 'ours', capacidades, hls, concurrent, consumer, video: caja.video,
-    programa: caja.video,
+    // The programme's clock (ADR 0114): the element, except while hls.js plays
+    // a traditional interstitial of the stream, when it is hls.js's primary.
+    programa: concurrent.programme,
     listo: () => caja.video.readyState >= 1,
-    enAviso: () => false
+    // Inside a traditional interstitial, ours cannot take a seek either.
+    enAviso: () => concurrent.linearOnScreen()
   };
 }
 
@@ -479,7 +544,7 @@ function armar(config, retomarEn = 0) {
 
   const lados = {};
   for (const lado of LADOS) {
-    const registro = { pedidos: [], selecciones: {}, desenlaces: {} };
+    const registro = { pedidos: [], selecciones: {}, desenlaces: {}, presentados: {} };
     const caja = construirCaja(panes[lado].caja);
     pintarRotulos(lado, config[lado]);
     const l = config[lado].modo === 'nativo'
@@ -542,8 +607,17 @@ for (const lado of LADOS) {
 const jumps = document.getElementById('jumps');
 jumps.replaceChildren(...[
   { texto: 'start', segundo: 0.05 },
-  ...stage.breaks.map((b) => ({ texto: `break ${b.id.toUpperCase()}`, segundo: Math.max(0.05, b.offset - ENTRADA) }))
-].map(({ texto, segundo }) => {
+  // The post-roll's jump lands a few seconds before the END of the programme,
+  // which is where it plays (ADR 0111), and not before its START-DATE.
+  ...stage.breaks.map((b) => ({
+    texto: `break ${b.id.toUpperCase()}`,
+    segundo: Math.max(0.05, (b.cue === 'POST' ? stage.programa.largo : b.offset) - ENTRADA)
+  }))
+  // The traditional linear break (ADR 0115), which both panes play.
+].concat(stage.breakLineal ? [{ texto: `break ${stage.breakLineal.id.toUpperCase()} (traditional)`,
+  segundo: Math.max(0.05, stage.breakLineal.offset - ENTRADA) }] : [])
+  .sort((a, b) => a.segundo - b.segundo)
+  .map(({ texto, segundo }) => {
   const boton = document.createElement('button');
   boton.type = 'button';
   boton.className = 'jump';

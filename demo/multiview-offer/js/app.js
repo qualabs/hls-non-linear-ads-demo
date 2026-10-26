@@ -3,7 +3,7 @@
 // It is two things and it marks which is which. The first is WHAT AN INTEGRATOR
 // WRITES, and it is the block fenced below: the library arrives as a
 // <script src> that defines a global, the page builds its own hls.js instance
-// with the one configuration the library hands over, and turns the concurrent
+// with its default configuration (ADR 0114), and turns the concurrent
 // experience on over a container. Six lines, and the multi view is in none of
 // them -- it is on because the playlist signals it, and a playlist that signals
 // no offer comes out exactly as it did before any of this existed.
@@ -28,7 +28,15 @@ import { showSignalling } from './senalizacion.js';
 // per break, written by scripts/senalizar-contenido.sh on every start. Its
 // START-DATE is resolved against the playlist's own EXT-X-PROGRAM-DATE-TIME, so
 // it cannot be a file in git: the clock moves every time the content is packaged.
-const SRC = './content/primary/con-daterange.m3u8';
+//
+// The class of the ad is the playlist's variable `{$adclass}` (ADR 0113), and
+// this page runs only our player, so it asks with OUR class and hls.js
+// substitutes it while parsing; the windows of multi view carry their own class,
+// written out. The name is the one scripts/senalizar-contenido.sh writes
+// (`PARAMETRO`); the test holds them together.
+const CLASS_PARAM = 'adclass';
+const SRC = `./content/primary/con-daterange.m3u8?${CLASS_PARAM}=` +
+  encodeURIComponent(QualabsConcurrentHls.CONCURRENT_CLASS);
 
 const video = document.getElementById('video');
 const hud = document.getElementById('hud');
@@ -36,7 +44,7 @@ const hud = document.getElementById('hud');
 // ===========================================================================
 // WHAT AN INTEGRATOR WRITES  (with the <script src> and the container of
 // index.html).
-const hls = new Hls({ ...QualabsConcurrentHls.hlsConfig });
+const hls = new Hls();
 const concurrent = QualabsConcurrentHls.attach(hls, {
   container: document.getElementById('player')
 });

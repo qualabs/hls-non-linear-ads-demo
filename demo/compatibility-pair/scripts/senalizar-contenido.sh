@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
-# Escribe la playlist señalizada: los mismos segmentos que el primario, más un
-# par de EXT-X-DATERANGE por break —uno de la clase de Apple y uno de la clase
-# concurrente, con el mismo START-DATE—, que es la forma de la playlist que la
-# T-02 midió.
+# Escribe la playlist señalizada: los mismos segmentos que el primario, más UN
+# EXT-X-DATERANGE por break cuya clase elige el cliente por la URL (ADR 0113).
+#
+# La playlist declara `#EXT-X-DEFINE:QUERYPARAM="adclass"` y cada break lleva
+# `CLASS="{$adclass}"`. Los dos panes cargan ESTE archivo: el de fábrica con
+# `?adclass=com.apple.hls.interstitial` y el nuestro con
+# `?adclass=com.qualabs.hls.concurrentInterstitial`, y hls.js sustituye la
+# referencia al parsear (draft-pantos-hls-rfc8216bis-22, 4.3 y 4.4.2.3). Antes
+# cada break eran dos tags de clases distintas en el mismo START-DATE (ADR 0007);
+# David decidió el 2026-10-22 que un stream lleva UN juego de tags. QUERYPARAM
+# obliga a EXT-X-VERSION 11, y este script la sube.
 #
 # Por qué es un paso generado y no un archivo en git: el START-DATE se resuelve
 # contra el EXT-X-PROGRAM-DATE-TIME de la propia playlist (ADR 0005), y ese
@@ -28,8 +35,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-SRC=content/primary/index.m3u8
-OUT=content/primary/con-daterange.m3u8
+SRC=${SRC:-content/primary/index.m3u8}
+OUT=${OUT:-content/primary/con-daterange.m3u8}
 
 # El recorrido, y es la tabla que gobierna la grabación: segundo de
 # reproducción, asset-list y el nombre con que se lo llama en la tabla que este
@@ -61,9 +68,20 @@ RECORRIDO=(
   "120|asset-list-mezclado.json|Break mezclado"
 )
 
-# El asset-list del tag de clase Apple, que es el mismo en los cinco breaks: un
-# aviso lineal de 12 s, que es lo que el cliente de mercado reemplaza.
+# EL BREAK LINEAL TRADICIONAL, ESCRITO (ADR 0115): un tag con
+# `CLASS="com.apple.hls.interstitial"` literal, sin variable, que los DOS panes
+# reproducen como interstitial lineal: el de fábrica porque es de Apple, y el
+# nuestro porque hls.js corre con su maquinaria encendida (ADR 0114). Va a los
+# 5 s, donde no se solapa con ningún otro break (el primero arranca en el 20):
+# un stream lleva un juego de tags y sus clases no se solapan (ADR 0113). Su
+# asset-list es el lineal de 12 s de siempre, `asset-list-linear.json`, sin
+# media nueva.
+LINEAL_EN=5
 LISTA_LINEAL=asset-list-linear.json
+
+# El nombre de la variable de la clase y del parámetro de la URL, que por la spec
+# son el mismo. js/app.js lo repite y el test de esta demo compara los dos.
+PARAMETRO=adclass
 
 [ -f "$SRC" ] || { echo "falta $SRC: correr ./scripts/preparar-contenido.sh" >&2; exit 1; }
 
@@ -97,50 +115,48 @@ declaracion() { # $1 ruta del asset-list
   ' "$1"
 }
 
-PLANNED_LINEAL=$(declaracion "signalling/$LISTA_LINEAL" | head -1)
-
 # Sumar dos segundos, que en la tabla son el arranque de un aviso y su largo.
 # Con awk y no con `bc` ni con `$(( ))`: awk ya es dependencia de este script y
 # los dos numeros pueden traer decimales.
 suma() { awk -v a="$1" -v b="$2" 'BEGIN { printf "%s", a + b }'; }
 
 
-# Un break son dos tags: el lineal que se queda el cliente de mercado y el
-# concurrente que se queda el de la demo (ADR 0007). Los dos con el mismo
-# START-DATE, cada uno con su ID y su asset-list.
+# Un break es UN tag, y lo leen los dos clientes: el de fábrica como
+# interstitial de Apple y el de la demo como concurrente. Su asset-list es el
+# concurrente del break, y lo leen los dos: su parte estándar —el `URI` y la
+# `DURATION` de cada asset, Apéndice D.2— es lo que hls.js reproduce, y el bloque
+# de encima lo que lee la librería (ADR 0090).
 #
-# El tag lineal va en la forma de REEMPLAZO, y la forma es la AUSENCIA de
+# El tag va en la forma de REEMPLAZO, y la forma es la AUSENCIA de
 # X-RESUME-OFFSET: sin el atributo el primario retoma donde el aviso termino, asi
 # que un pedazo del programa no se ve y los dos panes se quedan en el mismo
-# segundo del programa (ADR 0017). Escrito en 0 el atributo pide la otra cosa: el
-# primario retoma donde lo interrumpieron, no se pierde programa, y el pane de
-# fabrica se atrasa la duracion del aviso en cada break.
+# segundo del programa (ADR 0017). Con la clase concurrente el atributo no
+# significa nada, porque no hay nada interrumpido que reanudar (ADR 0016), y por
+# la misma razón el tag no lleva X-SNAP: lo leería hls.js en la lectura de Apple.
 #
-# Entre las dos formas del reemplazo decidio una medicion y no la
-# especificacion: con el atributo ausente hls.js 1.7.2 resuelve el punto de
-# retorno contra el largo que MIDIO del aviso, y con el offset escrito a mano
-# vale el numero escrito aunque el aviso dure otra cosa. Las dos reemplazan; la
-# ausencia es la que sigue siendo cierta si el aviso cambia de largo.
-#
-# El X-RESUME-OFFSET del tag concurrente no significa nada, porque no hay nada
-# interrumpido que reanudar (ADR 0016), y queda como estaba.
-#
-# CADA TAG DECLARA EL LARGO DE SU PROPIO ASSET-LIST y no el del otro: el de
-# clase Apple los 12 s del aviso lineal que reemplaza, y el concurrente lo que
-# suman los avisos de su lista. En los cuatro primeros breaks los dos numeros
-# coinciden; en el mezclado son 12 y 48, y esa diferencia es exactamente lo que
-# hace que el par de compatibilidad se invierta en un tramo del break.
-par_de_tags() { # $1 numero de break, $2 offset en segundos, $3 asset-list, $4 largo del concurrente
+# EL TAG DECLARA EL LARGO DE SU ASSET-LIST, que es el que reproducen los dos.
+tag() { # $1 numero de break, $2 offset en segundos, $3 asset-list, $4 largo
   local n=$1 offset=$2 lista=$3 largo=$4 start
   start=$(date -d "$PDT + $offset seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
-  printf '#EXT-X-DATERANGE:ID="AD-%s-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' "$n" "$start" "$LISTA_LINEAL" "$PLANNED_LINEAL"
-  printf '#EXT-X-DATERANGE:ID="AD-%s-CONCURRENT",CLASS="com.qualabs.hls.concurrentInterstitial",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' "$n" "$start" "$lista" "$largo"
+  printf '#EXT-X-DATERANGE:ID="AD-%s",CLASS="{$%s}",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' "$n" "$PARAMETRO" "$start" "$lista" "$largo"
+}
+
+# El tag del break lineal: la forma de reemplazo, igual que la lectura de Apple
+# de los otros.
+tag_lineal() {
+  local start
+  start=$(date -d "$PDT + $LINEAL_EN seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
+  printf '#EXT-X-DATERANGE:ID="AD-LINEAR",CLASS="com.apple.hls.interstitial",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
+    "$start" "$LISTA_LINEAL" "$(declaracion "signalling/$LISTA_LINEAL" | head -1)"
 }
 
 TAGS=""
 LARGOS=()
 if [ $# -eq 0 ]; then
-  MODO="el recorrido de los cinco breaks"
+  MODO="el recorrido de los cinco breaks, más el lineal escrito"
+  [ -f "signalling/$LISTA_LINEAL" ] || { echo "falta signalling/$LISTA_LINEAL" >&2; exit 1; }
+  TAGS="$(tag_lineal)
+"
   n=0
   for fila in "${RECORRIDO[@]}"; do
     IFS='|' read -r offset lista nombre <<< "$fila"
@@ -148,7 +164,7 @@ if [ $# -eq 0 ]; then
     n=$((n + 1))
     largo=$(declaracion "signalling/$lista" | head -1)
     LARGOS+=("$largo")
-    TAGS="$TAGS$(par_de_tags "$n" "$offset" "$lista" "$largo")
+    TAGS="$TAGS$(tag "$n" "$offset" "$lista" "$largo")
 "
   done
 else
@@ -157,13 +173,18 @@ else
   LAYOUT=${2:-cornerOverlay}
   LIST=asset-list-$LAYOUT.json
   [ -f "signalling/$LIST" ] || { echo "no hay asset-list para '$LAYOUT': falta signalling/$LIST" >&2; exit 1; }
-  TAGS="$(par_de_tags 1 "$OFFSET" "$LIST" "$(declaracion "signalling/$LIST" | head -1)")
+  TAGS="$(tag 1 "$OFFSET" "$LIST" "$(declaracion "signalling/$LIST" | head -1)")
 "
 fi
 
 # Los tags van después de las cabeceras y antes del primer segmento, que es
-# donde la especificación los admite y donde la T-02 los puso.
+# donde la especificación los admite y donde la T-02 los puso, con la definición
+# de la variable delante: una referencia sólo se sustituye con una variable
+# definida antes que ella (la spec, 6.3.1).
+TAGS="#EXT-X-DEFINE:QUERYPARAM=\"$PARAMETRO\"
+$TAGS"
 awk -v tags="$TAGS" '
+  /^#EXT-X-VERSION:/ { if (substr($0, 16) + 0 < 11) $0 = "#EXT-X-VERSION:11" }
   /^#EXTINF:/ && !hecho { printf "%s", tags; hecho = 1 }
   { print }
 ' "$SRC" > "$OUT"
@@ -172,6 +193,9 @@ echo "$OUT  ($MODO, $(grep -c '^#EXT-X-DATERANGE:' "$OUT") Date Ranges)"
 if [ $# -eq 0 ]; then
   echo
   echo "El recorrido, que es el orden en que hay que grabarlo:"
+  printf '  lineal   t=%3ss a %3ss  (%ss)  %-16s %s  CLASS de Apple, escrita: los dos panes lo reproducen\n' \
+    "$LINEAL_EN" "$(suma "$LINEAL_EN" "$(declaracion "signalling/$LISTA_LINEAL" | head -1)")" \
+    "$(declaracion "signalling/$LISTA_LINEAL" | head -1)" "Lineal" "$LISTA_LINEAL"
   n=0
   for fila in "${RECORRIDO[@]}"; do
     IFS='|' read -r offset lista nombre <<< "$fila"
@@ -222,14 +246,11 @@ if [ $# -eq 0 ]; then
   echo "sin sonido es una falla que nada en pantalla reporta."
   echo
   echo "El par de compatibilidad durante el break 5, y conviene contarlo antes"
-  echo "de grabarlo. Los dos tags del break arrancan en el mismo segundo"
-  echo "(ADR 0018), el de clase Apple declara 12 s y el nuestro 48. Del 120 al"
-  echo "132 el pane de fábrica muestra su aviso a cuadro entero y el nuestro el"
-  echo "programa con el aviso encima, que es el cuadro que la demo quiere. Del"
-  echo "132 en adelante el de fábrica ya volvió al programa y nosotros seguimos"
-  echo "adentro del break, y del 144 al 156 —el aviso a cuadro entero— la"
-  echo "comparación queda al revés: el nuestro tapado y el de fábrica con el"
-  echo "programa. Son 12 segundos de 48 y no cambian el argumento: los dos"
-  echo "players están haciendo lo mismo en momentos distintos, porque les"
-  echo "tocaron breaks de largos distintos."
+  echo "de grabarlo. Los dos panes leen el MISMO tag y el MISMO asset-list, así"
+  echo "que entran y salen del break juntos, del 120 al 168. El de fábrica"
+  echo "reproduce la parte estándar de los cuatro avisos, uno detrás del otro y a"
+  echo "cuadro entero; el nuestro dibuja tres de ellos encima del programa y el"
+  echo "tercero, que es lineal, a cuadro entero. Del 144 al 156 los dos panes"
+  echo "muestran lo mismo, el aviso lineal, y es lo que tiene que pasar: es el"
+  echo "único aviso del break que no tiene forma concurrente."
 fi

@@ -88,6 +88,29 @@ function decoders(container) {
 }
 
 /**
+ * The row of a window whose asset-list has not been asked for yet. The window is
+ * on the contract off its tag -- the class says which kind it is, PLANNED-DURATION
+ * how long -- and what it carries is in the list, which the player asks for when
+ * the programme is buffered up to it, as hls.js does for an interstitial
+ * (ADR 0108, ADR 0109). So the row says that, and fills in when the list arrives.
+ */
+function waitingRow(range) {
+  const node = el('li', 'run__row');
+  node.dataset.id = range.id;
+  node.append(
+    el('span', 'run__when', windowOf(range)),
+    el('span', 'run__kind', range.kind)
+  );
+  const what = el('div', 'run__what');
+  what.append(el('p', null,
+    `${range.kind === 'multiview' ? 'A catalogue of feeds' : 'An ad'}, announced by its tag. ` +
+    'What it carries is in its asset-list, which the player asks for when the programme is ' +
+    'buffered up to it, as hls.js does: it is described here when it arrives.'));
+  node.append(what);
+  return node;
+}
+
+/**
  * One row of the map. The copy is chosen by what the window announces:
  *
  *   an ad          the boxes came declared, so there is nothing for a viewer to
@@ -147,10 +170,13 @@ export function showTheRun({ provider, container, video, state, run }) {
 
   function drawMap() {
     const { ranges } = provider.programRanges();
-    // Rebuilt only when the set of ranges changes. They arrive as each
-    // asset-list resolves, so the map grows during the first seconds and then
-    // stops; comparing the key is what keeps this out of the frame loop's way.
-    const key = ranges.map((range) => range.id).join('|');
+    // Rebuilt only when the set of ranges changes, or one of them stops being
+    // the provisional one off its tag. Every window is there from the start,
+    // and each fills in when its asset-list arrives, which is when the programme
+    // is buffered up to it (ADR 0108): the first at load, the other two about
+    // thirty seconds before they open. Comparing the key is what keeps this out
+    // of the frame loop's way.
+    const key = ranges.map((range) => `${range.id}${range.provisional ? '?' : ''}`).join('|');
     if (key === drawnKey) return ranges;
     drawnKey = key;
     const byId = new Map(provider.experiences.map((experience) => [experience.id, experience]));
@@ -158,8 +184,12 @@ export function showTheRun({ provider, container, video, state, run }) {
       .map((range) => byId.get(range.id))
       .filter(isOffer);
     const most = Math.max(0, ...offers.map((offer) => offer.views.length));
-    const uncontested = offers.filter((offer) => offer.views.length === most).length === 1;
+    // Nobody is "the longest" while a catalogue is still unread: the one that
+    // has not arrived could be longer.
+    const unread = ranges.some((range) => range.provisional && range.kind === 'multiview');
+    const uncontested = !unread && offers.filter((offer) => offer.views.length === most).length === 1;
     run.replaceChildren(...ranges.map((range) => {
+      if (range.provisional) return waitingRow(range);
       const experience = byId.get(range.id);
       return rowOf(range, experience, uncontested && experience?.views?.length === most);
     }));

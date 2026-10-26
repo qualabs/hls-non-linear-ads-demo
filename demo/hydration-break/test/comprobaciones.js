@@ -17,7 +17,7 @@ import { resolveAnchor } from '../js/story.js';
  * y la esquina traen dos (ADR 0102), y la segunda es la gemela para el Roku.
  */
 const primeraOpcion = (item) =>
-  (Array.isArray(item?.options) && item.options.length ? { ...item, ...item.options[0] } : item);
+  (Array.isArray(item?.layoutOptions) && item.layoutOptions.length ? { ...item, ...item.layoutOptions[0] } : item);
 
 /**
  * El proveedor del contrato, armado desde los archivos declarados en lugar de desde un
@@ -354,7 +354,7 @@ export function losMediosSalenDelContrato({ assetList, fuentes }) {
   const hallazgos = [];
   const medios = [...new Set((assetList.ASSETS || [])
     .flatMap((a) => a['X-AD-CREATIVE-SIGNALING']?.payload ?? [])
-    .flatMap((item) => [item, ...(Array.isArray(item?.options) ? item.options : [])])
+    .flatMap((item) => [item, ...(Array.isArray(item?.layoutOptions) ? item.layoutOptions : [])])
     .flatMap((opcion) => opcion?.layout?.assets ?? [])
     .map((caja) => caja?.type)
     .filter((tipo) => typeof tipo === 'string' && tipo.length > 0))];
@@ -408,7 +408,7 @@ function camposDelAssetList(assetList) {
       sumar('item', item);
       // Una opción se mezcla sobre su ítem antes de dibujarse (R5.6): sus campos son
       // campos del ítem.
-      for (const opcion of [item, ...lista(item?.options)]) {
+      for (const opcion of [item, ...lista(item?.layoutOptions)]) {
         if (opcion !== item) sumar('item', opcion);
         const layout = opcion?.layout;
         if (layout == null) continue;

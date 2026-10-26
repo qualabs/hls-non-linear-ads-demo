@@ -1,11 +1,11 @@
 ---
 id: "0086"
 title: La capacidad se declara en ejes y viaja con los nombres de la spec
-status: accepted
+status: superseded
 scope: project
 date: 2026-09-28
 supersedes: null
-superseded_by: null
+superseded_by: "0104"
 generalizes: null
 generalized_by: null
 ---
@@ -40,3 +40,7 @@ QualabsConcurrentHls.attach(hls, {
 - `decoderCount` lo usaba sólo `stage-pair`, así que sacarlo no rompe ninguna otra demo.
 - El snippet que Nicolás pegó en la reunión (`create(player, {countDecoders, canRenderImages,
   canRenderHTML})`) queda como la idea; el ejemplo para la presentación es el de arriba.
+
+---
+
+**2026-10-20 — nota.** Superseded por el ADR 0104: SVTA2053 v3 nombra la configuración `concurrentVideo` y `concurrentImage`, y hace opcional mandarla en el pedido.
