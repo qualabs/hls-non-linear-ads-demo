@@ -12,7 +12,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import { blockIdentifiers, identifiersOf } from '../lib/experience.js';
-import { resolveAssetList } from '../hls/signalling.js';
+import { resolveAssets } from '../hls/signalling.js';
 import { createTracking, slotEvents } from '../lib/tracking.js';
 
 const AD_ID = { scheme: 'ad-id.org', value: 'KTRV0001000H' };
@@ -44,7 +44,7 @@ function lista({ uri = '/ketrava-16x9.m3u8', identifiers = [AD_ID] } = {}) {
 }
 
 const resolver = (l, capabilities = null, report = null) =>
-  resolveAssetList(l, { id: 'AD-B-CONCURRENT', slotStart: 65, capabilities, report });
+  resolveAssets(l, { id: 'AD-B-CONCURRENT', slotStart: 65, capabilities, report });
 
 test('identifiersOf keeps the scheme and value pairs and drops what is not one', () => {
   assert.deepEqual(identifiersOf([AD_ID, { scheme: ' ad-id.org ', value: ' X ' }]),

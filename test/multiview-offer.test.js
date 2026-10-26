@@ -58,7 +58,7 @@ import {
   KIND_OF_CLASS,
   MULTIVIEW_CLASS,
   kindOfClass,
-  resolveAssetList
+  resolveAssets
 } from '../hls/signalling.js';
 import { KINDS_PLAYED } from '../hls/concurrent-hls.js';
 import { RANGE_COLOURS, RANGE_TITLES } from '../lib/controls.js';
@@ -90,7 +90,7 @@ function resolveWithConsole(assetList, { id = ID, slotStart = SLOT_START } = {})
     console[level] = (...args) => said[level].push(args.join(' '));
   }
   try {
-    return { experiences: resolveAssetList(assetList, { id, slotStart }), said };
+    return { experiences: resolveAssets(assetList, { id, slotStart }), said };
   } finally {
     Object.assign(console, original);
   }

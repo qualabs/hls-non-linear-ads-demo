@@ -34,7 +34,7 @@ import {
   BLOCK,
   createSignalling,
   pendingFirstRequests,
-  resolveAssetList,
+  resolveAssets,
   resolveWithFirstRequests
 } from '../hls/signalling.js';
 import { firstRequest as mediaFirstRequest } from '../hls/media.js';
@@ -257,7 +257,7 @@ test('selectOption waits for a first request it does not know, and passes over o
 });
 
 test('without load results nothing is asked for and every asset counts as loaded', () => {
-  const out = resolveAssetList(list(), { id: ID, slotStart: SLOT_START, capabilities: usableCapabilities({ concurrentVideo: 2 }) });
+  const out = resolveAssets(list(), { id: ID, slotStart: SLOT_START, capabilities: usableCapabilities({ concurrentVideo: 2 }) });
   assert.equal(out.length, 1);
   assert.notEqual(out[0].type, LINEAR_TYPE);
 });
@@ -267,7 +267,7 @@ test('without load results nothing is asked for and every asset counts as loaded
 // ---------------------------------------------------------------------------
 
 test('without pre-validation every option that fits is handed over in order, and the default last', () => {
-  const out = resolveAssetList(list(), { id: ID, slotStart: SLOT_START, capabilities: usableCapabilities({ concurrentVideo: 2, concurrentImage: true }) });
+  const out = resolveAssets(list(), { id: ID, slotStart: SLOT_START, capabilities: usableCapabilities({ concurrentVideo: 2, concurrentImage: true }) });
   assert.deepEqual(handed(out[0]), {
     options: [[0, 'application/vnd.apple.mpegurl'], [1, 'image/svg+xml']],
     fallback: DEFAULT_URI
@@ -284,7 +284,7 @@ test('without pre-validation every option that fits is handed over in order, and
 
 test('without pre-validation an option the capabilities refuse is not handed over', () => {
   const report = [];
-  const out = quietSync(() => resolveAssetList(list(), {
+  const out = quietSync(() => resolveAssets(list(), {
     id: ID, slotStart: SLOT_START, capabilities: usableCapabilities({ concurrentVideo: 1, concurrentImage: true }), report
   }));
   assert.deepEqual(handed(out[0]).options, [[1, 'image/svg+xml']]);
@@ -312,7 +312,7 @@ test('a default chosen up front is its own single option, with no default behind
 });
 
 test('a break without a default hands over its options and no fallback', () => {
-  const out = resolveAssetList(list({ withDefault: false }), { id: ID, slotStart: SLOT_START });
+  const out = resolveAssets(list({ withDefault: false }), { id: ID, slotStart: SLOT_START });
   assert.equal(out[0].fallback, null);
   assert.equal(out[0].options.length, 2);
 });

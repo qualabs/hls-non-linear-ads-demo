@@ -30,7 +30,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { LINEAR_TYPE } from '../lib/experience.js';
-import { resolveAssetList } from '../hls/signalling.js';
+import { resolveAssets } from '../hls/signalling.js';
 import {
   fadesInAndOut, remainingIn, isLeaving, isImage,
   FULL_FRAME_TYPE, PRIMARY_MOVE_MS, AD_FADE_IN_MS, AD_FADE_OUT_MS
@@ -39,7 +39,7 @@ import {
 /** The experiences of one asset-list, resolved as the renderer gets them. */
 function experiencesOf(list) {
   const json = JSON.parse(readFileSync(new URL(`./fixtures/asset-lists/${list}`, import.meta.url), 'utf8'));
-  return resolveAssetList(json, { id: list, slotStart: 0 });
+  return resolveAssets(json, { id: list, slotStart: 0 });
 }
 
 const one = (list) => experiencesOf(list)[0];
