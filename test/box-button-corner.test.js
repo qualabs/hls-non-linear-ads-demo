@@ -38,7 +38,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { parseViewport, viewportsFor } from '../lib/signalling.js';
+import { parseViewport, viewportsFor } from '../lib/experience.js';
 import { boxToPixels, imageBox } from '../lib/renderer.js';
 import { BOX_CORNERS, boxButtonCorner, boxButtonRect } from '../lib/controls.js';
 

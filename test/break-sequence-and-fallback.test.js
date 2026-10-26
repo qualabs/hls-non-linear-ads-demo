@@ -42,17 +42,19 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import {
-  BLOCK,
   FULL_FRAME,
   LINEAR_ELEMENT_ID,
   LINEAR_TYPE,
   activeAt,
   rangeOfExperiences,
-  resolveAssetList,
   resolveExperience,
-  usablePayload,
+  usablePayload
+} from '../lib/experience.js';
+import {
+  BLOCK,
+  resolveAssetList,
   usableUri
-} from '../lib/signalling.js';
+} from '../hls/signalling.js';
 
 const read = (path) => readFileSync(new URL(path, import.meta.url), 'utf8');
 const readJson = (path) => JSON.parse(read(path));

@@ -42,23 +42,25 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import {
-  BLOCK,
-  CONCURRENT_CLASS,
   DEFAULT_PRIMARY_NAME,
-  INTERSTITIAL_CLASS,
-  KINDS_RESOLVED,
-  KIND_OF_CLASS,
   LINEAR_TYPE,
-  MULTIVIEW_CLASS,
   OFFER_TYPE,
   activeAt,
   isOffer,
-  kindOfClass,
   rangeOfExperiences,
-  resolveAssetList,
   usablePayload
-} from '../lib/signalling.js';
-import { KINDS_PLAYED } from '../lib/concurrent-hls.js';
+} from '../lib/experience.js';
+import {
+  BLOCK,
+  CONCURRENT_CLASS,
+  INTERSTITIAL_CLASS,
+  KINDS_RESOLVED,
+  KIND_OF_CLASS,
+  MULTIVIEW_CLASS,
+  kindOfClass,
+  resolveAssetList
+} from '../hls/signalling.js';
+import { KINDS_PLAYED } from '../hls/concurrent-hls.js';
 import { RANGE_COLOURS, RANGE_TITLES } from '../lib/controls.js';
 
 const readJson = (path) => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));

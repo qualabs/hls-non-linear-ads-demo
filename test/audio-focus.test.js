@@ -21,7 +21,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-import { resolveAssetList } from '../lib/signalling.js';
+import { resolveAssetList } from '../hls/signalling.js';
 import { volumeOf, effectiveVolumeOf } from '../lib/renderer.js';
 
 /** The elements of one of the layouts the run signals, resolved as the renderer gets them. */
