@@ -8,9 +8,9 @@
 # be run before writing, and asks gcloud what the sync would copy and delete. It
 # writes nothing to any bucket.
 #
-# WHAT IS PUBLISHED IS HEAD, NOT THE WORKING TREE. The demo, lib/, hls/ and vendor/ come
-# out of `git archive HEAD` into a stage of their own, dist/ is built there, and the
-# demo's own senalizar-contenido.sh runs there. Nothing in the checkout is written,
+# WHAT IS PUBLISHED IS HEAD, NOT THE WORKING TREE. The demo, lib/, hls/ and vendor/
+# come out of `git archive HEAD` into a stage of their own, dist/ is built there, and
+# the demo's own senalizar-contenido.sh runs there. Nothing in the checkout is written,
 # so the demos served on this machine from dist/ and content/ are not touched.
 #
 # CONTENT/ IS NOT IN GIT (.gitignore), so a push can never change it and a CI
