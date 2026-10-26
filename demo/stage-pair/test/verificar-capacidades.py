@@ -71,11 +71,16 @@ STAGE = json.loads((DEMO / "stage.json").read_text())
 BREAKS = {b["id"]: b for b in STAGE["breaks"]}
 
 COMBINACIONES = [
-    {"videoDecoders": 2, "imageOverVideo": True},
-    {"videoDecoders": 2, "imageOverVideo": False},
-    {"videoDecoders": 1, "imageOverVideo": True},
-    {"videoDecoders": 1, "imageOverVideo": False},
+    {"concurrentVideo": 2, "concurrentImage": True},
+    {"concurrentVideo": 2, "concurrentImage": False},
+    {"concurrentVideo": 1, "concurrentImage": True},
+    {"concurrentVideo": 1, "concurrentImage": False},
 ]
+
+
+def pieza(campana, forma):
+    """The row of `assets.piezas` for a campaign in a shape."""
+    return next(p for p in STAGE["assets"]["piezas"] if p["campana"] == campana and p["forma"] == forma)
 
 
 def esperado(capacidad, brk):
@@ -84,13 +89,14 @@ def esperado(capacidad, brk):
     `layout` es el tipo de la experiencia activa: el del break para el video, el
     de `formaImagen` para la imagen (ADR 0088), `linear` para el default.
     """
-    if capacidad["videoDecoders"] >= 2:
+    if capacidad["concurrentVideo"] >= 2:
         return {"outcome": "drawn", "chosen": 0, "video": 2, "img": 0, "layout": brk["layout"]}
-    if capacidad["imageOverVideo"]:
-        # The image option is the THIRD: each option is followed by its twin for the
-        # Roku -- HLS, MP4, SVG, PNG (ADR 0096) -- and the MP4 twin is discarded here
-        # for the same reason as the HLS (ADR 0097).
-        return {"outcome": "drawn", "chosen": 2, "video": 1, "img": 1,
+    if capacidad["concurrentImage"]:
+        # The image option comes after the video option AND its MP4 twin, when the
+        # piece has one -- HLS, MP4, SVG, PNG (ADR 0096) --; the MP4 twin is
+        # discarded here for the same reason as the HLS (ADR 0097).
+        return {"outcome": "drawn", "chosen": 2 if pieza(brk["campana"], brk["forma"]).get("mp4") else 1,
+                "video": 1, "img": 1,
                 "layout": STAGE["formas"][brk["formaImagen"]]["layout"]}
     if brk["lineal"]:
         return {"outcome": "default", "chosen": None, "video": 2, "img": 0, "layout": "linear"}
@@ -154,7 +160,7 @@ def medir_quietud(pagina, contenedor, capacidad, brk_id, salida, nombre_pagina):
 
 
 def nombre(capacidad):
-    return f"dec{capacidad['videoDecoders']}-img{'si' if capacidad['imageOverVideo'] else 'no'}"
+    return f"dec{capacidad['concurrentVideo']}-img{'si' if capacidad['concurrentImage'] else 'no'}"
 
 
 def main():

@@ -16,7 +16,7 @@
                 "value": "KTRV0003000H"
               }
             ],
-            "options": [
+            "layoutOptions": [
               {
                 "type": "squeezebackLShape",
                 "layout": {

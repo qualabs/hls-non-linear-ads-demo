@@ -1,6 +1,7 @@
-// capabilities.js -- the switch of index.html and inspect.html: what the device
-// declares, one axis at a time (ADR 0086), and the sentences both pages print
-// about what the library did with it (ADR 0085).
+// capabilities.js -- the switch of index.html and inspect.html: what the application
+// configures on the library, `concurrentVideo` and `concurrentImage` (SVTA2053 5.3.3,
+// ADR 0104), and the sentences both pages print about what the library did with it
+// (ADR 0085).
 //
 // ONE FILE FOR THE TWO PAGES because the two switches are the same statement,
 // and two copies of it are two places where "1 decoder" can come to mean two
@@ -13,14 +14,14 @@
 
 /** The label of each axis, and how each value is read out. */
 const EJES = {
-  videoDecoders: { titulo: 'Video decoders', valor: (v) => String(v) },
-  imageOverVideo: { titulo: 'Images over video', valor: (v) => (v ? 'yes' : 'no') }
+  concurrentVideo: { titulo: 'Video decoders', valor: (v) => String(v) },
+  concurrentImage: { titulo: 'Images over video', valor: (v) => (v ? 'yes' : 'no') }
 };
 
 /** The query parameter each axis travels in, as the library writes it. */
 export const PARAMETROS = {
-  videoDecoders: QualabsConcurrentHls.VIDEO_DECODERS_PARAM,
-  imageOverVideo: QualabsConcurrentHls.IMAGE_OVER_VIDEO_PARAM
+  concurrentVideo: QualabsConcurrentHls.VIDEO_DECODERS_PARAM,
+  concurrentImage: QualabsConcurrentHls.IMAGE_OVER_VIDEO_PARAM
 };
 
 /**
@@ -63,7 +64,7 @@ export function crearControl({ contenedor, salida, stage, alCambiar }) {
       botones.forEach((b, i) => b.setAttribute('aria-pressed', String(valores[i] === actual[clave])));
     }
     const query = Object.entries(PARAMETROS)
-      .map(([clave, nombre]) => `${nombre}=${clave === 'imageOverVideo' ? (actual[clave] ? 1 : 0) : actual[clave]}`)
+      .map(([clave, nombre]) => `${nombre}=${clave === 'concurrentImage' ? (actual[clave] ? 1 : 0) : actual[clave]}`)
       .join('&');
     salida.textContent = `request carries ?${query} → the same answer for every device; the library filters it`;
   }
@@ -77,42 +78,94 @@ export function crearControl({ contenedor, salida, stage, alCambiar }) {
  */
 export function describirOpcion(opcion, indice) {
   const medios = opcion.media.map((m) => (/^image\//i.test(m || '') ? `image (${m})` : `video (${m})`));
-  const pide = `needs ${opcion.needs.videoDecoders} video decoder${opcion.needs.videoDecoders === 1 ? '' : 's'}` +
-    (opcion.needs.imageOverVideo ? ' and images over video' : '');
+  const pide = `needs ${opcion.needs.concurrentVideo} video decoder${opcion.needs.concurrentVideo === 1 ? '' : 's'}` +
+    (opcion.needs.concurrentImage ? ' and images over video' : '');
   return `Option ${indice + 1} · ${opcion.type} · ${medios.join(' + ')} · ${pide}`;
 }
 
 /**
- * What happened to an asset of a break, as one sentence, from the report the
- * library hands `onResolved` (`resolveAssetList` in lib/signalling.js).
+ * What the library HANDED THE RENDERER for an asset of a break, as one sentence,
+ * from the report of `onResolved` (`resolveAssetList` in lib/signalling.js).
+ * Since ADR 0107 that is not yet what is on screen: the renderer can still fall
+ * to a later option, to the default or to nothing, and `presentado` says that.
  */
 export function desenlace(asset) {
+  // A post-roll (ADR 0111) never presents its non-linear ad: there is no
+  // programme under it after the end. Its options are not even considered.
+  if (asset.postroll) {
+    return asset.outcome === 'skipped'
+      ? 'A post-roll (CUE="POST") with no linear default: a non-linear ad is never presented after the ' +
+        'programme ends, so it is skipped.'
+      : 'A post-roll (CUE="POST"): a non-linear ad is never presented after the programme ends, so it ' +
+        'plays its linear default, full frame, when the programme ends.';
+  }
   const item = asset.items[0];
+  const fallaron = item?.discarded.filter((d) => d.failed).length ?? 0;
+  const ninguna = fallaron ? 'No option this device can show passed pre-validation' : 'No option fits this device';
   if (asset.outcome === 'drawn') {
-    const opcion = item?.offered[item.chosen];
-    const medio = opcion?.media.every((m) => /^image\//i.test(m || '')) ? 'as an image' : 'in video';
-    return `Drawn: option ${item.chosen + 1}, the ad ${medio}, over the programme.`;
+    const orden = (item?.order ?? [item.chosen]).map((i) => i + 1);
+    const antes = fallaron ? ` after ${fallaron} option${fallaron === 1 ? '' : 's'} failed pre-validation` : '';
+    const resto = orden.length > 1 ? `, then option${orden.length > 2 ? 's' : ''} ${orden.slice(1).join(', ')}` : '';
+    const red = asset.fallback ? ', then the linear default' : ', and no default after them';
+    return `Handed to the renderer${antes}: option ${orden[0]} first${resto}${red}.`;
   }
   if (asset.outcome === 'default') {
-    return 'No option fits this device, so the break plays its default: the linear ad, full frame.';
+    return `${ninguna}, so the break plays its default: the linear ad, full frame.`;
+  }
+  if (asset.outcome === 'skipped' && asset.defaultFailed) {
+    return `${ninguna}, and the first request for the default failed (${asset.defaultFailed.error}), ` +
+      'so the ad is skipped and the programme goes on.';
   }
   if (asset.outcome === 'skipped') {
-    return 'No option fits this device and this break has no default, so the ad is skipped and the programme goes on.';
+    return `${ninguna} and this break has no default, so the ad is skipped and the programme goes on.`;
   }
   return 'A linear ad: the asset carries no layout block.';
 }
 
 /** A short form of `desenlace`, for a list of requests. */
 export function desenlaceCorto(asset) {
+  if (asset.postroll) {
+    return asset.outcome === 'skipped' ? '→ post-roll, no linear default: skipped' : '→ post-roll: the linear default, after the programme';
+  }
   const item = asset.items[0];
-  if (asset.outcome === 'drawn') return `→ option ${item.chosen + 1} drawn (${item.offered[item.chosen].media.join(', ')})`;
-  if (asset.outcome === 'default') return '→ no option fits: the linear default';
-  if (asset.outcome === 'skipped') return '→ no option fits, no default: skipped';
+  const fallo = item?.discarded.some((d) => d.failed) ? ' (pre-validation discarded some)' : '';
+  if (asset.outcome === 'drawn') {
+    const orden = (item?.order ?? [item.chosen]).map((i) => i + 1).join(' → ');
+    return `→ handed: option ${orden}${asset.fallback ? ' → default' : ''}${fallo}`;
+  }
+  if (asset.outcome === 'default') return `→ no option fits${fallo}: the linear default`;
+  if (asset.outcome === 'skipped' && asset.defaultFailed) return `→ no option fits${fallo}, default failed to load: skipped`;
+  if (asset.outcome === 'skipped') return `→ no option fits${fallo}, no default: skipped`;
   return '→ linear';
 }
 
-/** The break a report of `onResolved` belongs to: `AD-A-CONCURRENT` is break `a`. */
-export const breakDelReporte = (seleccion) => seleccion.id.match(/^AD-([A-Z0-9]+)-/i)?.[1].toLowerCase() ?? null;
+/**
+ * WHAT WAS ACTUALLY PRESENTED, from the report of `onPresented` (ADR 0107): the
+ * renderer's failover, which is always on, after every attempt that failed to
+ * load on screen.
+ */
+export function presentado(reporte) {
+  const intentos = reporte.attempts.map((a) =>
+    `${a.linear ? 'the linear default' : `option ${a.index + 1}`} ${a.reason}${a.late ? ' (after its window opened)' : ''}`);
+  const antes = intentos.length ? ` First ${intentos.join('; then ')}.` : '';
+  if (reporte.outcome === 'skipped') return `On screen: nothing — nothing that was handed over loaded, so the ad was skipped.${antes}`;
+  const p = reporte.presented;
+  const que = p.linear ? 'the linear default, full frame' : `option ${p.index + 1} (${p.type})`;
+  const tarde = reporte.late ? ` It was mounted ${reporte.lateBy.toFixed(1)} s after its window opened.` : '';
+  return `On screen: ${que}.${antes}${tarde}`;
+}
+
+/** A short form of `presentado`, for a list of requests. */
+export function presentadoCorto(reporte) {
+  const n = reporte.attempts.length;
+  const fallos = n ? ` after ${n} failed to load` : '';
+  if (reporte.outcome === 'skipped') return `· shown: nothing${fallos}`;
+  const p = reporte.presented;
+  return `· shown: ${p.linear ? 'the linear default' : `option ${p.index + 1}`}${fallos}${reporte.late ? ', late' : ''}`;
+}
+
+/** The break a report of `onResolved` belongs to: `AD-A` is break `a` (one tag per break, ADR 0113). */
+export const breakDelReporte = (seleccion) => seleccion.id.match(/^AD-([A-Z0-9]+)(?:-|$)/i)?.[1].toLowerCase() ?? null;
 
 // ===========================================================================
 // index.html: ONE CONTROL PER PANE (fase 15)
@@ -136,7 +189,7 @@ const POR_DEFECTO = (stage) => ({
 /** One pane's configuration as it goes in the URL. */
 export function aTexto(c) {
   if (c.modo === 'nativo') return 'nativo';
-  return `ours-${c.capacidades.videoDecoders}dec-${c.capacidades.imageOverVideo ? 'img' : 'noimg'}`;
+  return `ours-${c.capacidades.concurrentVideo}dec-${c.capacidades.concurrentImage ? 'img' : 'noimg'}`;
 }
 
 /** One pane's configuration out of the URL, or null when the text is not one. */
@@ -144,9 +197,9 @@ export function deTexto(texto, stage) {
   if (texto === 'nativo') return { modo: 'nativo', capacidades: null };
   const m = /^ours-(\d+)dec-(img|noimg)$/.exec(texto || '');
   if (!m) return null;
-  const videoDecoders = Number(m[1]);
-  if (!stage.capacidades.videoDecoders.includes(videoDecoders)) return null;
-  return { modo: 'ours', capacidades: { videoDecoders, imageOverVideo: m[2] === 'img' } };
+  const concurrentVideo = Number(m[1]);
+  if (!stage.capacidades.concurrentVideo.includes(concurrentVideo)) return null;
+  return { modo: 'ours', capacidades: { concurrentVideo, concurrentImage: m[2] === 'img' } };
 }
 
 /** The page's configuration from the query string, pane by pane, with the default for what is missing or wrong. */
@@ -224,7 +277,7 @@ export function crearControlDePane({ contenedor, stage, lado, inicial, alCambiar
     }
     salida.textContent = actual.modo === 'ours'
       ? `asks with ?${Object.entries(PARAMETROS).map(([clave, nombre]) =>
-          `${nombre}=${clave === 'imageOverVideo' ? (actual.capacidades[clave] ? 1 : 0) : actual.capacidades[clave]}`).join('&')}`
+          `${nombre}=${clave === 'concurrentImage' ? (actual.capacidades[clave] ? 1 : 0) : actual.capacidades[clave]}`).join('&')}`
       : 'plays the Apple-class interstitial and replaces the programme with it';
   }
   pintar(actual);

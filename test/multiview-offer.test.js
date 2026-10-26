@@ -161,7 +161,7 @@ test('the kinds this player plays are the kinds whose list it reads, and each on
   assert.deepEqual([...KINDS_PLAYED].sort(), [...KINDS_RESOLVED].sort(),
     'what the bar marks and what the layer resolves are the same list of kinds');
   assert.ok(!KINDS_PLAYED.has('interstitial'),
-    'the replacement kind is deliberately not played here, which is why the three tables differ');
+    'the replacement kind is not drawn by this library: hls.js plays it, and its marks come from hls.js\'s schedule (ADR 0114)');
   // And the miss that reports nothing: a kind this player plays with no colour
   // is a break missing from the bar, and a break missing from the bar looks
   // exactly like a break that was never signalled.

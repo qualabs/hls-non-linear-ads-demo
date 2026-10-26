@@ -9,8 +9,8 @@
 # has one video decoder and the programme holds it. What it animates there is a short
 # progressive VP9 MP4. So the L and the corner of signalling/asset-list-hydration-break.json
 # are two options each, the HLS and then the same option with this file (ADR 0102). The
-# web never picks the second one: to the library it asks for what the HLS asks for, and
-# the HLS comes first (ADR 0097). The banner is already a PNG and has no twin.
+# web picks the second one only when the HLS fails to load (ADR 0107): to the library it
+# asks for what the HLS asks for, and the HLS comes first (ADR 0097). The banner is already a PNG and has no twin.
 #
 # WHAT IT DOES. Runs ../../scripts/progresivo.sh on content/<box>/index.m3u8 into
 # content/<box>/progressive.mp4, with the size and bitrate of `progresivo` in plate.json.
@@ -40,7 +40,7 @@ mapfile -t GEMELAS < <(node -e '
   const lista = require("./signalling/asset-list-hydration-break.json");
   const p = require("./plate.json").progresivo;
   for (const a of lista.ASSETS) {
-    const opciones = a["X-AD-CREATIVE-SIGNALING"]?.payload?.[0]?.options ?? [];
+    const opciones = a["X-AD-CREATIVE-SIGNALING"]?.payload?.[0]?.layoutOptions ?? [];
     opciones.forEach((o, i) => o.layout.assets.forEach((e, j) => {
       if (e.type !== "video/mp4") return;
       const hls = opciones[i - 1]?.layout.assets[j]?.uri;

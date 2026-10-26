@@ -19,12 +19,13 @@
   THE COMPATIBILITY PAIR (ADR 0007), which is the strongest argument this demo
   can make and the reason the page is two players and not one: the new
   experience deploys without breaking the clients that are already in the
-  market. One media playlist carries two EXT-X-DATERANGE with the same
-  START-DATE, one of Apple's interstitial class and one of the sibling class of
-  ADR 0009, and each client keeps the one it understands. Backwards
+  market. Both clients load THE SAME media playlist file, and each asks for it
+  with the class it takes (ADR 0113): the playlist declares
+  EXT-X-DEFINE:QUERYPARAM="adclass" and every break is one EXT-X-DATERANGE with
+  CLASS="{$adclass}", which hls.js substitutes while parsing. Backwards
   compatibility does not come from one class extending the other -- in HLS the
   class is compared by exact string equality and there is no inheritance -- it
-  comes from the playlist serving both things at once.
+  comes from each client choosing which class the same tag is.
 
   Left pane, an OFF-THE-SHELF client: hls.js at its factory configuration, with
   nothing of this demo wired INTO it. It schedules the linear ad and replaces
@@ -36,7 +37,7 @@
   of ADR 0007).
 
   Right pane, THIS DEMO'S client: the same library, same version, unmodified,
-  with its interstitials machinery off (ADR 0002) and the two layers of
+  with its interstitials machinery on (ADR 0114) and the two layers of
   ADR 0003 on top. It keeps the primary content on screen and draws the
   concurrent experience over it.
 
@@ -124,7 +125,7 @@
 
     <section class="pane pane-demo" id="pane-demo" data-state="primary">
       <h2 class="role">This demo&rsquo;s player</h2>
-      <p class="role-sub">The same library, same version, unmodified. Its interstitials machinery off.</p>
+      <p class="role-sub">The same library, same version, unmodified, driven by ours.</p>
       <p class="role-reads">
         keeps <code>com.qualabs.hls.concurrentInterstitial</code> ·
         ignores <code>com.apple.hls.interstitial</code>

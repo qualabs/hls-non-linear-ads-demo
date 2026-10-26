@@ -15,9 +15,12 @@
 // THE TWO SECTIONS ASK THE PROVIDER TWO DIFFERENT QUESTIONS, and the difference
 // is the whole shape of this file.
 //
-//   WHAT IS ANNOUNCED is answered once, as soon as the asset-lists resolve, and
-//   never changes: an ad announces boxes, an offer announces a catalogue, and
-//   neither depends on anybody watching. It is drawn from `experiences`.
+//   WHAT IS ANNOUNCED is answered break by break, as each asset-list arrives,
+//   and once a break has answered it never changes: an ad announces boxes, an
+//   offer announces a catalogue, and neither depends on anybody watching. It is
+//   drawn from `experiences`. A list arrives when the programme is buffered up to
+//   its break, as hls.js asks for an interstitial's (ADR 0108, ADR 0109), so a
+//   break further on has a card that says so until its list is in.
 //
 //   WHAT WAS COMPOSED cannot be answered in advance AT ALL, and that is not a
 //   shortcoming of the page, it is the subject of the demo: the shapes do not
@@ -107,6 +110,18 @@ function announceCard(experience) {
   card.append(figureOf(experience.elements, new Map(
     experience.elements.map((element) => [element.id, element.primary ? 'the programme' : element.id])
   )));
+  return card;
+}
+
+/** The card of a break whose asset-list has not been asked for yet: its tag is all there is. */
+function waitingCard(range) {
+  const card = el('article', 'card');
+  card.append(el('p', 'card__kind', range.kind === 'multiview' ? 'a catalogue' : 'a composition'));
+  card.append(el('h3', null, range.id));
+  card.append(el('p', 'card__lede',
+    `Announced by its tag, from ${secs(range.startTime)}. What it carries is in its asset-list, ` +
+    'which the player asks for when the programme is buffered up to it, as hls.js does for an ' +
+    'interstitial: this card is drawn when it arrives.'));
   return card;
 }
 
@@ -200,39 +215,43 @@ export function showWhatIsAnnounced({ provider, video, cards, fields, shapes, wa
 
   /** Number of boxes -> the shape recorded the first time the run reached it. */
   const seen = new Map();
-  let announced = false;
+  let announcedKey = null;
   let lastKey = null;
+  let fieldsDrawn = false;
 
   emptyGallery(shapes);
 
   function drawAnnounced() {
-    if (announced) return;
-    // SETTLED, AND NOT "THERE IS ENOUGH TO DRAW". The breaks arrive one at a
-    // time, as each asset-list comes back off the network, and a section drawn
-    // the moment it had one of each would be a section that showed the first two
-    // breaks of a playlist that has three. `settled` is the contract's own
-    // answer to "is this the whole list": the source is closed and nothing is
-    // still being fetched. Waiting for it costs a few hundred milliseconds of an
-    // empty container, and an empty container is the honest state of a section
-    // whose subject has not finished arriving. Measured: drawn on the first
-    // sufficient frame instead, this section showed two of the three breaks.
-    const { ranges, settled } = provider.programRanges();
-    if (!settled) return;
-    announced = true;
+    // ONE CARD PER BREAK FROM THE START, AND EACH ONE FILLS IN WHEN ITS LIST
+    // ARRIVES. The breaks are on the contract as soon as the playlist is read, off
+    // their tags (`provisional`), and their asset-lists are asked for when the
+    // programme is buffered up to each one (ADR 0108). Redrawn only when the set
+    // of ranges changes or one of them is resolved, which is what the key says.
+    const { ranges } = provider.programRanges();
+    const key = ranges.map((range) => `${range.id}${range.provisional ? '?' : ''}`).join('|');
+    if (key === announcedKey) return;
+    announcedKey = key;
     const byId = new Map(provider.experiences.map((e) => [e.id, e]));
     // Every break and not a pair picked here: a playlist with four would show
     // four, because what the list comes from is the ranges.
-    const ordered = ranges.map((range) => byId.get(range.id)).filter(Boolean);
-    cards.replaceChildren(...ordered.map(announceCard));
+    cards.replaceChildren(...ranges
+      .map((range) => (range.provisional ? waitingCard(range) : byId.get(range.id) && announceCard(byId.get(range.id))))
+      .filter(Boolean));
     // The field comparison needs one of each kind, and half a comparison is
-    // worth nothing: a playlist that carried only offers leaves that container
-    // empty rather than comparing a view against itself.
+    // worth nothing: until both have arrived -- or in a playlist that carries
+    // only offers -- that container stays empty rather than comparing a view
+    // against itself.
+    if (fieldsDrawn) return;
+    const ordered = ranges.map((range) => byId.get(range.id)).filter(Boolean);
     const offer = ordered.find(isOffer);
     const adAsset = ordered
       .filter((experience) => !isOffer(experience))
       .flatMap((experience) => experience.elements)
       .find((element) => !element.primary);
-    if (offer && adAsset) drawFields(fields, adAsset, offer.views[0]);
+    if (offer && adAsset) {
+      drawFields(fields, adAsset, offer.views[0]);
+      fieldsDrawn = true;
+    }
   }
 
   function recordShape(experience, elements) {

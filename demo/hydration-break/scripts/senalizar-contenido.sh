@@ -14,6 +14,12 @@
 # atrás y lo que el ADR 0019 ya reproduce por el camino único: su propio URI a
 # cuadro entero, con el programa corriendo detrás.
 #
+# LA CLASE LA ELIGE EL CLIENTE POR LA URL (ADR 0113): la playlist declara
+# `#EXT-X-DEFINE:QUERYPARAM="adclass"` y el tag lleva `CLASS="{$adclass}"`. La
+# página corre sólo nuestro player y pide la playlist con la clase concurrente;
+# hls.js sustituye la referencia al parsear. QUERYPARAM obliga a EXT-X-VERSION
+# 11, y este script la sube.
+#
 # Por qué es un paso generado y no un archivo en git: el START-DATE se resuelve
 # contra el EXT-X-PROGRAM-DATE-TIME de la propia playlist (ADR 0005), y ese reloj
 # es la hora de pared del empaquetado. Un START-DATE fijo en git apunta al pasado
@@ -21,9 +27,12 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-SRC=content/primary/index.m3u8
-OUT=content/primary/con-daterange.m3u8
+SRC=${SRC:-content/primary/index.m3u8}
+OUT=${OUT:-content/primary/con-daterange.m3u8}
 LISTA=asset-list-hydration-break.json
+# El nombre de la variable de la clase y del parámetro de la URL, que por la spec
+# son el mismo. js/app.js lo repite y el test de esta demo compara los dos.
+PARAMETRO=adclass
 
 [ -f "$SRC" ] || { echo "falta $SRC: correr ./scripts/preparar-contenido.sh" >&2; exit 1; }
 [ -f "signalling/$LISTA" ] || { echo "falta signalling/$LISTA" >&2; exit 1; }
@@ -59,7 +68,7 @@ declaracion() { # $1 ruta del asset-list
       const item = a["X-AD-CREATIVE-SIGNALING"]?.payload?.[0];
       // La primera opción, que es la que la web dibuja; la segunda es la gemela para
       // el Roku (ADR 0102).
-      const bloque = item?.options?.length ? { ...item, ...item.options[0] } : item;
+      const bloque = item?.layoutOptions?.length ? { ...item, ...item.layoutOptions[0] } : item;
       const tipo = bloque?.type ?? "linear";
       const cajas = bloque?.layout?.assets ?? [];
       const medios = [...new Set(cajas.map((c) => c.type))].join("+") || "-";
@@ -74,12 +83,14 @@ suma() { awk -v a="$1" -v b="$2" 'BEGIN { printf "%s", a + b }'; }
 LARGO_BREAK=$(declaracion "signalling/$LISTA" | head -1)
 START=$(date -d "$PDT + $PARADA seconds" +"%Y-%m-%dT%H:%M:%S.%3N%z")
 
-TAG=$(printf '#EXT-X-DATERANGE:ID="HYDRATION-BREAK",CLASS="com.qualabs.hls.concurrentInterstitial",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
-  "$START" "$LISTA" "$LARGO_BREAK")
+TAG=$(printf '#EXT-X-DEFINE:QUERYPARAM="%s"\n#EXT-X-DATERANGE:ID="HYDRATION-BREAK",CLASS="{$%s}",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESUME-OFFSET=0,X-SNAP="OUT,IN",X-RESTRICT="SKIP",PLANNED-DURATION=%s\n' \
+  "$PARAMETRO" "$PARAMETRO" "$START" "$LISTA" "$LARGO_BREAK")
 
 # El tag va después de las cabeceras y antes del primer segmento, que es donde
-# la especificación lo admite.
+# la especificación lo admite, con la definición de la variable delante (la
+# spec, 6.3.1: una referencia se sustituye sólo con una variable definida antes).
 awk -v tag="$TAG" '
+  /^#EXT-X-VERSION:/ { if (substr($0, 16) + 0 < 11) $0 = "#EXT-X-VERSION:11" }
   /^#EXTINF:/ && !hecho { printf "%s\n", tag; hecho = 1 }
   { print }
 ' "$SRC" > "$OUT"

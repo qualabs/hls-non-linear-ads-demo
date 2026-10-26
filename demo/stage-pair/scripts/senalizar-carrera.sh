@@ -22,10 +22,13 @@
 # aviso y una caja de cámara en pantalla a la vez, que es donde se ve dónde
 # termina la señalización de publicidad y empieza la extensión de Qualabs.
 #
-# NO HAY TAG DE CLASE APPLE ACÁ, y es la otra diferencia con el par. Esta página
-# no tiene pane de fábrica: la compatibilidad es la afirmación de `index.html` y
-# repetirla acá sería un segundo lugar donde mantenerla. Lo que esta página
-# afirma es otra cosa.
+# LA CLASE DE LOS AVISOS LA ELIGE EL CLIENTE, como en la playlist del par
+# (ADR 0113): la playlist declara `#EXT-X-DEFINE:QUERYPARAM="adclass"` y cada aviso
+# lleva `CLASS="{$adclass}"`. Esta página corre sólo nuestro player y pide la
+# playlist con la clase concurrente, así que no hay tag de reemplazo que alguien
+# lea: la compatibilidad es la afirmación de `index.html`. LA VENTANA NO: la de
+# multi view es una oferta y no un aviso, no tiene lectura de Apple, y su clase va
+# escrita.
 #
 # EL TAG DE LA VENTANA NO LLEVA X-RESTRICT, y es lo único que lo separa del de un
 # aviso: en un aviso ese atributo dice que el break no se puede saltear; acá no
@@ -69,9 +72,11 @@ RACE_OUT=${RACE_OUT:-$(leer carrera.playlist)}
 RACE_CONTENT=${RACE_CONTENT:-content/race}
 RACE_SIGNALLING=${RACE_SIGNALLING:-signalling}
 
-# Las dos clases hermanas del ADR 0063, escritas una sola vez.
-CLASE_CONCURRENTE=com.qualabs.hls.concurrentInterstitial
+# La clase de la ventana (ADR 0063), escrita una sola vez. La de los avisos no se
+# escribe: es la variable del ADR 0113, con el nombre de stage.json, y la página
+# la pide concurrente.
 CLASE_MULTIVIEW=com.qualabs.hls.multiViewInterstitial
+PARAMETRO=$(leer parametroDeClase)
 
 # LA CARRERA ES CONTENIDO GENERADO Y NO VIVE EN GIT, así que en un clone limpio
 # todavía no está. Eso NO es un error de esta corrida: las otras dos páginas
@@ -146,7 +151,7 @@ tag() { # $1 id, $2 offset, $3 nombre del asset-list
   if [ "$tipo" = multiViewOffer ]; then
     clase=$CLASE_MULTIVIEW; restrict=""
   else
-    clase=$CLASE_CONCURRENTE; restrict=',X-RESTRICT="SKIP"'
+    clase="{\$$PARAMETRO}"; restrict=',X-RESTRICT="SKIP"'
   fi
   printf '#EXT-X-DATERANGE:ID="%s",CLASS="%s",START-DATE="%s",X-ASSET-LIST="/signalling/%s",X-RESUME-OFFSET=0,X-SNAP="OUT,IN"%s,PLANNED-DURATION=%s\n' \
     "$id" "$clase" "$start" "$lista" "$restrict" "$largo"
@@ -163,9 +168,14 @@ TAGS="$TAGS$(tag "RACE-MULTIVIEW" "$(leer carrera.ofertaEn)" "$OFERTA")
 "
 
 # Los tags van después de las cabeceras y antes del primer segmento, que es donde
-# la especificación los admite.
+# la especificación los admite, con la definición de la variable delante: una
+# referencia sólo se sustituye con una variable definida antes (la spec, 6.3.1).
+# QUERYPARAM obliga a EXT-X-VERSION 11.
+TAGS="#EXT-X-DEFINE:QUERYPARAM=\"$PARAMETRO\"
+$TAGS"
 mkdir -p "$(dirname "$RACE_OUT")"
 awk -v tags="$TAGS" '
+  /^#EXT-X-VERSION:/ { if (substr($0, 16) + 0 < 11) $0 = "#EXT-X-VERSION:11" }
   /^#EXTINF:/ && !hecho { printf "%s", tags; hecho = 1 }
   { print }
 ' "$RACE_SRC" > "$RACE_OUT"

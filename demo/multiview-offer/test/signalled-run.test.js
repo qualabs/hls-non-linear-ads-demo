@@ -40,12 +40,16 @@ import { fileURLToPath } from 'node:url';
  * that impossible to get wrong, instead of something a test asserts about a copy.
  */
 import { CONCURRENT_CLASS, MULTIVIEW_CLASS } from '../../../lib/signalling.js';
+import { substitute, withClass } from '../../shared/test/variable-substitution.js';
 
 const DEMO = fileURLToPath(new URL('..', import.meta.url));
 const read = (path) => readFileSync(join(DEMO, path), 'utf8');
 
 /** The script that writes the signalled playlist this demo plays. */
 const SIGNALLER = read('scripts/senalizar-contenido.sh');
+
+/** The name of the variable of the ad's class (ADR 0113), as the script writes it. */
+const PARAM = SIGNALLER.match(/^PARAMETRO=(\S+)$/m)?.[1];
 
 /** Every row of its RECORRIDO table: second of playback, asset-list, name. */
 const ROWS = [...SIGNALLER.matchAll(/^\s*"(\d+)\|(asset-list-[^|]+)\|([^"]*)"/gm)].map(
@@ -92,7 +96,8 @@ function signalledPlaylist() {
       env: { ...process.env, SRC: src, OUT: out },
       encoding: 'utf8'
     });
-    return readFileSync(out, 'utf8');
+    // As the page reads it: with our class in the query (ADR 0113).
+    return substitute(readFileSync(out, 'utf8'), withClass('/content/primary/con-daterange.m3u8', PARAM, CONCURRENT_CLASS)).text;
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -253,4 +258,13 @@ test('the content is packaged with the configuration the five decoders were meas
   const preparer = read('scripts/preparar-contenido.sh');
   assert.doesNotMatch(preparer, /curl|wget/);
   assert.match(preparer, /compatibility-pair\/content\/\.fuentes/);
+});
+
+test('the class of the ad is the variable of the playlist, and the page asks with ours (ADR 0113)', () => {
+  assert.ok(PARAM, 'the script declares PARAMETRO');
+  assert.equal(read('js/app.js').match(/const CLASS_PARAM = '([^']+)'/)?.[1], PARAM,
+    'js/app.js asks for the playlist with the parameter the playlist defines');
+  assert.match(SIGNALLER, /clase="\{\\\$\$PARAMETRO\}"/, 'the ad tag is written with the reference');
+  assert.match(SIGNALLER, /#EXT-X-DEFINE:QUERYPARAM=/);
+  assert.match(SIGNALLER, /CLASE_MULTIVIEW=com\.qualabs\.hls\.multiViewInterstitial/, 'the windows keep their class');
 });

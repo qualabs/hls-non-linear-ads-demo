@@ -42,6 +42,10 @@ gap §5.4 de sgai-for-hls).
 > **Nota del 2026-09-30.** El último punto ya no vale: el ADR 0091 le pone también su tag de Apple
 > al break sin default, apuntando al mismo asset-list, y el player de fábrica lo saltea.
 
+> **Nota del 2026-10-22.** "Un manifest por clase" queda superseded por el ADR 0113: una sola
+> playlist, un tag por break con `CLASS="{$adclass}"`, y cada player la pide con su clase en la URL.
+> "Un asset-list por break, que leen los dos clientes" sigue valiendo.
+
 ## Consecuencias
 
 - La tesis del par pasa de "un manifest, dos clientes" a **"un asset-list, dos clientes"**: el

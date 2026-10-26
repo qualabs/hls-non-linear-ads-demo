@@ -121,8 +121,8 @@ says `PLAY STOPPED` and the break that draws advertising over it both read it.
 **The L and the corner are offered twice** (phase 17, ADR 0102): as their HLS, and then the
 same box as a progressive VP9 MP4 (`content/adL/progressive.mp4`, `content/adOverlay/progressive.mp4`,
 with its `codecs`), for a device with one decoder that animates a short file over the programme,
-the Roku. The library never picks the second: it asks for what the first asks for, and the first
-wins (ADR 0097). `scripts/progresivo-creativos.sh` makes them out of the HLS, with the sizes in
+the Roku. The library draws the second only when the HLS fails to load: it asks for what the first
+asks for, so the first wins (ADR 0097), and the second is the next option that fits (ADR 0107). `scripts/progresivo-creativos.sh` makes them out of the HLS, with the sizes in
 `plate.json`, and `--verificar` checks the hand-written asset-list against the files.
 
 ## Test it

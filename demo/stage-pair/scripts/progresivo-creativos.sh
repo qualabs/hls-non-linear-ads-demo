@@ -5,9 +5,9 @@
 # WHY (phase 17, ADR 0096). A Roku cannot play the HLS of a box over the programme: it
 # has one video decoder and the programme holds it. What it animates there is a short
 # progressive VP9 MP4. So each asset-list offers, right after the HLS option, the same
-# option with this file (scripts/escribir-asset-lists.mjs). The web never picks it: to
-# the library it asks for what the HLS option asks for, and the HLS option comes first
-# (ADR 0097).
+# option with this file (scripts/escribir-asset-lists.mjs). The web picks it only when
+# the HLS fails to load (ADR 0107): to the library it asks for what the HLS option asks
+# for, and the HLS option comes first (ADR 0097).
 #
 # WHAT IT DOES, per piece named by `breaks[].forma` of each break: runs
 # ../../scripts/progresivo.sh on the HLS that stage.json declares in its `video`, writes

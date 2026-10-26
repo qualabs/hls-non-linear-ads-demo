@@ -48,7 +48,7 @@
                 "value": "QDML0001000H"
               }
             ],
-            "options": [
+            "layoutOptions": [
               {
                 "type": "squeezebackLShape",
                 "layout": {
@@ -113,7 +113,7 @@
                 "value": "QDMO0001000H"
               }
             ],
-            "options": [
+            "layoutOptions": [
               {
                 "type": "cornerOverlay",
                 "layout": {
