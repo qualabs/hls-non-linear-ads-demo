@@ -6604,3 +6604,11 @@ carriage DASH de la presentación concurrente que SVTA2053 v3 dejó para una edi
 esquema y el sobre v2 de SVTA en un EventStream, sobre dash.js 5.2.1 sin modificar. Nicolás lo
 aprobó con las recomendaciones de sus siete preguntas abiertas. Generados `PHASE.md`, `TASKS.md`
 (10 tasks; la primera mide los dos riesgos del diseño antes de construir) y los ADR 0120-0127.
+
+## 2026-10-26 — Fase 19, T-01: los riesgos medidos
+
+dash.js 5.2.1 entrega en `eventModeOnReceive` todos los eventos del MPD al cargar (85 ms después del
+manifest), y un creativo MPD que no carga da `ERROR` en 1,6 a 3,2 s (404 en el MPD, en el init o en
+el primer segmento). El diseño sigue. Hallazgo: el cuerpo en CDATA no llega a `messageData` (bug de
+upstream: el modelo lee `__cdata` y el parser deja `#cdata`), ni llegan los atributos del Replace;
+ADR 0128: la librería lee el EventStream del texto del MPD en el interceptor de respuesta.

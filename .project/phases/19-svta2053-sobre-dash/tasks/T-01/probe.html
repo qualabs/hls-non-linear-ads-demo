@@ -1,0 +1,70 @@
+<!doctype html><meta charset="utf-8"><title>T-01 probe</title>
+<video id="v" muted playsinline width="320"></video>
+<script src="/dash.all.min.js"></script>
+<script>
+// Fase 19 T-01. Measures, in dash.js 5.2.1 unmodified:
+//  (a) when onReceive delivers the MPD EventStream events (SVTA and Replace)
+//  (b) which event/error says a creative MPD did not load: 404 MPD, 404 init, 404 media
+//  (c) whether ReplacePresentation's attributes are reachable from the event
+const t0 = performance.now();
+const log = []; window.LOG = log;
+const L = (o) => { o.ms = Math.round(performance.now() - t0); log.push(o); };
+const SVTA = 'urn:svta:advertising-wg:ad-creative-signaling';
+const REPL = 'urn:mpeg:dash:event:alternativeMPD:replace:2025';
+const v = document.getElementById('v');
+const p = dashjs.MediaPlayer().create();
+const ev = (scheme) => (e) => {
+  const ed = e.event || {};
+  const r = { k: 'event', scheme, type: e.type, id: ed.id, pt: ed.calculatedPresentationTime ?? ed.presentationTime,
+    dur: ed.duration, ct: v.currentTime, msg: typeof ed.messageData === 'string' ? ed.messageData.slice(0, 60) : (ed.messageData && ed.messageData.constructor.name),
+    eventKeys: Object.keys(ed), rawMsg: JSON.stringify(ed.messageData)?.slice(0,120), parsed: JSON.stringify(ed.parsedMessageData)?.slice(0,120), streamKeys: ed.eventStream ? Object.keys(ed.eventStream) : null };
+  // (c): where would the ReplacePresentation element be?
+  if (true) {
+    try {
+      const es = ed.eventStream; r.esPeriodKeys = es?.period ? Object.keys(es.period) : null;
+      const mpd = es?.period?.mpd; r.mpdKeys = mpd ? Object.keys(mpd) : null;
+      const man = mpd?.manifest; r.hasManifest = !!man;
+      const per = man?.Period?.[0] || man?.Period_asArray?.[0]; r.periodKeys = per ? Object.keys(per) : null;
+      const ess = per?.EventStream; const arr = Array.isArray(ess) ? ess : [ess];
+      const rs = arr.find((x) => x && x.schemeIdUri === e.type);
+      const raw = rs && (Array.isArray(rs.Event) ? rs.Event : [rs.Event]).find((x) => String(x.id) === String(ed.id));
+      r.rawEvent = raw ? JSON.stringify(raw).slice(0, 1500) : null;
+      r.parsedOnEvent = ed.parsedMessageData ?? null;
+    } catch (err) { r.err = String(err); }
+  }
+  L(r);
+};
+const RECV = { mode: dashjs.MediaPlayer.events.EVENT_MODE_ON_RECEIVE };
+const STRT = { mode: dashjs.MediaPlayer.events.EVENT_MODE_ON_START };
+p.on(SVTA, ev(SVTA + '#receive'), null, RECV);
+p.on(REPL, ev(REPL), null, RECV);
+p.on(SVTA, ev(SVTA + '#start'), null, STRT);
+p.on(dashjs.MediaPlayer.events.MANIFEST_LOADED, () => L({ k: 'main-manifest-loaded', ct: v.currentTime }));
+p.on(dashjs.MediaPlayer.events.PLAYBACK_PLAYING, () => L({ k: 'main-playing', ct: v.currentTime }));
+// Interceptor fallback for (a) and (c): the MPD text as it arrives.
+p.addResponseInterceptor && p.addResponseInterceptor((resp) => {
+  if (typeof resp.data === 'string' && resp.data.includes('<MPD')) L({ k: 'interceptor-mpd', hasReplace: resp.data.includes('ReplacePresentation'), url: resp.request?.url });
+  return Promise.resolve(resp);
+});
+p.initialize(v, '/main/manifest.mpd', true);
+
+// (b): one MediaPlayer per creative case, each with its own <video>.
+const E = dashjs.MediaPlayer.events;
+const cases = { ok: '/cre/manifest.mpd', mpd404: '/nope/manifest.mpd', init404: '/cre-segfail/manifest.mpd', media404: '/cre-medfail/manifest.mpd' };
+window.creatives = {};
+for (const [name, url] of Object.entries(cases)) {
+  const cv = document.createElement('video'); cv.muted = true; cv.width = 160; document.body.append(cv);
+  const cp = dashjs.MediaPlayer().create();
+  const start = performance.now(); const R = (k, extra) => L({ k: 'cre', name, what: k, since: Math.round(performance.now() - start), ...extra });
+  cp.on(E.ERROR, (e) => R('ERROR', { code: e.error?.code, message: String(e.error?.message).slice(0, 80) }));
+  cp.on(E.MANIFEST_LOADED, () => R('MANIFEST_LOADED'));
+  cp.on(E.STREAM_INITIALIZED, () => R('STREAM_INITIALIZED'));
+  cp.on(E.CAN_PLAY, () => R('CAN_PLAY'));
+  cp.on(E.PLAYBACK_PLAYING, () => R('PLAYBACK_PLAYING'));
+  cp.on(E.FRAGMENT_LOADING_ABANDONED, () => R('FRAGMENT_LOADING_ABANDONED'));
+  cv.addEventListener('loadeddata', () => R('video:loadeddata'));
+  cv.addEventListener('error', () => R('video:error'));
+  cp.initialize(cv, url, true);
+  window.creatives[name] = cp;
+}
+</script>
