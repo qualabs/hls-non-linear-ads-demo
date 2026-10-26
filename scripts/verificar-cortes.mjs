@@ -47,15 +47,14 @@ import { fileURLToPath } from 'node:url';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 /**
- * The signalling side of the seam of ADR 0003: the files of the library that ARE
- * allowed to name the transport, because naming it is their job.
- *
- * It is written down for one reason. The check of ADR 0003 runs over a list of
- * files written by hand, so a new file in `lib/` that nobody adds to either list
- * would pass by never being looked at. Every `lib/*.js` has to be on one side or
- * the other, and the script says so when one is on neither.
+ * WHICH SIDE OF THE SEAM OF ADR 0003 A FILE OF THE LIBRARY IS ON IS ITS FOLDER
+ * (ADR 0116). `lib/` is what a player of any streaming format would use as it is,
+ * so the whole of it is checked for the vocabulary of the transport; `hls/` is
+ * the signalling side, the files whose job is to name the transport. The check
+ * used to run over a list of files written by hand, which needed a second check
+ * that every `lib/*.js` was on one list or the other. With the folder there is
+ * no list to forget: a new file in `lib/` walks into the grep on its own.
  */
-const SIGNALLING_SIDE = ['lib/signalling.js', 'lib/media.js', 'lib/concurrent-hls.js'];
 
 const SEAMS = [
   {
@@ -64,15 +63,15 @@ const SEAMS = [
     // The same list of terms six tasks of phase 01 and four of phase 02 ran.
     // `interstitial` stays in it on purpose -- see the head of this file.
     terms: 'hls|daterange|date range|asset-list|assetlist|m3u8|manifest|EXT-X|interstitial|Hls\\.',
-    // Per file and not per directory: written as one file, signalling and
-    // rendering would share a scope and the grep would have nothing to point at.
-    // That is also why the library is assembled by a build step instead of being
-    // written by hand (scripts/construir-libreria.sh).
+    // Per file and never one file for the whole library: written as one file,
+    // signalling and rendering would share a scope and the grep would have
+    // nothing to point at. That is also why the library is assembled by a build
+    // step instead of being written by hand (scripts/construir-libreria.sh).
+    // `lib/*.js` is every file of the common side, each one grepped on its own.
     //
-    // Three of them are inside a demo, and they are named one by one for the
-    // same reason: they are the proof that the contract is enough to draw with,
-    // which is the argument of ADR 0003. What must not depend on any demo is the
-    // completeness check below, and that one is only over `lib/`.
+    // The rest are inside a demo, and they are named one by one: they are the
+    // proof that the contract is enough to draw with, which is the argument of
+    // ADR 0003, and no folder holds them all.
     //
     // AND NAMING THEM ONE BY ONE IS WHAT MAKES A NEW DEMO EASY TO MISS: a demo
     // that copies `contract-trace.js` gets a consumer of the contract that
@@ -93,18 +92,14 @@ const SEAMS = [
     // of phase 14; a term planted in it was watched go red before this line was
     // left in.
     //
-    // `lib/multiview.js` is on this side and it is worth saying why, because it
+    // `lib/multiview.js` is in lib/ and it is worth saying why, because it
     // is the one file that sits between the two: it decorates the provider, so
     // it reads what the layer underneath resolved and hands the same contract
     // on. What it must never do is name the transport -- the state of whoever
     // is watching has nothing to do with how the window was announced -- so it
     // is checked by the same grep that keeps the rendering side clean.
     files: [
-      'lib/renderer.js',
-      'lib/controls.js',
-      'lib/multiview.js',
-      'lib/tracking.js',
-      'lib/postroll.js',
+      'lib/*.js',
       'demo/compatibility-pair/js/contract-trace.js',
       'demo/compatibility-pair/css/player.css',
       'demo/stage-pair/js/contract-trace.js',
@@ -152,10 +147,11 @@ const SEAMS = [
     title: 'the library side does not name the demo application',
     terms:
       'demo|app\\.js|contract-trace|stock-player|index\\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state',
-    // Here the whole directory does go in: a new file in `lib/` walks into this
-    // check on its own, which is what this seam needs and the other one cannot
-    // have, because that one is per file on purpose.
-    files: ['lib/*.js', 'scripts/construir-libreria.sh'],
+    // Every folder of the library goes in whole, so a new file walks into this
+    // check on its own. `dash/*.js` joins the day dash/ holds a file: a pattern
+    // that matches nothing would hand grep no file at all, and grep would read
+    // stdin instead.
+    files: ['lib/*.js', 'hls/*.js', 'scripts/construir-libreria.sh'],
     // None, and not for lack of use: the T-04 ran this grep, it found a comment
     // explaining a colour with a reason that belonged to this page, and the
     // reason moved to the document of the task instead of being written here.
@@ -206,23 +202,6 @@ function runGrep(seam) {
       const [file, number, ...rest] = row.split(':');
       return { file, number: Number(number), line: rest.join(':') };
     });
-}
-
-/** Every `lib/*.js` has to be on one side of the seam of ADR 0003 or the other. */
-function nobodyIsUnwatched() {
-  const seam = SEAMS.find((s) => s.adr === '0003');
-  const classified = new Set([...seam.files, ...SIGNALLING_SIDE]);
-  const loose = expand('lib/*.js').filter((f) => !classified.has(f));
-  if (loose.length === 0) return true;
-  console.error('The seam of ADR 0003 is not looking at every file of the library.\n');
-  for (const f of loose) {
-    console.error(`  ${f} is on neither the rendering side nor the signalling side.`);
-  }
-  console.error(
-    '\n  A file on neither list is a file nobody checks. Put it in `files` of seam 0003\n' +
-      '  if it is rendering, or in SIGNALLING_SIDE if it knows the transport on purpose.'
-  );
-  return false;
 }
 
 /** An exception without a written reason is a configuration error, not an exception. */
@@ -318,7 +297,6 @@ function checkSeam(seam) {
 }
 
 let ok = everyReasonIsWritten();
-if (ok) ok = nobodyIsUnwatched();
 if (ok) {
   console.log('# The two seams of the project, verified and not asserted\n');
   for (const seam of SEAMS) ok = checkSeam(seam) && ok;
