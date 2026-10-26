@@ -5,8 +5,8 @@
 | T-01 | `scripts/comparar-publicacion.mjs`, y la línea de base | done | agent | — | rama `fase-18` · [`tasks/T-01/`](tasks/T-01/) |
 | T-02 | La partición: `lib/`, `hls/`, el build y los imports | done | agent | — | rama `fase-18` · [`tasks/T-02/`](tasks/T-02/) |
 | T-03 | Las costuras y la publicación con `hls/` | done | agent | — | rama `fase-18` · [`tasks/T-03/`](tasks/T-03/) |
-| T-04 | `dash/README.md` y la documentación que la mudanza dejó falsa | in-progress | agent | — | — |
-| T-05 | La verificación contra `0739c38`, y el merge a main local | planned | agent | — | — |
+| T-04 | `dash/README.md` y la documentación que la mudanza dejó falsa | done | agent | — | rama `fase-18` · [`tasks/T-04/`](tasks/T-04/) |
+| T-05 | La verificación contra `0739c38`, y el merge a main local | in-progress | agent | — | — |
 
 ---
 

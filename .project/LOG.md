@@ -6580,3 +6580,10 @@ declaraciones en otro orden, los tests de demo con los mismos nombres importados
 Rama `fase-18`, `5231ffa`: `verificar-cortes.mjs` corre la costura 0003 sobre `lib/` entera y la
 0015 sobre `lib/` y `hls/`, sin listas a mano ni chequeo de completitud; `demos-cambiadas.sh`
 publica las cinco cuando cambia `hls/`. Check verde, y rojo con cada uno de tres plantados.
+
+## 2026-10-26 — Fase 18, T-04: `dash/` y la documentación
+
+Rama `fase-18`, `8f3aa53`: `dash/README.md` con la regla; README, `docs/`, `CLAUDE.md` y los
+comentarios fuera de `demo/` ya no nombran rutas movidas (la búsqueda da vacío; sobre `0739c38`
+encuentra 29 archivos). Las 18 líneas que quedan en `demo/` son publicadas y quedan para la fase
+DASH.
