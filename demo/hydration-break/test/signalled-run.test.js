@@ -39,7 +39,8 @@ import {
   elRitmoDelGuion
 } from './comprobaciones.js';
 import { labelsOfAssetList, blockGlossOf } from '../js/senalizacion.js';
-import { CONCURRENT_CLASS, selectOption, usableCapabilities } from '../../../lib/signalling.js';
+import { selectOption, usableCapabilities } from '../../../lib/capabilities.js';
+import { CONCURRENT_CLASS } from '../../../hls/signalling.js';
 import { substitute, withClass } from '../../shared/test/variable-substitution.js';
 
 /** Los archivos que dibujan rótulos de la página leyendo el asset list. La lista se

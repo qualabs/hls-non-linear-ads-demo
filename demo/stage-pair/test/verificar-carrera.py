@@ -105,7 +105,7 @@ CAMARAS = CARRERA["camaras"]
 MAX_CAJAS = int(json.loads(
     subprocess.run(
         ["node", "--input-type=module", "-e",
-         f"import {{ MAX_BOXES }} from '{SDK}/lib/signalling.js';"
+         f"import {{ MAX_BOXES }} from '{SDK}/lib/experience.js';"
          " process.stdout.write(JSON.stringify(MAX_BOXES));"],
         capture_output=True, text=True, check=True).stdout))
 

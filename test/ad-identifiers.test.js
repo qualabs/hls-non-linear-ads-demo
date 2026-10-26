@@ -11,7 +11,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { blockIdentifiers, identifiersOf, resolveAssetList } from '../lib/signalling.js';
+import { blockIdentifiers, identifiersOf } from '../lib/experience.js';
+import { resolveAssetList } from '../hls/signalling.js';
 import { createTracking, slotEvents } from '../lib/tracking.js';
 
 const AD_ID = { scheme: 'ad-id.org', value: 'KTRV0001000H' };

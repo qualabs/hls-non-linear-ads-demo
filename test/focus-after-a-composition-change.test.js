@@ -42,7 +42,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-import { activeAt, isOffer, resolveAssetList } from '../lib/signalling.js';
+import { activeAt, isOffer } from '../lib/experience.js';
+import { resolveAssetList } from '../hls/signalling.js';
 import { createMultiview } from '../lib/multiview.js';
 import { applyPlan, effectiveVolumeOf, entryOf, planComposition } from '../lib/renderer.js';
 

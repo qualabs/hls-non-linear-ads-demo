@@ -41,7 +41,7 @@ import {
   preRollPlacement,
   preRollStart,
   provisionalRange
-} from '../lib/signalling.js';
+} from '../hls/signalling.js';
 
 const BREAK = { startTime: 60, duration: 12 };
 

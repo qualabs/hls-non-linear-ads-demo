@@ -29,7 +29,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-import { resolveAssetList, LINEAR_TYPE } from '../lib/signalling.js';
+import { LINEAR_TYPE } from '../lib/experience.js';
+import { resolveAssetList } from '../hls/signalling.js';
 import {
   fadesInAndOut, remainingIn, isLeaving, isImage,
   FULL_FRAME_TYPE, PRIMARY_MOVE_MS, AD_FADE_IN_MS, AD_FADE_OUT_MS
