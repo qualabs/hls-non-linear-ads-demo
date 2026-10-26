@@ -3,8 +3,8 @@
 | id | brief | status | who | plan | evidence |
 | --- | --- | --- | --- | --- | --- |
 | T-01 | `scripts/comparar-publicacion.mjs`, y la línea de base | done | agent | — | rama `fase-18` · [`tasks/T-01/`](tasks/T-01/) |
-| T-02 | La partición: `lib/`, `hls/`, el build y los imports | in-progress | agent | — | — |
-| T-03 | Las costuras y la publicación con `hls/` | planned | agent | — | — |
+| T-02 | La partición: `lib/`, `hls/`, el build y los imports | done | agent | — | rama `fase-18` · [`tasks/T-02/`](tasks/T-02/) |
+| T-03 | Las costuras y la publicación con `hls/` | in-progress | agent | — | — |
 | T-04 | `dash/README.md` y la documentación que la mudanza dejó falsa | planned | agent | — | — |
 | T-05 | La verificación contra `0739c38`, y el merge a main local | planned | agent | — | — |
 
@@ -50,6 +50,8 @@
 - **nivel de verificación:** alto. Es el código de las cinco demos públicas, y un cambio de
   comportamiento no se ve hasta que alguien mira la demo. No hay reglas de negocio nuevas que mutar:
   la referencia independiente es `0739c38`, a través de T-01.
+- **post-ejecución:** 2026-10-26, el `hls` del `git archive` de `scripts/publicar.sh` se hizo acá y
+  no en T-03: el comparador arma el stage con el `publicar.sh` de cada commit.
 
 ## T-03 — Las costuras y la publicación con `hls/`
 
