@@ -1,6 +1,6 @@
 ---
 title: "HLS y DASH lado a lado"
-description: "lib/ queda con lo común (el renderer, el modelo de un corte, las capacidades), hls/ con lo de HLS, dash/ vacía con su regla; lo que hace la demo no cambia, medido contra la publicación de hoy con un script que queda en el repo"
+description: "lib/signalling.js se partió en lib/experience.js (el modelo de un corte), lib/capabilities.js y hls/signalling.js; media.js y concurrent-hls.js pasaron a hls/; dash/ nació con su regla; el grep del ADR 0003 cubre lib/ entera; y scripts/comparar-publicacion.mjs prueba contra 0739c38 que lo publicado sólo cambia en el orden y los comentarios del dist y en los imports de los tests de demo"
 started: 2026-10-26
 origin: "Nicolás, 2026-10-26, plan aprobado; despacho de agent-nicolas-laptop-865daf a hls-demo-18 (fase 18). David Hassoun al tanto"
 depends_on: []

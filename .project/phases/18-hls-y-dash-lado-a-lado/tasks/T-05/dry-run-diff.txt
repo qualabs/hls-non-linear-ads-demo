@@ -1,0 +1,20 @@
+5c5
+<      0 to copy, 0 to remove
+---
+>      3 to copy, 0 to remove
+10c10
+<      0 to copy, 0 to remove
+---
+>      2 to copy, 0 to remove
+14c14
+<      0 to copy, 0 to remove
+---
+>      2 to copy, 0 to remove
+18c18
+<      0 to copy, 0 to remove
+---
+>      2 to copy, 0 to remove
+22c22
+<      0 to copy, 0 to remove
+---
+>      2 to copy, 0 to remove

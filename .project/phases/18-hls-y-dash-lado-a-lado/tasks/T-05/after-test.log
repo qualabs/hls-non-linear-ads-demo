@@ -1,0 +1,508 @@
+
+> qualabs-concurrent-hls@0.0.0 test
+> node --test
+
+✔ the script signals the five breaks of the recording, and every one names an asset-list of this demo (3.476975ms)
+✔ the length a break declares is computed from its asset-list and not typed into the script (0.4147ms)
+✔ one tag per break, its class the variable the page fills with each pane's class (ADR 0113) (1705.083333ms)
+✔ read with each class, the same file is all Apple or all ours, and the same asset-lists (1520.935008ms)
+✔ one traditional linear break, its class written and not chosen, overlapping no other (ADR 0115) (1371.555705ms)
+✔ demo/hydration-break/test/comprobaciones.js (43.451966ms)
+== sin romper nada, todos los chequeos tienen que estar en verde ==
+  VERDE  anclasDelGuion
+  VERDE  elBreakArrancaEnLaParada
+  VERDE  elRepartoSaleDeUnSoloLugar
+  VERDE  lasTresFormasDelMinuto
+  VERDE  laGaleriaSeDibujaDelContrato
+  VERDE  losMediosSalenDelContrato
+  VERDE  laGlosaDelBloqueExplicaSusCampos
+  VERDE  cadaPliegueRotulaSuAviso
+  VERDE  elRitmoDelGuion
+
+== una rotura por regla, y cada una tiene que poner ROJO a su chequeo ==
+  ROJO   anclasDelGuion
+         regla:  un ancla del guion tiene que caer en un aviso que existe (ADR 0037)
+         rotura: el beat del caso de negocio pasa a anclarse al aviso 9 del break 1
+         dijo:   el beat "el-caso-de-negocio" ancla a algo que la señalización no tiene: {"at":{"break":1,"ad":9},"lead":1.5}
+  ROJO   anclasDelGuion
+         regla:  un beat tiene que frenar ANTES de lo que anuncia (ADR 0037)
+         rotura: el mismo beat pasa a tener `lead: -3`, así que resuelve después del aviso
+         dijo:   el beat "el-caso-de-negocio" resuelve en 49s y lo que anuncia arranca en 46s: la placa llega tarde o justo encima
+  ROJO   elBreakArrancaEnLaParada
+         regla:  el segundo del break lo declara plate.json y no el script (ADR 0044)
+         rotura: el script de señalización pasa a tener el segundo escrito a mano
+         dijo:   el script de señalización no lee `paradaEn` de plate.json: si el segundo del break está escrito a mano, deja de seguir al plate (ADR 0044)
+  ROJO   elBreakArrancaEnLaParada
+         regla:  la parada del juego tiene que caber adentro del plate (ADR 0044)
+         rotura: la parada pasa a durar el doble del plate (184s sobre 92s)
+         dijo:   la parada del juego termina en 198s y el plate dura 92s: el break se sale del programa
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  los avisos suman lo que dura la parada (el reparto de plate.json)
+         rotura: el overlay de cierre pasa de 24 a 20 s, así que la publicidad no cubre la parada
+         dijo:   los avisos suman 60s y la parada dura 64s: la publicidad no cubre la parada, y eso no falla, se ve como otra demo
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  cada aviso es múltiplo de 8, que es el techo de una generación
+         rotura: el lineal vuelve a 10 s, que deja un resto corto en la cadena
+         dijo:   estos avisos no son múltiplos de 8: 10, 22. El techo de una generación son 8 s, así que un aviso que no es múltiplo deja un resto corto, que es el eslabón que peor sale
+  ROJO   elRepartoSaleDeUnSoloLugar
+         regla:  el reparto vive en un solo lugar (plate.json), no en el asset list
+         rotura: una DURATION del asset list se edita a mano y deja de coincidir con plate.json
+         dijo:   el asset list declara [12, 16, 8, 24] y plate.json [16, 16, 8, 24]: el reparto vive en dos lugares y ya se despegó
+  ROJO   lasTresFormasDelMinuto
+         regla:  el minuto declara exactamente un aviso de imagen fija (ADR 0046)
+         rotura: el banner pasa de `image/jpeg` a un `.m3u8`, que es lo que la demo deja de demostrar
+         dijo:   hay 0 avisos de imagen fija y tiene que haber exactamente uno (ADR 0046): es la tercera forma que este minuto demuestra
+  ROJO   lasTresFormasDelMinuto
+         regla:  el aviso lineal va tercero (ADR 0043)
+         rotura: el lineal se mueve al primer lugar del break
+         dijo:   el aviso lineal está en la posición 1 y va tercero (ADR 0043): ahí es donde el guion cuenta el caso de negocio
+  ROJO   lasTresFormasDelMinuto
+         regla:  el break son cuatro avisos (ADR 0043)
+         rotura: se le saca el overlay de cierre
+         dijo:   el break declara 3 avisos y el minuto son cuatro
+  ROJO   laGaleriaSeDibujaDelContrato
+         regla:  ningún identificador de layout está escrito a mano en la página (ADR 0073)
+         rotura: a una copia de index.html se le planta `lowerThirdOverlay` como rótulo escrito a mano, que es la galería degradada a una lista de nombres
+         dijo:   `index.html` tiene escrito el identificador de layout `lowerThirdOverlay`: la galería dejó de derivarse del contrato y pasó a ser una afirmación, que es lo que envejece sin que nadie se entere (ADR 0073)
+  ROJO   losMediosSalenDelContrato
+         regla:  ningún tipo de medio está escrito a mano en la página (ADR 0073)
+         rotura: a una copia de index.html se le planta `image/png` escrito al lado del dibujo, que es lo que puede ir en una caja degradado a una lista de formatos
+         dijo:   `index.html` tiene escrito el tipo de medio `image/png`: lo que la sección dice que se puede poner en una caja dejó de leerse del asset list y pasó a ser una afirmación, que es lo que envejece sin que nadie se entere (ADR 0073)
+  ROJO   laGlosaDelBloqueExplicaSusCampos
+         regla:  todo campo que el asset list trae está explicado en la glosa del bloque
+         rotura: el asset list gana un campo que la herramienta todavía no emitía y la glosa se queda como estaba, así que el lector lo ve en el JSON y la página no dice qué es
+         dijo:   el asset list trae `X-FIT` en el nivel `element` y la glosa no lo explica: el lector lo tiene adelante en el JSON del pliegue y la página no dice qué es
+  ROJO   laGlosaDelBloqueExplicaSusCampos
+         regla:  la glosa del bloque no explica un campo que el asset list no trae
+         rotura: la glosa se escribe a mano y le queda una fila de un campo que este archivo no declara, que se lee como que el archivo lo declara
+         dijo:   la glosa explica `opacity` en el nivel `element`, que este asset list no trae: la glosa dejó de salir del archivo que la sección muestra
+  ROJO   cadaPliegueRotulaSuAviso
+         regla:  el rótulo de un pliegue nombra el layout de su propio aviso (ADR 0075)
+         rotura: el pliegue del aviso lineal pasa a decir `lowerThirdOverlay` escrito a mano, que es un rótulo que ya no sale del asset list
+         dijo:   el pliegue 3 nombra `lowerThirdOverlay`, que su aviso no declara: el rótulo dejó de salir del asset list
+  ROJO   cadaPliegueRotulaSuAviso
+         regla:  hay un pliegue por ASSET y ninguno de menos (ADR 0075)
+         rotura: se dibujan tres pliegues para cuatro avisos, que es un aviso del break que la página no muestra en ningún lado
+         dijo:   la sección dibuja 3 pliegues y el asset list declara 4 avisos: hay un aviso sin pliegue o un pliegue sin aviso
+  ROJO   cadaPliegueRotulaSuAviso
+         regla:  el rótulo dice la duración que declara su aviso (ADR 0075)
+         rotura: el rótulo del primer pliegue se queda con los 12 s de una versión anterior del asset list
+         dijo:   el pliegue 1 no dice los 16 s que declara su aviso
+  ROJO   cadaPliegueRotulaSuAviso
+         regla:  el ordinal del rótulo es el del aviso que el pliegue tiene adentro (ADR 0075)
+         rotura: los dos primeros pliegues se rotulan al revés, que es la lista corrida un lugar
+         dijo:   el pliegue 1 se rotula "Ad 2 · squeezebackLShape · 16 s · video" y tiene adentro el aviso 1 del break: el ordinal no es el del aviso que muestra
+  ROJO   elRitmoDelGuion
+         regla:  entre dos placas consecutivas se ve partido (ADR 0037)
+         rotura: el beat de la señalización pasa a tener el mismo `lead` que el del banner, así que los dos resuelven en el mismo segundo y una placa entra pegada a la otra
+         dijo:   entre "la-senalizacion" y "el-banner" se ven 0 s de programa y el piso son 4 s: las dos placas se encadenan con un parpadeo de partido en el medio, que no falla, se ve como que la demo atropella
+  ROJO   elRitmoDelGuion
+         regla:  ninguna placa se queda en pantalla más que el tope (ADR 0037)
+         rotura: el beat de la vuelta pasa de `hold: 7` a `hold: 40`, que con el programa congelado atrás se ve como que la demo se colgó
+         dijo:   la placa "la-vuelta" se queda 40 s en pantalla y el tope son 10 s: con el programa congelado atrás, eso no se lee como una placa larga, se lee como que la demo se colgó
+
+las 20 roturas dieron rojo y los 9 chequeos dan verde sin romper nada
+✔ demo/hydration-break/test/mutaciones.mjs (70.646584ms)
+✔ toda ancla del guion cae en un break y en un aviso que existen, y frena antes (3.681955ms)
+✔ el break arranca en el corrimiento declarado de la parada del juego (0.332108ms)
+✔ el reparto de los avisos sale de plate.json y no del asset list (0.323025ms)
+✔ el minuto declara sus tres formas de aviso (0.385275ms)
+✔ la galería de formas se dibuja del contrato y no de una lista escrita a mano (0.726095ms)
+✔ lo que puede ir en una caja se lee del contrato y no está escrito en la página (0.80316ms)
+✔ cada pliegue de la señalización rotula el aviso que tiene adentro (1.083034ms)
+✔ la glosa del bloque explica los campos que el asset list trae, y ninguno más (1.443491ms)
+✔ entre dos placas se ve partido, y ninguna placa se queda (0.690175ms)
+✔ cada creativo del asset list tiene una carpeta de contenido nombrada (0.594519ms)
+✔ la clase del break es la variable de la playlist, y la página la pide con la nuestra (295.328533ms)
+✔ the L and the corner offer their HLS and then its MP4 twin, and nothing else changes (1.410839ms)
+✔ the twins never change what the library picks, under any capability (1.724143ms)
+✔ the folds of the page read the same with the twins as without them (1.059661ms)
+✔ the script signals the three breaks of the run, and every one names an asset-list of this demo (2.758725ms)
+✔ the run fits inside the 180 s of the primary, and the windows are the ones the phase declared (0.604926ms)
+✔ the playlist comes out with one Date Range of the concurrent class and two of multi view (703.779848ms)
+✔ every tag points at its own asset-list, starts where the table says, and declares its real length (903.968021ms)
+✔ the multi view tag drops X-RESTRICT and the concurrent one keeps it (782.748323ms)
+✔ the offers announce a catalogue and not a layout (0.967766ms)
+✔ the two catalogues are three views and five, and the long one is longer than the grid (0.652531ms)
+✔ the content is packaged with the configuration the five decoders were measured at (0.567503ms)
+✔ the class of the ad is the variable of the playlist, and the page asks with ours (ADR 0113) (0.540644ms)
+✔ the playlist comes out with one Date Range, of the multi view class, and no other (665.856961ms)
+✔ the window opens at the second race.json declares, and lasts what it declares (994.505404ms)
+✔ the multi view tag drops X-RESTRICT (602.12059ms)
+✔ the offer announces a catalogue and not a layout (509.256951ms)
+✔ the catalogue is the cameras that are packaged, named as race.json names them (1489.590245ms)
+✔ the cue sheet prints the seconds of the window, and they are computed and not typed (929.353293ms)
+✔ the content is packaged at 1280x720 and at the cadence of the footage (0.612438ms)
+✔ the numbers this demo runs on are declared once, in race.json (61.176121ms)
+✔ the check for typed numbers can see one (0.777661ms)
+✔ a break is placed off startTime and PLANNED-DURATION, sorted by time (2.290559ms)
+✔ PLANNED-DURATION wins over DURATION, and DURATION is the fallback (0.313001ms)
+✔ a Date Range with no start or no length is not placed (0.28639ms)
+✔ only the classes asked for are kept (0.272932ms)
+✔ fractions of the bar, clipped to it, and nothing without a length (4.608332ms)
+✔ demo/shared/test/variable-substitution.js (105.204396ms)
+✔ the same file reads as two classes, one per query parameter, and the literal one is left alone (2.712071ms)
+✔ a missing query parameter is a playlist that fails to parse (4.4.2.3) (0.806556ms)
+✔ a reference before its definition, or to no definition, fails too (6.3.1) (0.280828ms)
+✔ a name defined twice fails (4.4.2.3) (0.344414ms)
+✔ hay un break sin default y los otros con, que es lo que David pidió mostrar (1.684728ms)
+✔ el postroll: CUE="POST" en su tag y en ningún otro, con default, último, y la librería sólo toma su lineal (3640.726809ms)
+✔ el preroll: CUE="PRE" en su tag y en ningún otro, START-DATE en el origen, con default y antes que todo (3067.495766ms)
+✔ el break B lleva CUE="ONCE" en su tag, y ningún otro break lo lleva (1459.571271ms)
+✔ la librería lee el CUE de los tags que este script escribe (1504.817319ms)
+✔ una playlist: un tag por break, con la clase en la variable y la definición antes de los tags (1421.59075ms)
+✔ leída con cada parámetro, la misma playlist es toda de Apple o toda nuestra, y sin parámetro no se puede leer (1483.423128ms)
+✔ el break lineal tradicional: CLASS de Apple escrita, los dos clientes lo leen igual, sin solaparse con ningún break (1488.311558ms)
+✔ las dos lecturas de un break nombran el MISMO asset-list (1473.550681ms)
+✔ las dos lecturas de un break tienen el mismo START-DATE, y el instante es el de stage.json (1459.096052ms)
+✔ el break sin default tiene su tag de Apple pero su asset-list no tiene URI; los que tienen default, los dos (1469.387225ms)
+✔ la parte estándar dura lo que su break, y su tag lo declara: no hay tramo invertido (1460.980697ms)
+✔ el tag va en la forma de reemplazo, SIN X-RESUME-OFFSET, salvo el del break sin default, con 0, y sin X-SNAP (1489.644318ms)
+✔ cada break trae las opciones del aviso: el video y su MP4, después la imagen y su PNG (1412.964165ms)
+✔ la opción de imagen va en OTRA forma que la de video, y es de la misma campaña (1444.483999ms)
+✔ el layout de cada break es el que stage.json declara, con sus cajas, en las dos opciones (1451.889415ms)
+✔ el asset de cada break es la pieza de su campaña, en los dos medios (1449.96651ms)
+✔ each twin is its original with another medium, and nothing else changes (1469.156067ms)
+✔ the twins never change what the library picks, under any capability (1505.834836ms)
+✔ la opción de imagen de cada break es una imagen QUIETA: su SVG no tiene ninguna animación (1512.988494ms)
+✔ la librería, sobre la misma respuesta, dibuja video, imagen, el lineal o nada según la capacidad (1432.339388ms)
+✔ el control del tramo invertido se puede encender, y declara una duración que no es la del creativo (1472.94431ms)
+✔ la hoja que el script imprime sale de los archivos y no de sí misma (1410.135848ms)
+✔ la carrera sale con un tag por aviso más el de la ventana, y las dos clases son hermanas (1400.37818ms)
+✔ en la carrera la clase de los avisos es la variable, y la de la ventana va escrita (1413.375132ms)
+✔ EL ORDEN ES EL ARGUMENTO: los cuatro avisos terminan antes de que la ventana abra (1412.828072ms)
+✔ el chequeo del orden ve un aviso corrido adentro de la ventana (1377.444816ms)
+✔ la ventana abre en carrera.ofertaEn y dura lo que su asset-list declara (1399.236167ms)
+✔ el tag de la ventana no lleva X-RESTRICT y los de los avisos sí (1458.700197ms)
+✔ la oferta anuncia un catálogo y no un layout (2827.261529ms)
+✔ el catálogo son las cámaras EMPAQUETADAS, con el nombre que stage.json les da (2830.127651ms)
+✔ cada aviso de la carrera es la pieza de su campaña, en la forma que stage.json declara (1387.981865ms)
+✔ la hoja de la carrera sale de los archivos y no de sí misma (1371.644433ms)
+[signalling] AD-B-CONCURRENT: option 1 of 2 discarded, it needs 2 video decoders and concurrentVideo is 1.
+[signalling] AD-B-CONCURRENT: option 1 of 2 discarded, it needs 2 video decoders and concurrentVideo is 1.
+[signalling] AD-B-CONCURRENT: option 2 of 2 discarded, it needs an image over the video and concurrentImage is false.
+[signalling] AD-B-CONCURRENT: an ASSET carries a layout block this client cannot draw, so it falls back to the asset's own URI and plays as a linear ad (ADR 0019).
+[signalling] AD-B-CONCURRENT: an ASSET has nothing this client can play -- no usable layout block and no usable URI with a DURATION -- so THAT asset is skipped and the break is not. The assets after it keep their windows (Appendix D.5).
+[signalling] AD-B-CONCURRENT: option 1 of 2 discarded, it needs 2 video decoders and concurrentVideo is 1.
+[signalling] AD-B-CONCURRENT: option 2 of 2 discarded, it needs an image over the video and concurrentImage is false.
+[signalling] AD-B-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ identifiersOf keeps the scheme and value pairs and drops what is not one (2.286694ms)
+✔ the drawn option carries the identifiers of its Slot, whichever option it is (40.201769ms)
+✔ the linear default is the same ad played another way, and it keeps the identifiers (0.785454ms)
+✔ a skipped asset plays nothing, and the report still says which ad it was (0.769264ms)
+✔ an asset with no block has no Slot, so no identifiers (0.794186ms)
+✔ blockIdentifiers gathers the Slots of a block without repeats (0.355781ms)
+✔ slotEvents: an experience entering is a slotStart, one leaving a slotEnd, both with the identifiers (0.696863ms)
+✔ slotEvents: one ad giving way to the next is the end of the first and then the start of the second (0.3581ms)
+✔ createTracking reads the contract on every timeupdate and hands each change to onTracking (1.281818ms)
+✔ a callback that throws does not stop the next event (0.901359ms)
+✔ not due while the programme and its buffer are short of the break (1.894121ms)
+✔ due when the forward buffer reaches the start of the break (0.286689ms)
+✔ due when the programme is played or sought into the break, with nothing buffered (0.282683ms)
+✔ not due once the break is over: a seek past it does not ask for it (0.280398ms)
+✔ a break whose tag declares no length is due whenever the buffer reaches its start (0.259357ms)
+✔ no time, nothing due: before the media is there nothing is asked for (0.162212ms)
+✔ the forward buffer ends where the range around the playhead ends, and no big hole is jumped (0.338165ms)
+✔ the tolerance is hls.js's default maxBufferHole, 0.1 s (0.14059ms)
+✔ paused at 0 with the first range starting at 0.067 s, the buffer counts as ahead of the playhead (0.336996ms)
+✔ a hole at or above the tolerance is not stepped over, ahead of the playhead or between ranges (0.517564ms)
+✔ bufferedEndAt reads unsorted ranges and does not touch them (0.947421ms)
+✔ the CUE of a Date Range is read as hls.js reads it, parsed or off attr, and X-CUE as a fallback (0.464102ms)
+✔ a preroll sits where playback begins: startPosition when set, 0 otherwise (0.149886ms)
+✔ a preroll is due at once: nothing buffered, paused at 0, or with no clock at all (0.134054ms)
+✔ a break is on the list before its list is read, provisional, off its tag (0.24044ms)
+[signalling] AD-A-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-A-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ on demand: nothing is asked for until the buffer reaches the break, and the range is there from the start (16.429952ms)
+✔ on demand: a seek into the break asks for its list right there (0.8272ms)
+✔ on demand: a seek past the break does not ask for it (0.381915ms)
+✔ on demand: paused at 0 with the buffer starting at 0.067 s, the first break inside it is asked for before play (0.58816ms)
+✔ a preroll's list is asked for at load, with nothing buffered, and the break at 60 s still waits (7.655396ms)
+[signalling] MV-PRE: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ a preroll is placed where playback begins when the player was told a startPosition (4.436426ms)
+✔ a multiview preroll is asked for at load too (0.872115ms)
+✔ the live join point is hls.js's getLiveStartPos: the sync position when startPosition is unset (0.310145ms)
+✔ the live join point: a startPosition within three target durations of the sync position is the sync position (0.154372ms)
+✔ the live join point: a startPosition further behind than that is kept (DVR start) (0.117234ms)
+✔ the live join point is unknown (null) while there is no sync position and no startPosition (0.109069ms)
+✔ -1 is 0 on a VOD and the join point on a live playlist (0.131417ms)
+✔ a preroll is placed, waits for the join point, or is late (0.23301ms)
+✔ live: a preroll is placed at the live join point, not at 0, and its list is asked for at load (4.365228ms)
+✔ live: a startPosition far behind the edge (DVR) places the preroll there (0.760078ms)
+✔ live: the reloads of the playlist do not ask for the preroll again, nor move it (3.008081ms)
+✔ live: a preroll first seen on a reload after the join is not presented, as hls.js never steps back into one (48.139559ms)
+✔ live: with no join point yet the preroll waits, and is placed and asked for on the next update (2.038584ms)
+✔ live: an Apple-class preroll, reported off its tag, is placed at the join point too (0.682099ms)
+✔ with nobody focused every element comes out at the level the layout declared (6.684177ms)
+✔ the focused element comes out at full volume even when it declared 10 (0.998199ms)
+✔ everything else goes to 0 with the focus taken, the primary content included (1.231785ms)
+✔ a linear ad is on screen only while hls.js plays one of its interstitials (2.343374ms)
+✔ the programme ends by the programme's clock, and the element is trusted with no schedule (0.47257ms)
+✔ the bar marks what hls.js scheduled: the span it takes out of the programme, no post-roll, no skipped break (2.528266ms)
+✔ the kind hls.js plays has a colour and a name on the bar, and this library still draws only its own two (0.369322ms)
+✔ the programme is the element, except while a linear ad is on screen, and a seek goes where the clock comes from (0.90267ms)
+✔ an element that ends during a linear ad does not ask for the post-roll, and one that ends the programme does (16.260125ms)
+✔ the post-roll player does not start on an ended that is not the programme's (5.976198ms)
+✔ in the three shapes, no button lands on a control of the chrome (2.684678ms)
+✔ the 2x2 is the shape that needed this, and it is its fourth box (1.665116ms)
+✔ the two shapes that were right keep the screen they had (0.430717ms)
+✔ with nothing in the way the answer is the first corner, every time (0.523642ms)
+✔ when every corner is taken, the least buried one wins (1.843473ms)
+✔ the four corners are four different places, and each is inside the box (0.492938ms)
+✔ enlarging: the transform paints the whole picture back in its quadrant (8.355551ms)
+✔ shrinking: the transform paints the quadrant back over the whole picture (0.623258ms)
+✔ re-shaping: a box that changes slot when another camera goes up (0.385501ms)
+✔ a box that only moves is a translate and a scale of one (0.683606ms)
+✔ a destination equal to the origin asks for no movement at all (0.466806ms)
+✔ a destination with no area gets no transform instead of a division by zero (0.367888ms)
+✔ the origin is read and the destination is what the node is laid out at (0.532407ms)
+✔ the fixtures of the phase are the breaks the readings were taken on (5.030048ms)
+✔ a break of one asset opens at the START-DATE, which is every break of the recording (4.007606ms)
+✔ each asset begins where the one before it ended, over the breaks of three, four and two (3.470521ms)
+✔ the start of an item is an offset inside its own asset and not from the START-DATE (0.417189ms)
+✔ two ads of one break are two identities even when they share the layout (0.732877ms)
+✔ the ordinal of an ad is of the whole break, so two items of one asset are two ads (0.680807ms)
+✔ an ASSET with a URI and a DURATION and nothing else is one full-frame ad (0.605263ms)
+✔ in the mixed break the full-frame ad silences the programme and the concurrent ones do not (0.545712ms)
+✔ the three shapes this client cannot draw are the three that cannot become a box (0.388265ms)
+✔ a block this client cannot draw plays the asset own URI, and the ads around it do not move (0.695449ms)
+✔ an empty uri and a media type nobody knows are not failures of the block (0.773794ms)
+✔ none of the asset-lists the demo serves falls back, and the two linear ads are declared ones (1.09451ms)
+✔ an asset with nothing to play is skipped alone, and the ads after it keep their windows (0.87021ms)
+✔ the asset-list that cannot be read cancels the whole break, which is not skipping an asset (0.728543ms)
+✔ a list that declares no ASSETS plays nothing and reports no range (0.323803ms)
+✔ a break of several ads is one range, from the first to start to the last to end (0.68035ms)
+✔ an option asks one decoder for the primary content plus one per video element, and images apart (2.363024ms)
+✔ the four combinations of the two axes, against the same list of [video, image] (2.895844ms)
+✔ with no option left, the asset plays its default linear ad, or is skipped when it has none (0.883801ms)
+✔ every discarded option is reported with a sentence that says why (0.532883ms)
+✔ the order of the layoutOptions is the preference, and it is not re-ranked (0.434694ms)
+✔ the chosen option keeps the window of its item (0.193026ms)
+✔ without configured capabilities nothing is filtered and the first option wins (1.290127ms)
+✔ a capability that is not configured discards nothing (0.34847ms)
+✔ an item with no layoutOptions is one option, and a capability can still refuse it (0.377278ms)
+✔ a value that is not one of its axis is neither used nor sent, and it is said (0.370449ms)
+✔ the request carries one parameter per configured capability, and nothing without one (0.358144ms)
+✔ one item with no option left takes the whole asset to its default, and not only itself (0.326891ms)
+✔ the names before ADR 0104 are not read, and that is said instead of filtering on nothing (0.498459ms)
+✔ an asset-list with the key `options` of the drafts before v3 is not read as layoutOptions (0.23733ms)
+✔ the example of SVTA2053 5.3.3: backplate in video first, the same campaign as an image second (0.455223ms)
+✔ the one that lets go first does not bring the chrome down on the other (1.927331ms)
+✔ releasing twice is releasing once, and the countdown is armed once (0.336037ms)
+✔ releasing a token nobody took changes nothing (0.325249ms)
+✔ the token is the holder and not a count, so taking twice is one hold (0.319373ms)
+✔ with nobody holding, there is nothing to say (0.382206ms)
+[signalling] asset-list-linear.json: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ with nothing drawn, every element of the target is created and nothing is destroyed (4.771526ms)
+✔ with an empty target, every entry is destroyed and the composition comes back empty (1.263862ms)
+✔ with the two sides equal, everything is kept and nothing is made or let go (2.672433ms)
+✔ an element that changes box without changing identity is kept, and it is the one that moves (0.868586ms)
+✔ a change of stacking alone is a move, because the stack is geometry too (0.837146ms)
+✔ the second ad of a break recognises no box of the first one as its own (0.69653ms)
+✔ two overlapping breaks that name their boxes the same keep them apart (0.661857ms)
+✔ two boxes that name themselves not at all are two boxes and not one (0.303337ms)
+✔ applied, the composition is exactly the target: not one node more and not one less (0.894443ms)
+✔ what is leaving is taken off before what is arriving is made (0.47322ms)
+✔ for an experience that does not change, the incremental route and the total one agree (1.684558ms)
+✔ the two routes agree over a composition that changed, once it settled (0.437133ms)
+✔ the geometry of an element is its box and its place in the stack, and nothing else (0.314332ms)
+✔ two different pairs cannot share an identity, whatever the fields hold (44.568042ms)
+✔ the three moments of the mix, with the third equal to the second (5.731885ms)
+✔ and the third reading is measured against the one it must not be (0.953774ms)
+✔ a box at full frame that did not take the audio is a box nobody hears (1.829212ms)
+✔ the programme at full frame is the mix the layout declared (0.599732ms)
+✔ one button per box on the grid, on the box the picture is in (1.125847ms)
+✔ while one box is at full frame there is one button, and it is on that box (0.578585ms)
+✔ with no composition there is nothing to enlarge and nothing to draw on (0.339265ms)
+✔ the first requests of an option are its elements with a uri, the image and the playlist alike (2.57073ms)
+✔ everything loads: the first option is drawn, and the second one is never asked for (3.085865ms)
+✔ the example of SVTA2053 5.3.3: a 404 on the backplate playlist presents the second option (2.566347ms)
+✔ the next option is the next one that FITS: one the capabilities refuse is not asked for (0.597935ms)
+✔ every option that fits fails: the default linear ad is asked for, and played when it loads (3.893342ms)
+✔ the first request of the linear default fails: the asset is skipped (0.595802ms)
+✔ no option fits: the default is asked for without asking for any option, and skipped if it fails (0.597286ms)
+✔ a bare linear ad is the linear default too, and its failed first request skips it (0.294992ms)
+✔ without a default, every option failing skips the asset and nothing else is asked for (0.415087ms)
+✔ a first request that throws counts as failed (0.868908ms)
+✔ a skipped asset keeps the window of the ones after it (0.405245ms)
+✔ an item with no option left does not ask for the options of the other items of its asset (0.199872ms)
+✔ selectOption waits for a first request it does not know, and passes over one that failed (0.222908ms)
+✔ without load results nothing is asked for and every asset counts as loaded (0.269293ms)
+✔ without pre-validation every option that fits is handed over in order, and the default last (0.396225ms)
+✔ without pre-validation an option the capabilities refuse is not handed over (0.274039ms)
+✔ with pre-validation, an option whose first request failed is left out of the list, and the later ones stay (0.362739ms)
+✔ with pre-validation and everything loading, the later options are handed over unrequested (0.453189ms)
+✔ a default chosen up front is its own single option, with no default behind it (0.365971ms)
+✔ a break without a default hands over its options and no fallback (0.246406ms)
+✔ the defaults: pre-validation off, and GET (0.381141ms)
+✔ an unknown method or a non-boolean switch is warned about and falls to its default (0.271789ms)
+✔ by default no first request is made at resolution time, and the renderer gets every option (68.979794ms)
+✔ preValidateAssets: true makes the requests, with the configured method, and only discards (3.657456ms)
+✔ GET is the default method of the request (0.947798ms)
+✔ HEAD answered 200 is a pass, with one request (0.47113ms)
+✔ HEAD answered 405 or 501 is asked again with GET, and the GET decides (0.690132ms)
+✔ HEAD answered 403 is NOT retried, and the sentence names the signed-URL trap (0.37516ms)
+✔ a GET answered 405 is a failure like any other status (0.292845ms)
+✔ the touch reaches the element the composition has now, and not the one the node was made with (5.345107ms)
+✔ each node answers with its own box, and letting go still gives the declared mix back (0.906119ms)
+✔ a node the composition does not hold answers nothing at all (0.693583ms)
+✔ viewport is four inset percentages in the order top right bottom left (13.1671ms)
+✔ a viewport that is not four numbers falls back to the full frame, and warns (0.712647ms)
+✔ each of the six asset-lists resolves to one experience with its type and window (1.358578ms)
+✔ the fifteen elements come out with the ids, the uri and the mediaType of the payload (1.310681ms)
+✔ elements come out ordered by ascending zDepth in the six layouts (0.968616ms)
+✔ in squeezebackFrame the ad is the background and the primary content is on top (0.545813ms)
+✔ on an equal zDepth the order of the payload holds (0.588059ms)
+✔ the two overlays carry no primaryContent, and the layer assumes the full frame at zDepth 0 (0.983978ms)
+✔ the four layouts that do carry primaryContent keep its zDepth and its viewport (1.050291ms)
+✔ no payload of the tool carries volume: the ad comes out silent and the show does not (1.670692ms)
+✔ an explicit volume of 0 survives, because a silent ad is silent on purpose (0.585303ms)
+✔ the activation window is half open: in at startTime, out at the end (0.649153ms)
+✔ activeAt returns every experience active at that instant (0.58488ms)
+✔ the insets become the fifteen boxes in pixels T-03 measured (2.325474ms)
+✔ the conversion follows the player area, which is what a resize depends on (0.797058ms)
+[signalling] there is no shape for 5 boxes: the grid goes from 1 to 4 (ADR 0065), so nothing is composed. The cap is of the screen and it belongs to whoever keeps the selection (ADR 0066).
+✔ the shapes are the four rows of the decision, in their order (9.062773ms)
+✔ one box is the empty list, which is the way out of the multi view (1.392305ms)
+✔ every shape places every box it was asked for (2.170846ms)
+✔ the cap of the screen is the largest shape there is, and it is four (3.554934ms)
+✔ the four boxes of the full grid are the Quad already in the repository (48.346927ms)
+✔ the primary content keeps the aspect ratio of the area in the three shapes (3.953536ms)
+✔ the two halves of full height that were discarded do deform the picture (1.098719ms)
+✔ the boxes come out in reading order, and the primary content is the first (1.459773ms)
+✔ no two boxes of a shape are the same box (0.977402ms)
+✔ a count the table has no shape for composes nothing and says so (2.84642ms)
+✔ a count that is a number written as text is still that many boxes (0.836241ms)
+✔ the table cannot be edited through the list it hands over (0.664165ms)
+✔ the class of the offer is the third kind the layer translates, and the other two do not move (4.146774ms)
+✔ the window of an offer is one this layer goes and reads, and the replacement kind is not (0.758983ms)
+✔ every kind that can cross the seam has a colour and a name (3.666233ms)
+✔ the kinds this player plays are the kinds whose list it reads, and each one is drawn and named (0.763393ms)
+✔ the kind of the offer is in the three tables (0.55493ms)
+✔ the window of an offer is a range of its own kind, and that is what the bar filters by (6.108432ms)
+✔ the offer resolves to one experience with its three views, in order and with their names (1.82563ms)
+✔ a view that declares a geometry is ignored, and the layer says so (1.877157ms)
+✔ an offer with no primaryName is a usable offer (1.665528ms)
+✔ a view with no name is listed by its id, and one with no id by its place (1.731541ms)
+✔ an offer is told from an ad by the field it brings and not by its type (0.9736ms)
+✔ an offer with an empty catalogue falls back to the linear path of ADR 0019 (1.054447ms)
+✔ the window of an offer is the same sum of three numbers, offset included (1.499668ms)
+✔ an offer answers the activation window like anything else (1.339249ms)
+✔ an ad goes through the decorator as the same object, elements and all (7.541971ms)
+✔ programRanges is the one underneath, unchanged (0.942071ms)
+✔ with nothing raised the offer comes back untouched, which is the programme as it was (1.72964ms)
+✔ the control: the same shape, written by hand and legal, is accepted (1.138137ms)
+✔ a hand-written state with five boxes is refused, and the cap counts the programme (1.623142ms)
+✔ a hand-written state with the same view twice is refused (0.723976ms)
+✔ a hand-written state whose enlarged box is not on the grid is refused (0.840832ms)
+✔ a hand-written state naming a view the offer does not announce is refused (0.528511ms)
+✔ a state that is not a selection at all is refused, and each one says which (0.890855ms)
+✔ what an operation returns is frozen, so the chrome cannot re-compose the screen (1.031712ms)
+✔ raising the first view is what entering the multi view is, and there is no other door (0.916948ms)
+✔ with the grid full a view that is not up is refused, and its row says so (1.120066ms)
+✔ lowering the last view leaves one box, which is the way out and not a case of its own (0.585093ms)
+✔ lowering the box that is enlarged takes the enlargement with it (0.558906ms)
+✔ an offer that closes with views raised draws nothing, and leaves nothing behind (0.941222ms)
+✔ the programme is the first row, ticked and locked, and no gesture takes it down (1.027696ms)
+✔ the boxes are the shapes of the table, in the order the views were raised (0.671831ms)
+✔ the opening mix is the programme sounding and the views silent (0.477334ms)
+✔ a view carries its uri and its MIME into the box, which is what fills it (0.441287ms)
+✔ enlarging puts one box at full frame above the others, and leaves them where they are (0.855653ms)
+✔ the programme can be the enlarged box, because it is a box like the others (0.379319ms)
+✔ what is not on the grid cannot be enlarged, and neither can nothing (0.523674ms)
+✔ for one selection the composition is the same object, which is what the preload matches on (0.621718ms)
+✔ asking about a time ahead of now does not touch what is raised now (0.643038ms)
+✔ the handle drives the same operations, on the offer a gesture was made on (1.198478ms)
+✔ raising a view keeps every node that was already up, and only builds the new one (1.191506ms)
+✔ enlarging builds nothing and destroys nothing: it moves one box (0.681175ms)
+✔ a ONCE break is spent once it was entered and the programme is outside it (2.732053ms)
+✔ a seek over a ONCE break never entered it, so it stays (0.248712ms)
+✔ no range or no clock, nothing changes (0.263434ms)
+✔ a ONCE post-roll that has played is left out of the queue; one without ONCE is not (0.403107ms)
+✔ a ONCE break played to its end leaves the experiences and the bar, and a seek back does not draw it (15.233386ms)
+✔ a ONCE break entered and sought out of is spent too: "played" is started, then left (2.311034ms)
+✔ a seek over a ONCE break leaves it where it was, and it plays when reached (1.571342ms)
+✔ a break without ONCE is drawn again on a seek back, as before (51.598361ms)
+✔ the tracking of a ONCE break fires once: its slotStart is not repeated on a seek back (1.976709ms)
+✔ a post-roll goes at the end of the programme: details.edge on a VOD, nowhere on live (2.293856ms)
+✔ a post-roll's list is due when the playlist has ended and the programme is buffered to its end (0.259936ms)
+✔ a post-roll plays the linear default of an asset that carries a layout block, never the block (2.027778ms)
+✔ a post-roll with only a non-linear ad is skipped (0.271073ms)
+✔ a bare linear asset plays, and a skipped asset keeps the ones after it in their place (0.350676ms)
+✔ the queue is every resolved post-roll's ads, in order, and the end waits while a list is on its way (0.333429ms)
+✔ VOD: a post-roll is not asked for at load, is not on the bar, and is never active over the programme (53.401501ms)
+✔ VOD: buffered to the end, its list is asked for once, and only its linear default is kept (2.663056ms)
+✔ VOD: the programme ending counts as buffered to its end (1.026542ms)
+✔ VOD: with only a non-linear ad, the post-roll resolves to nothing (1.618555ms)
+✔ live: a post-roll has no place and is not asked for until the playlist ends (0.810092ms)
+✔ an Apple-class post-roll, reported off its tag, is placed at the end and marked (0.448164ms)
+✔ the presenter plays the linear ads after the programme ends, one after the other, and reports them (3.49338ms)
+✔ the presenter skips an ad whose first load fails and goes on to the next (2.483642ms)
+✔ going back into the programme takes the post-roll off (1.39339ms)
+✔ nothing resolved, nothing plays (1.083811ms)
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] AD-5-CONCURRENT: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ the run of the recording is five breaks, each naming an asset-list of this suite (4.718244ms)
+✔ the two classes the playlist signals become the two kinds the contract carries (0.301153ms)
+✔ the five breaks are the ten ranges T-05 read off the contract (6.566208ms)
+✔ a break of no experiences is no range, and a tag that declares no length is no range either (0.440836ms)
+✔ the window of a concurrent break spans every experience its asset-list declares (0.302461ms)
+✔ the ten ranges land where T-04 measured them on the bar (1.80858ms)
+✔ the same ten ranges on a programme of another length land somewhere else (1.322897ms)
+✔ a range that cannot be placed is not a mark (62.643203ms)
+✔ with no volume in the asset-list the ad comes out silent and the programme does not (0.961878ms)
+✔ the mix of the Quad is the one the asset-list declares, element by element (0.910108ms)
+✔ an explicit volume of 0 on the primary content survives, and it is what tells `??` from `||` (0.391076ms)
+✔ a volume that is not a number falls back to the element own default, and there are two (0.279273ms)
+✔ the order of the failover: the next option, then the default, then nothing (4.388998ms)
+✔ without a default, the last option failing is a skip (0.467095ms)
+✔ an experience with no options never fails over, and is presented as it comes (0.413694ms)
+✔ with nothing failed, what is presented is the experience itself (0.420727ms)
+✔ a later option is presented as a copy with its own key, the same ad and the same window (0.808777ms)
+✔ an asset gone to its default is presented by the default inside the default's window, and by no item (0.518592ms)
+✔ an asset skipped is presented by nothing, and the programme goes on alone (1.575992ms)
+✔ the failover of one ad does not touch another ad of another asset (0.526526ms)
+✔ two boxes overlap when they share area, and touching edges do not count (2.757626ms)
+✔ side by side: the primary content goes above the ad it does not overlap (0.723566ms)
+✔ L-shape: the backplate stays under the picture, as declared (0.492512ms)
+✔ lower third: the banner stays over the programme, as declared (0.332674ms)
+✔ an overlay declared above the picture stays above it even when the picture is lifted (0.60701ms)
+✔ a multi view with one box enlarged: the enlarged box covers everything, the rest under the picture (0.400205ms)
+✔ without a primary content, or with nothing disjoint from it, the order is the declared one (2.05688ms)
+[signalling] asset-list-linear.json: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] asset-list-mezclado.json: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] asset-list-repliegue-bloque-roto.json: an ASSET carries a layout block this client cannot draw, so it falls back to the asset's own URI and plays as a linear ad (ADR 0019).
+[signalling] asset-list-mezclado.json: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+[signalling] asset-list-mezclado.json: an ASSET carries no layout block, so it is a linear ad and plays its own URI full frame (ADR 0019).
+✔ the ads that are drawn a layout fade, and the one at full frame does not (7.235758ms)
+✔ inside one break the answer is per ad and not per break (3.787238ms)
+✔ the fallback of ADR 0019 lands on the side of the full-frame ad (0.909541ms)
+✔ the label this file copies is the one the layer underneath writes (0.233926ms)
+✔ an experience with no type at all still fades (0.264248ms)
+✔ what is left of a window is the window minus where the playhead is (0.492994ms)
+✔ the ad of a break that does not start at zero is read against its own window (0.779022ms)
+✔ the middle of a window is not leaving, on either lead (0.447036ms)
+✔ a frame inside the lead is leaving and a frame outside it is not (0.468153ms)
+✔ before the window opens nothing is leaving, and after it closes everything is (0.816706ms)
+✔ a window shorter than its own transition is leaving from its first frame (0.310048ms)
+✔ a window of zero length is leaving the moment it opens (0.222476ms)
+✔ a playhead that is not a number is not leaving (0.315258ms)
+✔ the three durations are the ones the phase declared, and the way out is the shortest (0.263566ms)
+✔ a still is told apart from a video, including when nothing is declared (0.217625ms)
+✔ the ad the phase fades is a still, so the two rules meet on the banner (0.279894ms)
+✔ with room on the grid the list says nothing, because there is nothing to explain (15.183895ms)
+✔ with the grid full the line is there, and it names the cap of the screen (1.807302ms)
+✔ a full grid with nothing left to raise says nothing either (1.447047ms)
+✔ the line is decided by the flag the state ships and not by counting ticks (1.014404ms)
+ℹ tests 378
+ℹ suites 0
+ℹ pass 378
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 56141.095275
+exit 0

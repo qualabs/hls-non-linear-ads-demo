@@ -6587,3 +6587,12 @@ Rama `fase-18`, `8f3aa53`: `dash/README.md` con la regla; README, `docs/`, `CLAU
 comentarios fuera de `demo/` ya no nombran rutas movidas (la búsqueda da vacío; sobre `0739c38`
 encuentra 29 archivos). Las 18 líneas que quedan en `demo/` son publicadas y quedan para la fase
 DASH.
+
+## 2026-10-26 — Fase 18, T-05, y fase cerrada
+
+Contra `0739c38`: 378/378, check verde, la corrida en seco con 0 faltantes, 0 borrados y los mismos
+señalizados; sus 11 copias son exactamente los 11 archivos que `comparar-publicacion.mjs` admite (el
+dist en cada demo y los seis tests de demo), y el comparador da verde. Merge `--no-ff` a main local
+(`aab6382`), sin push; el `dist/` de main no se reconstruyó. El próximo push publica un dist nuevo
+en las cinco demos con el mismo comportamiento. Informe en
+`phases/18-hls-y-dash-lado-a-lado/REPORT.md`.
