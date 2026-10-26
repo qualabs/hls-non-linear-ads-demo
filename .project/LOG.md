@@ -6560,3 +6560,9 @@ que el cambio es inerte, con un script que quede en el repo (ADR 0118).
 la pregunta que reparte la librería y el grep del 0003 sobre `lib/` entera (0116, generaliza el
 0020), el reparto de `signalling.js` (0117), la comparación de publicaciones (0118), y `demo/`
 intacta con `dash/` y su regla (0119).
+
+## 2026-10-26 — Fase 18, T-01: el comparador de publicaciones
+
+`scripts/comparar-publicacion.mjs` (rama `fase-18`, `3422cbb`): verde contra sí mismo en `0739c38`,
+y su `--control` saca cada uno de los 14 plantados como debe. Línea de base guardada en
+`phases/18-hls-y-dash-lado-a-lado/tasks/T-01/`.
