@@ -6554,3 +6554,18 @@ Opción A de David. ADR 0116.
   respuesta del reporte en lugar de pedirla otra vez.
 - Tests: `test/asset-list-response.test.js`. Smoke en Chrome headless en el 8091 (detenido por PID;
   8090 no se tocó): un pedido por asset-list.
+
+## 2026-10-26 — `onPresented` del default que también falla
+
+Corrección aprobada por David. Nota fechada en el ADR 0107.
+
+- **Causa:** en `lib/renderer.js`, `failed()` ponía el asset en `{ kind: 'skip' }` antes de
+  `report(..., 'skipped')`; `recordsOf()` ya no reconocía al default como tal y no encontraba los
+  avisos por los que hablaba, así que `onPresented` no se llamaba (PRE, B y C de
+  `inspect.html?modo=ours-2dec-noimg` sin línea de resultado).
+- **Corrección:** los registros se leen antes de mover el estado; un salteo reporta a todos los
+  items vistos del asset con `presented: null` y todos los intentos (opciones y default); un item
+  del asset visto por primera vez después se reporta con el resultado guardado del asset.
+- Tests: `test/renderer-on-presented.test.js` (renderer sobre un documento falso: default que falla,
+  default que carga, asset sin default, lineal suelto, dos items de un asset) y dos casos más en
+  `test/post-roll.test.js` (forma del reporte del default que falla en el post-roll).

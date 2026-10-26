@@ -287,6 +287,22 @@ test('the presenter skips an ad whose first load fails and goes on to the next',
     await flush();
     assert.deepEqual(attached, ['/one.m3u8', '/two.m3u8']);
     assert.deepEqual(presented.map((m) => m.outcome), ['skipped', 'presented']);
+    // The skip says which default failed and why, as the renderer's does.
+    assert.equal(presented[0].presented, null);
+    assert.deepEqual(presented[0].attempts.map((a) => [a.index, a.linear, a.uri, a.reason]),
+      [[null, true, '/one.m3u8', 'failed to load /one.m3u8 (HTTP 404)']]);
+  } finally { restore(); }
+});
+
+test('the presenter reports every default that fails, once each, and plays nothing', async () => {
+  const { handle, video, presented, restore } = withPresenter([{ state: 'resolved', experiences: ads() }],
+    { fail: ['/one.m3u8', '/two.m3u8'] });
+  try {
+    video.fire('ended');
+    await flush();
+    assert.equal(handle.playing, false);
+    assert.deepEqual(presented.map((m) => [m.itemId, m.outcome, m.presented, m.attempts.length]),
+      [['POST.0', 'skipped', null, 1], ['POST.1', 'skipped', null, 1]]);
   } finally { restore(); }
 });
 
