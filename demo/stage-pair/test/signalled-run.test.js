@@ -25,7 +25,7 @@
 //
 // El ADR 0085: la respuesta es UNA, la misma para cualquier capacidad, y quien
 // elige es la librería. Por eso el último test de esta sección le pasa los
-// archivos escritos a `resolveAssetList` bajo las cuatro combinaciones del
+// archivos escritos a `resolveAssets` bajo las cuatro combinaciones del
 // control y mira qué sale: es la única forma de saber que lo que la demo sirve y
 // lo que la librería filtra encajan.
 //
@@ -46,7 +46,7 @@ import { fileURLToPath } from 'node:url';
 import { LINEAR_TYPE, MAX_BOXES } from '../../../lib/experience.js';
 import { selectOption, usableCapabilities } from '../../../lib/capabilities.js';
 import {
-  CONCURRENT_CLASS, INTERSTITIAL_CLASS, MULTIVIEW_CLASS, resolveAssetList
+  CONCURRENT_CLASS, INTERSTITIAL_CLASS, MULTIVIEW_CLASS, resolveAssets
 } from '../../../hls/signalling.js';
 import { substitute, withClass } from '../../shared/test/variable-substitution.js';
 
@@ -555,7 +555,7 @@ test('la librería, sobre la misma respuesta, dibuja video, imagen, el lineal o 
     const { warn, log } = console;
     console.warn = console.log = () => {};
     try {
-      return resolveAssetList(lista(brk.concurrente), {
+      return resolveAssets(lista(brk.concurrente), {
         id: brk.id, slotStart: brk.offset, capabilities: usableCapabilities(capacidad)
       }).map((e) => (e.type === LINEAR_TYPE ? 'lineal' : e.elements.find((x) => !x.primary).mediaType));
     } finally { console.warn = warn; console.log = log; }

@@ -98,7 +98,7 @@ export function usableUri(asset) {
  * What happens to ONE asset of a list, decided and not yet acted on: the items
  * narrowed to their options, the payload this client can draw or `null`, the
  * asset's own `URI` and `DURATION`, the first requests it is still waiting on,
- * and whether the first request for its default failed. `resolveAssetList`
+ * and whether the first request for its default failed. `resolveAssets`
  * acts on it and `pendingFirstRequests` only reads `pending`, so the two cannot
  * disagree about which request an asset needs next.
  *
@@ -127,11 +127,11 @@ function decideAsset(asset, capabilities, loads) {
  * given the ones already answered in `loads`: for each asset, those of the
  * first option that fits and has not failed, or those of its default when no
  * option is left. Each `{ uri, mediaType }` once, however many assets share it.
- * Empty means `resolveAssetList` can run with `loads` and decide everything.
+ * Empty means `resolveAssets` can run with `loads` and decide everything.
  */
-export function pendingFirstRequests(assetList, { capabilities = null, loads }) {
+export function pendingFirstRequests(adList, { capabilities = null, loads }) {
   const seen = new Map();
-  for (const asset of Array.isArray(assetList?.ASSETS) ? assetList.ASSETS : []) {
+  for (const asset of Array.isArray(adList?.ASSETS) ? adList.ASSETS : []) {
     for (const request of decideAsset(asset, capabilities, loads).pending) {
       if (!seen.has(request.uri)) seen.set(request.uri, request);
     }
@@ -140,7 +140,7 @@ export function pendingFirstRequests(assetList, { capabilities = null, loads }) 
 }
 
 /**
- * `resolveAssetList` with PRE-VALIDATION in it: the up-front half of the "Asset
+ * `resolveAssets` with PRE-VALIDATION in it: the up-front half of the "Asset
  * load failure" of SVTA2053 5.3.3 (ADR 0106, and since ADR 0107 an optional
  * step, `preValidateAssets`). Before the list is handed over, the first request
  * for each asset of the first option that fits is made -- the playlist its
@@ -175,15 +175,15 @@ export function pendingFirstRequests(assetList, { capabilities = null, loads }) 
  * back over it. The answers live for one asset-list and are not shared between
  * breaks.
  *
- * Returns the experiences, as `resolveAssetList` does, and fills `requests`,
+ * Returns the experiences, as `resolveAssets` does, and fills `requests`,
  * when given, with every first request made: `{ uri, ok, error, method }`.
  */
-export async function resolveWithFirstRequests(assetList, {
+export async function resolveWithFirstRequests(adList, {
   id, slotStart, capabilities = null, report = null, firstRequest, requests = null
 }) {
   const loads = new Map();
-  for (let round = pendingFirstRequests(assetList, { capabilities, loads }); round.length;
-    round = pendingFirstRequests(assetList, { capabilities, loads })) {
+  for (let round = pendingFirstRequests(adList, { capabilities, loads }); round.length;
+    round = pendingFirstRequests(adList, { capabilities, loads })) {
     await Promise.all(round.map(async ({ uri, mediaType }) => {
       let answer;
       try {
@@ -196,7 +196,7 @@ export async function resolveWithFirstRequests(assetList, {
       requests?.push(answer?.method ? { uri, ...load, method: answer.method } : { uri, ...load });
     }));
   }
-  return resolveAssetList(assetList, { id, slotStart, capabilities, report, loads });
+  return resolveAssets(adList, { id, slotStart, capabilities, report, loads });
 }
 
 /**
@@ -262,9 +262,9 @@ export async function resolveWithFirstRequests(assetList, {
  * nothing when an asset fails to load on screen, and what it ends up
  * presenting is reported by the renderer (`onPresented`), not here.
  */
-export function resolveAssetList(assetList, { id, slotStart, capabilities = null, report = null, loads = null }) {
+export function resolveAssets(adList, { id, slotStart, capabilities = null, report = null, loads = null }) {
   const out = [];
-  const assets = assetList?.ASSETS;
+  const assets = adList?.ASSETS;
   // The third rung of Appendix D.5, and the whole of it: a list with no assets
   // resolves by APPLYING THE OFFSET AND PLAYING NOTHING. Under this render
   // there is no offset to apply, because the primary was never stopped -- so
@@ -592,13 +592,13 @@ export function postRollDue({ sourceClosed = false, bufferedToEnd = false } = {}
  * their own clock (lib/postroll.js), one after the other, each to the end of
  * its asset (ADR 0019).
  *
- * `report`, when given, receives one entry per asset, as `resolveAssetList`
+ * `report`, when given, receives one entry per asset, as `resolveAssets`
  * writes them: `outcome` is `default` (it carried a layout block, and its
  * linear default is what plays), `linear` (no block) or `skipped`.
  */
-export function resolvePostRoll(assetList, { id, slotStart, report = null }) {
+export function resolvePostRoll(adList, { id, slotStart, report = null }) {
   const out = [];
-  const assets = Array.isArray(assetList?.ASSETS) ? assetList.ASSETS : [];
+  const assets = Array.isArray(adList?.ASSETS) ? adList.ASSETS : [];
   let assetStart = 0;
   for (const [assetIndex, asset] of assets.entries()) {
     const uri = usableUri(asset);
@@ -651,7 +651,7 @@ export const IMAGE_OVER_VIDEO_PARAM = 'sgai-image-over-video';
  * on the request at all is the caller's choice (`sendCapabilities`, ADR 0104),
  * made by passing `null` here.
  */
-export function assetListUrl(uri, base, capabilities = null) {
+export function listRequestUrl(uri, base, capabilities = null) {
   const url = new URL(uri, base);
   if (capabilities?.concurrentVideo != null) {
     url.searchParams.set(VIDEO_DECODERS_PARAM, String(capabilities.concurrentVideo));
@@ -921,7 +921,7 @@ export function createProgramme(hls, video) {
  * `onResolved(experiences, selection)` gets, as its second argument, what the
  * intermediate step of ADR 0085 did with this break: the URL that was asked
  * for, and per asset what was offered, what was discarded and why, and how the
- * asset ended (see `resolveAssetList`). It is called for a break that resolved
+ * asset ended (see `resolveAssets`). It is called for a break that resolved
  * to nothing too, because a skipped break is exactly what a page has to be able
  * to show. `requests` in it lists every first request made for the break,
  * `{ uri, ok, error }`, and is empty without `firstRequest`.
@@ -1106,7 +1106,7 @@ export function createSignalling(hls, {
         postRolls.set(id, {
           id, kind, dateRange, once, state: 'waiting', startTime: null, experiences: [],
           url: KINDS_RESOLVED.has(kind)
-            ? assetListUrl(dateRange.attr['X-ASSET-LIST'], details.url || location.href, sendCapabilities ? declared : null)
+            ? listRequestUrl(dateRange.attr['X-ASSET-LIST'], details.url || location.href, sendCapabilities ? declared : null)
             : null
         });
         continue;
@@ -1127,7 +1127,7 @@ export function createSignalling(hls, {
         if (range) ranges.push(range);
         continue;
       }
-      const url = assetListUrl(dateRange.attr['X-ASSET-LIST'], details.url || location.href,
+      const url = listRequestUrl(dateRange.attr['X-ASSET-LIST'], details.url || location.href,
         sendCapabilities ? declared : null);
       toResolve.push({
         id, url, slotStart, kind, pre, dateRange,
@@ -1268,7 +1268,7 @@ export function createSignalling(hls, {
         ? await resolveWithFirstRequests(assetList, {
           id, slotStart, capabilities: declared, report, firstRequest: request, requests
         })
-        : resolveAssetList(assetList, { id, slotStart, capabilities: declared, report });
+        : resolveAssets(assetList, { id, slotStart, capabilities: declared, report });
       drop();
       // A ONCE break already played while its list was on its way stays gone (ADR 0112).
       if (onces.get(id)?.spent) return;

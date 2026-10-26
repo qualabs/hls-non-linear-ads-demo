@@ -52,7 +52,7 @@ import {
 } from '../lib/experience.js';
 import {
   BLOCK,
-  resolveAssetList,
+  resolveAssets,
   usableUri
 } from '../hls/signalling.js';
 
@@ -88,7 +88,7 @@ function resolveWithConsole(name, { id = ID, slotStart = SLOT_START } = {}) {
     console[level] = (...args) => said[level].push(args.join(' '));
   }
   try {
-    return { experiences: resolveAssetList(list(name), { id, slotStart }), said };
+    return { experiences: resolveAssets(list(name), { id, slotStart }), said };
   } finally {
     Object.assign(console, original);
   }
@@ -187,7 +187,7 @@ test('the start of an item is an offset inside its own asset and not from the ST
     ]
   };
   assert.deepEqual(
-    resolveAssetList(twoAssets, { id: ID, slotStart: SLOT_START }).map((e) => e.startTime),
+    resolveAssets(twoAssets, { id: ID, slotStart: SLOT_START }).map((e) => e.startTime),
     [23, 35]
   );
 });
@@ -232,7 +232,7 @@ test('the ordinal of an ad is of the whole break, so two items of one asset are 
       { URI: '/b.m3u8', DURATION: 12, [BLOCK]: { payload: [ad('third', 0)] } }
     ]
   };
-  const resolved = resolveAssetList(twoInOne, { id: ID, slotStart: SLOT_START });
+  const resolved = resolveAssets(twoInOne, { id: ID, slotStart: SLOT_START });
   assert.deepEqual(resolved.map((e) => e.itemId), [`${ID}.0`, `${ID}.1`, `${ID}.2`]);
   assert.deepEqual(resolved.map((e) => e.startTime), [20, 26, 32]);
 
@@ -382,7 +382,7 @@ test('an empty uri and a media type nobody knows are not failures of the block',
   ));
   assert.deepEqual([...uris], [''], 'the tool emits an empty uri on every element of the six');
   for (const type of Object.keys(TOOL)) {
-    const [experience] = resolveAssetList(TOOL[type], { id: ID, slotStart: SLOT_START });
+    const [experience] = resolveAssets(TOOL[type], { id: ID, slotStart: SLOT_START });
     assert.equal(experience.type, type, `${type} keeps the layout the tool declared`);
     assert.notEqual(experience.type, LINEAR_TYPE, `${type} does not fall back`);
   }
@@ -406,7 +406,7 @@ test('an empty uri and a media type nobody knows are not failures of the block',
       }
     }]
   };
-  const [drawn] = resolveAssetList(exotic, { id: ID, slotStart: SLOT_START });
+  const [drawn] = resolveAssets(exotic, { id: ID, slotStart: SLOT_START });
   assert.equal(drawn.type, 'cornerOverlay');
   assert.equal(drawn.elements.find((e) => !e.primary).mediaType, 'video/x-nothing-plays-this');
 
@@ -516,7 +516,7 @@ test('a list that declares no ASSETS plays nothing and reports no range', () => 
     const original = console.warn;
     console.warn = () => {};
     try {
-      return resolveAssetList(assetList, { id: ID, slotStart: SLOT_START });
+      return resolveAssets(assetList, { id: ID, slotStart: SLOT_START });
     } finally {
       console.warn = original;
     }
