@@ -18,7 +18,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { BLOCK, LINEAR_TYPE, resolveAssetList } from '../lib/signalling.js';
+import { LINEAR_TYPE } from '../lib/experience.js';
+import { BLOCK, resolveAssetList } from '../hls/signalling.js';
 import { identityOf, nextAfterFailure, presentedAt, variantOf } from '../lib/renderer.js';
 
 const ID = 'AD-B-CONCURRENT';

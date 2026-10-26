@@ -27,7 +27,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { CONCURRENT_CLASS, INTERSTITIAL_CLASS } from '../../../lib/signalling.js';
+import { CONCURRENT_CLASS, INTERSTITIAL_CLASS } from '../../../hls/signalling.js';
 import { substitute } from '../../shared/test/variable-substitution.js';
 
 const DEMO = fileURLToPath(new URL('..', import.meta.url));

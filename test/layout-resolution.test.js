@@ -28,12 +28,12 @@ import {
   parseViewport,
   resolveElement,
   resolveExperience,
-  resolveAssetList,
   activeAt,
   DEFAULT_AD_VOLUME,
   DEFAULT_PRIMARY_VOLUME,
   FULL_FRAME
-} from '../lib/signalling.js';
+} from '../lib/experience.js';
+import { resolveAssetList } from '../hls/signalling.js';
 import { boxToPixels } from '../lib/renderer.js';
 
 /**

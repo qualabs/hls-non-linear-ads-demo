@@ -18,7 +18,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { resolveElement } from '../lib/signalling.js';
+import { resolveElement } from '../lib/experience.js';
 import { overlaps, stackingOf } from '../lib/renderer.js';
 
 const el = (id, viewport, zDepth, primary = false) =>

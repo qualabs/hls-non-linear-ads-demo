@@ -22,20 +22,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
+import { LINEAR_TYPE } from '../lib/experience.js';
 import {
-  BLOCK,
-  LINEAR_TYPE,
   PRE_VALIDATE_METHODS,
-  createSignalling,
   firstRequestsOf,
-  pendingFirstRequests,
-  resolveAssetList,
-  resolveWithFirstRequests,
   selectOption,
   usableCapabilities,
   usablePreValidation
-} from '../lib/signalling.js';
-import { firstRequest as mediaFirstRequest } from '../lib/media.js';
+} from '../lib/capabilities.js';
+import {
+  BLOCK,
+  createSignalling,
+  pendingFirstRequests,
+  resolveAssetList,
+  resolveWithFirstRequests
+} from '../hls/signalling.js';
+import { firstRequest as mediaFirstRequest } from '../hls/media.js';
 
 const ID = 'AD-A-CONCURRENT';
 const SLOT_START = 20;

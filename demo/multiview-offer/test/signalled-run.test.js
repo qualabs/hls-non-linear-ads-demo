@@ -39,7 +39,7 @@ import { fileURLToPath } from 'node:url';
  * never meet. Now that both are in `KIND_OF_CLASS`, importing them is what makes
  * that impossible to get wrong, instead of something a test asserts about a copy.
  */
-import { CONCURRENT_CLASS, MULTIVIEW_CLASS } from '../../../lib/signalling.js';
+import { CONCURRENT_CLASS, MULTIVIEW_CLASS } from '../../../hls/signalling.js';
 import { substitute, withClass } from '../../shared/test/variable-substitution.js';
 
 const DEMO = fileURLToPath(new URL('..', import.meta.url));
