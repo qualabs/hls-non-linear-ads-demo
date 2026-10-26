@@ -6540,3 +6540,23 @@ lineal. Las siete tasks `done`; falta cerrar la fase (Mode D).
 
 Las siete tasks `done`; informe en `phases/17-png-y-mp4-para-el-roku/REPORT.md`. Deja una idea en el
 roadmap: `creative-png-del-banner-sin-no-cache`.
+
+## 2026-10-26 — Diseño de la fase: HLS y DASH lado a lado
+
+Nicolás aprobó el plan (despacho de agent-nicolas-laptop-865daf a hls-demo-18; David Hassoun al
+tanto): `lib/` lo común, `hls/` lo de HLS, `dash/` vacía, sin cambiar lo que hace la demo, para que
+la fase siguiente prototipe SVTA2053 v3 sobre DASH. Diseño en
+`roadmap/hls-y-dash-lado-a-lado/DESIGN.md`. La línea de base de `0739c38`: 378/378, check verde, y la
+corrida en seco de las cinco demos con 0 para copiar y 0 para borrar.
+
+Lo que el diseño encontró y se resolvió antes de generar: ninguna reestructura de `lib/` deja el
+dist byte a byte igual (el build etiqueta cada fuente con su ruta), y los tests de las cinco demos,
+que se publican, importan de `lib/signalling.js`. Nicolás aceptó que cambien siempre que se pruebe
+que el cambio es inerte, con un script que quede en el repo (ADR 0118).
+
+## 2026-10-26 — Fase generada: HLS y DASH lado a lado
+
+`PHASE.md` y `TASKS.md` (cinco tasks) en `roadmap/hls-y-dash-lado-a-lado/`, y los ADR 0116 a 0119:
+la pregunta que reparte la librería y el grep del 0003 sobre `lib/` entera (0116, generaliza el
+0020), el reparto de `signalling.js` (0117), la comparación de publicaciones (0118), y `demo/`
+intacta con `dash/` y su regla (0119).
