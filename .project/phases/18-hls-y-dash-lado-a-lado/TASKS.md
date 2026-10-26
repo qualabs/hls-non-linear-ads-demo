@@ -1,9 +1,9 @@
-# Tasks — fase hls-y-dash-lado-a-lado
+# Tasks — fase 18-hls-y-dash-lado-a-lado
 
 | id | brief | status | who | plan | evidence |
 | --- | --- | --- | --- | --- | --- |
-| T-01 | `scripts/comparar-publicacion.mjs`, y la línea de base | planned | agent | — | — |
-| T-02 | La partición: `lib/`, `hls/`, el build y los imports | planned | agent | — | — |
+| T-01 | `scripts/comparar-publicacion.mjs`, y la línea de base | done | agent | — | rama `fase-18` · [`tasks/T-01/`](tasks/T-01/) |
+| T-02 | La partición: `lib/`, `hls/`, el build y los imports | in-progress | agent | — | — |
 | T-03 | Las costuras y la publicación con `hls/` | planned | agent | — | — |
 | T-04 | `dash/README.md` y la documentación que la mudanza dejó falsa | planned | agent | — | — |
 | T-05 | La verificación contra `0739c38`, y el merge a main local | planned | agent | — | — |
