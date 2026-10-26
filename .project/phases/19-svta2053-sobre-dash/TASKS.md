@@ -2,7 +2,7 @@
 
 | id | brief | status | who | plan | evidence |
 | --- | --- | --- | --- | --- | --- |
-| T-01 | Los riesgos medidos: el evento del MPD, el creativo que no carga, el Replace | planned | agent | — | — |
+| T-01 | Los riesgos medidos: el evento del MPD, el creativo que no carga, el Replace | done | agent | — | [`tasks/T-01/`](tasks/T-01/) · ADR 0128 |
 | T-02 | Lo común de `hls/` sube a `lib/` | planned | agent | — | — |
 | T-03 | `dash/signalling.js` | planned | agent | — | — |
 | T-04 | Los tests de `dash/signalling.js`, vistos fallar | planned | agent | — | — |

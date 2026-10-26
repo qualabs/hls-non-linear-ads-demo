@@ -1,0 +1,214 @@
+{
+ "after8s_count": 20,
+ "log": [
+  {
+   "k": "interceptor-mpd",
+   "hasReplace": true,
+   "url": "/main/manifest.mpd",
+   "ms": 256
+  },
+  {
+   "k": "main-manifest-loaded",
+   "ct": 0,
+   "ms": 262
+  },
+  {
+   "k": "cre",
+   "name": "init404",
+   "what": "MANIFEST_LOADED",
+   "since": 102,
+   "ms": 269
+  },
+  {
+   "k": "cre",
+   "name": "ok",
+   "what": "MANIFEST_LOADED",
+   "since": 161,
+   "ms": 271
+  },
+  {
+   "k": "cre",
+   "name": "media404",
+   "what": "MANIFEST_LOADED",
+   "since": 31,
+   "ms": 273
+  },
+  {
+   "k": "event",
+   "scheme": "urn:svta:advertising-wg:ad-creative-signaling#receive",
+   "type": "urn:svta:advertising-wg:ad-creative-signaling",
+   "id": 1,
+   "pt": 0,
+   "dur": 10,
+   "ct": 0,
+   "msg": null,
+   "rawMsg": null,
+   "parsed": "null",
+   "hasManifest": true,
+   "parsedOnEvent": null,
+   "ms": 341
+  },
+  {
+   "k": "event",
+   "scheme": "urn:svta:advertising-wg:ad-creative-signaling#receive",
+   "type": "urn:svta:advertising-wg:ad-creative-signaling",
+   "id": 2,
+   "pt": 45,
+   "dur": 12,
+   "ct": 0,
+   "msg": null,
+   "rawMsg": null,
+   "parsed": "null",
+   "hasManifest": true,
+   "parsedOnEvent": null,
+   "ms": 341
+  },
+  {
+   "k": "event",
+   "scheme": "urn:svta:advertising-wg:ad-creative-signaling#receive",
+   "type": "urn:svta:advertising-wg:ad-creative-signaling",
+   "id": 4,
+   "pt": 130,
+   "dur": 5,
+   "ct": 0,
+   "msg": "{\"version\":2,\"type\":\"pod\",\"plain\":true}",
+   "rawMsg": "\"{\\\"version\\\":2,\\\"type\\\":\\\"pod\\\",\\\"plain\\\":true}\"",
+   "parsed": "null",
+   "hasManifest": true,
+   "parsedOnEvent": null,
+   "ms": 341
+  },
+  {
+   "k": "event",
+   "scheme": "urn:svta:advertising-wg:ad-creative-signaling#receive",
+   "type": "urn:svta:advertising-wg:ad-creative-signaling",
+   "id": 3,
+   "pt": 120,
+   "dur": 12,
+   "ct": 0,
+   "msg": null,
+   "rawMsg": null,
+   "parsed": "null",
+   "hasManifest": true,
+   "parsedOnEvent": null,
+   "ms": 342
+  },
+  {
+   "k": "event",
+   "scheme": "urn:mpeg:dash:event:alternativeMPD:replace:2025",
+   "type": "urn:mpeg:dash:event:alternativeMPD:replace:2025",
+   "id": 9,
+   "pt": 90,
+   "dur": 10,
+   "ct": 0,
+   "msg": null,
+   "rawMsg": null,
+   "parsed": "null",
+   "hasManifest": true,
+   "parsedOnEvent": null,
+   "ms": 342
+  },
+  {
+   "k": "cre",
+   "name": "ok",
+   "what": "STREAM_INITIALIZED",
+   "since": 271,
+   "ms": 381
+  },
+  {
+   "k": "cre",
+   "name": "media404",
+   "what": "STREAM_INITIALIZED",
+   "since": 140,
+   "ms": 383
+  },
+  {
+   "k": "event",
+   "scheme": "urn:svta:advertising-wg:ad-creative-signaling#start",
+   "type": "urn:svta:advertising-wg:ad-creative-signaling",
+   "id": 1,
+   "pt": 0,
+   "dur": 10,
+   "ct": 0,
+   "msg": null,
+   "rawMsg": null,
+   "parsed": "null",
+   "hasManifest": true,
+   "parsedOnEvent": null,
+   "ms": 383
+  },
+  {
+   "k": "main-playing",
+   "ct": 0.0003,
+   "ms": 392
+  },
+  {
+   "k": "cre",
+   "name": "ok",
+   "what": "video:loadeddata",
+   "since": 282,
+   "ms": 392
+  },
+  {
+   "k": "cre",
+   "name": "ok",
+   "what": "CAN_PLAY",
+   "since": 282,
+   "ms": 392
+  },
+  {
+   "k": "cre",
+   "name": "ok",
+   "what": "PLAYBACK_PLAYING",
+   "since": 282,
+   "ms": 393
+  },
+  {
+   "k": "cre",
+   "name": "mpd404",
+   "what": "ERROR",
+   "since": 1626,
+   "code": 25,
+   "message": "/nope/manifest.mpd is not available",
+   "ms": 1778
+  },
+  {
+   "k": "cre",
+   "name": "init404",
+   "what": "ERROR",
+   "since": 3217,
+   "code": 28,
+   "message": "http://127.0.0.1:8195/cre-segfail/init-0.m4s is not available",
+   "ms": 3384
+  },
+  {
+   "k": "cre",
+   "name": "media404",
+   "what": "ERROR",
+   "since": 3159,
+   "code": 27,
+   "message": "http://127.0.0.1:8195/cre-medfail/seg-0-1.m4s is not available",
+   "ms": 3402
+  },
+  {
+   "k": "main-playing",
+   "ct": 40.0009,
+   "ms": 8293
+  },
+  {
+   "k": "event",
+   "scheme": "urn:svta:advertising-wg:ad-creative-signaling#start",
+   "type": "urn:svta:advertising-wg:ad-creative-signaling",
+   "id": 2,
+   "pt": 45,
+   "dur": 12,
+   "ct": 45.0852,
+   "msg": null,
+   "rawMsg": null,
+   "parsed": "null",
+   "hasManifest": true,
+   "parsedOnEvent": null,
+   "ms": 13377
+  }
+ ]
+}
