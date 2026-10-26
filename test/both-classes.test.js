@@ -110,7 +110,7 @@ test('an element that ends during a linear ad does not ask for the post-roll, an
     interstitialsManager: manager({ playing: 'AD-LINEAR', at: 150 }) };
   const asked = [];
   const realFetch = globalThis.fetch;
-  globalThis.fetch = async (url) => { asked.push(String(url)); return { json: async () => ({ ASSETS: [] }) }; };
+  globalThis.fetch = async (url) => { asked.push(String(url)); return { text: async () => JSON.stringify({ ASSETS: [] }) }; };
   const { log, warn } = console;
   console.log = console.warn = () => {};
   try {

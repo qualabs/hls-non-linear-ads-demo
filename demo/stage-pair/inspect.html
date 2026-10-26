@@ -40,13 +40,15 @@
   Apple's -- and none for the break with no linear default. Both name the same
   asset-list.
 
-  TWO, WHAT THE CLIENT ASKED FOR. The URL that went out, read off the
-  performance timeline, with the two capability parameters picked out of it
-  (ADR 0086, ADR 0104). The switch above moves them.
+  TWO, WHAT THE CLIENT ASKED FOR. The URL that went out, as the player got its
+  answer from it, with the two capability parameters picked out of it (ADR
+  0086, ADR 0104). The switch above moves them.
 
-  THREE, WHAT CAME BACK. The body of that same URL, verbatim -- and it is THE
-  SAME for every position of the switch, because the answer carries every
-  option of the ad (ADR 0085).
+  THREE, WHAT CAME BACK. The answer to that same request, as the player
+  received it, and not a second request (ADR 0116): verbatim from the library's
+  report for a break of ours, and from hls.js's interstitial event for a list
+  hls.js loads itself. It is THE SAME for every position of the switch, because
+  the answer carries every option of the ad (ADR 0085).
 
   FOUR, WHAT THE LIBRARY KEPT. The intermediate step: each option of the answer
   checked against what the device declared, in order, with the reason for every
@@ -65,8 +67,8 @@
 
   NOT ONE OF THE THREE IS TYPED INTO THIS FILE, and that is the rule of the page
   and not a detail of it: the ranges are read out of the playlist the player is
-  playing, the URL is read off the network, and the body is fetched from that
-  URL. A page that pasted a tag would be showing an illustration, and an
+  playing, and the URL and the body are the ones the player's own request got,
+  handed over by whoever made it. A page that pasted a tag would be showing an illustration, and an
   illustration of a playlist is worth nothing to a room that reads playlists for
   a living -- besides which the START-DATE moves every time the content is
   packaged, so a pasted one is wrong by tomorrow. `js/inspect.js` has the
@@ -168,7 +170,7 @@
 
       <article class="move">
         <h2 class="move__title"><span class="move__n">2</span> What the client asked for</h2>
-        <p class="move__lede">The URL that went out, read off the network and not written by this page.</p>
+        <p class="move__lede">The URL that went out, as the player made the request, and not written by this page.</p>
         <p class="request" id="request"></p>
       </article>
 

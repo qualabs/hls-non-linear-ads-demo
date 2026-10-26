@@ -2,11 +2,13 @@
 // exchange drawn beside it.
 //
 // THE PAGE SHOWS THREE THINGS AND READS ALL THREE. The ranges come out of the
-// playlist the player is playing, the request comes off the performance
-// timeline, and the body comes from that same URL. Not one of them is a string
-// in this file, and that is the rule of the page rather than a nicety: a tag
-// pasted into the markup would be an illustration, and the audience of this demo
-// reads playlists for a living. Besides which the START-DATE is resolved against
+// playlist the player is playing, and the request and its answer are the ones the
+// player received: our library hands them over in its report (ADR 0116), and
+// hls.js, for the lists it loads itself, in its interstitial event. Nothing is
+// requested a second time to be shown. Not one of them is a string in this
+// file, and that is the rule of the page rather than a nicety: a tag pasted into
+// the markup would be an illustration, and the audience of this demo reads
+// playlists for a living. Besides which the START-DATE is resolved against
 // the EXT-X-PROGRAM-DATE-TIME of the packaging (ADR 0005), so a transcribed tag
 // is wrong the next time the content is packaged.
 //
@@ -198,23 +200,32 @@ function dibujarRango(linea, pedida) {
 // ===========================================================================
 // WHAT WENT OUT, AND WHAT CAME BACK  (moves 2 and 3)
 // ===========================================================================
-// The requests are READ off the performance timeline: what is printed is the URL
-// the browser actually fetched, which is the same string the network tab shows.
-// A page that printed the step it had just been handed would be reporting its
-// own intention, which is the one thing on this page nobody needs told.
+// WHAT IS PRINTED IS THE EXCHANGE THE PLAYER HAD, AND NOT A SECOND ONE (ADR
+// 0116). Each list is asked for once, by whoever plays the break, and both the
+// URL and the body on screen are what that request got: a page that asked again
+// would be showing an answer the player never resolved, and to an ad server a
+// second request is a second impression. Two clients ask, so there are two
+// sources:
 //
-// AND THE BODY IS FETCHED FROM THAT SAME URL, not from a path this file builds:
-// whatever query the library put on it travels, so what is on screen is the
-// answer to the request on screen. The fetch lands on the timeline too, which is
-// why what is kept is a MAP KEYED BY URL -- a second sighting of a URL already
-// seen is dropped, and without that the observer would feed itself for ever.
+// - A BREAK OF OURS is asked for by the library, and its report hands the answer
+//   over as it was received: `response` in the second argument of `onResolved`,
+//   with the URL it came from and the body verbatim.
+// - A LIST hls.js LOADS ITSELF -- every break in native mode, and in our mode the
+//   traditional break of the stream (ADR 0114, ADR 0115) -- is never seen by the
+//   library. Its body is the one hls.js keeps on its interstitial event
+//   (`assetListResponse`), which it sets BEFORE it fires ASSET_LIST_LOADED, so it
+//   is there for the list hls.js then fails on too: the break without a default,
+//   whose event never reaches a listener (measured, fase 15, T-20). hls.js keeps
+//   it parsed and not the bytes, so it is printed re-serialised and the card says
+//   so. Its URL is READ off the performance timeline, by the session id hls.js
+//   writes on the request (`_HLS_primary_id`), because the event does not carry
+//   it for that same list: the observer sees the request the browser made, and
+//   makes none.
 
-/** break id -> { url, cuerpo }, the request this client made and its answer. */
+/** break id -> { url, cuerpo, deHls }, the request this client made and its answer. */
 const intercambio = new Map();
 
-// The concurrent list of a break (our library) or its linear one (the native
-// client): the break is in the name either way.
-const breakDeLaUrl = (url) => url.match(/asset-list-(?:break|linear)-([a-z0-9]+)\.json/)?.[1] ?? null;
+const breakDeLaUrl = (url) => url.match(/asset-list-break-([a-z0-9]+)\.json/)?.[1] ?? null;
 
 /** break id -> what the library kept of the answer, as `onResolved` reported it. */
 const selecciones = new Map();
@@ -232,28 +243,46 @@ const presentados = new Map();
  */
 let prevalidar = new URLSearchParams(location.search).get('prevalidar') === '1';
 
-const vistas = new Set();
+/** What our library received for a break, off its report (ADR 0116). */
+function anotarRespuesta(seleccion) {
+  const { response } = seleccion;
+  if (!response) return;
+  intercambio.set(breakDelReporte(seleccion), { url: new URL(response.url), cuerpo: response.text, deHls: false });
+}
 
-async function anotarPedido(href) {
-  if (vistas.has(href)) return;
-  vistas.add(href);
-  const id = breakDeLaUrl(href);
-  if (!id) return;
-  const url = new URL(href);
-  intercambio.set(id, { url, cuerpo: null });
-  pintarIntercambio();
-  try {
-    intercambio.set(id, { url, cuerpo: await (await fetch(href)).text() });
-  } catch (error) {
-    intercambio.set(id, { url, cuerpo: `could not read the answer: ${error.message}` });
-    console.error('[page] the answer could not be read', error);
-  }
-  pintarIntercambio();
+/** break id -> the interstitial event hls.js loads that break's list for, whose body it keeps. */
+const eventosDeHls = new Map();
+
+/** The body hls.js kept for a break, re-serialised, or null while it has none. */
+function cuerpoDeHls(id) {
+  const lista = eventosDeHls.get(id)?.assetListResponse;
+  return lista ? JSON.stringify(lista, null, 2) : null;
+}
+
+/**
+ * The lists THIS instance of hls.js asks for: the URL off the timeline, the body
+ * off its event. The id of its session is on every request it makes, and that is
+ * what keeps a request of a previous arming out.
+ */
+function escucharListasDeHls(hls) {
+  hls.on(Hls.Events.ASSET_LIST_LOADING, (_e, data) => {
+    const id = breakDelReporte({ id: data.event.identifier });
+    if (id) eventosDeHls.set(id, data.event);
+  });
+  // Either one means hls.js has the body: LOADED when it accepted the list, an
+  // ERROR when a listener of it threw on the list it had already kept.
+  hls.on(Hls.Events.ASSET_LIST_LOADED, () => pintarIntercambio());
+  hls.on(Hls.Events.ERROR, () => pintarIntercambio());
 }
 
 new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
-    if (/\/signalling\/asset-list-(break|linear)-/.test(entry.name)) anotarPedido(entry.name);
+    const id = breakDeLaUrl(entry.name);
+    if (!id || !vivo) continue;
+    const url = new URL(entry.name);
+    if (url.searchParams.get('_HLS_primary_id') !== vivo.hls.sessionId) continue;
+    intercambio.set(id, { url, cuerpo: null, deHls: true });
+    pintarIntercambio();
   }
 }).observe({ type: 'resource' });
 
@@ -437,12 +466,18 @@ function pintarIntercambio() {
     dom.outcome.textContent = `${pre}${desenlace(asset)}${reporte ? ` ${presentado(reporte)}` : ''}`;
   }
 
-  // Move 3: the body of that same URL, verbatim.
+  // Move 3: the answer to that same request, as the player received it (ADR 0116).
+  if (traza?.deHls && traza.cuerpo == null) traza.cuerpo = cuerpoDeHls(mostrado.id);
   if (!traza || traza.cuerpo == null) {
-    dom.answerLede.textContent = 'Read from the URL above, verbatim.';
-    dom.answer.textContent = traza ? 'reading…' : '';
+    dom.answerLede.textContent = 'The answer to the request above, as the player received it.';
+    dom.answer.textContent = traza
+      ? 'hls.js asked for this list and has not kept a body for it: either it is still on its way, or hls.js ' +
+        'could not read it as an asset-list. The page does not ask a second time.'
+      : '';
   } else {
-    dom.answerLede.textContent = resumenDeLaRespuesta(traza.cuerpo);
+    dom.answerLede.textContent = resumenDeLaRespuesta(traza.cuerpo) + (traza.deHls
+      ? ' · as hls.js parsed it, re-serialised: hls.js keeps the list, not the bytes'
+      : ' · verbatim, from the library\'s report');
     dom.answer.textContent = traza.cuerpo;
   }
 }
@@ -565,7 +600,7 @@ function armar(config, retomarEn = 0) {
   intercambio.clear();
   selecciones.clear();
   presentados.clear();
-  vistas.clear();
+  eventosDeHls.clear();
   mostrado = null;
   leerRangos(SRC.ours).then(pintarIntercambio);
 
@@ -601,12 +636,16 @@ function armar(config, retomarEn = 0) {
           ` window ${e.startTime.toFixed(2)}s -> ${(e.startTime + e.duration).toFixed(2)}s`);
       }
       selecciones.set(breakDelReporte(seleccion), seleccion);
+      anotarRespuesta(seleccion);
       pintarIntercambio();
     }
   });
   hls.loadSource(SRC.ours);
   hls.attachMedia(video);
   // =========================================================================
+
+  // The traditional break of the stream is loaded by hls.js, not by the library.
+  escucharListasDeHls(hls);
 
   const consumer = traceContract({
     provider: concurrent.provider, video, hud: dom.contract
@@ -710,7 +749,7 @@ function armarNativo(retomarEn = 0) {
   intercambio.clear();
   selecciones.clear();
   presentados.clear();
-  vistas.clear();
+  eventosDeHls.clear();
   mostrado = null;
   leerRangos(SRC.nativo).then(pintarIntercambio);
   const { player, video } = construirCaja();
@@ -720,6 +759,7 @@ function armarNativo(retomarEn = 0) {
     skipped: salteadosPorElNativo
   });
   stock.hls.on(Hls.Events.LEVEL_UPDATED, () => pintarIntercambio());
+  escucharListasDeHls(stock.hls);
   const alTiempo = () => mostrarBreak(breakDelSegundo(stock.programme.currentTime));
   video.addEventListener('timeupdate', alTiempo);
   video.addEventListener('seeked', alTiempo);

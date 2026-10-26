@@ -120,7 +120,7 @@ function withSignalling(list) {
   const hls = { on: (event, fn) => { handlers[event] = fn; }, media, startPosition: -1, liveSyncPosition: null };
   const asked = [];
   const realFetch = globalThis.fetch;
-  globalThis.fetch = async (url) => { asked.push(String(url)); return { json: async () => list }; };
+  globalThis.fetch = async (url) => { asked.push(String(url)); return { text: async () => JSON.stringify(list) }; };
   const { log, warn } = console;
   console.log = () => {};
   console.warn = () => {};

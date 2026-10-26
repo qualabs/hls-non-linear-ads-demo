@@ -6540,3 +6540,17 @@ lineal. Las siete tasks `done`; falta cerrar la fase (Mode D).
 
 Las siete tasks `done`; informe en `phases/17-png-y-mp4-para-el-roku/REPORT.md`. Deja una idea en el
 roadmap: `creative-png-del-banner-sin-no-cache`.
+
+## 2026-10-26 — Cada asset-list se pide una vez: la respuesta viaja en el reporte de onResolved
+
+Opción A de David. ADR 0116.
+
+- **Librería:** `onResolved` suma `response: { url, status, text, json }` (breaks y post-rolls),
+  armado por `readAssetList` en `lib/signalling.js`.
+- **`inspect.html`:** deja de hacer su propio `fetch`; un break nuestro sale del reporte, una lista de
+  hls.js (modo nativo y `AD-LINEAR`) del `assetListResponse` de su evento, re-serializado. El
+  `PerformanceObserver` queda sólo para la URL de las listas de hls.js.
+- **`hydration-break`, `multiview-offer`, `race-multiview`:** su sección de señalización muestra la
+  respuesta del reporte en lugar de pedirla otra vez.
+- Tests: `test/asset-list-response.test.js`. Smoke en Chrome headless en el 8091 (detenido por PID;
+  8090 no se tocó): un pedido por asset-list.

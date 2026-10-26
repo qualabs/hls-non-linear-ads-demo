@@ -176,7 +176,7 @@ async function onDemand({ dateRanges = null, startPosition = -1, ranges = [[0, 2
   const realFetch = globalThis.fetch;
   globalThis.fetch = async (url) => {
     asked.push(String(url));
-    return { json: async () => ({ ASSETS: [{ URI: '/linear.m3u8', DURATION: 10 }] }) };
+    return { text: async () => JSON.stringify({ ASSETS: [{ URI: '/linear.m3u8', DURATION: 10 }] }) };
   };
   const { log } = console;
   console.log = () => {};
@@ -342,7 +342,7 @@ function onLive({ liveSyncPosition = 3600, startPosition = -1 } = {}) {
   const realFetch = globalThis.fetch;
   globalThis.fetch = async (url) => {
     asked.push(String(url));
-    return { json: async () => ({ ASSETS: [{ URI: '/linear.m3u8', DURATION: 10 }] }) };
+    return { text: async () => JSON.stringify({ ASSETS: [{ URI: '/linear.m3u8', DURATION: 10 }] }) };
   };
   const { log } = console;
   console.log = () => {};
