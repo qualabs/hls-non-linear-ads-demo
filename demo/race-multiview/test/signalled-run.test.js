@@ -28,7 +28,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { MULTIVIEW_CLASS } from '../../../lib/signalling.js';
+import { MULTIVIEW_CLASS } from '../../../hls/signalling.js';
 
 const DEMO = fileURLToPath(new URL('..', import.meta.url));
 const read = (path) => readFileSync(join(DEMO, path), 'utf8');

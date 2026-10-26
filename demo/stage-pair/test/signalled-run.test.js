@@ -43,10 +43,11 @@ import { fileURLToPath } from 'node:url';
 // `MULTIVIEW_CLASS` y `MAX_BOXES` los agrega la tercera página: la clase que
 // esta demo señaliza es la que la librería traduce, y el tope de cajas se lee de
 // donde está declarado en lugar de copiarse de un ADR a un test.
+import { LINEAR_TYPE, MAX_BOXES } from '../../../lib/experience.js';
+import { selectOption, usableCapabilities } from '../../../lib/capabilities.js';
 import {
-  CONCURRENT_CLASS, INTERSTITIAL_CLASS, LINEAR_TYPE, MAX_BOXES, MULTIVIEW_CLASS,
-  resolveAssetList, selectOption, usableCapabilities
-} from '../../../lib/signalling.js';
+  CONCURRENT_CLASS, INTERSTITIAL_CLASS, MULTIVIEW_CLASS, resolveAssetList
+} from '../../../hls/signalling.js';
 import { substitute, withClass } from '../../shared/test/variable-substitution.js';
 
 const DEMO = fileURLToPath(new URL('..', import.meta.url));
@@ -199,7 +200,7 @@ test('el postroll: CUE="POST" en su tag y en ningún otro, con default, último,
     assert.deepEqual(conCue.map((t) => t.id.split('-')[1]), ['POST'], 'el CUE va sólo en el postroll');
   }
   assert.match(corrida.hoja, /break POST .*CUE=POST/);
-  const { resolvePostRoll } = await import('../../../lib/signalling.js');
+  const { resolvePostRoll } = await import('../../../hls/signalling.js');
   const [lineal, ...resto] = resolvePostRoll(corrida.lista(posts[0].concurrente), { id: 'AD-POST', slotStart: 198 });
   assert.deepEqual(resto, []);
   assert.equal(lineal.type, 'linear');
@@ -241,7 +242,7 @@ test('el break B lleva CUE="ONCE" en su tag, y ningún otro break lo lleva', () 
 });
 
 test('la librería lee el CUE de los tags que este script escribe', async () => {
-  const { cueOf } = await import('../../../lib/signalling.js');
+  const { cueOf } = await import('../../../hls/signalling.js');
   const corrida = run();
   const attr = (line) => ({ CUE: line.match(/CUE="([^"]+)"/)?.[1] });
   const pre = deLosBreaks(corrida.concurrente).map((t) => [t.id, cueOf({ attr: attr(t.line) }).pre]);

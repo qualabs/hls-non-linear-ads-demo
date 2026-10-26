@@ -38,9 +38,9 @@ import {
   MAX_BOXES,
   activeAt,
   isOffer,
-  resolveAssetList,
   viewportsFor
-} from '../lib/signalling.js';
+} from '../lib/experience.js';
+import { resolveAssetList } from '../hls/signalling.js';
 import {
   PRIMARY_ID,
   createMultiview,
