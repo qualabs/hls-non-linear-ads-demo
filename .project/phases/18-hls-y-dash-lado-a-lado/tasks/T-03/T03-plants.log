@@ -1,0 +1,17 @@
+== plant: an HLS term in lib/experience.js (lib/experience.js)
+exit 1
+   RED: 1 occurrence(s) that are not on the accepted list.
+     lib/experience.js:496
+== plant: an import of hls/ in lib/capabilities.js (lib/capabilities.js)
+exit 1
+   RED: 1 occurrence(s) that are not on the accepted list.
+     lib/capabilities.js:281
+== plant: the word demo in hls/media.js (hls/media.js)
+exit 1
+     lib/controls.js:33  // or 'interstitial' -- which the contract carries on purpose, because the two
+     lib/controls.js:133  interstitial: '#ffcc00'
+     lib/controls.js:169  interstitial: 'traditional interstitial: the content is replaced by the ad'
+   RED: 1 occurrence(s) that are not on the accepted list.
+== clean
+exit 0
+verificar-cortes: both seams hold.

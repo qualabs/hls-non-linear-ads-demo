@@ -6574,3 +6574,9 @@ Rama `fase-18`, `7c95e9a`: `lib/signalling.js` partida en `lib/experience.js`,
 `package.json` al día; los tests sólo cambian de dónde importan. 378/378, y
 `comparar-publicacion.mjs 0739c38 HEAD` verde en las cinco demos (el dist con las mismas 174
 declaraciones en otro orden, los tests de demo con los mismos nombres importados).
+
+## 2026-10-26 — Fase 18, T-03: las costuras y la publicación
+
+Rama `fase-18`, `5231ffa`: `verificar-cortes.mjs` corre la costura 0003 sobre `lib/` entera y la
+0015 sobre `lib/` y `hls/`, sin listas a mano ni chequeo de completitud; `demos-cambiadas.sh`
+publica las cinco cuando cambia `hls/`. Check verde, y rojo con cada uno de tres plantados.
