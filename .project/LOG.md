@@ -6596,3 +6596,11 @@ dist en cada demo y los seis tests de demo), y el comparador da verde. Merge `--
 (`aab6382`), sin push; el `dist/` de main no se reconstruyó. El próximo push publica un dist nuevo
 en las cinco demos con el mismo comportamiento. Informe en
 `phases/18-hls-y-dash-lado-a-lado/REPORT.md`.
+
+## 2026-10-26 — Fase 19: el diseño de SVTA2053 sobre DASH, aprobado y generado
+
+El diseño (`roadmap/svta2053-sobre-dash/DESIGN.md`, `8fcbcad` y `bb0d78b`) escribe y prototipa la
+carriage DASH de la presentación concurrente que SVTA2053 v3 dejó para una edición futura, con el
+esquema y el sobre v2 de SVTA en un EventStream, sobre dash.js 5.2.1 sin modificar. Nicolás lo
+aprobó con las recomendaciones de sus siete preguntas abiertas. Generados `PHASE.md`, `TASKS.md`
+(10 tasks; la primera mide los dos riesgos del diseño antes de construir) y los ADR 0120-0127.

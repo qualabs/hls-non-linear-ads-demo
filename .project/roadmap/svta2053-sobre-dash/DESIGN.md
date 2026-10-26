@@ -1,10 +1,3 @@
----
-description: Escribir y prototipar la carriage DASH de la presentación concurrente que SVTA2053 v3 dejó para una edición futura, con el esquema y el payload versión 2 de SVTA en un EventStream, sobre dash.js sin modificar, y mostrar el mismo stream en HLS y en DASH lado a lado
-status: designing
-category: feature
-origin: "Nicolás vía agent-nicolas-laptop-865daf, 2026-10-26, despacho del diseño de la fase 19"
----
-
 # SVTA2053: la presentación concurrente sobre DASH
 
 Sólo diseño. SVTA2053 cubre DASH desde su primera edición: el esquema
