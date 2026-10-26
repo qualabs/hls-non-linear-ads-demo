@@ -6566,3 +6566,11 @@ intacta con `dash/` y su regla (0119).
 `scripts/comparar-publicacion.mjs` (rama `fase-18`, `3422cbb`): verde contra sí mismo en `0739c38`,
 y su `--control` saca cada uno de los 14 plantados como debe. Línea de base guardada en
 `phases/18-hls-y-dash-lado-a-lado/tasks/T-01/`.
+
+## 2026-10-26 — Fase 18, T-02: la partición
+
+Rama `fase-18`, `7c95e9a`: `lib/signalling.js` partida en `lib/experience.js`,
+`lib/capabilities.js` y `hls/signalling.js`; `media.js` y `concurrent-hls.js` a `hls/`; el build y
+`package.json` al día; los tests sólo cambian de dónde importan. 378/378, y
+`comparar-publicacion.mjs 0739c38 HEAD` verde en las cinco demos (el dist con las mismas 174
+declaraciones en otro orden, los tests de demo con los mismos nombres importados).

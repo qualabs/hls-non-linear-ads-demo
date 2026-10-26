@@ -1,0 +1,3 @@
+lib/controls.js:33:// or 'interstitial' -- which the contract carries on purpose, because the two
+lib/controls.js:133:  interstitial: '#ffcc00'
+lib/controls.js:169:  interstitial: 'traditional interstitial: the content is replaced by the ad'
