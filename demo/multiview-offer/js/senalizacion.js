@@ -4,16 +4,18 @@
 // EVERYTHING HERE COMES OFF THE NETWORK AND NOTHING OFF THIS REPOSITORY. The
 // tags are the lines of the media playlist this player is playing, fetched
 // again and printed as they are; the JSON is the asset-list each tag points at,
-// fetched from the URL the tag declares, which is the URL the library fetched
-// it from. A tag or a payload pasted into a file here would be an illustration
-// of a playlist, which is worth nothing to an audience that reads playlists for
-// a living.
+// as the library received it from the URL the tag declares. A tag or a payload
+// pasted into a file here would be an illustration of a playlist, which is
+// worth nothing to an audience that reads playlists for a living.
 //
-// AND IT IS FETCHED A SECOND TIME ON PURPOSE, after the player has fetched it,
-// rather than asking the library for what it already has. What the library hands over is the contract -- resolved
-// experiences, with the two defaults of the tool already applied -- and the
-// point of this section is the document BEFORE that happened. Asking the
-// provider would show the reading and call it the source.
+// AND THE LIST IS THE DOCUMENT, NOT THE CONTRACT, AND IT IS NOT ASKED FOR TWICE
+// (ADR 0116). The point of this section is the document BEFORE the library read
+// it, so it is not the provider: that hands over resolved experiences, with the
+// two defaults of the tool already applied, and asking it would show the
+// reading and call it the source. It is the body of the library's own request,
+// verbatim, which `onResolved` hands over as `response` and app.js keeps in
+// `received`, by the ID of the Date Range. Before ADR 0116 this section fetched
+// the list a second time, which to an ad server is a second impression.
 //
 // THE GLOSS IS PROSE AND THE FIELD NAMES ARE NOT. Each list below is the keys of
 // the object in front of the reader, in the order the document carries them, and
@@ -100,7 +102,7 @@ function untilAskedFor(provider, id) {
   });
 }
 
-export function showSignalling({ src, provider, video, tags, payload, assets }) {
+export function showSignalling({ src, provider, video, tags, payload, assets, received }) {
   let folds = [];
 
   // The gloss is drawn off the first offer in the run, at its three levels.
@@ -136,15 +138,14 @@ export function showSignalling({ src, provider, video, tags, payload, assets }) 
       tags.replaceChildren(...lines.map(tagNode));
 
       // One fold per tag, in the order of the playlist, each one carrying the
-      // document that tag points at, fetched at the URL the tag declares, resolved
-      // against the playlist so a relative X-ASSET-LIST works the same way here as
-      // it does there.
+      // document that tag points at: the URL the tag declares, resolved against the
+      // playlist as the library resolves it, and the body the library received
+      // from it, verbatim (ADR 0116).
       //
-      // AND FETCHED ONLY ONCE THE PLAYER HAS ASKED FOR IT. The player asks for a
+      // AND SHOWN ONLY ONCE THE PLAYER HAS ASKED FOR IT. The player asks for a
       // break's list when the programme is buffered up to the break, as hls.js does
-      // for an interstitial (ADR 0108, ADR 0109); a page that read every list at load
-      // would be making the request the player does not make. So each fold is there
-      // from the start and fills in when its break's list is in.
+      // for an interstitial (ADR 0108, ADR 0109). So each fold is there from the
+      // start and fills in when its break's list is in.
       let glossed = false;
       folds = lines.map((line) => {
         const id = line.match(/ID="([^"]+)"/)?.[1] ?? '(no ID)';
@@ -160,15 +161,12 @@ export function showSignalling({ src, provider, video, tags, payload, assets }) 
           : 'no X-ASSET-LIST on the tag');
         fold.append(summary, code);
         if (absolute) {
-          untilAskedFor(provider, id).then(async () => {
-            let list = null;
-            try {
-              list = await fetch(absolute).then((r) => r.json());
-            } catch (error) {
-              console.error('[page] the asset-list of', id, 'could not be read', absolute, error);
-            }
-            code.textContent = list ? JSON.stringify(list, null, 2) : 'the asset-list could not be read';
-            if (!glossed) glossed = gloss(list);
+          untilAskedFor(provider, id).then(() => {
+            // What the library received for this break, from its report (ADR
+            // 0116): a range that left without one is a list that could not be read.
+            const response = received.get(id);
+            code.textContent = response ? response.text : 'the asset-list could not be read';
+            if (!glossed) glossed = gloss(response?.json);
           });
         }
         return { id, node: fold };
