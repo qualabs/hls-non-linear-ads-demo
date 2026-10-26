@@ -10,6 +10,25 @@ generalizes: null
 generalized_by: null
 ---
 
+## 2026-10-26 — nota: `onPresented` del default que falla, y de los items que llegan después
+
+**Un aviso cuyas opciones fallaban todas y cuyo default lineal también fallaba no se reportaba
+nunca.** `failed()` marcaba el asset como salteado (`{ kind: 'skip' }`) antes de llamar a
+`report(..., 'skipped')`, y `recordsOf()` reconoce al default comparándolo con el `fallback` del
+estado del asset: con el estado ya en `skip`, el default dejaba de ser el default, se buscaba el
+registro de su propio `itemId` (`<assetId>.default`, que no tiene) y `onPresented` no se llamaba.
+Lo vio la revisión de `inspect.html?modo=ours-2dec-noimg` (PRE, B y C sin línea de resultado).
+
+**Corregido así:** los registros se leen antes de mover el estado, y un salteo reporta a **todos**
+los items del asset que el renderer ya vio (la unidad del repliegue es el asset), con
+`outcome: 'skipped'`, `presented: null` y cada intento con su motivo, las opciones y el default.
+Además, el resultado del asset queda guardado en su estado, y un item del mismo asset que el
+renderer ve por primera vez después (un segundo item cuya ventana abre más tarde) se reporta en ese
+momento con el resultado del asset: presentado por el default, o salteado con el intento del
+default. Esto amplía la consecuencia de arriba, que lo limitaba a los items ya vistos. Los demás
+caminos (asset sin default, lineal suelto, post-roll) ya reportaban bien; quedan cubiertos por
+tests en `test/renderer-on-presented.test.js` y `test/post-roll.test.js`.
+
 ## Contexto
 
 El ADR 0106 hizo el primer pedido de cada asset en la señalización, al resolver la lista ("opción
