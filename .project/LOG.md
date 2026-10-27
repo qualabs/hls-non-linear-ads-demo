@@ -6732,3 +6732,24 @@ Pedido de David: que el failover del renderer (ADR 0107) se vea en la demo.
   existe, el resto real). `verificar-capacidades.py` no cambia: lee la opción ENTREGADA primero y el
   layout del contrato, que siguen iguales.
 - Cambia lo que muestra la demo publicada cuando esto llegue a `main`.
+
+## 2026-10-26 — El CI acepta la falta deliberada del break C, y sólo ésa
+
+Corrección pedida por David: el push de `adde7f2` a `main` dejó `publicar` en rojo, sin publicar
+nada, por las dos URIs de `missing-on-purpose` del break C (HLS y DASH), que faltan a propósito.
+
+- `scripts/publicar.py`: `deliberate()` lee `primeraOpcionRota` del `stage.json` del stage y su
+  forma DASH (`index.m3u8` pasa a `dash/manifest.mpd`, como en `escribir-asset-lists.mjs`); `check`
+  las imprime como `ACCEPTED (deliberate, stage.json primeraOpcionRota)` y no se pone en rojo por
+  ellas. Cualquier otra falta sigue siendo `MISSING` y rojo, `--control` incluido. Nota en el
+  ADR 0094; cabecera de `scripts/publicar.sh`.
+- `selftest`: la falta declarada pasa (2 aceptadas, 0 faltas), una no declarada al lado falla
+  (1 falta) y la misma sin la declaración falla (2 faltas). Sacar la aceptación o la forma DASH lo
+  pone en rojo (medido con dos mutaciones).
+- Corrida en seco local: `publicar.sh stage-pair` pasa el paso 0 y el 1 y se corta en el primer
+  `gcloud` (no está instalado). El paso 2 se reprodujo sin gcloud: las playlists y el md5 de cada
+  objeto referenciado se leyeron del bucket por HTTPS sin credenciales (`x-goog-hash`). Resultado
+  de `stage-pair`: 93 archivos fuera de `content/`, 58 referencias, 18 playlists, 465 segmentos;
+  0 faltas, 2 aceptadas. Con TZ local la playlist señalizada sale con `-0300` y difiere del bucket
+  sólo en la zona horaria; con `TZ=UTC`, como el runner, 0 archivos señalizados cambian.
+- `npm test` 440/440, `npm run check` verde.
