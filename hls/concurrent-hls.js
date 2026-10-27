@@ -146,7 +146,7 @@ function playedRanges(provider, hls) {
  *                     (`order`), every first request made (`requests`), and
  *                     whether pre-validation ran (`preValidation`), and the
  *                     asset-list as it was received (`response`: `{ url,
- *                     status, text, json }`, ADR 0120), so that a page that
+ *                     status, text, json }`, ADR 0129), so that a page that
  *                     shows the list does not request it a second time. It says
  *                     what was HANDED OVER; what was shown is `onPresented`.
  * @param onPresented  optional, called once per ad when it is known which of

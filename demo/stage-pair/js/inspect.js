@@ -3,7 +3,7 @@
 //
 // THE PAGE SHOWS THREE THINGS AND READS ALL THREE. The ranges come out of the
 // playlist the player is playing, and the request and its answer are the ones the
-// player received: our library hands them over in its report (ADR 0120), and
+// player received: our library hands them over in its report (ADR 0129), and
 // hls.js, for the lists it loads itself, in its interstitial event. Nothing is
 // requested a second time to be shown. Not one of them is a string in this
 // file, and that is the rule of the page rather than a nicety: a tag pasted into
@@ -202,7 +202,7 @@ function dibujarRango(linea, pedida) {
 // WHAT WENT OUT, AND WHAT CAME BACK  (moves 2 and 3)
 // ===========================================================================
 // WHAT IS PRINTED IS THE EXCHANGE THE PLAYER HAD, AND NOT A SECOND ONE (ADR
-// 0120). Each list is asked for once, by whoever plays the break, and both the
+// 0129). Each list is asked for once, by whoever plays the break, and both the
 // URL and the body on screen are what that request got: a page that asked again
 // would be showing an answer the player never resolved, and to an ad server a
 // second request is a second impression. Two clients ask, so there are two
@@ -244,7 +244,7 @@ const presentados = new Map();
  */
 let prevalidar = new URLSearchParams(location.search).get('prevalidar') === '1';
 
-/** What our library received for a break, off its report (ADR 0120). */
+/** What our library received for a break, off its report (ADR 0129). */
 function anotarRespuesta(seleccion) {
   const { response } = seleccion;
   if (!response) return;
@@ -500,7 +500,7 @@ function pintarIntercambio() {
     dom.outcome.textContent = `${pre}${desenlace(asset)}${reporte ? ` ${presentado(reporte)}` : ''}`;
   }
 
-  // Move 3: the answer to that same request, as the player received it (ADR 0120).
+  // Move 3: the answer to that same request, as the player received it (ADR 0129).
   if (traza?.deHls && traza.cuerpo == null) traza.cuerpo = cuerpoDeHls(mostrado.id);
   if (!traza || traza.cuerpo == null) {
     dom.answerLede.textContent = 'The answer to the request above, as the player received it.';
