@@ -33,7 +33,7 @@ import {
   DEFAULT_PRIMARY_VOLUME,
   FULL_FRAME
 } from '../lib/experience.js';
-import { resolveAssets } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { boxToPixels } from '../lib/renderer.js';
 
 /**

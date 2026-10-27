@@ -30,7 +30,7 @@ import {
   VIDEO_DECODERS_PARAM,
   listRequestUrl,
   resolveAssets
-} from '../hls/signalling.js';
+} from '../lib/ad-list.js';
 
 const ID = 'AD-A-CONCURRENT';
 const SLOT_START = 20;

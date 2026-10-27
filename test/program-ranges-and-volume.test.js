@@ -42,9 +42,9 @@ import {
   CONCURRENT_CLASS,
   INTERSTITIAL_CLASS,
   kindOfClass,
-  resolveAssets,
   rangeOfDateRange
 } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { volumeOf } from '../lib/renderer.js';
 import { rangeSpan } from '../lib/controls.js';
 

@@ -14,8 +14,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
-  createProgramme, createSignalling, linearOnScreen, programmeAtEnd, resolvePostRoll, scheduledRanges
+  createProgramme,
+  createSignalling,
+  linearOnScreen,
+  programmeAtEnd,
+  scheduledRanges
 } from '../hls/signalling.js';
+import { resolvePostRoll } from '../lib/ad-list.js';
 import { createPostRoll } from '../lib/postroll.js';
 import { KINDS_PLAYED } from '../hls/concurrent-hls.js';
 import { RANGE_COLOURS, RANGE_TITLES } from '../lib/controls.js';

@@ -40,7 +40,7 @@ SALIDA=${SALIDA:-dist/qualabs-concurrent-hls.js}
 # In dependency order, which matters only for what runs when the script loads: a
 # top-level constant that reads another has to come after it, and nothing in lib/
 # reads hls/ (ADR 0117). The entry point goes last.
-FUENTES=(lib/experience.js lib/capabilities.js hls/signalling.js lib/multiview.js lib/renderer.js lib/controls.js hls/media.js lib/tracking.js lib/postroll.js hls/concurrent-hls.js)
+FUENTES=(lib/experience.js lib/capabilities.js lib/ad-list.js lib/playhead.js hls/signalling.js lib/multiview.js lib/renderer.js lib/controls.js hls/media.js lib/tracking.js lib/postroll.js hls/concurrent-hls.js)
 
 mkdir -p "$(dirname "$SALIDA")"
 {

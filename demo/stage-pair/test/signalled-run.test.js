@@ -45,9 +45,8 @@ import { fileURLToPath } from 'node:url';
 // donde está declarado en lugar de copiarse de un ADR a un test.
 import { LINEAR_TYPE, MAX_BOXES } from '../../../lib/experience.js';
 import { selectOption, usableCapabilities } from '../../../lib/capabilities.js';
-import {
-  CONCURRENT_CLASS, INTERSTITIAL_CLASS, MULTIVIEW_CLASS, resolveAssets
-} from '../../../hls/signalling.js';
+import { CONCURRENT_CLASS, INTERSTITIAL_CLASS, MULTIVIEW_CLASS } from '../../../hls/signalling.js';
+import { resolveAssets } from '../../../lib/ad-list.js';
 import { substitute, withClass } from '../../shared/test/variable-substitution.js';
 
 const DEMO = fileURLToPath(new URL('..', import.meta.url));
@@ -200,7 +199,7 @@ test('el postroll: CUE="POST" en su tag y en ningún otro, con default, último,
     assert.deepEqual(conCue.map((t) => t.id.split('-')[1]), ['POST'], 'el CUE va sólo en el postroll');
   }
   assert.match(corrida.hoja, /break POST .*CUE=POST/);
-  const { resolvePostRoll } = await import('../../../hls/signalling.js');
+  const { resolvePostRoll } = await import('../../../lib/ad-list.js');
   const [lineal, ...resto] = resolvePostRoll(corrida.lista(posts[0].concurrente), { id: 'AD-POST', slotStart: 198 });
   assert.deepEqual(resto, []);
   assert.equal(lineal.type, 'linear');

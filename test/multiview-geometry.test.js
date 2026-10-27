@@ -37,7 +37,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { MAX_BOXES, parseViewport, viewportsFor } from '../lib/experience.js';
-import { resolveAssets } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { boxToPixels } from '../lib/renderer.js';
 
 /** The four rows of ADR 0065, which is what the table has to be. */

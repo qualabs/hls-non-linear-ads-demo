@@ -12,7 +12,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import { blockIdentifiers, identifiersOf } from '../lib/experience.js';
-import { resolveAssets } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { createTracking, slotEvents } from '../lib/tracking.js';
 
 const AD_ID = { scheme: 'ad-id.org', value: 'KTRV0001000H' };

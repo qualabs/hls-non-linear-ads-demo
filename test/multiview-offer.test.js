@@ -51,15 +51,14 @@ import {
   usablePayload
 } from '../lib/experience.js';
 import {
-  BLOCK,
   CONCURRENT_CLASS,
   INTERSTITIAL_CLASS,
   KINDS_RESOLVED,
   KIND_OF_CLASS,
   MULTIVIEW_CLASS,
-  kindOfClass,
-  resolveAssets
+  kindOfClass
 } from '../hls/signalling.js';
+import { BLOCK, resolveAssets } from '../lib/ad-list.js';
 import { KINDS_PLAYED } from '../hls/concurrent-hls.js';
 import { RANGE_COLOURS, RANGE_TITLES } from '../lib/controls.js';
 
