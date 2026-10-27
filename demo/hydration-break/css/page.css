@@ -489,7 +489,7 @@ body[data-story="done"] .skip { color: var(--q-paper-50); border-color: #47505f;
 
 /* WHAT GOES IN A BOX. The gallery above says where the boxes are; this says what
  * can be inside one, and the three tiles are the three branches of `attachAsset`
- * in `lib/media.js` rather than three things somebody chose to mention. The markup
+ * in `hls/media.js` rather than three things somebody chose to mention. The markup
  * is built by `js/tipos.js` and the media types printed in it are read off the
  * contract, for the same reason the shapes are.
  *

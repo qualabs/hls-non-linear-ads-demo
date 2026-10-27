@@ -56,7 +56,7 @@
            would draw over anything this page puts on top of the picture.
 
   No bundler and no framework. The library is one classic <script src> that
-  defines a global, assembled from lib/ on every start; this page's own file is a
+  defines a global, assembled from lib/ and hls/ on every start; this page's own file is a
   native ES module. hls.js is vendored at 1.7.2, which is the version the
   measurements ran on.
 -->
@@ -201,7 +201,7 @@
     <!--
       WHAT GOES IN ONE OF THOSE BOXES, and the box below is empty for the same
       reason the gallery above it is. The three kinds are the three branches of
-      `attachAsset` in `lib/media.js` and the media types beside them are the ones
+      `attachAsset` in `hls/media.js` and the media types beside them are the ones
       THIS run declares, read off the contract: typing them in would be the same
       claim going stale in silence, and `test/comprobaciones.js` asserts that none
       of them is written here or in `js/tipos.js`.

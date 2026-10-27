@@ -13,13 +13,18 @@
 # same ads. And it needs neither MP4Box nor shaka-packager, which this machine
 # does not have: ffmpeg's dash muxer with `-c copy`.
 #
-# THE TIMELINE STARTS WHERE THE HLS ONE DOES, AND IT IS MEASURED. `-copyts` keeps
-# the timestamps of the TS, 1.4 s of MPEG-TS offset included, and dash.js and
-# hls.js both put the first frame at 0.066733 s with nothing else written: the
-# same frame at the same second, pixel for pixel, at 30, 75.5 and 140 s (T-06 of
-# phase 19, tasks/T-06/). Writing a @presentationTimeOffset of those 1.4 s, which
-# reads like the right thing, puts the DASH programme 1.4 s early: measured too.
-
+# THE TIMELINE STARTS WHERE THE HLS ONE DOES, AND IT IS MEASURED. hls.js puts the
+# first frame of the programme at 0.066733 s: its first timestamp minus the 1.4 s
+# of MPEG-TS offset. `-copyts -output_ts_offset -1.4` writes the fragmented MP4
+# with that same timeline, so the MPD's first segment starts at 0.0667 s and
+# needs no @presentationTimeOffset: dash.js shows the same frame as hls.js at
+# the same second, pixel for pixel, for the programme and for a creative (T-06
+# and T-07 of phase 19, tasks/). The two alternatives that look right are wrong,
+# and both were measured: `-copyts` alone leaves the first segment at 1.4667 s,
+# and dash.js jumps that "gap" when a player starts at 0, so a creative began
+# 1.47 s into its animation; and a @presentationTimeOffset of 1.4 s moved the
+# whole DASH programme 1.4 s early.
+#
 # Segments of 2 s, which is the -hls_time of the HLS packaging, so a segment
 # boundary is a keyframe in both. SegmentTimeline, because the TS segments are not
 # all 2 s long (the first is 3.04 s) and a fixed @duration would drift.
@@ -36,7 +41,7 @@ remux() {
   [ -f "$playlist" ] || { echo "empaquetar-dash: $playlist does not exist; package the HLS first" >&2; exit 1; }
   rm -rf "$out"
   mkdir -p "$out"
-  ffmpeg -hide_banner -loglevel error -y -copyts -i "$playlist" -map 0 -c copy -tag:v avc1 -tag:a mp4a -bsf:a aac_adtstoasc \
+  ffmpeg -hide_banner -loglevel error -y -copyts -i "$playlist" -output_ts_offset -1.4 -map 0 -c copy -tag:v avc1 -tag:a mp4a -bsf:a aac_adtstoasc \
     -f dash -seg_duration 2 -use_template 1 -use_timeline 1 \
     -init_seg_name 'init-$RepresentationID$.m4s' -media_seg_name 'seg-$RepresentationID$-$Number%05d$.m4s' \
     "$out/manifest.mpd"
