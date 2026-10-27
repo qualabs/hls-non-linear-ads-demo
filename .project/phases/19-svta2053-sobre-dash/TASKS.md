@@ -9,8 +9,8 @@
 | T-05 | `dash/media.js`, `dash/concurrent-dash.js`, el dist DASH y las costuras | done | agent | — | rama `fase-19` · [`tasks/T-05/`](tasks/T-05/) |
 | T-06 | El contenido DASH de `stage-pair` | done | agent | — | rama `fase-19` · [`tasks/T-06/`](tasks/T-06/) |
 | T-07 | `stage-pair`: "DASH, nuestra librería" en cada pane | done | agent | — | rama `fase-19` · [`tasks/T-07/`](tasks/T-07/) |
-| T-08 | `verificar-pares.py`: HLS contra DASH, con sus dos controles | planned | agent | — | — |
-| T-09 | El texto para SVTA2053: la 6.7 y los ajustes de §1, §4.1 y §5 | planned | agent | — | — |
+| T-08 | `verificar-pares.py`: HLS contra DASH, con sus dos controles | done | agent | — | rama `fase-19` · [`tasks/T-08/`](tasks/T-08/) |
+| T-09 | El texto para SVTA2053: la 6.7 y los ajustes de §1, §4.1 y §5 | done | agent | — | rama `fase-19` · [`tasks/T-09/`](tasks/T-09/) |
 | T-10 | La documentación, la verificación final y el merge a main local | planned | agent | — | — |
 
 ---

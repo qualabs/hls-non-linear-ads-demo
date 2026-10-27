@@ -1,0 +1,129 @@
+
+== izq=ours-2dec-img  der=dash-2dec-img
+   break pre  izq t=   5.2  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break pre  der t=   5.1  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   ok   break pre: the same presented in both ([{'type': 'lowerThirdOverlay', 'media': ['video']}])
+   ok   window of pre: HLS ('concurrent', 0, 12)  DASH ('concurrent', 0, 12)
+   ok   request of pre: HLS ?sgai-image-over-video=1&sgai-video-decoders=2  DASH ?sgai-image-over-video=1&sgai-video-decoders=2
+   break a    izq t=  24.4  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   break a    der t=  24.6  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   ok   break a: the same presented in both ([{'type': 'squeezebackDoubleBox', 'media': ['video']}])
+   ok   window of a: HLS ('concurrent', 20, 12)  DASH ('concurrent', 20, 12)
+   ok   request of a: HLS ?sgai-image-over-video=1&sgai-video-decoders=2  DASH ?sgai-image-over-video=1&sgai-video-decoders=2
+   break b    izq t=  69.1  [{'type': 'squeezebackLShape', 'media': ['video']}]
+   break b    der t=  69.1  [{'type': 'squeezebackLShape', 'media': ['video']}]
+   ok   break b: the same presented in both ([{'type': 'squeezebackLShape', 'media': ['video']}])
+   ok   window of b: HLS ('concurrent', 65, 12)  DASH ('concurrent', 65, 12)
+   ok   request of b: HLS ?sgai-image-over-video=1&sgai-video-decoders=2  DASH ?sgai-image-over-video=1&sgai-video-decoders=2
+   ok   B (ONCE) after leaving it and seeking back: HLS []  DASH [], its window gone from both bars
+   break c    izq t= 114.3  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break c    der t= 114.4  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   ok   break c: the same presented in both ([{'type': 'lowerThirdOverlay', 'media': ['video']}])
+   ok   window of c: HLS ('concurrent', 110, 12)  DASH ('concurrent', 110, 12)
+   ok   request of c: HLS ?sgai-image-over-video=1&sgai-video-decoders=2  DASH ?sgai-image-over-video=1&sgai-video-decoders=2
+   ok   the linear break on screen in both: HLS True (programme 150.0)  DASH True (programme 150.3)
+   ok   both back to the programme after it: HLS 165.6  DASH 163.0
+   ok   post-roll presented: HLS {'outcome': 'presented', 'presented': {'index': None, 'type': 'linear', 'linear': True}, 'itemId': 'AD-POST.0'}  DASH {'outcome': 'presented', 'presented': {'index': None, 'type': 'linear', 'linear': True}, 'itemId': '5.0'}
+
+== izq=ours-2dec-noimg  der=dash-2dec-noimg
+   break pre  izq t=   5.0  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break pre  der t=   5.0  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   ok   break pre: the same presented in both ([{'type': 'lowerThirdOverlay', 'media': ['video']}])
+   ok   window of pre: HLS ('concurrent', 0, 12)  DASH ('concurrent', 0, 12)
+   ok   request of pre: HLS ?sgai-image-over-video=0&sgai-video-decoders=2  DASH ?sgai-image-over-video=0&sgai-video-decoders=2
+   break a    izq t=  24.5  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   break a    der t=  24.6  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   ok   break a: the same presented in both ([{'type': 'squeezebackDoubleBox', 'media': ['video']}])
+   ok   window of a: HLS ('concurrent', 20, 12)  DASH ('concurrent', 20, 12)
+   ok   request of a: HLS ?sgai-image-over-video=0&sgai-video-decoders=2  DASH ?sgai-image-over-video=0&sgai-video-decoders=2
+   break b    izq t=  69.5  [{'type': 'squeezebackLShape', 'media': ['video']}]
+   break b    der t=  69.5  [{'type': 'squeezebackLShape', 'media': ['video']}]
+   ok   break b: the same presented in both ([{'type': 'squeezebackLShape', 'media': ['video']}])
+   ok   window of b: HLS ('concurrent', 65, 12)  DASH ('concurrent', 65, 12)
+   ok   request of b: HLS ?sgai-image-over-video=0&sgai-video-decoders=2  DASH ?sgai-image-over-video=0&sgai-video-decoders=2
+   ok   B (ONCE) after leaving it and seeking back: HLS []  DASH [], its window gone from both bars
+   break c    izq t= 114.6  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break c    der t= 114.5  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   ok   break c: the same presented in both ([{'type': 'lowerThirdOverlay', 'media': ['video']}])
+   ok   window of c: HLS ('concurrent', 110, 12)  DASH ('concurrent', 110, 12)
+   ok   request of c: HLS ?sgai-image-over-video=0&sgai-video-decoders=2  DASH ?sgai-image-over-video=0&sgai-video-decoders=2
+   ok   the linear break on screen in both: HLS True (programme 150.0)  DASH True (programme 150.3)
+   ok   both back to the programme after it: HLS 163.0  DASH 163.5
+   ok   post-roll presented: HLS {'outcome': 'presented', 'presented': {'index': None, 'type': 'linear', 'linear': True}, 'itemId': 'AD-POST.0'}  DASH {'outcome': 'presented', 'presented': {'index': None, 'type': 'linear', 'linear': True}, 'itemId': '5.0'}
+
+== izq=ours-1dec-img  der=dash-1dec-img
+   break pre  izq t=   5.0  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   break pre  der t=   5.3  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   ok   break pre: the same presented in both ([{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}])
+   ok   window of pre: HLS ('concurrent', 0, 12)  DASH ('concurrent', 0, 12)
+   ok   request of pre: HLS ?sgai-image-over-video=1&sgai-video-decoders=1  DASH ?sgai-image-over-video=1&sgai-video-decoders=1
+   break a    izq t=  24.5  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   break a    der t=  24.6  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   ok   break a: the same presented in both ([{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}])
+   ok   window of a: HLS ('concurrent', 20, 12)  DASH ('concurrent', 20, 12)
+   ok   request of a: HLS ?sgai-image-over-video=1&sgai-video-decoders=1  DASH ?sgai-image-over-video=1&sgai-video-decoders=1
+   break b    izq t=  69.5  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   break b    der t=  69.6  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   ok   break b: the same presented in both ([{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}])
+   ok   window of b: HLS ('concurrent', 65, 12)  DASH ('concurrent', 65, 12)
+   ok   request of b: HLS ?sgai-image-over-video=1&sgai-video-decoders=1  DASH ?sgai-image-over-video=1&sgai-video-decoders=1
+   ok   B (ONCE) after leaving it and seeking back: HLS []  DASH [], its window gone from both bars
+   break c    izq t= 114.5  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   break c    der t= 114.7  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   ok   break c: the same presented in both ([{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}])
+   ok   window of c: HLS ('concurrent', 110, 12)  DASH ('concurrent', 110, 12)
+   ok   request of c: HLS ?sgai-image-over-video=1&sgai-video-decoders=1  DASH ?sgai-image-over-video=1&sgai-video-decoders=1
+   ok   the linear break on screen in both: HLS True (programme 150.0)  DASH True (programme 150.4)
+   ok   both back to the programme after it: HLS 163.0  DASH 163.9
+   ok   post-roll presented: HLS {'outcome': 'presented', 'presented': {'index': None, 'type': 'linear', 'linear': True}, 'itemId': 'AD-POST.0'}  DASH {'outcome': 'presented', 'presented': {'index': None, 'type': 'linear', 'linear': True}, 'itemId': '5.0'}
+
+== izq=ours-1dec-noimg  der=dash-1dec-noimg
+   break pre  izq t=   5.2  [{'type': 'linear', 'media': ['linear']}]
+   break pre  der t=   5.0  [{'type': 'linear', 'media': ['linear']}]
+   ok   break pre: the same presented in both ([{'type': 'linear', 'media': ['linear']}])
+   ok   window of pre: HLS ('concurrent', 0, 12)  DASH ('concurrent', 0, 12)
+   ok   request of pre: HLS ?sgai-image-over-video=0&sgai-video-decoders=1  DASH ?sgai-image-over-video=0&sgai-video-decoders=1
+   break a    izq t=  24.5  []
+   break a    der t=  24.6  []
+   ok   break a: the same presented in both (nothing)
+   ok   window of a: HLS None  DASH None
+   ok   request of a: HLS ?sgai-image-over-video=0&sgai-video-decoders=1  DASH ?sgai-image-over-video=0&sgai-video-decoders=1
+   break b    izq t=  69.4  [{'type': 'linear', 'media': ['linear']}]
+   break b    der t=  69.5  [{'type': 'linear', 'media': ['linear']}]
+   ok   break b: the same presented in both ([{'type': 'linear', 'media': ['linear']}])
+   ok   window of b: HLS ('concurrent', 65, 12)  DASH ('concurrent', 65, 12)
+   ok   request of b: HLS ?sgai-image-over-video=0&sgai-video-decoders=1  DASH ?sgai-image-over-video=0&sgai-video-decoders=1
+   ok   B (ONCE) after leaving it and seeking back: HLS []  DASH [], its window gone from both bars
+   break c    izq t= 114.7  [{'type': 'linear', 'media': ['linear']}]
+   break c    der t= 114.5  [{'type': 'linear', 'media': ['linear']}]
+   ok   break c: the same presented in both ([{'type': 'linear', 'media': ['linear']}])
+   ok   window of c: HLS ('concurrent', 110, 12)  DASH ('concurrent', 110, 12)
+   ok   request of c: HLS ?sgai-image-over-video=0&sgai-video-decoders=1  DASH ?sgai-image-over-video=0&sgai-video-decoders=1
+   ok   the linear break on screen in both: HLS True (programme 150.0)  DASH True (programme 150.3)
+   ok   both back to the programme after it: HLS 163.0  DASH 163.6
+   ok   post-roll presented: HLS {'outcome': 'presented', 'presented': {'index': None, 'type': 'linear', 'linear': True}, 'itemId': 'AD-POST.0'}  DASH {'outcome': 'presented', 'presented': {'index': None, 'type': 'linear', 'linear': True}, 'itemId': '5.0'}
+
+== izq=dash-1dec-img  der=dash-1dec-noimg
+   break pre  izq t=   5.1  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   break pre  der t=   5.0  [{'type': 'linear', 'media': ['linear']}]
+   break a    izq t=  24.6  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   break a    der t=  24.5  []
+   break b    izq t=  69.5  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   break b    der t=  69.6  [{'type': 'linear', 'media': ['linear']}]
+   break c    izq t= 114.5  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   break c    der t= 114.9  [{'type': 'linear', 'media': ['linear']}]
+
+== izq=ours-2dec-img  der=dash-2dec-img  404 PLANTADO en **/ketrava-backplate/*/dash/manifest.mpd
+   break pre  izq t=   5.2  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break pre  der t=   5.0  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break a    izq t=  24.8  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   break a    der t=  24.5  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   break b    izq t=  69.5  [{'type': 'squeezebackLShape', 'media': ['video']}]
+   break b    der t=  69.7  [{'type': 'squeezebackLShape', 'media': ['video/mp4']}]
+   break c    izq t= 114.7  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break c    der t= 114.5  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+control: with the MPD of B answered 404, DASH falls to its next option and HLS does not -> HLS [{'type': 'squeezebackLShape', 'media': ['video']}]  DASH [{'type': 'squeezebackLShape', 'media': ['video/mp4']}]  ok
+control: in B, DASH 1 dec with images against without -> different
+
+VERDE
+exit 0
