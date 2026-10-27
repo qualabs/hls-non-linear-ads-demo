@@ -29,6 +29,15 @@
 # files as they are; the exclusion patterns exclude what they claim. --control plants
 # two references that do not exist, to watch the reference check turn red.
 #
+# THE ONE MISS THAT IS NOT A FAILURE IS ONE THE DEMO DECLARES. A break of stage.json
+# with `primeraOpcionRota` points its first option at a URI that does not exist, so
+# the renderer's failover (ADR 0107) is seen (break C of stage-pair). The check reads
+# that field, and the DASH form escribir-asset-lists.mjs derives from it, out of the
+# stage and prints those references as ACCEPTED with the reason; nothing is written
+# down here, so the exception cannot outlive the declaration (ADR 0094, note of
+# 2026-10-26). The selftest proves both sides: the declared miss passes, an
+# undeclared one fails.
+#
 # What the traps are (the bucket in the host, the 403 at the root, the .ts content
 # type, the anchored -x, content/.fuentes/) is in the CLAUDE.md of the project;
 # how each one is handled is in scripts/publicar.py, which does the analysis.
@@ -70,7 +79,7 @@ host() { echo "https://qualabs-hls-demo-$1.storage.googleapis.com"; }
 # The files of a tree with their hash, outside content/: what senalizar may not change.
 hashes() { (cd "$1" && find . -path ./content -prune -o -type f -print0 | sort -z | xargs -0 sha256sum); }
 
-echo "== 0. the exclusion patterns, against planted paths =="
+echo "== 0. the exclusion patterns and the reference check, against planted paths =="
 $PY selftest
 
 echo "== 1. the stage: HEAD $(git rev-parse --short HEAD), with dist/ built in it =="
