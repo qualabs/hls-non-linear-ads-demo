@@ -285,7 +285,7 @@ fi
 # comando, no hay un error. Misma condición que la carrera, por la misma razón.
 if [ "$SIGNALLING" = signalling ]; then
   if [ -f content/primary/dash/manifest.mpd ]; then
-    "$DEMO/scripts/senalizar-dash.mjs" "$DEMO/stage.json" content/primary/dash/manifest.mpd content/primary/dash/senalizado.mpd
+    "$DEMO/scripts/senalizar-dash.mjs" "$DEMO/stage.json" content/primary/dash/manifest.mpd "$(leer mpd)"
   else
     echo "senalizar-dash: no hay content/primary/dash/manifest.mpd; correr ./scripts/empaquetar-dash.sh"
   fi
