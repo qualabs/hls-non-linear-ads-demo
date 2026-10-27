@@ -7,7 +7,7 @@ date: 2026-09-08
 supersedes: null
 superseded_by: null
 generalizes: ["0015"]
-generalized_by: null
+generalized_by: "0116"
 ---
 
 ## Contexto
@@ -147,3 +147,5 @@ antemano; el efecto lateral es que igual no hay cambio.
 profundidad.** Todo lo de la página queda un directorio más abajo, y los comandos
 de contenido de esa demo pasan a nombrarse con su ruta completa. Se paga una vez
 y compra que la segunda demo no tenga que discutir dónde va.
+
+> 2026-10-26: generalizado por el ADR 0116, que reparte la librería en `lib/` y una carpeta por formato (`hls/`, `dash/`).

@@ -6541,6 +6541,32 @@ lineal. Las siete tasks `done`; falta cerrar la fase (Mode D).
 Las siete tasks `done`; informe en `phases/17-png-y-mp4-para-el-roku/REPORT.md`. Deja una idea en el
 roadmap: `creative-png-del-banner-sin-no-cache`.
 
+## 2026-10-26 — Diseño de la fase: HLS y DASH lado a lado
+
+Nicolás aprobó el plan (despacho de agent-nicolas-laptop-865daf a hls-demo-18; David Hassoun al
+tanto): `lib/` lo común, `hls/` lo de HLS, `dash/` vacía, sin cambiar lo que hace la demo, para que
+la fase siguiente prototipe SVTA2053 v3 sobre DASH. Diseño en
+`roadmap/hls-y-dash-lado-a-lado/DESIGN.md`. La línea de base de `0739c38`: 378/378, check verde, y la
+corrida en seco de las cinco demos con 0 para copiar y 0 para borrar.
+
+Lo que el diseño encontró y se resolvió antes de generar: ninguna reestructura de `lib/` deja el
+dist byte a byte igual (el build etiqueta cada fuente con su ruta), y los tests de las cinco demos,
+que se publican, importan de `lib/signalling.js`. Nicolás aceptó que cambien siempre que se pruebe
+que el cambio es inerte, con un script que quede en el repo (ADR 0118).
+
+## 2026-10-26 — Fase generada: HLS y DASH lado a lado
+
+`PHASE.md` y `TASKS.md` (cinco tasks) en `roadmap/hls-y-dash-lado-a-lado/`, y los ADR 0116 a 0119:
+la pregunta que reparte la librería y el grep del 0003 sobre `lib/` entera (0116, generaliza el
+0020), el reparto de `signalling.js` (0117), la comparación de publicaciones (0118), y `demo/`
+intacta con `dash/` y su regla (0119).
+
+## 2026-10-26 — Fase 18, T-01: el comparador de publicaciones
+
+`scripts/comparar-publicacion.mjs` (rama `fase-18`, `3422cbb`): verde contra sí mismo en `0739c38`,
+y su `--control` saca cada uno de los 14 plantados como debe. Línea de base guardada en
+`phases/18-hls-y-dash-lado-a-lado/tasks/T-01/`.
+
 ## 2026-10-26 — Cada asset-list se pide una vez: la respuesta viaja en el reporte de onResolved
 
 Opción A de David. ADR 0116.
@@ -6554,6 +6580,36 @@ Opción A de David. ADR 0116.
   respuesta del reporte en lugar de pedirla otra vez.
 - Tests: `test/asset-list-response.test.js`. Smoke en Chrome headless en el 8091 (detenido por PID;
   8090 no se tocó): un pedido por asset-list.
+
+## 2026-10-26 — Fase 18, T-02: la partición
+
+Rama `fase-18`, `7c95e9a`: `lib/signalling.js` partida en `lib/experience.js`,
+`lib/capabilities.js` y `hls/signalling.js`; `media.js` y `concurrent-hls.js` a `hls/`; el build y
+`package.json` al día; los tests sólo cambian de dónde importan. 378/378, y
+`comparar-publicacion.mjs 0739c38 HEAD` verde en las cinco demos (el dist con las mismas 174
+declaraciones en otro orden, los tests de demo con los mismos nombres importados).
+
+## 2026-10-26 — Fase 18, T-03: las costuras y la publicación
+
+Rama `fase-18`, `5231ffa`: `verificar-cortes.mjs` corre la costura 0003 sobre `lib/` entera y la
+0015 sobre `lib/` y `hls/`, sin listas a mano ni chequeo de completitud; `demos-cambiadas.sh`
+publica las cinco cuando cambia `hls/`. Check verde, y rojo con cada uno de tres plantados.
+
+## 2026-10-26 — Fase 18, T-04: `dash/` y la documentación
+
+Rama `fase-18`, `8f3aa53`: `dash/README.md` con la regla; README, `docs/`, `CLAUDE.md` y los
+comentarios fuera de `demo/` ya no nombran rutas movidas (la búsqueda da vacío; sobre `0739c38`
+encuentra 29 archivos). Las 18 líneas que quedan en `demo/` son publicadas y quedan para la fase
+DASH.
+
+## 2026-10-26 — Fase 18, T-05, y fase cerrada
+
+Contra `0739c38`: 378/378, check verde, la corrida en seco con 0 faltantes, 0 borrados y los mismos
+señalizados; sus 11 copias son exactamente los 11 archivos que `comparar-publicacion.mjs` admite (el
+dist en cada demo y los seis tests de demo), y el comparador da verde. Merge `--no-ff` a main local
+(`aab6382`), sin push; el `dist/` de main no se reconstruyó. El próximo push publica un dist nuevo
+en las cinco demos con el mismo comportamiento. Informe en
+`phases/18-hls-y-dash-lado-a-lado/REPORT.md`.
 
 ## 2026-10-26 — `onPresented` del default que también falla
 

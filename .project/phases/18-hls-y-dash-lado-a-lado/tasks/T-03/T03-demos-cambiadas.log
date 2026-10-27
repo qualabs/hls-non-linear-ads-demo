@@ -1,0 +1,16 @@
+== only hls/media.js changed:
+stage-pair
+race-multiview
+multiview-offer
+hydration-break
+compatibility-pair
+== only dash/README.md:
+(end)
+== only lib/renderer.js (reference):
+stage-pair
+race-multiview
+multiview-offer
+hydration-break
+compatibility-pair
+== the script before this task, only hls/media.js changed (the red it fixes):
+(end)

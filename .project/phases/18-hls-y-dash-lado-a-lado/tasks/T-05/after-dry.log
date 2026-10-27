@@ -1,0 +1,74 @@
+== 0. the exclusion patterns, against planted paths ==
+   scripts/__pycache__/x.pyc                    excluded
+   test/__pycache__/y.pyc                       excluded
+   content/primary/seg000.ts                    excluded
+   index.html                                   published
+   signalling/asset-list-offer.json             published
+   js/content/x.js                              published
+   .fuentes/Sparks.mp4                          excluded
+   primary/con-daterange-rica.m3u8              excluded
+   primary/seg000.ts                            published
+   primary/con-daterange.m3u8                   published
+   index.html                                   no-cache
+   graphics/campaigns/zumbra-backplate-fijo.png no-cache
+   content/creatives/zumbra-16x9/d8eabbdae4/progressive.mp4 no-cache
+   content/adL/progressive.mp4                  no-cache
+   content/primary/index.m3u8                   no-cache
+   content/primary/seg000.ts                    cached an hour
+   content/adBanner/creative.png                cached an hour
+== 1. the stage: HEAD 8f3aa53, with dist/ built in it ==
+construir-libreria: dist/qualabs-concurrent-hls.js (7679 lines, global QualabsConcurrentHls)
+== 2. stage-pair: checks ==
+   21 playlists of content/ downloaded from the bucket
+   senalizar-contenido.sh leaves the committed files as they are
+   80 files to publish outside content/, 2 signalled files of content/ that change
+   47 references, 18 playlists followed, 465 segments; 0 missing
+   the sync would do (gcloud --dry-run):
+     3 to copy, 0 to remove
+     Would copy file:///run/user/1000/publicar-Is4Qq9/repo/demo/stage-pair/dist/qualabs-concurrent-hls.js to gs://qualabs-hls-demo-stage-pair/dist/qualabs-concurrent-hls.js#1793047859526498
+     Would copy file:///run/user/1000/publicar-Is4Qq9/repo/demo/stage-pair/test/signalled-run.test.js to gs://qualabs-hls-demo-stage-pair/test/signalled-run.test.js#1793047859456113
+     Would copy file:///run/user/1000/publicar-Is4Qq9/repo/demo/stage-pair/test/verificar-carrera.py to gs://qualabs-hls-demo-stage-pair/test/verificar-carrera.py#1790095757040065
+     signalled, would upload: content/primary/con-daterange.m3u8
+     signalled, would upload: content/race/program/con-daterange.m3u8
+== 2. race-multiview: checks ==
+   8 playlists of content/ downloaded from the bucket
+   senalizar-contenido.sh leaves the committed files as they are
+   68 files to publish outside content/, 1 signalled files of content/ that change
+   9 references, 6 playlists followed, 192 segments; 0 missing
+   the sync would do (gcloud --dry-run):
+     2 to copy, 0 to remove
+     Would copy file:///run/user/1000/publicar-Is4Qq9/repo/demo/race-multiview/dist/qualabs-concurrent-hls.js to gs://qualabs-hls-demo-race-multiview/dist/qualabs-concurrent-hls.js#1793047868463183
+     Would copy file:///run/user/1000/publicar-Is4Qq9/repo/demo/race-multiview/test/signalled-run.test.js to gs://qualabs-hls-demo-race-multiview/test/signalled-run.test.js#1789420288686046
+     signalled, would upload: content/primary/con-daterange.m3u8
+== 2. multiview-offer: checks ==
+   8 playlists of content/ downloaded from the bucket
+   senalizar-contenido.sh leaves the committed files as they are
+   25 files to publish outside content/, 1 signalled files of content/ that change
+   10 references, 6 playlists followed, 153 segments; 0 missing
+   the sync would do (gcloud --dry-run):
+     2 to copy, 0 to remove
+     Would copy file:///run/user/1000/publicar-Is4Qq9/repo/demo/multiview-offer/dist/qualabs-concurrent-hls.js to gs://qualabs-hls-demo-multiview-offer/dist/qualabs-concurrent-hls.js#1793047873379295
+     Would copy file:///run/user/1000/publicar-Is4Qq9/repo/demo/multiview-offer/test/signalled-run.test.js to gs://qualabs-hls-demo-multiview-offer/test/signalled-run.test.js#1793047873323016
+     signalled, would upload: content/primary/con-daterange.m3u8
+== 2. hydration-break: checks ==
+   5 playlists of content/ downloaded from the bucket
+   senalizar-contenido.sh leaves the committed files as they are
+   61 files to publish outside content/, 1 signalled files of content/ that change
+   14 references, 3 playlists followed, 24 segments; 0 missing
+   the sync would do (gcloud --dry-run):
+     2 to copy, 0 to remove
+     Would copy file:///run/user/1000/publicar-Is4Qq9/repo/demo/hydration-break/dist/qualabs-concurrent-hls.js to gs://qualabs-hls-demo-hydration-break/dist/qualabs-concurrent-hls.js#1793047879724607
+     Would copy file:///run/user/1000/publicar-Is4Qq9/repo/demo/hydration-break/test/signalled-run.test.js to gs://qualabs-hls-demo-hydration-break/test/signalled-run.test.js#1793047879456565
+     signalled, would upload: content/primary/con-daterange.m3u8
+== 2. compatibility-pair: checks ==
+   5 playlists of content/ downloaded from the bucket
+   senalizar-contenido.sh leaves the committed files as they are
+   31 files to publish outside content/, 1 signalled files of content/ that change
+   7 references, 3 playlists followed, 18 segments; 0 missing
+   the sync would do (gcloud --dry-run):
+     2 to copy, 0 to remove
+     Would copy file:///run/user/1000/publicar-Is4Qq9/repo/demo/compatibility-pair/dist/qualabs-concurrent-hls.js to gs://qualabs-hls-demo-compatibility-pair/dist/qualabs-concurrent-hls.js#1793047885515934
+     Would copy file:///run/user/1000/publicar-Is4Qq9/repo/demo/compatibility-pair/test/signalled-run.test.js to gs://qualabs-hls-demo-compatibility-pair/test/signalled-run.test.js#1793047885430821
+     signalled, would upload: content/primary/con-daterange.m3u8
+DRY RUN GREEN: nothing was published (--publicar does)
+exit 0

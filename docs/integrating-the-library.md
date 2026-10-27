@@ -328,7 +328,7 @@ at once, counting the programme. With the grid full the rows that are not up go
 grey with a line saying why, and the way past it is to lower one and raise
 another. The number comes from the table of shapes the library composes with,
 derived from it rather than written beside it — `MAX_BOXES` in
-`lib/signalling.js`.
+`lib/experience.js`.
 
 **A full grid is that many video decoders playing at once**, which is exactly the
 number `capabilities.concurrentVideo` exists to tell your ad server before it picks
@@ -361,7 +361,7 @@ The global is `QualabsConcurrentHls`, and this is all of it:
 **The multi view class is not on the global**, and it is better known than
 discovered. The library reads `com.qualabs.hls.multiViewInterstitial` too, and the
 only place that string is published is the source — `MULTIVIEW_CLASS` in
-`lib/signalling.js`. A packager or an ad server that has to spell it writes it
+`hls/signalling.js`. A packager or an ad server that has to spell it writes it
 out, with no name to check itself against.
 
 ### `attach(hls, options)`
@@ -692,7 +692,7 @@ Apple's own players mark a break with, so it arrives already read.
 
 ## 8. Getting the file
 
-`dist/qualabs-concurrent-hls.js` is assembled from `lib/` by
+`dist/qualabs-concurrent-hls.js` is assembled from `lib/` and `hls/` by
 `scripts/construir-libreria.sh`: the sources stay as ES modules, one file per
 piece, and the build concatenates them into one classic script that defines the
 global. No bundler, no dependencies, and the browser does not resolve modules.

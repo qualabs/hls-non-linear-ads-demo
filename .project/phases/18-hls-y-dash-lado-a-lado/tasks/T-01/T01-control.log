@@ -1,0 +1,17 @@
+   ok    green expected, green got: the same stage
+   ok    green expected, green got: a comment of the dist changed
+   ok    green expected, green got: two declarations of the dist swapped
+   ok    red   expected, red   got: a string of the dist changed (dist/qualabs-concurrent-hls.js: declaration 'use strict' is missing, or not the same, after)
+   ok    red   expected, red   got: a regex of the dist changed (dist/qualabs-concurrent-hls.js: declaration parseViewport is missing, or not the same, after)
+   ok    red   expected, red   got: a declaration of the dist missing (dist/qualabs-concurrent-hls.js: declaration kindOfClass is missing, or not the same, after)
+   ok    red   expected, red   got: a dist that does not parse (dist/qualabs-concurrent-hls.js: the dist of after without comments does not parse -- a broken dist, or a lexer)
+   ok    red   expected, red   got: MAX_BOXES moved before VIEWPORTS_BY_COUNT, which it reads when it loads (dist/qualabs-concurrent-hls.js: evaluating the dist failed: Cannot access 'VIEWPORTS_BY_COUNT' before initiali)
+   ok    red   expected, red   got: a file more (only after (a new URL): planted.html)
+   ok    red   expected, red   got: a file less (only before (a deletion from the bucket): index.html)
+   ok    red   expected, red   got: a byte of a page changed (index.html: differs outside its imports, first at line 167 of what is left: "" -> " ")
+   ok    green expected, green got: an import of a demo test split in two, same names
+   ok    red   expected, red   got: an import of a demo test with another name (test/signalled-run.test.js: imports other names (gone: CONCURRENT_CLASS; new: CONCURRENT_CLASSX))
+   ok    red   expected, red   got: a line of a demo test changed outside its imports (test/signalled-run.test.js: differs outside its imports, first at line 899 of what is left: "" -> "// planted")
+control on stage-pair at 0739c38, test file test/signalled-run.test.js
+CONTROL GREEN: every plant came out the way it should
+exit 0

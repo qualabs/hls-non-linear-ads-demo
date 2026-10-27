@@ -13,7 +13,7 @@ and knowing which is which is worth more than reading any of them first:
 | `README.md` | what the library is and how it is integrated |
 | `.project/PROJECT.md` | the scope, the dates and who does what |
 | `.project/decisions/` | **the decisions, numbered**. When something in the code looks arbitrary, the reason is here |
-| the header comments of `lib/*.js` and of the pages | **the real documentation**. They are long on purpose and they explain why, not what |
+| the header comments of `lib/*.js`, `hls/*.js` and of the pages | **the real documentation**. They are long on purpose and they explain why, not what |
 
 The order for understanding why something is the way it is: the file's own comment,
 then the ADR it names, then the phase that opened it.

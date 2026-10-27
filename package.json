@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "description": "Non-linear (concurrent) HLS ad experiences on hls.js, unmodified. No bundler and no dependencies: native ES modules in the browser, node --test for the pure logic.",
   "type": "module",
-  "main": "./lib/concurrent-hls.js",
-  "exports": "./lib/concurrent-hls.js",
+  "main": "./hls/concurrent-hls.js",
+  "exports": "./hls/concurrent-hls.js",
   "files": [
     "lib/",
+    "hls/",
     "dist/",
     "docs/"
   ],

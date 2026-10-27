@@ -35,14 +35,16 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 
 import {
+  resolveElement,
+  rangeOfExperiences
+} from '../lib/experience.js';
+import {
   CONCURRENT_CLASS,
   INTERSTITIAL_CLASS,
   kindOfClass,
   resolveAssetList,
-  resolveElement,
-  rangeOfExperiences,
   rangeOfDateRange
-} from '../lib/signalling.js';
+} from '../hls/signalling.js';
 import { volumeOf } from '../lib/renderer.js';
 import { rangeSpan } from '../lib/controls.js';
 
