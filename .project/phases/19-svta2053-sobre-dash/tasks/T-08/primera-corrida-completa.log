@@ -1,0 +1,196 @@
+
+== izq=nativo  der=ours-2dec-img   la página leyó la URL: ok
+   ROJO break a izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado None
+   ROJO break a izq (nativo         ) t=     0  {'aviso_lineal': True}   esperado {'aviso_lineal': False}
+   ok   break a der (ours-2dec-img  ) t=  24.5  {'layout': 'squeezebackDoubleBox', 'video': 2, 'img': 0}
+   ok   break b izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b izq (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   break b der (ours-2dec-img  ) t=  69.5  {'layout': 'squeezebackLShape', 'video': 2, 'img': 0}
+   ROJO break c izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.0}
+   ok   break c izq (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   break c der (ours-2dec-img  ) t= 114.5  {'layout': 'lowerThirdOverlay', 'video': 2, 'img': 0}
+   ok   pedidos izq (nativo): 1
+          asset-list-break-pre.json?_HLS_primary_id=1b7fa0f5-a64b-426b-99ed-1dfef897bf0f
+   ok   pedidos der (ours-2dec-img): 2
+          asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=1
+          asset-list-break-pre.json?sgai-video-decoders=2&sgai-image-over-video=1
+
+== izq=ours-1dec-img  der=ours-1dec-noimg   la página leyó la URL: ok
+   ok   break a izq (ours-1dec-img  ) t=  24.5  {'layout': 'squeezebackLShape', 'video': 1, 'img': 1}
+   ok   break a der (ours-1dec-noimg) t=  24.6  {'layout': None, 'video': 1, 'img': 0}
+   ok   break b izq (ours-1dec-img  ) t=  69.6  {'layout': 'squeezebackDoubleBox', 'video': 1, 'img': 1}
+   ok   break b der (ours-1dec-noimg) t=  69.5  {'layout': 'linear', 'video': 2, 'img': 0}
+   ok   break c izq (ours-1dec-img  ) t= 114.3  {'layout': 'squeezebackLShape', 'video': 1, 'img': 1}
+   ok   break c der (ours-1dec-noimg) t= 114.4  {'layout': 'linear', 'video': 2, 'img': 0}
+   ok   pedidos izq (ours-1dec-img): 2
+          asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=1
+          asset-list-break-pre.json?sgai-video-decoders=1&sgai-image-over-video=1
+   ok   pedidos der (ours-1dec-noimg): 2
+          asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=0
+          asset-list-break-pre.json?sgai-video-decoders=1&sgai-image-over-video=0
+
+== izq=nativo  der=nativo   la página leyó la URL: ok
+   ROJO break a izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado None
+   ROJO break a izq (nativo         ) t=     0  {'aviso_lineal': True}   esperado {'aviso_lineal': False}
+   ROJO break a der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado None
+   ROJO break a der (nativo         ) t=     0  {'aviso_lineal': True}   esperado {'aviso_lineal': False}
+   ok   break b izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b izq (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   break b der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b der (nativo         ) t=     0  {'aviso_lineal': True}
+   ROJO break c izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.0}
+   ok   break c izq (nativo         ) t=     0  {'aviso_lineal': True}
+   ROJO break c der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.0}
+   ok   break c der (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   pedidos izq (nativo): 1
+          asset-list-break-pre.json?_HLS_primary_id=8d536f72-91fd-43b4-a9d1-89d8ce6f9c90
+   ok   pedidos der (nativo): 1
+          asset-list-break-pre.json?_HLS_primary_id=319e18c9-e7c0-48a2-af48-c0b96a830b8d
+
+== izq=ours-2dec-noimg  der=nativo   la página leyó la URL: ok
+   ok   break a izq (ours-2dec-noimg) t=  24.5  {'layout': 'squeezebackDoubleBox', 'video': 2, 'img': 0}
+   ROJO break a der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado None
+   ROJO break a der (nativo         ) t=     0  {'aviso_lineal': True}   esperado {'aviso_lineal': False}
+   ok   break b izq (ours-2dec-noimg) t=  69.1  {'layout': 'squeezebackLShape', 'video': 2, 'img': 0}
+   ok   break b der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b der (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   break c izq (ours-2dec-noimg) t= 114.5  {'layout': 'lowerThirdOverlay', 'video': 2, 'img': 0}
+   ROJO break c der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.0}
+   ok   break c der (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   pedidos izq (ours-2dec-noimg): 2
+          asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=0
+          asset-list-break-pre.json?sgai-video-decoders=2&sgai-image-over-video=0
+   ok   pedidos der (nativo): 1
+          asset-list-break-pre.json?_HLS_primary_id=1e112865-c235-44b4-b2cc-64026392ed37
+
+== izq=ours-2dec-img  der=dash-2dec-img
+   break pre  izq t=   5.3  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break pre  der t=   5.0  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   ok   break pre: the same option presented in both
+   break a    izq t=  24.2  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   break a    der t=  24.0  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   ok   break a: the same option presented in both
+   break b    izq t=  69.5  [{'type': 'squeezebackLShape', 'media': ['video']}]
+   break b    der t=  69.5  [{'type': 'squeezebackLShape', 'media': ['video']}]
+   ok   break b: the same option presented in both
+   break c    izq t= 114.6  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break c    der t= 114.5  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   ok   break c: the same option presented in both
+   ok   window of a      HLS ('concurrent', 20, 12)  DASH ('concurrent', 20, 12)
+   ok   window of b      HLS ('concurrent', 65, 12)  DASH ('concurrent', 65, 12)
+   ok   window of c      HLS ('concurrent', 110, 12)  DASH ('concurrent', 110, 12)
+   ok   window of linear HLS ('interstitial', 150, 12)  DASH ('interstitial', 150, 12)
+   ok   window of pre    HLS ('concurrent', 0, 12)  DASH ('concurrent', 0, 12)
+   ok   request of pre: HLS ?sgai-image-over-video=1&sgai-video-decoders=2  DASH ?sgai-image-over-video=1&sgai-video-decoders=2
+   ROJO request of a: HLS ?None  DASH ?sgai-image-over-video=1&sgai-video-decoders=2
+   ROJO request of b: HLS ?None  DASH ?None
+   ok   request of c: HLS ?sgai-image-over-video=1&sgai-video-decoders=2  DASH ?sgai-image-over-video=1&sgai-video-decoders=2
+   ROJO B (ONCE) after a seek back into it: HLS [{'type': 'squeezebackLShape', 'media': ['video']}]  DASH [{'type': 'squeezebackLShape', 'media': ['video']}]
+   ROJO the linear break on screen: HLS False (programme 163.2)  DASH False (programme 162.5)
+   ROJO post-roll: HLS None  DASH None
+
+== izq=ours-2dec-noimg  der=dash-2dec-noimg
+   break pre  izq t=   5.2  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break pre  der t=   5.0  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   ok   break pre: the same option presented in both
+   break a    izq t=  24.5  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   break a    der t=  24.6  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   ok   break a: the same option presented in both
+   break b    izq t=  69.5  [{'type': 'squeezebackLShape', 'media': ['video']}]
+   break b    der t=  69.6  [{'type': 'squeezebackLShape', 'media': ['video']}]
+   ok   break b: the same option presented in both
+   break c    izq t= 114.5  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break c    der t= 114.4  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   ok   break c: the same option presented in both
+   ok   window of a      HLS ('concurrent', 20, 12)  DASH ('concurrent', 20, 12)
+   ok   window of b      HLS ('concurrent', 65, 12)  DASH ('concurrent', 65, 12)
+   ok   window of c      HLS ('concurrent', 110, 12)  DASH ('concurrent', 110, 12)
+   ok   window of linear HLS ('interstitial', 150, 12)  DASH ('interstitial', 150, 12)
+   ok   window of pre    HLS ('concurrent', 0, 12)  DASH ('concurrent', 0, 12)
+   ok   request of pre: HLS ?sgai-image-over-video=0&sgai-video-decoders=2  DASH ?sgai-image-over-video=0&sgai-video-decoders=2
+   ROJO request of a: HLS ?None  DASH ?sgai-image-over-video=0&sgai-video-decoders=2
+   ROJO request of b: HLS ?None  DASH ?None
+   ok   request of c: HLS ?sgai-image-over-video=0&sgai-video-decoders=2  DASH ?sgai-image-over-video=0&sgai-video-decoders=2
+   ROJO B (ONCE) after a seek back into it: HLS [{'type': 'squeezebackLShape', 'media': ['video']}]  DASH [{'type': 'squeezebackLShape', 'media': ['video']}]
+   ROJO the linear break on screen: HLS False (programme 163.2)  DASH False (programme 162.8)
+   ROJO post-roll: HLS None  DASH None
+
+== izq=ours-1dec-img  der=dash-1dec-img
+   break pre  izq t=   5.0  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   break pre  der t=   5.3  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   ok   break pre: the same option presented in both
+   break a    izq t=  24.5  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   break a    der t=  24.6  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   ok   break a: the same option presented in both
+   break b    izq t=  69.5  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   break b    der t=  69.6  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   ok   break b: the same option presented in both
+   break c    izq t= 114.5  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   break c    der t= 114.6  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   ok   break c: the same option presented in both
+   ok   window of a      HLS ('concurrent', 20, 12)  DASH ('concurrent', 20, 12)
+   ok   window of b      HLS ('concurrent', 65, 12)  DASH ('concurrent', 65, 12)
+   ok   window of c      HLS ('concurrent', 110, 12)  DASH ('concurrent', 110, 12)
+   ok   window of linear HLS ('interstitial', 150, 12)  DASH ('interstitial', 150, 12)
+   ok   window of pre    HLS ('concurrent', 0, 12)  DASH ('concurrent', 0, 12)
+   ok   request of pre: HLS ?sgai-image-over-video=1&sgai-video-decoders=1  DASH ?sgai-image-over-video=1&sgai-video-decoders=1
+   ROJO request of a: HLS ?None  DASH ?sgai-image-over-video=1&sgai-video-decoders=1
+   ROJO request of b: HLS ?None  DASH ?None
+   ok   request of c: HLS ?sgai-image-over-video=1&sgai-video-decoders=1  DASH ?sgai-image-over-video=1&sgai-video-decoders=1
+   ROJO B (ONCE) after a seek back into it: HLS [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]  DASH [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   ROJO the linear break on screen: HLS False (programme 163.3)  DASH False (programme 164.0)
+   ROJO post-roll: HLS None  DASH None
+
+== izq=ours-1dec-noimg  der=dash-1dec-noimg
+   break pre  izq t=   5.2  [{'type': 'linear', 'media': ['linear']}]
+   break pre  der t=   5.0  [{'type': 'linear', 'media': ['linear']}]
+   ok   break pre: the same option presented in both
+   break a    izq t=  24.5  []
+   break a    der t=  24.6  []
+   ROJO break a: the same option presented in both
+   break b    izq t=  69.5  [{'type': 'linear', 'media': ['linear']}]
+   break b    der t=  69.5  [{'type': 'linear', 'media': ['linear']}]
+   ok   break b: the same option presented in both
+   break c    izq t= 114.5  [{'type': 'linear', 'media': ['linear']}]
+   break c    der t= 114.6  [{'type': 'linear', 'media': ['linear']}]
+   ok   break c: the same option presented in both
+   ROJO window of a      HLS ('concurrent', 20, 12)  DASH None
+   ok   window of b      HLS ('concurrent', 65, 12)  DASH ('concurrent', 65, 12)
+   ok   window of c      HLS ('concurrent', 110, 12)  DASH ('concurrent', 110, 12)
+   ok   window of linear HLS ('interstitial', 150, 12)  DASH ('interstitial', 150, 12)
+   ok   window of pre    HLS ('concurrent', 0, 12)  DASH ('concurrent', 0, 12)
+   ok   request of pre: HLS ?sgai-image-over-video=0&sgai-video-decoders=1  DASH ?sgai-image-over-video=0&sgai-video-decoders=1
+   ROJO request of a: HLS ?None  DASH ?sgai-image-over-video=0&sgai-video-decoders=1
+   ROJO request of b: HLS ?None  DASH ?None
+   ok   request of c: HLS ?sgai-image-over-video=0&sgai-video-decoders=1  DASH ?sgai-image-over-video=0&sgai-video-decoders=1
+   ROJO B (ONCE) after a seek back into it: HLS [{'type': 'linear', 'media': ['linear']}]  DASH [{'type': 'linear', 'media': ['linear']}]
+   ROJO the linear break on screen: HLS False (programme 163.4)  DASH False (programme 163.9)
+   ROJO post-roll: HLS None  DASH None
+
+== izq=dash-1dec-img  der=dash-1dec-noimg
+   break pre  izq t=   5.1  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   break pre  der t=   5.0  [{'type': 'linear', 'media': ['linear']}]
+   break a    izq t=  24.6  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   break a    der t=  24.5  []
+   break b    izq t=  69.6  [{'type': 'squeezebackDoubleBox', 'media': ['image/svg+xml']}]
+   break b    der t=  69.5  [{'type': 'linear', 'media': ['linear']}]
+   break c    izq t= 114.5  [{'type': 'squeezebackLShape', 'media': ['image/svg+xml']}]
+   break c    der t= 114.6  [{'type': 'linear', 'media': ['linear']}]
+
+== izq=ours-2dec-img  der=dash-2dec-img  404 PLANTADO en **/ketrava-backplate/*/dash/manifest.mpd
+   break pre  izq t=   5.1  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break pre  der t=   5.0  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break a    izq t=  24.6  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   break a    der t=  24.5  [{'type': 'squeezebackDoubleBox', 'media': ['video']}]
+   break b    izq t=  69.7  [{'type': 'squeezebackLShape', 'media': ['video']}]
+   break b    der t=  69.5  [{'type': 'squeezebackLShape', 'media': ['video/mp4']}]
+   break c    izq t= 114.7  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+   break c    der t= 114.5  [{'type': 'lowerThirdOverlay', 'media': ['video']}]
+control: with the MPD of B answered 404, DASH falls to its next option and HLS does not -> HLS [{'type': 'squeezebackLShape', 'media': ['video']}]  DASH [{'type': 'squeezebackLShape', 'media': ['video/mp4']}]  ok
+control: in B, DASH 1 dec with images against without -> different
+
+control: en B, 1 dec con imágenes contra sin imágenes -> distintos
+control: en B, nativo contra nativo -> iguales
+
+ROJO (34)
+exit 1

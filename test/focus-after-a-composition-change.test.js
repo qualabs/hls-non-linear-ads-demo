@@ -43,7 +43,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { activeAt, isOffer } from '../lib/experience.js';
-import { resolveAssetList } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { createMultiview } from '../lib/multiview.js';
 import { applyPlan, effectiveVolumeOf, entryOf, planComposition } from '../lib/renderer.js';
 
@@ -58,7 +58,7 @@ const SLOT_START = 45;
 /** The offer as it is served, behind the decorator that holds the choices. */
 function multiview() {
   const list = readJson('./fixtures/asset-lists/asset-list-offer-3.json');
-  const experiences = resolveAssetList(list, { id: ID, slotStart: SLOT_START });
+  const experiences = resolveAssets(list, { id: ID, slotStart: SLOT_START });
   const mv = createMultiview({
     activeAt: (time) => activeAt(experiences, time),
     programRanges: () => ({ ranges: [], settled: true }),

@@ -36,7 +36,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { FULL_FRAME } from '../lib/experience.js';
-import { resolveAssetList } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import {
   PRIMARY_ID, boxesOf, elementsOf, emptySelection, enlarge, raise, shrink
 } from '../lib/multiview.js';
@@ -47,7 +47,7 @@ const readJson = (path) => JSON.parse(readFileSync(new URL(path, import.meta.url
 /** The offer as it is served: three views, which with the programme is a full grid. */
 function offer() {
   const list = readJson('./fixtures/asset-lists/asset-list-offer-3.json');
-  return resolveAssetList(list, { id: 'MV-1-OFFER', slotStart: 45 })[0];
+  return resolveAssets(list, { id: 'MV-1-OFFER', slotStart: 45 })[0];
 }
 
 const idsOf = (o) => o.views.map((view) => view.id);

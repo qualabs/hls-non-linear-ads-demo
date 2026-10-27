@@ -1,0 +1,50 @@
+== 0. the exclusion patterns, against planted paths ==
+   scripts/__pycache__/x.pyc                    excluded
+   test/__pycache__/y.pyc                       excluded
+   content/primary/seg000.ts                    excluded
+   index.html                                   published
+   signalling/asset-list-offer.json             published
+   js/content/x.js                              published
+   .fuentes/Sparks.mp4                          excluded
+   primary/con-daterange-rica.m3u8              excluded
+   primary/seg000.ts                            published
+   primary/con-daterange.m3u8                   published
+   index.html                                   no-cache
+   graphics/campaigns/zumbra-backplate-fijo.png no-cache
+   content/creatives/zumbra-16x9/d8eabbdae4/progressive.mp4 no-cache
+   content/adL/progressive.mp4                  no-cache
+   content/primary/index.m3u8                   no-cache
+   content/primary/seg000.ts                    cached an hour
+   content/adBanner/creative.png                cached an hour
+== 1. the stage: HEAD f148970, with dist/ built in it ==
+construir-libreria: dist/qualabs-concurrent-hls.js (7774 lines, global QualabsConcurrentHls)
+construir-libreria: dist/qualabs-concurrent-dash.js (7030 lines, global QualabsConcurrentDash)
+== 2. stage-pair: checks ==
+   senalizar-contenido.sh leaves the committed files as they are
+   91 files to publish outside content/, 0 signalled files of content/ that change
+   57 references, 18 playlists followed, 465 segments; 0 missing
+   the sync would do (gcloud --dry-run):
+     24 to copy, 0 to remove
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/README.md to gs://qualabs-hls-demo-stage-pair/README.md#1793047859292217
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/dist/qualabs-concurrent-dash.js to gs://qualabs-hls-demo-stage-pair/dist/qualabs-concurrent-dash.js
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/dist/qualabs-concurrent-hls.js to gs://qualabs-hls-demo-stage-pair/dist/qualabs-concurrent-hls.js#1793052081530074
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/index.html to gs://qualabs-hls-demo-stage-pair/index.html#1793047859439693
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/inspect.html to gs://qualabs-hls-demo-stage-pair/inspect.html#1793047859546654
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/js/app.js to gs://qualabs-hls-demo-stage-pair/js/app.js#1793047859641491
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/js/capabilities.js to gs://qualabs-hls-demo-stage-pair/js/capabilities.js#1793047859609271
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/js/inspect.js to gs://qualabs-hls-demo-stage-pair/js/inspect.js#1793047859621164
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/race.html to gs://qualabs-hls-demo-stage-pair/race.html#1790095755349338
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/scripts/empaquetar-dash.sh to gs://qualabs-hls-demo-stage-pair/scripts/empaquetar-dash.sh
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/scripts/escribir-asset-lists.mjs to gs://qualabs-hls-demo-stage-pair/scripts/escribir-asset-lists.mjs#1793047859379521
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/scripts/senalizar-contenido.sh to gs://qualabs-hls-demo-stage-pair/scripts/senalizar-contenido.sh#1793047859520287
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/scripts/senalizar-dash.mjs to gs://qualabs-hls-demo-stage-pair/scripts/senalizar-dash.mjs
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/signalling/dash/slots-break-a.json to gs://qualabs-hls-demo-stage-pair/signalling/dash/slots-break-a.json
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/signalling/dash/slots-break-b.json to gs://qualabs-hls-demo-stage-pair/signalling/dash/slots-break-b.json
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/signalling/dash/slots-break-c.json to gs://qualabs-hls-demo-stage-pair/signalling/dash/slots-break-c.json
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/signalling/dash/slots-break-post.json to gs://qualabs-hls-demo-stage-pair/signalling/dash/slots-break-post.json
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/signalling/dash/slots-break-pre.json to gs://qualabs-hls-demo-stage-pair/signalling/dash/slots-break-pre.json
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/stage.json to gs://qualabs-hls-demo-stage-pair/stage.json#1793047859506639
+     Would copy file:///run/user/1000/publicar-XqZKPd/repo/demo/stage-pair/test/signalled-run.test.js to gs://qualabs-hls-demo-stage-pair/test/signalled-run.test.js#1793052081193772
+     and content/: 262 objects to copy or remove
+DRY RUN GREEN: nothing was published (--publicar does)
+exit 0

@@ -42,9 +42,9 @@ import {
   CONCURRENT_CLASS,
   INTERSTITIAL_CLASS,
   kindOfClass,
-  resolveAssetList,
   rangeOfDateRange
 } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { volumeOf } from '../lib/renderer.js';
 import { rangeSpan } from '../lib/controls.js';
 
@@ -109,7 +109,7 @@ function programRanges() {
   for (const { n, slotStart, list } of RUN) {
     const id = `AD-${n}-CONCURRENT`;
     const assetList = readJson(assetListPath(list));
-    ranges.push(rangeOfExperiences(id, resolveAssetList(assetList, { id, slotStart })));
+    ranges.push(rangeOfExperiences(id, resolveAssets(assetList, { id, slotStart })));
   }
   return ranges.sort((a, b) => a.startTime - b.startTime);
 }
@@ -336,7 +336,7 @@ const MEASURED_VOLUME = [
 ];
 
 function resolvedElements(list, type) {
-  const [experience] = resolveAssetList(readJson(assetListPath(list)), { id: type, slotStart: 0 });
+  const [experience] = resolveAssets(readJson(assetListPath(list)), { id: type, slotStart: 0 });
   return experience.elements;
 }
 

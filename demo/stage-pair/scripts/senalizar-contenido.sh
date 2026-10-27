@@ -275,3 +275,18 @@ if [ "$SIGNALLING" = signalling ]; then
   echo
   "$DEMO/scripts/senalizar-carrera.sh"
 fi
+
+# ---------------------------------------------------------------------------
+# EL MPD SEÑALIZADO, para el pane DASH (fase 19)
+# ---------------------------------------------------------------------------
+# Los sobres `slot` de cada break ya los escribió escribir-asset-lists.mjs, que
+# van a git. El MPD va a content/, al lado del empaquetado del que sale, y sólo
+# cuando ese empaquetado existe (scripts/empaquetar-dash.sh): sin él falta un
+# comando, no hay un error. Misma condición que la carrera, por la misma razón.
+if [ "$SIGNALLING" = signalling ]; then
+  if [ -f content/primary/dash/manifest.mpd ]; then
+    "$DEMO/scripts/senalizar-dash.mjs" "$DEMO/stage.json" content/primary/dash/manifest.mpd "$(leer mpd)"
+  else
+    echo "senalizar-dash: no hay content/primary/dash/manifest.mpd; correr ./scripts/empaquetar-dash.sh"
+  fi
+fi

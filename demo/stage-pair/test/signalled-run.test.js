@@ -25,7 +25,7 @@
 //
 // El ADR 0085: la respuesta es UNA, la misma para cualquier capacidad, y quien
 // elige es la librería. Por eso el último test de esta sección le pasa los
-// archivos escritos a `resolveAssetList` bajo las cuatro combinaciones del
+// archivos escritos a `resolveAssets` bajo las cuatro combinaciones del
 // control y mira qué sale: es la única forma de saber que lo que la demo sirve y
 // lo que la librería filtra encajan.
 //
@@ -45,9 +45,8 @@ import { fileURLToPath } from 'node:url';
 // donde está declarado en lugar de copiarse de un ADR a un test.
 import { LINEAR_TYPE, MAX_BOXES } from '../../../lib/experience.js';
 import { selectOption, usableCapabilities } from '../../../lib/capabilities.js';
-import {
-  CONCURRENT_CLASS, INTERSTITIAL_CLASS, MULTIVIEW_CLASS, resolveAssetList
-} from '../../../hls/signalling.js';
+import { CONCURRENT_CLASS, INTERSTITIAL_CLASS, MULTIVIEW_CLASS } from '../../../hls/signalling.js';
+import { resolveAssets } from '../../../lib/ad-list.js';
 import { substitute, withClass } from '../../shared/test/variable-substitution.js';
 
 const DEMO = fileURLToPath(new URL('..', import.meta.url));
@@ -96,9 +95,11 @@ function run(env = {}) {
     });
     // Se leen ACÁ, antes de que el `finally` borre el temporal. Y se lee el
     // DIRECTORIO y no la lista de nombres de stage.json, que es lo que permite
-    // assertar cuántos archivos salieron.
+    // assertar cuántos archivos salieron. Sus archivos y no sus carpetas: los
+    // sobres del lado DASH van en `dash/` (fase 19) y los cuenta su propio test.
     const escritos = Object.fromEntries(
-      readdirSync(signalling).sort().map((name) => [name, JSON.parse(readFileSync(join(signalling, name), 'utf8'))])
+      readdirSync(signalling, { withFileTypes: true }).filter((e) => e.isFile()).map((e) => e.name).sort()
+        .map((name) => [name, JSON.parse(readFileSync(join(signalling, name), 'utf8'))])
     );
     const lista = (name) => {
       if (!(name in escritos)) throw new Error(`el señalizador no escribió ${name}`);
@@ -200,7 +201,7 @@ test('el postroll: CUE="POST" en su tag y en ningún otro, con default, último,
     assert.deepEqual(conCue.map((t) => t.id.split('-')[1]), ['POST'], 'el CUE va sólo en el postroll');
   }
   assert.match(corrida.hoja, /break POST .*CUE=POST/);
-  const { resolvePostRoll } = await import('../../../hls/signalling.js');
+  const { resolvePostRoll } = await import('../../../lib/ad-list.js');
   const [lineal, ...resto] = resolvePostRoll(corrida.lista(posts[0].concurrente), { id: 'AD-POST', slotStart: 198 });
   assert.deepEqual(resto, []);
   assert.equal(lineal.type, 'linear');
@@ -574,7 +575,7 @@ test('la librería, sobre la misma respuesta, dibuja video, imagen, el lineal o 
     const { warn, log } = console;
     console.warn = console.log = () => {};
     try {
-      return resolveAssetList(lista(brk.concurrente), {
+      return resolveAssets(lista(brk.concurrente), {
         id: brk.id, slotStart: brk.offset, capabilities: usableCapabilities(capacidad)
       }).map((e) => (e.type === LINEAR_TYPE ? 'lineal' : e.elements.find((x) => !x.primary).mediaType));
     } finally { console.warn = warn; console.log = log; }

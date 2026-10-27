@@ -1,0 +1,240 @@
+[
+{
+"mediaType": null,
+"uri": "/content/adA/index.m3u8"
+},
+{
+"mediaType": null,
+"uri": "/content/adB/index.m3u8"
+},
+{
+"mediaType": null,
+"uri": "/content/adC/index.m3u8"
+},
+{
+"mediaType": null,
+"uri": "/content/adL/index.m3u8"
+},
+{
+"mediaType": null,
+"uri": "/content/adLinear/index.m3u8"
+},
+{
+"mediaType": null,
+"uri": "/content/adOverlay/index.m3u8"
+},
+{
+"mediaType": null,
+"uri": "/content/creatives/ketrava-16x9/index.m3u8"
+},
+{
+"mediaType": null,
+"uri": "/content/creatives/kovrin-16x9/index.m3u8"
+},
+{
+"mediaType": null,
+"uri": "/content/creatives/zumbra-16x9/d8eabbdae4/index.m3u8"
+},
+{
+"mediaType": null,
+"uri": "/content/overlay/index.m3u8"
+},
+{
+"mediaType": null,
+"uri": "/content/race/caldrix/index.m3u8"
+},
+{
+"mediaType": null,
+"uri": "/content/view-caminandes-a/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/adA/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/adB/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/adC/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/adL/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/adOverlay/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/creatives/ketrava-backplate/8d140e0f2b/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/creatives/ketrava-banner/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/creatives/kovrin-backplate/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/creatives/kovrin-banner/8e5914d854/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/creatives/zumbra-16x9/d8eabbdae4/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/creatives/zumbra-backplate/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/creatives/zumbra-banner/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/overlay/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/race/caldrix/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/race/marvok/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/race/noctev/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/race/pentav/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/race/quentra/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/race/runtak/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/view-caminandes-a/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/view-caminandes-b/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/view-ed-a/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/view-ed-b/index.m3u8"
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/content/view-sintel/index.m3u8"
+},
+{
+"mediaType": "image/jpeg",
+"uri": "/content/adImageA/creative.jpg"
+},
+{
+"mediaType": "image/jpeg",
+"uri": "/content/adImageB/creative.jpg"
+},
+{
+"mediaType": "image/png",
+"uri": "/content/adBanner/creative.png"
+},
+{
+"mediaType": "image/png",
+"uri": "/graphics/campaigns/ketrava-16x9-fijo.png"
+},
+{
+"mediaType": "image/png",
+"uri": "/graphics/campaigns/kovrin-backplate-fijo.png"
+},
+{
+"mediaType": "image/png",
+"uri": "/graphics/campaigns/zumbra-backplate-fijo.png"
+},
+{
+"mediaType": "image/svg+xml",
+"uri": "/graphics/campaigns/ketrava-16x9-fijo.svg"
+},
+{
+"mediaType": "image/svg+xml",
+"uri": "/graphics/campaigns/kovrin-backplate-fijo.svg"
+},
+{
+"mediaType": "image/svg+xml",
+"uri": "/graphics/campaigns/zumbra-backplate-fijo.svg"
+},
+{
+"mediaType": "video/mp4",
+"uri": "/content/adL/progressive.mp4"
+},
+{
+"mediaType": "video/mp4",
+"uri": "/content/adOverlay/progressive.mp4"
+},
+{
+"mediaType": "video/mp4",
+"uri": "/content/creatives/ketrava-backplate/8d140e0f2b/progressive.mp4"
+},
+{
+"mediaType": "video/mp4",
+"uri": "/content/creatives/kovrin-banner/8e5914d854/progressive.mp4"
+},
+{
+"mediaType": "video/mp4",
+"uri": "/content/creatives/zumbra-16x9/d8eabbdae4/progressive.mp4"
+},
+{
+"mediaType": null,
+"uri": null
+},
+{
+"mediaType": "image/png",
+"uri": null
+},
+{
+"mediaType": "video/mp4",
+"uri": "/a.mp4",
+"startAt": 5
+},
+{
+"mediaType": "application/vnd.apple.mpegurl",
+"uri": "/a.m3u8",
+"startAt": 5
+},
+{
+"mediaType": "application/x-mpegURL",
+"uri": "/noext"
+},
+{
+"mediaType": null,
+"uri": "/a.m3u8?x=1"
+},
+{
+"mediaType": "weird/type",
+"uri": "/a.bin"
+},
+{
+"mediaType": null,
+"uri": "/content/creatives/zumbra-16x9/abc/progressive.mp4"
+},
+{
+"mediaType": "IMAGE/PNG",
+"uri": "/a.png"
+}
+]

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The MPD of the tests of dash/signalling.js (phase 19). Two Periods: the first
+     from 0 to 100 s, the second from 100 s to the end, 200 s. Every case of the
+     carriage of ADR 0120 is here once: a pre-roll, a break with remote slots, a
+     break with its slots inside, a ONCE, a post-roll, an envelope without the
+     flag of ADR 0121, an event cut by the end of its Period, a timescale and a
+     presentationTimeOffset, and a replace event (ADR 0125). Its plain reading is
+     breaks.json, which a browser check compares against readMpd. -->
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" type="static" mediaPresentationDuration="PT3M20S" profiles="urn:mpeg:dash:profile:isoff-live:2011" minBufferTime="PT2S">
+  <Period id="p0" start="PT0S" duration="PT100S">
+    <EventStream schemeIdUri="urn:svta:advertising-wg:ad-creative-signaling" timescale="1000">
+      <Event id="1" presentationTime="0" duration="12000"><![CDATA[{"version":2,"type":"pod","features":{"remoteFields":true,"concurrentPresentation":true},"cue":["PRE"],"payload":[{"duration":12,"$remote":{"slots":"slots-two.json"}}]}]]></Event>
+      <Event id="2" presentationTime="45000" duration="12000"><![CDATA[{"version":2,"type":"pod","features":{"remoteFields":true,"concurrentPresentation":true},"cue":["ONCE"],"payload":[{"duration":12,"$remote":{"slots":"/signalling/slots-two.json"}}]}]]></Event>
+      <Event id="3" presentationTime="70000" duration="6000">{"version":2,"type":"pod","features":{"concurrentPresentation":true},"payload":[{"duration":6,"slots":[{"start":0,"duration":6,"identifiers":[{"scheme":"ad-id.org","value":"X"}],"layoutOptions":[{"type":"lowerThirdOverlay","layout":{"assets":[{"id":"b","type":"image/png","uri":"/b.png","viewport":"80 6.25 2.75 6.25","zDepth":1}]}}]}]}]}</Event>
+      <Event id="4" presentationTime="80000" duration="5000"><![CDATA[{"version":2,"type":"pod","payload":[{"duration":5,"slots":[]}]}]]></Event>
+      <Event id="5" presentationTime="95000" duration="12000"><![CDATA[{"version":2,"type":"pod","features":{"concurrentPresentation":true},"payload":[{"duration":12,"slots":[]}]}]]></Event>
+    </EventStream>
+  </Period>
+  <Period id="p1">
+    <EventStream schemeIdUri="urn:svta:advertising-wg:ad-creative-signaling" timescale="90000" presentationTimeOffset="900000">
+      <Event id="6" presentationTime="4950000" duration="1080000"><![CDATA[{"version":2,"type":"pod","features":{"remoteFields":true,"concurrentPresentation":true},"cue":"post","payload":[{"duration":12,"$remote":{"slots":"slots-post.json"}}]}]]></Event>
+    </EventStream>
+    <EventStream schemeIdUri="urn:mpeg:dash:event:alternativeMPD:replace:2025" timescale="1000">
+      <Event id="9" presentationTime="50000" duration="12000"><ReplacePresentation uri="/content/creatives/ketrava-16x9/dash/manifest.mpd" maxDuration="10000" clip="false" executeOnce="true"/></Event>
+    </EventStream>
+    <EventStream schemeIdUri="urn:example:other" timescale="1">
+      <Event id="7" presentationTime="1">ignored: another scheme</Event>
+    </EventStream>
+  </Period>
+</MPD>

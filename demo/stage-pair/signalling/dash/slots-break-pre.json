@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "type": "slot",
+  "payload": [
+    {
+      "start": 0,
+      "duration": 12,
+      "identifiers": [
+        {
+          "scheme": "ad-id.org",
+          "value": "KTRV0002000H"
+        }
+      ],
+      "media": [
+        {
+          "type": "application/dash+xml",
+          "id": "ketrava-16x9",
+          "uri": "/content/creatives/ketrava-16x9/dash/manifest.mpd"
+        }
+      ],
+      "layoutOptions": [
+        {
+          "type": "lowerThirdOverlay",
+          "layout": {
+            "assets": [
+              {
+                "id": "banner",
+                "type": "application/dash+xml",
+                "uri": "/content/creatives/ketrava-banner/dash/manifest.mpd",
+                "viewport": "70 6.25 12.5 6.25",
+                "zDepth": 1
+              }
+            ]
+          }
+        },
+        {
+          "type": "squeezebackDoubleBox",
+          "layout": {
+            "primaryContent": {
+              "zDepth": 0,
+              "viewport": "25 50 25 0"
+            },
+            "assets": [
+              {
+                "id": "adSideBySide",
+                "type": "image/svg+xml",
+                "uri": "/graphics/campaigns/ketrava-16x9-fijo.svg",
+                "viewport": "25 0 25 50",
+                "zDepth": 1
+              }
+            ]
+          }
+        },
+        {
+          "type": "squeezebackDoubleBox",
+          "layout": {
+            "primaryContent": {
+              "zDepth": 0,
+              "viewport": "25 50 25 0"
+            },
+            "assets": [
+              {
+                "id": "adSideBySide",
+                "type": "image/png",
+                "uri": "/graphics/campaigns/ketrava-16x9-fijo.png",
+                "viewport": "25 0 25 50",
+                "zDepth": 1
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

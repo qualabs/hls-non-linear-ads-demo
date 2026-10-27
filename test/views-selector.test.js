@@ -26,7 +26,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { MAX_BOXES } from '../lib/experience.js';
-import { resolveAssetList } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { emptySelection, raise, rowsOf } from '../lib/multiview.js';
 import { FULL_GRID_NOTE, selectorNote } from '../lib/controls.js';
 
@@ -35,7 +35,7 @@ const readJson = (path) => JSON.parse(readFileSync(new URL(path, import.meta.url
 /** The offer as it is served: three views, which with the programme is a full grid. */
 function offer() {
   const list = readJson('./fixtures/asset-lists/asset-list-offer-3.json');
-  return resolveAssetList(list, { id: 'MV-1-OFFER', slotStart: 45 })[0];
+  return resolveAssets(list, { id: 'MV-1-OFFER', slotStart: 45 })[0];
 }
 
 /**
@@ -49,7 +49,7 @@ function longOffer() {
   item.views = item.views.concat(item.views.map((view, i) => ({
     ...view, id: `${view.id}-again-${i}`, name: `${view.name} (again)`
   })));
-  return resolveAssetList(list, { id: 'MV-1-OFFER', slotStart: 45 })[0];
+  return resolveAssets(list, { id: 'MV-1-OFFER', slotStart: 45 })[0];
 }
 
 const idsOf = (o) => o.views.map((view) => view.id);

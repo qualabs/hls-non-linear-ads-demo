@@ -40,7 +40,7 @@
 // does not play at all.
 //
 // WHAT CAN GO IN A BOX IS THE LIBRARY'S THREE BRANCHES AND NOT A LIST OF FORMATS.
-// `attachAsset` in `lib/media.js` asks three questions in order -- is it an image,
+// `attachAsset` in `hls/media.js` asks three questions in order -- is it an image,
 // is it a media playlist, is it anything else -- and each answer is a different way
 // of getting pixels into the box. `KINDS` below is those three questions in that
 // order, and the media types printed next to them are the ones THIS run declares,

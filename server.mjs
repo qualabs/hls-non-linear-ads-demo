@@ -52,7 +52,8 @@ const TYPES = {
   '.m3u8': 'application/vnd.apple.mpegurl',
   '.ts': 'video/mp2t',
   '.mp4': 'video/mp4',
-  '.m4s': 'video/iso.segment'
+  '.m4s': 'video/iso.segment',
+  '.mpd': 'application/dash+xml'
 };
 
 /** The file, or null when it landed outside the root it was resolved against. */

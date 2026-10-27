@@ -73,13 +73,16 @@ function publicationOf(commit) {
   const archived = script.match(/git archive HEAD ([a-z ]+?) \|/);
   const all = script.match(/^ALL=\(([^)]*)\)/m);
   if (!archived || !all) throw new Error(`${commit}: scripts/publicar.sh has no "git archive HEAD ..." or no ALL=(...)`);
-  return { paths: archived[1].split(/\s+/), demos: all[1].split(/\s+/).filter(Boolean) };
+  // The DASH side goes only to the demos that load it (phase 19); a commit before
+  // that has no such lines and nothing to leave out.
+  const list = (name) => (script.match(new RegExp(`^${name}=\\(([^)]*)\\)`, 'm'))?.[1] ?? '').split(/\s+/).filter(Boolean);
+  return { paths: archived[1].split(/\s+/), demos: all[1].split(/\s+/).filter(Boolean), dash: list('DASH'), dashFiles: list('DASH_FILES') };
 }
 
 /** { demo: absolute path of its stage } for one commit. */
 function stage(commit, label) {
   const sha = git('rev-parse', '--verify', `${commit}^{commit}`).trim();
-  const { paths, demos } = publicationOf(sha);
+  const { paths, demos, dash, dashFiles } = publicationOf(sha);
   const dir = join(TMP, label);
   mkdirSync(dir);
   const tar = execFileSync('git', ['archive', sha, ...paths], { cwd: ROOT, maxBuffer: 1 << 30 });
@@ -89,6 +92,7 @@ function stage(commit, label) {
   for (const d of demos) {
     cpSync(join(dir, 'dist'), join(dir, 'demo', d, 'dist'), { recursive: true });
     cpSync(join(dir, 'vendor'), join(dir, 'demo', d, 'vendor'), { recursive: true });
+    if (!dash.includes(d)) for (const f of dashFiles) rmSync(join(dir, 'demo', d, f), { force: true });
     out[d] = join(dir, 'demo', d);
   }
   return { sha, demos, stages: out };
