@@ -79,7 +79,7 @@ that was measured). The next start of `run.sh` signals the MPD.
 | page | what it is for |
 | --- | --- |
 | [`index.html`](index.html) | **the pair.** Two players, each with its own control — the native HLS client, our library over HLS, or our library over DASH (`?der=dash-2dec-img`), which loads the same programme as an MPD signalled with the scheme of SVTA2053 —, loading the same playlist with the class of its mode, over the same programme, the walk through the three non-linear shapes — side by side, L-shape and banner — over a preroll, three breaks and a post-roll, and the capability switch |
-| [`inspect.html`](inspect.html) | **one player, and the whole exchange in the open**, with the same control as each player of the pair. The Date Range the playlist carries, as written (`CLASS="{$adclass}"`) and as this client's hls.js read it, the asset-list URL the client asked for with the capability on it, the body that came back, verbatim, and **what the library kept of it**: each option, why it was discarded, and how the break ended. Made to be read out loud in a room with the network tab open |
+| [`inspect.html`](inspect.html) | **one player, and the whole exchange in the open**, with the same control as each player of the pair. The Date Range the playlist carries, as written (`CLASS="{$adclass}"`) and as this client's hls.js read it, the asset-list URL the client asked for with the capability on it, the body that came back as the player received it, with no second request (ADR 0129), and **what the library kept of it**: each option, why it was discarded, and how the break ended. Made to be read out loud in a room with the network tab open |
 | [`race.html`](race.html) | **the ads first, then the multi view window.** Four non-linear ads over a race, eight seconds of clean race, and then a window that offers a catalogue of six on-board cameras for whoever is watching to compose |
 
 The three are served from the same root, so they are one demo and not three: same library
@@ -160,6 +160,17 @@ new media, and it overlaps no other break. While it plays, ours draws nothing, i
 the programme's clock and marks the break in yellow, and its line says the ad is played by
 hls.js. The "break LINEAR (traditional)" jump lands 5 s before it; `inspect.html` has a card for
 it that says it is not a break of ours.
+
+**Break C's first option fails on purpose**, to show the failover working without breaking
+anything else. Its first layoutOption, the KOVRIN banner in HLS, points at
+`/content/creatives/kovrin-banner/missing-on-purpose/index.m3u8`, which does not exist: the
+request answers 404 and the renderer mounts the next option that fits by itself (ADR 0107). On a
+desktop browser configured with two decoders that is the MP4 twin of the same banner (ADR 0096),
+so what is on screen looks like the banner; `inspect.html` says the first option failed and why,
+and the console logs it. With one decoder and images it is the still L, as in the table below.
+The bad URI is written by `scripts/escribir-asset-lists.mjs` from `primeraOpcionRota` in
+`stage.json`, whose `_primeraOpcionRota` says why; taking that field out restores the break.
+The off-the-shelf pane does not read layoutOptions, so it is unaffected.
 
 **On a machine where the video creatives are not packaged** (`content/creatives/` missing), every
 video option answers 404, and that is the failover on display: each break shows its still image

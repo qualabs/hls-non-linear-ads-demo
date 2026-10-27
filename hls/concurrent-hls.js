@@ -144,7 +144,10 @@ function playedRanges(provider, hls) {
  *                     request for one of their assets failed (ADR 0106) --,
  *                     the order the rest were handed to the renderer in
  *                     (`order`), every first request made (`requests`), and
- *                     whether pre-validation ran (`preValidation`). It says
+ *                     whether pre-validation ran (`preValidation`), and the
+ *                     asset-list as it was received (`response`: `{ url,
+ *                     status, text, json }`, ADR 0129), so that a page that
+ *                     shows the list does not request it a second time. It says
  *                     what was HANDED OVER; what was shown is `onPresented`.
  * @param onPresented  optional, called once per ad when it is known which of
  *                     its options was actually presented (ADR 0107): `{ id,

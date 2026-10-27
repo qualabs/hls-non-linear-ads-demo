@@ -6567,6 +6567,20 @@ intacta con `dash/` y su regla (0119).
 y su `--control` saca cada uno de los 14 plantados como debe. Línea de base guardada en
 `phases/18-hls-y-dash-lado-a-lado/tasks/T-01/`.
 
+## 2026-10-26 — Cada asset-list se pide una vez: la respuesta viaja en el reporte de onResolved
+
+Opción A de David. ADR 0129.
+
+- **Librería:** `onResolved` suma `response: { url, status, text, json }` (breaks y post-rolls),
+  armado por `readAssetList` en `lib/signalling.js`.
+- **`inspect.html`:** deja de hacer su propio `fetch`; un break nuestro sale del reporte, una lista de
+  hls.js (modo nativo y `AD-LINEAR`) del `assetListResponse` de su evento, re-serializado. El
+  `PerformanceObserver` queda sólo para la URL de las listas de hls.js.
+- **`hydration-break`, `multiview-offer`, `race-multiview`:** su sección de señalización muestra la
+  respuesta del reporte en lugar de pedirla otra vez.
+- Tests: `test/asset-list-response.test.js`. Smoke en Chrome headless en el 8091 (detenido por PID;
+  8090 no se tocó): un pedido por asset-list.
+
 ## 2026-10-26 — Fase 18, T-02: la partición
 
 Rama `fase-18`, `7c95e9a`: `lib/signalling.js` partida en `lib/experience.js`,
@@ -6596,6 +6610,21 @@ dist en cada demo y los seis tests de demo), y el comparador da verde. Merge `--
 (`aab6382`), sin push; el `dist/` de main no se reconstruyó. El próximo push publica un dist nuevo
 en las cinco demos con el mismo comportamiento. Informe en
 `phases/18-hls-y-dash-lado-a-lado/REPORT.md`.
+
+## 2026-10-26 — `onPresented` del default que también falla
+
+Corrección aprobada por David. Nota fechada en el ADR 0107.
+
+- **Causa:** en `lib/renderer.js`, `failed()` ponía el asset en `{ kind: 'skip' }` antes de
+  `report(..., 'skipped')`; `recordsOf()` ya no reconocía al default como tal y no encontraba los
+  avisos por los que hablaba, así que `onPresented` no se llamaba (PRE, B y C de
+  `inspect.html?modo=ours-2dec-noimg` sin línea de resultado).
+- **Corrección:** los registros se leen antes de mover el estado; un salteo reporta a todos los
+  items vistos del asset con `presented: null` y todos los intentos (opciones y default); un item
+  del asset visto por primera vez después se reporta con el resultado guardado del asset.
+- Tests: `test/renderer-on-presented.test.js` (renderer sobre un documento falso: default que falla,
+  default que carga, asset sin default, lineal suelto, dos items de un asset) y dos casos más en
+  `test/post-roll.test.js` (forma del reporte del default que falla en el post-roll).
 
 ## 2026-10-26 — Fase 19: el diseño de SVTA2053 sobre DASH, aprobado y generado
 
@@ -6665,3 +6694,41 @@ diferencias medidas una por una; en seco, las cuatro demos HLS sin faltantes y `
 faltantes que son su contenido DASH, todavía no subido (con `--con-contenido`, verde). Merge
 `--no-ff` a main local (`7ec15b5`), sin push. Informe en `phases/19-svta2053-sobre-dash/REPORT.md`;
 dos `idea` sembradas (`uris-relativos-de-las-listas`, `verificar-pares-nativo`).
+
+## 2026-10-26 — El pane nativo dice lo que hizo hls.js, no lo que planea la lista
+
+Corrección aprobada por David.
+
+- **Antes:** `inspect.html` (tarjeta 4) e `index.html` (lista de pedidos del pane nativo) decían
+  "plays its default: the linear ad" leyendo el asset-list, aunque el default diera 404 y hls.js
+  salteara el break.
+- **Ahora:** `demo/stage-pair/js/native-outcome.js` sigue los eventos de hls.js
+  (`INTERSTITIAL_ASSET_STARTED`, `INTERSTITIAL_ASSET_ERROR` más el `error` que hls.js escribe en el
+  evento cuando se rinde, la lista vacía del break sin default, `INTERSTITIAL_ENDED`). Hasta que hay
+  desenlace la página dice el plan ("will play its default"); después, "default failed to load
+  (HTTP 404): skipped" o que el default arrancó. Un fallo gana sobre un arranque: hls.js arranca el
+  asset del preroll antes de que conteste su playlist. Vale también para el break tradicional
+  (`AD-LINEAR`) en los dos modos. `compatibility-pair` no tiene ese texto: su pane de fábrica sólo
+  muestra el estado en vivo.
+- Tests: `demo/stage-pair/test/native-outcome.test.js`. Smoke en Chrome headless en el 8091
+  (detenido por PID), con los creativos bloqueados por `route()`: en nativo PRE, B, C y el lineal
+  dicen "failed to load (HTTP 404)… skipped"; sin bloquear, B dice el plan y después que arrancó.
+
+## 2026-10-26 — La primera opción del break C falla a propósito
+
+Pedido de David: que el failover del renderer (ADR 0107) se vea en la demo.
+
+- `stage.json`, break C: `primeraOpcionRota` =
+  `content/creatives/kovrin-banner/missing-on-purpose/index.m3u8`, con `_primeraOpcionRota` que
+  explica que es una demostración deliberada. `scripts/escribir-asset-lists.mjs` lo escribe como
+  `uri` de la primera layoutOption (el banner KOVRIN en HLS); el MP4, el SVG, el PNG y el default
+  siguen reales. `signalling/asset-list-break-c.json` regenerado con el script.
+- Lo que se ve: con 2 decodificadores, el 404 lleva al gemelo MP4 del mismo banner (medido en
+  Chrome headless, 8091: `progressive.mp4` en pantalla, la tarjeta 4 dice que la opción 1 falló a
+  propósito). Con 1 decodificador e imágenes no cambia nada (las dos de video se descartan antes).
+  El pane nativo no lee layoutOptions.
+- `inspect.html` lo dice en la línea del break y en la opción que falló; README de `stage-pair`.
+- Tests: `demo/stage-pair/test/signalled-run.test.js` (sólo C, sólo la primera opción, la URI no
+  existe, el resto real). `verificar-capacidades.py` no cambia: lee la opción ENTREGADA primero y el
+  layout del contrato, que siguen iguales.
+- Cambia lo que muestra la demo publicada cuando esto llegue a `main`.
