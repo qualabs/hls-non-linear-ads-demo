@@ -7,7 +7,7 @@
 | T-03 | `dash/signalling.js` | done | agent | — | rama `fase-19` · [`tasks/T-03/`](tasks/T-03/) |
 | T-04 | Los tests de `dash/signalling.js`, vistos fallar | done | agent | — | rama `fase-19` · [`tasks/T-04/`](tasks/T-04/) |
 | T-05 | `dash/media.js`, `dash/concurrent-dash.js`, el dist DASH y las costuras | done | agent | — | rama `fase-19` · [`tasks/T-05/`](tasks/T-05/) |
-| T-06 | El contenido DASH de `stage-pair` | planned | agent | — | — |
+| T-06 | El contenido DASH de `stage-pair` | done | agent | — | rama `fase-19` · [`tasks/T-06/`](tasks/T-06/) |
 | T-07 | `stage-pair`: "DASH, nuestra librería" en cada pane | planned | agent | — | — |
 | T-08 | `verificar-pares.py`: HLS contra DASH, con sus dos controles | planned | agent | — | — |
 | T-09 | El texto para SVTA2053: la 6.7 y los ajustes de §1, §4.1 y §5 | planned | agent | — | — |
