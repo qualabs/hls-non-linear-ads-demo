@@ -6588,3 +6588,22 @@ Corrección aprobada por David.
 - Tests: `demo/stage-pair/test/native-outcome.test.js`. Smoke en Chrome headless en el 8091
   (detenido por PID), con los creativos bloqueados por `route()`: en nativo PRE, B, C y el lineal
   dicen "failed to load (HTTP 404)… skipped"; sin bloquear, B dice el plan y después que arrancó.
+
+## 2026-10-26 — La primera opción del break C falla a propósito
+
+Pedido de David: que el failover del renderer (ADR 0107) se vea en la demo.
+
+- `stage.json`, break C: `primeraOpcionRota` =
+  `content/creatives/kovrin-banner/missing-on-purpose/index.m3u8`, con `_primeraOpcionRota` que
+  explica que es una demostración deliberada. `scripts/escribir-asset-lists.mjs` lo escribe como
+  `uri` de la primera layoutOption (el banner KOVRIN en HLS); el MP4, el SVG, el PNG y el default
+  siguen reales. `signalling/asset-list-break-c.json` regenerado con el script.
+- Lo que se ve: con 2 decodificadores, el 404 lleva al gemelo MP4 del mismo banner (medido en
+  Chrome headless, 8091: `progressive.mp4` en pantalla, la tarjeta 4 dice que la opción 1 falló a
+  propósito). Con 1 decodificador e imágenes no cambia nada (las dos de video se descartan antes).
+  El pane nativo no lee layoutOptions.
+- `inspect.html` lo dice en la línea del break y en la opción que falló; README de `stage-pair`.
+- Tests: `demo/stage-pair/test/signalled-run.test.js` (sólo C, sólo la primera opción, la URI no
+  existe, el resto real). `verificar-capacidades.py` no cambia: lee la opción ENTREGADA primero y el
+  layout del contrato, que siguen iguales.
+- Cambia lo que muestra la demo publicada cuando esto llegue a `main`.

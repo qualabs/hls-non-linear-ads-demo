@@ -207,6 +207,8 @@
       "concurrente": "asset-list-break-c.json",
       "formaImagen": "backplate",
       "lineal": true,
+      "primeraOpcionRota": "content/creatives/kovrin-banner/missing-on-purpose/index.m3u8",
+      "_primeraOpcionRota": "A DELIBERATE FAILOVER DEMONSTRATION, asked for by David Hassoun on 2026-10-26. The first layoutOption of this break (the KOVRIN banner in HLS) is written with this URI, which does not exist and never will, so its first request answers 404 and the renderer's failover (ADR 0107) moves on its own to the next option that fits: on a desktop browser with two decoders, the MP4 twin of the same banner (ADR 0096). Every other option and the linear default keep their real URIs. escribir-asset-lists.mjs writes it; take this field out to show break C as it was.",
       "_": "Calzado en el banner porque una zapatilla de perfil es la única de las tres siluetas que llena una tira de 8,89:1 sin quedar perdida en el medio."
     },
     {
