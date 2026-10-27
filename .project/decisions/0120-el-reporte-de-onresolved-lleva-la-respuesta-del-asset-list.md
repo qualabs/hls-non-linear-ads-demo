@@ -1,5 +1,5 @@
 ---
-id: "0116"
+id: "0120"
 title: El reporte de onResolved lleva la respuesta del asset-list, y ninguna página lo pide dos veces
 status: accepted
 scope: project

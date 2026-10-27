@@ -9,12 +9,12 @@
 // worth nothing to an audience that reads playlists for a living.
 //
 // AND THE LIST IS THE DOCUMENT, NOT THE CONTRACT, AND IT IS NOT ASKED FOR TWICE
-// (ADR 0116). The point of this section is the document BEFORE the library read
+// (ADR 0120). The point of this section is the document BEFORE the library read
 // it, so it is not the provider: that hands over resolved experiences, with the
 // two defaults of the tool already applied, and asking it would show the
 // reading and call it the source. It is the body of the library's own request,
 // verbatim, which `onResolved` hands over as `response` and app.js keeps in
-// `received`, by the ID of the Date Range. Before ADR 0116 this section fetched
+// `received`, by the ID of the Date Range. Before ADR 0120 this section fetched
 // the list a second time, which to an ad server is a second impression.
 //
 // THE GLOSS IS PROSE AND THE FIELD NAMES ARE NOT. Each list below is the keys of
@@ -140,7 +140,7 @@ export function showSignalling({ src, provider, video, tags, payload, assets, re
       // One fold per tag, in the order of the playlist, each one carrying the
       // document that tag points at: the URL the tag declares, resolved against the
       // playlist as the library resolves it, and the body the library received
-      // from it, verbatim (ADR 0116).
+      // from it, verbatim (ADR 0120).
       //
       // AND SHOWN ONLY ONCE THE PLAYER HAS ASKED FOR IT. The player asks for a
       // break's list when the programme is buffered up to the break, as hls.js does
@@ -163,7 +163,7 @@ export function showSignalling({ src, provider, video, tags, payload, assets, re
         if (absolute) {
           untilAskedFor(provider, id).then(() => {
             // What the library received for this break, from its report (ADR
-            // 0116): a range that left without one is a list that could not be read.
+            // 0120): a range that left without one is a list that could not be read.
             const response = received.get(id);
             code.textContent = response ? response.text : 'the asset-list could not be read';
             if (!glossed) glossed = gloss(response?.json);
