@@ -152,6 +152,17 @@ the programme's clock and marks the break in yellow, and its line says the ad is
 hls.js. The "break LINEAR (traditional)" jump lands 5 s before it; `inspect.html` has a card for
 it that says it is not a break of ours.
 
+**Break C's first option fails on purpose**, to show the failover working without breaking
+anything else. Its first layoutOption, the KOVRIN banner in HLS, points at
+`/content/creatives/kovrin-banner/missing-on-purpose/index.m3u8`, which does not exist: the
+request answers 404 and the renderer mounts the next option that fits by itself (ADR 0107). On a
+desktop browser configured with two decoders that is the MP4 twin of the same banner (ADR 0096),
+so what is on screen looks like the banner; `inspect.html` says the first option failed and why,
+and the console logs it. With one decoder and images it is the still L, as in the table below.
+The bad URI is written by `scripts/escribir-asset-lists.mjs` from `primeraOpcionRota` in
+`stage.json`, whose `_primeraOpcionRota` says why; taking that field out restores the break.
+The off-the-shelf pane does not read layoutOptions, so it is unaffected.
+
 **On a machine where the video creatives are not packaged** (`content/creatives/` missing), every
 video option answers 404, and that is the failover on display: each break shows its still image
 instead, and with one decoder and no images break B's linear default 404s too and the ad is

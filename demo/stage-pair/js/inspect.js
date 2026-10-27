@@ -472,7 +472,8 @@ function pintarIntercambio() {
         porque = descarte.failed ? `Discarded by pre-validation: it ${descarte.reason}.` : `Discarded: it ${descarte.reason}.`;
       } else if (fallo) {
         veredicto = 'discarded';
-        porque = `Failed on screen: it ${fallo.reason}${fallo.late ? ', after its window had opened' : ''}. The renderer took it down and mounted the next.`;
+        porque = `Failed on screen: it ${fallo.reason}${fallo.late ? ', after its window had opened' : ''}. The renderer took it down and mounted the next.` +
+          (i === 0 && mostrado.primeraOpcionRota ? ' On purpose: this URI does not exist, to show the failover.' : '');
       } else if (i === mostrada) {
         veredicto = 'kept';
         porque = `On screen: its assets loaded${reporte.attempts.length ? ' after the ones before it failed' : ''}.`;
@@ -537,6 +538,11 @@ function mostrarBreak(brk) {
     (brk.cue === 'PRE' ? 'preroll, CUE="PRE": its list is asked for at load · ' : '') +
     (brk.cue === 'ONCE'
       ? 'CUE="ONCE": once it has played, both clients take it out, so a seek back does not show it again · '
+      : '') +
+    // A deliberate failover demonstration (stage.json, `_primeraOpcionRota`).
+    (brk.primeraOpcionRota
+      ? 'its FIRST OPTION FAILS ON PURPOSE: it points at a URI that does not exist, so the renderer moves on ' +
+        'to the next option by itself (ADR 0107) · '
       : '') +
     (brk.cue === 'POST'
       ? 'post-roll, CUE="POST": its list is asked for when the programme is buffered to its end, and a ' +
