@@ -1,0 +1,112 @@
+{
+ "type": "static",
+ "mediaPresentationDuration": 200,
+ "periods": [
+  {
+   "id": "p0",
+   "start": 0,
+   "duration": 100,
+   "eventStreams": [
+    {
+     "schemeIdUri": "urn:svta:advertising-wg:ad-creative-signaling",
+     "value": null,
+     "timescale": 1000,
+     "presentationTimeOffset": 0,
+     "events": [
+      {
+       "id": "1",
+       "presentationTime": 0,
+       "duration": 12000,
+       "body": "{\"version\":2,\"type\":\"pod\",\"features\":{\"remoteFields\":true,\"concurrentPresentation\":true},\"cue\":[\"PRE\"],\"payload\":[{\"duration\":12,\"$remote\":{\"slots\":\"slots-two.json\"}}]}",
+       "replace": null
+      },
+      {
+       "id": "2",
+       "presentationTime": 45000,
+       "duration": 12000,
+       "body": "{\"version\":2,\"type\":\"pod\",\"features\":{\"remoteFields\":true,\"concurrentPresentation\":true},\"cue\":[\"ONCE\"],\"payload\":[{\"duration\":12,\"$remote\":{\"slots\":\"/signalling/slots-two.json\"}}]}",
+       "replace": null
+      },
+      {
+       "id": "3",
+       "presentationTime": 70000,
+       "duration": 6000,
+       "body": "{\"version\":2,\"type\":\"pod\",\"features\":{\"concurrentPresentation\":true},\"payload\":[{\"duration\":6,\"slots\":[{\"start\":0,\"duration\":6,\"identifiers\":[{\"scheme\":\"ad-id.org\",\"value\":\"X\"}],\"layoutOptions\":[{\"type\":\"lowerThirdOverlay\",\"layout\":{\"assets\":[{\"id\":\"b\",\"type\":\"image/png\",\"uri\":\"/b.png\",\"viewport\":\"80 6.25 2.75 6.25\",\"zDepth\":1}]}}]}]}]}",
+       "replace": null
+      },
+      {
+       "id": "4",
+       "presentationTime": 80000,
+       "duration": 5000,
+       "body": "{\"version\":2,\"type\":\"pod\",\"payload\":[{\"duration\":5,\"slots\":[]}]}",
+       "replace": null
+      },
+      {
+       "id": "5",
+       "presentationTime": 95000,
+       "duration": 12000,
+       "body": "{\"version\":2,\"type\":\"pod\",\"features\":{\"concurrentPresentation\":true},\"payload\":[{\"duration\":12,\"slots\":[]}]}",
+       "replace": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1",
+   "start": null,
+   "duration": null,
+   "eventStreams": [
+    {
+     "schemeIdUri": "urn:svta:advertising-wg:ad-creative-signaling",
+     "value": null,
+     "timescale": 90000,
+     "presentationTimeOffset": 900000,
+     "events": [
+      {
+       "id": "6",
+       "presentationTime": 4950000,
+       "duration": 1080000,
+       "body": "{\"version\":2,\"type\":\"pod\",\"features\":{\"remoteFields\":true,\"concurrentPresentation\":true},\"cue\":\"post\",\"payload\":[{\"duration\":12,\"$remote\":{\"slots\":\"slots-post.json\"}}]}",
+       "replace": null
+      }
+     ]
+    },
+    {
+     "schemeIdUri": "urn:mpeg:dash:event:alternativeMPD:replace:2025",
+     "value": null,
+     "timescale": 1000,
+     "presentationTimeOffset": 0,
+     "events": [
+      {
+       "id": "9",
+       "presentationTime": 50000,
+       "duration": 12000,
+       "body": null,
+       "replace": {
+        "uri": "/content/creatives/ketrava-16x9/dash/manifest.mpd",
+        "maxDuration": 10000,
+        "executeOnce": true
+       }
+      }
+     ]
+    },
+    {
+     "schemeIdUri": "urn:example:other",
+     "value": null,
+     "timescale": 1,
+     "presentationTimeOffset": 0,
+     "events": [
+      {
+       "id": "7",
+       "presentationTime": 1,
+       "duration": null,
+       "body": "ignored: another scheme",
+       "replace": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
