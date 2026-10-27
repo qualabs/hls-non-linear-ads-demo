@@ -6569,3 +6569,22 @@ Corrección aprobada por David. Nota fechada en el ADR 0107.
 - Tests: `test/renderer-on-presented.test.js` (renderer sobre un documento falso: default que falla,
   default que carga, asset sin default, lineal suelto, dos items de un asset) y dos casos más en
   `test/post-roll.test.js` (forma del reporte del default que falla en el post-roll).
+
+## 2026-10-26 — El pane nativo dice lo que hizo hls.js, no lo que planea la lista
+
+Corrección aprobada por David.
+
+- **Antes:** `inspect.html` (tarjeta 4) e `index.html` (lista de pedidos del pane nativo) decían
+  "plays its default: the linear ad" leyendo el asset-list, aunque el default diera 404 y hls.js
+  salteara el break.
+- **Ahora:** `demo/stage-pair/js/native-outcome.js` sigue los eventos de hls.js
+  (`INTERSTITIAL_ASSET_STARTED`, `INTERSTITIAL_ASSET_ERROR` más el `error` que hls.js escribe en el
+  evento cuando se rinde, la lista vacía del break sin default, `INTERSTITIAL_ENDED`). Hasta que hay
+  desenlace la página dice el plan ("will play its default"); después, "default failed to load
+  (HTTP 404): skipped" o que el default arrancó. Un fallo gana sobre un arranque: hls.js arranca el
+  asset del preroll antes de que conteste su playlist. Vale también para el break tradicional
+  (`AD-LINEAR`) en los dos modos. `compatibility-pair` no tiene ese texto: su pane de fábrica sólo
+  muestra el estado en vivo.
+- Tests: `demo/stage-pair/test/native-outcome.test.js`. Smoke en Chrome headless en el 8091
+  (detenido por PID), con los creativos bloqueados por `route()`: en nativo PRE, B, C y el lineal
+  dicen "failed to load (HTTP 404)… skipped"; sin bloquear, B dice el plan y después que arrancó.

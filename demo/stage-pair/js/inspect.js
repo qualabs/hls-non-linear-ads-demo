@@ -68,6 +68,7 @@
 
 import { traceContract } from './contract-trace.js';
 import { createStockPlayer } from './stock-player.js';
+import { followInterstitials } from './native-outcome.js';
 import {
   PARAMETROS, breakDelReporte, crearControlDePane, desenlace, describirOpcion, leerModo, escribirModo,
   presentado
@@ -250,6 +251,37 @@ function anotarRespuesta(seleccion) {
   intercambio.set(breakDelReporte(seleccion), { url: new URL(response.url), cuerpo: response.text, deHls: false });
 }
 
+/**
+ * What hls.js DID with the breaks it plays itself (native-outcome.js): card 4
+ * says the plan the list declares until this says what happened.
+ */
+let seguidorDeHls = null;
+
+/**
+ * Card 4 for a break hls.js plays -- every break in native mode, the traditional
+ * one in both -- as the PLAN its list declares until hls.js reports the outcome:
+ * its default started, or it failed to load and the break was skipped.
+ * `{ texto, salteado }`.
+ */
+function desenlaceDeHls(brk, que, coda) {
+  const o = seguidorDeHls?.outcome(brk.id) ?? null;
+  if (o?.kind === 'failed') {
+    return { salteado: true, texto: `The default of this break failed to load (${o.reason}), so hls.js skipped ${que} ` +
+      'and the programme went on.' };
+  }
+  if (o?.kind === 'empty' || o?.kind === 'skipped' || !brk.lineal) {
+    const sabido = o != null;
+    return { salteado: sabido, texto: `The asset-list of this break has no standard part (no default), so hls.js ` +
+      `${sabido ? 'skipped' : 'will skip'} ${que} and the programme goes on.` };
+  }
+  if (o?.kind === 'played') {
+    return { salteado: false, texto: `hls.js plays ${que}: its default, the linear ad, started full frame, replacing ` +
+      `the programme${coda}.` };
+  }
+  return { salteado: false, texto: `hls.js will play ${que} as it is, full frame, replacing the programme${coda}, ` +
+    'if its default loads.' };
+}
+
 /** break id -> the interstitial event hls.js loads that break's list for, whose body it keeps. */
 const eventosDeHls = new Map();
 
@@ -265,6 +297,7 @@ function cuerpoDeHls(id) {
  * what keeps a request of a previous arming out.
  */
 function escucharListasDeHls(hls) {
+  seguidorDeHls = followInterstitials(hls, () => pintarIntercambio(), (identifier) => breakDelReporte({ id: identifier }));
   hls.on(Hls.Events.ASSET_LIST_LOADING, (_e, data) => {
     const id = breakDelReporte({ id: data.event.identifier });
     if (id) eventosDeHls.set(id, data.event);
@@ -353,7 +386,7 @@ function pintarIntercambio() {
     : vivo?.modo === 'nativo'
     ? (mostrado?.lineal
       ? `The same playlist both clients load, asked for with ${pedidoCon}: hls.js reads this break as an ` +
-        'Apple interstitial and plays the standard part of its asset-list.'
+        'Apple interstitial and plays the standard part of its asset-list, if it loads.'
       : `The same playlist both clients load, asked for with ${pedidoCon}: hls.js reads this break as an ` +
         'Apple interstitial, but its asset-list has no standard part, so hls.js skips it (ADR 0091).')
     : `The same playlist both clients load, asked for with ${pedidoCon}: hls.js reads this break as our ` +
@@ -389,17 +422,17 @@ function pintarIntercambio() {
       ? 'Native HLS interstitials: no capabilities are configured and there are no layoutOptions to filter.'
       : 'Not a break of ours: its class is Apple\'s, written out, so the library does not resolve it. ' +
         'hls.js, which runs inside this player with its interstitials machinery on, plays it (ADR 0114).'));
-    dom.outcome.dataset.outcome = 'default';
-    dom.outcome.textContent = 'hls.js plays this traditional interstitial as it is, full frame, replacing the programme, ' +
-      (vivo?.modo === 'nativo' ? 'as it does every break in this mode.' : 'in our player too.');
+    const { texto, salteado } = desenlaceDeHls(mostrado, 'this traditional interstitial',
+      vivo?.modo === 'nativo' ? ', as it does every break in this mode' : ', in our player too');
+    dom.outcome.dataset.outcome = salteado ? 'skipped' : 'default';
+    dom.outcome.textContent = texto;
   } else if (vivo?.modo === 'nativo') {
     dom.filter.replaceChildren(el('li', 'none',
       'Native HLS interstitials: no capabilities are configured and there are no layoutOptions to filter.'));
-    dom.outcome.dataset.outcome = 'native';
-    dom.outcome.textContent = mostrado.lineal
-      ? 'hls.js plays the Apple-class interstitial of this break as it is, full frame, replacing the programme.'
-      : 'The asset-list of this break has no standard part (no default), so hls.js skips the ' +
-        'interstitial and the programme goes on.';
+    const { texto, salteado } = desenlaceDeHls(mostrado,
+      mostrado.lineal ? 'the Apple-class interstitial of this break' : 'the interstitial', '');
+    dom.outcome.dataset.outcome = salteado ? 'skipped' : 'native';
+    dom.outcome.textContent = texto;
   }
   const seleccion = vivo?.modo === 'nativo' ? null : selecciones.get(mostrado.id);
   const asset = seleccion?.assets[0];
