@@ -6649,3 +6649,11 @@ Rama `fase-19` (`750d27c`): cada pane de `stage-pair` puede ser "DASH, our libra
 par HLS|DASH en el pre-roll, en B y en el lineal. La captura destapó un corrimiento de 1,47 s en los
 creativos DASH (post-ejecución de T-06, arreglado en el empaquetado). Las 18 líneas viejas de `demo/`
 corregidas; en las cuatro demos que no son `stage-pair` es sólo comentarios, medido.
+
+## 2026-10-26 — Fase 19, T-08 y T-09: HLS contra DASH medido, y el texto para SVTA2053
+
+Rama `fase-19`. T-08 (`6212c5e`): `verificar-pares.py --solo-dash` verde, 64 chequeos (misma
+opción, ventana y pedido en cada break y combinación de capacidades; ONCE; lineal; post-roll) y sus
+dos controles con la diferencia esperada. La parte vieja del verificador (nativo contra ours) ya
+falla en `bb0d78b`: hallazgo previo, al REPORT. T-09 (`2719f87`): la 6.7 y los ajustes de §1-§5 en
+`docs/svta2053-dash-concurrent-presentation.md`, con 63 citas chequeadas por grep.
