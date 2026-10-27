@@ -6642,3 +6642,10 @@ armado desde su asset-list HLS (que queda byte a byte igual), y el MPD señaliza
 hls.js y dash.js muestran el mismo cuadro en el mismo segundo (diferencia 0 en 30, 75,5 y 140 s;
 control corrido 0,1 s: 14,73 / 1,86 / 2,77). Un `@presentationTimeOffset` de 1,4 s, que la norma
 sugiere, corría el DASH 1,4 s: medido y sacado.
+
+## 2026-10-26 — Fase 19, T-07: el modo DASH en `stage-pair`
+
+Rama `fase-19` (`750d27c`): cada pane de `stage-pair` puede ser "DASH, our library". Capturas del
+par HLS|DASH en el pre-roll, en B y en el lineal. La captura destapó un corrimiento de 1,47 s en los
+creativos DASH (post-ejecución de T-06, arreglado en el empaquetado). Las 18 líneas viejas de `demo/`
+corregidas; en las cuatro demos que no son `stage-pair` es sólo comentarios, medido.
