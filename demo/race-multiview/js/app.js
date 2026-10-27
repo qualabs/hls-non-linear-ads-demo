@@ -30,7 +30,7 @@ const SRC = './content/primary/con-daterange.m3u8';
 const video = document.getElementById('video');
 const hud = document.getElementById('hud');
 
-/** Date Range ID -> the answer to its asset-list request, off the library's report (ADR 0120). */
+/** Date Range ID -> the answer to its asset-list request, off the library's report (ADR 0129). */
 const received = new Map();
 
 // ===========================================================================
@@ -39,7 +39,7 @@ const hls = new Hls();
 const concurrent = QualabsConcurrentHls.attach(hls, {
   container: document.getElementById('player'),
   // Each asset-list as the library received it, kept for the signalling
-  // section below, which shows it and asks for none (ADR 0120).
+  // section below, which shows it and asks for none (ADR 0129).
   onResolved: (_experiences, selection) => received.set(selection.id, selection.response)
 });
 hls.loadSource(SRC);

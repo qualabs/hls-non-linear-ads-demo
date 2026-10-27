@@ -309,7 +309,7 @@ export function programEnd(details) {
 // hls.js itself uses to call a hole irrelevant.
 
 /**
- * The answer to an asset-list request, read ONCE and kept whole (ADR 0120):
+ * The answer to an asset-list request, read ONCE and kept whole (ADR 0129):
  * `{ url, status, text, json }`. `url` is the URL the answer came from -- the
  * response's own, so after any redirect, and the one asked for when the response
  * carries none --, `status` its HTTP status, `text` the body verbatim and `json`
@@ -536,7 +536,7 @@ export function createProgramme(hls, video) {
  * to show. `requests` in it lists every first request made for the break,
  * `{ uri, ok, error }`, and is empty without `firstRequest`. `response` is the
  * answer to the asset-list request as it was received, `{ url, status, text,
- * json }` (`readAssetList`, ADR 0120): a page that shows the list reads it here
+ * json }` (`readAssetList`, ADR 0129): a page that shows the list reads it here
  * and does not request it again.
  *
  * `firstRequest(uri, mediaType, { method })`, when given, is how the first
