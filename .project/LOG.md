@@ -6612,3 +6612,10 @@ manifest), y un creativo MPD que no carga da `ERROR` en 1,6 a 3,2 s (404 en el M
 el primer segmento). El diseño sigue. Hallazgo: el cuerpo en CDATA no llega a `messageData` (bug de
 upstream: el modelo lee `__cdata` y el parser deja `#cdata`), ni llegan los atributos del Replace;
 ADR 0128: la librería lee el EventStream del texto del MPD en el interceptor de respuesta.
+
+## 2026-10-26 — Fase 19, T-02: lo común sube a `lib/`
+
+Rama `fase-19`: `lib/ad-list.js`, `lib/playhead.js` y `lib/media.js`. Renombre puro previo
+(`resolveAssetList` → `resolveAssets`, `assetListUrl` → `listRequestUrl`), porque el nombre cruzaba
+la costura 0003; la mudanza da verde en el comparador, y la de `media` cambia sólo `attachAsset`
+(+ `attachPlain`, con 6 tests nuevos vistos fallar). 384/384, check verde.

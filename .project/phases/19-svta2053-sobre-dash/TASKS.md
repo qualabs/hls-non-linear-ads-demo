@@ -3,7 +3,7 @@
 | id | brief | status | who | plan | evidence |
 | --- | --- | --- | --- | --- | --- |
 | T-01 | Los riesgos medidos: el evento del MPD, el creativo que no carga, el Replace | done | agent | — | [`tasks/T-01/`](tasks/T-01/) · ADR 0128 |
-| T-02 | Lo común de `hls/` sube a `lib/` | planned | agent | — | — |
+| T-02 | Lo común de `hls/` sube a `lib/` | done | agent | — | rama `fase-19` · [`tasks/T-02/`](tasks/T-02/) |
 | T-03 | `dash/signalling.js` | planned | agent | — | — |
 | T-04 | Los tests de `dash/signalling.js`, vistos fallar | planned | agent | — | — |
 | T-05 | `dash/media.js`, `dash/concurrent-dash.js`, el dist DASH y las costuras | planned | agent | — | — |
@@ -55,6 +55,10 @@
   el dist evaluado en node define `QualabsConcurrentHls` con las mismas claves.
 - **nivel de verificación:** alto. Es el código de las cinco demos públicas; la referencia
   independiente es `bb0d78b` a través del comparador, que ya se vio fallar en la fase 18.
+- **post-ejecución:** 2026-10-26, la definición de done pedía `comparar-publicacion.mjs bb0d78b
+  HEAD` verde, y no puede darlo: `resolveAssetList` y `assetListUrl` cruzaban la costura 0003 por el
+  nombre y se renombraron (commit propio, reproducido por sed), y subir las ramas de `attachAsset`
+  cambia `attachAsset`. Cada commit con su testigo en `tasks/T-02/README.md`.
 
 ## T-03 — `dash/signalling.js`
 
