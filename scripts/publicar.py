@@ -8,7 +8,10 @@ no token at all, which is the only way to prove that ANYBODY can read a demo.
 Subcommands (all paths are what publicar.sh passes):
 
   regex noncontent | content <demo>   the exclusion patterns, printed for gcloud -x
-  selftest                            the patterns against planted paths
+  selftest                            the patterns against planted paths, and the
+                                      reference check against a planted stage
+                                      (a declared deliberate miss passes, an
+                                      undeclared one fails; see deliberate())
   check <stage> <state> <derived-out> [<control-ref>...]
   fixes <stage> <listing> <ts-out> <nocache-out>
   verify <stage> <listing> <derived> [<content>]
@@ -21,11 +24,15 @@ content/ folder when the content is being published too.
 """
 import base64
 import concurrent.futures
+import contextlib
 import hashlib
+import io
 import json
 import os
 import re
+import shutil
 import sys
+import tempfile
 import urllib.error
 import urllib.request
 
@@ -59,6 +66,36 @@ SCANNED = ('.html', '.js', '.json', '.css', '.m3u8')
 # each client asks for it with its class in the query (ADR 0113).
 QUERYPARAM = re.compile(r'^#EXT-X-DEFINE:QUERYPARAM="([^"]+)"', re.M)
 CLASSES = ('com.apple.hls.interstitial', 'com.qualabs.hls.concurrentInterstitial')
+
+
+def deliberate(stage):
+    """{reference: which break} of the references that are missing ON PURPOSE.
+
+    A break of stage.json that declares `primeraOpcionRota` gets its first
+    layoutOption written with that URI, which does not exist, so the renderer's
+    failover (ADR 0107) is seen in the demo (`_primeraOpcionRota` says why).
+    escribir-asset-lists.mjs writes it in the HLS asset-list as it is, and in the
+    DASH slots as `mpdDe` maps a video: `.../index.m3u8` -> `.../dash/manifest.mpd`.
+
+    THE ACCEPTED SET IS READ FROM THE DECLARATION AND NEVER WRITTEN HERE, so it
+    cannot drift from it: take the field out of stage.json and both references
+    are back to being failures, and a miss that stage.json does not declare
+    never was anything else. Like the ACCEPTED list of verificar-cortes.mjs,
+    every entry carries its reason, and check prints it instead of hiding it.
+    """
+    path = os.path.join(stage, 'stage.json')
+    if not os.path.isfile(path):
+        return {}
+    out = {}
+    for brk in json.load(open(path, encoding='utf-8')).get('breaks', []):
+        uri = brk.get('primeraOpcionRota')
+        if not uri:
+            continue
+        uri = uri.lstrip('/')
+        out[uri] = f'break {brk.get("id")}'
+        if uri.endswith('/index.m3u8'):  # the DASH side, as escribir-asset-lists.mjs derives it
+            out[uri[:-len('index.m3u8')] + 'dash/manifest.mpd'] = f'break {brk.get("id")}, its DASH form'
+    return out
 
 
 def md5_file(p):
@@ -150,7 +187,46 @@ def cmd_selftest():
         got = no_cache(p)
         bad += got != want
         print('   %-44s %s%s' % (p, 'no-cache' if got else 'cached an hour', '' if got == want else '   <-- WRONG'))
+    bad += selftest_deliberate()
     return 1 if bad else 0
+
+
+def selftest_deliberate():
+    """The reference check against a planted stage: a miss that stage.json declares
+    (HLS and its DASH form) passes, printed as ACCEPTED; a miss it does not declare
+    fails, and so does the declared one once the declaration is taken out."""
+    broken = 'content/creatives/x/missing-on-purpose/index.m3u8'
+    dash = 'content/creatives/x/missing-on-purpose/dash/manifest.mpd'
+    cases = [  # (what, declares primeraOpcionRota, extra reference, must pass, MISSING lines)
+        ('declared miss, HLS and DASH', True, None, True, 0),
+        ('undeclared miss next to it', True, '/content/creatives/y/index.m3u8', False, 1),
+        ('the same miss, declaration taken out', False, None, False, 2),
+    ]
+    bad = 0
+    base = os.environ.get('XDG_RUNTIME_DIR') or None
+    for what, declares, extra, want, nmissing in cases:
+        tmp = tempfile.mkdtemp(prefix='publicar-selftest-', dir=base)
+        try:
+            stage, content = os.path.join(tmp, 'stage-pair'), os.path.join(tmp, 'content')
+            os.makedirs(os.path.join(stage, 'signalling', 'dash'))
+            os.makedirs(content)
+            brk = {'id': 'c', **({'primeraOpcionRota': broken} if declares else {})}
+            json.dump({'breaks': [brk]}, open(os.path.join(stage, 'stage.json'), 'w'))
+            json.dump({'uri': '/' + broken, 'extra': extra or '/signalling/dash/slots-break-c.json'},
+                      open(os.path.join(stage, 'signalling', 'asset-list-break-c.json'), 'w'))
+            json.dump({'uri': '/' + dash}, open(os.path.join(stage, 'signalling', 'dash', 'slots-break-c.json'), 'w'))
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                got = cmd_check(stage, content, os.path.join(tmp, 'derived')) == 0
+            accepted = out.getvalue().count('ACCEPTED (deliberate, stage.json primeraOpcionRota)')
+            missing = out.getvalue().count('     MISSING ')
+            ok = got == want and accepted == (2 if declares else 0) and missing == nmissing
+        finally:
+            shutil.rmtree(tmp)
+        bad += not ok
+        print('   %-44s %s: %d accepted, %d missing%s'
+              % (what, 'passes' if got else 'fails', accepted, missing, '' if ok else '   <-- WRONG'))
+    return bad
 
 
 def cmd_check(stage, state, derived_out, *control):
@@ -190,8 +266,19 @@ def cmd_check(stage, state, derived_out, *control):
                 todo.append(t)
             else:
                 segs += 1
+    # A miss that stage.json declares deliberate is printed, with its reason, and
+    # does not turn the check red; any other miss still does.
+    on_purpose = deliberate(stage)
+    accepted = [(u, src) for u, src in missing if u in on_purpose]
+    missing = [(u, src) for u, src in missing if u not in on_purpose]
     print(f'   {len(files)} files to publish outside content/, {len(new)} signalled files of content/ that change')
-    print(f'   {len(refs)} references, {len(seen)} playlists followed, {segs} segments; {len(missing)} missing')
+    print(f'   {len(refs)} references, {len(seen)} playlists followed, {segs} segments; '
+          f'{len(missing)} missing, {len(accepted)} accepted')
+    for u, src in accepted:
+        print(f'     ACCEPTED (deliberate, stage.json primeraOpcionRota) {u}   (from {src}; {on_purpose[u]})')
+    for u in sorted(set(on_purpose) - {u for u, _ in accepted}):
+        print(f'     NOTE stage.json declares {u} missing on purpose, but '
+              + ('it exists: the failover is not shown' if exists(u) else 'nothing references it'))
     for u, src in missing[:40]:
         print(f'     MISSING {u}   (from {src})')
     return 1 if missing or not files or not refs else 0
