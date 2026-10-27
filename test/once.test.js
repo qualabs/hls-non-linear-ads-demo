@@ -67,7 +67,7 @@ function withSignalling(dateRanges) {
   const hls = { on: (event, fn) => { handlers[event] = fn; }, media, startPosition: -1 };
   const asked = [];
   const realFetch = globalThis.fetch;
-  globalThis.fetch = async (url) => { asked.push(String(url)); return { json: async () => ({ ASSETS: [{ URI: '/linear.m3u8', DURATION: 10 }] }) }; };
+  globalThis.fetch = async (url) => { asked.push(String(url)); return { text: async () => JSON.stringify({ ASSETS: [{ URI: '/linear.m3u8', DURATION: 10 }] }) }; };
   const { log } = console;
   console.log = () => {};
   const provider = createSignalling(hls, {});

@@ -61,6 +61,13 @@
 //       before its original would change what the web draws. A twin goes only
 //       where its piece declares it (`mp4`, `pngFijo`).
 //
+//   primeraOpcionRota         A FIRST OPTION THAT FAILS ON PURPOSE. A break that
+//       declares it gets its first layoutOption written with that URI instead of
+//       the piece's, a path that does not exist, so the renderer's failover (ADR
+//       0107) is seen working in the demo: the 404 sends it to the next option.
+//       Only the first option's `uri` changes; the rest and the default stay
+//       real. Break C carries it (`_primeraOpcionRota` in stage.json says why).
+//
 //   primaryContent            lo declaran los dos squeezeback y NO el
 //       lowerThirdOverlay, que es una ausencia deliberada y argumentada en
 //       stage.json (`formas.banner._sinPrimario`).
@@ -215,6 +222,11 @@ function concurrente(brk) {
       layoutOptions: MEDIOS.filter((medio) => tieneMedio(brk, medio)).map((medio) => opcion(brk, medio))
     }]
   };
+  // The deliberate failover demonstration: the first option points at a URI
+  // that does not exist (`primeraOpcionRota`).
+  if (brk.primeraOpcionRota) {
+    asset['X-AD-CREATIVE-SIGNALING'].payload[0].layoutOptions[0].layout.assets[0].uri = url(brk.primeraOpcionRota);
+  }
   return { ASSETS: [asset] };
 }
 

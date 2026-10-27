@@ -350,7 +350,7 @@ async function signal(options) {
   const hls = { on: (event, fn) => { handlers[event] = fn; }, media };
   const listUrls = [];
   const realFetch = globalThis.fetch;
-  globalThis.fetch = async (url) => { listUrls.push(String(url)); return { json: async () => list() }; };
+  globalThis.fetch = async (url) => { listUrls.push(String(url)); return { text: async () => JSON.stringify(list()) }; };
   const { asked, firstRequest } = fake({ '/b.m3u8': 'HTTP 404' });
   const resolved = [];
   try {

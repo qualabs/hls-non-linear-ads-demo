@@ -35,7 +35,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -399,8 +399,10 @@ test('la opción de imagen va en OTRA forma que la de video, y es de la misma ca
     assert.notEqual(brk.formaImagen, brk.forma, `${brk.id}: stage.json declara la misma forma`);
     assert.notEqual(imagen.type, video.type, `${brk.id}: los dos layouts son el mismo`);
     const campana = (o) => STAGE.assets.piezas.find((p) =>
-      [`/${p.video}`, `/${p.svgFijo}`].includes(o.layout.assets[0].uri))?.campana;
-    assert.equal(campana(video), brk.campana, `${brk.id}: el video no es de la campaña del break`);
+      [`/${p.video}`, `/${p.mp4}`, `/${p.svgFijo}`].includes(o.layout.assets[0].uri))?.campana;
+    // A first option that fails on purpose has no piece behind it: its twin says the campaign.
+    const { mp4 } = porMedio(lista(brk.concurrente));
+    assert.equal(campana(brk.primeraOpcionRota ? mp4 : video), brk.campana, `${brk.id}: el video no es de la campaña del break`);
     assert.equal(campana(imagen), brk.campana, `${brk.id}: la imagen no es de la campaña del break`);
   }
 });
@@ -440,9 +442,26 @@ test('el asset de cada break es la pieza de su campaña, en los dos medios', () 
   for (const brk of BREAKS) {
     const { deVideo, deImagen } = piezasDe(brk);
     const { video, imagen } = porMedio(lista(brk.concurrente));
-    assert.equal(video.layout.assets[0].uri, `/${deVideo.video}`);
+    assert.equal(video.layout.assets[0].uri, brk.primeraOpcionRota ? `/${brk.primeraOpcionRota}` : `/${deVideo.video}`);
     assert.equal(imagen.layout.assets[0].uri, `/${deImagen.svgFijo}`);
   }
+});
+
+test('break C\'s first option fails on purpose, and nothing else of the signalling does', () => {
+  // A deliberate failover demonstration (stage.json, `_primeraOpcionRota`): the
+  // first layoutOption of C points at a URI that does not exist, so the
+  // renderer moves to the next option on its own (ADR 0107). Only that one uri:
+  // the twin after it, the image options and the default are the real pieces.
+  const { lista } = run();
+  assert.deepEqual(BREAKS.filter((b) => b.primeraOpcionRota).map((b) => b.id), ['c']);
+  const c = BREAKS.find((b) => b.id === 'c');
+  assert.match(c.primeraOpcionRota, /missing-on-purpose/, 'the bad uri says it is on purpose');
+  assert.equal(existsSync(join(DEMO, c.primeraOpcionRota)), false, 'the bad uri must not exist');
+  const { deVideo, deImagen } = piezasDe(c);
+  const asset = lista(c.concurrente).ASSETS[0];
+  const uris = opciones(lista(c.concurrente)).map((o) => o.layout.assets[0].uri);
+  assert.deepEqual(uris, [`/${c.primeraOpcionRota}`, `/${deVideo.mp4}`, `/${deImagen.svgFijo}`, `/${deImagen.pngFijo}`]);
+  assert.equal(asset.URI, `/${STAGE.assets.piezas.find((p) => p.campana === c.campana && p.forma === '16x9').video}`);
 });
 
 /**

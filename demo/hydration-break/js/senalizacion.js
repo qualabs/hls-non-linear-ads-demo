@@ -10,13 +10,13 @@
 // illustration of a playlist is worth nothing to an audience that reads
 // playlists for a living -- besides which the START-DATE moves every time the
 // content is packaged, so a pasted one would be wrong by tomorrow. The playlist
-// is fetched over the network here and the asset-list is fetched from the URL
-// the tag itself carries.
+// is fetched over the network here, and the asset-list is the one the library
+// received from the URL the tag itself carries, handed over in its report
+// (`onResolved`'s `response`, ADR 0129) and not requested a second time.
 //
-// AND THE ASSET-LIST IS FETCHED ONLY ONCE THE PLAYER HAS ASKED FOR IT. The
+// AND THE ASSET-LIST IS SHOWN ONLY ONCE THE PLAYER HAS ASKED FOR IT. The
 // player asks when the programme is buffered up to the break, as hls.js does for
-// an interstitial (ADR 0108, ADR 0109), and a page that went and read the list
-// before that would be the request the player does not make. So the tag is
+// an interstitial (ADR 0108, ADR 0109). So the tag is
 // printed at once, and the folds wait for the contract to say the break is no
 // longer known only off its tag. Here that is a moment after the page loads,
 // because the break is inside the first forward buffer.
@@ -463,9 +463,9 @@ async function untilTheListsAreIn(provider) {
  * because it belongs to the tag and not to the asset-list: it is inserted right
  * after the block it explains, so the two cannot drift apart in the page. The gloss
  * of the BLOCK does have a box of its own, because it belongs to the list and the
- * list arrives one fetch later.
+ * list arrives later.
  */
-export async function showSignalling({ src, tag, mount, payload, provider, video }) {
+export async function showSignalling({ src, tag, mount, payload, provider, video, received }) {
   try {
     const playlist = await fetch(src).then((r) => r.text());
     const line = playlist.split('\n').find((l) => l.startsWith('#EXT-X-DATERANGE:'));
@@ -481,10 +481,14 @@ export async function showSignalling({ src, tag, mount, payload, provider, video
         'player has asked for it.'));
       await untilTheListsAreIn(provider);
     }
-    const assetList = url ? await fetch(url).then((r) => r.json()) : null;
+    // The list the library received, from its report, and not a second request
+    // for it (ADR 0129): to an ad server a second request is a second impression.
+    const id = line?.match(/ID="([^"]+)"/)?.[1];
+    const assetList = url ? received.get(id)?.json ?? null : null;
     const assets = assetList?.ASSETS;
     if (!Array.isArray(assets) || assets.length === 0) {
-      mount.append(el('p', 'note', 'no asset-list on the tag'));
+      mount.append(el('p', 'note', !url ? 'no asset-list on the tag'
+        : assetList ? 'the asset-list carries no asset' : 'the asset-list could not be read'));
       return;
     }
 
