@@ -6634,3 +6634,11 @@ Rama `fase-19` (`d607237`): `dash/media.js`, `dash/concurrent-dash.js`, `vendor/
 5.2.1 y `dist/qualabs-concurrent-dash.js`; `createLayer` subió a `lib/layer.js` (comparador verde).
 El dist HLS sale byte a byte igual; la costura 0015 cubre `dash/`; los archivos de DASH se publican
 sólo en `stage-pair` (`DASH=(…)` en `publicar.sh`), así que las otras cuatro demos no ganan URLs.
+
+## 2026-10-26 — Fase 19, T-06: el contenido DASH de `stage-pair`
+
+Rama `fase-19` (`6e9bbea`): remux del HLS empaquetado a fMP4 + MPD, un sobre `slot` por break
+armado desde su asset-list HLS (que queda byte a byte igual), y el MPD señalizado. Medido en Chrome:
+hls.js y dash.js muestran el mismo cuadro en el mismo segundo (diferencia 0 en 30, 75,5 y 140 s;
+control corrido 0,1 s: 14,73 / 1,86 / 2,77). Un `@presentationTimeOffset` de 1,4 s, que la norma
+sugiere, corría el DASH 1,4 s: medido y sacado.

@@ -1,0 +1,32 @@
+{
+ "start": {
+  "hls": 0.066733,
+  "dash": 0.066733
+ },
+ "frames": [
+  {
+   "at": 30,
+   "hlsTime": 30,
+   "dashTime": 30,
+   "same": 0,
+   "shiftedBy": 0.1,
+   "shifted": 14.73
+  },
+  {
+   "at": 75.5,
+   "hlsTime": 75.5,
+   "dashTime": 75.5,
+   "same": 0,
+   "shiftedBy": 0.1,
+   "shifted": 1.86
+  },
+  {
+   "at": 140,
+   "hlsTime": 140,
+   "dashTime": 140,
+   "same": 0,
+   "shiftedBy": 0.1,
+   "shifted": 2.77
+  }
+ ]
+} []
