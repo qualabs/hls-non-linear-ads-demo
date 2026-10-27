@@ -30,7 +30,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { LINEAR_TYPE } from '../lib/experience.js';
-import { resolveAssets } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import {
   fadesInAndOut, remainingIn, isLeaving, isImage,
   FULL_FRAME_TYPE, PRIMARY_MOVE_MS, AD_FADE_IN_MS, AD_FADE_OUT_MS

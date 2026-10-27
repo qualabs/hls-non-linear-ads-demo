@@ -40,7 +40,7 @@ import {
   isOffer,
   viewportsFor
 } from '../lib/experience.js';
-import { resolveAssets } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import {
   PRIMARY_ID,
   createMultiview,

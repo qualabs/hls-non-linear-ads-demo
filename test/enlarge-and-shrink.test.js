@@ -36,7 +36,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { FULL_FRAME } from '../lib/experience.js';
-import { resolveAssets } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import {
   PRIMARY_ID, boxesOf, elementsOf, emptySelection, enlarge, raise, shrink
 } from '../lib/multiview.js';

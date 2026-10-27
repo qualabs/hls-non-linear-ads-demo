@@ -30,13 +30,13 @@ import {
   usableCapabilities,
   usablePreValidation
 } from '../lib/capabilities.js';
+import { createSignalling } from '../hls/signalling.js';
 import {
   BLOCK,
-  createSignalling,
   pendingFirstRequests,
   resolveAssets,
   resolveWithFirstRequests
-} from '../hls/signalling.js';
+} from '../lib/ad-list.js';
 import { firstRequest as mediaFirstRequest } from '../hls/media.js';
 
 const ID = 'AD-A-CONCURRENT';

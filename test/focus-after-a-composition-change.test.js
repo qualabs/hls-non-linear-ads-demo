@@ -43,7 +43,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { activeAt, isOffer } from '../lib/experience.js';
-import { resolveAssets } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { createMultiview } from '../lib/multiview.js';
 import { applyPlan, effectiveVolumeOf, entryOf, planComposition } from '../lib/renderer.js';
 

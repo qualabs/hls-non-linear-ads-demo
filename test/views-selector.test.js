@@ -26,7 +26,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { MAX_BOXES } from '../lib/experience.js';
-import { resolveAssets } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { emptySelection, raise, rowsOf } from '../lib/multiview.js';
 import { FULL_GRID_NOTE, selectorNote } from '../lib/controls.js';
 

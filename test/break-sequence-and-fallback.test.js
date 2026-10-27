@@ -50,11 +50,7 @@ import {
   resolveExperience,
   usablePayload
 } from '../lib/experience.js';
-import {
-  BLOCK,
-  resolveAssets,
-  usableUri
-} from '../hls/signalling.js';
+import { BLOCK, resolveAssets, usableUri } from '../lib/ad-list.js';
 
 const read = (path) => readFileSync(new URL(path, import.meta.url), 'utf8');
 const readJson = (path) => JSON.parse(read(path));

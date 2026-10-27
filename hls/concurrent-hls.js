@@ -21,7 +21,8 @@
 // controls built and not before, because the controls are most of it.
 
 // One line: the build strips import lines, and only whole ones.
-import { createSignalling, createProgramme, linearOnScreen, programmeAtEnd, scheduledRanges, CONCURRENT_CLASS, MULTIVIEW_CLASS, VIDEO_DECODERS_PARAM, IMAGE_OVER_VIDEO_PARAM } from './signalling.js';
+import { createSignalling, createProgramme, linearOnScreen, programmeAtEnd, scheduledRanges, CONCURRENT_CLASS, MULTIVIEW_CLASS } from './signalling.js';
+import { VIDEO_DECODERS_PARAM, IMAGE_OVER_VIDEO_PARAM } from '../lib/ad-list.js';
 import { createMultiview } from '../lib/multiview.js';
 import { createRenderer } from '../lib/renderer.js';
 import { createControls } from '../lib/controls.js';
