@@ -6619,3 +6619,11 @@ Rama `fase-19`: `lib/ad-list.js`, `lib/playhead.js` y `lib/media.js`. Renombre p
 (`resolveAssetList` → `resolveAssets`, `assetListUrl` → `listRequestUrl`), porque el nombre cruzaba
 la costura 0003; la mudanza da verde en el comparador, y la de `media` cambia sólo `attachAsset`
 (+ `attachPlain`, con 6 tests nuevos vistos fallar). 384/384, check verde.
+
+## 2026-10-26 — Fase 19, T-03 y T-04: `dash/signalling.js` y sus tests
+
+Rama `fase-19` (`28e59e7`, `4616a5a`): la capa de señalización DASH, con el MPD leído en el
+interceptor (ADR 0128) y lo común de `lib/`. 29 tests sobre una fixture de dos Periods escrita a
+mano; `readMpd` igual a esa fixture en Chrome; 16 mutaciones, una por regla, todas en rojo.
+413/413. Las opciones viajan en `layoutOptions` (ADR 0105), no en el `options` del borrador que
+citaba el diseño.
