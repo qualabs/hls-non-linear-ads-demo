@@ -13,8 +13,10 @@
 // Each pane is configured on its own (fase 15, asked for by Nicolás to be able to
 // compare every combination): first a MODE, the off-the-shelf "HLS interstitials"
 // client -- hls.js with nothing of ours, which replaces the programme with the
-// ad -- or "with our library"; and only in the second, the two capability axes of
-// ADR 0086. So the page compares native against ours, ours against ours with
+// ad -- or "with our library", or, since phase 19, "DASH, our library": the same
+// programme and the same breaks in an MPD, signalled with the scheme of SVTA2053
+// in an EventStream and played by dash.js under our library (ADR 0127); and in
+// the last two, the two capability axes of ADR 0086. So the page compares native against ours, ours against ours with
 // different capabilities, or native against native. The default is the pair as
 // it was published: native on the left, ours with two decoders and images on the
 // right, and the configuration travels in the URL (`?izq=nativo&der=ours-2dec-img`)
@@ -32,7 +34,8 @@
 // and the two scrub bars are tied -- see "THE TWO BARS ARE ONE BAR" below.
 //
 // WHY A CHANGE REBUILDS, AND WHY BOTH. `capabilities` is read ONCE, when the
-// signalling is created (`createSignalling`, lib/signalling.js), so there is no
+// signalling is created (`createSignalling`, hls/signalling.js and
+// dash/signalling.js), so there is no
 // in-flight way to change it: rebuilding is the contract. And both sides rebuild
 // in one call, because rebuilding one leaves the pair on two timelines.
 
@@ -40,7 +43,7 @@ import { traceContract } from './contract-trace.js';
 import { createStockPlayer } from './stock-player.js';
 import { followInterstitials, outcomeNote } from './native-outcome.js';
 import {
-  breakDelReporte, crearControlDePane, desenlaceCorto, leerConfig, escribirConfig, presentadoCorto
+  breakDash, breakDelReporte, crearControlDePane, desenlaceCorto, leerConfig, escribirConfig, presentadoCorto
 } from './capabilities.js';
 
 // The one source of the numbers of this demo (ADR 0044).
@@ -56,6 +59,9 @@ const CLASE = {
 const SRC = Object.fromEntries(Object.entries(CLASE).map(([modo, clase]) =>
   [modo, `/${stage.playlist}?${stage.parametroDeClase}=${encodeURIComponent(clase)}`]));
 const PLAYLIST = stage.playlist.split('/').pop();
+// The DASH pane's MPD, signalled by `senalizar-dash.mjs` (phase 19).
+SRC.dash = `/${stage.mpd}`;
+const MPD = stage.mpd.split('/').pop();
 
 const LADOS = ['izq', 'der'];
 
@@ -84,6 +90,11 @@ const ROTULOS = {
     rol: 'With our library',
     sub: 'The same hls.js, unmodified, driven by our library: our breaks are drawn over the programme, which is never replaced; a traditional interstitial, if the stream has one, hls.js plays.',
     lee: `loads ${PLAYLIST}?${stage.parametroDeClase}=${CLASE.ours}: the same file, its breaks read as ours`
+  },
+  dash: {
+    rol: 'DASH, our library',
+    sub: 'The same programme and the same breaks over MPEG-DASH: dash.js, unmodified, driven by our library. The breaks are an EventStream with the scheme of SVTA2053; the traditional linear one, a replace event, our library plays.',
+    lee: `loads ${MPD}: its breaks read off its EventStream, their ads asked for at $remote.slots`
   }
 };
 
@@ -121,8 +132,8 @@ function tieneDefault(id) {
   return stage.breaks.find((b) => b.id === id)?.lineal;
 }
 
-/** The break an asset-list belongs to, from its name: `asset-list-break-a.json` is break `a`. */
-const breakDeLaLista = (ruta) => ruta.match(/asset-list-break-([a-z0-9]+)\.json/)?.[1] ?? null;
+/** The break a list belongs to, from its name: `asset-list-break-a.json`, or `slots-break-a.json` in DASH, is break `a`. */
+const breakDeLaLista = (ruta) => ruta.match(/(?:asset-list|slots)-break-([a-z0-9]+)\.json/)?.[1] ?? null;
 
 function pintarPedidos(lado) {
   const { pedidos, seguidor = null, presentados = {} } = vivo?.lados[lado] ?? { pedidos: [] };
@@ -219,7 +230,7 @@ function derribar() {
   // so what is left of an arming is cleared by replacing the DOM it drew into.
   for (const lado of LADOS) {
     vivo.lados[lado].desconectar?.();
-    vivo.lados[lado].hls.destroy();
+    vivo.lados[lado].destruir();
     panes[lado].caja.replaceChildren();
   }
   vivo = null;
@@ -465,6 +476,7 @@ function construirNuestro(lado, capacidades, caja, registro) {
 
   return {
     desconectar: () => propios.disconnect(),
+    destruir: () => hls.destroy(),
     modo: 'ours', capacidades, hls, concurrent, consumer, video: caja.video,
     // The programme's clock (ADR 0114): the element, except while hls.js plays
     // a traditional interstitial of the stream, when it is hls.js's primary.
@@ -472,6 +484,78 @@ function construirNuestro(lado, capacidades, caja, registro) {
     listo: () => caja.video.readyState >= 1,
     // Inside a traditional interstitial, ours cannot take a seek either.
     enAviso: () => concurrent.linearOnScreen()
+  };
+}
+
+/**
+ * A pane with our library over DASH (phase 19), and the block an integrator
+ * writes: the same as `construirNuestro`, with dash.js. The one difference he
+ * sees is the order: `attach` before `initialize`, because the breaks are read
+ * off the MPD as dash.js receives it (ADR 0128).
+ */
+function construirDash(lado, capacidades, caja, registro) {
+  const p = panes[lado];
+  // The reports name a break by its Event@id, a number; the lists of this page by its letter.
+  const deBreak = (reporte) => breakDash(reporte.id, stage);
+  // =========================================================================
+  // WHAT AN INTEGRATOR WRITES
+  const player = dashjs.MediaPlayer().create();
+  const concurrent = QualabsConcurrentDash.attach(player, {
+    container: caja.player,
+    video: caja.video,
+    capabilities: capacidades,
+    sendCapabilities: true,
+    onPresented: (reporte) => {
+      registro.presentados[deBreak(reporte)] = reporte;
+      pintarPedidos(lado);
+    },
+    onResolved: (experiences, seleccion) => {
+      for (const e of experiences) {
+        console.log(`[app:${lado}] resolved ${e.type}#${e.itemId}: ${e.elements.length} elements,` +
+          ` window ${e.startTime.toFixed(2)}s -> ${(e.startTime + e.duration).toFixed(2)}s`);
+      }
+      registro.selecciones[deBreak(seleccion)] = seleccion;
+      if (seleccion.url) registro.pedidos.push({ url: seleccion.url, asset: seleccion.assets[0] });
+      pintarPedidos(lado);
+    }
+  });
+  player.initialize(caja.video, SRC.dash, true);
+  // =========================================================================
+
+  const consumer = traceContract({ provider: concurrent.provider, video: caja.video, hud: p.contract });
+  player.on(dashjs.MediaPlayer.events.ERROR, (e) => console.error(`[dash:${lado}] error`, e.error?.code, e.error?.message));
+  player.on(dashjs.MediaPlayer.events.MANIFEST_LOADED, () => {
+    p.hud.textContent = `dash.js ${player.getVersion()} · capabilities: ${JSON.stringify(capacidades)} · playing ${SRC.dash}`;
+  });
+  caja.video.muted = true;
+
+  function pintar() {
+    const t = caja.video.currentTime;
+    const activas = concurrent.presentedAt(t);
+    // The traditional linear break, a replace event our library plays (ADR 0125).
+    if (activas.some((e) => e.type === 'linear' && registroLineal(e))) {
+      p.pane.dataset.state = 'ad';
+      p.state.textContent = `LINEAR AD, played by our library (replace event) · programme at ${t.toFixed(1)}s · the content is off the screen`;
+      return;
+    }
+    p.pane.dataset.state = activas.length ? 'ad' : 'primary';
+    p.state.textContent = activas.length
+      ? `primary content + NON-LINEAR AD (${activas.map((e) => e.type).join(', ')})` +
+        ` · ${t.toFixed(1)}s · nothing was replaced · ad media: ${medios(activas)}`
+      : `primary content · ${t.toFixed(1)}s`;
+  }
+  /** Whether a linear experience is the replace break, and not a linear default of ours. */
+  const registroLineal = (e) => breakDash(e.id, stage) === stage.breakLineal?.id;
+  caja.video.addEventListener('timeupdate', pintar);
+  pintar();
+
+  return {
+    modo: 'dash', capacidades, player, concurrent, consumer, video: caja.video,
+    destruir: () => player.reset(),
+    programa: caja.video,
+    listo: () => caja.video.readyState >= 1,
+    // Our library plays the replace break too, so the programme takes a seek anywhere.
+    enAviso: () => false
   };
 }
 
@@ -514,6 +598,7 @@ function construirNativo(lado, caja, registro) {
     (identifier) => breakDelReporte({ id: identifier }));
   return {
     modo: 'nativo', capacidades: null, hls: stock.hls, stock, video: caja.video,
+    destruir: () => stock.hls.destroy(),
     programa: stock.programme,
     listo: () => stock.hls.interstitialsManager?.primary != null && caja.video.readyState >= 1,
     enAviso: () => stock.playingAd != null,
@@ -528,7 +613,7 @@ function pintarRotulos(lado, config) {
   p.sub.textContent = r.sub;
   p.lee.textContent = r.lee;
   p.pane.classList.toggle('pane-stock', config.modo === 'nativo');
-  p.pane.classList.toggle('pane-demo', config.modo === 'ours');
+  p.pane.classList.toggle('pane-demo', config.modo !== 'nativo');
   p.pane.dataset.modo = config.modo;
 }
 
@@ -544,7 +629,9 @@ function armar(config, retomarEn = 0) {
     pintarRotulos(lado, config[lado]);
     const l = config[lado].modo === 'nativo'
       ? construirNativo(lado, caja, registro)
-      : construirNuestro(lado, config[lado].capacidades, caja, registro);
+      : config[lado].modo === 'dash'
+        ? construirDash(lado, config[lado].capacidades, caja, registro)
+        : construirNuestro(lado, config[lado].capacidades, caja, registro);
     Object.assign(l, registro, { caja });
     lados[lado] = l;
   }
@@ -569,6 +656,7 @@ function armar(config, retomarEn = 0) {
     get concurrent() { return primero('ours')?.concurrent; },
     get provider() { return primero('ours')?.concurrent.provider; },
     get stock() { return primero('nativo')?.stock; },
+    get dash() { return primero('dash')?.concurrent; },
     get capacidades() { return primero('ours')?.capacidades; },
     get selecciones() { return primero('ours')?.selecciones ?? {}; },
     pedidos: (lado) => [...vivo.lados[lado].pedidos],

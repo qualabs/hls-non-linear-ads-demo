@@ -19,7 +19,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import { LINEAR_TYPE } from '../lib/experience.js';
-import { BLOCK, resolveAssetList } from '../hls/signalling.js';
+import { BLOCK, resolveAssets } from '../lib/ad-list.js';
 import { identityOf, nextAfterFailure, presentedAt, variantOf } from '../lib/renderer.js';
 
 const ID = 'AD-B-CONCURRENT';
@@ -45,7 +45,7 @@ const IMAGE = {
 function experienceWith({ withDefault = true } = {}) {
   const asset = { DURATION: 12, [BLOCK]: { version: 2, type: 'slot', payload: [{ start: 0, duration: 12, layoutOptions: [VIDEO, IMAGE] }] } };
   if (withDefault) asset.URI = '/linear.m3u8';
-  return resolveAssetList({ ASSETS: [asset] }, { id: ID, slotStart: SLOT_START })[0];
+  return resolveAssets({ ASSETS: [asset] }, { id: ID, slotStart: SLOT_START })[0];
 }
 
 const fresh = () => ({ attempts: new Map(), assets: new Map(), cache: new Map() });

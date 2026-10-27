@@ -237,6 +237,8 @@
   "_breaks": "Los cuatro duran lo mismo para que el creativo 16:9 de cada campaña sirva de lineal en su break sin recortarse. El primero es el preroll (CUE=\"PRE\", ADR 0110), de 0 a 12 s. Entre los tres de mitad de programa los huecos son iguales, 33 s, y A entra a los 20 s para que la demo lo alcance rápido, 8 s después de que termina el preroll. El último de mitad de programa termina en 122 s, bastante antes del corte del programa en 198,0 s (los créditos arrancan en 199,0 s: la medición está en programa._largo). El quinto es el postroll (CUE=\"POST\", ADR 0111): va después del fin del programa y sólo como lineal.",
 
   "playlist": "content/primary/con-daterange.m3u8",
+  "mpd": "content/primary/dash/senalizado.mpd",
+  "_mpd": "EL MPD DEL PANE DASH (fase 19, ADR 0127): el mismo programa remuxado a fMP4 por scripts/empaquetar-dash.sh y señalizado por scripts/senalizar-dash.mjs, con un Event del esquema de SVTA2053 por break y el replace del break lineal. Va en content/ por la misma razón que la playlist: sale del empaquetado.",
   "_playlist": "UNA playlist para los dos clientes (ADR 0113, que supersede el manifest por clase del ADR 0090). Cada break lleva UN tag, con `CLASS=\"{$adclass}\"`, y la playlist declara `#EXT-X-DEFINE:QUERYPARAM=\"adclass\"`: cada player la pide con otro parámetro y hls.js sustituye la clase al parsear (draft-pantos-hls-rfc8216bis-22, 4.3 y 4.4.2.3). El de fábrica la pide con `?adclass=com.apple.hls.interstitial`, el nuestro con `?adclass=com.qualabs.hls.concurrentInterstitial`. El archivo es el mismo byte por byte, así que sirve igual desde un bucket estático. Va al lado del contenido empaquetado y NO en signalling/, porque lleva un START-DATE resuelto contra el EXT-X-PROGRAM-DATE-TIME del propio empaquetado (ADR 0005): es hora de pared y se mueve con cada empaquetado, así que en git sólo podría estar vieja.",
   "parametroDeClase": "adclass",
   "_parametroDeClase": "El nombre de la variable y del parámetro de la URL, que son el mismo por la spec: QUERYPARAM nombra a la vez la variable y el parámetro. Lo leen el señalizador, las tres páginas y los tests; no se escribe en ningún otro lado.",
@@ -245,7 +247,7 @@
     "concurrentVideo": [1, 2],
     "concurrentImage": [true, false],
     "inicial": { "concurrentVideo": 2, "concurrentImage": true },
-    "_": "Los dos ejes que el control de index.html y de inspect.html ofrece, con sus valores, en el orden en que se muestran (ADR 0086). Los nombres son los de la opción `capabilities` de attach(); los parámetros del pedido los define lib/signalling.js y no se repiten acá. No hay 3 decodificadores porque ningún layout de esta demo pide más de dos: el primario y un elemento de aviso. No hay eje HTML porque la librería no dibuja HTML."
+    "_": "Los dos ejes que el control de index.html y de inspect.html ofrece, con sus valores, en el orden en que se muestran (ADR 0086). Los nombres son los de la opción `capabilities` de attach(); los parámetros del pedido los define lib/ad-list.js y no se repiten acá. No hay 3 decodificadores porque ningún layout de esta demo pide más de dos: el primario y un elemento de aviso. No hay eje HTML porque la librería no dibuja HTML."
   },
 
   "assets": {

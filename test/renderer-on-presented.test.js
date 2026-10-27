@@ -19,7 +19,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { BLOCK, resolveAssetList } from '../hls/signalling.js';
+import { BLOCK, resolveAssets } from '../lib/ad-list.js';
 import { createRenderer } from '../lib/renderer.js';
 
 const ID = 'AD-B-CONCURRENT';
@@ -55,7 +55,7 @@ function resolve(assets) {
   console.log = () => {};
   console.warn = () => {};
   try {
-    return resolveAssetList({ ASSETS: assets }, { id: ID, slotStart: SLOT_START });
+    return resolveAssets({ ASSETS: assets }, { id: ID, slotStart: SLOT_START });
   } finally { console.log = log; console.warn = warn; }
 }
 

@@ -148,10 +148,10 @@ const SEAMS = [
     terms:
       'demo|app\\.js|contract-trace|stock-player|index\\.html|getElementById|querySelector|#player|#ads|#video|#ad-audio|pane-|data-state',
     // Every folder of the library goes in whole, so a new file walks into this
-    // check on its own. `dash/*.js` joins the day dash/ holds a file: a pattern
-    // that matches nothing would hand grep no file at all, and grep would read
-    // stdin instead.
-    files: ['lib/*.js', 'hls/*.js', 'scripts/construir-libreria.sh'],
+    // check on its own. dash/ is in since phase 19, when it got its first file:
+    // a pattern that matches nothing would hand grep no file at all, and grep
+    // would read stdin instead.
+    files: ['lib/*.js', 'hls/*.js', 'dash/*.js', 'scripts/construir-libreria.sh'],
     // None, and not for lack of use: the T-04 ran this grep, it found a comment
     // explaining a colour with a reason that belonged to this page, and the
     // reason moved to the document of the task instead of being written here.

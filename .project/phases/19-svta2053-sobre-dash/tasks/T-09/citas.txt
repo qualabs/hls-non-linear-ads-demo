@@ -1,0 +1,345 @@
+# T-09 — citations of docs/svta2053-dash-concurrent-presentation.md, each checked with grep
+# SVTA2053 v3 draft: $B = /home/nicolas/Develop/ai_workspace/cto-assistant/sandbox/sgai/2026-10-02-svta-doc-update/borrador.md
+# ISO/IEC 23009-1:2026: $I = pdftotext -layout of sandbox/ai-playground/vertex-rag/ISO_IEC_23009-1_2026(en) (1).pdf (temporary, removed after)
+# Current-edition text known only through the project's ADRs: $D = /home/nicolas/Develop/ai_workspace/cto-assistant/projects/hls-non-linear-ads-demo/.project/decisions
+
+=== Abstract, sentence replaced
+$ grep -n 'defines their carriage in HLS through a dedicated EXT-X-DATERANGE class' $B
+38:As more distributors utilize interleaved/stitched presentation architectures for the exhibition of advertisements, a clear and interoperable signaling mechanism for inserted creative assets is needed to ensure delivery and monitoring accuracy. This document
+
+=== Versioning, Version 3.0 row
+$ grep -n 'and HLS carriage through the concurrent interstitial class' $B
+48:| Version 3.0 | TBD, 2026 | Concurrent presentation: layout data model, presentation options and device capability parameters, fixed multi-view layouts, and HLS carriage through the concurrent interstitial class |
+
+=== TOC: 7 HLS Reference Implementation (Informative)
+$ grep -n '^7 HLS Reference Implementation (Informative)' $B
+80:7 HLS Reference Implementation (Informative)
+
+=== §1 ADDRESSES, capability bullet replaced
+$ grep -n 'the device capability parameters a Player sends when requesting an ASSET-LIST' $B
+104:- Ordered presentation options for a slot, the device capability parameters a Player sends when requesting an ASSET-LIST, and how a Player selects the option it presents.
+
+=== §1 DOES NOT ADDRESS, bullet removed
+$ grep -n 'Concurrent presentation in DASH. The layout data model of Section 4 is format independent; its DASH carriage is left to a future edition.' $B
+114:- Concurrent presentation in DASH. The layout data model of Section 4 is format independent; its DASH carriage is left to a future edition.
+
+=== §2, 'how an HLS Player discovers'
+$ grep -n -o 'it defines how an HLS Player discovers such presentations' $B
+120:it defines how an HLS Player discovers such presentations
+
+=== §3, APS row
+$ grep -n '^| APS |' $B
+130:| APS | Ad Presentation Server, the system that answers the Player's ASSET-LIST request, converting the decision of the ADS into an ASSET-LIST object, including its layout data. |
+
+=== 4.1 exception sentence replaced
+$ grep -n 'The exception is a concurrent presentation, whose additional assets are referenced by the layout of its options (4.4.8, 4.4.9)' $B
+154:The Ad Creative Signaling Data Model establishes a set of objects and their relationships, which are carried through the Ad Creative Signaling Data Scheme and the containing manifest resources. Objects MAY be split or combined across carriage messages and 
+
+=== 4.4.3 MediaReference
+$ grep -n '^### 4.4.3 MediaReference' $B
+271:### 4.4.3 MediaReference
+
+=== 4.4.8 AssetLayout
+$ grep -n '^### 4.4.8 AssetLayout' $B
+331:### 4.4.8 AssetLayout
+
+=== 4.4.9 SlotOption (LayoutOption in the current edition)
+$ grep -n '^### 4.4.9 SlotOption' $B
+346:### 4.4.9 SlotOption
+
+=== Table 5 Slot, media is Array<MediaReference>
+$ grep -n '^| media | Array<MediaReference>' $B
+261:| media | Array<MediaReference> | No, default [] | An array of MediaReference objects representing the ad creative. |
+
+=== Table 4 Pod, start optional / duration SHOULD equal sum of slots
+$ grep -n '^| start | MediaTime | No | The start time of the pod\|SHOULD be equivalent to the sum of the individual slots' $B
+243:| start | MediaTime | No | The start time of the pod within the primary content stream. |
+244:| duration | MediaTime | Yes | The total duration of the pod, which SHOULD be equivalent to the sum of the individual slots. |
+
+=== 5.2.1.4 Pod Object
+$ grep -n '^#### 5.2.1.4 Pod Object' $B
+448:#### 5.2.1.4 Pod Object
+
+=== 5.2.2.1 Base Envelope and Table 18 (features.remoteFields row; flag semantics)
+$ grep -n '^#### 5.2.2.1 Base Envelope\|^| features.remoteFields\|^Table 18: Base Carriage Envelope\|If a feature flag is set to true for a feature not supported' $B
+537:#### 5.2.2.1 Base Envelope
+547:| features.remoteFields | A boolean value that MUST be set to true if the data payload makes use of the Remote Field feature outlined in 5.2.2.2. |
+549:Table 18: Base Carriage Envelope
+551:The flags present in the features object allow for upfront declarations of feature support that components interpreting the signaling scheme MUST support. If a feature flag is set to true for a feature not supported by the parsing interpreter, an error SHO
+1239:Table 18: Base Carriage Envelope
+
+=== Table 19, $remote.slots resolves to a 'slot' envelope
+$ grep -n '^| \$remote.slots\|^Table 19:' $B
+562:| $remote.slots | URI | Pod | A URI that resolves to a carriage envelope of the type "slot". |
+566:Table 19: Remote Fields Description Object
+1240:Table 19: Remote Fields Description Object
+
+=== 5.2.2.2.2, 'cannot ultimately change how a stream ... decisioned or stitched' and delayed resolution
+$ grep -n '^##### 5.2.2.2.2\|SHOULD delay resolution until the data is necessary\|cannot ultimately change how a stream or experience has been decisioned or stitched' $B
+592:##### 5.2.2.2.2 Remote Resolution Semantics
+594:When a data payload associated with this signaling scheme contains a remote field definition, the signaling scheme interpreter SHOULD delay resolution until the data is necessary to perform functionality. In most cases this will be when the containing obje
+
+=== 5.3.1 Window item replaced
+$ grep -n -o 'A presentation starts at its scheduled time (6.6.2) and ends as an HLS interstitial does (\[RFC8216bis\] Appendix D.2): when playback reaches the end of its assets or, if the range carries X-PLAYOUT-LIMIT, when playback reaches that offset from the start of the range.' $B
+679:A presentation starts at its scheduled time (6.6.2) and ends as an HLS interstitial does ([RFC8216bis] Appendix D.2): when playback reaches the end of its assets or, if the range carries X-PLAYOUT-LIMIT, when playback reaches that offset from the start of 
+
+=== 5.3.1 Window refers to DURATION of an Asset-Description
+$ grep -n -o 'ends at the DURATION of its Asset-Description' $B
+679:ends at the DURATION of its Asset-Description
+
+=== 5.3.3 capability parameters (Table 21) and 'When no option fits ... fallback of 6.6.4'
+$ grep -n '^\*\*Capability parameters.\*\*\|^Table 21: Capability Parameters\|^\*\*When no option fits.\*\*' $B
+707:**Capability parameters.** When requesting the ASSET-LIST, a Player MAY declare the capability of the device as query parameters, one per axis. Each axis is optional, and an axis that is not declared is not sent.
+714:Table 21: Capability Parameters
+726:**When no option fits.** If no option of a slot satisfies the declared capability, the asset carrying it cannot be presented concurrently, and the Player applies the fallback of 6.6.4: it presents the asset's own URI as a linear ad if the asset has one, an
+1242:Table 21: Capability Parameters
+
+=== 5.3.4 Multi-View Layouts
+$ grep -n '^### 5.3.4' $B
+797:### 5.3.4 Multi-View Layouts (Informative)
+
+=== 5.1, future versions not structurally compatible
+$ grep -n -o 'implementers MUST NOT assume future data versions are structurally compatible' $B
+380:implementers MUST NOT assume future data versions are structurally compatible
+
+=== 6.1, Table 24 (@value omitted, @timescale, @presentationTimeOffset)
+$ grep -n '^## 6.1 DASH with EventStream Carriage\|^| @value | omitted\|^Table 24:' $B
+833:## 6.1 DASH with EventStream Carriage
+840:| @value | omitted |
+844:Table 24: DASH Manifest Carriage, EventStream Properties
+1245:Table 24: DASH Manifest Carriage, EventStream Properties
+
+=== 6.1, Table 25 (@id, @presentationTime, @duration, data in node as a string)
+$ grep -n '^| @id |\|^| @presentationTime |\|^| @duration |\|^| <data in node>\|^Table 25:' $B
+850:| @id | A generated ID that is unique for the containing manifest. |
+851:| @presentationTime | The start of the creative asset relative to the Period@start, taking into account the EventStream@presentationTimeOffset, if specified. |
+852:| @duration | The duration, in EventStream@timescale units, of the creative asset. |
+853:| <data in node> | The Ad Creative Signaling Scheme JSON data payload object for the creative asset, as a string. |
+855:Table 25: DASH Manifest Carriage, Event Properties
+1246:Table 25: DASH Manifest Carriage, Event Properties
+
+=== 6.1 examples use CDATA (Code 8, 9, 13)
+$ grep -n -c 'CDATA' $B
+5
+
+=== Code 8, 9 and 13 use ad-id-signaling
+$ grep -n 'ad-id-signaling\|^Code 8:\|^Code 9:\|^Code 13:' $B
+866:schemeIdUri="urn:svta:advertising-wg:ad-id-signaling"
+879:Code 8: DASH Manifest Carriage V1 Example
+890:schemeIdUri="urn:svta:advertising-wg:ad-id-signaling"
+903:Code 9: DASH Manifest Carriage V2 Example
+1083:<EventStream schemeIdUri="urn:svta:advertising-wg:ad-id-signaling" timescale="1">
+1100:Code 13: DASH type="list" with native Tracking and skip
+1264:Code 8: DASH Manifest Carriage V1 Example
+1265:Code 9: DASH Manifest Carriage V2 Example
+1269:Code 13: DASH type="list" with native Tracking and skip
+
+=== §5 scheme URI ad-creative-signaling
+$ grep -n 'MUST be identified by the scheme URI' $B
+359:The Ad Creative Signaling Data Scheme MUST be identified by the scheme URI: "urn:svta:advertising-wg:ad-creative-signaling".
+
+=== 6.6.1, one EXT-X-DATERANGE per break
+$ grep -n -o 'A break is signaled with a single EXT-X-DATERANGE of this class.' $B
+1119:A break is signaled with a single EXT-X-DATERANGE of this class.
+
+=== 6.6.3 mixed concurrent and linear; at most one presentation active
+$ grep -n -o 'At most one presentation is active at a time.' $B
+1147:At most one presentation is active at a time.
+
+=== Table 29 skipTiming
+$ grep -n '^| skipTiming\|^Table 29:' $B
+1143:| skipTiming | "collapse" or "preserve" | No, default "collapse" | The time a skipped asset (6.6.4) occupies. With "collapse", a skipped asset takes no time and is not counted: the asset after it starts where the skipped one would have started, back to ba
+1145:Table 29: Concurrent ASSET-LIST Top-Level Keys
+1187:| skipTiming | 6.6.3 | Not implemented: skipTiming is not read, and a skipped asset always keeps its window, which is the behavior of "preserve" and not of the default "collapse" |
+1250:Table 29: Concurrent ASSET-LIST Top-Level Keys
+
+=== 6.6.4 and Table 30
+$ grep -n '^### 6.6.4 Fallback\|^Table 30:' $B
+1149:### 6.6.4 Fallback
+1159:Table 30: Resolution of an Asset of a Concurrent Interstitial
+1251:Table 30: Resolution of an Asset of a Concurrent Interstitial
+
+=== 6.6.5, a non-implementing client presents nothing, not even the linear default
+$ grep -n -o 'presents no ad for the break, not even the linear default' $B
+1171:presents no ad for the break, not even the linear default
+
+=== §7 title and Table 31
+$ grep -n '^# 7 HLS REFERENCE IMPLEMENTATION\|^Table 31: Reference Implementation Status\|over an unmodified hls.js 1.7.2' $B
+1177:# 7 HLS REFERENCE IMPLEMENTATION (INFORMATIVE)
+1179:A reference implementation of Sections 5.3 and 6.6 exists for hls.js, developed by Qualabs for the SVTA, as a library that runs over an unmodified hls.js 1.7.2. It is activated when the class appears in the EXT-X-DATERANGE and requires the hls.js intersti
+1192:Table 31: Reference Implementation Status
+1252:Table 31: Reference Implementation Status
+
+=== §9 ISO/IEC 23009-1:2022 row and Table 32
+$ grep -n 'ISO/IEC 23009-1:2022, MPEG-DASH 5th Edition\|^Table 32:' $B
+1207:| ISO/IEC 23009-1:2022, MPEG-DASH 5th Edition | Moving Picture Experts Group | https://www.iso.org/standard/83314.html |
+1216:Table 32: Specification and Standard References
+1253:Table 32: Specification and Standard References
+
+=== §10: last table (32) and last code (14)
+$ grep -n '^Table 32: Specification\|^Code 14:' $B
+1127:Code 14: HLS Concurrent Interstitial EXT-X-DATERANGE
+1216:Table 32: Specification and Standard References
+1253:Table 32: Specification and Standard References
+1270:Code 14: HLS Concurrent Interstitial EXT-X-DATERANGE
+
+=== No other cross-reference to Table 31/32 to renumber
+$ grep -n 'Table 3[12]' $B
+1192:Table 31: Reference Implementation Status
+1216:Table 32: Specification and Standard References
+1252:Table 31: Reference Implementation Status
+1253:Table 32: Specification and Standard References
+
+=== Current edition: layoutOptions / LayoutOption (ADR 0105)
+$ grep -n 'options. pasa' $D/0105-*.md
+19:El 2026-10-20 David Hassoun renombró en SVTA2053 (`v3-DRAFT`) la clave y su objeto: `options` pasa
+
+=== Current edition 5.3.3 'Asset load failure', '(in HLS, its Multivariant Playlist or Media Playlist)' (ADR 0106)
+$ grep -n 'Asset load failure\|in HLS, its Multivariant Playlist or Media Playlist' $D/0106-*.md
+22:> *"Asset load failure. Before it presents an option, the Player makes the first request for each
+
+=== Current edition 5.3.3 'applies the fallback of 6.6.4' and 6.6.4 'If the first request for the URI of a linear default fails' (ADR 0106)
+$ grep -n 'the Player applies the fallback of 6.6.4\|If the first request for the URI of a' $D/0106-*.md
+33:fails to load, [...] the Player applies the fallback of 6.6.4 [...]. If the first request for that
+34:URI also fails, the asset is skipped"* (5.3.3), y en 6.6.4 *"If the first request for the URI of a
+
+=== Current edition 5.3.3 'MAY also send the configured capabilities to the APS as query parameters' (ADR 0104)
+$ grep -n 'MAY also send the configured capabilities' $D/0104-*.md
+29:- **Mandarla es opcional.** *"a Player MAY also send the configured capabilities to the APS as
+
+=== ?adclass= with EXT-X-DEFINE:QUERYPARAM, decided by David 2026-10-22 (ADR 0113)
+$ grep -n 'QUERYPARAM' $D/0113-*.md | head -3
+3:title: Un juego de tags por stream, y la clase de cada break la elige el cliente con un parámetro de la URL (EXT-X-DEFINE QUERYPARAM)
+24:  `EXT-X-DEFINE:QUERYPARAM` en la playlist y `CLASS="{$…}"` en los breaks. Cada player carga la
+37:- 4.4.2.3, QUERYPARAM: *"its value is the value associated with the query parameter of the same
+
+=== ISO 5.10.2.1: events terminate at the end of the Period; at most one EventStream per schemeIdUri/value in a Period
+$ grep -n '^5.10.2.1\|Events shall terminate at the end of a Period\|A Period shall contain at most one EventStream element with the same value' $I
+9371:5.10.2.1 Overview
+9375:specified by an EventStream element in a Period element. Events shall terminate at the end of a Period
+9384:A Period shall contain at most one EventStream element with the same value of the @schemeIdUri
+
+=== ISO Table 43: @timescale, @presentationTimeOffset
+$ grep -n 'Table 43 — Event Stream Semantics\|@presentationTimeOffset  *OD\|Event presentation time subtracted by the value of the presentation' $I
+9418:                                      Table 43 — Event Stream Semantics
+9454:      @presentationTimeOffset                   OD      specifies the presentation time offset of this Event Stream that
+
+=== ISO Table 44: @presentationTime relative to Period start; @messageData deprecated as of the 6th edition
+$ grep -n 'Table 44 — Event Semantics\|relative to the$\|start of the Period, taking into account the\|@messageData   \|Deprecated as of the 6th edition' $I
+2360:that should elapse after playing the media of all prior Periods in this Media Presentation relative to the
+9262:                                                               indicated in Media Presentation time and is relative to the
+9496:                                        Table 44 — Event Semantics
+9510:         @presentationTime                      OD         specifies the presentation time of the event relative to the
+9511:                                             default: 0    start of the Period, taking into account the
+9572:                                                                Deprecated as of the 6th edition.
+9573:           @messageData                               O         specifies the value for the event stream element. The value
+9577:                                                                Deprecated as of the 6th edition
+12971:with a presentation time TP signalled in the media stream, the Media Presentation time relative to the
+
+=== ISO 5.10.2.3: Event@id xs:unsignedLong; messageData prohibited
+$ grep -n '^5.10.2.3 XML Syntax\|attribute name="id" type="xs:unsignedLong"\|name="messageData" type="xs:string" use="prohibited"' $I
+6145:    <xs:attribute name="id" type="xs:unsignedLong" use="required"/>
+9628:5.10.2.3 XML Syntax
+9676:    <xs:attribute name="id" type="xs:unsignedLong"/>
+9679:    <xs:attribute name="messageData" type="xs:string" use="prohibited">
+
+=== ISO 5.16.1: Replacement, main not output, media time progresses
+$ grep -n '^5.16.1\|main Media Presentation is not being output, but its media time' $I
+11116:5.16.1    General
+11130:  Media Presentation. In this case, the main Media Presentation is not being output, but its media time
+
+=== ISO 5.16.2.2: executeOnce counts executions (E.c); a failed execution is not counted
+$ grep -n '^5.16.2.2 Hypothetical\|@executeOnce is set to "true", and E.c > 0\|The counter E.c has not been incremented due to the failure' $I
+11321:5.16.2.2 Hypothetical Reference Model of Alternative MPD Event Processing
+11601:— @executeOnce is set to "true", and E.c > 0, i.e. the event can be only executed once and was executed at
+11618:NOTE 3     The counter E.c has not been incremented due to the failure, consequently if E.c = 0 the event can still be
+
+=== ISO 5.16.3 Insertion, 5.16.4 Replacement
+$ grep -n '^5.16.3 \|^5.16.4 \|urn:mpeg:dash:event:alternativeMPD:replace:2025".$' $I
+11707:5.16.3   Alternative MPD Insertion Event
+11773:5.16.4   Alternative MPD Replacement event
+11783:This event scheme is identified by the URN "urn:mpeg:dash:event:alternativeMPD:replace:2025".
+19782:schemeIdUri="urn:mpeg:dash:event:alternativeMPD:replace:2025">
+20681:schemeIdUri="urn:mpeg:dash:event:alternativeMPD:replace:2025">
+
+=== ISO Table 63: @earliestResolutionTimeOffset default 60 s; @maxDuration; @executeOnce
+$ grep -n 'Table 63 — Semantics of common\|@earliestResolutionTimeOffset  \|The default is 60 seconds in units of\|@maxDuration   \|^@executeOnce' $I
+11914:              Table 63 — Semantics of common Alternative Media Presentation properties
+11929:   @earliestResolutionTimeOffset                                OD     specifies the time interval (in units of
+11933:                                                                       requested. The default is 60 seconds in units of
+11942:   @maxDuration                                                 OD     specifies maximum duration of the Alternative
+11973:@executeOnce                                           OD specifies whether the event is executed only once
+
+=== ISO 5.16.4 / Table 62 attributes not read: @returnOffset, @clip, @startWithOffset; Table 63 @noJump
+$ grep -n '^  @returnOffset\|^  @clip\|^  @startWithOffset\|^@noJump' $I
+11837:  @returnOffset                                           O       specifies a non-negative time offset from
+11860:  @clip                                                  OD       specifies whether the maximum duration of the
+11872:  @startWithOffset                                       OD       specifies whether a static alternative presentation
+11981:@noJump                                                OD If non-zero, the playhead may not move forward
+
+=== ISO A.13.7: on-receive dispatch mode
+$ grep -n '^A.13.7\|— on-receive Dispatch Mode' $I
+16555:A.13.7   Events and timed metadata sample dispatch timing modes
+16566:— on-receive Dispatch Mode: Dispatching at LAT or at the earliest time possible. Since the segment carrying
+
+=== ISO 6th edition (§9 row)
+$ grep -n -m2 'ISO/IEC 23009-1:2026(en)\|6th edition' $I | head -2
+35:ISO/IEC 23009-1:2026(en)                                                               © ISO/IEC 2026
+39:                                                ISO/IEC 23009-1:2026(en)
+
+=== dash.js 5.2.1 CDATA body undefined, __cdata vs #cdata (T-01)
+$ grep -n '__cdata\|#cdata\|messageData. \*\*.undefined' $P/phases/19-svta2053-sobre-dash/tasks/T-01/README.md
+38:Los eventos en CDATA (1, 2, 3) llegan con `messageData` **`undefined`**; el 4, con el mismo JSON
+48:Causa, en el código de 5.2.1: el modelo lee `n.messageData||n.__cdata||n.__text`, y el parser nuevo
+49:deja el CDATA en un nodo `"#cdata"` (`"#cdata":{"nodeName":"#cdata","nodeValue":"{\"version\":2,…"}`
+
+=== dash.js 404 on the MPD: error 25 in 1596 ms; init/segment after load (T-01)
+$ grep -n '^| 404' $P/phases/19-svta2053-sobre-dash/tasks/T-01/README.md
+64:| 404 en el MPD | `ERROR` "…/nope/manifest.mpd is not available" | 25 | 1596 ms |
+65:| 404 en el init | `ERROR` "…/cre-segfail/init-0.m4s is not available" | 28 | 3188 ms |
+66:| 404 en el primer segmento | `ERROR` "…/cre-medfail/seg-0-1.m4s is not available" | 27 | 3243 ms |
+
+=== 5.2.2.2.2, the exact phrase 'cannot ultimately change how a stream or experience has been decisioned or stitched'
+$ grep -n -o 'cannot ultimately change how a stream or experience has been decisioned or stitched' $B
+594:cannot ultimately change how a stream or experience has been decisioned or stitched
+
+=== Current edition 5.3.3, '(in HLS, its Multivariant Playlist or Media Playlist)' (ADR 0106, quote wrapped over two lines with a '> ' prefix, stripped and joined)
+$ sed 's/^> //' $D/0106-*.md | tr '\n' ' ' | grep -o 'in HLS, its Multivariant Playlist or Media Playlist'
+in HLS, its Multivariant Playlist or Media Playlist
+
+=== 4.4 Objects; Table 31 row 'Tracking, verification, skipOffset and clickThrough | 4.4'
+$ grep -n '^## 4.4 Objects\|^| Tracking, verification, skipOffset and clickThrough | 4.4' $B
+235:## 4.4 Objects
+1190:| Tracking, verification, skipOffset and clickThrough | 4.4 | Not implemented |
+
+=== 5.3 Concurrent Presentation
+$ grep -n '^## 5.3 Concurrent Presentation' $B
+667:## 5.3 Concurrent Presentation
+
+=== 6.6 and 6.6.2 Timing
+$ grep -n '^## 6.6 \|^### 6.6.2 Timing' $B
+1102:## 6.6 HLS Concurrent Interstitial with ASSET-LIST Carriage
+1129:### 6.6.2 Timing
+
+=== 10.1 Tables, 10.2 Code
+$ grep -n '^## 10.1 Tables\|^## 10.2 Code' $B
+1220:## 10.1 Tables
+1255:## 10.2 Code
+
+=== dash/media.js: 404 on init/first segment arrives after MANIFEST_LOADED; only the MPD counts
+$ grep -n 'MANIFEST_LOADED\|after .MANIFEST_LOADED' $W/dash/media.js | head -4
+11:// `MANIFEST_LOADED` is "it loaded"; an `ERROR` before it is "it failed", with
+14:// (28) or on the first media segment (27) arrives after `MANIFEST_LOADED`, so it
+42:  player.on(events.MANIFEST_LOADED, first.loaded);
+
+=== dash/signalling.js: only the first Pod is read (pods[0]); id read as string; relative $remote.slots against the MPD URL
+$ grep -n 'brk.pods\[0\]\|id: event.getAttribute\|listRequestUrl(remote, base' $W/dash/signalling.js
+119:            id: event.getAttribute('id'),
+476:    const pod = brk.pods[0];
+479:      const url = listRequestUrl(remote, base, sendCapabilities ? declared : null);
+
+=== dash/signalling.js: Replace window = min(@duration, @maxDuration); executeOnce read as ONCE
+$ grep -n 'Math.min(...length)\|if (brk.once) onces.set' $W/dash/signalling.js
+310:            id, kind: 'interstitial', startTime, duration: length.length ? Math.min(...length) : null,
+419:        if (brk.once) onces.set(brk.id, { entered: false, spent: false });
+

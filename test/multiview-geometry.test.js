@@ -37,7 +37,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { MAX_BOXES, parseViewport, viewportsFor } from '../lib/experience.js';
-import { resolveAssetList } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { boxToPixels } from '../lib/renderer.js';
 
 /** The four rows of ADR 0065, which is what the table has to be. */
@@ -129,7 +129,7 @@ function quadElements() {
   const list = JSON.parse(
     readFileSync(new URL('./fixtures/asset-lists/asset-list-multiView.json', import.meta.url))
   );
-  const experiences = resolveAssetList(list, { id: 'QUAD', slotStart: 0 });
+  const experiences = resolveAssets(list, { id: 'QUAD', slotStart: 0 });
   assert.equal(experiences.length, 1, 'the Quad is one experience of four elements');
   return experiences[0].elements;
 }

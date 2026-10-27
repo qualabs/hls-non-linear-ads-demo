@@ -8,16 +8,20 @@
 // and the contract is plain data -- see docs/contrato-senalizacion-renderizado.md.
 //
 // What the contract is built WITH does not know HLS, and it is not here: the
-// model of a break is lib/experience.js, and the capabilities and the options of
-// an ad are lib/capabilities.js (ADR 0117). This file reads the transport and
+// model of a break is lib/experience.js, the capabilities and the options of an
+// ad are lib/capabilities.js (ADR 0117), what a break's list resolves into is
+// lib/ad-list.js, and the readings of the programme's clock that say a break is
+// due or spent are lib/playhead.js (phase 19). This file reads the transport and
 // hands what it read to them.
 //
 // The pure functions are exported one by one on purpose: they are the surface
 // the tests of T-08 aim at, and the module reaches for the `Hls` global only
 // INSIDE createSignalling(), so `node --test` can import this file.
 
-import { activeAt, blockIdentifiers, isOffer, linearItem, rangeOfExperiences, resolveExperience, usablePayload, withOptions } from '../lib/experience.js';
-import { narrowBlock, usableCapabilities, usablePreValidation } from '../lib/capabilities.js';
+import { activeAt, rangeOfExperiences } from '../lib/experience.js';
+import { usableCapabilities, usablePreValidation } from '../lib/capabilities.js';
+import { listRequestUrl, resolveAssets, resolvePostRoll, resolveWithFirstRequests } from '../lib/ad-list.js';
+import { bufferedEndAt, onceProgress, postRollDue, rangesOf } from '../lib/playhead.js';
 
 /** The class of ADR 0009: sibling of Apple's interstitial, not an extension. */
 export const CONCURRENT_CLASS = 'com.qualabs.hls.concurrentInterstitial';
@@ -84,284 +88,6 @@ export function kindOfClass(hlsClass) {
  * what `KIND_OF_CLASS` above just answered.
  */
 export const KINDS_RESOLVED = new Set(['concurrent', 'multiview']);
-
-/** The extension of ADR 0019: our block, on top of the standard asset. */
-export const BLOCK = 'X-AD-CREATIVE-SIGNALING';
-
-/** The asset's own `URI`, which is what the fallback plays, or null. */
-export function usableUri(asset) {
-  const uri = asset?.URI;
-  return typeof uri === 'string' && uri.trim() ? uri.trim() : null;
-}
-
-/**
- * What happens to ONE asset of a list, decided and not yet acted on: the items
- * narrowed to their options, the payload this client can draw or `null`, the
- * asset's own `URI` and `DURATION`, the first requests it is still waiting on,
- * and whether the first request for its default failed. `resolveAssetList`
- * acts on it and `pendingFirstRequests` only reads `pending`, so the two cannot
- * disagree about which request an asset needs next.
- *
- * THE DEFAULT IS ASKED FOR ONLY WHEN IT IS GOING TO BE PLAYED. Its first
- * request is made when no option is left, and not alongside the options: a
- * request for an ad nobody shows is a request the ad server may count.
- */
-function decideAsset(asset, capabilities, loads) {
-  const items = [];
-  const pending = [];
-  const block = narrowBlock(asset?.[BLOCK], capabilities, items, loads, pending);
-  const payload = pending.length ? null : usablePayload(block);
-  const uri = usableUri(asset);
-  const declared = Number(asset?.DURATION);
-  let defaultFailed = null;
-  if (loads && !pending.length && !payload && uri && declared > 0) {
-    const load = loads.get(uri);
-    if (!load) pending.push({ uri, mediaType: null });
-    else if (!load.ok) defaultFailed = { uri, error: load.error };
-  }
-  return { items, block, payload, uri, declared, pending, defaultFailed };
-}
-
-/**
- * The first requests an asset-list still needs before it can be resolved,
- * given the ones already answered in `loads`: for each asset, those of the
- * first option that fits and has not failed, or those of its default when no
- * option is left. Each `{ uri, mediaType }` once, however many assets share it.
- * Empty means `resolveAssetList` can run with `loads` and decide everything.
- */
-export function pendingFirstRequests(assetList, { capabilities = null, loads }) {
-  const seen = new Map();
-  for (const asset of Array.isArray(assetList?.ASSETS) ? assetList.ASSETS : []) {
-    for (const request of decideAsset(asset, capabilities, loads).pending) {
-      if (!seen.has(request.uri)) seen.set(request.uri, request);
-    }
-  }
-  return [...seen.values()];
-}
-
-/**
- * `resolveAssetList` with PRE-VALIDATION in it: the up-front half of the "Asset
- * load failure" of SVTA2053 5.3.3 (ADR 0106, and since ADR 0107 an optional
- * step, `preValidateAssets`). Before the list is handed over, the first request
- * for each asset of the first option that fits is made -- the playlist its
- * `uri` references, or the image -- and an option one of whose first requests
- * failed is discarded and the next one that fits is requested. When none is
- * left, the first request for the default linear ad is made, and when that
- * fails too the asset is skipped.
- *
- * ITS ONLY EFFECT IS ON THE LIST THE RENDERER IS HANDED (ADR 0107). An option
- * that failed here is not in `Experience.options`, so the renderer never mounts
- * it; what it does mount, and what it falls to when that fails on screen, is
- * the renderer's own failover, which runs whether this ran or not. There is no
- * second failover here: this one decides before the window, that one during
- * the preload, and they share the rule and not the code.
- *
- * `firstRequest(uri, mediaType)` makes the request and answers `{ ok, error }`,
- * and may say which `method` answered. It is injected because how a request is
- * made is the business of the piece that knows the player library
- * (`firstRequest` in media.js, which takes `preValidateMethod`), and because it
- * is what a test replaces. A request that throws counts as failed.
- *
- * IT GOES IN ROUNDS, and a round is every request no answer is known for yet,
- * all at once: the first fitting option of every asset in the first round, and
- * then only what a failure made necessary. So a list whose assets all load
- * costs one round, and the second option of an ad is never asked for unless the
- * first one failed. It ends because every round answers at least one request
- * nobody had answered, and a list has a finite number of them.
- *
- * ONLY THE FIRST REQUEST COUNTS, and that is the whole scope of the rule: what
- * fails after it -- a segment, a variant, a decode -- is a playback error of
- * the ad that was already chosen, and nothing here changes option or falls
- * back over it. The answers live for one asset-list and are not shared between
- * breaks.
- *
- * Returns the experiences, as `resolveAssetList` does, and fills `requests`,
- * when given, with every first request made: `{ uri, ok, error, method }`.
- */
-export async function resolveWithFirstRequests(assetList, {
-  id, slotStart, capabilities = null, report = null, firstRequest, requests = null
-}) {
-  const loads = new Map();
-  for (let round = pendingFirstRequests(assetList, { capabilities, loads }); round.length;
-    round = pendingFirstRequests(assetList, { capabilities, loads })) {
-    await Promise.all(round.map(async ({ uri, mediaType }) => {
-      let answer;
-      try {
-        answer = await firstRequest(uri, mediaType);
-      } catch (error) {
-        answer = { ok: false, error: String(error?.message || error) };
-      }
-      const load = answer?.ok ? { ok: true } : { ok: false, error: answer?.error || 'the request failed' };
-      loads.set(uri, load);
-      requests?.push(answer?.method ? { uri, ...load, method: answer.method } : { uri, ...load });
-    }));
-  }
-  return resolveAssetList(assetList, { id, slotStart, capabilities, report, loads });
-}
-
-/**
- * Every experience an asset-list declares, one behind the other.
- *
- * THE ORDER IS NOT OURS AND THE OFFSET IS. The assets are played in the order
- * of the `ASSETS` array -- Appendix D.2 of the standard, and there is nothing
- * to decide there. What the standard has no field for is WHERE each one lands
- * on the timeline of the programme, so this layer decides it, and it decides
- * it from the top-level `DURATION`: each asset begins where the ones before it
- * ended, accumulated. The item's `start` then places the item inside its own
- * asset, which is where the block that carries it lives.
- *
- * WHY THE `DURATION` AND NOT THE `start`. The offset has to come out of a
- * field that EVERY asset has. `DURATION` is one of the two members Appendix
- * D.2 makes mandatory on every Asset-Description; the block is our extension
- * and an asset is allowed not to carry one -- that asset is a linear ad, and
- * it has nowhere to write a `start`. A rule written on the `start` would work
- * for the ads we draw and have nothing to say about the one we do not.
- *
- * The six payloads the tool emits carry a single asset with `start: 0`, so the
- * accumulator is 0 and the two readings agree on every one of them, which is
- * why nothing written against the old rule moves.
- *
- * WHAT IT COSTS, AND IT IS NOT HIDDEN. The `DURATION` is DECLARED metadata: a
- * decisioning server can declare one thing and serve a creative of another
- * length, and then the ads that come after are placed against a number that
- * was never true. Which end of that the layer takes is written in
- * docs/contrato-senalizacion-renderizado.md.
- *
- * AND EVERY ASSET RESOLVES ONE OF THREE WAYS, which is ADR 0019 plus the first
- * and third rungs of Appendix D.5, in one place because they are one decision:
- * a usable block becomes the experiences it declares; an asset without one --
- * declared bare, or carrying a block this client cannot draw -- becomes ONE
- * experience that plays its own `URI` at full frame; and an asset with neither
- * is skipped, alone, with the assets after it left where they were.
- *
- * WHAT "USABLE" MEANS DEPENDS ON THE DEVICE SINCE ADR 0085. Before the block is
- * judged, `narrowBlock` keeps, per item, the first of its `layoutOptions` the
- * configured `capabilities` fit; an item with none left makes the block unusable, and
- * the asset goes down the same two paths as any other block this client cannot
- * draw -- its `URI` as the default linear ad, or skipped when it has none.
- * AND SINCE ADR 0106, "USABLE" ALSO MEANS "ITS ASSETS LOAD". `loads`, when
- * given, is what the first request for each asset answered (a Map of `uri` to
- * `{ ok, error }`, written by `resolveWithFirstRequests`): an option whose first
- * request failed is passed over for the next one that fits, and a default
- * linear ad whose first request failed is skipped (SVTA2053 5.3.3, "Asset load
- * failure", and 6.6.4). An asset that still needs a first request nobody has
- * made yet is `pending`, draws nothing, and is what `pendingFirstRequests`
- * lists. Without `loads` nothing is requested and every asset counts as loaded,
- * which is how this function behaved before ADR 0106.
- *
- * `report`, when given, receives one entry per asset: the items' selection and
- * the `outcome`, which is `drawn`, `default` (a block that could not be drawn,
- * played as its `URI`), `linear` (no block at all), `skipped` or `pending`. An
- * asset skipped because the first request for its default failed carries that
- * request in `defaultFailed`, `{ uri, error }`. Each entry also carries its
- * `assetId`, and in `fallback` the `URI` of the default handed to the renderer
- * as its last resort when the asset was drawn, `null` otherwise (ADR 0107).
- *
- * WHAT THE OUTCOME SAYS IS WHAT WAS HANDED OVER, NOT WHAT WAS SHOWN. Since ADR
- * 0107 the renderer can still fall to a later option, to the default or to
- * nothing when an asset fails to load on screen, and what it ends up
- * presenting is reported by the renderer (`onPresented`), not here.
- */
-export function resolveAssetList(assetList, { id, slotStart, capabilities = null, report = null, loads = null }) {
-  const out = [];
-  const assets = assetList?.ASSETS;
-  // The third rung of Appendix D.5, and the whole of it: a list with no assets
-  // resolves by APPLYING THE OFFSET AND PLAYING NOTHING. Under this render
-  // there is no offset to apply, because the primary was never stopped -- so
-  // the break contributes no experience, no range, and no interruption. It is
-  // said out loud because "nothing happened" is exactly what a break that is
-  // silently broken looks like.
-  if (!Array.isArray(assets) || assets.length === 0) {
-    console.warn(`[signalling] ${id}: the list declares no ASSETS. The break plays nothing and the` +
-      ' programme is not interrupted (Appendix D.5, resolved by applying the offset).');
-    return out;
-  }
-  let assetStart = 0;
-  for (const [assetIndex, asset] of assets.entries()) {
-    const { items, block, payload, uri, declared, pending, defaultFailed } = decideAsset(asset, capabilities, loads);
-    // The ad this asset is, whatever happens to it below: drawn, played as its
-    // default, or skipped, a page can say WHICH ad it was (ADR 0093).
-    const identifiers = blockIdentifiers(asset?.[BLOCK]);
-    // WHICH ASSET OF THE LIST, because the unit of the fallback is the asset
-    // (see `usablePayload`): when the renderer runs out of options for one item,
-    // every item of the same asset goes to its default with it (ADR 0107).
-    const assetId = `${id}.a${assetIndex}`;
-    const entry = { items, outcome: null, identifiers, assetId, fallback: null };
-    report?.push(entry);
-    for (const { discarded, offered } of items) {
-      for (const { index, reason } of discarded) {
-        console.log(`[signalling] ${id}: option ${index + 1} of ${offered.length} discarded, it ${reason}.`);
-      }
-    }
-    if (pending.length) {
-      // Only reachable by calling this with `loads` half written: the driver,
-      // `resolveWithFirstRequests`, makes every first request before it calls
-      // this. Nothing is drawn and nothing falls back, because neither is known
-      // yet; the window stays where it is.
-      entry.outcome = 'pending';
-    } else if (payload) {
-      entry.outcome = 'drawn';
-      // The default the renderer falls to when every option it was handed for
-      // an item of this asset fails to load (ADR 0107). It is not requested
-      // here: a request for an ad nobody shows is a request the ad server may
-      // count, and the renderer asks for it only if it gets that far.
-      const fallback = uri && declared > 0
-        ? withOptions(resolveExperience(linearItem(uri, declared, identifiers),
-          { id, itemId: `${assetId}.default`, slotStart, assetStart }), { assetId })
-        : null;
-      entry.fallback = fallback ? uri : null;
-      payload.forEach((item, i) => {
-        // The ordinal of the whole list and not of the ASSETS array, so that two
-        // items of a single asset are two identities and not one.
-        const experience = resolveExperience(item, { id, itemId: `${id}.${out.length}`, slotStart, assetStart });
-        out.push(isOffer(item) ? experience : withOptions(experience, { assetId, fallback, ranked: block.ranked?.[i] }));
-      });
-    } else if (uri && declared > 0 && !defaultFailed) {
-      // THE ONE PATH OF ADR 0019, TAKEN BY TWO KINDS OF ASSET. One is the
-      // linear ad, declared the way it was always declared: `URI`, `DURATION`,
-      // and no block of ours. The other is an ad we WOULD have drawn and
-      // cannot, because its block is unreadable, asks for something this
-      // client does not do, or has no option the configured capabilities fit. They are not the same event and they are said
-      // differently below, but what is played is the same thing: the asset's
-      // own `URI`, full frame, over a programme that keeps running behind it.
-      entry.outcome = block == null ? 'linear' : 'default';
-      if (block == null) {
-        console.log(`[signalling] ${id}: an ASSET carries no layout block, so it is a linear ad and` +
-          ' plays its own URI full frame (ADR 0019).');
-      } else {
-        console.warn(`[signalling] ${id}: an ASSET carries a layout block this client cannot draw,` +
-          " so it falls back to the asset's own URI and plays as a linear ad (ADR 0019).");
-      }
-      out.push(withOptions(resolveExperience(linearItem(uri, declared, identifiers),
-        { id, itemId: `${id}.${out.length}`, slotStart, assetStart }), { assetId }));
-    } else {
-      // The FIRST rung of Appendix D.5, and the distinction it makes is the
-      // one that matters: what is skipped is THAT ASSET and not the break. The
-      // accumulator below still advances by the declared DURATION, so the
-      // assets after it keep the windows they already had -- a skip that moved
-      // them would be the break failing, one asset at a time.
-      entry.outcome = 'skipped';
-      if (defaultFailed) {
-        // The last sentence of the "When no option fits" of SVTA2053 5.3.3: the
-        // default linear ad is also an asset with a first request, and when
-        // that request fails there is nothing left to play, so the asset goes
-        // the way of one that never had a default (ADR 0106).
-        entry.defaultFailed = defaultFailed;
-        console.warn(`[signalling] ${id}: an ASSET falls to its linear default and the first request` +
-          ` for it failed (${defaultFailed.uri}: ${defaultFailed.error}), so THAT asset is skipped and` +
-          ' the break is not (SVTA2053 5.3.3 and 6.6.4, ADR 0106).');
-      } else console.warn(`[signalling] ${id}: an ASSET has nothing this client can play -- no usable` +
-        ' layout block and no usable URI with a DURATION -- so THAT asset is skipped and the break' +
-        ' is not. The assets after it keep their windows (Appendix D.5).');
-    }
-    if (!Number.isFinite(declared)) {
-      console.warn(`[signalling] ${id}: an ASSET declares no usable DURATION, so the assets after` +
-        ' it start where it did instead of after it. DURATION is mandatory on every asset.');
-    }
-    assetStart += Number.isFinite(declared) ? declared : 0;
-  }
-  return out;
-}
 
 /**
  * The window of a range that is NOT resolved. Nothing on this side plays the
@@ -528,139 +254,59 @@ export function programEnd(details) {
   return Number.isFinite(total) ? first + total : null;
 }
 
-/**
- * Whether a post-roll's asset-list is due (ADR 0111). hls.js asks for it in
- * `onBufferedToEnd` ("Buffered to post-roll": `if (interstitial.cue.post) { ...
- * this.bufferedToItem(item, 0); }`), on BUFFERED_TO_END, which its buffer
- * controller fires when the last fragment of a playlist that has ENDED is
- * appended -- never on a live one. So: when the source is closed (ENDLIST, the
- * `sourceClosed` of `createSignalling`) and the programme is buffered to its
- * end. Reaching the end of the programme counts as buffered to it.
- */
-/**
- * WHETHER A `CUE="ONCE"` BREAK HAS PLAYED, AND SO LEAVES (ADR 0112). hls.js
- * 1.7.2 removes a ONCE interstitial from its schedule "after it has played"
- * (src/controller/interstitials-controller.ts, `setSchedulePosition`):
- *
- *     interstitial.hasPlayed = true;
- *     this.hls.trigger(Events.INTERSTITIAL_ENDED, { ... });
- *     // Exiting an Interstitial
- *     if (interstitial.cue.once && this.hls) {
- *       // Remove interstitial with CUE attribute value of ONCE after it has played
- *       this.updateSchedule();
- *
- * and `parseSchedule` filters it out for good: "!(event.cue.once &&
- * event.hasPlayed)". `hasPlayed` is set when playback LEAVES the interstitial's
- * item for another one, after INTERSTITIAL_STARTED -- at its end, or by a seek
- * out of it. So "played" is "started, then left", not "completed": a ONCE
- * break that was entered and then sought out of is gone too. A seek that jumps
- * OVER it never entered it, and it stays.
- *
- * Here: `entered` is whether the programme has been inside the break's window
- * (its range, provisional or resolved), and the answer is `{ entered, spent }`
- * for the programme at `time`: spent once it was entered and is now outside.
- */
-export function onceProgress(range, entered, time) {
-  if (!range || !Number.isFinite(time)) return { entered: Boolean(entered), spent: false };
-  const inside = time >= range.startTime && time < range.startTime + range.duration;
-  if (inside) return { entered: true, spent: false };
-  return { entered: Boolean(entered), spent: Boolean(entered) };
-}
-
-export function postRollDue({ sourceClosed = false, bufferedToEnd = false } = {}) {
-  return Boolean(sourceClosed && bufferedToEnd);
-}
-
-/**
- * WHAT A POST-ROLL PLAYS, out of its asset-list (ADR 0111): every asset's
- * LINEAR DEFAULT, its own `URI` with its `DURATION`, in order, and nothing
- * else. David Hassoun, 2026-10-22: "it should auto fail to the linear ad if
- * defined as a standard interstitial, or skip if only non-linear is defined".
- *
- * WHY THE NON-LINEAR OPTIONS ARE NOT EVEN LOOKED AT: a non-linear ad is drawn
- * over the programme, and after the end there is no programme to draw over. So
- * a post-roll is the standard interstitial and only that -- what any client
- * already in the market plays from the same list (ADR 0090) -- and an asset
- * that has no standard part is skipped, alone, with the assets after it keeping
- * their place (Appendix D.5), exactly like an asset that has nothing to play
- * in the middle of the programme.
- *
- * Each linear ad is an experience of the contract like any other (full frame,
- * `type: 'linear'`), with its window from `slotStart`, the end of the
- * programme. It is NOT one of the experiences `activeAt` hands over: the
- * programme's clock stops at its end, so the windows past it are played by
- * their own clock (lib/postroll.js), one after the other, each to the end of
- * its asset (ADR 0019).
- *
- * `report`, when given, receives one entry per asset, as `resolveAssetList`
- * writes them: `outcome` is `default` (it carried a layout block, and its
- * linear default is what plays), `linear` (no block) or `skipped`.
- */
-export function resolvePostRoll(assetList, { id, slotStart, report = null }) {
-  const out = [];
-  const assets = Array.isArray(assetList?.ASSETS) ? assetList.ASSETS : [];
-  let assetStart = 0;
-  for (const [assetIndex, asset] of assets.entries()) {
-    const uri = usableUri(asset);
-    const declared = Number(asset?.DURATION);
-    const block = asset?.[BLOCK];
-    const identifiers = blockIdentifiers(block);
-    const assetId = `${id}.a${assetIndex}`;
-    const entry = { items: [], outcome: null, identifiers, assetId, fallback: null, postroll: true };
-    report?.push(entry);
-    if (uri && declared > 0) {
-      entry.outcome = block == null ? 'linear' : 'default';
-      out.push(withOptions(resolveExperience(linearItem(uri, declared, identifiers),
-        { id, itemId: `${id}.${out.length}`, slotStart, assetStart }), { assetId }));
-    } else {
-      entry.outcome = 'skipped';
-      console.warn(`[signalling] ${id}: a post-roll (CUE="POST") ASSET has no linear default -- no usable` +
-        ' URI with a DURATION -- so THAT asset is skipped: a non-linear ad is never presented after the' +
-        ' programme ends (ADR 0111).');
-    }
-    assetStart += Number.isFinite(declared) ? declared : 0;
-  }
-  return out;
-}
-
-/**
- * The query parameters the configured capabilities travel in, ONE PER AXIS,
- * with the names of SVTA2053 5.3.3, Table 21 (ADR 0086, ADR 0104). They replace
- * `qa-decoder-count`, whose own comment said that the day the capability had a
- * name of the specification, that would be the one to travel.
- *
- *   sgai-video-decoders     an integer above zero: the value of `concurrentVideo`
- *   sgai-image-over-video   1 when `concurrentImage` is true, 0 when it is false
- *
- * THEY DO NOT BEGIN WITH `_HLS_`, which the base reserves for its own query
- * parameters, and which hls.js already puts on the off-the-shelf client's
- * asset-list request (`_HLS_primary_id`).
- *
- * THE THIRD AXIS, `sgai-html-over-video`, IS NOT HERE ON PURPOSE. This library
- * draws `<img>` and `<video>` and nothing else (`media.js`), so there is no
- * value of that axis it could declare about itself and have it be true.
- */
-export const VIDEO_DECODERS_PARAM = 'sgai-video-decoders';
-export const IMAGE_OVER_VIDEO_PARAM = 'sgai-image-over-video';
-
-/**
- * The URI of a Date Range's asset-list, resolved against the playlist it came
- * in, carrying one parameter per configured capability. Without one the string
- * is what `new URL(...).href` has always produced, character for character.
- * `capabilities` is already the output of `usableCapabilities`; whether they go
- * on the request at all is the caller's choice (`sendCapabilities`, ADR 0104),
- * made by passing `null` here.
- */
-export function assetListUrl(uri, base, capabilities = null) {
-  const url = new URL(uri, base);
-  if (capabilities?.concurrentVideo != null) {
-    url.searchParams.set(VIDEO_DECODERS_PARAM, String(capabilities.concurrentVideo));
-  }
-  if (capabilities?.concurrentImage != null) {
-    url.searchParams.set(IMAGE_OVER_VIDEO_PARAM, capabilities.concurrentImage ? '1' : '0');
-  }
-  return url.href;
-}
+// ===========================================================================
+// THE RULES OF lib/playhead.js, AS hls.js 1.7.2 APPLIES THEM
+// ===========================================================================
+// `onceProgress`, `postRollDue` and `bufferedEndAt` moved to lib/playhead.js in
+// phase 19, because a second format reads them the same way. Where each rule
+// comes from on this side is hls.js, and it stays written here, next to the code
+// that calls them.
+//
+// A POST-ROLL'S ASSET-LIST (ADR 0111). hls.js asks for it in `onBufferedToEnd`
+// ("Buffered to post-roll": `if (interstitial.cue.post) { ...
+// this.bufferedToItem(item, 0); }`), on BUFFERED_TO_END, which its buffer
+// controller fires when the last fragment of a playlist that has ENDED is
+// appended -- never on a live one. So `postRollDue` is asked with the source
+// closed (ENDLIST, the `sourceClosed` of `createSignalling`) and the programme
+// buffered to its end.
+//
+// A `CUE="ONCE"` BREAK (ADR 0112). hls.js 1.7.2 removes a ONCE interstitial
+// from its schedule "after it has played"
+// (src/controller/interstitials-controller.ts, `setSchedulePosition`):
+//
+//     interstitial.hasPlayed = true;
+//     this.hls.trigger(Events.INTERSTITIAL_ENDED, { ... });
+//     // Exiting an Interstitial
+//     if (interstitial.cue.once && this.hls) {
+//       // Remove interstitial with CUE attribute value of ONCE after it has played
+//       this.updateSchedule();
+//
+// and `parseSchedule` filters it out for good: "!(event.cue.once &&
+// event.hasPlayed)". `hasPlayed` is set when playback LEAVES the interstitial's
+// item for another one, after INTERSTITIAL_STARTED -- at its end, or by a seek
+// out of it. That is the "started, then left" of `onceProgress`.
+//
+// THE QUERY PARAMETERS OF THE CAPABILITIES (`listRequestUrl`, lib/ad-list.js)
+// DO NOT BEGIN WITH `_HLS_`, which the base reserves for its own query
+// parameters, and which hls.js already puts on the off-the-shelf client's
+// asset-list request (`_HLS_primary_id`).
+//
+// THE BUFFER HOLE. `BUFFER_HOLE_TOLERANCE` is hls.js's own default
+// `maxBufferHole` (src/config.ts: "maxBufferHole: 0.1, // used by
+// stream-controller and gap-controller"), and the value it hands
+// `BufferHelper.bufferInfo(media, pos, maxHoleDuration)` when it measures the
+// forward buffer it loads against (`getFwdBufferInfo`, while playing).
+// `bufferedEndAt` merges ranges as that function does ("if small hole (value
+// between 0 or maxHoleDuration) or overlapping", and "pos + maxHoleDuration >=
+// start"). The paused page at 0 of ADR 0109 has THE SAME BEHAVIOUR in hls.js,
+// and it is said here so nobody reads the tolerance as copying it: its
+// interstitials controller measures with `bufferInfo(primaryMedia,
+// timelinePos, 0)` (`checkBuffer`), and nothing moves a paused playhead off 0
+// -- `seekToStartPos` only adjusts the start "if (startPosition >= 0 &&
+// currentTime < startPosition)", which is false at 0 against 0 on a VOD, and
+// the gap controller returns early on a paused element. The tolerance is the
+// one place this layer is LESS strict than hls.js, and the smallest number
+// hls.js itself uses to call a hole irrelevant.
 
 /**
  * The answer to an asset-list request, read ONCE and kept whole (ADR 0120):
@@ -738,60 +384,6 @@ export function assetListDue({ startTime, duration, pre = false }, { time, buffe
   const end = duration != null && Number.isFinite(length) && length > 0 ? startTime + length : Infinity;
   if (time >= end) return false;
   return startTime <= Math.max(time, Number.isFinite(bufferedEnd) ? bufferedEnd : time);
-}
-
-/**
- * The hole, in seconds, that `bufferedEndAt` steps over: 0.1 s, hls.js's own
- * default `maxBufferHole` (src/config.ts: "maxBufferHole: 0.1, // used by
- * stream-controller and gap-controller"), and the value it hands
- * `BufferHelper.bufferInfo(media, pos, maxHoleDuration)` when it measures the
- * forward buffer it loads against (`getFwdBufferInfo`, while playing).
- *
- * WHY THERE IS A TOLERANCE AT ALL (ADR 0109, 2026-10-22 note). The first
- * buffered range of a packaged programme does not start at 0: here it starts at
- * 0.067 s, the first presentation timestamp of the first segment. With no
- * tolerance a page paused at 0 has a forward buffer that ends at the playhead,
- * so the first break's list is not asked for until play, even with the buffer
- * already past the break. hls.js has THE SAME BEHAVIOUR, and it is said here so
- * nobody reads this as copying it: its interstitials controller measures with
- * `bufferInfo(primaryMedia, timelinePos, 0)` (`checkBuffer`), and nothing moves
- * a paused playhead off 0 -- `seekToStartPos` only adjusts the start "if
- * (startPosition >= 0 && currentTime < startPosition)", which is false at 0
- * against 0 on a VOD, and the gap controller returns early on a paused element.
- * The tolerance is the one place this layer is LESS strict than hls.js, and the
- * smallest number hls.js itself uses to call a hole irrelevant.
- */
-export const BUFFER_HOLE_TOLERANCE = 0.1;
-
-/**
- * Where the forward buffer ends: the end of the buffered range that contains
- * `time`, or `time` itself when none does. A hole smaller than `tolerance` is
- * stepped over, as `BufferHelper.bufferInfo(media, pos, maxHoleDuration)` does
- * in hls.js 1.7.2: ranges closer than that are merged ("if small hole (value
- * between 0 or maxHoleDuration) or overlapping"), and a range that starts less
- * than that ahead of the playhead counts as containing it ("pos +
- * maxHoleDuration >= start"). A bigger hole is not jumped. `ranges` is a list
- * of `[start, end]`, which `rangesOf` makes out of a media element's
- * `buffered`.
- */
-export function bufferedEndAt(ranges, time, tolerance = BUFFER_HOLE_TOLERANCE) {
-  const merged = [];
-  for (const [start, end] of [...(ranges || [])].sort((a, b) => a[0] - b[0])) {
-    const last = merged[merged.length - 1];
-    if (last && start - last[1] < tolerance) last[1] = Math.max(last[1], end);
-    else merged.push([start, end]);
-  }
-  for (const [start, end] of merged) {
-    if (time + tolerance >= start && time <= end) return end;
-  }
-  return time;
-}
-
-/** A media element's `buffered`, as the list of `[start, end]` `bufferedEndAt` reads. */
-function rangesOf(buffered) {
-  const out = [];
-  for (let i = 0; i < (buffered?.length ?? 0); i += 1) out.push([buffered.start(i), buffered.end(i)]);
-  return out;
 }
 
 /**
@@ -939,7 +531,7 @@ export function createProgramme(hls, video) {
  * `onResolved(experiences, selection)` gets, as its second argument, what the
  * intermediate step of ADR 0085 did with this break: the URL that was asked
  * for, and per asset what was offered, what was discarded and why, and how the
- * asset ended (see `resolveAssetList`). It is called for a break that resolved
+ * asset ended (see `resolveAssets`). It is called for a break that resolved
  * to nothing too, because a skipped break is exactly what a page has to be able
  * to show. `requests` in it lists every first request made for the break,
  * `{ uri, ok, error }`, and is empty without `firstRequest`. `response` is the
@@ -1127,7 +719,7 @@ export function createSignalling(hls, {
         postRolls.set(id, {
           id, kind, dateRange, once, state: 'waiting', startTime: null, experiences: [],
           url: KINDS_RESOLVED.has(kind)
-            ? assetListUrl(dateRange.attr['X-ASSET-LIST'], details.url || location.href, sendCapabilities ? declared : null)
+            ? listRequestUrl(dateRange.attr['X-ASSET-LIST'], details.url || location.href, sendCapabilities ? declared : null)
             : null
         });
         continue;
@@ -1148,7 +740,7 @@ export function createSignalling(hls, {
         if (range) ranges.push(range);
         continue;
       }
-      const url = assetListUrl(dateRange.attr['X-ASSET-LIST'], details.url || location.href,
+      const url = listRequestUrl(dateRange.attr['X-ASSET-LIST'], details.url || location.href,
         sendCapabilities ? declared : null);
       toResolve.push({
         id, url, slotStart, kind, pre, dateRange,
@@ -1290,7 +882,7 @@ export function createSignalling(hls, {
         ? await resolveWithFirstRequests(assetList, {
           id, slotStart, capabilities: declared, report, firstRequest: request, requests
         })
-        : resolveAssetList(assetList, { id, slotStart, capabilities: declared, report });
+        : resolveAssets(assetList, { id, slotStart, capabilities: declared, report });
       drop();
       // A ONCE break already played while its list was on its way stays gone (ADR 0112).
       if (onces.get(id)?.spent) return;

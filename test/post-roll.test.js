@@ -19,9 +19,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import { LINEAR_TYPE } from '../lib/experience.js';
-import {
-  BLOCK, createSignalling, postRollDue, programEnd, resolvePostRoll
-} from '../hls/signalling.js';
+import { createSignalling, programEnd } from '../hls/signalling.js';
+import { BLOCK, resolvePostRoll } from '../lib/ad-list.js';
+import { postRollDue } from '../lib/playhead.js';
 import { createPostRoll, postRollPending, postRollQueue } from '../lib/postroll.js';
 
 const BANNER = {

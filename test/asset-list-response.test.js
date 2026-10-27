@@ -15,7 +15,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { BLOCK, createSignalling, readAssetList } from '../hls/signalling.js';
+import { BLOCK } from '../lib/ad-list.js';
+import { createSignalling, readAssetList } from '../hls/signalling.js';
 
 const LIST = {
   ASSETS: [{

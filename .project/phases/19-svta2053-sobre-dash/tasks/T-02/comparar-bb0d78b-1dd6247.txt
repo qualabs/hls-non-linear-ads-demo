@@ -1,0 +1,84 @@
+before bb0d78b (bb0d78b), after 1dd6247 (HEAD)
+== stage-pair: 80 files, 78 identical, 0 admitted, 17 red
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssetList is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration assetListUrl is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssets is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration listRequestUrl is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+   RED       test/signalled-run.test.js: imports other names (gone: resolveAssetList; new: resolveAssets)
+   RED       test/signalled-run.test.js: differs outside its imports, first at line 28 of what is left: "// archivos escritos a `resolveAssetList` bajo las cuatro combinaciones del" -> "// archivos escritos a `resolveAssets` bajo las cuatro combinaciones del"
+== race-multiview: 67 files, 66 identical, 0 admitted, 15 red
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssetList is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration assetListUrl is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssets is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration listRequestUrl is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+== multiview-offer: 25 files, 24 identical, 0 admitted, 15 red
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssetList is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration assetListUrl is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssets is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration listRequestUrl is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+== hydration-break: 61 files, 60 identical, 0 admitted, 15 red
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssetList is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration assetListUrl is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssets is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration listRequestUrl is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+== compatibility-pair: 31 files, 30 identical, 0 admitted, 15 red
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssetList is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration assetListUrl is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssets is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration listRequestUrl is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+RED

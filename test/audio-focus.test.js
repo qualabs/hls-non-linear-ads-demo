@@ -21,13 +21,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-import { resolveAssetList } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { volumeOf, effectiveVolumeOf } from '../lib/renderer.js';
 
 /** The elements of one of the layouts the run signals, resolved as the renderer gets them. */
 function elementsOf(list, id) {
   const json = JSON.parse(readFileSync(new URL(`./fixtures/asset-lists/${list}`, import.meta.url), 'utf8'));
-  const [experience] = resolveAssetList(json, { id, slotStart: 0 });
+  const [experience] = resolveAssets(json, { id, slotStart: 0 });
   return experience.elements;
 }
 

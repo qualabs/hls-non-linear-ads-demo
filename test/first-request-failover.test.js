@@ -12,7 +12,7 @@
 // should have been passed over is drawn as a black box, and a default that
 // should have been skipped is a black frame over the programme.
 //
-// The request itself is the browser's (`firstRequest` in hls/media.js) and is
+// The request itself is the browser's (`firstRequest` in lib/media.js) and is
 // not here. What is here is the decision, driven by a fake that answers from a
 // table and records what it was asked, so a test can also say what was NOT
 // asked for -- the second option of an ad whose first option loaded.
@@ -30,14 +30,14 @@ import {
   usableCapabilities,
   usablePreValidation
 } from '../lib/capabilities.js';
+import { createSignalling } from '../hls/signalling.js';
 import {
   BLOCK,
-  createSignalling,
   pendingFirstRequests,
-  resolveAssetList,
+  resolveAssets,
   resolveWithFirstRequests
-} from '../hls/signalling.js';
-import { firstRequest as mediaFirstRequest } from '../hls/media.js';
+} from '../lib/ad-list.js';
+import { firstRequest as mediaFirstRequest } from '../lib/media.js';
 
 const ID = 'AD-A-CONCURRENT';
 const SLOT_START = 20;
@@ -257,7 +257,7 @@ test('selectOption waits for a first request it does not know, and passes over o
 });
 
 test('without load results nothing is asked for and every asset counts as loaded', () => {
-  const out = resolveAssetList(list(), { id: ID, slotStart: SLOT_START, capabilities: usableCapabilities({ concurrentVideo: 2 }) });
+  const out = resolveAssets(list(), { id: ID, slotStart: SLOT_START, capabilities: usableCapabilities({ concurrentVideo: 2 }) });
   assert.equal(out.length, 1);
   assert.notEqual(out[0].type, LINEAR_TYPE);
 });
@@ -267,7 +267,7 @@ test('without load results nothing is asked for and every asset counts as loaded
 // ---------------------------------------------------------------------------
 
 test('without pre-validation every option that fits is handed over in order, and the default last', () => {
-  const out = resolveAssetList(list(), { id: ID, slotStart: SLOT_START, capabilities: usableCapabilities({ concurrentVideo: 2, concurrentImage: true }) });
+  const out = resolveAssets(list(), { id: ID, slotStart: SLOT_START, capabilities: usableCapabilities({ concurrentVideo: 2, concurrentImage: true }) });
   assert.deepEqual(handed(out[0]), {
     options: [[0, 'application/vnd.apple.mpegurl'], [1, 'image/svg+xml']],
     fallback: DEFAULT_URI
@@ -284,7 +284,7 @@ test('without pre-validation every option that fits is handed over in order, and
 
 test('without pre-validation an option the capabilities refuse is not handed over', () => {
   const report = [];
-  const out = quietSync(() => resolveAssetList(list(), {
+  const out = quietSync(() => resolveAssets(list(), {
     id: ID, slotStart: SLOT_START, capabilities: usableCapabilities({ concurrentVideo: 1, concurrentImage: true }), report
   }));
   assert.deepEqual(handed(out[0]).options, [[1, 'image/svg+xml']]);
@@ -312,7 +312,7 @@ test('a default chosen up front is its own single option, with no default behind
 });
 
 test('a break without a default hands over its options and no fallback', () => {
-  const out = resolveAssetList(list({ withDefault: false }), { id: ID, slotStart: SLOT_START });
+  const out = resolveAssets(list({ withDefault: false }), { id: ID, slotStart: SLOT_START });
   assert.equal(out[0].fallback, null);
   assert.equal(out[0].options.length, 2);
 });

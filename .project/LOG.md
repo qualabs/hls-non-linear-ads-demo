@@ -6626,6 +6626,75 @@ Corrección aprobada por David. Nota fechada en el ADR 0107.
   default que carga, asset sin default, lineal suelto, dos items de un asset) y dos casos más en
   `test/post-roll.test.js` (forma del reporte del default que falla en el post-roll).
 
+## 2026-10-26 — Fase 19: el diseño de SVTA2053 sobre DASH, aprobado y generado
+
+El diseño (`roadmap/svta2053-sobre-dash/DESIGN.md`, `8fcbcad` y `bb0d78b`) escribe y prototipa la
+carriage DASH de la presentación concurrente que SVTA2053 v3 dejó para una edición futura, con el
+esquema y el sobre v2 de SVTA en un EventStream, sobre dash.js 5.2.1 sin modificar. Nicolás lo
+aprobó con las recomendaciones de sus siete preguntas abiertas. Generados `PHASE.md`, `TASKS.md`
+(10 tasks; la primera mide los dos riesgos del diseño antes de construir) y los ADR 0120-0127.
+
+## 2026-10-26 — Fase 19, T-01: los riesgos medidos
+
+dash.js 5.2.1 entrega en `eventModeOnReceive` todos los eventos del MPD al cargar (85 ms después del
+manifest), y un creativo MPD que no carga da `ERROR` en 1,6 a 3,2 s (404 en el MPD, en el init o en
+el primer segmento). El diseño sigue. Hallazgo: el cuerpo en CDATA no llega a `messageData` (bug de
+upstream: el modelo lee `__cdata` y el parser deja `#cdata`), ni llegan los atributos del Replace;
+ADR 0128: la librería lee el EventStream del texto del MPD en el interceptor de respuesta.
+
+## 2026-10-26 — Fase 19, T-02: lo común sube a `lib/`
+
+Rama `fase-19`: `lib/ad-list.js`, `lib/playhead.js` y `lib/media.js`. Renombre puro previo
+(`resolveAssetList` → `resolveAssets`, `assetListUrl` → `listRequestUrl`), porque el nombre cruzaba
+la costura 0003; la mudanza da verde en el comparador, y la de `media` cambia sólo `attachAsset`
+(+ `attachPlain`, con 6 tests nuevos vistos fallar). 384/384, check verde.
+
+## 2026-10-26 — Fase 19, T-03 y T-04: `dash/signalling.js` y sus tests
+
+Rama `fase-19` (`28e59e7`, `4616a5a`): la capa de señalización DASH, con el MPD leído en el
+interceptor (ADR 0128) y lo común de `lib/`. 29 tests sobre una fixture de dos Periods escrita a
+mano; `readMpd` igual a esa fixture en Chrome; 16 mutaciones, una por regla, todas en rojo.
+413/413. Las opciones viajan en `layoutOptions` (ADR 0105), no en el `options` del borrador que
+citaba el diseño.
+
+## 2026-10-26 — Fase 19, T-05: el entry point DASH, su dist y las costuras
+
+Rama `fase-19` (`d607237`): `dash/media.js`, `dash/concurrent-dash.js`, `vendor/dash.all.min.js`
+5.2.1 y `dist/qualabs-concurrent-dash.js`; `createLayer` subió a `lib/layer.js` (comparador verde).
+El dist HLS sale byte a byte igual; la costura 0015 cubre `dash/`; los archivos de DASH se publican
+sólo en `stage-pair` (`DASH=(…)` en `publicar.sh`), así que las otras cuatro demos no ganan URLs.
+
+## 2026-10-26 — Fase 19, T-06: el contenido DASH de `stage-pair`
+
+Rama `fase-19` (`6e9bbea`): remux del HLS empaquetado a fMP4 + MPD, un sobre `slot` por break
+armado desde su asset-list HLS (que queda byte a byte igual), y el MPD señalizado. Medido en Chrome:
+hls.js y dash.js muestran el mismo cuadro en el mismo segundo (diferencia 0 en 30, 75,5 y 140 s;
+control corrido 0,1 s: 14,73 / 1,86 / 2,77). Un `@presentationTimeOffset` de 1,4 s, que la norma
+sugiere, corría el DASH 1,4 s: medido y sacado.
+
+## 2026-10-26 — Fase 19, T-07: el modo DASH en `stage-pair`
+
+Rama `fase-19` (`750d27c`): cada pane de `stage-pair` puede ser "DASH, our library". Capturas del
+par HLS|DASH en el pre-roll, en B y en el lineal. La captura destapó un corrimiento de 1,47 s en los
+creativos DASH (post-ejecución de T-06, arreglado en el empaquetado). Las 18 líneas viejas de `demo/`
+corregidas; en las cuatro demos que no son `stage-pair` es sólo comentarios, medido.
+
+## 2026-10-26 — Fase 19, T-08 y T-09: HLS contra DASH medido, y el texto para SVTA2053
+
+Rama `fase-19`. T-08 (`6212c5e`): `verificar-pares.py --solo-dash` verde, 64 chequeos (misma
+opción, ventana y pedido en cada break y combinación de capacidades; ONCE; lineal; post-roll) y sus
+dos controles con la diferencia esperada. La parte vieja del verificador (nativo contra ours) ya
+falla en `bb0d78b`: hallazgo previo, al REPORT. T-09 (`2719f87`): la 6.7 y los ajustes de §1-§5 en
+`docs/svta2053-dash-concurrent-presentation.md`, con 63 citas chequeadas por grep.
+
+## 2026-10-26 — Fase 19, T-10, y fase cerrada
+
+Documentación al día (`f148970`); 419/419, check verde; el comparador contra `bb0d78b` sólo con
+diferencias medidas una por una; en seco, las cuatro demos HLS sin faltantes y `stage-pair` con 8
+faltantes que son su contenido DASH, todavía no subido (con `--con-contenido`, verde). Merge
+`--no-ff` a main local (`7ec15b5`), sin push. Informe en `phases/19-svta2053-sobre-dash/REPORT.md`;
+dos `idea` sembradas (`uris-relativos-de-las-listas`, `verificar-pares-nativo`).
+
 ## 2026-10-26 — El pane nativo dice lo que hizo hls.js, no lo que planea la lista
 
 Corrección aprobada por David.
