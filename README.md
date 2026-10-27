@@ -81,7 +81,7 @@ it when the composition changes around a box that never stopped playing. All of
 it is arithmetic over data, which is what a test can aim at without a browser.
 
 No case is invented unless it says so, and no case is read out of a demo:
-`test/` reads `test/` and `lib/`, and nothing else (ADR 0023). The six payloads
+`test/` reads `test/`, `lib/` and `hls/`, and nothing else (ADR 0023). The six payloads
 the tool emits, the readings taken on the running player and the run they were
 taken over are copies this suite owns, in
 [`test/fixtures/`](test/fixtures/README.md), which is also where the reason
@@ -102,17 +102,25 @@ finding and the check is not asked to cry wolf.
 ## What is where
 
 The line of ADR 0015 runs through the tree: the root is the library and what
-serves it, and everything below `demo/` is a page that uses it.
+serves it, and everything below `demo/` is a page that uses it. Inside the
+library, `lib/` is what a player of any streaming format would use as it is and
+`hls/` is what HLS adds; `dash/` is where MPEG-DASH goes (ADR 0116). The check of
+ADR 0003 holds the line: nothing in `lib/` names the transport.
 
 | | |
 | --- | --- |
-| `lib/` | **the library.** No bundler and no dependencies |
-| `lib/signalling.js` | the signalling layer: Date Ranges in, the contract out |
+| `lib/` | **the library, the part common to every format.** No bundler and no dependencies |
+| `lib/experience.js` | the model of a break: what an ad declares becomes the contract the renderer draws |
+| `lib/capabilities.js` | what the device can draw, and which option of an ad it draws (SVTA2053 5.3.3) |
 | `lib/renderer.js` | the rendering layer: the contract in, the boxes drawn over the video. Knows nothing about HLS |
 | `lib/controls.js` | the composition's own controls: one progress bar over the whole programme, pause, audio, fullscreen, the list of feeds whoever is watching picks from, and the marks on its rail that say where the breaks this player plays are |
 | `lib/multiview.js` | the state of whoever is watching: which feeds are up, in what order, and which one is enlarged. It decorates the provider, so the rendering side never learns that somebody is choosing |
-| `lib/media.js` | how a `uri` becomes pixels: one instance of hls.js per ad asset |
-| `lib/concurrent-hls.js` | the entry point and the public surface: `attach` for the concurrent experience, `attachControls` for the chrome on its own |
+| `lib/tracking.js`, `lib/postroll.js` | what is reported of what was shown, and the linear ads after the programme ends |
+| `hls/` | **the library, what HLS adds** |
+| `hls/signalling.js` | the signalling layer: Date Ranges and asset-lists in, the contract out |
+| `hls/media.js` | how a `uri` becomes pixels: one instance of hls.js per ad asset |
+| `hls/concurrent-hls.js` | the entry point and the public surface: `attach` for the concurrent experience, `attachControls` for the chrome on its own |
+| `dash/` | where MPEG-DASH goes. Empty but for its README, which says the rule |
 | `dist/` | the built library: one classic script that defines a global. Generated, gitignored |
 | `demo/` | **the demos**, one folder each, indexed above |
 | `test/` | the tests of what fails in silence: the layout resolution, the sequence of a break and its fallback, the ranges of the programme, and the volume of an element |
@@ -120,8 +128,8 @@ serves it, and everything below `demo/` is a page that uses it.
 | `vendor/hls.min.js` | hls.js **1.7.2, unmodified**, with its interstitials machinery on (ADR 0114) |
 | `server.mjs` | a static file server, and nothing else: no ad server, no APS. It takes the folder to serve as its argument, and mounts `/dist/` and `/vendor/` from here (ADR 0022) |
 | `run.sh` | the one command of a demo, with the demo as its argument |
-| `scripts/` | the two scripts of the library: `scripts/construir-libreria.sh`, the build, and `scripts/verificar-cortes.mjs`, the check of the two seams |
-| `package.json` | what the product is: the entry point, and the three folders `files` lists (ADR 0024) |
+| `scripts/` | the scripts of the library and of the publication. The build is `scripts/construir-libreria.sh`, the check of the two seams `scripts/verificar-cortes.mjs`, and `scripts/comparar-publicacion.mjs` says whether what would be published from one commit differs from another's in anything but order, comments and import paths (ADR 0118) |
+| `package.json` | what the product is: the entry point, and the folders `files` lists (ADR 0024) |
 
 ## The two layers
 
@@ -155,8 +163,8 @@ dos defaults que la herramienta omite*.
 
 ## The library, and the page that uses it
 
-The library is `lib/`: the two layers, the piece that turns a `uri` into pixels,
-and the entry point that joins them.
+The library is `lib/` and `hls/`: the two layers, the piece that turns a `uri`
+into pixels, and the entry point that joins them.
 
 It is distributed as **one classic `<script src>` that defines a global**, with
 no bundler and no npm dependency. The sources stay as ES modules and

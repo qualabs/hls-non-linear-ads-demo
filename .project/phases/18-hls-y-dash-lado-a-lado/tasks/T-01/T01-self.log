@@ -1,0 +1,8 @@
+before 0739c38 (0739c38), after 0739c38 (0739c38)
+== stage-pair: 80 files, 80 identical, 0 admitted, 0 red
+== race-multiview: 67 files, 67 identical, 0 admitted, 0 red
+== multiview-offer: 25 files, 25 identical, 0 admitted, 0 red
+== hydration-break: 61 files, 61 identical, 0 admitted, 0 red
+== compatibility-pair: 31 files, 31 identical, 0 admitted, 0 red
+GREEN: what would be published differs only in the ways ADR 0118 admits
+exit 0

@@ -1,0 +1,24 @@
+== after (fase-18 working tree), outside .project/ and demo/:
+(end)
+== the same search on 0739c38 (the instrument finds):
+29
+files
+== left in demo/ (published, ADR 0119):
+demo/compatibility-pair/index.html:85:  defines a global, assembled from lib/ on every start (ADR 0015); this page's
+demo/hydration-break/css/page.css:492: * in `lib/media.js` rather than three things somebody chose to mention. The markup
+demo/hydration-break/index.html:59:  defines a global, assembled from lib/ on every start; this page's own file is a
+demo/hydration-break/index.html:204:      `attachAsset` in `lib/media.js` and the media types beside them are the ones
+demo/hydration-break/js/senalizacion.js:57:// sentence of it is answerable against `lib/signalling.js` -- which field is
+demo/hydration-break/js/senalizacion.js:133: * Every sentence here is answerable in `lib/signalling.js`: what it refuses, what
+demo/hydration-break/js/tipos.js:43:// `attachAsset` in `lib/media.js` asks three questions in order -- is it an image,
+demo/multiview-offer/index.html:77:  defines a global, assembled from lib/ on every start; this page's own files
+demo/race-multiview/index.html:77:  assembled from lib/ on every start; this page's own files are native ES modules. hls.js is
+demo/stage-pair/index.html:74:           (lib/signalling.js), and a pair rebuilt one half at a time would be on
+demo/stage-pair/index.html:85:  defines a global, assembled from lib/ on every start (ADR 0015); this page's
+demo/stage-pair/inspect.html:82:              (lib/signalling.js).
+demo/stage-pair/inspect.html:96:  defines a global, assembled from lib/ on every start (ADR 0015); this page's
+demo/stage-pair/js/app.js:35:// signalling is created (`createSignalling`, lib/signalling.js), so there is no
+demo/stage-pair/js/capabilities.js:88: * from the report of `onResolved` (`resolveAssetList` in lib/signalling.js).
+demo/stage-pair/js/inspect.js:51:// in lib/signalling.js), with the argument written where it is read: what that
+demo/stage-pair/race.html:100:  defines a global, assembled from lib/ on every start (ADR 0015); this page's
+demo/stage-pair/stage.json:246:    "_": "Los dos ejes que el control de index.html y de inspect.html ofrece, con sus valores, en el orden en que se muestran (ADR 0086). Los nombres son los de la opción `capabilities` de attach(); los parámetros del pedido los define lib/signalling.js y no se repiten acá. No hay 3 decodificadores porque ningún layout de esta demo pide más de dos: el primario y un elemento de aviso. No hay eje HTML porque la librería no dibuja HTML."

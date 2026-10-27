@@ -1,0 +1,11 @@
+stage-pair dist/qualabs-concurrent-hls.js
+stage-pair test/signalled-run.test.js
+stage-pair test/verificar-carrera.py
+race-multiview dist/qualabs-concurrent-hls.js
+race-multiview test/signalled-run.test.js
+multiview-offer dist/qualabs-concurrent-hls.js
+multiview-offer test/signalled-run.test.js
+hydration-break dist/qualabs-concurrent-hls.js
+hydration-break test/signalled-run.test.js
+compatibility-pair dist/qualabs-concurrent-hls.js
+compatibility-pair test/signalled-run.test.js

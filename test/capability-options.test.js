@@ -18,17 +18,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
+import { LINEAR_TYPE } from '../lib/experience.js';
+import {
+  needsOf,
+  selectOption,
+  usableCapabilities
+} from '../lib/capabilities.js';
 import {
   BLOCK,
   IMAGE_OVER_VIDEO_PARAM,
-  LINEAR_TYPE,
   VIDEO_DECODERS_PARAM,
   assetListUrl,
-  needsOf,
-  resolveAssetList,
-  selectOption,
-  usableCapabilities
-} from '../lib/signalling.js';
+  resolveAssetList
+} from '../hls/signalling.js';
 
 const ID = 'AD-A-CONCURRENT';
 const SLOT_START = 20;

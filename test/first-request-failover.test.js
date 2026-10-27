@@ -12,7 +12,7 @@
 // should have been passed over is drawn as a black box, and a default that
 // should have been skipped is a black frame over the programme.
 //
-// The request itself is the browser's (`firstRequest` in lib/media.js) and is
+// The request itself is the browser's (`firstRequest` in hls/media.js) and is
 // not here. What is here is the decision, driven by a fake that answers from a
 // table and records what it was asked, so a test can also say what was NOT
 // asked for -- the second option of an ad whose first option loaded.
@@ -22,20 +22,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
+import { LINEAR_TYPE } from '../lib/experience.js';
 import {
-  BLOCK,
-  LINEAR_TYPE,
   PRE_VALIDATE_METHODS,
-  createSignalling,
   firstRequestsOf,
-  pendingFirstRequests,
-  resolveAssetList,
-  resolveWithFirstRequests,
   selectOption,
   usableCapabilities,
   usablePreValidation
-} from '../lib/signalling.js';
-import { firstRequest as mediaFirstRequest } from '../lib/media.js';
+} from '../lib/capabilities.js';
+import {
+  BLOCK,
+  createSignalling,
+  pendingFirstRequests,
+  resolveAssetList,
+  resolveWithFirstRequests
+} from '../hls/signalling.js';
+import { firstRequest as mediaFirstRequest } from '../hls/media.js';
 
 const ID = 'AD-A-CONCURRENT';
 const SLOT_START = 20;

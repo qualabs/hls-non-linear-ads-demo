@@ -15,9 +15,9 @@ import assert from 'node:assert/strict';
 
 import {
   createProgramme, createSignalling, linearOnScreen, programmeAtEnd, resolvePostRoll, scheduledRanges
-} from '../lib/signalling.js';
+} from '../hls/signalling.js';
 import { createPostRoll } from '../lib/postroll.js';
-import { KINDS_PLAYED } from '../lib/concurrent-hls.js';
+import { KINDS_PLAYED } from '../hls/concurrent-hls.js';
 import { RANGE_COLOURS, RANGE_TITLES } from '../lib/controls.js';
 
 /** The interstitials manager, as far as the library reads it. */

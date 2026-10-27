@@ -19,7 +19,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { BLOCK, resolveAssetList } from '../lib/signalling.js';
+import { BLOCK, resolveAssetList } from '../hls/signalling.js';
 import { createRenderer } from '../lib/renderer.js';
 
 const ID = 'AD-B-CONCURRENT';

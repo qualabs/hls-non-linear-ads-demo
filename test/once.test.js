@@ -13,7 +13,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { createSignalling, onceProgress } from '../lib/signalling.js';
+import { createSignalling, onceProgress } from '../hls/signalling.js';
 import { postRollQueue } from '../lib/postroll.js';
 import { slotEvents } from '../lib/tracking.js';
 

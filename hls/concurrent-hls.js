@@ -22,12 +22,12 @@
 
 // One line: the build strips import lines, and only whole ones.
 import { createSignalling, createProgramme, linearOnScreen, programmeAtEnd, scheduledRanges, CONCURRENT_CLASS, MULTIVIEW_CLASS, VIDEO_DECODERS_PARAM, IMAGE_OVER_VIDEO_PARAM } from './signalling.js';
-import { createMultiview } from './multiview.js';
-import { createRenderer } from './renderer.js';
-import { createControls } from './controls.js';
+import { createMultiview } from '../lib/multiview.js';
+import { createRenderer } from '../lib/renderer.js';
+import { createControls } from '../lib/controls.js';
 import { attachAsset, firstRequest } from './media.js';
-import { createTracking } from './tracking.js';
-import { createPostRoll } from './postroll.js';
+import { createTracking } from '../lib/tracking.js';
+import { createPostRoll } from '../lib/postroll.js';
 
 export const VERSION = '0.1.0';
 

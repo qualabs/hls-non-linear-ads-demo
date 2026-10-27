@@ -4,7 +4,7 @@
 content/
 node_modules/
 
-# The built library. It is assembled from lib/ by scripts/construir-libreria.sh
+# The built library. It is assembled from lib/ and hls/ by scripts/construir-libreria.sh
 # on every start, exactly like the signalled playlist, so a copy in git could
 # only be a stale one.
 dist/
