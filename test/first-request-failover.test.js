@@ -12,7 +12,7 @@
 // should have been passed over is drawn as a black box, and a default that
 // should have been skipped is a black frame over the programme.
 //
-// The request itself is the browser's (`firstRequest` in hls/media.js) and is
+// The request itself is the browser's (`firstRequest` in lib/media.js) and is
 // not here. What is here is the decision, driven by a fake that answers from a
 // table and records what it was asked, so a test can also say what was NOT
 // asked for -- the second option of an ad whose first option loaded.
@@ -37,7 +37,7 @@ import {
   resolveAssets,
   resolveWithFirstRequests
 } from '../lib/ad-list.js';
-import { firstRequest as mediaFirstRequest } from '../hls/media.js';
+import { firstRequest as mediaFirstRequest } from '../lib/media.js';
 
 const ID = 'AD-A-CONCURRENT';
 const SLOT_START = 20;

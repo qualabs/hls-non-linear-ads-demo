@@ -26,7 +26,8 @@ import { VIDEO_DECODERS_PARAM, IMAGE_OVER_VIDEO_PARAM } from '../lib/ad-list.js'
 import { createMultiview } from '../lib/multiview.js';
 import { createRenderer } from '../lib/renderer.js';
 import { createControls } from '../lib/controls.js';
-import { attachAsset, firstRequest } from './media.js';
+import { attachAsset } from './media.js';
+import { firstRequest } from '../lib/media.js';
 import { createTracking } from '../lib/tracking.js';
 import { createPostRoll } from '../lib/postroll.js';
 
