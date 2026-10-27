@@ -11,6 +11,13 @@ and the composition is built by whoever is watching. The two are siblings and
 neither extends the other — in HLS a Date Range class is compared as an exact
 string — and one playlist carries both.
 
+**The same library over MPEG-DASH**, on an unmodified dash.js: the break is an
+EventStream with the scheme of SVTA2053 (`urn:svta:advertising-wg:ad-creative-signaling`),
+one Event per break carrying a version 2 `pod` envelope marked
+`features.concurrentPresentation`. It is the DASH carriage SVTA2053 v3 left for a
+future edition, written in [`docs/svta2053-dash-concurrent-presentation.md`](docs/svta2053-dash-concurrent-presentation.md);
+`stage-pair` shows the same stream over HLS and over DASH side by side.
+
 The root of this repository is that library. `demo/` is where it is shown: one
 folder per demo, and each demo tells its own run.
 
@@ -81,7 +88,7 @@ it when the composition changes around a box that never stopped playing. All of
 it is arithmetic over data, which is what a test can aim at without a browser.
 
 No case is invented unless it says so, and no case is read out of a demo:
-`test/` reads `test/`, `lib/` and `hls/`, and nothing else (ADR 0023). The six payloads
+`test/` reads `test/`, `lib/`, `hls/` and `dash/`, and nothing else (ADR 0023). The six payloads
 the tool emits, the readings taken on the running player and the run they were
 taken over are copies this suite owns, in
 [`test/fixtures/`](test/fixtures/README.md), which is also where the reason
@@ -104,7 +111,7 @@ finding and the check is not asked to cry wolf.
 The line of ADR 0015 runs through the tree: the root is the library and what
 serves it, and everything below `demo/` is a page that uses it. Inside the
 library, `lib/` is what a player of any streaming format would use as it is and
-`hls/` is what HLS adds; `dash/` is where MPEG-DASH goes (ADR 0116). The check of
+`hls/` and `dash/` are what each format adds (ADR 0116). The check of
 ADR 0003 holds the line: nothing in `lib/` names the transport.
 
 | | |
@@ -116,11 +123,16 @@ ADR 0003 holds the line: nothing in `lib/` names the transport.
 | `lib/controls.js` | the composition's own controls: one progress bar over the whole programme, pause, audio, fullscreen, the list of feeds whoever is watching picks from, and the marks on its rail that say where the breaks this player plays are |
 | `lib/multiview.js` | the state of whoever is watching: which feeds are up, in what order, and which one is enlarged. It decorates the provider, so the rendering side never learns that somebody is choosing |
 | `lib/tracking.js`, `lib/postroll.js` | what is reported of what was shown, and the linear ads after the programme ends |
+| `lib/ad-list.js` | what a break's list of ads resolves into, whatever the transport that carried it |
+| `lib/playhead.js`, `lib/media.js`, `lib/layer.js` | the readings of the programme's clock, the assets that need no player (images, progressive files) and the first load, and the layer the ads are drawn on |
 | `hls/` | **the library, what HLS adds** |
 | `hls/signalling.js` | the signalling layer: Date Ranges and asset-lists in, the contract out |
 | `hls/media.js` | how a `uri` becomes pixels: one instance of hls.js per ad asset |
 | `hls/concurrent-hls.js` | the entry point and the public surface: `attach` for the concurrent experience, `attachControls` for the chrome on its own |
-| `dash/` | where MPEG-DASH goes. Empty but for its README, which says the rule |
+| `dash/` | **the library, what MPEG-DASH adds** ([its README](dash/README.md)) |
+| `dash/signalling.js` | the signalling layer: the EventStream of the MPD and `$remote.slots` in, the same contract out |
+| `dash/media.js` | an MPD becomes pixels: one dash.js `MediaPlayer` per ad asset |
+| `dash/concurrent-dash.js` | the entry point over dash.js: `attach`, before `initialize` |
 | `dist/` | the built library: one classic script that defines a global. Generated, gitignored |
 | `demo/` | **the demos**, one folder each, indexed above |
 | `test/` | the tests of what fails in silence: the layout resolution, the sequence of a break and its fallback, the ranges of the programme, and the volume of an element |
@@ -163,13 +175,14 @@ dos defaults que la herramienta omite*.
 
 ## The library, and the page that uses it
 
-The library is `lib/` and `hls/`: the two layers, the piece that turns a `uri`
-into pixels, and the entry point that joins them.
+The library is `lib/` and the folder of a format, `hls/` or `dash/`: the two
+layers, the piece that turns a `uri` into pixels, and the entry point that joins
+them.
 
 It is distributed as **one classic `<script src>` that defines a global**, with
 no bundler and no npm dependency. The sources stay as ES modules and
 `scripts/construir-libreria.sh` assembles them into
-`dist/qualabs-concurrent-hls.js` on every start, the same way a demo's signalled
+`dist/qualabs-concurrent-hls.js` and `dist/qualabs-concurrent-dash.js` on every start, the same way a demo's signalled
 playlist is written on every start. They stay separate for two reasons that are
 not taste: the seam of ADR 0003 is verified per file by
 `scripts/verificar-cortes.mjs`, and the tests import the pure functions of both
@@ -190,6 +203,15 @@ const concurrent = QualabsConcurrentHls.attach(hls, {
 });
 hls.loadSource(src);
 hls.attachMedia(video);
+```
+
+Over DASH it is the same, with one difference in the order: the breaks are read
+off the MPD as dash.js receives it, so `attach` comes before `initialize`.
+
+```js
+const player = dashjs.MediaPlayer().create();
+QualabsConcurrentDash.attach(player, { container, video });
+player.initialize(video, mpd, true);
 ```
 
 **An option whose asset does not load is never left on screen.** Every ad hands the
