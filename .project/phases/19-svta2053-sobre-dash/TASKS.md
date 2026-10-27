@@ -8,7 +8,7 @@
 | T-04 | Los tests de `dash/signalling.js`, vistos fallar | done | agent | — | rama `fase-19` · [`tasks/T-04/`](tasks/T-04/) |
 | T-05 | `dash/media.js`, `dash/concurrent-dash.js`, el dist DASH y las costuras | done | agent | — | rama `fase-19` · [`tasks/T-05/`](tasks/T-05/) |
 | T-06 | El contenido DASH de `stage-pair` | done | agent | — | rama `fase-19` · [`tasks/T-06/`](tasks/T-06/) |
-| T-07 | `stage-pair`: "DASH, nuestra librería" en cada pane | planned | agent | — | — |
+| T-07 | `stage-pair`: "DASH, nuestra librería" en cada pane | done | agent | — | rama `fase-19` · [`tasks/T-07/`](tasks/T-07/) |
 | T-08 | `verificar-pares.py`: HLS contra DASH, con sus dos controles | planned | agent | — | — |
 | T-09 | El texto para SVTA2053: la 6.7 y los ajustes de §1, §4.1 y §5 | planned | agent | — | — |
 | T-10 | La documentación, la verificación final y el merge a main local | planned | agent | — | — |
@@ -130,6 +130,9 @@
   (chequeado por script, y visto fallar con uno cambiado); el MPD carga en dash.js y reproduce.
 - **nivel de verificación:** alto. Escribe los archivos que lee la demo HLS publicada, y una
   diferencia en un ASSET-LIST no se ve en pantalla.
+- **post-ejecución:** 2026-10-26, la captura de T-07 mostró los creativos DASH 1,47 s adelantados
+  (dash.js salta el gap de 1,4667 s que deja `-copyts`); `empaquetar-dash.sh` pasa a
+  `-output_ts_offset -1.4` y la diferencia queda en 0,07-0,1 s (`tasks/T-07/README.md`).
 
 ## T-07 — `stage-pair`: "DASH, nuestra librería" en cada pane
 
