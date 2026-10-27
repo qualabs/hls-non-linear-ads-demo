@@ -95,9 +95,11 @@ function run(env = {}) {
     });
     // Se leen ACÁ, antes de que el `finally` borre el temporal. Y se lee el
     // DIRECTORIO y no la lista de nombres de stage.json, que es lo que permite
-    // assertar cuántos archivos salieron.
+    // assertar cuántos archivos salieron. Sus archivos y no sus carpetas: los
+    // sobres del lado DASH van en `dash/` (fase 19) y los cuenta su propio test.
     const escritos = Object.fromEntries(
-      readdirSync(signalling).sort().map((name) => [name, JSON.parse(readFileSync(join(signalling, name), 'utf8'))])
+      readdirSync(signalling, { withFileTypes: true }).filter((e) => e.isFile()).map((e) => e.name).sort()
+        .map((name) => [name, JSON.parse(readFileSync(join(signalling, name), 'utf8'))])
     );
     const lista = (name) => {
       if (!(name in escritos)) throw new Error(`el señalizador no escribió ${name}`);
