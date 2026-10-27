@@ -1,0 +1,22 @@
+before f37d906 (f37d906), after 1dd6247 (HEAD)
+== stage-pair: 80 files, 79 identical, 0 admitted, 3 red
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+== race-multiview: 67 files, 66 identical, 0 admitted, 3 red
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+== multiview-offer: 25 files, 24 identical, 0 admitted, 3 red
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+== hydration-break: 61 files, 60 identical, 0 admitted, 3 red
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+== compatibility-pair: 31 files, 30 identical, 0 admitted, 3 red
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+RED

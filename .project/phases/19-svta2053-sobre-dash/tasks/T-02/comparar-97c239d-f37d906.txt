@@ -1,0 +1,13 @@
+before 97c239d (97c239d), after f37d906 (f37d906)
+== stage-pair: 80 files, 78 identical, 2 admitted, 0 red
+   admitted  dist/qualabs-concurrent-hls.js: only order and comments -- 174 declarations before, 174 after, another order; 7 keys on the global
+   admitted  test/signalled-run.test.js: only its imports -- 8 names imported, the same
+== race-multiview: 67 files, 66 identical, 1 admitted, 0 red
+   admitted  dist/qualabs-concurrent-hls.js: only order and comments -- 174 declarations before, 174 after, another order; 7 keys on the global
+== multiview-offer: 25 files, 24 identical, 1 admitted, 0 red
+   admitted  dist/qualabs-concurrent-hls.js: only order and comments -- 174 declarations before, 174 after, another order; 7 keys on the global
+== hydration-break: 61 files, 60 identical, 1 admitted, 0 red
+   admitted  dist/qualabs-concurrent-hls.js: only order and comments -- 174 declarations before, 174 after, another order; 7 keys on the global
+== compatibility-pair: 31 files, 30 identical, 1 admitted, 0 red
+   admitted  dist/qualabs-concurrent-hls.js: only order and comments -- 174 declarations before, 174 after, another order; 7 keys on the global
+GREEN: what would be published differs only in the ways ADR 0118 admits
