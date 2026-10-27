@@ -40,7 +40,7 @@ import {
   isOffer,
   viewportsFor
 } from '../lib/experience.js';
-import { resolveAssetList } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import {
   PRIMARY_ID,
   createMultiview,
@@ -69,7 +69,7 @@ const SLOT_START = 45;
 /** The offer as it is served: one asset, one item, three views of 60 s. */
 function offer({ id = ID, slotStart = SLOT_START } = {}) {
   const list = readJson('./fixtures/asset-lists/asset-list-offer-3.json');
-  return resolveAssetList(list, { id, slotStart })[0];
+  return resolveAssets(list, { id, slotStart })[0];
 }
 
 /**
@@ -85,13 +85,13 @@ function longOffer() {
   item.views = item.views.concat(item.views.slice(0, 2).map((view, i) => ({
     ...view, id: `${view.id}-again-${i}`, name: `${view.name} (again)`
   })));
-  return resolveAssetList(list, { id: ID, slotStart: SLOT_START })[0];
+  return resolveAssets(list, { id: ID, slotStart: SLOT_START })[0];
 }
 
 /** An ad, which is everything this module has to leave exactly as it found it. */
 function ad() {
   const list = readJson('./fixtures/asset-lists/asset-list-cornerOverlay.json');
-  return resolveAssetList(list, { id: 'AD-1', slotStart: 20 });
+  return resolveAssets(list, { id: 'AD-1', slotStart: 20 });
 }
 
 /** The provider of ADR 0003 over a fixed list, which is all the decorator reads. */

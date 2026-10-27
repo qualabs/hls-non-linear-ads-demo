@@ -238,4 +238,40 @@ if (stage.breakLineal) {
   writeFileSync(join(outDir, stage.breakLineal.lista), JSON.stringify(lineal(stage.breakLineal), null, 2) + '\n');
   escritos.push(stage.breakLineal.lista);
 }
+
+// ---------------------------------------------------------------------------
+// EL LADO DASH (fase 19): un sobre `slot` por break, lo que contesta su `$remote.slots`
+// ---------------------------------------------------------------------------
+// El MPD señalizado lleva un Event por break con un sobre `pod` cuyo Pod apunta,
+// en `$remote.slots`, a este archivo (ADR 0120). Es EL MISMO Slot que el bloque del
+// asset-list de HLS del mismo break -- mismas opciones, mismo orden, mismas gemelas
+// PNG y MP4 (ADR 0096) -- con dos diferencias, las dos de transporte: el video es
+// el MPD que `empaquetar-dash.sh` escribe al lado de cada playlist, y el default
+// lineal, que en HLS es el `URI` del asset, es el `media` del Slot (ADR 0122). Se
+// arma DESDE el asset-list de HLS y no aparte, así que no pueden divergir en nada
+// que no sea eso.
+const MPD = 'application/dash+xml';
+const mpdDe = (uri) => {
+  if (!/\/index\.m3u8$/.test(uri)) throw new Error(`no sé dónde está el MPD de ${uri}`);
+  return uri.replace(/index\.m3u8$/, 'dash/manifest.mpd');
+};
+const enDash = (opt) => ({
+  ...opt,
+  layout: {
+    ...opt.layout,
+    assets: opt.layout.assets.map((x) => (x.type === stage.assets.tipos.video ? { ...x, type: MPD, uri: mpdDe(x.uri) } : x))
+  }
+});
+function slotsDash(brk) {
+  const [asset] = concurrente(brk).ASSETS;
+  const { layoutOptions, ...slot } = asset['X-AD-CREATIVE-SIGNALING'].payload[0];
+  if (asset.URI) slot.media = [{ type: MPD, id: `${brk.campana}-16x9`, uri: mpdDe(asset.URI) }];
+  return { version: 2, type: 'slot', payload: [{ ...slot, layoutOptions: layoutOptions.map(enDash) }] };
+}
+mkdirSync(join(outDir, 'dash'), { recursive: true });
+for (const brk of stage.breaks) {
+  const nombre = join('dash', `slots-break-${brk.id}.json`);
+  writeFileSync(join(outDir, nombre), JSON.stringify(slotsDash(brk), null, 2) + '\n');
+  escritos.push(nombre);
+}
 process.stdout.write(escritos.join('\n') + '\n');

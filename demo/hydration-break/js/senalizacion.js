@@ -54,7 +54,7 @@
 // way and for the same reason: a row appears for a field only when the list in
 // front of the reader really carries it, so the explanation cannot describe a
 // signalling this page is not showing. What each field MEANS is prose, and every
-// sentence of it is answerable against `lib/signalling.js` -- which field is
+// sentence of it is answerable against `lib/experience.js` and `lib/ad-list.js` -- which field is
 // refused, which one is assumed, and what the assumption is. A field the list
 // carries and this page has no sentence for says so on the page instead of being
 // dropped, which is the same choice `NO_GLOSS` makes for an attribute.
@@ -130,7 +130,7 @@ const LEVEL_SAYS = {
  * THE THIRD MARK IS THE ONE WORTH HAVING. `required` and `optional` are what
  * anybody writing a list wants first; `ignored` is what nobody can find out
  * without reading the client, and two of the three fields of the block are it.
- * Every sentence here is answerable in `lib/signalling.js`: what it refuses, what
+ * Every sentence here is answerable in `lib/experience.js` and `lib/ad-list.js`: what it refuses, what
  * it assumes, and what the assumption is.
  */
 const BLOCK_GLOSS = [

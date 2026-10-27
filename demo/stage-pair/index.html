@@ -71,7 +71,7 @@
            follow it. The slots are EMPTY in this file and filled by js/app.js,
            because any change REBUILDS both players at the same second: the
            capabilities are read once, when the signalling is created
-           (lib/signalling.js), and a pair rebuilt one half at a time would be on
+           (hls/signalling.js, dash/signalling.js), and a pair rebuilt one half at a time would be on
            two timelines. See `armar()` in js/app.js.
 
   #contract-*  the contract of ADR 0003 in one line of text, for a pane with our
@@ -82,7 +82,7 @@
            picture. Neither <video> carries a `controls` attribute.
 
   No bundler and no framework. The library is one classic <script src> that
-  defines a global, assembled from lib/ on every start (ADR 0015); this page's
+  defines a global, assembled from lib/ and the folder of its format, hls/ or dash/, on every start (ADR 0015); this page's
   own two files are native ES modules. hls.js is vendored in ./vendor/ at 1.7.2
   rather than pulled from a CDN, because it is the version the code was read
   against and the version the measurements ran on (ADR 0002).
@@ -160,6 +160,8 @@
 
 <script src="/vendor/hls.min.js"></script>
 <script src="/dist/qualabs-concurrent-hls.js"></script>
+<script src="/vendor/dash.all.min.js"></script>
+<script src="/dist/qualabs-concurrent-dash.js"></script>
 <script type="module" src="./js/app.js"></script>
 
 </body>

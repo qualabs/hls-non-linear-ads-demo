@@ -33,7 +33,7 @@ import {
   DEFAULT_PRIMARY_VOLUME,
   FULL_FRAME
 } from '../lib/experience.js';
-import { resolveAssetList } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { boxToPixels } from '../lib/renderer.js';
 
 /**
@@ -86,7 +86,7 @@ function measuredArea(type) {
 
 /** The tool's asset-list through the whole signalling layer, as app.js calls it. */
 function resolve(type) {
-  return resolveAssetList(TOOL[type], { id: type, slotStart: SLOT_START });
+  return resolveAssets(TOOL[type], { id: type, slotStart: SLOT_START });
 }
 
 function toolLayout(type) {
@@ -319,8 +319,8 @@ test('the activation window is half open: in at startTime, out at the end', () =
 test('activeAt returns every experience active at that instant', () => {
   // Two of the real layouts, in two Date Ranges that overlap: the renderer
   // builds all of them, so the window has to hand over all of them.
-  const corner = resolveAssetList(TOOL.cornerOverlay, { id: 'AD-1', slotStart: 100 });
-  const lower = resolveAssetList(TOOL.lowerThirdOverlay, { id: 'AD-2', slotStart: 110 });
+  const corner = resolveAssets(TOOL.cornerOverlay, { id: 'AD-1', slotStart: 100 });
+  const lower = resolveAssets(TOOL.lowerThirdOverlay, { id: 'AD-2', slotStart: 110 });
   const all = [...corner, ...lower];
   assert.deepEqual(activeAt(all, 99), []);
   assert.deepEqual(activeAt(all, 105), corner);
