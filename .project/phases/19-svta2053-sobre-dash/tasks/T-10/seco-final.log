@@ -1,0 +1,103 @@
+== 0. the exclusion patterns, against planted paths ==
+   scripts/__pycache__/x.pyc                    excluded
+   test/__pycache__/y.pyc                       excluded
+   content/primary/seg000.ts                    excluded
+   index.html                                   published
+   signalling/asset-list-offer.json             published
+   js/content/x.js                              published
+   .fuentes/Sparks.mp4                          excluded
+   primary/con-daterange-rica.m3u8              excluded
+   primary/seg000.ts                            published
+   primary/con-daterange.m3u8                   published
+   index.html                                   no-cache
+   graphics/campaigns/zumbra-backplate-fijo.png no-cache
+   content/creatives/zumbra-16x9/d8eabbdae4/progressive.mp4 no-cache
+   content/adL/progressive.mp4                  no-cache
+   content/primary/index.m3u8                   no-cache
+   content/primary/seg000.ts                    cached an hour
+   content/adBanner/creative.png                cached an hour
+== 1. the stage: HEAD f148970, with dist/ built in it ==
+construir-libreria: dist/qualabs-concurrent-hls.js (7774 lines, global QualabsConcurrentHls)
+construir-libreria: dist/qualabs-concurrent-dash.js (7030 lines, global QualabsConcurrentDash)
+== 2. stage-pair: checks ==
+   21 playlists of content/ downloaded from the bucket
+   senalizar-contenido.sh leaves the committed files as they are
+   91 files to publish outside content/, 2 signalled files of content/ that change
+   57 references, 18 playlists followed, 465 segments; 8 missing
+     MISSING content/creatives/ketrava-16x9/dash/manifest.mpd   (from signalling/dash/slots-break-pre.json)
+     MISSING content/creatives/ketrava-backplate/8d140e0f2b/dash/manifest.mpd   (from signalling/dash/slots-break-b.json)
+     MISSING content/creatives/ketrava-banner/dash/manifest.mpd   (from signalling/dash/slots-break-pre.json)
+     MISSING content/creatives/kovrin-16x9/dash/manifest.mpd   (from signalling/dash/slots-break-c.json)
+     MISSING content/creatives/kovrin-banner/8e5914d854/dash/manifest.mpd   (from signalling/dash/slots-break-c.json)
+     MISSING content/creatives/zumbra-16x9/d8eabbdae4/dash/manifest.mpd   (from signalling/dash/slots-break-post.json)
+     MISSING content/creatives/zumbra-banner/dash/manifest.mpd   (from signalling/dash/slots-break-post.json)
+     MISSING content/primary/dash/senalizado.mpd   (from stage.json)
+   the sync would do (gcloud --dry-run):
+     24 to copy, 0 to remove
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/README.md to gs://qualabs-hls-demo-stage-pair/README.md#1793047859292217
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/dist/qualabs-concurrent-dash.js to gs://qualabs-hls-demo-stage-pair/dist/qualabs-concurrent-dash.js
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/dist/qualabs-concurrent-hls.js to gs://qualabs-hls-demo-stage-pair/dist/qualabs-concurrent-hls.js#1793052081530074
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/index.html to gs://qualabs-hls-demo-stage-pair/index.html#1793047859439693
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/inspect.html to gs://qualabs-hls-demo-stage-pair/inspect.html#1793047859546654
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/js/app.js to gs://qualabs-hls-demo-stage-pair/js/app.js#1793047859641491
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/js/capabilities.js to gs://qualabs-hls-demo-stage-pair/js/capabilities.js#1793047859609271
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/js/inspect.js to gs://qualabs-hls-demo-stage-pair/js/inspect.js#1793047859621164
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/race.html to gs://qualabs-hls-demo-stage-pair/race.html#1790095755349338
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/scripts/empaquetar-dash.sh to gs://qualabs-hls-demo-stage-pair/scripts/empaquetar-dash.sh
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/scripts/escribir-asset-lists.mjs to gs://qualabs-hls-demo-stage-pair/scripts/escribir-asset-lists.mjs#1793047859379521
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/scripts/senalizar-contenido.sh to gs://qualabs-hls-demo-stage-pair/scripts/senalizar-contenido.sh#1793047859520287
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/scripts/senalizar-dash.mjs to gs://qualabs-hls-demo-stage-pair/scripts/senalizar-dash.mjs
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/signalling/dash/slots-break-a.json to gs://qualabs-hls-demo-stage-pair/signalling/dash/slots-break-a.json
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/signalling/dash/slots-break-b.json to gs://qualabs-hls-demo-stage-pair/signalling/dash/slots-break-b.json
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/signalling/dash/slots-break-c.json to gs://qualabs-hls-demo-stage-pair/signalling/dash/slots-break-c.json
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/signalling/dash/slots-break-post.json to gs://qualabs-hls-demo-stage-pair/signalling/dash/slots-break-post.json
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/signalling/dash/slots-break-pre.json to gs://qualabs-hls-demo-stage-pair/signalling/dash/slots-break-pre.json
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/stage.json to gs://qualabs-hls-demo-stage-pair/stage.json#1793047859506639
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/stage-pair/test/signalled-run.test.js to gs://qualabs-hls-demo-stage-pair/test/signalled-run.test.js#1793052081193772
+     signalled, would upload: content/primary/con-daterange.m3u8
+     signalled, would upload: content/race/program/con-daterange.m3u8
+== 2. race-multiview: checks ==
+   8 playlists of content/ downloaded from the bucket
+   senalizar-contenido.sh leaves the committed files as they are
+   68 files to publish outside content/, 1 signalled files of content/ that change
+   9 references, 6 playlists followed, 192 segments; 0 missing
+   the sync would do (gcloud --dry-run):
+     2 to copy, 0 to remove
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/race-multiview/dist/qualabs-concurrent-hls.js to gs://qualabs-hls-demo-race-multiview/dist/qualabs-concurrent-hls.js#1793052087354973
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/race-multiview/index.html to gs://qualabs-hls-demo-race-multiview/index.html#1789420285956105
+     signalled, would upload: content/primary/con-daterange.m3u8
+== 2. multiview-offer: checks ==
+   8 playlists of content/ downloaded from the bucket
+   senalizar-contenido.sh leaves the committed files as they are
+   25 files to publish outside content/, 1 signalled files of content/ that change
+   10 references, 6 playlists followed, 153 segments; 0 missing
+   the sync would do (gcloud --dry-run):
+     2 to copy, 0 to remove
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/multiview-offer/dist/qualabs-concurrent-hls.js to gs://qualabs-hls-demo-multiview-offer/dist/qualabs-concurrent-hls.js#1793052092412682
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/multiview-offer/index.html to gs://qualabs-hls-demo-multiview-offer/index.html#1792597290243455
+     signalled, would upload: content/primary/con-daterange.m3u8
+== 2. hydration-break: checks ==
+   5 playlists of content/ downloaded from the bucket
+   senalizar-contenido.sh leaves the committed files as they are
+   61 files to publish outside content/, 1 signalled files of content/ that change
+   14 references, 3 playlists followed, 24 segments; 0 missing
+   the sync would do (gcloud --dry-run):
+     5 to copy, 0 to remove
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/hydration-break/css/page.css to gs://qualabs-hls-demo-hydration-break/css/page.css#1789165792629643
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/hydration-break/dist/qualabs-concurrent-hls.js to gs://qualabs-hls-demo-hydration-break/dist/qualabs-concurrent-hls.js#1793052097984777
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/hydration-break/index.html to gs://qualabs-hls-demo-hydration-break/index.html#1789165793728387
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/hydration-break/js/senalizacion.js to gs://qualabs-hls-demo-hydration-break/js/senalizacion.js#1793047879696879
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/hydration-break/js/tipos.js to gs://qualabs-hls-demo-hydration-break/js/tipos.js#1793047879445248
+     signalled, would upload: content/primary/con-daterange.m3u8
+== 2. compatibility-pair: checks ==
+   5 playlists of content/ downloaded from the bucket
+   senalizar-contenido.sh leaves the committed files as they are
+   31 files to publish outside content/, 1 signalled files of content/ that change
+   7 references, 3 playlists followed, 18 segments; 0 missing
+   the sync would do (gcloud --dry-run):
+     2 to copy, 0 to remove
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/compatibility-pair/dist/qualabs-concurrent-hls.js to gs://qualabs-hls-demo-compatibility-pair/dist/qualabs-concurrent-hls.js#1793052102851753
+     Would copy file:///run/user/1000/publicar-MmLZbp/repo/demo/compatibility-pair/index.html to gs://qualabs-hls-demo-compatibility-pair/index.html#1793047885506627
+     signalled, would upload: content/primary/con-daterange.m3u8
+RED: nothing was published
+exit 1

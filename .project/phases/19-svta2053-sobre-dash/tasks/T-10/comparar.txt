@@ -1,0 +1,113 @@
+before bb0d78b (bb0d78b), after f148970 (HEAD)
+== stage-pair: 91 files, 67 identical, 0 admitted, 39 red
+   RED       only after (a new URL): dist/qualabs-concurrent-dash.js
+   RED       only after (a new URL): scripts/empaquetar-dash.sh
+   RED       only after (a new URL): scripts/senalizar-dash.mjs
+   RED       only after (a new URL): signalling/dash/slots-break-a.json
+   RED       only after (a new URL): signalling/dash/slots-break-b.json
+   RED       only after (a new URL): signalling/dash/slots-break-c.json
+   RED       only after (a new URL): signalling/dash/slots-break-post.json
+   RED       only after (a new URL): signalling/dash/slots-break-pre.json
+   RED       only after (a new URL): test/slots-dash.test.js
+   RED       only after (a new URL): vendor/dash.all.min.js
+   RED       only after (a new URL): vendor/dash.js.LICENSE
+   RED       README.md: differs outside its imports, first at line 68 of what is left: "## The three pages" -> "**The DASH pane needs a third**, after those two, and it is a remux and not an encode, so it"
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssetList is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration assetListUrl is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssets is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration listRequestUrl is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+   RED       index.html: differs outside its imports, first at line 74 of what is left: "           (lib/signalling.js), and a pair rebuilt one half at a time would be on" -> "           (hls/signalling.js, dash/signalling.js), and a pair rebuilt one half at a time would be o"
+   RED       inspect.html: differs outside its imports, first at line 82 of what is left: "              (lib/signalling.js)." -> "              (hls/signalling.js)."
+   RED       js/app.js: differs outside its imports, first at line 16 of what is left: "// ad -- or \"with our library\"; and only in the second, the two capability axes of" -> "// ad -- or \"with our library\", or, since phase 19, \"DASH, our library\": the same"
+   RED       js/capabilities.js: differs outside its imports, first at line 88 of what is left: " * from the report of `onResolved` (`resolveAssetList` in lib/signalling.js)." -> " * from the report of `onResolved` (`resolveAssets` in lib/ad-list.js)."
+   RED       js/inspect.js: differs outside its imports, first at line 51 of what is left: "// in lib/signalling.js), with the argument written where it is read: what that" -> "// in hls/signalling.js), with the argument written where it is read: what that"
+   RED       race.html: differs outside its imports, first at line 100 of what is left: "  defines a global, assembled from lib/ on every start (ADR 0015); this page's" -> "  defines a global, assembled from lib/ and hls/ on every start (ADR 0015); this page's"
+   RED       scripts/escribir-asset-lists.mjs: differs outside its imports, first at line 241 of what is left: "process.stdout.write(escritos.join('\\n') + '\\n');" -> ""
+   RED       scripts/senalizar-contenido.sh: differs outside its imports, first at line 279 of what is left: "" -> "# ---------------------------------------------------------------------------"
+   RED       stage.json: differs outside its imports, first at line 238 of what is left: "  \"_playlist\": \"UNA playlist para los dos clientes (ADR 0113, que supersede el manifest por clase de" -> "  \"mpd\": \"content/primary/dash/senalizado.mpd\","
+   RED       test/signalled-run.test.js: imports other names (gone: resolveAssetList; new: resolveAssets)
+   RED       test/signalled-run.test.js: differs outside its imports, first at line 28 of what is left: "// archivos escritos a `resolveAssetList` bajo las cuatro combinaciones del" -> "// archivos escritos a `resolveAssets` bajo las cuatro combinaciones del"
+   RED       test/verificar-pares.py: differs outside its imports, first at line 32 of what is left: "import sys" -> "import re"
+== race-multiview: 67 files, 65 identical, 0 admitted, 16 red
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssetList is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration assetListUrl is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssets is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration listRequestUrl is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+   RED       index.html: differs outside its imports, first at line 77 of what is left: "  assembled from lib/ on every start; this page's own files are native ES modules. hls.js is" -> "  assembled from lib/ and hls/ on every start; this page's own files are native ES modules. hls.js i"
+== multiview-offer: 25 files, 23 identical, 0 admitted, 16 red
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssetList is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration assetListUrl is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssets is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration listRequestUrl is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+   RED       index.html: differs outside its imports, first at line 77 of what is left: "  defines a global, assembled from lib/ on every start; this page's own files" -> "  defines a global, assembled from lib/ and hls/ on every start; this page's own files"
+== hydration-break: 61 files, 56 identical, 0 admitted, 19 red
+   RED       css/page.css: differs outside its imports, first at line 492 of what is left: " * in `lib/media.js` rather than three things somebody chose to mention. The markup" -> " * in `hls/media.js` rather than three things somebody chose to mention. The markup"
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssetList is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration assetListUrl is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssets is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration listRequestUrl is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+   RED       index.html: differs outside its imports, first at line 59 of what is left: "  defines a global, assembled from lib/ on every start; this page's own file is a" -> "  defines a global, assembled from lib/ and hls/ on every start; this page's own file is a"
+   RED       js/senalizacion.js: differs outside its imports, first at line 57 of what is left: "// sentence of it is answerable against `lib/signalling.js` -- which field is" -> "// sentence of it is answerable against `lib/experience.js` and `lib/ad-list.js` -- which field is"
+   RED       js/tipos.js: differs outside its imports, first at line 43 of what is left: "// `attachAsset` in `lib/media.js` asks three questions in order -- is it an image," -> "// `attachAsset` in `hls/media.js` asks three questions in order -- is it an image,"
+== compatibility-pair: 31 files, 29 identical, 0 admitted, 16 red
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssetList is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration assetListUrl is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is missing, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration pendingFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveWithFirstRequests is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolveAssets is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration resolvePostRoll is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration listRequestUrl is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachPlain is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration createSignalling is new, or not the same, after
+   RED       dist/qualabs-concurrent-hls.js: declaration attachAsset is new, or not the same, after
+   RED       index.html: differs outside its imports, first at line 85 of what is left: "  defines a global, assembled from lib/ on every start (ADR 0015); this page's" -> "  defines a global, assembled from lib/ and hls/ on every start (ADR 0015); this page's"
+RED
