@@ -38,6 +38,7 @@
 
 import { traceContract } from './contract-trace.js';
 import { createStockPlayer } from './stock-player.js';
+import { followInterstitials, outcomeNote } from './native-outcome.js';
 import {
   breakDelReporte, crearControlDePane, desenlaceCorto, leerConfig, escribirConfig, presentadoCorto
 } from './capabilities.js';
@@ -110,17 +111,21 @@ function construirCaja(slot) {
 // `construirNativo`. Two panes of the same mode ask for the same files, so the
 // network tab alone could not tell them apart; each instance can.
 
-/** What the native client did with a break, as one line of the list. */
-const DESENLACE_NATIVO = {
-  default: '→ plays its default: the linear ad',
-  skipped: '→ skipped: no default content'
-};
+/**
+ * Whether the list of a break declares a linear default, off stage.json: what a
+ * list hls.js plays PLANS, said as the plan until hls.js reports what it did
+ * (native-outcome.js).
+ */
+function tieneDefault(id) {
+  if (stage.breakLineal?.id === id) return true;
+  return stage.breaks.find((b) => b.id === id)?.lineal;
+}
 
 /** The break an asset-list belongs to, from its name: `asset-list-break-a.json` is break `a`. */
 const breakDeLaLista = (ruta) => ruta.match(/asset-list-break-([a-z0-9]+)\.json/)?.[1] ?? null;
 
 function pintarPedidos(lado) {
-  const { pedidos, desenlaces, presentados = {} } = vivo?.lados[lado] ?? { pedidos: [], desenlaces: {} };
+  const { pedidos, seguidor = null, presentados = {} } = vivo?.lados[lado] ?? { pedidos: [] };
   const lista = panes[lado].pedidos;
   if (!pedidos.length) {
     const li = document.createElement('li');
@@ -138,7 +143,9 @@ function pintarPedidos(lado) {
     if (!query) marca.className = 'none';
     marca.textContent = query ? `?${query}` : '  — no query';
     li.append(marca);
-    const nativo = asset ? null : DESENLACE_NATIVO[desenlaces[breakDeLaLista(u.pathname)]];
+    // A list hls.js plays: what it did, once it said so, and the plan until then.
+    const id = breakDeLaLista(u.pathname);
+    const nativo = asset ? null : outcomeNote(seguidor?.outcome(id), { hasDefault: tieneDefault(id) });
     if (asset || nativo) {
       const nota = document.createElement('span');
       nota.className = 'wire__outcome';
@@ -452,10 +459,9 @@ function construirNuestro(lado, capacidades, caja, registro) {
     }
   });
   propios.observe({ type: 'resource' });
-  hls.on(Hls.Events.INTERSTITIAL_ASSET_STARTED, (_e, data) => {
-    registro.desenlaces[breakDelReporte({ id: data.event.identifier })] = 'default';
-    pintarPedidos(lado);
-  });
+  // And what hls.js did with it: started its default, or skipped it because
+  // the default failed to load (native-outcome.js).
+  registro.seguidor = followInterstitials(hls, () => pintarPedidos(lado), (identifier) => breakDelReporte({ id: identifier }));
 
   return {
     desconectar: () => propios.disconnect(),
@@ -502,21 +508,10 @@ function construirNativo(lado, caja, registro) {
   });
   propios.observe({ type: 'resource' });
   // And what it did with each break, from its interstitial events: an asset that
-  // started is the default playing; a break that ended with none started was
-  // skipped, which is what the break without a default is for (ADR 0091).
-  const empezados = new Set();
-  stock.hls.on(Hls.Events.INTERSTITIAL_ASSET_STARTED, (_e, data) => {
-    const id = breakDelReporte({ id: data.event.identifier });
-    empezados.add(id);
-    registro.desenlaces[id] = 'default';
-    pintarPedidos(lado);
-  });
-  stock.hls.on(Hls.Events.INTERSTITIAL_ENDED, (_e, data) => {
-    const id = breakDelReporte({ id: data.event.identifier });
-    if (!empezados.has(id)) registro.desenlaces[id] = 'skipped';
-    empezados.delete(id);
-    pintarPedidos(lado);
-  });
+  // started is the default playing; a default that failed to load, or a list
+  // with no default (ADR 0091), is a break skipped (native-outcome.js).
+  registro.seguidor = followInterstitials(stock.hls, () => pintarPedidos(lado),
+    (identifier) => breakDelReporte({ id: identifier }));
   return {
     modo: 'nativo', capacidades: null, hls: stock.hls, stock, video: caja.video,
     programa: stock.programme,
@@ -544,7 +539,7 @@ function armar(config, retomarEn = 0) {
 
   const lados = {};
   for (const lado of LADOS) {
-    const registro = { pedidos: [], selecciones: {}, desenlaces: {}, presentados: {} };
+    const registro = { pedidos: [], selecciones: {}, seguidor: null, presentados: {} };
     const caja = construirCaja(panes[lado].caja);
     pintarRotulos(lado, config[lado]);
     const l = config[lado].modo === 'nativo'
