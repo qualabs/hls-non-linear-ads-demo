@@ -46,3 +46,39 @@ y T-10 (los panes HLS de `stage-pair` montan HLS, PNG y MP4).
 - El build sin `lib/ad-list.js` y `lib/playhead.js` en `FUENTES` pasó `npm run check` y los tests
   (importan los módulos), y lo agarró el comparador: 13 declaraciones faltantes y `evaluating the
   dist failed`.
+
+## `attachAsset`, medido contra el de `bb0d78b`
+
+Pregunta del despacho: ¿cambia lo que hacen las demos HLS? Ningún test de la suite toca
+`hls/media.js` (es de browser), así que se midió con un diferencial, `diferencial.mjs`: el
+`attachAsset` de `bb0d78b` y el de `1dd6247` sobre las mismas entradas, con un `Hls` falso y nodos
+falsos que registran todo (constructor y opciones de `Hls`, suscripciones, `loadSource`,
+`attachMedia`, `destroy`, cada `set` y llamada sobre el nodo, `onLoaded`/`onFailed` con su frase), y
+la traza entera comparada.
+
+Entradas (`cases.json`): los 50 pares `(type, uri)` que aparecen en las listas de las cinco demos
+(cada `uri` de un layout con su `type`, y cada `URI` de asset sin type, que es como llega un default
+lineal), más 9 bordes (uri nulo, imagen sin uri, `startAt`, `x-mpegURL` sin extensión, `.m3u8?x`,
+type desconocido, `.mp4` sin type, `IMAGE/PNG`). El único archivo de listas que no parsea es
+`asset-list-repliegue-json-roto.json`, roto a propósito: nunca llega a `attachAsset`. Escenarios por
+entrada (10): `load`, `error`, `loadedmetadata` del nodo; `MANIFEST_LOADED`, 404, timeout, error de
+fragmento no fatal y fatal de hls.js; los 10 s del timer; nada. Después, detach y 20 s de timer.
+
+```
+590 runs (59 inputs x 10 scenarios), 0 differ
+```
+
+Rama que toma cada entrada de las demos (`diferencial-salida.txt`): 39 hls.js, 11 imagen,
+9 progresivo.
+
+El instrumento, visto fallar con cuatro mutaciones del código nuevo:
+
+```
+mut1 (streaming invertido):            480 differ
+mut2 (startAt > 10 en vez de > 0):      10 differ
+mut3 (otra frase de fallo del archivo):  8 differ
+mut4 (uri vacío no cuenta como cargado): 20 differ
+```
+
+(Una primera `mut2`, `startAt > 1`, dio 0: ninguna entrada tiene `startAt` entre 0 y 1. Se cambió
+por una que el conjunto de entradas sí distingue.)
