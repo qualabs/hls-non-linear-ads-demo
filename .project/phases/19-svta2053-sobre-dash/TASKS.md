@@ -6,7 +6,7 @@
 | T-02 | Lo común de `hls/` sube a `lib/` | done | agent | — | rama `fase-19` · [`tasks/T-02/`](tasks/T-02/) |
 | T-03 | `dash/signalling.js` | done | agent | — | rama `fase-19` · [`tasks/T-03/`](tasks/T-03/) |
 | T-04 | Los tests de `dash/signalling.js`, vistos fallar | done | agent | — | rama `fase-19` · [`tasks/T-04/`](tasks/T-04/) |
-| T-05 | `dash/media.js`, `dash/concurrent-dash.js`, el dist DASH y las costuras | planned | agent | — | — |
+| T-05 | `dash/media.js`, `dash/concurrent-dash.js`, el dist DASH y las costuras | done | agent | — | rama `fase-19` · [`tasks/T-05/`](tasks/T-05/) |
 | T-06 | El contenido DASH de `stage-pair` | planned | agent | — | — |
 | T-07 | `stage-pair`: "DASH, nuestra librería" en cada pane | planned | agent | — | — |
 | T-08 | `verificar-pares.py`: HLS contra DASH, con sus dos controles | planned | agent | — | — |

@@ -6627,3 +6627,10 @@ interceptor (ADR 0128) y lo común de `lib/`. 29 tests sobre una fixture de dos 
 mano; `readMpd` igual a esa fixture en Chrome; 16 mutaciones, una por regla, todas en rojo.
 413/413. Las opciones viajan en `layoutOptions` (ADR 0105), no en el `options` del borrador que
 citaba el diseño.
+
+## 2026-10-26 — Fase 19, T-05: el entry point DASH, su dist y las costuras
+
+Rama `fase-19` (`d607237`): `dash/media.js`, `dash/concurrent-dash.js`, `vendor/dash.all.min.js`
+5.2.1 y `dist/qualabs-concurrent-dash.js`; `createLayer` subió a `lib/layer.js` (comparador verde).
+El dist HLS sale byte a byte igual; la costura 0015 cubre `dash/`; los archivos de DASH se publican
+sólo en `stage-pair` (`DASH=(…)` en `publicar.sh`), así que las otras cuatro demos no ganan URLs.
