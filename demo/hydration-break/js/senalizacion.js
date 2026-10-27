@@ -12,7 +12,7 @@
 // content is packaged, so a pasted one would be wrong by tomorrow. The playlist
 // is fetched over the network here, and the asset-list is the one the library
 // received from the URL the tag itself carries, handed over in its report
-// (`onResolved`'s `response`, ADR 0116) and not requested a second time.
+// (`onResolved`'s `response`, ADR 0120) and not requested a second time.
 //
 // AND THE ASSET-LIST IS SHOWN ONLY ONCE THE PLAYER HAS ASKED FOR IT. The
 // player asks when the programme is buffered up to the break, as hls.js does for
@@ -482,7 +482,7 @@ export async function showSignalling({ src, tag, mount, payload, provider, video
       await untilTheListsAreIn(provider);
     }
     // The list the library received, from its report, and not a second request
-    // for it (ADR 0116): to an ad server a second request is a second impression.
+    // for it (ADR 0120): to an ad server a second request is a second impression.
     const id = line?.match(/ID="([^"]+)"/)?.[1];
     const assetList = url ? received.get(id)?.json ?? null : null;
     const assets = assetList?.ASSETS;

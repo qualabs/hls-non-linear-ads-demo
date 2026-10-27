@@ -1,4 +1,4 @@
-// asset-list-response.test.js -- the tests of ADR 0116: the answer to each
+// asset-list-response.test.js -- the tests of ADR 0120: the answer to each
 // asset-list request travels in the report `onResolved` gets, as it was received.
 //
 // What they are for: a page that shows the asset-list of a break reads it from

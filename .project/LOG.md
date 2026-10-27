@@ -6569,7 +6569,7 @@ y su `--control` saca cada uno de los 14 plantados como debe. Línea de base gua
 
 ## 2026-10-26 — Cada asset-list se pide una vez: la respuesta viaja en el reporte de onResolved
 
-Opción A de David. ADR 0116.
+Opción A de David. ADR 0120.
 
 - **Librería:** `onResolved` suma `response: { url, status, text, json }` (breaks y post-rolls),
   armado por `readAssetList` en `lib/signalling.js`.
