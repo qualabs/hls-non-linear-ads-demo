@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "type": "slot",
+  "payload": [
+    {
+      "start": 0,
+      "duration": 12,
+      "identifiers": [
+        {
+          "scheme": "ad-id.org",
+          "value": "ZMBR0002000H"
+        }
+      ],
+      "media": [
+        {
+          "type": "application/dash+xml",
+          "id": "zumbra-16x9",
+          "uri": "/content/creatives/zumbra-16x9/d8eabbdae4/dash/manifest.mpd"
+        }
+      ],
+      "layoutOptions": [
+        {
+          "type": "lowerThirdOverlay",
+          "layout": {
+            "assets": [
+              {
+                "id": "banner",
+                "type": "application/dash+xml",
+                "uri": "/content/creatives/zumbra-banner/dash/manifest.mpd",
+                "viewport": "70 6.25 12.5 6.25",
+                "zDepth": 1
+              }
+            ]
+          }
+        },
+        {
+          "type": "squeezebackLShape",
+          "layout": {
+            "primaryContent": {
+              "zDepth": 1,
+              "viewport": "0 0 25 25"
+            },
+            "assets": [
+              {
+                "id": "lBackplate",
+                "type": "image/svg+xml",
+                "uri": "/graphics/campaigns/zumbra-backplate-fijo.svg",
+                "viewport": "0 0 0 0",
+                "zDepth": 0
+              }
+            ]
+          }
+        },
+        {
+          "type": "squeezebackLShape",
+          "layout": {
+            "primaryContent": {
+              "zDepth": 1,
+              "viewport": "0 0 25 25"
+            },
+            "assets": [
+              {
+                "id": "lBackplate",
+                "type": "image/png",
+                "uri": "/graphics/campaigns/zumbra-backplate-fijo.png",
+                "viewport": "0 0 0 0",
+                "zDepth": 0
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

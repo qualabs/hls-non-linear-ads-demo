@@ -1,0 +1,91 @@
+{
+  "version": 2,
+  "type": "slot",
+  "payload": [
+    {
+      "start": 0,
+      "duration": 12,
+      "identifiers": [
+        {
+          "scheme": "ad-id.org",
+          "value": "ZMBR0001000H"
+        }
+      ],
+      "layoutOptions": [
+        {
+          "type": "squeezebackDoubleBox",
+          "layout": {
+            "primaryContent": {
+              "zDepth": 0,
+              "viewport": "25 50 25 0"
+            },
+            "assets": [
+              {
+                "id": "adSideBySide",
+                "type": "application/dash+xml",
+                "uri": "/content/creatives/zumbra-16x9/d8eabbdae4/dash/manifest.mpd",
+                "viewport": "25 0 25 50",
+                "zDepth": 1
+              }
+            ]
+          }
+        },
+        {
+          "type": "squeezebackDoubleBox",
+          "layout": {
+            "primaryContent": {
+              "zDepth": 0,
+              "viewport": "25 50 25 0"
+            },
+            "assets": [
+              {
+                "id": "adSideBySide",
+                "type": "video/mp4",
+                "codecs": "vp09.00.30.08",
+                "uri": "/content/creatives/zumbra-16x9/d8eabbdae4/progressive.mp4",
+                "viewport": "25 0 25 50",
+                "zDepth": 1
+              }
+            ]
+          }
+        },
+        {
+          "type": "squeezebackLShape",
+          "layout": {
+            "primaryContent": {
+              "zDepth": 1,
+              "viewport": "0 0 25 25"
+            },
+            "assets": [
+              {
+                "id": "lBackplate",
+                "type": "image/svg+xml",
+                "uri": "/graphics/campaigns/zumbra-backplate-fijo.svg",
+                "viewport": "0 0 0 0",
+                "zDepth": 0
+              }
+            ]
+          }
+        },
+        {
+          "type": "squeezebackLShape",
+          "layout": {
+            "primaryContent": {
+              "zDepth": 1,
+              "viewport": "0 0 25 25"
+            },
+            "assets": [
+              {
+                "id": "lBackplate",
+                "type": "image/png",
+                "uri": "/graphics/campaigns/zumbra-backplate-fijo.png",
+                "viewport": "0 0 0 0",
+                "zDepth": 0
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
