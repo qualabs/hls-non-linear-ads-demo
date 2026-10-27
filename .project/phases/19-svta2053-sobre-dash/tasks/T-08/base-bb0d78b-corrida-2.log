@@ -1,0 +1,70 @@
+
+== izq=nativo  der=ours-2dec-img   la página leyó la URL: ok
+   ROJO break a izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado None
+   ROJO break a izq (nativo         ) t=     0  {'aviso_lineal': True}   esperado {'aviso_lineal': False}
+   ok   break a der (ours-2dec-img  ) t=  24.4  {'layout': 'squeezebackDoubleBox', 'video': 2, 'img': 0}
+   ok   break b izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b izq (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   break b der (ours-2dec-img  ) t=  69.5  {'layout': 'squeezebackLShape', 'video': 2, 'img': 0}
+   ROJO break c izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.0}
+   ok   break c izq (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   break c der (ours-2dec-img  ) t= 114.5  {'layout': 'lowerThirdOverlay', 'video': 2, 'img': 0}
+   ok   pedidos izq (nativo): 1
+          asset-list-break-pre.json?_HLS_primary_id=17a68ebe-1bf8-4317-a4b1-54a2c6020daa
+   ok   pedidos der (ours-2dec-img): 2
+          asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=1
+          asset-list-break-pre.json?sgai-video-decoders=2&sgai-image-over-video=1
+
+== izq=ours-1dec-img  der=ours-1dec-noimg   la página leyó la URL: ok
+   ok   break a izq (ours-1dec-img  ) t=  24.5  {'layout': 'squeezebackLShape', 'video': 1, 'img': 1}
+   ok   break a der (ours-1dec-noimg) t=  24.6  {'layout': None, 'video': 1, 'img': 0}
+   ok   break b izq (ours-1dec-img  ) t=  69.5  {'layout': 'squeezebackDoubleBox', 'video': 1, 'img': 1}
+   ok   break b der (ours-1dec-noimg) t=  69.5  {'layout': 'linear', 'video': 2, 'img': 0}
+   ok   break c izq (ours-1dec-img  ) t= 114.6  {'layout': 'squeezebackLShape', 'video': 1, 'img': 1}
+   ok   break c der (ours-1dec-noimg) t= 114.5  {'layout': 'linear', 'video': 2, 'img': 0}
+   ok   pedidos izq (ours-1dec-img): 2
+          asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=1
+          asset-list-break-pre.json?sgai-video-decoders=1&sgai-image-over-video=1
+   ok   pedidos der (ours-1dec-noimg): 2
+          asset-list-break-c.json?sgai-video-decoders=1&sgai-image-over-video=0
+          asset-list-break-pre.json?sgai-video-decoders=1&sgai-image-over-video=0
+
+== izq=nativo  der=nativo   la página leyó la URL: ok
+   ROJO break a izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado None
+   ROJO break a izq (nativo         ) t=     0  {'aviso_lineal': True}   esperado {'aviso_lineal': False}
+   ROJO break a der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado None
+   ROJO break a der (nativo         ) t=     0  {'aviso_lineal': True}   esperado {'aviso_lineal': False}
+   ok   break b izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b izq (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   break b der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b der (nativo         ) t=     0  {'aviso_lineal': True}
+   ROJO break c izq asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.0}
+   ok   break c izq (nativo         ) t=     0  {'aviso_lineal': True}
+   ROJO break c der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.0}
+   ok   break c der (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   pedidos izq (nativo): 1
+          asset-list-break-pre.json?_HLS_primary_id=1e3df98b-f2ae-40a1-88fb-48e47441669f
+   ok   pedidos der (nativo): 1
+          asset-list-break-pre.json?_HLS_primary_id=206dbf0f-6ea9-4d3d-98a9-dc81b08efc9c
+
+== izq=ours-2dec-noimg  der=nativo   la página leyó la URL: ok
+   ROJO break a izq (ours-2dec-noimg) t=  34.7  {'layout': None, 'video': 1, 'img': 0}   esperado {'layout': 'squeezebackDoubleBox', 'video': 2, 'img': 0}
+   ok   break a der asset que reproduce hls.js: None
+   ok   break a der (nativo         ) t=  24.4  {'aviso_lineal': False}
+   ok   break b izq (ours-2dec-noimg) t=  69.5  {'layout': 'squeezebackLShape', 'video': 2, 'img': 0}
+   ok   break b der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}
+   ok   break b der (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   break c izq (ours-2dec-noimg) t= 114.5  {'layout': 'lowerThirdOverlay', 'video': 2, 'img': 0}
+   ROJO break c der asset que reproduce hls.js: {'uri': '/content/creatives/ketrava-16x9/index.m3u8', 'duracion': 12.066666666666666}   esperado {'uri': '/content/creatives/kovrin-16x9/index.m3u8', 'duracion': 12.0}
+   ok   break c der (nativo         ) t=     0  {'aviso_lineal': True}
+   ok   pedidos izq (ours-2dec-noimg): 2
+          asset-list-break-c.json?sgai-video-decoders=2&sgai-image-over-video=0
+          asset-list-break-pre.json?sgai-video-decoders=2&sgai-image-over-video=0
+   ok   pedidos der (nativo): 1
+          asset-list-break-pre.json?_HLS_primary_id=511fd794-222d-4f35-a135-3b16211d9dff
+
+control: en B, 1 dec con imágenes contra sin imágenes -> distintos
+control: en B, nativo contra nativo -> iguales
+
+ROJO (11)
+exit 1

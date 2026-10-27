@@ -11,7 +11,7 @@
 | T-07 | `stage-pair`: "DASH, nuestra librería" en cada pane | done | agent | — | rama `fase-19` · [`tasks/T-07/`](tasks/T-07/) |
 | T-08 | `verificar-pares.py`: HLS contra DASH, con sus dos controles | done | agent | — | rama `fase-19` · [`tasks/T-08/`](tasks/T-08/) |
 | T-09 | El texto para SVTA2053: la 6.7 y los ajustes de §1, §4.1 y §5 | done | agent | — | rama `fase-19` · [`tasks/T-09/`](tasks/T-09/) |
-| T-10 | La documentación, la verificación final y el merge a main local | planned | agent | — | — |
+| T-10 | La documentación, la verificación final y el merge a main local | done | agent | — | [`tasks/T-10/`](tasks/T-10/) · merge `7ec15b5` |
 
 ---
 
@@ -191,3 +191,6 @@
   que no son `stage-pair` sólo con los cambios del ADR 0118; main local con el merge; `git status`
   limpio.
 - **nivel de verificación:** alto. Es la prueba de la regla dura de la fase.
+- **post-ejecución:** 2026-10-26, la definición de done pedía las cuatro demos "sólo con los
+  cambios del ADR 0118"; tienen además los renombres de T-02, `attachAsset` y comentarios (T-07),
+  cada uno medido. Y `stage-pair` da 8 referencias faltantes en seco hasta subir su contenido DASH.

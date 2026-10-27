@@ -1,6 +1,6 @@
 ---
 title: "SVTA2053 sobre DASH"
-description: "Escribir la carriage DASH de la presentación concurrente que SVTA2053 v3 dejó para una edición futura (una 6.7 y los ajustes de §1, §4.1 y §5), con el esquema y el sobre v2 de SVTA en un EventStream, y prototiparla en dash/ sobre dash.js 5.2.1 sin modificar, con stage-pair mostrando el mismo stream en HLS y en DASH"
+description: "dash/ sobre dash.js 5.2.1 sin modificar lee la carriage DASH de la presentación concurrente (un EventStream de SVTA con un sobre v2 pod, leído del texto del MPD porque dash.js pierde el CDATA), stage-pair muestra el mismo stream en HLS y en DASH con la misma opción, ventana y pedido en cada break (medido), y docs/svta2053-dash-concurrent-presentation.md escribe la 6.7 para David"
 started: 2026-10-26
 origin: "Nicolás vía agent-nicolas-laptop-865daf, 2026-10-26, despacho del diseño de la fase 19; diseño aprobado (bb0d78b) y ejecución despachada a hls-demo-19"
 depends_on: []

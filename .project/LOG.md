@@ -6657,3 +6657,11 @@ opción, ventana y pedido en cada break y combinación de capacidades; ONCE; lin
 dos controles con la diferencia esperada. La parte vieja del verificador (nativo contra ours) ya
 falla en `bb0d78b`: hallazgo previo, al REPORT. T-09 (`2719f87`): la 6.7 y los ajustes de §1-§5 en
 `docs/svta2053-dash-concurrent-presentation.md`, con 63 citas chequeadas por grep.
+
+## 2026-10-26 — Fase 19, T-10, y fase cerrada
+
+Documentación al día (`f148970`); 419/419, check verde; el comparador contra `bb0d78b` sólo con
+diferencias medidas una por una; en seco, las cuatro demos HLS sin faltantes y `stage-pair` con 8
+faltantes que son su contenido DASH, todavía no subido (con `--con-contenido`, verde). Merge
+`--no-ff` a main local (`7ec15b5`), sin push. Informe en `phases/19-svta2053-sobre-dash/REPORT.md`;
+dos `idea` sembradas (`uris-relativos-de-las-listas`, `verificar-pares-nativo`).
