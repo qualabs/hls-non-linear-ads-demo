@@ -33,8 +33,6 @@ import assert from 'node:assert/strict';
 
 import {
   assetListDue,
-  BUFFER_HOLE_TOLERANCE,
-  bufferedEndAt,
   createSignalling,
   cueOf,
   liveStartPosition,
@@ -42,6 +40,7 @@ import {
   preRollStart,
   provisionalRange
 } from '../hls/signalling.js';
+import { BUFFER_HOLE_TOLERANCE, bufferedEndAt } from '../lib/playhead.js';
 
 const BREAK = { startTime: 60, duration: 12 };
 

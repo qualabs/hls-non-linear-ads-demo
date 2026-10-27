@@ -353,8 +353,9 @@ que va el programa y sin fundido. Qué se presentó lo reporta `onPresented`.
 
 Del lado del renderizado esa función es opaca: la llama y guarda el `detach`.
 Quien la implementa es `hls/media.js`, que es el archivo de la librería que
-conoce a hls.js, y ahí adentro sí se sabe que un `mediaType` de media playlist
-necesita una segunda instancia del player. Que dos elementos de video, cada uno
+conoce a hls.js (y `dash/media.js` del lado DASH, con dash.js), y ahí adentro sí
+se sabe que un `mediaType` de media playlist necesita una segunda instancia del
+player. Que dos elementos de video, cada uno
 con su propia instancia, reproduzcan al mismo tiempo es lo que midió la T-01 de
 la fase 01.
 

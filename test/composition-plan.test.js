@@ -42,13 +42,13 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { resolveExperience } from '../lib/experience.js';
-import { resolveAssetList } from '../hls/signalling.js';
+import { resolveAssets } from '../lib/ad-list.js';
 import { planComposition, applyPlan, identityOf, sameGeometry } from '../lib/renderer.js';
 
 /** The experiences of one asset-list, resolved as the renderer gets them. */
 function experiencesOf(list, { id = list, slotStart = 0 } = {}) {
   const json = JSON.parse(readFileSync(new URL(`./fixtures/asset-lists/${list}`, import.meta.url), 'utf8'));
-  return resolveAssetList(json, { id, slotStart });
+  return resolveAssets(json, { id, slotStart });
 }
 
 const one = (list, options) => experiencesOf(list, options)[0];

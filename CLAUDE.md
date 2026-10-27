@@ -13,7 +13,7 @@ and knowing which is which is worth more than reading any of them first:
 | `README.md` | what the library is and how it is integrated |
 | `.project/PROJECT.md` | the scope, the dates and who does what |
 | `.project/decisions/` | **the decisions, numbered**. When something in the code looks arbitrary, the reason is here |
-| the header comments of `lib/*.js`, `hls/*.js` and of the pages | **the real documentation**. They are long on purpose and they explain why, not what |
+| the header comments of `lib/*.js`, `hls/*.js`, `dash/*.js` and of the pages | **the real documentation**. They are long on purpose and they explain why, not what |
 
 The order for understanding why something is the way it is: the file's own comment,
 then the ADR it names, then the phase that opened it.
@@ -52,6 +52,13 @@ workflow authenticates through Workload Identity Federation, set up by
 except for the signalled playlists that `senalizar-contenido.sh` writes there. After
 re-packaging a demo, its content goes up by hand: `scripts/publicar.sh --publicar
 --con-contenido <demo>`, from a checkout that has it.
+
+**The DASH side of `stage-pair` (phase 19) goes up by hand too**: its segments, its MPDs and
+the signalled MPD are all in `content/`, so after `demo/stage-pair/scripts/empaquetar-dash.sh`
+it is `scripts/publicar.sh --publicar --con-contenido stage-pair`. Until then a dry run of
+`stage-pair` checks the references of the DASH envelopes against the bucket, where they are not,
+and goes red, which is the right answer. The DASH build and dash.js go only to the demos in the
+`DASH` list of `publicar.sh`.
 
 **Anything with a fixed name is served with `Cache-Control: no-cache`**, because the default
 is a public hour and the Google edge keeps serving the old file for that hour; and in

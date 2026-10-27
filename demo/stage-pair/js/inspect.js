@@ -48,7 +48,7 @@
 // WHY THE SWITCH REBUILDS AND THE JUMP DOES NOT
 // ============================================================================
 // `capabilities` is read ONCE, when the signalling is created (`createSignalling`
-// in lib/signalling.js), with the argument written where it is read: what that
+// in hls/signalling.js), with the argument written where it is read: what that
 // value can be wrong about is a statement of the integrator, and that is one
 // statement and not one per break. So there is no in-flight way to change it and
 // rebuilding is not a detour around the contract -- it IS the contract.

@@ -85,7 +85,7 @@ export function describirOpcion(opcion, indice) {
 
 /**
  * What the library HANDED THE RENDERER for an asset of a break, as one sentence,
- * from the report of `onResolved` (`resolveAssetList` in lib/signalling.js).
+ * from the report of `onResolved` (`resolveAssets` in lib/ad-list.js).
  * Since ADR 0107 that is not yet what is on screen: the renderer can still fall
  * to a later option, to the default or to nothing, and `presentado` says that.
  */
@@ -167,18 +167,31 @@ export function presentadoCorto(reporte) {
 /** The break a report of `onResolved` belongs to: `AD-A` is break `a` (one tag per break, ADR 0113). */
 export const breakDelReporte = (seleccion) => seleccion.id.match(/^AD-([A-Z0-9]+)(?:-|$)/i)?.[1].toLowerCase() ?? null;
 
+/**
+ * The break of a report of the DASH pane (phase 19). An Event@id of an MPD is an
+ * unsigned int, so `senalizar-dash.mjs` numbers the breaks of `stage.breaks` from
+ * 1 and gives the traditional linear one the next number; this reads it back.
+ */
+export const breakDash = (id, stage) => {
+  const n = Number(id);
+  if (n >= 1 && n <= stage.breaks.length) return stage.breaks[n - 1].id;
+  return n === stage.breaks.length + 1 ? stage.breakLineal?.id ?? null : null;
+};
+
 // ===========================================================================
 // index.html: ONE CONTROL PER PANE (fase 15)
 // ===========================================================================
-// Each pane of the pair chooses its mode -- the native HLS interstitials client
-// or our library -- and, only with our library, the two axes. The configuration
+// Each pane of the pair chooses its mode -- the native HLS interstitials client,
+// our library over HLS, or our library over DASH (phase 19) -- and, with our
+// library, the two axes. The configuration
 // of the page is `{ izq: {modo, capacidades}, der: {...} }` and it travels in the
 // URL, so a link opens a precise combination:
 //
 //     ?izq=nativo&der=ours-2dec-img        the default: the pair as published
 //     ?izq=ours-1dec-img&der=ours-1dec-noimg
+//     ?izq=ours-2dec-img&der=dash-2dec-img     the same stream over HLS and over DASH
 
-const MODOS = { nativo: 'HLS interstitials, native', ours: 'With our library' };
+const MODOS = { nativo: 'HLS interstitials, native', ours: 'With our library', dash: 'DASH, our library' };
 
 /** The default of each pane: the pair as it was published. */
 const POR_DEFECTO = (stage) => ({
@@ -189,17 +202,17 @@ const POR_DEFECTO = (stage) => ({
 /** One pane's configuration as it goes in the URL. */
 export function aTexto(c) {
   if (c.modo === 'nativo') return 'nativo';
-  return `ours-${c.capacidades.concurrentVideo}dec-${c.capacidades.concurrentImage ? 'img' : 'noimg'}`;
+  return `${c.modo}-${c.capacidades.concurrentVideo}dec-${c.capacidades.concurrentImage ? 'img' : 'noimg'}`;
 }
 
 /** One pane's configuration out of the URL, or null when the text is not one. */
 export function deTexto(texto, stage) {
   if (texto === 'nativo') return { modo: 'nativo', capacidades: null };
-  const m = /^ours-(\d+)dec-(img|noimg)$/.exec(texto || '');
+  const m = /^(ours|dash)-(\d+)dec-(img|noimg)$/.exec(texto || '');
   if (!m) return null;
-  const concurrentVideo = Number(m[1]);
+  const concurrentVideo = Number(m[2]);
   if (!stage.capacidades.concurrentVideo.includes(concurrentVideo)) return null;
-  return { modo: 'ours', capacidades: { concurrentVideo, concurrentImage: m[2] === 'img' } };
+  return { modo: m[1], capacidades: { concurrentVideo, concurrentImage: m[3] === 'img' } };
 }
 
 /** The page's configuration from the query string, pane by pane, with the default for what is missing or wrong. */
@@ -255,8 +268,8 @@ export function crearControlDePane({ contenedor, stage, lado, inicial, alCambiar
   }));
   const ejes = Object.entries(EJES).map(([clave, eje]) => grupo(eje.titulo,
     stage.capacidades[clave].map((valor) => boton(eje.valor(valor), { lado, eje: clave, valor: String(valor) }, () => {
-      if (actual.modo !== 'ours' || actual.capacidades[clave] === valor) return;
-      actual = { modo: 'ours', capacidades: { ...actual.capacidades, [clave]: valor } };
+      if (actual.modo === 'nativo' || actual.capacidades[clave] === valor) return;
+      actual = { modo: actual.modo, capacidades: { ...actual.capacidades, [clave]: valor } };
       Object.assign(ultimaCapacidad, actual.capacidades);
       alCambiar(structuredClone(actual));
     }))));
@@ -270,13 +283,13 @@ export function crearControlDePane({ contenedor, stage, lado, inicial, alCambiar
   function pintar(config) {
     actual = structuredClone(config);
     modos.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.modo === actual.modo)));
-    cajaEjes.hidden = actual.modo !== 'ours';
+    cajaEjes.hidden = actual.modo === 'nativo';
     for (const b of cajaEjes.querySelectorAll('button')) {
-      b.setAttribute('aria-pressed', String(actual.modo === 'ours'
+      b.setAttribute('aria-pressed', String(actual.modo !== 'nativo'
         && String(actual.capacidades[b.dataset.eje]) === b.dataset.valor));
     }
-    salida.textContent = actual.modo === 'ours'
-      ? `asks with ?${Object.entries(PARAMETROS).map(([clave, nombre]) =>
+    salida.textContent = actual.modo !== 'nativo'
+      ? `asks${actual.modo === 'dash' ? ' for its $remote.slots' : ''} with ?${Object.entries(PARAMETROS).map(([clave, nombre]) =>
           `${nombre}=${clave === 'concurrentImage' ? (actual.capacidades[clave] ? 1 : 0) : actual.capacidades[clave]}`).join('&')}`
       : 'plays the Apple-class interstitial and replaces the programme with it';
   }

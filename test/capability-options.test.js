@@ -28,9 +28,9 @@ import {
   BLOCK,
   IMAGE_OVER_VIDEO_PARAM,
   VIDEO_DECODERS_PARAM,
-  assetListUrl,
-  resolveAssetList
-} from '../hls/signalling.js';
+  listRequestUrl,
+  resolveAssets
+} from '../lib/ad-list.js';
 
 const ID = 'AD-A-CONCURRENT';
 const SLOT_START = 20;
@@ -60,7 +60,7 @@ function list({ withDefault = true, item = { start: 0, duration: 12, layoutOptio
 /** What a list resolves to under a capability: the media drawn, and the report. */
 function resolve(capabilities, options) {
   const report = [];
-  const out = resolveAssetList(list(options), {
+  const out = resolveAssets(list(options), {
     id: ID, slotStart: SLOT_START, capabilities: usableCapabilities(capabilities), report
   });
   const drawn = out.map((e) => e.type === LINEAR_TYPE
@@ -184,10 +184,10 @@ test('a value that is not one of its axis is neither used nor sent, and it is sa
 
 test('the request carries one parameter per configured capability, and nothing without one', () => {
   const base = 'http://host/content/primary/con-daterange.m3u8';
-  assert.equal(assetListUrl('/signalling/a.json', base), 'http://host/signalling/a.json');
-  assert.equal(assetListUrl('/signalling/a.json', base, usableCapabilities({ concurrentVideo: 1, concurrentImage: false })),
+  assert.equal(listRequestUrl('/signalling/a.json', base), 'http://host/signalling/a.json');
+  assert.equal(listRequestUrl('/signalling/a.json', base, usableCapabilities({ concurrentVideo: 1, concurrentImage: false })),
     `http://host/signalling/a.json?${VIDEO_DECODERS_PARAM}=1&${IMAGE_OVER_VIDEO_PARAM}=0`);
-  assert.equal(assetListUrl('/signalling/a.json', base, usableCapabilities({ concurrentImage: true })),
+  assert.equal(listRequestUrl('/signalling/a.json', base, usableCapabilities({ concurrentImage: true })),
     `http://host/signalling/a.json?${IMAGE_OVER_VIDEO_PARAM}=1`);
   assert.equal(VIDEO_DECODERS_PARAM, 'sgai-video-decoders');
   assert.equal(IMAGE_OVER_VIDEO_PARAM, 'sgai-image-over-video');
@@ -210,7 +210,7 @@ test('one item with no option left takes the whole asset to its default, and not
         ]
       }
     };
-    const out = resolveAssetList({ ASSETS: [asset] }, {
+    const out = resolveAssets({ ASSETS: [asset] }, {
       id: ID, slotStart: SLOT_START, capabilities: usableCapabilities({ concurrentVideo: 1, concurrentImage: true })
     });
     assert.deepEqual(out.map((e) => e.type), [LINEAR_TYPE]);

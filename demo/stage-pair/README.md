@@ -65,11 +65,20 @@ Without the first, the two pages of the pair still run: what is missing is the v
 each break, not the demo. Without the second, `race.html` has nothing to play, and the
 signalling script says exactly that and carries on.
 
+**The DASH pane needs a third**, after those two, and it is a remux and not an encode, so it
+takes seconds: the programme and every creative in fragmented MP4 with its MPD, in a `dash/`
+folder next to each playlist, on the same timeline as HLS (the header of the script says how
+that was measured). The next start of `run.sh` signals the MPD.
+
+```bash
+./demo/stage-pair/scripts/empaquetar-dash.sh
+```
+
 ## The three pages
 
 | page | what it is for |
 | --- | --- |
-| [`index.html`](index.html) | **the pair.** Two players, each with its own control, loading the same playlist with the class of its mode, over the same programme, the walk through the three non-linear shapes — side by side, L-shape and banner — over a preroll, three breaks and a post-roll, and the capability switch |
+| [`index.html`](index.html) | **the pair.** Two players, each with its own control — the native HLS client, our library over HLS, or our library over DASH (`?der=dash-2dec-img`), which loads the same programme as an MPD signalled with the scheme of SVTA2053 —, loading the same playlist with the class of its mode, over the same programme, the walk through the three non-linear shapes — side by side, L-shape and banner — over a preroll, three breaks and a post-roll, and the capability switch |
 | [`inspect.html`](inspect.html) | **one player, and the whole exchange in the open**, with the same control as each player of the pair. The Date Range the playlist carries, as written (`CLASS="{$adclass}"`) and as this client's hls.js read it, the asset-list URL the client asked for with the capability on it, the body that came back, verbatim, and **what the library kept of it**: each option, why it was discarded, and how the break ended. Made to be read out loud in a room with the network tab open |
 | [`race.html`](race.html) | **the ads first, then the multi view window.** Four non-linear ads over a race, eight seconds of clean race, and then a window that offers a catalogue of six on-board cameras for whoever is watching to compose |
 

@@ -8,7 +8,7 @@
 # be run before writing, and asks gcloud what the sync would copy and delete. It
 # writes nothing to any bucket.
 #
-# WHAT IS PUBLISHED IS HEAD, NOT THE WORKING TREE. The demo, lib/, hls/ and vendor/
+# WHAT IS PUBLISHED IS HEAD, NOT THE WORKING TREE. The demo, lib/, hls/, dash/ and vendor/
 # come out of `git archive HEAD` into a stage of their own, dist/ is built there, and
 # the demo's own senalizar-contenido.sh runs there. Nothing in the checkout is written,
 # so the demos served on this machine from dist/ and content/ are not touched.
@@ -40,6 +40,12 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 ALL=(stage-pair race-multiview multiview-offer hydration-break compatibility-pair)
+# THE DASH SIDE GOES ONLY TO THE DEMOS THAT LOAD IT (phase 19). Every bucket holds
+# dist/ and vendor/ whole, and the DASH build and dash.js are three files no page of
+# the other demos asks for: published there they would be three new URLs in four
+# buckets that did not change. scripts/comparar-publicacion.mjs reads these two lines.
+DASH=(stage-pair)
+DASH_FILES=(dist/qualabs-concurrent-dash.js vendor/dash.all.min.js vendor/dash.js.LICENSE)
 PUBLISH=0 CONTENT=0 CONTROL=() DEMOS=()
 for a in "$@"; do
   case "$a" in
@@ -69,7 +75,7 @@ $PY selftest
 
 echo "== 1. the stage: HEAD $(git rev-parse --short HEAD), with dist/ built in it =="
 mkdir "$TMP/repo"
-git archive HEAD lib hls scripts vendor demo | tar -x -C "$TMP/repo"
+git archive HEAD lib hls dash scripts vendor demo | tar -x -C "$TMP/repo"
 (cd "$TMP/repo" && ./scripts/construir-libreria.sh)
 
 red=0
@@ -77,6 +83,7 @@ for d in "${DEMOS[@]}"; do
   S="$TMP/repo/demo/$d" B=$(bucket "$d")
   echo "== 2. $d: checks =="
   cp -r "$TMP/repo/dist" "$TMP/repo/vendor" "$S/"
+  [[ " ${DASH[*]} " == *" $d "* ]] || (cd "$S" && rm -f "${DASH_FILES[@]}")
   gcloud storage ls --json "$B/**" > "$TMP/$d.before.json"
   if [ "$CONTENT" = 1 ]; then
     [ -d "demo/$d/content" ] || { echo "   --con-contenido needs demo/$d/content on disk" >&2; exit 1; }

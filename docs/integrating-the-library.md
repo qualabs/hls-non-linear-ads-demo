@@ -20,6 +20,15 @@ list of feeds and fullscreen of the composition — can also be used on its own,
 over a player this library does nothing else to. That is a second call and it is
 §6.
 
+**Over MPEG-DASH it is the same library on dash.js**, with its own build
+(`dist/qualabs-concurrent-dash.js`, the global `QualabsConcurrentDash`) and its
+own `attach(player, options)`, with the same options and the same handle. Two
+things differ, and both are written in [`dash/README.md`](../dash/README.md):
+`attach` goes before `player.initialize(video, mpd)`, with `video` passed in the
+options, and the traditional linear break of the stream, an Alternative MPD
+replace event, is played by this library because dash.js does not. This page is
+otherwise about the HLS build.
+
 The seam between the two layers inside the library is a different document,
 `contrato-senalizacion-renderizado.md`. You do not need it to integrate; you
 need it if you want to read what is active at a given instant, which is what
