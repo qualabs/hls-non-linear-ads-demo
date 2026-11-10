@@ -6753,3 +6753,43 @@ nada, por las dos URIs de `missing-on-purpose` del break C (HLS y DASH), que fal
   0 faltas, 2 aceptadas. Con TZ local la playlist señalizada sale con `-0300` y difiere del bucket
   sólo en la zona horaria; con `TZ=UTC`, como el runner, 0 archivos señalizados cambian.
 - `npm test` 440/440, `npm run check` verde.
+
+## 2026-11-10 — inspect.html tiene modo DASH (ADR 0130)
+
+Pedido de David: `inspect.html?modo=dash-2dec-img` tiraba "Cannot read properties of undefined
+(reading 'rol')" (`ROTULOS` sin `dash`) y no cargaba nada, también publicado. Rama `inspect-dash`
+desde `cc9edb9`, sin push.
+
+- `readAssetList` se muda a `lib/ad-list.js` como `readListResponse` (el nombre viejo no pasa la
+  costura del ADR 0003, que busca `assetlist` sin distinguir mayúsculas); `hls/signalling.js` la
+  sigue exportando como `readAssetList`. `dash/signalling.js` lee `$remote.slots` con ella y entrega
+  `response: { url, status, text, json }` en `onResolved`, breaks y post-roll. Un pedido por lista.
+- `js/dash-player.js`: el bloque del integrador DASH, que usan el pane DASH de `index.html` y el
+  modo DASH de `inspect.html`. `js/dash-mpd.js`: lectura pura del EventStream del texto del MPD.
+- Las cuatro tarjetas en DASH: el Event del break tal como está en el MPD que recibió dash.js (por un
+  interceptor propio de la página), con lo que leyó la librería y lo que trajo el evento de dash.js
+  (`messageData` `undefined` por el CDATA, ADR 0128); el pedido a `$remote.slots` con sus `sgai-*`;
+  el sobre `slot` textual del reporte; lo que la librería guardó y lo que quedó en pantalla, con la
+  falla deliberada del break C (`.../missing-on-purpose/dash/manifest.mpd`). El break lineal es un
+  replace que reproduce la librería (ADR 0125): las tarjetas 2 y 3 dicen que no hay lista. Un
+  `?modo=` desconocido se dice en `#aviso` y no rompe la página.
+- Contenido DASH local: este checkout no tenía `content/primary/dash/`. Se corrió
+  `demo/stage-pair/scripts/empaquetar-dash.sh` (programa y nueve creativos, remux con ffmpeg) y
+  `senalizar-dash.mjs stage.json content/primary/dash/manifest.mpd content/primary/dash/senalizado.mpd`.
+  `content/` no va a git.
+- Tests: `demo/stage-pair/test/dash-mpd.test.js` (8), dos en `test/dash-signalling.test.js` y uno en
+  `test/asset-list-response.test.js`; `npm test` 451/451, `npm run check` verde, validador verde.
+  `verificar-inspect-modos.py` pasa a ocho modos con un pedido por lista, sin excepciones, failover
+  del break C, botón de modo y modo desconocido: VERDE en Chrome headless (8091).
+
+## 2026-11-10 — Un salto en modo nativo de inspect.html no aterrizaba
+
+Encontrado al correr `verificar-inspect-modos.py`, que ya estaba rojo en `cc9edb9` en modo nativo
+(medido contra `origin/main` en un worktree, 8092): cada salto rearma el player, el hls.js de fábrica
+vuelve a reproducir el preroll de 12 s (ADR 0110), y las veinte escrituras de `buscar` se agotaban
+en ese tiempo, aceptadas y descartadas. El programa arrancaba en 12 s en lugar del break.
+
+- `inspect.js`: en nativo, `listo` también espera a que no haya un aviso sonando (esperar es
+  disponibilidad, no un intento). Medido: el salto a B aterriza en 60 s y B suena a los 65 s.
+- `verificar-inspect-modos.py`: en nativo espera el aviso de ESE break, no el preroll del rearme.
+  Corrida completa de los ocho modos: VERDE.
