@@ -41,7 +41,7 @@
 
 import { activeAt, linearItem, rangeOfExperiences, resolveExperience, withOptions } from '../lib/experience.js';
 import { usableCapabilities, usablePreValidation } from '../lib/capabilities.js';
-import { BLOCK, listRequestUrl, resolveAssets, resolvePostRoll, resolveWithFirstRequests } from '../lib/ad-list.js';
+import { BLOCK, listRequestUrl, readListResponse, resolveAssets, resolvePostRoll, resolveWithFirstRequests } from '../lib/ad-list.js';
 import { bufferedEndAt, onceProgress, postRollDue, rangesOf } from '../lib/playhead.js';
 
 /** The scheme of SVTA2053 §5 (Table 24). Its Code 8, 9 and 13 write `ad-id-signaling`; §5 is the one. */
@@ -360,6 +360,13 @@ export function drawnAt(experiences, linear, time) {
  * `player` is a dash.js `MediaPlayer` before `initialize` (the interceptor has to
  * be there when the MPD arrives); `video` is its element. Only a `static` MPD
  * is read: live is out of the prototype (phase 19).
+ *
+ * `onResolved(experiences, selection)` gets the report the HLS side hands over,
+ * built by the same lib/ad-list.js, and `selection.response` is the answer to
+ * the `$remote.slots` request as it was received, `{ url, status, text, json }`
+ * (`readListResponse`, ADR 0129): the slot envelope verbatim, so a page that
+ * shows it does not ask for it again. It is null for Slots written inside the
+ * Pod, which nothing was requested for.
  */
 export function createSignalling(player, video, {
   onResolved, capabilities = null, sendCapabilities = true, firstRequest = null,
@@ -471,16 +478,22 @@ export function createSignalling(player, video, {
     }
   }
 
-  /** The Pod's slots, inside or behind `$remote.slots`, with the capabilities on the request. */
+  /**
+   * The Pod's slots, inside or behind `$remote.slots`, with the capabilities on
+   * the request. A remote list is asked for ONCE, and its answer is kept whole
+   * as `response` (`readListResponse`, ADR 0129) for `onResolved`, as the HLS
+   * side does; Slots written inside the Pod have no request and no `response`.
+   */
   async function slotsOf(brk) {
     const pod = brk.pods[0];
     const remote = pod?.$remote?.slots;
     if (brk.remote && typeof remote === 'string') {
       const url = listRequestUrl(remote, base, sendCapabilities ? declared : null);
       console.log(`[signalling] ${brk.id}: $remote.slots ${url}`);
-      return { url, slots: slotsOfEnvelope(await fetch(url).then((r) => r.json())) };
+      const response = await readListResponse(await fetch(url), url);
+      return { url, slots: slotsOfEnvelope(response.json), response };
     }
-    return { url: null, slots: Array.isArray(pod?.slots) ? pod.slots : [] };
+    return { url: null, slots: Array.isArray(pod?.slots) ? pod.slots : [], response: null };
   }
 
   async function resolveBreak(brk) {
@@ -490,6 +503,7 @@ export function createSignalling(player, video, {
     try {
       const got = await slotsOf(brk);
       url = got.url;
+      const { response } = got;
       const adList = adListOfSlots(got.slots);
       const report = [];
       const requests = [];
@@ -503,7 +517,7 @@ export function createSignalling(player, video, {
       if (range) ranges.push(range);
       onResolved?.(resolved, {
         id, url, capabilities: declared, sent: Boolean(url && sendCapabilities && declared), assets: report, requests,
-        preValidation: { enabled: Boolean(request), method: request ? preValidation.method : null }
+        preValidation: { enabled: Boolean(request), method: request ? preValidation.method : null }, response
       });
     } catch (error) {
       drop();
@@ -517,13 +531,13 @@ export function createSignalling(player, video, {
   async function resolvePost(entry) {
     const { id } = entry;
     try {
-      const { url, slots } = await slotsOf(entry.brk);
+      const { url, slots, response } = await slotsOf(entry.brk);
       const report = [];
       entry.experiences = resolvePostRoll(adListOfSlots(slots), { id, slotStart: entry.startTime, report });
       entry.state = 'resolved';
       onResolved?.(entry.experiences.slice(), {
         id, url, postroll: true, capabilities: declared, sent: Boolean(url && sendCapabilities && declared),
-        assets: report, requests: [], preValidation: { enabled: false, method: null }
+        assets: report, requests: [], preValidation: { enabled: false, method: null }, response
       });
     } catch (error) {
       entry.state = 'failed';
