@@ -999,7 +999,11 @@ function armarNativo(retomarEn = 0) {
   vivo = {
     modo: 'nativo', hls: stock.hls, stock, video, capacidades: null, src: SRC.nativo,
     programa: stock.programme, destruir: () => stock.hls.destroy(),
-    listo: () => stock.hls.interstitialsManager?.primary != null && video.readyState >= 1
+    // Not while hls.js plays an ad: a rebuild replays the preroll (CUE="PRE", ADR
+    // 0110), 12 s in which a write to the programme clock is accepted and
+    // dropped, and the twenty writes of `buscar` ran out before it ended, so a
+    // jump in native mode never landed. Waiting is readiness, not an attempt.
+    listo: () => stock.hls.interstitialsManager?.primary != null && video.readyState >= 1 && stock.playingAd == null
   };
   alTiempo();
   if (retomarEn > 0) buscar(retomarEn);

@@ -6781,3 +6781,15 @@ desde `cc9edb9`, sin push.
   `test/asset-list-response.test.js`; `npm test` 451/451, `npm run check` verde, validador verde.
   `verificar-inspect-modos.py` pasa a ocho modos con un pedido por lista, sin excepciones, failover
   del break C, botón de modo y modo desconocido: VERDE en Chrome headless (8091).
+
+## 2026-11-10 — Un salto en modo nativo de inspect.html no aterrizaba
+
+Encontrado al correr `verificar-inspect-modos.py`, que ya estaba rojo en `cc9edb9` en modo nativo
+(medido contra `origin/main` en un worktree, 8092): cada salto rearma el player, el hls.js de fábrica
+vuelve a reproducir el preroll de 12 s (ADR 0110), y las veinte escrituras de `buscar` se agotaban
+en ese tiempo, aceptadas y descartadas. El programa arrancaba en 12 s en lugar del break.
+
+- `inspect.js`: en nativo, `listo` también espera a que no haya un aviso sonando (esperar es
+  disponibilidad, no un intento). Medido: el salto a B aterriza en 60 s y B suena a los 65 s.
+- `verificar-inspect-modos.py`: en nativo espera el aviso de ESE break, no el preroll del rearme.
+  Corrida completa de los ocho modos: VERDE.
