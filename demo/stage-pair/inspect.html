@@ -60,6 +60,14 @@
   second opinion computed by this page. The toggle "Pre-validate assets"
   (off, the library's default) adds the up-front check of ADR 0106.
 
+  IN DASH MODE (`?modo=dash-...`, phase 19) THE SAME FOUR MOVES, OFF THE MPD.
+  One: the break's Event in the signalled MPD's EventStream, as written, cut out
+  of the response dash.js received -- with what the library read of it and what
+  dash.js's own event carried (ADR 0128). Two: the `$remote.slots` request with
+  its capabilities. Three: the slot envelope that came back, from the library's
+  report (ADR 0129). Four: as above. The traditional linear break is an
+  Alternative MPD replace event our library plays (ADR 0125), with no list.
+
   AND THE REQUESTS ARRIVE ONE BREAK AT A TIME (ADR 0108): the library asks for
   a break's asset-list when the programme is buffered up to it, or when it is
   played or sought into, as hls.js does for an interstitial -- so card 2 says
@@ -82,7 +90,9 @@
               `capabilities` is read once, when the signalling is created, so a
               value changed in flight would never be read again
               (hls/signalling.js).
-  #ranges     the range of the break in this client's manifest, read off it.
+  #ranges     the range of the break in this client's manifest, read off it
+              (in DASH, its Event in the MPD).
+  #aviso      a line said only when the URL asks for a mode this page does not play.
   #request    the URL that went out, with the parameter picked out of it.
   #answer     the body that came back.
   #filter     what the library kept of it, and why.
@@ -127,10 +137,16 @@
       still image in another layout.
       What decides what is drawn is the library, in panel 4. With our library the player loads
       the concurrent manifest; in native mode, the interstitials manifest, and hls.js plays the
-      standard part of the same asset-list. The combination is in the URL.
+      standard part of the same asset-list. In DASH mode the player is dash.js with our library,
+      loading the signalled MPD: each break is an Event of SVTA2053's scheme, and its options are
+      asked for at its <code>$remote.slots</code>, with the same two capabilities. There is no native
+      DASH client to set beside it. The combination is in the URL.
     </p>
     </details>
   </section>
+
+  <!-- Said when the page was asked for a mode it does not play; hidden otherwise. -->
+  <p class="step-out" id="aviso" role="status" hidden></p>
 
   <div class="inspect">
 
@@ -163,7 +179,7 @@
       <p class="exchange__which" id="which"></p>
 
       <article class="move">
-        <h2 class="move__title"><span class="move__n">1</span> What the playlist said</h2>
+        <h2 class="move__title"><span class="move__n">1</span> <span id="ranges-title">What the playlist said</span></h2>
         <p class="move__lede" id="ranges-lede"></p>
         <div id="ranges"></div>
       </article>
@@ -196,6 +212,9 @@
 
 <script src="/vendor/hls.min.js"></script>
 <script src="/dist/qualabs-concurrent-hls.js"></script>
+<!-- The DASH mode (phase 19): dash.js and the library's DASH build, as on index.html. -->
+<script src="/vendor/dash.all.min.js"></script>
+<script src="/dist/qualabs-concurrent-dash.js"></script>
 <script type="module" src="./js/inspect.js"></script>
 
 </body>

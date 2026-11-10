@@ -225,8 +225,9 @@ function harness({ mpd = MPD, slots = { 'slots-two.json': SLOTS_TWO, 'slots-post
   const fetch = mock.method(globalThis, 'fetch', async (url) => {
     asked.push(url);
     const name = Object.keys(slots).find((key) => new URL(url).pathname.endsWith(key));
-    if (!name) return { json: async () => { throw new Error(`404 ${url}`); } };
-    return { json: async () => structuredClone(slots[name]) };
+    // Response-shaped, as `readListResponse` reads it: its URL, its status and its body as text.
+    if (!name) return { url, status: 404, text: async () => 'Not Found' };
+    return { url, status: 200, text: async () => JSON.stringify(slots[name], null, 1) };
   });
   let interceptor = null;
   const player = { addResponseInterceptor(fn) { interceptor = fn; } };
@@ -358,4 +359,39 @@ test('only the scheme of SVTA2053 §5 is read', () => {
   const other = structuredClone(MPD);
   other.periods[0].eventStreams[0].schemeIdUri = 'urn:svta:advertising-wg:ad-id-signaling';
   assert.equal(breaksOfMpd(other, BASE).breaks.some((b) => b.id === '2'), false);
+});
+
+// ---------------------------------------------------------------------------
+// The answer in the report (ADR 0129), as on the HLS side
+// ---------------------------------------------------------------------------
+
+test('the report carries the $remote.slots answer as received, and each list is asked for once', async () => {
+  const h = harness();
+  try {
+    await h.load();
+    await h.at(0);
+    await h.at(46);
+    const slots = h.asked.filter((u) => u.includes('/signalling/slots-two.json'));
+    assert.equal(slots.length, 1, 'no refetch: one request for the list');
+    const { selection } = h.resolved.find((r) => r.selection.id === '2');
+    assert.deepEqual(Object.keys(selection.response).sort(), ['json', 'status', 'text', 'url']);
+    assert.equal(selection.response.url, slots[0]);
+    assert.equal(selection.url, slots[0]);
+    assert.equal(selection.response.status, 200);
+    assert.equal(selection.response.text, JSON.stringify(SLOTS_TWO, null, 1), 'the body verbatim, its own spacing kept');
+    assert.deepEqual(selection.response.json, SLOTS_TWO);
+  } finally { h.restore(); }
+});
+
+test('the post-roll\'s report carries its answer too', async () => {
+  const h = harness();
+  try {
+    await h.load();
+    h.video.fire('ended');
+    await h.settle(); await h.settle();
+    const post = h.resolved.find((r) => r.selection.postroll);
+    assert.ok(post, 'the post-roll resolved');
+    assert.deepEqual(post.selection.response.json, SLOTS_POST);
+    assert.equal(h.asked.filter((u) => u.includes('slots-post.json')).length, 1);
+  } finally { h.restore(); }
 });
