@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""inspect.html con el mismo control que cada player del par: los cinco modos, en A y B.
+"""inspect.html con el mismo control que cada player del par: los ocho modos, en A, B y C.
 
 Fase 15, pedido de Nicolás: el player solo de `inspect.html` se configura igual que
 un pane de `index.html` -- "HLS interstitials, native" o "With our library" con
@@ -16,6 +16,17 @@ modo y en los breaks A y B mide:
 
   LA TARJETA 4. Con nuestra librería, el desenlace del filtro; en nativo, que no
   hay filtro -- sin opciones inventadas.
+
+  DASH (fase 19, y el modo DASH de inspect.html del 2026-11-10): los tres modos
+  `dash-*` con las mismas tres medidas, el pedido es el `$remote.slots` del break
+  (`/signalling/dash/slots-break-<id>.json`) con sus sgai-*, y la tarjeta 1 tiene
+  que mostrar el Event del break tal como está en el MPD. En los dos modos (HLS y
+  DASH): cada lista se pide UNA vez (ADR 0129), la página no tira ninguna
+  excepción, y en 2 decoders el break C muestra la primera opción caída a
+  propósito y la siguiente en pantalla.
+
+  Y DOS CONTROLES MÁS: el botón de modo pasa de ours a DASH y la URL lo refleja, y
+  un `?modo=` que la página no conoce se dice en pantalla en lugar de romperla.
 
 Uso:  verificar-inspect-modos.py --puerto 8093 --salida <dir>     (o --base <url>)
 """
@@ -42,7 +53,9 @@ pares = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(pares)
 esperado, BREAKS = pares.esperado, pares.BREAKS
 
-MODOS = ["nativo", "ours-2dec-img", "ours-2dec-noimg", "ours-1dec-img", "ours-1dec-noimg"]
+MODOS = ["nativo", "ours-2dec-img", "ours-2dec-noimg", "ours-1dec-img", "ours-1dec-noimg",
+         "dash-2dec-img", "dash-1dec-img", "dash-1dec-noimg"]
+LISTAS = ("/signalling/asset-list-", "/signalling/dash/slots-")
 
 LEER = """
 () => {
@@ -63,7 +76,9 @@ def main():
     ap.add_argument("--puerto", type=int)
     ap.add_argument("--base")
     ap.add_argument("--salida", required=True)
+    ap.add_argument("--modos", help="sólo estos modos, separados por coma (por defecto, los ocho)")
     args = ap.parse_args()
+    modos = args.modos.split(",") if args.modos else MODOS
     base = args.base.rstrip("/") if args.base else f"http://localhost:{args.puerto}"
     salida = Path(args.salida)
     salida.mkdir(parents=True, exist_ok=True)
@@ -71,10 +86,11 @@ def main():
     with sync_playwright() as pw:
         nav = pw.chromium.launch(channel="chrome",
                                  args=["--autoplay-policy=no-user-gesture-required", "--mute-audio"])
-        for modo in MODOS:
+        for modo in modos:
             pagina = nav.new_page(viewport={"width": 1907, "height": 1150})
-            red = []
-            pagina.on("request", lambda r: "/signalling/asset-list-" in r.url and red.append(r.url))
+            red, errores = [], []
+            pagina.on("request", lambda r: any(x in r.url for x in LISTAS) and red.append(r.url))
+            pagina.on("pageerror", lambda e: errores.append(str(e)))
             pagina.goto(f"{base}/inspect.html?modo={modo}")
             pagina.wait_for_function("window.demo && window.demo.modo")
             leido = pagina.evaluate("() => new URLSearchParams(location.search).get('modo')")
@@ -94,7 +110,14 @@ def main():
                 esp = esperado(modo, brk)
                 ok_dibujo = obtenido == esp
                 pedido = pagina.locator("#request").inner_text().strip()
-                if modo == "nativo":
+                if modo.startswith("dash"):
+                    dec, img = modo.split("-")[1:]
+                    q = f"sgai-video-decoders={dec[0]}&sgai-image-over-video={1 if img == 'img' else 0}"
+                    ok_pedido = pedido.startswith(f"/signalling/dash/slots-break-{brk_id}.json?{q}")
+                    tarjeta1 = pagina.locator("#ranges").inner_text()
+                    evento = f'<Event id="{list(BREAKS).index(brk_id) + 1}"'
+                    ok_pedido = ok_pedido and evento in tarjeta1 and "CDATA" in tarjeta1
+                elif modo == "nativo":
                     # Los tres breaks, también el sin default (ADR 0091), con el mismo asset-list.
                     ok_pedido = pedido.startswith(f"/signalling/asset-list-break-{brk_id}.json") and "sgai-" not in pedido
                 else:
@@ -106,13 +129,54 @@ def main():
                 tarjeta4 = pagina.locator("#outcome").inner_text().strip()
                 ok_t4 = ("hls.js" in tarjeta4 and not pagina.locator("#filter .filter__option").count()) \
                     if modo == "nativo" else bool(tarjeta4) and "hls.js" not in tarjeta4
-                ok_all = ok_dibujo and ok_pedido and en_red and ok_t4
+                # El break C, en 2 decoders: la primera opción cae a propósito y la segunda queda.
+                filtro = pagina.locator("#filter").inner_text()
+                ok_c = True
+                if brk_id == "c" and modo != "nativo" and "2dec" in modo:
+                    ok_c = "Failed on screen" in filtro and "On purpose" in filtro and "On screen: option 2" in tarjeta4
+                ok_all = ok_dibujo and ok_pedido and en_red and ok_t4 and ok_c
                 rojo += 0 if ok_all else 1
                 print(f"   {'ok  ' if ok_all else 'ROJO'} break {brk_id}  dibuja {obtenido}{'' if ok_dibujo else ' esperado ' + str(esp)}")
                 print(f"          tarjeta 2: {pedido.replace(chr(10), '')[:110]}   {'(en la red)' if en_red else '(NO está en la red)'}")
-                print(f"          tarjeta 4: {tarjeta4[:110]}")
+                print(f"          tarjeta 4: {tarjeta4[:110]}{'' if ok_c else '   ROJO: el break C no muestra su failover'}")
                 pagina.screenshot(path=str(salida / f"inspect-{modo}-break-{brk_id}.png"), full_page=True)
+            # Una lista, un pedido (ADR 0129): ninguna URL de lista sale dos veces.
+            repetidas = sorted({u for u in red if red.count(u) > 1})
+            ok_uno = not repetidas and not errores
+            rojo += 0 if ok_uno else 1
+            print(f"   {'ok  ' if ok_uno else 'ROJO'} un pedido por lista ({len(red)} pedidos)"
+                  f"{'' if not repetidas else ' repetidas: ' + str(repetidas)}"
+                  f"{'' if not errores else ' excepciones: ' + str(errores)}")
             pagina.close()
+
+        # El botón de modo: de ours a DASH, y la URL lo dice.
+        pagina = nav.new_page(viewport={"width": 1907, "height": 1150})
+        errores = []
+        pagina.on("pageerror", lambda e: errores.append(str(e)))
+        pagina.goto(f"{base}/inspect.html?modo=ours-2dec-img")
+        pagina.wait_for_function("window.demo && window.demo.modo === 'ours'")
+        pagina.get_by_role("button", name="DASH, our library", exact=True).click()
+        pagina.wait_for_function("window.demo.modo === 'dash'", timeout=10000)
+        leido = pagina.evaluate("() => new URLSearchParams(location.search).get('modo')")
+        titulo = pagina.locator("#ranges-title").inner_text()
+        ok = leido == "dash-2dec-img" and titulo == "What the MPD said" and not errores
+        rojo += 0 if ok else 1
+        print(f"\n{'ok  ' if ok else 'ROJO'} el botón de modo pasa a DASH: ?modo={leido}, tarjeta 1 «{titulo}»"
+              f"{'' if not errores else ' excepciones: ' + str(errores)}")
+        pagina.close()
+
+        # Un modo que la página no conoce: se dice, y no rompe.
+        pagina = nav.new_page(viewport={"width": 1907, "height": 1150})
+        errores = []
+        pagina.on("pageerror", lambda e: errores.append(str(e)))
+        pagina.goto(f"{base}/inspect.html?modo=hls-9dec-img")
+        pagina.wait_for_function("window.demo && window.demo.modo")
+        aviso = pagina.locator("#aviso")
+        ok = aviso.is_visible() and "not a mode" in aviso.inner_text() and not errores
+        rojo += 0 if ok else 1
+        print(f"{'ok  ' if ok else 'ROJO'} un ?modo= desconocido: «{aviso.inner_text()[:90]}»"
+              f"{'' if not errores else ' excepciones: ' + str(errores)}")
+        pagina.close()
         nav.close()
     print("\nVERDE" if rojo == 0 else f"\nROJO ({rojo})")
     sys.exit(1 if rojo else 0)
