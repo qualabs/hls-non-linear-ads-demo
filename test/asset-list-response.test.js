@@ -15,7 +15,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { BLOCK } from '../lib/ad-list.js';
+import { BLOCK, readListResponse } from '../lib/ad-list.js';
 import { createSignalling, readAssetList } from '../hls/signalling.js';
 
 const LIST = {
@@ -54,6 +54,10 @@ test('readAssetList falls back to the URL asked for, and to a null status, when 
 
 test('readAssetList throws on a body that is not JSON, as response.json() did', async () => {
   await assert.rejects(readAssetList(answer('https://example.test/x.json', { body: 'Not Found' }), 'x'), SyntaxError);
+});
+
+test('readAssetList is lib/ad-list.js\'s readListResponse, the one both transports read their list with', () => {
+  assert.equal(readAssetList, readListResponse);
 });
 
 // ---------------------------------------------------------------------------

@@ -21,6 +21,9 @@ and its decisions are ADR 0120 to 0128. Two things an integrator has to know:
 - **The traditional linear break is played by this library**, an Alternative MPD
   replace event drawn at full frame over the programme, because dash.js upstream
   does not execute Alternative MPD (ADR 0125).
+- **`onResolved` hands over the `$remote.slots` answer as it was received**,
+  `response: { url, status, text, json }`, as the HLS side does with its asset-list
+  (ADR 0129): both read it with `readListResponse` of `lib/ad-list.js`, once.
 
 Live (a `dynamic` MPD), `InsertPresentation`, List MPD and multi view are not
 read.

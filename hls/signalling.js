@@ -20,7 +20,7 @@
 
 import { activeAt, rangeOfExperiences } from '../lib/experience.js';
 import { usableCapabilities, usablePreValidation } from '../lib/capabilities.js';
-import { listRequestUrl, resolveAssets, resolvePostRoll, resolveWithFirstRequests } from '../lib/ad-list.js';
+import { listRequestUrl, readListResponse, resolveAssets, resolvePostRoll, resolveWithFirstRequests } from '../lib/ad-list.js';
 import { bufferedEndAt, onceProgress, postRollDue, rangesOf } from '../lib/playhead.js';
 
 /** The class of ADR 0009: sibling of Apple's interstitial, not an extension. */
@@ -309,22 +309,12 @@ export function programEnd(details) {
 // hls.js itself uses to call a hole irrelevant.
 
 /**
- * The answer to an asset-list request, read ONCE and kept whole (ADR 0129):
- * `{ url, status, text, json }`. `url` is the URL the answer came from -- the
- * response's own, so after any redirect, and the one asked for when the response
- * carries none --, `status` its HTTP status, `text` the body verbatim and `json`
- * the same body parsed, which is the object the break is resolved from.
- *
- * It is what `onResolved` hands over as `response`, so that a page that shows the
- * answer shows THIS one and does not ask the server a second time: a second
- * request is a second impression to an ad server, and its answer need not be the
- * same. It throws, as `response.json()` did, when the body is not JSON: a list
- * that cannot be read cancels its break (Appendix D.5) either way.
+ * The answer to an asset-list request, read once and kept whole (ADR 0129):
+ * `readListResponse` of lib/ad-list.js, under the name it has always had on
+ * this side. The DASH signalling reads its `$remote.slots` with the same
+ * function, so both transports hand `onResolved` the same `response`.
  */
-export async function readAssetList(response, requested) {
-  const text = await response.text();
-  return { url: response.url || requested, status: response.status ?? null, text, json: JSON.parse(text) };
-}
+export const readAssetList = readListResponse;
 
 /**
  * WHEN A BREAK'S ASSET-LIST IS REQUESTED (ADR 0108, ADR 0109): the rule of hls.js
@@ -536,7 +526,7 @@ export function createProgramme(hls, video) {
  * to show. `requests` in it lists every first request made for the break,
  * `{ uri, ok, error }`, and is empty without `firstRequest`. `response` is the
  * answer to the asset-list request as it was received, `{ url, status, text,
- * json }` (`readAssetList`, ADR 0129): a page that shows the list reads it here
+ * json }` (`readListResponse` of lib/ad-list.js, ADR 0129): a page that shows the list reads it here
  * and does not request it again.
  *
  * `firstRequest(uri, mediaType, { method })`, when given, is how the first
@@ -814,7 +804,7 @@ export function createSignalling(hls, {
     const { id, url } = entry;
     console.log(`[signalling] ${id}: post-roll asset-list ${url}`);
     try {
-      const response = await readAssetList(await fetch(url), url);
+      const response = await readListResponse(await fetch(url), url);
       const report = [];
       entry.experiences = resolvePostRoll(response.json, { id, slotStart: entry.startTime, report });
       entry.state = 'resolved';
@@ -868,7 +858,7 @@ export function createSignalling(hls, {
       if (at >= 0) ranges.splice(at, 1);
     };
     try {
-      const response = await readAssetList(await fetch(url), url);
+      const response = await readListResponse(await fetch(url), url);
       const assetList = response.json;
       const report = [];
       const requests = [];
