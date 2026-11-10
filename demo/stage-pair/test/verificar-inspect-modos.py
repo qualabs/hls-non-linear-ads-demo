@@ -101,10 +101,18 @@ def main():
             for brk_id in ("a", "b", "c"):
                 brk = BREAKS[brk_id]
                 pagina.get_by_role("button", name=f"break {brk_id.upper()}", exact=True).click()
-                pagina.wait_for_function("""t => { const d = window.demo;
-                    return d.modo === 'nativo' ? (d.stock.playingAd != null || d.stock.programme.currentTime > t)
-                                               : d.video.currentTime > t; }""", arg=brk["offset"] + 3.5, timeout=40000)
-                pagina.wait_for_function("id => window.demo.mostrado === id", arg=brk_id, timeout=10000)
+                # En nativo, el aviso que se mira es el de ESTE break y no el preroll que el
+                # hls.js de fábrica vuelve a reproducir al rearmarse (CUE="PRE", ADR 0110):
+                # con default, su lineal sonando con el programa ya en el break; sin default,
+                # el programa adentro del break y ningún aviso.
+                pagina.wait_for_function("""({ t, off, lineal }) => { const d = window.demo;
+                    if (d.modo !== 'nativo') return d.video.currentTime > t;
+                    const p = d.stock.programme.currentTime;
+                    return d.stock.playingAd != null ? (lineal && p >= off - 1) : p > t; }""",
+                    arg={"t": brk["offset"] + 3.5, "off": brk["offset"], "lineal": bool(brk["lineal"])}, timeout=60000)
+                # 40 s y no 10: en nativo cada salto rearma el player, y el hls.js de fábrica
+                # reproduce primero el preroll (CUE="PRE", ADR 0110), de 12 s, antes de ir al break.
+                pagina.wait_for_function("id => window.demo.mostrado === id", arg=brk_id, timeout=40000)
                 time.sleep(1.2)
                 obtenido = pagina.evaluate(LEER)
                 esp = esperado(modo, brk)
