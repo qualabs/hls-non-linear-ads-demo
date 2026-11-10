@@ -42,8 +42,9 @@
 import { traceContract } from './contract-trace.js';
 import { createStockPlayer } from './stock-player.js';
 import { followInterstitials, outcomeNote } from './native-outcome.js';
+import { crearDash } from './dash-player.js';
 import {
-  breakDash, breakDelReporte, crearControlDePane, desenlaceCorto, leerConfig, escribirConfig, presentadoCorto
+  breakDelReporte, crearControlDePane, desenlaceCorto, leerConfig, escribirConfig, mediosEnPantalla, presentadoCorto
 } from './capabilities.js';
 
 // The one source of the numbers of this demo (ADR 0044).
@@ -374,17 +375,6 @@ function unSoloAudio(elementos) {
   }
 }
 
-/** The media of the ad, off the contract: what the capabilities actually move. */
-function medios(activas) {
-  // A linear default declares no medium of its own: it is the asset's `URI`
-  // played full frame (ADR 0019), so it is named for what it is.
-  const tipos = activas
-    .flatMap((e) => e.elements.map((el) => ({ el, lineal: e.type === 'linear' })))
-    .filter(({ el }) => !el.primary)
-    .map(({ el, lineal }) => el.mediaType || (lineal ? 'the linear default, full frame' : 'unknown'));
-  return [...new Set(tipos)].join(', ');
-}
-
 /** A pane with our library, and the block an integrator writes. */
 function construirNuestro(lado, capacidades, caja, registro) {
   const p = panes[lado];
@@ -452,7 +442,7 @@ function construirNuestro(lado, capacidades, caja, registro) {
     p.pane.dataset.state = activas.length ? 'ad' : 'primary';
     p.state.textContent = activas.length
       ? `primary content + NON-LINEAR AD (${activas.map((e) => e.type).join(', ')})` +
-        ` · ${caja.video.currentTime.toFixed(1)}s · nothing was replaced · ad media: ${medios(activas)}`
+        ` · ${caja.video.currentTime.toFixed(1)}s · nothing was replaced · ad media: ${mediosEnPantalla(activas)}`
       : `primary content · ${caja.video.currentTime.toFixed(1)}s`;
   }
   caja.video.addEventListener('timeupdate', pintar);
@@ -488,75 +478,26 @@ function construirNuestro(lado, capacidades, caja, registro) {
 }
 
 /**
- * A pane with our library over DASH (phase 19), and the block an integrator
- * writes: the same as `construirNuestro`, with dash.js. The one difference he
- * sees is the order: `attach` before `initialize`, because the breaks are read
- * off the MPD as dash.js receives it (ADR 0128).
+ * A pane with our library over DASH (phase 19), built by dash-player.js, which
+ * inspect.html builds its DASH player with too. The one difference an
+ * integrator sees is the order: `attach` before `initialize`, because the
+ * breaks are read off the MPD as dash.js receives it (ADR 0128).
  */
 function construirDash(lado, capacidades, caja, registro) {
   const p = panes[lado];
-  // The reports name a break by its Event@id, a number; the lists of this page by its letter.
-  const deBreak = (reporte) => breakDash(reporte.id, stage);
-  // =========================================================================
-  // WHAT AN INTEGRATOR WRITES
-  const player = dashjs.MediaPlayer().create();
-  const concurrent = QualabsConcurrentDash.attach(player, {
-    container: caja.player,
-    video: caja.video,
-    capabilities: capacidades,
-    sendCapabilities: true,
-    onPresented: (reporte) => {
-      registro.presentados[deBreak(reporte)] = reporte;
+  return crearDash({
+    caja, capacidades, src: SRC.dash, stage, etiqueta: `app:${lado}`,
+    hud: p.hud, contract: p.contract, pane: p.pane, state: p.state,
+    alPresentar: (id, reporte) => {
+      registro.presentados[id] = reporte;
       pintarPedidos(lado);
     },
-    onResolved: (experiences, seleccion) => {
-      for (const e of experiences) {
-        console.log(`[app:${lado}] resolved ${e.type}#${e.itemId}: ${e.elements.length} elements,` +
-          ` window ${e.startTime.toFixed(2)}s -> ${(e.startTime + e.duration).toFixed(2)}s`);
-      }
-      registro.selecciones[deBreak(seleccion)] = seleccion;
+    alResolver: (id, seleccion) => {
+      registro.selecciones[id] = seleccion;
       if (seleccion.url) registro.pedidos.push({ url: seleccion.url, asset: seleccion.assets[0] });
       pintarPedidos(lado);
     }
   });
-  player.initialize(caja.video, SRC.dash, true);
-  // =========================================================================
-
-  const consumer = traceContract({ provider: concurrent.provider, video: caja.video, hud: p.contract });
-  player.on(dashjs.MediaPlayer.events.ERROR, (e) => console.error(`[dash:${lado}] error`, e.error?.code, e.error?.message));
-  player.on(dashjs.MediaPlayer.events.MANIFEST_LOADED, () => {
-    p.hud.textContent = `dash.js ${player.getVersion()} · capabilities: ${JSON.stringify(capacidades)} · playing ${SRC.dash}`;
-  });
-  caja.video.muted = true;
-
-  function pintar() {
-    const t = caja.video.currentTime;
-    const activas = concurrent.presentedAt(t);
-    // The traditional linear break, a replace event our library plays (ADR 0125).
-    if (activas.some((e) => e.type === 'linear' && registroLineal(e))) {
-      p.pane.dataset.state = 'ad';
-      p.state.textContent = `LINEAR AD, played by our library (replace event) · programme at ${t.toFixed(1)}s · the content is off the screen`;
-      return;
-    }
-    p.pane.dataset.state = activas.length ? 'ad' : 'primary';
-    p.state.textContent = activas.length
-      ? `primary content + NON-LINEAR AD (${activas.map((e) => e.type).join(', ')})` +
-        ` · ${t.toFixed(1)}s · nothing was replaced · ad media: ${medios(activas)}`
-      : `primary content · ${t.toFixed(1)}s`;
-  }
-  /** Whether a linear experience is the replace break, and not a linear default of ours. */
-  const registroLineal = (e) => breakDash(e.id, stage) === stage.breakLineal?.id;
-  caja.video.addEventListener('timeupdate', pintar);
-  pintar();
-
-  return {
-    modo: 'dash', capacidades, player, concurrent, consumer, video: caja.video,
-    destruir: () => player.reset(),
-    programa: caja.video,
-    listo: () => caja.video.readyState >= 1,
-    // Our library plays the replace break too, so the programme takes a seek anywhere.
-    enAviso: () => false
-  };
 }
 
 /**

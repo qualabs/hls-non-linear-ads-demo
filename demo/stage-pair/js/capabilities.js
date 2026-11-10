@@ -167,16 +167,21 @@ export function presentadoCorto(reporte) {
 /** The break a report of `onResolved` belongs to: `AD-A` is break `a` (one tag per break, ADR 0113). */
 export const breakDelReporte = (seleccion) => seleccion.id.match(/^AD-([A-Z0-9]+)(?:-|$)/i)?.[1].toLowerCase() ?? null;
 
+/** The break of a report of the DASH mode (phase 19): see dash-mpd.js, where it lives so a test can import it. */
+export { breakDash } from './dash-mpd.js';
+
 /**
- * The break of a report of the DASH pane (phase 19). An Event@id of an MPD is an
- * unsigned int, so `senalizar-dash.mjs` numbers the breaks of `stage.breaks` from
- * 1 and gives the traditional linear one the next number; this reads it back.
+ * The media of the ad, off the contract: what the capabilities actually move.
+ * A linear default declares no medium of its own: it is the asset's `URI`
+ * played full frame (ADR 0019), so it is named for what it is.
  */
-export const breakDash = (id, stage) => {
-  const n = Number(id);
-  if (n >= 1 && n <= stage.breaks.length) return stage.breaks[n - 1].id;
-  return n === stage.breaks.length + 1 ? stage.breakLineal?.id ?? null : null;
-};
+export function mediosEnPantalla(activas) {
+  const tipos = activas
+    .flatMap((e) => e.elements.map((el) => ({ el, lineal: e.type === 'linear' })))
+    .filter(({ el }) => !el.primary)
+    .map(({ el, lineal }) => el.mediaType || (lineal ? 'the linear default, full frame' : 'unknown'));
+  return [...new Set(tipos)].join(', ');
+}
 
 // ===========================================================================
 // index.html: ONE CONTROL PER PANE (fase 15)
